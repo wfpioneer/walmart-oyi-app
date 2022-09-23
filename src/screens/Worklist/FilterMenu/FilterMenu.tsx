@@ -414,19 +414,34 @@ export const RenderExceptionTypeCard = (props: {
   filterExceptions: string[];
   dispatch: Dispatch<any>;
   wlSummary: WorklistSummary | undefined;
-  isAudits: boolean
+  isAudits: boolean,
+  disableAuditWL: boolean;
 }): JSX.Element => {
   const {
-    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits
+    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits, disableAuditWL
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   const exceptionMap: FilterListItem[] = [];
 
   wlSummary?.worklistTypes.forEach(worklist => {
+    if (disableAuditWL && worklist.worklistType === 'AU') {
+      return;
+    }
     const exceptionType = fullExceptionList.get(worklist.worklistType);
     if (exceptionType) {
       const isSelected = filterExceptions.indexOf(worklist.worklistType) !== -1;
-      exceptionMap.push({ value: worklist.worklistType, display: exceptionType, selected: isSelected });
+      // Sets filter to Rollover Audits if rolloverCmp flag is true and rollover WL is not complete
+      if (disableAuditWL && worklist.worklistType === 'RA' && !isSelected) {
+        trackEvent('worklist_update_filter_exceptions', {
+          exception: JSON.stringify(worklist.worklistType)
+        });
+        dispatch(updateFilterExceptions([worklist.worklistType]));
+      }
+      exceptionMap.push({
+        value: worklist.worklistType,
+        display: exceptionType,
+        selected: isSelected
+      });
     }
   });
 
@@ -493,6 +508,13 @@ export const getCategoryMap = (
   );
 };
 
+const isRollOverComplete = (wlSummary: WorklistSummary) => {
+  const rollOverSummary = wlSummary.worklistTypes.find(wlType => wlType.worklistType === 'RA');
+  if (rollOverSummary) {
+    return rollOverSummary.totalItems === 0 || rollOverSummary.completedItems === rollOverSummary.totalItems;
+  }
+  return true;
+};
 interface FilterMenuProps {
   categoryOpen: boolean;
   filterCategories: string[];
@@ -505,6 +527,7 @@ interface FilterMenuProps {
   enableAreaFilter: boolean;
   wlSummary: WorklistSummary[];
   selectedWorklistGoal: WorklistGoal;
+  showRollOverAudit: boolean
 }
 
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
@@ -519,9 +542,11 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
     categoryMap,
     enableAreaFilter,
     wlSummary,
-    selectedWorklistGoal
+    selectedWorklistGoal,
+    showRollOverAudit
   } = props;
   const worklistIndex = wlSummary.findIndex(item => item.worklistGoal === selectedWorklistGoal);
+  const disableAuditWL = showRollOverAudit && !isRollOverComplete(wlSummary[worklistIndex]);
 
   return (
     <View style={styles.menuContainer}>
@@ -556,6 +581,7 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         dispatch={dispatch}
         wlSummary={wlSummary[worklistIndex]}
         isAudits={selectedWorklistGoal === WorklistGoal.AUDITS}
+        disableAuditWL={disableAuditWL}
       />
     </View>
   );
@@ -571,7 +597,7 @@ export const FilterMenu = (): JSX.Element => {
     filterExceptions,
     areaOpen
   } = useTypedSelector(state => state.Worklist) as WorklistState;
-  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter, showRollOverAudit } = useTypedSelector(state => state.User.configs);
   const { result } = workListApi;
   const data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
   const categoryMap: FilteredCategory[] = getCategoryMap(
@@ -595,6 +621,7 @@ export const FilterMenu = (): JSX.Element => {
       enableAreaFilter={enableAreaFilter}
       wlSummary={wlSummary || []}
       selectedWorklistGoal={selectedWorklistGoal}
+      showRollOverAudit={showRollOverAudit}
     />
   );
 };
