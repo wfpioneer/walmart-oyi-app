@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ActivityIndicator, FlatList, Platform, Text, TouchableOpacity, View
+  ActivityIndicator, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
@@ -38,7 +38,7 @@ const renderLocationCard = ({ item, locationType, scanRequired }:
     locationName, quantity, palletId, increment, decrement, onDelete, qtyChange
   } = item;
   return (
-    <View style={styles.locationCard}>
+    <View style={styles.locationCard} key={locationName}>
       <LocationCard
         location={locationName}
         locationType={locationType}
@@ -124,11 +124,11 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
           <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
         </View>
       ) : (
-        <FlatList
-          data={locationList}
-          renderItem={({ item }) => renderLocationCard({ item, locationType, scanRequired })}
-          keyExtractor={(item: LocationList, index: number) => item.sectionId + index.toString()}
-        />
+        <>
+          {
+            locationList.map(item => renderLocationCard({ item, locationType, scanRequired }))
+          }
+        </>
       )}
     </View>
   );
