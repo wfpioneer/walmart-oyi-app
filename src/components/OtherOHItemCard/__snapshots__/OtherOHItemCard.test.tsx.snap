@@ -1,6 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests OtherOHItemCard Component should tests redering OtherOHItemCard with other OH Qty props 1`] = `
+exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard in collpased state 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "width": "100%",
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#eeeeee",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "marginRight": 0,
+            }
+          }
+        >
+          
+        </Text>
+        <Text>
+          [missing "en.AUDITS.OTHER_ON_HANDS" translation] (15)
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 0.1,
+            "opacity": 1,
+            "paddingLeft": 5,
+          }
+        }
+        testID="collapsible-card"
+      >
+        <MaterialIcon
+          color="#000000"
+          name="keyboard-arrow-down"
+          size={25}
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard while loading 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "margin": 8,
+      }
+    }
+    testID="loader"
+  >
+    <ActivityIndicator
+      size={30}
+    />
+  </View>
+</View>
+`;
+
+exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard with other OH Qty props 1`] = `
 <View
   style={
     Object {
@@ -128,109 +231,6 @@ exports[`Tests OtherOHItemCard Component should tests redering OtherOHItemCard w
         </View>
       </View>
     </View>
-  </View>
-</View>
-`;
-
-exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard in collpased state 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "#ffffffff",
-      "width": "100%",
-    }
-  }
->
-  <View>
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffffffff",
-          "borderBottomColor": "#eeeeee",
-          "borderBottomWidth": 1,
-          "flexDirection": "row",
-          "paddingHorizontal": 10,
-          "paddingVertical": 10,
-        }
-      }
-    >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flex": 1,
-            "flexDirection": "row",
-            "justifyContent": "flex-start",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "marginRight": 0,
-            }
-          }
-        >
-          
-        </Text>
-        <Text>
-          [missing "en.AUDITS.OTHER_ON_HANDS" translation] (15)
-        </Text>
-      </View>
-      <View
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "flex": 0.1,
-            "opacity": 1,
-            "paddingLeft": 5,
-          }
-        }
-        testID="collapsible-card"
-      >
-        <MaterialIcon
-          color="#000000"
-          name="keyboard-arrow-down"
-          size={25}
-        />
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard while loading 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "#ffffffff",
-      "width": "100%",
-    }
-  }
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-        "margin": 8,
-      }
-    }
-    testID="loader"
-  >
-    <ActivityIndicator
-      size={30}
-    />
   </View>
 </View>
 `;
