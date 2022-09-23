@@ -14,7 +14,8 @@ import {
   renderAreaCheckbox,
   renderAreaFilterCard,
   renderCategoryFilterCard,
-  renderExceptionFilterCard
+  renderExceptionFilterCard,
+  renderExceptionRadioFilterCard
 } from './FilterMenu';
 import {
   FilterListItem,
@@ -24,6 +25,8 @@ import {
   mockCategoryMap
 } from '../../../mockData/mockWorkList';
 import { mockAreas } from '../../../mockData/mockConfig';
+import { WorklistGoal } from '../../../models/WorklistSummary';
+import { mockItemNPalletNAuditWorklistSummary } from '../../../mockData/mockWorklistSummary';
 
 jest.mock('../../../utils/AppCenterTool.ts', () => ({
   ...jest.requireActual('../../../utils/__mocks__/AppCenterTool'),
@@ -64,6 +67,29 @@ describe('FilterMenu Component', () => {
           areas={mockAreas}
           categoryMap={[]}
           enableAreaFilter={false}
+          selectedWorklistGoal={WorklistGoal.ITEMS}
+          wlSummary={mockItemNPalletNAuditWorklistSummary}
+        />
+      </Provider>
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('ShallowRender FilterMenu with Audits WL Goal', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Provider store={store}>
+        <FilterMenuComponent
+          dispatch={jest.fn()}
+          categoryOpen={false}
+          filterCategories={[]}
+          exceptionOpen={false}
+          filterExceptions={[]}
+          areaOpen={false}
+          areas={mockAreas}
+          categoryMap={[]}
+          enableAreaFilter={false}
+          selectedWorklistGoal={WorklistGoal.AUDITS}
+          wlSummary={mockItemNPalletNAuditWorklistSummary}
         />
       </Provider>
     );
@@ -83,6 +109,8 @@ describe('FilterMenu Component', () => {
           areas={mockAreas}
           categoryMap={[]}
           enableAreaFilter={true}
+          selectedWorklistGoal={WorklistGoal.ITEMS}
+          wlSummary={mockItemNPalletNAuditWorklistSummary}
         />
       </Provider>
     );
@@ -172,6 +200,22 @@ describe('FilterMenu Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
+  it('Test the renderExceptionRadioFilterCard component with an item selected', () => {
+    const mockFilterItem: FilterListItem = {
+      value: 'RA',
+      display: 'Rollover Audits',
+      selected: true
+    };
+    const { toJSON, getByTestId } = render(
+      renderExceptionRadioFilterCard(mockFilterItem, mockDispatch)
+    );
+    const exceptionButton = getByTestId('radio exception button');
+    fireEvent.press(exceptionButton);
+    expect(trackEvent).toBeCalledTimes(1);
+    expect(mockDispatch).toBeCalledTimes(1);
+    expect(toJSON()).toMatchSnapshot();
+  });
+
   it('Test the renderCategoryCollapsibleCard and calls dispatch()', () => {
     const { toJSON, getByText } = render(
       <RenderCategoryCollapsibleCard
@@ -208,6 +252,8 @@ describe('FilterMenu Component', () => {
         exceptionOpen={false}
         filterExceptions={mockFilterExeceptions}
         dispatch={mockDispatch}
+        isAudits={false}
+        wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
@@ -222,6 +268,8 @@ describe('FilterMenu Component', () => {
         exceptionOpen={true}
         filterExceptions={mockFilterExeceptions}
         dispatch={mockDispatch}
+        isAudits={false}
+        wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));

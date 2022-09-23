@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Dispatch } from 'redux';
+import { useRoute } from '@react-navigation/native';
 import styles from './FilterMenu.style';
 import COLOR from '../../../themes/Color';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
@@ -27,6 +28,7 @@ import {
 import { area } from '../../../models/User';
 import { WorklistItemI } from '../../../models/WorklistItem';
 import { WorklistState } from '../../../state/reducers/Worklist';
+import { WorklistGoal, WorklistSummary } from '../../../models/WorklistSummary';
 
 interface MenuCardProps {
   title: string;
@@ -232,6 +234,44 @@ export const renderAreaFilterCard = (
   );
 };
 
+export const renderExceptionRadioFilterCard = (
+  item: FilterListItem,
+  dispatch: Dispatch<any>,
+): JSX.Element => {
+  const onItemPress = () => {
+    trackEvent('worklist_update_filter_exceptions', {
+      exception: JSON.stringify(item.value)
+    });
+    return dispatch(updateFilterExceptions([item.value]));
+  };
+  return (
+    <TouchableOpacity
+      testID="radio exception button"
+      style={styles.categoryFilterCard}
+      onPress={onItemPress}
+    >
+      <View style={styles.selectionView}>
+        {item.selected ? (
+          <MaterialCommunityIcons
+            name="radiobox-marked"
+            size={15}
+            color={COLOR.MAIN_THEME_COLOR}
+          />
+        ) : (
+          <MaterialCommunityIcons
+            name="radiobox-blank"
+            size={15}
+            color={COLOR.MAIN_THEME_COLOR}
+          />
+        )}
+      </View>
+      <Text style={styles.categoryFilterText} numberOfLines={2}>
+        {item.display}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
 export const RenderAreaCard = (props: {
   areaOpen: boolean;
   dispatch: Dispatch<any>;
@@ -373,14 +413,21 @@ export const RenderExceptionTypeCard = (props: {
   exceptionOpen: boolean;
   filterExceptions: string[];
   dispatch: Dispatch<any>;
+  wlSummary: WorklistSummary | undefined;
+  isAudits: boolean
 }): JSX.Element => {
-  const { exceptionOpen, filterExceptions, dispatch } = props;
+  const {
+    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits
+  } = props;
   const fullExceptionList = ExceptionList.getInstance();
   const exceptionMap: FilterListItem[] = [];
 
-  fullExceptionList.forEach((value, key) => {
-    const isSelected = filterExceptions.indexOf(key) !== -1;
-    exceptionMap.push({ value: key, display: value, selected: isSelected });
+  wlSummary?.worklistTypes.forEach(worklist => {
+    const exceptionType = fullExceptionList.get(worklist.worklistType);
+    if (exceptionType) {
+      const isSelected = filterExceptions.indexOf(worklist.worklistType) !== -1;
+      exceptionMap.push({ value: worklist.worklistType, display: exceptionType, selected: isSelected });
+    }
   });
 
   let subtext = '';
@@ -414,7 +461,8 @@ export const RenderExceptionTypeCard = (props: {
       {exceptionOpen && (
         <FlatList
           data={exceptionMap}
-          renderItem={({ item }) => renderExceptionFilterCard(item, dispatch, filterExceptions)}
+          renderItem={({ item }) => (isAudits ? renderExceptionRadioFilterCard(item, dispatch)
+            : renderExceptionFilterCard(item, dispatch, filterExceptions))}
           style={styles.categoryList}
           keyExtractor={(item: any) => item.value}
         />
@@ -432,7 +480,7 @@ export const getCategoryMap = (
   workListItems: WorklistItemI[],
   filterCategories: string[]
 ): FilteredCategory[] => {
-  const categoryMap: FilteredCategory[] = workListItems.map((item: any) => {
+  const categoryMap: FilteredCategory[] = workListItems.map(item => {
     const isSelected = filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`) !== -1;
     return {
       catgNbr: item.catgNbr,
@@ -455,6 +503,8 @@ interface FilterMenuProps {
   areas: area[];
   categoryMap: FilteredCategory[];
   enableAreaFilter: boolean;
+  wlSummary: WorklistSummary[];
+  selectedWorklistGoal: WorklistGoal;
 }
 
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
@@ -467,8 +517,11 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
     areaOpen,
     areas,
     categoryMap,
-    enableAreaFilter
+    enableAreaFilter,
+    wlSummary,
+    selectedWorklistGoal
   } = props;
+  const worklistIndex = wlSummary.findIndex(item => item.worklistGoal === selectedWorklistGoal);
 
   return (
     <View style={styles.menuContainer}>
@@ -501,6 +554,8 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         exceptionOpen={exceptionOpen}
         filterExceptions={filterExceptions}
         dispatch={dispatch}
+        wlSummary={wlSummary[worklistIndex]}
+        isAudits={selectedWorklistGoal === WorklistGoal.AUDITS}
       />
     </View>
   );
@@ -523,6 +578,9 @@ export const FilterMenu = (): JSX.Element => {
     data,
     filterCategories
   );
+  const route = useRoute();
+  const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummary.result?.data);
+  const selectedWorklistGoal = route.name.includes('Audit') ? WorklistGoal.AUDITS : WorklistGoal.ITEMS;
 
   return (
     <FilterMenuComponent
@@ -535,6 +593,8 @@ export const FilterMenu = (): JSX.Element => {
       areas={areas}
       categoryMap={categoryMap}
       enableAreaFilter={enableAreaFilter}
+      wlSummary={wlSummary || []}
+      selectedWorklistGoal={selectedWorklistGoal}
     />
   );
 };
