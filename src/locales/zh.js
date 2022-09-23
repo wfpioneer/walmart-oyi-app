@@ -493,6 +493,17 @@ export default {
     AREA_FILTER: '区域筛选'
   },
   AUDITS: {
-    AUDIT_ITEM: '盘点商品'
+    AUDITS: '盘点',
+    AUDIT_ITEM: '盘点商品',
+    ROLLOVER_AUDITS: '上周遗留盘点清单',
+    COLLAPSE_ALL: '折叠',
+    EXPAND_ALL: '全部展开',
+    VALIDATE_QUANTITY: '实盘每一个位置数量',
+    VALIDATE_SCAN_QUANTITY: '扫描卡板并实盘数量',
+    OTHER_ON_HANDS: '其它库存',
+    PALLET_COUNT: '请输入卡板库存数量',
+    CONFIRM_AUDIT: '确认现货盘点结果',
+    UPDATED_QTY: '更新数量',
+    LARGE_CURRENCY_CHANGE: '大金额调整(超1000)'
   }
 };
