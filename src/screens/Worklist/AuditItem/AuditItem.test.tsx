@@ -28,6 +28,7 @@ jest.mock('../../../utils/sessionTimeout.ts', () => ({
   validateSession: jest.fn(() => Promise.resolve())
 }));
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'mockMaterialIcons');
 jest.mock('@react-navigation/native', () => {
   const actualNav = jest.requireActual('@react-navigation/native');
   return {

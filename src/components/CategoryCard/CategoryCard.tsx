@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   FlatList, Text, TouchableOpacity, View
 } from 'react-native';
-import { NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './CategoryCard.style';
 import { WorklistItemI } from '../../models/WorklistItem';
@@ -14,12 +13,12 @@ export type CategoryCardProps = {
   listOfItems: WorklistItemI[];
   category: string;
   collapsed: boolean;
-  navigation: NavigationProp<any>;
+  onItemCardClick: (itemNumber: number) => void;
 };
 
 const CategoryCard = (props: CategoryCardProps): JSX.Element => {
   const {
-    listOfItems, category, collapsed, navigation
+    listOfItems, category, collapsed, onItemCardClick
   } = props;
 
   const [open, setOpen] = useState(true);
@@ -46,7 +45,9 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             description={itemName || ''}
             imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
             onHandQty={11}
-            onClick={() => { navigation.navigate('AuditItem'); }}
+            onClick={() => {
+              onItemCardClick(itemNbr || 0);
+            }}
             loading={false}
           />
         </View>

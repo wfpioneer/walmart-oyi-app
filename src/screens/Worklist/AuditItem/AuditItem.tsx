@@ -1,8 +1,8 @@
 import React, {
-  EffectCallback, RefObject, createRef, useEffect, useState
+  EffectCallback, RefObject, createRef, useEffect
 } from 'react';
 import {
-  ActivityIndicator, BackHandler, Platform, RefreshControl, ScrollView, Text, TouchableOpacity,
+  RefreshControl, ScrollView, Text, TouchableOpacity,
   View
 } from 'react-native';
 import {
@@ -100,17 +100,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    useFocusEffectHook,
-    userFeatures, userConfigs,
     itemNumber
   } = props;
-
-  useEffectHook(() => {
-    if (navigation.isFocused()) {
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
-      dispatch(getItemDetails({ id: itemNumber }));
-    }
-  }, []);
 
   // Scanned Item Event Listener
   useEffectHook(() => {
@@ -248,7 +239,7 @@ const AuditItem = (): JSX.Element => {
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
 
-  // TODO replaced from redux state when navigating from audit worklist
+  // TODO replaced from redux state when navigating from audit worklist, create a redux state for this screen
   const itemNbr = 980056535;
 
   return (

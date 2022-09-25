@@ -8,7 +8,10 @@ import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
-import { getWorklist } from '../../state/actions/saga';
+import { getItemDetails, getWorklist } from '../../state/actions/saga';
+import {
+  GET_ITEM_DETAILS
+} from '../../state/actions/asyncAPI';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 
@@ -27,13 +30,18 @@ export interface AuditWorklistTabScreenProps {
 }
 
 const renderCategoryCard = (
-  category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>
+  category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
 ) => (
   <CategoryCard
     category={category}
     listOfItems={items}
     collapsed={collapsed}
-    navigation={navigation}
+    onItemCardClick={(itemNumber: number) => {
+      dispatch({ type: GET_ITEM_DETAILS.RESET });
+      dispatch(getItemDetails({ id: itemNumber }));
+      navigation.navigate('AuditItem');
+    }}
   />
 );
 
@@ -61,7 +69,9 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
       <CollapseAllBar collapsed={collapsed} onclick={() => setCollapsed(!collapsed)} />
       <FlatList
         data={sortedItemKeys}
-        renderItem={({ item: key }) => renderCategoryCard(key, itemsBasedOnCategory[key], collapsed, navigation)}
+        renderItem={({ item: key }) => renderCategoryCard(
+          key, itemsBasedOnCategory[key], collapsed, navigation, dispatch
+        )}
         keyExtractor={item => `category-${item}`}
         // TODO: worklist types needs to be updated after Filter component gets completed
         onRefresh={() => dispatch(getWorklist({ worklistType: ['AU', 'RA'] }))}

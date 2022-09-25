@@ -419,38 +419,6 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
         </Text>
       </View>
     </View>
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={false}
-      hitSlop={
-        Object {
-          "bottom": 10,
-          "left": 15,
-          "right": 15,
-          "top": 10,
-        }
-      }
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
-      testID="add-location"
-    >
-      <Icon
-        color="#0071e9"
-        name="plus-thick"
-        size={25}
-      />
-    </View>
   </View>
   <View
     style={

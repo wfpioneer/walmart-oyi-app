@@ -81,13 +81,6 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
       </View>
     );
   }
-  // if (loading) {
-  //   return (
-  //     <View style={styles.loader} testID="loader">
-  //       <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
-  //     </View>
-  //   );
-  // }
 
   return (
     <View>
@@ -106,7 +99,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
             </Text>
           </View>
         </View>
-        {locationType === 'floor'
+        {locationType === 'floor' && !loading
             && (
             <TouchableOpacity
               hitSlop={{
