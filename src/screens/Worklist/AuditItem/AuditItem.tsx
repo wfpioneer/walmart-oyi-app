@@ -151,7 +151,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   if (_.get(itemDetailsRes, 'status') === 204 || _.get(itemDetails, 'code') === 204) {
     return (
       <View style={styles.safeAreaView}>
-        {/* { TODO } */}
+        <View style={styles.activityIndicator}>
+          <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+          <Text style={styles.errorText}>{strings('PALLET.ITEMS_NOT_FOUND')}</Text>
+        </View>
       </View>
     );
   }

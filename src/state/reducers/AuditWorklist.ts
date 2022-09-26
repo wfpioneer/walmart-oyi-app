@@ -16,7 +16,7 @@ export const initialState: AuditWorklistState = {
   itemNumber: 0
 };
 
-export const AuditWorklist = (state = initialState, action: Actions) => {
+export const AuditWorklist = (state = initialState, action: Actions) : AuditWorklistState => {
   switch (action.type) {
     case SET_WORKLIST_ITEMS:
       return {

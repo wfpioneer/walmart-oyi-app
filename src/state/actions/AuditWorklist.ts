@@ -16,7 +16,7 @@ export const clearWorklistItems = () => ({
 export const setAuditItemNumber = (itemNbr: number) => ({
   type: SET_AUDIT_ITEM_NUMBER,
   payload: itemNbr
-});
+} as const);
 
 export type Actions =
   | ReturnType<typeof setWorklistItems>

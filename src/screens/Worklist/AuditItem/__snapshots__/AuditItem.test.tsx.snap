@@ -657,7 +657,33 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Scanne
       "flex": 1,
     }
   }
-/>
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#5FA7F2"
+      name="information"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.PALLET.ITEMS_NOT_FOUND" translation]
+    </Text>
+  </View>
+</View>
 `;
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the details for a single item with non-null status 1`] = `
