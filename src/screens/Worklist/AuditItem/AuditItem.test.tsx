@@ -15,7 +15,9 @@ itemDetail
   from '../../../mockData/getItemDetails';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
-import AuditItem, { AuditItemScreen, AuditItemScreenProps, isError, onValidateItemNumber } from './AuditItem';
+import AuditItem, {
+  AuditItemScreen, AuditItemScreenProps, isError, onValidateItemNumber
+} from './AuditItem';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
