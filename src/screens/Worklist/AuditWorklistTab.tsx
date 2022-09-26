@@ -8,10 +8,8 @@ import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
-import { getItemDetails, getWorklist } from '../../state/actions/saga';
-import {
-  GET_ITEM_DETAILS
-} from '../../state/actions/asyncAPI';
+import { getWorklist } from '../../state/actions/saga';
+import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 
@@ -29,6 +27,11 @@ export interface AuditWorklistTabScreenProps {
     refreshing: boolean;
 }
 
+const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispatch: Dispatch<any>) => {
+  dispatch(setAuditItemNumber(itemNumber));
+  navigation.navigate('AuditItem');
+};
+
 const renderCategoryCard = (
   category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
@@ -38,9 +41,7 @@ const renderCategoryCard = (
     listOfItems={items}
     collapsed={collapsed}
     onItemCardClick={(itemNumber: number) => {
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
-      dispatch(getItemDetails({ id: itemNumber }));
-      navigation.navigate('AuditItem');
+      onItemClick(itemNumber, navigation, dispatch);
     }}
   />
 );

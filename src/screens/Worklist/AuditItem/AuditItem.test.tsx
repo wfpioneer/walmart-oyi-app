@@ -15,7 +15,7 @@ itemDetail
   from '../../../mockData/getItemDetails';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
-import AuditItem, { AuditItemScreen, AuditItemScreenProps, isError } from './AuditItem';
+import AuditItem, { AuditItemScreen, AuditItemScreenProps, isError, onValidateItemNumber } from './AuditItem';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -88,7 +88,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
   userConfigs: mockConfig,
-  itemNumber: 500252
+  itemNumber: 0
 };
 
 describe('AuditItemScreen', () => {
@@ -175,6 +175,18 @@ describe('AuditItemScreen', () => {
     const mockDispatch = jest.fn();
     afterEach(() => {
       jest.clearAllMocks();
+    });
+
+    it('test onValidateItemNumber', async () => {
+      const expectedGetItemDetailsAction = {
+        payload: {
+          id: 123
+        },
+        type: 'SAGA/GET_ITEM_DETAILS'
+      };
+      await onValidateItemNumber({ ...mockAuditItemScreenProps, itemNumber: 123 });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
     });
 
     it('test isError', () => {

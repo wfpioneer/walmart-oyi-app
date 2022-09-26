@@ -88,6 +88,23 @@ export const isError = (
   );
 };
 
+export const onValidateItemNumber = (props: AuditItemScreenProps) => {
+  const {
+    userId, route,
+    dispatch, navigation, trackEventCall,
+    validateSessionCall, itemNumber
+  } = props;
+
+  if (navigation.isFocused()) {
+    validateSessionCall(navigation, route.name).then(() => {
+      if (itemNumber > 0) {
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
+        dispatch(getItemDetails({ id: itemNumber }));
+      }
+    }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+  }
+};
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -102,6 +119,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     useEffectHook,
     itemNumber
   } = props;
+
+  // call get Item details
+  useEffectHook(() => {
+    onValidateItemNumber(props);
+  }, [itemNumber]);
 
   // Scanned Item Event Listener
   useEffectHook(() => {
@@ -173,58 +195,61 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const itemDetailsData = (itemDetails || emptyData);
   return (
-    <ScrollView
-      ref={scrollViewRef}
-      contentContainerStyle={styles.container}
-      nestedScrollEnabled={true}
-      refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
-    >
+    <>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
-      <View
-        style={styles.container}
-      >
-        <View style={{ marginBottom: 8 }}>
-          <ItemCard
-            itemNumber={itemDetailsData.itemNbr}
-            description={itemDetailsData.itemName}
-            imageUrl={undefined}
-            onHandQty={itemDetailsData.onHandsQty}
-            onClick={() => { }}
-            loading={isWaitingItemDetailsRes}
-          />
-        </View>
-        <View style={styles.marginBottomStyle}>
-          <LocationListCard
-            locationList={getLocationList(itemDetailsData.location.floor)}
-            locationType="floor"
-            loading={isWaitingItemDetailsRes}
-            error={!!itemDetailsResErrror}
-            onRetry={() => { }}
-            scanRequired={false}
-          />
-        </View>
-        <View style={styles.marginBottomStyle}>
-          <LocationListCard
-            locationList={getLocationList(itemDetailsData.location.reserve)}
-            locationType="reserve"
-            loading={isWaitingItemDetailsRes}
-            error={!!itemDetailsResErrror}
-            onRetry={() => { }}
-            scanRequired={false}
-          />
-        </View>
-        <View style={styles.marginBottomStyle}>
-          <OtherOHItemCard
-            flyCloudInTransitOH={5}
-            flyCloudOH={3}
-            claimsOH={5}
-            consolidatorOH={2}
-            loading={isWaitingItemDetailsRes}
-            collapsed={false}
-          />
-        </View>
+      <View style={{ marginBottom: 8 }}>
+        <ItemCard
+          itemNumber={itemDetailsData.itemNbr}
+          description={itemDetailsData.itemName}
+          imageUrl={undefined}
+          onHandQty={itemDetailsData.onHandsQty}
+          onClick={() => { }}
+          loading={isWaitingItemDetailsRes}
+        />
       </View>
-    </ScrollView>
+      <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={styles.container}
+        nestedScrollEnabled={true}
+        refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
+      >
+        <View
+          style={styles.container}
+        >
+          <View style={styles.marginBottomStyle}>
+            <LocationListCard
+              locationList={getLocationList(itemDetailsData.location.floor)}
+              locationType="floor"
+              loading={isWaitingItemDetailsRes}
+              error={!!itemDetailsResErrror}
+              onRetry={() => { }}
+              scanRequired={false}
+            />
+          </View>
+          <View style={styles.marginBottomStyle}>
+            <LocationListCard
+              locationList={getLocationList(itemDetailsData.location.reserve)}
+              locationType="reserve"
+              loading={isWaitingItemDetailsRes}
+              error={!!itemDetailsResErrror}
+              onRetry={() => { }}
+              scanRequired={false}
+            />
+          </View>
+          <View style={styles.marginBottomStyle}>
+            <OtherOHItemCard
+              flyCloudInTransitOH={5}
+              flyCloudOH={3}
+              claimsOH={5}
+              consolidatorOH={2}
+              loading={isWaitingItemDetailsRes}
+              collapsed={false}
+            />
+          </View>
+        </View>
+      </ScrollView>
+
+    </>
   );
 };
 
@@ -238,9 +263,7 @@ const AuditItem = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
-
-  // TODO replaced from redux state when navigating from audit worklist, create a redux state for this screen
-  const itemNbr = 980056535;
+  const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
 
   return (
     <AuditItemScreen
@@ -260,7 +283,7 @@ const AuditItem = (): JSX.Element => {
       userFeatures={userFeatures}
       userConfigs={userConfigs}
       userId={userId}
-      itemNumber={itemNbr}
+      itemNumber={itemNumber}
     />
   );
 };

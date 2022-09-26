@@ -32,13 +32,15 @@ interface LocationListCardProp {
   scanRequired: boolean;
 }
 
-const renderLocationCard = ({ item, locationType, scanRequired }:
-  { item: LocationList, locationType: LocationType, scanRequired: boolean }) => {
+const renderLocationCard = ({
+  item, locationType, scanRequired, index
+}:
+  { item: LocationList, locationType: LocationType, scanRequired: boolean, index: number }) => {
   const {
     locationName, quantity, palletId, increment, decrement, onDelete, qtyChange
   } = item;
   return (
-    <View style={styles.locationCard} key={locationName}>
+    <View style={styles.locationCard} key={`${locationName}-${index}`}>
       <LocationCard
         location={locationName}
         locationType={locationType}
@@ -119,7 +121,9 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
       ) : (
         <>
           {
-            locationList.map(item => renderLocationCard({ item, locationType, scanRequired }))
+            locationList.map((item, index) => renderLocationCard({
+              item, locationType, scanRequired, index
+            }))
           }
         </>
       )}
