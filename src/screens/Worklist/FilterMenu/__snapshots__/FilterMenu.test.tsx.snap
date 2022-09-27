@@ -148,6 +148,7 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
     filterCategories={Array []}
     filterExceptions={Array []}
     selectedWorklistGoal="ITEMS"
+    showRollOverAudit={false}
     wlSummary={
       Array [
         Object {
@@ -289,6 +290,7 @@ exports[`FilterMenu Component ShallowRender FilterMenu with Audits WL Goal 1`] =
     filterCategories={Array []}
     filterExceptions={Array []}
     selectedWorklistGoal="AUDITS"
+    showRollOverAudit={false}
     wlSummary={
       Array [
         Object {

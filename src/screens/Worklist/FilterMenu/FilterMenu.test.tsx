@@ -69,6 +69,7 @@ describe('FilterMenu Component', () => {
           enableAreaFilter={false}
           selectedWorklistGoal={WorklistGoal.ITEMS}
           wlSummary={mockItemNPalletNAuditWorklistSummary}
+          showRollOverAudit={false}
         />
       </Provider>
     );
@@ -90,6 +91,7 @@ describe('FilterMenu Component', () => {
           enableAreaFilter={false}
           selectedWorklistGoal={WorklistGoal.AUDITS}
           wlSummary={mockItemNPalletNAuditWorklistSummary}
+          showRollOverAudit={false}
         />
       </Provider>
     );
@@ -111,6 +113,7 @@ describe('FilterMenu Component', () => {
           enableAreaFilter={true}
           selectedWorklistGoal={WorklistGoal.ITEMS}
           wlSummary={mockItemNPalletNAuditWorklistSummary}
+          showRollOverAudit={false}
         />
       </Provider>
     );
@@ -254,6 +257,7 @@ describe('FilterMenu Component', () => {
         dispatch={mockDispatch}
         isAudits={false}
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
+        disableAuditWL={false}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
@@ -270,6 +274,7 @@ describe('FilterMenu Component', () => {
         dispatch={mockDispatch}
         isAudits={false}
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
+        disableAuditWL={true}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
