@@ -138,7 +138,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "completed": false,
           "completedTs": undefined,
           "completedUserId": undefined,
-          "itemName": "TEST ITEM",
+          "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
           "itemNbr": 1234567890,
           "subCatgName": undefined,
           "subCatgNbr": 0,
@@ -151,7 +151,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "completed": false,
           "completedTs": undefined,
           "completedUserId": undefined,
-          "itemName": "TEST ITEM",
+          "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
           "itemNbr": 1234567899,
           "subCatgName": undefined,
           "subCatgNbr": 0,
@@ -227,8 +227,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               "justifyContent": "flex-start",
               "marginBottom": 2,
               "opacity": 1,
-              "paddingHorizontal": 15,
-              "paddingVertical": 5,
             }
           }
         >
@@ -237,30 +235,103 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               Object {
                 "alignItems": "flex-start",
                 "flex": 1,
-                "height": 100,
                 "justifyContent": "space-evenly",
               }
             }
           >
-            <Text
+            <View
               style={
                 Object {
-                  "fontSize": 12,
+                  "width": "100%",
                 }
               }
             >
-              TEST ITEM
-            </Text>
-            <Text
-              style={
-                Object {
-                  "color": "#616161",
-                  "fontSize": 12,
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "opacity": 1,
+                    "padding": 5,
+                    "width": "100%",
+                  }
                 }
-              }
-            >
-              1234567890
-            </Text>
+                testID="itemCard"
+              >
+                <Image
+                  source=""
+                  style={
+                    Object {
+                      "height": 85,
+                      "width": 85,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "column",
+                      "flexShrink": 1,
+                      "padding": 5,
+                    }
+                  }
+                  testID="item-details"
+                >
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.GENERICS.ITEM" translation] 1234567890
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 14,
+                          "marginVertical": 2,
+                        }
+                      }
+                    >
+                      Nature Valley Sweet And Salty Nuts Granola Bars
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.ON_HANDS" translation] 11
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -288,8 +359,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               "justifyContent": "flex-start",
               "marginBottom": 2,
               "opacity": 1,
-              "paddingHorizontal": 15,
-              "paddingVertical": 5,
             }
           }
         >
@@ -298,30 +367,103 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               Object {
                 "alignItems": "flex-start",
                 "flex": 1,
-                "height": 100,
                 "justifyContent": "space-evenly",
               }
             }
           >
-            <Text
+            <View
               style={
                 Object {
-                  "fontSize": 12,
+                  "width": "100%",
                 }
               }
             >
-              TEST ITEM
-            </Text>
-            <Text
-              style={
-                Object {
-                  "color": "#616161",
-                  "fontSize": 12,
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "opacity": 1,
+                    "padding": 5,
+                    "width": "100%",
+                  }
                 }
-              }
-            >
-              1234567899
-            </Text>
+                testID="itemCard"
+              >
+                <Image
+                  source=""
+                  style={
+                    Object {
+                      "height": 85,
+                      "width": 85,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "column",
+                      "flexShrink": 1,
+                      "padding": 5,
+                    }
+                  }
+                  testID="item-details"
+                >
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.GENERICS.ITEM" translation] 1234567899
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 14,
+                          "marginVertical": 2,
+                        }
+                      }
+                    >
+                      Nature Valley Sweet And Salty Nuts Granola Bars
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.ON_HANDS" translation] 11
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -349,8 +491,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               "justifyContent": "flex-start",
               "marginBottom": 2,
               "opacity": 1,
-              "paddingHorizontal": 15,
-              "paddingVertical": 5,
             }
           }
         >
@@ -359,30 +499,103 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               Object {
                 "alignItems": "flex-start",
                 "flex": 1,
-                "height": 100,
                 "justifyContent": "space-evenly",
               }
             }
           >
-            <Text
+            <View
               style={
                 Object {
-                  "fontSize": 12,
+                  "width": "100%",
                 }
               }
             >
-              ELECTRONIC ITEM
-            </Text>
-            <Text
-              style={
-                Object {
-                  "color": "#616161",
-                  "fontSize": 12,
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "opacity": 1,
+                    "padding": 5,
+                    "width": "100%",
+                  }
                 }
-              }
-            >
-              987654321
-            </Text>
+                testID="itemCard"
+              >
+                <Image
+                  source=""
+                  style={
+                    Object {
+                      "height": 85,
+                      "width": 85,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "column",
+                      "flexShrink": 1,
+                      "padding": 5,
+                    }
+                  }
+                  testID="item-details"
+                >
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.GENERICS.ITEM" translation] 987654321
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 14,
+                          "marginVertical": 2,
+                        }
+                      }
+                    >
+                      ELECTRONIC ITEM
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.ON_HANDS" translation] 11
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -410,8 +623,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               "justifyContent": "flex-start",
               "marginBottom": 2,
               "opacity": 1,
-              "paddingHorizontal": 15,
-              "paddingVertical": 5,
             }
           }
         >
@@ -420,30 +631,103 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               Object {
                 "alignItems": "flex-start",
                 "flex": 1,
-                "height": 100,
                 "justifyContent": "space-evenly",
               }
             }
           >
-            <Text
+            <View
               style={
                 Object {
-                  "fontSize": 12,
+                  "width": "100%",
                 }
               }
             >
-              BAKERY ITEM
-            </Text>
-            <Text
-              style={
-                Object {
-                  "color": "#616161",
-                  "fontSize": 12,
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "backgroundColor": "#ffffffff",
+                    "flexDirection": "row",
+                    "opacity": 1,
+                    "padding": 5,
+                    "width": "100%",
+                  }
                 }
-              }
-            >
-              123789456
-            </Text>
+                testID="itemCard"
+              >
+                <Image
+                  source=""
+                  style={
+                    Object {
+                      "height": 85,
+                      "width": 85,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "column",
+                      "flexShrink": 1,
+                      "padding": 5,
+                    }
+                  }
+                  testID="item-details"
+                >
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.GENERICS.ITEM" translation] 123789456
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 14,
+                          "marginVertical": 2,
+                        }
+                      }
+                    >
+                      BAKERY ITEM
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "color": "#616161",
+                          "flexShrink": 1,
+                          "flexWrap": "wrap",
+                          "fontSize": 12,
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.ON_HANDS" translation] 11
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </View>

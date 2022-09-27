@@ -6,7 +6,7 @@ import { TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { strings } from '../locales';
-import AuditWorklist from '../screens/Worklist/AuditWorklist/AuditWorklistScreen';
+import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 import { setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
@@ -100,8 +100,8 @@ export const AuditWorklistNavigatorStack = (
         }}
       />
       <Stack.Screen
-        name="AuditWorklist"
-        component={AuditWorklist}
+        name="AuditItem"
+        component={AuditItem}
         options={{
           headerTitle: strings('AUDITS.AUDIT_ITEM'),
           headerRight: () => (

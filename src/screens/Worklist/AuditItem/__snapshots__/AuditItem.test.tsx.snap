@@ -1,0 +1,867 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditItemScreen Manage AuditItem externalized function tests test isError 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#e57373",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 10,
+          "opacity": 1,
+          "width": "95%",
+        }
+      }
+      testID="errorLoadingItemRetry"
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`AuditItemScreen Manage AuditItem externalized function tests test isError 2`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#e57373",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 10,
+          "opacity": 1,
+          "width": "95%",
+        }
+      }
+      testID="errorLoadingItemRetry"
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "marginBottom": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#ffffffff",
+            "flexDirection": "row",
+            "opacity": 1,
+            "padding": 5,
+            "width": "100%",
+          }
+        }
+        testID="itemCard"
+      >
+        <Image
+          source=""
+          style={
+            Object {
+              "height": 85,
+              "width": 85,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "flexDirection": "column",
+              "flexShrink": 1,
+              "padding": 5,
+            }
+          }
+          testID="item-details"
+        >
+          <View>
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "flexShrink": 1,
+                  "flexWrap": "wrap",
+                  "fontSize": 12,
+                }
+              }
+            >
+              [missing "en.GENERICS.ITEM" translation] 0
+            </Text>
+          </View>
+          <View>
+            <Text
+              style={
+                Object {
+                  "flexShrink": 1,
+                  "flexWrap": "wrap",
+                  "fontSize": 14,
+                  "marginVertical": 2,
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+          <View>
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "flexShrink": 1,
+                  "flexWrap": "wrap",
+                  "fontSize": 12,
+                }
+              }
+            >
+              [missing "en.ITEM.ON_HANDS" translation] 0
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>,
+  <RCTScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    nestedScrollEnabled={true}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+  >
+    <RCTRefreshControl />
+    <View>
+      <View
+        style={
+          Object {
+            "alignItems": "stretch",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "marginBottom": 6,
+            }
+          }
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "borderBottomWidth": 1,
+                  "borderColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 15,
+                  "paddingVertical": 10,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flex": 1,
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <View>
+                  <mockMaterialCommunityIcons
+                    color="#000000"
+                    name="map-marker-outline"
+                    size={25}
+                  />
+                </View>
+                <View>
+                  <Text
+                    style={
+                      Object {
+                        "fontWeight": "bold",
+                      }
+                    }
+                  >
+                    [missing "en.LOCATION.FLOOR" translation] (0)
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    [missing "en.AUDITS.VALIDATE_QUANTITY" translation]
+                  </Text>
+                </View>
+              </View>
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={false}
+                hitSlop={
+                  Object {
+                    "bottom": 10,
+                    "left": 15,
+                    "right": 15,
+                    "top": 10,
+                  }
+                }
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "opacity": 1,
+                  }
+                }
+                testID="add-location"
+              >
+                <mockMaterialCommunityIcons
+                  color="#0071e9"
+                  name="plus-thick"
+                  size={25}
+                />
+              </View>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "justifyContent": "center",
+                  "marginBottom": 2,
+                  "padding": 5,
+                }
+              }
+            >
+              <Text>
+                [missing "en.AUDITS.NO_LOCATION_AVAILABLE" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "marginBottom": 6,
+            }
+          }
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "borderBottomWidth": 1,
+                  "borderColor": "#e0e0e0",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingHorizontal": 15,
+                  "paddingVertical": 10,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flex": 1,
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <View>
+                  <mockMaterialCommunityIcons
+                    color="#000000"
+                    name="map-marker-outline"
+                    size={25}
+                  />
+                </View>
+                <View>
+                  <Text
+                    style={
+                      Object {
+                        "fontWeight": "bold",
+                      }
+                    }
+                  >
+                    [missing "en.LOCATION.RESERVE" translation] (0)
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "fontSize": 12,
+                      }
+                    }
+                  >
+                    [missing "en.AUDITS.VALIDATE_SCAN_QUANTITY" translation]
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "justifyContent": "center",
+                  "marginBottom": 2,
+                  "padding": 5,
+                }
+              }
+            >
+              <Text>
+                [missing "en.AUDITS.NO_LOCATION_AVAILABLE" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "marginBottom": 6,
+            }
+          }
+        >
+          <View>
+            <View>
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "borderBottomColor": "#eeeeee",
+                    "borderBottomWidth": 1,
+                    "flexDirection": "row",
+                    "paddingHorizontal": 10,
+                    "paddingVertical": 10,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flex": 1,
+                      "flexDirection": "row",
+                      "justifyContent": "flex-start",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "marginRight": 0,
+                      }
+                    }
+                  >
+                    
+                  </Text>
+                  <Text
+                    style={
+                      Object {
+                        "fontWeight": "500",
+                        "paddingLeft": 10,
+                      }
+                    }
+                  >
+                    [missing "en.AUDITS.OTHER_ON_HANDS" translation] (15)
+                  </Text>
+                </View>
+                <View
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Object {
+                      "flex": 0.1,
+                      "opacity": 1,
+                      "paddingLeft": 5,
+                    }
+                  }
+                  testID="collapsible-card"
+                >
+                  <mockMaterialIcons
+                    color="#000000"
+                    name="keyboard-arrow-up"
+                    size={25}
+                  />
+                </View>
+              </View>
+              <View>
+                <View
+                  style={
+                    Object {
+                      "backgroundColor": "#ffffffff",
+                      "flexDirection": "row",
+                      "justifyContent": "space-evenly",
+                    }
+                  }
+                >
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "padding": 8,
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.CLAIMS_QTY" translation]  5
+                    </Text>
+                    <Text
+                      style={
+                        Object {
+                          "padding": 8,
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.FLY_CLOUD_QTY" translation]  3
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={
+                        Object {
+                          "padding": 8,
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.CONSOLIDATED_QTY" translation]  2
+                    </Text>
+                    <Text
+                      style={
+                        Object {
+                          "padding": 8,
+                          "textAlign": "right",
+                        }
+                      }
+                    >
+                      [missing "en.ITEM.IN_TRANSIT_FLY_QTY" translation]  5
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>,
+]
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activity Indicator' waiting for ItemDetails Response  1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "marginBottom": 8,
+      }
+    }
+  >
+    <ItemCard
+      description=""
+      itemNumber={0}
+      loading={true}
+      onClick={[Function]}
+      onHandQty={0}
+    />
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    nestedScrollEnabled={true}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          error={false}
+          loading={true}
+          locationList={Array []}
+          locationType="floor"
+          onRetry={[Function]}
+          scanRequired={false}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          error={false}
+          loading={true}
+          locationList={Array []}
+          locationType="reserve"
+          onRetry={[Function]}
+          scanRequired={false}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <OtherOHItemCard
+          claimsOH={5}
+          collapsed={false}
+          consolidatorOH={2}
+          flyCloudInTransitOH={5}
+          flyCloudOH={3}
+          loading={true}
+        />
+      </View>
+    </View>
+  </ScrollView>
+</React.Fragment>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Scanned Item Not Found' on request status 204 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#5FA7F2"
+      name="information"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.PALLET.ITEMS_NOT_FOUND" translation]
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the details for a single item with non-null status 1`] = `
+<React.Fragment>
+  <View
+    style={
+      Object {
+        "marginBottom": 8,
+      }
+    }
+  >
+    <ItemCard
+      description="Test Item That is Really, Really Long (and has parenthesis)"
+      itemNumber={1234567890}
+      loading={false}
+      onClick={[Function]}
+      onHandQty={42}
+    />
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    nestedScrollEnabled={true}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          error={false}
+          loading={false}
+          locationList={
+            Array [
+              Object {
+                "decrement": [Function],
+                "increment": [Function],
+                "locationName": "A1-1",
+                "onDelete": [Function],
+                "palletId": "",
+                "qtyChange": [Function],
+                "quantity": 0,
+                "sectionId": 1,
+              },
+              Object {
+                "decrement": [Function],
+                "increment": [Function],
+                "locationName": "A1-2",
+                "onDelete": [Function],
+                "palletId": "",
+                "qtyChange": [Function],
+                "quantity": 0,
+                "sectionId": 2,
+              },
+              Object {
+                "decrement": [Function],
+                "increment": [Function],
+                "locationName": "A1-3",
+                "onDelete": [Function],
+                "palletId": "",
+                "qtyChange": [Function],
+                "quantity": 0,
+                "sectionId": 3,
+              },
+              Object {
+                "decrement": [Function],
+                "increment": [Function],
+                "locationName": "A1-4",
+                "onDelete": [Function],
+                "palletId": "",
+                "qtyChange": [Function],
+                "quantity": 0,
+                "sectionId": 4,
+              },
+            ]
+          }
+          locationType="floor"
+          onRetry={[Function]}
+          scanRequired={false}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          error={false}
+          loading={false}
+          locationList={
+            Array [
+              Object {
+                "decrement": [Function],
+                "increment": [Function],
+                "locationName": "A1-1",
+                "onDelete": [Function],
+                "palletId": "",
+                "qtyChange": [Function],
+                "quantity": 10,
+                "sectionId": 1,
+              },
+            ]
+          }
+          locationType="reserve"
+          onRetry={[Function]}
+          scanRequired={false}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <OtherOHItemCard
+          claimsOH={5}
+          collapsed={false}
+          consolidatorOH={2}
+          flyCloudInTransitOH={5}
+          flyCloudOH={3}
+          loading={false}
+        />
+      </View>
+    </View>
+  </ScrollView>
+</React.Fragment>
+`;

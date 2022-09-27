@@ -100,6 +100,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
+    titleStyle={Object {}}
   >
     <View
       testID="additional-item-details"

@@ -52,7 +52,7 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
   />
   <Screen
     component={[Function]}
-    name="AuditWorklist"
+    name="AuditItem"
     options={
       Object {
         "headerRight": [Function],

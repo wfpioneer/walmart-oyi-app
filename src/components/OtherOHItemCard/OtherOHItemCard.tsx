@@ -23,13 +23,23 @@ const OtherOHItemCard = (props: OtherOHItemCardProps): JSX.Element => {
   const totalOtherOHItems = claimsOH + consolidatorOH + flyCloudInTransitOH + flyCloudOH;
 
   return (
-    <View style={styles.mainContainer}>
+    <View>
       {loading ? (
-        <View style={styles.loader} testID="loader">
-          <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
-        </View>
+        <CollapsibleCard
+          isOpened={!collapsed}
+          titleStyle={styles.titleStyle}
+          title={strings('AUDITS.OTHER_ON_HANDS')}
+        >
+          <View style={styles.loader} testID="loader">
+            <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+          </View>
+        </CollapsibleCard>
       ) : (
-        <CollapsibleCard isOpened={!collapsed} title={`${strings('AUDITS.OTHER_ON_HANDS')} (${totalOtherOHItems})`}>
+        <CollapsibleCard
+          isOpened={!collapsed}
+          titleStyle={styles.titleStyle}
+          title={`${strings('AUDITS.OTHER_ON_HANDS')} (${totalOtherOHItems})`}
+        >
           <View style={styles.otherOHDetails}>
             <View>
               <Text style={styles.content}>{`${strings('ITEM.CLAIMS_QTY')}  ${claimsOH}`}</Text>
