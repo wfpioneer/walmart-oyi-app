@@ -7,7 +7,6 @@ import SideMenu from 'react-native-side-menu-updated';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { strings } from '../locales';
-import AuditWorklist from '../screens/Worklist/AuditWorklist/AuditWorklistScreen';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { setManualScan } from '../state/actions/Global';
 import { toggleMenu } from '../state/actions/Worklist';
@@ -15,6 +14,7 @@ import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
 import styles from './AuditWorklistNavigator.style';
 import AuditWorklistTabs from './AuditWorklistTabNavigator/AuditWorklistTabNavigator';
+import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 
 const Stack = createStackNavigator();
 
@@ -65,7 +65,11 @@ const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
 const renderFilterButton = (dispatch: Dispatch<any>, menuOpen: boolean) => (
   <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
     <View style={styles.filterButton}>
-      <MaterialCommunityIcons name="filter-variant" size={30} color={COLOR.WHITE} />
+      <MaterialCommunityIcons
+        name="filter-variant"
+        size={30}
+        color={COLOR.WHITE}
+      />
     </View>
   </TouchableOpacity>
 );
@@ -74,7 +78,11 @@ export const AuditWorklistNavigatorStack = (
   props: AuditWorklistNavProps
 ): JSX.Element => {
   const {
-    auditWorklists, dispatch, isManualScanEnabled, navigation, menuOpen
+    auditWorklists,
+    dispatch,
+    isManualScanEnabled,
+    navigation,
+    menuOpen
   } = props;
 
   const navigateBack = () => {
@@ -94,13 +102,13 @@ export const AuditWorklistNavigatorStack = (
         friction: 8,
         useNativeDriver: true
       })}
-      onChange={(isOpen => {
+      onChange={isOpen => {
         if (!isOpen && menuOpen) {
           dispatch(toggleMenu(false));
         } else if (isOpen && !menuOpen) {
           dispatch(toggleMenu(true));
         }
-      })}
+      }}
     >
       <Stack.Navigator
         screenOptions={() => ({
@@ -116,7 +124,7 @@ export const AuditWorklistNavigatorStack = (
             headerTitle: strings('WORKLIST.AUDIT_WORKLIST'),
             headerLeft: hlProps => hlProps.canGoBack && (
             <HeaderBackButton
-            // eslint-disable-next-line react/jsx-props-no-spreading
+                  // eslint-disable-next-line react/jsx-props-no-spreading
               {...hlProps}
               onPress={navigateBack}
             />
@@ -129,8 +137,8 @@ export const AuditWorklistNavigatorStack = (
           }}
         />
         <Stack.Screen
-          name="AuditWorklist"
-          component={AuditWorklist}
+          name="AuditItem"
+          component={AuditItem}
           options={{
             headerTitle: strings('AUDITS.AUDIT_ITEM'),
             headerRight: () => (

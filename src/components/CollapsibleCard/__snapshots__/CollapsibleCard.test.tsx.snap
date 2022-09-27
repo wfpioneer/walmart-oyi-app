@@ -34,7 +34,9 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       >
         
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         History
       </Text>
     </View>
@@ -102,7 +104,9 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       >
         
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         History
       </Text>
     </View>

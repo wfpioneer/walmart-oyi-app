@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ActivityIndicator, FlatList, Platform, Text, TouchableOpacity, View
+  ActivityIndicator, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
@@ -32,13 +32,15 @@ interface LocationListCardProp {
   scanRequired: boolean;
 }
 
-const renderLocationCard = ({ item, locationType, scanRequired }:
-  { item: LocationList, locationType: LocationType, scanRequired: boolean }) => {
+const renderLocationCard = ({
+  item, locationType, scanRequired, index
+}:
+  { item: LocationList, locationType: LocationType, scanRequired: boolean, index: number }) => {
   const {
     locationName, quantity, palletId, increment, decrement, onDelete, qtyChange
   } = item;
   return (
-    <View style={styles.locationCard}>
+    <View style={styles.locationCard} key={`${locationName}-${index}`}>
       <LocationCard
         location={locationName}
         locationType={locationType}
@@ -81,13 +83,6 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
       </View>
     );
   }
-  if (loading) {
-    return (
-      <View style={styles.loader} testID="loader">
-        <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
-      </View>
-    );
-  }
 
   return (
     <View>
@@ -106,7 +101,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
             </Text>
           </View>
         </View>
-        {locationType === 'floor'
+        {locationType === 'floor' && !loading
             && (
             <TouchableOpacity
               hitSlop={{
@@ -119,11 +114,26 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
             </TouchableOpacity>
             )}
       </View>
-      <FlatList
-        data={locationList}
-        renderItem={({ item }) => renderLocationCard({ item, locationType, scanRequired })}
-        keyExtractor={(item: LocationList, index: number) => item.sectionId + index.toString()}
-      />
+      {loading ? (
+        <View style={styles.loader} testID="loader">
+          <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+        </View>
+      ) : (
+        <>
+          {
+            locationList.length ? locationList.map((item, index) => renderLocationCard({
+              item, locationType, scanRequired, index
+            }))
+              : (
+                <View style={styles.nolocation}>
+                  <Text>
+                    {strings('AUDITS.NO_LOCATION_AVAILABLE')}
+                  </Text>
+                </View>
+              )
+          }
+        </>
+      )}
     </View>
   );
 };
