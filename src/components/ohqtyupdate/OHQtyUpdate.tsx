@@ -129,7 +129,7 @@ const OHQtyUpdate = (props: OHQtyUpdateProps): JSX.Element => {
           <Button
             testID="saveButton"
             style={styles.saveBtn}
-            title="Save"
+            title={strings('GENERICS.SAVE')}
             type={ButtonType.PRIMARY}
             disabled={!validateQty(newOHQty) || validateSameQty(onHandsQty, newOHQty)}
             onPress={handleSubmit}
