@@ -121,9 +121,16 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
       ) : (
         <>
           {
-            locationList.map((item, index) => renderLocationCard({
+            locationList.length ? locationList.map((item, index) => renderLocationCard({
               item, locationType, scanRequired, index
             }))
+              : (
+                <View style={styles.nolocation}>
+                  <Text>
+                    {strings('AUDITS.NO_LOCATION_AVAILABLE')}
+                  </Text>
+                </View>
+              )
           }
         </>
       )}

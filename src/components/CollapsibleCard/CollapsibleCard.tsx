@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useState } from 'react';
 import {
-  Text, TouchableOpacity, View
+  Text, TextStyle, TouchableOpacity, View
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,6 +12,7 @@ interface CollapsibleHeaderCardProps {
     isOpened: boolean;
     toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
     icon: string;
+    titleStyle: TextStyle | undefined;
 }
 
 interface CollapsibleCardProps {
@@ -19,11 +20,12 @@ interface CollapsibleCardProps {
     isOpened?: boolean;
     children: ReactNode | ReactElement;
     icon?: string;
+    titleStyle?: TextStyle;
 }
 
 export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.Element => {
   const {
-    icon, title, isOpened, toggleIsOpened
+    icon, title, isOpened, toggleIsOpened, titleStyle
   } = props;
   const iconName = isOpened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
 
@@ -39,7 +41,7 @@ export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.El
           />
           )}
         </Text>
-        <Text>{title}</Text>
+        <Text style={titleStyle}>{title}</Text>
       </View>
       <TouchableOpacity
         testID="collapsible-card"
@@ -54,7 +56,7 @@ export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.El
 
 export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
   const {
-    icon, title, children, isOpened
+    icon, title, children, isOpened, titleStyle
   } = props;
 
   const [cardOpen, toggleCardOpen] = useState(isOpened || false);
@@ -66,6 +68,7 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
         isOpened={cardOpen}
         toggleIsOpened={toggleCardOpen}
         icon={icon || ''}
+        titleStyle={titleStyle}
       />
       {cardOpen && (
       <View>
@@ -78,7 +81,8 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
 
 CollapsibleCard.defaultProps = {
   isOpened: false,
-  icon: ''
+  icon: '',
+  titleStyle: {}
 };
 
 export default CollapsibleCard;

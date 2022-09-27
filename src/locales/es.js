@@ -498,6 +498,7 @@ export default {
     PALLET_COUNT: 'Por favor ingresa el conteo del pallet',
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',
     UPDATED_QTY: 'Cantidad actualizada',
-    LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada'
+    LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada',
+    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible'
   }
 };

@@ -503,6 +503,7 @@ export default {
     PALLET_COUNT: '请输入卡板库存数量',
     CONFIRM_AUDIT: '确认现货盘点结果',
     UPDATED_QTY: '更新数量',
-    LARGE_CURRENCY_CHANGE: '大金额调整(超1000)'
+    LARGE_CURRENCY_CHANGE: '大金额调整(超1000)',
+    NO_LOCATION_AVAILABLE: '无位置信息'
   }
 };

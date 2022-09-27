@@ -500,6 +500,7 @@ export default {
     PALLET_COUNT: 'Please enter the count for pallet',
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',
     UPDATED_QTY: 'Updated Quantity',
-    LARGE_CURRENCY_CHANGE: 'Large Currency Change'
+    LARGE_CURRENCY_CHANGE: 'Large Currency Change',
+    NO_LOCATION_AVAILABLE: 'No location available'
   }
 };

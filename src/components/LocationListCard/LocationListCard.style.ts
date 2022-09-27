@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderBottomWidth: 1,
-    borderColor: COLOR.GREY_700,
+    borderColor: COLOR.GREY_300,
     backgroundColor: COLOR.WHITE
   },
   title: {
@@ -50,6 +50,13 @@ const styles = StyleSheet.create({
   },
   locationCard: {
     marginBottom: 2
+  },
+  nolocation: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    marginBottom: 2,
+    backgroundColor: COLOR.WHITE
   }
 });
 
