@@ -17,6 +17,7 @@ import { Picking } from './Picking';
 import { PalletWorklist } from './PalletWorklist';
 import { ItemHistory } from './ItemHistory';
 import { AuditWorklist } from './AuditWorklist';
+import { AuditItemScreen } from './AuditItemScreen';
 
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
@@ -38,7 +39,8 @@ const RootReducer = combineReducers({
   Picking,
   PalletWorklist,
   ItemHistory,
-  AuditWorklist
+  AuditWorklist,
+  AuditItemScreen
 });
 
 export default RootReducer;

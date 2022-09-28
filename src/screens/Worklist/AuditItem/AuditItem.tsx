@@ -1,5 +1,5 @@
 import React, {
-  EffectCallback, RefObject, createRef, useEffect
+  EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
   RefreshControl, ScrollView, Text, TouchableOpacity,
@@ -8,12 +8,12 @@ import {
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
-import _ from 'lodash';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { AxiosError, AxiosResponse } from 'axios';
+import Toast from 'react-native-toast-message';
+import { AxiosError } from 'axios';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import { validateSession } from '../../../utils/sessionTimeout';
@@ -35,11 +35,15 @@ import {
 import ItemCard from '../../../components/ItemCard/ItemCard';
 import LocationListCard, { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
+import { setupScreen } from '../../../state/actions/ItemDetailScreen';
+import { AsyncState } from '../../../models/AsyncState';
+import { setFloorLocations, setItemDetails, setReserveLocations } from '../../../state/actions/AuditItemScreen';
 
 export interface AuditItemScreenProps {
     scannedEvent: { value: string | null; type: string | null; };
     isManualScanEnabled: boolean;
-    isWaitingItemDetailsRes: boolean; itemDetailsResErrror: AxiosError | null; itemDetailsRes: AxiosResponse | null;
+    getItemDetailsApi: AsyncState;
+    getLocationApi: AsyncState;
     userId: string;
     floorLocations?: Location[];
     reserveLocations?: Location[];
@@ -54,6 +58,9 @@ export interface AuditItemScreenProps {
     userFeatures: string[];
     userConfigs: Configurations;
     itemNumber: number;
+    showItemNotFoundMsg: boolean;
+    setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
+    itemDetails: ItemDetails | null;
   }
 
 export const isError = (
@@ -105,10 +112,73 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
   }
 };
 
+export const addLocationHandler = (
+  itemDetails: ItemDetails | null,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  dispatch(setupScreen(
+    itemDetails ? itemDetails.itemNbr : 0,
+    itemDetails ? itemDetails.upcNbr : '',
+    itemDetails?.location.floor || [],
+    itemDetails?.location.reserve || [],
+    null,
+    -999,
+    false,
+    false
+  ));
+  navigation.navigate('AddLocation');
+};
+
+export const getlocationsApiResult = (locationsApi: AsyncState, dispatch: Dispatch<any>) => {
+  const locDetails = (locationsApi.result && locationsApi.result.data);
+  if (locDetails.location) {
+    if (locDetails.location.floor) {
+      dispatch(setFloorLocations(locDetails.location.floor));
+    }
+    if (locDetails.location.reserve) {
+      dispatch(setReserveLocations(locDetails.location.reserve));
+    }
+  }
+};
+
+export const getItemDetailsApiHook = (
+  getItemDetailsApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (navigation.isFocused()) {
+    // on api success
+    if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
+      if (getItemDetailsApi.result.status === 200 || getItemDetailsApi.result.status === 207) {
+        const itemDetails: ItemDetails = getItemDetailsApi.result.data;
+        dispatch(setItemDetails(itemDetails));
+        dispatch(setFloorLocations(itemDetails.location.floor || []));
+        dispatch(setReserveLocations(itemDetails.location.reserve || []));
+        setShowItemNotFoundMsg(false);
+      } else if (getItemDetailsApi.result.status === 204) {
+        setShowItemNotFoundMsg(true);
+        Toast.show({
+          type: 'error',
+          text1: strings('ITEM.ITEM_NOT_FOUND'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+      }
+      dispatch({ type: GET_ITEM_DETAILS.RESET });
+    }
+    if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
+      setShowItemNotFoundMsg(false);
+    }
+  }
+};
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
-    isWaitingItemDetailsRes, itemDetailsResErrror, itemDetailsRes,
+    getLocationApi,
+    getItemDetailsApi,
     userId,
     route,
     dispatch,
@@ -117,7 +187,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     trackEventCall,
     validateSessionCall,
     useEffectHook,
-    itemNumber
+    itemNumber,
+    setShowItemNotFoundMsg,
+    showItemNotFoundMsg,
+    itemDetails,
+    floorLocations,
+    reserveLocations
   } = props;
 
   // call get Item details
@@ -130,17 +205,23 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     // TO DO
   }, [scannedEvent]);
 
-  const itemDetails: ItemDetails = (itemDetailsRes && itemDetailsRes.data);
-
-  // Set Item Details
+  // Get Location Details API
   useEffectHook(() => {
-    // TO DO
-  }, [itemDetails]);
+    if (!getLocationApi.isWaiting && getLocationApi.result) {
+      getlocationsApiResult(getLocationApi, dispatch);
+    }
+  }, [getLocationApi]);
 
-  if (!isWaitingItemDetailsRes && (itemDetailsResErrror || (itemDetails && itemDetails.message))) {
+  // Get Item Details UPC api
+  useEffectHook(
+    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg),
+    [getItemDetailsApi]
+  );
+
+  if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
     return isError(
-      itemDetailsResErrror,
+      getItemDetailsApi.error,
       dispatch,
       trackEventCall,
       itemNumber,
@@ -148,7 +229,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     );
   }
 
-  if (_.get(itemDetailsRes, 'status') === 204 || _.get(itemDetails, 'code') === 204) {
+  if (showItemNotFoundMsg) {
     return (
       <View style={styles.safeAreaView}>
         <View style={styles.activityIndicator}>
@@ -186,28 +267,17 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     return locationLst;
   };
 
-  const emptyData = {
-    itemNbr: 0,
-    itemName: '',
-    onHandsQty: 0,
-    location: {
-      floor: null,
-      reserver: null
-    }
-  };
-
-  const itemDetailsData = (itemDetails || emptyData);
   return (
     <>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
       <View style={{ marginBottom: 8 }}>
         <ItemCard
-          itemNumber={itemDetailsData.itemNbr}
-          description={itemDetailsData.itemName}
+          itemNumber={itemDetails ? itemDetails.itemNbr : 0}
+          description={itemDetails ? itemDetails.itemName : ''}
           imageUrl={undefined}
-          onHandQty={itemDetailsData.onHandsQty}
+          onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
           onClick={() => { }}
-          loading={isWaitingItemDetailsRes}
+          loading={getItemDetailsApi.isWaiting}
         />
       </View>
       <ScrollView
@@ -221,20 +291,25 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         >
           <View style={styles.marginBottomStyle}>
             <LocationListCard
-              locationList={getLocationList(itemDetailsData.location.floor)}
+              locationList={getLocationList(floorLocations)}
               locationType="floor"
-              loading={isWaitingItemDetailsRes}
-              error={!!itemDetailsResErrror}
+              add={() => addLocationHandler(
+                itemDetails,
+                dispatch,
+                navigation
+              )}
+              loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
+              error={!!(getItemDetailsApi.error || getLocationApi.error)}
               onRetry={() => { }}
               scanRequired={false}
             />
           </View>
           <View style={styles.marginBottomStyle}>
             <LocationListCard
-              locationList={getLocationList(itemDetailsData.location.reserve)}
+              locationList={getLocationList(reserveLocations)}
               locationType="reserve"
-              loading={isWaitingItemDetailsRes}
-              error={!!itemDetailsResErrror}
+              loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
+              error={!!(getItemDetailsApi.error || getLocationApi.error)}
               onRetry={() => { }}
               scanRequired={false}
             />
@@ -245,7 +320,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               flyCloudOH={3}
               claimsOH={5}
               consolidatorOH={2}
-              loading={isWaitingItemDetailsRes}
+              loading={getItemDetailsApi.isWaiting}
               collapsed={false}
             />
           </View>
@@ -258,7 +333,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
 const AuditItem = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
+  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
+  const getLocationApi = useTypedSelector(state => state.async.getLocation);
   const { userId } = useTypedSelector(state => state.User);
   const userFeatures = useTypedSelector(state => state.User.features);
   const userConfigs = useTypedSelector(state => state.User.configs);
@@ -267,14 +343,15 @@ const AuditItem = (): JSX.Element => {
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
+  const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
+  const { itemDetails, floorLocations, reserveLocations } = useTypedSelector(state => state.AuditItemScreen);
 
   return (
     <AuditItemScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
-      isWaitingItemDetailsRes={isWaiting}
-      itemDetailsResErrror={error}
-      itemDetailsRes={result}
+      getItemDetailsApi={getItemDetailsApi}
+      getLocationApi={getLocationApi}
       route={route}
       dispatch={dispatch}
       navigation={navigation}
@@ -287,6 +364,11 @@ const AuditItem = (): JSX.Element => {
       userConfigs={userConfigs}
       userId={userId}
       itemNumber={itemNumber}
+      showItemNotFoundMsg={showItemNotFoundMsg}
+      setShowItemNotFoundMsg={setShowItemNotFoundMsg}
+      itemDetails={itemDetails}
+      floorLocations={floorLocations}
+      reserveLocations={reserveLocations}
     />
   );
 };

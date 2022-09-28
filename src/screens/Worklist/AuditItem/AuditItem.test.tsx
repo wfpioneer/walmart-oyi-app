@@ -10,14 +10,13 @@ import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { AxiosError, AxiosResponse } from 'axios';
 import { object } from 'prop-types';
-import
-itemDetail
-  from '../../../mockData/getItemDetails';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen, AuditItemScreenProps, isError, onValidateItemNumber
 } from './AuditItem';
+import { AsyncState } from '../../../models/AsyncState';
+import { getMockItemDetails } from '../../../mockData';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -73,12 +72,19 @@ const scrollViewProp: React.RefObject<ScrollView> = {
   current: null
 };
 
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
 const mockAuditItemScreenProps: AuditItemScreenProps = {
   scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
-  isWaitingItemDetailsRes: false,
-  itemDetailsResErrror: null,
-  itemDetailsRes: null,
+  getItemDetailsApi: defaultAsyncState,
+  getLocationApi: defaultAsyncState,
+  itemDetails: null,
   userId: 'testUser',
   route: routeProp,
   dispatch: jest.fn(),
@@ -90,18 +96,12 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
   userConfigs: mockConfig,
-  itemNumber: 0
+  itemNumber: 0,
+  setShowItemNotFoundMsg: jest.fn(),
+  showItemNotFoundMsg: false
 };
 
 describe('AuditItemScreen', () => {
-  const defaultResult: AxiosResponse = {
-    config: {},
-    data: {},
-    headers: {},
-    status: 200,
-    statusText: 'OK',
-    request: {}
-  };
   const mockError: AxiosError = {
     config: {},
     isAxiosError: true,
@@ -133,11 +133,14 @@ describe('AuditItemScreen', () => {
     it('renders the details for a single item with non-null status', () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
-        itemDetailsRes: {
-          ...defaultResult,
-          data: { ...itemDetail[123] },
-          status: 200
-        }
+        getItemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: getMockItemDetails('123')
+          }
+        },
+        itemDetails: getMockItemDetails('123')
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -148,11 +151,14 @@ describe('AuditItemScreen', () => {
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
-        itemDetailsRes: {
-          ...defaultResult,
-          data: [],
-          status: 204
-        }
+        getItemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            data: [],
+            status: 204
+          }
+        },
+        showItemNotFoundMsg: true
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -163,7 +169,10 @@ describe('AuditItemScreen', () => {
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
-        isWaitingItemDetailsRes: true
+        getItemDetailsApi: {
+          ...defaultAsyncState,
+          isWaiting: true
+        }
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(

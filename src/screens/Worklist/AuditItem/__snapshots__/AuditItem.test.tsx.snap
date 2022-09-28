@@ -320,7 +320,7 @@ Array [
               <View
                 accessible={true}
                 collapsable={false}
-                focusable={false}
+                focusable={true}
                 hitSlop={
                   Object {
                     "bottom": 10,
@@ -636,6 +636,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         }
       >
         <LocationListCard
+          add={[Function]}
           error={false}
           loading={true}
           locationList={Array []}
@@ -765,52 +766,10 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         }
       >
         <LocationListCard
+          add={[Function]}
           error={false}
           loading={false}
-          locationList={
-            Array [
-              Object {
-                "decrement": [Function],
-                "increment": [Function],
-                "locationName": "A1-1",
-                "onDelete": [Function],
-                "palletId": "",
-                "qtyChange": [Function],
-                "quantity": 0,
-                "sectionId": 1,
-              },
-              Object {
-                "decrement": [Function],
-                "increment": [Function],
-                "locationName": "A1-2",
-                "onDelete": [Function],
-                "palletId": "",
-                "qtyChange": [Function],
-                "quantity": 0,
-                "sectionId": 2,
-              },
-              Object {
-                "decrement": [Function],
-                "increment": [Function],
-                "locationName": "A1-3",
-                "onDelete": [Function],
-                "palletId": "",
-                "qtyChange": [Function],
-                "quantity": 0,
-                "sectionId": 3,
-              },
-              Object {
-                "decrement": [Function],
-                "increment": [Function],
-                "locationName": "A1-4",
-                "onDelete": [Function],
-                "palletId": "",
-                "qtyChange": [Function],
-                "quantity": 0,
-                "sectionId": 4,
-              },
-            ]
-          }
+          locationList={Array []}
           locationType="floor"
           onRetry={[Function]}
           scanRequired={false}
@@ -826,20 +785,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         <LocationListCard
           error={false}
           loading={false}
-          locationList={
-            Array [
-              Object {
-                "decrement": [Function],
-                "increment": [Function],
-                "locationName": "A1-1",
-                "onDelete": [Function],
-                "palletId": "",
-                "qtyChange": [Function],
-                "quantity": 10,
-                "sectionId": 1,
-              },
-            ]
-          }
+          locationList={Array []}
           locationType="reserve"
           onRetry={[Function]}
           scanRequired={false}
