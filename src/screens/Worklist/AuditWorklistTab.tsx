@@ -12,6 +12,7 @@ import { getWorklist } from '../../state/actions/saga';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
+import { mockCompletedAuditWorklist, mockToDoAuditWorklist } from '../../mockData/mockWorkList';
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
@@ -89,7 +90,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const [collapsed, setCollapsed] = useState(false);
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
-  const items = toDo ? toDoItems : completedItems;
+  const items = toDo ? mockToDoAuditWorklist : mockCompletedAuditWorklist;
   const { isWaiting } = useTypedSelector(state => state.async.getWorklist);
   // TODO: If there are no worklist items we need to show error message
   if (isEmpty(items)) {

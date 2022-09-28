@@ -8,15 +8,18 @@ import { ScrollView } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 import { object } from 'prop-types';
+import Toast from 'react-native-toast-message';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
-  AuditItemScreen, AuditItemScreenProps, isError, onValidateItemNumber
+  AuditItemScreen, AuditItemScreenProps, addLocationHandler,
+  getItemDetailsApiHook, getlocationsApiResult, isError, onValidateItemNumber
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
+import { strings } from '../../../locales';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -109,6 +112,7 @@ describe('AuditItemScreen', () => {
     name: 'Network Error',
     toJSON: () => object
   };
+  const mockItemDetails = getMockItemDetails('123');
 
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
@@ -224,6 +228,75 @@ describe('AuditItemScreen', () => {
         980056535
       ));
       expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('tests addLocationHandler', () => {
+      const mockNavigate = jest.fn();
+      navigationProp.navigate = mockNavigate;
+      addLocationHandler(mockItemDetails, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockNavigate).toBeCalledTimes(1);
+    });
+
+    it('tests getlocationsApiResult', () => {
+      const mockLocationsAsyncstate = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: {
+            location: {
+              floor: mockItemDetails.location.floor,
+              reserve: mockItemDetails.location.reserve
+            }
+          }
+        }
+      };
+      getlocationsApiResult(mockLocationsAsyncstate, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(2);
+    });
+
+    it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockItemDetails,
+          status: 200
+        }
+      };
+      const mockSetShowItemNotFoundMsg = jest.fn();
+      getItemDetailsApiHook(successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      expect(mockDispatch).toBeCalledTimes(4);
+      expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests getItemDetailsApiHook on 204 success for a new item', () => {
+      const successApi204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const mockSetShowItemNotFoundMsg = jest.fn();
+      const toastItemNotFound = {
+        type: 'error',
+        text1: strings('ITEM.ITEM_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi204, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
+    });
+
+    it('Tests getItemDetailsApi on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const mockSetShowItemNotFoundMsg = jest.fn();
+      getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
   });
 });
