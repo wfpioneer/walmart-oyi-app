@@ -52,7 +52,7 @@ export const MissingPalletWorklistNavigatorStack = (
 
   const navigateBack = () => {
     if (palletWorklists) {
-      navigation.navigate(strings('WORKLIST.WORKLIST'));
+      navigation.navigate('WorklistHome');
     } else {
       navigation.goBack();
     }

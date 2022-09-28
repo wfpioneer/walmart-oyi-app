@@ -46,7 +46,11 @@ const renderPrintButton = () => (
 const renderFilterButton = () => (
   <TouchableOpacity onPress={() => {}}>
     <View style={styles.filterButton}>
-      <MaterialCommunityIcons name="filter-variant" size={30} color={COLOR.WHITE} />
+      <MaterialCommunityIcons
+        name="filter-variant"
+        size={30}
+        color={COLOR.WHITE}
+      />
     </View>
   </TouchableOpacity>
 );
@@ -67,7 +71,7 @@ export const AuditWorklistNavigatorStack = (
 
   const navigateBack = () => {
     if (auditWorklists) {
-      navigation.navigate(strings('WORKLIST.WORKLIST'));
+      navigation.navigate('WorklistHome');
     } else {
       navigation.goBack();
     }
@@ -79,6 +83,7 @@ export const AuditWorklistNavigatorStack = (
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTintColor: COLOR.WHITE
       })}
+      initialRouteName="AuditWorklistTabs"
     >
       <Stack.Screen
         name="AuditWorklistTabs"
@@ -86,16 +91,14 @@ export const AuditWorklistNavigatorStack = (
         options={{
           headerTitle: strings('WORKLIST.AUDIT_WORKLIST'),
           headerLeft: hlProps => hlProps.canGoBack && (
-          <HeaderBackButton
-                // eslint-disable-next-line react/jsx-props-no-spreading
-            {...hlProps}
-            onPress={navigateBack}
-          />
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...hlProps}
+              onPress={navigateBack}
+            />
           ),
           headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderFilterButton()}
-            </View>
+            <View style={styles.headerContainer}>{renderFilterButton()}</View>
           )
         }}
       />
