@@ -37,6 +37,12 @@ exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`
 
 exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`] = `
 <StackNavigator
+  initialRouteName="AuditWorklistTabs"
+  screenListeners={
+    Object {
+      "transitionStart": [Function],
+    }
+  }
   screenOptions={[Function]}
 >
   <Screen

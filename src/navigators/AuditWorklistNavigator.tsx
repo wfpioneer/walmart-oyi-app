@@ -1,5 +1,9 @@
 import { HeaderBackButton } from '@react-navigation/elements';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  CommonActions,
+  NavigationProp,
+  useNavigation
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { Dispatch } from 'react';
 import { TouchableOpacity, View } from 'react-native';
@@ -69,6 +73,8 @@ export const AuditWorklistNavigatorStack = (
     auditWorklists, dispatch, isManualScanEnabled, navigation
   } = props;
 
+  const navState = navigation.getState();
+
   const navigateBack = () => {
     if (auditWorklists) {
       navigation.navigate('WorklistHome');
@@ -84,6 +90,19 @@ export const AuditWorklistNavigatorStack = (
         headerTintColor: COLOR.WHITE
       })}
       initialRouteName="AuditWorklistTabs"
+      screenListeners={{
+        transitionStart: () => {
+          if (navState.routes[0].name !== 'WorklistHome') {
+            navigation.dispatch(state => {
+              const newRoute = state.routes.map(route => ({ name: route.name }));
+              return CommonActions.reset({
+                index: 1,
+                routes: [{ name: 'WorklistHome' }, ...newRoute]
+              });
+            });
+          }
+        }
+      }}
     >
       <Stack.Screen
         name="AuditWorklistTabs"
@@ -91,11 +110,11 @@ export const AuditWorklistNavigatorStack = (
         options={{
           headerTitle: strings('WORKLIST.AUDIT_WORKLIST'),
           headerLeft: hlProps => hlProps.canGoBack && (
-            <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...hlProps}
-              onPress={navigateBack}
-            />
+          <HeaderBackButton
+                // eslint-disable-next-line react/jsx-props-no-spreading
+            {...hlProps}
+            onPress={navigateBack}
+          />
           ),
           headerRight: () => (
             <View style={styles.headerContainer}>{renderFilterButton()}</View>

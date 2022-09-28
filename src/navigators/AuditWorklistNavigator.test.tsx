@@ -4,9 +4,22 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import { AuditWorklistNavigatorStack, renderScanButton } from './AuditWorklistNavigator';
 
-let navigationProp: NavigationProp<any>;
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
-
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
+};
 describe('AuditItemWorklist Navigator', () => {
   it('Renders the AuditItemWorklist Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();

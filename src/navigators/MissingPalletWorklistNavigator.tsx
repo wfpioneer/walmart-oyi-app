@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { CommonActions, NavigationProp, useNavigation } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import MissingPalletWorklistTabs from './MissingPalletWorklistTabs/MissingPalletWorklistTabNavigator';
@@ -50,6 +50,7 @@ export const MissingPalletWorklistNavigatorStack = (
     dispatch, isManualScanEnabled, palletWorklists, navigation
   } = props;
 
+  const navState = navigation.getState();
   const navigateBack = () => {
     if (palletWorklists) {
       navigation.navigate('WorklistHome');
@@ -65,6 +66,19 @@ export const MissingPalletWorklistNavigatorStack = (
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTintColor: COLOR.WHITE
       })}
+      screenListeners={{
+        transitionStart: () => {
+          if (navState.routes[0].name !== 'WorklistHome') {
+            navigation.dispatch(state => {
+              const newRoute = state.routes.map(route => ({ name: route.name }));
+              return CommonActions.reset({
+                index: 1,
+                routes: [{ name: 'WorklistHome' }, ...newRoute]
+              });
+            });
+          }
+        }
+      }}
     >
       <Stack.Screen
         name="MissingPalletWorklistTabs"
