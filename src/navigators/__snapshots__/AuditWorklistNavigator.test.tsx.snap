@@ -60,6 +60,7 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
     initialRouteName="AuditWorklistTabs"
     screenListeners={
       Object {
+        "focus": [Function],
         "transitionStart": [Function],
       }
     }

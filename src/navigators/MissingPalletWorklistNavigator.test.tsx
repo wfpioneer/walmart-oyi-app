@@ -32,6 +32,7 @@ describe('MissingPalletWorklist Navigator', () => {
         isManualScanEnabled={false}
         navigation={navigationProp}
         palletWorklists={true}
+        isBottomTabEnabled={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

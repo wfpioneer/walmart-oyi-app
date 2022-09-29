@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { strings } from '../locales';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
-import { setManualScan } from '../state/actions/Global';
+import { setBottomTab, setManualScan } from '../state/actions/Global';
 import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
@@ -29,6 +29,7 @@ interface AuditWorklistNavProps {
   isManualScanEnabled: boolean;
   navigation: NavigationProp<any>;
   menuOpen: boolean;
+  isBottomTabEnabled: boolean;
 }
 
 export const renderScanButton = (
@@ -87,7 +88,8 @@ export const AuditWorklistNavigatorStack = (
     dispatch,
     isManualScanEnabled,
     navigation,
-    menuOpen
+    menuOpen,
+    isBottomTabEnabled
   } = props;
 
   const navState = navigation.getState();
@@ -134,6 +136,13 @@ export const AuditWorklistNavigatorStack = (
                   routes: [{ name: 'WorklistHome' }, ...newRoute]
                 });
               });
+            }
+          },
+          focus: screen => {
+            if (screen.target && !screen.target.includes('AuditWorklistTabs') && isBottomTabEnabled) {
+              dispatch(setBottomTab(false));
+            } else if (screen.target && screen.target.includes('AuditWorklistTabs') && !isBottomTabEnabled) {
+              dispatch(setBottomTab(true));
             }
           }
         }}
@@ -187,7 +196,7 @@ export const AuditWorklistNavigatorStack = (
 const AuditWorklistNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, isBottomTabEnabled } = useTypedSelector(state => state.Global);
   const { auditWorklists } = useTypedSelector(state => state.User.configs);
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
@@ -198,6 +207,7 @@ const AuditWorklistNavigator = (): JSX.Element => {
       navigation={navigation}
       isManualScanEnabled={isManualScanEnabled}
       menuOpen={menuOpen}
+      isBottomTabEnabled={isBottomTabEnabled}
     />
   );
 };

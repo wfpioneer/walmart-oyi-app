@@ -30,6 +30,7 @@ describe('AuditItemWorklist Navigator', () => {
         auditWorklists={false}
         navigation={navigationProp}
         menuOpen={false}
+        isBottomTabEnabled={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
