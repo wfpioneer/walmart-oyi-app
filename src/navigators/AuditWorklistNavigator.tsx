@@ -6,6 +6,7 @@ import { Animated, TouchableOpacity, View } from 'react-native';
 import SideMenu from 'react-native-side-menu-updated';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
+import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { strings } from '../locales';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { setManualScan } from '../state/actions/Global';
@@ -147,6 +148,15 @@ export const AuditWorklistNavigatorStack = (
                 {renderScanButton(dispatch, isManualScanEnabled)}
               </View>
             )
+          }}
+        />
+        <Stack.Screen
+          name="AddLocation"
+          component={SelectLocationType}
+          options={{
+            headerTitle: strings('LOCATION.ADD_NEW_LOCATION'),
+            headerTitleAlign: 'left',
+            headerBackTitleVisible: false
           }}
         />
       </Stack.Navigator>
