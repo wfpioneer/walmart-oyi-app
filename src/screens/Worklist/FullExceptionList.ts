@@ -16,6 +16,7 @@ export class ExceptionList {
        ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
        ['C', strings('EXCEPTION.CANCELLED')],
        ['NSFL', strings('EXCEPTION.NSFL')],
+       ['MP', strings('EXCEPTION.MISSING_PALLETS')],
        ['AU', strings('EXCEPTION.AUDITS')],
        ['RA', strings('EXCEPTION.ROLLOVER_AUDITS')]
      ]);

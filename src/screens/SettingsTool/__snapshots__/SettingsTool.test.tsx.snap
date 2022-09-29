@@ -496,6 +496,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
           },
           Object {
+            "configKey": "enableAreaFilter",
+            "fluffyKey": "enable area filter",
+            "name": "[missing \\"en.SETTINGS.AREA_FILTER\\" translation]",
+          },
+          Object {
             "configKey": "createPallet",
             "fluffyKey": "create Pallet",
             "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
@@ -876,6 +881,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
           },
           Object {
+            "configKey": "enableAreaFilter",
+            "fluffyKey": "enable area filter",
+            "name": "[missing \\"en.SETTINGS.AREA_FILTER\\" translation]",
+          },
+          Object {
             "configKey": "createPallet",
             "fluffyKey": "create Pallet",
             "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
@@ -1174,6 +1184,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "configKey": "binning",
             "fluffyKey": "binning",
             "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+          },
+          Object {
+            "configKey": "enableAreaFilter",
+            "fluffyKey": "enable area filter",
+            "name": "[missing \\"en.SETTINGS.AREA_FILTER\\" translation]",
           },
           Object {
             "configKey": "createPallet",

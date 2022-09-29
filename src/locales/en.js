@@ -486,7 +486,8 @@ export default {
     TITLE: 'Settings',
     FEATURE_UPDATE_SUCCESS: 'Features Updated',
     FEATURE_UPDATE_FAILURE: 'Unable to get updated features',
-    FEATURES: 'Features'
+    FEATURES: 'Features',
+    AREA_FILTER: 'Area Filter'
   },
   AUDITS: {
     AUDITS: 'Audits',
