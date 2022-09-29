@@ -31,6 +31,7 @@ const TabNavigator = (): JSX.Element => {
   const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
   const dispatch = useDispatch();
   const { palletWorklists, auditWorklists } = user.configs;
+  const { isBottomTabEnabled } = useTypedSelector(state => state.Global);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -51,9 +52,9 @@ const TabNavigator = (): JSX.Element => {
           // You can return any component that you like here!
           return <MaterialIcons name="help" size={size} color={color} />;
         },
-        tabBarVisible: selectedAmount <= 0,
-        activeTintColor: COLOR.MAIN_THEME_COLOR,
-        inactiveTintColor: COLOR.GREY,
+        tabBarStyle: { display: selectedAmount <= 0 && isBottomTabEnabled ? 'flex' : 'none' },
+        tabBarActiveTintColor: COLOR.MAIN_THEME_COLOR,
+        tabBarInactiveTintColor: COLOR.GREY,
         headerShown: false
       })}
     >

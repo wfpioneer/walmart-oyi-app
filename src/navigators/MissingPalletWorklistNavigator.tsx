@@ -11,7 +11,7 @@ import MissingPalletWorklistTabs from './MissingPalletWorklistTabs/MissingPallet
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import ScanPallet from '../screens/ScanPallet/ScanPallet';
 import { ScanLocation } from '../screens/ScanLocation/ScanLocation';
-import { setManualScan } from '../state/actions/Global';
+import { setBottomTab, setManualScan } from '../state/actions/Global';
 import styles from './MissingPalletWorklistNavigator.style';
 
 const Stack = createStackNavigator();
@@ -41,13 +41,14 @@ interface MissingPalletWorklistNavigatorProps {
   dispatch: Dispatch<any>;
   palletWorklists: boolean;
   navigation: NavigationProp<any>;
+  isBottomTabEnabled: boolean;
 }
 
 export const MissingPalletWorklistNavigatorStack = (
   props: MissingPalletWorklistNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch, isManualScanEnabled, palletWorklists, navigation
+    dispatch, isManualScanEnabled, palletWorklists, navigation, isBottomTabEnabled
   } = props;
 
   const navState = navigation.getState();
@@ -76,6 +77,13 @@ export const MissingPalletWorklistNavigatorStack = (
                 routes: [{ name: 'WorklistHome' }, ...newRoute]
               });
             });
+          }
+        },
+        focus: screen => {
+          if (screen.target && !screen.target.includes('MissingPalletWorklistTabs') && isBottomTabEnabled) {
+            dispatch(setBottomTab(false));
+          } else if (screen.target && screen.target.includes('MissingPalletWorklistTabs') && !isBottomTabEnabled) {
+            dispatch(setBottomTab(true));
           }
         }
       }}
@@ -124,7 +132,7 @@ export const MissingPalletWorklistNavigatorStack = (
 
 const MissingPalletWorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, isBottomTabEnabled } = useTypedSelector(state => state.Global);
   const { palletWorklists } = useTypedSelector(state => state.User.configs);
   const navigation = useNavigation();
   return (
@@ -133,6 +141,7 @@ const MissingPalletWorklistNavigator = (): JSX.Element => {
       isManualScanEnabled={isManualScanEnabled}
       palletWorklists={palletWorklists}
       navigation={navigation}
+      isBottomTabEnabled={isBottomTabEnabled}
     />
   );
 };
