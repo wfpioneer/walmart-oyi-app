@@ -730,8 +730,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
           && (
           <Button
             title={strings('PRINT.ADD_TO_QUEUE')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            type={ButtonType.SOLID_WHITE}
+            type={ButtonType.PRIMARY}
             style={styles.footerBtn}
             onPress={() => handleAddPrintList(
               printQueue, locationPrintQueue, selectedSignType,
