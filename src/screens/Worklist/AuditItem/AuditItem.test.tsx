@@ -8,16 +8,19 @@ import { ScrollView } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 import { object } from 'prop-types';
-import
-itemDetail
-  from '../../../mockData/getItemDetails';
+import Toast from 'react-native-toast-message';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
-  AuditItemScreen, AuditItemScreenProps, isError, onValidateItemNumber
+  AuditItemScreen, AuditItemScreenProps, addLocationHandler,
+  getItemDetailsApiHook, getlocationsApiResult, isError, onValidateItemNumber
 } from './AuditItem';
+import { AsyncState } from '../../../models/AsyncState';
+import { getMockItemDetails } from '../../../mockData';
+import { strings } from '../../../locales';
+import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -73,12 +76,19 @@ const scrollViewProp: React.RefObject<ScrollView> = {
   current: null
 };
 
+const defaultAsyncState: AsyncState = {
+  isWaiting: false,
+  value: null,
+  error: null,
+  result: null
+};
+
 const mockAuditItemScreenProps: AuditItemScreenProps = {
   scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
-  isWaitingItemDetailsRes: false,
-  itemDetailsResErrror: null,
-  itemDetailsRes: null,
+  getItemDetailsApi: defaultAsyncState,
+  getLocationApi: defaultAsyncState,
+  itemDetails: null,
   userId: 'testUser',
   route: routeProp,
   dispatch: jest.fn(),
@@ -90,18 +100,15 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
   userConfigs: mockConfig,
-  itemNumber: 0
+  itemNumber: 0,
+  setShowItemNotFoundMsg: jest.fn(),
+  showItemNotFoundMsg: false,
+  floorLocations: [],
+  reserveLocations: [],
+  getItemPalletsApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
-  const defaultResult: AxiosResponse = {
-    config: {},
-    data: {},
-    headers: {},
-    status: 200,
-    statusText: 'OK',
-    request: {}
-  };
   const mockError: AxiosError = {
     config: {},
     isAxiosError: true,
@@ -109,6 +116,7 @@ describe('AuditItemScreen', () => {
     name: 'Network Error',
     toJSON: () => object
   };
+  const mockItemDetails = getMockItemDetails('123');
 
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
@@ -133,11 +141,14 @@ describe('AuditItemScreen', () => {
     it('renders the details for a single item with non-null status', () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
-        itemDetailsRes: {
-          ...defaultResult,
-          data: { ...itemDetail[123] },
-          status: 200
-        }
+        getItemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: getMockItemDetails('123')
+          }
+        },
+        itemDetails: getMockItemDetails('123')
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -148,11 +159,14 @@ describe('AuditItemScreen', () => {
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
-        itemDetailsRes: {
-          ...defaultResult,
-          data: [],
-          status: 204
-        }
+        getItemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            data: [],
+            status: 204
+          }
+        },
+        showItemNotFoundMsg: true
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -163,7 +177,10 @@ describe('AuditItemScreen', () => {
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
-        isWaitingItemDetailsRes: true
+        getItemDetailsApi: {
+          ...defaultAsyncState,
+          isWaiting: true
+        }
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -215,6 +232,75 @@ describe('AuditItemScreen', () => {
         980056535
       ));
       expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('tests addLocationHandler', () => {
+      const mockNavigate = jest.fn();
+      navigationProp.navigate = mockNavigate;
+      addLocationHandler(mockItemDetails, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockNavigate).toBeCalledTimes(1);
+    });
+
+    it('tests getlocationsApiResult', () => {
+      const mockLocationsAsyncstate = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: {
+            location: {
+              floor: mockItemDetails.location.floor,
+              reserve: mockItemDetails.location.reserve
+            }
+          }
+        }
+      };
+      getlocationsApiResult(mockLocationsAsyncstate, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: mockItemDetails,
+          status: 200
+        }
+      };
+      const mockSetShowItemNotFoundMsg = jest.fn();
+      getItemDetailsApiHook(successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      expect(mockDispatch).toBeCalledTimes(3);
+      expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests getItemDetailsApiHook on 204 success for a new item', () => {
+      const successApi204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      const mockSetShowItemNotFoundMsg = jest.fn();
+      const toastItemNotFound = {
+        type: 'error',
+        text1: strings('ITEM.ITEM_NOT_FOUND'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      };
+      getItemDetailsApiHook(successApi204, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
+      expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
+    });
+
+    it('Tests getItemDetailsApi on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      const mockSetShowItemNotFoundMsg = jest.fn();
+      getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
   });
 });
