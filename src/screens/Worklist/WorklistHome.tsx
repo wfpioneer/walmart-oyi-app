@@ -44,7 +44,10 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         && (
         <Button
           title={strings('WORKLIST.AUDIT_WORKLIST')}
-          onPress={() => navigation.navigate('AuditWorklistNavigator', { screen: 'AuditWorklistTabs' })}
+          onPress={() => {
+            dispatch(clearFilter());
+            navigation.navigate('AuditWorklistNavigator', { screen: 'AuditWorklistTabs' });
+          }}
           type={ButtonType.PRIMARY}
           style={styles.button}
           testID="auditWorkListButton"

@@ -205,6 +205,11 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       name: strings('BINNING.BINNING')
     },
     {
+      fluffyKey: 'enable area filter',
+      configKey: 'enableAreaFilter',
+      name: strings('SETTINGS.AREA_FILTER')
+    },
+    {
       fluffyKey: 'create Pallet',
       configKey: 'createPallet',
       name: strings('PALLET.CREATE_PALLET')
