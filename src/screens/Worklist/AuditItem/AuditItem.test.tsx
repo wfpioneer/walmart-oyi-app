@@ -20,6 +20,7 @@ import AuditItem, {
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
+import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -101,7 +102,10 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   userConfigs: mockConfig,
   itemNumber: 0,
   setShowItemNotFoundMsg: jest.fn(),
-  showItemNotFoundMsg: false
+  showItemNotFoundMsg: false,
+  floorLocations: [],
+  reserveLocations: [],
+  getItemPalletsApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
@@ -252,7 +256,7 @@ describe('AuditItemScreen', () => {
         }
       };
       getlocationsApiResult(mockLocationsAsyncstate, mockDispatch);
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(1);
     });
 
     it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
@@ -265,7 +269,7 @@ describe('AuditItemScreen', () => {
       };
       const mockSetShowItemNotFoundMsg = jest.fn();
       getItemDetailsApiHook(successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
-      expect(mockDispatch).toBeCalledTimes(4);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
     });
 
@@ -281,7 +285,7 @@ describe('AuditItemScreen', () => {
       const toastItemNotFound = {
         type: 'error',
         text1: strings('ITEM.ITEM_NOT_FOUND'),
-        visibilityTime: 4000,
+        visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       };
       getItemDetailsApiHook(successApi204, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);

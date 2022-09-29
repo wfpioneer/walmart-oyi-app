@@ -1,3 +1,4 @@
+import { ItemPalletInfo } from '../../models/AuditItem';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 import {
@@ -11,7 +12,7 @@ import {
 export interface AuditItemScreenState {
    itemDetails: ItemDetails | null,
    floorLocations: Location[],
-   reserveLocations: Location[]
+   reserveLocations: ItemPalletInfo[]
 }
 
 export const initialState: AuditItemScreenState = {

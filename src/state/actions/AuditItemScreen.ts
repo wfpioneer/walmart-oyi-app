@@ -1,3 +1,4 @@
+import { ItemPalletInfo } from '../../models/AuditItem';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 
@@ -16,9 +17,9 @@ export const setFloorLocations = (locations: Location[]) => ({
   payload: locations
 } as const);
 
-export const setReserveLocations = (locations: Location[]) => ({
+export const setReserveLocations = (pallets: ItemPalletInfo[]) => ({
   type: SET_RESERVE_LOCATIONS,
-  payload: locations
+  payload: pallets
 } as const);
 
 export const clearAuditScreenData = () => ({

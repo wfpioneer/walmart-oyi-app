@@ -38,15 +38,19 @@ import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard
 import { setupScreen } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import { setFloorLocations, setItemDetails, setReserveLocations } from '../../../state/actions/AuditItemScreen';
+import { ItemPalletInfo } from '../../../models/AuditItem';
+import { mockGetItemPalletsAsyncState } from '../../../mockData/getItemPallets';
+import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 
 export interface AuditItemScreenProps {
     scannedEvent: { value: string | null; type: string | null; };
     isManualScanEnabled: boolean;
     getItemDetailsApi: AsyncState;
     getLocationApi: AsyncState;
+    getItemPalletsApi: AsyncState;
     userId: string;
-    floorLocations?: Location[];
-    reserveLocations?: Location[];
+    floorLocations: Location[];
+    reserveLocations: ItemPalletInfo[];
     route: RouteProp<any, string>;
     dispatch: Dispatch<any>;
     navigation: NavigationProp<any>;
@@ -132,13 +136,8 @@ export const addLocationHandler = (
 
 export const getlocationsApiResult = (locationsApi: AsyncState, dispatch: Dispatch<any>) => {
   const locDetails = (locationsApi.result && locationsApi.result.data);
-  if (locDetails.location) {
-    if (locDetails.location.floor) {
-      dispatch(setFloorLocations(locDetails.location.floor));
-    }
-    if (locDetails.location.reserve) {
-      dispatch(setReserveLocations(locDetails.location.reserve));
-    }
+  if (locDetails.location && locDetails.location.floor) {
+    dispatch(setFloorLocations(locDetails.location.floor));
   }
 };
 
@@ -155,14 +154,13 @@ export const getItemDetailsApiHook = (
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
         dispatch(setFloorLocations(itemDetails.location.floor || []));
-        dispatch(setReserveLocations(itemDetails.location.reserve || []));
         setShowItemNotFoundMsg(false);
       } else if (getItemDetailsApi.result.status === 204) {
         setShowItemNotFoundMsg(true);
         Toast.show({
           type: 'error',
           text1: strings('ITEM.ITEM_NOT_FOUND'),
-          visibilityTime: 4000,
+          visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
       }
@@ -170,6 +168,23 @@ export const getItemDetailsApiHook = (
     }
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
       setShowItemNotFoundMsg(false);
+    }
+  }
+};
+
+// TODO: getItemPalletsApiHoook has to be updated after real APi integration
+export const getItemPalletsApiHook = (
+  getItemPalletsApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  if (navigation.isFocused()) {
+    // on api success
+    if (!getItemPalletsApi.isWaiting && getItemPalletsApi.result) {
+      if (getItemPalletsApi.result.status === 200) {
+        const { data } = getItemPalletsApi.result;
+        dispatch(setReserveLocations(data.pallets));
+      }
     }
   }
 };
@@ -192,7 +207,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     showItemNotFoundMsg,
     itemDetails,
     floorLocations,
-    reserveLocations
+    reserveLocations,
+    getItemPalletsApi
   } = props;
 
   // call get Item details
@@ -207,7 +223,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Location Details API
   useEffectHook(() => {
-    if (!getLocationApi.isWaiting && getLocationApi.result) {
+    if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
       getlocationsApiResult(getLocationApi, dispatch);
     }
   }, [getLocationApi]);
@@ -216,6 +232,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg),
     [getItemDetailsApi]
+  );
+
+  // Get Pallets api
+  useEffectHook(
+    () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation),
+    [getItemPalletsApi]
   );
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
@@ -248,7 +270,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
-  const getLocationList = (locations: Location[] | undefined) => {
+  const getFloorLocationList = (locations: Location[]) => {
     const locationLst: LocationList[] = [];
     if (locations && locations.length) {
       locations.forEach(loc => {
@@ -257,6 +279,25 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`,
           quantity: loc.qty ? loc.qty : 0,
           palletId: '',
+          increment: () => {},
+          decrement: () => {},
+          onDelete: () => {},
+          qtyChange: () => {}
+        });
+      });
+    }
+    return locationLst;
+  };
+
+  const getReserveLocationList = (locations: ItemPalletInfo[]) => {
+    const locationLst: LocationList[] = [];
+    if (locations && locations.length) {
+      locations.forEach(loc => {
+        locationLst.push({
+          sectionId: loc.sectionId,
+          locationName: loc.locationName,
+          quantity: loc.quantity,
+          palletId: loc.palletId,
           increment: () => {},
           decrement: () => {},
           onDelete: () => {},
@@ -291,7 +332,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         >
           <View style={styles.marginBottomStyle}>
             <LocationListCard
-              locationList={getLocationList(floorLocations)}
+              locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(
                 itemDetails,
@@ -306,10 +347,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
           <View style={styles.marginBottomStyle}>
             <LocationListCard
-              locationList={getLocationList(reserveLocations)}
+              locationList={getReserveLocationList(reserveLocations)}
               locationType="reserve"
-              loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
-              error={!!(getItemDetailsApi.error || getLocationApi.error)}
+              loading={getItemPalletsApi.isWaiting}
+              error={!!getItemPalletsApi.error}
               onRetry={() => { }}
               scanRequired={false}
             />
@@ -335,6 +376,8 @@ const AuditItem = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
+  // TODO: Below mock state needs to be replaced with async state
+  const getItemPalletsApi = mockGetItemPalletsAsyncState;
   const { userId } = useTypedSelector(state => state.User);
   const userFeatures = useTypedSelector(state => state.User.features);
   const userConfigs = useTypedSelector(state => state.User.configs);
@@ -351,6 +394,7 @@ const AuditItem = (): JSX.Element => {
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
       getItemDetailsApi={getItemDetailsApi}
+      getItemPalletsApi={getItemPalletsApi}
       getLocationApi={getLocationApi}
       route={route}
       dispatch={dispatch}

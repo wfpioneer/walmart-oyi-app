@@ -9,6 +9,7 @@ import {
   setReserveLocations
 } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
+import { itemPallets } from '../../mockData/getItemPallets';
 
 describe('Audit Item Screen actions', () => {
   const mockItemDetails = getMockItemDetails('123');
@@ -28,7 +29,7 @@ describe('Audit Item Screen actions', () => {
     });
   });
   it('handles setting reserve locations in AuditItemScreen redux state', () => {
-    const mockReserveLocations = mockItemDetails.location.reserve;
+    const mockReserveLocations = itemPallets.pallets;
     const setReserveLocationsResult = setReserveLocations(mockReserveLocations);
     expect(setReserveLocationsResult).toStrictEqual({
       type: SET_RESERVE_LOCATIONS,

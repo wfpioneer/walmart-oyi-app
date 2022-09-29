@@ -6,6 +6,7 @@ import {
 } from '../actions/AuditItemScreen';
 import { AuditItemScreen, AuditItemScreenState, initialState } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
+import { itemPallets } from '../../mockData/getItemPallets';
 
 describe('The Audit Item Screen Reducer', () => {
   // Intitial State
@@ -27,7 +28,7 @@ describe('The Audit Item Screen Reducer', () => {
     expect(testResults).toStrictEqual(changeState);
   });
   it('handles setting the floor locations in AuditItemScreen redux state', () => {
-    const mockReserveLocations = mockItemDetails.location.reserve;
+    const mockReserveLocations = itemPallets.pallets;
     const testResults = AuditItemScreen(testInitialState, setReserveLocations(mockReserveLocations));
     const changeState = { ...testInitialState, reserveLocations: mockReserveLocations };
     expect(testResults).toStrictEqual(changeState);
