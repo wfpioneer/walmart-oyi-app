@@ -42,6 +42,7 @@ exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navig
 <StackNavigator
   screenListeners={
     Object {
+      "focus": [Function],
       "transitionStart": [Function],
     }
   }
