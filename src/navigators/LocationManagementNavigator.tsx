@@ -76,6 +76,15 @@ export const resetLocManualScan = (
   }
 };
 
+export const hideLocBottomSheetPopup = (
+  locationPopupVisible: boolean,
+  dispatch: Dispatch<any>
+): void => {
+  if (locationPopupVisible) {
+    dispatch(hideLocationPopup());
+  }
+};
+
 export const LocationManagementNavigatorStack = (props: LocationManagementProps): JSX.Element => {
   const {
     isManualScanEnabled, user, locationPopupVisible, navigation, dispatch, getSectionDetailsApi
@@ -154,6 +163,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         listeners={{
           blur: () => {
             resetLocManualScan(isManualScanEnabled, dispatch);
+          },
+          beforeRemove: () => {
+            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
           }
         }}
       />
@@ -178,6 +190,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           },
           beforeRemove: () => {
             resetLocManualScan(isManualScanEnabled, dispatch);
+            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
           }
         }}
       />
@@ -203,6 +216,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           },
           beforeRemove: () => {
             resetLocManualScan(isManualScanEnabled, dispatch);
+            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
           }
         }}
       />
@@ -228,6 +242,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           },
           beforeRemove: () => {
             resetLocManualScan(isManualScanEnabled, dispatch);
+            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
           }
         }}
       />
