@@ -4,14 +4,14 @@ import { TouchableOpacity, View } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { CommonActions, NavigationProp, useNavigation } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import MissingPalletWorklistTabs from './MissingPalletWorklistTabs/MissingPalletWorklistTabNavigator';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import ScanPallet from '../screens/ScanPallet/ScanPallet';
 import { ScanLocation } from '../screens/ScanLocation/ScanLocation';
-import { setManualScan } from '../state/actions/Global';
+import { setBottomTab, setManualScan } from '../state/actions/Global';
 import styles from './MissingPalletWorklistNavigator.style';
 
 const Stack = createStackNavigator();
@@ -41,18 +41,20 @@ interface MissingPalletWorklistNavigatorProps {
   dispatch: Dispatch<any>;
   palletWorklists: boolean;
   navigation: NavigationProp<any>;
+  isBottomTabEnabled: boolean;
 }
 
 export const MissingPalletWorklistNavigatorStack = (
   props: MissingPalletWorklistNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch, isManualScanEnabled, palletWorklists, navigation
+    dispatch, isManualScanEnabled, palletWorklists, navigation, isBottomTabEnabled
   } = props;
 
+  const navState = navigation.getState();
   const navigateBack = () => {
     if (palletWorklists) {
-      navigation.navigate(strings('WORKLIST.WORKLIST'));
+      navigation.navigate('WorklistHome');
     } else {
       navigation.goBack();
     }
@@ -65,6 +67,26 @@ export const MissingPalletWorklistNavigatorStack = (
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTintColor: COLOR.WHITE
       })}
+      screenListeners={{
+        transitionStart: () => {
+          if (navState.routes[0].name !== 'WorklistHome') {
+            navigation.dispatch(state => {
+              const newRoute = state.routes.map(route => ({ name: route.name }));
+              return CommonActions.reset({
+                index: 1,
+                routes: [{ name: 'WorklistHome' }, ...newRoute]
+              });
+            });
+          }
+        },
+        focus: screen => {
+          if (screen.target && !screen.target.includes('MissingPalletWorklistTabs') && isBottomTabEnabled) {
+            dispatch(setBottomTab(false));
+          } else if (screen.target && screen.target.includes('MissingPalletWorklistTabs') && !isBottomTabEnabled) {
+            dispatch(setBottomTab(true));
+          }
+        }
+      }}
     >
       <Stack.Screen
         name="MissingPalletWorklistTabs"
@@ -110,7 +132,7 @@ export const MissingPalletWorklistNavigatorStack = (
 
 const MissingPalletWorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, isBottomTabEnabled } = useTypedSelector(state => state.Global);
   const { palletWorklists } = useTypedSelector(state => state.User.configs);
   const navigation = useNavigation();
   return (
@@ -119,6 +141,7 @@ const MissingPalletWorklistNavigator = (): JSX.Element => {
       isManualScanEnabled={isManualScanEnabled}
       palletWorklists={palletWorklists}
       navigation={navigation}
+      isBottomTabEnabled={isBottomTabEnabled}
     />
   );
 };
