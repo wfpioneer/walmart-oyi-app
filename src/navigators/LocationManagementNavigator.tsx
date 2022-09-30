@@ -135,6 +135,8 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
     </TouchableOpacity>
   ));
 
+  const screensNeedListeners = ['Zones', 'Aisles', 'Sections', 'SectionDetails'];
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -142,6 +144,19 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
         headerTitleStyle: { fontSize: 18 },
         headerTintColor: COLOR.WHITE
+      }}
+      screenListeners={{
+        blur: screen => {
+          if (screen.target && screensNeedListeners.some(screenName => screen.target?.includes(screenName))) {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+          }
+        },
+        beforeRemove: screen => {
+          if (screen.target && screensNeedListeners.some(screenName => screen.target?.includes(screenName))) {
+            resetLocManualScan(isManualScanEnabled, dispatch);
+            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
+          }
+        }
       }}
     >
       <Stack.Screen
@@ -160,14 +175,6 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             </View>
           )
         }}
-        listeners={{
-          blur: () => {
-            resetLocManualScan(isManualScanEnabled, dispatch);
-          },
-          beforeRemove: () => {
-            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
-          }
-        }}
       />
       <Stack.Screen
         name="Aisles"
@@ -183,15 +190,6 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               )}
             </View>
           )
-        }}
-        listeners={{
-          blur: () => {
-            resetLocManualScan(isManualScanEnabled, dispatch);
-          },
-          beforeRemove: () => {
-            resetLocManualScan(isManualScanEnabled, dispatch);
-            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
-          }
         }}
       />
       <Stack.Screen
@@ -210,15 +208,6 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
             </View>
           )
         }}
-        listeners={{
-          blur: () => {
-            resetLocManualScan(isManualScanEnabled, dispatch);
-          },
-          beforeRemove: () => {
-            resetLocManualScan(isManualScanEnabled, dispatch);
-            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
-          }
-        }}
       />
       <Stack.Screen
         name="SectionDetails"
@@ -235,15 +224,6 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
               )}
             </View>
           )
-        }}
-        listeners={{
-          blur: () => {
-            resetLocManualScan(isManualScanEnabled, dispatch);
-          },
-          beforeRemove: () => {
-            resetLocManualScan(isManualScanEnabled, dispatch);
-            hideLocBottomSheetPopup(locationPopupVisible, dispatch);
-          }
         }}
       />
       <Stack.Screen
