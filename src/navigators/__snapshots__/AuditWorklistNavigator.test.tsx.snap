@@ -57,6 +57,13 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
   toleranceY={10}
 >
   <StackNavigator
+    initialRouteName="AuditWorklistTabs"
+    screenListeners={
+      Object {
+        "focus": [Function],
+        "transitionStart": [Function],
+      }
+    }
     screenOptions={[Function]}
   >
     <Screen

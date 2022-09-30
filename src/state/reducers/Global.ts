@@ -1,6 +1,7 @@
 import {
   Actions,
   RESET_SCANNED_EVENT,
+  SET_BOTTOM_TAB,
   SET_BYOD,
   SET_MANUAL_SCAN,
   SET_SCANNED_EVENT
@@ -13,6 +14,7 @@ export interface StateType {
     value: string | null;
     type: string | null;
   };
+  isBottomTabEnabled: boolean;
 }
 
 const initialState: StateType = {
@@ -21,10 +23,11 @@ const initialState: StateType = {
     value: null,
     type: null
   },
-  isManualScanEnabled: false
+  isManualScanEnabled: false,
+  isBottomTabEnabled: true
 };
 
-export const Global = (state = initialState, action: Actions) => {
+export const Global = (state = initialState, action: Actions): StateType => {
   switch (action.type) {
     case SET_BYOD:
       return {
@@ -45,6 +48,11 @@ export const Global = (state = initialState, action: Actions) => {
       return {
         ...state,
         isManualScanEnabled: action.payload
+      };
+    case SET_BOTTOM_TAB:
+      return {
+        ...state,
+        isBottomTabEnabled: action.payload
       };
     default:
       return state;

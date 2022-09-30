@@ -1,5 +1,9 @@
 import { HeaderBackButton } from '@react-navigation/elements';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  CommonActions,
+  NavigationProp,
+  useNavigation
+} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { Dispatch } from 'react';
 import { Animated, TouchableOpacity, View } from 'react-native';
@@ -9,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { strings } from '../locales';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
-import { setManualScan } from '../state/actions/Global';
+import { setBottomTab, setManualScan } from '../state/actions/Global';
 import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
@@ -25,6 +29,7 @@ interface AuditWorklistNavProps {
   isManualScanEnabled: boolean;
   navigation: NavigationProp<any>;
   menuOpen: boolean;
+  isBottomTabEnabled: boolean;
 }
 
 export const renderScanButton = (
@@ -83,12 +88,15 @@ export const AuditWorklistNavigatorStack = (
     dispatch,
     isManualScanEnabled,
     navigation,
-    menuOpen
+    menuOpen,
+    isBottomTabEnabled
   } = props;
+
+  const navState = navigation.getState();
 
   const navigateBack = () => {
     if (auditWorklists) {
-      navigation.navigate(strings('WORKLIST.WORKLIST'));
+      navigation.navigate('WorklistHome');
     } else {
       navigation.goBack();
     }
@@ -117,6 +125,27 @@ export const AuditWorklistNavigatorStack = (
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           headerTintColor: COLOR.WHITE
         })}
+        initialRouteName="AuditWorklistTabs"
+        screenListeners={{
+          transitionStart: () => {
+            if (navState.routes[0].name !== 'WorklistHome') {
+              navigation.dispatch(state => {
+                const newRoute = state.routes.map(route => ({ name: route.name }));
+                return CommonActions.reset({
+                  index: 1,
+                  routes: [{ name: 'WorklistHome' }, ...newRoute]
+                });
+              });
+            }
+          },
+          focus: screen => {
+            if (screen.target && !screen.target.includes('AuditWorklistTabs') && isBottomTabEnabled) {
+              dispatch(setBottomTab(false));
+            } else if (screen.target && screen.target.includes('AuditWorklistTabs') && !isBottomTabEnabled) {
+              dispatch(setBottomTab(true));
+            }
+          }
+        }}
       >
         <Stack.Screen
           name="AuditWorklistTabs"
@@ -167,7 +196,7 @@ export const AuditWorklistNavigatorStack = (
 const AuditWorklistNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, isBottomTabEnabled } = useTypedSelector(state => state.Global);
   const { auditWorklists } = useTypedSelector(state => state.User.configs);
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
@@ -178,6 +207,7 @@ const AuditWorklistNavigator = (): JSX.Element => {
       navigation={navigation}
       isManualScanEnabled={isManualScanEnabled}
       menuOpen={menuOpen}
+      isBottomTabEnabled={isBottomTabEnabled}
     />
   );
 };
