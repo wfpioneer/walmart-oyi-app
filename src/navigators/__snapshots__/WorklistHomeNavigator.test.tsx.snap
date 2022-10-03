@@ -21,5 +21,32 @@ exports[`WorklistHome Navigator Renders the WorklistHome Navigator 1`] = `
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="WorklistNavigator"
+    options={
+      Object {
+        "headerShown": false,
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="MissingPalletWorklist"
+    options={
+      Object {
+        "headerShown": false,
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AuditWorklistNavigator"
+    options={
+      Object {
+        "headerShown": false,
+      }
+    }
+  />
 </StackNavigator>
 `;

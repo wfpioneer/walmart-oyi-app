@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  LocationManagementNavigatorStack, renderCamButton, renderScanButton, resetLocManualScan
+  LocationManagementNavigatorStack, hideLocBottomSheetPopup, renderCamButton, renderScanButton, resetLocManualScan
 } from './LocationManagementNavigator';
 import { AsyncState } from '../models/AsyncState';
 import User from '../models/User';
@@ -116,5 +116,17 @@ describe('LocationManagement Navigator', () => {
     const manualScanEnabled = true;
     resetLocManualScan(manualScanEnabled, mockDispatch);
     expect(mockDispatch).toHaveBeenCalled();
+  });
+  it('Expects dispatch to be called if locationPopupVisible is true for "hideLocBottomSheetPopup()"', () => {
+    const mockDispatch = jest.fn();
+    const locationPopupVisible = true;
+    hideLocBottomSheetPopup(locationPopupVisible, mockDispatch);
+    expect(mockDispatch).toHaveBeenCalled();
+  });
+  it('Expects dispatch not to be called if locationPopupVisible is false for "hideLocBottomSheetPopup()"', () => {
+    const mockDispatch = jest.fn();
+    const locationPopupVisible = false;
+    hideLocBottomSheetPopup(locationPopupVisible, mockDispatch);
+    expect(mockDispatch).not.toHaveBeenCalled();
   });
 });

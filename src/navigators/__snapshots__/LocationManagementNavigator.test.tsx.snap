@@ -2,6 +2,12 @@
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator with LocationKebabMenu disabled 1`] = `
 <StackNavigator
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "blur": [Function],
+    }
+  }
   screenOptions={
     Object {
       "headerMode": "float",
@@ -17,11 +23,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 >
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "blur": [Function],
-      }
-    }
     name="Zones"
     options={
       Object {
@@ -32,12 +33,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Aisles"
     options={
       Object {
@@ -48,12 +43,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Sections"
     options={
       Object {
@@ -64,12 +53,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="SectionDetails"
     options={
       Object {
@@ -131,6 +114,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator with Print List Button 1`] = `
 <StackNavigator
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "blur": [Function],
+    }
+  }
   screenOptions={
     Object {
       "headerMode": "float",
@@ -146,11 +135,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 >
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "blur": [Function],
-      }
-    }
     name="Zones"
     options={
       Object {
@@ -161,12 +145,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Aisles"
     options={
       Object {
@@ -177,12 +155,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Sections"
     options={
       Object {
@@ -193,12 +165,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="SectionDetails"
     options={
       Object {
@@ -260,6 +226,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, manager 1`] = `
 <StackNavigator
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "blur": [Function],
+    }
+  }
   screenOptions={
     Object {
       "headerMode": "float",
@@ -275,11 +247,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
 >
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "blur": [Function],
-      }
-    }
     name="Zones"
     options={
       Object {
@@ -290,12 +257,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Aisles"
     options={
       Object {
@@ -306,12 +267,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Sections"
     options={
       Object {
@@ -322,12 +277,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="SectionDetails"
     options={
       Object {
@@ -389,6 +338,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, non manager 1`] = `
 <StackNavigator
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "blur": [Function],
+    }
+  }
   screenOptions={
     Object {
       "headerMode": "float",
@@ -404,11 +359,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
 >
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "blur": [Function],
-      }
-    }
     name="Zones"
     options={
       Object {
@@ -419,12 +369,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Aisles"
     options={
       Object {
@@ -435,12 +379,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="Sections"
     options={
       Object {
@@ -451,12 +389,6 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
-    listeners={
-      Object {
-        "beforeRemove": [Function],
-        "blur": [Function],
-      }
-    }
     name="SectionDetails"
     options={
       Object {
