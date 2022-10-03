@@ -238,7 +238,7 @@ export default {
     EDIT_LOCATION_API_ERROR: '编辑位置报错，\n请重试',
     DELETE_CONFIRMATION: '确认删除位置 ',
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
-    DELETE_LOCATION_API_SUCCESS: 'Location %{locationName} has been successfully deleted', // TODO Mandarin translation
+    DELETE_LOCATION_API_SUCCESS: '位置 %{locationName} 删除成功',
     ADD_NEW_LOCATION: '新增位置',
     EDIT_LOCATION: '修改位置',
     LOCATION_MANAGEMENT: '通道管理',
