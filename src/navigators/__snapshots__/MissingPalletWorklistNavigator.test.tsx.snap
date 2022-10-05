@@ -40,6 +40,12 @@ exports[`MissingPalletWorklist Navigator Renders and Calls the Manual Scan Butto
 
 exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navigator 1`] = `
 <StackNavigator
+  screenListeners={
+    Object {
+      "focus": [Function],
+      "transitionStart": [Function],
+    }
+  }
   screenOptions={[Function]}
 >
   <Screen

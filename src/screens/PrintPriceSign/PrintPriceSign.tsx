@@ -141,9 +141,8 @@ export const getPrinter = (
   selectedPrinter: Printer | null, selectedSignType: PrintPaperSize, countryCode: string
 ): LaserPaperCn | PortablePaperCn | LaserPaperMx | PortablePaperMx => {
   const sizeObject = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
-  return (selectedPrinter?.type === PrinterType.LASER
   // @ts-expect-error selectSignType contains keys that do not exist for each enum
-    ? sizeObject[selectedSignType] : sizeObject[selectedSignType]);
+    return sizeObject[selectedSignType];
 };
 
 const isValid = (actionCompleted: boolean, exceptionType: string) => !actionCompleted && exceptionType === 'PO';
