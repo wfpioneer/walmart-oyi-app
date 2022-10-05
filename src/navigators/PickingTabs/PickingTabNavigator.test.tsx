@@ -208,16 +208,6 @@ describe('Manage PickingNavigator externalized function tests', () => {
     expect(Toast.show).toHaveBeenCalledWith(picklistError);
   });
 
-  it('Tests getPicklistApiHook isWaiting', () => {
-    const isLoadingApi: AsyncState = {
-      ...defaultAsyncState,
-      isWaiting: true
-    };
-
-    getPicklistApiHook(isLoadingApi, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(1);
-  });
-
   it('Tests updatePicklistStatusApiHook', () => {
     const updateSuccessApi: AsyncState = {
       ...defaultAsyncState,
