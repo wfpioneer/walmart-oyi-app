@@ -63,6 +63,8 @@ describe('Quick pick tab render tests', () => {
       user={mockUser}
       dispatch={jest.fn()}
       isManualScanEnabled={false}
+      refreshing={false}
+      onRefresh={jest.fn()}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -76,6 +78,8 @@ describe('Quick pick tab render tests', () => {
       user={mockUser}
       dispatch={jest.fn()}
       isManualScanEnabled={true}
+      refreshing={false}
+      onRefresh={jest.fn()}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -108,6 +112,8 @@ describe('Quick pick tab render tests', () => {
       user={mockUser}
       dispatch={jest.fn()}
       isManualScanEnabled={false}
+      refreshing={false}
+      onRefresh={jest.fn()}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -140,6 +146,41 @@ describe('Quick pick tab render tests', () => {
       user={mockUser}
       dispatch={jest.fn()}
       isManualScanEnabled={false}
+      refreshing={false}
+      onRefresh={jest.fn()}
+    />);
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('renders the screen while refreshing', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const quickPickItems: PickListItem[] = [
+      {
+        ...basePickItem,
+        assignedAssociate: 't0s0og',
+        status: PickStatus.READY_TO_WORK
+      },
+      {
+        ...basePickItem,
+        assignedAssociate: 'vn50pz4',
+        id: 1,
+        status: PickStatus.READY_TO_BIN
+      },
+      {
+        ...basePickItem,
+        assignedAssociate: 'vn50pz4',
+        id: 2,
+        status: PickStatus.READY_TO_PICK
+      }
+    ];
+
+    renderer.render(<QuickPickTabScreen
+      quickPicks={quickPickItems}
+      user={mockUser}
+      dispatch={jest.fn()}
+      isManualScanEnabled={false}
+      refreshing={true}
+      onRefresh={jest.fn()}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();

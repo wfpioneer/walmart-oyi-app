@@ -11,6 +11,26 @@ exports[`SalesFloorTabScreen Renders the SalesFloorTabScreen Component 1`] = `
       ]
     }
     keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+</View>
+`;
+
+exports[`SalesFloorTabScreen Renders the SalesFloorTabScreen Component while refreshing 1`] = `
+<View>
+  <FlatList
+    data={
+      Array [
+        "Front",
+        "ABAR",
+        "BREW",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={true}
     renderItem={[Function]}
   />
 </View>
