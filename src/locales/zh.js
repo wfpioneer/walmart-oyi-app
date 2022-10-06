@@ -184,7 +184,11 @@ export default {
     PRICE_SIGNS: '价格标签',
     LOCATIONS: '位置',
     PRICE_SIGN_SUCCESS: '价格标签打印成功',
-    PRINTER_NOT_ASSIGNED: '未分配打印机'
+    PRINTER_NOT_ASSIGNED: '未分配打印机',
+    Was_Large: 'Was Price - Large', // TODO MANDARIN TRANSLATIONS
+    Was_Medium: 'Was Price - Medium',
+    Was_Small: 'Was Price - Small',
+    Was_XSmall: 'Was Price - XSmall'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',

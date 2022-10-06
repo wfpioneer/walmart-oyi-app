@@ -80,8 +80,15 @@ export enum PortablePaperMx {
   'Wine' = 'W'
 }
 
+export enum LaserPaperPrice {
+'Was_Large' = 'A',
+'Was_Medium' = 'B',
+'Was_Small' = 'C',
+'Was_XSmall' = 'D'
+}
+
 export type PrintPaperSize = keyof typeof LaserPaperCn | keyof typeof LaserPaperMx
-| keyof typeof PortablePaperCn |keyof typeof PortablePaperMx | '';
+| keyof typeof PortablePaperCn |keyof typeof PortablePaperMx | keyof typeof LaserPaperPrice | '';
 
 export interface PrintQueueAPIMultistatus {
   itemNbr: number;

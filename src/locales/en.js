@@ -184,7 +184,11 @@ export default {
     PRICE_SIGNS: 'Price Signs',
     LOCATIONS: 'Locations',
     PRICE_SIGN_SUCCESS: 'Price Sign Label Successfully Printed',
-    PRINTER_NOT_ASSIGNED: 'No assigned printer'
+    PRINTER_NOT_ASSIGNED: 'No assigned printer',
+    Was_Large: 'Was Price - Large',
+    Was_Medium: 'Was Price - Medium',
+    Was_Small: 'Was Price - Small',
+    Was_XSmall: 'Was Price - XSmall'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
