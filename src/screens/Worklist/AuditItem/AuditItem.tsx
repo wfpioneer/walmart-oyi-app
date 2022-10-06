@@ -72,23 +72,10 @@ export interface AuditItemScreenProps {
     showItemNotFoundMsg: boolean;
     setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
     itemDetails: ItemDetails | null;
-    showDeleteConfirmationModal: boolean;
-    setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
-    locToConfirm: {
-      locationName: string;
-      locationArea: string;
-      locationIndex: number;
-      locationTypeNbr: number;
-    };
-    setLocToConfirm: React.Dispatch<React.SetStateAction<{
-      locationName: string;
-      locationArea: string;
-      locationIndex: number;
-      locationTypeNbr: number;
-    }>>;
     showPalletQtyUpdateModal: boolean;
     setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>;
     scannedPalletId: string;
+    userConfig: Configurations;
   }
 
 export const isError = (
@@ -291,14 +278,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     getItemPalletsApi,
     setShowPalletQtyUpdateModal,
     showPalletQtyUpdateModal,
-    scannedPalletId
+    scannedPalletId,
+    userConfig
   } = props;
   let scannedSubscription: EmitterSubscription;
 
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused()) {
+      if (navigation.isFocused() && userConfig.scanRequired) {
         validateSessionCall(navigation, route.name).then(() => {
           trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
           dispatch(setScannedEvent(scan));
@@ -454,7 +442,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
               error={!!(getItemDetailsApi.error || getLocationApi.error)}
               onRetry={() => { }}
-              scanRequired={false}
+              scanRequired={userConfig.scanRequired}
             />
           </View>
           <View style={styles.marginBottomStyle}>
@@ -464,7 +452,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               loading={getItemPalletsApi.isWaiting}
               error={!!getItemPalletsApi.error}
               onRetry={() => { }}
-              scanRequired={true}
+              scanRequired={userConfig.scanRequired}
             />
           </View>
           <View style={styles.marginBottomStyle}>
@@ -488,6 +476,7 @@ const AuditItem = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
+  const userConfig = useTypedSelector(state => state.User.configs);
   // TODO: Below mock state needs to be replaced with async state
   const getItemPalletsApi = mockGetItemPalletsAsyncState;
   const { userId } = useTypedSelector(state => state.User);
@@ -502,10 +491,6 @@ const AuditItem = (): JSX.Element => {
   const {
     itemDetails, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
-  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
-  const [locToConfirm, setLocToConfirm] = useState({
-    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
-  });
   const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
 
   return (
@@ -532,13 +517,10 @@ const AuditItem = (): JSX.Element => {
       itemDetails={itemDetails}
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
-      showDeleteConfirmationModal={showDeleteConfirmationModal}
-      setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
-      locToConfirm={locToConfirm}
-      setLocToConfirm={setLocToConfirm}
       showPalletQtyUpdateModal={showPalletQtyUpdateModal}
       setShowPalletQtyUpdateModal={setShowPalletQtyUpdateModal}
       scannedPalletId={scannedPalletId}
+      userConfig={userConfig}
     />
   );
 };

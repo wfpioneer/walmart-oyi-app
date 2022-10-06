@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import Button, { ButtonType } from '../buttons/Button';
 import NumericSelector from '../NumericSelector/NumericSelector';
@@ -57,7 +57,7 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
     qty, palletId, handleSubmit, handleClose
   } = props;
 
-  const [newQty, setNewQty] = useState(qty || 0);
+  const [newQty, setNewQty] = React.useState(qty || 0);
 
   const handleTextChange = (text: string) => {
     const newQtyVal: number = parseInt(text, 10);

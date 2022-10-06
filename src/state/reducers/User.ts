@@ -76,7 +76,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           createPallet: action.payload.createPallet || false,
           auditWorklists: action.payload.auditWorklists || false,
           showRollOverAudit: action.payload.showRollOverAudit || false,
-          scanRequired: action.payload.scanRequired || true
+          scanRequired: action.payload.scanRequired || false
         }
       };
     default:

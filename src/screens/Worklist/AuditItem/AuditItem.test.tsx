@@ -14,13 +14,14 @@ import Toast from 'react-native-toast-message';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
-  AuditItemScreen, AuditItemScreenProps, addLocationHandler,
-  getItemDetailsApiHook, getlocationsApiResult, isError, onValidateItemNumber
+  AuditItemScreen, AuditItemScreenProps, addLocationHandler, getItemDetailsApiHook, getScannedPalletEffect,
+  getlocationsApiResult, isError, onValidateItemNumber, renderpalletQtyUpdateModal
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { itemPallets } from '../../../mockData/getItemPallets';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -72,6 +73,11 @@ const routeProp: RouteProp<any, string> = {
   name: 'test'
 };
 
+const mockScannedEvent = {
+  type: 'TEST',
+  value: '4598'
+};
+
 const scrollViewProp: React.RefObject<ScrollView> = {
   current: null
 };
@@ -105,7 +111,11 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showItemNotFoundMsg: false,
   floorLocations: [],
   reserveLocations: [],
-  getItemPalletsApi: defaultAsyncState
+  getItemPalletsApi: defaultAsyncState,
+  showPalletQtyUpdateModal: false,
+  setShowPalletQtyUpdateModal: jest.fn(),
+  scannedPalletId: '4928',
+  userConfig: mockConfig
 };
 
 describe('AuditItemScreen', () => {
@@ -301,6 +311,54 @@ describe('AuditItemScreen', () => {
       const mockSetShowItemNotFoundMsg = jest.fn();
       getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
+    });
+    it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      getScannedPalletEffect(
+        navigationProp, mockScannedEvent, itemPallets.pallets, mockDispatch, mocksetShowPalletQtyUpdateModal
+      );
+      expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalled();
+      expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalledWith(true);
+      expect(mockDispatch).toHaveBeenCalled();
+    });
+    it('Tests getScannedPalletEffect shows error toast if the scanned pallet not associated with the item', () => {
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      const mockReserveLocations = [{
+        palletId: '5999',
+        quantity: 22,
+        sectionId: 5578,
+        locationName: 'D1-4',
+        mixedPallet: false
+      }];
+      getScannedPalletEffect(
+        navigationProp,
+        mockScannedEvent,
+        mockReserveLocations,
+        mockDispatch,
+        mocksetShowPalletQtyUpdateModal
+      );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.SCAN_PALLET_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    });
+    it('Snapshot test for update pallet qty modal', () => {
+      const mockShowPalletQtyModal = true;
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      const mockVendorPackQty = 3;
+      const { toJSON } = render(
+        renderpalletQtyUpdateModal(
+          '4988',
+          itemPallets.pallets,
+          mockDispatch,
+          mockShowPalletQtyModal,
+          mocksetShowPalletQtyUpdateModal,
+          mockVendorPackQty
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
     });
   });
 });
