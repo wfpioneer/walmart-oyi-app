@@ -26,10 +26,12 @@ import { strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
 
 import {
-  GET_ITEM_DETAILS
+  GET_ITEM_DETAILS,
+  GET_ITEM_PALLETS
 } from '../../../state/actions/asyncAPI';
 import {
-  getItemDetails
+  getItemDetails,
+  getItemPallets
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
@@ -39,7 +41,6 @@ import { setupScreen } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import { setFloorLocations, setItemDetails, setReserveLocations } from '../../../state/actions/AuditItemScreen';
 import { ItemPalletInfo } from '../../../models/AuditItem';
-import { mockGetItemPalletsAsyncState } from '../../../mockData/getItemPallets';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 
 export interface AuditItemScreenProps {
@@ -111,6 +112,8 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
       if (itemNumber > 0) {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemNumber }));
+        dispatch({ type: GET_ITEM_PALLETS.RESET });
+        dispatch(getItemPallets({ itemNbr: itemNumber }));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -267,7 +270,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       trackEventCall('refresh_item_details', { itemNumber });
       dispatch({ type: GET_ITEM_DETAILS.RESET });
       dispatch(getItemDetails({ id: itemNumber }));
+      dispatch({ type: GET_ITEM_PALLETS.RESET });
+      dispatch(getItemPallets({ itemNbr: itemNumber }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+  };
+
+  const handleReserveLocsRetry = () => {
+    dispatch({ type: GET_ITEM_PALLETS.RESET });
+    dispatch(getItemPallets({ itemNbr: itemNumber }));
   };
 
   const getFloorLocationList = (locations: Location[]) => {
@@ -351,7 +361,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationType="reserve"
               loading={getItemPalletsApi.isWaiting}
               error={!!getItemPalletsApi.error}
-              onRetry={() => { }}
+              onRetry={handleReserveLocsRetry}
               scanRequired={false}
             />
           </View>
@@ -377,7 +387,7 @@ const AuditItem = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
   // TODO: Below mock state needs to be replaced with async state
-  const getItemPalletsApi = mockGetItemPalletsAsyncState;
+  const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const { userId } = useTypedSelector(state => state.User);
   const userFeatures = useTypedSelector(state => state.User.features);
   const userConfigs = useTypedSelector(state => state.User.configs);
