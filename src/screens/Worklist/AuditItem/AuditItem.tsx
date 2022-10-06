@@ -2,6 +2,7 @@ import React, {
   EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
+  EmitterSubscription,
   RefreshControl, ScrollView, Text, TouchableOpacity,
   View
 } from 'react-native';
@@ -14,6 +15,8 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
 import { AxiosError } from 'axios';
+import { barcodeEmitter } from '../../../utils/scannerUtils';
+import { CustomModalComponent } from '../../Modal/Modal';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import { validateSession } from '../../../utils/sessionTimeout';
@@ -24,6 +27,7 @@ import styles from './AuditItem.style';
 import ManualScanComponent from '../../../components/manualscan/ManualScan';
 import { strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
+import { resetScannedEvent, setScannedEvent } from '../../../state/actions/Global';
 
 import {
   GET_ITEM_DETAILS
@@ -37,10 +41,13 @@ import LocationListCard, { LocationList } from '../../../components/LocationList
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 import { setupScreen } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
-import { setFloorLocations, setItemDetails, setReserveLocations } from '../../../state/actions/AuditItemScreen';
+import {
+  setFloorLocations, setItemDetails, setReserveLocations, setScannedPalletId, updatePalletQty
+} from '../../../state/actions/AuditItemScreen';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { mockGetItemPalletsAsyncState } from '../../../mockData/getItemPallets';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
 
 export interface AuditItemScreenProps {
     scannedEvent: { value: string | null; type: string | null; };
@@ -65,6 +72,23 @@ export interface AuditItemScreenProps {
     showItemNotFoundMsg: boolean;
     setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
     itemDetails: ItemDetails | null;
+    showDeleteConfirmationModal: boolean;
+    setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
+    locToConfirm: {
+      locationName: string;
+      locationArea: string;
+      locationIndex: number;
+      locationTypeNbr: number;
+    };
+    setLocToConfirm: React.Dispatch<React.SetStateAction<{
+      locationName: string;
+      locationArea: string;
+      locationIndex: number;
+      locationTypeNbr: number;
+    }>>;
+    showPalletQtyUpdateModal: boolean;
+    setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>;
+    scannedPalletId: string;
   }
 
 export const isError = (
@@ -189,6 +213,62 @@ export const getItemPalletsApiHook = (
   }
 };
 
+export const getScannedPalletEffect = (
+  navigation: NavigationProp<any>,
+  scannedEvent: { type: string | null; value: string | null },
+  reserveLocations: ItemPalletInfo[],
+  dispatch: Dispatch<any>,
+  setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (navigation.isFocused() && scannedEvent.value) {
+    const matchedPallet = reserveLocations.find(loc => loc.palletId === scannedEvent.value);
+    if (matchedPallet) {
+      setShowPalletQtyUpdateModal(true);
+      dispatch(setScannedPalletId(scannedEvent.value));
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: strings('AUDITS.SCAN_PALLET_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    }
+    dispatch(resetScannedEvent());
+  }
+};
+
+export const renderpalletQtyUpdateModal = (
+  palletId: string,
+  reserveLocations: ItemPalletInfo[],
+  dispatch: Dispatch<any>,
+  showPalletQtyUpdateModal: boolean,
+  setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>,
+  vendorPackQty?: number
+) => {
+  const palletInfo = reserveLocations.find(pallet => pallet.palletId === palletId);
+  const qty = palletInfo?.quantity === vendorPackQty ? palletInfo?.quantity : 0;
+  const newPalletQty = palletInfo?.newQty;
+  return (
+    <CustomModalComponent
+      isVisible={showPalletQtyUpdateModal}
+      onClose={() => setShowPalletQtyUpdateModal(false)}
+      modalType="Form"
+    >
+      <PalletQtyUpdate
+        palletId={palletId}
+        qty={newPalletQty || qty || 0}
+        handleClose={() => {
+          setShowPalletQtyUpdateModal(false);
+        }}
+        handleSubmit={(newQty: number) => {
+          dispatch(updatePalletQty(palletId, newQty));
+          setShowPalletQtyUpdateModal(false);
+        }}
+      />
+    </CustomModalComponent>
+  );
+};
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -208,8 +288,31 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     itemDetails,
     floorLocations,
     reserveLocations,
-    getItemPalletsApi
+    getItemPalletsApi,
+    setShowPalletQtyUpdateModal,
+    showPalletQtyUpdateModal,
+    scannedPalletId
   } = props;
+  let scannedSubscription: EmitterSubscription;
+
+  // Scanner listener
+  useEffectHook(() => {
+    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused()) {
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
+          dispatch(setScannedEvent(scan));
+        });
+      }
+    });
+    return () => {
+      scannedSubscription.remove();
+    };
+  }, []);
+
+  useEffectHook(() => getScannedPalletEffect(
+    navigation, scannedEvent, reserveLocations, dispatch, setShowPalletQtyUpdateModal
+  ), [scannedEvent]);
 
   // call get Item details
   useEffectHook(() => {
@@ -296,7 +399,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         locationLst.push({
           sectionId: loc.sectionId,
           locationName: loc.locationName,
-          quantity: loc.quantity,
+          quantity: loc.newQty || loc.quantity,
+          scanned: loc.scanned,
           palletId: loc.palletId,
           increment: () => {},
           decrement: () => {},
@@ -310,6 +414,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   return (
     <>
+      {renderpalletQtyUpdateModal(
+        scannedPalletId,
+        reserveLocations,
+        dispatch,
+        showPalletQtyUpdateModal,
+        setShowPalletQtyUpdateModal,
+        itemDetails?.vendorPackQty
+      )}
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
       <View style={{ marginBottom: 8 }}>
         <ItemCard
@@ -352,7 +464,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               loading={getItemPalletsApi.isWaiting}
               error={!!getItemPalletsApi.error}
               onRetry={() => { }}
-              scanRequired={false}
+              scanRequired={true}
             />
           </View>
           <View style={styles.marginBottomStyle}>
@@ -387,7 +499,14 @@ const AuditItem = (): JSX.Element => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
-  const { itemDetails, floorLocations, reserveLocations } = useTypedSelector(state => state.AuditItemScreen);
+  const {
+    itemDetails, floorLocations, reserveLocations, scannedPalletId
+  } = useTypedSelector(state => state.AuditItemScreen);
+  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+  const [locToConfirm, setLocToConfirm] = useState({
+    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
+  });
+  const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
 
   return (
     <AuditItemScreen
@@ -413,6 +532,13 @@ const AuditItem = (): JSX.Element => {
       itemDetails={itemDetails}
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
+      showDeleteConfirmationModal={showDeleteConfirmationModal}
+      setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
+      locToConfirm={locToConfirm}
+      setLocToConfirm={setLocToConfirm}
+      showPalletQtyUpdateModal={showPalletQtyUpdateModal}
+      setShowPalletQtyUpdateModal={setShowPalletQtyUpdateModal}
+      scannedPalletId={scannedPalletId}
     />
   );
 };

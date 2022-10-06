@@ -505,6 +505,7 @@ export default {
     CONFIRM_AUDIT: '确认现货盘点结果',
     UPDATED_QTY: '更新数量',
     LARGE_CURRENCY_CHANGE: '大金额调整(超1000)',
-    NO_LOCATION_AVAILABLE: '无位置信息'
+    NO_LOCATION_AVAILABLE: '无位置信息',
+    SCAN_PALLET_ERROR: '扫描的卡板必须和关联的商品匹配'
   }
 };

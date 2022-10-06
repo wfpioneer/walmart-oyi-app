@@ -500,6 +500,7 @@ export default {
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',
     UPDATED_QTY: 'Cantidad actualizada',
     LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada',
-    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible'
+    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible',
+    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet asociado al artículo'
   }
 };

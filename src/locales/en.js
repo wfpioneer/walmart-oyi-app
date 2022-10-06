@@ -502,6 +502,7 @@ export default {
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',
     UPDATED_QTY: 'Updated Quantity',
     LARGE_CURRENCY_CHANGE: 'Large Currency Change',
-    NO_LOCATION_AVAILABLE: 'No location available'
+    NO_LOCATION_AVAILABLE: 'No location available',
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet associated to the item'
   }
 };
