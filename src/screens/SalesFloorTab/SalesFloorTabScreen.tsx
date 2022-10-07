@@ -8,7 +8,15 @@ import { strings } from '../../locales';
 
 interface SalesFloorTabProps {
   readyToWorklist: PickListItem[];
+  refreshing: boolean;
+  onRefresh: () => void;
+}
+
+interface SalesFloorTabScreenProps {
+  readyToWorklist: PickListItem[];
   dispatch: Dispatch<any>;
+  refreshing: boolean;
+  onRefresh: () => void;
 }
 
 const FRONT = 'Front';
@@ -18,8 +26,13 @@ const getZoneFromPalletLocation = (pickItem: PickListItem) => (pickItem.palletLo
     .replace(/[\d.]+$/, '')
   : FRONT);
 
-export const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
-  const { readyToWorklist, dispatch } = props;
+export const SalesFloorTabScreen = (props: SalesFloorTabScreenProps) => {
+  const {
+    readyToWorklist,
+    dispatch,
+    refreshing,
+    onRefresh
+  } = props;
 
   const listGroupMap: Map<string, PickListItem[]> = new Map().set(FRONT, []);
 
@@ -67,16 +80,21 @@ export const SalesFloorTabScreen = (props: SalesFloorTabProps) => {
           />
         )}
         keyExtractor={(item, index) => `${item}-${index}`}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
       />
     </View>
   );
 };
-const SalesFloorTab = (props: { readyToWorklist: PickListItem[] }) => {
+const SalesFloorTab = (props: SalesFloorTabProps) => {
+  const { readyToWorklist, refreshing, onRefresh } = props;
   const dispatch = useDispatch();
   return (
     <SalesFloorTabScreen
-      readyToWorklist={props.readyToWorklist}
+      readyToWorklist={readyToWorklist}
       dispatch={dispatch}
+      refreshing={refreshing}
+      onRefresh={onRefresh}
     />
   );
 };
