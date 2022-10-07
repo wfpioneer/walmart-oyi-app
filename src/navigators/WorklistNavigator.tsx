@@ -96,19 +96,6 @@ export const WorklistNavigator = (): JSX.Element => {
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           headerTintColor: COLOR.WHITE
         }}
-        screenListeners={{
-          transitionStart: () => {
-            if ((palletWorklists || auditWorklists) && navState.routes[0].name !== 'WorklistHome') {
-              navigation.dispatch(state => {
-                const newRoute = state.routes.map(route => ({ name: route.name }));
-                return CommonActions.reset({
-                  index: 1,
-                  routes: [{ name: 'WorklistHome' }, ...newRoute]
-                });
-              });
-            }
-          }
-        }}
       >
         <Stack.Screen
           name="ITEMWORKLIST"

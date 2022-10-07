@@ -68,17 +68,6 @@ export const MissingPalletWorklistNavigatorStack = (
         headerTintColor: COLOR.WHITE
       })}
       screenListeners={{
-        transitionStart: () => {
-          if (navState.routes[0].name !== 'WorklistHome') {
-            navigation.dispatch(state => {
-              const newRoute = state.routes.map(route => ({ name: route.name }));
-              return CommonActions.reset({
-                index: 1,
-                routes: [{ name: 'WorklistHome' }, ...newRoute]
-              });
-            });
-          }
-        },
         focus: screen => {
           if (screen.target && !screen.target.includes('MissingPalletWorklistTabs') && isBottomTabEnabled) {
             dispatch(setBottomTab(false));
