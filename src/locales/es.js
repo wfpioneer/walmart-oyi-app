@@ -185,10 +185,10 @@ export default {
     LOCATIONS: 'Ubicaciones',
     PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
     PRINTER_NOT_ASSIGNED: 'No impresoras asignadas',
-    Was_Large: 'Was Price - Large', // TODO SPANISH TRANSLATIONS
-    Was_Medium: 'Was Price - Med',
-    Was_Small: 'Was Price - Small',
-    Was_XSmall: 'Was Price - X-Small'
+    Was_Large: 'Promo - Grande',
+    Was_Medium: 'Promo - Mediano',
+    Was_Small: 'Promo - Chico',
+    Was_XSmall: 'Promo - Xchico'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',

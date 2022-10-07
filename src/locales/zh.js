@@ -185,10 +185,10 @@ export default {
     LOCATIONS: '位置',
     PRICE_SIGN_SUCCESS: '价格标签打印成功',
     PRINTER_NOT_ASSIGNED: '未分配打印机',
-    Was_Large: 'Was Price - Large', // TODO MANDARIN TRANSLATIONS
-    Was_Medium: 'Was Price - Med',
-    Was_Small: 'Was Price - Small',
-    Was_XSmall: 'Was Price - X-Small'
+    Was_Large: '原价-大',
+    Was_Medium: '原价-中',
+    Was_Small: '原价-小',
+    Was_XSmall: '原价-超小'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
