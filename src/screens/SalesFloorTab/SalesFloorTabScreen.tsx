@@ -27,7 +27,12 @@ const getZoneFromPalletLocation = (pickItem: PickListItem) => (pickItem.palletLo
   : FRONT);
 
 export const SalesFloorTabScreen = (props: SalesFloorTabScreenProps) => {
-  const { readyToWorklist, dispatch, refreshing, onRefresh } = props;
+  const {
+    readyToWorklist,
+    dispatch,
+    refreshing,
+    onRefresh
+  } = props;
 
   const listGroupMap: Map<string, PickListItem[]> = new Map().set(FRONT, []);
 
