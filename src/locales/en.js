@@ -239,6 +239,7 @@ export default {
     SCAN_INSTRUCTION: 'Scan location label.',
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
+    DELETE_LOCATION_API_SUCCESS: 'Location %{locationName} has been successfully deleted',
     ADD_NEW_LOCATION: 'Add New Location',
     EDIT_LOCATION: 'Edit Location',
     LOCATION_MANAGEMENT: 'Location Management',
@@ -486,7 +487,8 @@ export default {
     TITLE: 'Settings',
     FEATURE_UPDATE_SUCCESS: 'Features Updated',
     FEATURE_UPDATE_FAILURE: 'Unable to get updated features',
-    FEATURES: 'Features'
+    FEATURES: 'Features',
+    AREA_FILTER: 'Area Filter'
   },
   AUDITS: {
     AUDITS: 'Audits',
@@ -500,6 +502,7 @@ export default {
     PALLET_COUNT: 'Please enter the count for pallet',
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',
     UPDATED_QTY: 'Updated Quantity',
-    LARGE_CURRENCY_CHANGE: 'Large Currency Change'
+    LARGE_CURRENCY_CHANGE: 'Large Currency Change',
+    NO_LOCATION_AVAILABLE: 'No location available'
   }
 };

@@ -1,13 +1,28 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationProp } from '@react-navigation/native';
 import {
   MissingPalletWorklistNavigatorStack,
   renderScanButton
 } from './MissingPalletWorklistNavigator';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
-
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
+};
 describe('MissingPalletWorklist Navigator', () => {
   it('Renders the MissingPalletWorklist Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -15,6 +30,9 @@ describe('MissingPalletWorklist Navigator', () => {
       <MissingPalletWorklistNavigatorStack
         dispatch={jest.fn()}
         isManualScanEnabled={false}
+        navigation={navigationProp}
+        palletWorklists={true}
+        isBottomTabEnabled={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

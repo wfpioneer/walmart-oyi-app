@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderBottomWidth: 1,
-    borderColor: COLOR.GREY_700,
+    borderColor: COLOR.GREY_300,
     backgroundColor: COLOR.WHITE
   },
   title: {
@@ -44,12 +44,19 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   loader: {
-    ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 30
   },
   locationCard: {
-    marginBottom: 5
+    marginBottom: 2
+  },
+  nolocation: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    marginBottom: 2,
+    backgroundColor: COLOR.WHITE
   }
 });
 

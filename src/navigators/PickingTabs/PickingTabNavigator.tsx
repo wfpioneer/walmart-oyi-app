@@ -148,10 +148,6 @@ export const getPicklistApiHook = (
       dispatch(hideActivityModal());
     }
   }
-  // Get Picklist api isWaiting
-  if (isFocused && getPicklistApi.isWaiting) {
-    dispatch(showActivityModal());
-  }
 };
 
 export const updatePicklistStatusApiHook = (
@@ -293,7 +289,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           focus: () => dispatch(setSelectedTab(Tabs.QUICKPICK))
         }}
       >
-        {() => <QuickPickTab quickPickItems={quickPickList} />}
+        {() => (
+          <QuickPickTab
+            quickPickItems={quickPickList}
+            refreshing={getPicklistsApi.isWaiting}
+            onRefresh={() => dispatch(getPicklists())}/>
+        )}
       </Tab.Screen>
       <Tab.Screen
         name={Tabs.PICK}
@@ -309,7 +310,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           focus: () => dispatch(setSelectedTab(Tabs.PICK))
         }}
       >
-        {() => <PickBinTab pickBinList={pickBinList} />}
+        {() => (
+          <PickBinTab
+            pickBinList={pickBinList}
+            refreshing={getPicklistsApi.isWaiting}
+            onRefresh={() => dispatch(getPicklists())}/>
+        )}
       </Tab.Screen>
       <Tab.Screen
         name={Tabs.SALESFLOOR}
@@ -325,7 +331,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           focus: () => dispatch(setSelectedTab(Tabs.SALESFLOOR))
         }}
       >
-        {() => <SalesFloorTab readyToWorklist={salesFloorList} />}
+        {() => (
+          <SalesFloorTab
+            readyToWorklist={salesFloorList}
+            refreshing={getPicklistsApi.isWaiting}
+            onRefresh={() => dispatch(getPicklists())}/>
+        )}
       </Tab.Screen>
     </Tab.Navigator>
   );

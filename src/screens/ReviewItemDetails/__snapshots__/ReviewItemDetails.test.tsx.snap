@@ -352,6 +352,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+    titleStyle={Object {}}
     toggleIsOpened={[Function]}
   />
 </View>
@@ -363,6 +364,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+    titleStyle={Object {}}
     toggleIsOpened={[Function]}
   />
 </View>
@@ -374,6 +376,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+    titleStyle={Object {}}
     toggleIsOpened={[Function]}
   />
 </View>
@@ -385,6 +388,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    titleStyle={Object {}}
     toggleIsOpened={[Function]}
   />
 </View>
@@ -396,6 +400,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    titleStyle={Object {}}
     toggleIsOpened={[Function]}
   />
 </View>
@@ -407,6 +412,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+    titleStyle={Object {}}
     toggleIsOpened={[Function]}
   />
 </View>
@@ -454,6 +460,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.HISTORY\\" translation]"
+    titleStyle={Object {}}
   >
     <RenderItemHistoryCard
       date="2022-07-26"
@@ -513,6 +520,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
     icon=""
     isOpened={false}
     title="[missing \\"en.ITEM.HISTORY\\" translation]"
+    titleStyle={Object {}}
   >
     <View
       style={
@@ -2730,6 +2738,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             icon=""
             isOpened={false}
             title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+            titleStyle={Object {}}
           >
             <View
               style={
@@ -2797,6 +2806,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               icon=""
               isOpened={false}
               title="[missing \\"en.ITEM.HISTORY\\" translation]"
+              titleStyle={Object {}}
             >
               <RenderItemHistoryCard
                 date="2022-07-26"
@@ -2920,6 +2930,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={false}
           title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
           <View
             style={

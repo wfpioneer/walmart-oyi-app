@@ -9,6 +9,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { getWorklist } from '../../state/actions/saga';
+import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 
@@ -26,17 +27,28 @@ export interface AuditWorklistTabScreenProps {
     refreshing: boolean;
 }
 
-const renderCategoryCard = (category: string, items: WorklistItemI[], collapsed: boolean) => (
+const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispatch: Dispatch<any>) => {
+  dispatch(setAuditItemNumber(itemNumber));
+  navigation.navigate('AuditItem');
+};
+
+const renderCategoryCard = (
+  category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => (
   <CategoryCard
     category={category}
     listOfItems={items}
     collapsed={collapsed}
+    onItemCardClick={(itemNumber: number) => {
+      onItemClick(itemNumber, navigation, dispatch);
+    }}
   />
 );
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, collapsed, setCollapsed, refreshing, dispatch
+    items, collapsed, setCollapsed, refreshing, dispatch, navigation
   } = props;
   const itemsBasedOnCategory = groupBy(items, item => `${item.catgNbr} - ${item.catgName}`);
   const sortedItemKeys = Object.keys(itemsBasedOnCategory).sort((a, b) => (a > b ? 1 : -1));
@@ -58,7 +70,9 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
       <CollapseAllBar collapsed={collapsed} onclick={() => setCollapsed(!collapsed)} />
       <FlatList
         data={sortedItemKeys}
-        renderItem={({ item: key }) => renderCategoryCard(key, itemsBasedOnCategory[key], collapsed)}
+        renderItem={({ item: key }) => renderCategoryCard(
+          key, itemsBasedOnCategory[key], collapsed, navigation, dispatch
+        )}
         keyExtractor={item => `category-${item}`}
         // TODO: worklist types needs to be updated after Filter component gets completed
         onRefresh={() => dispatch(getWorklist({ worklistType: ['AU', 'RA'] }))}

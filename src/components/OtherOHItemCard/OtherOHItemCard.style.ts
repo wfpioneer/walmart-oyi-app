@@ -4,20 +4,22 @@ import { COLOR } from '../../themes/Color';
 const styles = StyleSheet.create({
   otherOHDetails: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    backgroundColor: COLOR.WHITE
   },
   loader: {
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 5,
     margin: 8
-  },
-  mainContainer: {
-    backgroundColor: COLOR.WHITE,
-    width: '100%'
   },
   content: {
     padding: 8,
     textAlign: 'right'
+  },
+  titleStyle: {
+    fontWeight: '500',
+    paddingLeft: 10
   }
 });
 

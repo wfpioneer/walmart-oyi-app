@@ -36,29 +36,67 @@ exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`
 `;
 
 exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`] = `
-<StackNavigator
-  screenOptions={[Function]}
+<SideMenu
+  animationFunction={[Function]}
+  animationStyle={[Function]}
+  autoClosing={true}
+  bounceBackOnOverdraw={true}
+  disableGestures={false}
+  edgeHitWidth={60}
+  hiddenMenuOffset={0}
+  isOpen={false}
+  menu={<FilterMenu />}
+  menuPosition="right"
+  onAnimationComplete={[Function]}
+  onChange={[Function]}
+  onMove={[Function]}
+  onSliding={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  openMenuOffset={500}
+  toleranceX={10}
+  toleranceY={10}
 >
-  <Screen
-    component={[Function]}
-    name="AuditWorklistTabs"
-    options={
+  <StackNavigator
+    initialRouteName="AuditWorklistTabs"
+    screenListeners={
       Object {
-        "headerLeft": [Function],
-        "headerRight": [Function],
-        "headerTitle": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+        "focus": [Function],
       }
     }
-  />
-  <Screen
-    component={[Function]}
-    name="AuditWorklist"
-    options={
-      Object {
-        "headerRight": [Function],
-        "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+    screenOptions={[Function]}
+  >
+    <Screen
+      component={[Function]}
+      name="AuditWorklistTabs"
+      options={
+        Object {
+          "headerLeft": [Function],
+          "headerRight": [Function],
+          "headerTitle": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+        }
       }
-    }
-  />
-</StackNavigator>
+    />
+    <Screen
+      component={[Function]}
+      name="AuditItem"
+      options={
+        Object {
+          "headerRight": [Function],
+          "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+        }
+      }
+    />
+    <Screen
+      component={[Function]}
+      name="AddLocation"
+      options={
+        Object {
+          "headerBackTitleVisible": false,
+          "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+          "headerTitleAlign": "left",
+        }
+      }
+    />
+  </StackNavigator>
+</SideMenu>
 `;

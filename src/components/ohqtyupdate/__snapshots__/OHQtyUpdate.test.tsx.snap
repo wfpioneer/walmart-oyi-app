@@ -273,7 +273,7 @@ Array [
             }
           }
         >
-          Save
+          [missing "en.GENERICS.SAVE" translation]
         </Text>
       </View>
     </View>
@@ -565,7 +565,7 @@ Array [
             }
           }
         >
-          Save
+          [missing "en.GENERICS.SAVE" translation]
         </Text>
       </View>
     </View>
@@ -857,7 +857,7 @@ Array [
             }
           }
         >
-          Save
+          [missing "en.GENERICS.SAVE" translation]
         </Text>
       </View>
     </View>
@@ -1312,7 +1312,7 @@ Array [
             }
           }
         >
-          Save
+          [missing "en.GENERICS.SAVE" translation]
         </Text>
       </View>
     </View>

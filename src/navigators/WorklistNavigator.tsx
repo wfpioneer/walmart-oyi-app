@@ -56,8 +56,6 @@ export const WorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
-  const user = useTypedSelector(state => state.User);
-  const { palletWorklists } = user.configs;
 
   useEffect(
     () => navigation.addListener('focus', () => {
@@ -67,11 +65,7 @@ export const WorklistNavigator = (): JSX.Element => {
   );
 
   const navigateBack = () => {
-    if (palletWorklists) {
-      navigation.navigate(strings('WORKLIST.WORKLIST'));
-    } else {
-      navigation.goBack();
-    }
+    navigation.goBack();
   };
 
   const menu = <FilterMenu />;
