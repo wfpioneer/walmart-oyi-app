@@ -1,6 +1,5 @@
 import { HeaderBackButton } from '@react-navigation/elements';
 import {
-  CommonActions,
   NavigationProp,
   useNavigation
 } from '@react-navigation/native';
@@ -91,8 +90,6 @@ export const AuditWorklistNavigatorStack = (
     menuOpen,
     isBottomTabEnabled
   } = props;
-
-  const navState = navigation.getState();
 
   const navigateBack = () => {
     if (auditWorklists) {

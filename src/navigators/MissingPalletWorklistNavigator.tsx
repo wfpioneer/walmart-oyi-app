@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { CommonActions, NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import MissingPalletWorklistTabs from './MissingPalletWorklistTabs/MissingPalletWorklistTabNavigator';
@@ -51,7 +51,6 @@ export const MissingPalletWorklistNavigatorStack = (
     dispatch, isManualScanEnabled, palletWorklists, navigation, isBottomTabEnabled
   } = props;
 
-  const navState = navigation.getState();
   const navigateBack = () => {
     if (palletWorklists) {
       navigation.navigate('WorklistHome');

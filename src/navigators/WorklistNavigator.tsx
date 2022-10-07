@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SideMenu from 'react-native-side-menu-updated';
-import { CommonActions, NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { TodoWorklist } from '../screens/Worklist/TodoWorklist';
 import { CompletedWorklist } from '../screens/Worklist/CompletedWorklist';
@@ -56,8 +56,6 @@ export const WorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
-  const user = useTypedSelector(state => state.User);
-  const { palletWorklists, auditWorklists } = user.configs;
 
   useEffect(
     () => navigation.addListener('focus', () => {
@@ -66,7 +64,6 @@ export const WorklistNavigator = (): JSX.Element => {
     [navigation]
   );
 
-  const navState = navigation.getState();
   const navigateBack = () => {
     navigation.goBack();
   };
