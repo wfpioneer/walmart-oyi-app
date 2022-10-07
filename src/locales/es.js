@@ -238,6 +238,7 @@ export default {
     SCAN_INSTRUCTION: 'Escanea la etiqueta de Ubicación.',
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
+    DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',

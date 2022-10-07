@@ -31,7 +31,10 @@ export const AuditItemScreen = (state = initialState, action: Actions) : AuditIt
     case SET_FLOOR_LOCATIONS:
       return {
         ...state,
-        floorLocations: action.payload
+        floorLocations: action.payload.map((loc: Location) => ({
+          ...loc,
+          locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
+        }))
       };
     case SET_RESERVE_LOCATIONS:
       return {
