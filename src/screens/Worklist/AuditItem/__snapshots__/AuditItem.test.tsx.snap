@@ -327,6 +327,248 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
 </Modal>
 `;
 
+exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderDeleteLocationModal should render modal with loader 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#0071e9"
+        hidesWhenStopped={true}
+        size="large"
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      />
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderDeleteLocationModal should render modal with locationName and action buttons 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#545F7A",
+          "borderRadius": 10,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "justifyContent": "center",
+          "minHeight": 150,
+          "padding": 10,
+          "width": "80%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.DELETE_CONFIRMATION" translation]A1-1
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-cancel-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                  }
+                }
+              >
+                [missing "en.GENERICS.CANCEL" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#D6512D",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-confirm-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                  }
+                }
+              >
+                [missing "en.GENERICS.OK" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`AuditItemScreen Manage AuditItem externalized function tests test isError 1`] = `
 <View
   style={
@@ -459,6 +701,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
 Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
@@ -1152,6 +1401,76 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       qty={0}
     />
   </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -1294,6 +1613,76 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       palletId="4928"
       qty={0}
     />
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
   </CustomModalComponent>
   <View
     style={

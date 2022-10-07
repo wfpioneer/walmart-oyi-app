@@ -239,6 +239,7 @@ export default {
     SCAN_INSTRUCTION: 'Scan location label.',
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
     DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
+    DELETE_LOCATION_API_SUCCESS: 'Location %{locationName} has been successfully deleted',
     ADD_NEW_LOCATION: 'Add New Location',
     EDIT_LOCATION: 'Edit Location',
     LOCATION_MANAGEMENT: 'Location Management',

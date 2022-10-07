@@ -33,6 +33,20 @@ const styles = StyleSheet.create({
   },
   marginBottomStyle: {
     marginBottom: 6
+  },
+  buttonContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row'
+  },
+  button: {
+    flex: 1,
+    paddingHorizontal: 10
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 15
   }
 });
 
