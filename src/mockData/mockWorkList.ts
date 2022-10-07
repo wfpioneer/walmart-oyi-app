@@ -9,7 +9,7 @@ enum ITEM_NAME {
   WINE_ITEM = 'WINE ITEM',
   PHARMACY_ITEM = 'PHARMACY ITEM',
   PHARMACY_ITEM_1 = 'PHARMACY ITEM 1',
-  TEST_ITEM = 'TEST ITEM'
+  TEST_ITEM = 'Nature Valley Sweet And Salty Nuts Granola Bars'
 }
 
 // eslint-disable-next-line no-shadow

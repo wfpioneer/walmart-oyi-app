@@ -238,6 +238,7 @@ export default {
     SCAN_INSTRUCTION: 'Escanea la etiqueta de Ubicación.',
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
     DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
+    DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
@@ -484,7 +485,8 @@ export default {
     TITLE: 'Ajustes',
     FEATURE_UPDATE_SUCCESS: 'Funcionalidades actualizadas',
     FEATURE_UPDATE_FAILURE: 'Incapaz de obtener las funcionalidades actualizadas',
-    FEATURES: 'Funcionalidades'
+    FEATURES: 'Funcionalidades',
+    AREA_FILTER: 'Filtros por Área '
   },
   AUDITS: {
     AUDITS: 'Auditorías',
@@ -498,6 +500,7 @@ export default {
     PALLET_COUNT: 'Por favor ingresa el conteo del pallet',
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',
     UPDATED_QTY: 'Cantidad actualizada',
-    LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada'
+    LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada',
+    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible'
   }
 };

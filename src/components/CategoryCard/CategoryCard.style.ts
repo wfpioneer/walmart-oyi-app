@@ -20,15 +20,12 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: COLOR.WHITE,
     height: 100,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
     marginBottom: 2,
     flexDirection: 'row'
   },
   content: {
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
-    height: 100,
     flex: 1
   },
   itemInfo: {

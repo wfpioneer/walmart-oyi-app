@@ -2,6 +2,12 @@ export const SET_BYOD = 'GLOBAL/SET_BYOD';
 export const SET_SCANNED_EVENT = 'GLOBAL/SET_SCANNED_EVENT';
 export const RESET_SCANNED_EVENT = 'GLOBAL/RESET_SCANNED_EVENT';
 export const SET_MANUAL_SCAN = 'GLOBAL/SET_MANUAL_SCAN';
+export const SET_BOTTOM_TAB = 'GLOBAL/SET_BOTTOM_TAB';
+
+export const setBottomTab = (isEnabled: boolean) => ({
+  type: SET_BOTTOM_TAB,
+  payload: isEnabled
+} as const);
 
 export const setIsByod = (bool: boolean) => ({
   type: SET_BYOD,
@@ -26,4 +32,5 @@ export type Actions =
   | ReturnType<typeof setIsByod>
   | ReturnType<typeof setScannedEvent>
   | ReturnType<typeof resetScannedEvent>
-  | ReturnType<typeof setManualScan>;
+  | ReturnType<typeof setManualScan>
+  | ReturnType<typeof setBottomTab>;

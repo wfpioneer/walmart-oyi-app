@@ -238,6 +238,7 @@ export default {
     EDIT_LOCATION_API_ERROR: '编辑位置报错，\n请重试',
     DELETE_CONFIRMATION: '确认删除位置 ',
     DELETE_LOCATION_API_ERROR: '删除位置报错，\n请重试',
+    DELETE_LOCATION_API_SUCCESS: '位置 %{locationName} 删除成功',
     ADD_NEW_LOCATION: '新增位置',
     EDIT_LOCATION: '修改位置',
     LOCATION_MANAGEMENT: '通道管理',
@@ -489,7 +490,8 @@ export default {
     TITLE: '设置',
     FEATURE_UPDATE_SUCCESS: '系统功能已更新',
     FEATURE_UPDATE_FAILURE: '无法获取已更新的系统功能',
-    FEATURES: '功能模块'
+    FEATURES: '功能模块',
+    AREA_FILTER: '区域筛选'
   },
   AUDITS: {
     AUDITS: '盘点',
@@ -503,6 +505,7 @@ export default {
     PALLET_COUNT: '请输入卡板库存数量',
     CONFIRM_AUDIT: '确认现货盘点结果',
     UPDATED_QTY: '更新数量',
-    LARGE_CURRENCY_CHANGE: '大金额调整(超1000)'
+    LARGE_CURRENCY_CHANGE: '大金额调整(超1000)',
+    NO_LOCATION_AVAILABLE: '无位置信息'
   }
 };

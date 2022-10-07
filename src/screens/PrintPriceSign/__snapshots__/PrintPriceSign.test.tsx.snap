@@ -1338,10 +1338,10 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       }
       title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
+      titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
-      type={2}
+      type={1}
       width={-1}
     />
     <Button
@@ -1725,10 +1725,10 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         }
       }
       title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
+      titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
-      type={2}
+      type={1}
       width={-1}
     />
     <Button
@@ -1944,10 +1944,10 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
         }
       }
       title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
+      titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
-      type={2}
+      type={1}
       width={-1}
     />
     <Button
@@ -2246,10 +2246,10 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
         }
       }
       title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
-      titleColor="#0071e9"
+      titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
-      type={2}
+      type={1}
       width={-1}
     />
     <Button

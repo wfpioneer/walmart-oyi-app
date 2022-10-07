@@ -1,5 +1,179 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "height": "100%",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "picks": Array [
+            Object {
+              "assignedAssociate": "vn50pz4",
+              "category": 3,
+              "createTs": "2022-04-03T12:55:31.9633333Z",
+              "createdBy": "Guude",
+              "id": 1,
+              "itemDesc": "generic description",
+              "itemNbr": 1,
+              "moveToFront": false,
+              "palletId": "43",
+              "palletLocationId": 4,
+              "palletLocationName": "ABAR1-2",
+              "quickPick": true,
+              "salesFloorLocationId": 5,
+              "salesFloorLocationName": "ABAR1-3",
+              "status": "ready to bin",
+              "upcNbr": "1234567890123",
+            },
+            Object {
+              "assignedAssociate": "vn50pz4",
+              "category": 3,
+              "createTs": "2022-04-03T12:55:31.9633333Z",
+              "createdBy": "Guude",
+              "id": 2,
+              "itemDesc": "generic description",
+              "itemNbr": 1,
+              "moveToFront": false,
+              "palletId": "43",
+              "palletLocationId": 4,
+              "palletLocationName": "ABAR1-2",
+              "quickPick": true,
+              "salesFloorLocationId": 5,
+              "salesFloorLocationName": "ABAR1-3",
+              "status": "ready to pick",
+              "upcNbr": "1234567890123",
+            },
+          ],
+          "title": "[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation]",
+        },
+        Object {
+          "picks": Array [],
+          "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        },
+        Object {
+          "picks": Array [
+            Object {
+              "assignedAssociate": "t0s0og",
+              "category": 3,
+              "createTs": "2022-04-03T12:55:31.9633333Z",
+              "createdBy": "Guude",
+              "id": 0,
+              "itemDesc": "generic description",
+              "itemNbr": 1,
+              "moveToFront": false,
+              "palletId": "43",
+              "palletLocationId": 4,
+              "palletLocationName": "ABAR1-2",
+              "quickPick": true,
+              "salesFloorLocationId": 5,
+              "salesFloorLocationName": "ABAR1-3",
+              "status": "ready to work",
+              "upcNbr": "1234567890123",
+            },
+          ],
+          "title": "[missing \\"en.PICKING.WORK\\" translation]",
+        },
+        Object {
+          "picks": Array [],
+          "title": "[missing \\"en.PICKING.BIN\\" translation]",
+        },
+      ]
+    }
+    extraData={
+      Array [
+        Object {
+          "assignedAssociate": "t0s0og",
+          "category": 3,
+          "createTs": "2022-04-03T12:55:31.9633333Z",
+          "createdBy": "Guude",
+          "id": 0,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": "43",
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": true,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to work",
+          "upcNbr": "1234567890123",
+        },
+        Object {
+          "assignedAssociate": "vn50pz4",
+          "category": 3,
+          "createTs": "2022-04-03T12:55:31.9633333Z",
+          "createdBy": "Guude",
+          "id": 1,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": "43",
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": true,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to bin",
+          "upcNbr": "1234567890123",
+        },
+        Object {
+          "assignedAssociate": "vn50pz4",
+          "category": 3,
+          "createTs": "2022-04-03T12:55:31.9633333Z",
+          "createdBy": "Guude",
+          "id": 2,
+          "itemDesc": "generic description",
+          "itemNbr": 1,
+          "moveToFront": false,
+          "palletId": "43",
+          "palletLocationId": 4,
+          "palletLocationName": "ABAR1-2",
+          "quickPick": true,
+          "salesFloorLocationId": 5,
+          "salesFloorLocationName": "ABAR1-3",
+          "status": "ready to pick",
+          "upcNbr": "1234567890123",
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={true}
+    renderItem={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#eaeaea",
+        "marginTop": "auto",
+        "padding": 7,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+        }
+      }
+    >
+      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
+    </Text>
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`Quick pick tab render tests renders the screen with no picking items 1`] = `
 <ForwardRef(SafeAreaView)
   style={
@@ -33,6 +207,8 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
     }
     extraData={Array []}
     keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
     renderItem={[Function]}
   />
   <View
@@ -96,6 +272,8 @@ exports[`Quick pick tab render tests renders the screen with no picking items an
     }
     extraData={Array []}
     keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
     renderItem={[Function]}
   />
   <View
@@ -268,6 +446,8 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
       ]
     }
     keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
     renderItem={[Function]}
   />
   <View
@@ -439,6 +619,8 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
       ]
     }
     keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
     renderItem={[Function]}
   />
   <View
