@@ -17,15 +17,18 @@ export enum ButtonType {
 type fontWeightType = 'normal' | 'bold' | '100' | '200' | '300' |
     '400' | '500' | '600' | '700' | '800' | '900' | undefined;
 
+type textAlignType = 'auto' | 'left' | 'right' | 'center' | 'justify' | undefined;
+
 interface ButtonPropsI {
   onPress?: () => void,
   title?: string,
   titleColor?: string,
   titleFontSize?: number,
   titleFontWeight?: fontWeightType,
+  titleAlign?: textAlignType,
   backgroundColor?: string,
-  height?: number,
-  width?: number,
+  height?: number | string,
+  width?: number | string,
   radius?: number,
   style?: object,
   type?: number,
@@ -46,6 +49,7 @@ export const Button = (props: ButtonPropsI): JSX.Element => {
     titleColor,
     titleFontSize,
     titleFontWeight,
+    titleAlign,
     title,
     testID
   } = props;
@@ -108,7 +112,8 @@ export const Button = (props: ButtonPropsI): JSX.Element => {
               color: titleColor,
               fontSize: titleFontSize,
               fontFamily: 'Roboto-Medium',
-              fontWeight: titleFontWeight
+              fontWeight: titleFontWeight,
+              textAlign: titleAlign
             }}
           >
             {title}
@@ -125,6 +130,7 @@ Button.defaultProps = {
   titleColor: COLOR.WHITE,
   titleFontSize: 16,
   titleFontWeight: 'normal',
+  titleAlign: undefined,
   backgroundColor: COLOR.MAIN_THEME_COLOR,
   height: 45,
   width: -1,

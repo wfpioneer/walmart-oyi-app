@@ -186,9 +186,9 @@ export default {
     PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
     PRINTER_NOT_ASSIGNED: 'No impresoras asignadas',
     Was_Large: 'Was Price - Large', // TODO SPANISH TRANSLATIONS
-    Was_Medium: 'Was Price - Medium',
+    Was_Medium: 'Was Price - Med',
     Was_Small: 'Was Price - Small',
-    Was_XSmall: 'Was Price - XSmall'
+    Was_XSmall: 'Was Price - X-Small'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',

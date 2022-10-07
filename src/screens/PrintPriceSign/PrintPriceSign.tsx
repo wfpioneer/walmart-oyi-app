@@ -84,10 +84,11 @@ export const renderSignSizeButtons = (
               backgroundColor={
                 signType === key ? COLOR.MAIN_THEME_COLOR : COLOR.GREY_200
               }
+              titleAlign="center"
               type={ButtonType.PRIMARY}
               radius={20}
-              height={25}
-              width={56}
+              height={30}
+              width="21%"
               style={styles.sizeBtnMargin}
               // @ts-expect-error key is of type PrinterPaperSize
               onPress={() => dispatch(setSignType(key))}
