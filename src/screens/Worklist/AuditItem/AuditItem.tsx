@@ -29,7 +29,7 @@ import {
   GET_ITEM_DETAILS
 } from '../../../state/actions/asyncAPI';
 import {
-  getItemDetails
+  getItemDetails, noAction
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
@@ -65,6 +65,7 @@ export interface AuditItemScreenProps {
     showItemNotFoundMsg: boolean;
     setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
     itemDetails: ItemDetails | null;
+    completeItemApi: AsyncState;
   }
 
 export const isError = (
@@ -308,6 +309,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     return locationLst;
   };
 
+  const handleContinueAction = () => {
+    const itemOHQty = itemDetails?.onHandsQty;
+    const totalOHQty = 150;
+    if (itemOHQty === totalOHQty) {
+      dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemNumber, scannedValue: scan.value }))
+    }
+  }
+
   return (
     <>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
@@ -388,6 +397,7 @@ const AuditItem = (): JSX.Element => {
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
   const { itemDetails, floorLocations, reserveLocations } = useTypedSelector(state => state.AuditItemScreen);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
 
   return (
     <AuditItemScreen
@@ -413,6 +423,7 @@ const AuditItem = (): JSX.Element => {
       itemDetails={itemDetails}
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
+      completeItemApi={completeItemApi}
     />
   );
 };
