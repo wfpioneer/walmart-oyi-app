@@ -15,11 +15,19 @@ import { strings } from '../../locales';
 import styles from './QuickPickTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
 
+interface QuickPickTabProps {
+  quickPickItems: PickListItem[];
+  refreshing: boolean;
+  onRefresh: () => void;
+}
+
 interface QuickPickTabScreenProps {
   quickPicks: PickListItem[];
   user: User;
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
+  refreshing: boolean;
+  onRefresh: () => void;
 }
 
 interface GroupItem {
@@ -32,7 +40,9 @@ export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
     quickPicks,
     user,
     isManualScanEnabled,
-    dispatch
+    dispatch,
+    refreshing,
+    onRefresh
   } = props;
   const [assignedToMe, assignedToOthers] = quickPicks.reduce(
     ([mine, others]: [PickListItem[], PickListItem[]], pick) => (
@@ -73,6 +83,8 @@ export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
         renderItem={renderItem}
         keyExtractor={item => item.title}
         extraData={quickPicks}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
       />
       <View style={styles.scanTextView}>
         <Text style={styles.scanText}>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
@@ -81,21 +93,20 @@ export const QuickPickTabScreen = (props: QuickPickTabScreenProps) => {
   );
 };
 
-interface QuickPickTabProps {
-  quickPickItems: PickListItem[]
-}
-
 const QuickPickTab = (props: QuickPickTabProps) => {
+  const { quickPickItems, refreshing, onRefresh } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
 
   return (
     <QuickPickTabScreen
-      quickPicks={props.quickPickItems}
+      quickPicks={quickPickItems}
       user={user}
       isManualScanEnabled={isManualScanEnabled}
       dispatch={dispatch}
+      refreshing={refreshing}
+      onRefresh={onRefresh}
     />
   );
 };
