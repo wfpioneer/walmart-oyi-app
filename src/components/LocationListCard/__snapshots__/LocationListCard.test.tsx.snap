@@ -460,7 +460,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
             }
           }
         >
-          [missing "en.LOCATION.FLOOR" translation] (0)
+          [missing "en.LOCATION.FLOOR" translation] 
         </Text>
         <Text
           style={

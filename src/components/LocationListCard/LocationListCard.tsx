@@ -111,7 +111,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
           </View>
           <View>
             <Text style={styles.title}>
-              {`${locationTitle} (${locationList.length})`}
+              {`${locationTitle} ${!loading ? `(${locationList.length})` : ''}`}
             </Text>
             <Text style={styles.subText}>
               {locationType === 'reserve' ? strings('AUDITS.VALIDATE_SCAN_QUANTITY')
