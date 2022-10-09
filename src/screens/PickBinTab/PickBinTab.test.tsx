@@ -32,6 +32,8 @@ describe('PickBinTabScreen', () => {
           user={user}
           isManualScanEnabled={false}
           dispatch={jest.fn()}
+          refreshing={false}
+          onRefresh={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -63,6 +65,40 @@ describe('PickBinTabScreen', () => {
           user={user}
           isManualScanEnabled={false}
           dispatch={jest.fn()}
+          refreshing={false}
+          onRefresh={jest.fn}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Test renders the PickBinTabScreen component while refreshing', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const newMockPickList = [...mockPickLists, {
+        assignedAssociate: 'vn51wu8',
+        category: 46,
+        createTs: '2022-04-03T12:55:31.9633333Z',
+        createdBy: 'Associate 2',
+        id: 4,
+        itemDesc: 'Candy',
+        itemNbr: 7344,
+        moveToFront: true,
+        palletId: '4321',
+        palletLocationId: 1672,
+        palletLocationName: 'C1-2-1',
+        quickPick: false,
+        salesFloorLocationId: 1673,
+        salesFloorLocationName: 'C1-3',
+        status: PickStatus.ACCEPTED_PICK,
+        upcNbr: '000041800004'
+      }];
+      renderer.render(
+        <PickBinTabScreen
+          pickBinList={newMockPickList}
+          user={user}
+          isManualScanEnabled={false}
+          dispatch={jest.fn()}
+          refreshing={true}
+          onRefresh={jest.fn}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

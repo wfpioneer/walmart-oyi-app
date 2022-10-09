@@ -1,6 +1,5 @@
 import { HeaderBackButton } from '@react-navigation/elements';
 import {
-  CommonActions,
   NavigationProp,
   useNavigation
 } from '@react-navigation/native';
@@ -92,8 +91,6 @@ export const AuditWorklistNavigatorStack = (
     isBottomTabEnabled
   } = props;
 
-  const navState = navigation.getState();
-
   const navigateBack = () => {
     if (auditWorklists) {
       navigation.navigate('WorklistHome');
@@ -127,17 +124,6 @@ export const AuditWorklistNavigatorStack = (
         })}
         initialRouteName="AuditWorklistTabs"
         screenListeners={{
-          transitionStart: () => {
-            if (navState.routes[0].name !== 'WorklistHome') {
-              navigation.dispatch(state => {
-                const newRoute = state.routes.map(route => ({ name: route.name }));
-                return CommonActions.reset({
-                  index: 1,
-                  routes: [{ name: 'WorklistHome' }, ...newRoute]
-                });
-              });
-            }
-          },
           focus: screen => {
             if (screen.target && !screen.target.includes('AuditWorklistTabs') && isBottomTabEnabled) {
               dispatch(setBottomTab(false));
