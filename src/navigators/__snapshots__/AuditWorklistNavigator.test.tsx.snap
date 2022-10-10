@@ -61,7 +61,6 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
     screenListeners={
       Object {
         "focus": [Function],
-        "transitionStart": [Function],
       }
     }
     screenOptions={[Function]}
