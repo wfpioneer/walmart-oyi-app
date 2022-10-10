@@ -14,13 +14,17 @@ import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
 
 interface PickBinTabProps {
-  pickBinList: PickListItem[]
+  pickBinList: PickListItem[];
+  refreshing: boolean;
+  onRefresh: () => void;
 }
 interface PickBinTabScreenProps {
   pickBinList: PickListItem[];
   user: User;
   isManualScanEnabled: boolean;
   dispatch: Dispatch<any>;
+  refreshing: boolean;
+  onRefresh: () => void;
 }
 
 const ASSIGNED_TO_ME = 'assignedToMe';
@@ -30,7 +34,7 @@ const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletL
 
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
-    pickBinList, user, isManualScanEnabled, dispatch
+    pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing
   } = props;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
   const groupedPickListByZone = groupBy(otherPickList,
@@ -59,6 +63,8 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
           );
         }}
         keyExtractor={(item, index) => `listGroup-${item}-${index}`}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
       />
       <View style={styles.scanItemLabel}>
         <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
@@ -68,7 +74,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
 };
 
 const PickBinTab = (props: PickBinTabProps) => {
-  const { pickBinList } = props;
+  const { pickBinList, onRefresh, refreshing } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
@@ -79,6 +85,8 @@ const PickBinTab = (props: PickBinTabProps) => {
       user={user}
       isManualScanEnabled={isManualScanEnabled}
       dispatch={dispatch}
+      refreshing={refreshing}
+      onRefresh={onRefresh}
     />
   );
 };

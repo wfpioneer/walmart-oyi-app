@@ -211,13 +211,22 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           this.props.updateFilterExceptions([worklist.worklistType]);
           validateSession(this.props.navigation, this.props.route.name).then(() => {
             if (isPalletWorklist) {
-              this.props.navigation.navigate(strings('WORKLIST.WORKLIST'), { screen: 'MissingPalletWorklist' });
+              this.props.navigation.navigate(
+                strings('WORKLIST.WORKLIST'),
+                { screen: 'MissingPalletWorklist', initial: false }
+              );
             } else if (isAuditWorklist) {
-              this.props.navigation.navigate(strings('WORKLIST.WORKLIST'), { screen: 'AuditWorklistNavigator' });
+              this.props.navigation.navigate(
+                strings('WORKLIST.WORKLIST'),
+                { screen: 'AuditWorklistNavigator', initial: false }
+              );
             } else {
-              const { auditWorklists, palletWorklists } = this.props.userConfig;
+              const {auditWorklists, palletWorklists} = this.props.userConfig;
               if (auditWorklists || palletWorklists) {
-                this.props.navigation.navigate(strings('WORKLIST.WORKLIST'), { screen: 'WorklistNavigator' });
+                this.props.navigation.navigate(
+                  strings('WORKLIST.WORKLIST'),
+                  { screen: 'WorklistNavigator', initial: false }
+                );
               } else {
                 this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
               }

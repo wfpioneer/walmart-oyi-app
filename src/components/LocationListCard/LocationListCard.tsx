@@ -72,16 +72,34 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
 
   if (error) {
     return (
-      <View style={styles.errorView}>
-        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
-        <TouchableOpacity
-          style={styles.errorButton}
-          onPress={onRetry}
-          testID="retry-button"
-        >
-          <Text>{strings('GENERICS.RETRY')}</Text>
-        </TouchableOpacity>
+      <View>
+        <View style={styles.headerContainer}>
+          <View style={styles.titleContainer}>
+            <View>
+              <MaterialCommunityIcon name="map-marker-outline" size={25} color={COLOR.BLACK} />
+            </View>
+            <View>
+              <Text style={styles.title}>
+                {`${locationTitle}`}
+              </Text>
+              <Text style={styles.subText}>
+                {locationType === 'reserve' ? strings('AUDITS.VALIDATE_SCAN_QUANTITY')
+                  : strings('AUDITS.VALIDATE_QUANTITY')}
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.errorView}>
+          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+          <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
+          <TouchableOpacity
+            style={styles.errorButton}
+            onPress={onRetry}
+            testID="retry-button"
+          >
+            <Text>{strings('GENERICS.RETRY')}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -95,7 +113,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
           </View>
           <View>
             <Text style={styles.title}>
-              {`${locationTitle} (${locationList.length})`}
+              {`${locationTitle} ${!loading ? `(${locationList.length})` : ''}`}
             </Text>
             <Text style={styles.subText}>
               {locationType === 'reserve' ? strings('AUDITS.VALIDATE_SCAN_QUANTITY')
