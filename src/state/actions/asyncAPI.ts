@@ -147,3 +147,6 @@ export const postCreatePallet = makeAsyncActionCreators(POST_CREATE_PALLET);
 
 export const REPORT_MISSING_PALLET = makeAsyncActionTypes('API/REPORT_MISSING_PALLET');
 export const reportMissingPallet = makeAsyncActionCreators(REPORT_MISSING_PALLET);
+
+export const GET_ITEM_PALLETS = makeAsyncActionTypes('API/GET_ITEM_PALLETS');
+export const getItemPallets = makeAsyncActionCreators(GET_ITEM_PALLETS);

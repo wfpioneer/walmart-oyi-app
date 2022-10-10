@@ -29,6 +29,7 @@ import CreatePalletService from '../../services/CreatePallet.service';
 import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 import ReportMissingPalletService from '../../services/ReportMissingPallet.service';
+import GetItemPalletsService from '../../services/GetItemPallets.service';
 
 const genericSagas = [
   // TODO remove this saga once the BE orchestration changes are pushed to Production
@@ -84,7 +85,10 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService),
   makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),
   makeAsyncSaga(saga.CREATE_NEW_PICK, actions.createNewPick, PickingService.createNewPick),
-  makeAsyncSaga(saga.REPORT_MISSING_PALLET, actions.reportMissingPallet, ReportMissingPalletService.reportMissingPallet)
+  makeAsyncSaga(
+    saga.REPORT_MISSING_PALLET, actions.reportMissingPallet, ReportMissingPalletService.reportMissingPallet
+  ),
+  makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets)
 ];
 
 export default function* rootSaga() {

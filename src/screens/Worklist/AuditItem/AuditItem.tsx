@@ -30,11 +30,13 @@ import COLOR from '../../../themes/Color';
 import {
   DELETE_LOCATION,
   GET_ITEM_DETAILS,
+  GET_ITEM_PALLETS,
   REPORT_MISSING_PALLET
 } from '../../../state/actions/asyncAPI';
 import {
   deleteLocation,
   getItemDetails, getLocationDetails,
+  getItemPallets,
   reportMissingPallet
 } from '../../../state/actions/saga';
 
@@ -45,7 +47,6 @@ import { setupScreen } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import { setFloorLocations, setItemDetails, setReserveLocations } from '../../../state/actions/AuditItemScreen';
 import { ItemPalletInfo } from '../../../models/AuditItem';
-import { mockGetItemPalletsAsyncState } from '../../../mockData/getItemPallets';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import Button from '../../../components/buttons/Button';
 
@@ -138,6 +139,8 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
       if (itemNumber > 0) {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemNumber }));
+        dispatch({ type: GET_ITEM_PALLETS.RESET });
+        dispatch(getItemPallets({ itemNbr: itemNumber }));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -454,6 +457,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       trackEventCall('refresh_item_details', { itemNumber });
       dispatch({ type: GET_ITEM_DETAILS.RESET });
       dispatch(getItemDetails({ id: itemNumber }));
+      dispatch({ type: GET_ITEM_PALLETS.RESET });
+      dispatch(getItemPallets({ itemNbr: itemNumber }));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
@@ -478,8 +483,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }
   };
 
-  const deleteReserveLocationConfirmed = () => {
-
+  const handleReserveLocsRetry = () => {
+    dispatch({ type: GET_ITEM_PALLETS.RESET });
+    dispatch(getItemPallets({ itemNbr: itemNumber }));
   };
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
@@ -497,15 +503,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }).catch(() => { });
   };
 
-  const handleDeleteReserveLocation = (loc: Location, locIndex: number, palletId: string) => {
+  const handleDeleteReserveLocation = (loc: ItemPalletInfo, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('audit_delete_reserve_location_click', { location: JSON.stringify(loc), palletId, index: locIndex });
+      trackEvent('audit_delete_reserve_location_click', { location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'reserve',
         locationIndex: locIndex,
-        locationTypeNbr: loc.typeNbr,
-        palletId,
+        locationTypeNbr: 0,
+        palletId: loc.palletId,
         sectionId: loc.sectionId
       });
       setShowDeleteConfirmationModal(true);
@@ -542,7 +548,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           palletId: loc.palletId,
           increment: () => {},
           decrement: () => {},
-          onDelete: () => {},
+          onDelete: () => handleDeleteReserveLocation(loc, index),
           qtyChange: () => {}
         });
       });
@@ -603,7 +609,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationType="reserve"
               loading={getItemPalletsApi.isWaiting}
               error={!!getItemPalletsApi.error}
-              onRetry={() => { }}
+              onRetry={handleReserveLocsRetry}
               scanRequired={false}
             />
           </View>
@@ -631,7 +637,7 @@ const AuditItem = (): JSX.Element => {
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const reportMissingPalletApi = useTypedSelector(state => state.async.reportMissingPallet);
   // TODO: Below mock state needs to be replaced with async state
-  const getItemPalletsApi = mockGetItemPalletsAsyncState;
+  const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const { userId } = useTypedSelector(state => state.User);
   const userFeatures = useTypedSelector(state => state.User.features);
   const userConfigs = useTypedSelector(state => state.User.configs);
