@@ -133,7 +133,6 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
       if (itemNumber > 0) {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemNumber }));
-        dispatch({ type: GET_ITEM_PALLETS.RESET });
         dispatch(getItemPallets({ itemNbr: itemNumber }));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
