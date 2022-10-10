@@ -2,6 +2,7 @@ import React, {
   EffectCallback, RefObject, createRef, useEffect, useState
 } from 'react';
 import {
+  ActivityIndicator,
   RefreshControl, ScrollView, Text, TouchableOpacity,
   View
 } from 'react-native';
@@ -14,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
 import { AxiosError } from 'axios';
+import { CustomModalComponent } from '../../Modal/Modal';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import { validateSession } from '../../../utils/sessionTimeout';
@@ -26,10 +28,13 @@ import { strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
 
 import {
-  GET_ITEM_DETAILS, NO_ACTION
+  DELETE_LOCATION,
+  GET_ITEM_DETAILS,
+  NO_ACTION
 } from '../../../state/actions/asyncAPI';
 import {
-  getItemDetails, noAction
+  deleteLocation,
+  getItemDetails, getLocationDetails, noAction
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
@@ -41,6 +46,7 @@ import { setFloorLocations, setItemDetails, setReserveLocations } from '../../..
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { mockGetItemPalletsAsyncState } from '../../../mockData/getItemPallets';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import Button from '../../../components/buttons/Button';
 
 export interface AuditItemScreenProps {
     scannedEvent: { value: string | null; type: string | null; };
@@ -48,6 +54,7 @@ export interface AuditItemScreenProps {
     getItemDetailsApi: AsyncState;
     getLocationApi: AsyncState;
     getItemPalletsApi: AsyncState;
+    deleteFloorLocationApi: AsyncState;
     userId: string;
     floorLocations: Location[];
     reserveLocations: ItemPalletInfo[];
@@ -66,6 +73,20 @@ export interface AuditItemScreenProps {
     setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
     itemDetails: ItemDetails | null;
     completeItemApi: AsyncState;
+    showDeleteConfirmationModal: boolean;
+    setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
+    locToConfirm: {
+      locationName: string;
+      locationArea: string;
+      locationIndex: number;
+      locationTypeNbr: number;
+    };
+    setLocToConfirm: React.Dispatch<React.SetStateAction<{
+      locationName: string;
+      locationArea: string;
+      locationIndex: number;
+      locationTypeNbr: number;
+    }>>;
   }
 
 export const isError = (
@@ -142,6 +163,19 @@ export const getlocationsApiResult = (locationsApi: AsyncState, dispatch: Dispat
   }
 };
 
+export const getLocationsApiHook = (
+  getLocationApi: AsyncState,
+  itemNumber: number,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  if (navigation.isFocused()) {
+    if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
+      getlocationsApiResult(getLocationApi, dispatch);
+    }
+  }
+};
+
 export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
@@ -169,6 +203,40 @@ export const getItemDetailsApiHook = (
     }
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
       setShowItemNotFoundMsg(false);
+    }
+  }
+};
+
+export const deleteFloorLocationApiHook = (
+  deleteFloorLocationApi: AsyncState,
+  itemNbr: number,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
+  locationName: string
+) => {
+  if (navigation.isFocused()) {
+    if (!deleteFloorLocationApi.isWaiting && deleteFloorLocationApi.result) {
+      setShowDeleteConfirmationModal(false);
+      if (deleteFloorLocationApi.result.status === 200) {
+        Toast.show({
+          type: 'success',
+          text1: strings('LOCATION.DELETE_LOCATION_API_SUCCESS', { locationName }),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+        dispatch(getLocationDetails({ itemNbr }));
+        dispatch({ type: DELETE_LOCATION.RESET });
+      }
+    } else if (!deleteFloorLocationApi.isWaiting && deleteFloorLocationApi.error) {
+      setShowDeleteConfirmationModal(false);
+      Toast.show({
+        type: 'error',
+        text1: strings('LOCATION.DELETE_LOCATION_API_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: DELETE_LOCATION.RESET });
     }
   }
 };
@@ -235,12 +303,61 @@ export const calculateTotalOHQty = (
    + (itemDetails?.inTransitCloudQty || 0) + (itemDetails?.cloudQty || 0) + (itemDetails?.consolidatedOnHandQty || 0);
   return floorLocationsCount + reserveLocationsCount + otherOHTotalCount;
 };
+export const renderDeleteLocationModal = (
+  deleteFloorLocationApi: AsyncState,
+  showDeleteConfirmationModal: boolean,
+  setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
+  deleteLocationConfirmed: () => void,
+  locationName: string
+) => (
+  <CustomModalComponent
+    isVisible={showDeleteConfirmationModal}
+    onClose={() => setShowDeleteConfirmationModal(false)}
+    modalType="Error"
+  >
+    {deleteFloorLocationApi.isWaiting ? (
+      <ActivityIndicator
+        animating={deleteFloorLocationApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    ) : (
+      <>
+        <Text style={styles.message}>
+          {deleteFloorLocationApi.error
+            ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
+            : `${strings('LOCATION.DELETE_CONFIRMATION')}${locationName
+            }`}
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.button}
+            title={strings('GENERICS.CANCEL')}
+            backgroundColor={COLOR.MAIN_THEME_COLOR}
+            testID="modal-cancel-button"
+            onPress={() => setShowDeleteConfirmationModal(false)}
+          />
+          <Button
+            style={styles.button}
+            title={deleteFloorLocationApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+            testID="modal-confirm-button"
+            backgroundColor={COLOR.TRACKER_RED}
+            onPress={deleteLocationConfirmed}
+          />
+        </View>
+      </>
+    )}
+  </CustomModalComponent>
+);
 
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
     getLocationApi,
     getItemDetailsApi,
+    deleteFloorLocationApi,
     userId,
     route,
     dispatch,
@@ -256,7 +373,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     floorLocations,
     reserveLocations,
     getItemPalletsApi,
-    completeItemApi
+    completeItemApi,
+    showDeleteConfirmationModal,
+    setShowDeleteConfirmationModal,
+    locToConfirm,
+    setLocToConfirm
   } = props;
 
   // call get Item details
@@ -270,11 +391,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   }, [scannedEvent]);
 
   // Get Location Details API
-  useEffectHook(() => {
-    if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
-      getlocationsApiResult(getLocationApi, dispatch);
-    }
-  }, [getLocationApi]);
+  useEffectHook(
+    () => getLocationsApiHook(getLocationApi, itemNumber, dispatch, navigation),
+    [getLocationApi]
+  );
 
   // Get Item Details UPC api
   useEffectHook(
@@ -292,6 +412,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => completeItemApiHook(completeItemApi, dispatch, navigation),
     [completeItemApi]
+  );
+
+  // Delete Location API
+  useEffectHook(
+    () => deleteFloorLocationApiHook(
+      deleteFloorLocationApi, itemNumber, dispatch, navigation,
+      setShowDeleteConfirmationModal, locToConfirm.locationName
+    ),
+    [deleteFloorLocationApi]
   );
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
@@ -324,10 +453,34 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
+  const deleteLocationConfirmed = () => {
+    dispatch(
+      deleteLocation({
+        headers: { itemNumber },
+        upc: itemDetails?.upcNbr || '',
+        sectionId: locToConfirm.locationName,
+        locationTypeNbr: locToConfirm.locationTypeNbr
+      }),
+    );
+  };
+
+  const handleDeleteLocation = (loc: Location, locIndex: number) => {
+    validateSession(navigation, route.name).then(() => {
+      trackEvent('audit_delete_floor_location_click', { location: JSON.stringify(loc), index: locIndex });
+      setLocToConfirm({
+        locationName: loc.locationName,
+        locationArea: 'floor',
+        locationIndex: locIndex,
+        locationTypeNbr: loc.typeNbr
+      });
+      setShowDeleteConfirmationModal(true);
+    }).catch(() => { });
+  };
+
   const getFloorLocationList = (locations: Location[]) => {
     const locationLst: LocationList[] = [];
     if (locations && locations.length) {
-      locations.forEach(loc => {
+      locations.forEach((loc: Location, index: number) => {
         locationLst.push({
           sectionId: loc.sectionId,
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`,
@@ -335,7 +488,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           palletId: '',
           increment: () => {},
           decrement: () => {},
-          onDelete: () => {},
+          onDelete: () => handleDeleteLocation(loc, index),
           qtyChange: () => {}
         });
       });
@@ -374,6 +527,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   return (
     <>
+      {renderDeleteLocationModal(
+        deleteFloorLocationApi,
+        showDeleteConfirmationModal,
+        setShowDeleteConfirmationModal,
+        deleteLocationConfirmed,
+        locToConfirm.locationName
+      )}
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
       <View style={{ marginBottom: 8 }}>
         <ItemCard
@@ -440,6 +600,7 @@ const AuditItem = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
+  const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   // TODO: Below mock state needs to be replaced with async state
   const getItemPalletsApi = mockGetItemPalletsAsyncState;
   const { userId } = useTypedSelector(state => state.User);
@@ -453,6 +614,10 @@ const AuditItem = (): JSX.Element => {
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
   const { itemDetails, floorLocations, reserveLocations } = useTypedSelector(state => state.AuditItemScreen);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
+  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+  const [locToConfirm, setLocToConfirm] = useState({
+    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
+  });
 
   return (
     <AuditItemScreen
@@ -460,6 +625,7 @@ const AuditItem = (): JSX.Element => {
       isManualScanEnabled={isManualScanEnabled}
       getItemDetailsApi={getItemDetailsApi}
       getItemPalletsApi={getItemPalletsApi}
+      deleteFloorLocationApi={deleteFloorLocationApi}
       getLocationApi={getLocationApi}
       route={route}
       dispatch={dispatch}
@@ -479,6 +645,10 @@ const AuditItem = (): JSX.Element => {
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
       completeItemApi={completeItemApi}
+      showDeleteConfirmationModal={showDeleteConfirmationModal}
+      setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
+      locToConfirm={locToConfirm}
+      setLocToConfirm={setLocToConfirm}
     />
   );
 };
