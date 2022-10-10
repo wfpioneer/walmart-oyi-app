@@ -481,7 +481,7 @@ describe('AuditItemScreen', () => {
         }
       };
       reportMissingPalletApiHook(
-        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234'
+        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
@@ -495,7 +495,7 @@ describe('AuditItemScreen', () => {
         error: 'Internal Server Error'
       };
       reportMissingPalletApiHook(
-        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234'
+        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);

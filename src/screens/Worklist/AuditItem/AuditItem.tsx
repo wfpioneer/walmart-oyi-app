@@ -35,8 +35,9 @@ import {
 } from '../../../state/actions/asyncAPI';
 import {
   deleteLocation,
-  getItemDetails, getLocationDetails,
+  getItemDetails,
   getItemPallets,
+  getLocationDetails,
   reportMissingPallet
 } from '../../../state/actions/saga';
 
@@ -254,7 +255,8 @@ export const reportMissingPalletApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  palletId: string
+  palletId: string,
+  itemNbr: number
 ) => {
   if (navigation.isFocused()) {
     if (!reportMissingPalletApi.isWaiting && reportMissingPalletApi.result) {
@@ -266,7 +268,7 @@ export const reportMissingPalletApiHook = (
           visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
-        // dispatch(getLocationDetails({ 0 }));
+        dispatch(getItemPallets({ itemNbr }));
         dispatch({ type: REPORT_MISSING_PALLET.RESET });
       }
     } else if (!reportMissingPalletApi.isWaiting && reportMissingPalletApi.error) {
@@ -425,7 +427,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => reportMissingPalletApiHook(
       reportMissingPalletApi, dispatch, navigation,
-      setShowDeleteConfirmationModal, locToConfirm.palletId
+      setShowDeleteConfirmationModal, locToConfirm.palletId, itemNumber
     ),
     [reportMissingPalletApi]
   );
@@ -540,7 +542,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const getReserveLocationList = (locations: ItemPalletInfo[]) => {
     const locationLst: LocationList[] = [];
     if (locations && locations.length) {
-      locations.forEach(loc => {
+      locations.forEach((loc, index) => {
         locationLst.push({
           sectionId: loc.sectionId,
           locationName: loc.locationName,
