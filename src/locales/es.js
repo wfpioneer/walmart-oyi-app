@@ -500,6 +500,8 @@ export default {
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',
     UPDATED_QTY: 'Cantidad actualizada',
     LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada',
-    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible'
+    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible',
+    COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
+    COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo'
   }
 };

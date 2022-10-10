@@ -15,12 +15,13 @@ import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen, AuditItemScreenProps, addLocationHandler,
-  getItemDetailsApiHook, getlocationsApiResult, isError, onValidateItemNumber
+  calculateTotalOHQty, completeItemApiHook, getItemDetailsApiHook, getlocationsApiResult, isError, onValidateItemNumber
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { itemPallets } from '../../../mockData/getItemPallets';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -105,7 +106,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showItemNotFoundMsg: false,
   floorLocations: [],
   reserveLocations: [],
-  getItemPalletsApi: defaultAsyncState
+  getItemPalletsApi: defaultAsyncState,
+  completeItemApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
@@ -301,6 +303,50 @@ describe('AuditItemScreen', () => {
       const mockSetShowItemNotFoundMsg = jest.fn();
       getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
+    });
+
+    it('Tests completeItemApiHook on 200 success for completing an item', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {},
+          status: 200
+        }
+      };
+      completeItemApiHook(successApi, mockDispatch, navigationProp);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests completeItemApiHook on failure while completing an item', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      completeItemApiHook(failureApi, mockDispatch, navigationProp);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).not.toHaveBeenCalled();
+    });
+
+    it('Tests calculateTotalOHQty funcitionality', () => {
+      const mockFloorLocations = mockItemDetails.location.floor;
+      const mockReserveLocations = itemPallets.pallets;
+      const itemDetails = getMockItemDetails('123');
+      const totalCountResult = calculateTotalOHQty(mockFloorLocations, mockReserveLocations, itemDetails);
+      const expectedCount = 37;
+      expect(totalCountResult).toBe(expectedCount);
     });
   });
 });

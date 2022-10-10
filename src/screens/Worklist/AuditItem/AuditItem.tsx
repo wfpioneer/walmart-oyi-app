@@ -26,7 +26,7 @@ import { strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
 
 import {
-  GET_ITEM_DETAILS
+  GET_ITEM_DETAILS, NO_ACTION
 } from '../../../state/actions/asyncAPI';
 import {
   getItemDetails, noAction
@@ -190,6 +190,52 @@ export const getItemPalletsApiHook = (
   }
 };
 
+export const completeItemApiHook = (
+  completeItemApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  if (navigation.isFocused()) {
+    if (!completeItemApi.isWaiting && completeItemApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: NO_ACTION.RESET });
+    }
+    if (!completeItemApi.isWaiting && completeItemApi.result) {
+      Toast.show({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: NO_ACTION.RESET });
+      navigation.goBack();
+    }
+  }
+};
+
+export const calculateTotalOHQty = (
+  floorLocations: Location[],
+  reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null
+) => {
+  const floorLocationsCount = floorLocations.reduce((acc: number, loc: Location) => {
+    const qty = typeof (loc.newQty) === 'number' ? loc.newQty : loc.qty;
+    return acc + (qty || 0);
+  }, 0);
+  const reserveLocationsCount = reserveLocations.reduce((acc: number, loc: ItemPalletInfo) => {
+    const qty = typeof (loc.newQty) === 'number' ? loc.newQty : loc.quantity;
+    return acc + (qty || 0);
+  }, 0);
+  const otherOHTotalCount = (itemDetails?.claimsOnHandQty || 0)
+   + (itemDetails?.inTransitCloudQty || 0) + (itemDetails?.cloudQty || 0) + (itemDetails?.consolidatedOnHandQty || 0);
+  return floorLocationsCount + reserveLocationsCount + otherOHTotalCount;
+};
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -209,7 +255,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     itemDetails,
     floorLocations,
     reserveLocations,
-    getItemPalletsApi
+    getItemPalletsApi,
+    completeItemApi
   } = props;
 
   // call get Item details
@@ -239,6 +286,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation),
     [getItemPalletsApi]
+  );
+
+  // Complete Item API
+  useEffectHook(
+    () => completeItemApiHook(completeItemApi, dispatch, navigation),
+    [completeItemApi]
   );
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
@@ -308,14 +361,16 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }
     return locationLst;
   };
-
+  // TODO: This action needs to added to the onpress event for continue button and has to handled in INTLSAOPS-7829
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty;
-    const totalOHQty = 150;
+    const totalOHQty = calculateTotalOHQty(floorLocations, reserveLocations, itemDetails);
     if (itemOHQty === totalOHQty) {
-      dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemNumber, scannedValue: scan.value }))
+      dispatch(noAction({ upc: itemDetails?.upcNbr || '', itemNbr: itemNumber, scannedValue: itemNumber.toString() }));
+    } else {
+      // TODO: This logic has to be handled in INTLSAOPS-7839
     }
-  }
+  };
 
   return (
     <>
@@ -366,10 +421,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
           <View style={styles.marginBottomStyle}>
             <OtherOHItemCard
-              flyCloudInTransitOH={5}
-              flyCloudOH={3}
-              claimsOH={5}
-              consolidatorOH={2}
+              flyCloudInTransitOH={itemDetails?.inTransitCloudQty || 0}
+              flyCloudOH={itemDetails?.cloudQty || 0}
+              claimsOH={itemDetails?.claimsOnHandQty || 0}
+              consolidatorOH={itemDetails?.consolidatedOnHandQty || 0}
               loading={getItemDetailsApi.isWaiting}
               collapsed={false}
             />

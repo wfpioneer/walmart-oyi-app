@@ -502,6 +502,8 @@ export default {
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',
     UPDATED_QTY: 'Updated Quantity',
     LARGE_CURRENCY_CHANGE: 'Large Currency Change',
-    NO_LOCATION_AVAILABLE: 'No location available'
+    NO_LOCATION_AVAILABLE: 'No location available',
+    COMPLETE_AUDIT_ITEM_SUCCESS: 'Item audit successfully completed',
+    COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.'
   }
 };

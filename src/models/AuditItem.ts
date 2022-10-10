@@ -3,5 +3,6 @@ export interface ItemPalletInfo {
   quantity: number,
   sectionId: number,
   locationName: string,
-  mixedPallet: boolean
+  mixedPallet: boolean,
+  newQty?: number
 }
