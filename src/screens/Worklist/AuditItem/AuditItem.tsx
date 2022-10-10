@@ -524,6 +524,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }
     return locationLst;
   };
+
   // TODO: This action needs to added to the onpress event for continue button and has to handled in INTLSAOPS-7829
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty;
@@ -534,6 +535,18 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       // TODO: This logic has to be handled in INTLSAOPS-7839
     }
   };
+
+  if (completeItemApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={completeItemApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
 
   return (
     <>

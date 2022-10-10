@@ -202,6 +202,21 @@ describe('AuditItemScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('renders \'Activity Indicator\' waiting for completeItemApi Response ', () => {
+      const testProps: AuditItemScreenProps = {
+        ...mockAuditItemScreenProps,
+        completeItemApi: {
+          ...defaultAsyncState,
+          isWaiting: true
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <AuditItemScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Manage AuditItem externalized function tests', () => {
