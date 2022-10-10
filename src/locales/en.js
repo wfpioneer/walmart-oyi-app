@@ -353,7 +353,10 @@ export default {
     ROLLOVER_WORKLIST: 'Rollover Work List',
     SCAN_PALLET: 'Scan Pallet',
     SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
-    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist'
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist',
+    MISSING_PALLET_API_ERROR: 'There was an error reporting the pallet missing. \nRetry?',
+    MISSING_PALLET_CONFIRMATION: 'Confirm: \nmissing pallet ',
+    MISSING_PALLET_API_SUCCESS: 'Pallet %{palletId} has been successfully reported missing'
   },
   MISSING_PALLET_WORKLIST: {
     MISSING_PALLET_LABEL: 'Missing Pallet',

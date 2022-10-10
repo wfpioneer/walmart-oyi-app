@@ -15,7 +15,7 @@ import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen, AuditItemScreenProps, addLocationHandler, deleteFloorLocationApiHook, getItemDetailsApiHook,
-  getlocationsApiResult, isError, onValidateItemNumber, renderDeleteLocationModal
+  getlocationsApiResult, isError, onValidateItemNumber, renderDeleteLocationModal, reportMissingPalletApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
@@ -109,10 +109,11 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showDeleteConfirmationModal: false,
   setShowDeleteConfirmationModal: jest.fn(),
   locToConfirm: {
-    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
+    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1, palletId: '', sectionId: 0
   },
   setLocToConfirm: jest.fn(),
-  deleteFloorLocationApi: defaultAsyncState
+  deleteFloorLocationApi: defaultAsyncState,
+  reportMissingPalletApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
@@ -321,10 +322,13 @@ describe('AuditItemScreen', () => {
     it('Tests renderDeleteLocationModal should render modal with locationName and action buttons', () => {
       const { toJSON } = render(renderDeleteLocationModal(
         defaultAsyncState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -336,10 +340,13 @@ describe('AuditItemScreen', () => {
       };
       const { toJSON } = render(renderDeleteLocationModal(
         mockDeleteFloorLocationApiState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -347,10 +354,13 @@ describe('AuditItemScreen', () => {
     it('Tests renderDeleteLocationModal cancel button action', () => {
       const { getByTestId } = render(renderDeleteLocationModal(
         defaultAsyncState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -364,10 +374,13 @@ describe('AuditItemScreen', () => {
     it('Tests renderDeleteLocationModal confirm button action', () => {
       const { getByTestId } = render(renderDeleteLocationModal(
         defaultAsyncState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
@@ -398,6 +411,91 @@ describe('AuditItemScreen', () => {
       };
       deleteFloorLocationApiHook(
         failureApi, mockItemNumber, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 'A1-1'
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests renderDeleteLocationModal should render modal with loader', () => {
+      const mockReportMissingPalletApiState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const { toJSON } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        mockReportMissingPalletApiState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderDeleteLocationModal cancel button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalCancelButton = getByTestId('modal-cancel-button');
+      fireEvent.press(modalCancelButton);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledWith(false);
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests renderDeleteLocationModal confirm button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {},
+          status: 200
+        }
+      };
+      reportMissingPalletApiHook(
+        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234'
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests reportMissingPalletApiHook on failure', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      reportMissingPalletApiHook(
+        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234'
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);

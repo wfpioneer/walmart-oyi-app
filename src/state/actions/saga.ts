@@ -76,6 +76,7 @@ export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
 export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
+export const REPORT_MISSING_PALLET = 'SAGA/REPORT_MISSING_PALLET';
 
 // TODO Remove this dispatch call once the BE has been pushed to Production
 export const getItemDetailsV2 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V2, payload } as const);
@@ -233,6 +234,11 @@ export const createNewPick = (payload: CreatePickRequest) => ({
   payload
 } as const);
 export const postCreatePallet = (payload: CreatePallet) => ({ type: POST_CREATE_PALLET, payload } as const);
+export const reportMissingPallet = (payload: {
+  palletId: string;
+    locationName: string;
+    sectionId: number;
+}) => ({ type: REPORT_MISSING_PALLET, payload } as const);
 
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
@@ -275,4 +281,5 @@ export type SagaParams =
 & Pick<ReturnType <typeof updatePicklistStatus>, 'payload'>
 & Pick<ReturnType <typeof updatePalletNotFound>, 'payload'>
 & Pick<ReturnType <typeof createNewPick>, 'payload'>
-& Pick<ReturnType <typeof postCreatePallet>, 'payload'>;
+& Pick<ReturnType <typeof postCreatePallet>, 'payload'>
+& Pick<ReturnType <typeof reportMissingPallet>, 'payload'>;

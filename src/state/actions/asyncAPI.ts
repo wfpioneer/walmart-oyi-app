@@ -144,3 +144,6 @@ export const createNewPick = makeAsyncActionCreators(CREATE_NEW_PICK);
 
 export const POST_CREATE_PALLET = makeAsyncActionTypes('API/POST_CREATE_PALLET');
 export const postCreatePallet = makeAsyncActionCreators(POST_CREATE_PALLET);
+
+export const REPORT_MISSING_PALLET = makeAsyncActionTypes('API/REPORT_MISSING_PALLET');
+export const reportMissingPallet = makeAsyncActionCreators(REPORT_MISSING_PALLET);
