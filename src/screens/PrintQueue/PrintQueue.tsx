@@ -313,6 +313,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
             setItemIndexToEdit={setItemIndexToEdit}
             printQueue={printQueue}
             selectedPrinter={selectedPrinter}
+            countryCode={countryCode}
           />
         </CustomModalComponent>
         <ScrollView contentContainerStyle={styles.container}>

@@ -88,7 +88,7 @@ export enum LaserPaperPrice {
 }
 
 export type PrintPaperSize = keyof typeof LaserPaperCn | keyof typeof LaserPaperMx
-| keyof typeof PortablePaperCn |keyof typeof PortablePaperMx | keyof typeof LaserPaperPrice | '';
+| keyof typeof PortablePaperCn | keyof typeof PortablePaperMx | keyof typeof LaserPaperPrice | '';
 
 export interface PrintQueueAPIMultistatus {
   itemNbr: number;

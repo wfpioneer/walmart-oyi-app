@@ -272,6 +272,7 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
           printQueue={printQueue}
           queueName={tabName}
           selectedPrinter={selectedPrinter}
+          countryCode={countryCode}
         />
       </CustomModalComponent>
       {printQueue.length !== 0 && (

@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
     paddingHorizontal: 8,
-    paddingVertical: 4
+    paddingVertical: 4,
+    width: '100%'
   },
   printerContainer: {
     flexDirection: 'row',
@@ -99,6 +100,14 @@ const styles = StyleSheet.create({
   genericTextLabel: {
     fontSize: 12,
     color: COLOR.GREY_600
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: COLOR.GREY,
+    marginHorizontal: 0,
+    marginBottom: 10,
+    width: '75%'
   }
 });
 

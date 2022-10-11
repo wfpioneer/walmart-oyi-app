@@ -55,6 +55,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
@@ -225,6 +226,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
@@ -557,6 +559,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={0}
       printQueue={
         Array [
@@ -727,6 +730,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={Array []}
       queueName="PRICESIGN"
@@ -862,6 +866,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
@@ -965,6 +970,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
