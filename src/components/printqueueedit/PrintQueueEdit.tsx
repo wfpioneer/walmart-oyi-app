@@ -141,16 +141,21 @@ const PrintQueueEdit = (props: {
       </View>
       <View style={styles.signSizeContainer}>
         <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
-        <View style={styles.pickerContainer}>
-          <Picker
-            selectedValue={signSize}
-            onValueChange={(paperSize: PrintPaperSize) => setSignSize(paperSize)}
-            mode="dropdown"
-          >
-            {addPaperSizesToPicker(getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode))}
-          </Picker>
+        {queueName === 'PRICESIGN'
+          ? (
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={signSize}
+                onValueChange={(paperSize: PrintPaperSize) => setSignSize(paperSize)}
+                mode="dropdown"
+              >
+                {addPaperSizesToPicker(getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode))}
+              </Picker>
 
-        </View>
+            </View>
+          )
+          : (<Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
+          )}
       </View>
       <View style={styles.printerContainer}>
         <View style={styles.printerAlignment}>

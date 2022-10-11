@@ -19,7 +19,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.XSmall\\" translation]"
@@ -39,7 +39,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Small\\" translation]"
@@ -59,7 +59,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Medium\\" translation]"
@@ -79,7 +79,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Large\\" translation]"
@@ -99,7 +99,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Wine\\" translation]"
@@ -119,7 +119,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_Large\\" translation]"
@@ -139,7 +139,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_Medium\\" translation]"
@@ -159,7 +159,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_Small\\" translation]"
@@ -179,7 +179,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
@@ -212,7 +212,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.XSmall\\" translation]"
@@ -232,7 +232,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Small\\" translation]"
@@ -252,7 +252,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Medium\\" translation]"
@@ -285,7 +285,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.XSmall\\" translation]"
@@ -305,7 +305,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Small\\" translation]"
@@ -325,7 +325,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Medium\\" translation]"
@@ -345,7 +345,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Large\\" translation]"
@@ -365,7 +365,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_Large\\" translation]"
@@ -385,7 +385,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_Medium\\" translation]"
@@ -405,7 +405,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_Small\\" translation]"
@@ -425,7 +425,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     style={
       Object {
         "marginHorizontal": 6,
-        "marginVertical": 2,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
@@ -612,7 +612,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
@@ -632,7 +632,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
@@ -652,7 +652,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
@@ -672,7 +672,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
@@ -692,7 +692,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Large\\" translation]"
@@ -712,7 +712,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Medium\\" translation]"
@@ -732,7 +732,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Small\\" translation]"
@@ -752,7 +752,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
@@ -1111,7 +1111,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
@@ -1131,7 +1131,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
@@ -1151,7 +1151,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
@@ -1171,7 +1171,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
@@ -1191,7 +1191,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Large\\" translation]"
@@ -1211,7 +1211,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Medium\\" translation]"
@@ -1231,7 +1231,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Small\\" translation]"
@@ -1251,7 +1251,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
@@ -1545,7 +1545,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
@@ -1565,7 +1565,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
@@ -1585,7 +1585,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
@@ -1605,7 +1605,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
@@ -1625,7 +1625,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Large\\" translation]"
@@ -1645,7 +1645,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Medium\\" translation]"
@@ -1665,7 +1665,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Small\\" translation]"
@@ -1685,7 +1685,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
@@ -1994,7 +1994,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
@@ -2014,7 +2014,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
@@ -2034,7 +2034,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
@@ -2054,7 +2054,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
@@ -2074,7 +2074,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Large\\" translation]"
@@ -2094,7 +2094,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Medium\\" translation]"
@@ -2114,7 +2114,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_Small\\" translation]"
@@ -2134,7 +2134,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           style={
             Object {
               "marginHorizontal": 6,
-              "marginVertical": 2,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Was_XSmall\\" translation]"

@@ -14,8 +14,8 @@ import { strings } from '../../locales';
 import styles from './PrintList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem, PrintQueueItemType,
-  Printer, PrinterType, PrintingType
+  PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem,
+  PrintQueueItemType, Printer, PrinterType, PrintingType
 } from '../../models/Printer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -49,6 +49,9 @@ interface PrintListProps {
   itemIndexToEdit: number;
   setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
   countryCode: string;
+}
+interface PrintQueueItemSize extends PrintQueueItem {
+  isSizeValid: boolean;
 }
 
 export const printItemApiEffect = (
@@ -165,7 +168,7 @@ export const NoPrintQueueMessage = (): JSX.Element => (
   </View>
 );
 const handlePrint = (
-  printQueue: PrintQueueItem[],
+  printQueue: PrintQueueItemSize[],
   tabName: PrintTab,
   selectedPrinterId: string | undefined,
   navigation: NavigationProp<any>,
@@ -189,7 +192,7 @@ const handlePrint = (
     } else {
       const paperSizeObj = getPaperSizeBasedOnCountry(PrinterType.LASER, countryCode);
       const printArray: PrintItemList[] = printQueue
-        .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM)
+        .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM && printItem.isSizeValid)
         .map(printItem => {
           const {
             itemNbr, signQty, paperSize, worklistType
@@ -256,7 +259,13 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
     dispatch,
     navigation,
   ), [printLocationAPI]);
+  const paperSizeObj = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
 
+  const updatePrintQueue: PrintQueueItemSize[] = printQueue.map(printItem => ({
+    ...printItem,
+    // @ts-expect-error needed because typechecking error
+    isSizeValid: paperSizeObj[printItem.paperSize] !== undefined
+  }));
   return (
     <View style={styles.container}>
       <CustomModalComponent
@@ -269,28 +278,29 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
         <PrintQueueEdit
           itemIndexToEdit={itemIndexToEdit}
           setItemIndexToEdit={setItemIndexToEdit}
-          printQueue={printQueue}
+          printQueue={updatePrintQueue}
           queueName={tabName}
           selectedPrinter={selectedPrinter}
           countryCode={countryCode}
         />
       </CustomModalComponent>
-      {printQueue.length !== 0 && (
+      {updatePrintQueue.length !== 0 && (
       <Text style={styles.itemText}>
         {`${queueLength} ${queueLength !== 1
           ? strings('GENERICS.ITEMS') : strings('GENERICS.ITEM')}`}
       </Text>
       )}
       <FlatList
-        data={printQueue}
-        keyExtractor={(item: PrintQueueItem) => item?.itemName + item?.paperSize}
+        data={updatePrintQueue}
+        keyExtractor={(item: PrintQueueItemSize) => item?.itemName + item?.paperSize}
         renderItem={({ item, index }) => (
           <PrintQueueItemCard
             jobName={item.itemName}
             nbrOfCopies={item.signQty}
             size={item.paperSize}
             editCallback={() => setItemIndexToEdit(index)}
-            deleteCallback={handleDeleteAction(index, printQueue, navigation, route, dispatch, tabName)}
+            deleteCallback={handleDeleteAction(index, updatePrintQueue, navigation, route, dispatch, tabName)}
+            isSizeValid={item.isSizeValid}
           />
         )}
         ListEmptyComponent={<NoPrintQueueMessage />}
@@ -322,9 +332,9 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
               type={ButtonType.PRIMARY}
               style={styles.footerBtn}
               onPress={() => handlePrint(
-                printQueue, tabName, selectedPrinter?.id, navigation, route, dispatch, countryCode
+                updatePrintQueue, tabName, selectedPrinter?.id, navigation, route, dispatch, countryCode
               )}
-              disabled={printQueue.length < 1}
+              disabled={updatePrintQueue.length < 1}
             />
           </View>
         </View>
