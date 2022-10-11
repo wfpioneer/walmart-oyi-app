@@ -14,13 +14,15 @@ import Toast from 'react-native-toast-message';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
-  AuditItemScreen, AuditItemScreenProps, addLocationHandler, deleteFloorLocationApiHook, getItemDetailsApiHook,
-  getlocationsApiResult, isError, onValidateItemNumber, renderDeleteLocationModal
+  AuditItemScreen, AuditItemScreenProps, addLocationHandler, calculateTotalOHQty, completeItemApiHook,
+  deleteFloorLocationApiHook, getItemDetailsApiHook, getlocationsApiResult, isError, onValidateItemNumber,
+  renderDeleteLocationModal
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { itemPallets } from '../../../mockData/getItemPallets';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -106,6 +108,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   floorLocations: [],
   reserveLocations: [],
   getItemPalletsApi: defaultAsyncState,
+  completeItemApi: defaultAsyncState,
   showDeleteConfirmationModal: false,
   setShowDeleteConfirmationModal: jest.fn(),
   locToConfirm: {
@@ -189,6 +192,21 @@ describe('AuditItemScreen', () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
         getItemDetailsApi: {
+          ...defaultAsyncState,
+          isWaiting: true
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <AuditItemScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders \'Activity Indicator\' waiting for completeItemApi Response ', () => {
+      const testProps: AuditItemScreenProps = {
+        ...mockAuditItemScreenProps,
+        completeItemApi: {
           ...defaultAsyncState,
           isWaiting: true
         }
@@ -403,6 +421,49 @@ describe('AuditItemScreen', () => {
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+    it('Tests completeItemApiHook on 200 success for completing an item', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {},
+          status: 200
+        }
+      };
+      completeItemApiHook(successApi, mockDispatch, navigationProp);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests completeItemApiHook on failure while completing an item', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Internal Server Error'
+      };
+      completeItemApiHook(failureApi, mockDispatch, navigationProp);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).not.toHaveBeenCalled();
+    });
+
+    it('Tests calculateTotalOHQty funcitionality', () => {
+      const mockFloorLocations = mockItemDetails.location.floor;
+      const mockReserveLocations = itemPallets.pallets;
+      const itemDetails = getMockItemDetails('123');
+      const totalCountResult = calculateTotalOHQty(mockFloorLocations, mockReserveLocations, itemDetails);
+      const expectedCount = 37;
+      expect(totalCountResult).toBe(expectedCount);
     });
   });
 });

@@ -30,13 +30,15 @@ import COLOR from '../../../themes/Color';
 import {
   DELETE_LOCATION,
   GET_ITEM_DETAILS,
-  GET_ITEM_PALLETS
+  GET_ITEM_PALLETS,
+  NO_ACTION
 } from '../../../state/actions/asyncAPI';
 import {
   deleteLocation,
   getItemDetails,
   getItemPallets,
-  getLocationDetails
+  getLocationDetails,
+  noAction
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
@@ -73,6 +75,7 @@ export interface AuditItemScreenProps {
     showItemNotFoundMsg: boolean;
     setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
     itemDetails: ItemDetails | null;
+    completeItemApi: AsyncState;
     showDeleteConfirmationModal: boolean;
     setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
     locToConfirm: {
@@ -259,6 +262,51 @@ export const getItemPalletsApiHook = (
   }
 };
 
+export const completeItemApiHook = (
+  completeItemApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  if (navigation.isFocused()) {
+    if (!completeItemApi.isWaiting && completeItemApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: NO_ACTION.RESET });
+    }
+    if (!completeItemApi.isWaiting && completeItemApi.result) {
+      Toast.show({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: NO_ACTION.RESET });
+      navigation.goBack();
+    }
+  }
+};
+
+export const calculateTotalOHQty = (
+  floorLocations: Location[],
+  reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null
+) => {
+  const floorLocationsCount = floorLocations.reduce((acc: number, loc: Location) => {
+    const qty = typeof (loc.newQty) === 'number' ? loc.newQty : loc.qty;
+    return acc + (qty || 0);
+  }, 0);
+  const reserveLocationsCount = reserveLocations.reduce((acc: number, loc: ItemPalletInfo) => {
+    const qty = typeof (loc.newQty) === 'number' ? loc.newQty : loc.quantity;
+    return acc + (qty || 0);
+  }, 0);
+  const otherOHTotalCount = (itemDetails?.claimsOnHandQty || 0)
+   + (itemDetails?.inTransitCloudQty || 0) + (itemDetails?.cloudQty || 0) + (itemDetails?.consolidatedOnHandQty || 0);
+  return floorLocationsCount + reserveLocationsCount + otherOHTotalCount;
+};
 export const renderDeleteLocationModal = (
   deleteFloorLocationApi: AsyncState,
   showDeleteConfirmationModal: boolean,
@@ -329,6 +377,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     floorLocations,
     reserveLocations,
     getItemPalletsApi,
+    completeItemApi,
     showDeleteConfirmationModal,
     setShowDeleteConfirmationModal,
     locToConfirm,
@@ -361,6 +410,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation),
     [getItemPalletsApi]
+  );
+
+  // Complete Item API
+  useEffectHook(
+    () => completeItemApiHook(completeItemApi, dispatch, navigation),
+    [completeItemApi]
   );
 
   // Delete Location API
@@ -470,6 +525,29 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     return locationLst;
   };
 
+  // TODO: This action needs to added to the onpress event for continue button and has to handled in INTLSAOPS-7829
+  const handleContinueAction = () => {
+    const itemOHQty = itemDetails?.onHandsQty;
+    const totalOHQty = calculateTotalOHQty(floorLocations, reserveLocations, itemDetails);
+    if (itemOHQty === totalOHQty) {
+      dispatch(noAction({ upc: itemDetails?.upcNbr || '', itemNbr: itemNumber, scannedValue: itemNumber.toString() }));
+    } else {
+      // TODO: This logic has to be handled in INTLSAOPS-7839
+    }
+  };
+
+  if (completeItemApi.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={completeItemApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
   return (
     <>
       {renderDeleteLocationModal(
@@ -526,10 +604,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
           <View style={styles.marginBottomStyle}>
             <OtherOHItemCard
-              flyCloudInTransitOH={5}
-              flyCloudOH={3}
-              claimsOH={5}
-              consolidatorOH={2}
+              flyCloudInTransitOH={itemDetails?.inTransitCloudQty || 0}
+              flyCloudOH={itemDetails?.cloudQty || 0}
+              claimsOH={itemDetails?.claimsOnHandQty || 0}
+              consolidatorOH={itemDetails?.consolidatedOnHandQty || 0}
               loading={getItemDetailsApi.isWaiting}
               collapsed={false}
             />
@@ -557,6 +635,7 @@ const AuditItem = (): JSX.Element => {
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
   const { itemDetails, floorLocations, reserveLocations } = useTypedSelector(state => state.AuditItemScreen);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
@@ -587,6 +666,7 @@ const AuditItem = (): JSX.Element => {
       itemDetails={itemDetails}
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
+      completeItemApi={completeItemApi}
       showDeleteConfirmationModal={showDeleteConfirmationModal}
       setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
       locToConfirm={locToConfirm}
