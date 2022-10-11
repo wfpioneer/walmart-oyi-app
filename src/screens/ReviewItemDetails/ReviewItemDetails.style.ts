@@ -174,13 +174,13 @@ const styles = StyleSheet.create({
     borderBottomColor: COLOR.GREY_200
   },
   openAuditText: {
-    paddingVertical: 5,
-    paddingHorizontal: 15,
+    fontSize: 16,
     color: COLOR.MAIN_THEME_COLOR,
     textDecorationLine: 'underline'
   },
   openAuditContainer: {
-    flex: 1,
+    paddingTop: 5,
+    paddingHorizontal: 15,
     backgroundColor: COLOR.WHITE,
     flexDirection: 'row',
     justifyContent: 'flex-end'
