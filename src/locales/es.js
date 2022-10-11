@@ -188,7 +188,8 @@ export default {
     Was_Large: 'Promo - Grande',
     Was_Medium: 'Promo - Mediano',
     Was_Small: 'Promo - Chico',
-    Was_XSmall: 'Promo - Xchico'
+    Was_XSmall: 'Promo - Xchico',
+    INVALID_SIZE: 'Some items will not be printed due to invalid sign size' // TODO Spanish Translations
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',

@@ -188,7 +188,8 @@ export default {
     Was_Large: '原价-大',
     Was_Medium: '原价-中',
     Was_Small: '原价-小',
-    Was_XSmall: '原价-超小'
+    Was_XSmall: '原价-超小',
+    INVALID_SIZE: 'Some items will not be printed due to invalid sign size' // TODO mandarin translations
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',

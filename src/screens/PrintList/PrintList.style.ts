@@ -62,6 +62,11 @@ const styles = StyleSheet.create({
   activityIndicator: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  errorText: {
+    color: COLOR.RED,
+    alignSelf: 'center',
+    fontSize: 14
   }
 });
 

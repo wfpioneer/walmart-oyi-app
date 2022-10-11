@@ -317,6 +317,8 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
         </View>
       ) : (
         <View style={styles.footerContainer}>
+          {updatePrintQueue.some(item => !item.isSizeValid)
+          && (<Text style={styles.errorText}>{strings('PRINT.INVALID_SIZE')}</Text>)}
           <View style={styles.printerNameContainer}>
             <View style={styles.printTextPadding}>
               <MaterialCommunityIcons name="printer-check" size={24} />

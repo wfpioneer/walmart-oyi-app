@@ -188,7 +188,8 @@ export default {
     Was_Large: 'Was Price - Large',
     Was_Medium: 'Was Price - Med',
     Was_Small: 'Was Price - Small',
-    Was_XSmall: 'Was Price - X-Small'
+    Was_XSmall: 'Was Price - X-Small',
+    INVALID_SIZE: 'Some items will not be printed due to invalid sign size'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
