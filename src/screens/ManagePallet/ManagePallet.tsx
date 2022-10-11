@@ -28,7 +28,7 @@ import styles from './ManagePallet.style';
 import { strings } from '../../locales';
 import ManualScan from '../../components/manualscan/ManualScan';
 import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
-import { barcodeEmitter } from '../../utils/scannerUtils';
+import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import {
   addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, postCreatePallet, updatePalletItemQty
 } from '../../state/actions/saga';
@@ -62,6 +62,7 @@ import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import ItemDetails from '../../models/ItemDetails';
 import { CustomModalComponent } from '../Modal/Modal';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -579,7 +580,7 @@ export const postCreatePalletApiHook = (
 ): void => {
   if (navigation.isFocused()) {
     if (!postCreatePalletApi.isWaiting) {
-    // Success
+      // Success
       if (postCreatePalletApi.result) {
         const createPalletResponse = postCreatePalletApi.result.data as Array<CreatePalletResponse>;
         const palletId = createPalletResponse.length > 0 ? createPalletResponse[0].palletId : 0;
@@ -723,7 +724,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const postCreateNewPallet = () => {
     const expirationDt = newExpirationDate
       ? `${moment(newExpirationDate, 'DD/MM/YYYY').format('YYYY-MM-DDT00:00:00.000')}Z` : '';
-    const createPalletPayload : CreatePallet = {
+    const createPalletPayload: CreatePallet = {
       expirationDate: expirationDt,
       numberOfPallets: 1,
       items: items.map(item => ({ upcNbr: item.upcNbr, qty: item.newQuantity }))
@@ -776,7 +777,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     return false;
   };
 
-  const onDatePickerChange = (event: DateTimePickerEvent, value: Date| undefined) => {
+  const onDatePickerChange = (event: DateTimePickerEvent, value: Date | undefined) => {
     const { type } = event;
     const newDate = value && moment(value).format('DD/MM/YYYY');
     setIsPickerShow(false);
@@ -847,17 +848,17 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.headerContainer}>
           {!createPallet && (
-          <View style={styles.headerItem}>
-            <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
-            <Text style={styles.headerItemText}>{id}</Text>
-          </View>
+            <View style={styles.headerItem}>
+              <Text style={styles.headerText}>{strings('PALLET.PALLET_ID')}</Text>
+              <Text style={styles.headerItemText}>{id}</Text>
+            </View>
           )}
           {(isPerishableItemExist(items, perishableCategories)) && (
             <PalletExpiration
               expirationDate={expirationDate}
               newExpirationDate={newExpirationDate}
               dateChanged={isExpiryDateChanged(palletInfo) || isAddedPerishable || isRemoveExpirationDate
-              || isPerishableItemDeleted(items, perishableCategories)}
+                || isPerishableItemDeleted(items, perishableCategories)}
               dateRemoved={isRemoveExpirationDate}
               showPicker={isPickerShow}
               setShowPicker={setIsPickerShow}
@@ -870,16 +871,27 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             <Text style={styles.headerItemText}>{items.length}</Text>
           </View>
           {(isLocationExistOnAnItem(items)) && (
-          <View style={styles.headerItem}>
-            <Text style={styles.headerText}>{strings('ITEM.LOCATION')}</Text>
-            <Text style={styles.headerItemText}>{items[0]?.locationName}</Text>
-          </View>
+            <View style={styles.headerItem}>
+              <Text style={styles.headerText}>{strings('ITEM.LOCATION')}</Text>
+              <Text style={styles.headerItemText}>{items[0]?.locationName}</Text>
+            </View>
           )}
         </View>
         <View style={styles.instructionLabel}>
           <Text style={styles.instructionLabelText}>
             {strings('PALLET.SCAN_INSTRUCTIONS')}
           </Text>
+        </View>
+        <View style={styles.container}>
+          {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
+          <View style={styles.scanContainer}>
+            <TouchableOpacity onPress={() => openCamera()}>
+              <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
+            </TouchableOpacity>
+            <View style={styles.scanText}>
+              <Text>{strings('LOCATION.SCAN_ITEM')}</Text>
+            </View>
+          </View>
         </View>
         {getNumberOfDeleted(items) > 0 ? (
           <View style={styles.deletedBanner}>

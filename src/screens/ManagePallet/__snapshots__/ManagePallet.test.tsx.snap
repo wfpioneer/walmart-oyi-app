@@ -252,6 +252,51 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
     <View
       style={
         Object {
+          "flex": 1,
+        }
+      }
+    >
+      <ManualScanComponent
+        keyboardType="numeric"
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "paddingTop": 80,
+            "width": "100%",
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </TouchableOpacity>
+        <View
+          style={
+            Object {
+              "paddingTop": 20,
+            }
+          }
+        >
+          <Text>
+            [missing "en.LOCATION.SCAN_ITEM" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -624,6 +669,51 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       >
         [missing "en.PALLET.SCAN_INSTRUCTIONS" translation]
       </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <ManualScanComponent
+        keyboardType="numeric"
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "paddingTop": 80,
+            "width": "100%",
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </TouchableOpacity>
+        <View
+          style={
+            Object {
+              "paddingTop": 20,
+            }
+          }
+        >
+          <Text>
+            [missing "en.LOCATION.SCAN_ITEM" translation]
+          </Text>
+        </View>
+      </View>
     </View>
     <View
       style={
@@ -1004,6 +1094,51 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     <View
       style={
         Object {
+          "flex": 1,
+        }
+      }
+    >
+      <ManualScanComponent
+        keyboardType="numeric"
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "paddingTop": 80,
+            "width": "100%",
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </TouchableOpacity>
+        <View
+          style={
+            Object {
+              "paddingTop": 20,
+            }
+          }
+        >
+          <Text>
+            [missing "en.LOCATION.SCAN_ITEM" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -1376,6 +1511,51 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       >
         [missing "en.PALLET.SCAN_INSTRUCTIONS" translation]
       </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <ManualScanComponent
+        keyboardType="numeric"
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "paddingTop": 80,
+            "width": "100%",
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </TouchableOpacity>
+        <View
+          style={
+            Object {
+              "paddingTop": 20,
+            }
+          }
+        >
+          <Text>
+            [missing "en.LOCATION.SCAN_ITEM" translation]
+          </Text>
+        </View>
+      </View>
     </View>
     <View
       style={
@@ -1756,6 +1936,51 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     <View
       style={
         Object {
+          "flex": 1,
+        }
+      }
+    >
+      <ManualScanComponent
+        keyboardType="numeric"
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "paddingTop": 80,
+            "width": "100%",
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </TouchableOpacity>
+        <View
+          style={
+            Object {
+              "paddingTop": 20,
+            }
+          }
+        >
+          <Text>
+            [missing "en.LOCATION.SCAN_ITEM" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -2132,6 +2357,51 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
     <View
       style={
         Object {
+          "flex": 1,
+        }
+      }
+    >
+      <ManualScanComponent
+        keyboardType="numeric"
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "paddingTop": 80,
+            "width": "100%",
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </TouchableOpacity>
+        <View
+          style={
+            Object {
+              "paddingTop": 20,
+            }
+          }
+        >
+          <Text>
+            [missing "en.LOCATION.SCAN_ITEM" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -2504,6 +2774,51 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
       >
         [missing "en.PALLET.SCAN_INSTRUCTIONS" translation]
       </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <ManualScanComponent
+        keyboardType="numeric"
+        placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "paddingTop": 80,
+            "width": "100%",
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </TouchableOpacity>
+        <View
+          style={
+            Object {
+              "paddingTop": 20,
+            }
+          }
+        >
+          <Text>
+            [missing "en.LOCATION.SCAN_ITEM" translation]
+          </Text>
+        </View>
+      </View>
     </View>
     <View
       style={
