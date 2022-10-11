@@ -504,6 +504,8 @@ export default {
     UPDATED_QTY: 'Updated Quantity',
     LARGE_CURRENCY_CHANGE: 'Large Currency Change',
     NO_LOCATION_AVAILABLE: 'No location available',
-    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet associated to the item'
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet associated to the item',
+    COMPLETE_AUDIT_ITEM_SUCCESS: 'Item audit successfully completed',
+    COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.'
   }
 };

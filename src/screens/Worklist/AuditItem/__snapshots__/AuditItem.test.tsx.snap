@@ -1076,7 +1076,7 @@ Array [
                       }
                     }
                   >
-                    [missing "en.AUDITS.OTHER_ON_HANDS" translation] (15)
+                    [missing "en.AUDITS.OTHER_ON_HANDS" translation] (0)
                   </Text>
                 </View>
                 <View
@@ -1125,7 +1125,7 @@ Array [
                         }
                       }
                     >
-                      [missing "en.ITEM.CLAIMS_QTY" translation]  5
+                      [missing "en.ITEM.CLAIMS_QTY" translation]  0
                     </Text>
                     <Text
                       style={
@@ -1135,7 +1135,7 @@ Array [
                         }
                       }
                     >
-                      [missing "en.ITEM.FLY_CLOUD_QTY" translation]  3
+                      [missing "en.ITEM.FLY_CLOUD_QTY" translation]  0
                     </Text>
                   </View>
                   <View>
@@ -1147,7 +1147,7 @@ Array [
                         }
                       }
                     >
-                      [missing "en.ITEM.CONSOLIDATED_QTY" translation]  2
+                      [missing "en.ITEM.CONSOLIDATED_QTY" translation]  0
                     </Text>
                     <Text
                       style={
@@ -1157,7 +1157,7 @@ Array [
                         }
                       }
                     >
-                      [missing "en.ITEM.IN_TRANSIT_FLY_QTY" translation]  5
+                      [missing "en.ITEM.IN_TRANSIT_FLY_QTY" translation]  0
                     </Text>
                   </View>
                 </View>
@@ -1335,17 +1335,33 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         }
       >
         <OtherOHItemCard
-          claimsOH={5}
+          claimsOH={0}
           collapsed={false}
-          consolidatorOH={2}
-          flyCloudInTransitOH={5}
-          flyCloudOH={3}
+          consolidatorOH={0}
+          flyCloudInTransitOH={0}
+          flyCloudOH={0}
           loading={true}
         />
       </View>
     </View>
   </ScrollView>
 </React.Fragment>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activity Indicator' waiting for completeItemApi Response  1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
 `;
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Scanned Item Not Found' on request status 204 1`] = `
@@ -1550,9 +1566,9 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         <OtherOHItemCard
           claimsOH={5}
           collapsed={false}
-          consolidatorOH={2}
-          flyCloudInTransitOH={5}
-          flyCloudOH={3}
+          consolidatorOH={10}
+          flyCloudInTransitOH={0}
+          flyCloudOH={0}
           loading={false}
         />
       </View>
