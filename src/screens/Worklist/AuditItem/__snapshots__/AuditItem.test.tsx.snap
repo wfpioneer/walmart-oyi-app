@@ -164,6 +164,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
                     "fontWeight": "normal",
+                    "textAlign": undefined,
                   }
                 }
               >
@@ -228,6 +229,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
                     "fontWeight": "normal",
+                    "textAlign": undefined,
                   }
                 }
               >
