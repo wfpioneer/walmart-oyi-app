@@ -26,7 +26,11 @@ const mockUser: User = {
     areas: mockAreas,
     enableAreaFilter: false,
     palletWorklists: false,
-    additionalItemDetails: false
+    additionalItemDetails: false,
+    showOpenAuditLink: false,
+    showRollOverAudit: false,
+    createPallet: false,
+    auditWorklists: false
   },
   countryCode: 'US',
   domain: 'Home Office',
