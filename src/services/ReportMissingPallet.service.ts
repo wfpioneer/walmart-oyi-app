@@ -9,11 +9,11 @@ export default class ReportMissingPalletService {
     sectionId: number;
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
-    return Request.put(
+    return Request.post(
       `${urls.worklistURL}/worklist/pallet/${payload.palletId}/missingpallet`,
       {
         locationName: payload.locationName,
-        sectionId: payload.sectionId
+        locationId: payload.sectionId
       }
     );
   }

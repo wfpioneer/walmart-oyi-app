@@ -354,9 +354,9 @@ export default {
     SCAN_PALLET: 'Scan Pallet',
     SCAN_PALLET_LABEL: 'Scan Pallet Label to continue',
     SCAN_PALLET_ERROR: 'Pallet scanned must match pallet on worklist',
-    MISSING_PALLET_API_ERROR: 'There was an error reporting the pallet missing. \nRetry?',
-    MISSING_PALLET_CONFIRMATION: 'Confirm: \nmissing pallet ',
-    MISSING_PALLET_API_SUCCESS: 'Pallet %{palletId} has been successfully reported missing'
+    MISSING_PALLET_API_ERROR: 'There was an error reporting the pallet as missing. Please try again.',
+    MISSING_PALLET_CONFIRMATION: 'Do you want to report pallet %{palletId} as a missing pallet?',
+    MISSING_PALLET_API_SUCCESS: 'Pallet has been added to the missing pallet worklist'
   },
   MISSING_PALLET_WORKLIST: {
     MISSING_PALLET_LABEL: 'Missing Pallet',
@@ -506,6 +506,9 @@ export default {
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',
     UPDATED_QTY: 'Updated Quantity',
     LARGE_CURRENCY_CHANGE: 'Large Currency Change',
-    NO_LOCATION_AVAILABLE: 'No location available'
+    NO_LOCATION_AVAILABLE: 'No location available',
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet associated to the item',
+    COMPLETE_AUDIT_ITEM_SUCCESS: 'Item audit successfully completed',
+    COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.'
   }
 };
