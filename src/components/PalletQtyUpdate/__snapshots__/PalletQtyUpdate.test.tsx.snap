@@ -231,6 +231,7 @@ Array [
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
                 "fontWeight": "normal",
+                "textAlign": undefined,
               }
             }
           >
@@ -295,6 +296,7 @@ Array [
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
                 "fontWeight": "normal",
+                "textAlign": undefined,
               }
             }
           >
@@ -527,6 +529,7 @@ Array [
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
                 "fontWeight": "normal",
+                "textAlign": undefined,
               }
             }
           >
@@ -591,6 +594,7 @@ Array [
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
                 "fontWeight": "normal",
+                "textAlign": undefined,
               }
             }
           >
