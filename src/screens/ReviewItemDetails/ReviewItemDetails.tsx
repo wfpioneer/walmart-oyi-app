@@ -57,6 +57,7 @@ import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
 import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
+import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -1174,6 +1175,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
+  const navigateToAuditItemScreen = () => {
+    dispatch(setAuditItemNumber(itemDetails.itemNbr));
+    navigation.navigate('AuditItem');
+  };
+
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
@@ -1235,6 +1241,14 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         {!isWaiting && itemDetails
           && (
           <View>
+            {userConfigs.showOpenAuditLink
+            && (
+            <View style={styles.openAuditContainer}>
+              <TouchableOpacity onPress={navigateToAuditItemScreen}>
+                <Text style={styles.openAuditText}>{strings('AUDITS.OPEN_AUDIT_LABEL')}</Text>
+              </TouchableOpacity>
+            </View>
+            )}
             <ItemInfo
               itemName={itemDetails.itemName}
               itemNbr={itemDetails.itemNbr}

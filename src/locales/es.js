@@ -504,6 +504,7 @@ export default {
     NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible',
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet asociado al artículo',
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
-    COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo'
+    COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo',
+    OPEN_AUDIT_LABEL: 'Abrir Auditoría'
   }
 };
