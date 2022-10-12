@@ -507,6 +507,7 @@ export default {
     UPDATED_QTY: '更新数量',
     LARGE_CURRENCY_CHANGE: '大金额调整(超1000)',
     NO_LOCATION_AVAILABLE: '无位置信息',
+    SCAN_PALLET_ERROR: '扫描的卡板必须和关联的商品匹配',
     COMPLETE_AUDIT_ITEM_SUCCESS: '成功-商品盘点完成成功',
     COMPLETE_AUDIT_ITEM_ERROR: '失败-商品盘点完成失败，请重试',
     OPEN_AUDIT_LABEL: '计划外盘点'
