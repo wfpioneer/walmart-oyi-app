@@ -28,6 +28,7 @@ const mockUser: User = {
     palletWorklists: false,
     additionalItemDetails: false,
     showOpenAuditLink: false,
+    scanRequired: false,
     showRollOverAudit: false,
     createPallet: false,
     auditWorklists: false
