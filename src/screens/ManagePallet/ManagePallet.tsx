@@ -21,6 +21,7 @@ import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { validateSession } from '../../utils/sessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import COLOR from '../../themes/Color';
@@ -62,7 +63,6 @@ import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import ItemDetails from '../../models/ItemDetails';
 import { CustomModalComponent } from '../Modal/Modal';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
