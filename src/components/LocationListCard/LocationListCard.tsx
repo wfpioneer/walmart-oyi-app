@@ -18,7 +18,8 @@ export interface LocationList {
     increment: () => void;
     decrement: () => void;
     onDelete: () => void;
-    qtyChange: () => void
+    qtyChange: () => void;
+    scanned?: boolean;
 }
 
 interface LocationListCardProp {
@@ -37,7 +38,7 @@ const renderLocationCard = ({
 }:
   { item: LocationList, locationType: LocationType, scanRequired: boolean, index: number }) => {
   const {
-    locationName, quantity, palletId, increment, decrement, onDelete, qtyChange
+    locationName, quantity, palletId, increment, decrement, onDelete, qtyChange, scanned
   } = item;
   return (
     <View style={styles.locationCard} key={`${locationName}-${index}`}>
@@ -51,6 +52,7 @@ const renderLocationCard = ({
         scannerEnabled={scanRequired}
         quantity={quantity}
         onLocationDelete={onDelete}
+        scanned={scanned}
       />
     </View>
   );

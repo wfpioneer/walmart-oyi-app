@@ -3,10 +3,12 @@ import {
   SET_FLOOR_LOCATIONS,
   SET_ITEM_DETAILS,
   SET_RESERVE_LOCATIONS,
+  UPDATE_PALLET_QTY,
   clearAuditScreenData,
   setFloorLocations,
   setItemDetails,
-  setReserveLocations
+  setReserveLocations,
+  updatePalletQty
 } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
 import { itemPallets } from '../../mockData/getItemPallets';
@@ -40,6 +42,15 @@ describe('Audit Item Screen actions', () => {
     const clearAuditScreenDataResult = clearAuditScreenData();
     expect(clearAuditScreenDataResult).toStrictEqual({
       type: CLEAR_AUDIT_SCREEN_DATA
+    });
+  });
+  it('handles updating the pallet quantity based on palletId', () => {
+    const mockPalletId = '4567';
+    const mockNewQty = 22;
+    const updatePalletQtyResult = updatePalletQty(mockPalletId, mockNewQty);
+    expect(updatePalletQtyResult).toStrictEqual({
+      type: UPDATE_PALLET_QTY,
+      payload: { palletId: mockPalletId, newQty: mockNewQty }
     });
   });
 });

@@ -13,7 +13,9 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { object } from 'prop-types';
 import { strings } from '../../locales';
 import
-itemDetail, { mockAdditionalItemDetails, mockOHChangeHistory, mockReserveLocations, pickListMockHistory }
+itemDetail, {
+  mockAdditionalItemDetails, mockOHChangeHistory, mockReserveLocations, pickListMockHistory
+}
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
@@ -191,7 +193,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[123], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -212,7 +214,7 @@ describe('ReviewItemDetailsScreen', () => {
         result: {
           ...defaultResult,
           data: {
-            itemDetails: {...itemDetail[123], ...mockAdditionalItemDetails},
+            itemDetails: { ...itemDetail[123], ...mockAdditionalItemDetails },
             itemOhChangeHistory: { code: 204 },
             picklistHistory: { code: 204 }
           },
@@ -231,12 +233,25 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('renders show openAudit link when showOpenAuditLink Flag is true', () => {
+      const testProps: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        userConfigs: { ...mockConfig, additionalItemDetails: true }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ReviewItemDetailsScreen {...testProps} />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
     it('renders the details for a single item with ohQtyModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[123], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -257,7 +272,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[123], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -278,7 +293,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[123], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -299,7 +314,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[123], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -319,7 +334,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[456], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[456], ...mockAdditionalItemDetails },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -340,7 +355,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[123], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
         },
         exceptionType: 'NSFL',
@@ -405,7 +420,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: {...itemDetail[321], ...mockAdditionalItemDetails},
+          data: { ...itemDetail[321], ...mockAdditionalItemDetails },
           status: 207
         },
         exceptionType: 'NSFL',
