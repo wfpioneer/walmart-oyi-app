@@ -64,6 +64,18 @@ const styles = StyleSheet.create({
     flexBasis: '60%',
     flexGrow: 1,
     flexShrink: 0
+  },
+  sourceLabel: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: COLOR.PINK,
+    paddingHorizontal: 5
+  },
+  itemTitleContainer: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
 
