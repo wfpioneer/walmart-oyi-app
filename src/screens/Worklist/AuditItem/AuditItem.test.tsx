@@ -115,7 +115,9 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   },
   setLocToConfirm: jest.fn(),
-  deleteFloorLocationApi: defaultAsyncState
+  deleteFloorLocationApi: defaultAsyncState,
+  showOnHandsConfirmState: [false, jest.fn()],
+  updateOHQtyApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {

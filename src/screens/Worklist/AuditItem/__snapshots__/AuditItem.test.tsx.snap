@@ -20,19 +20,24 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Object {
-          "alignContent": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderColor": "#545F7A",
-          "borderRadius": 10,
-          "borderStyle": "solid",
-          "borderWidth": 1,
-          "justifyContent": "center",
-          "minHeight": 150,
-          "padding": 10,
-          "width": "80%",
-        }
+        Array [
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <ActivityIndicator
@@ -73,19 +78,24 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Object {
-          "alignContent": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderColor": "#545F7A",
-          "borderRadius": 10,
-          "borderStyle": "solid",
-          "borderWidth": 1,
-          "justifyContent": "center",
-          "minHeight": 150,
-          "padding": 10,
-          "width": "80%",
-        }
+        Array [
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <Text
@@ -115,6 +125,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
                 "height": 45,
               },
               Object {
+                "color": "#000000",
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -179,6 +190,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
                 "height": 45,
               },
               Object {
+                "color": "#000000",
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -374,6 +386,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
 Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
@@ -874,6 +893,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           radius={5}
           style={
             Object {
+              "color": "#000000",
               "flex": 1,
               "paddingHorizontal": 10,
             }
@@ -894,12 +914,196 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           radius={5}
           style={
             Object {
+              "color": "#000000",
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
           title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.AUDITS.CONFIRM_AUDIT" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#ab2703",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          <mockMaterialCommunityIcons
+            name="arrow-down-bold"
+            size={16}
+          />
+          $0.00
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#ab2703",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "marginBottom": 5,
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.AUDITS.UPDATED_QTY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "color": "#000000",
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={true}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "color": "#000000",
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1090,6 +1294,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           radius={5}
           style={
             Object {
+              "color": "#000000",
               "flex": 1,
               "paddingHorizontal": 10,
             }
@@ -1110,12 +1315,204 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           radius={5}
           style={
             Object {
+              "color": "#000000",
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
           title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <mockMaterialCommunityIcons
+        color="#e74517"
+        name="alert"
+        size={40}
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.AUDITS.CONFIRM_AUDIT" translation]
+      </Text>
+      <Text>
+        [missing "en.AUDITS.LARGE_CURRENCY_CHANGE" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          42
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#ab2703",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          <mockMaterialCommunityIcons
+            name="arrow-down-bold"
+            size={16}
+          />
+          -$40,508.10
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#ab2703",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          -27
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "marginBottom": 5,
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.AUDITS.UPDATED_QTY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          15
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "color": "#000000",
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "color": "#000000",
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"

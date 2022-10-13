@@ -418,6 +418,7 @@ export const renderConfirmOnHandsModal = (
       isVisible={showOnHandsConfirmationModal}
       onClose={() => setShowOnHandsConfirmationModal(false)}
       modalType="Popup"
+      minHeight={150}
     >
       {updateOHQtyApi.isWaiting ? (
         <ActivityIndicator
@@ -795,7 +796,7 @@ const AuditItem = (): JSX.Element => {
   const { itemDetails, floorLocations, reserveLocations } = useTypedSelector(state => state.AuditItemScreen);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
-  const showOnHandsConfirmState = useState(true);
+  const showOnHandsConfirmState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
