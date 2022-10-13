@@ -884,7 +884,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             {strings('PALLET.SCAN_INSTRUCTIONS')}
           </Text>
         </View>
-        <View style={styles.container}>
+        {!items.length && <View style={styles.container}>
           {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
           <View style={styles.scanContainer}>
             <Pressable onPress={() => Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? openCamera() : null}>
@@ -894,7 +894,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               <Text>{strings('LOCATION.SCAN_ITEM')}</Text>
             </View>
           </View>
-        </View>
+        </View>}
         {getNumberOfDeleted(items) > 0 ? (
           <View style={styles.deletedBanner}>
             <Text style={styles.deleteBannerText}>
