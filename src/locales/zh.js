@@ -184,7 +184,12 @@ export default {
     PRICE_SIGNS: '价格标签',
     LOCATIONS: '位置',
     PRICE_SIGN_SUCCESS: '价格标签打印成功',
-    PRINTER_NOT_ASSIGNED: '未分配打印机'
+    PRINTER_NOT_ASSIGNED: '未分配打印机',
+    Was_Large: '原价-大',
+    Was_Medium: '原价-中',
+    Was_Small: '原价-小',
+    Was_XSmall: '原价-超小',
+    INVALID_SIZE: '由于标签尺寸无效，部份商品无法打印'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',

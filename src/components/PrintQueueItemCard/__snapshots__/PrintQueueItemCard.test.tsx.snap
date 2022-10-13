@@ -3,16 +3,17 @@
 exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock print queue item 1`] = `
 <View
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffffff",
-      "borderBottomColor": "#e0e0e0",
-      "borderBottomWidth": 1,
-      "flexDirection": "row",
-      "justifyContent": "flex-start",
-      "marginBottom": 2,
-      "padding": 15,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffe5dd",
+        "borderColor": "#f44336",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "padding": 15,
+      },
+    ]
   }
 >
   <View
@@ -116,16 +117,17 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
 exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock print queue item without size prop 1`] = `
 <View
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffffff",
-      "borderBottomColor": "#e0e0e0",
-      "borderBottomWidth": 1,
-      "flexDirection": "row",
-      "justifyContent": "flex-start",
-      "marginBottom": 2,
-      "padding": 15,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffe5dd",
+        "borderColor": "#f44336",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "padding": 15,
+      },
+    ]
   }
 >
   <View
