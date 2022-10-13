@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { color } from 'react-native-reanimated';
 import COLOR from '../../../themes/Color';
 
 const styles = StyleSheet.create({
@@ -41,12 +42,58 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    color: COLOR.BLACK
   },
   message: {
     textAlign: 'center',
     fontSize: 18,
     padding: 15
+  },
+  itemCardContainer: {
+    marginBottom: 8
+  },
+  confirmText: {
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  modalQuantityRow: {
+    flexDirection: 'row',
+    width: '90%',
+    borderBottomColor: COLOR.GREY_500,
+    borderBottomWidth: 1,
+    justifyContent: 'space-evenly',
+    paddingVertical: 5
+  },
+  updatedQtyRow: {
+    flexDirection: 'row',
+    width: '90%',
+    justifyContent: 'space-evenly',
+    paddingVertical: 5,
+    marginBottom: 5
+  },
+  rowQuantityTitle: {
+    flex: 1
+  },
+  rowQuantity: {
+    fontSize: 15
+  },
+  negativeChange: {
+    fontSize: 15,
+    alignSelf: 'flex-start',
+    color: COLOR.RED_550,
+    marginLeft: 30
+  },
+  positiveChange: {
+    fontSize: 15,
+    alignSelf: 'flex-start',
+    color: COLOR.GREEN,
+    marginLeft: 30
+  },
+  noOHChange: {
+    fontSize: 15,
+    alignSelf: 'center',
+    marginLeft: 30
   }
 });
 

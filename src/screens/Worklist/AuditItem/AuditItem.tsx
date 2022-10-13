@@ -24,7 +24,7 @@ import { Configurations } from '../../../models/User';
 import ItemDetails from '../../../models/ItemDetails';
 import styles from './AuditItem.style';
 import ManualScanComponent from '../../../components/manualscan/ManualScan';
-import { strings } from '../../../locales';
+import { currencies, strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
 
 import {
@@ -307,6 +307,17 @@ export const calculateTotalOHQty = (
    + (itemDetails?.inTransitCloudQty || 0) + (itemDetails?.cloudQty || 0) + (itemDetails?.consolidatedOnHandQty || 0);
   return floorLocationsCount + reserveLocationsCount + otherOHTotalCount;
 };
+
+const qtyStyleChange = (oldQty: number, newQty: number): Record<string, unknown> => {
+  if (oldQty === 0 && newQty === 0) {
+    return styles.noOHChange;
+  }
+  if (newQty > oldQty) {
+    return styles.positiveChange;
+  }
+  return styles.negativeChange;
+};
+
 export const renderDeleteLocationModal = (
   deleteFloorLocationApi: AsyncState,
   showDeleteConfirmationModal: boolean,
@@ -356,6 +367,64 @@ export const renderDeleteLocationModal = (
   </CustomModalComponent>
 );
 
+export const renderConfirmOnHandsModal = (
+  currentQuantity: number,
+  updatedQuantity: number,
+  basePrice: number
+) => {
+  const changeQuantity = updatedQuantity - currentQuantity;
+  const priceChange = basePrice * changeQuantity;
+  const priceLimit = 1000.0;
+  return (
+    <CustomModalComponent
+      isVisible={true}
+      onClose={() => console.log('empty')}
+      modalType="Popup"
+    >
+      {Math.abs(priceChange) > priceLimit
+      && <MaterialCommunityIcon name="alert" size={40} color={COLOR.ORANGE} /> }
+      <Text style={styles.confirmText}>{strings('AUDITS.CONFIRM_AUDIT')}</Text>
+      {Math.abs(priceChange) > priceLimit && <Text>{strings('AUDITS.LARGE_CURRENCY_CHANGE')}</Text>}
+      <View style={styles.modalQuantityRow}>
+        <Text style={styles.rowQuantityTitle}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
+        <Text style={styles.rowQuantity}>{currentQuantity}</Text>
+      </View>
+      <View style={styles.modalQuantityRow}>
+        <Text style={styles.rowQuantityTitle}>{strings('GENERICS.CHANGE')}</Text>
+        <Text style={qtyStyleChange(currentQuantity, updatedQuantity)}>
+          <MaterialCommunityIcon
+            name={updatedQuantity > currentQuantity
+              ? 'arrow-up-bold' : 'arrow-down-bold'}
+            size={16}
+          />
+          {currencies(priceChange)}
+        </Text>
+        <Text style={qtyStyleChange(currentQuantity, updatedQuantity)}>{changeQuantity}</Text>
+      </View>
+      <View style={styles.updatedQtyRow}>
+        <Text style={styles.rowQuantityTitle}>{strings('AUDITS.UPDATED_QTY')}</Text>
+        <Text style={styles.rowQuantity}>{updatedQuantity}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.button}
+          title={strings('APPROVAL.GO_BACK')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          testID="modal-cancel-button"
+          onPress={undefined}
+          type={2}
+        />
+        <Button
+          style={styles.button}
+          title={strings('GENERICS.OK')}
+          testID="modal-confirm-button"
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={undefined}
+        />
+      </View>
+    </CustomModalComponent>
+  );
+};
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -383,6 +452,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     locToConfirm,
     setLocToConfirm
   } = props;
+
+  const totalOHQty = calculateTotalOHQty(floorLocations, reserveLocations, itemDetails);
 
   // call get Item details
   useEffectHook(() => {
@@ -528,7 +599,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   // TODO: This action needs to added to the onpress event for continue button and has to handled in INTLSAOPS-7829
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty;
-    const totalOHQty = calculateTotalOHQty(floorLocations, reserveLocations, itemDetails);
     if (itemOHQty === totalOHQty) {
       dispatch(noAction({ upc: itemDetails?.upcNbr || '', itemNbr: itemNumber, scannedValue: itemNumber.toString() }));
     } else {
@@ -557,8 +627,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         deleteLocationConfirmed,
         locToConfirm.locationName
       )}
+      {renderConfirmOnHandsModal(itemDetails?.onHandsQty || 0, totalOHQty, itemDetails?.basePrice || 0)}
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
-      <View style={{ marginBottom: 8 }}>
+      <View style={styles.itemCardContainer}>
         <ItemCard
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
