@@ -16,7 +16,9 @@ import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen, AuditItemScreenProps, addLocationHandler, calculateTotalOHQty, completeItemApiHook,
   deleteFloorLocationApiHook, getItemDetailsApiHook, getlocationsApiResult, isError, onValidateItemNumber,
-  renderDeleteLocationModal
+  renderConfirmOnHandsModal,
+  renderDeleteLocationModal,
+  updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
@@ -225,12 +227,23 @@ describe('AuditItemScreen', () => {
     const mockDispatch = jest.fn();
     const mockSetShowDeleteConfirmationModal = jest.fn();
     const mockDeleteLocationConfirmed = jest.fn();
+    const mockSetShowOnHandsConfirmModal = jest.fn();
     const mockLocationName = 'A1-1';
     const mockItemNumber = 9800065634;
     afterEach(() => {
       jest.clearAllMocks();
     });
-
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: mockItemDetails,
+        status: 200
+      }
+    };
+    const failureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
     it('test onValidateItemNumber', async () => {
       const expectedGetItemDetailsAction = {
         payload: {
@@ -295,13 +308,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: mockItemDetails,
-          status: 200
-        }
-      };
       const mockSetShowItemNotFoundMsg = jest.fn();
       getItemDetailsApiHook(successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
       expect(mockDispatch).toBeCalledTimes(3);
@@ -329,10 +335,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests getItemDetailsApi on failure', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       const mockSetShowItemNotFoundMsg = jest.fn();
       getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
@@ -395,13 +397,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests deleteFloorLocationApiHook on 200 success for deleting location', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: {},
-          status: 200
-        }
-      };
       deleteFloorLocationApiHook(
         successApi, mockItemNumber, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 'A1-1'
       );
@@ -412,10 +407,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests deleteFloorLocationApiHook on failure', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       deleteFloorLocationApiHook(
         failureApi, mockItemNumber, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 'A1-1'
       );
@@ -425,13 +416,6 @@ describe('AuditItemScreen', () => {
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
     it('Tests completeItemApiHook on 200 success for completing an item', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: {},
-          status: 200
-        }
-      };
       completeItemApiHook(successApi, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'success',
@@ -444,10 +428,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       completeItemApiHook(failureApi, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -466,6 +446,93 @@ describe('AuditItemScreen', () => {
       const totalCountResult = calculateTotalOHQty(mockFloorLocations, mockReserveLocations, itemDetails);
       const expectedCount = 37;
       expect(totalCountResult).toBe(expectedCount);
+    });
+
+    it('Tests updateOHQtyApiHook on success', () => {
+      const setShowOnHands = jest.fn();
+      updateOHQtyApiHook(successApi, mockDispatch, navigationProp, setShowOnHands);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(setShowOnHands).toHaveBeenCalledWith(false);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests updateOHQtyApiHook on failure', () => {
+      const setShowOnHands = jest.fn();
+      updateOHQtyApiHook(failureApi, mockDispatch, navigationProp, setShowOnHands);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    });
+
+    it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
+      const { toJSON } = render(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderConfirmOnHandsModal should render loader', () => {
+      const mockUpdateOHQtyLoading: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      }
+      const { toJSON } = render(
+        renderConfirmOnHandsModal(
+          mockUpdateOHQtyLoading,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderConfirmOnHandsModal confirm button action', () => {
+      const { getByTestId } = render(renderConfirmOnHandsModal(
+        defaultAsyncState,
+        true,
+        mockSetShowOnHandsConfirmModal,
+        50,
+        mockItemDetails,
+        mockDispatch
+      ));
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('Tests renderConfirmOnHandsModal cancel button action', () => {
+      const { getByTestId } = render(renderConfirmOnHandsModal(
+        defaultAsyncState,
+        true,
+        mockSetShowOnHandsConfirmModal,
+        50,
+        mockItemDetails,
+        mockDispatch
+      ));
+      const modalConfirmButton = getByTestId('modal-cancel-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockSetShowOnHandsConfirmModal).toHaveBeenCalledWith(false);
     });
   });
 });

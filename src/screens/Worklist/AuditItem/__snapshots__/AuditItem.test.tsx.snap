@@ -1,5 +1,370 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderConfirmOnHandsModal should render loader 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": 150,
+          },
+        ]
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#0071e9"
+        hidesWhenStopped={true}
+        size="large"
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      />
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderConfirmOnHandsModal with itemDetails onHandsQty 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": 150,
+          },
+        ]
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#e74517"
+        name="alert"
+        size={40}
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.AUDITS.CONFIRM_AUDIT" translation]
+      </Text>
+      <Text>
+        [missing "en.AUDITS.LARGE_CURRENCY_CHANGE" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          42
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#33691E",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          <mockMaterialCommunityIcons
+            name="arrow-up-bold"
+            size={16}
+          />
+          $12,002.40
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#33691E",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          8
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "marginBottom": 5,
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.AUDITS.UPDATED_QTY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          50
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "color": "#000000",
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "borderColor": "#0071e9",
+                  "borderRadius": 5,
+                  "borderWidth": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-cancel-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#0071e9",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                  }
+                }
+              >
+                [missing "en.APPROVAL.GO_BACK" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "color": "#000000",
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-confirm-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                  }
+                }
+              >
+                [missing "en.GENERICS.SUBMIT" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderDeleteLocationModal should render modal with loader 1`] = `
 <Modal
   animationType="none"
