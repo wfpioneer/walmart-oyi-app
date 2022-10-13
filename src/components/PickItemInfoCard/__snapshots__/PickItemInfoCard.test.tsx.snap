@@ -57,6 +57,7 @@ exports[`Tests rendering PickItemInfoCard Renders the deleteView component and f
               "fontFamily": "Roboto-Medium",
               "fontSize": 16,
               "fontWeight": "normal",
+              "textAlign": undefined,
             }
           }
         >
@@ -157,6 +158,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
                   "fontFamily": "Roboto-Medium",
                   "fontSize": 16,
                   "fontWeight": "normal",
+                  "textAlign": undefined,
                 }
               }
             >

@@ -12,7 +12,8 @@ export interface PrintQueueItemCardProp {
   nbrOfCopies: number,
   size?: string,
   editCallback: () => void,
-  deleteCallback: () => void
+  deleteCallback: () => void,
+  isSizeValid: boolean
 }
 
 const PrintQueueItemCard = (props: PrintQueueItemCardProp) : JSX.Element => {
@@ -21,7 +22,8 @@ const PrintQueueItemCard = (props: PrintQueueItemCardProp) : JSX.Element => {
     nbrOfCopies,
     size,
     editCallback,
-    deleteCallback
+    deleteCallback,
+    isSizeValid
   } = props;
 
   const renderActionIcon = (name: string, action?: (event: GestureResponderEvent) => void) => (
@@ -33,7 +35,7 @@ const PrintQueueItemCard = (props: PrintQueueItemCardProp) : JSX.Element => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[isSizeValid ? styles.container : styles.errorContainer]}>
       <View style={styles.content}>
         <View style={styles.itemContainer}>
           <Text style={styles.textHeader}>
