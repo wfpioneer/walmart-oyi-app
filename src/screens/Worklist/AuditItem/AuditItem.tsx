@@ -425,9 +425,10 @@ export const renderDeleteLocationModal = (
 
 export const disabledContinue = (
   floorLocations: Location[],
-  reserveLocations: ItemPalletInfo[]
+  reserveLocations: ItemPalletInfo[],
+  scanRequired: boolean
 ) : boolean => floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1)
-  || reserveLocations.some(loc => (!loc.scanned || (loc.newQty || loc.quantity || -1) < 0));
+  || reserveLocations.some(loc => ((scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0));
 
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
@@ -725,7 +726,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         <AuditScreenFooter
           totalCount={calculateTotalOHQty(floorLocations, reserveLocations, itemDetails)}
           onContinueClick={handleContinueAction}
-          disabledContinue={disabledContinue(floorLocations, reserveLocations)}
+          disabledContinue={disabledContinue(floorLocations, reserveLocations, userConfig.scanRequired)}
         />
       </View>
     </>

@@ -528,10 +528,10 @@ describe('AuditItemScreen', () => {
       const mockFloorLocations = mockItemDetails.location.floor;
       const mockReserveLocations = itemPallets.pallets;
 
-      expect(disabledContinue(mockFloorLocations, mockReserveLocations)).toBe(true);
+      expect(disabledContinue(mockFloorLocations, mockReserveLocations, false)).toBe(true);
     });
     it(`Test disabledContinue functionality return true 
-      when all of the locaion qty is present and reserve pallet is not scanned`, () => {
+      when all of the locaion qty is present and reserve pallet is not scanned but scan is required`, () => {
       const mockFloorLocations = [{ ...mockItemDetails.location.floor[0], newQty: 10 }];
       const mockReserveLocations: ItemPalletInfo[] = [
         {
@@ -545,10 +545,10 @@ describe('AuditItemScreen', () => {
         }
       ];
 
-      expect(disabledContinue(mockFloorLocations, mockReserveLocations)).toBe(true);
+      expect(disabledContinue(mockFloorLocations, mockReserveLocations, true)).toBe(true);
     });
     it(`Test disabledContinue functionality return false 
-      when all of the locaion qty is present and reserve pallet is scanned`, () => {
+      when all of the locaion qty is present and reserve pallet is scanned and scan is required`, () => {
       const mockFloorLocations = [{ ...mockItemDetails.location.floor[0], newQty: 10 }];
       const mockReserveLocations: ItemPalletInfo[] = [
         {
@@ -562,7 +562,24 @@ describe('AuditItemScreen', () => {
         }
       ];
 
-      expect(disabledContinue(mockFloorLocations, mockReserveLocations)).toBe(false);
+      expect(disabledContinue(mockFloorLocations, mockReserveLocations, true)).toBe(false);
+    });
+    it(`Test disabledContinue functionality return false 
+      when all of the locaion qty is present and reserve pallet is not scanned but scan is not required`, () => {
+      const mockFloorLocations = [{ ...mockItemDetails.location.floor[0], newQty: 10 }];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: undefined,
+          scanned: false
+        }
+      ];
+
+      expect(disabledContinue(mockFloorLocations, mockReserveLocations, false)).toBe(false);
     });
   });
 });
