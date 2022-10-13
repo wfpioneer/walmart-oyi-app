@@ -55,11 +55,13 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Small",
@@ -101,6 +103,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       Array [
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Small",
@@ -225,11 +228,13 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "XSmall",
@@ -239,6 +244,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Small",
@@ -248,6 +254,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Medium",
@@ -257,6 +264,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Large",
@@ -266,6 +274,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Wine",
@@ -275,6 +284,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
             "paperSize": "XSmall",
@@ -284,6 +294,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
             "paperSize": "Small",
@@ -293,6 +304,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
             "paperSize": "Medium",
@@ -302,6 +314,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
             "paperSize": "Large",
@@ -311,6 +324,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           },
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
             "paperSize": "Wine",
@@ -352,6 +366,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       Array [
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "XSmall",
@@ -361,6 +376,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Small",
@@ -370,6 +386,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Medium",
@@ -379,6 +396,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Large",
@@ -388,6 +406,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Wine",
@@ -397,6 +416,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Store Use Item",
           "itemNbr": 789012,
           "paperSize": "XSmall",
@@ -406,6 +426,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Store Use Item",
           "itemNbr": 789012,
           "paperSize": "Small",
@@ -415,6 +436,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Store Use Item",
           "itemNbr": 789012,
           "paperSize": "Medium",
@@ -424,6 +446,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Store Use Item",
           "itemNbr": 789012,
           "paperSize": "Large",
@@ -433,6 +456,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         },
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Store Use Item",
           "itemNbr": 789012,
           "paperSize": "Wine",
@@ -557,11 +581,13 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={0}
       printQueue={
         Array [
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Small",
@@ -603,6 +629,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       Array [
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Small",
@@ -727,6 +754,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={Array []}
       queueName="PRICESIGN"
@@ -862,11 +890,13 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Small",
@@ -908,6 +938,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       Array [
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Small",
@@ -965,11 +996,13 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
     onClose={[Function]}
   >
     <PrintQueueEdit
+      countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
         Array [
           Object {
             "catgNbr": 2,
+            "isSizeValid": true,
             "itemName": "Test item",
             "itemNbr": 123456,
             "paperSize": "Small",
@@ -1011,6 +1044,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       Array [
         Object {
           "catgNbr": 2,
+          "isSizeValid": true,
           "itemName": "Test item",
           "itemNbr": 123456,
           "paperSize": "Small",

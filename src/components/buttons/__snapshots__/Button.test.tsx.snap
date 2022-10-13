@@ -42,6 +42,7 @@ exports[`Button Component Renders the button with other custom specification pro
             "fontFamily": "Roboto-Medium",
             "fontSize": 12,
             "fontWeight": "normal",
+            "textAlign": undefined,
           }
         }
       >
@@ -90,6 +91,7 @@ exports[`Button Component Renders the button with type as No Border 1`] = `
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
             "fontWeight": "normal",
+            "textAlign": undefined,
           }
         }
       >
@@ -140,6 +142,7 @@ exports[`Button Component Renders the button with type as Primary 1`] = `
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
             "fontWeight": "normal",
+            "textAlign": undefined,
           }
         }
       >
@@ -191,6 +194,7 @@ exports[`Button Component Renders the button with type as Solid White 1`] = `
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
             "fontWeight": "normal",
+            "textAlign": undefined,
           }
         }
       >
@@ -241,6 +245,7 @@ exports[`Button Component Renders the default button 1`] = `
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
             "fontWeight": "normal",
+            "textAlign": undefined,
           }
         }
       >
@@ -291,6 +296,7 @@ exports[`Button Component Renders the disabled button 1`] = `
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
             "fontWeight": "normal",
+            "textAlign": undefined,
           }
         }
       >

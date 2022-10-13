@@ -118,10 +118,12 @@ const style = StyleSheet.create({
   },
   sizeBtnContainer: {
     flexDirection: 'row',
-    marginVertical: 4
+    marginVertical: 4,
+    flexWrap: 'wrap'
   },
   sizeBtnMargin: {
-    marginHorizontal: 6
+    marginHorizontal: 6,
+    marginVertical: 4
   },
   printerNameContainer: {
     flexDirection: 'row',

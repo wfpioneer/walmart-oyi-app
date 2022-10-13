@@ -184,7 +184,12 @@ export default {
     PRICE_SIGNS: 'Price Signs',
     LOCATIONS: 'Locations',
     PRICE_SIGN_SUCCESS: 'Price Sign Label Successfully Printed',
-    PRINTER_NOT_ASSIGNED: 'No assigned printer'
+    PRINTER_NOT_ASSIGNED: 'No assigned printer',
+    Was_Large: 'Was Price - Large',
+    Was_Medium: 'Was Price - Med',
+    Was_Small: 'Was Price - Small',
+    Was_XSmall: 'Was Price - X-Small',
+    INVALID_SIZE: 'Some items will not be printed due to invalid sign size'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
@@ -504,7 +509,9 @@ export default {
     UPDATED_QTY: 'Updated Quantity',
     LARGE_CURRENCY_CHANGE: 'Large Currency Change',
     NO_LOCATION_AVAILABLE: 'No location available',
+    SCAN_PALLET_ERROR: 'Pallet scanned must match pallet associated to the item',
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Item audit successfully completed',
-    COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.'
+    COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.',
+    OPEN_AUDIT_LABEL: 'Open Audit'
   }
 };
