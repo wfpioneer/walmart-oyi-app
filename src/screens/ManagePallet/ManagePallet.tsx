@@ -8,6 +8,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Text,
+  Pressable,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -24,6 +25,7 @@ import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { validateSession } from '../../utils/sessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import Config from 'react-native-config';
 import COLOR from '../../themes/Color';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
@@ -885,9 +887,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         <View style={styles.container}>
           {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
           <View style={styles.scanContainer}>
-            <TouchableOpacity onPress={() => openCamera()}>
+            <Pressable onPress={() => Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? openCamera() : null}>
               <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-            </TouchableOpacity>
+            </Pressable>
             <View style={styles.scanText}>
               <Text>{strings('LOCATION.SCAN_ITEM')}</Text>
             </View>
