@@ -1,4 +1,5 @@
 import { PrintQueueItem } from '../models/Printer';
+import { PrintQueueItemSize } from '../screens/PrintList/PrintList';
 
 export const mockPrintQueue: PrintQueueItem[] = [{
   itemName: 'Test item',
@@ -9,6 +10,8 @@ export const mockPrintQueue: PrintQueueItem[] = [{
   paperSize: 'Small',
   worklistType: 'NSFL'
 }];
+
+export const mockPrintQueueItemSize: PrintQueueItemSize[] = [{ ...mockPrintQueue[0], isSizeValid: true }];
 
 export const mockLocationPrintQueue: PrintQueueItem[] = [
   {
@@ -21,7 +24,7 @@ export const mockLocationPrintQueue: PrintQueueItem[] = [
     itemName: 'A1-2',
     signQty: 1,
     locationId: 4321,
-    paperSize: 'Small',
+    paperSize: 'Small'
   },
   {
     itemName: 'A1-3',

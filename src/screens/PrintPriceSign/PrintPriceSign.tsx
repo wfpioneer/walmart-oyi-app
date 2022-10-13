@@ -25,8 +25,9 @@ import {
 } from '../../state/actions/Print';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import {
-  LaserPaperCn, LaserPaperMx, PortablePaperCn, PortablePaperMx, PrintItemList, PrintLocationList,
-  PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType, Printer, PrinterType, PrintingType
+  LaserPaperCn, LaserPaperMx, LaserPaperPrice, PortablePaperCn, PortablePaperMx, PrintItemList,
+  PrintLocationList, PrintPalletList, PrintPaperSize, PrintQueueItem, PrintQueueItemType,
+  Printer, PrinterType, PrintingType
 } from '../../models/Printer';
 import { Configurations } from '../../models/User';
 
@@ -83,10 +84,11 @@ export const renderSignSizeButtons = (
               backgroundColor={
                 signType === key ? COLOR.MAIN_THEME_COLOR : COLOR.GREY_200
               }
+              titleAlign="center"
               type={ButtonType.PRIMARY}
               radius={20}
-              height={25}
-              width={56}
+              height={30}
+              width="21%"
               style={styles.sizeBtnMargin}
               // @ts-expect-error key is of type PrinterPaperSize
               onPress={() => dispatch(setSignType(key))}
@@ -139,10 +141,10 @@ interface PriceSignProps {
 
 export const getPrinter = (
   selectedPrinter: Printer | null, selectedSignType: PrintPaperSize, countryCode: string
-): LaserPaperCn | PortablePaperCn | LaserPaperMx | PortablePaperMx => {
+): LaserPaperCn | PortablePaperCn | LaserPaperMx | PortablePaperMx | LaserPaperPrice => {
   const sizeObject = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
   // @ts-expect-error selectSignType contains keys that do not exist for each enum
-    return sizeObject[selectedSignType];
+  return sizeObject[selectedSignType];
 };
 
 const isValid = (actionCompleted: boolean, exceptionType: string) => !actionCompleted && exceptionType === 'PO';

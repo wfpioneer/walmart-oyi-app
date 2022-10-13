@@ -9,10 +9,18 @@ export default StyleSheet.create({
     justifyContent,
     backgroundColor: COLOR.WHITE,
     padding: 15,
-    marginBottom: 2,
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: COLOR.GREY_300
+    borderWidth: 1,
+    borderColor: COLOR.GREY_300
+  },
+  errorContainer: {
+    alignItems: 'center',
+    justifyContent,
+    backgroundColor: COLOR.MODERATE_RED,
+    padding: 15,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: COLOR.RED_500
   },
   content: {
     alignItems: 'flex-start',
