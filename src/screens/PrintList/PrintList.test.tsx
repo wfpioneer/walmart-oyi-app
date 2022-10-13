@@ -6,7 +6,7 @@ import {
   NoPrintQueueMessage, PrintListsScreen, handleChangePrinter, locationLabelsApiEffect, printItemApiEffect
 } from './PrintList';
 import { Printer, PrinterType } from '../../models/Printer';
-import { mockLargePrintQueue, mockPrintQueue } from '../../mockData/mockPrintQueue';
+import { mockLargePrintQueue, mockPrintQueue, mockPrintQueueItemSize } from '../../mockData/mockPrintQueue';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
 
@@ -205,7 +205,7 @@ describe('PrintListScreen', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      printItemApiEffect(printApiSuccess, mockDispatch, navigationProp);
+      printItemApiEffect(printApiSuccess, mockDispatch, navigationProp, mockPrintQueueItemSize, 'PRICESIGN');
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(successToast));
@@ -241,7 +241,7 @@ describe('PrintListScreen', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      printItemApiEffect(partialSuccess, mockDispatch, navigationProp);
+      printItemApiEffect(partialSuccess, mockDispatch, navigationProp, mockPrintQueueItemSize, 'PRICESIGN');
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(partialSuccessPrint));
     });
@@ -257,7 +257,7 @@ describe('PrintListScreen', () => {
         position: 'bottom'
       };
 
-      printItemApiEffect(printApiError, mockDispatch, navigationProp);
+      printItemApiEffect(printApiError, mockDispatch, navigationProp, mockPrintQueueItemSize, 'PRICESIGN');
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(printError));
     });
 
@@ -275,7 +275,7 @@ describe('PrintListScreen', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      locationLabelsApiEffect(printApiSuccess, mockDispatch, navigationProp);
+      locationLabelsApiEffect(printApiSuccess, mockDispatch, navigationProp, 'LOCATION');
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(successToast));
@@ -293,7 +293,7 @@ describe('PrintListScreen', () => {
         position: 'bottom'
       };
 
-      locationLabelsApiEffect(printApiError, mockDispatch, navigationProp);
+      locationLabelsApiEffect(printApiError, mockDispatch, navigationProp, 'LOCATION');
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining(printError));
     });
 

@@ -37,6 +37,7 @@ export const initialState: User = {
     createPallet: false,
     auditWorklists: false,
     showRollOverAudit: false,
+    showOpenAuditLink: false,
     scanRequired: false
   }
 };
@@ -76,6 +77,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           createPallet: action.payload.createPallet || false,
           auditWorklists: action.payload.auditWorklists || false,
           showRollOverAudit: action.payload.showRollOverAudit || false,
+          showOpenAuditLink: action.payload.showOpenAuditLink || false,
           scanRequired: action.payload.scanRequired || false
         }
       };

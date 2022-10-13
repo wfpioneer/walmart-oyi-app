@@ -184,7 +184,12 @@ export default {
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
     PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
-    PRINTER_NOT_ASSIGNED: 'No impresoras asignadas'
+    PRINTER_NOT_ASSIGNED: 'No impresoras asignadas',
+    Was_Large: 'Promo - Grande',
+    Was_Medium: 'Promo - Mediano',
+    Was_Small: 'Promo - Chico',
+    Was_XSmall: 'Promo - Xchico',
+    INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -504,6 +509,7 @@ export default {
     NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible',
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet asociado al artículo',
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
-    COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo'
+    COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo',
+    OPEN_AUDIT_LABEL: 'Abrir Auditoría'
   }
 };

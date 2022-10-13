@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Picker } from '@react-native-picker/picker';
 import IconButton, { IconButtonType } from '../buttons/IconButton';
 import COLOR from '../../themes/Color';
 import Button, { ButtonType } from '../buttons/Button';
@@ -13,7 +14,9 @@ import { setLocationPrintQueue, setPrintQueue } from '../../state/actions/Print'
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ModalCloseIcon } from '../../screens/Modal/Modal';
 import { PrintTab } from '../../screens/PrintList/PrintList';
-import { PrintQueueItem, Printer } from '../../models/Printer';
+import { PrintPaperSize, PrintQueueItem, Printer } from '../../models/Printer';
+
+import { getPaperSizeBasedOnCountry } from '../../utils/global';
 
 const QTY_MIN = 1;
 const QTY_MAX = 100;
@@ -34,15 +37,17 @@ const PrintQueueEdit = (props: {
   setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
   queueName?: PrintTab
   selectedPrinter: Printer | null;
+  countryCode: string;
 }): JSX.Element => {
   const {
-    itemIndexToEdit, printQueue, setItemIndexToEdit, queueName, selectedPrinter
+    itemIndexToEdit, printQueue, setItemIndexToEdit, queueName, selectedPrinter, countryCode
   } = props;
   const itemToEdit = printQueue[itemIndexToEdit];
   const dispatch = useDispatch();
 
   const [signQty, setSignQty] = useState<number>(itemToEdit.signQty);
   const [isValidQty, setIsValidQty] = useState(true);
+  const [signSize, setSignSize] = useState<PrintPaperSize>(itemToEdit.paperSize);
 
   const handleTextChange = (text: string) => {
     const newQty: number = parseInt(text, 10);
@@ -73,7 +78,7 @@ const PrintQueueEdit = (props: {
 
   const handleSave = () => {
     trackEvent('print_queue_edit_save', { printItem: JSON.stringify(itemToEdit), newSignQty: signQty });
-    printQueue.splice(itemIndexToEdit, 1, { ...itemToEdit, signQty });
+    printQueue.splice(itemIndexToEdit, 1, { ...itemToEdit, signQty, paperSize: signSize });
     if (queueName === 'LOCATION') {
       dispatch(setLocationPrintQueue(printQueue));
     } else {
@@ -82,6 +87,11 @@ const PrintQueueEdit = (props: {
     setItemIndexToEdit(-1);
   };
 
+  const addPaperSizesToPicker = (sizes: any) => [
+    ...Object.keys(sizes).map(size => (
+      <Picker.Item label={strings(`PRINT.${size}`)} value={size} key={size} />
+    ))
+  ];
   return (
     <>
       <View style={styles.closeContainer}>
@@ -131,7 +141,21 @@ const PrintQueueEdit = (props: {
       </View>
       <View style={styles.signSizeContainer}>
         <Text style={styles.signSizeLabel}>{strings('PRINT.SIGN_SIZE')}</Text>
-        <Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
+        {queueName === 'PRICESIGN'
+          ? (
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={signSize}
+                onValueChange={(paperSize: PrintPaperSize) => setSignSize(paperSize)}
+                mode="dropdown"
+              >
+                {addPaperSizesToPicker(getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode))}
+              </Picker>
+
+            </View>
+          )
+          : (<Text>{`${strings(`PRINT.${itemToEdit.paperSize}`)}`}</Text>
+          )}
       </View>
       <View style={styles.printerContainer}>
         <View style={styles.printerAlignment}>

@@ -184,7 +184,12 @@ export default {
     PRICE_SIGNS: '价格标签',
     LOCATIONS: '位置',
     PRICE_SIGN_SUCCESS: '价格标签打印成功',
-    PRINTER_NOT_ASSIGNED: '未分配打印机'
+    PRINTER_NOT_ASSIGNED: '未分配打印机',
+    Was_Large: '原价-大',
+    Was_Medium: '原价-中',
+    Was_Small: '原价-小',
+    Was_XSmall: '原价-超小',
+    INVALID_SIZE: '由于标签尺寸无效，部份商品无法打印'
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
@@ -509,6 +514,7 @@ export default {
     NO_LOCATION_AVAILABLE: '无位置信息',
     SCAN_PALLET_ERROR: '扫描的卡板必须和关联的商品匹配',
     COMPLETE_AUDIT_ITEM_SUCCESS: '成功-商品盘点完成成功',
-    COMPLETE_AUDIT_ITEM_ERROR: '失败-商品盘点完成失败，请重试'
+    COMPLETE_AUDIT_ITEM_ERROR: '失败-商品盘点完成失败，请重试',
+    OPEN_AUDIT_LABEL: '计划外盘点'
   }
 };

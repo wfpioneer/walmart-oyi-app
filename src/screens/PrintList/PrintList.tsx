@@ -14,8 +14,8 @@ import { strings } from '../../locales';
 import styles from './PrintList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem, PrintQueueItemType,
-  Printer, PrinterType, PrintingType
+  PrintItemList, PrintLocationList, PrintQueueAPIMultistatus, PrintQueueItem,
+  PrintQueueItemType, Printer, PrinterType, PrintingType
 } from '../../models/Printer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
@@ -50,44 +50,51 @@ interface PrintListProps {
   setItemIndexToEdit: React.Dispatch<React.SetStateAction<number>>;
   countryCode: string;
 }
+export interface PrintQueueItemSize extends PrintQueueItem {
+  isSizeValid: boolean;
+}
 
 export const printItemApiEffect = (
   printAPI: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
+  printQueue: PrintQueueItemSize[],
+  tabName: PrintTab
 ): void => {
-  if (!printAPI.isWaiting && printAPI.result) {
-    if (printAPI.result.status === 207) {
-      const { data } = printAPI.result;
-      const succeededItemNbrs: number[] = [];
-      const succeededUpcs: string[] = [];
-      data.filter((item: PrintQueueAPIMultistatus) => item.completed)
-        .forEach((item: PrintQueueAPIMultistatus) => {
-          if (item.itemNbr) {
-            succeededItemNbrs.push(item.itemNbr);
-          } else {
-            succeededUpcs.push(item.upcNbr);
-          }
+  if (tabName === 'PRICESIGN') {
+    if (!printAPI.isWaiting && printAPI.result) {
+      if (printAPI.result.status === 207) {
+        const { data } = printAPI.result;
+        const succeededItemNbrs: number[] = [];
+        const succeededUpcs: string[] = [];
+        data.filter((item: PrintQueueAPIMultistatus) => item.completed)
+          .forEach((item: PrintQueueAPIMultistatus) => {
+            if (item.itemNbr) {
+              succeededItemNbrs.push(item.itemNbr);
+            } else {
+              succeededUpcs.push(item.upcNbr);
+            }
+          });
+        dispatch(removeMultipleFromPrintQueueByItemNbr(succeededItemNbrs));
+        dispatch(removeMultipleFromPrintQueueByUpc(succeededUpcs));
+        Toast.show({
+          type: 'info',
+          text1: strings('PRINT.SOME_PRINTS_FAILED'),
+          visibilityTime: 4000,
+          position: 'bottom'
         });
-      dispatch(removeMultipleFromPrintQueueByItemNbr(succeededItemNbrs));
-      dispatch(removeMultipleFromPrintQueueByUpc(succeededUpcs));
-      Toast.show({
-        type: 'info',
-        text1: strings('PRINT.SOME_PRINTS_FAILED'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
-    } else {
-      Toast.show({
-        type: 'success',
-        text1: strings('PRINT.PRICE_SIGN_SUCCESS'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
-      dispatch(setPrintQueue([]));
-      navigation.goBack();
+      } else {
+        Toast.show({
+          type: 'success',
+          text1: strings('PRINT.PRICE_SIGN_SUCCESS'),
+          visibilityTime: 4000,
+          position: 'bottom'
+        });
+        const updatedPrintQueue = printQueue.filter(item => !item.isSizeValid);
+        dispatch(setPrintQueue(updatedPrintQueue));
+        navigation.goBack();
+      }
     }
-    return undefined;
   }
 
   // on api failure
@@ -99,34 +106,35 @@ export const printItemApiEffect = (
       position: 'bottom'
     });
   }
-
-  return undefined;
 };
 
 export const locationLabelsApiEffect = (
   printLabelAPI: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
+  tabName: PrintTab
 ): void => {
-  // on api success
-  if (!printLabelAPI.isWaiting && printLabelAPI.result) {
-    dispatch(clearLocationPrintQueue());
-    Toast.show({
-      type: 'success',
-      text1: strings('PRINT.LOCATION_SUCCESS'),
-      visibilityTime: 4000,
-      position: 'bottom'
-    });
-    navigation.goBack();
-  }
-  // on api failure
-  if (!printLabelAPI.isWaiting && printLabelAPI.error) {
-    Toast.show({
-      type: 'error',
-      text1: strings('PRINT.PRINT_SERVICE_ERROR'),
-      visibilityTime: 4000,
-      position: 'bottom'
-    });
+  if (tabName === 'LOCATION') {
+    // on api success
+    if (!printLabelAPI.isWaiting && printLabelAPI.result) {
+      dispatch(clearLocationPrintQueue());
+      Toast.show({
+        type: 'success',
+        text1: strings('PRINT.LOCATION_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      navigation.goBack();
+    }
+    // on api failure
+    if (!printLabelAPI.isWaiting && printLabelAPI.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PRINT.PRINT_SERVICE_ERROR'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
   }
 };
 
@@ -165,7 +173,7 @@ export const NoPrintQueueMessage = (): JSX.Element => (
   </View>
 );
 const handlePrint = (
-  printQueue: PrintQueueItem[],
+  printQueue: PrintQueueItemSize[],
   tabName: PrintTab,
   selectedPrinterId: string | undefined,
   navigation: NavigationProp<any>,
@@ -189,7 +197,7 @@ const handlePrint = (
     } else {
       const paperSizeObj = getPaperSizeBasedOnCountry(PrinterType.LASER, countryCode);
       const printArray: PrintItemList[] = printQueue
-        .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM)
+        .filter(printItem => printItem.itemType === PrintQueueItemType.ITEM && printItem.isSizeValid)
         .map(printItem => {
           const {
             itemNbr, signQty, paperSize, worklistType
@@ -232,6 +240,13 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
   } = props;
   const queueLength = printQueue.length;
 
+  const paperSizeObj = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
+  const updatePrintQueue: PrintQueueItemSize[] = printQueue.map(printItem => ({
+    ...printItem,
+    // @ts-expect-error needed because typechecking error
+    isSizeValid: paperSizeObj[printItem.paperSize] !== undefined
+  }));
+
   // Navigation Listener
   useEffectHook(() => {
     // Resets Print api response data when navigating off-screen
@@ -248,6 +263,8 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
     printAPI,
     dispatch,
     navigation,
+    updatePrintQueue,
+    tabName
   ), [printAPI]);
 
   // Print Location Label API
@@ -255,8 +272,8 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
     printLocationAPI,
     dispatch,
     navigation,
+    tabName
   ), [printLocationAPI]);
-
   return (
     <View style={styles.container}>
       <CustomModalComponent
@@ -269,27 +286,29 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
         <PrintQueueEdit
           itemIndexToEdit={itemIndexToEdit}
           setItemIndexToEdit={setItemIndexToEdit}
-          printQueue={printQueue}
+          printQueue={updatePrintQueue}
           queueName={tabName}
           selectedPrinter={selectedPrinter}
+          countryCode={countryCode}
         />
       </CustomModalComponent>
-      {printQueue.length !== 0 && (
+      {updatePrintQueue.length !== 0 && (
       <Text style={styles.itemText}>
         {`${queueLength} ${queueLength !== 1
           ? strings('GENERICS.ITEMS') : strings('GENERICS.ITEM')}`}
       </Text>
       )}
       <FlatList
-        data={printQueue}
-        keyExtractor={(item: PrintQueueItem) => item?.itemName + item?.paperSize}
+        data={updatePrintQueue}
+        keyExtractor={(item: PrintQueueItemSize) => item?.itemName + item?.paperSize}
         renderItem={({ item, index }) => (
           <PrintQueueItemCard
             jobName={item.itemName}
             nbrOfCopies={item.signQty}
             size={item.paperSize}
             editCallback={() => setItemIndexToEdit(index)}
-            deleteCallback={handleDeleteAction(index, printQueue, navigation, route, dispatch, tabName)}
+            deleteCallback={handleDeleteAction(index, updatePrintQueue, navigation, route, dispatch, tabName)}
+            isSizeValid={item.isSizeValid}
           />
         )}
         ListEmptyComponent={<NoPrintQueueMessage />}
@@ -306,6 +325,8 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
         </View>
       ) : (
         <View style={styles.footerContainer}>
+          {updatePrintQueue.some(item => !item.isSizeValid)
+          && (<Text style={styles.errorText}>{strings('PRINT.INVALID_SIZE')}</Text>)}
           <View style={styles.printerNameContainer}>
             <View style={styles.printTextPadding}>
               <MaterialCommunityIcons name="printer-check" size={24} />
@@ -321,9 +342,9 @@ export const PrintListsScreen = (props: PrintListProps): JSX.Element => {
               type={ButtonType.PRIMARY}
               style={styles.footerBtn}
               onPress={() => handlePrint(
-                printQueue, tabName, selectedPrinter?.id, navigation, route, dispatch, countryCode
+                updatePrintQueue, tabName, selectedPrinter?.id, navigation, route, dispatch, countryCode
               )}
-              disabled={printQueue.length < 1}
+              disabled={updatePrintQueue.length < 1 || updatePrintQueue.every(item => !item.isSizeValid)}
             />
           </View>
         </View>
