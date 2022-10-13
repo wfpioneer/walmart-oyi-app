@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with continue disabled 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-around",
+      "paddingHorizontal": 10,
+      "paddingVertical": 5,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "fontWeight": "500",
+        }
+      }
+    >
+      20 [missing "en.GENERICS.ITEMS" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 45,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#5FA7F2",
+              "borderRadius": 5,
+              "elevation": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="btnContinue"
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ffffffff",
+                "fontFamily": "Roboto-Medium",
+                "fontSize": 16,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            [missing "en.GENERICS.CONTINUE" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with continue enabled 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-around",
+      "paddingHorizontal": 10,
+      "paddingVertical": 5,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "fontWeight": "500",
+        }
+      }
+    >
+      20 [missing "en.GENERICS.ITEMS" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 45,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#0071e9",
+              "borderRadius": 5,
+              "elevation": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="btnContinue"
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ffffffff",
+                "fontFamily": "Roboto-Medium",
+                "fontSize": 16,
+                "fontWeight": "normal",
+              }
+            }
+          >
+            [missing "en.GENERICS.CONTINUE" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

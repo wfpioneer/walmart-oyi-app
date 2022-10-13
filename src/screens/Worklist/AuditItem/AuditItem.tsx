@@ -29,6 +29,7 @@ import ManualScanComponent from '../../../components/manualscan/ManualScan';
 import { strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
 import { resetScannedEvent, setScannedEvent } from '../../../state/actions/Global';
+import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreenFooter';
 
 import {
   DELETE_LOCATION,
@@ -50,7 +51,7 @@ import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard
 import { setupScreen } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import {
-  setFloorLocations, setItemDetails, setReserveLocations, setScannedPalletId, updatePalletQty
+  clearAuditScreenData, setFloorLocations, setItemDetails, setReserveLocations, setScannedPalletId, updatePalletQty
 } from '../../../state/actions/AuditItemScreen';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
@@ -422,6 +423,12 @@ export const renderDeleteLocationModal = (
   </CustomModalComponent>
 );
 
+export const disabledContinue = (
+  floorLocations: Location[],
+  reserveLocations: ItemPalletInfo[]
+) : boolean => floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1)
+  || reserveLocations.some(loc => (!loc.scanned || (loc.newQty || loc.quantity || -1) < 0));
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -542,6 +549,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('refresh_item_details', { itemNumber });
+      dispatch(clearAuditScreenData());
       dispatch({ type: GET_ITEM_DETAILS.RESET });
       dispatch(getItemDetails({ id: itemNumber }));
       dispatch(getItemPallets({ itemNbr: itemNumber }));
@@ -701,7 +709,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               onRetry={handleReserveLocsRetry}
             />
           </View>
-          <View style={styles.marginBottomStyle}>
+          <View>
             <OtherOHItemCard
               flyCloudInTransitOH={itemDetails?.inTransitCloudQty || 0}
               flyCloudOH={itemDetails?.cloudQty || 0}
@@ -713,7 +721,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
-
+      <View style={styles.footer}>
+        <AuditScreenFooter
+          totalCount={calculateTotalOHQty(floorLocations, reserveLocations, itemDetails)}
+          onContinueClick={handleContinueAction}
+          disabledContinue={disabledContinue(floorLocations, reserveLocations)}
+        />
+      </View>
     </>
   );
 };

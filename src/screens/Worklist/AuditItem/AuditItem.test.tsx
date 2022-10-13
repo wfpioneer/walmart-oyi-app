@@ -15,14 +15,15 @@ import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen, AuditItemScreenProps, addLocationHandler, calculateTotalOHQty, completeItemApiHook,
-  deleteFloorLocationApiHook, getItemDetailsApiHook, getScannedPalletEffect, getlocationsApiResult, isError,
-  onValidateItemNumber, renderDeleteLocationModal, renderpalletQtyUpdateModal
+  deleteFloorLocationApiHook, disabledContinue, getItemDetailsApiHook, getScannedPalletEffect,
+  getlocationsApiResult, isError, onValidateItemNumber, renderDeleteLocationModal, renderpalletQtyUpdateModal
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { itemPallets } from '../../../mockData/getItemPallets';
+import { ItemPalletInfo } from '../../../models/AuditItem';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -521,6 +522,47 @@ describe('AuditItemScreen', () => {
       const totalCountResult = calculateTotalOHQty(mockFloorLocations, mockReserveLocations, itemDetails);
       const expectedCount = 37;
       expect(totalCountResult).toBe(expectedCount);
+    });
+
+    it('Test disabledContinue functionality return true when any of the locaion is empty', () => {
+      const mockFloorLocations = mockItemDetails.location.floor;
+      const mockReserveLocations = itemPallets.pallets;
+
+      expect(disabledContinue(mockFloorLocations, mockReserveLocations)).toBe(true);
+    });
+    it(`Test disabledContinue functionality return true 
+      when all of the locaion qty is present and reserve pallet is not scanned`, () => {
+      const mockFloorLocations = [{ ...mockItemDetails.location.floor[0], newQty: 10 }];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: undefined,
+          scanned: false
+        }
+      ];
+
+      expect(disabledContinue(mockFloorLocations, mockReserveLocations)).toBe(true);
+    });
+    it(`Test disabledContinue functionality return false 
+      when all of the locaion qty is present and reserve pallet is scanned`, () => {
+      const mockFloorLocations = [{ ...mockItemDetails.location.floor[0], newQty: 10 }];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: undefined,
+          scanned: true
+        }
+      ];
+
+      expect(disabledContinue(mockFloorLocations, mockReserveLocations)).toBe(false);
     });
   });
 });
