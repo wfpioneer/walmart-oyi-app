@@ -89,11 +89,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     color: COLOR.GREEN,
     marginLeft: 30
-  },
-  noOHChange: {
-    fontSize: 15,
-    alignSelf: 'center',
-    marginLeft: 30
   }
 });
 

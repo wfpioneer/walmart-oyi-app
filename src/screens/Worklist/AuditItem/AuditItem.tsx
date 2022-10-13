@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
 import { AxiosError } from 'axios';
+import moment from 'moment';
 import { CustomModalComponent } from '../../Modal/Modal';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
 import { trackEvent } from '../../../utils/AppCenterTool';
@@ -31,14 +32,16 @@ import {
   DELETE_LOCATION,
   GET_ITEM_DETAILS,
   GET_ITEM_PALLETS,
-  NO_ACTION
+  NO_ACTION,
+  UPDATE_OH_QTY
 } from '../../../state/actions/asyncAPI';
 import {
   deleteLocation,
   getItemDetails,
   getItemPallets,
   getLocationDetails,
-  noAction
+  noAction,
+  updateOHQty
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
@@ -50,6 +53,8 @@ import { setFloorLocations, setItemDetails, setReserveLocations } from '../../..
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import Button from '../../../components/buttons/Button';
+import { UseStateType } from '../../../models/Generics.d';
+import { approvalRequestSource } from '../../../models/ApprovalListItem';
 
 export interface AuditItemScreenProps {
     scannedEvent: { value: string | null; type: string | null; };
@@ -58,6 +63,8 @@ export interface AuditItemScreenProps {
     getLocationApi: AsyncState;
     getItemPalletsApi: AsyncState;
     deleteFloorLocationApi: AsyncState;
+    updateOHQtyApi: AsyncState;
+    completeItemApi: AsyncState;
     userId: string;
     floorLocations: Location[];
     reserveLocations: ItemPalletInfo[];
@@ -75,7 +82,6 @@ export interface AuditItemScreenProps {
     showItemNotFoundMsg: boolean;
     setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
     itemDetails: ItemDetails | null;
-    completeItemApi: AsyncState;
     showDeleteConfirmationModal: boolean;
     setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
     locToConfirm: {
@@ -90,6 +96,7 @@ export interface AuditItemScreenProps {
       locationIndex: number;
       locationTypeNbr: number;
     }>>;
+    showOnHandsConfirmState: UseStateType<boolean>;
   }
 
 export const isError = (
@@ -290,6 +297,35 @@ export const completeItemApiHook = (
   }
 };
 
+export const updateOHQtyApiHook = (
+  updateOHQtyApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (navigation.isFocused()) {
+    if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      dispatch({ type: UPDATE_OH_QTY.RESET });
+      setShowOnHandsConfirmationModal(false);
+      navigation.goBack();
+    }
+    if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    }
+  }
+};
+
 export const calculateTotalOHQty = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
@@ -309,9 +345,6 @@ export const calculateTotalOHQty = (
 };
 
 const qtyStyleChange = (oldQty: number, newQty: number): Record<string, unknown> => {
-  if (oldQty === 0 && newQty === 0) {
-    return styles.noOHChange;
-  }
   if (newQty > oldQty) {
     return styles.positiveChange;
   }
@@ -368,60 +401,94 @@ export const renderDeleteLocationModal = (
 );
 
 export const renderConfirmOnHandsModal = (
-  currentQuantity: number,
+  updateOHQtyApi: AsyncState,
+  showOnHandsConfirmationModal: boolean,
+  setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   updatedQuantity: number,
-  basePrice: number
+  itemDetails: ItemDetails | null,
+  dispatch: Dispatch<any>
 ) => {
-  const changeQuantity = updatedQuantity - currentQuantity;
+  const onHandsQty = itemDetails?.onHandsQty || 0;
+  const basePrice = itemDetails?.basePrice || 0;
+  const changeQuantity = updatedQuantity - onHandsQty;
   const priceChange = basePrice * changeQuantity;
   const priceLimit = 1000.0;
   return (
     <CustomModalComponent
-      isVisible={true}
-      onClose={() => console.log('empty')}
+      isVisible={showOnHandsConfirmationModal}
+      onClose={() => setShowOnHandsConfirmationModal(false)}
       modalType="Popup"
     >
-      {Math.abs(priceChange) > priceLimit
-      && <MaterialCommunityIcon name="alert" size={40} color={COLOR.ORANGE} /> }
-      <Text style={styles.confirmText}>{strings('AUDITS.CONFIRM_AUDIT')}</Text>
-      {Math.abs(priceChange) > priceLimit && <Text>{strings('AUDITS.LARGE_CURRENCY_CHANGE')}</Text>}
-      <View style={styles.modalQuantityRow}>
-        <Text style={styles.rowQuantityTitle}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
-        <Text style={styles.rowQuantity}>{currentQuantity}</Text>
-      </View>
-      <View style={styles.modalQuantityRow}>
-        <Text style={styles.rowQuantityTitle}>{strings('GENERICS.CHANGE')}</Text>
-        <Text style={qtyStyleChange(currentQuantity, updatedQuantity)}>
-          <MaterialCommunityIcon
-            name={updatedQuantity > currentQuantity
-              ? 'arrow-up-bold' : 'arrow-down-bold'}
-            size={16}
-          />
-          {currencies(priceChange)}
-        </Text>
-        <Text style={qtyStyleChange(currentQuantity, updatedQuantity)}>{changeQuantity}</Text>
-      </View>
-      <View style={styles.updatedQtyRow}>
-        <Text style={styles.rowQuantityTitle}>{strings('AUDITS.UPDATED_QTY')}</Text>
-        <Text style={styles.rowQuantity}>{updatedQuantity}</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
-          title={strings('APPROVAL.GO_BACK')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          testID="modal-cancel-button"
-          onPress={undefined}
-          type={2}
+      {updateOHQtyApi.isWaiting ? (
+        <ActivityIndicator
+          animating={updateOHQtyApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
         />
-        <Button
-          style={styles.button}
-          title={strings('GENERICS.OK')}
-          testID="modal-confirm-button"
-          backgroundColor={COLOR.MAIN_THEME_COLOR}
-          onPress={undefined}
-        />
-      </View>
+      )
+        : (
+          <>
+            {Math.abs(priceChange) > priceLimit
+               && <MaterialCommunityIcon name="alert" size={40} color={COLOR.ORANGE} /> }
+            <Text style={styles.confirmText}>{strings('AUDITS.CONFIRM_AUDIT')}</Text>
+            {Math.abs(priceChange) > priceLimit && <Text>{strings('AUDITS.LARGE_CURRENCY_CHANGE')}</Text>}
+            <View style={styles.modalQuantityRow}>
+              <Text style={styles.rowQuantityTitle}>{strings('APPROVAL.CURRENT_QUANTITY')}</Text>
+              <Text style={styles.rowQuantity}>{onHandsQty}</Text>
+            </View>
+            <View style={styles.modalQuantityRow}>
+              <Text style={styles.rowQuantityTitle}>{strings('GENERICS.CHANGE')}</Text>
+              <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>
+                <MaterialCommunityIcon
+                  name={updatedQuantity > onHandsQty
+                    ? 'arrow-up-bold' : 'arrow-down-bold'}
+                  size={16}
+                />
+                {currencies(priceChange)}
+              </Text>
+              <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>{changeQuantity}</Text>
+            </View>
+            <View style={styles.updatedQtyRow}>
+              <Text style={styles.rowQuantityTitle}>{strings('AUDITS.UPDATED_QTY')}</Text>
+              <Text style={styles.rowQuantity}>{updatedQuantity}</Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <Button
+                style={styles.button}
+                title={strings('APPROVAL.GO_BACK')}
+                titleColor={COLOR.MAIN_THEME_COLOR}
+                testID="modal-cancel-button"
+                onPress={() => setShowOnHandsConfirmationModal(false)}
+                type={2}
+              />
+              <Button
+                style={styles.button}
+                title={strings('GENERICS.SUBMIT')}
+                testID="modal-confirm-button"
+                backgroundColor={COLOR.MAIN_THEME_COLOR}
+                onPress={() => {
+                  dispatch(updateOHQty({
+                    data: {
+                      ...itemDetails,
+                      approvalRequestSource: approvalRequestSource.Audits,
+                      categoryNbr: itemDetails?.categoryNbr,
+                      dollarChange: priceChange,
+                      initiatedTimestamp: moment().toISOString(),
+                      itemName: itemDetails?.itemName,
+                      itemNbr: itemDetails?.itemNbr,
+                      newQuantity: updatedQuantity,
+                      oldQuantity: onHandsQty,
+                      upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
+                    }
+                  }));
+                }}
+                disabled={itemDetails === null}
+              />
+            </View>
+          </>
+        )}
     </CustomModalComponent>
   );
 };
@@ -431,6 +498,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     getLocationApi,
     getItemDetailsApi,
     deleteFloorLocationApi,
+    updateOHQtyApi,
     userId,
     route,
     dispatch,
@@ -450,9 +518,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     showDeleteConfirmationModal,
     setShowDeleteConfirmationModal,
     locToConfirm,
-    setLocToConfirm
+    setLocToConfirm,
+    showOnHandsConfirmState
   } = props;
 
+  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
   const totalOHQty = calculateTotalOHQty(floorLocations, reserveLocations, itemDetails);
 
   // call get Item details
@@ -497,6 +567,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     ),
     [deleteFloorLocationApi]
   );
+
+  // Update OH quantity API
+  useEffectHook(() => updateOHQtyApiHook(
+    updateOHQtyApi,
+    dispatch,
+    navigation,
+    setShowOnHandsConfirmationModal
+  ));
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
@@ -603,6 +681,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       dispatch(noAction({ upc: itemDetails?.upcNbr || '', itemNbr: itemNumber, scannedValue: itemNumber.toString() }));
     } else {
       // TODO: This logic has to be handled in INTLSAOPS-7839
+      setShowOnHandsConfirmationModal(true);
     }
   };
 
@@ -627,7 +706,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         deleteLocationConfirmed,
         locToConfirm.locationName
       )}
-      {renderConfirmOnHandsModal(itemDetails?.onHandsQty || 0, totalOHQty, itemDetails?.basePrice || 0)}
+      {renderConfirmOnHandsModal(
+        updateOHQtyApi,
+        showOnHandsConfirmationModal,
+        setShowOnHandsConfirmationModal,
+        totalOHQty,
+        itemDetails,
+        dispatch
+      )}
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />}
       <View style={styles.itemCardContainer}>
         <ItemCard
@@ -696,6 +782,7 @@ const AuditItem = (): JSX.Element => {
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
+  const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const { userId } = useTypedSelector(state => state.User);
   const userFeatures = useTypedSelector(state => state.User.features);
   const userConfigs = useTypedSelector(state => state.User.configs);
@@ -708,6 +795,7 @@ const AuditItem = (): JSX.Element => {
   const { itemDetails, floorLocations, reserveLocations } = useTypedSelector(state => state.AuditItemScreen);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+  const showOnHandsConfirmState = useState(true);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
@@ -720,6 +808,8 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsApi={getItemPalletsApi}
       deleteFloorLocationApi={deleteFloorLocationApi}
       getLocationApi={getLocationApi}
+      updateOHQtyApi={updateOHQtyApi}
+      completeItemApi={completeItemApi}
       route={route}
       dispatch={dispatch}
       navigation={navigation}
@@ -737,11 +827,11 @@ const AuditItem = (): JSX.Element => {
       itemDetails={itemDetails}
       floorLocations={floorLocations}
       reserveLocations={reserveLocations}
-      completeItemApi={completeItemApi}
       showDeleteConfirmationModal={showDeleteConfirmationModal}
       setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
       locToConfirm={locToConfirm}
       setLocToConfirm={setLocToConfirm}
+      showOnHandsConfirmState={showOnHandsConfirmState}
     />
   );
 };
