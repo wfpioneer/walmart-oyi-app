@@ -44,6 +44,7 @@ import {
   resetScannedEvent,
   setScannedEvent
 } from '../../../state/actions/Global';
+import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreenFooter';
 
 import {
   DELETE_LOCATION,
@@ -69,6 +70,7 @@ import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard
 import { setupScreen } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import {
+  clearAuditScreenData,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
@@ -228,9 +230,9 @@ export const getLocationsApiHook = (
 ) => {
   if (navigation.isFocused()) {
     if (
-      !getLocationApi.isWaiting
-      && getLocationApi.result
-      && getLocationApi.value?.itemNbr === itemNumber
+      !getLocationApi.isWaiting &&
+      getLocationApi.result &&
+      getLocationApi.value?.itemNbr === itemNumber
     ) {
       getlocationsApiResult(getLocationApi, dispatch);
     }
@@ -247,8 +249,8 @@ export const getItemDetailsApiHook = (
     // on api success
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
       if (
-        getItemDetailsApi.result.status === 200
-        || getItemDetailsApi.result.status === 207
+        getItemDetailsApi.result.status === 200 ||
+        getItemDetailsApi.result.status === 207
       ) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
@@ -295,8 +297,8 @@ export const deleteFloorLocationApiHook = (
         dispatch({ type: DELETE_LOCATION.RESET });
       }
     } else if (
-      !deleteFloorLocationApi.isWaiting
-      && deleteFloorLocationApi.error
+      !deleteFloorLocationApi.isWaiting &&
+      deleteFloorLocationApi.error
     ) {
       setShowDeleteConfirmationModal(false);
       Toast.show({
@@ -463,10 +465,11 @@ export const calculateTotalOHQty = (
     },
     0
   );
-  const otherOHTotalCount = (itemDetails?.claimsOnHandQty || 0)
-    + (itemDetails?.inTransitCloudQty || 0)
-    + (itemDetails?.cloudQty || 0)
-    + (itemDetails?.consolidatedOnHandQty || 0);
+  const otherOHTotalCount =
+    (itemDetails?.claimsOnHandQty || 0) +
+    (itemDetails?.inTransitCloudQty || 0) +
+    (itemDetails?.cloudQty || 0) +
+    (itemDetails?.consolidatedOnHandQty || 0);
   return floorLocationsCount + reserveLocationsCount + otherOHTotalCount;
 };
 
@@ -648,6 +651,17 @@ export const renderConfirmOnHandsModal = (
     </CustomModalComponent>
   );
 };
+export const disabledContinue = (
+  floorLocations: Location[],
+  reserveLocations: ItemPalletInfo[],
+  scanRequired: boolean
+): boolean =>
+  floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1) ||
+  reserveLocations.some(
+    loc =>
+      (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
+  );
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent,
@@ -703,17 +717,19 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   }, []);
 
   useEffectHook(
-    () => getScannedPalletEffect(
-      navigation,
-      scannedEvent,
-      reserveLocations,
-      dispatch,
-      setShowPalletQtyUpdateModal
-    ),
+    () =>
+      getScannedPalletEffect(
+        navigation,
+        scannedEvent,
+        reserveLocations,
+        dispatch,
+        setShowPalletQtyUpdateModal
+      ),
     [scannedEvent]
   );
 
-  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
+  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] =
+    showOnHandsConfirmState;
   const totalOHQty = calculateTotalOHQty(
     floorLocations,
     reserveLocations,
@@ -738,12 +754,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Item Details UPC api
   useEffectHook(
-    () => getItemDetailsApiHook(
-      getItemDetailsApi,
-      dispatch,
-      navigation,
-      setShowItemNotFoundMsg
-    ),
+    () =>
+      getItemDetailsApiHook(
+        getItemDetailsApi,
+        dispatch,
+        navigation,
+        setShowItemNotFoundMsg
+      ),
     [getItemDetailsApi]
   );
 
@@ -761,30 +778,34 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Delete Location API
   useEffectHook(
-    () => deleteFloorLocationApiHook(
-      deleteFloorLocationApi,
-      itemNumber,
-      dispatch,
-      navigation,
-      setShowDeleteConfirmationModal,
-      locToConfirm.locationName
-    ),
+    () =>
+      deleteFloorLocationApiHook(
+        deleteFloorLocationApi,
+        itemNumber,
+        dispatch,
+        navigation,
+        setShowDeleteConfirmationModal,
+        locToConfirm.locationName
+      ),
     [deleteFloorLocationApi]
   );
 
   // Update OH quantity API
-  useEffectHook(() => updateOHQtyApiHook(
-    updateOHQtyApi,
-    dispatch,
-    navigation,
-    setShowOnHandsConfirmationModal
-  ));
+  useEffectHook(() =>
+    updateOHQtyApiHook(
+      updateOHQtyApi,
+      dispatch,
+      navigation,
+      setShowOnHandsConfirmationModal
+    )
+  );
 
   if (
-    !getItemDetailsApi.isWaiting
-    && (getItemDetailsApi.error || (itemDetails && itemDetails.message))
+    !getItemDetailsApi.isWaiting &&
+    (getItemDetailsApi.error || (itemDetails && itemDetails.message))
   ) {
-    const message = itemDetails && itemDetails.message ? itemDetails.message : undefined;
+    const message =
+      itemDetails && itemDetails.message ? itemDetails.message : undefined;
     return isError(
       getItemDetailsApi.error,
       dispatch,
@@ -815,6 +836,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     validateSessionCall(navigation, route.name)
       .then(() => {
         trackEventCall('refresh_item_details', { itemNumber });
+        dispatch(clearAuditScreenData());
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemNumber }));
         dispatch(getItemPallets({ itemNbr: itemNumber }));
@@ -994,7 +1016,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               onRetry={handleReserveLocsRetry}
             />
           </View>
-          <View style={styles.marginBottomStyle}>
+          <View>
             <OtherOHItemCard
               flyCloudInTransitOH={itemDetails?.inTransitCloudQty || 0}
               flyCloudOH={itemDetails?.cloudQty || 0}
@@ -1006,6 +1028,21 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
+      <View style={styles.footer}>
+        <AuditScreenFooter
+          totalCount={calculateTotalOHQty(
+            floorLocations,
+            reserveLocations,
+            itemDetails
+          )}
+          onContinueClick={handleContinueAction}
+          disabledContinue={disabledContinue(
+            floorLocations,
+            reserveLocations,
+            userConfig.scanRequired
+          )}
+        />
+      </View>
     </>
   );
 };
@@ -1035,12 +1072,13 @@ const AuditItem = (): JSX.Element => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
-  const {
-    itemDetails, floorLocations, reserveLocations, scannedPalletId
-  } = useTypedSelector(state => state.AuditItemScreen);
-  const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
+  const { itemDetails, floorLocations, reserveLocations, scannedPalletId } =
+    useTypedSelector(state => state.AuditItemScreen);
+  const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] =
+    useState(false);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
-  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] =
+    useState(false);
   const showOnHandsConfirmState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',

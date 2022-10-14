@@ -42,8 +42,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    paddingHorizontal: 10,
-    color: COLOR.BLACK
+    paddingHorizontal: 10
   },
   message: {
     textAlign: 'center',
@@ -89,6 +88,11 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     color: COLOR.GREEN,
     marginLeft: 30
+  },
+  footer: {
+    height: 60,
+    borderTopWidth: 4,
+    borderTopColor: COLOR.GREY_200
   }
 });
 
