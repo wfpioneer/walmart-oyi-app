@@ -5,6 +5,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
   style={
     Object {
       "flexDirection": "row",
+      "flexWrap": "wrap",
       "marginVertical": 4,
     }
   }
@@ -12,92 +13,182 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.XSmall\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Small\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Medium\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Large\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#0071e9"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Wine\\" translation]"
+    titleAlign="center"
     titleColor="#ffffffff"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_Large\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_Small\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
   />
 </View>
 `;
@@ -107,6 +198,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
   style={
     Object {
       "flexDirection": "row",
+      "flexWrap": "wrap",
       "marginVertical": 4,
     }
   }
@@ -114,56 +206,62 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
   <Button
     backgroundColor="#0071e9"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.XSmall\\" translation]"
+    titleAlign="center"
     titleColor="#ffffffff"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Small\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Medium\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
 </View>
 `;
@@ -173,6 +271,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
   style={
     Object {
       "flexDirection": "row",
+      "flexWrap": "wrap",
       "marginVertical": 4,
     }
   }
@@ -180,74 +279,162 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
   <Button
     backgroundColor="#0071e9"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.XSmall\\" translation]"
+    titleAlign="center"
     titleColor="#ffffffff"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Small\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Medium\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
   />
   <Button
     backgroundColor="#eeeeee"
     disabled={false}
-    height={25}
+    height={30}
     onPress={[Function]}
     radius={20}
     style={
       Object {
         "marginHorizontal": 6,
+        "marginVertical": 4,
       }
     }
     title="[missing \\"en.PRINT.Large\\" translation]"
+    titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
     titleFontWeight="bold"
     type={1}
-    width={56}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_Large\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_Small\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
+  />
+  <Button
+    backgroundColor="#eeeeee"
+    disabled={false}
+    height={30}
+    onPress={[Function]}
+    radius={20}
+    style={
+      Object {
+        "marginHorizontal": 6,
+        "marginVertical": 4,
+      }
+    }
+    title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+    titleAlign="center"
+    titleColor="#000000"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={1}
+    width="21%"
   />
 </View>
 `;
@@ -411,6 +598,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         style={
           Object {
             "flexDirection": "row",
+            "flexWrap": "wrap",
             "marginVertical": 4,
           }
         }
@@ -418,74 +606,162 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         <Button
           backgroundColor="#0071e9"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
+          titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
         />
       </View>
     </View>
@@ -821,6 +1097,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         style={
           Object {
             "flexDirection": "row",
+            "flexWrap": "wrap",
             "marginVertical": 4,
           }
         }
@@ -828,74 +1105,162 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         <Button
           backgroundColor="#0071e9"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
+          titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
         />
       </View>
     </View>
@@ -1166,6 +1531,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         style={
           Object {
             "flexDirection": "row",
+            "flexWrap": "wrap",
             "marginVertical": 4,
           }
         }
@@ -1173,74 +1539,162 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         <Button
           backgroundColor="#0071e9"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
+          titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
         />
       </View>
     </View>
@@ -1526,6 +1980,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         style={
           Object {
             "flexDirection": "row",
+            "flexWrap": "wrap",
             "marginVertical": 4,
           }
         }
@@ -1533,74 +1988,162 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         <Button
           backgroundColor="#0071e9"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.XSmall\\" translation]"
+          titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Small\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Medium\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
         />
         <Button
           backgroundColor="#eeeeee"
           disabled={false}
-          height={25}
+          height={30}
           onPress={[Function]}
           radius={20}
           style={
             Object {
               "marginHorizontal": 6,
+              "marginVertical": 4,
             }
           }
           title="[missing \\"en.PRINT.Large\\" translation]"
+          titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
           titleFontWeight="bold"
           type={1}
-          width={56}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
+        />
+        <Button
+          backgroundColor="#eeeeee"
+          disabled={false}
+          height={30}
+          onPress={[Function]}
+          radius={20}
+          style={
+            Object {
+              "marginHorizontal": 6,
+              "marginVertical": 4,
+            }
+          }
+          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          titleAlign="center"
+          titleColor="#000000"
+          titleFontSize={12}
+          titleFontWeight="bold"
+          type={1}
+          width="21%"
         />
       </View>
     </View>
