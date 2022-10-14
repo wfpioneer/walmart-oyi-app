@@ -230,9 +230,9 @@ export const getLocationsApiHook = (
 ) => {
   if (navigation.isFocused()) {
     if (
-      !getLocationApi.isWaiting &&
-      getLocationApi.result &&
-      getLocationApi.value?.itemNbr === itemNumber
+      !getLocationApi.isWaiting
+      && getLocationApi.result
+      && getLocationApi.value?.itemNbr === itemNumber
     ) {
       getlocationsApiResult(getLocationApi, dispatch);
     }
@@ -249,8 +249,8 @@ export const getItemDetailsApiHook = (
     // on api success
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
       if (
-        getItemDetailsApi.result.status === 200 ||
-        getItemDetailsApi.result.status === 207
+        getItemDetailsApi.result.status === 200
+        || getItemDetailsApi.result.status === 207
       ) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
@@ -297,8 +297,8 @@ export const deleteFloorLocationApiHook = (
         dispatch({ type: DELETE_LOCATION.RESET });
       }
     } else if (
-      !deleteFloorLocationApi.isWaiting &&
-      deleteFloorLocationApi.error
+      !deleteFloorLocationApi.isWaiting
+      && deleteFloorLocationApi.error
     ) {
       setShowDeleteConfirmationModal(false);
       Toast.show({
@@ -465,11 +465,10 @@ export const calculateTotalOHQty = (
     },
     0
   );
-  const otherOHTotalCount =
-    (itemDetails?.claimsOnHandQty || 0) +
-    (itemDetails?.inTransitCloudQty || 0) +
-    (itemDetails?.cloudQty || 0) +
-    (itemDetails?.consolidatedOnHandQty || 0);
+  const otherOHTotalCount = (itemDetails?.claimsOnHandQty || 0)
+    + (itemDetails?.inTransitCloudQty || 0)
+    + (itemDetails?.cloudQty || 0)
+    + (itemDetails?.consolidatedOnHandQty || 0);
   return floorLocationsCount + reserveLocationsCount + otherOHTotalCount;
 };
 
@@ -549,7 +548,7 @@ export const renderConfirmOnHandsModal = (
   const basePrice = itemDetails?.basePrice || 0;
   const changeQuantity = updatedQuantity - onHandsQty;
   const priceChange = basePrice * changeQuantity;
-  const priceLimit = 1000.0;
+  const priceLimit = Math.abs(priceChange) > 1000.0;
   return (
     <CustomModalComponent
       isVisible={showOnHandsConfirmationModal}
@@ -567,7 +566,7 @@ export const renderConfirmOnHandsModal = (
         />
       ) : (
         <>
-          {Math.abs(priceChange) > priceLimit && (
+          {priceLimit && (
             <MaterialCommunityIcon
               name="alert"
               size={40}
@@ -577,7 +576,7 @@ export const renderConfirmOnHandsModal = (
           <Text style={styles.confirmText}>
             {strings('AUDITS.CONFIRM_AUDIT')}
           </Text>
-          {Math.abs(priceChange) > priceLimit && (
+          {priceLimit && (
             <Text>{strings('AUDITS.LARGE_CURRENCY_CHANGE')}</Text>
           )}
           <View style={styles.modalQuantityRow}>
@@ -655,11 +654,9 @@ export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
   scanRequired: boolean
-): boolean =>
-  floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1) ||
-  reserveLocations.some(
-    loc =>
-      (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
+): boolean => floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1)
+  || reserveLocations.some(
+    loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
 
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
@@ -717,19 +714,17 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   }, []);
 
   useEffectHook(
-    () =>
-      getScannedPalletEffect(
-        navigation,
-        scannedEvent,
-        reserveLocations,
-        dispatch,
-        setShowPalletQtyUpdateModal
-      ),
+    () => getScannedPalletEffect(
+      navigation,
+      scannedEvent,
+      reserveLocations,
+      dispatch,
+      setShowPalletQtyUpdateModal
+    ),
     [scannedEvent]
   );
 
-  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] =
-    showOnHandsConfirmState;
+  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
   const totalOHQty = calculateTotalOHQty(
     floorLocations,
     reserveLocations,
@@ -754,13 +749,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Item Details UPC api
   useEffectHook(
-    () =>
-      getItemDetailsApiHook(
-        getItemDetailsApi,
-        dispatch,
-        navigation,
-        setShowItemNotFoundMsg
-      ),
+    () => getItemDetailsApiHook(
+      getItemDetailsApi,
+      dispatch,
+      navigation,
+      setShowItemNotFoundMsg
+    ),
     [getItemDetailsApi]
   );
 
@@ -778,34 +772,30 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Delete Location API
   useEffectHook(
-    () =>
-      deleteFloorLocationApiHook(
-        deleteFloorLocationApi,
-        itemNumber,
-        dispatch,
-        navigation,
-        setShowDeleteConfirmationModal,
-        locToConfirm.locationName
-      ),
+    () => deleteFloorLocationApiHook(
+      deleteFloorLocationApi,
+      itemNumber,
+      dispatch,
+      navigation,
+      setShowDeleteConfirmationModal,
+      locToConfirm.locationName
+    ),
     [deleteFloorLocationApi]
   );
 
   // Update OH quantity API
-  useEffectHook(() =>
-    updateOHQtyApiHook(
-      updateOHQtyApi,
-      dispatch,
-      navigation,
-      setShowOnHandsConfirmationModal
-    )
-  );
+  useEffectHook(() => updateOHQtyApiHook(
+    updateOHQtyApi,
+    dispatch,
+    navigation,
+    setShowOnHandsConfirmationModal
+  ));
 
   if (
-    !getItemDetailsApi.isWaiting &&
-    (getItemDetailsApi.error || (itemDetails && itemDetails.message))
+    !getItemDetailsApi.isWaiting
+    && (getItemDetailsApi.error || (itemDetails && itemDetails.message))
   ) {
-    const message =
-      itemDetails && itemDetails.message ? itemDetails.message : undefined;
+    const message = itemDetails && itemDetails.message ? itemDetails.message : undefined;
     return isError(
       getItemDetailsApi.error,
       dispatch,
@@ -931,7 +921,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         })
       );
     } else {
-      // TODO: This logic has to be handled in INTLSAOPS-7839
       setShowOnHandsConfirmationModal(true);
     }
   };
@@ -1072,13 +1061,12 @@ const AuditItem = (): JSX.Element => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
-  const { itemDetails, floorLocations, reserveLocations, scannedPalletId } =
-    useTypedSelector(state => state.AuditItemScreen);
-  const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] =
-    useState(false);
+  const {
+    itemDetails, floorLocations, reserveLocations, scannedPalletId
+  } = useTypedSelector(state => state.AuditItemScreen);
+  const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
-  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] =
-    useState(false);
+  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
