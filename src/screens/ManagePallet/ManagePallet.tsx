@@ -7,8 +7,8 @@ import {
   FlatList,
   Keyboard,
   KeyboardAvoidingView,
-  Text,
   Pressable,
+  Text,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -23,9 +23,9 @@ import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Config from 'react-native-config';
 import { validateSession } from '../../utils/sessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import Config from 'react-native-config';
 import COLOR from '../../themes/Color';
 import styles from './ManagePallet.style';
 import { strings } from '../../locales';
@@ -884,17 +884,25 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             {strings('PALLET.SCAN_INSTRUCTIONS')}
           </Text>
         </View>
-        {!items.length && <View style={styles.container}>
+        {!items.length && (
+        <View style={styles.mainContainer}>
           {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
           <View style={styles.scanContainer}>
-            <Pressable onPress={() => Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? openCamera() : null}>
+            <Pressable onPress={() => {
+              if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+                return openCamera();
+              }
+              return null;
+            }}
+            >
               <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
             </Pressable>
             <View style={styles.scanText}>
               <Text>{strings('LOCATION.SCAN_ITEM')}</Text>
             </View>
           </View>
-        </View>}
+        </View>
+        )}
         {getNumberOfDeleted(items) > 0 ? (
           <View style={styles.deletedBanner}>
             <Text style={styles.deleteBannerText}>

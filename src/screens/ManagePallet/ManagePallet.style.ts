@@ -137,15 +137,17 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: COLOR.RED_500,
     paddingBottom: 5
-  }, 
+  },
+  mainContainer: {
+    flex: 2
+  },
   scanContainer: {
     flexDirection: 'column',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    paddingTop: 80
-  }, 
+    width: '100%'
+  },
   scanText: {
     paddingTop: 20
   }
