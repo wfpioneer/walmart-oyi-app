@@ -887,6 +887,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         {!items.length && (
         <View style={styles.mainContainer}>
           {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
+          {!isManualScanEnabled && (
           <View style={styles.scanContainer}>
             <Pressable onPress={() => {
               if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
@@ -901,6 +902,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               <Text>{strings('LOCATION.SCAN_ITEM')}</Text>
             </View>
           </View>
+          )}
         </View>
         )}
         {getNumberOfDeleted(items) > 0 ? (
