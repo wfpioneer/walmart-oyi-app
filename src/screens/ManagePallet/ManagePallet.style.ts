@@ -138,12 +138,9 @@ export default StyleSheet.create({
     color: COLOR.RED_500,
     paddingBottom: 5
   },
-  mainContainer: {
-    flex: 2
-  },
   scanContainer: {
     flexDirection: 'column',
-    flex: 1,
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%'
