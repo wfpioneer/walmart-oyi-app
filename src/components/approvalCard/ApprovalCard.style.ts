@@ -66,10 +66,10 @@ const styles = StyleSheet.create({
     flexShrink: 0
   },
   sourceLabel: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
     color: COLOR.PINK,
-    paddingHorizontal: 5
+    paddingHorizontal: 8
   },
   itemTitleContainer: {
     flex: 1,

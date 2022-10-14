@@ -300,9 +300,9 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
         style={
           Object {
             "color": "#d938ab",
-            "fontSize": 12,
+            "fontSize": 14,
             "fontWeight": "bold",
-            "paddingHorizontal": 5,
+            "paddingHorizontal": 8,
           }
         }
       >
