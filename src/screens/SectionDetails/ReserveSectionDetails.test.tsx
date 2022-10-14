@@ -67,6 +67,8 @@ describe('Tests Reserve Section Details Screen', () => {
           setPalletClicked={jest.fn()}
           userConfig={mockConfig}
           perishableCategories={[]}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -98,6 +100,8 @@ describe('Tests Reserve Section Details Screen', () => {
           setPalletClicked={jest.fn()}
           userConfig={mockConfig}
           perishableCategories={[]}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -131,6 +135,8 @@ describe('Tests Reserve Section Details Screen', () => {
           setPalletClicked={jest.fn()}
           userConfig={mockConfig}
           perishableCategories={[]}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -162,6 +168,8 @@ describe('Tests Reserve Section Details Screen', () => {
           setPalletClicked={jest.fn()}
           userConfig={mockConfig}
           perishableCategories={[]}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -191,6 +199,8 @@ describe('Tests Reserve Section Details Screen', () => {
           setPalletClicked={jest.fn()}
           userConfig={mockConfig}
           perishableCategories={[]}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -219,6 +229,8 @@ describe('Tests Reserve Section Details Screen', () => {
           setPalletClicked={jest.fn()}
           userConfig={mockConfig}
           perishableCategories={[]}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
