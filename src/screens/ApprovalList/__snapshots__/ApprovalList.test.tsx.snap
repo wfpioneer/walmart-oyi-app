@@ -167,6 +167,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
 
 exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem renders an approval item 1`] = `
 <ApprovalCard
+  approvalRequestSource="itemdetails"
   daysLeft={3}
   dispatch={[MockFunction]}
   dollarChange={150.5}

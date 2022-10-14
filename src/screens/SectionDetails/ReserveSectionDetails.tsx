@@ -1,10 +1,11 @@
 import React, {
-  Dispatch, EffectCallback, useEffect, useState
+  DependencyList,
+  Dispatch, EffectCallback, useCallback, useEffect, useState
 } from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
 } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp, useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -41,6 +42,8 @@ interface ReserveSectionDetailsProps {
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
   userConfig: Configurations;
   perishableCategories: number[];
+  useFocusEffectHook: (effect: EffectCallback) => void;
+  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
 }
 // Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
 export const combineReserveArrays = (
@@ -166,27 +169,31 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     configComplete,
     setGetPalletDetailsComplete,
     getPalletConfigApi,
-    perishableCategories
+    perishableCategories,
+    useFocusEffectHook,
+    useCallbackHook
   } = props;
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
   || undefined;
   const reservePallets: ReserveDetailsPallet[] | undefined = (
     getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
 
-  // Navigation Listener
   useEffectHook(() => {
-    navigation.addListener('focus', () => {
-      if (perishableCategories.length === 0) {
-        dispatch(getPalletConfig());
-      } else {
-        setConfigComplete(true);
-      }
-    });
     // Resets Get PalletDetails api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: GET_PALLET_DETAILS.RESET });
     });
   }, []);
+
+  useFocusEffectHook(
+    useCallbackHook(() => {
+      if (perishableCategories.length === 0) {
+        dispatch(getPalletConfig());
+      } else {
+        setConfigComplete(true);
+      }
+    }, [navigation])
+  );
 
   // Get Pallet Details Api
   useEffectHook(() => {
@@ -306,6 +313,8 @@ const ReserveSectionDetails = (): JSX.Element => {
         setPalletClicked={setPalletClicked}
         userConfig={userConfig}
         perishableCategories={perishableCategories}
+        useFocusEffectHook={useFocusEffect}
+        useCallbackHook={useCallback}
       />
     </>
   );
