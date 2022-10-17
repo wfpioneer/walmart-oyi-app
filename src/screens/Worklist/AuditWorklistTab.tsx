@@ -23,6 +23,7 @@ import { updateFilterCategories, updateFilterExceptions } from '../../state/acti
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
+    onRefresh: () => void;
 }
 
 export interface AuditWorklistTabScreenProps {
@@ -38,6 +39,7 @@ export interface AuditWorklistTabScreenProps {
     enableAreaFilter: boolean;
     filterExceptions: string[];
     filterCategories: string[];
+    onRefresh: () => void;
 }
 
 const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispatch: Dispatch<any>) => {
@@ -106,12 +108,8 @@ export const renderFilterPills = (
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
     items, collapsed, setCollapsed, refreshing, dispatch, navigation, error,
-    areas, enableAreaFilter, filterExceptions, filterCategories
+    areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh
   } = props;
-
-  const onRefresh = () => {
-    dispatch(getWorklist({ worklistType: ['AU', 'RA'] }));
-  };
 
   const fullExceptionList = ExceptionList.getInstance();
 
@@ -219,7 +217,6 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           key, itemsBasedOnCategory[key], collapsed, navigation, dispatch
         )}
         keyExtractor={item => `category-${item}`}
-        // TODO: worklist types needs to be updated after Filter component gets completed
         onRefresh={onRefresh}
         refreshing={refreshing}
       />
@@ -228,7 +225,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 };
 
 const AuditWorklistTab = (props: AuditWorklistTabProps) => {
-  const { toDo } = props;
+  const { toDo, onRefresh } = props;
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [collapsed, setCollapsed] = useState(false);
@@ -253,6 +250,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       enableAreaFilter={enableAreaFilter}
       filterExceptions={filterExceptions}
       filterCategories={filterCategories}
+      onRefresh={onRefresh}
     />
   );
 };

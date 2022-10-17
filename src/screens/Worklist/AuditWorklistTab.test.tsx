@@ -34,6 +34,7 @@ describe('AuditWorklistTab', () => {
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
+          onRefresh={() => {}}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -55,6 +56,7 @@ describe('AuditWorklistTab', () => {
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
+          onRefresh={() => {}}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -76,6 +78,7 @@ describe('AuditWorklistTab', () => {
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
+          onRefresh={() => {}}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
@@ -97,6 +100,7 @@ describe('AuditWorklistTab', () => {
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
+          onRefresh={() => {}}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');

@@ -61,16 +61,19 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
   const worklistIndex = wlSummary.findIndex(item => item.worklistGoal === selectedWorklistGoal);
   const disableAuditWL = showRollOverAudit && !isRollOverComplete(wlSummary[worklistIndex]);
 
+  const getAuditWlItems = () => {
+    validateSessionCall(navigation, route.name).then(() => {
+      const auditWlType = ['RA'];
+      if (!disableAuditWL) {
+        auditWlType.push('AU');
+      }
+      dispatch(getWorklist({ worklistType: auditWlType }));
+    });
+  };
   // Get Audit worklist items call
   useFocusEffectHook(
     useCallbackHook(() => {
-      validateSessionCall(navigation, route.name).then(() => {
-        const auditWlType = ['RA'];
-        if (!disableAuditWL) {
-          auditWlType.push('AU');
-        }
-        dispatch(getWorklist({ worklistType: auditWlType }));
-      });
+      getAuditWlItems();
     }, [navigation])
   );
 
@@ -84,8 +87,12 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
         tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
       }}
     >
-      <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoAuditWorklist} />
-      <Tab.Screen name={strings('WORKLIST.COMPLETED')} component={CompletedAuditWorklist} />
+      <Tab.Screen name={strings('WORKLIST.TODO')}>
+        {() => <TodoAuditWorklist onRefresh={getAuditWlItems} />}
+      </Tab.Screen>
+      <Tab.Screen name={strings('WORKLIST.COMPLETED')}>
+        {() => <CompletedAuditWorklist onRefresh={getAuditWlItems} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };
