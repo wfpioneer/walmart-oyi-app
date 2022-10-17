@@ -565,7 +565,7 @@ describe('AuditItemScreen', () => {
         mockReserveLocations,
         itemDetails
       );
-      const expectedCount = 37;
+      const expectedCount = 39;
       expect(totalCountResult).toBe(expectedCount);
     });
 
@@ -743,6 +743,7 @@ describe('AuditItemScreen', () => {
     });
     it('tests getUpdatedReserveLocations', () => {
       const mockItempallets = itemPallets.pallets;
+      mockItempallets[0].newQty = 22;
       const testResults = getUpdatedReserveLocations(mockItempallets, []);
       expect(testResults).toEqual(mockItempallets);
     });
