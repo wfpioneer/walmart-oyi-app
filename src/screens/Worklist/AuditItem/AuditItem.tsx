@@ -51,7 +51,13 @@ import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard
 import { setupScreen } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import {
-  clearAuditScreenData, setFloorLocations, setItemDetails, setReserveLocations, setScannedPalletId, updatePalletQty
+  clearAuditScreenData,
+  setFloorLocations,
+  setItemDetails,
+  setReserveLocations,
+  setScannedPalletId,
+  updateFloorLocationQty,
+  updatePalletQty
 } from '../../../state/actions/AuditItemScreen';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
@@ -171,10 +177,69 @@ export const addLocationHandler = (
   navigation.navigate('AddLocation');
 };
 
-export const getlocationsApiResult = (locationsApi: AsyncState, dispatch: Dispatch<any>) => {
-  const locDetails = (locationsApi.result && locationsApi.result.data);
-  if (locDetails.location && locDetails.location.floor) {
-    dispatch(setFloorLocations(locDetails.location.floor));
+export const calculateFloorLocDecreaseQty = (
+  newOHQty: any,
+  locationName: string,
+  dispatch: Dispatch<any>
+) => {
+  const OH_MIN = 1;
+  const OH_MAX = 9999;
+  if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
+    dispatch(updateFloorLocationQty(locationName, newOHQty - 1));
+  }
+};
+
+export const calculateFloorLocIncreaseQty = (
+  newOHQty: number,
+  locationName: string,
+  dispatch: Dispatch<any>
+) => {
+  const OH_MAX = 9999;
+  if (newOHQty < OH_MAX) {
+    dispatch(updateFloorLocationQty(locationName, (newOHQty || 0) + 1));
+  }
+};
+
+export const calculatePalletDecreaseQty = (
+  newOHQty: any,
+  palletId: string,
+  dispatch: Dispatch<any>
+) => {
+  const OH_MIN = 0;
+  const OH_MAX = 9999;
+  if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
+    dispatch(updatePalletQty(palletId, newOHQty - 1));
+  }
+};
+
+export const calculatePalletIncreaseQty = (
+  newOHQty: any,
+  palletId: string,
+  dispatch: Dispatch<any>,
+) => {
+  const OH_MAX = 9999;
+  if (newOHQty < OH_MAX) {
+    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1));
+  }
+};
+
+export const getFloorLocationsResult = (
+  floorResultsData: Location[] | undefined, dispatch: Dispatch<any>, existingFloorLocations: Location[]
+) => {
+  let updatedFloorLocations = [];
+  if (floorResultsData && floorResultsData.length > 0) {
+    if (existingFloorLocations.length > 0) {
+      updatedFloorLocations = floorResultsData.map((loc: Location) => {
+        const alreadyExistedLocation = existingFloorLocations.find(
+          existingLoc => existingLoc.locationName === `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
+        );
+        return alreadyExistedLocation?.newQty
+          ? { ...loc, newQty: alreadyExistedLocation.newQty } : { ...loc, newQty: loc.qty || 0 };
+      });
+    } else {
+      updatedFloorLocations = floorResultsData.map((loc: Location) => ({ ...loc, newQty: loc.qty || 0 }));
+    }
+    dispatch(setFloorLocations(updatedFloorLocations));
   }
 };
 
@@ -183,10 +248,14 @@ export const getLocationsApiHook = (
   itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
+  existingFloorLocations: Location[]
 ) => {
   if (navigation.isFocused()) {
     if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
-      getlocationsApiResult(getLocationApi, dispatch);
+      const locDetails = getLocationApi.result.data;
+      if (locDetails && locDetails.location && locDetails.location.floor) {
+        getFloorLocationsResult(locDetails.location.floor, dispatch, existingFloorLocations);
+      }
     }
   }
 };
@@ -195,7 +264,8 @@ export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>
+  setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>,
+  existingFloorLocations: Location[]
 ) => {
   if (navigation.isFocused()) {
     // on api success
@@ -203,7 +273,7 @@ export const getItemDetailsApiHook = (
       if (getItemDetailsApi.result.status === 200 || getItemDetailsApi.result.status === 207) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
-        dispatch(setFloorLocations(itemDetails.location.floor || []));
+        getFloorLocationsResult(itemDetails.location.floor, dispatch, existingFloorLocations);
         setShowItemNotFoundMsg(false);
       } else if (getItemDetailsApi.result.status === 204) {
         setShowItemNotFoundMsg(true);
@@ -494,13 +564,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Location Details API
   useEffectHook(
-    () => getLocationsApiHook(getLocationApi, itemNumber, dispatch, navigation),
+    () => getLocationsApiHook(getLocationApi, itemNumber, dispatch, navigation, floorLocations),
     [getLocationApi]
   );
 
   // Get Item Details UPC api
   useEffectHook(
-    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg),
+    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg, floorLocations),
     [getItemDetailsApi]
   );
 
@@ -524,6 +594,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     ),
     [deleteFloorLocationApi]
   );
+
+  // Navigation Listener
+  useEffectHook(() => {
+    // Clear Audit Item Screen redux state before removing the component
+    navigation.addListener('beforeRemove', () => {
+      dispatch(clearAuditScreenData());
+    });
+  }, []);
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
@@ -593,12 +671,19 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         locationLst.push({
           sectionId: loc.sectionId,
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`,
-          quantity: loc.qty ? loc.qty : 0,
+          quantity: loc.newQty,
           palletId: '',
-          increment: () => {},
-          decrement: () => {},
+          increment: () => calculateFloorLocIncreaseQty(loc.newQty, loc.locationName, dispatch),
+          decrement: () => calculateFloorLocDecreaseQty(loc.newQty, loc.locationName, dispatch),
           onDelete: () => handleDeleteLocation(loc, index),
-          qtyChange: () => {}
+          qtyChange: (qty: string) => {
+            dispatch(updateFloorLocationQty(loc.locationName, parseInt(qty, 10)));
+          },
+          onEndEditing: () => {
+            if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
+              dispatch(updateFloorLocationQty(loc.locationName, 0));
+            }
+          }
         });
       });
     }
@@ -615,10 +700,17 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           quantity: loc.newQty || loc.quantity,
           scanned: loc.scanned,
           palletId: loc.palletId,
-          increment: () => {},
-          decrement: () => {},
+          increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch),
+          decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch),
           onDelete: () => {},
-          qtyChange: () => {}
+          qtyChange: (qty: string) => {
+            dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10)));
+          },
+          onEndEditing: () => {
+            if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
+              dispatch(updatePalletQty(loc.palletId, 0));
+            }
+          }
         });
       });
     }
