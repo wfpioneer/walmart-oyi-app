@@ -11,7 +11,8 @@ describe('ApprovalCard Component', () => {
     newQuantity: 20,
     oldQuantity: 5,
     dollarChange: 200.00,
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
+    approvalRequestSource: 'itemdetails'
   };
   const negativeItem: ApprovalCardProps = {
     itemNbr: 456,
@@ -21,7 +22,8 @@ describe('ApprovalCard Component', () => {
     newQuantity: 10,
     oldQuantity: 30,
     dollarChange: 100.00,
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
+    approvalRequestSource: 'itemdetails'
   };
 
   describe('Tests rendering ApprovalCard:', () => {
@@ -38,6 +40,7 @@ describe('ApprovalCard Component', () => {
           userId={positiveItem.userId}
           dispatch={jest.fn()}
           isChecked={false}
+          approvalRequestSource="itemdetails"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -57,6 +60,7 @@ describe('ApprovalCard Component', () => {
           userId={negativeItem.userId}
           dispatch={negativeItem.dispatch}
           isChecked={false}
+          approvalRequestSource="itemdetails"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -75,6 +79,7 @@ describe('ApprovalCard Component', () => {
           userId=""
           dispatch={jest.fn()}
           isChecked={true}
+          approvalRequestSource="itemdetails"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -93,6 +98,7 @@ describe('ApprovalCard Component', () => {
           userId=""
           dispatch={jest.fn()}
           isChecked={false}
+          approvalRequestSource="itemdetails"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -111,6 +117,26 @@ describe('ApprovalCard Component', () => {
           userId=""
           dispatch={jest.fn()}
           isChecked={false}
+          approvalRequestSource="itemdetails"
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders an Approval Item with a source label as Audits after itemNumber', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <ApprovalCard
+          dollarChange={positiveItem.dollarChange}
+          daysLeft={positiveItem.daysLeft}
+          itemName={positiveItem.itemName}
+          itemNbr={positiveItem.itemNbr}
+          oldQuantity={positiveItem.oldQuantity}
+          newQuantity={positiveItem.newQuantity}
+          userId={positiveItem.userId}
+          dispatch={jest.fn()}
+          isChecked={false}
+          approvalRequestSource="audits"
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

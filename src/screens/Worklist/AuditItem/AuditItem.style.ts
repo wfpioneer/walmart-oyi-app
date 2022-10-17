@@ -47,6 +47,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     padding: 15
+  },
+  footer: {
+    height: 60,
+    borderTopWidth: 4,
+    borderTopColor: COLOR.GREY_200
   }
 });
 
