@@ -243,6 +243,27 @@ export const getFloorLocationsResult = (
   }
 };
 
+export const getUpdatedReserveLocations = (
+  itemPallets: ItemPalletInfo[] | undefined, existingReserveLocations: ItemPalletInfo[]
+) => {
+  let updatedReserveLocations = [];
+  if (itemPallets && itemPallets.length > 0) {
+    if (existingReserveLocations.length > 0) {
+      updatedReserveLocations = itemPallets.map((loc: ItemPalletInfo) => {
+        const alreadyExistedLocation = existingReserveLocations.find(
+          existingLoc => existingLoc.palletId === loc.palletId
+        );
+        return alreadyExistedLocation?.newQty
+          ? { ...loc, newQty: alreadyExistedLocation.newQty } : { ...loc, newQty: loc.quantity || 0 };
+      });
+    } else {
+      updatedReserveLocations = itemPallets.map((loc: ItemPalletInfo) => ({ ...loc, newQty: loc.quantity || 0 }));
+    }
+    return updatedReserveLocations;
+  }
+  return [];
+};
+
 export const getLocationsApiHook = (
   getLocationApi: AsyncState,
   itemNumber: number,
@@ -330,13 +351,15 @@ export const getItemPalletsApiHook = (
   getItemPalletsApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
+  existingReserveLocations: ItemPalletInfo[]
 ) => {
   if (navigation.isFocused()) {
     // on api success
     if (!getItemPalletsApi.isWaiting && getItemPalletsApi.result) {
       if (getItemPalletsApi.result.status === 200) {
         const { data } = getItemPalletsApi.result;
-        dispatch(setReserveLocations(data.pallets));
+        const updatedReserveLocations = getUpdatedReserveLocations(data.pallets, existingReserveLocations);
+        dispatch(setReserveLocations(updatedReserveLocations));
         dispatch({ type: GET_ITEM_PALLETS.RESET });
       }
     }
@@ -576,7 +599,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Pallets api
   useEffectHook(
-    () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation),
+    () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation, reserveLocations),
     [getItemPalletsApi]
   );
 

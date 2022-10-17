@@ -15,8 +15,9 @@ import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen, AuditItemScreenProps, addLocationHandler, calculateTotalOHQty, completeItemApiHook,
-  deleteFloorLocationApiHook, disabledContinue, getItemDetailsApiHook, getScannedPalletEffect,
-  getlocationsApiResult, isError, onValidateItemNumber, renderDeleteLocationModal, renderpalletQtyUpdateModal
+  deleteFloorLocationApiHook, disabledContinue, getFloorLocationsResult, getItemDetailsApiHook,
+  getScannedPalletEffect, getUpdatedReserveLocations, isError, onValidateItemNumber,
+  renderDeleteLocationModal, renderpalletQtyUpdateModal
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
@@ -44,6 +45,7 @@ jest.mock('@react-navigation/native', () => {
     useNavigation: () => ({
       navigate: jest.fn(),
       dispatch: jest.fn(),
+      addListener: jest.fn(),
       isFocused: jest.fn().mockReturnValue(true),
       goBack: jest.fn()
     }),
@@ -285,20 +287,19 @@ describe('AuditItemScreen', () => {
       expect(mockNavigate).toBeCalledTimes(1);
     });
 
-    it('tests getlocationsApiResult', () => {
-      const mockLocationsAsyncstate = {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: {
-            location: {
-              floor: mockItemDetails.location.floor,
-              reserve: mockItemDetails.location.reserve
-            }
-          }
-        }
-      };
-      getlocationsApiResult(mockLocationsAsyncstate, mockDispatch);
+    it('tests getFloorLocationsResult', () => {
+      const newResults = [...mockItemDetails.location.floor, [{
+        zoneId: 0,
+        aisleId: 1,
+        sectionId: 1,
+        zoneName: 'A',
+        aisleName: '1',
+        sectionName: '1',
+        locationName: 'A1-1',
+        type: 'Sales Floor',
+        typeNbr: 8
+      }]];
+      getFloorLocationsResult(newResults, mockDispatch, mockItemDetails.location.floor);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -311,7 +312,9 @@ describe('AuditItemScreen', () => {
         }
       };
       const mockSetShowItemNotFoundMsg = jest.fn();
-      getItemDetailsApiHook(successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg, mockItemDetails.location
+      );
       expect(mockDispatch).toBeCalledTimes(3);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
     });
@@ -331,7 +334,9 @@ describe('AuditItemScreen', () => {
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       };
-      getItemDetailsApiHook(successApi204, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        successApi204, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg, mockItemDetails.location
+      );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
     });
@@ -342,7 +347,9 @@ describe('AuditItemScreen', () => {
         error: 'Internal Server Error'
       };
       const mockSetShowItemNotFoundMsg = jest.fn();
-      getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg, mockItemDetails.location
+      );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
     it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
@@ -580,6 +587,11 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(disabledContinue(mockFloorLocations, mockReserveLocations, false)).toBe(false);
+    });
+    it('tests getUpdatedReserveLocations', () => {
+      const mockItempallets = itemPallets.pallets;
+      const testResults = getUpdatedReserveLocations(mockItempallets, []);
+      expect(testResults).toEqual(mockItempallets);
     });
   });
 });
