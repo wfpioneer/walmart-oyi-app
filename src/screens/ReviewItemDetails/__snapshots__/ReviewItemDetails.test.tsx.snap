@@ -27,19 +27,24 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
     >
       <View
         style={
-          Object {
-            "alignContent": "center",
-            "alignSelf": "center",
-            "backgroundColor": "#ffffffff",
-            "borderColor": "#545F7A",
-            "borderRadius": 10,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "justifyContent": "center",
-            "minHeight": 150,
-            "padding": 10,
-            "width": "80%",
-          }
+          Array [
+            Object {
+              "alignContent": "center",
+              "alignSelf": "center",
+              "backgroundColor": "#ffffffff",
+              "borderColor": "#545F7A",
+              "borderRadius": 10,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "justifyContent": "center",
+              "minHeight": 150,
+              "padding": 10,
+              "width": "80%",
+            },
+            Object {
+              "minHeight": undefined,
+            },
+          ]
         }
       >
         <mockMaterialCommunityIcons
@@ -646,19 +651,24 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
   >
     <View
       style={
-        Object {
-          "alignContent": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderColor": "#545F7A",
-          "borderRadius": 10,
-          "borderStyle": "solid",
-          "borderWidth": 1,
-          "justifyContent": "center",
-          "minHeight": 150,
-          "padding": 10,
-          "width": "80%",
-        }
+        Array [
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <mockMaterialCommunityIcons
@@ -736,19 +746,24 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
   >
     <View
       style={
-        Object {
-          "alignContent": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderColor": "#545F7A",
-          "borderRadius": 10,
-          "borderStyle": "solid",
-          "borderWidth": 1,
-          "justifyContent": "center",
-          "minHeight": 150,
-          "padding": 10,
-          "width": "80%",
-        }
+        Array [
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 150,
+            "padding": 10,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <mockMaterialCommunityIcons

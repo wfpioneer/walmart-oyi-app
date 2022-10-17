@@ -91,7 +91,7 @@ export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
   const {
     itemNbr, itemName, oldQuantity,
     newQuantity, dollarChange, initiatedUserId, daysLeft,
-    categoryHeader, categoryNbr, categoryDescription, isChecked
+    categoryHeader, categoryNbr, categoryDescription, isChecked, approvalRequestSource
   } = props.item;
   const { dispatch } = props;
 
@@ -117,6 +117,7 @@ export const RenderApprovalItem = (props: ApprovalItemProp): JSX.Element => {
       userId={initiatedUserId}
       isChecked={isChecked}
       dispatch={dispatch}
+      approvalRequestSource={approvalRequestSource}
     />
   );
 };
