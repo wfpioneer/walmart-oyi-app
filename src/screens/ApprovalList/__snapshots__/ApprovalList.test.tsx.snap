@@ -723,15 +723,20 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderRadius": 7.5,
-          "justifyContent": "space-between",
-          "paddingVertical": 15,
-          "width": "75%",
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <Text
@@ -808,15 +813,20 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderRadius": 7.5,
-          "justifyContent": "space-between",
-          "paddingVertical": 15,
-          "width": "75%",
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <Text
@@ -882,15 +892,20 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderRadius": 7.5,
-          "justifyContent": "space-between",
-          "paddingVertical": 15,
-          "width": "75%",
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <Text
@@ -958,15 +973,20 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "center",
-          "backgroundColor": "#ffffffff",
-          "borderRadius": 7.5,
-          "justifyContent": "space-between",
-          "paddingVertical": 15,
-          "width": "75%",
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
       }
     >
       <Text

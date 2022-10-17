@@ -137,5 +137,15 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: COLOR.RED_500,
     paddingBottom: 5
+  },
+  scanContainer: {
+    flexDirection: 'column',
+    flex: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
+  },
+  scanText: {
+    paddingTop: 20
   }
 });
