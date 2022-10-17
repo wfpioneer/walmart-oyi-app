@@ -1,26 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator component 1`] = `
-<MaterialTopTabNavigator
-  screenOptions={
+<Context.Provider
+  value={
     Object {
-      "tabBarActiveTintColor": "#ffffffff",
-      "tabBarIndicatorStyle": Object {
-        "backgroundColor": "#ffffffff",
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
       },
-      "tabBarStyle": Object {
-        "backgroundColor": "#0071e9",
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
       },
     }
   }
 >
-  <Screen
-    component={[Function]}
-    name="[missing \\"en.WORKLIST.TODO\\" translation]"
+  <AuditWorklistTabNavigator
+    dispatch={[Function]}
+    route={
+      Object {
+        "key": "",
+        "name": "AuditWorklistTabs",
+      }
+    }
+    useCallbackHook={[Function]}
+    useFocusEffectHook={[Function]}
+    validateSessionCall={[Function]}
   />
-  <Screen
-    component={[Function]}
-    name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
-  />
-</MaterialTopTabNavigator>
+</Context.Provider>
 `;

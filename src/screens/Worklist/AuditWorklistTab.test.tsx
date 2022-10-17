@@ -6,10 +6,13 @@ import {
   mockCompletedAuditWorklist, mockToDoAuditWorklist
 } from '../../mockData/mockWorkList';
 import {
-  AuditWorklistTabScreen
+  AuditWorklistTabScreen, renderFilterPills
 } from './AuditWorklistTab';
+import { ExceptionList } from './FullExceptionList';
+import { mockAreas } from '../../mockData/mockConfig';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 
 let navigationProp: NavigationProp<any>;
 describe('AuditWorklistTab', () => {
@@ -26,6 +29,11 @@ describe('AuditWorklistTab', () => {
           collapsed={false}
           setCollapsed={jest.fn}
           refreshing={false}
+          error={undefined}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -42,6 +50,11 @@ describe('AuditWorklistTab', () => {
           collapsed={false}
           setCollapsed={jest.fn}
           refreshing={false}
+          error={undefined}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -58,6 +71,11 @@ describe('AuditWorklistTab', () => {
           collapsed={false}
           setCollapsed={jest.fn}
           refreshing={false}
+          error={undefined}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
@@ -74,11 +92,85 @@ describe('AuditWorklistTab', () => {
           collapsed={true}
           setCollapsed={jest.fn}
           refreshing={false}
+          error={undefined}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
       fireEvent.press(btnCollapse);
       expect(toJSON()).toMatchSnapshot();
     });
+  });
+});
+
+describe('Tests rendering Filter `Pills`', () => {
+  const filterCategories = ['99 - ELECTRONICS'];
+  const filterExceptions = ['RA'];
+  const exceptionList = ExceptionList.getInstance();
+
+  it('Renders a filter button for list filter type EXCEPTION', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const exceptionFilter = { type: 'EXCEPTION', value: 'RA' };
+    renderer.render(
+      renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions, exceptionList, [])
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders empty view element for non-existing EXCEPTION value', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const exceptionFilter = { type: 'EXCEPTION', value: 'Not An Exception' };
+    renderer.render(
+      renderFilterPills(exceptionFilter, jest.fn(), [], [], exceptionList, [])
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders a filter button for list filter type CATEGORY ', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const categoryFilter = { type: 'CATEGORY', value: '99 - ELECTRONICS' };
+    const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
+    renderer.render(
+      renderFilterPills(categoryFilter, jest.fn(), filterCategories, [], exceptionList, areas)
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders a filter button for list filter type AREA', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+    const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH'];
+    const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
+    renderer.render(
+      renderFilterPills(areaFilter, jest.fn(), mockFilterCategories, [], exceptionList, areas)
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('should dispatch updateFilterCategories action with removed filtered categories', () => {
+    const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+    const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH', '5-OFFICE SUPPLIES'];
+    const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
+    const mockDispatch = jest.fn();
+    const { getByTestId } = render(
+      renderFilterPills(areaFilter, mockDispatch, mockFilterCategories, [], exceptionList, areas)
+    );
+    const removeButton = getByTestId('button');
+    fireEvent.press(removeButton);
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: 'WORKLIST_FILTER/UPDATE_FILTER_CATEGORIES',
+      payload: ['5-OFFICE SUPPLIES']
+    });
+  });
+
+  it('Renders empty view element for invalid list filter type', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    const invalidFilter = { type: '', value: '' };
+    renderer.render(
+      renderFilterPills(invalidFilter, jest.fn(), [], [], exceptionList, [])
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });
