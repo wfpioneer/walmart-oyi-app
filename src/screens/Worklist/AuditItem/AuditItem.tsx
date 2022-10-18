@@ -989,7 +989,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         locationLst.push({
           sectionId: loc.sectionId,
           locationName: loc.locationName,
-          quantity: loc.newQty || loc.quantity,
+          quantity: loc.newQty,
           scanned: loc.scanned,
           palletId: loc.palletId,
           increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch),
