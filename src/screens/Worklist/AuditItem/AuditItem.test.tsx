@@ -14,12 +14,17 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import Toast from 'react-native-toast-message';
+import { UPDATE_FLOOR_LOCATION_QTY, UPDATE_PALLET_QTY } from '../../../state/actions/AuditItemScreen';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen,
   AuditItemScreenProps,
   addLocationHandler,
+  calculateFloorLocDecreaseQty,
+  calculateFloorLocIncreaseQty,
+  calculatePalletDecreaseQty,
+  calculatePalletIncreaseQty,
   calculateTotalOHQty,
   completeItemApiHook,
   deleteFloorLocationApiHook,
@@ -746,6 +751,50 @@ describe('AuditItemScreen', () => {
       mockItempallets[0].newQty = 22;
       const testResults = getUpdatedReserveLocations(mockItempallets, []);
       expect(testResults).toEqual(mockItempallets);
+    });
+    it('tests calculateFloorLocDecreaseQty when newOHQty is greater than min value', () => {
+      calculateFloorLocDecreaseQty(22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 21 } }
+      ));
+    });
+    it('tests calculateFloorLocDecreaseQty when newOHQty is less than or equals min value', () => {
+      calculateFloorLocDecreaseQty(1, 'A1-1', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than max value', () => {
+      calculateFloorLocIncreaseQty(22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 23 } }
+      ));
+    });
+    it('tests calculateFloorLocIncreaseQty when newOHQty is greater than max value', () => {
+      calculateFloorLocIncreaseQty(100000, 'A1-1', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculatePalletDecreaseQty when newOHQty is greater than min value', () => {
+      calculatePalletDecreaseQty(1, '4597', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 0 } }
+      ));
+    });
+    it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
+      calculatePalletDecreaseQty(0, '4597', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculatePalletIncreaseQty when newOHQty is lesser than max value', () => {
+      calculatePalletIncreaseQty(22, '4597', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 23 } }
+      ));
+    });
+    it('tests calculatePalletIncreaseQty when newOHQty is greater than max value', () => {
+      calculatePalletIncreaseQty(100000, '4597', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
     });
   });
 });

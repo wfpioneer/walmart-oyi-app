@@ -262,7 +262,7 @@ export const calculatePalletIncreaseQty = (
 export const getFloorLocationsResult = (
   floorResultsData: Location[] | undefined, dispatch: Dispatch<any>, existingFloorLocations: Location[]
 ) => {
-  let updatedFloorLocations = [];
+  let updatedFloorLocations: Location[] = [];
   if (floorResultsData && floorResultsData.length > 0) {
     if (existingFloorLocations.length > 0) {
       updatedFloorLocations = floorResultsData.map((loc: Location) => {
@@ -275,8 +275,8 @@ export const getFloorLocationsResult = (
     } else {
       updatedFloorLocations = floorResultsData.map((loc: Location) => ({ ...loc, newQty: loc.qty || 0 }));
     }
-    dispatch(setFloorLocations(updatedFloorLocations));
   }
+  dispatch(setFloorLocations(updatedFloorLocations));
 };
 
 export const getUpdatedReserveLocations = (
@@ -310,7 +310,7 @@ export const getLocationsApiHook = (
   if (navigation.isFocused()) {
     if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
       const locDetails = getLocationApi.result.data;
-      if (locDetails && locDetails.location && locDetails.location.floor) {
+      if (locDetails && locDetails.location) {
         getFloorLocationsResult(locDetails.location.floor, dispatch, existingFloorLocations);
       }
     }
