@@ -19,6 +19,7 @@ import COLOR from '../themes/Color';
 import styles from './AuditWorklistNavigator.style';
 import AuditWorklistTabs from './AuditWorklistTabNavigator/AuditWorklistTabNavigator';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
+import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
 
 const Stack = createStackNavigator();
 
@@ -51,8 +52,8 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-const renderPrintButton = () => (
-  <TouchableOpacity onPress={() => {}}>
+const renderPrintButton = (navigation: NavigationProp<any>) => (
+  <TouchableOpacity onPress={() => { navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' }); }}>
     <View>
       <MaterialCommunityIcons name="printer" size={20} color={COLOR.WHITE} />
     </View>
@@ -159,10 +160,15 @@ export const AuditWorklistNavigatorStack = (
             headerTitle: strings('AUDITS.AUDIT_ITEM'),
             headerRight: () => (
               <View style={styles.headerContainer}>
-                {renderPrintButton()}
+                {renderPrintButton(navigation)}
                 {renderScanButton(dispatch, isManualScanEnabled)}
               </View>
             )
+          }}
+          listeners={{
+            beforeRemove: () => {
+              dispatch({ type: GET_ITEM_DETAILS.RESET });
+            }
           }}
         />
         <Stack.Screen

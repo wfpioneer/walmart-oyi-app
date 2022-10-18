@@ -91,6 +91,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
   const items = toDo ? toDoItems : completedItems;
   const { isWaiting } = useTypedSelector(state => state.async.getWorklist);
+
   // TODO: If there are no worklist items we need to show error message
   if (isEmpty(items)) {
     return null;
