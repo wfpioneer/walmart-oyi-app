@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux';
 import {
   ActivityIndicator, FlatList, Text, TouchableOpacity, View
 } from 'react-native';
+import { AxiosError } from 'axios';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
-import { getWorklist } from '../../state/actions/saga';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
@@ -34,7 +34,7 @@ export interface AuditWorklistTabScreenProps {
     collapsed: boolean;
     setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
     refreshing: boolean;
-    error: any;
+    error: AxiosError | null;
     areas: area[];
     enableAreaFilter: boolean;
     filterExceptions: string[];
