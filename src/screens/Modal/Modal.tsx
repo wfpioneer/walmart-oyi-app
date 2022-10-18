@@ -17,6 +17,7 @@ interface CustomModalProps {
   isVisible: boolean;
   modalType: 'Error' | 'Form' | 'FormHeader' |'Popup';
   onClose: () => void;
+  minHeight?: number | string;
 }
 
 const styleSelector = {
@@ -30,7 +31,7 @@ export const ModalCloseIcon = <MaterialCommunityIcon name="close" size={16} colo
 
 export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
   const {
-    children, isVisible, modalType, onClose, animationType
+    children, isVisible, modalType, onClose, animationType, minHeight
   } = props;
 
   return (
@@ -41,7 +42,7 @@ export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
       animationType={animationType}
     >
       <View style={styles.modalContainer}>
-        <View style={styleSelector[modalType]}>
+        <View style={[styleSelector[modalType], { minHeight }]}>
           {children}
         </View>
       </View>
@@ -49,7 +50,8 @@ export const CustomModalComponent = (props: CustomModalProps): JSX.Element => {
   );
 };
 CustomModalComponent.defaultProps = {
-  animationType: 'none'
+  animationType: 'none',
+  minHeight: undefined
 };
 
 // TODO Brainstorm a way to remove the need for dispatching calls to the global modal
