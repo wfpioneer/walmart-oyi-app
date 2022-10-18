@@ -3,6 +3,7 @@ export const SET_SCANNED_EVENT = 'GLOBAL/SET_SCANNED_EVENT';
 export const RESET_SCANNED_EVENT = 'GLOBAL/RESET_SCANNED_EVENT';
 export const SET_MANUAL_SCAN = 'GLOBAL/SET_MANUAL_SCAN';
 export const SET_BOTTOM_TAB = 'GLOBAL/SET_BOTTOM_TAB';
+export const SET_CALCULATOR_OPEN = 'GLOBAL/SET_CALCULATOR_OPEN';
 
 export const setBottomTab = (isEnabled: boolean) => ({
   type: SET_BOTTOM_TAB,
@@ -28,9 +29,15 @@ export const setManualScan = (bool: boolean) => ({
   payload: bool
 } as const);
 
+export const setCalculatorOpen = (bool: boolean) => ({
+  type: SET_CALCULATOR_OPEN,
+  payload: bool
+} as const);
+
 export type Actions =
   | ReturnType<typeof setIsByod>
   | ReturnType<typeof setScannedEvent>
   | ReturnType<typeof resetScannedEvent>
   | ReturnType<typeof setManualScan>
-  | ReturnType<typeof setBottomTab>;
+  | ReturnType<typeof setBottomTab>
+  | ReturnType<typeof setCalculatorOpen>;

@@ -3,6 +3,7 @@ import {
   RESET_SCANNED_EVENT,
   SET_BOTTOM_TAB,
   SET_BYOD,
+  SET_CALCULATOR_OPEN,
   SET_MANUAL_SCAN,
   SET_SCANNED_EVENT
 } from '../actions/Global';
@@ -15,6 +16,7 @@ export interface StateType {
     type: string | null;
   };
   isBottomTabEnabled: boolean;
+  calcOpen: boolean;
 }
 
 const initialState: StateType = {
@@ -24,7 +26,8 @@ const initialState: StateType = {
     type: null
   },
   isManualScanEnabled: false,
-  isBottomTabEnabled: true
+  isBottomTabEnabled: true,
+  calcOpen: false
 };
 
 export const Global = (state = initialState, action: Actions): StateType => {
@@ -53,6 +56,11 @@ export const Global = (state = initialState, action: Actions): StateType => {
       return {
         ...state,
         isBottomTabEnabled: action.payload
+      };
+    case SET_CALCULATOR_OPEN:
+      return {
+        ...state,
+        calcOpen: action.payload
       };
     default:
       return state;

@@ -1,9 +1,11 @@
 import {
   RESET_SCANNED_EVENT,
   SET_BYOD,
+  SET_CALCULATOR_OPEN,
   SET_MANUAL_SCAN,
   SET_SCANNED_EVENT,
   resetScannedEvent,
+  setCalculatorOpen,
   setIsByod,
   setManualScan,
   setScannedEvent
@@ -34,6 +36,13 @@ describe('test action creators for Global', () => {
     expect(setIsByodResult).toStrictEqual({
       type: SET_BYOD,
       payload: mockIsByod
+    });
+
+    // setIsByod action creator
+    const setCalculatorOpenRes = setCalculatorOpen(true);
+    expect(setCalculatorOpenRes).toStrictEqual({
+      type: SET_CALCULATOR_OPEN,
+      payload: true
     });
   });
 });
