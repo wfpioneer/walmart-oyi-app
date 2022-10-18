@@ -13,10 +13,12 @@ const styles = StyleSheet.create({
     borderRadius: 8
   },
   inputView: {
-    borderBottomWidth: 1
+    borderWidth: 1,
+    borderRadius: 7,
+    margin: 2
   },
   input: {
-    width: (4 * width) / buttonScale + 8,
+    width: (4 * width) / buttonScale + 4,
     height: width / buttonScale,
     fontSize: 20,
     textAlign: 'center'
@@ -39,11 +41,11 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   errorText: {
-    fontSize: 15,
+    fontSize: 14,
     color: COLOR.RED_700
   },
   highlightedErrorText: {
-    fontSize: 15,
+    fontSize: 14,
     color: COLOR.WHITE,
     backgroundColor: COLOR.RED
   }
