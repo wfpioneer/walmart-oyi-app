@@ -78,6 +78,11 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
     />
     <Screen
       component={[Function]}
+      listeners={
+        Object {
+          "beforeRemove": [Function],
+        }
+      }
       name="AuditItem"
       options={
         Object {

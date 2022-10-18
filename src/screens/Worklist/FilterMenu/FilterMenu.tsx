@@ -430,13 +430,6 @@ export const RenderExceptionTypeCard = (props: {
     const exceptionType = fullExceptionList.get(worklist.worklistType);
     if (exceptionType) {
       const isSelected = filterExceptions.indexOf(worklist.worklistType) !== -1;
-      // Sets filter to Rollover Audits if rolloverCmp flag is true and rollover WL is not complete
-      if (disableAuditWL && worklist.worklistType === 'RA' && !isSelected) {
-        trackEvent('worklist_update_filter_exceptions', {
-          exception: JSON.stringify(worklist.worklistType)
-        });
-        dispatch(updateFilterExceptions([worklist.worklistType]));
-      }
       exceptionMap.push({
         value: worklist.worklistType,
         display: exceptionType,

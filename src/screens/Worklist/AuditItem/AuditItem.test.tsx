@@ -341,7 +341,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockSetShowItemNotFoundMsg
       );
-      expect(mockDispatch).toBeCalledTimes(3);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
     });
 
