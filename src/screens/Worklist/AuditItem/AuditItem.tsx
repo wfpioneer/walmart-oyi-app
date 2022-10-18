@@ -265,7 +265,6 @@ export const getItemDetailsApiHook = (
           position: 'bottom'
         });
       }
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
     }
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
       setShowItemNotFoundMsg(false);
