@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // adding this exception as a valid exception to the no spreading props rule is when there are a large amount of props
 import {
-  NavigationContainer, NavigationContext, NavigationProp, RouteProp
+  NavigationContainer,
+  NavigationContext,
+  NavigationProp,
+  RouteProp
 } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView } from 'react-native';
@@ -14,15 +17,30 @@ import Toast from 'react-native-toast-message';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
-  AuditItemScreen, AuditItemScreenProps, addLocationHandler, calculateTotalOHQty, completeItemApiHook,
-  deleteFloorLocationApiHook, getItemDetailsApiHook, getScannedPalletEffect, getlocationsApiResult, isError,
-  onValidateItemNumber, renderDeleteLocationModal, renderpalletQtyUpdateModal, reportMissingPalletApiHook
+  AuditItemScreen,
+  AuditItemScreenProps,
+  addLocationHandler,
+  calculateTotalOHQty,
+  completeItemApiHook,
+  deleteFloorLocationApiHook,
+  disabledContinue,
+  getItemDetailsApiHook,
+  getScannedPalletEffect,
+  getlocationsApiResult,
+  isError,
+  onValidateItemNumber,
+  renderConfirmOnHandsModal,
+  renderDeleteLocationModal,
+  renderpalletQtyUpdateModal,
+  reportMissingPalletApiHook,
+  updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { itemPallets } from '../../../mockData/getItemPallets';
+import { ItemPalletInfo } from '../../../models/AuditItem';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -34,7 +52,10 @@ jest.mock('../../../utils/sessionTimeout.ts', () => ({
   ...jest.requireActual('../../../utils/sessionTimeout.ts'),
   validateSession: jest.fn(() => Promise.resolve())
 }));
-jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+jest.mock(
+  'react-native-vector-icons/MaterialCommunityIcons',
+  () => 'mockMaterialCommunityIcons'
+);
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'mockMaterialIcons');
 jest.mock('@react-navigation/native', () => {
   const actualNav = jest.requireActual('@react-navigation/native');
@@ -121,11 +142,18 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showDeleteConfirmationModal: false,
   setShowDeleteConfirmationModal: jest.fn(),
   locToConfirm: {
-    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1, palletId: '', sectionId: 0
+    locationName: '',
+    locationArea: '',
+    locationIndex: -1,
+    locationTypeNbr: -1,
+    palletId: '',
+    sectionId: 0
   },
   setLocToConfirm: jest.fn(),
   deleteFloorLocationApi: defaultAsyncState,
-  reportMissingPalletApi: defaultAsyncState
+  reportMissingPalletApi: defaultAsyncState,
+  showOnHandsConfirmState: [false, jest.fn()],
+  updateOHQtyApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
@@ -173,13 +201,11 @@ describe('AuditItemScreen', () => {
         itemDetails: getMockItemDetails('123')
       };
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <AuditItemScreen {...testProps} />
-      );
+      renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders \'Scanned Item Not Found\' on request status 204', () => {
+    it("renders 'Scanned Item Not Found' on request status 204", () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
         getItemDetailsApi: {
@@ -192,13 +218,11 @@ describe('AuditItemScreen', () => {
         showItemNotFoundMsg: true
       };
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <AuditItemScreen {...testProps} />
-      );
+      renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
+    it("renders 'Activity Indicator' waiting for ItemDetails Response ", () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
         getItemDetailsApi: {
@@ -207,13 +231,11 @@ describe('AuditItemScreen', () => {
         }
       };
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <AuditItemScreen {...testProps} />
-      );
+      renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders \'Activity Indicator\' waiting for completeItemApi Response ', () => {
+    it("renders 'Activity Indicator' waiting for completeItemApi Response ", () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
         completeItemApi: {
@@ -222,9 +244,7 @@ describe('AuditItemScreen', () => {
         }
       };
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <AuditItemScreen {...testProps} />
-      );
+      renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
@@ -233,12 +253,23 @@ describe('AuditItemScreen', () => {
     const mockDispatch = jest.fn();
     const mockSetShowDeleteConfirmationModal = jest.fn();
     const mockDeleteLocationConfirmed = jest.fn();
+    const mockSetShowOnHandsConfirmModal = jest.fn();
     const mockLocationName = 'A1-1';
     const mockItemNumber = 9800065634;
     afterEach(() => {
       jest.clearAllMocks();
     });
-
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: mockItemDetails,
+        status: 200
+      }
+    };
+    const failureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
     it('test onValidateItemNumber', async () => {
       const expectedGetItemDetailsAction = {
         payload: {
@@ -246,9 +277,17 @@ describe('AuditItemScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
-      await onValidateItemNumber({ ...mockAuditItemScreenProps, itemNumber: 123 });
-      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
-      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
+      await onValidateItemNumber({
+        ...mockAuditItemScreenProps,
+        itemNumber: 123
+      });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
+        type: 'API/GET_ITEM_DETAILS/RESET'
+      });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        2,
+        expectedGetItemDetailsAction
+      );
     });
 
     it('test isError', () => {
@@ -258,22 +297,14 @@ describe('AuditItemScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
-      const { getByTestId, rerender, toJSON } = render(isError(
-        mockError,
-        mockDispatch,
-        jest.fn,
-        980056535
-      ));
+      const { getByTestId, rerender, toJSON } = render(
+        isError(mockError, mockDispatch, jest.fn, 980056535)
+      );
       expect(toJSON()).toMatchSnapshot();
       const retryButton = getByTestId('errorLoadingItemRetry');
       fireEvent.press(retryButton);
       expect(mockDispatch).toHaveBeenCalledWith(expectedGetItemDetailAction);
-      rerender(isError(
-        mockError,
-        mockDispatch,
-        jest.fn,
-        980056535
-      ));
+      rerender(isError(mockError, mockDispatch, jest.fn, 980056535));
       expect(toJSON()).toMatchSnapshot();
     });
 
@@ -303,15 +334,13 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: mockItemDetails,
-          status: 200
-        }
-      };
       const mockSetShowItemNotFoundMsg = jest.fn();
-      getItemDetailsApiHook(successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowItemNotFoundMsg
+      );
       expect(mockDispatch).toBeCalledTimes(3);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
     });
@@ -331,24 +360,34 @@ describe('AuditItemScreen', () => {
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       };
-      getItemDetailsApiHook(successApi204, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        successApi204,
+        mockDispatch,
+        navigationProp,
+        mockSetShowItemNotFoundMsg
+      );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
     });
 
     it('Tests getItemDetailsApi on failure', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       const mockSetShowItemNotFoundMsg = jest.fn();
-      getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowItemNotFoundMsg
+      );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
     it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
       const mocksetShowPalletQtyUpdateModal = jest.fn();
       getScannedPalletEffect(
-        navigationProp, mockScannedEvent, itemPallets.pallets, mockDispatch, mocksetShowPalletQtyUpdateModal
+        navigationProp,
+        mockScannedEvent,
+        itemPallets.pallets,
+        mockDispatch,
+        mocksetShowPalletQtyUpdateModal
       );
       expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalled();
       expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalledWith(true);
@@ -356,13 +395,15 @@ describe('AuditItemScreen', () => {
     });
     it('Tests getScannedPalletEffect shows error toast if the scanned pallet not associated with the item', () => {
       const mocksetShowPalletQtyUpdateModal = jest.fn();
-      const mockReserveLocations = [{
-        palletId: '5999',
-        quantity: 22,
-        sectionId: 5578,
-        locationName: 'D1-4',
-        mixedPallet: false
-      }];
+      const mockReserveLocations = [
+        {
+          palletId: '5999',
+          quantity: 22,
+          sectionId: 5578,
+          locationName: 'D1-4',
+          mixedPallet: false
+        }
+      ];
       getScannedPalletEffect(
         navigationProp,
         mockScannedEvent,
@@ -463,33 +504,36 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests deleteFloorLocationApiHook on 200 success for deleting location', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: {},
-          status: 200
-        }
-      };
       deleteFloorLocationApiHook(
-        successApi, mockItemNumber, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 'A1-1'
+        successApi,
+        mockItemNumber,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        'A1-1'
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({ type: 'success' })
+      );
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
     it('Tests deleteFloorLocationApiHook on failure', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       deleteFloorLocationApiHook(
-        failureApi, mockItemNumber, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 'A1-1'
+        failureApi,
+        mockItemNumber,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        'A1-1'
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({ type: 'error' })
+      );
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
@@ -548,13 +592,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: {},
-          status: 200
-        }
-      };
       reportMissingPalletApiHook(
         successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
       );
@@ -565,13 +602,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests completeItemApiHook on 200 success for completing an item', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: {},
-          status: 200
-        }
-      };
       completeItemApiHook(successApi, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'success',
@@ -584,10 +614,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests reportMissingPalletApiHook on failure', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       reportMissingPalletApiHook(
         failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
       );
@@ -598,10 +624,6 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       completeItemApiHook(failureApi, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -617,9 +639,186 @@ describe('AuditItemScreen', () => {
       const mockFloorLocations = mockItemDetails.location.floor;
       const mockReserveLocations = itemPallets.pallets;
       const itemDetails = getMockItemDetails('123');
-      const totalCountResult = calculateTotalOHQty(mockFloorLocations, mockReserveLocations, itemDetails);
+      const totalCountResult = calculateTotalOHQty(
+        mockFloorLocations,
+        mockReserveLocations,
+        itemDetails
+      );
       const expectedCount = 37;
       expect(totalCountResult).toBe(expectedCount);
+    });
+
+    it('Tests updateOHQtyApiHook on success', () => {
+      const setShowOnHands = jest.fn();
+      updateOHQtyApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands
+      );
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(setShowOnHands).toHaveBeenCalledWith(false);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests updateOHQtyApiHook on failure', () => {
+      const setShowOnHands = jest.fn();
+      updateOHQtyApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands
+      );
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    });
+
+    it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
+      const { toJSON } = render(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderConfirmOnHandsModal should render loader', () => {
+      const mockUpdateOHQtyLoading: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const { toJSON } = render(
+        renderConfirmOnHandsModal(
+          mockUpdateOHQtyLoading,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderConfirmOnHandsModal confirm button action', () => {
+      const { getByTestId } = render(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('Tests renderConfirmOnHandsModal cancel button action', () => {
+      const { getByTestId } = render(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      const modalConfirmButton = getByTestId('modal-cancel-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockSetShowOnHandsConfirmModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Test disabledContinue functionality return true when any of the locaion is empty', () => {
+      const mockFloorLocations = mockItemDetails.location.floor;
+      const mockReserveLocations = itemPallets.pallets;
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, false)
+      ).toBe(true);
+    });
+    it(`Test disabledContinue functionality return true 
+      when all of the locaion qty is present and reserve pallet is not scanned but scan is required`, () => {
+      const mockFloorLocations = [
+        { ...mockItemDetails.location.floor[0], newQty: 10 }
+      ];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: undefined,
+          scanned: false
+        }
+      ];
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, true)
+      ).toBe(true);
+    });
+    it(`Test disabledContinue functionality return false 
+      when all of the locaion qty is present and reserve pallet is scanned and scan is required`, () => {
+      const mockFloorLocations = [
+        { ...mockItemDetails.location.floor[0], newQty: 10 }
+      ];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: undefined,
+          scanned: true
+        }
+      ];
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, true)
+      ).toBe(false);
+    });
+    it(`Test disabledContinue functionality return false 
+      when all of the locaion qty is present and reserve pallet is not scanned but scan is not required`, () => {
+      const mockFloorLocations = [
+        { ...mockItemDetails.location.floor[0], newQty: 10 }
+      ];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: undefined,
+          scanned: false
+        }
+      ];
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, false)
+      ).toBe(false);
     });
   });
 });

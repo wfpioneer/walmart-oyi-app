@@ -1,31 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests rendering EnterClubNbrForm Renders the EnterClubNbrForm 1`] = `
-Array [
-  <Text
-    style={
-      Object {
-        "paddingTop": 12,
-      }
+exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with continue disabled 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-around",
+      "paddingHorizontal": 10,
+      "paddingVertical": 5,
+      "width": "100%",
     }
-  >
-    [missing "en.LOGIN.CLUB_NBR_REQUIRED" translation]
-  </Text>,
-  <TextInput
-    keyboardType="numeric"
-    maxLength={5}
-    onChangeText={[Function]}
-    placeholder="[missing \\"en.LOGIN.ENTER_CLUB_NBR\\" translation]"
-    selectionColor="#0071e9"
-    testID="txtClubNbr"
-    textAlign="center"
-    value=""
-  />,
+  }
+>
   <View
     style={
       Object {
-        "flex": 0,
-        "flexDirection": "row",
+        "alignItems": "center",
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "fontWeight": "500",
+        }
+      }
+    >
+      20 [missing "en.GENERICS.ITEMS" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
       }
     }
   >
@@ -35,76 +47,7 @@ Array [
           Object {
             "height": 45,
           },
-          Object {
-            "paddingHorizontal": 12,
-            "width": "50%",
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Object {
-            "flex": 1,
-          }
-        }
-      >
-        <View
-          accessibilityState={
-            Object {
-              "disabled": false,
-            }
-          }
-          accessible={true}
-          collapsable={false}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-          style={
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffffff",
-              "borderColor": "#0071e9",
-              "borderRadius": 5,
-              "borderWidth": 1,
-              "flex": 1,
-              "justifyContent": "center",
-              "opacity": 1,
-            }
-          }
-          testID="btnSignOut"
-        >
-          <Text
-            style={
-              Object {
-                "color": "#0071e9",
-                "fontFamily": "Roboto-Medium",
-                "fontSize": 16,
-                "fontWeight": "normal",
-                "textAlign": undefined,
-              }
-            }
-          >
-            [missing "en.GENERICS.SIGN_OUT" translation]
-          </Text>
-        </View>
-      </View>
-    </View>
-    <View
-      style={
-        Array [
-          Object {
-            "height": 45,
-          },
-          Object {
-            "paddingHorizontal": 12,
-            "width": "50%",
-          },
+          undefined,
         ]
       }
     >
@@ -142,7 +85,7 @@ Array [
               "opacity": 1,
             }
           }
-          testID="btnSubmit"
+          testID="btnContinue"
         >
           <Text
             style={
@@ -155,11 +98,118 @@ Array [
               }
             }
           >
-            [missing "en.GENERICS.SUBMIT" translation]
+            [missing "en.GENERICS.CONTINUE" translation]
           </Text>
         </View>
       </View>
     </View>
-  </View>,
-]
+  </View>
+</View>
+`;
+
+exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with continue enabled 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-around",
+      "paddingHorizontal": 10,
+      "paddingVertical": 5,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "fontWeight": "500",
+        }
+      }
+    >
+      20 [missing "en.GENERICS.ITEMS" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 45,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#0071e9",
+              "borderRadius": 5,
+              "elevation": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="btnContinue"
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ffffffff",
+                "fontFamily": "Roboto-Medium",
+                "fontSize": 16,
+                "fontWeight": "normal",
+                "textAlign": undefined,
+              }
+            }
+          >
+            [missing "en.GENERICS.CONTINUE" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
 `;

@@ -304,6 +304,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
                 "fontWeight": "normal",
+                "textAlign": undefined,
               }
             }
           >
@@ -369,6 +370,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
                 "fontWeight": "normal",
+                "textAlign": undefined,
               }
             }
           >

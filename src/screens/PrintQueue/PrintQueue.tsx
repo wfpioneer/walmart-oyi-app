@@ -38,6 +38,7 @@ import { CustomModalComponent } from '../Modal/Modal';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import { getPaperSizeBasedOnCountry } from '../../utils/global';
 
+// TODO this screen can be removed as it has been replaced with PrintList.tsx
 interface HandlePrintProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
@@ -313,6 +314,7 @@ export const PrintQueueScreen = (props: PrintQueueScreenProps): JSX.Element => {
             setItemIndexToEdit={setItemIndexToEdit}
             printQueue={printQueue}
             selectedPrinter={selectedPrinter}
+            countryCode={countryCode}
           />
         </CustomModalComponent>
         <ScrollView contentContainerStyle={styles.container}>

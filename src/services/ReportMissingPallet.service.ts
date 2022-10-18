@@ -10,7 +10,7 @@ export default class ReportMissingPalletService {
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.post(
-      `${urls.worklistURL}/worklist/pallet/${payload.palletId}/missingpallet`,
+      `${urls.orchestrationURL}/worklist/pallet/${payload.palletId}/missingpallet`,
       {
         locationName: payload.locationName,
         locationId: payload.sectionId
