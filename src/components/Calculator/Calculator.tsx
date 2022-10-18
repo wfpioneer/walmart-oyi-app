@@ -7,7 +7,6 @@ import {
   View
 } from 'react-native';
 import COLOR from '../../themes/Color';
-import { UseStateType } from '../../models/Generics.d';
 import styles from './Calculator.style';
 import { strings } from '../../locales';
 
@@ -25,13 +24,12 @@ const opAtEdgeOfParentRegex = new RegExp(
 );
 
 interface CalculatorProps {
-  calcTextState: UseStateType<string>;
-  setIsCalculated: UseStateType<boolean>[1];
+  onEquals: (result: number) => void;
 }
 
 const Calculator = (props: CalculatorProps) => {
-  const [calcText, setCalcText] = props.calcTextState;
-  const { setIsCalculated } = props;
+  const { onEquals } = props;
+  const [calcText, setCalcText] = useState('');
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
 
   const doOrCanParenthesesClose = (index: number, parentsMustClose: boolean, openingParents = 0): boolean => {
@@ -79,7 +77,6 @@ const Calculator = (props: CalculatorProps) => {
 
   const onClear = () => {
     setCalcText('');
-    setIsCalculated(false);
     setIsCalcInvalid(false);
   };
 
@@ -103,17 +100,17 @@ const Calculator = (props: CalculatorProps) => {
     }
   };
 
-  const onEquals = () => {
+  const onEqualsPress = () => {
     if (isValidSyntax(true)) {
-      setCalcText(evaluate(calcText));
-      setIsCalculated(true);
+      const result: string = evaluate(calcText);
+      setCalcText(result);
+      onEquals(Number(result));
     } else {
       setIsCalcInvalid(true);
     }
   };
 
   const onType = (char: string) => {
-    setIsCalculated(false);
     setCalcText(`${calcText}${char}`);
   };
 
@@ -205,7 +202,8 @@ const Calculator = (props: CalculatorProps) => {
             ...styles.calcButtonView,
             backgroundColor: isValidSyntax() ? COLOR.MAIN_THEME_COLOR : COLOR.DISABLED_BLUE
           }}
-          onPress={() => onEquals()}
+          disabled={!isValidSyntax()}
+          onPress={() => onEqualsPress()}
         >
           <Text style={styles.calcButtonText}>=</Text>
         </Pressable>
