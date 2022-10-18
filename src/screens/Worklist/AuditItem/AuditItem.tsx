@@ -196,13 +196,14 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
 export const addLocationHandler = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  floorLocations: Location[]
 ) => {
   dispatch(
     setupScreen(
       itemDetails ? itemDetails.itemNbr : 0,
       itemDetails ? itemDetails.upcNbr : '',
-      itemDetails?.location.floor || [],
+      floorLocations || [],
       itemDetails?.location.reserve || [],
       null,
       -999,
@@ -734,8 +735,9 @@ export const renderConfirmOnHandsModal = (
 export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
-  scanRequired: boolean
-): boolean => floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1)
+  scanRequired: boolean,
+  itemDetailsLoading: boolean
+): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1)
   || reserveLocations.some(
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
@@ -1086,7 +1088,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             <LocationListCard
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
-              add={() => addLocationHandler(itemDetails, dispatch, navigation)}
+              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations)}
               loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
               error={!!(getItemDetailsApi.error || getLocationApi.error)}
               onRetry={() => {}}
@@ -1126,7 +1128,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           disabledContinue={disabledContinue(
             floorLocations,
             reserveLocations,
-            userConfig.scanRequired
+            userConfig.scanRequired,
+            getItemDetailsApi.isWaiting
           )}
         />
       </View>

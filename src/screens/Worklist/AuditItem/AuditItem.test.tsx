@@ -314,7 +314,7 @@ describe('AuditItemScreen', () => {
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      addLocationHandler(mockItemDetails, mockDispatch, navigationProp);
+      addLocationHandler(mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockNavigate).toBeCalledTimes(1);
     });
@@ -680,7 +680,7 @@ describe('AuditItemScreen', () => {
       const mockReserveLocations = itemPallets.pallets;
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, false)
+        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
       ).toBe(true);
     });
     it(`Test disabledContinue functionality return true 
@@ -701,7 +701,7 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, true)
+        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
       ).toBe(true);
     });
     it(`Test disabledContinue functionality return false 
@@ -722,7 +722,7 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, true)
+        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
       ).toBe(false);
     });
     it(`Test disabledContinue functionality return false 
@@ -743,7 +743,7 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, false)
+        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
       ).toBe(false);
     });
     it('tests getUpdatedReserveLocations', () => {
