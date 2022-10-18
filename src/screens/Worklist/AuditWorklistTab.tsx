@@ -9,7 +9,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { getWorklist } from '../../state/actions/saga';
-import { setAuditItemNumber, setWorklistItems } from '../../state/actions/AuditWorklist';
+import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 
@@ -92,11 +92,6 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const items = toDo ? toDoItems : completedItems;
   const { isWaiting } = useTypedSelector(state => state.async.getWorklist);
 
-  const { result } = useTypedSelector(state => state.async.getWorklist);
-
-  if (result && result.data) {
-    dispatch(setWorklistItems(result.data));
-  }
   // TODO: If there are no worklist items we need to show error message
   if (isEmpty(items)) {
     return null;
