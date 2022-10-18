@@ -306,6 +306,7 @@ const ZoneList = (): JSX.Element => {
     <BottomSheetModalProvider>
       <TouchableOpacity
         activeOpacity={1}
+        onPress={() => dispatch(hideLocationPopup())}
         disabled={!location.locationPopupVisible}
         style={location.locationPopupVisible ? styles.disabledContainer : styles.safeAreaView}
       >
