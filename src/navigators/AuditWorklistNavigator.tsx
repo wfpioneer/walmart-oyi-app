@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { strings } from '../locales';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
-import { setBottomTab, setManualScan } from '../state/actions/Global';
+import { setBottomTab, setCalcOpen, setManualScan } from '../state/actions/Global';
 import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
@@ -29,6 +29,7 @@ interface AuditWorklistNavProps {
   navigation: NavigationProp<any>;
   menuOpen: boolean;
   isBottomTabEnabled: boolean;
+  calcOpen: boolean;
 }
 
 export const renderScanButton = (
@@ -41,7 +42,7 @@ export const renderScanButton = (
     }}
     testID="manual-scan"
   >
-    <View style={styles.leftButton}>
+    <View style={styles.headerLeftIcon}>
       <MaterialCommunityIcons
         name="barcode-scan"
         size={20}
@@ -53,8 +54,24 @@ export const renderScanButton = (
 
 const renderPrintButton = () => (
   <TouchableOpacity onPress={() => {}}>
-    <View>
+    <View style={styles.headerLeftIcon}>
       <MaterialCommunityIcons name="printer" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
+);
+
+export const renderCalcButton = (
+  dispatch: Dispatch<any>,
+  calcOpen: boolean
+): JSX.Element => (
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(setCalcOpen(!calcOpen));
+    }}
+    testID="calc-button"
+  >
+    <View style={styles.headerLeftIcon}>
+      <MaterialCommunityIcons name="calculator" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
 );
@@ -88,7 +105,8 @@ export const AuditWorklistNavigatorStack = (
     isManualScanEnabled,
     navigation,
     menuOpen,
-    isBottomTabEnabled
+    isBottomTabEnabled,
+    calcOpen
   } = props;
 
   const navigateBack = () => {
@@ -159,6 +177,7 @@ export const AuditWorklistNavigatorStack = (
             headerTitle: strings('AUDITS.AUDIT_ITEM'),
             headerRight: () => (
               <View style={styles.headerContainer}>
+                {renderCalcButton(dispatch, calcOpen)}
                 {renderPrintButton()}
                 {renderScanButton(dispatch, isManualScanEnabled)}
               </View>
@@ -182,7 +201,7 @@ export const AuditWorklistNavigatorStack = (
 const AuditWorklistNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { isManualScanEnabled, isBottomTabEnabled } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, isBottomTabEnabled, calcOpen } = useTypedSelector(state => state.Global);
   const { auditWorklists } = useTypedSelector(state => state.User.configs);
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
@@ -194,6 +213,7 @@ const AuditWorklistNavigator = (): JSX.Element => {
       isManualScanEnabled={isManualScanEnabled}
       menuOpen={menuOpen}
       isBottomTabEnabled={isBottomTabEnabled}
+      calcOpen={calcOpen}
     />
   );
 };
