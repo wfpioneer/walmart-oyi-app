@@ -406,7 +406,8 @@ describe('AuditItemScreen', () => {
           quantity: 22,
           sectionId: 5578,
           locationName: 'D1-4',
-          mixedPallet: false
+          mixedPallet: false,
+          newQty: 16
         }
       ];
       getScannedPalletEffect(
@@ -695,7 +696,7 @@ describe('AuditItemScreen', () => {
           sectionId: 123,
           locationName: '1b-1',
           mixedPallet: true,
-          newQty: undefined,
+          newQty: 1,
           scanned: false
         }
       ];
@@ -716,7 +717,7 @@ describe('AuditItemScreen', () => {
           sectionId: 123,
           locationName: '1b-1',
           mixedPallet: true,
-          newQty: undefined,
+          newQty: 1,
           scanned: true
         }
       ];
@@ -737,7 +738,7 @@ describe('AuditItemScreen', () => {
           sectionId: 123,
           locationName: '1b-1',
           mixedPallet: true,
-          newQty: undefined,
+          newQty: 1,
           scanned: false
         }
       ];

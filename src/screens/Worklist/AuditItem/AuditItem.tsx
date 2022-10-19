@@ -215,7 +215,7 @@ export const addLocationHandler = (
 };
 
 export const calculateFloorLocDecreaseQty = (
-  newOHQty: any,
+  newOHQty: number,
   locationName: string,
   dispatch: Dispatch<any>
 ) => {
@@ -238,7 +238,7 @@ export const calculateFloorLocIncreaseQty = (
 };
 
 export const calculatePalletDecreaseQty = (
-  newOHQty: any,
+  newOHQty: number,
   palletId: string,
   dispatch: Dispatch<any>
 ) => {
@@ -250,7 +250,7 @@ export const calculatePalletDecreaseQty = (
 };
 
 export const calculatePalletIncreaseQty = (
-  newOHQty: any,
+  newOHQty: number,
   palletId: string,
   dispatch: Dispatch<any>,
 ) => {
