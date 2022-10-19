@@ -291,10 +291,11 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
   };
 
   const handleBin = (items: PickListItem[]) => {
-    const { palletId } = items[0];
+    const { palletId, palletLocationName } = items[0];
 
     const palletDetails = {
       id: palletId,
+      lastLocation: palletLocationName,
       items: items.map(item => ({
         itemNbr: item.itemNbr,
         itemDesc: item.itemDesc,
