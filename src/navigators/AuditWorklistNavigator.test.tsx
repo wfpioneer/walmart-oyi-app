@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
-import { AuditWorklistNavigatorStack, renderScanButton } from './AuditWorklistNavigator';
+import { AuditWorklistNavigatorStack, renderCalcButton, renderScanButton } from './AuditWorklistNavigator';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 const navigationProp: NavigationProp<any> = {
@@ -31,6 +31,7 @@ describe('AuditItemWorklist Navigator', () => {
         navigation={navigationProp}
         menuOpen={false}
         isBottomTabEnabled={true}
+        calcOpen={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -44,6 +45,19 @@ describe('AuditItemWorklist Navigator', () => {
     );
     const scanButton = getByTestId('manual-scan');
     fireEvent.press(scanButton);
+
+    expect(mockDispatch).toHaveBeenCalled();
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('Renders and Calls the calculator Button', () => {
+    const mockDispatch = jest.fn();
+
+    const { toJSON, getByTestId } = render(
+      renderCalcButton(mockDispatch, false)
+    );
+    const calcButton = getByTestId('calc-button');
+    fireEvent.press(calcButton);
 
     expect(mockDispatch).toHaveBeenCalled();
     expect(toJSON()).toMatchSnapshot();

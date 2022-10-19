@@ -22,13 +22,48 @@ exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`
   <View
     style={
       Object {
-        "paddingHorizontal": 15,
+        "width": 35,
       }
     }
   >
     <Icon
       color="#ffffffff"
       name="barcode-scan"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`AuditItemWorklist Navigator Renders and Calls the calculator Button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="calc-button"
+>
+  <View
+    style={
+      Object {
+        "width": 35,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="calculator"
       size={20}
     />
   </View>
