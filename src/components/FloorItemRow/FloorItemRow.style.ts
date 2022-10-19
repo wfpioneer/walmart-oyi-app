@@ -6,8 +6,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: COLOR.WHITE,
-    paddingLeft: 15,
-    paddingRight: 25,
+    paddingHorizontal: 15,
     paddingVertical: 5,
     marginBottom: 2,
     flexDirection: 'row'
@@ -34,7 +33,8 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   rightButton: {
-    paddingVertical: 3
+    paddingVertical: 3,
+    paddingRight: 10
   },
   leftButton: {
     flex: 1,
