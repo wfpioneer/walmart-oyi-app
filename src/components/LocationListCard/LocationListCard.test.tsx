@@ -12,7 +12,8 @@ const mockLocationList: LocationList[] = [{
   increment: jest.fn,
   decrement: jest.fn,
   onDelete: jest.fn,
-  qtyChange: jest.fn
+  qtyChange: jest.fn,
+  onEndEditing: jest.fn
 }];
 
 describe('Tests LocationListCard Component', () => {
