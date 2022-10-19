@@ -24,9 +24,6 @@ interface LocationCardProp {
     scanned?: boolean;
   }
 
-export const MAX = 9999;
-export const MIN = 0;
-
 export const getContentStyle = (
   locationType: string, scannerEnabled: boolean, scanned: boolean | undefined, isLocationText: boolean
 ) => {
@@ -39,7 +36,7 @@ export const getContentStyle = (
   return isLocationText ? styles.location : styles.pallet;
 };
 
-export const validateQty = (qty: number) => MIN <= qty && qty <= MAX;
+export const validateQty = (qty: number, MIN: number, MAX: number) => MIN <= qty && qty <= MAX;
 
 const LocationCard = (props: LocationCardProp): JSX.Element => {
   const {
@@ -55,6 +52,9 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
     scannerEnabled,
     scanned
   } = props;
+
+  const MIN = locationType === 'floor' ? 1 : 0;
+  const MAX = 9999;
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -77,10 +77,10 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
             onDecreaseQty={onQtyDecrement}
             onIncreaseQty={onQtyIncrement}
             onTextChange={onTextChange}
-            minValue={0}
+            minValue={MIN}
             maxValue={MAX}
             value={quantity}
-            isValid={validateQty(quantity)}
+            isValid={validateQty(quantity, MIN, MAX)}
             onEndEditing={onEndEditing}
           />
         </View>
