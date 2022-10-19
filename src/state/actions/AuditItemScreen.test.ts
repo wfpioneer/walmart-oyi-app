@@ -3,11 +3,15 @@ import {
   SET_FLOOR_LOCATIONS,
   SET_ITEM_DETAILS,
   SET_RESERVE_LOCATIONS,
+  SET_SCANNED_PALLET_ID,
+  UPDATE_FLOOR_LOCATION_QTY,
   UPDATE_PALLET_QTY,
   clearAuditScreenData,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
+  setScannedPalletId,
+  updateFloorLocationQty,
   updatePalletQty
 } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
@@ -51,6 +55,23 @@ describe('Audit Item Screen actions', () => {
     expect(updatePalletQtyResult).toStrictEqual({
       type: UPDATE_PALLET_QTY,
       payload: { palletId: mockPalletId, newQty: mockNewQty }
+    });
+  });
+  it('handles setting the palletId for Audit Item Screen', () => {
+    const mockPalletId = '4567';
+    const setScannedPalletIdResult = setScannedPalletId(mockPalletId);
+    expect(setScannedPalletIdResult).toStrictEqual({
+      type: SET_SCANNED_PALLET_ID,
+      payload: mockPalletId
+    });
+  });
+  it('handles updating the loc quantity based on locationName', () => {
+    const mockLocationName = 'A1-1';
+    const mockNewQty = 22;
+    const updateFloorLocationQtyResult = updateFloorLocationQty(mockLocationName, mockNewQty);
+    expect(updateFloorLocationQtyResult).toStrictEqual({
+      type: UPDATE_FLOOR_LOCATION_QTY,
+      payload: { locationName: mockLocationName, newQty: mockNewQty }
     });
   });
 });

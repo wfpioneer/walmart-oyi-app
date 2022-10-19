@@ -304,39 +304,46 @@ const ZoneList = (): JSX.Element => {
 
   return (
     <BottomSheetModalProvider>
-      <ZoneScreen
-        siteId={siteId}
-        dispatch={dispatch}
-        getZoneApi={getZoneApi}
-        isManualScanEnabled={isManualScanEnabled}
-        navigation={navigation}
-        route={route}
-        useEffectHook={useEffect}
-        apiStart={apiStart}
-        setApiStart={setApiStart}
-        trackEventCall={trackEvent}
-        locationPopupVisible={location.locationPopupVisible}
-        getZoneNamesApi={getZoneNamesApi}
-        errorVisible={errorVisible}
-        setErrorVisible={setErrorVisible}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-      />
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        snapPoints={snapPoints}
-        index={0}
-        onDismiss={() => dispatch(hideLocationPopup())}
-        style={styles.bottomSheetModal}
-        backdropComponent={BottomSheetBackdrop}
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => dispatch(hideLocationPopup())}
+        disabled={!location.locationPopupVisible}
+        style={location.locationPopupVisible ? styles.disabledContainer : styles.safeAreaView}
       >
-        <BottomSheetAddCard
-          isManagerOption={true}
-          isVisible={true}
-          text={strings('LOCATION.ADD_ZONE')}
-          onPress={handleAddZone}
+        <ZoneScreen
+          siteId={siteId}
+          dispatch={dispatch}
+          getZoneApi={getZoneApi}
+          isManualScanEnabled={isManualScanEnabled}
+          navigation={navigation}
+          route={route}
+          useEffectHook={useEffect}
+          apiStart={apiStart}
+          setApiStart={setApiStart}
+          trackEventCall={trackEvent}
+          locationPopupVisible={location.locationPopupVisible}
+          getZoneNamesApi={getZoneNamesApi}
+          errorVisible={errorVisible}
+          setErrorVisible={setErrorVisible}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
         />
-      </BottomSheetModal>
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          snapPoints={snapPoints}
+          index={0}
+          onDismiss={() => dispatch(hideLocationPopup())}
+          style={styles.bottomSheetModal}
+          backdropComponent={BottomSheetBackdrop}
+        >
+          <BottomSheetAddCard
+            isManagerOption={true}
+            isVisible={true}
+            text={strings('LOCATION.ADD_ZONE')}
+            onPress={handleAddZone}
+          />
+        </BottomSheetModal>
+      </TouchableOpacity>
     </BottomSheetModalProvider>
   );
 };
