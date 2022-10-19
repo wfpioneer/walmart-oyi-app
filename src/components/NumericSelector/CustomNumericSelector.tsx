@@ -6,7 +6,7 @@ import styles from './NumericSelector.style';
 import COLOR from '../../themes/Color';
 import IconButton, { IconButtonType } from '../buttons/IconButton';
 
-interface CalcNumericSelectorProps {
+interface CustomNumericSelectorProps {
   // eslint-disable-next-line react/require-default-props
   testID?: string;
   isValid: boolean;
@@ -27,7 +27,7 @@ const renderPlusMinusBtn = (name: 'plus' | 'minus', isDisabled: boolean) => (
   />
 );
 
-const CalcNumericSelector = (props: CalcNumericSelectorProps): JSX.Element => {
+const CustomNumericSelector = (props: CustomNumericSelectorProps): JSX.Element => {
   const {
     testID,
     isValid,
@@ -74,8 +74,8 @@ const CalcNumericSelector = (props: CalcNumericSelectorProps): JSX.Element => {
   );
 };
 
-export default CalcNumericSelector;
+export default CustomNumericSelector;
 
-CalcNumericSelector.defaultProps = {
+CustomNumericSelector.defaultProps = {
   onEndEditing: () => {}
 };

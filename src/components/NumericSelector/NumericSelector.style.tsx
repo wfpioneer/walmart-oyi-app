@@ -18,14 +18,12 @@ const styles = StyleSheet.create({
     color: COLOR.MAIN_THEME_COLOR,
     minWidth: '15%',
     textAlign: 'center',
-    height: 40,
-    backgroundColor: COLOR.RED_100
+    height: 40
   },
   calcInput: {
     color: COLOR.MAIN_THEME_COLOR,
     minWidth: '15%',
     textAlign: 'center',
-    backgroundColor: COLOR.GREY_300,
     paddingHorizontal: 4
   },
   buttonInput: {
