@@ -380,6 +380,7 @@ describe('Tests Reserve Section Details Screen', () => {
         mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(true);
+
       mockConfigWaiting = false;
       mockGetPalletDetailsWaiting = true;
       mockGetPalletDetailsComplete = false;
@@ -388,18 +389,25 @@ describe('Tests Reserve Section Details Screen', () => {
         mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(true);
+
       mockGetPalletDetailsWaiting = false;
       mockGetSectionDetailsWaiting = true;
       result = showActivitySpinner(
         mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(true);
+
       mockGetSectionDetailsWaiting = false;
-      mockGetPalletDetailsComplete = true;
       result = showActivitySpinner(
         mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(false);
+
+      mockGetPalletDetailsComplete = true;
+      result = showActivitySpinner(
+        mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
+      );
+      expect(result).toStrictEqual(true);
     });
   });
 });
