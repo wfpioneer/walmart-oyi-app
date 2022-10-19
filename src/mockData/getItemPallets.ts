@@ -9,7 +9,8 @@ export const itemPallets = {
     quantity: 22,
     sectionId: 5578,
     locationName: 'D1-4',
-    mixedPallet: false
+    mixedPallet: false,
+    newQty: 24
   }]
 };
 
