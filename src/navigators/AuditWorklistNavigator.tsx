@@ -19,6 +19,7 @@ import COLOR from '../themes/Color';
 import styles from './AuditWorklistNavigator.style';
 import AuditWorklistTabs from './AuditWorklistTabNavigator/AuditWorklistTabNavigator';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
+import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
 
 const Stack = createStackNavigator();
 
@@ -42,7 +43,7 @@ export const renderScanButton = (
     }}
     testID="manual-scan"
   >
-    <View style={styles.headerLeftIcon}>
+    <View style={styles.headerRightIcon}>
       <MaterialCommunityIcons
         name="barcode-scan"
         size={20}
@@ -52,9 +53,9 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-const renderPrintButton = () => (
-  <TouchableOpacity onPress={() => {}}>
-    <View style={styles.headerLeftIcon}>
+const renderPrintButton = (navigation: NavigationProp<any>) => (
+  <TouchableOpacity onPress={() => { navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' }); }}>
+    <View style={styles.headerRightIcon}>
       <MaterialCommunityIcons name="printer" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
@@ -70,7 +71,7 @@ export const renderCalcButton = (
     }}
     testID="calc-button"
   >
-    <View style={styles.headerLeftIcon}>
+    <View style={styles.headerRightIcon}>
       <MaterialCommunityIcons name="calculator" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
@@ -178,10 +179,15 @@ export const AuditWorklistNavigatorStack = (
             headerRight: () => (
               <View style={styles.headerContainer}>
                 {renderCalcButton(dispatch, calcOpen)}
-                {renderPrintButton()}
+                {renderPrintButton(navigation)}
                 {renderScanButton(dispatch, isManualScanEnabled)}
               </View>
             )
+          }}
+          listeners={{
+            beforeRemove: () => {
+              dispatch({ type: GET_ITEM_DETAILS.RESET });
+            }
           }}
         />
         <Stack.Screen

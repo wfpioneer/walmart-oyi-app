@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center'
   },
-  headerLeftIcon: {
+  headerRightIcon: {
     width: 35
   },
   filterButton: {
