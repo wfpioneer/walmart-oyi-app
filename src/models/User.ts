@@ -32,6 +32,8 @@ export interface Configurations {
   createPallet: boolean;
   auditWorklists: boolean;
   showRollOverAudit: boolean;
+  showOpenAuditLink: boolean;
+  scanRequired: boolean;
 }
 
 export interface area {

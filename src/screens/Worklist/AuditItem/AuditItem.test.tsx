@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // adding this exception as a valid exception to the no spreading props rule is when there are a large amount of props
 import {
-  NavigationContainer, NavigationContext, NavigationProp, RouteProp
+  NavigationContainer,
+  NavigationContext,
+  NavigationProp,
+  RouteProp
 } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView } from 'react-native';
@@ -11,16 +14,39 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import Toast from 'react-native-toast-message';
+import { UPDATE_FLOOR_LOCATION_QTY, UPDATE_PALLET_QTY } from '../../../state/actions/AuditItemScreen';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
-  AuditItemScreen, AuditItemScreenProps, addLocationHandler, deleteFloorLocationApiHook, getItemDetailsApiHook,
-  getlocationsApiResult, isError, onValidateItemNumber, renderDeleteLocationModal
+  AuditItemScreen,
+  AuditItemScreenProps,
+  addLocationHandler,
+  calculateFloorLocDecreaseQty,
+  calculateFloorLocIncreaseQty,
+  calculatePalletDecreaseQty,
+  calculatePalletIncreaseQty,
+  calculateTotalOHQty,
+  completeItemApiHook,
+  deleteFloorLocationApiHook,
+  disabledContinue,
+  getFloorLocationsResult,
+  getItemDetailsApiHook,
+  getScannedPalletEffect,
+  getUpdatedReserveLocations,
+  isError,
+  onValidateItemNumber,
+  renderConfirmOnHandsModal,
+  renderDeleteLocationModal,
+  renderpalletQtyUpdateModal,
+  reportMissingPalletApiHook,
+  updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { itemPallets } from '../../../mockData/getItemPallets';
+import { ItemPalletInfo } from '../../../models/AuditItem';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -32,7 +58,10 @@ jest.mock('../../../utils/sessionTimeout.ts', () => ({
   ...jest.requireActual('../../../utils/sessionTimeout.ts'),
   validateSession: jest.fn(() => Promise.resolve())
 }));
-jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+jest.mock(
+  'react-native-vector-icons/MaterialCommunityIcons',
+  () => 'mockMaterialCommunityIcons'
+);
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'mockMaterialIcons');
 jest.mock('@react-navigation/native', () => {
   const actualNav = jest.requireActual('@react-navigation/native');
@@ -41,6 +70,7 @@ jest.mock('@react-navigation/native', () => {
     useNavigation: () => ({
       navigate: jest.fn(),
       dispatch: jest.fn(),
+      addListener: jest.fn(),
       isFocused: jest.fn().mockReturnValue(true),
       goBack: jest.fn()
     }),
@@ -70,6 +100,11 @@ const navigationProp: NavigationProp<any> = {
 const routeProp: RouteProp<any, string> = {
   key: 'test',
   name: 'test'
+};
+
+const mockScannedEvent = {
+  type: 'TEST',
+  value: '4598'
 };
 
 const scrollViewProp: React.RefObject<ScrollView> = {
@@ -106,13 +141,26 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   floorLocations: [],
   reserveLocations: [],
   getItemPalletsApi: defaultAsyncState,
+  showPalletQtyUpdateModal: false,
+  setShowPalletQtyUpdateModal: jest.fn(),
+  scannedPalletId: '4928',
+  userConfig: mockConfig,
+  completeItemApi: defaultAsyncState,
   showDeleteConfirmationModal: false,
   setShowDeleteConfirmationModal: jest.fn(),
   locToConfirm: {
-    locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
+    locationName: '',
+    locationArea: '',
+    locationIndex: -1,
+    locationTypeNbr: -1,
+    palletId: '',
+    sectionId: 0
   },
   setLocToConfirm: jest.fn(),
-  deleteFloorLocationApi: defaultAsyncState
+  deleteFloorLocationApi: defaultAsyncState,
+  reportMissingPalletApi: defaultAsyncState,
+  showOnHandsConfirmState: [false, jest.fn()],
+  updateOHQtyApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
@@ -160,13 +208,11 @@ describe('AuditItemScreen', () => {
         itemDetails: getMockItemDetails('123')
       };
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <AuditItemScreen {...testProps} />
-      );
+      renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders \'Scanned Item Not Found\' on request status 204', () => {
+    it("renders 'Scanned Item Not Found' on request status 204", () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
         getItemDetailsApi: {
@@ -179,13 +225,11 @@ describe('AuditItemScreen', () => {
         showItemNotFoundMsg: true
       };
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <AuditItemScreen {...testProps} />
-      );
+      renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
+    it("renders 'Activity Indicator' waiting for ItemDetails Response ", () => {
       const testProps: AuditItemScreenProps = {
         ...mockAuditItemScreenProps,
         getItemDetailsApi: {
@@ -194,9 +238,20 @@ describe('AuditItemScreen', () => {
         }
       };
       const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <AuditItemScreen {...testProps} />
-      );
+      renderer.render(<AuditItemScreen {...testProps} />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it("renders 'Activity Indicator' waiting for completeItemApi Response ", () => {
+      const testProps: AuditItemScreenProps = {
+        ...mockAuditItemScreenProps,
+        completeItemApi: {
+          ...defaultAsyncState,
+          isWaiting: true
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
@@ -205,12 +260,23 @@ describe('AuditItemScreen', () => {
     const mockDispatch = jest.fn();
     const mockSetShowDeleteConfirmationModal = jest.fn();
     const mockDeleteLocationConfirmed = jest.fn();
+    const mockSetShowOnHandsConfirmModal = jest.fn();
     const mockLocationName = 'A1-1';
     const mockItemNumber = 9800065634;
     afterEach(() => {
       jest.clearAllMocks();
     });
-
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: mockItemDetails,
+        status: 200
+      }
+    };
+    const failureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
     it('test onValidateItemNumber', async () => {
       const expectedGetItemDetailsAction = {
         payload: {
@@ -218,9 +284,17 @@ describe('AuditItemScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
-      await onValidateItemNumber({ ...mockAuditItemScreenProps, itemNumber: 123 });
-      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
-      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
+      await onValidateItemNumber({
+        ...mockAuditItemScreenProps,
+        itemNumber: 123
+      });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
+        type: 'API/GET_ITEM_DETAILS/RESET'
+      });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        2,
+        expectedGetItemDetailsAction
+      );
     });
 
     it('test isError', () => {
@@ -230,61 +304,51 @@ describe('AuditItemScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS'
       };
-      const { getByTestId, rerender, toJSON } = render(isError(
-        mockError,
-        mockDispatch,
-        jest.fn,
-        980056535
-      ));
+      const { getByTestId, rerender, toJSON } = render(
+        isError(mockError, mockDispatch, jest.fn, 980056535)
+      );
       expect(toJSON()).toMatchSnapshot();
       const retryButton = getByTestId('errorLoadingItemRetry');
       fireEvent.press(retryButton);
       expect(mockDispatch).toHaveBeenCalledWith(expectedGetItemDetailAction);
-      rerender(isError(
-        mockError,
-        mockDispatch,
-        jest.fn,
-        980056535
-      ));
+      rerender(isError(mockError, mockDispatch, jest.fn, 980056535));
       expect(toJSON()).toMatchSnapshot();
     });
 
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      addLocationHandler(mockItemDetails, mockDispatch, navigationProp);
+      addLocationHandler(mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockNavigate).toBeCalledTimes(1);
     });
 
-    it('tests getlocationsApiResult', () => {
-      const mockLocationsAsyncstate = {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: {
-            location: {
-              floor: mockItemDetails.location.floor,
-              reserve: mockItemDetails.location.reserve
-            }
-          }
-        }
-      };
-      getlocationsApiResult(mockLocationsAsyncstate, mockDispatch);
+    it('tests getFloorLocationsResult', () => {
+      const newResults = [...mockItemDetails.location.floor, [{
+        zoneId: 0,
+        aisleId: 1,
+        sectionId: 1,
+        zoneName: 'A',
+        aisleName: '1',
+        sectionName: '1',
+        locationName: 'A1-1',
+        type: 'Sales Floor',
+        typeNbr: 8
+      }]];
+      getFloorLocationsResult(newResults, mockDispatch, mockItemDetails.location.floor);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
     it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: mockItemDetails,
-          status: 200
-        }
-      };
       const mockSetShowItemNotFoundMsg = jest.fn();
-      getItemDetailsApiHook(successApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
-      expect(mockDispatch).toBeCalledTimes(3);
+      getItemDetailsApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowItemNotFoundMsg,
+        mockItemDetails.location
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
     });
 
@@ -303,28 +367,94 @@ describe('AuditItemScreen', () => {
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       };
-      getItemDetailsApiHook(successApi204, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        successApi204,
+        mockDispatch,
+        navigationProp,
+        mockSetShowItemNotFoundMsg,
+        mockItemDetails.location
+      );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
     });
 
     it('Tests getItemDetailsApi on failure', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
       const mockSetShowItemNotFoundMsg = jest.fn();
-      getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, mockSetShowItemNotFoundMsg);
+      getItemDetailsApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowItemNotFoundMsg,
+        mockItemDetails.location
+      );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
+    });
+    it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      getScannedPalletEffect(
+        navigationProp,
+        mockScannedEvent,
+        itemPallets.pallets,
+        mockDispatch,
+        mocksetShowPalletQtyUpdateModal
+      );
+      expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalled();
+      expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalledWith(true);
+      expect(mockDispatch).toHaveBeenCalled();
+    });
+    it('Tests getScannedPalletEffect shows error toast if the scanned pallet not associated with the item', () => {
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      const mockReserveLocations = [
+        {
+          palletId: '5999',
+          quantity: 22,
+          sectionId: 5578,
+          locationName: 'D1-4',
+          mixedPallet: false,
+          newQty: 16
+        }
+      ];
+      getScannedPalletEffect(
+        navigationProp,
+        mockScannedEvent,
+        mockReserveLocations,
+        mockDispatch,
+        mocksetShowPalletQtyUpdateModal
+      );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.SCAN_PALLET_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    });
+    it('Snapshot test for update pallet qty modal', () => {
+      const mockShowPalletQtyModal = true;
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      const mockVendorPackQty = 3;
+      const { toJSON } = render(
+        renderpalletQtyUpdateModal(
+          '4988',
+          itemPallets.pallets,
+          mockDispatch,
+          mockShowPalletQtyModal,
+          mocksetShowPalletQtyUpdateModal,
+          mockVendorPackQty
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
     });
 
     it('Tests renderDeleteLocationModal should render modal with locationName and action buttons', () => {
       const { toJSON } = render(renderDeleteLocationModal(
         defaultAsyncState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -336,10 +466,13 @@ describe('AuditItemScreen', () => {
       };
       const { toJSON } = render(renderDeleteLocationModal(
         mockDeleteFloorLocationApiState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -347,10 +480,13 @@ describe('AuditItemScreen', () => {
     it('Tests renderDeleteLocationModal cancel button action', () => {
       const { getByTestId } = render(renderDeleteLocationModal(
         defaultAsyncState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -364,10 +500,13 @@ describe('AuditItemScreen', () => {
     it('Tests renderDeleteLocationModal confirm button action', () => {
       const { getByTestId } = render(renderDeleteLocationModal(
         defaultAsyncState,
+        defaultAsyncState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
-        mockLocationName
+        mockLocationName,
+        'floor',
+        ''
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
@@ -375,15 +514,96 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests deleteFloorLocationApiHook on 200 success for deleting location', () => {
-      const successApi: AsyncState = {
-        ...defaultAsyncState,
-        result: {
-          data: {},
-          status: 200
-        }
-      };
       deleteFloorLocationApiHook(
-        successApi, mockItemNumber, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 'A1-1'
+        successApi,
+        mockItemNumber,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        'A1-1'
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({ type: 'success' })
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests deleteFloorLocationApiHook on failure', () => {
+      deleteFloorLocationApiHook(
+        failureApi,
+        mockItemNumber,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        'A1-1'
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({ type: 'error' })
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests renderDeleteLocationModal should render modal with loader', () => {
+      const mockReportMissingPalletApiState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const { toJSON } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        mockReportMissingPalletApiState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderDeleteLocationModal cancel button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalCancelButton = getByTestId('modal-cancel-button');
+      fireEvent.press(modalCancelButton);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledWith(false);
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests renderDeleteLocationModal confirm button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
+      reportMissingPalletApiHook(
+        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
@@ -391,18 +611,274 @@ describe('AuditItemScreen', () => {
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
-    it('Tests deleteFloorLocationApiHook on failure', () => {
-      const failureApi: AsyncState = {
-        ...defaultAsyncState,
-        error: 'Internal Server Error'
-      };
-      deleteFloorLocationApiHook(
-        failureApi, mockItemNumber, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 'A1-1'
+    it('Tests completeItemApiHook on 200 success for completing an item', () => {
+      completeItemApiHook(successApi, mockDispatch, navigationProp);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests reportMissingPalletApiHook on failure', () => {
+      reportMissingPalletApiHook(
+        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests completeItemApiHook on failure while completing an item', () => {
+      completeItemApiHook(failureApi, mockDispatch, navigationProp);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).not.toHaveBeenCalled();
+    });
+
+    it('Tests calculateTotalOHQty funcitionality', () => {
+      const mockFloorLocations = mockItemDetails.location.floor;
+      const mockReserveLocations = itemPallets.pallets;
+      const itemDetails = getMockItemDetails('123');
+      const totalCountResult = calculateTotalOHQty(
+        mockFloorLocations,
+        mockReserveLocations,
+        itemDetails
+      );
+      const expectedCount = 39;
+      expect(totalCountResult).toBe(expectedCount);
+    });
+
+    it('Tests updateOHQtyApiHook on success', () => {
+      const setShowOnHands = jest.fn();
+      updateOHQtyApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands
+      );
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(setShowOnHands).toHaveBeenCalledWith(false);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests updateOHQtyApiHook on failure', () => {
+      const setShowOnHands = jest.fn();
+      updateOHQtyApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands
+      );
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    });
+
+    it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
+      const { toJSON } = render(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderConfirmOnHandsModal should render loader', () => {
+      const mockUpdateOHQtyLoading: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const { toJSON } = render(
+        renderConfirmOnHandsModal(
+          mockUpdateOHQtyLoading,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderConfirmOnHandsModal confirm button action', () => {
+      const { getByTestId } = render(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('Tests renderConfirmOnHandsModal cancel button action', () => {
+      const { getByTestId } = render(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          50,
+          mockItemDetails,
+          mockDispatch
+        )
+      );
+      const modalConfirmButton = getByTestId('modal-cancel-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockSetShowOnHandsConfirmModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Test disabledContinue functionality return true when any of the locaion is empty', () => {
+      const mockFloorLocations = mockItemDetails.location.floor;
+      const mockReserveLocations = itemPallets.pallets;
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
+      ).toBe(true);
+    });
+    it(`Test disabledContinue functionality return true 
+      when all of the locaion qty is present and reserve pallet is not scanned but scan is required`, () => {
+      const mockFloorLocations = [
+        { ...mockItemDetails.location.floor[0], newQty: 10 }
+      ];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: 1,
+          scanned: false
+        }
+      ];
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
+      ).toBe(true);
+    });
+    it(`Test disabledContinue functionality return false 
+      when all of the locaion qty is present and reserve pallet is scanned and scan is required`, () => {
+      const mockFloorLocations = [
+        { ...mockItemDetails.location.floor[0], newQty: 10 }
+      ];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: 1,
+          scanned: true
+        }
+      ];
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
+      ).toBe(false);
+    });
+    it(`Test disabledContinue functionality return false 
+      when all of the locaion qty is present and reserve pallet is not scanned but scan is not required`, () => {
+      const mockFloorLocations = [
+        { ...mockItemDetails.location.floor[0], newQty: 10 }
+      ];
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: '123',
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: 1,
+          scanned: false
+        }
+      ];
+
+      expect(
+        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
+      ).toBe(false);
+    });
+    it('tests getUpdatedReserveLocations', () => {
+      const mockItempallets = itemPallets.pallets;
+      mockItempallets[0].newQty = 22;
+      const testResults = getUpdatedReserveLocations(mockItempallets, []);
+      expect(testResults).toEqual(mockItempallets);
+    });
+    it('tests calculateFloorLocDecreaseQty when newOHQty is greater than min value', () => {
+      calculateFloorLocDecreaseQty(22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 21 } }
+      ));
+    });
+    it('tests calculateFloorLocDecreaseQty when newOHQty is less than or equals min value', () => {
+      calculateFloorLocDecreaseQty(1, 'A1-1', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than max value', () => {
+      calculateFloorLocIncreaseQty(22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 23 } }
+      ));
+    });
+    it('tests calculateFloorLocIncreaseQty when newOHQty is greater than max value', () => {
+      calculateFloorLocIncreaseQty(100000, 'A1-1', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculatePalletDecreaseQty when newOHQty is greater than min value', () => {
+      calculatePalletDecreaseQty(1, '4597', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 0 } }
+      ));
+    });
+    it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
+      calculatePalletDecreaseQty(0, '4597', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculatePalletIncreaseQty when newOHQty is lesser than max value', () => {
+      calculatePalletIncreaseQty(22, '4597', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 23 } }
+      ));
+    });
+    it('tests calculatePalletIncreaseQty when newOHQty is greater than max value', () => {
+      calculatePalletIncreaseQty(100000, '4597', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
     });
   });
 });

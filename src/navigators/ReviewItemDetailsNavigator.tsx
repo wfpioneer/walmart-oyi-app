@@ -20,6 +20,7 @@ import { trackEvent } from '../utils/AppCenterTool';
 import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2 } from '../state/actions/asyncAPI';
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
+import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 
 const Stack = createStackNavigator();
 
@@ -182,6 +183,19 @@ const ReviewItemDetailsNavigator = () => {
           headerRight: () => (
             <View>
               {renderCloseButton()}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="AuditItem"
+        component={AuditItem}
+        options={{
+          headerTitle: strings('AUDITS.AUDIT_ITEM'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {renderScanButton()}
+              {renderPrintQueueButton()}
             </View>
           )
         }}

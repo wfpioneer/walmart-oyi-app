@@ -18,17 +18,28 @@ export interface ApprovalCardProps{
   daysLeft?: number;
   isChecked?: boolean;
   dispatch: Dispatch<any>;
+  approvalRequestSource: string
 }
 
 export const ApprovalCard = (props: ApprovalCardProps): JSX.Element => {
   const {
-    itemNbr, itemName, oldQuantity,
+    itemNbr, itemName, oldQuantity, approvalRequestSource,
     newQuantity, dollarChange, userId, daysLeft, isChecked, dispatch
   } = props;
 
   return (
     <View style={styles.cardContainer}>
-      <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
+      <View style={styles.itemTitleContainer}>
+        <View>
+          <Text style={styles.itemNumber}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
+        </View>
+        {approvalRequestSource === 'audits'
+        && (
+        <View>
+          <Text style={styles.sourceLabel}>{strings('AUDITS.AUDITS')}</Text>
+        </View>
+        )}
+      </View>
       <View style={styles.itemInfoContainer}>
         <Text style={styles.itemDesc}>{itemName}</Text>
         <Checkbox

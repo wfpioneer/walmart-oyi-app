@@ -6,19 +6,24 @@ import {
   CLEAR_AUDIT_SCREEN_DATA,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_DETAILS,
-  SET_RESERVE_LOCATIONS
+  SET_RESERVE_LOCATIONS,
+  SET_SCANNED_PALLET_ID,
+  UPDATE_FLOOR_LOCATION_QTY,
+  UPDATE_PALLET_QTY
 } from '../actions/AuditItemScreen';
 
 export interface AuditItemScreenState {
    itemDetails: ItemDetails | null,
    floorLocations: Location[],
-   reserveLocations: ItemPalletInfo[]
+   reserveLocations: ItemPalletInfo[],
+   scannedPalletId: string
 }
 
 export const initialState: AuditItemScreenState = {
   itemDetails: null,
   floorLocations: [],
-  reserveLocations: []
+  reserveLocations: [],
+  scannedPalletId: ''
 };
 
 export const AuditItemScreen = (state = initialState, action: Actions) : AuditItemScreenState => {
@@ -41,6 +46,33 @@ export const AuditItemScreen = (state = initialState, action: Actions) : AuditIt
         ...state,
         reserveLocations: action.payload
       };
+    case SET_SCANNED_PALLET_ID:
+      return {
+        ...state,
+        scannedPalletId: action.payload
+      };
+    case UPDATE_PALLET_QTY: {
+      const { reserveLocations } = state;
+      const { palletId, newQty } = action.payload;
+      const updatedLocations = reserveLocations.map(loc => {
+        if (loc.palletId === palletId) {
+          return { ...loc, newQty, scanned: true };
+        }
+        return loc;
+      });
+      return { ...state, reserveLocations: updatedLocations };
+    }
+    case UPDATE_FLOOR_LOCATION_QTY: {
+      const { floorLocations } = state;
+      const { locationName, newQty } = action.payload;
+      const updatedLocations = floorLocations.map(loc => {
+        if (loc.locationName === locationName) {
+          return { ...loc, newQty };
+        }
+        return loc;
+      });
+      return { ...state, floorLocations: updatedLocations };
+    }
     case CLEAR_AUDIT_SCREEN_DATA:
       return initialState;
     default:

@@ -102,15 +102,16 @@ export const clearPalletAPIHook = (
   }
 };
 
-const onPalletCardClick = (
+export const onPalletCardClick = (
   item: MissingPalletWorklistItemI,
   index: number,
   activeItemIndex: number,
   setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>,
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  isCompletedTab: boolean
 ) => {
-  if (activeItemIndex === index) {
+  if (activeItemIndex === index || isCompletedTab) {
     setPalletClicked(true);
     dispatch(getPalletDetails({ palletIds: [item.palletId.toString()], isAllItems: true }));
   } else {
@@ -140,9 +141,8 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       addCallback={() => handleAddLocationClick(item.palletId.toString())}
       deleteCallback={() => handleDeleteClick(item.palletId.toString())}
       navigateCallback={() => onPalletCardClick(
-        item, itemIndex, activeItemIndex, setActiveItemIndex, setPalletClicked, dispatch
+        item, itemIndex, activeItemIndex, setActiveItemIndex, setPalletClicked, dispatch, selectedTab === Tabs.COMPLETED
       )}
-      disabled={selectedTab === Tabs.COMPLETED}
     />
   );
 };

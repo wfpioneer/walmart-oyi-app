@@ -184,7 +184,12 @@ export default {
     PRICE_SIGNS: 'Señalización Precios',
     LOCATIONS: 'Ubicaciones',
     PRICE_SIGN_SUCCESS: 'Señalización impresa correctamente',
-    PRINTER_NOT_ASSIGNED: 'No impresoras asignadas'
+    PRINTER_NOT_ASSIGNED: 'No impresoras asignadas',
+    Was_Large: 'Promo - Grande',
+    Was_Medium: 'Promo - Mediano',
+    Was_Small: 'Promo - Chico',
+    Was_XSmall: 'Promo - Xchico',
+    INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -351,7 +356,10 @@ export default {
     AUDIT_WORKLIST: 'Lista de trabajo de Auditorías',
     SCAN_PALLET: 'Escanea Pallet',
     SCAN_PALLET_LABEL: 'Escanea la etiqueta del pallet para continuar',
-    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'
+    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista',
+    MISSING_PALLET_API_ERROR: 'Hubo un error reportando el pallet como faltante. Inténtalo de nuevo',
+    MISSING_PALLET_CONFIRMATION: 'Quieres reportar este pallet como faltante?',
+    MISSING_PALLET_API_SUCCESS: 'El pallet se agregó a la lista de Pallets Faltantes'
   },
   MISSING_PALLET_WORKLIST: {
     MISSING_PALLET_LABEL: 'Pallets Faltantes',
@@ -501,6 +509,10 @@ export default {
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',
     UPDATED_QTY: 'Cantidad actualizada',
     LARGE_CURRENCY_CHANGE: 'Cambio de cantidad elevada',
-    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible'
+    NO_LOCATION_AVAILABLE: 'Sin Ubicación Disponible',
+    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet asociado al artículo',
+    COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
+    COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo',
+    OPEN_AUDIT_LABEL: 'Abrir Auditoría'
   }
 };

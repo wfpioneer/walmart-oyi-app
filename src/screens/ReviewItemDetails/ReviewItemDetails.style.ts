@@ -172,6 +172,18 @@ const styles = StyleSheet.create({
     marginBottom: 1,
     borderBottomWidth: 1,
     borderBottomColor: COLOR.GREY_200
+  },
+  openAuditText: {
+    fontSize: 16,
+    color: COLOR.MAIN_THEME_COLOR,
+    textDecorationLine: 'underline'
+  },
+  openAuditContainer: {
+    paddingTop: 5,
+    paddingHorizontal: 15,
+    backgroundColor: COLOR.WHITE,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   }
 });
 
