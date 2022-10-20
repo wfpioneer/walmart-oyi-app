@@ -20429,16 +20429,6 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       2+6-4
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -21165,7 +21155,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -21183,7 +21173,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -21281,19 +21271,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      2+6-4
+      4
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -22020,7 +22000,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -22038,7 +22018,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -24671,19 +24651,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      2+6-
+      
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -25526,19 +25496,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      2+6-(2+3)/
+      
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -27226,19 +27186,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      2+6-(2+3)/1+
+      1+
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -27965,7 +27915,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -27983,7 +27933,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -28081,19 +28031,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      2+6-(2+3)/1+23
+      1+23
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -28820,7 +28760,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -28838,7 +28778,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -28936,19 +28876,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      2+6-(2+3)/4
+      1.25
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -29675,7 +29605,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -29693,7 +29623,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -29791,19 +29721,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      2+6-(2+3)/4
+      (2+3)/4
     </TextInput>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 14,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -30530,7 +30450,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -30548,7 +30468,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -32220,7 +32140,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -32238,7 +32158,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,

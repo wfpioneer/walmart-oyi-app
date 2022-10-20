@@ -10,7 +10,7 @@ import COLOR from '../../themes/Color';
 import styles from './Calculator.style';
 import { strings } from '../../locales';
 
-const operandRegex = /\+|\*|\/|(\d|\))-/;
+const operandRegex = /\+|\*|\/|(?<=(\d|\)))-/;
 const openParent = /\(/;
 const closeParent = /\)/;
 const decimalNotPartOfNumberRegex = /.\.\D|.\.$|^\.\D|\.\.|^\.$|\d*\.\d*\.\d*/;
@@ -104,10 +104,17 @@ const Calculator = (props: CalculatorProps) => {
 
   const onEqualsPress = () => {
     if (isValidSyntax(true)) {
-      const result: string = evaluate(calcText);
-      setCalcText(result);
-      if (onEquals) {
-        onEquals(Number(result));
+      const result = evaluate(calcText);
+      if (typeof result === 'number') {
+        setCalcText(result.toString());
+        if (onEquals) {
+          onEquals(result);
+        }
+      } else {
+        setCalcText(result);
+        if (onEquals) {
+          onEquals(Number(result));
+        }
       }
     } else {
       setIsCalcInvalid(true);
