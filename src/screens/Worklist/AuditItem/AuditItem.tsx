@@ -406,6 +406,17 @@ export const getItemPalletsApiHook = (
         dispatch(setReserveLocations(updatedReserveLocations));
         dispatch({ type: GET_ITEM_PALLETS.RESET });
       }
+      if (getItemPalletsApi.result.status === 204) {
+        dispatch(setReserveLocations([]));
+        dispatch({ type: GET_ITEM_PALLETS.RESET });
+      }
+    }
+    if (!getItemPalletsApi.isWaiting && getItemPalletsApi.error) {
+      if (getItemPalletsApi.error.response && getItemPalletsApi.error.response.status === 409
+        && getItemPalletsApi.error.response.data.errorEnum === 'NO_RESERVE_PALLETS_AVAILABLE') {
+        dispatch(setReserveLocations([]));
+        dispatch({ type: GET_ITEM_PALLETS.RESET });
+      }
     }
   }
 };
@@ -777,6 +788,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   } = props;
   let scannedSubscription: EmitterSubscription;
 
+  const itemPalletsError = getItemPalletsApi.error && getItemPalletsApi.error.response
+  && !(getItemPalletsApi.error.response.status === 409
+    && getItemPalletsApi.error.response.data.errorEnum === 'NO_RESERVE_PALLETS_AVAILABLE');
+
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -1099,7 +1114,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getReserveLocationList(reserveLocations)}
               locationType="reserve"
               loading={getItemPalletsApi.isWaiting}
-              error={!!getItemPalletsApi.error}
+              error={!!itemPalletsError}
               scanRequired={userConfig.scanRequired}
               onRetry={handleReserveLocsRetry}
             />
