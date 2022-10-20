@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center'
   },
-  leftButton: {
-    paddingHorizontal: 15
+  headerRightIcon: {
+    width: 35
   },
   filterButton: {
     paddingHorizontal: 10
