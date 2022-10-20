@@ -135,13 +135,13 @@ const Calculator = (props: CalculatorProps) => {
         </Text>
       )}
       <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onClear()}>
+        <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="clear">
           <Text style={styles.calcButtonText}>C</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('(')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('(')} testID="openParent">
           <Text style={styles.calcButtonText}>(</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType(')')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType(')')} testID="closeParent">
           <Text style={styles.calcButtonText}>)</Text>
         </Pressable>
         <Pressable
@@ -149,57 +149,58 @@ const Calculator = (props: CalculatorProps) => {
           onPress={() => onDelete()}
           onLongPress={() => onDelete(true)}
           delayLongPress={1500}
+          testID="delete"
         >
           <Text style={styles.calcButtonText}>Del</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('7')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('7')} testID="seven">
           <Text style={styles.calcButtonText}>7</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('8')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('8')} testID="eight">
           <Text style={styles.calcButtonText}>8</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('9')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('9')} testID="nine">
           <Text style={styles.calcButtonText}>9</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('/')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('/')} testID="divide">
           <Text style={styles.calcButtonText}>/</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('4')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('4')} testID="four">
           <Text style={styles.calcButtonText}>4</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('5')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('5')} testID="five">
           <Text style={styles.calcButtonText}>5</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('6')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('6')} testID="six">
           <Text style={styles.calcButtonText}>6</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('*')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('*')} testID="multiply">
           <Text style={styles.calcButtonText}>*</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('1')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('1')} testID="one">
           <Text style={styles.calcButtonText}>1</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('2')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('2')} testID="two">
           <Text style={styles.calcButtonText}>2</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('3')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('3')} testID="three">
           <Text style={styles.calcButtonText}>3</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('-')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('-')} testID="subtract">
           <Text style={styles.calcButtonText}>-</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('.')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('.')} testID="decimal">
           <Text style={styles.calcButtonText}>.</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('0')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('0')} testID="zero">
           <Text style={styles.calcButtonText}>0</Text>
         </Pressable>
         <Pressable
@@ -209,10 +210,11 @@ const Calculator = (props: CalculatorProps) => {
           }}
           disabled={!(isValidSyntax() && calcText.length)}
           onPress={() => onEqualsPress()}
+          testID="equals"
         >
           <Text style={styles.calcButtonText}>=</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('+')}>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('+')} testID="add">
           <Text style={styles.calcButtonText}>+</Text>
         </Pressable>
       </View>
