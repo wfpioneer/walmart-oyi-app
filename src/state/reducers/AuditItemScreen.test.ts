@@ -3,6 +3,8 @@ import {
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
+  setScannedPalletId,
+  updateFloorLocationQty,
   updatePalletQty
 } from '../actions/AuditItemScreen';
 import { AuditItemScreen, AuditItemScreenState, initialState } from './AuditItemScreen';
@@ -57,6 +59,53 @@ describe('The Audit Item Screen Reducer', () => {
         locationName: 'D1-4',
         mixedPallet: false
       }]
+    };
+    expect(testResults).toStrictEqual(changeState);
+  });
+  it('handles setting the new pallet id while it got scanned', () => {
+    const testNewState = {
+      ...initialState,
+      scannedPalletId: '4597'
+    };
+    const testResults = AuditItemScreen(testInitialState, setScannedPalletId('4597'));
+    expect(testResults).toStrictEqual(testNewState);
+  });
+  it('handles updating new qty for the floor loc', () => {
+    const mockFloorLocations = [{
+      zoneId: 0,
+      aisleId: 1,
+      sectionId: 1,
+      zoneName: 'A',
+      aisleName: '1',
+      sectionName: '1',
+      locationName: 'A1-1',
+      type: 'Sales Floor',
+      typeNbr: 8,
+      newQty: 0
+    }];
+    const mockInitialState: AuditItemScreenState = {
+      ...initialState,
+      floorLocations: mockFloorLocations
+    };
+    const expectedFloorLocState = [{
+      zoneId: 0,
+      aisleId: 1,
+      sectionId: 1,
+      zoneName: 'A',
+      aisleName: '1',
+      sectionName: '1',
+      locationName: 'A1-1',
+      type: 'Sales Floor',
+      typeNbr: 8,
+      newQty: 13
+    }];
+
+    const mockNewQty = 13;
+    const mockLocName = 'A1-1';
+    const testResults = AuditItemScreen(mockInitialState, updateFloorLocationQty(mockLocName, mockNewQty));
+    const changeState = {
+      ...initialState,
+      floorLocations: expectedFloorLocState
     };
     expect(testResults).toStrictEqual(changeState);
   });
