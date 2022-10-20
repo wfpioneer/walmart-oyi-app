@@ -13,6 +13,7 @@ import { strings } from '../../locales';
 const operandRegex = /\+|\*|\/|(\d|\))-/;
 const openParent = /\(/;
 const closeParent = /\)/;
+const decimalNotPartOfNumberRegex = /.\.\D|.\.$|^\.\D|\.\.|^\.$|\d*\.\d*\.\d*/;
 const parenthesesRegex = new RegExp(`${openParent.source}|${closeParent.source}`);
 const opAndParentRegex = new RegExp(`${operandRegex.source}|${parenthesesRegex.source}`);
 const lastOpOrParentRegex = new RegExp(`(${opAndParentRegex.source})(?!.*(${opAndParentRegex.source}))`);
@@ -24,7 +25,7 @@ const opAtEdgeOfParentRegex = new RegExp(
 );
 
 interface CalculatorProps {
-  onEquals: (result: number) => void;
+  onEquals?: (result: number) => void;
 }
 
 const Calculator = (props: CalculatorProps) => {
@@ -71,6 +72,7 @@ const Calculator = (props: CalculatorProps) => {
     calcText.search(doubleOperandRegex) >= 0
     || calcText.search(opAtStartRegex) >= 0
     || calcText.search(opAtEdgeOfParentRegex) >= 0
+    || calcText.search(decimalNotPartOfNumberRegex) >= 0
     || (isOnSubmit && calcText.search(opAtEndRegex) >= 0)
     || !doOrCanParenthesesClose(0, isOnSubmit)
   ));
@@ -104,7 +106,9 @@ const Calculator = (props: CalculatorProps) => {
     if (isValidSyntax(true)) {
       const result: string = evaluate(calcText);
       setCalcText(result);
-      onEquals(Number(result));
+      if (onEquals) {
+        onEquals(Number(result));
+      }
     } else {
       setIsCalcInvalid(true);
     }
@@ -112,6 +116,7 @@ const Calculator = (props: CalculatorProps) => {
 
   const onType = (char: string) => {
     setCalcText(`${calcText}${char}`);
+    setIsCalcInvalid(false);
   };
 
   return (
@@ -200,9 +205,9 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable
           style={{
             ...styles.calcButtonView,
-            backgroundColor: isValidSyntax() ? COLOR.MAIN_THEME_COLOR : COLOR.DISABLED_BLUE
+            backgroundColor: isValidSyntax() && calcText.length ? COLOR.MAIN_THEME_COLOR : COLOR.DISABLED_BLUE
           }}
-          disabled={!isValidSyntax()}
+          disabled={!(isValidSyntax() && calcText.length)}
           onPress={() => onEqualsPress()}
         >
           <Text style={styles.calcButtonText}>=</Text>
@@ -213,6 +218,10 @@ const Calculator = (props: CalculatorProps) => {
       </View>
     </View>
   );
+};
+
+Calculator.defaultProps = {
+  onEquals: () => {}
 };
 
 export default Calculator;
