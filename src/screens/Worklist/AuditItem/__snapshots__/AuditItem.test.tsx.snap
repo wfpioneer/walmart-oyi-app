@@ -2086,7 +2086,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     }
   >
     <AuditScreenFooter
-      disabledContinue={false}
+      disabledContinue={true}
       onContinueClick={[Function]}
       totalCount={0}
     />

@@ -9,7 +9,7 @@ interface Location {
   type: string;
   typeNbr: number;
   qty?: number;
-  newQty?: number;
+  newQty: number;
 }
 
 // eslint-disable-next-line no-shadow

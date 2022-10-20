@@ -14,19 +14,25 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import Toast from 'react-native-toast-message';
+import { UPDATE_FLOOR_LOCATION_QTY, UPDATE_PALLET_QTY } from '../../../state/actions/AuditItemScreen';
 import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen,
   AuditItemScreenProps,
   addLocationHandler,
+  calculateFloorLocDecreaseQty,
+  calculateFloorLocIncreaseQty,
+  calculatePalletDecreaseQty,
+  calculatePalletIncreaseQty,
   calculateTotalOHQty,
   completeItemApiHook,
   deleteFloorLocationApiHook,
   disabledContinue,
+  getFloorLocationsResult,
   getItemDetailsApiHook,
   getScannedPalletEffect,
-  getlocationsApiResult,
+  getUpdatedReserveLocations,
   isError,
   onValidateItemNumber,
   renderConfirmOnHandsModal,
@@ -64,6 +70,7 @@ jest.mock('@react-navigation/native', () => {
     useNavigation: () => ({
       navigate: jest.fn(),
       dispatch: jest.fn(),
+      addListener: jest.fn(),
       isFocused: jest.fn().mockReturnValue(true),
       goBack: jest.fn()
     }),
@@ -311,25 +318,24 @@ describe('AuditItemScreen', () => {
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      addLocationHandler(mockItemDetails, mockDispatch, navigationProp);
+      addLocationHandler(mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockNavigate).toBeCalledTimes(1);
     });
 
-    it('tests getlocationsApiResult', () => {
-      const mockLocationsAsyncstate = {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: {
-            location: {
-              floor: mockItemDetails.location.floor,
-              reserve: mockItemDetails.location.reserve
-            }
-          }
-        }
-      };
-      getlocationsApiResult(mockLocationsAsyncstate, mockDispatch);
+    it('tests getFloorLocationsResult', () => {
+      const newResults = [...mockItemDetails.location.floor, [{
+        zoneId: 0,
+        aisleId: 1,
+        sectionId: 1,
+        zoneName: 'A',
+        aisleName: '1',
+        sectionName: '1',
+        locationName: 'A1-1',
+        type: 'Sales Floor',
+        typeNbr: 8
+      }]];
+      getFloorLocationsResult(newResults, mockDispatch, mockItemDetails.location.floor);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -339,7 +345,8 @@ describe('AuditItemScreen', () => {
         successApi,
         mockDispatch,
         navigationProp,
-        mockSetShowItemNotFoundMsg
+        mockSetShowItemNotFoundMsg,
+        mockItemDetails.location
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
@@ -364,7 +371,8 @@ describe('AuditItemScreen', () => {
         successApi204,
         mockDispatch,
         navigationProp,
-        mockSetShowItemNotFoundMsg
+        mockSetShowItemNotFoundMsg,
+        mockItemDetails.location
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
@@ -376,7 +384,8 @@ describe('AuditItemScreen', () => {
         failureApi,
         mockDispatch,
         navigationProp,
-        mockSetShowItemNotFoundMsg
+        mockSetShowItemNotFoundMsg,
+        mockItemDetails.location
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
@@ -401,7 +410,8 @@ describe('AuditItemScreen', () => {
           quantity: 22,
           sectionId: 5578,
           locationName: 'D1-4',
-          mixedPallet: false
+          mixedPallet: false,
+          newQty: 16
         }
       ];
       getScannedPalletEffect(
@@ -644,7 +654,7 @@ describe('AuditItemScreen', () => {
         mockReserveLocations,
         itemDetails
       );
-      const expectedCount = 37;
+      const expectedCount = 39;
       expect(totalCountResult).toBe(expectedCount);
     });
 
@@ -754,7 +764,7 @@ describe('AuditItemScreen', () => {
       const mockReserveLocations = itemPallets.pallets;
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, false)
+        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
       ).toBe(true);
     });
     it(`Test disabledContinue functionality return true 
@@ -769,13 +779,13 @@ describe('AuditItemScreen', () => {
           sectionId: 123,
           locationName: '1b-1',
           mixedPallet: true,
-          newQty: undefined,
+          newQty: 1,
           scanned: false
         }
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, true)
+        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
       ).toBe(true);
     });
     it(`Test disabledContinue functionality return false 
@@ -790,13 +800,13 @@ describe('AuditItemScreen', () => {
           sectionId: 123,
           locationName: '1b-1',
           mixedPallet: true,
-          newQty: undefined,
+          newQty: 1,
           scanned: true
         }
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, true)
+        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
       ).toBe(false);
     });
     it(`Test disabledContinue functionality return false 
@@ -811,14 +821,64 @@ describe('AuditItemScreen', () => {
           sectionId: 123,
           locationName: '1b-1',
           mixedPallet: true,
-          newQty: undefined,
+          newQty: 1,
           scanned: false
         }
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, false)
+        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
       ).toBe(false);
+    });
+    it('tests getUpdatedReserveLocations', () => {
+      const mockItempallets = itemPallets.pallets;
+      mockItempallets[0].newQty = 22;
+      const testResults = getUpdatedReserveLocations(mockItempallets, []);
+      expect(testResults).toEqual(mockItempallets);
+    });
+    it('tests calculateFloorLocDecreaseQty when newOHQty is greater than min value', () => {
+      calculateFloorLocDecreaseQty(22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 21 } }
+      ));
+    });
+    it('tests calculateFloorLocDecreaseQty when newOHQty is less than or equals min value', () => {
+      calculateFloorLocDecreaseQty(1, 'A1-1', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than max value', () => {
+      calculateFloorLocIncreaseQty(22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 23 } }
+      ));
+    });
+    it('tests calculateFloorLocIncreaseQty when newOHQty is greater than max value', () => {
+      calculateFloorLocIncreaseQty(100000, 'A1-1', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculatePalletDecreaseQty when newOHQty is greater than min value', () => {
+      calculatePalletDecreaseQty(1, '4597', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 0 } }
+      ));
+    });
+    it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
+      calculatePalletDecreaseQty(0, '4597', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
+    });
+    it('tests calculatePalletIncreaseQty when newOHQty is lesser than max value', () => {
+      calculatePalletIncreaseQty(22, '4597', mockDispatch);
+      expect(mockDispatch).toBeCalled();
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 23 } }
+      ));
+    });
+    it('tests calculatePalletIncreaseQty when newOHQty is greater than max value', () => {
+      calculatePalletIncreaseQty(100000, '4597', mockDispatch);
+      expect(mockDispatch).not.toBeCalled();
     });
   });
 });
