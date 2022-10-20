@@ -38,7 +38,8 @@ const mapStateToProps = (state: any) => ({
   printerList: state.Print.printerList,
   printingType: state.Print.selectedPrintingType,
   printingLocationLabels: state.Print.printingLocationLabels,
-  printingPalletLabel: state.Print.printingPalletLabel
+  printingPalletLabel: state.Print.printingPalletLabel,
+  selectedPriceSignType: state.Print.selectedSignType
 });
 
 const mapDispatchToProps = {

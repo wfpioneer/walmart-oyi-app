@@ -15,7 +15,15 @@ export const getPaperSizeBasedOnCountry = (
   countryCode: string,
 ) => {
   if (countryCode === 'MX') {
-    return printerType === PrinterType.LASER ? { ...LaserPaperMx, ...LaserPaperPrice } : PortablePaperMx;
+    switch (printerType) {
+      case PrinterType.LASER: return { ...LaserPaperMx, ...LaserPaperPrice };
+      case PrinterType.PORTABLE: return PortablePaperMx;
+      default: return LaserPaperMx;
+    }
   }
-  return printerType === PrinterType.LASER ? { ...LaserPaperCn, ...LaserPaperPrice } : PortablePaperCn;
+  switch (printerType) {
+    case PrinterType.LASER: return { ...LaserPaperCn, ...LaserPaperPrice };
+    case PrinterType.PORTABLE: return PortablePaperCn;
+    default: return LaserPaperCn;
+  }
 };
