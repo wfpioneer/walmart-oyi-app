@@ -27,16 +27,8 @@ export const BinningItemCard = (props: Props): JSX.Element => {
     <TouchableOpacity onPress={() => onClick && onClick()}>
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <View style={styles.firstLineContainer}>
-            <View>
-              <Text>{`${strings('PALLET.PALLET_ID')}: ${palletId}`}</Text>
-            </View>
-            {lastLocation
-            && (
-            <View style={styles.lastLocationContainer}>
-              <Text>{`${strings('BINNING.LAST_LOC')}: ${lastLocation}`}</Text>
-            </View>
-            )}
+          <View style={styles.palletText}>
+            <Text>{`${strings('PALLET.PALLET_ID')}: ${palletId}`}</Text>
           </View>
           {itemDesc
             ? (
@@ -48,6 +40,12 @@ export const BinningItemCard = (props: Props): JSX.Element => {
               <View>
                 <Text style={styles.emptyPalletMsg}>{`${strings('BINNING.EMPTY_PALLET')}`}</Text>
               </View>
+            )}
+          {lastLocation
+            && (
+            <View style={styles.lastLocationContainer}>
+              <Text>{`${strings('BINNING.LAST_LOC')}: ${lastLocation}`}</Text>
+            </View>
             )}
         </View>
         {canDelete
