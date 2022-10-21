@@ -356,7 +356,10 @@ export default {
     AUDIT_WORKLIST: 'Lista de trabajo de Auditorías',
     SCAN_PALLET: 'Escanea Pallet',
     SCAN_PALLET_LABEL: 'Escanea la etiqueta del pallet para continuar',
-    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista'
+    SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet de la lista',
+    MISSING_PALLET_API_ERROR: 'Hubo un error reportando el pallet como faltante. Inténtalo de nuevo',
+    MISSING_PALLET_CONFIRMATION: 'Quieres reportar este pallet como faltante?',
+    MISSING_PALLET_API_SUCCESS: 'El pallet se agregó a la lista de Pallets Faltantes'
   },
   MISSING_PALLET_WORKLIST: {
     MISSING_PALLET_LABEL: 'Pallets Faltantes',

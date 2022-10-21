@@ -359,7 +359,10 @@ export default {
     AUDIT_WORKLIST: '盘点任务清单',
     SCAN_PALLET: '扫描卡板',
     SCAN_PALLET_LABEL: '扫描卡板标签继续操作',
-    SCAN_PALLET_ERROR: '扫描的卡板标签必须和任务清单的匹配'
+    SCAN_PALLET_ERROR: '扫描的卡板标签必须和任务清单的匹配',
+    MISSING_PALLET_API_ERROR: '失败提示：发送到不在储位卡板例外时出错',
+    MISSING_PALLET_CONFIRMATION: '要发送此卡板%｛pallet ID｝到不在储位卡板例外吗？',
+    MISSING_PALLET_API_SUCCESS: '成功提示：此卡板成功添加到不在储位卡板清单'
   },
   MISSING_PALLET_WORKLIST: {
     MISSING_PALLET_LABEL: '不在货架位卡板',
