@@ -180,6 +180,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
         isVisible={displayConfirmation}
         onClose={() => setDisplayConfirmation(false)}
         modalType="Error"
+        minHeight={150}
       >
         {delAPI.isWaiting ? (
           <ActivityIndicator
