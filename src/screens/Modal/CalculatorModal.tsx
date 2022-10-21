@@ -9,6 +9,7 @@ import COLOR from '../../themes/Color';
 import styles from './CalculatorModal.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { setCalcOpen } from '../../state/actions/Global';
+import Calculator from '../../components/Calculator/Calculator';
 
 const CalculatorModal = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -21,17 +22,18 @@ const CalculatorModal = (): JSX.Element => {
     <CustomModalComponent
       isVisible={calcOpen}
       onClose={onClose}
-      modalType="Form"
+      modalType="Popup"
     >
-      {/* TODO Calculator Comp */}
-      <View />
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.closeBtn}
-          title={strings('GENERICS.CLOSE')}
-          backgroundColor={COLOR.MAIN_THEME_COLOR}
-          onPress={onClose}
-        />
+      <View style={styles.container}>
+        <Calculator />
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.closeBtn}
+            title={strings('GENERICS.CLOSE')}
+            backgroundColor={COLOR.MAIN_THEME_COLOR}
+            onPress={onClose}
+          />
+        </View>
       </View>
     </CustomModalComponent>
   );

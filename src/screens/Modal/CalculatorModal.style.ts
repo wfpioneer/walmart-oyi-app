@@ -1,14 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  },
   buttonContainer: {
-    width: '100%',
     alignContent: 'space-around',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    padding: 10,
+    height: 60
   },
   closeBtn: {
-    flex: 1,
-    paddingHorizontal: 10
+    width: '100%'
   }
 });
 

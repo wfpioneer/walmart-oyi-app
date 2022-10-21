@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 const { width } = Dimensions.get('window');
-const buttonScale = 5;
+const buttonScale = 6;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
