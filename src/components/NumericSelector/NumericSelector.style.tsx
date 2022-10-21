@@ -19,6 +19,16 @@ const styles = StyleSheet.create({
     minWidth: '15%',
     textAlign: 'center',
     height: 40
+  },
+  calcInput: {
+    color: COLOR.MAIN_THEME_COLOR,
+    minWidth: '15%',
+    textAlign: 'center',
+    paddingHorizontal: 4
+  },
+  buttonInput: {
+    justifyContent: 'center',
+    height: 40
   }
 });
 

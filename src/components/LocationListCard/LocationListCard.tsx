@@ -149,7 +149,8 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
               : (
                 <View style={styles.nolocation}>
                   <Text>
-                    {strings('AUDITS.NO_LOCATION_AVAILABLE')}
+                    { locationType === 'floor' ? strings('AUDITS.NO_LOCATION_AVAILABLE')
+                      : strings('AUDITS.NO_PALLETS_FOUND_FOR_ITEM')}
                   </Text>
                 </View>
               )
