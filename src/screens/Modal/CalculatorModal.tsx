@@ -8,13 +8,13 @@ import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import styles from './CalculatorModal.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { setCalculatorOpen } from '../../state/actions/Global';
+import { setCalcOpen } from '../../state/actions/Global';
 
 const CalculatorModal = (): JSX.Element => {
   const dispatch = useDispatch();
   const { calcOpen } = useTypedSelector(state => state.Global);
   const onClose = () => {
-    dispatch(setCalculatorOpen(false));
+    dispatch(setCalcOpen(false));
   };
 
   return (

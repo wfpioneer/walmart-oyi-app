@@ -3,7 +3,7 @@ import {
   RESET_SCANNED_EVENT,
   SET_BOTTOM_TAB,
   SET_BYOD,
-  SET_CALCULATOR_OPEN,
+  SET_CALC_OPEN,
   SET_MANUAL_SCAN,
   SET_SCANNED_EVENT
 } from '../actions/Global';
@@ -57,7 +57,7 @@ export const Global = (state = initialState, action: Actions): StateType => {
         ...state,
         isBottomTabEnabled: action.payload
       };
-    case SET_CALCULATOR_OPEN:
+    case SET_CALC_OPEN:
       return {
         ...state,
         calcOpen: action.payload

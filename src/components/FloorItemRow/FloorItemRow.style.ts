@@ -33,7 +33,8 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   rightButton: {
-    paddingVertical: 3
+    paddingVertical: 3,
+    paddingRight: 10
   },
   leftButton: {
     flex: 1,

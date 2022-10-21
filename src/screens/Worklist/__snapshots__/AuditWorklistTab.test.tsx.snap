@@ -1263,3 +1263,124 @@ Array [
   </RCTScrollView>,
 ]
 `;
+
+exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filter type AREA 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    ELECTRONICS
+  </Text>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="button"
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filter type CATEGORY  1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    99 - ELECTRONICS
+  </Text>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="button"
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filter type EXCEPTION 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#0071e9",
+      "borderRadius": 20,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginHorizontal": 5,
+      "marginVertical": 10,
+      "paddingHorizontal": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffffff",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    [missing "en.EXCEPTION.ROLLOVER_AUDITS" translation]
+  </Text>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="button"
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="close-circle"
+      size={20}
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Tests rendering Filter \`Pills\` Renders empty view element for invalid list filter type 1`] = `<View />`;
+
+exports[`Tests rendering Filter \`Pills\` Renders empty view element for non-existing EXCEPTION value 1`] = `<View />`;

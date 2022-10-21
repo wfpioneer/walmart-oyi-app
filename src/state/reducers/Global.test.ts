@@ -1,7 +1,7 @@
 import { Global, StateType } from './Global';
 import {
   resetScannedEvent,
-  setCalculatorOpen,
+  setCalcOpen,
   setIsByod,
   setManualScan,
   setScannedEvent
@@ -20,7 +20,7 @@ describe('testing Global reducer', () => {
         type: null
       },
       isManualScanEnabled: false,
-      isBottomTabEnabled: false,
+      isBottomTabEnabled: true,
       calcOpen: false
     };
 
@@ -30,8 +30,8 @@ describe('testing Global reducer', () => {
         value: null,
         type: null
       },
+      isBottomTabEnabled: true,
       isManualScanEnabled: false,
-      isBottomTabEnabled: false,
       calcOpen: false
     };
 
@@ -54,8 +54,9 @@ describe('testing Global reducer', () => {
     testResults = Global(testInitialState, resetScannedEvent());
     expect(testResults).toStrictEqual(testChangedState);
 
+    testChangedState.calcOpen = testInitialState.calcOpen;
     testChangedState.calcOpen = true;
-    testResults = Global(testInitialState, setCalculatorOpen(true));
+    testResults = Global(testInitialState, setCalcOpen(true));
     expect(testResults).toStrictEqual(testChangedState);
   });
 });

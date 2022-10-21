@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Calculator Modal render tests does not show when isVisible is set to false 1`] = `
+exports[`Calculator Modal render tests does not show when calcOpen is set to false 1`] = `
 <Context.Provider
   value={
     Object {
@@ -28,7 +28,7 @@ exports[`Calculator Modal render tests does not show when isVisible is set to fa
 </Context.Provider>
 `;
 
-exports[`Calculator Modal render tests show when isVisible is set to true 1`] = `
+exports[`Calculator Modal render tests show when calcOpen is set to true 1`] = `
 <Context.Provider
   value={
     Object {
