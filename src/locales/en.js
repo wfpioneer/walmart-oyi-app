@@ -57,7 +57,8 @@ export default {
     UNASSIGNED: 'unassigned',
     SELECTED: 'selected',
     UPDATE: 'Update Configuration',
-    WARNING_LABEL: 'Warning'
+    WARNING_LABEL: 'Warning',
+    TEST: 'Test screen'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -516,6 +517,7 @@ export default {
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Item audit successfully completed',
     COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.',
     OPEN_AUDIT_LABEL: 'Open Audit',
+    INVALID_EQUATION: 'Invalid formula, please check the operation',
     NO_PALLETS_FOUND_FOR_ITEM: 'No Pallets found for the item'
   }
 };
