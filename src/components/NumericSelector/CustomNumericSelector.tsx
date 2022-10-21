@@ -15,7 +15,6 @@ interface CustomNumericSelectorProps {
   minValue: number;
   maxValue: number;
   value: number;
-  onEndEditing?: () => void;
   onInputPress: () => void;
 }
 
@@ -36,7 +35,6 @@ const CustomNumericSelector = (props: CustomNumericSelectorProps): JSX.Element =
     minValue,
     maxValue,
     value,
-    onEndEditing,
     onInputPress
   } = props;
   const isMinimum = value <= minValue;
@@ -75,7 +73,3 @@ const CustomNumericSelector = (props: CustomNumericSelectorProps): JSX.Element =
 };
 
 export default CustomNumericSelector;
-
-CustomNumericSelector.defaultProps = {
-  onEndEditing: () => {}
-};
