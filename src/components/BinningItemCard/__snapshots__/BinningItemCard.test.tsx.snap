@@ -27,32 +27,28 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
       <View
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
             "marginBottom": 5,
           }
         }
       >
-        <View>
-          <Text>
-            [missing "en.PALLET.PALLET_ID" translation]: 1
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "backgroundColor": "#FFFFE0",
-            }
-          }
-        >
-          <Text>
-            [missing "en.BINNING.LAST_LOC" translation]: A1-1
-          </Text>
-        </View>
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 1
+        </Text>
       </View>
       <View>
         <Text>
           [missing "en.BINNING.FIRST_ITEM" translation]: itemDesc
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 5,
+          }
+        }
+      >
+        <Text>
+          [missing "en.BINNING.LAST_LOC" translation]: A1-1
         </Text>
       </View>
     </View>
@@ -109,17 +105,13 @@ exports[`Binning Item card render tests renders the binning item card for empty 
       <View
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
             "marginBottom": 5,
           }
         }
       >
-        <View>
-          <Text>
-            [missing "en.PALLET.PALLET_ID" translation]: 1
-          </Text>
-        </View>
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 1
+        </Text>
       </View>
       <View>
         <Text
@@ -186,32 +178,28 @@ exports[`Binning Item card render tests renders the binning item card in read on
       <View
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
             "marginBottom": 5,
           }
         }
       >
-        <View>
-          <Text>
-            [missing "en.PALLET.PALLET_ID" translation]: 1
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "backgroundColor": "#FFFFE0",
-            }
-          }
-        >
-          <Text>
-            [missing "en.BINNING.LAST_LOC" translation]: A1-1
-          </Text>
-        </View>
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 1
+        </Text>
       </View>
       <View>
         <Text>
           [missing "en.BINNING.FIRST_ITEM" translation]: itemDesc
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 5,
+          }
+        }
+      >
+        <Text>
+          [missing "en.BINNING.LAST_LOC" translation]: A1-1
         </Text>
       </View>
     </View>
@@ -246,17 +234,13 @@ exports[`Binning Item card render tests renders the binning item card without la
       <View
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
             "marginBottom": 5,
           }
         }
       >
-        <View>
-          <Text>
-            [missing "en.PALLET.PALLET_ID" translation]: 1
-          </Text>
-        </View>
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 1
+        </Text>
       </View>
       <View>
         <Text>

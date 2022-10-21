@@ -27,17 +27,13 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
       <View
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
             "marginBottom": 5,
           }
         }
       >
-        <View>
-          <Text>
-            [missing "en.PALLET.PALLET_ID" translation]: 123456
-          </Text>
-        </View>
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 123456
+        </Text>
       </View>
       <View>
         <Text>

@@ -1468,7 +1468,7 @@ Array [
               }
             >
               <Text>
-                [missing "en.AUDITS.NO_LOCATION_AVAILABLE" translation]
+                [missing "en.AUDITS.NO_PALLETS_FOUND_FOR_ITEM" translation]
               </Text>
             </View>
           </View>

@@ -484,7 +484,7 @@ export default {
     PALLET_BIN_PARTIAL: 'No todos los pallets se agruparon, %{number} fallido',
     WARNING_LABEL: 'Aviso',
     WARNING_DESCRIPTION: 'Si navega afuera de esta pantalla los pallets ya escaneados no se agruparán',
-    LAST_LOC: 'última ubicación',
+    LAST_LOC: 'Última ubicación en bodega',
     FIRST_ITEM: 'Primer articulo',
     EMPTY_PALLET: 'Pallet vacía',
     PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo'
@@ -513,6 +513,7 @@ export default {
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet asociado al artículo',
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
     COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo',
-    OPEN_AUDIT_LABEL: 'Abrir Auditoría'
+    OPEN_AUDIT_LABEL: 'Abrir Auditoría',
+    NO_PALLETS_FOUND_FOR_ITEM: 'No hay pallets encontrados para este artículo'
   }
 };

@@ -489,7 +489,7 @@ export default {
     PALLET_BIN_SUCCESS: '卡板上架成功',
     PALLET_BIN_FAILURE: '卡板上架失败',
     PALLET_BIN_PARTIAL: '部分卡板上架成功，%{number} 失败',
-    LAST_LOC: '上一个位置',
+    LAST_LOC: '上一次高货架储位',
     FIRST_ITEM: '第一个item',
     EMPTY_PALLET: '空卡板',
     PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态'
@@ -518,6 +518,7 @@ export default {
     SCAN_PALLET_ERROR: '扫描的卡板必须和关联的商品匹配',
     COMPLETE_AUDIT_ITEM_SUCCESS: '成功-商品盘点完成成功',
     COMPLETE_AUDIT_ITEM_ERROR: '失败-商品盘点完成失败，请重试',
-    OPEN_AUDIT_LABEL: '计划外盘点'
+    OPEN_AUDIT_LABEL: '计划外盘点',
+    NO_PALLETS_FOUND_FOR_ITEM: '未找到此item卡板信息'
   }
 };
