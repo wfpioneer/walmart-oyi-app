@@ -38,6 +38,7 @@ import AuditItem, {
   renderConfirmOnHandsModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
+  reportMissingPalletApiHook,
   updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
@@ -151,10 +152,13 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
     locationName: '',
     locationArea: '',
     locationIndex: -1,
-    locationTypeNbr: -1
+    locationTypeNbr: -1,
+    palletId: '',
+    sectionId: 0
   },
   setLocToConfirm: jest.fn(),
   deleteFloorLocationApi: defaultAsyncState,
+  reportMissingPalletApi: defaultAsyncState,
   showOnHandsConfirmState: [false, jest.fn()],
   updateOHQtyApi: defaultAsyncState
 };
@@ -442,15 +446,16 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderDeleteLocationModal should render modal with locationName and action buttons', () => {
-      const { toJSON } = render(
-        renderDeleteLocationModal(
-          defaultAsyncState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { toJSON } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       expect(toJSON()).toMatchSnapshot();
     });
 
@@ -459,28 +464,30 @@ describe('AuditItemScreen', () => {
         ...defaultAsyncState,
         isWaiting: true
       };
-      const { toJSON } = render(
-        renderDeleteLocationModal(
-          mockDeleteFloorLocationApiState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { toJSON } = render(renderDeleteLocationModal(
+        mockDeleteFloorLocationApiState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       expect(toJSON()).toMatchSnapshot();
     });
 
     it('Tests renderDeleteLocationModal cancel button action', () => {
-      const { getByTestId } = render(
-        renderDeleteLocationModal(
-          defaultAsyncState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
       expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
@@ -491,15 +498,16 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderDeleteLocationModal confirm button action', () => {
-      const { getByTestId } = render(
-        renderDeleteLocationModal(
-          defaultAsyncState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
@@ -538,6 +546,71 @@ describe('AuditItemScreen', () => {
       );
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
+
+    it('Tests renderDeleteLocationModal should render modal with loader', () => {
+      const mockReportMissingPalletApiState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const { toJSON } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        mockReportMissingPalletApiState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderDeleteLocationModal cancel button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalCancelButton = getByTestId('modal-cancel-button');
+      fireEvent.press(modalCancelButton);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledWith(false);
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests renderDeleteLocationModal confirm button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
+      reportMissingPalletApiHook(
+        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
     it('Tests completeItemApiHook on 200 success for completing an item', () => {
       completeItemApiHook(successApi, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith({
@@ -548,6 +621,16 @@ describe('AuditItemScreen', () => {
       });
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests reportMissingPalletApiHook on failure', () => {
+      reportMissingPalletApiHook(
+        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
