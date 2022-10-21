@@ -53,8 +53,7 @@ export default StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     padding: 10,
-    alignSelf: 'center',
-    minHeight: 150
+    alignSelf: 'center'
   },
   contentContainer: {
     width: '80%',
