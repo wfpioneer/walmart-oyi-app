@@ -514,6 +514,7 @@ export default {
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
     COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo',
     OPEN_AUDIT_LABEL: 'Abrir Auditoría',
-    INVALID_EQUATION: 'Fórmula invalida, por favor verifica la operación'
+    INVALID_EQUATION: 'Fórmula invalida, por favor verifica la operación',
+    NO_PALLETS_FOUND_FOR_ITEM: 'No hay pallets encontrados para este artículo'
   }
 };
