@@ -513,6 +513,7 @@ export default {
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet asociado al artículo',
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
     COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo',
-    OPEN_AUDIT_LABEL: 'Abrir Auditoría'
+    OPEN_AUDIT_LABEL: 'Abrir Auditoría',
+    INVALID_EQUATION: 'Fórmula invalida, por favor verifica la operación'
   }
 };
