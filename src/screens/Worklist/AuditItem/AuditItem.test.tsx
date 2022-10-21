@@ -31,6 +31,7 @@ import AuditItem, {
   disabledContinue,
   getFloorLocationsResult,
   getItemDetailsApiHook,
+  getItemPalletsApiHook,
   getScannedPalletEffect,
   getUpdatedReserveLocations,
   isError,
@@ -38,6 +39,7 @@ import AuditItem, {
   renderConfirmOnHandsModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
+  reportMissingPalletApiHook,
   updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
@@ -151,12 +153,17 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
     locationName: '',
     locationArea: '',
     locationIndex: -1,
-    locationTypeNbr: -1
+    locationTypeNbr: -1,
+    palletId: '',
+    sectionId: 0
   },
   setLocToConfirm: jest.fn(),
   deleteFloorLocationApi: defaultAsyncState,
+  reportMissingPalletApi: defaultAsyncState,
   showOnHandsConfirmState: [false, jest.fn()],
-  updateOHQtyApi: defaultAsyncState
+  updateOHQtyApi: defaultAsyncState,
+  getItemPalletsError: false,
+  setGetItemPalletsError: jest.fn()
 };
 
 describe('AuditItemScreen', () => {
@@ -257,6 +264,8 @@ describe('AuditItemScreen', () => {
     const mockSetShowDeleteConfirmationModal = jest.fn();
     const mockDeleteLocationConfirmed = jest.fn();
     const mockSetShowOnHandsConfirmModal = jest.fn();
+    const mockSetGetItemPalletsError = jest.fn();
+    const mockExistingReserveLocations: ItemPalletInfo[] = [];
     const mockLocationName = 'A1-1';
     const mockItemNumber = 9800065634;
     afterEach(() => {
@@ -442,15 +451,16 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderDeleteLocationModal should render modal with locationName and action buttons', () => {
-      const { toJSON } = render(
-        renderDeleteLocationModal(
-          defaultAsyncState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { toJSON } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       expect(toJSON()).toMatchSnapshot();
     });
 
@@ -459,28 +469,30 @@ describe('AuditItemScreen', () => {
         ...defaultAsyncState,
         isWaiting: true
       };
-      const { toJSON } = render(
-        renderDeleteLocationModal(
-          mockDeleteFloorLocationApiState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { toJSON } = render(renderDeleteLocationModal(
+        mockDeleteFloorLocationApiState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       expect(toJSON()).toMatchSnapshot();
     });
 
     it('Tests renderDeleteLocationModal cancel button action', () => {
-      const { getByTestId } = render(
-        renderDeleteLocationModal(
-          defaultAsyncState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
       expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
@@ -491,15 +503,16 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderDeleteLocationModal confirm button action', () => {
-      const { getByTestId } = render(
-        renderDeleteLocationModal(
-          defaultAsyncState,
-          true,
-          mockSetShowDeleteConfirmationModal,
-          mockDeleteLocationConfirmed,
-          mockLocationName
-        )
-      );
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'floor',
+        ''
+      ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
@@ -538,6 +551,71 @@ describe('AuditItemScreen', () => {
       );
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
+
+    it('Tests renderDeleteLocationModal should render modal with loader', () => {
+      const mockReportMissingPalletApiState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      const { toJSON } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        mockReportMissingPalletApiState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Tests renderDeleteLocationModal cancel button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalCancelButton = getByTestId('modal-cancel-button');
+      fireEvent.press(modalCancelButton);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
+      expect(mockSetShowDeleteConfirmationModal).toBeCalledWith(false);
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests renderDeleteLocationModal confirm button action', () => {
+      const { getByTestId } = render(renderDeleteLocationModal(
+        defaultAsyncState,
+        defaultAsyncState,
+        true,
+        mockSetShowDeleteConfirmationModal,
+        mockDeleteLocationConfirmed,
+        mockLocationName,
+        'reserve',
+        '1234'
+      ));
+      const modalConfirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(modalConfirmButton);
+      expect(mockDeleteLocationConfirmed).toBeCalled();
+    });
+
+    it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
+      reportMissingPalletApiHook(
+        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
     it('Tests completeItemApiHook on 200 success for completing an item', () => {
       completeItemApiHook(successApi, mockDispatch, navigationProp);
       expect(Toast.show).toHaveBeenCalledWith({
@@ -548,6 +626,16 @@ describe('AuditItemScreen', () => {
       });
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests reportMissingPalletApiHook on failure', () => {
+      reportMissingPalletApiHook(
+        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
@@ -684,6 +772,7 @@ describe('AuditItemScreen', () => {
         disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
       ).toBe(true);
     });
+
     it(`Test disabledContinue functionality return true 
       when all of the locaion qty is present and reserve pallet is not scanned but scan is required`, () => {
       const mockFloorLocations = [
@@ -705,6 +794,7 @@ describe('AuditItemScreen', () => {
         disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
       ).toBe(true);
     });
+
     it(`Test disabledContinue functionality return false 
       when all of the locaion qty is present and reserve pallet is scanned and scan is required`, () => {
       const mockFloorLocations = [
@@ -726,6 +816,7 @@ describe('AuditItemScreen', () => {
         disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
       ).toBe(false);
     });
+
     it(`Test disabledContinue functionality return false 
       when all of the locaion qty is present and reserve pallet is not scanned but scan is not required`, () => {
       const mockFloorLocations = [
@@ -747,12 +838,14 @@ describe('AuditItemScreen', () => {
         disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
       ).toBe(false);
     });
+
     it('tests getUpdatedReserveLocations', () => {
       const mockItempallets = itemPallets.pallets;
       mockItempallets[0].newQty = 22;
       const testResults = getUpdatedReserveLocations(mockItempallets, []);
       expect(testResults).toEqual(mockItempallets);
     });
+
     it('tests calculateFloorLocDecreaseQty when newOHQty is greater than min value', () => {
       calculateFloorLocDecreaseQty(22, 'A1-1', mockDispatch);
       expect(mockDispatch).toBeCalled();
@@ -760,10 +853,12 @@ describe('AuditItemScreen', () => {
         { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 21 } }
       ));
     });
+
     it('tests calculateFloorLocDecreaseQty when newOHQty is less than or equals min value', () => {
       calculateFloorLocDecreaseQty(1, 'A1-1', mockDispatch);
       expect(mockDispatch).not.toBeCalled();
     });
+
     it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than max value', () => {
       calculateFloorLocIncreaseQty(22, 'A1-1', mockDispatch);
       expect(mockDispatch).toBeCalled();
@@ -771,10 +866,12 @@ describe('AuditItemScreen', () => {
         { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 23 } }
       ));
     });
+
     it('tests calculateFloorLocIncreaseQty when newOHQty is greater than max value', () => {
       calculateFloorLocIncreaseQty(100000, 'A1-1', mockDispatch);
       expect(mockDispatch).not.toBeCalled();
     });
+
     it('tests calculatePalletDecreaseQty when newOHQty is greater than min value', () => {
       calculatePalletDecreaseQty(1, '4597', mockDispatch);
       expect(mockDispatch).toBeCalled();
@@ -782,10 +879,12 @@ describe('AuditItemScreen', () => {
         { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 0 } }
       ));
     });
+
     it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
       calculatePalletDecreaseQty(0, '4597', mockDispatch);
       expect(mockDispatch).not.toBeCalled();
     });
+
     it('tests calculatePalletIncreaseQty when newOHQty is lesser than max value', () => {
       calculatePalletIncreaseQty(22, '4597', mockDispatch);
       expect(mockDispatch).toBeCalled();
@@ -793,9 +892,53 @@ describe('AuditItemScreen', () => {
         { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 23 } }
       ));
     });
+
     it('tests calculatePalletIncreaseQty when newOHQty is greater than max value', () => {
       calculatePalletIncreaseQty(100000, '4597', mockDispatch);
       expect(mockDispatch).not.toBeCalled();
+    });
+
+    it('Tests getItemPalletsApiHook on 200 success for a item', () => {
+      getItemPalletsApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockExistingReserveLocations,
+        mockSetGetItemPalletsError
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockSetGetItemPalletsError).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests getItemPalletsApiHook on 204 response', () => {
+      const successApi204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: '',
+          status: 204
+        }
+      };
+      getItemPalletsApiHook(
+        successApi204,
+        mockDispatch,
+        navigationProp,
+        mockExistingReserveLocations,
+        mockSetGetItemPalletsError
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockSetGetItemPalletsError).toBeCalledWith(false);
+    });
+
+    it('Tests getItemPalletsApiHook on failure', () => {
+      getItemPalletsApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockExistingReserveLocations,
+        mockSetGetItemPalletsError
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetGetItemPalletsError).toBeCalledWith(true);
     });
   });
 });

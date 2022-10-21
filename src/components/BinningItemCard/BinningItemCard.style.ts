@@ -9,9 +9,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flex: 1
   },
-  firstLineContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  palletText: {
     marginBottom: 5
   },
   infoContainer: {
@@ -20,7 +18,7 @@ export default StyleSheet.create({
     flex: 4
   },
   lastLocationContainer: {
-    backgroundColor: COLOR.YELLOW
+    marginTop: 5
   },
   icon: {
     paddingBottom: 5,
