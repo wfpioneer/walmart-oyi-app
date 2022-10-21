@@ -484,7 +484,7 @@ export default {
     PALLET_BIN_PARTIAL: 'No todos los pallets se agruparon, %{number} fallido',
     WARNING_LABEL: 'Aviso',
     WARNING_DESCRIPTION: 'Si navega afuera de esta pantalla los pallets ya escaneados no se agruparán',
-    LAST_LOC: 'última ubicación',
+    LAST_LOC: 'Última ubicación en bodega',
     FIRST_ITEM: 'Primer articulo',
     EMPTY_PALLET: 'Pallet vacía',
     PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo'

@@ -487,7 +487,7 @@ export default {
     PALLET_BIN_PARTIAL: 'Not all pallets binned, %{number} failed',
     WARNING_LABEL: 'Warning',
     WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
-    LAST_LOC: 'Last Loc',
+    LAST_LOC: 'Last Bin Loc',
     FIRST_ITEM: 'First Item',
     EMPTY_PALLET: 'Empty Pallet',
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
