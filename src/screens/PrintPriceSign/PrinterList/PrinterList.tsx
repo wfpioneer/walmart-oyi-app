@@ -31,6 +31,7 @@ import {
   setPalletLabelPrinter,
   setPriceLabelPrinter
 } from '../../../utils/asyncStorageUtils';
+import { getPortablePaperSizeByCountry } from '../../../utils/global';
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -38,7 +39,9 @@ const mapStateToProps = (state: any) => ({
   printerList: state.Print.printerList,
   printingType: state.Print.selectedPrintingType,
   printingLocationLabels: state.Print.printingLocationLabels,
-  printingPalletLabel: state.Print.printingPalletLabel
+  printingPalletLabel: state.Print.printingPalletLabel,
+  selectedPriceSignType: state.Print.selectedSignType,
+  countryCode: state.User.countryCode
 });
 
 const mapDispatchToProps = {
@@ -51,19 +54,34 @@ const mapDispatchToProps = {
 };
 type setTypePrinterFn = (printer: Printer | null) => ({ type: string, payload: Printer | null });
 
+const isPortablePaperSelected = (
+  selectedPriceSignType: PrintPaperSize | undefined,
+  countryCode: string
+): boolean => {
+  const portablePaper = getPortablePaperSizeByCountry(countryCode);
+  return Object.keys(portablePaper).some((key: string) => key === selectedPriceSignType);
+};
+
 const printingTypeSwitch = (
   printingType: PrintingType,
   item: Printer,
   setPriceLabelPrinterActionCall: setTypePrinterFn,
   setLocationLabelPrinterActionCall: setTypePrinterFn,
   setPalletLabelPrinterActionCall: setTypePrinterFn,
-  setSignTypeActionCall: (type: PrintPaperSize) => ({type: string, payload: PrintPaperSize})
+  setSignTypeActionCall: (type: PrintPaperSize) => ({type: string, payload: PrintPaperSize}),
+  selectedPriceSignType: PrintPaperSize | undefined,
+  countryCode: string
 ) => {
   switch (printingType) {
     case PrintingType.PRICE_SIGN:
       setPriceLabelPrinter(item);
       setPriceLabelPrinterActionCall(item);
-      setSignTypeActionCall('');
+      if (
+        item.type === PrinterType.PORTABLE
+        && !isPortablePaperSelected(selectedPriceSignType, countryCode)
+      ) {
+        setSignTypeActionCall('');
+      }
       break;
     case PrintingType.LOCATION:
       setLocationLabelPrinter(item);
@@ -85,6 +103,8 @@ interface PrinterListProps {
   printingType: PrintingType | null;
   printingLocationLabels: string;
   printingPalletLabel: boolean;
+  selectedPriceSignType: PrintPaperSize | undefined;
+  countryCode: string;
   deleteFromPrinterList: (printerId: string) => ({ type: string, payload: string});
   setSelectedPrinter: setPrinterFn;
   setLocationLabelPrinterAction: setTypePrinterFn;
@@ -126,7 +146,9 @@ export class PrinterList extends React.PureComponent<PrinterListProps> {
           this.props.setPriceLabelPrinterAction,
           this.props.setLocationLabelPrinterAction,
           this.props.setPalletLabelPrinterAction,
-          this.props.setSignType
+          this.props.setSignType,
+          this.props.selectedPriceSignType,
+          this.props.countryCode
         );
       } else {
         this.props.setSelectedPrinter(item);
