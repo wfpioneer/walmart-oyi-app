@@ -10,7 +10,7 @@ import COLOR from '../../themes/Color';
 import styles from './Calculator.style';
 import { strings } from '../../locales';
 
-const operandRegex = /\+|\*|\/|(?<=(\d|\)))-/;
+const operandRegex = /\+|\*|\/|(?<=(\d|\)))-|^-$/;
 const openParent = /\(/;
 const closeParent = /\)/;
 const decimalNotPartOfNumberRegex = /.\.\D|.\.$|^\.\D|\.\.|^\.$|\d*\.\d*\.\d*/;
@@ -18,6 +18,7 @@ const parenthesesRegex = new RegExp(`${openParent.source}|${closeParent.source}`
 const opAndParentRegex = new RegExp(`${operandRegex.source}|${parenthesesRegex.source}`);
 const lastOpOrParentRegex = new RegExp(`(${opAndParentRegex.source})(?!.*(${opAndParentRegex.source}))`);
 const doubleOperandRegex = new RegExp(`(${operandRegex.source}){2}`);
+const emptyParentsRegex = new RegExp(`${openParent.source}${closeParent.source}`)
 const opAtStartRegex = new RegExp(`^(${operandRegex.source})`);
 const opAtEndRegex = new RegExp(`(${operandRegex.source})$`);
 const opAtEdgeOfParentRegex = new RegExp(
@@ -70,6 +71,7 @@ const Calculator = (props: CalculatorProps) => {
 
   const isValidSyntax = (isOnSubmit = false) => !(calcText.length && (
     calcText.search(doubleOperandRegex) >= 0
+    || calcText.search(emptyParentsRegex) >= 0
     || calcText.search(opAtStartRegex) >= 0
     || calcText.search(opAtEdgeOfParentRegex) >= 0
     || calcText.search(decimalNotPartOfNumberRegex) >= 0

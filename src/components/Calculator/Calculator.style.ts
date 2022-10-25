@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   errorText: {
-    fontSize: 14,
+    fontSize: 16,
     color: COLOR.RED_700
   },
   highlightedErrorText: {
-    fontSize: 14,
+    fontSize: 16,
     color: COLOR.WHITE,
     backgroundColor: COLOR.RED
   }
