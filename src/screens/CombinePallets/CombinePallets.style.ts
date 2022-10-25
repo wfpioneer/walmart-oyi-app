@@ -3,7 +3,6 @@ import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: COLOR.WHITE
   },
   scanContainer: {
@@ -27,8 +26,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   },
   palletInfoHeader: {
-    paddingHorizontal: 20,
-    marginVertical: 20
+    paddingHorizontal: 10,
+    width: '100%',
+    borderBottomWidth: 2,
+    borderColor: COLOR.GREY_600,
+    paddingVertical: 10
   },
   palletText: {
     fontSize: 18
@@ -36,15 +38,44 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 14
   },
+  mergeView: {
+    width: '100%',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: COLOR.GREY_600
+  },
   mergeText: {
-    alignSelf: 'center',
+    fontSize: 16,
+    paddingVertical: 12
+  },
+  deletePalletInfoHeader: {
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: 16
+  },
+  deletePalletText: {
     fontSize: 16
   },
   saveButton: {
-    width: '100%',
+    width: '90%',
+    alignItems: 'center',
+    marginBottom: 15,
     flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 15
+    alignSelf: 'center'
+  },
+  palletScanContainer: {
+    width: '100%',
+    alignItems: 'center'
+  },
+  orText: {
+    paddingVertical: 10,
+    marginBottom: 14
+  },
+  barcodeScanContainer: {
+    alignItems: 'center'
+  },
+  barCodeScanText: {
+    paddingVertical: 10
   }
 });
 

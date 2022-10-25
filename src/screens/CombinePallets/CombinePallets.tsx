@@ -3,6 +3,7 @@ import {
   EmitterSubscription,
   FlatList,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
-import { barcodeEmitter } from '../../utils/scannerUtils';
+import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import styles from './CombinePallets.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CombinePallet, PalletItem } from '../../models/PalletManagementTypes';
@@ -210,7 +211,7 @@ export const CombinePalletsScreen = (
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET_PLACEHOLDER')} />}
       {combinePallets.length > 0 && (
         <View style={styles.scanView}>
-          <Text style={styles.scanText}>{strings('PALLET.SCAN_PALLET')}</Text>
+          <Text style={styles.scanText} />
         </View>
       )}
       <FlatList
@@ -223,30 +224,53 @@ export const CombinePalletsScreen = (
       />
       <View style={styles.palletContainer}>
         {combinePallets.length > 0 && (
-          <Text style={styles.mergeText}>{strings('PALLET.PALLET_MERGE')}</Text>
+          <View style={styles.mergeView}>
+            <Text style={styles.mergeText}>{strings('PALLET.PALLET_MERGE')}</Text>
+          </View>
         )}
         <View style={styles.palletInfoHeader}>
           <Text style={styles.palletText}>
-            {`${strings('LOCATION.PALLET')}: ${palletId}`}
+            {`${strings('PALLET.PALLET_ID')}: ${palletId}`}
           </Text>
           <Text style={styles.itemText}>
             {`${strings('GENERICS.ITEMS')}: ${palletItems.length}`}
           </Text>
         </View>
-        <View style={styles.saveButton}>
-          <Button
-            title={strings('GENERICS.SAVE')}
-            type={ButtonType.PRIMARY}
-            style={{ width: '90%' }}
-            onPress={() => dispatch(combinePalletsSaga({
-              targetPallet: palletId,
-              combinePallets: combinePallets.reduce(
-                (prevVal: string[], currVal) => prevVal.concat(currVal.palletId), []
-              )
-            }))}
-            disabled={combinePallets.length === 0}
-          />
-        </View>
+        {combinePallets.length > 0 && (
+          <>
+            <View style={styles.deletePalletInfoHeader}>
+              <Text style={styles.deletePalletText}>
+                {`${strings('PALLET.PALLET_ID')} ${combinePallets[0].palletId} will be deleted once merged` }
+              </Text>
+            </View>
+            <View style={styles.palletScanContainer}>
+              {isManualScanEnabled && <ManualScanComponent placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
+              <View style={styles.barcodeScanContainer}>
+                <TouchableOpacity onPress={() => openCamera()}>
+                  <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
+                </TouchableOpacity>
+                <View style={styles.barCodeScanText}>
+                  <Text>{strings('PALLET.SCAN_PALLET')}</Text>
+                </View>
+                <View style={styles.orText}>
+                  <Text>{strings('GENERICS.OR')}</Text>
+                </View>
+              </View>
+            </View>
+          </>
+        )}
+        <Button
+          title={strings('GENERICS.SAVE')}
+          type={ButtonType.PRIMARY}
+          style={styles.saveButton}
+          onPress={() => dispatch(combinePalletsSaga({
+            targetPallet: palletId,
+            combinePallets: combinePallets.reduce(
+              (prevVal: string[], currVal) => prevVal.concat(currVal.palletId), []
+            )
+          }))}
+          disabled={combinePallets.length === 0}
+        />
       </View>
     </View>
   );
