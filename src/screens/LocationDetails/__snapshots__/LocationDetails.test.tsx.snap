@@ -5,6 +5,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   <CustomModalComponent
     animationType="none"
     isVisible={false}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >
@@ -159,6 +160,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   <CustomModalComponent
     animationType="none"
     isVisible={false}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >
@@ -328,6 +330,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   <CustomModalComponent
     animationType="none"
     isVisible={false}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >
@@ -433,6 +436,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
   <CustomModalComponent
     animationType="none"
     isVisible={true}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >
@@ -587,6 +591,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <CustomModalComponent
     animationType="none"
     isVisible={false}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >
@@ -748,6 +753,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <CustomModalComponent
     animationType="none"
     isVisible={false}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >
@@ -915,6 +921,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <CustomModalComponent
     animationType="none"
     isVisible={false}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >
@@ -1089,6 +1096,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <CustomModalComponent
     animationType="none"
     isVisible={false}
+    minHeight={150}
     modalType="Error"
     onClose={[Function]}
   >

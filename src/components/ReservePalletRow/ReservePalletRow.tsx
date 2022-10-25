@@ -97,6 +97,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
         isVisible={displayConfirmation}
         onClose={() => setDisplayConfirmation(false)}
         modalType="Error"
+        minHeight={150}
       >
         {delPalletAPI.isWaiting ? (
           <ActivityIndicator
