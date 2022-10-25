@@ -140,6 +140,8 @@ export interface AuditItemScreenProps {
   }>>;
   reportMissingPalletApi: AsyncState;
   showOnHandsConfirmState: UseStateType<boolean>;
+  getItemPalletsError: boolean;
+  setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const isError = (
@@ -434,7 +436,8 @@ export const getItemPalletsApiHook = (
   getItemPalletsApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  existingReserveLocations: ItemPalletInfo[]
+  existingReserveLocations: ItemPalletInfo[],
+  setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     // on api success
@@ -443,8 +446,24 @@ export const getItemPalletsApiHook = (
         const { data } = getItemPalletsApi.result;
         const updatedReserveLocations = getUpdatedReserveLocations(data.pallets, existingReserveLocations);
         dispatch(setReserveLocations(updatedReserveLocations));
-        dispatch({ type: GET_ITEM_PALLETS.RESET });
       }
+      // item does not have any location
+      if (getItemPalletsApi.result.status === 204) {
+        dispatch(setReserveLocations([]));
+      }
+      dispatch({ type: GET_ITEM_PALLETS.RESET });
+      setGetItemPalletsError(false);
+    }
+    // No pallets associated with the item
+    if (!getItemPalletsApi.isWaiting && getItemPalletsApi.error) {
+      if (getItemPalletsApi.error.response && getItemPalletsApi.error.response.status === 409
+        && getItemPalletsApi.error.response.data.errorEnum === 'NO_PALLETS_FOUND_FOR_ITEM') {
+        dispatch(setReserveLocations([]));
+        setGetItemPalletsError(false);
+      } else {
+        setGetItemPalletsError(true);
+      }
+      dispatch({ type: GET_ITEM_PALLETS.RESET });
     }
   }
 };
@@ -818,7 +837,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     locToConfirm,
     setLocToConfirm,
     reportMissingPalletApi,
-    showOnHandsConfirmState
+    showOnHandsConfirmState,
+    setGetItemPalletsError,
+    getItemPalletsError
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -882,7 +903,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Pallets api
   useEffectHook(
-    () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation, reserveLocations),
+    () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation, reserveLocations, setGetItemPalletsError),
     [getItemPalletsApi]
   );
 
@@ -1191,7 +1212,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getReserveLocationList(reserveLocations)}
               locationType="reserve"
               loading={getItemPalletsApi.isWaiting}
-              error={!!getItemPalletsApi.error}
+              error={getItemPalletsError}
               scanRequired={userConfig.scanRequired}
               onRetry={handleReserveLocsRetry}
             />
@@ -1250,6 +1271,7 @@ const AuditItem = (): JSX.Element => {
   const scrollViewRef: RefObject<ScrollView> = createRef();
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
+  const [getItemPalletsError, setGetItemPalletsError] = useState(false);
   const {
     itemDetails, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
@@ -1303,6 +1325,8 @@ const AuditItem = (): JSX.Element => {
       setLocToConfirm={setLocToConfirm}
       reportMissingPalletApi={reportMissingPalletApi}
       showOnHandsConfirmState={showOnHandsConfirmState}
+      getItemPalletsError={getItemPalletsError}
+      setGetItemPalletsError={setGetItemPalletsError}
     />
   );
 };

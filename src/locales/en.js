@@ -488,7 +488,7 @@ export default {
     PALLET_BIN_PARTIAL: 'Not all pallets binned, %{number} failed',
     WARNING_LABEL: 'Warning',
     WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
-    LAST_LOC: 'Last Loc',
+    LAST_LOC: 'Last Bin Loc',
     FIRST_ITEM: 'First Item',
     EMPTY_PALLET: 'Empty Pallet',
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
@@ -518,6 +518,7 @@ export default {
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Item audit successfully completed',
     COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.',
     OPEN_AUDIT_LABEL: 'Open Audit',
-    INVALID_EQUATION: 'Invalid formula, please check the operation'
+    INVALID_EQUATION: 'Invalid formula, please check the operation',
+    NO_PALLETS_FOUND_FOR_ITEM: 'No Pallets found for the item'
   }
 };
