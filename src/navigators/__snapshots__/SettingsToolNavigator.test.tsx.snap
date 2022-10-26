@@ -14,7 +14,7 @@ exports[`SettingsTool Navigator Renders the settings tool navigator component 1`
 >
   <Screen
     component={[Function]}
-    name="SettingsTool"
+    name="SettingsToolHome"
     options={
       Object {
         "headerTitle": "[missing \\"en.SETTINGS.TITLE\\" translation]",
