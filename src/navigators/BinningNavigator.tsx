@@ -64,7 +64,7 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
       }}
     >
       <Stack.Screen
-        name="Binning"
+        name="BinningHome"
         component={Binning}
         options={{
           headerTitle: strings('BINNING.BINNING'),
