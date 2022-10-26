@@ -28,6 +28,7 @@ import { showSnackBar } from '../../state/actions/SnackBar';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
 import { LocationIdName } from '../../state/reducers/Location';
+import Location from '../../models/Location';
 
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
@@ -66,7 +67,7 @@ export const handleEditItem = (
   selectedAisle: LocationIdName,
   selectedSection: LocationIdName
 ): void => {
-  const currentSection = {
+  const currentSection: Location = {
     zoneId: selectedZone.id,
     aisleId: selectedAisle.id,
     sectionId: selectedSection.id,
@@ -75,7 +76,8 @@ export const handleEditItem = (
     sectionName: selectedSection.name,
     locationName: `${selectedZone.name}${selectedAisle.name}-${selectedSection.name}`,
     type: '8',
-    typeNbr: 8
+    typeNbr: 8,
+    newQty: 0
   };
   dispatch(setupScreen(
     selectedItem ? selectedItem.itemNbr : 0,
@@ -198,6 +200,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
         isVisible={displayConfirmation}
         onClose={() => setDisplayConfirmation(false)}
         modalType="Error"
+        minHeight={150}
       >
         {deleteLocationApi.isWaiting ? (
           <ActivityIndicator
