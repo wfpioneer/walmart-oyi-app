@@ -114,7 +114,9 @@ export const getPicklistApiHook = (
   if (isFocused && !getPicklistApi.isWaiting) {
     // Get Picklist api success
     if (getPicklistApi.result) {
-      if (getPicklistApi.result.status === 204) {
+      if (getPicklistApi.result.status === 200) {
+        dispatch(initializePicklist(getPicklistApi.result.data));
+      } else if (getPicklistApi.result.status === 204) {
         // Resetting the picking redux if no more picks available
         dispatch(resetPickList());
         Toast.show({
