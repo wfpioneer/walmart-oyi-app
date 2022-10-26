@@ -15,7 +15,7 @@ export const ToolsNavigatorStack = (): JSX.Element => (
     }}
   >
     <Stack.Screen
-      name="Tools"
+      name="ToolsHomeScreen"
       component={Tools}
       options={{
         headerTitle: strings('GENERICS.TOOLS')
