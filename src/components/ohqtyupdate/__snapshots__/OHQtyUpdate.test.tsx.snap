@@ -839,7 +839,7 @@ Array [
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#5FA7F2",
+            "backgroundColor": "#BABBBE",
             "borderRadius": 5,
             "elevation": 1,
             "flex": 1,
@@ -1295,7 +1295,7 @@ Array [
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#5FA7F2",
+            "backgroundColor": "#BABBBE",
             "borderRadius": 5,
             "elevation": 1,
             "flex": 1,
