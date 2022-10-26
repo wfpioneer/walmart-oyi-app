@@ -191,7 +191,7 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
     }}
   >
     <Stack.Screen
-      name="Home"
+      name="HomeScreen"
       component={Home}
       options={({ navigation }) => ({
         headerRight: () => renderHomeHeader(props, navigation),
