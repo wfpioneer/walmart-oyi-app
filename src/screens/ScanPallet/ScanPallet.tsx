@@ -10,6 +10,7 @@ import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Config from 'react-native-config';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
@@ -88,7 +89,13 @@ export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
     <View style={styles.container}>
       {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       <View style={styles.scanContainer}>
-        <TouchableOpacity onPress={() => openCamera()}>
+        <TouchableOpacity onPress={() => {
+          if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+            return openCamera();
+          }
+          return null;
+        }}
+        >
           <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
         </TouchableOpacity>
         <View style={styles.scanText}>
