@@ -20,7 +20,7 @@ exports[`Binning Navigator Renders the Binning navigator component 1`] = `
         "blur": [Function],
       }
     }
-    name="Binning"
+    name="BinningHome"
     options={
       Object {
         "headerRight": [Function],

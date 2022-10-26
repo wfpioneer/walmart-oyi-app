@@ -14,7 +14,7 @@ export const SettingsToolNavigatorStack = (): JSX.Element => (
     }}
   >
     <Stack.Screen
-      name="SettingsTool"
+      name="SettingsToolHome"
       component={SettingsTool}
       options={{
         headerTitle: strings('SETTINGS.TITLE')
