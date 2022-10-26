@@ -157,16 +157,8 @@ describe('Manage PickingNavigator externalized function tests', () => {
         status: 200
       }
     };
-    const successToast = {
-      type: 'success',
-      text1: strings('PICKING.PICKLIST_SUCCESS'),
-      visibilityTime: 4000,
-      position: 'bottom'
-    };
-
     getPicklistApiHook(successApi, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(3);
-    expect(Toast.show).toHaveBeenCalledWith(successToast);
+    expect(mockDispatch).toBeCalledTimes(2);
   });
 
   it('Tests getPicklistApiHook on 204 not found', () => {
