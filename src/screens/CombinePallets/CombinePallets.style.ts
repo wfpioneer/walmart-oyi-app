@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLOR.WHITE
   },
+  flexContainer: {
+    backgroundColor: COLOR.WHITE,
+    flex: 1
+  },
   scanContainer: {
     flexDirection: 'column',
     flex: 1,
@@ -30,6 +34,10 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 2,
     borderColor: COLOR.GREY_600,
+    paddingVertical: 10
+  },
+  palletInfoHeaderNoItems: {
+    paddingHorizontal: 20,
     paddingVertical: 10
   },
   palletText: {

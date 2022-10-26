@@ -206,7 +206,7 @@ export const CombinePalletsScreen = (
   useEffectHook(() => getPalletDetailsApiEffect(getPalletDetailsApi, dispatch, navigation), [getPalletDetailsApi]);
 
   return (
-    <View style={styles.container}>
+    <View style={combinePallets.length > 0 ? styles.container : styles.flexContainer}>
       {/* TODO add change to pass Placeholder text to ManualScan component */}
       {isManualScanEnabled && <ManualScanComponent placeholder={strings('LOCATION.PALLET_PLACEHOLDER')} />}
       {combinePallets.length > 0 && (
@@ -228,7 +228,7 @@ export const CombinePalletsScreen = (
             <Text style={styles.mergeText}>{strings('PALLET.PALLET_MERGE')}</Text>
           </View>
         )}
-        <View style={styles.palletInfoHeader}>
+        <View style={combinePallets.length > 0 ? styles.palletInfoHeader : styles.palletInfoHeaderNoItems}>
           <Text style={styles.palletText}>
             {`${strings('PALLET.PALLET_ID')}: ${palletId}`}
           </Text>
