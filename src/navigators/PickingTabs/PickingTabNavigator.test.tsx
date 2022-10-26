@@ -158,7 +158,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
       }
     };
     getPicklistApiHook(successApi, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockDispatch).toBeCalledTimes(3);
   });
 
   it('Tests getPicklistApiHook on 204 not found', () => {
