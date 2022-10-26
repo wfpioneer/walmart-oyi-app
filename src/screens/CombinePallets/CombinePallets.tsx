@@ -240,7 +240,7 @@ export const CombinePalletsScreen = (
           <>
             <View style={styles.deletePalletInfoHeader}>
               <Text style={styles.deletePalletText}>
-                {`${strings('PALLET.PALLET_ID')} ${combinePallets[0].palletId} will be deleted once merged` }
+                {`${strings('PALLET.DELETE_ONCE_MERGED', { palletId: combinePallets[0].palletId })}`}
               </Text>
             </View>
             <View style={styles.palletScanContainer}>

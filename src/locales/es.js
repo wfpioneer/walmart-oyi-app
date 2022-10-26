@@ -226,7 +226,8 @@ export default {
     UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
     CREATE_PALLET: 'Crear Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet creado con éxito',
-    CREATE_PALLET_FAILED: 'Falló la creación de pallet'
+    CREATE_PALLET_FAILED: 'Falló la creación de pallet',
+    DELETE_ONCE_MERGED: 'El pallet %{palletId} será eliminado una vez combinado'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',

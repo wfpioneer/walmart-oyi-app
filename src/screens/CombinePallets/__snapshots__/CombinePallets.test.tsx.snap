@@ -146,7 +146,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
             }
           }
         >
-          [missing "en.PALLET.PALLET_ID" translation] 789 will be deleted once merged
+          [missing "en.PALLET.DELETE_ONCE_MERGED" translation]
         </Text>
       </View>
       <View
