@@ -2,7 +2,7 @@ import React, {
   DependencyList, EffectCallback, MutableRefObject, useCallback, useEffect, useRef, useState
 } from 'react';
 import {
-  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
+  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Pressable, Text, TouchableOpacity, View
 } from 'react-native';
 import { head } from 'lodash';
 import { trackEvent } from 'appcenter-analytics';
@@ -313,7 +313,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           keyExtractor={(item: any) => item.id.toString()}
           ListEmptyComponent={(
             <View style={styles.scanContainer}>
-              <TouchableOpacity onPress={() => {
+              <Pressable onPress={() => {
                 if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
                   return openCamera();
                 }
@@ -321,7 +321,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               }}
               >
                 <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-              </TouchableOpacity>
+              </Pressable>
               <View style={styles.scanText}>
                 <Text>{strings('BINNING.SCAN_PALLET')}</Text>
               </View>

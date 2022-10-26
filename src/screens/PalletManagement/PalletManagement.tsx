@@ -4,6 +4,7 @@ import React, {
 import {
   ActivityIndicator,
   EmitterSubscription,
+  Pressable,
   Text,
   TouchableOpacity,
   View
@@ -217,7 +218,7 @@ export const PalletManagementScreen = (
     <View style={styles.container}>
       {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       <View style={styles.scanContainer}>
-        <TouchableOpacity onPress={() => {
+        <Pressable onPress={() => {
           if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
             return openCamera();
           }
@@ -225,7 +226,7 @@ export const PalletManagementScreen = (
         }}
         >
           <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.scanText}>
           <Text>{strings('PALLET.SCAN_PALLET')}</Text>
         </View>
