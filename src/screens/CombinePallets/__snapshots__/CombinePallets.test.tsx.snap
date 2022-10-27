@@ -164,7 +164,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
             }
           }
         >
-          <TouchableOpacity
+          <Memo(Pressable)
             onPress={[Function]}
           >
             <mockConstructor
@@ -172,7 +172,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
               name="barcode-scan"
               size={100}
             />
-          </TouchableOpacity>
+          </Memo(Pressable)>
           <View
             style={
               Object {
