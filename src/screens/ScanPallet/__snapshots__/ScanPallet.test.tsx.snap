@@ -22,7 +22,7 @@ exports[`ScanPalletScreen Tests rendering the ScanPalletScreen component Test re
       }
     }
   >
-    <TouchableOpacity
+    <Memo(Pressable)
       onPress={[Function]}
     >
       <mockConstructor
@@ -30,7 +30,7 @@ exports[`ScanPalletScreen Tests rendering the ScanPalletScreen component Test re
         name="barcode-scan"
         size={100}
       />
-    </TouchableOpacity>
+    </Memo(Pressable)>
     <View
       style={
         Object {
