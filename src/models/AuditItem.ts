@@ -1,5 +1,5 @@
 export interface ItemPalletInfo {
-  palletId: string,
+  palletId: number,
   quantity: number,
   sectionId: number,
   locationName: string,
