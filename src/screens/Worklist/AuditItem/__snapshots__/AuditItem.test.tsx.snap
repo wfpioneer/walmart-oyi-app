@@ -302,7 +302,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#5FA7F2",
+                  "backgroundColor": "#BABBBE",
                   "borderRadius": 5,
                   "elevation": 1,
                   "flex": 1,
