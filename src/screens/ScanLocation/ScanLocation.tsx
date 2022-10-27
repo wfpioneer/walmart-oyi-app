@@ -6,7 +6,7 @@ import {
   useRoute
 } from '@react-navigation/native';
 import React, { Dispatch, EffectCallback, useEffect } from 'react';
-import { Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';

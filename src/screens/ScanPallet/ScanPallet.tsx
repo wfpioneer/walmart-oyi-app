@@ -1,6 +1,6 @@
 import React, { EffectCallback, useEffect } from 'react';
 import {
-  EmitterSubscription, Pressable, Text, TouchableOpacity, View
+  EmitterSubscription, Pressable, Text, View
 } from 'react-native';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';

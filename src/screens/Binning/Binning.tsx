@@ -2,7 +2,7 @@ import React, {
   DependencyList, EffectCallback, MutableRefObject, useCallback, useEffect, useRef, useState
 } from 'react';
 import {
-  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Pressable, Text, TouchableOpacity, View
+  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Pressable, Text, View
 } from 'react-native';
 import { head } from 'lodash';
 import { trackEvent } from 'appcenter-analytics';
