@@ -1,6 +1,6 @@
 import React, { EffectCallback, useEffect } from 'react';
 import {
-  EmitterSubscription, Text, TouchableOpacity, View
+  EmitterSubscription, Pressable, Text, TouchableOpacity, View
 } from 'react-native';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
@@ -89,7 +89,7 @@ export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
     <View style={styles.container}>
       {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       <View style={styles.scanContainer}>
-        <TouchableOpacity onPress={() => {
+        <Pressable onPress={() => {
           if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
             return openCamera();
           }
@@ -97,7 +97,7 @@ export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
         }}
         >
           <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.scanText}>
           <Text>{strings('WORKLIST.SCAN_PALLET_LABEL')}</Text>
         </View>
