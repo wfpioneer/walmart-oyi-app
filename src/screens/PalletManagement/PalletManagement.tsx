@@ -4,8 +4,8 @@ import React, {
 import {
   ActivityIndicator,
   EmitterSubscription,
+  Pressable,
   Text,
-  TouchableOpacity,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,6 +17,7 @@ import {
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
+import Config from 'react-native-config';
 import COLOR from '../../themes/Color';
 import styles from './PalletManagement.style';
 import { strings } from '../../locales';
@@ -216,9 +217,15 @@ export const PalletManagementScreen = (
     <View style={styles.container}>
       {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       <View style={styles.scanContainer}>
-        <TouchableOpacity onPress={() => openCamera()}>
+        <Pressable onPress={() => {
+          if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+            return openCamera();
+          }
+          return null;
+        }}
+        >
           <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.scanText}>
           <Text>{strings('PALLET.SCAN_PALLET')}</Text>
         </View>

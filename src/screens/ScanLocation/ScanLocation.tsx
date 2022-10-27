@@ -6,10 +6,11 @@ import {
   useRoute
 } from '@react-navigation/native';
 import React, { Dispatch, EffectCallback, useEffect } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
+import Config from 'react-native-config';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -140,13 +141,19 @@ export const ScanLocationScreen = (props: ScanLocationProps) => {
     <View style={styles.container}>
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <View style={styles.scanContainer}>
-        <TouchableOpacity onPress={() => openCamera()}>
+        <Pressable onPress={() => {
+          if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+            return openCamera();
+          }
+          return null;
+        }}
+        >
           <MaterialCommunityIcons
             size={100}
             name="barcode-scan"
             color={COLOR.BLACK}
           />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.scanText}>
           <Text>{strings('LOCATION.SCAN_INSTRUCTION')}</Text>
         </View>
