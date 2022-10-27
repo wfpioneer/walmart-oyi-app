@@ -22,6 +22,7 @@ export interface ConfigResponse {
   showRollOverAudit: boolean;
   showOpenAuditLink: boolean;
   scanRequired: boolean;
+  showCalculator: boolean;
 }
 
 export default class ConfigService {
