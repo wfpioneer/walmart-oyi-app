@@ -58,7 +58,7 @@ export default {
     SELECTED: 'selected',
     UPDATE: 'Update Configuration',
     WARNING_LABEL: 'Warning',
-    TEST: 'Test screen'
+    CLOSE: 'Close'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',

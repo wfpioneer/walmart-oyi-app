@@ -86,6 +86,7 @@ import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate
 import Button from '../../../components/buttons/Button';
 import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
+import Calculator from '../../../components/Calculator/Calculator';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -142,6 +143,7 @@ export interface AuditItemScreenProps {
   showOnHandsConfirmState: UseStateType<boolean>;
   getItemPalletsError: boolean;
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
+  showCalcModalState: UseStateType<boolean>;
 }
 
 export const isError = (
@@ -794,6 +796,43 @@ export const renderConfirmOnHandsModal = (
     </CustomModalComponent>
   );
 };
+
+const renderCalculatorModal = (
+  showCalcModal: boolean,
+  setShowCalcModal: React.Dispatch<React.SetStateAction<boolean>>,
+) => {
+  let temp;
+  console.log('temp:', temp);
+  return (
+    <CustomModalComponent
+      isVisible={showCalcModal}
+      modalType="Form"
+      onClose={() => setShowCalcModal(false)}
+    >
+      <Calculator onEquals={result => {
+        temp = result;
+        console.log(result);
+      }}
+      />
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.button}
+          title={strings('GENERICS.CLOSE')}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={() => setShowCalcModal(false)}
+        />
+        {temp && (
+        <Button
+          style={styles.button}
+          title={strings('PICKING.ACCEPT')}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={undefined}
+        />
+        )}
+      </View>
+    </CustomModalComponent>
+  );
+};
 export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
@@ -839,9 +878,18 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reportMissingPalletApi,
     showOnHandsConfirmState,
     setGetItemPalletsError,
-    getItemPalletsError
+    getItemPalletsError,
+    showCalcModalState
   } = props;
   let scannedSubscription: EmitterSubscription;
+
+  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
+  const [showCalcModal, setShowCalcModal] = showCalcModalState;
+  const totalOHQty = calculateTotalOHQty(
+    floorLocations,
+    reserveLocations,
+    itemDetails
+  );
 
   // Scanner listener
   useEffectHook(() => {
@@ -870,13 +918,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       setShowPalletQtyUpdateModal
     ),
     [scannedEvent]
-  );
-
-  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
-  const totalOHQty = calculateTotalOHQty(
-    floorLocations,
-    reserveLocations,
-    itemDetails
   );
 
   // call get Item details
@@ -1174,6 +1215,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         itemDetails,
         dispatch
       )}
+      {(renderCalculatorModal(showCalcModal, setShowCalcModal))}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
       )}
@@ -1279,6 +1321,7 @@ const AuditItem = (): JSX.Element => {
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
+  const showCalcModalState = useState(true); // TOOD Set to false
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
     locationArea: '',
@@ -1327,6 +1370,7 @@ const AuditItem = (): JSX.Element => {
       showOnHandsConfirmState={showOnHandsConfirmState}
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
+      showCalcModalState={showCalcModalState}
     />
   );
 };
