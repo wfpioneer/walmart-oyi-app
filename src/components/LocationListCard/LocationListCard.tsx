@@ -20,7 +20,9 @@ export interface LocationList {
     onDelete: () => void;
     qtyChange: (qty: string) => void;
     onEndEditing: () => void;
+    onInputPress: () => void;
     scanned?: boolean;
+    locationType: LocationType
 }
 
 interface LocationListCardProp {

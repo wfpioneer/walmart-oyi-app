@@ -163,7 +163,10 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showOnHandsConfirmState: [false, jest.fn()],
   updateOHQtyApi: defaultAsyncState,
   getItemPalletsError: false,
-  setGetItemPalletsError: jest.fn()
+  setGetItemPalletsError: jest.fn(),
+  showCalcModalState: [false, jest.fn()],
+  calcResultState: [-1, jest.fn()],
+  locationListState: [{ locationName: '', locationType: 'floor', palletId: '' }, jest.fn()]
 };
 
 describe('AuditItemScreen', () => {
