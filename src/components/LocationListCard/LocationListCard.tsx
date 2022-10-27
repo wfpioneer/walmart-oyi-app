@@ -18,8 +18,7 @@ export interface LocationList {
     increment: () => void;
     decrement: () => void;
     onDelete: () => void;
-    qtyChange: (qty: string) => void;
-    onEndEditing: () => void;
+    openCalc: () => void;
     scanned?: boolean;
 }
 
@@ -39,7 +38,7 @@ const renderLocationCard = ({
 }:
   { item: LocationList, locationType: LocationType, scanRequired: boolean, index: number }) => {
   const {
-    locationName, quantity, palletId, increment, decrement, onDelete, qtyChange, scanned, onEndEditing
+    locationName, quantity, palletId, increment, decrement, onDelete, openCalc, scanned
   } = item;
   return (
     <View style={styles.locationCard} key={`${locationName}-${index}`}>
@@ -47,14 +46,13 @@ const renderLocationCard = ({
         location={locationName}
         locationType={locationType}
         onQtyIncrement={increment}
-        onTextChange={qtyChange}
+        onInputClick={openCalc}
         onQtyDecrement={decrement}
         palletID={palletId}
         scannerEnabled={scanRequired}
         quantity={quantity}
         onLocationDelete={onDelete}
         scanned={scanned}
-        onEndEditing={onEndEditing}
       />
     </View>
   );

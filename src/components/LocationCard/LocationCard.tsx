@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
-import NumericSelector from '../NumericSelector/NumericSelector';
+import NumericSelector from '../NumericSelector/CustomNumericSelector';
 import styles from './LocationCard.style';
 import COLOR from '../../themes/Color';
 
@@ -17,7 +17,7 @@ interface LocationCardProp {
     locationType: string;
     onQtyIncrement(): void;
     onQtyDecrement(): void;
-    onTextChange(text: string): void;
+    onInputClick(): void;
     onLocationDelete(): void;
     onEndEditing?: () => void;
     scannerEnabled: boolean;
@@ -46,11 +46,11 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
     locationType,
     onQtyIncrement,
     onQtyDecrement,
-    onTextChange,
     onLocationDelete,
     onEndEditing,
     scannerEnabled,
-    scanned
+    scanned,
+    onInputClick
   } = props;
 
   const MIN = locationType === 'floor' ? 1 : 0;
@@ -76,12 +76,11 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
           <NumericSelector
             onDecreaseQty={onQtyDecrement}
             onIncreaseQty={onQtyIncrement}
-            onTextChange={onTextChange}
             minValue={MIN}
             maxValue={MAX}
             value={quantity}
             isValid={validateQty(quantity, MIN, MAX)}
-            onEndEditing={onEndEditing}
+            onInputPress={onInputClick}
           />
         </View>
         <View>

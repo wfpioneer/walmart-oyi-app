@@ -87,6 +87,12 @@ import Button from '../../../components/buttons/Button';
 import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
 
+interface CurrentLocQtyClick {
+  type: string;
+  locName: string;
+  palletId: string
+}
+
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
   isManualScanEnabled: boolean;
@@ -142,6 +148,8 @@ export interface AuditItemScreenProps {
   showOnHandsConfirmState: UseStateType<boolean>;
   getItemPalletsError: boolean;
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
+  setLocQtyClick: React.Dispatch<React.SetStateAction<CurrentLocQtyClick>>;
+  locQtyClick: CurrentLocQtyClick
 }
 
 export const isError = (
@@ -839,7 +847,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reportMissingPalletApi,
     showOnHandsConfirmState,
     setGetItemPalletsError,
-    getItemPalletsError
+    getItemPalletsError,
+    setLocQtyClick,
+    locQtyClick
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1077,14 +1087,19 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           increment: () => calculateFloorLocIncreaseQty(loc.newQty, loc.locationName, dispatch),
           decrement: () => calculateFloorLocDecreaseQty(loc.newQty, loc.locationName, dispatch),
           onDelete: () => handleDeleteLocation(loc, index),
-          qtyChange: (qty: string) => {
-            dispatch(updateFloorLocationQty(loc.locationName, parseInt(qty, 10)));
-          },
-          onEndEditing: () => {
-            if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
-              dispatch(updateFloorLocationQty(loc.locationName, 0));
-            }
-          }
+          openCalc: () => setLocQtyClick({
+            type: 'floor',
+            locName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`,
+            palletId: ''
+          })
+          // qtyChange: (qty: string) => {
+          //   dispatch(updateFloorLocationQty(loc.locationName, parseInt(qty, 10)));
+          // },
+          // onEndEditing: () => {
+          //   if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
+          //     dispatch(updateFloorLocationQty(loc.locationName, 0));
+          //   }
+          // }
         });
       });
     }
@@ -1104,14 +1119,19 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch),
           decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch),
           onDelete: () => handleDeleteReserveLocation(loc, index),
-          qtyChange: (qty: string) => {
-            dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10)));
-          },
-          onEndEditing: () => {
-            if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
-              dispatch(updatePalletQty(loc.palletId, 0));
-            }
-          }
+          openCalc: () => setLocQtyClick({
+            type: 'reserve',
+            locName: loc.locationName,
+            palletId: loc.palletId
+          })
+          // qtyChange: (qty: string) => {
+          //   dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10)));
+          // },
+          // onEndEditing: () => {
+          //   if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
+          //     dispatch(updatePalletQty(loc.palletId, 0));
+          //   }
+          // }
         });
       });
     }
@@ -1145,6 +1165,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       />
     );
   }
+
+  const onQtyCalculationAccept = (qty: number) => {
+    const { type, locName, palletId } = locQtyClick;
+    if (type === 'floor') {
+      dispatch(updateFloorLocationQty(locName, qty));
+    } else if (type === 'reserve') {
+      dispatch(updatePalletQty(palletId, qty));
+    }
+  };
 
   return (
     <>
@@ -1278,6 +1307,7 @@ const AuditItem = (): JSX.Element => {
   const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+  const [locQtyClick, setLocQtyClick] = useState({ type: '', locName: '', palletId: '' } as CurrentLocQtyClick);
   const showOnHandsConfirmState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
@@ -1327,6 +1357,8 @@ const AuditItem = (): JSX.Element => {
       showOnHandsConfirmState={showOnHandsConfirmState}
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
+      setLocQtyClick={setLocQtyClick}
+      locQtyClick={locQtyClick}
     />
   );
 };
