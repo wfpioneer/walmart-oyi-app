@@ -18,6 +18,7 @@ import Toast, {
 import { MainNavigator } from './src/navigators/MainNavigator';
 import { setI18nConfig } from './src/locales';
 import { ActivityModalComponent } from './src/screens/Modal/Modal';
+import CalculatorModal from './src/screens/Modal/CalculatorModal';
 import AppRoot from './src/components/AppRoot';
 import { initialize } from './src/utils/AppCenterTool';
 import store from './src/state/index';
@@ -71,6 +72,7 @@ export default class App extends React.PureComponent {
       <Provider store={store}>
         <AppRoot>
           <ActivityModalComponent />
+          <CalculatorModal />
           <SnackBar />
           <MainNavigator />
           {/* TODO Replace All instances of SnackBar with RN-Toast-Message */}
