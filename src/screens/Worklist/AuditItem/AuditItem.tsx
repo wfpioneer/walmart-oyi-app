@@ -799,7 +799,7 @@ export const renderConfirmOnHandsModal = (
   );
 };
 
-const renderCalculatorModal = (
+export const renderCalculatorModal = (
   locationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>,
   showCalcModal: boolean,
   setShowCalcModal: React.Dispatch<React.SetStateAction<boolean>>,
@@ -827,6 +827,7 @@ const renderCalculatorModal = (
             setShowCalcModal(false);
             setCalcQtyResult(-1);
           }}
+          testID="modal-close-button"
         />
         {calcQtyResult >= 0 && (
         <Button
@@ -843,6 +844,7 @@ const renderCalculatorModal = (
               setCalcQtyResult(-1);
             }
           }}
+          testID="modal-accept-button"
         />
         )}
       </View>
