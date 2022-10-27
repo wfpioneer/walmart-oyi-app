@@ -57,7 +57,8 @@ export default {
     UNASSIGNED: 'Sin asignar',
     SELECTED: 'Seleccionado',
     UPDATE: 'Actualizar Configuración',
-    WARNING_LABEL: 'Aviso'
+    WARNING_LABEL: 'Aviso',
+    CLOSE: 'Cerrar'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
