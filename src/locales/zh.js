@@ -521,6 +521,7 @@ export default {
     COMPLETE_AUDIT_ITEM_ERROR: '失败-商品盘点完成失败，请重试',
     OPEN_AUDIT_LABEL: '计划外盘点',
     INVALID_EQUATION: '无效公式，请检查操作',
-    NO_PALLETS_FOUND_FOR_ITEM: '未找到此item卡板信息'
+    NO_PALLETS_FOUND_FOR_ITEM: '未找到此item卡板信息',
+    NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater' // TODO add mandarin translation
   }
 };
