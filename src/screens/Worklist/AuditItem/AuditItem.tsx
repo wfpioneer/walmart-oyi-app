@@ -819,7 +819,7 @@ export const renderCalculatorModal = (
         onEquals={result => {
           setCalcQtyResult(result);
         }}
-        showNegValidation={calcQtyResult < 0}
+        showNegValidation={true}
       />
       <View style={styles.buttonContainer}>
         <Button
@@ -1356,7 +1356,7 @@ const AuditItem = (): JSX.Element => {
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
-  const showCalcModalState = useState(true); // TOOD Set to false
+  const showCalcModalState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
     locationArea: '',
