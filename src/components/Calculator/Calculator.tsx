@@ -27,10 +27,11 @@ const opAtEdgeOfParentRegex = new RegExp(
 
 interface CalculatorProps {
   onEquals?: (result: number) => void;
+  showNegValidation?: boolean
 }
 
 const Calculator = (props: CalculatorProps) => {
-  const { onEquals } = props;
+  const { onEquals, showNegValidation } = props;
   const [calcText, setCalcText] = useState('');
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
 
@@ -143,6 +144,11 @@ const Calculator = (props: CalculatorProps) => {
           {strings('AUDITS.INVALID_EQUATION')}
         </Text>
       )}
+      {(showNegValidation) && (
+        <Text style={styles.errorText}>
+          {strings('AUDITS.NEGATIVE_VALIDATION')}
+        </Text>
+      )}
       <View style={styles.buttonRow}>
         <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="clear">
           <Text style={styles.calcButtonText}>C</Text>
@@ -232,7 +238,8 @@ const Calculator = (props: CalculatorProps) => {
 };
 
 Calculator.defaultProps = {
-  onEquals: () => {}
+  onEquals: () => {},
+  showNegValidation: false
 };
 
 export default Calculator;

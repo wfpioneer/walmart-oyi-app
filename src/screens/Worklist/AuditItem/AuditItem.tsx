@@ -815,9 +815,11 @@ export const renderCalculatorModal = (
       modalType="Form"
       onClose={() => setShowCalcModal(false)}
     >
-      <Calculator onEquals={result => {
-        setCalcQtyResult(result);
-      }}
+      <Calculator
+        onEquals={result => {
+          setCalcQtyResult(result);
+        }}
+        showNegValidation={calcQtyResult < 0}
       />
       <View style={styles.buttonContainer}>
         <Button
