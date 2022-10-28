@@ -16,14 +16,14 @@ export interface AuditItemScreenState {
    itemDetails: ItemDetails | null,
    floorLocations: Location[],
    reserveLocations: ItemPalletInfo[],
-   scannedPalletId: string
+   scannedPalletId: number
 }
 
 export const initialState: AuditItemScreenState = {
   itemDetails: null,
   floorLocations: [],
   reserveLocations: [],
-  scannedPalletId: ''
+  scannedPalletId: 0
 };
 
 export const AuditItemScreen = (state = initialState, action: Actions) : AuditItemScreenState => {
@@ -53,10 +53,10 @@ export const AuditItemScreen = (state = initialState, action: Actions) : AuditIt
       };
     case UPDATE_PALLET_QTY: {
       const { reserveLocations } = state;
-      const { palletId, newQty } = action.payload;
+      const { palletId, newQty, scanned } = action.payload;
       const updatedLocations = reserveLocations.map(loc => {
         if (loc.palletId === palletId) {
-          return { ...loc, newQty, scanned: true };
+          return { ...loc, newQty, scanned };
         }
         return loc;
       });

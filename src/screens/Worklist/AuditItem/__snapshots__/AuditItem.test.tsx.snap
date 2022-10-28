@@ -1736,7 +1736,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     <PalletQtyUpdate
       handleClose={[Function]}
       handleSubmit={[Function]}
-      palletId="4928"
+      palletId={4928}
       qty={0}
     />
   </CustomModalComponent>
@@ -2154,7 +2154,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <PalletQtyUpdate
       handleClose={[Function]}
       handleSubmit={[Function]}
-      palletId="4928"
+      palletId={4928}
       qty={0}
     />
   </CustomModalComponent>
