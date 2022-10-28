@@ -21,7 +21,7 @@ describe('testing PalletQtyUpdate component', () => {
       const { toJSON } = render(
         <PalletQtyUpdate
           qty={10}
-          palletId="4598"
+          palletId={4598}
           handleSubmit={mockHandleSubmit}
           handleClose={mockHandleClose}
         />
@@ -32,7 +32,7 @@ describe('testing PalletQtyUpdate component', () => {
       const { toJSON } = render(
         <PalletQtyUpdate
           qty={-11}
-          palletId="4598"
+          palletId={4598}
           handleSubmit={mockHandleSubmit}
           handleClose={mockHandleClose}
         />
@@ -43,7 +43,7 @@ describe('testing PalletQtyUpdate component', () => {
       const { getByTestId } = render(
         <PalletQtyUpdate
           qty={11}
-          palletId="4598"
+          palletId={4598}
           handleSubmit={mockHandleSubmit}
           handleClose={mockHandleClose}
         />

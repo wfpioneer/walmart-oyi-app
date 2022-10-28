@@ -7,7 +7,7 @@ import styles from './PalletQtyUpdate.style';
 import COLOR from '../../themes/Color';
 
 interface palletQtyUpdateProps {
-  palletId: string;
+  palletId: number;
   qty: number;
   handleSubmit: (newQty: number) => void;
   handleClose(): void;

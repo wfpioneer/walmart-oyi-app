@@ -49,16 +49,17 @@ describe('Audit Item Screen actions', () => {
     });
   });
   it('handles updating the pallet quantity based on palletId', () => {
-    const mockPalletId = '4567';
+    const mockPalletId = 4567;
     const mockNewQty = 22;
-    const updatePalletQtyResult = updatePalletQty(mockPalletId, mockNewQty);
+    const mockScanned = true;
+    const updatePalletQtyResult = updatePalletQty(mockPalletId, mockNewQty, mockScanned);
     expect(updatePalletQtyResult).toStrictEqual({
       type: UPDATE_PALLET_QTY,
-      payload: { palletId: mockPalletId, newQty: mockNewQty }
+      payload: { palletId: mockPalletId, newQty: mockNewQty, scanned: mockScanned }
     });
   });
   it('handles setting the palletId for Audit Item Screen', () => {
-    const mockPalletId = '4567';
+    const mockPalletId = 4567;
     const setScannedPalletIdResult = setScannedPalletId(mockPalletId);
     expect(setScannedPalletIdResult).toStrictEqual({
       type: SET_SCANNED_PALLET_ID,

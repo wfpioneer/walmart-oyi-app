@@ -67,7 +67,7 @@ export const Button = (props: ButtonPropsI): JSX.Element => {
       height,
       width
     };
-  const bgColor = disabled ? COLOR.DISABLED_BLUE : backgroundColor;
+  const bgColor = disabled ? COLOR.DISABLED_GREY : backgroundColor;
 
   let buttonStyle = {};
   if (type === ButtonType.PRIMARY) {

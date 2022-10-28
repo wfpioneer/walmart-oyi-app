@@ -46,12 +46,13 @@ describe('The Audit Item Screen Reducer', () => {
       reserveLocations: itemPallets.pallets
     };
     const mockNewQty = 13;
-    const mockPalletId = '4598';
-    const testResults = AuditItemScreen(mockInitialState, updatePalletQty(mockPalletId, mockNewQty));
+    const mockPalletId = 4598;
+    const mockScanned = true;
+    const testResults = AuditItemScreen(mockInitialState, updatePalletQty(mockPalletId, mockNewQty, mockScanned));
     const changeState = {
       ...initialState,
       reserveLocations: [{
-        palletId: '4598',
+        palletId: 4598,
         quantity: 22,
         newQty: 13,
         scanned: true,
@@ -65,9 +66,9 @@ describe('The Audit Item Screen Reducer', () => {
   it('handles setting the new pallet id while it got scanned', () => {
     const testNewState = {
       ...initialState,
-      scannedPalletId: '4597'
+      scannedPalletId: 4597
     };
-    const testResults = AuditItemScreen(testInitialState, setScannedPalletId('4597'));
+    const testResults = AuditItemScreen(testInitialState, setScannedPalletId(4597));
     expect(testResults).toStrictEqual(testNewState);
   });
   it('handles updating new qty for the floor loc', () => {

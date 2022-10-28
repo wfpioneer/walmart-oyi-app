@@ -8,7 +8,7 @@ const mockLocationList: LocationList[] = [{
   sectionId: 1502,
   locationName: 'A1-1',
   quantity: 22,
-  palletId: '4928',
+  palletId: 4928,
   increment: jest.fn,
   decrement: jest.fn,
   onDelete: jest.fn,

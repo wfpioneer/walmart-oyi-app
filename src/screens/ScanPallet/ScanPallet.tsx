@@ -1,6 +1,6 @@
 import React, { EffectCallback, useEffect } from 'react';
 import {
-  EmitterSubscription, Text, TouchableOpacity, View
+  EmitterSubscription, Pressable, Text, View
 } from 'react-native';
 import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Config from 'react-native-config';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
@@ -88,9 +89,15 @@ export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
     <View style={styles.container}>
       {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       <View style={styles.scanContainer}>
-        <TouchableOpacity onPress={() => openCamera()}>
+        <Pressable onPress={() => {
+          if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+            return openCamera();
+          }
+          return null;
+        }}
+        >
           <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.scanText}>
           <Text>{strings('WORKLIST.SCAN_PALLET_LABEL')}</Text>
         </View>
