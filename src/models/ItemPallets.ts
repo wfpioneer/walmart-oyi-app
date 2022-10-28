@@ -1,5 +1,5 @@
 export interface Pallet {
-    palletId: string;
+    palletId: number;
     quantity: number;
     sectionId: number;
     locationName: string;
