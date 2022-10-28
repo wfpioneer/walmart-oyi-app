@@ -144,7 +144,7 @@ const Calculator = (props: CalculatorProps) => {
           {strings('AUDITS.INVALID_EQUATION')}
         </Text>
       )}
-      {(showNegValidation) && (
+      {(showNegValidation && parseInt(calcText, 10) < 0) && (
         <Text style={styles.errorText}>
           {strings('AUDITS.NEGATIVE_VALIDATION')}
         </Text>

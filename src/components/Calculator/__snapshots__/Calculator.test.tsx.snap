@@ -32890,7 +32890,7 @@ exports[`Test Calculator component renders the calculator modal component with t
         }
       }
     >
-      
+      -1
     </TextInput>
   </View>
   <Text
@@ -32911,8 +32911,19 @@ exports[`Test Calculator component renders the calculator modal component with t
       }
     }
   >
-    <Memo(Pressable)
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -32937,9 +32948,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         C
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -32964,9 +32986,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         (
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -32991,11 +33024,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         )
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      delayLongPress={1500}
-      onLongPress={[Function]}
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33020,7 +33062,7 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         Del
       </Text>
-    </Memo(Pressable)>
+    </View>
   </View>
   <View
     style={
@@ -33029,8 +33071,19 @@ exports[`Test Calculator component renders the calculator modal component with t
       }
     }
   >
-    <Memo(Pressable)
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33055,9 +33108,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         7
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33082,9 +33146,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         8
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33109,9 +33184,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         9
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33136,7 +33222,7 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         /
       </Text>
-    </Memo(Pressable)>
+    </View>
   </View>
   <View
     style={
@@ -33145,8 +33231,19 @@ exports[`Test Calculator component renders the calculator modal component with t
       }
     }
   >
-    <Memo(Pressable)
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33171,9 +33268,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         4
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33198,9 +33306,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         5
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33225,9 +33344,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         6
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33252,7 +33382,7 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         *
       </Text>
-    </Memo(Pressable)>
+    </View>
   </View>
   <View
     style={
@@ -33261,8 +33391,19 @@ exports[`Test Calculator component renders the calculator modal component with t
       }
     }
   >
-    <Memo(Pressable)
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33287,9 +33428,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         1
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33314,9 +33466,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         2
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33341,9 +33504,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         3
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33368,7 +33542,7 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         -
       </Text>
-    </Memo(Pressable)>
+    </View>
   </View>
   <View
     style={
@@ -33377,8 +33551,19 @@ exports[`Test Calculator component renders the calculator modal component with t
       }
     }
   >
-    <Memo(Pressable)
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33403,9 +33588,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         .
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33430,14 +33626,29 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         0
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      disabled={true}
-      onPress={[Function]}
+    </View>
+    <View
+      accessibilityState={
+        Object {
+          "disabled": false,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -33458,9 +33669,20 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         =
       </Text>
-    </Memo(Pressable)>
-    <Memo(Pressable)
-      onPress={[Function]}
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -33485,7 +33707,7 @@ exports[`Test Calculator component renders the calculator modal component with t
       >
         +
       </Text>
-    </Memo(Pressable)>
+    </View>
   </View>
 </View>
 `;

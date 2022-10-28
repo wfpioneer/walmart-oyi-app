@@ -2963,6 +2963,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
   >
     <Calculator
       onEquals={[Function]}
+      showNegValidation={true}
     />
     <View
       style={
@@ -3435,6 +3436,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   >
     <Calculator
       onEquals={[Function]}
+      showNegValidation={true}
     />
     <View
       style={
