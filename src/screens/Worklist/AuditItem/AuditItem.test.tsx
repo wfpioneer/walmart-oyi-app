@@ -146,7 +146,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   getItemPalletsApi: defaultAsyncState,
   showPalletQtyUpdateModal: false,
   setShowPalletQtyUpdateModal: jest.fn(),
-  scannedPalletId: '4928',
+  scannedPalletId: 4928,
   userConfig: mockConfig,
   completeItemApi: defaultAsyncState,
   showDeleteConfirmationModal: false,
@@ -156,7 +156,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
     locationArea: '',
     locationIndex: -1,
     locationTypeNbr: -1,
-    palletId: '',
+    palletId: 0,
     sectionId: 0
   },
   setLocToConfirm: jest.fn(),
@@ -416,7 +416,7 @@ describe('AuditItemScreen', () => {
       const mocksetShowPalletQtyUpdateModal = jest.fn();
       const mockReserveLocations = [
         {
-          palletId: '5999',
+          palletId: 5999,
           quantity: 22,
           sectionId: 5578,
           locationName: 'D1-4',
@@ -444,7 +444,7 @@ describe('AuditItemScreen', () => {
       const mockVendorPackQty = 3;
       const { toJSON } = render(
         renderpalletQtyUpdateModal(
-          '4988',
+          4988,
           itemPallets.pallets,
           mockDispatch,
           mockShowPalletQtyModal,
@@ -464,7 +464,7 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        ''
+        0
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -482,7 +482,7 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        ''
+        0
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -496,7 +496,7 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        ''
+        0
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -516,7 +516,7 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        ''
+        0
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
@@ -570,7 +570,7 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        '1234'
+        1234
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -584,7 +584,7 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        '1234'
+        1234
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -604,7 +604,7 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        '1234'
+        1234
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
@@ -613,7 +613,7 @@ describe('AuditItemScreen', () => {
 
     it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
       reportMissingPalletApiHook(
-        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
+        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
@@ -635,7 +635,7 @@ describe('AuditItemScreen', () => {
 
     it('Tests reportMissingPalletApiHook on failure', () => {
       reportMissingPalletApiHook(
-        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, '1234', 1234
+        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -785,7 +785,7 @@ describe('AuditItemScreen', () => {
       ];
       const mockReserveLocations: ItemPalletInfo[] = [
         {
-          palletId: '123',
+          palletId: 123,
           quantity: 10,
           sectionId: 123,
           locationName: '1b-1',
@@ -807,7 +807,7 @@ describe('AuditItemScreen', () => {
       ];
       const mockReserveLocations: ItemPalletInfo[] = [
         {
-          palletId: '123',
+          palletId: 123,
           quantity: 10,
           sectionId: 123,
           locationName: '1b-1',
@@ -829,7 +829,7 @@ describe('AuditItemScreen', () => {
       ];
       const mockReserveLocations: ItemPalletInfo[] = [
         {
-          palletId: '123',
+          palletId: 123,
           quantity: 10,
           sectionId: 123,
           locationName: '1b-1',
@@ -878,28 +878,28 @@ describe('AuditItemScreen', () => {
     });
 
     it('tests calculatePalletDecreaseQty when newOHQty is greater than min value', () => {
-      calculatePalletDecreaseQty(1, '4597', mockDispatch);
+      calculatePalletDecreaseQty(1, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 0 } }
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0, scanned: false } }
       ));
     });
 
     it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
-      calculatePalletDecreaseQty(0, '4597', mockDispatch);
+      calculatePalletDecreaseQty(0, 4597, mockDispatch);
       expect(mockDispatch).not.toBeCalled();
     });
 
     it('tests calculatePalletIncreaseQty when newOHQty is lesser than max value', () => {
-      calculatePalletIncreaseQty(22, '4597', mockDispatch);
+      calculatePalletIncreaseQty(22, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: '4597', newQty: 23 } }
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23, scanned: false } }
       ));
     });
 
     it('tests calculatePalletIncreaseQty when newOHQty is greater than max value', () => {
-      calculatePalletIncreaseQty(100000, '4597', mockDispatch);
+      calculatePalletIncreaseQty(100000, 4597, mockDispatch);
       expect(mockDispatch).not.toBeCalled();
     });
 
@@ -950,7 +950,7 @@ describe('AuditItemScreen', () => {
       const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
         locationName: 'A1-1',
         locationType: 'floor',
-        palletId: '3'
+        palletId: 3
       };
       const mockSetShowCalc = jest.fn();
       const mockSetCalcQty = jest.fn();
@@ -975,7 +975,7 @@ describe('AuditItemScreen', () => {
       const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
         locationName: 'A1-1',
         locationType: 'floor',
-        palletId: '3'
+        palletId: 3
       };
       const mockSetShowCalc = jest.fn();
       const mockSetCalcQty = jest.fn();

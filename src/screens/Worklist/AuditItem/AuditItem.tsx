@@ -119,7 +119,7 @@ export interface AuditItemScreenProps {
   itemDetails: ItemDetails | null;
   showPalletQtyUpdateModal: boolean;
   setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>;
-  scannedPalletId: string;
+  scannedPalletId: number;
   userConfig: Configurations;
   showDeleteConfirmationModal: boolean;
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -128,7 +128,7 @@ export interface AuditItemScreenProps {
     locationArea: string;
     locationIndex: number;
     locationTypeNbr: number;
-    palletId: string;
+    palletId: number;
     sectionId: number;
   };
   setLocToConfirm: React.Dispatch<React.SetStateAction<{
@@ -136,7 +136,7 @@ export interface AuditItemScreenProps {
     locationArea: string;
     locationIndex: number;
     locationTypeNbr: number;
-    palletId: string;
+    palletId: number;
     sectionId: number;
   }>>;
   reportMissingPalletApi: AsyncState;
@@ -250,24 +250,24 @@ export const calculateFloorLocIncreaseQty = (
 
 export const calculatePalletDecreaseQty = (
   newOHQty: number,
-  palletId: string,
+  palletId: number,
   dispatch: Dispatch<any>
 ) => {
   const OH_MIN = 0;
   const OH_MAX = 9999;
   if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
-    dispatch(updatePalletQty(palletId, newOHQty - 1));
+    dispatch(updatePalletQty(palletId, newOHQty - 1, false));
   }
 };
 
 export const calculatePalletIncreaseQty = (
   newOHQty: number,
-  palletId: string,
+  palletId: number,
   dispatch: Dispatch<any>,
 ) => {
   const OH_MAX = 9999;
   if (newOHQty < OH_MAX) {
-    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1));
+    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1, false));
   }
 };
 
@@ -407,7 +407,7 @@ export const reportMissingPalletApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  palletId: string,
+  palletId: number,
   itemNbr: number
 ) => {
   if (navigation.isFocused()) {
@@ -480,12 +480,13 @@ export const getScannedPalletEffect = (
   setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused() && scannedEvent.value) {
+    const scannedPallet = parseInt(scannedEvent.value, 10);
     const matchedPallet = reserveLocations.find(
-      loc => loc.palletId === scannedEvent.value
+      loc => loc.palletId === scannedPallet
     );
     if (matchedPallet) {
       setShowPalletQtyUpdateModal(true);
-      dispatch(setScannedPalletId(scannedEvent.value));
+      dispatch(setScannedPalletId(scannedPallet));
     } else {
       Toast.show({
         type: 'error',
@@ -499,7 +500,7 @@ export const getScannedPalletEffect = (
 };
 
 export const renderpalletQtyUpdateModal = (
-  palletId: string,
+  scannedPalletId: number,
   reserveLocations: ItemPalletInfo[],
   dispatch: Dispatch<any>,
   showPalletQtyUpdateModal: boolean,
@@ -507,7 +508,7 @@ export const renderpalletQtyUpdateModal = (
   vendorPackQty?: number
 ) => {
   const palletInfo = reserveLocations.find(
-    pallet => pallet.palletId === palletId
+    pallet => pallet.palletId === scannedPalletId
   );
   const qty = palletInfo?.quantity === vendorPackQty ? palletInfo?.quantity : 0;
   const newPalletQty = palletInfo?.newQty;
@@ -518,13 +519,13 @@ export const renderpalletQtyUpdateModal = (
       modalType="Form"
     >
       <PalletQtyUpdate
-        palletId={palletId}
+        palletId={scannedPalletId}
         qty={newPalletQty || qty || 0}
         handleClose={() => {
           setShowPalletQtyUpdateModal(false);
         }}
         handleSubmit={(newQty: number) => {
-          dispatch(updatePalletQty(palletId, newQty));
+          dispatch(updatePalletQty(scannedPalletId, newQty, true));
           setShowPalletQtyUpdateModal(false);
         }}
       />
@@ -633,7 +634,7 @@ export const renderDeleteLocationModal = (
   deleteLocationConfirmed: (locType: string) => void,
   locationName: string,
   locationType: string,
-  palletId: string
+  palletId: number
 ) => (
   <CustomModalComponent
     isVisible={showDeleteConfirmationModal}
@@ -839,7 +840,7 @@ export const renderCalculatorModal = (
               if (locationType === 'floor') {
                 dispatch(updateFloorLocationQty(locationName, calcQtyResult));
               } else {
-                dispatch(updatePalletQty(palletId, calcQtyResult));
+                dispatch(updatePalletQty(palletId, calcQtyResult, false));
               }
               setCalcQtyResult(-1);
             }
@@ -1107,7 +1108,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         locationArea: 'floor',
         locationIndex: locIndex,
         locationTypeNbr: loc.typeNbr,
-        palletId: '',
+        palletId: 0,
         sectionId: 0
       });
       setShowDeleteConfirmationModal(true);
@@ -1137,8 +1138,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           sectionId: loc.sectionId,
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`,
           quantity: loc.newQty,
-          palletId: '',
           locationType: 'floor',
+          palletId: 0,
           increment: () => calculateFloorLocIncreaseQty(loc.newQty, loc.locationName, dispatch),
           decrement: () => calculateFloorLocDecreaseQty(loc.newQty, loc.locationName, dispatch),
           onDelete: () => handleDeleteLocation(loc, index),
@@ -1151,7 +1152,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             }
           },
           onInputPress: () => {
-            setLocation({ locationName: loc.locationName, locationType: 'floor', palletId: '' });
+            setLocation({ locationName: loc.locationName, locationType: 'floor', palletId: 0 });
             setShowCalcModal(true);
           }
         });
@@ -1175,11 +1176,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch),
           onDelete: () => handleDeleteReserveLocation(loc, index),
           qtyChange: (qty: string) => {
-            dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10)));
+            dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10), false));
           },
           onEndEditing: () => {
             if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
-              dispatch(updatePalletQty(loc.palletId, 0));
+              dispatch(updatePalletQty(loc.palletId, 0, false));
             }
           },
           onInputPress: () => {
@@ -1359,8 +1360,8 @@ const AuditItem = (): JSX.Element => {
     locationArea: '',
     locationIndex: -1,
     locationTypeNbr: -1,
-    palletId: '',
-    sectionId: 0
+    sectionId: 0,
+    palletId: 0
   });
 
   const locationListState = useState({

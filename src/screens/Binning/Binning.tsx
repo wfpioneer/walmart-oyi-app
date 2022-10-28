@@ -2,7 +2,7 @@ import React, {
   DependencyList, EffectCallback, MutableRefObject, useCallback, useEffect, useRef, useState
 } from 'react';
 import {
-  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, View
+  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Pressable, Text, View
 } from 'react-native';
 import { head } from 'lodash';
 import { trackEvent } from 'appcenter-analytics';
@@ -14,6 +14,7 @@ import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Config from 'react-native-config';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
@@ -312,9 +313,15 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           keyExtractor={(item: any) => item.id.toString()}
           ListEmptyComponent={(
             <View style={styles.scanContainer}>
-              <TouchableOpacity onPress={() => openCamera()}>
+              <Pressable onPress={() => {
+                if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+                  return openCamera();
+                }
+                return null;
+              }}
+              >
                 <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-              </TouchableOpacity>
+              </Pressable>
               <View style={styles.scanText}>
                 <Text>{strings('BINNING.SCAN_PALLET')}</Text>
               </View>

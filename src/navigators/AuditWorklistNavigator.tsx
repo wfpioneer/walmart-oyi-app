@@ -25,6 +25,7 @@ const Stack = createStackNavigator();
 
 interface AuditWorklistNavProps {
   auditWorklists: boolean;
+  showCalculator: boolean;
   dispatch: Dispatch<any>;
   isManualScanEnabled: boolean;
   navigation: NavigationProp<any>;
@@ -102,6 +103,7 @@ export const AuditWorklistNavigatorStack = (
 ): JSX.Element => {
   const {
     auditWorklists,
+    showCalculator,
     dispatch,
     isManualScanEnabled,
     navigation,
@@ -178,7 +180,7 @@ export const AuditWorklistNavigatorStack = (
             headerTitle: strings('AUDITS.AUDIT_ITEM'),
             headerRight: () => (
               <View style={styles.headerContainer}>
-                {renderCalcButton(dispatch, calcOpen)}
+                {showCalculator && renderCalcButton(dispatch, calcOpen)}
                 {renderPrintButton(navigation)}
                 {renderScanButton(dispatch, isManualScanEnabled)}
               </View>
@@ -208,12 +210,13 @@ const AuditWorklistNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { isManualScanEnabled, isBottomTabEnabled, calcOpen } = useTypedSelector(state => state.Global);
-  const { auditWorklists } = useTypedSelector(state => state.User.configs);
+  const { auditWorklists, showCalculator } = useTypedSelector(state => state.User.configs);
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
   return (
     <AuditWorklistNavigatorStack
       auditWorklists={auditWorklists}
+      showCalculator={showCalculator}
       dispatch={dispatch}
       navigation={navigation}
       isManualScanEnabled={isManualScanEnabled}

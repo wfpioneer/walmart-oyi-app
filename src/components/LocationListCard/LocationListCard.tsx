@@ -14,7 +14,7 @@ export interface LocationList {
     sectionId: number;
     locationName: string;
     quantity: number;
-    palletId: string;
+    palletId: number;
     increment: () => void;
     decrement: () => void;
     onDelete: () => void;
@@ -51,7 +51,7 @@ const renderLocationCard = ({
         onQtyIncrement={increment}
         onTextChange={qtyChange}
         onQtyDecrement={decrement}
-        palletID={palletId}
+        palletId={palletId}
         scannerEnabled={scanRequired}
         quantity={quantity}
         onLocationDelete={onDelete}
