@@ -558,6 +558,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -868,6 +870,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1161,6 +1165,963 @@ Array [
     transparent={true}
     visible={false}
   />,
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={true}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#00000099",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffffff",
+              "borderRadius": 7.5,
+              "justifyContent": "center",
+              "paddingBottom": 12,
+              "paddingHorizontal": 8,
+              "width": "80%",
+            },
+            Object {
+              "minHeight": undefined,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "borderColor": "#00000099",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "flexDirection": "column",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "borderRadius": 7,
+                "borderWidth": 1,
+                "margin": 2,
+              }
+            }
+          >
+            <TextInput
+              editable={false}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontSize": 20,
+                  "height": 125,
+                  "textAlign": "center",
+                  "width": 504,
+                }
+              }
+            >
+              
+            </TextInput>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="clear"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                C
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="openParent"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                (
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="closeParent"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                )
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="delete"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                Del
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="seven"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                7
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="eight"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                8
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="nine"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                9
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="divide"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                /
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="four"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                4
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="five"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                5
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="six"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                6
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="multiply"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                *
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="one"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                1
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="two"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                2
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="three"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                3
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="subtract"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                -
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="decimal"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                .
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="zero"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                0
+              </Text>
+            </View>
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": true,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#5FA7F2",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="equals"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                =
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderColor": "#000000",
+                  "borderRadius": 7,
+                  "borderWidth": 1,
+                  "height": 125,
+                  "justifyContent": "center",
+                  "margin": 1,
+                  "width": 125,
+                }
+              }
+              testID="add"
+            >
+              <Text
+                style={
+                  Object {
+                    "fontSize": 30,
+                  }
+                }
+              >
+                +
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "alignContent": "space-around",
+              "flexDirection": "row",
+              "justifyContent": "space-evenly",
+              "paddingTop": 10,
+              "width": "100%",
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 45,
+                },
+                Object {
+                  "flex": 1,
+                  "paddingHorizontal": 10,
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#0071e9",
+                    "borderRadius": 5,
+                    "elevation": 1,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+                testID="modal-close-button"
+              >
+                <Text
+                  style={
+                    Object {
+                      "color": "#ffffffff",
+                      "fontFamily": "Roboto-Medium",
+                      "fontSize": 16,
+                      "fontWeight": "normal",
+                      "textAlign": undefined,
+                    }
+                  }
+                >
+                  [missing "en.GENERICS.CLOSE" translation]
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </Modal>,
   <View
     style={
       Object {
@@ -1762,6 +2723,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1943,6 +2906,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1989,6 +2954,48 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         />
       </View>
     </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <Calculator
+      onEquals={[Function]}
+    />
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+          "paddingTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        testID="modal-close-button"
+        title="[missing \\"en.GENERICS.CLOSE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
   </CustomModalComponent>
   <View
     style={
@@ -2180,6 +3187,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2369,6 +3378,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2415,6 +3426,48 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         />
       </View>
     </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <Calculator
+      onEquals={[Function]}
+    />
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+          "paddingTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        testID="modal-close-button"
+        title="[missing \\"en.GENERICS.CLOSE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
   </CustomModalComponent>
   <View
     style={
