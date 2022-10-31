@@ -409,7 +409,8 @@ export default {
     FAILED_APPROVE: 'Requests Failed to Approve',
     FAILED_ITEMS: 'Items Failed',
     UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.',
-    MANAGER_APPROVAL: 'Manager Approval'
+    MANAGER_APPROVAL: 'Manager Approval',
+    APPROVAL_LOADING_MSG: 'Large approval requests may take some time, please be patient'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
