@@ -32,7 +32,13 @@ const styles = StyleSheet.create({
   activityIndicator: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 'auto'
+  },
+  approvalLoaderMsg: {
+    padding: 20,
+    fontSize: 16,
+    textAlign: 'center'
   },
   buttonContainer: {
     width: '100%',
