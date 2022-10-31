@@ -36,6 +36,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         ]
       }
     >
+      <Modal
+        animationType="none"
+        hardwareAccelerated={false}
+        onRequestClose={[Function]}
+        transparent={true}
+        visible={false}
+      />
       <View>
         <Text
           style={
@@ -118,21 +125,38 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             </View>
           </View>
         </View>
-        <TextInput
-          keyboardType="numeric"
-          onChangeText={[Function]}
-          onEndEditing={[Function]}
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#0071e9",
               "height": 40,
-              "minWidth": "15%",
-              "textAlign": "center",
+              "justifyContent": "center",
+              "opacity": 1,
             }
           }
-          testID="numericTextInput"
-          value="0"
-        />
+        >
+          <Text
+            style={
+              Object {
+                "color": "#0071e9",
+                "minWidth": "15%",
+                "paddingHorizontal": 4,
+                "textAlign": "center",
+              }
+            }
+          >
+            0
+          </Text>
+        </View>
         <View
           style={
             Array [
@@ -558,6 +582,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -868,6 +894,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1140,6 +1168,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
 Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
@@ -1738,6 +1773,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       handleSubmit={[Function]}
       palletId={4928}
       qty={0}
+      showCalculator={false}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -1762,6 +1798,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1943,6 +1981,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1990,6 +2030,12 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
     </React.Fragment>
   </CustomModalComponent>
+  <CalculatorModal
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButtonOn={[Function]}
+    visible={false}
+  />
   <View
     style={
       Object {
@@ -2043,6 +2089,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           locationType="floor"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View
@@ -2059,6 +2106,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           locationType="reserve"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View>
@@ -2156,6 +2204,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       handleSubmit={[Function]}
       palletId={4928}
       qty={0}
+      showCalculator={false}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -2180,6 +2229,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2369,6 +2420,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2416,6 +2469,12 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
     </React.Fragment>
   </CustomModalComponent>
+  <CalculatorModal
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButtonOn={[Function]}
+    visible={false}
+  />
   <View
     style={
       Object {
@@ -2469,6 +2528,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationType="floor"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View
@@ -2485,6 +2545,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationType="reserve"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View>
