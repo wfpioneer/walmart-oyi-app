@@ -12,7 +12,7 @@ import COLOR from '../../themes/Color';
 
 interface LocationCardProp {
     location: string;
-    palletID?: string;
+    palletId?: number;
     quantity: number;
     locationType: string;
     onQtyIncrement(): void;
@@ -41,7 +41,7 @@ export const validateQty = (qty: number, MIN: number, MAX: number) => MIN <= qty
 const LocationCard = (props: LocationCardProp): JSX.Element => {
   const {
     location,
-    palletID,
+    palletId,
     quantity,
     locationType,
     onQtyIncrement,
@@ -66,7 +66,7 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
         {locationType === 'reserve' && (
         <View>
           <Text style={getContentStyle(locationType, scannerEnabled, scanned, false)}>
-            {`${strings('LOCATION.PALLET')} ${palletID}`}
+            {`${strings('LOCATION.PALLET')} ${palletId}`}
           </Text>
         </View>
         )}
@@ -94,7 +94,7 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
 };
 
 LocationCard.defaultProps = {
-  palletID: '',
+  palletId: 0,
   scanned: false,
   onEndEditing: () => {}
 };

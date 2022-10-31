@@ -10,6 +10,7 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import { head } from 'lodash';
+import Config from 'react-native-config';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
@@ -335,8 +336,13 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
 
   const scanTextView = () => (
     <View style={styles.scanView}>
-      {/* TODO make dev only? */}
-      <Pressable onPress={() => openCamera()}>
+      <Pressable onPress={() => {
+        if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+          return openCamera();
+        }
+        return null;
+      }}
+      >
         <MaterialCommunityIcon
           name="barcode-scan"
           size={70}

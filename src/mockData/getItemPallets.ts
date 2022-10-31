@@ -5,7 +5,7 @@ export const itemPallets = {
   upcNbr: '777555333',
   category: 99,
   pallets: [{
-    palletId: '4598',
+    palletId: 4598,
     quantity: 22,
     sectionId: 5578,
     locationName: 'D1-4',

@@ -34,6 +34,7 @@ export interface Configurations {
   showRollOverAudit: boolean;
   showOpenAuditLink: boolean;
   scanRequired: boolean;
+  showCalculator: boolean;
 }
 
 export interface area {

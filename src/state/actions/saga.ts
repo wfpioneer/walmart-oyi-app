@@ -236,7 +236,7 @@ export const createNewPick = (payload: CreatePickRequest) => ({
 } as const);
 export const postCreatePallet = (payload: CreatePallet) => ({ type: POST_CREATE_PALLET, payload } as const);
 export const reportMissingPallet = (payload: {
-  palletId: string;
+    palletId: number;
     locationName: string;
     sectionId: number;
 }) => ({ type: REPORT_MISSING_PALLET, payload } as const);

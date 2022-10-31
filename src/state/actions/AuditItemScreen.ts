@@ -25,14 +25,14 @@ export const setReserveLocations = (pallets: ItemPalletInfo[]) => ({
   payload: pallets
 } as const);
 
-export const setScannedPalletId = (palletId: string) => ({
+export const setScannedPalletId = (palletId: number) => ({
   type: SET_SCANNED_PALLET_ID,
   payload: palletId
 } as const);
 
-export const updatePalletQty = (palletId: string, newQty: number) => ({
+export const updatePalletQty = (palletId: number, newQty: number, scanned: boolean) => ({
   type: UPDATE_PALLET_QTY,
-  payload: { palletId, newQty }
+  payload: { palletId, newQty, scanned }
 } as const);
 
 export const updateFloorLocationQty = (locationName: string, newQty: number) => ({
