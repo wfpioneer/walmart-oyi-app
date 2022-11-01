@@ -1,8 +1,8 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, {
-  Dispatch, EffectCallback, ReactNode, useEffect
+  Dispatch, EffectCallback, useEffect
 } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Platform, Text, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
@@ -23,13 +23,12 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
-import { RootState, useTypedSelector } from '../../state/reducers/RootReducer';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import COLOR from '../../themes/Color';
 import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
 import { AsyncState } from '../../models/AsyncState';
-import { ConfigResponse } from '../../services/Config.service';
 import {
   getLocationLabelPrinter,
   getPalletLabelPrinter,
@@ -224,18 +223,18 @@ export const LoginScreen = (props: LoginScreenProps) => {
       dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
       trackEvent('user_sign_in');
       if (user.siteId && user.countryCode !== 'US') {
-        getFluffyFeatures(user);
+        dispatch(getFluffyFeatures(user));
       }
     });
   };
 
   const signOutUser = (): void => {
-    showActivityModal();
+    dispatch(showActivityModal());
     trackEvent('user_sign_out', { lastPage: 'Login' });
     WMSSO.signOutUser().then(() => {
-      logoutUser();
+      dispatch(logoutUser());
       if (Platform.OS === 'android') {
-        hideActivityModal();
+        dispatch(hideActivityModal());
       }
       signInUser();
     });
@@ -250,12 +249,18 @@ export const LoginScreen = (props: LoginScreenProps) => {
         signInUser();
       });
     }
+    navigation.addListener('blur', () => {
+      dispatch(resetClubConfigApiState());
+      dispatch(resetFluffyFeaturesApiState());
+    });
+
     return () => {
       if (Platform.OS === 'ios') {
         navigation.removeListener('focus', () => {});
       }
+      navigation.removeListener('blur', () => {});
     };
-  }, []);
+  }, [navigation]);
 
   useEffectHook(() => userConfigsApiHook(
     getFluffyApiState,
@@ -278,7 +283,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
             dispatch(loginUser(updatedUser));
             trackEvent('user_sign_in');
             if (user.countryCode !== 'US') {
-              getFluffyFeatures(updatedUser);
+              dispatch((updatedUser));
             }
           }}
           onSignOut={() => signOutUser()}
@@ -298,12 +303,12 @@ export const LoginScreen = (props: LoginScreenProps) => {
           onSubmitCN={() => {
             const updatedUser = { ...user, countryCode: 'CN' };
             dispatch(loginUser(updatedUser));
-            getFluffyFeatures(updatedUser);
+            dispatch(getFluffyFeatures(updatedUser));
           }}
           onSubmitMX={() => {
             const updatedUser = { ...user, countryCode: 'MX' };
             dispatch(loginUser(updatedUser));
-            getFluffyFeatures(updatedUser);
+            dispatch(getFluffyFeatures(updatedUser));
           }}
         />
       </CustomModalComponent>
