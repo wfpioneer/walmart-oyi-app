@@ -59,6 +59,13 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
       <View
         style={
           Object {
+            "paddingTop": 10,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
             "alignItems": "center",
             "borderColor": "#00000099",
             "borderRadius": 8,

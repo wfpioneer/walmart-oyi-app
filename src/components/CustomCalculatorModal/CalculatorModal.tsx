@@ -26,6 +26,7 @@ const CalculatorModal = (props: CalculatorModalProps) => {
       modalType="Form"
       onClose={onClose}
     >
+      <View style={{ paddingTop: 10 }} />
       <Calculator
         onEquals={((value: number) => setCalcValue(value.toString()))}
         showNegValidation={true}
