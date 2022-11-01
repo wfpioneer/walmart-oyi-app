@@ -1,10 +1,13 @@
-import { NavigationProp } from '@react-navigation/native';
-import React, { ReactNode } from 'react';
-import { connect } from 'react-redux';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, {
+  Dispatch, EffectCallback, ReactNode, useEffect
+} from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { Platform, Text, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
+import _ from 'lodash';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
@@ -20,7 +23,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { setUserId, trackEvent } from '../../utils/AppCenterTool';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
-import { RootState } from '../../state/reducers/RootReducer';
+import { RootState, useTypedSelector } from '../../state/reducers/RootReducer';
 import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import COLOR from '../../themes/Color';
@@ -44,24 +47,6 @@ import {
 const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
 
-const mapDispatchToProps = {
-  loginUser,
-  logoutUser,
-  hideActivityModal,
-  setEndTime,
-  getFluffyFeatures,
-  assignFluffyFeatures,
-  getClubConfig,
-  setConfigs,
-  showActivityModal,
-  setLocationLabelPrinter,
-  setPalletLabelPrinter,
-  setPriceLabelPrinter,
-  setPrinterList,
-  resetClubConfigApiState,
-  resetFluffyFeaturesApiState
-};
-
 // This type uses all fields from the User type except it makes siteId optional
 // It is necessary to provide an accurate type to the User object returned
 // from WMSSO.getUser (since its siteId is optional and CN users can log in without one)
@@ -69,12 +54,6 @@ type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
-
-const mapStateToProps = (state: RootState) => ({
-  User: state.User,
-  fluffyApiState: state.async.getFluffyRoles,
-  getClubConfigApiState: state.async.getClubConfig
-});
 
 // Since CN Associate JobCodes are inconsistent, this set of roles will be added
 // to all successful fluffy responses for CN
@@ -89,25 +68,12 @@ const addCNAssociateRoleOverrides = (
 
 // TODO correct all the function definitions (specifically return types)
 export interface LoginScreenProps {
-  loginUser: (userPayload: User) => void;
-  logoutUser: () => void,
-  User: User;
+  user: User;
   navigation: NavigationProp<any>;
-  hideActivityModal: () => void;
-  setEndTime: (sessionEndTime: number) => void;
-  getFluffyFeatures: (payload: WMSSOUser) => void;
-  fluffyApiState: AsyncState;
-  assignFluffyFeatures: (resultPayload: string[]) => void;
-  getClubConfig: () => void;
+  getFluffyApiState: AsyncState;
   getClubConfigApiState: AsyncState;
-  setConfigs: (configs: ConfigResponse) => void;
-  showActivityModal: () => void;
-  setPrinterList: (payload: Printer[]) => void;
-  setPriceLabelPrinter: (payload: Printer | null) => void;
-  setLocationLabelPrinter: (payload: Printer | null) => void;
-  setPalletLabelPrinter: (payload: Printer | null) => void;
-  resetClubConfigApiState: () => void;
-  resetFluffyFeaturesApiState: () => void;
+  dispatch: Dispatch<any>;
+  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
@@ -145,73 +111,61 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
   );
 };
 
-// TODO convert to Functional Component
-export class LoginScreen extends React.PureComponent<LoginScreenProps> {
-  private unsubscribe: (() => void | undefined) | undefined;
-
-  constructor(props: LoginScreenProps) {
-    super(props);
-    this.signInUser = this.signInUser.bind(this);
+const userConfigsApiHook = (
+  getFluffyApiState: AsyncState,
+  getClubConfigApiState: AsyncState,
+  user: User,
+  dispatch: Dispatch<any>,
+  getPrinterDetailsFromAsyncStorage: () => Promise<void>,
+  navigation: NavigationProp<any>
+) => {
+  if (getFluffyApiState.isWaiting || getClubConfigApiState.isWaiting) {
+    dispatch(showActivityModal());
   }
 
-  componentDidMount(): void {
-    this.signInUser();
-    // this following snippet is mostly for iOS, as
-    // I need it to automatically call signInUser when we go back to the login screen
-    if (Platform.OS === 'ios') {
-      this.unsubscribe = this.props.navigation.addListener('focus', () => {
-        this.signInUser();
-      });
+  if (getFluffyApiState.isWaiting) {
+    if (getFluffyApiState.result && getFluffyApiState.result.status === 200) {
+      const userCountryCode = user.countryCode.toUpperCase();
+      const fluffyResultData = getFluffyApiState.result.data;
+      const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
+        : fluffyResultData;
+      dispatch(assignFluffyFeatures(fluffyFeatures));
+    } else if (getFluffyApiState.error) {
+      // TODO Display toast/popup letting user know roles could not be retrieved
     }
+
+    dispatch(getClubConfig());
   }
 
-  componentDidUpdate(prevProps: Readonly<LoginScreenProps>): void {
-    if (this.props.fluffyApiState.isWaiting || this.props.getClubConfigApiState.isWaiting) {
-      this.props.showActivityModal();
-    }
-
-    if (prevProps.fluffyApiState.isWaiting) {
-      if (this.props.fluffyApiState.result && this.props.fluffyApiState.result.status === 200) {
-        const userCountryCode = this.props.User.countryCode.toUpperCase();
-        const fluffyResultData = this.props.fluffyApiState.result.data;
-        const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
-          : fluffyResultData;
-        this.props.assignFluffyFeatures(fluffyFeatures);
-      } else if (this.props.fluffyApiState.error) {
-        // TODO Display toast/popup letting user know roles could not be retrieved
+  if (getClubConfigApiState.isWaiting) {
+    if (getClubConfigApiState.result) {
+      dispatch(setConfigs(getClubConfigApiState.result.data));
+      if (getClubConfigApiState.result.data.printingUpdate) {
+        getPrinterDetailsFromAsyncStorage();
       }
-
-      this.props.getClubConfig();
+    } else if (getClubConfigApiState.error) {
+      // TODO Display toast/popup for error
     }
 
-    if (prevProps.getClubConfigApiState.isWaiting) {
-      if (this.props.getClubConfigApiState.result) {
-        this.props.setConfigs(this.props.getClubConfigApiState.result.data);
-        if (this.props.getClubConfigApiState.result.data.printingUpdate) {
-          this.getPrinterDetailsFromAsyncStorage();
-        }
-      } else if (this.props.getClubConfigApiState.error) {
-        // TODO Display toast/popup for error
-      }
-
-      this.props.hideActivityModal();
-      this.props.navigation.reset({
-        index: 0,
-        routes: [{ name: 'Tabs' }]
-      });
-      this.props.setEndTime(sessionEnd());
-    }
+    dispatch(hideActivityModal());
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Tabs' }]
+    });
+    dispatch(setEndTime(sessionEnd()));
   }
+};
+export const LoginScreen = (props: LoginScreenProps) => {
+  const {
+    user,
+    getFluffyApiState,
+    getClubConfigApiState,
+    navigation,
+    dispatch,
+    useEffectHook
+  } = props;
 
-  componentWillUnmount(): void {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-    this.props.resetClubConfigApiState();
-    this.props.resetFluffyFeaturesApiState();
-  }
-
-  async getPrinterDetailsFromAsyncStorage(): Promise<void> {
+  const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
     const printerList = await getPrinterList();
     const priceLabelPrinter = await getPriceLabelPrinter();
     const palletLabelPrinter = await getPalletLabelPrinter();
@@ -222,7 +176,7 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         defPrinter.desc = strings('GENERICS.DEFAULT');
         defPrinter.name = strings('PRINT.FRONT_DESK');
       }
-      this.props.setPrinterList(printerList);
+      setPrinterList(printerList);
     } else {
       const defaultPrinter: Printer = {
         type: PrinterType.LASER,
@@ -231,37 +185,25 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         id: '000000000000',
         labelsAvailable: ['price']
       };
-      this.props.setPrinterList([defaultPrinter]);
+      setPrinterList([defaultPrinter]);
       savePrinter(defaultPrinter);
     }
     if (priceLabelPrinter && priceLabelPrinter.id === '000000000000') {
       priceLabelPrinter.desc = strings('GENERICS.DEFAULT');
       priceLabelPrinter.name = strings('PRINT.FRONT_DESK');
     }
-    this.props.setPriceLabelPrinter(priceLabelPrinter);
-    this.props.setPalletLabelPrinter(palletLabelPrinter);
-    this.props.setLocationLabelPrinter(locationLabelPrinter);
-  }
+    setPriceLabelPrinter(priceLabelPrinter);
+    setPalletLabelPrinter(palletLabelPrinter);
+    setLocationLabelPrinter(locationLabelPrinter);
+  };
 
-  signOutUser(): void {
-    this.props.showActivityModal();
-    trackEvent('user_sign_out', { lastPage: 'Login' });
-    WMSSO.signOutUser().then(() => {
-      this.props.logoutUser();
-      if (Platform.OS === 'android') {
-        this.props.hideActivityModal();
-      }
-      this.signInUser();
-    });
-  }
-
-  signInUser(): void {
+  const signInUser = (): void => {
     if (Config.ENVIRONMENT !== 'prod') {
       // For use with Fluffy in non-prod
       WMSSO.setEnv('STG');
     }
     WMSSO.getUser().then((user: WMSSOUser) => {
-      if (!this.props.User.userId) {
+      if (!user.userId) {
         const countryCode = user.countryCode.toLowerCase();
         switch (countryCode) {
           case 'us':
@@ -279,70 +221,124 @@ export class LoginScreen extends React.PureComponent<LoginScreenProps> {
         }
       }
       setUserId(user.userId);
-      this.props.loginUser({ ...user, siteId: user.siteId ?? 0 });
+      dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
       trackEvent('user_sign_in');
       if (user.siteId && user.countryCode !== 'US') {
-        this.props.getFluffyFeatures(user);
+        getFluffyFeatures(user);
       }
     });
-  }
+  };
 
-  render(): ReactNode {
-    return (
-      <View style={styles.container}>
-        <CustomModalComponent
-          isVisible={!this.props.User.siteId && userIsSignedIn(this.props.User)}
-          onClose={() => this.signOutUser()}
-          modalType="Form"
-        >
-          <EnterClubNbrForm
-            onSubmit={clubNbr => {
-              const updatedUser = { ...this.props.User, siteId: clubNbr };
-              this.props.loginUser(updatedUser);
-              trackEvent('user_sign_in');
-              if (this.props.User.countryCode !== 'US') {
-                this.props.getFluffyFeatures(updatedUser);
-              }
-            }}
-            onSignOut={() => this.signOutUser()}
-          />
-        </CustomModalComponent>
-        <CustomModalComponent
-          isVisible={
-            this.props.User.siteId !== 0
-            && this.props.User.countryCode === 'US'
-            && userIsSignedIn(this.props.User)
-          }
-          onClose={() => this.signOutUser()}
-          modalType="Form"
-        >
-          <SelectCountryCodeModal
-            onSignOut={() => this.signOutUser()}
-            onSubmitCN={() => {
-              const updatedUser = { ...this.props.User, countryCode: 'CN' };
-              this.props.loginUser(updatedUser);
-              this.props.getFluffyFeatures(updatedUser);
-            }}
-            onSubmitMX={() => {
-              const updatedUser = { ...this.props.User, countryCode: 'MX' };
-              this.props.loginUser(updatedUser);
-              this.props.getFluffyFeatures(updatedUser);
-            }}
-          />
-        </CustomModalComponent>
-        <View style={styles.buttonContainer}>
-          <Button
-            title={strings('GENERICS.SIGN_IN')}
-            style={styles.signInButton}
-            onPress={this.signInUser}
-          />
-        </View>
-        <Text style={styles.versionDisplay}>
-          { `${strings('GENERICS.VERSION')} ${pkg.version}${getBuildEnvironment()}` }
-        </Text>
+  const signOutUser = (): void => {
+    showActivityModal();
+    trackEvent('user_sign_out', { lastPage: 'Login' });
+    WMSSO.signOutUser().then(() => {
+      logoutUser();
+      if (Platform.OS === 'android') {
+        hideActivityModal();
+      }
+      signInUser();
+    });
+  };
+
+  useEffectHook(() => {
+    signInUser();
+    // this following snippet is mostly for iOS, as
+    // I need it to automatically call signInUser when we go back to the login screen
+    if (Platform.OS === 'ios') {
+      navigation.addListener('focus', () => {
+        signInUser();
+      });
+    }
+    return () => {
+      if (Platform.OS === 'ios') {
+        navigation.removeListener('focus', () => {});
+      }
+    };
+  }, []);
+
+  useEffectHook(() => userConfigsApiHook(
+    getFluffyApiState,
+    getClubConfigApiState,
+    user,
+    dispatch,
+    getPrinterDetailsFromAsyncStorage,
+    navigation
+  ), [getFluffyApiState, getClubConfigApiState]);
+  return (
+    <View style={styles.container}>
+      <CustomModalComponent
+        isVisible={!user.siteId && userIsSignedIn(user)}
+        onClose={() => signOutUser()}
+        modalType="Form"
+      >
+        <EnterClubNbrForm
+          onSubmit={clubNbr => {
+            const updatedUser = { ...user, siteId: clubNbr };
+            dispatch(loginUser(updatedUser));
+            trackEvent('user_sign_in');
+            if (user.countryCode !== 'US') {
+              getFluffyFeatures(updatedUser);
+            }
+          }}
+          onSignOut={() => signOutUser()}
+        />
+      </CustomModalComponent>
+      <CustomModalComponent
+        isVisible={
+          user.siteId !== 0
+          && user.countryCode === 'US'
+          && userIsSignedIn(user)
+        }
+        onClose={() => signOutUser()}
+        modalType="Form"
+      >
+        <SelectCountryCodeModal
+          onSignOut={() => signOutUser()}
+          onSubmitCN={() => {
+            const updatedUser = { ...user, countryCode: 'CN' };
+            dispatch(loginUser(updatedUser));
+            getFluffyFeatures(updatedUser);
+          }}
+          onSubmitMX={() => {
+            const updatedUser = { ...user, countryCode: 'MX' };
+            dispatch(loginUser(updatedUser));
+            getFluffyFeatures(updatedUser);
+          }}
+        />
+      </CustomModalComponent>
+      <View style={styles.buttonContainer}>
+        <Button
+          title={strings('GENERICS.SIGN_IN')}
+          style={styles.signInButton}
+          onPress={signInUser}
+        />
       </View>
-    );
-  }
-}
+      <Text style={styles.versionDisplay}>
+        { `${strings('GENERICS.VERSION')} ${pkg.version}${getBuildEnvironment()}` }
+      </Text>
+    </View>
+  );
+};
+// TODO convert to Functional Component
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+const Login = () => {
+  const configUser = useTypedSelector(state => state.User);
+  const getFluffyApiState = useTypedSelector(state => state.async.getFluffyRoles);
+  const getClubConfigApiState = useTypedSelector(state => state.async.getClubConfig);
+
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  return (
+    <LoginScreen
+      user={configUser}
+      dispatch={dispatch}
+      getFluffyApiState={getFluffyApiState}
+      getClubConfigApiState={getClubConfigApiState}
+      navigation={navigation}
+      useEffectHook={useEffect}
+    />
+  );
+};
+export default Login;
