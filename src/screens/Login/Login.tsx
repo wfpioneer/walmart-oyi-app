@@ -110,7 +110,51 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
   );
 };
 
-const userConfigsApiHook = (
+export const signInUser = (dispatch: Dispatch<any>): void => {
+  if (Config.ENVIRONMENT !== 'prod') {
+    // For use with Fluffy in non-prod
+    WMSSO.setEnv('STG');
+  }
+  WMSSO.getUser().then((user: WMSSOUser) => {
+    if (!user.userId) {
+      const countryCode = user.countryCode.toLowerCase();
+      switch (countryCode) {
+        case 'us':
+          setLanguage('en');
+          break;
+        case 'cn':
+          setLanguage('zh');
+          break;
+        case 'mx':
+          setLanguage('es');
+          break;
+        default:
+          setLanguage('en');
+          break;
+      }
+    }
+    setUserId(user.userId);
+    dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
+    trackEvent('user_sign_in');
+    if (user.siteId && user.countryCode !== 'US') {
+      dispatch(getFluffyFeatures(user));
+    }
+  });
+};
+
+export const signOutUser = (dispatch: Dispatch<any>): void => {
+  dispatch(showActivityModal());
+  trackEvent('user_sign_out', { lastPage: 'Login' });
+  WMSSO.signOutUser().then(() => {
+    dispatch(logoutUser());
+    if (Platform.OS === 'android') {
+      dispatch(hideActivityModal());
+    }
+    signInUser(dispatch);
+  });
+};
+
+export const userConfigsApiHook = (
   getFluffyApiState: AsyncState,
   getClubConfigApiState: AsyncState,
   user: User,
@@ -122,38 +166,69 @@ const userConfigsApiHook = (
     dispatch(showActivityModal());
   }
 
-  if (getFluffyApiState.isWaiting) {
-    if (getFluffyApiState.result && getFluffyApiState.result.status === 200) {
+  if (!getFluffyApiState.isWaiting && getFluffyApiState.result) {
+    if (getFluffyApiState.result.status === 200) {
       const userCountryCode = user.countryCode.toUpperCase();
       const fluffyResultData = getFluffyApiState.result.data;
       const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
         : fluffyResultData;
       dispatch(assignFluffyFeatures(fluffyFeatures));
-    } else if (getFluffyApiState.error) {
-      // TODO Display toast/popup letting user know roles could not be retrieved
-    }
 
-    dispatch(getClubConfig());
+      dispatch(getClubConfig());
+      dispatch(resetFluffyFeaturesApiState());
+    }
+  } else if (getFluffyApiState.error) {
+    // TODO Display toast/popup letting user know roles could not be retrieved
   }
 
-  if (getClubConfigApiState.isWaiting) {
-    if (getClubConfigApiState.result) {
-      dispatch(setConfigs(getClubConfigApiState.result.data));
-      if (getClubConfigApiState.result.data.printingUpdate) {
-        getPrinterDetailsFromAsyncStorage();
-      }
-    } else if (getClubConfigApiState.error) {
-      // TODO Display toast/popup for error
+  if (!getClubConfigApiState.isWaiting && getClubConfigApiState.result) {
+    dispatch(setConfigs(getClubConfigApiState.result.data));
+    if (getClubConfigApiState.result.data.printingUpdate) {
+      getPrinterDetailsFromAsyncStorage();
     }
-
     dispatch(hideActivityModal());
     navigation.reset({
       index: 0,
       routes: [{ name: 'Tabs' }]
     });
     dispatch(setEndTime(sessionEnd()));
+  } else if (getClubConfigApiState.error) {
+    // TODO Display toast/popup for error
   }
 };
+
+export const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
+  const printerList = await getPrinterList();
+  const priceLabelPrinter = await getPriceLabelPrinter();
+  const palletLabelPrinter = await getPalletLabelPrinter();
+  const locationLabelPrinter = await getLocationLabelPrinter();
+  if (printerList && printerList.length > 0) {
+    const defPrinter = printerList.find(obj => obj.id === '000000000000');
+    if (defPrinter) {
+      defPrinter.desc = strings('GENERICS.DEFAULT');
+      defPrinter.name = strings('PRINT.FRONT_DESK');
+    }
+    setPrinterList(printerList);
+  } else {
+    const defaultPrinter: Printer = {
+      type: PrinterType.LASER,
+      name: strings('PRINT.FRONT_DESK'),
+      desc: strings('GENERICS.DEFAULT'),
+      id: '000000000000',
+      labelsAvailable: ['price']
+    };
+    setPrinterList([defaultPrinter]);
+    savePrinter(defaultPrinter);
+  }
+  if (priceLabelPrinter && priceLabelPrinter.id === '000000000000') {
+    priceLabelPrinter.desc = strings('GENERICS.DEFAULT');
+    priceLabelPrinter.name = strings('PRINT.FRONT_DESK');
+  }
+  setPriceLabelPrinter(priceLabelPrinter);
+  setPalletLabelPrinter(palletLabelPrinter);
+  setLocationLabelPrinter(locationLabelPrinter);
+};
+
 export const LoginScreen = (props: LoginScreenProps) => {
   const {
     user,
@@ -164,94 +239,17 @@ export const LoginScreen = (props: LoginScreenProps) => {
     useEffectHook
   } = props;
 
-  const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
-    const printerList = await getPrinterList();
-    const priceLabelPrinter = await getPriceLabelPrinter();
-    const palletLabelPrinter = await getPalletLabelPrinter();
-    const locationLabelPrinter = await getLocationLabelPrinter();
-    if (printerList && printerList.length > 0) {
-      const defPrinter = printerList.find(obj => obj.id === '000000000000');
-      if (defPrinter) {
-        defPrinter.desc = strings('GENERICS.DEFAULT');
-        defPrinter.name = strings('PRINT.FRONT_DESK');
-      }
-      setPrinterList(printerList);
-    } else {
-      const defaultPrinter: Printer = {
-        type: PrinterType.LASER,
-        name: strings('PRINT.FRONT_DESK'),
-        desc: strings('GENERICS.DEFAULT'),
-        id: '000000000000',
-        labelsAvailable: ['price']
-      };
-      setPrinterList([defaultPrinter]);
-      savePrinter(defaultPrinter);
-    }
-    if (priceLabelPrinter && priceLabelPrinter.id === '000000000000') {
-      priceLabelPrinter.desc = strings('GENERICS.DEFAULT');
-      priceLabelPrinter.name = strings('PRINT.FRONT_DESK');
-    }
-    setPriceLabelPrinter(priceLabelPrinter);
-    setPalletLabelPrinter(palletLabelPrinter);
-    setLocationLabelPrinter(locationLabelPrinter);
-  };
-
-  const signInUser = (): void => {
-    if (Config.ENVIRONMENT !== 'prod') {
-      // For use with Fluffy in non-prod
-      WMSSO.setEnv('STG');
-    }
-    WMSSO.getUser().then((user: WMSSOUser) => {
-      if (!user.userId) {
-        const countryCode = user.countryCode.toLowerCase();
-        switch (countryCode) {
-          case 'us':
-            setLanguage('en');
-            break;
-          case 'cn':
-            setLanguage('zh');
-            break;
-          case 'mx':
-            setLanguage('es');
-            break;
-          default:
-            setLanguage('en');
-            break;
-        }
-      }
-      setUserId(user.userId);
-      dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
-      trackEvent('user_sign_in');
-      if (user.siteId && user.countryCode !== 'US') {
-        dispatch(getFluffyFeatures(user));
-      }
-    });
-  };
-
-  const signOutUser = (): void => {
-    dispatch(showActivityModal());
-    trackEvent('user_sign_out', { lastPage: 'Login' });
-    WMSSO.signOutUser().then(() => {
-      dispatch(logoutUser());
-      if (Platform.OS === 'android') {
-        dispatch(hideActivityModal());
-      }
-      signInUser();
-    });
-  };
-
   useEffectHook(() => {
-    signInUser();
+    signInUser(dispatch);
     // this following snippet is mostly for iOS, as
     // I need it to automatically call signInUser when we go back to the login screen
     if (Platform.OS === 'ios') {
       navigation.addListener('focus', () => {
-        signInUser();
+        signInUser(dispatch);
       });
     }
     navigation.addListener('blur', () => {
       dispatch(resetClubConfigApiState());
-      dispatch(resetFluffyFeaturesApiState());
     });
 
     return () => {
@@ -270,11 +268,12 @@ export const LoginScreen = (props: LoginScreenProps) => {
     getPrinterDetailsFromAsyncStorage,
     navigation
   ), [getFluffyApiState, getClubConfigApiState]);
+
   return (
     <View style={styles.container}>
       <CustomModalComponent
         isVisible={!user.siteId && userIsSignedIn(user)}
-        onClose={() => signOutUser()}
+        onClose={() => signOutUser(dispatch)}
         modalType="Form"
       >
         <EnterClubNbrForm
@@ -286,7 +285,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
               dispatch((updatedUser));
             }
           }}
-          onSignOut={() => signOutUser()}
+          onSignOut={() => signOutUser(dispatch)}
         />
       </CustomModalComponent>
       <CustomModalComponent
@@ -295,11 +294,11 @@ export const LoginScreen = (props: LoginScreenProps) => {
           && user.countryCode === 'US'
           && userIsSignedIn(user)
         }
-        onClose={() => signOutUser()}
+        onClose={() => signOutUser(dispatch)}
         modalType="Form"
       >
         <SelectCountryCodeModal
-          onSignOut={() => signOutUser()}
+          onSignOut={() => signOutUser(dispatch)}
           onSubmitCN={() => {
             const updatedUser = { ...user, countryCode: 'CN' };
             dispatch(loginUser(updatedUser));
@@ -316,7 +315,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}
-          onPress={signInUser}
+          onPress={() => signInUser(dispatch)}
         />
       </View>
       <Text style={styles.versionDisplay}>
