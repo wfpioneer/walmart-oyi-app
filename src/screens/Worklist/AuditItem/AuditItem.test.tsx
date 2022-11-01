@@ -449,6 +449,7 @@ describe('AuditItemScreen', () => {
           mockDispatch,
           mockShowPalletQtyModal,
           mocksetShowPalletQtyUpdateModal,
+          false,
           mockVendorPackQty
         )
       );

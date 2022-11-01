@@ -125,38 +125,21 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             </View>
           </View>
         </View>
-        <View
-          accessible={true}
-          collapsable={false}
-          focusable={true}
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
+        <TextInput
+          keyboardType="numeric"
+          onChangeText={[Function]}
+          onEndEditing={[Function]}
           style={
             Object {
+              "color": "#0071e9",
               "height": 40,
-              "justifyContent": "center",
-              "opacity": 1,
+              "minWidth": "15%",
+              "textAlign": "center",
             }
           }
-        >
-          <Text
-            style={
-              Object {
-                "color": "#0071e9",
-                "minWidth": "15%",
-                "paddingHorizontal": 4,
-                "textAlign": "center",
-              }
-            }
-          >
-            0
-          </Text>
-        </View>
+          testID="numericTextInput"
+          value="0"
+        />
         <View
           style={
             Array [
