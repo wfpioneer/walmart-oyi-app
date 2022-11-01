@@ -227,7 +227,8 @@ export default {
     UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失',
     CREATE_PALLET: '创建卡板',
     CREATE_PALLET_SUCCESS: '卡板创建成功',
-    CREATE_PALLET_FAILED: '卡板创建失败'
+    CREATE_PALLET_FAILED: '卡板创建失败',
+    DELETE_ONCE_MERGED: '一旦合并卡板%{palletId}将被删除'
   },
   LOCATION: {
     TITLE: '所有位置',
