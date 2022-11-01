@@ -128,6 +128,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
           type={2}
           title={strings('PRINT.PRICE_SIGN')}
           titleColor={COLOR.MAIN_THEME_COLOR}
+          testID="print-price-sign"
           style={styles.printPriceBtn}
           onPress={handlePrintPriceSign}
         />
