@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
 import COLOR from '../../../themes/Color';
 
 const styles = StyleSheet.create({
@@ -37,8 +36,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
+    justifyContent: 'space-evenly',
     alignContent: 'space-around',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingTop: 10
   },
   button: {
     flex: 1,

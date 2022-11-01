@@ -36,6 +36,7 @@ import AuditItem, {
   getUpdatedReserveLocations,
   isError,
   onValidateItemNumber,
+  renderCalculatorModal,
   renderConfirmOnHandsModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
@@ -48,6 +49,7 @@ import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { itemPallets } from '../../../mockData/getItemPallets';
 import { ItemPalletInfo } from '../../../models/AuditItem';
+import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -163,7 +165,10 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showOnHandsConfirmState: [false, jest.fn()],
   updateOHQtyApi: defaultAsyncState,
   getItemPalletsError: false,
-  setGetItemPalletsError: jest.fn()
+  setGetItemPalletsError: jest.fn(),
+  showCalcModalState: [false, jest.fn()],
+  calcResultState: [-1, jest.fn()],
+  locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()]
 };
 
 describe('AuditItemScreen', () => {
@@ -939,6 +944,69 @@ describe('AuditItemScreen', () => {
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetGetItemPalletsError).toBeCalledWith(true);
+    });
+
+    it('Tests renderCalculatorModal close button action', () => {
+      const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
+        locationName: 'A1-1',
+        locationType: 'floor',
+        palletId: 3
+      };
+      const mockSetShowCalc = jest.fn();
+      const mockSetCalcQty = jest.fn();
+      const { getByTestId } = render(
+        renderCalculatorModal(
+          mockLocationListItem,
+          true,
+          mockSetShowCalc,
+          -1,
+          mockSetCalcQty,
+          mockDispatch
+        )
+      );
+      const modalCloseButton = getByTestId('modal-close-button');
+      fireEvent.press(modalCloseButton);
+      expect(mockSetShowCalc).toHaveBeenCalledWith(false);
+      expect(mockSetShowCalc).toHaveBeenCalledTimes(1);
+      expect(mockSetCalcQty).toHaveBeenCalledWith(-1);
+    });
+
+    it('Tests renderCalculatorModal accept button action', () => {
+      const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
+        locationName: 'A1-1',
+        locationType: 'floor',
+        palletId: 3
+      };
+      const mockSetShowCalc = jest.fn();
+      const mockSetCalcQty = jest.fn();
+      const { getByTestId, update } = render(
+        renderCalculatorModal(
+          mockLocationListItem,
+          true,
+          mockSetShowCalc,
+          5,
+          mockSetCalcQty,
+          mockDispatch
+        )
+      );
+      const modalAcceptButton = getByTestId('modal-accept-button');
+      fireEvent.press(modalAcceptButton);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockSetCalcQty).toHaveBeenCalledWith(-1);
+
+      update(
+        renderCalculatorModal(
+          { ...mockLocationListItem, locationType: 'reserve' },
+          true,
+          mockSetShowCalc,
+          5,
+          mockSetCalcQty,
+          mockDispatch
+        )
+      );
+      fireEvent.press(modalAcceptButton);
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(mockSetCalcQty).toHaveBeenCalledWith(-1);
     });
   });
 });

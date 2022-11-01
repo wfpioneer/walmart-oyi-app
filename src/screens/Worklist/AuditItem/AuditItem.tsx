@@ -86,6 +86,7 @@ import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate
 import Button from '../../../components/buttons/Button';
 import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
+import Calculator from '../../../components/Calculator/Calculator';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -142,6 +143,9 @@ export interface AuditItemScreenProps {
   showOnHandsConfirmState: UseStateType<boolean>;
   getItemPalletsError: boolean;
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
+  showCalcModalState: UseStateType<boolean>;
+  locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
+  calcResultState: UseStateType<number>;
 }
 
 export const isError = (
@@ -795,6 +799,61 @@ export const renderConfirmOnHandsModal = (
     </CustomModalComponent>
   );
 };
+
+export const renderCalculatorModal = (
+  locationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>,
+  showCalcModal: boolean,
+  setShowCalcModal: React.Dispatch<React.SetStateAction<boolean>>,
+  calcQtyResult: number,
+  setCalcQtyResult: React.Dispatch<React.SetStateAction<number>>,
+  dispatch: Dispatch<any>
+) => {
+  const { locationName, locationType, palletId } = locationListItem;
+  return (
+    <CustomModalComponent
+      isVisible={showCalcModal}
+      modalType="Form"
+      onClose={() => setShowCalcModal(false)}
+    >
+      <Calculator
+        onEquals={result => {
+          setCalcQtyResult(result);
+        }}
+        showNegValidation={true}
+      />
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.button}
+          title={strings('GENERICS.CLOSE')}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={() => {
+            setShowCalcModal(false);
+            setCalcQtyResult(-1);
+          }}
+          testID="modal-close-button"
+        />
+        {calcQtyResult >= 0 && (
+        <Button
+          style={styles.button}
+          title={strings('PICKING.ACCEPT')}
+          backgroundColor={COLOR.MAIN_THEME_COLOR}
+          onPress={() => {
+            if (locationName !== '') {
+              if (locationType === 'floor') {
+                dispatch(updateFloorLocationQty(locationName, calcQtyResult));
+              } else {
+                dispatch(updatePalletQty(palletId, calcQtyResult, false));
+              }
+              setCalcQtyResult(-1);
+            }
+          }}
+          testID="modal-accept-button"
+        />
+        )}
+      </View>
+    </CustomModalComponent>
+  );
+};
 export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
@@ -840,9 +899,23 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reportMissingPalletApi,
     showOnHandsConfirmState,
     setGetItemPalletsError,
-    getItemPalletsError
+    getItemPalletsError,
+    showCalcModalState,
+    calcResultState,
+    locationListState
   } = props;
   let scannedSubscription: EmitterSubscription;
+
+  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
+  const [showCalcModal, setShowCalcModal] = showCalcModalState;
+  const [calcResult, setCalcResult] = calcResultState;
+  const [location, setLocation] = locationListState;
+
+  const totalOHQty = calculateTotalOHQty(
+    floorLocations,
+    reserveLocations,
+    itemDetails
+  );
 
   // Scanner listener
   useEffectHook(() => {
@@ -871,13 +944,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       setShowPalletQtyUpdateModal
     ),
     [scannedEvent]
-  );
-
-  const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
-  const totalOHQty = calculateTotalOHQty(
-    floorLocations,
-    reserveLocations,
-    itemDetails
   );
 
   // call get Item details
@@ -1074,6 +1140,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           sectionId: loc.sectionId,
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`,
           quantity: loc.newQty,
+          locationType: 'floor',
           palletId: 0,
           increment: () => calculateFloorLocIncreaseQty(loc.newQty, loc.locationName, dispatch),
           decrement: () => calculateFloorLocDecreaseQty(loc.newQty, loc.locationName, dispatch),
@@ -1085,6 +1152,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
               dispatch(updateFloorLocationQty(loc.locationName, 0));
             }
+          },
+          onInputPress: () => {
+            setLocation({ locationName: loc.locationName, locationType: 'floor', palletId: 0 });
+            setShowCalcModal(true);
           }
         });
       });
@@ -1102,6 +1173,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           quantity: loc.newQty,
           scanned: loc.scanned,
           palletId: loc.palletId,
+          locationType: 'reserve',
           increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch),
           decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch),
           onDelete: () => handleDeleteReserveLocation(loc, index),
@@ -1112,6 +1184,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
               dispatch(updatePalletQty(loc.palletId, 0, false));
             }
+          },
+          onInputPress: () => {
+            setLocation({ locationName: loc.locationName, locationType: 'reserve', palletId: loc.palletId });
+            setShowCalcModal(true);
           }
         });
       });
@@ -1119,7 +1195,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     return locationLst;
   };
 
-  // TODO: This action needs to added to the onpress event for continue button and has to handled in INTLSAOPS-7829
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty;
     if (itemOHQty === totalOHQty) {
@@ -1175,6 +1250,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         itemDetails,
         dispatch
       )}
+      {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, calcResult, setCalcResult, dispatch))}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
       )}
@@ -1280,6 +1356,7 @@ const AuditItem = (): JSX.Element => {
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
+  const showCalcModalState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
     locationArea: '',
@@ -1289,6 +1366,13 @@ const AuditItem = (): JSX.Element => {
     palletId: 0
   });
 
+  const locationListState = useState({
+    locationName: '',
+    locationType: 'floor',
+    palletId: '-1'
+  });
+  // Must be set to -1 to perform validation check
+  const calcResultState = useState(-1);
   return (
     <AuditItemScreen
       scannedEvent={scannedEvent}
@@ -1328,6 +1412,10 @@ const AuditItem = (): JSX.Element => {
       showOnHandsConfirmState={showOnHandsConfirmState}
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
+      showCalcModalState={showCalcModalState}
+      calcResultState={calcResultState}
+      // @ts-expect-error typechecking error with location type
+      locationListState={locationListState}
     />
   );
 };
