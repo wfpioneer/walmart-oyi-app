@@ -139,7 +139,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "completedTs": undefined,
           "completedUserId": undefined,
           "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
-          "itemNbr": 1234567890,
+          "itemNbr": 123,
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
@@ -282,6 +282,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     Object {
                       "flexDirection": "column",
                       "flexShrink": 1,
+                      "justifyContent": "space-around",
                       "padding": 5,
                     }
                   }
@@ -298,7 +299,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                         }
                       }
                     >
-                      [missing "en.GENERICS.ITEM" translation] 1234567890
+                      [missing "en.GENERICS.ITEM" translation] 123
                     </Text>
                   </View>
                   <View>
@@ -313,20 +314,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       }
                     >
                       Nature Valley Sweet And Salty Nuts Granola Bars
-                    </Text>
-                  </View>
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "color": "#616161",
-                          "flexShrink": 1,
-                          "flexWrap": "wrap",
-                          "fontSize": 12,
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.ON_HANDS" translation] 11
                     </Text>
                   </View>
                 </View>
@@ -414,6 +401,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     Object {
                       "flexDirection": "column",
                       "flexShrink": 1,
+                      "justifyContent": "space-around",
                       "padding": 5,
                     }
                   }
@@ -447,20 +435,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       Nature Valley Sweet And Salty Nuts Granola Bars
                     </Text>
                   </View>
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "color": "#616161",
-                          "flexShrink": 1,
-                          "flexWrap": "wrap",
-                          "fontSize": 12,
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.ON_HANDS" translation] 11
-                    </Text>
-                  </View>
                 </View>
               </View>
             </View>
@@ -546,6 +520,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     Object {
                       "flexDirection": "column",
                       "flexShrink": 1,
+                      "justifyContent": "space-around",
                       "padding": 5,
                     }
                   }
@@ -579,20 +554,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       ELECTRONIC ITEM
                     </Text>
                   </View>
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "color": "#616161",
-                          "flexShrink": 1,
-                          "flexWrap": "wrap",
-                          "fontSize": 12,
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.ON_HANDS" translation] 11
-                    </Text>
-                  </View>
                 </View>
               </View>
             </View>
@@ -678,6 +639,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     Object {
                       "flexDirection": "column",
                       "flexShrink": 1,
+                      "justifyContent": "space-around",
                       "padding": 5,
                     }
                   }
@@ -709,20 +671,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       }
                     >
                       BAKERY ITEM
-                    </Text>
-                  </View>
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "color": "#616161",
-                          "flexShrink": 1,
-                          "flexWrap": "wrap",
-                          "fontSize": 12,
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.ON_HANDS" translation] 11
                     </Text>
                   </View>
                 </View>
