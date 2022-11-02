@@ -124,7 +124,7 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
     FLY_CLOUD_QTY: 'Fly Cloud',
-    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud Qty',
+    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud',
     ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
     ITEM_NUMBER: 'Item Number',
     OH_CHANGE_HISTORY: 'On Hands Change History',

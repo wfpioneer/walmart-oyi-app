@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontWeight: '500',
     paddingLeft: 10
+  },
+  contentList: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
   }
 });
 
