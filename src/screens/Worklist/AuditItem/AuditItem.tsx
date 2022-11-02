@@ -146,6 +146,7 @@ export interface AuditItemScreenProps {
   showCalcModalState: UseStateType<boolean>;
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   calcResultState: UseStateType<number>;
+  countryCode: string;
 }
 
 export const isError = (
@@ -902,7 +903,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     getItemPalletsError,
     showCalcModalState,
     calcResultState,
-    locationListState
+    locationListState,
+    countryCode
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1302,6 +1304,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               consolidatorOH={itemDetails?.consolidatedOnHandQty || 0}
               loading={getItemDetailsApi.isWaiting}
               collapsed={false}
+              countryCode={countryCode}
             />
           </View>
         </View>
@@ -1373,6 +1376,7 @@ const AuditItem = (): JSX.Element => {
   });
   // Must be set to -1 to perform validation check
   const calcResultState = useState(-1);
+  const countryCode = useTypedSelector(state => state.User.countryCode);
   return (
     <AuditItemScreen
       scannedEvent={scannedEvent}
@@ -1416,6 +1420,7 @@ const AuditItem = (): JSX.Element => {
       calcResultState={calcResultState}
       // @ts-expect-error typechecking error with location type
       locationListState={locationListState}
+      countryCode={countryCode}
     />
   );
 };
