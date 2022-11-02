@@ -228,7 +228,8 @@ export default {
     UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
     CREATE_PALLET: 'Create Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet created successfully',
-    CREATE_PALLET_FAILED: 'Failed to create pallet'
+    CREATE_PALLET_FAILED: 'Failed to create pallet',
+    DELETE_ONCE_MERGED: 'Pallet ID %{palletId} will be deleted once merged'
   },
   LOCATION: {
     TITLE: 'All locations',
