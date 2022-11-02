@@ -34,5 +34,6 @@ export const mockConfig: Configurations = {
   showRollOverAudit: false,
   showOpenAuditLink: false,
   scanRequired: false,
-  showCalculator: false
+  showCalculator: false,
+  showItemImages: false
 };
