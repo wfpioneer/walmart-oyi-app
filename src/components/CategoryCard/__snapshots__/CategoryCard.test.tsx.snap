@@ -139,7 +139,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "completedTs": undefined,
           "completedUserId": undefined,
           "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
-          "itemNbr": 123,
+          "itemNbr": 1234567890,
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
@@ -299,7 +299,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                         }
                       }
                     >
-                      [missing "en.GENERICS.ITEM" translation] 123
+                      [missing "en.GENERICS.ITEM" translation] 1234567890
                     </Text>
                   </View>
                   <View>
