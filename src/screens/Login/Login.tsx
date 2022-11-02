@@ -137,7 +137,7 @@ export const signInUser = (dispatch: Dispatch<any>): void => {
     dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
     trackEvent('user_sign_in');
     if (user.siteId && user.countryCode !== 'US') {
-      dispatch(getFluffyFeatures(user));
+      dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
     }
   });
 };
