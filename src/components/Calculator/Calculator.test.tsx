@@ -233,4 +233,16 @@ describe('Test Calculator component', () => {
     pressButtonAndRerender(six, rerender);
     expect(toJSON()).toMatchSnapshot('cannot have double operand');
   });
+
+  it('renders the calculator modal component with the negative validation error enabled', () => {
+    const { getByTestId, rerender, toJSON } = render(<Calculator showNegValidation={true} />);
+    const subtract = getByTestId('subtract');
+    const one = getByTestId('one');
+    fireEvent.press(subtract);
+    rerender(<Calculator showNegValidation={true} />);
+
+    fireEvent.press(one);
+    rerender(<Calculator showNegValidation={true} />);
+    expect(toJSON()).toMatchSnapshot();
+  });
 });

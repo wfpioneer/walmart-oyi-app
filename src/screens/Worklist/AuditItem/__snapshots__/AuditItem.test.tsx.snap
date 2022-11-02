@@ -558,6 +558,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -868,6 +870,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1140,6 +1144,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
 Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
@@ -1762,6 +1773,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1943,6 +1956,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1989,6 +2004,49 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         />
       </View>
     </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <Calculator
+      onEquals={[Function]}
+      showNegValidation={true}
+    />
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+          "paddingTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        testID="modal-close-button"
+        title="[missing \\"en.GENERICS.CLOSE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
   </CustomModalComponent>
   <View
     style={
@@ -2180,6 +2238,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2369,6 +2429,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2415,6 +2477,49 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         />
       </View>
     </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <Calculator
+      onEquals={[Function]}
+      showNegValidation={true}
+    />
+    <View
+      style={
+        Object {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+          "paddingTop": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 10,
+          }
+        }
+        testID="modal-close-button"
+        title="[missing \\"en.GENERICS.CLOSE\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
   </CustomModalComponent>
   <View
     style={
