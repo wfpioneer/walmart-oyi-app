@@ -86,7 +86,6 @@ import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate
 import Button from '../../../components/buttons/Button';
 import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
-import Calculator from '../../../components/Calculator/Calculator';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 
 export interface AuditItemScreenProps {
@@ -146,7 +145,6 @@ export interface AuditItemScreenProps {
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
   showCalcModalState: UseStateType<boolean>;
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
-  calcResultState: UseStateType<number>;
   countryCode: string;
 }
 
@@ -880,7 +878,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     setGetItemPalletsError,
     getItemPalletsError,
     showCalcModalState,
-    calcResultState,
     locationListState,
     countryCode
   } = props;
@@ -888,7 +885,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
   const [showCalcModal, setShowCalcModal] = showCalcModalState;
-  const [calcResult, setCalcResult] = calcResultState;
   const [location, setLocation] = locationListState;
 
   const totalOHQty = calculateTotalOHQty(
@@ -1355,8 +1351,7 @@ const AuditItem = (): JSX.Element => {
     locationType: 'floor',
     palletId: '-1'
   });
-  // Must be set to -1 to perform validation check
-  const calcResultState = useState(-1);
+
   const countryCode = useTypedSelector(state => state.User.countryCode);
   return (
     <AuditItemScreen
@@ -1398,7 +1393,6 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
       showCalcModalState={showCalcModalState}
-      calcResultState={calcResultState}
       // @ts-expect-error typechecking error with location type
       locationListState={locationListState}
       countryCode={countryCode}

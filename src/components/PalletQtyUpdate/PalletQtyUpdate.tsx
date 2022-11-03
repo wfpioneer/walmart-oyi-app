@@ -61,7 +61,7 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
   } = props;
 
   const [newQty, setNewQty] = React.useState(qty || 0);
-  const [calcOpen, setCaclOpen] = React.useState(false);
+  const [calcOpen, setCalcOpen] = React.useState(false);
 
   const handleTextChange = (text: string) => {
     const newQtyVal: number = parseInt(text, 10);
@@ -88,7 +88,7 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
     <>
       <CalculatorModal
         visible={calcOpen}
-        onClose={() => setCaclOpen(false)}
+        onClose={() => setCalcOpen(false)}
         onAccept={onCalcAccept}
         showAcceptButtonOn={(value: string): boolean => {
           const calcVal = parseInt(value, 10);
@@ -111,7 +111,7 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
             minValue={MIN_QTY}
             maxValue={MAX_QTY}
             value={newQty}
-            onInputPress={() => setCaclOpen(true)}
+            onInputPress={() => setCalcOpen(true)}
           />
         )
         : (
