@@ -86,7 +86,7 @@ import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate
 import Button from '../../../components/buttons/Button';
 import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
-import Calculator from '../../../components/Calculator/Calculator';
+import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -145,7 +145,6 @@ export interface AuditItemScreenProps {
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
   showCalcModalState: UseStateType<boolean>;
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
-  calcResultState: UseStateType<number>;
   countryCode: string;
 }
 
@@ -506,13 +505,15 @@ export const renderpalletQtyUpdateModal = (
   dispatch: Dispatch<any>,
   showPalletQtyUpdateModal: boolean,
   setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>,
-  vendorPackQty?: number
+  showCalculator: boolean,
+  vendorPackQty?: number,
 ) => {
   const palletInfo = reserveLocations.find(
     pallet => pallet.palletId === scannedPalletId
   );
   const qty = palletInfo?.quantity === vendorPackQty ? palletInfo?.quantity : 0;
   const newPalletQty = palletInfo?.newQty;
+
   return (
     <CustomModalComponent
       isVisible={showPalletQtyUpdateModal}
@@ -529,6 +530,7 @@ export const renderpalletQtyUpdateModal = (
           dispatch(updatePalletQty(scannedPalletId, newQty, true));
           setShowPalletQtyUpdateModal(false);
         }}
+        showCalculator={showCalculator}
       />
     </CustomModalComponent>
   );
@@ -805,54 +807,28 @@ export const renderCalculatorModal = (
   locationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>,
   showCalcModal: boolean,
   setShowCalcModal: React.Dispatch<React.SetStateAction<boolean>>,
-  calcQtyResult: number,
-  setCalcQtyResult: React.Dispatch<React.SetStateAction<number>>,
   dispatch: Dispatch<any>
 ) => {
   const { locationName, locationType, palletId } = locationListItem;
   return (
-    <CustomModalComponent
-      isVisible={showCalcModal}
-      modalType="Form"
+    <CalculatorModal
+      visible={showCalcModal}
+      showAcceptButtonOn={(value: string): boolean => {
+        const calcVal = parseInt(value, 10);
+        if (calcVal && calcVal >= 0) return true;
+        return false;
+      }}
       onClose={() => setShowCalcModal(false)}
-    >
-      <Calculator
-        onEquals={result => {
-          setCalcQtyResult(result);
-        }}
-        showNegValidation={true}
-      />
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
-          title={strings('GENERICS.CLOSE')}
-          backgroundColor={COLOR.MAIN_THEME_COLOR}
-          onPress={() => {
-            setShowCalcModal(false);
-            setCalcQtyResult(-1);
-          }}
-          testID="modal-close-button"
-        />
-        {calcQtyResult >= 0 && (
-        <Button
-          style={styles.button}
-          title={strings('PICKING.ACCEPT')}
-          backgroundColor={COLOR.MAIN_THEME_COLOR}
-          onPress={() => {
-            if (locationName !== '') {
-              if (locationType === 'floor') {
-                dispatch(updateFloorLocationQty(locationName, calcQtyResult));
-              } else {
-                dispatch(updatePalletQty(palletId, calcQtyResult, false));
-              }
-              setCalcQtyResult(-1);
-            }
-          }}
-          testID="modal-accept-button"
-        />
-        )}
-      </View>
-    </CustomModalComponent>
+      onAccept={(value: string) => {
+        if (locationName !== '') {
+          if (locationType === 'floor') {
+            dispatch(updateFloorLocationQty(locationName, parseInt(value, 10)));
+          } else {
+            dispatch(updatePalletQty(palletId, parseInt(value, 10), false));
+          }
+        }
+      }}
+    />
   );
 };
 export const disabledContinue = (
@@ -902,7 +878,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     setGetItemPalletsError,
     getItemPalletsError,
     showCalcModalState,
-    calcResultState,
     locationListState,
     countryCode
   } = props;
@@ -910,7 +885,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
   const [showCalcModal, setShowCalcModal] = showCalcModalState;
-  const [calcResult, setCalcResult] = calcResultState;
   const [location, setLocation] = locationListState;
 
   const totalOHQty = calculateTotalOHQty(
@@ -1232,6 +1206,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         dispatch,
         showPalletQtyUpdateModal,
         setShowPalletQtyUpdateModal,
+        userConfig.showCalculator,
         itemDetails?.vendorPackQty
       )}
       {renderDeleteLocationModal(
@@ -1252,7 +1227,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         itemDetails,
         dispatch
       )}
-      {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, calcResult, setCalcResult, dispatch))}
+      {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
       )}
@@ -1284,6 +1259,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               error={!!(getItemDetailsApi.error || getLocationApi.error)}
               onRetry={() => {}}
               scanRequired={userConfig.scanRequired}
+              showCalculator={userConfig.showCalculator}
             />
           </View>
           <View style={styles.marginBottomStyle}>
@@ -1294,6 +1270,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               error={getItemPalletsError}
               scanRequired={userConfig.scanRequired}
               onRetry={handleReserveLocsRetry}
+              showCalculator={userConfig.showCalculator}
             />
           </View>
           <View>
@@ -1374,8 +1351,7 @@ const AuditItem = (): JSX.Element => {
     locationType: 'floor',
     palletId: '-1'
   });
-  // Must be set to -1 to perform validation check
-  const calcResultState = useState(-1);
+
   const countryCode = useTypedSelector(state => state.User.countryCode);
   return (
     <AuditItemScreen
@@ -1417,7 +1393,6 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
       showCalcModalState={showCalcModalState}
-      calcResultState={calcResultState}
       // @ts-expect-error typechecking error with location type
       locationListState={locationListState}
       countryCode={countryCode}
