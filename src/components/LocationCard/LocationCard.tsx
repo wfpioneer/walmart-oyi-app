@@ -7,6 +7,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
 import NumericSelector from '../NumericSelector/NumericSelector';
+import CustomNumericSelector from '../NumericSelector/CustomNumericSelector';
 import styles from './LocationCard.style';
 import COLOR from '../../themes/Color';
 
@@ -18,10 +19,12 @@ interface LocationCardProp {
     onQtyIncrement(): void;
     onQtyDecrement(): void;
     onTextChange(text: string): void;
+    onInputPress(): void;
     onLocationDelete(): void;
     onEndEditing?: () => void;
     scannerEnabled: boolean;
     scanned?: boolean;
+    showCalculator: boolean;
   }
 
 export const getContentStyle = (
@@ -46,11 +49,13 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
     locationType,
     onQtyIncrement,
     onQtyDecrement,
-    onTextChange,
     onLocationDelete,
+    onTextChange,
     onEndEditing,
     scannerEnabled,
-    scanned
+    scanned,
+    onInputPress,
+    showCalculator
   } = props;
 
   const MIN = locationType === 'floor' ? 1 : 0;
@@ -73,16 +78,30 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
       </View>
       <View style={styles.actionContainer}>
         <View>
-          <NumericSelector
-            onDecreaseQty={onQtyDecrement}
-            onIncreaseQty={onQtyIncrement}
-            onTextChange={onTextChange}
-            minValue={MIN}
-            maxValue={MAX}
-            value={quantity}
-            isValid={validateQty(quantity, MIN, MAX)}
-            onEndEditing={onEndEditing}
-          />
+          {showCalculator
+            ? (
+              <CustomNumericSelector
+                onDecreaseQty={onQtyDecrement}
+                onIncreaseQty={onQtyIncrement}
+                minValue={MIN}
+                maxValue={MAX}
+                value={quantity}
+                isValid={validateQty(quantity, MIN, MAX)}
+                onInputPress={onInputPress}
+              />
+            )
+            : (
+              <NumericSelector
+                onDecreaseQty={onQtyDecrement}
+                onIncreaseQty={onQtyIncrement}
+                onTextChange={onTextChange}
+                minValue={MIN}
+                maxValue={MAX}
+                value={quantity}
+                isValid={validateQty(quantity, MIN, MAX)}
+                onEndEditing={onEndEditing}
+              />
+            )}
         </View>
         <View>
           <TouchableOpacity onPress={() => { onLocationDelete(); }}>

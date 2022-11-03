@@ -2,6 +2,13 @@
 
 exports[`testing PalletQtyUpdate component render component and test buttons render component with invalid new qty 1`] = `
 Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <View>
     <Text
       style={
@@ -311,6 +318,13 @@ Array [
 
 exports[`testing PalletQtyUpdate component render component and test buttons render component with same onhands and new qty 1`] = `
 Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <View>
     <Text
       style={

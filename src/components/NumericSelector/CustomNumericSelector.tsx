@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from './NumericSelector.style';
 import COLOR from '../../themes/Color';
 import IconButton, { IconButtonType } from '../buttons/IconButton';
