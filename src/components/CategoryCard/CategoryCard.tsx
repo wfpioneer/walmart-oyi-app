@@ -63,7 +63,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             {category}
           </Text>
           <Text>
-            {`${listOfItems.length} ${strings('AUDITS.ITEMS')}`}
+            {`${listOfItems.length} ${strings('AUDITS.CUSTOM_ITEMS')}`}
           </Text>
         </View>
         <TouchableOpacity

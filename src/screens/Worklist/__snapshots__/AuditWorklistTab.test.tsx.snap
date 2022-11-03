@@ -152,7 +152,7 @@ Array [
                 88 - FRESH BAKERY
               </Text>
               <Text>
-                1 [missing "en.AUDITS.ITEMS" translation]
+                1 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
               </Text>
             </View>
             <View
@@ -387,7 +387,7 @@ Array [
                 93 - FOODSERVICE
               </Text>
               <Text>
-                2 [missing "en.AUDITS.ITEMS" translation]
+                2 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
               </Text>
             </View>
             <View
@@ -767,7 +767,7 @@ Array [
                 99 - ELECTRONICS
               </Text>
               <Text>
-                1 [missing "en.AUDITS.ITEMS" translation]
+                1 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
               </Text>
             </View>
             <View
@@ -1085,7 +1085,7 @@ Array [
                 88 - FRESH BAKERY
               </Text>
               <Text>
-                1 [missing "en.AUDITS.ITEMS" translation]
+                1 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
               </Text>
             </View>
             <View
@@ -1153,7 +1153,7 @@ Array [
                 93 - FOODSERVICE
               </Text>
               <Text>
-                2 [missing "en.AUDITS.ITEMS" translation]
+                2 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
               </Text>
             </View>
             <View
@@ -1221,7 +1221,7 @@ Array [
                 99 - ELECTRONICS
               </Text>
               <Text>
-                1 [missing "en.AUDITS.ITEMS" translation]
+                1 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
               </Text>
             </View>
             <View
