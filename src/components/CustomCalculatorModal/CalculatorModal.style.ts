@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     paddingHorizontal: 10
+  },
+  containerPadding: {
+    paddingTop: 10
   }
 });
 
