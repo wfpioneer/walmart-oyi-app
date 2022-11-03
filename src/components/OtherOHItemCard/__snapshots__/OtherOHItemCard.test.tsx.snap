@@ -254,50 +254,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
           }
         }
       >
-        <View>
-          <Text
-            style={
-              Object {
-                "padding": 8,
-                "textAlign": "right",
-              }
-            }
-          >
-            [missing "en.ITEM.CLAIMS_QTY" translation]  5
-          </Text>
-          <Text
-            style={
-              Object {
-                "padding": 8,
-                "textAlign": "right",
-              }
-            }
-          >
-            [missing "en.ITEM.FLY_CLOUD_QTY" translation]  3
-          </Text>
-        </View>
-        <View>
-          <Text
-            style={
-              Object {
-                "padding": 8,
-                "textAlign": "right",
-              }
-            }
-          >
-            [missing "en.ITEM.CONSOLIDATED_QTY" translation]  2
-          </Text>
-          <Text
-            style={
-              Object {
-                "padding": 8,
-                "textAlign": "right",
-              }
-            }
-          >
-            [missing "en.ITEM.IN_TRANSIT_FLY_QTY" translation]  5
-          </Text>
-        </View>
+        <View />
       </View>
     </View>
   </View>
