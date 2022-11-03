@@ -31,7 +31,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
         }
       }
     >
-      20 [missing "en.GENERICS.ITEMS" translation]
+      20 [missing "en.AUDITS.ITEMS" translation]
     </Text>
   </View>
   <View
@@ -138,7 +138,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
         }
       }
     >
-      20 [missing "en.GENERICS.ITEMS" translation]
+      20 [missing "en.AUDITS.ITEMS" translation]
     </Text>
   </View>
   <View

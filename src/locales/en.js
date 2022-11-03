@@ -521,6 +521,7 @@ export default {
     OPEN_AUDIT_LABEL: 'Open Audit',
     INVALID_EQUATION: 'Invalid formula, please check the operation',
     NO_PALLETS_FOUND_FOR_ITEM: 'No Pallets found for the item',
-    NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater'
+    NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
+    ITEMS: 'Items'
   }
 };
