@@ -519,6 +519,8 @@ export default {
     OPEN_AUDIT_LABEL: 'Abrir Auditoría',
     INVALID_EQUATION: 'Fórmula invalida, por favor verifica la operación',
     NO_PALLETS_FOUND_FOR_ITEM: 'No hay pallets encontrados para este artículo',
-    NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor'
+    NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor',
+    ITEMS: 'Artículos',
+    CUSTOM_ITEMS: 'Artículos'
   }
 };
