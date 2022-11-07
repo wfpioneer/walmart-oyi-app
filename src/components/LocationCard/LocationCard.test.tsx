@@ -19,6 +19,27 @@ describe('LocationCard', () => {
         scanned={false}
         quantity={12}
         onLocationDelete={jest.fn}
+        onInputPress={jest.fn}
+        showCalculator={false}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('LocationCard with valid input and show calculator as true', () => {
+      renderer.render(<LocationCard
+        location="A1-1"
+        locationType="floor"
+        onQtyIncrement={jest.fn}
+        onEndEditing={jest.fn}
+        onTextChange={jest.fn}
+        onQtyDecrement={jest.fn}
+        palletId={1234}
+        scannerEnabled={false}
+        scanned={false}
+        quantity={12}
+        onLocationDelete={jest.fn}
+        onInputPress={jest.fn}
+        showCalculator={true}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -36,6 +57,8 @@ describe('LocationCard', () => {
         scanned={false}
         quantity={12}
         onLocationDelete={jest.fn}
+        onInputPress={jest.fn}
+        showCalculator={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -53,6 +76,8 @@ describe('LocationCard', () => {
         scanned={false}
         quantity={12}
         onLocationDelete={jest.fn}
+        onInputPress={jest.fn}
+        showCalculator={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -70,6 +95,8 @@ describe('LocationCard', () => {
         scanned={true}
         quantity={12}
         onLocationDelete={jest.fn}
+        onInputPress={jest.fn}
+        showCalculator={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

@@ -42,12 +42,14 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: COLOR.RED_700
+    color: COLOR.RED_700,
+    paddingHorizontal: 10
   },
   highlightedErrorText: {
     fontSize: 16,
     color: COLOR.WHITE,
-    backgroundColor: COLOR.RED
+    backgroundColor: COLOR.RED,
+    paddingHorizontal: 10
   }
 });
 

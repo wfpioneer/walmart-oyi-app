@@ -149,6 +149,25 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   >
     $14.00
   </Text>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "marginVertical": 10,
+      }
+    }
+    testID="print-price-sign"
+    title="[missing \\"en.PRINT.PRICE_SIGN\\" translation]"
+    titleColor="#0071e9"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={2}
+    width={-1}
+  />
 </View>
 `;
 
@@ -248,6 +267,177 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   >
     [missing "en.ITEM.CATEGORY" translation]: 17-test
   </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "marginBottom": 6,
+        "marginTop": 16,
+      }
+    }
+  >
+    $14.00
+  </Text>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={45}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "marginVertical": 10,
+      }
+    }
+    testID="print-price-sign"
+    title="[missing \\"en.PRINT.PRICE_SIGN\\" translation]"
+    titleColor="#0071e9"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={2}
+    width={-1}
+  />
+</View>
+`;
+
+exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info component without print print price sign button enabled 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "padding": 8,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#d938ab",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "marginBottom": 4,
+        "marginTop": 16,
+      }
+    }
+  >
+    [missing "en.EXCEPTION.NSFL" translation]
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginVertical": 4,
+      }
+    }
+  >
+    Test item
+  </Text>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 4,
+        "marginTop": 4,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.ITEM.ITEM" translation] 10359
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+          "marginHorizontal": 8,
+        }
+      }
+    >
+      |
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+        }
+      }
+    >
+      [missing "en.ITEM.UPC" translation] 286201035990
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 12,
+        "marginBottom": 4,
+      }
+    }
+  >
+    [missing "en.ITEM.STATUS" translation]: Active
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#616161",
+        "fontSize": 12,
+        "marginBottom": 4,
+      }
+    }
+  >
+    [missing "en.ITEM.CATEGORY" translation]: 17-test
+  </Text>
+  <CollapsibleCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
+    titleStyle={Object {}}
+  >
+    <View
+      testID="additional-item-details"
+    >
+      <ItemDetailsList
+        indentAfterFirstRow={false}
+        rows={
+          Array [
+            Object {
+              "label": "[missing \\"en.ITEM.VENDOR_PACK\\" translation]",
+              "value": 33,
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.COLOR\\" translation]",
+              "value": "red",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.SIZE\\" translation]",
+              "value": 88,
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.PRICE_BEFORE_TAX\\" translation]",
+              "value": "$15.05",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.MARGIN\\" translation]",
+              "value": "14.00%",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.GROSS_PROFIT\\" translation]",
+              "value": "$2.50",
+            },
+          ]
+        }
+      />
+    </View>
+  </CollapsibleCard>
   <Text
     style={
       Object {

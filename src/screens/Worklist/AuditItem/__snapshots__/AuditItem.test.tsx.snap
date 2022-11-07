@@ -36,6 +36,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         ]
       }
     >
+      <Modal
+        animationType="none"
+        hardwareAccelerated={false}
+        onRequestClose={[Function]}
+        transparent={true}
+        visible={false}
+      />
       <View>
         <Text
           style={
@@ -558,6 +565,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -868,6 +877,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1140,6 +1151,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
 Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <Modal
     animationType="none"
     hardwareAccelerated={false}
@@ -1556,50 +1574,7 @@ Array [
                     }
                   }
                 >
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.CLAIMS_QTY" translation]  0
-                    </Text>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.FLY_CLOUD_QTY" translation]  0
-                    </Text>
-                  </View>
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.CONSOLIDATED_QTY" translation]  0
-                    </Text>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.IN_TRANSIT_FLY_QTY" translation]  0
-                    </Text>
-                  </View>
+                  <View />
                 </View>
               </View>
             </View>
@@ -1647,7 +1622,7 @@ Array [
             }
           }
         >
-          0 [missing "en.GENERICS.ITEMS" translation]
+          0 [missing "en.AUDITS.ITEMS" translation]
         </Text>
       </View>
       <View
@@ -1738,6 +1713,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       handleSubmit={[Function]}
       palletId={4928}
       qty={0}
+      showCalculator={false}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -1762,6 +1738,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1943,6 +1921,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1990,6 +1970,12 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
     </React.Fragment>
   </CustomModalComponent>
+  <CalculatorModal
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButtonOn={[Function]}
+    visible={false}
+  />
   <View
     style={
       Object {
@@ -2043,6 +2029,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           locationType="floor"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View
@@ -2059,6 +2046,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           locationType="reserve"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View>
@@ -2156,6 +2144,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       handleSubmit={[Function]}
       palletId={4928}
       qty={0}
+      showCalculator={false}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -2180,6 +2169,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2369,6 +2360,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2416,6 +2409,12 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
     </React.Fragment>
   </CustomModalComponent>
+  <CalculatorModal
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButtonOn={[Function]}
+    visible={false}
+  />
   <View
     style={
       Object {
@@ -2469,6 +2468,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationType="floor"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View
@@ -2485,6 +2485,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationType="reserve"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View>

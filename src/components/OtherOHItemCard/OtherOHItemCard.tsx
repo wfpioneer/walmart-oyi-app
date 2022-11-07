@@ -14,13 +14,46 @@ export type OtherOHItemCardProps = {
     flyCloudInTransitOH: number;
     collapsed: boolean;
     loading: boolean;
+    countryCode?: string;
 };
 
 const OtherOHItemCard = (props: OtherOHItemCardProps): JSX.Element => {
   const {
-    claimsOH, consolidatorOH, flyCloudInTransitOH, flyCloudOH, collapsed, loading
+    claimsOH, consolidatorOH, flyCloudInTransitOH, flyCloudOH, collapsed, loading, countryCode
   } = props;
   const totalOtherOHItems = claimsOH + consolidatorOH + flyCloudInTransitOH + flyCloudOH;
+
+  const ClaimsText = () => (
+    <Text style={styles.content}>
+      {`${strings(
+        'ITEM.CLAIMS_QTY'
+      )}  ${claimsOH}`}
+    </Text>
+  );
+
+  const ConsolidatedText = () => (
+    <Text style={styles.content}>
+      {`${strings(
+        'ITEM.CONSOLIDATED_QTY'
+      )}  ${consolidatorOH}`}
+    </Text>
+  );
+
+  const FlyCloudText = () => (
+    <Text style={styles.content}>
+      {`${strings(
+        'ITEM.FLY_CLOUD_QTY'
+      )}  ${flyCloudOH}`}
+    </Text>
+  );
+
+  const InTransitOHText = () => (
+    <Text style={styles.content}>
+      {`${strings(
+        'ITEM.IN_TRANSIT_FLY_QTY'
+      )}  ${flyCloudInTransitOH}`}
+    </Text>
+  );
 
   return (
     <View>
@@ -31,7 +64,12 @@ const OtherOHItemCard = (props: OtherOHItemCardProps): JSX.Element => {
           title={strings('AUDITS.OTHER_ON_HANDS')}
         >
           <View style={styles.loader} testID="loader">
-            <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
+            <ActivityIndicator
+              size={30}
+              color={
+                Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined
+              }
+            />
           </View>
         </CollapsibleCard>
       ) : (
@@ -42,12 +80,23 @@ const OtherOHItemCard = (props: OtherOHItemCardProps): JSX.Element => {
         >
           <View style={styles.otherOHDetails}>
             <View>
-              <Text style={styles.content}>{`${strings('ITEM.CLAIMS_QTY')}  ${claimsOH}`}</Text>
-              <Text style={styles.content}>{`${strings('ITEM.FLY_CLOUD_QTY')}  ${flyCloudOH}`}</Text>
-            </View>
-            <View>
-              <Text style={styles.content}>{`${strings('ITEM.CONSOLIDATED_QTY')}  ${consolidatorOH}`}</Text>
-              <Text style={styles.content}>{`${strings('ITEM.IN_TRANSIT_FLY_QTY')}  ${flyCloudInTransitOH}`}</Text>
+              {countryCode === 'MX' && (
+                <View style={styles.contentList}>
+                  <ClaimsText />
+                  <ConsolidatedText />
+                </View>
+              )}
+              {countryCode === 'CN' && (
+                <>
+                  <View style={styles.contentList}>
+                    <ClaimsText />
+                    <FlyCloudText />
+                  </View>
+                  <View style={styles.contentList}>
+                    <InTransitOHText />
+                  </View>
+                </>
+              )}
             </View>
           </View>
         </CollapsibleCard>
