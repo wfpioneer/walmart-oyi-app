@@ -1,18 +1,15 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { groupBy, partition } from 'lodash';
+import { partition } from 'lodash';
 import React, { useState } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import {
-  ActivityIndicator, FlatList, Text, TouchableOpacity, View
+  FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { AxiosError } from 'axios';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
-import CategoryCard from '../../components/CategoryCard/CategoryCard';
-import AuditItemCard from '../../components/ItemCard';
 import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
@@ -40,8 +37,6 @@ export interface AuditWorklistTabScreenProps {
     navigation: NavigationProp<any>;
     dispatch: Dispatch<any>;
     toDo: boolean;
-    collapsed: boolean;
-    setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
     refreshing: boolean;
     error: AxiosError | null;
     areas: area[];
@@ -177,7 +172,7 @@ export const renderFilterPills = (
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, collapsed, setCollapsed, refreshing, dispatch, navigation, error,
+    items, refreshing, dispatch, navigation, error,
     areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh
   } = props;
 
@@ -250,8 +245,6 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
     });
   }
 
-  const itemsBasedOnCategory = groupBy(filteredData, item => `${item.catgNbr} - ${item.catgName}`);
-  const sortedItemKeys = Object.keys(itemsBasedOnCategory).sort((a, b) => (a > b ? 1 : -1));
   return (
     <>
       { (filterCategories.length > 0 || (filterExceptions.length > 0)) && (
@@ -267,7 +260,6 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         />
       </View>
       ) }
-      {/*{sortedItemKeys.length > 0 && <CollapseAllBar collapsed={collapsed} onclick={() => setCollapsed(!collapsed)} />}*/}
       <FlatList
         data={convertDataToDisplayList(filteredData, true)}
         renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
@@ -289,7 +281,6 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const { toDo, onRefresh } = props;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [collapsed, setCollapsed] = useState(false);
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
   const items = toDo ? toDoItems : completedItems;
@@ -303,8 +294,6 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       dispatch={dispatch}
       navigation={navigation}
       toDo={toDo}
-      collapsed={collapsed}
-      setCollapsed={setCollapsed}
       refreshing={isWaiting}
       error={error}
       areas={areas}
