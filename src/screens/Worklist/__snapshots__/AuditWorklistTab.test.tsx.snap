@@ -301,6 +301,7 @@ Array [
                           Object {
                             "flexDirection": "column",
                             "flexShrink": 1,
+                            "justifyContent": "space-around",
                             "padding": 5,
                           }
                         }
@@ -332,20 +333,6 @@ Array [
                             }
                           >
                             BAKERY ITEM
-                          </Text>
-                        </View>
-                        <View>
-                          <Text
-                            style={
-                              Object {
-                                "color": "#616161",
-                                "flexShrink": 1,
-                                "flexWrap": "wrap",
-                                "fontSize": 12,
-                              }
-                            }
-                          >
-                            [missing "en.ITEM.ON_HANDS" translation] 11
                           </Text>
                         </View>
                       </View>
@@ -549,6 +536,7 @@ Array [
                           Object {
                             "flexDirection": "column",
                             "flexShrink": 1,
+                            "justifyContent": "space-around",
                             "padding": 5,
                           }
                         }
@@ -580,20 +568,6 @@ Array [
                             }
                           >
                             Nature Valley Sweet And Salty Nuts Granola Bars
-                          </Text>
-                        </View>
-                        <View>
-                          <Text
-                            style={
-                              Object {
-                                "color": "#616161",
-                                "flexShrink": 1,
-                                "flexWrap": "wrap",
-                                "fontSize": 12,
-                              }
-                            }
-                          >
-                            [missing "en.ITEM.ON_HANDS" translation] 11
                           </Text>
                         </View>
                       </View>
@@ -681,6 +655,7 @@ Array [
                           Object {
                             "flexDirection": "column",
                             "flexShrink": 1,
+                            "justifyContent": "space-around",
                             "padding": 5,
                           }
                         }
@@ -712,20 +687,6 @@ Array [
                             }
                           >
                             Nature Valley Sweet And Salty Nuts Granola Bars
-                          </Text>
-                        </View>
-                        <View>
-                          <Text
-                            style={
-                              Object {
-                                "color": "#616161",
-                                "flexShrink": 1,
-                                "flexWrap": "wrap",
-                                "fontSize": 12,
-                              }
-                            }
-                          >
-                            [missing "en.ITEM.ON_HANDS" translation] 11
                           </Text>
                         </View>
                       </View>
@@ -916,6 +877,7 @@ Array [
                           Object {
                             "flexDirection": "column",
                             "flexShrink": 1,
+                            "justifyContent": "space-around",
                             "padding": 5,
                           }
                         }
@@ -947,20 +909,6 @@ Array [
                             }
                           >
                             ELECTRONIC ITEM
-                          </Text>
-                        </View>
-                        <View>
-                          <Text
-                            style={
-                              Object {
-                                "color": "#616161",
-                                "flexShrink": 1,
-                                "flexWrap": "wrap",
-                                "fontSize": 12,
-                              }
-                            }
-                          >
-                            [missing "en.ITEM.ON_HANDS" translation] 11
                           </Text>
                         </View>
                       </View>

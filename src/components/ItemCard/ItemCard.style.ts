@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
   itemDetails: {
     padding: 5,
     flexDirection: 'column',
-    flexShrink: 1
+    flexShrink: 1,
+    justifyContent: 'space-around'
   },
   itemNbr: {
     fontSize: 12,
