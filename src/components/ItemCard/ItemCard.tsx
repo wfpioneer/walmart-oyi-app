@@ -9,7 +9,7 @@ import { strings } from '../../locales';
 interface ItemCardProps {
   imageUrl: { uri: string } | undefined,
   itemNumber: number,
-  onHandQty: number,
+  onHandQty: number | undefined,
   description: string,
   onClick: () => void,
   loading: boolean
@@ -45,9 +45,11 @@ const ItemCard = ({
         <View>
           <Text style={styles.itemDesc}>{description}</Text>
         </View>
-        <View>
-          <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty}`}</Text>
-        </View>
+        {onHandQty !== undefined && (
+          <View>
+            <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
+          </View>
+        )}
       </View>
       )}
     </TouchableOpacity>
