@@ -7,7 +7,6 @@ import { Platform, Text, View } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
-import _ from 'lodash';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
@@ -324,7 +323,6 @@ export const LoginScreen = (props: LoginScreenProps) => {
     </View>
   );
 };
-// TODO convert to Functional Component
 
 const Login = () => {
   const configUser = useTypedSelector(state => state.User);
