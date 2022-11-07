@@ -34,14 +34,6 @@ exports[`Custom Numeric selector component CustomNumericSelector minus button is
     width={35}
   />
   <TouchableOpacity
-    activeOpacity={0.2}
-    delayLongPress={600}
-    extraButtonProps={
-      Object {
-        "exclusive": true,
-        "rippleColor": "transparent",
-      }
-    }
     onPress={[MockFunction]}
     style={
       Object {
@@ -117,14 +109,6 @@ exports[`Custom Numeric selector component CustomNumericSelector plus button is 
     width={35}
   />
   <TouchableOpacity
-    activeOpacity={0.2}
-    delayLongPress={600}
-    extraButtonProps={
-      Object {
-        "exclusive": true,
-        "rippleColor": "transparent",
-      }
-    }
     onPress={[MockFunction]}
     style={
       Object {
@@ -200,14 +184,6 @@ exports[`Custom Numeric selector component CustomNumericSelector with invalid in
     width={35}
   />
   <TouchableOpacity
-    activeOpacity={0.2}
-    delayLongPress={600}
-    extraButtonProps={
-      Object {
-        "exclusive": true,
-        "rippleColor": "transparent",
-      }
-    }
     onPress={[MockFunction]}
     style={
       Object {
@@ -283,14 +259,6 @@ exports[`Custom Numeric selector component CustomNumericSelector with valid inpu
     width={35}
   />
   <TouchableOpacity
-    activeOpacity={0.2}
-    delayLongPress={600}
-    extraButtonProps={
-      Object {
-        "exclusive": true,
-        "rippleColor": "transparent",
-      }
-    }
     onPress={[MockFunction]}
     style={
       Object {

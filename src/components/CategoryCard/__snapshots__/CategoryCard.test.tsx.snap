@@ -27,7 +27,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         43 - FOODSERVICE
       </Text>
       <Text>
-        4 [missing "en.GENERICS.ITEMS" translation]
+        4 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
       </Text>
     </View>
     <View
@@ -93,7 +93,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         43 - FOODSERVICE
       </Text>
       <Text>
-        4 [missing "en.GENERICS.ITEMS" translation]
+        4 [missing "en.AUDITS.CUSTOM_ITEMS" translation]
       </Text>
     </View>
     <View

@@ -124,7 +124,7 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
     FLY_CLOUD_QTY: 'Fly Cloud',
-    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud Qty',
+    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud',
     ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
     ITEM_NUMBER: 'Item Number',
     OH_CHANGE_HISTORY: 'On Hands Change History',
@@ -521,6 +521,8 @@ export default {
     OPEN_AUDIT_LABEL: 'Open Audit',
     INVALID_EQUATION: 'Invalid formula, please check the operation',
     NO_PALLETS_FOUND_FOR_ITEM: 'No Pallets found for the item',
-    NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater'
+    NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
+    ITEMS: 'Items',
+    CUSTOM_ITEMS: 'Items'
   }
 };
