@@ -23,6 +23,7 @@ export interface ConfigResponse {
   showOpenAuditLink: boolean;
   scanRequired: boolean;
   showCalculator: boolean;
+  showItemImages: boolean
 }
 
 export default class ConfigService {
