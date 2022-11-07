@@ -12,6 +12,8 @@ import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
+import AuditItemCard from '../../components/ItemCard';
+import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
@@ -20,10 +22,17 @@ import { area } from '../../models/User';
 import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
+import ItemCard from "../../components/ItemCard/ItemCard";
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
     onRefresh: () => void;
+}
+
+interface ListItemProps {
+  item: WorklistItemI;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
 }
 
 export interface AuditWorklistTabScreenProps {
@@ -60,6 +69,81 @@ const renderCategoryCard = (
     }}
   />
 );
+
+export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
+  const { dispatch, item, navigation } = props;
+  if (item.worklistType === 'CATEGORY') {
+    const { catgName, itemCount } = item;
+    return (
+      <WorklistHeader title={catgName} numberOfItems={itemCount || 0} />
+    );
+  }
+  const {
+    itemName, itemNbr, imageURLKey
+  } = item;
+
+  return (
+    <ItemCard
+      imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
+      itemNumber={itemNbr}
+      description={itemName}
+      onItemCardClick={(itemNumber: number) => {
+        onItemClick(itemNumber, navigation, dispatch);
+      }}
+      loading={false}
+    />
+  );
+};
+
+export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boolean): WorklistItemI[] => {
+  if (!groupToggle) {
+    const workListItems = data || [];
+    return [{
+      worklistType: 'CATEGORY',
+      catgName: strings('WORKLIST.ALL'),
+      itemCount: workListItems.length
+    },
+      ...workListItems];
+  }
+
+  const sortedData = data;
+  // first, sort by category number
+  sortedData.sort((firstEl: WorklistItemI, secondEl: WorklistItemI) => {
+    if (firstEl.catgNbr && secondEl.catgNbr) {
+      return firstEl.catgNbr - secondEl.catgNbr;
+    }
+    return 0;
+  });
+
+  const returnData: WorklistItemI[] = [];
+
+  // next, insert into the array where the category numbers change
+  let previousItem: WorklistItemI;
+  let previousCategoryIndex: number;
+  sortedData.forEach(item => {
+    if (!previousItem || (previousItem.catgNbr !== item.catgNbr)) {
+      previousItem = item;
+      returnData.push({
+        worklistType: 'CATEGORY',
+        catgName: item.catgName || '',
+        catgNbr: item.catgNbr,
+        itemCount: 1
+      });
+      previousCategoryIndex = returnData.length - 1;
+      returnData.push(item);
+    } else {
+      previousItem = item;
+      if (returnData[previousCategoryIndex].itemCount) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        returnData[previousCategoryIndex].itemCount += 1;
+      }
+      returnData.push(item);
+    }
+  });
+
+  return returnData;
+};
 
 export const renderFilterPills = (
   listFilter: { type: string; value: string },
@@ -125,18 +209,6 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
     );
   }
 
-  if (refreshing) {
-    return (
-      <ActivityIndicator
-        animating={refreshing}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
   let filteredData: WorklistItemI[] = items || [];
 
   // removes missing WorkList categories from the config list Area categories
@@ -194,7 +266,6 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 
   const itemsBasedOnCategory = groupBy(filteredData, item => `${item.catgNbr} - ${item.catgName}`);
   const sortedItemKeys = Object.keys(itemsBasedOnCategory).sort((a, b) => (a > b ? 1 : -1));
-
   return (
     <>
       { (filterCategories.length > 0 || (filterExceptions.length > 0)) && (
@@ -210,15 +281,19 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         />
       </View>
       ) }
-      {sortedItemKeys.length > 0 && <CollapseAllBar collapsed={collapsed} onclick={() => setCollapsed(!collapsed)} />}
+      {/*{sortedItemKeys.length > 0 && <CollapseAllBar collapsed={collapsed} onclick={() => setCollapsed(!collapsed)} />}*/}
       <FlatList
-        data={sortedItemKeys}
-        renderItem={({ item: key }) => renderCategoryCard(
-          key, itemsBasedOnCategory[key], collapsed, navigation, dispatch
-        )}
-        keyExtractor={item => `category-${item}`}
+        data={convertDataToDisplayList(filteredData, true)}
+        renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
+        keyExtractor={(item: WorklistItemI, index: number) => {
+          if (item.worklistType === 'CATEGORY') {
+            return item.catgName.toString();
+          }
+          return item.itemNbr + index.toString();
+        }}
         onRefresh={onRefresh}
         refreshing={refreshing}
+        windowSize={3}
       />
     </>
   );
@@ -232,7 +307,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
   const items = toDo ? toDoItems : completedItems;
-  const { isWaiting, error } = useTypedSelector(state => state.async.getWorklist);
+  const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
   const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
 

@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import styles from './WorklistHome.style';
 import { strings } from '../../locales';
-import { clearFilter } from '../../state/actions/Worklist';
+import { clearFilter, setWorklistType } from '../../state/actions/Worklist';
 import { Configurations } from '../../models/User';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 
@@ -25,6 +25,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         title={strings('WORKLIST.ITEM_WORKLIST')}
         onPress={() => {
           dispatch(clearFilter());
+          dispatch(setWorklistType("ITEM"));
           navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
         }}
         style={styles.button}
@@ -46,6 +47,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
           title={strings('WORKLIST.AUDIT_WORKLIST')}
           onPress={() => {
             dispatch(clearFilter());
+            dispatch(setWorklistType('AUDIT'));
             navigation.navigate('AuditWorklistNavigator', { screen: 'AuditWorklistTabs' });
           }}
           type={ButtonType.PRIMARY}

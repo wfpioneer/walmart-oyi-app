@@ -583,16 +583,20 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
 export const FilterMenu = (): JSX.Element => {
   const dispatch = useDispatch();
   const workListApi = useTypedSelector(state => state.async.getWorklist);
+  const workListAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
   const {
     categoryOpen,
     filterCategories,
     exceptionOpen,
     filterExceptions,
-    areaOpen
+    areaOpen,
+    workListType
   } = useTypedSelector(state => state.Worklist) as WorklistState;
   const { areas, enableAreaFilter, showRollOverAudit } = useTypedSelector(state => state.User.configs);
-  const { result } = workListApi;
+  const result = workListType === "AUDIT" ? workListApi.results : workListAuditApi.results;
+  console.log('result ', result);
   const data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
+  console.log('data ', data);
   const categoryMap: FilteredCategory[] = getCategoryMap(
     data,
     filterCategories
