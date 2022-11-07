@@ -2,15 +2,18 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Button, { ButtonType } from '../buttons/Button';
 import NumericSelector from '../NumericSelector/NumericSelector';
+import CustomNumericSelector from '../NumericSelector/CustomNumericSelector';
 import { numbers, strings } from '../../locales';
 import styles from './PalletQtyUpdate.style';
 import COLOR from '../../themes/Color';
+import CalculatorModal from '../CustomCalculatorModal/CalculatorModal';
 
 interface palletQtyUpdateProps {
   palletId: number;
   qty: number;
   handleSubmit: (newQty: number) => void;
   handleClose(): void;
+  showCalculator: boolean;
 }
 
 const MIN_QTY = 0;
@@ -54,10 +57,11 @@ export const onQtyEditingEnd = (newQty: any, onHandsQty: number,
 
 const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
   const {
-    qty, palletId, handleSubmit, handleClose
+    qty, palletId, handleSubmit, handleClose, showCalculator
   } = props;
 
   const [newQty, setNewQty] = React.useState(qty || 0);
+  const [calcOpen, setCalcOpen] = React.useState(false);
 
   const handleTextChange = (text: string) => {
     const newQtyVal: number = parseInt(text, 10);
@@ -76,24 +80,53 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
     onQtyEditingEnd(newQty, qty, setNewQty);
   };
 
+  const onCalcAccept = (value: string) => {
+    assignHandleTextChange(value, setNewQty);
+  };
+
   return (
     <>
+      <CalculatorModal
+        visible={calcOpen}
+        onClose={() => setCalcOpen(false)}
+        onAccept={onCalcAccept}
+        showAcceptButtonOn={(value: string): boolean => {
+          const calcVal = parseInt(value, 10);
+          if (calcVal && calcVal >= 0) return true;
+          return false;
+        }}
+      />
       <View>
         <Text style={styles.titleLabel}>
           {`${strings('AUDITS.PALLET_COUNT')} ${palletId}`}
         </Text>
       </View>
-      <NumericSelector
-        testID="numericSelector"
-        isValid={validateQty(newQty)}
-        onDecreaseQty={handleDecreaseQty}
-        onIncreaseQty={handleIncreaseQty}
-        onTextChange={handleTextChange}
-        minValue={MIN_QTY}
-        maxValue={MAX_QTY}
-        value={newQty}
-        onEndEditing={handleEndEditingQty}
-      />
+      {showCalculator
+        ? (
+          <CustomNumericSelector
+            testID="numericSelector"
+            isValid={validateQty(newQty)}
+            onDecreaseQty={handleDecreaseQty}
+            onIncreaseQty={handleIncreaseQty}
+            minValue={MIN_QTY}
+            maxValue={MAX_QTY}
+            value={newQty}
+            onInputPress={() => setCalcOpen(true)}
+          />
+        )
+        : (
+          <NumericSelector
+            testID="numericSelector"
+            isValid={validateQty(newQty)}
+            onDecreaseQty={handleDecreaseQty}
+            onIncreaseQty={handleIncreaseQty}
+            onTextChange={handleTextChange}
+            minValue={MIN_QTY}
+            maxValue={MAX_QTY}
+            value={newQty}
+            onEndEditing={handleEndEditingQty}
+          />
+        )}
       {!validateQty(newQty) && (
       <Text style={styles.invalidLabel}>
         {strings('ITEM.OH_UPDATE_ERROR', ERROR_FORMATTING_OPTIONS)}

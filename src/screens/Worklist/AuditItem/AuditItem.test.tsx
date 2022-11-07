@@ -449,6 +449,7 @@ describe('AuditItemScreen', () => {
           mockDispatch,
           mockShowPalletQtyModal,
           mocksetShowPalletQtyUpdateModal,
+          false,
           mockVendorPackQty
         )
       );
@@ -953,14 +954,11 @@ describe('AuditItemScreen', () => {
         palletId: 3
       };
       const mockSetShowCalc = jest.fn();
-      const mockSetCalcQty = jest.fn();
       const { getByTestId } = render(
         renderCalculatorModal(
           mockLocationListItem,
           true,
           mockSetShowCalc,
-          -1,
-          mockSetCalcQty,
           mockDispatch
         )
       );
@@ -968,7 +966,6 @@ describe('AuditItemScreen', () => {
       fireEvent.press(modalCloseButton);
       expect(mockSetShowCalc).toHaveBeenCalledWith(false);
       expect(mockSetShowCalc).toHaveBeenCalledTimes(1);
-      expect(mockSetCalcQty).toHaveBeenCalledWith(-1);
     });
 
     it('Tests renderCalculatorModal accept button action', () => {
@@ -978,35 +975,29 @@ describe('AuditItemScreen', () => {
         palletId: 3
       };
       const mockSetShowCalc = jest.fn();
-      const mockSetCalcQty = jest.fn();
+      jest.spyOn(React, 'useState').mockImplementation(() => ([5, jest.fn]));
       const { getByTestId, update } = render(
         renderCalculatorModal(
           mockLocationListItem,
           true,
           mockSetShowCalc,
-          5,
-          mockSetCalcQty,
           mockDispatch
         )
       );
       const modalAcceptButton = getByTestId('modal-accept-button');
       fireEvent.press(modalAcceptButton);
       expect(mockDispatch).toHaveBeenCalledTimes(1);
-      expect(mockSetCalcQty).toHaveBeenCalledWith(-1);
 
       update(
         renderCalculatorModal(
           { ...mockLocationListItem, locationType: 'reserve' },
           true,
           mockSetShowCalc,
-          5,
-          mockSetCalcQty,
           mockDispatch
         )
       );
       fireEvent.press(modalAcceptButton);
       expect(mockDispatch).toHaveBeenCalledTimes(2);
-      expect(mockSetCalcQty).toHaveBeenCalledWith(-1);
     });
   });
 });
