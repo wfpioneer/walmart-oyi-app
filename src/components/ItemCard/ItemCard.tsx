@@ -11,7 +11,7 @@ interface ItemCardProps {
   itemNumber: number,
   onHandQty?: number,
   description: string,
-  onClick: () => void,
+  onClick: (itemNumber: number) => void;
   loading: boolean
 }
 
@@ -23,7 +23,7 @@ const ItemCard = ({
       style={!loading ? styles.container : styles.loaderContainer}
       onPress={() => {
         if (!loading) {
-          onClick();
+          onClick(itemNumber);
         }
       }}
       testID="itemCard"

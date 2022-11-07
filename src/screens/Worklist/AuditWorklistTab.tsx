@@ -56,20 +56,6 @@ const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispat
   navigation.navigate('AuditItem');
 };
 
-const renderCategoryCard = (
-  category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>,
-  dispatch: Dispatch<any>
-) => (
-  <CategoryCard
-    category={category}
-    listOfItems={items}
-    collapsed={collapsed}
-    onItemCardClick={(itemNumber: number) => {
-      onItemClick(itemNumber, navigation, dispatch);
-    }}
-  />
-);
-
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const { dispatch, item, navigation } = props;
   if (item.worklistType === 'CATEGORY') {
@@ -87,7 +73,7 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
       itemNumber={itemNbr}
       description={itemName}
-      onItemCardClick={(itemNumber: number) => {
+      onClick={(itemNumber: number) => {
         onItemClick(itemNumber, navigation, dispatch);
       }}
       loading={false}

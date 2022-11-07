@@ -593,10 +593,8 @@ export const FilterMenu = (): JSX.Element => {
     workListType
   } = useTypedSelector(state => state.Worklist) as WorklistState;
   const { areas, enableAreaFilter, showRollOverAudit } = useTypedSelector(state => state.User.configs);
-  const result = workListType === "AUDIT" ? workListApi.results : workListAuditApi.results;
-  console.log('result ', result);
+  const result = workListType === 'AUDIT' ? workListAuditApi.result : workListApi.result;
   const data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
-  console.log('data ', data);
   const categoryMap: FilteredCategory[] = getCategoryMap(
     data,
     filterCategories
