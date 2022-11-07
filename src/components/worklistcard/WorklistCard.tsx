@@ -29,7 +29,7 @@ function WorklistCard(props: WorkListCardProps): JSX.Element {
     return completionPercentage >= completionGoal ? styles.barFillAtGoal : styles.barFillNotAtGoal;
   };
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+    <TouchableOpacity testID="btnCard" style={styles.card} onPress={onPress}>
       <View style={styles.head}>
         <Text style={styles.title}>{goalTitle}</Text>
         <Text style={styles.progress}>
