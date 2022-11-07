@@ -311,7 +311,7 @@ exports[`LoginScreen renders the EnterClubNbr modal when a user logs in without 
       }
     }
   >
-    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
+    [missing "en.GENERICS.VERSION" translation] 1.1.0-DEV
   </Text>
 </View>
 `;
@@ -390,7 +390,7 @@ exports[`LoginScreen renders the Select CountryCode modal when a user logs in as
       }
     }
   >
-    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
+    [missing "en.GENERICS.VERSION" translation] 1.1.0-DEV
   </Text>
 </View>
 `;
@@ -469,7 +469,7 @@ exports[`LoginScreen renders the snapshot test appropriately 1`] = `
       }
     }
   >
-    [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
+    [missing "en.GENERICS.VERSION" translation] 1.1.0-DEV
   </Text>
 </View>
 `;
