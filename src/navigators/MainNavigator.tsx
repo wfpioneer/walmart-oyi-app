@@ -28,10 +28,7 @@ export const MainNavigator = (): JSX.Element => (
         component={ReviewItemDetailsNavigator}
       />
       <Stack.Screen name="PrintPriceSign" component={PrintPriceSignNavigator} />
-      <Stack.Screen
-        name="LocationManagement"
-        component={LocationManagementNavigator}
-      />
+
       <Stack.Screen
         name="PalletManagement"
         component={PalletManagementNavigator}
