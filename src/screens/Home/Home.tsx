@@ -17,7 +17,7 @@ import GoalCircle from '../../components/goalcircle/GoalCircle';
 import { strings } from '../../locales';
 import { getWorklistSummary } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
-import { updateFilterExceptions, setWorklistType } from '../../state/actions/Worklist';
+import { setWorklistType, updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button from '../../components/buttons/Button';
@@ -224,7 +224,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
                 { screen: 'AuditWorklistNavigator', initial: false }
               );
             } else {
-              const {auditWorklists, palletWorklists} = this.props.userConfig;
+              const { auditWorklists, palletWorklists } = this.props.userConfig;
               this.props.setWorklistType('ITEM');
               if (auditWorklists || palletWorklists) {
                 this.props.navigation.navigate(

@@ -25,7 +25,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         title={strings('WORKLIST.ITEM_WORKLIST')}
         onPress={() => {
           dispatch(clearFilter());
-          dispatch(setWorklistType("ITEM"));
+          dispatch(setWorklistType('ITEM'));
           navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
         }}
         style={styles.button}

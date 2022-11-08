@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { partition } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import {
@@ -66,12 +66,13 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   return (
     <ItemCard
       imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
-      itemNumber={itemNbr}
-      description={itemName}
+      itemNumber={itemNbr || 0}
+      description={itemName || ''}
       onClick={(itemNumber: number) => {
         onItemClick(itemNumber, navigation, dispatch);
       }}
       loading={false}
+      onHandQty={undefined}
     />
   );
 };
@@ -79,12 +80,14 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
 export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boolean): WorklistItemI[] => {
   if (!groupToggle) {
     const workListItems = data || [];
-    return [{
-      worklistType: 'CATEGORY',
-      catgName: strings('WORKLIST.ALL'),
-      itemCount: workListItems.length
-    },
-      ...workListItems];
+    return [
+      {
+        worklistType: 'CATEGORY',
+        catgName: strings('WORKLIST.ALL'),
+        itemCount: workListItems.length
+      },
+      ...workListItems
+    ];
   }
 
   const sortedData = data;

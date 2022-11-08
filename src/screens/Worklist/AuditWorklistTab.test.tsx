@@ -64,7 +64,7 @@ describe('AuditWorklistTab', () => {
   });
   // commenting out these tests as the collapsable functionality temporarily removed and will be added back in another
   // story
-  /*describe('Tests rendering AuditWorklistTab component with collapsible prop', () => {
+  /* describe('Tests rendering AuditWorklistTab component with collapsible prop', () => {
     it('Renders the worklist items in collapsible mode when collapse button clicked', () => {
       const { toJSON, getByTestId } = render(
         <AuditWorklistTabScreen
@@ -109,7 +109,7 @@ describe('AuditWorklistTab', () => {
       fireEvent.press(btnCollapse);
       expect(toJSON()).toMatchSnapshot();
     });
-  });*/
+  }); */
 });
 
 describe('Tests rendering Filter `Pills`', () => {

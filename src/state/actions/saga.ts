@@ -88,7 +88,7 @@ export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_I
 export const getWorklist = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST, payload } as const);
 export const getWorklistAudits = (payload?: { worklistType?: string[] }) => (
   { type: GET_WORKLIST_AUDIT, payload } as const
-  );
+);
 export const getPalletWorklist = (payload: { worklistType: PalletWorklistType[] }) => (
   { type: GET_PALLET_WORKLIST, payload } as const
 );
