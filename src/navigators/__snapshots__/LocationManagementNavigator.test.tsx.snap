@@ -6,6 +6,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     Object {
       "beforeRemove": [Function],
       "blur": [Function],
+      "focus": [Function],
     }
   }
   screenOptions={
@@ -63,6 +64,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+        "focus": [Function],
+      }
+    }
     name="EditLocation"
     options={
       Object {
@@ -118,6 +125,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     Object {
       "beforeRemove": [Function],
       "blur": [Function],
+      "focus": [Function],
     }
   }
   screenOptions={
@@ -175,6 +183,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+        "focus": [Function],
+      }
+    }
     name="EditLocation"
     options={
       Object {
@@ -230,6 +244,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     Object {
       "beforeRemove": [Function],
       "blur": [Function],
+      "focus": [Function],
     }
   }
   screenOptions={
@@ -287,6 +302,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+        "focus": [Function],
+      }
+    }
     name="EditLocation"
     options={
       Object {
@@ -342,6 +363,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     Object {
       "beforeRemove": [Function],
       "blur": [Function],
+      "focus": [Function],
     }
   }
   screenOptions={
@@ -399,6 +421,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "blur": [Function],
+        "focus": [Function],
+      }
+    }
     name="EditLocation"
     options={
       Object {
