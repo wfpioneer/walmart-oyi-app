@@ -11,7 +11,8 @@ import {
   clearSelectedItem,
   hideItemPopup,
   setSelectedItem,
-  showItemPopup
+  showItemPopup,
+  toggleResetLocationNav
 } from '../../state/actions/Location';
 import styles from './FloorItemRow.style';
 import { currencies, strings } from '../../locales';
@@ -33,6 +34,7 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
       setScannedEvent({ type: 'Section', value: item.itemNbr.toString() })
     );
     navigation.navigate('ReviewItemDetails', { screen: 'ReviewItemDetailsHome' });
+    dispatch(toggleResetLocationNav(false));
   };
 
   const locationManagementEdit = () => user.features.includes('location management edit')

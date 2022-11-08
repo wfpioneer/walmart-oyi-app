@@ -30,7 +30,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideItemPopup, hideLocationPopup } from '../../state/actions/Location';
+import { hideItemPopup, hideLocationPopup, toggleResetLocationNav } from '../../state/actions/Location';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
@@ -213,7 +213,7 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   const {
     headerText, isEditEnabled, isReserve, isDisabled
   } = props;
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddItems');
   };
@@ -364,6 +364,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       validateSession(navigation, route.name).then(() => {
         if (!scannedEvent.value) {
           dispatch(getSectionDetails({ sectionId: section.id.toString() }));
+          dispatch(toggleResetLocationNav(true));
         }
       });
     });
@@ -462,6 +463,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         buttonPress={() => {
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
+          dispatch(toggleResetLocationNav(false));
         }}
         buttonText={locationManagementEdit() ? strings('LOCATION.PRINT_LABEL') : undefined}
         isDisabled={!sectionExists}

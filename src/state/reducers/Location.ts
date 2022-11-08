@@ -20,7 +20,8 @@ import {
   SET_SELECTED_ITEM,
   SET_ZONES,
   SHOW_ITEM_POPUP,
-  SHOW_LOCATION_POPUP
+  SHOW_LOCATION_POPUP,
+  TOGGLE_RESET_LOC_NAV
 } from '../actions/Location';
 import {
   AisleItem,
@@ -61,6 +62,7 @@ export interface LocationState {
   aislesToCreate: CreateAisles[];
   itemPopupVisible: boolean;
   selectedItem: SectionDetailsItem | null;
+  isToolBarNavigation: boolean;
 }
 
 export const initialState: LocationState = {
@@ -86,7 +88,8 @@ export const initialState: LocationState = {
   newZone: '',
   aislesToCreate: [],
   itemPopupVisible: false,
-  selectedItem: null
+  selectedItem: null,
+  isToolBarNavigation: true
 };
 
 export const Location = (
@@ -221,6 +224,11 @@ export const Location = (
       return {
         ...state,
         selectedItem: null
+      };
+    case TOGGLE_RESET_LOC_NAV:
+      return {
+        ...state,
+        isToolBarNavigation: action.payload
       };
     default:
       return state;
