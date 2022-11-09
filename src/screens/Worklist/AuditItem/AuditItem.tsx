@@ -251,12 +251,13 @@ export const calculateFloorLocIncreaseQty = (
 export const calculatePalletDecreaseQty = (
   newOHQty: number,
   palletId: number,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  isScanned: boolean
 ) => {
   const OH_MIN = 0;
   const OH_MAX = 9999;
   if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
-    dispatch(updatePalletQty(palletId, newOHQty - 1, false));
+    dispatch(updatePalletQty(palletId, newOHQty - 1, isScanned));
   }
 };
 
@@ -264,10 +265,11 @@ export const calculatePalletIncreaseQty = (
   newOHQty: number,
   palletId: number,
   dispatch: Dispatch<any>,
+  isScanned: boolean
 ) => {
   const OH_MAX = 9999;
   if (newOHQty < OH_MAX) {
-    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1, false));
+    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1, isScanned));
   }
 };
 
@@ -1150,8 +1152,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           scanned: loc.scanned,
           palletId: loc.palletId,
           locationType: 'reserve',
-          increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch),
-          decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch),
+          increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch, loc.scanned || false),
+          decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch, loc.scanned || false),
           onDelete: () => handleDeleteReserveLocation(loc, index),
           qtyChange: (qty: string) => {
             dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10), false));
