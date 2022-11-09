@@ -29,6 +29,18 @@ describe('testing PalletQtyUpdate component', () => {
       );
       expect(toJSON()).toMatchSnapshot();
     });
+    it('render component with showcalculator true', () => {
+      const { toJSON } = render(
+        <PalletQtyUpdate
+          qty={10}
+          palletId={4598}
+          handleSubmit={mockHandleSubmit}
+          handleClose={mockHandleClose}
+          showCalculator={true}
+        />
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
     it('render component with invalid new qty', () => {
       const { toJSON } = render(
         <PalletQtyUpdate
