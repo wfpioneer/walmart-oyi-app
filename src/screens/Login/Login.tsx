@@ -42,8 +42,8 @@ import {
   setPrinterList
 } from '../../state/actions/Print';
 
-const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
-const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
+export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
+export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
 
 // This type uses all fields from the User type except it makes siteId optional
 // It is necessary to provide an accurate type to the User object returned
