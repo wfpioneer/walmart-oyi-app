@@ -1,4 +1,4 @@
-import { evaluate } from 'mathjs';
+import { evaluate, format } from 'mathjs';
 import React, { useState } from 'react';
 import {
   Pressable,
@@ -18,7 +18,7 @@ const parenthesesRegex = new RegExp(`${openParent.source}|${closeParent.source}`
 const opAndParentRegex = new RegExp(`${operandRegex.source}|${parenthesesRegex.source}`);
 const lastOpOrParentRegex = new RegExp(`(${opAndParentRegex.source})(?!.*(${opAndParentRegex.source}))`);
 const doubleOperandRegex = new RegExp(`(${operandRegex.source}){2}`);
-const emptyParentsRegex = new RegExp(`${openParent.source}${closeParent.source}`)
+const emptyParentsRegex = new RegExp(`${openParent.source}${closeParent.source}`);
 const opAtStartRegex = new RegExp(`^(${operandRegex.source})`);
 const opAtEndRegex = new RegExp(`(${operandRegex.source})$`);
 const opAtEdgeOfParentRegex = new RegExp(
@@ -107,17 +107,10 @@ const Calculator = (props: CalculatorProps) => {
 
   const onEqualsPress = () => {
     if (isValidSyntax(true)) {
-      const result = evaluate(calcText);
-      if (typeof result === 'number') {
-        setCalcText(result.toString());
-        if (onEquals) {
-          onEquals(result);
-        }
-      } else {
-        setCalcText(result);
-        if (onEquals) {
-          onEquals(Number(result));
-        }
+      const result: string = format(evaluate(calcText), { precision: 2 });
+      setCalcText(result);
+      if (onEquals) {
+        onEquals(Number(result));
       }
     } else {
       setIsCalcInvalid(true);

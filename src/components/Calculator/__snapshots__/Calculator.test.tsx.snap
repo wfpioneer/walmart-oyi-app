@@ -28887,7 +28887,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      1.25
+      1.3
     </TextInput>
   </View>
   <View
@@ -31422,7 +31422,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      6.28
+      6.3
     </TextInput>
   </View>
   <View
