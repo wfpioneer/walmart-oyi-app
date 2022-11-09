@@ -44,7 +44,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             itemNumber={itemNbr || 0}
             description={itemName || ''}
             imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
-            onHandQty={11}
+            onHandQty={undefined}
             onClick={() => {
               onItemCardClick(itemNbr || 0);
             }}

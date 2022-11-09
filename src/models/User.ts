@@ -35,6 +35,7 @@ export interface Configurations {
   showOpenAuditLink: boolean;
   scanRequired: boolean;
   showCalculator: boolean;
+  showItemImages: boolean;
 }
 
 export interface area {

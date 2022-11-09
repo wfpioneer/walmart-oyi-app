@@ -1,6 +1,7 @@
 import {
   Actions,
   CLEAR_FILTER,
+  SET_WORKLIST_TYPE,
   TOGGLE_AREA,
   TOGGLE_CATEGORIES,
   TOGGLE_EXCEPTIONS,
@@ -16,6 +17,7 @@ export interface WorklistState {
   areaOpen: boolean;
   filterCategories: string[];
   filterExceptions: string[];
+  workListType: string | null;
 }
 
 export const initialState: WorklistState = {
@@ -24,7 +26,8 @@ export const initialState: WorklistState = {
   exceptionOpen: false,
   areaOpen: false,
   filterCategories: [],
-  filterExceptions: []
+  filterExceptions: [],
+  workListType: null
 };
 
 export const worklist = (state = initialState, action: Actions) => {
@@ -58,6 +61,11 @@ export const worklist = (state = initialState, action: Actions) => {
       return {
         ...state,
         filterExceptions: action.payload
+      };
+    case SET_WORKLIST_TYPE:
+      return {
+        ...state,
+        workListType: action.payload
       };
     case CLEAR_FILTER:
       return {
