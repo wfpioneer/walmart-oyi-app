@@ -284,6 +284,31 @@ describe('Tests login screen functions', () => {
 
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
+
+  it('Tests userConfigsApiHook on api error', () => {
+    const mockGetFluffyApiError: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    const mockGetClubConfigApiError: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    userConfigsApiHook(
+      mockGetFluffyApiError,
+      mockGetClubConfigApiError,
+      mockUser,
+      mockDispatch,
+      mockGetPrinterDetailsFromAsyncStorage,
+      navigationProp
+    );
+
+    expect(mockDispatch).toHaveBeenCalledTimes(4);
+    expect(navigationProp.reset).toHaveBeenCalledWith({
+      index: 0,
+      routes: [{ name: 'Tabs' }]
+    });
+  });
 });
 
 describe('ComponentDidUpdate', () => {
