@@ -2,12 +2,18 @@ import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  LoginScreen, signInUser, signOutUser, userConfigsApiHook
+  LoginScreen, resetFluffyFeaturesApiState, signInUser, signOutUser, userConfigsApiHook
 } from './Login';
 import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import mockUser from '../../mockData/mockUser';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import { setEndTime } from '../../state/actions/SessionTimeout';
+import { sessionEnd } from '../../utils/sessionTimeout';
+import { assignFluffyFeatures, setConfigs } from '../../state/actions/User';
+import { getClubConfig } from '../../state/actions/saga';
+import { ConfigResponse } from '../../services/Config.service';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
@@ -223,28 +229,36 @@ describe('Tests login screen functions', () => {
     signOutUser(mockDispatch);
 
     expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(showActivityModal());
     expect(mockAppCenter.trackEvent).toHaveBeenCalledWith('user_sign_out', { lastPage: 'Login' });
     expect(mockWMSSO.signOutUser).toHaveBeenCalled();
   });
 
   it('Tests userConfigsApiHook on Success', () => {
+    const mockFluffyData = [
+      'manager approval',
+      'location management',
+      'on hands change',
+      'location management edit',
+      'location printing'
+    ];
+    const mockConfigResponse: ConfigResponse = {
+      ...mockConfig,
+      printingUpdate: true,
+      locMgmtEdit: mockConfig.locationManagementEdit,
+      addItemDetails: mockConfig.additionalItemDetails
+    };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
       result: {
         status: 200,
-        data: [
-          'manager approval',
-          'location management',
-          'on hands change',
-          'location management edit',
-          'location printing'
-        ]
+        data: mockFluffyData
       }
     };
     const mockGetClubConfigApiSuccess: AsyncState = {
       ...defaultAsyncState,
       result: {
-        data: { ...mockConfig, printingUpdate: true }
+        data: mockConfigResponse
       }
     };
     userConfigsApiHook(
@@ -257,6 +271,12 @@ describe('Tests login screen functions', () => {
     );
 
     expect(mockDispatch).toHaveBeenCalledTimes(7);
+    expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
+    expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
+    expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());
+    expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
+    expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
+    expect(mockDispatch).toHaveBeenCalledWith(setConfigs(mockConfigResponse));
     expect(mockGetPrinterDetailsFromAsyncStorage).toHaveBeenCalledTimes(1);
     expect(navigationProp.reset).toHaveBeenCalledWith({
       index: 0,
@@ -283,11 +303,32 @@ describe('Tests login screen functions', () => {
     );
 
     expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(showActivityModal());
   });
-});
 
-describe('ComponentDidUpdate', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+  it('Tests userConfigsApiHook on api error', () => {
+    const mockGetFluffyApiError: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    const mockGetClubConfigApiError: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    userConfigsApiHook(
+      mockGetFluffyApiError,
+      mockGetClubConfigApiError,
+      mockUser,
+      mockDispatch,
+      mockGetPrinterDetailsFromAsyncStorage,
+      navigationProp
+    );
+    expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
+    expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
+    expect(mockDispatch).toHaveBeenCalledTimes(4);
+    expect(navigationProp.reset).toHaveBeenCalledWith({
+      index: 0,
+      routes: [{ name: 'Tabs' }]
+    });
   });
 });
