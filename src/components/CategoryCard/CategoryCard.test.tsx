@@ -12,6 +12,7 @@ describe('Tests CategoryCard Component', () => {
         listOfItems={mockToDoAuditWorklist}
         collapsed={false}
         category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
+        onItemCardClick={jest.fn()}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -22,6 +23,7 @@ describe('Tests CategoryCard Component', () => {
         listOfItems={mockToDoAuditWorklist}
         collapsed={true}
         category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
+        onItemCardClick={jest.fn()}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -32,6 +34,7 @@ describe('Tests CategoryCard Component', () => {
         listOfItems={mockToDoAuditWorklist}
         collapsed={true}
         category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
+        onItemCardClick={jest.fn()}
       />
     );
     expect(findByText(`43 - ${CATEGORY_NAME.FOODSERVICE}`)).toBeTruthy();
