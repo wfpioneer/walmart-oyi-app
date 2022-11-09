@@ -5,6 +5,7 @@ export const UPDATE_FILTER_CATEGORIES = 'WORKLIST_FILTER/UPDATE_FILTER_CATEGORIE
 export const UPDATE_FILTER_EXCEPTIONS = 'WORKLIST_FILTER/UPDATE_FILTER_EXCEPTIONS';
 export const CLEAR_FILTER = 'WORKLIST_FILTER/CLEAR_FILTER';
 export const TOGGLE_AREA = 'WORKLIST_FILTER/TOGGLE_AREA';
+export const SET_WORKLIST_TYPE = 'WORKLIST_FILTER/SET_WORKLIST_TYPE';
 
 export const toggleMenu = (menuOpen: boolean) => ({
   type: TOGGLE_MENU,
@@ -36,6 +37,11 @@ export const updateFilterExceptions = (filterExceptions: string[]) => ({
   payload: filterExceptions
 } as const);
 
+export const setWorklistType = (worklistType: string | null) => ({
+  type: SET_WORKLIST_TYPE,
+  payload: worklistType
+} as const);
+
 export const clearFilter = () => ({
   type: CLEAR_FILTER
 } as const);
@@ -47,4 +53,5 @@ export type Actions =
   | ReturnType<typeof updateFilterCategories>
   | ReturnType<typeof updateFilterExceptions>
   | ReturnType<typeof clearFilter>
-  | ReturnType<typeof toggleArea>;
+  | ReturnType<typeof toggleArea>
+  | ReturnType<typeof setWorklistType>;
