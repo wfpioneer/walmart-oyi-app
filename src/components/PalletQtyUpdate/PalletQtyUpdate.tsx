@@ -92,7 +92,7 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
         onAccept={onCalcAccept}
         disableAcceptButton={(value: string): boolean => {
           const calcValue = Number(value);
-          return !(calcValue % 1 === 0 && calcValue > 0);
+          return !(calcValue % 1 === 0 && calcValue >= 0);
         }}
         showAcceptButton={true}
       />
