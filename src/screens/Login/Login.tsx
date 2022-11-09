@@ -42,8 +42,8 @@ import {
   setPrinterList
 } from '../../state/actions/Print';
 
-const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
-const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
+export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
+export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
 
 // This type uses all fields from the User type except it makes siteId optional
 // It is necessary to provide an accurate type to the User object returned
@@ -172,12 +172,13 @@ export const userConfigsApiHook = (
       const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
         : fluffyResultData;
       dispatch(assignFluffyFeatures(fluffyFeatures));
-
-      dispatch(getClubConfig());
-      dispatch(resetFluffyFeaturesApiState());
     }
+    dispatch(resetFluffyFeaturesApiState());
+    dispatch(getClubConfig());
   } else if (getFluffyApiState.error) {
     // TODO Display toast/popup letting user know roles could not be retrieved
+    dispatch(getClubConfig());
+    dispatch(resetFluffyFeaturesApiState());
   }
 
   if (!getClubConfigApiState.isWaiting && getClubConfigApiState.result) {
@@ -193,6 +194,12 @@ export const userConfigsApiHook = (
     dispatch(setEndTime(sessionEnd()));
   } else if (getClubConfigApiState.error) {
     // TODO Display toast/popup for error
+    dispatch(hideActivityModal());
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Tabs' }]
+    });
+    dispatch(setEndTime(sessionEnd()));
   }
 };
 
