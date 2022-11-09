@@ -172,12 +172,13 @@ export const userConfigsApiHook = (
       const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
         : fluffyResultData;
       dispatch(assignFluffyFeatures(fluffyFeatures));
-
-      dispatch(getClubConfig());
-      dispatch(resetFluffyFeaturesApiState());
     }
+    dispatch(resetFluffyFeaturesApiState());
+    dispatch(getClubConfig());
   } else if (getFluffyApiState.error) {
     // TODO Display toast/popup letting user know roles could not be retrieved
+    dispatch(getClubConfig());
+    dispatch(resetFluffyFeaturesApiState());
   }
 
   if (!getClubConfigApiState.isWaiting && getClubConfigApiState.result) {
@@ -193,6 +194,12 @@ export const userConfigsApiHook = (
     dispatch(setEndTime(sessionEnd()));
   } else if (getClubConfigApiState.error) {
     // TODO Display toast/popup for error
+    dispatch(hideActivityModal());
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Tabs' }]
+    });
+    dispatch(setEndTime(sessionEnd()));
   }
 };
 
