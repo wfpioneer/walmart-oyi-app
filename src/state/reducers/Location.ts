@@ -13,6 +13,7 @@ import {
   SET_AISLES_TO_CREATE_TO_EXISTING_AISLE,
   SET_AISLE_SECTION_COUNT,
   SET_CREATE_FLOW,
+  SET_IS_TOOL_BAR_NAVIGATION,
   SET_NEW_ZONE,
   SET_PALLET_IDS,
   SET_POSSIBLE_ZONES,
@@ -20,8 +21,7 @@ import {
   SET_SELECTED_ITEM,
   SET_ZONES,
   SHOW_ITEM_POPUP,
-  SHOW_LOCATION_POPUP,
-  TOGGLE_RESET_LOC_NAV
+  SHOW_LOCATION_POPUP
 } from '../actions/Location';
 import {
   AisleItem,
@@ -225,7 +225,7 @@ export const Location = (
         ...state,
         selectedItem: null
       };
-    case TOGGLE_RESET_LOC_NAV:
+    case SET_IS_TOOL_BAR_NAVIGATION:
       return {
         ...state,
         isToolBarNavigation: action.payload

@@ -8,7 +8,7 @@ import SelectLocationType from '../screens/SelectLocationType/SelectLocationType
 import AddPallet from '../screens/AddPallet/AddPallet';
 import AddZone from '../screens/AddZone/AddZone';
 import AddSection from '../screens/AddSection/AddSection';
-import { hideLocationPopup, showLocationPopup, toggleResetLocationNav } from '../state/actions/Location';
+import { hideLocationPopup, setIsToolBarNavigation, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
@@ -103,7 +103,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
       trackEvent('print_queue_list_click');
       dispatch(setPrintingLocationLabels(LocationName.SECTION));
       navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
-      dispatch(toggleResetLocationNav(false));
+      dispatch(setIsToolBarNavigation(false));
     }}
     >
       <View style={styles.rightButton}>
@@ -148,7 +148,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
       }}
       screenListeners={{
         focus: () => {
-          dispatch(toggleResetLocationNav(true));
+          dispatch(setIsToolBarNavigation(true));
         },
         blur: screen => {
           if (screen.target && screensNeedListeners.some(screenName => screen.target?.includes(screenName))) {

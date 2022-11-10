@@ -41,8 +41,8 @@ import {
   hideLocationPopup,
   setAislesToCreateToExistingAisle,
   setCreateFlow,
-  setSections,
-  toggleResetLocationNav
+  setIsToolBarNavigation,
+  setSections
 } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
@@ -580,7 +580,7 @@ const SectionList = (): JSX.Element => {
               }
               dispatch(setPrintingLocationLabels(LocationName.AISLE));
               navigation.navigate('PrintPriceSign');
-              dispatch(toggleResetLocationNav(false));
+              dispatch(setIsToolBarNavigation(false));
             }}
           />
           <BottomSheetAddCard
