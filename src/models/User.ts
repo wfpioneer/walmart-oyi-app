@@ -36,6 +36,8 @@ export interface Configurations {
   scanRequired: boolean;
   showCalculator: boolean;
   showItemImages: boolean;
+  multiPick: boolean;
+  multiBin: boolean;
 }
 
 export interface area {
