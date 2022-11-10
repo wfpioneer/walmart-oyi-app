@@ -1412,6 +1412,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.FLOOR" translation]
     </Text>
+    <Text>
+      A1-1
+    </Text>
   </View>
   <View
     style={
@@ -1494,6 +1497,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.RESERVE" translation]
     </Text>
+    <Text>
+      A1-1
+    </Text>
   </View>
   <View
     style={
@@ -1544,6 +1550,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     <Text>
       [missing "en.ITEM.FLOOR" translation]
     </Text>
+    <Text>
+      A1-1
+    </Text>
   </View>
   <View
     style={
@@ -1559,6 +1568,9 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   >
     <Text>
       [missing "en.ITEM.RESERVE" translation]
+    </Text>
+    <Text>
+      A1-1
     </Text>
   </View>
   <View
@@ -1950,6 +1962,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -1965,6 +1980,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
@@ -2795,6 +2813,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -3415,6 +3436,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -3430,6 +3454,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
@@ -3941,6 +3968,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -3956,6 +3986,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
@@ -4467,6 +4500,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -4482,6 +4518,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
@@ -5014,6 +5053,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -5029,6 +5071,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
@@ -5561,6 +5606,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -5576,6 +5624,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
@@ -6108,6 +6159,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -6123,6 +6177,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
@@ -6655,6 +6712,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.FLOOR" translation]
             </Text>
+            <Text>
+              A1-1
+            </Text>
           </View>
           <View
             style={
@@ -6670,6 +6730,9 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           >
             <Text>
               [missing "en.ITEM.RESERVE" translation]
+            </Text>
+            <Text>
+              A1-1
             </Text>
           </View>
           <View
