@@ -37,8 +37,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  equalBtn: {
+    width: (2 * width) / buttonScale
+  },
   calcButtonText: {
-    fontSize: 30
+    fontSize: 30,
+    color: COLOR.WHITE
   },
   errorText: {
     fontSize: 16,
