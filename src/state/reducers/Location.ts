@@ -13,6 +13,7 @@ import {
   SET_AISLES_TO_CREATE_TO_EXISTING_AISLE,
   SET_AISLE_SECTION_COUNT,
   SET_CREATE_FLOW,
+  SET_IS_TOOL_BAR_NAVIGATION,
   SET_NEW_ZONE,
   SET_PALLET_IDS,
   SET_POSSIBLE_ZONES,
@@ -61,6 +62,7 @@ export interface LocationState {
   aislesToCreate: CreateAisles[];
   itemPopupVisible: boolean;
   selectedItem: SectionDetailsItem | null;
+  isToolBarNavigation: boolean;
 }
 
 export const initialState: LocationState = {
@@ -86,7 +88,8 @@ export const initialState: LocationState = {
   newZone: '',
   aislesToCreate: [],
   itemPopupVisible: false,
-  selectedItem: null
+  selectedItem: null,
+  isToolBarNavigation: true
 };
 
 export const Location = (
@@ -221,6 +224,11 @@ export const Location = (
       return {
         ...state,
         selectedItem: null
+      };
+    case SET_IS_TOOL_BAR_NAVIGATION:
+      return {
+        ...state,
+        isToolBarNavigation: action.payload
       };
     default:
       return state;
