@@ -109,8 +109,8 @@ const Calculator = (props: CalculatorProps) => {
     if (isValidSyntax(true)) {
       const calculatedValue = evaluate(calcText);
       const valueHasDecimalNumber = calculatedValue % 1 !== 0;
-      const result: string = valueHasDecimalNumber ? format(calculatedValue, { precision: 4, notation: 'fixed' })
-        : calculatedValue;
+      const result: string = valueHasDecimalNumber
+        ? format(calculatedValue, { precision: 4, notation: 'fixed' }) : calculatedValue;
       setCalcText(result);
       if (onEquals) {
         onEquals(Number(result));
