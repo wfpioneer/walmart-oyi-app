@@ -42,9 +42,6 @@ describe('Test Calculator component', () => {
     const multiply = getByTestId('multiply');
     const divide = getByTestId('divide');
 
-    const openParent = getByTestId('openParent');
-    const closeParent = getByTestId('closeParent');
-
     const equals = getByTestId('equals');
     const del = getByTestId('delete');
     const clear = getByTestId('clear');
@@ -86,11 +83,10 @@ describe('Test Calculator component', () => {
     pressButtonAndRerender(del, rerender);
     expect(toJSON()).toMatchSnapshot('initial render');
     pressButtonAndRerender(clear, rerender);
-    pressButtonAndRerender(openParent, rerender);
+
     pressButtonAndRerender(numbers[2], rerender);
     pressButtonAndRerender(add, rerender);
     pressButtonAndRerender(numbers[3], rerender);
-    pressButtonAndRerender(closeParent, rerender);
     pressButtonAndRerender(divide, rerender);
     pressButtonAndRerender(numbers[4], rerender);
     expect(toJSON()).toMatchSnapshot('parentheses and divide equation');
@@ -161,16 +157,9 @@ describe('Test Calculator component', () => {
     const multiply = getByTestId('multiply');
     const divide = getByTestId('divide');
 
-    const openParent = getByTestId('openParent');
-    const closeParent = getByTestId('closeParent');
-
     const equals = getByTestId('equals');
     const del = getByTestId('delete');
     const clear = getByTestId('clear');
-
-    pressButtonAndRerender(closeParent, rerender);
-    expect(toJSON()).toMatchSnapshot('cannot open with closing paretheses');
-    pressButtonAndRerender(clear, rerender);
 
     pressButtonAndRerender(add, rerender);
     expect(toJSON()).toMatchSnapshot('cannot begin with operand');
@@ -188,19 +177,14 @@ describe('Test Calculator component', () => {
 
     pressButtonAndRerender(del, rerender);
     pressButtonAndRerender(three, rerender);
-    pressButtonAndRerender(openParent, rerender);
     pressButtonAndRerender(two, rerender);
-    pressButtonAndRerender(closeParent, rerender);
-    pressButtonAndRerender(closeParent, rerender);
     expect(toJSON()).toMatchSnapshot('cannot have closing parent without opening parent');
     pressButtonAndRerender(clear, rerender);
 
     pressButtonAndRerender(five, rerender);
     pressButtonAndRerender(divide, rerender);
-    pressButtonAndRerender(openParent, rerender);
     pressButtonAndRerender(seven, rerender);
     pressButtonAndRerender(add, rerender);
-    pressButtonAndRerender(closeParent, rerender);
     expect(toJSON()).toMatchSnapshot('cannot have operand next to parent');
 
     pressButtonAndRerender(del, rerender);

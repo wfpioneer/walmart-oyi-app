@@ -149,11 +149,8 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="clear">
           <Text style={styles.calcButtonText}>C</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('(')} testID="openParent">
-          <Text style={styles.calcButtonText}>(</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType(')')} testID="closeParent">
-          <Text style={styles.calcButtonText}>)</Text>
+        <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="allClear">
+          <Text style={styles.calcButtonText}>AC</Text>
         </Pressable>
         <Pressable
           style={styles.calcButtonView}
@@ -163,6 +160,9 @@ const Calculator = (props: CalculatorProps) => {
           testID="delete"
         >
           <Text style={styles.calcButtonText}>Del</Text>
+        </Pressable>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('/')} testID="divide">
+          <Text style={styles.calcButtonText}>/</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
@@ -175,8 +175,8 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable style={styles.calcButtonView} onPress={() => onType('9')} testID="nine">
           <Text style={styles.calcButtonText}>9</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('/')} testID="divide">
-          <Text style={styles.calcButtonText}>/</Text>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('*')} testID="multiply">
+          <Text style={styles.calcButtonText}>*</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
@@ -189,8 +189,8 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable style={styles.calcButtonView} onPress={() => onType('6')} testID="six">
           <Text style={styles.calcButtonText}>6</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('*')} testID="multiply">
-          <Text style={styles.calcButtonText}>*</Text>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('-')} testID="subtract">
+          <Text style={styles.calcButtonText}>-</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
@@ -203,8 +203,8 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable style={styles.calcButtonView} onPress={() => onType('3')} testID="three">
           <Text style={styles.calcButtonText}>3</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('-')} testID="subtract">
-          <Text style={styles.calcButtonText}>-</Text>
+        <Pressable style={styles.calcButtonView} onPress={() => onType('+')} testID="add">
+          <Text style={styles.calcButtonText}>+</Text>
         </Pressable>
       </View>
       <View style={styles.buttonRow}>
@@ -217,6 +217,7 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable
           style={{
             ...styles.calcButtonView,
+            ...styles.equalBtn,
             backgroundColor: isValidSyntax() && calcText.length ? COLOR.MAIN_THEME_COLOR : COLOR.DISABLED_BLUE
           }}
           disabled={!(isValidSyntax() && calcText.length)}
@@ -224,9 +225,6 @@ const Calculator = (props: CalculatorProps) => {
           testID="equals"
         >
           <Text style={styles.calcButtonText}>=</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('+')} testID="add">
-          <Text style={styles.calcButtonText}>+</Text>
         </Pressable>
       </View>
     </View>
