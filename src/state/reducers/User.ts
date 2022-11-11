@@ -40,7 +40,9 @@ export const initialState: User = {
     showOpenAuditLink: false,
     scanRequired: false,
     showCalculator: false,
-    showItemImages: false
+    showItemImages: false,
+    multiBin: false,
+    multiPick: false
   }
 };
 
@@ -82,7 +84,9 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showOpenAuditLink: action.payload.showOpenAuditLink || false,
           scanRequired: action.payload.scanRequired || false,
           showCalculator: action.payload.showCalculator || false,
-          showItemImages: action.payload.showItemImages
+          showItemImages: action.payload.showItemImages || false,
+          multiBin: action.payload.multiBin || false,
+          multiPick: action.payload.multiPick || false
         }
       };
     default:
