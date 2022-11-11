@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Location Manual Scan Component Renders Manual Scan component with a default keyboard type 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "marginBottom": 8,
+      "paddingRight": 16,
+    }
+  }
+>
+  <TextInput
+    autoFocus={true}
+    keyboardType="default"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="Test"
+    selectionColor="#0071e9"
+    style={
+      Object {
+        "color": "#000000",
+        "flex": 1,
+        "paddingLeft": 10,
+      }
+    }
+    testID="txtEntry"
+    value=""
+  />
+</View>
+`;
+
+exports[`Test Location Manual Scan Component Renders Manual Scan component with a numeric keyboard type 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "marginBottom": 8,
+      "paddingRight": 16,
+    }
+  }
+>
+  <TextInput
+    autoFocus={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onSubmitEditing={[Function]}
+    placeholder="Test"
+    selectionColor="#0071e9"
+    style={
+      Object {
+        "color": "#000000",
+        "flex": 1,
+        "paddingLeft": 10,
+      }
+    }
+    testID="txtEntry"
+    value=""
+  />
+</View>
+`;
