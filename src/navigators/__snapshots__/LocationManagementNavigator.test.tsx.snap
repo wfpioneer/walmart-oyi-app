@@ -66,7 +66,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     listeners={
       Object {
-        "blur": [Function],
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -197,7 +197,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     listeners={
       Object {
-        "blur": [Function],
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -328,7 +328,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     listeners={
       Object {
-        "blur": [Function],
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -459,7 +459,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     listeners={
       Object {
-        "blur": [Function],
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }

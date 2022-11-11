@@ -242,7 +242,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           focus: () => {
             dispatch(setBottomTab(false));
           },
-          blur: () => {
+          beforeRemove: () => {
             dispatch(setBottomTab(true));
           }
         }}
