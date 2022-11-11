@@ -24,6 +24,18 @@ describe('testing PalletQtyUpdate component', () => {
           palletId={4598}
           handleSubmit={mockHandleSubmit}
           handleClose={mockHandleClose}
+          showCalculator={false}
+        />
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+    it('render component with showcalculator true', () => {
+      const { toJSON } = render(
+        <PalletQtyUpdate
+          qty={10}
+          palletId={4598}
+          handleSubmit={mockHandleSubmit}
+          handleClose={mockHandleClose}
           showCalculator={true}
         />
       );

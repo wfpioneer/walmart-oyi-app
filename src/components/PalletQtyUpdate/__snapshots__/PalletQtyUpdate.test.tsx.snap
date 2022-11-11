@@ -424,6 +424,311 @@ Array [
         </View>
       </View>
     </View>
+    <TextInput
+      keyboardType="numeric"
+      onChangeText={[Function]}
+      onEndEditing={[Function]}
+      style={
+        Object {
+          "color": "#0071e9",
+          "height": 40,
+          "minWidth": "15%",
+          "textAlign": "center",
+        }
+      }
+      testID="numericTextInput"
+      value="10"
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "height": 15,
+            "width": 35,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#00000000",
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="increaseButton"
+        >
+          <mockMaterialCommunityIcons
+            color="#0071e9"
+            name="plus"
+            size={18}
+          />
+        </View>
+      </View>
+    </View>
+  </View>,
+  <View
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "paddingVertical": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 45,
+          },
+          Object {
+            "paddingHorizontal": 8,
+            "width": "50%",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffffff",
+              "borderColor": "#0071e9",
+              "borderRadius": 5,
+              "borderWidth": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="cancelButton"
+        >
+          <Text
+            style={
+              Object {
+                "color": "#0071e9",
+                "fontFamily": "Roboto-Medium",
+                "fontSize": 16,
+                "fontWeight": "normal",
+                "textAlign": undefined,
+              }
+            }
+          >
+            [missing "en.GENERICS.CANCEL" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "height": 45,
+          },
+          Object {
+            "paddingHorizontal": 8,
+            "width": "50%",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#BABBBE",
+              "borderRadius": 5,
+              "elevation": 1,
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="confirmButton"
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ffffffff",
+                "fontFamily": "Roboto-Medium",
+                "fontSize": 16,
+                "fontWeight": "normal",
+                "textAlign": undefined,
+              }
+            }
+          >
+            [missing "en.APPROVAL.CONFIRM" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;
+
+exports[`testing PalletQtyUpdate component render component and test buttons render component with showcalculator true 1`] = `
+Array [
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
+  <View>
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+          "paddingVertical": 8,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.AUDITS.PALLET_COUNT" translation] 4598
+    </Text>
+  </View>,
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "borderWidth": 1,
+          "flexDirection": "row",
+        },
+        Object {
+          "borderColor": "#e0e0e0",
+        },
+      ]
+    }
+    testID="numericSelector"
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "height": 15,
+            "width": 35,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#00000000",
+              "flex": 1,
+              "justifyContent": "center",
+              "opacity": 1,
+            }
+          }
+          testID="decreaseButton"
+        >
+          <mockMaterialCommunityIcons
+            color="#0071e9"
+            name="minus"
+            size={18}
+          />
+        </View>
+      </View>
+    </View>
     <View
       accessible={true}
       collapsable={false}
