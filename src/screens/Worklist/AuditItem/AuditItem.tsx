@@ -826,6 +826,7 @@ export const renderCalculatorModal = (
           } else {
             dispatch(updatePalletQty(palletId, parseInt(value, 10), false));
           }
+          setShowCalcModal(false);
         }
       }}
     />
