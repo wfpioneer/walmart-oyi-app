@@ -92,6 +92,7 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
         onAccept={onCalcAccept}
         showAcceptButtonOn={(value: string): boolean => {
           const calcVal = parseInt(value, 10);
+          setCalcOpen(false);
           if (calcVal && calcVal >= 0) return true;
           return false;
         }}
