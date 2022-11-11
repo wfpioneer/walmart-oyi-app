@@ -91,21 +91,38 @@ Array [
         </View>
       </View>
     </View>
-    <TextInput
-      keyboardType="numeric"
-      onChangeText={[Function]}
-      onEndEditing={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "color": "#0071e9",
           "height": 40,
-          "minWidth": "15%",
-          "textAlign": "center",
+          "justifyContent": "center",
+          "opacity": 1,
         }
       }
-      testID="numericTextInput"
-      value="-11"
-    />
+    >
+      <Text
+        style={
+          Object {
+            "color": "#0071e9",
+            "minWidth": "15%",
+            "paddingHorizontal": 4,
+            "textAlign": "center",
+          }
+        }
+      >
+        -11
+      </Text>
+    </View>
     <View
       style={
         Array [

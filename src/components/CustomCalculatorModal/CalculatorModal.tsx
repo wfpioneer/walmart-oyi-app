@@ -12,12 +12,13 @@ export interface CalculatorModalProps {
     visible: boolean;
     onClose(): void;
     onAccept(value: string): void;
-    showAcceptButtonOn(value: string): boolean;
+    showAcceptButton: boolean;
+    disableAcceptButton(value: string): boolean;
 }
 
 const CalculatorModal = (props: CalculatorModalProps) => {
   const {
-    onClose, onAccept, showAcceptButtonOn, visible
+    onClose, onAccept, showAcceptButton, disableAcceptButton, visible
   } = props;
   const [calcValue, setCalcValue] = React.useState('');
   return (
@@ -42,10 +43,11 @@ const CalculatorModal = (props: CalculatorModalProps) => {
           }}
           testID="modal-close-button"
         />
-        {showAcceptButtonOn(calcValue) && (
+        {showAcceptButton && (
         <Button
           style={styles.button}
           title={strings('PICKING.ACCEPT')}
+          disabled={disableAcceptButton(calcValue)}
           backgroundColor={COLOR.MAIN_THEME_COLOR}
           onPress={() => { onAccept(calcValue); setCalcValue(''); }}
           testID="modal-accept-button"
