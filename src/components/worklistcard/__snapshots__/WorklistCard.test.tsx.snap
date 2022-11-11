@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing OHQtyUpdate component render component and test buttons render component with some test data and goal as zero 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "borderRadius": 10,
+      "elevation": 2,
+      "margin": 4,
+      "opacity": 1,
+      "padding": 6,
+      "width": "95%",
+    }
+  }
+  testID="btnCard"
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      Test
+    </Text>
+    <Text
+      style={
+        Object {
+          "flex": 1,
+          "fontWeight": "bold",
+          "textAlign": "right",
+        }
+      }
+    >
+      [missing "en.GENERICS.GOAL" translation] 100%
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#e0e0e0",
+        "borderRadius": 10,
+        "flexDirection": "row",
+        "height": 10,
+        "marginBottom": 5,
+        "marginTop": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "backgroundColor": "#e0e0e0",
+            "borderRadius": 10,
+          },
+          Object {
+            "width": "90%",
+          },
+        ]
+      }
+    />
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#006DE5",
+        "textAlign": "right",
+      }
+    }
+  >
+    [missing "en.HOME.WORKLIST_GOAL_COMPLETE" translation]
+  </Text>
+</View>
+`;
+
+exports[`testing OHQtyUpdate component render component and test buttons render component with some test data and goal not as zero 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "borderRadius": 10,
+      "elevation": 2,
+      "margin": 4,
+      "opacity": 1,
+      "padding": 6,
+      "width": "95%",
+    }
+  }
+  testID="btnCard"
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      Test
+    </Text>
+    <Text
+      style={
+        Object {
+          "flex": 1,
+          "fontWeight": "bold",
+          "textAlign": "right",
+        }
+      }
+    >
+      [missing "en.GENERICS.GOAL" translation] 100%
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#e0e0e0",
+        "borderRadius": 10,
+        "flexDirection": "row",
+        "height": 10,
+        "marginBottom": 5,
+        "marginTop": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "backgroundColor": "#D6512D",
+            "borderRadius": 10,
+          },
+          Object {
+            "width": "90%",
+          },
+        ]
+      }
+    />
+  </View>
+  <Text
+    style={
+      Object {
+        "color": "#006DE5",
+        "textAlign": "right",
+      }
+    }
+  >
+    [missing "en.HOME.WORKLIST_GOAL_COMPLETE" translation]
+  </Text>
+</View>
+`;
