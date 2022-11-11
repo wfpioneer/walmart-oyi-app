@@ -260,12 +260,28 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         options={{
           headerTitle: strings('LOCATION.ADD_ZONE')
         }}
+        listeners={{
+          focus: () => {
+            dispatch(setBottomTab(false));
+          },
+          beforeRemove: () => {
+            dispatch(setBottomTab(true));
+          }
+        }}
       />
       <Stack.Screen
         name="AddSection"
         component={AddSection}
         options={{
           headerTitle: strings('LOCATION.ADD_SECTIONS')
+        }}
+        listeners={{
+          focus: () => {
+            dispatch(setBottomTab(false));
+          },
+          beforeRemove: () => {
+            dispatch(setBottomTab(true));
+          }
         }}
       />
       <Stack.Screen

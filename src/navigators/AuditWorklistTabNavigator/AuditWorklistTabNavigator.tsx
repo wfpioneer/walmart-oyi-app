@@ -18,7 +18,6 @@ import { AsyncState } from '../../models/AsyncState';
 import { setWorklistItems } from '../../state/actions/AuditWorklist';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
-import { mockToDoAuditWorklist } from '../../mockData/mockWorkList';
 
 interface AuditWorklistTabNavigatorProps {
   dispatch: Dispatch<any>;
@@ -38,7 +37,6 @@ const getWorklistAuditApiHook = (
   navigation: NavigationProp<any>
 ) => {
   if (navigation.isFocused()) {
-    dispatch(setWorklistItems(mockToDoAuditWorklist));
     if (!getWorklistAuditApi.isWaiting && getWorklistAuditApi.result && getWorklistAuditApi.result.data) {
       dispatch(setWorklistItems(getWorklistAuditApi.result.data as WorklistItemI[]));
     }

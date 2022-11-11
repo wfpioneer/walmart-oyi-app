@@ -90,6 +90,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddZone"
     options={
       Object {
@@ -99,6 +105,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddSection"
     options={
       Object {
@@ -209,6 +221,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddZone"
     options={
       Object {
@@ -218,6 +236,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddSection"
     options={
       Object {
@@ -328,6 +352,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddZone"
     options={
       Object {
@@ -337,6 +367,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddSection"
     options={
       Object {
@@ -447,6 +483,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddZone"
     options={
       Object {
@@ -456,6 +498,12 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   />
   <Screen
     component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
     name="AddSection"
     options={
       Object {
