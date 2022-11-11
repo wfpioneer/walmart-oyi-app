@@ -78,7 +78,8 @@ import {
   setReserveLocations,
   setScannedPalletId,
   updateFloorLocationQty,
-  updatePalletQty
+  updatePalletQty,
+  updatePalletScannedStatus
 } from '../../../state/actions/AuditItemScreen';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
@@ -251,25 +252,23 @@ export const calculateFloorLocIncreaseQty = (
 export const calculatePalletDecreaseQty = (
   newOHQty: number,
   palletId: number,
-  dispatch: Dispatch<any>,
-  isScanned: boolean
+  dispatch: Dispatch<any>
 ) => {
   const OH_MIN = 0;
   const OH_MAX = 9999;
   if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
-    dispatch(updatePalletQty(palletId, newOHQty - 1, isScanned));
+    dispatch(updatePalletQty(palletId, newOHQty - 1));
   }
 };
 
 export const calculatePalletIncreaseQty = (
   newOHQty: number,
   palletId: number,
-  dispatch: Dispatch<any>,
-  isScanned: boolean
+  dispatch: Dispatch<any>
 ) => {
   const OH_MAX = 9999;
   if (newOHQty < OH_MAX) {
-    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1, isScanned));
+    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1));
   }
 };
 
@@ -489,6 +488,7 @@ export const getScannedPalletEffect = (
     if (matchedPallet) {
       setShowPalletQtyUpdateModal(true);
       dispatch(setScannedPalletId(scannedPallet));
+      dispatch(updatePalletScannedStatus(scannedPallet, true));
     } else {
       Toast.show({
         type: 'error',
@@ -529,7 +529,7 @@ export const renderpalletQtyUpdateModal = (
           setShowPalletQtyUpdateModal(false);
         }}
         handleSubmit={(newQty: number) => {
-          dispatch(updatePalletQty(scannedPalletId, newQty, true));
+          dispatch(updatePalletQty(scannedPalletId, newQty));
           setShowPalletQtyUpdateModal(false);
         }}
         showCalculator={showCalculator}
@@ -822,11 +822,12 @@ export const renderCalculatorModal = (
       }}
       onClose={() => setShowCalcModal(false)}
       onAccept={(value: string) => {
+        const calcValue = Number(value);
         if (locationName !== '') {
           if (locationType === 'floor') {
-            dispatch(updateFloorLocationQty(locationName, parseInt(value, 10)));
+            dispatch(updateFloorLocationQty(locationName, calcValue));
           } else {
-            dispatch(updatePalletQty(palletId, parseInt(value, 10), false));
+            dispatch(updatePalletQty(palletId, calcValue));
           }
         }
       }}
@@ -1152,15 +1153,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           scanned: loc.scanned,
           palletId: loc.palletId,
           locationType: 'reserve',
-          increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch, loc.scanned || false),
-          decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch, loc.scanned || false),
+          increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch),
+          decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch),
           onDelete: () => handleDeleteReserveLocation(loc, index),
           qtyChange: (qty: string) => {
-            dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10), false));
+            dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10)));
           },
           onEndEditing: () => {
             if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
-              dispatch(updatePalletQty(loc.palletId, 0, false));
+              dispatch(updatePalletQty(loc.palletId, 0));
             }
           },
           onInputPress: () => {

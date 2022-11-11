@@ -167,8 +167,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   getItemPalletsError: false,
   setGetItemPalletsError: jest.fn(),
   showCalcModalState: [false, jest.fn()],
-  calcResultState: [-1, jest.fn()],
-  locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()]
+  locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
+  countryCode: 'CN'
 };
 
 describe('AuditItemScreen', () => {
@@ -879,28 +879,28 @@ describe('AuditItemScreen', () => {
     });
 
     it('tests calculatePalletDecreaseQty when newOHQty is greater than min value', () => {
-      calculatePalletDecreaseQty(1, 4597, mockDispatch, false);
+      calculatePalletDecreaseQty(1, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0, scanned: false } }
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0 } }
       ));
     });
 
     it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
-      calculatePalletDecreaseQty(0, 4597, mockDispatch, false);
+      calculatePalletDecreaseQty(0, 4597, mockDispatch);
       expect(mockDispatch).not.toBeCalled();
     });
 
     it('tests calculatePalletIncreaseQty when newOHQty is lesser than max value', () => {
-      calculatePalletIncreaseQty(22, 4597, mockDispatch, false);
+      calculatePalletIncreaseQty(22, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23, scanned: false } }
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23 } }
       ));
     });
 
     it('tests calculatePalletIncreaseQty when newOHQty is greater than max value', () => {
-      calculatePalletIncreaseQty(100000, 4597, mockDispatch, false);
+      calculatePalletIncreaseQty(100000, 4597, mockDispatch);
       expect(mockDispatch).not.toBeCalled();
     });
 
