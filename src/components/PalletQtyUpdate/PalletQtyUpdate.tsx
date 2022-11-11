@@ -90,12 +90,11 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
         visible={calcOpen}
         onClose={() => setCalcOpen(false)}
         onAccept={onCalcAccept}
-        showAcceptButtonOn={(value: string): boolean => {
-          const calcVal = parseInt(value, 10);
-          setCalcOpen(false);
-          if (calcVal && calcVal >= 0) return true;
-          return false;
+        disableAcceptButton={(value: string): boolean => {
+          const calcValue = Number(value);
+          return !(calcValue % 1 === 0 && calcValue >= 0);
         }}
+        showAcceptButton={true}
       />
       <View>
         <Text style={styles.titleLabel}>
