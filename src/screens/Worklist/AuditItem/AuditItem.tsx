@@ -815,11 +815,11 @@ export const renderCalculatorModal = (
   return (
     <CalculatorModal
       visible={showCalcModal}
-      showAcceptButtonOn={(value: string): boolean => {
-        const calcVal = parseInt(value, 10);
-        if (calcVal && calcVal >= 0) return true;
-        return false;
+      disableAcceptButton={(value: string): boolean => {
+        const calcValue = Number(value);
+        return !(calcValue % 1 === 0 && calcValue >= 0);
       }}
+      showAcceptButton={true}
       onClose={() => setShowCalcModal(false)}
       onAccept={(value: string) => {
         const calcValue = Number(value);
@@ -829,6 +829,7 @@ export const renderCalculatorModal = (
           } else {
             dispatch(updatePalletQty(palletId, calcValue));
           }
+          setShowCalcModal(false);
         }
       }}
     />

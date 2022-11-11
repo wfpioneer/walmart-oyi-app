@@ -37,6 +37,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
   return (
     <View style={styles.container}>
       <TextInput
+        testID="txtEntry"
         ref={textInputRef}
         style={styles.textInput}
         value={value}
@@ -54,6 +55,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
           icon={ModalCloseIcon}
           type={IconButtonType.NO_BORDER}
           onPress={clearText}
+          testID="clearbutton"
         />
       )}
     </View>

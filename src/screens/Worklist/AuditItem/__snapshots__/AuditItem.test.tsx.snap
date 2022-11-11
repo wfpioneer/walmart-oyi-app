@@ -1972,9 +1972,10 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     </React.Fragment>
   </CustomModalComponent>
   <CalculatorModal
+    disableAcceptButton={[Function]}
     onAccept={[Function]}
     onClose={[Function]}
-    showAcceptButtonOn={[Function]}
+    showAcceptButton={true}
     visible={false}
   />
   <View
@@ -2412,9 +2413,10 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     </React.Fragment>
   </CustomModalComponent>
   <CalculatorModal
+    disableAcceptButton={[Function]}
     onAccept={[Function]}
     onClose={[Function]}
-    showAcceptButtonOn={[Function]}
+    showAcceptButton={true}
     visible={false}
   />
   <View
