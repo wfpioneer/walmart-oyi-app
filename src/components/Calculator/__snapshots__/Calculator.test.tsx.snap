@@ -21282,7 +21282,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      4.00
+      4
     </TextInput>
   </View>
   <View
@@ -22011,7 +22011,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -22029,7 +22029,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -24662,7 +24662,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      4.0
+      4
     </TextInput>
   </View>
   <View
@@ -25391,7 +25391,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -25409,7 +25409,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -28887,7 +28887,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      1.25
+      1.2500
     </TextInput>
   </View>
   <View
@@ -31422,7 +31422,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
         }
       }
     >
-      6.28
+      6.2800
     </TextInput>
   </View>
   <View
