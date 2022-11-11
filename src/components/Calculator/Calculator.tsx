@@ -1,4 +1,4 @@
-import { evaluate } from 'mathjs';
+import { evaluate, format } from 'mathjs';
 import React, { useState } from 'react';
 import {
   Pressable,
@@ -107,17 +107,13 @@ const Calculator = (props: CalculatorProps) => {
 
   const onEqualsPress = () => {
     if (isValidSyntax(true)) {
-      const result = evaluate(calcText);
-      if (typeof result === 'number') {
-        setCalcText(result.toString());
-        if (onEquals) {
-          onEquals(result);
-        }
-      } else {
-        setCalcText(result);
-        if (onEquals) {
-          onEquals(Number(result));
-        }
+      const calculatedValue = evaluate(calcText);
+      const valueHasDecimalNumber = calculatedValue % 1 !== 0;
+      const result: string = valueHasDecimalNumber
+        ? format(calculatedValue, { precision: 4, notation: 'fixed' }) : calculatedValue;
+      setCalcText(result);
+      if (onEquals) {
+        onEquals(Number(result));
       }
     } else {
       setIsCalcInvalid(true);
