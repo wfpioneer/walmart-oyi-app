@@ -10,6 +10,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   clearSelectedItem,
   hideItemPopup,
+  setIsToolBarNavigation,
   setSelectedItem,
   showItemPopup
 } from '../../state/actions/Location';
@@ -33,6 +34,7 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
       setScannedEvent({ type: 'Section', value: item.itemNbr.toString() })
     );
     navigation.navigate('ReviewItemDetails', { screen: 'ReviewItemDetailsHome' });
+    dispatch(setIsToolBarNavigation(false));
   };
 
   const locationManagementEdit = () => user.features.includes('location management edit')

@@ -21,5 +21,20 @@ exports[`Tools Navigator Renders the Tools Navigator 1`] = `
       }
     }
   />
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "blur": [Function],
+      }
+    }
+    name="LocationManagement"
+    options={
+      Object {
+        "headerShown": false,
+      }
+    }
+  />
 </StackNavigator>
 `;

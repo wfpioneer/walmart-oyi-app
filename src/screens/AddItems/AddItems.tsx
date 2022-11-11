@@ -17,7 +17,7 @@ import { addLocation } from '../../state/actions/saga';
 import { ADD_LOCATION } from '../../state/actions/asyncAPI';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { setManualScan } from '../../state/actions/Global';
+import { setBottomTab, setManualScan } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { AsyncState } from '../../models/AsyncState';
@@ -53,14 +53,14 @@ export const addItemApiHook = (
 ) => {
   if (isFocusted) {
     if (!addItemApi.isWaiting && addItemApi.result) {
-      trackEventCall('create_items_to_section_success', {duration: moment().valueOf() - addItemApiStart});
+      trackEventCall('create_items_to_section_success', { duration: moment().valueOf() - addItemApiStart });
       Toast.show({
         type: 'success',
         text1: strings('LOCATION.ITEM_ADDED'),
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
-      dispatch({type: ADD_LOCATION.RESET});
+      dispatch({ type: ADD_LOCATION.RESET });
       navigateBack();
     }
 
@@ -80,7 +80,7 @@ export const addItemApiHook = (
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
-      dispatch({type: ADD_LOCATION.RESET});
+      dispatch({ type: ADD_LOCATION.RESET });
     }
   }
 };
@@ -121,9 +121,18 @@ export const AddItemsScreen = (props: AddItemsScreenProps): JSX.Element => {
   // Navigation Listener
   useEffectHook(() => {
     // Resets location api response data when navigating off-screen
+    navigation.addListener('focus', () => {
+      dispatch(setBottomTab(false));
+    });
     navigation.addListener('beforeRemove', () => {
+      dispatch(setBottomTab(true));
       dispatch({ type: 'API/ADD_LOCATION/RESET' });
     });
+
+    return () => {
+      navigation.removeListener('focus', () => {});
+      navigation.removeListener('beforeRemove', () => {});
+    };
   }, []);
 
   // Barcode event listener effect
