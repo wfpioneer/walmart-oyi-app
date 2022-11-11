@@ -107,7 +107,7 @@ const Calculator = (props: CalculatorProps) => {
 
   const onEqualsPress = () => {
     if (isValidSyntax(true)) {
-      const result: string = format(evaluate(calcText), { precision: 2 });
+      const result: string = format(evaluate(calcText), { precision: 2, notation: 'fixed' });
       setCalcText(result);
       if (onEquals) {
         onEquals(Number(result));
