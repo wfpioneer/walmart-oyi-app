@@ -167,8 +167,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   getItemPalletsError: false,
   setGetItemPalletsError: jest.fn(),
   showCalcModalState: [false, jest.fn()],
-  calcResultState: [-1, jest.fn()],
-  locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()]
+  locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
+  countryCode: 'CN'
 };
 
 describe('AuditItemScreen', () => {
@@ -882,7 +882,7 @@ describe('AuditItemScreen', () => {
       calculatePalletDecreaseQty(1, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0, scanned: false } }
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0 } }
       ));
     });
 
@@ -895,7 +895,7 @@ describe('AuditItemScreen', () => {
       calculatePalletIncreaseQty(22, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23, scanned: false } }
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23 } }
       ));
     });
 
