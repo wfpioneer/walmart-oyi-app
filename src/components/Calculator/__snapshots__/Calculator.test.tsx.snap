@@ -48,7 +48,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        +
+        
       </TextInput>
     </View>
   </View>
@@ -884,7 +884,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        5/7=
+        5
       </TextInput>
     </View>
     <View>
@@ -900,7 +900,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        0.7143
+        5
       </TextInput>
     </View>
   </View>
@@ -1725,7 +1725,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        5/78=
+        58
       </TextInput>
     </View>
     <View>
@@ -1741,7 +1741,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        0.0641
+        58
       </TextInput>
     </View>
   </View>
@@ -2566,7 +2566,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        
+        132
       </TextInput>
     </View>
     <View>
@@ -2582,7 +2582,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        1+32
+        132
       </TextInput>
     </View>
   </View>
@@ -3407,7 +3407,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        
+        0.+
       </TextInput>
     </View>
     <View>
@@ -3423,7 +3423,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        0.+
+        0.
       </TextInput>
     </View>
   </View>
@@ -4259,7 +4259,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        
+        1*
       </TextInput>
     </View>
     <View>
@@ -4275,21 +4275,10 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        1+*
+        1
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -5034,7 +5023,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -5052,7 +5041,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -5111,7 +5100,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        
+        0.9.*6
       </TextInput>
     </View>
     <View>
@@ -5127,7 +5116,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        0.9+*6
+        0.9.
       </TextInput>
     </View>
   </View>
@@ -5963,7 +5952,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        
+        0.9.
       </TextInput>
     </View>
     <View>
@@ -6815,7 +6804,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        
+        5+
       </TextInput>
     </View>
     <View>
@@ -6831,7 +6820,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        5/7+
+        5
       </TextInput>
     </View>
   </View>
@@ -7656,7 +7645,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           }
         }
       >
-        
+        .
       </TextInput>
     </View>
     <View>
@@ -9349,7 +9338,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: er
           }
         }
       >
-        
+        58
       </TextInput>
     </View>
     <View>
@@ -9365,7 +9354,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: er
           }
         }
       >
-        5/78
+        58
       </TextInput>
     </View>
   </View>
@@ -19441,7 +19430,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        
+        2-4
       </TextInput>
     </View>
     <View>
@@ -19457,7 +19446,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+6-4
+        2
       </TextInput>
     </View>
   </View>
@@ -20282,7 +20271,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+6-4=
+        2-4
       </TextInput>
     </View>
     <View>
@@ -20298,7 +20287,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        4
+        -2
       </TextInput>
     </View>
   </View>
@@ -23646,7 +23635,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+6-=
+        2-
       </TextInput>
     </View>
     <View>
@@ -23662,7 +23651,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        4
+        -2
       </TextInput>
     </View>
   </View>
@@ -24487,7 +24476,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+3/=
+        2/
       </TextInput>
     </View>
     <View>
@@ -24503,7 +24492,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2.7500
+        0.5000
       </TextInput>
     </View>
   </View>
@@ -25328,7 +25317,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        
+        3.14*2
       </TextInput>
     </View>
     <View>
@@ -25344,7 +25333,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        3.14*2
+        3.14
       </TextInput>
     </View>
   </View>
@@ -26169,7 +26158,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        
+        0.5000+
       </TextInput>
     </View>
     <View>
@@ -26185,7 +26174,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+3/1+
+        0.5000
       </TextInput>
     </View>
   </View>
@@ -27010,7 +26999,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        
+        0.5000+23
       </TextInput>
     </View>
     <View>
@@ -27026,7 +27015,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+3/1+23
+        0.5000
       </TextInput>
     </View>
   </View>
@@ -27851,7 +27840,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+3/4=
+        2/4
       </TextInput>
     </View>
     <View>
@@ -27867,7 +27856,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2.7500
+        0.5000
       </TextInput>
     </View>
   </View>
@@ -28692,7 +28681,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        
+        2/4
       </TextInput>
     </View>
     <View>
@@ -28708,7 +28697,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        2+3/4
+        2
       </TextInput>
     </View>
   </View>
@@ -30374,7 +30363,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
       >
-        3.14*2=
+        3.14*2
       </TextInput>
     </View>
     <View>

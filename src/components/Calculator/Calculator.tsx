@@ -34,7 +34,7 @@ const Calculator = (props: CalculatorProps) => {
   const { onEquals, showNegValidation } = props;
   const [calcText, setCalcText] = useState('');
   const [calcValue, setCalcValue] = useState('');
-  const [calcComplete, setCalcComplete] = useState(false);
+  const [showPaperTape, setShowPaperTape] = useState(false);
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
 
   const doOrCanParenthesesClose = (index: number, parentsMustClose: boolean, openingParents = 0): boolean => {
@@ -85,9 +85,6 @@ const Calculator = (props: CalculatorProps) => {
   const onClear = () => {
     setCalcText('');
     setCalcValue('');
-    if (calcComplete) {
-      setCalcComplete(false);
-    }
     setIsCalcInvalid(false);
   };
 
@@ -117,7 +114,6 @@ const Calculator = (props: CalculatorProps) => {
       const valueHasDecimalNumber = calculatedValue % 1 !== 0;
       const result: string = valueHasDecimalNumber
         ? format(calculatedValue, { precision: 4, notation: 'fixed' }) : calculatedValue;
-      setCalcComplete(true);
       setCalcValue(result);
       if (onEquals) {
         onEquals(Number(result));
@@ -128,10 +124,18 @@ const Calculator = (props: CalculatorProps) => {
   };
 
   const onType = (char: string) => {
-    if (calcComplete) {
-      setCalcComplete(false);
+    const newValue = `${calcText}${char}`;
+    // set the first number
+    if (newValue.search(operandRegex) < 0) {
+      setCalcValue(newValue);
     }
-    setCalcText(`${calcText}${char}`);
+    // operand click functionality when there is calculated value
+    if (calcValue && char.search(operandRegex) >= 0) {
+      setShowPaperTape(true);
+      setCalcText(`${calcValue}${char}`);
+    } else {
+      setCalcText(newValue);
+    }
     setIsCalcInvalid(false);
   };
 
@@ -139,14 +143,16 @@ const Calculator = (props: CalculatorProps) => {
     <View style={styles.container}>
       <View style={styles.inputView}>
         <View>
-          <TextInput style={styles.calcPaperTape}>{ calcComplete ? `${calcText}=` : ''}</TextInput>
+          <TextInput style={styles.calcPaperTape}>
+            { showPaperTape ? calcText : ''}
+          </TextInput>
         </View>
         <View>
           <TextInput
             editable={false}
             style={{ ...styles.input, color: COLOR.BLACK }}
           >
-            {calcComplete ? calcValue : calcText}
+            {calcValue}
           </TextInput>
         </View>
       </View>
