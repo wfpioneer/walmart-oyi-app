@@ -56,7 +56,7 @@ exports[`ActivityModalComponent show activity loader when show activity is set t
 </Context.Provider>
 `;
 
-exports[`ActivityModalComponent show content modal when show info modal is true also on btn ok click should call dispatch 1`] = `
+exports[`ActivityModalComponent show content modal when show info modal is true 1`] = `
 <Context.Provider
   value={
     Object {
