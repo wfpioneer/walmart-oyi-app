@@ -9,6 +9,7 @@ export const CLEAR_AUDIT_SCREEN_DATA = 'AUDIT_ITEM_SCREEN/CLEAR_AUDIT_SCREEN_DAT
 export const SET_SCANNED_PALLET_ID = 'AUDIT_ITEM_SCREEN/SET_SCANNED_PALLET_ID';
 export const UPDATE_PALLET_QTY = 'AUDIT_ITEM_SCREEN/UPDATE_PALLET_QTY';
 export const UPDATE_FLOOR_LOCATION_QTY = 'AUDIT_ITEM_SCREEN/UPDATE_FLOOR_LOCATION_QTY';
+export const UPDATE_SCANNED_PALLET_STATUS = 'AUDIT_ITEM_SCREEN/UPDATE_SCANNED_PALLET_STATUS';
 
 export const setItemDetails = (items: ItemDetails) => ({
   type: SET_ITEM_DETAILS,
@@ -30,9 +31,9 @@ export const setScannedPalletId = (palletId: number) => ({
   payload: palletId
 } as const);
 
-export const updatePalletQty = (palletId: number, newQty: number, scanned: boolean) => ({
+export const updatePalletQty = (palletId: number, newQty: number) => ({
   type: UPDATE_PALLET_QTY,
-  payload: { palletId, newQty, scanned }
+  payload: { palletId, newQty }
 } as const);
 
 export const updateFloorLocationQty = (locationName: string, newQty: number) => ({
@@ -44,6 +45,11 @@ export const clearAuditScreenData = () => ({
   type: CLEAR_AUDIT_SCREEN_DATA
 } as const);
 
+export const updatePalletScannedStatus = (palletId: number, scanned: boolean) => ({
+  type: UPDATE_SCANNED_PALLET_STATUS,
+  payload: { palletId, scanned }
+} as const);
+
 export type Actions =
   | ReturnType<typeof setItemDetails>
   | ReturnType<typeof setFloorLocations>
@@ -52,3 +58,4 @@ export type Actions =
   | ReturnType<typeof setScannedPalletId>
   | ReturnType<typeof updatePalletQty>
   | ReturnType<typeof updateFloorLocationQty>
+  | ReturnType<typeof updatePalletScannedStatus>

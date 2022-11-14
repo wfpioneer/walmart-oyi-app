@@ -1972,9 +1972,10 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     </React.Fragment>
   </CustomModalComponent>
   <CalculatorModal
+    disableAcceptButton={[Function]}
     onAccept={[Function]}
     onClose={[Function]}
-    showAcceptButtonOn={[Function]}
+    showAcceptButton={true}
     visible={false}
   />
   <View
@@ -2055,6 +2056,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           claimsOH={0}
           collapsed={false}
           consolidatorOH={0}
+          countryCode="CN"
           flyCloudInTransitOH={0}
           flyCloudOH={0}
           loading={true}
@@ -2411,9 +2413,10 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     </React.Fragment>
   </CustomModalComponent>
   <CalculatorModal
+    disableAcceptButton={[Function]}
     onAccept={[Function]}
     onClose={[Function]}
-    showAcceptButtonOn={[Function]}
+    showAcceptButton={true}
     visible={false}
   />
   <View
@@ -2494,6 +2497,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           claimsOH={5}
           collapsed={false}
           consolidatorOH={10}
+          countryCode="CN"
           flyCloudInTransitOH={0}
           flyCloudOH={0}
           loading={false}

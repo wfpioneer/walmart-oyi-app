@@ -82,6 +82,7 @@ describe('Test Calculator component', () => {
 
     pressButtonAndRerender(del, rerender);
     expect(toJSON()).toMatchSnapshot('initial render');
+    pressButtonAndRerender(clear, rerender);
 
     pressButtonAndRerender(numbers[2], rerender);
     pressButtonAndRerender(add, rerender);

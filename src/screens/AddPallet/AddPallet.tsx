@@ -12,7 +12,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { addPallet, getSectionDetails } from '../../state/actions/saga';
 import Button from '../../components/buttons/Button';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { setBottomTab, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { strings } from '../../locales';
 import styles from './AddPallet.style';
@@ -82,9 +82,17 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
   // Navigation Listener
   useEffectHook(() => {
     // Resets location api response data when navigating off-screen
+    navigation.addListener('focus', () => {
+      dispatch(setBottomTab(false));
+    });
     navigation.addListener('beforeRemove', () => {
+      dispatch(setBottomTab(true));
       dispatch({ type: 'API/ADD_PALLET/RESET' });
     });
+    return () => {
+      navigation.removeListener('focus', () => {});
+      navigation.removeListener('beforeRemove', () => {});
+    };
   }, []);
   // Barcode event listener effect
   useEffectHook(() => {
