@@ -45,7 +45,7 @@ describe('ActivityModalComponent', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('show content modal when show info modal is true also on btn ok click should call dispatch', () => {
+  it('show content modal when show info modal is true', () => {
     const renderer = ShallowRenderer.createRenderer();
     store.dispatch(hideActivityModal());
     store.dispatch(showInfoModal('title', 'content'));
