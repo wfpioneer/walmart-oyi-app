@@ -13,15 +13,17 @@ const styles = StyleSheet.create({
     borderRadius: 8
   },
   inputView: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
     borderWidth: 1,
     borderRadius: 7,
     margin: 2
   },
   input: {
     width: (4 * width) / buttonScale + 4,
-    height: width / buttonScale,
+    height: width / (buttonScale + 1),
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'right'
   },
   buttonRow: {
     flexDirection: 'row'
@@ -54,6 +56,9 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
     backgroundColor: COLOR.RED,
     paddingHorizontal: 10
+  },
+  calcPaperTape: {
+    paddingBottom: 0
   }
 });
 

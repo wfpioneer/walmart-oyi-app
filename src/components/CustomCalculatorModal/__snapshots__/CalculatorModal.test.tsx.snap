@@ -78,26 +78,41 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
         <View
           style={
             Object {
+              "alignItems": "flex-end",
               "borderRadius": 7,
               "borderWidth": 1,
+              "justifyContent": "flex-end",
               "margin": 2,
             }
           }
         >
-          <TextInput
-            editable={false}
-            style={
-              Object {
-                "color": "#000000",
-                "fontSize": 20,
-                "height": 125,
-                "textAlign": "center",
-                "width": 504,
+          <View>
+            <TextInput
+              style={
+                Object {
+                  "paddingBottom": 0,
+                }
               }
-            }
-          >
-            
-          </TextInput>
+            >
+              
+            </TextInput>
+          </View>
+          <View>
+            <TextInput
+              editable={false}
+              style={
+                Object {
+                  "color": "#000000",
+                  "fontSize": 20,
+                  "height": 107.14285714285714,
+                  "textAlign": "right",
+                  "width": 504,
+                }
+              }
+            >
+              
+            </TextInput>
+          </View>
         </View>
         <View
           style={
