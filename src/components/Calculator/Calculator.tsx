@@ -10,7 +10,7 @@ import COLOR from '../../themes/Color';
 import styles from './Calculator.style';
 import { strings } from '../../locales';
 
-const operandRegex = /\+|\*|\/|(?<=(\d|\)))-|^-$/;
+const operandRegex = /-|\+|\*|\/|(?<=(\d|\)))-|^-$/;
 const openParent = /\(/;
 const closeParent = /\)/;
 const decimalNotPartOfNumberRegex = /.\.\D|.\.$|^\.\D|\.\.|^\.$|\d*\.\d*\.\d*/;
@@ -33,9 +33,9 @@ interface CalculatorProps {
 const Calculator = (props: CalculatorProps) => {
   const { onEquals, showNegValidation } = props;
   const [calcText, setCalcText] = useState('');
-  const [calcValue, setCalcValue] = useState('');
-  const [showPaperTape, setShowPaperTape] = useState(false);
+  const [calcPaperTape, setCalcPaperTape] = useState('');
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
+  const [currentCalculatedValue, setCurrentCalculatedValue] = useState('');
 
   const doOrCanParenthesesClose = (index: number, parentsMustClose: boolean, openingParents = 0): boolean => {
     const nextOpeningParent = calcText.indexOf('(', index);
@@ -84,8 +84,20 @@ const Calculator = (props: CalculatorProps) => {
 
   const onClear = () => {
     setCalcText('');
-    setCalcValue('');
     setIsCalcInvalid(false);
+  };
+
+  const onClearAll = () => {
+    setCalcText('');
+    setCalcPaperTape('');
+    setCurrentCalculatedValue('');
+    setIsCalcInvalid(false);
+  };
+
+  const clearPaperTapeAndSetNewVal = (val: string) => {
+    setCalcText(val);
+    setCurrentCalculatedValue('');
+    setCalcPaperTape('');
   };
 
   const onDelete = (shouldDeleteNumber = false) => {
@@ -114,7 +126,9 @@ const Calculator = (props: CalculatorProps) => {
       const valueHasDecimalNumber = calculatedValue % 1 !== 0;
       const result: string = valueHasDecimalNumber
         ? format(calculatedValue, { precision: 4, notation: 'fixed' }) : calculatedValue;
-      setCalcValue(result);
+      setCalcPaperTape(prevState => `${prevState}${calcText}=`);
+      setCurrentCalculatedValue(result);
+      setCalcText(result);
       if (onEquals) {
         onEquals(Number(result));
       }
@@ -124,17 +138,19 @@ const Calculator = (props: CalculatorProps) => {
   };
 
   const onType = (char: string) => {
-    const newValue = `${calcText}${char}`;
-    // set the first number
-    if (newValue.search(operandRegex) < 0) {
-      setCalcValue(newValue);
-    }
-    // operand click functionality when there is calculated value
-    if (calcValue && char.search(operandRegex) >= 0) {
-      setShowPaperTape(true);
-      setCalcText(`${calcValue}${char}`);
+    // Enter new value and intiating new calc
+    if (currentCalculatedValue && currentCalculatedValue === calcText && char.search(operandRegex) < 0) {
+      clearPaperTapeAndSetNewVal(`${char}`);
+    } else if (currentCalculatedValue && calcText === '') {
+      if (char.search(operandRegex) >= 0) {
+        // Enter operand after clearing the input
+        setCalcText(`${currentCalculatedValue}${char}`);
+      } else {
+        // Enter new value after clearing input
+        clearPaperTapeAndSetNewVal(`${char}`);
+      }
     } else {
-      setCalcText(newValue);
+      setCalcText(`${calcText}${char}`);
     }
     setIsCalcInvalid(false);
   };
@@ -143,16 +159,17 @@ const Calculator = (props: CalculatorProps) => {
     <View style={styles.container}>
       <View style={styles.inputView}>
         <View>
-          <TextInput style={styles.calcPaperTape}>
-            { showPaperTape ? calcText : ''}
+          <TextInput testID="calc-paper-tape" style={styles.calcPaperTape}>
+            {calcPaperTape}
           </TextInput>
         </View>
         <View>
           <TextInput
             editable={false}
+            testID="calc-text"
             style={{ ...styles.input, color: COLOR.BLACK }}
           >
-            {calcValue}
+            {calcText}
           </TextInput>
         </View>
       </View>
@@ -170,7 +187,7 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="clear">
           <Text style={styles.calcButtonText}>C</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="allClear">
+        <Pressable style={styles.calcButtonView} onPress={() => onClearAll()} testID="allClear">
           <Text style={styles.calcButtonText}>AC</Text>
         </Pressable>
         <Pressable

@@ -28,9 +28,11 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -47,8 +49,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        
+        +
       </TextInput>
     </View>
   </View>
@@ -880,11 +883,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        5
+        5/7=
       </TextInput>
     </View>
     <View>
@@ -899,8 +904,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        5
+        0.7143
       </TextInput>
     </View>
   </View>
@@ -1721,11 +1727,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        58
+        8=
       </TextInput>
     </View>
     <View>
@@ -1740,8 +1748,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        58
+        8
       </TextInput>
     </View>
   </View>
@@ -2489,7 +2498,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -2507,7 +2516,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -2562,11 +2571,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        132
+        
       </TextInput>
     </View>
     <View>
@@ -2581,8 +2592,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        132
+        1+32
       </TextInput>
     </View>
   </View>
@@ -3403,11 +3415,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        0.+
+        
       </TextInput>
     </View>
     <View>
@@ -3422,8 +3436,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        0.
+        0.+
       </TextInput>
     </View>
   </View>
@@ -4255,11 +4270,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        1*
+        
       </TextInput>
     </View>
     <View>
@@ -4274,11 +4291,23 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        1
+        1+*
       </TextInput>
     </View>
   </View>
+  <Text
+    style={
+      Object {
+        "color": "#d32f2f",
+        "fontSize": 16,
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    [missing "en.AUDITS.INVALID_EQUATION" translation]
+  </Text>
   <View
     style={
       Object {
@@ -5023,7 +5052,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -5041,7 +5070,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -5096,11 +5125,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        0.9.*6
+        
       </TextInput>
     </View>
     <View>
@@ -5115,8 +5146,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        0.9.
+        0.9+*6
       </TextInput>
     </View>
   </View>
@@ -5948,11 +5980,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        0.9.
+        
       </TextInput>
     </View>
     <View>
@@ -5967,6 +6001,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         0.9.
       </TextInput>
@@ -6800,11 +6835,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        5+
+        
       </TextInput>
     </View>
     <View>
@@ -6819,8 +6856,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        5
+        5/7+
       </TextInput>
     </View>
   </View>
@@ -7641,11 +7679,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        .
+        
       </TextInput>
     </View>
     <View>
@@ -7660,6 +7700,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         .
       </TextInput>
@@ -8493,9 +8534,11 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -8512,11 +8555,23 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         -4
       </TextInput>
     </View>
   </View>
+  <Text
+    style={
+      Object {
+        "color": "#d32f2f",
+        "fontSize": 16,
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    [missing "en.AUDITS.INVALID_EQUATION" translation]
+  </Text>
   <View
     style={
       Object {
@@ -9261,7 +9316,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -9279,7 +9334,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -9334,11 +9389,13 @@ exports[`Test Calculator component presses buttons to make invalid equations: er
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        58
+        
       </TextInput>
     </View>
     <View>
@@ -9353,8 +9410,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: er
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        58
+        8
       </TextInput>
     </View>
   </View>
@@ -10175,9 +10233,11 @@ exports[`Test Calculator component presses buttons to make invalid equations: in
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -10194,6 +10254,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: in
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         
       </TextInput>
@@ -11016,9 +11077,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -11035,6 +11098,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         0
       </TextInput>
@@ -11857,9 +11921,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -11876,6 +11942,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         01
       </TextInput>
@@ -12698,9 +12765,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -12717,6 +12786,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         012
       </TextInput>
@@ -13539,9 +13609,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -13558,6 +13630,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         0123
       </TextInput>
@@ -14380,9 +14453,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -14399,6 +14474,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         01234
       </TextInput>
@@ -15221,9 +15297,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -15240,6 +15318,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         012345
       </TextInput>
@@ -16062,9 +16141,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -16081,6 +16162,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         0123456
       </TextInput>
@@ -16903,9 +16985,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -16922,6 +17006,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         01234567
       </TextInput>
@@ -17744,9 +17829,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -17763,6 +17850,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         012345678
       </TextInput>
@@ -18585,9 +18673,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -18604,6 +18694,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         0123456789
       </TextInput>
@@ -19426,11 +19517,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        2-4
+        
       </TextInput>
     </View>
     <View>
@@ -19445,8 +19538,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        2
+        2+6-4
       </TextInput>
     </View>
   </View>
@@ -20267,11 +20361,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        2-4
+        2+6-4=
       </TextInput>
     </View>
     <View>
@@ -20286,8 +20382,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        -2
+        4
       </TextInput>
     </View>
   </View>
@@ -21035,7 +21132,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -21053,7 +21150,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -21108,9 +21205,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -21127,6 +21226,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         
       </TextInput>
@@ -21949,9 +22049,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -21968,6 +22070,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         
       </TextInput>
@@ -22790,11 +22893,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        
+        3.14*2=
       </TextInput>
     </View>
     <View>
@@ -22809,6 +22914,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         
       </TextInput>
@@ -23631,11 +23737,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        2-
+        2+6-4=
       </TextInput>
     </View>
     <View>
@@ -23650,8 +23758,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        -2
+        4
       </TextInput>
     </View>
   </View>
@@ -24399,7 +24508,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -24417,7 +24526,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -24472,11 +24581,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        2/
+        2+3/4=
       </TextInput>
     </View>
     <View>
@@ -24491,8 +24602,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        0.5000
+        
       </TextInput>
     </View>
   </View>
@@ -25240,7 +25352,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -25258,7 +25370,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -25313,11 +25425,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        3.14*2
+        
       </TextInput>
     </View>
     <View>
@@ -25332,8 +25446,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        3.14
+        3.14*2
       </TextInput>
     </View>
   </View>
@@ -26154,11 +26269,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        0.5000+
+        
       </TextInput>
     </View>
     <View>
@@ -26173,8 +26290,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        0.5000
+        1+
       </TextInput>
     </View>
   </View>
@@ -26995,11 +27113,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        0.5000+23
+        
       </TextInput>
     </View>
     <View>
@@ -27014,8 +27134,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        0.5000
+        1+23
       </TextInput>
     </View>
   </View>
@@ -27836,11 +27957,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        2/4
+        2+3/4=
       </TextInput>
     </View>
     <View>
@@ -27855,8 +27978,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        0.5000
+        2.7500
       </TextInput>
     </View>
   </View>
@@ -28677,11 +28801,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        2/4
+        
       </TextInput>
     </View>
     <View>
@@ -28696,8 +28822,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
-        2
+        2+3/4
       </TextInput>
     </View>
   </View>
@@ -29518,9 +29645,11 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -29537,6 +29666,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         3.14
       </TextInput>
@@ -30359,11 +30489,13 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
-        3.14*2
+        3.14*2=
       </TextInput>
     </View>
     <View>
@@ -30378,6 +30510,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         6.2800
       </TextInput>
@@ -31200,9 +31333,11 @@ exports[`Test Calculator component renders the calculator 1`] = `
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -31219,6 +31354,7 @@ exports[`Test Calculator component renders the calculator 1`] = `
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         
       </TextInput>
@@ -31802,6 +31938,850 @@ exports[`Test Calculator component renders the calculator 1`] = `
 </View>
 `;
 
+exports[`Test Calculator component renders the calculator component with paper tape on continuous calculation 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "borderColor": "#00000099",
+      "borderRadius": 8,
+      "borderWidth": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "borderRadius": 7,
+        "borderWidth": 1,
+        "justifyContent": "flex-end",
+        "margin": 2,
+      }
+    }
+  >
+    <View>
+      <TextInput
+        style={
+          Object {
+            "fontSize": 14,
+            "paddingBottom": 0,
+          }
+        }
+        testID="calc-paper-tape"
+      >
+        4-2=2*4=8-3=
+      </TextInput>
+    </View>
+    <View>
+      <TextInput
+        editable={false}
+        style={
+          Object {
+            "color": "#000000",
+            "fontSize": 20,
+            "height": 107.14285714285714,
+            "textAlign": "right",
+            "width": 504,
+          }
+        }
+        testID="calc-text"
+      >
+        5
+      </TextInput>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="clear"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        C
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="allClear"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        AC
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="delete"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        Del
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="divide"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        /
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="seven"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        7
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="eight"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        8
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="nine"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        9
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="multiply"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        *
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="four"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        4
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="five"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        5
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="six"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        6
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="subtract"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        -
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="one"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        1
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="two"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        2
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="three"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        3
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="add"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        +
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="decimal"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        .
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 125,
+        }
+      }
+      testID="zero"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#5FA7F2",
+          "borderColor": "#000000",
+          "borderRadius": 7,
+          "borderWidth": 1,
+          "height": 125,
+          "justifyContent": "center",
+          "margin": 1,
+          "width": 250,
+        }
+      }
+      testID="equals"
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 30,
+          }
+        }
+      >
+        =
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`Test Calculator component renders the calculator modal component with the negative validation error enabled 1`] = `
 <View
   style={
@@ -31830,9 +32810,11 @@ exports[`Test Calculator component renders the calculator modal component with t
       <TextInput
         style={
           Object {
+            "fontSize": 14,
             "paddingBottom": 0,
           }
         }
+        testID="calc-paper-tape"
       >
         
       </TextInput>
@@ -31849,11 +32831,23 @@ exports[`Test Calculator component renders the calculator modal component with t
             "width": 504,
           }
         }
+        testID="calc-text"
       >
         -1
       </TextInput>
     </View>
   </View>
+  <Text
+    style={
+      Object {
+        "color": "#d32f2f",
+        "fontSize": 16,
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    [missing "en.AUDITS.INVALID_EQUATION" translation]
+  </Text>
   <Text
     style={
       Object {
@@ -32609,7 +33603,7 @@ exports[`Test Calculator component renders the calculator modal component with t
     <View
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -32627,7 +33621,7 @@ exports[`Test Calculator component renders the calculator modal component with t
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#0071e9",
+          "backgroundColor": "#5FA7F2",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,

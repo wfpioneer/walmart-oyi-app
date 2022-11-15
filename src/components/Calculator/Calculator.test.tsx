@@ -229,4 +229,38 @@ describe('Test Calculator component', () => {
     rerender(<Calculator showNegValidation={true} />);
     expect(toJSON()).toMatchSnapshot();
   });
+  it('renders the calculator component with paper tape on continuous calculation', () => {
+    const { getByTestId, rerender, toJSON } = render(<Calculator showNegValidation={true} />);
+    const two = getByTestId('two');
+    const three = getByTestId('three');
+    const four = getByTestId('four');
+    const subtract = getByTestId('subtract');
+    const multiply = getByTestId('multiply');
+    const equals = getByTestId('equals');
+    const clear = getByTestId('clear');
+    pressButtonAndRerender(four, rerender);
+    pressButtonAndRerender(subtract, rerender);
+    pressButtonAndRerender(two, rerender);
+    pressButtonAndRerender(equals, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('4-2=');
+    expect(getByTestId('calc-text').props.children).toEqual(2);
+    pressButtonAndRerender(multiply, rerender);
+    pressButtonAndRerender(four, rerender);
+    pressButtonAndRerender(equals, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('4-2=2*4=');
+    expect(getByTestId('calc-text').props.children).toEqual(8);
+    // clear the current calc and click on any operand
+    pressButtonAndRerender(clear, rerender);
+    pressButtonAndRerender(subtract, rerender);
+    pressButtonAndRerender(three, rerender);
+    pressButtonAndRerender(equals, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('4-2=2*4=8-3=');
+    expect(getByTestId('calc-text').props.children).toEqual(5);
+    expect(toJSON()).toMatchSnapshot();
+    // clear the current calc and clicking on any value
+    pressButtonAndRerender(clear, rerender);
+    pressButtonAndRerender(three, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('');
+    expect(getByTestId('calc-text').props.children).toEqual('3');
+  });
 });

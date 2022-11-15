@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   calcPaperTape: {
-    paddingBottom: 0
+    paddingBottom: 0,
+    fontSize: 14
   }
 });
 

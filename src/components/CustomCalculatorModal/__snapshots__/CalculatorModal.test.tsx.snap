@@ -90,9 +90,11 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             <TextInput
               style={
                 Object {
+                  "fontSize": 14,
                   "paddingBottom": 0,
                 }
               }
+              testID="calc-paper-tape"
             >
               
             </TextInput>
@@ -109,6 +111,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
                   "width": 504,
                 }
               }
+              testID="calc-text"
             >
               
             </TextInput>
