@@ -1,8 +1,10 @@
 import { cloneDeep } from 'lodash';
 import {
   Actions,
+  CLEAR_APPROVAL_FILTER,
   RESET_APPROVALS, SET_APPROVAL_LIST, TOGGLE_ALL_ITEMS, TOGGLE_CATEGORY,
-  TOGGLE_ITEM
+  TOGGLE_ITEM,
+  UPDATE_APPROVAL_FILTER_CATEGORIES
 } from '../actions/Approvals';
 import { ApprovalCategory } from '../../models/ApprovalListItem';
 
@@ -18,14 +20,17 @@ export interface ApprovalState {
   categoryIndices: Array<number>;
   selectedItemQty: number;
   isAllSelected: boolean;
+  filterCategories: string[]
 }
 export const initialState: ApprovalState = {
   approvalList: [],
   categories: {},
   categoryIndices: [],
   selectedItemQty: 0,
-  isAllSelected: false
+  isAllSelected: false,
+  filterCategories: []
 };
+
 const isCheckedElsetotalItemQty = (isChecked: boolean, categoryObj: {
   checkedItemQty: number;
   totalItemQty: number;
@@ -185,6 +190,18 @@ export const Approvals = (
         categories: updatedCategories,
         selectedItemQty: isCheckedSelectedItemQty(checked, selectedQtyToAdd, currCheckedQty, totalCategoryQty),
         isAllSelected: updatedItemCat.every(item => item.isChecked === true)
+      };
+    }
+    case UPDATE_APPROVAL_FILTER_CATEGORIES: {
+      return {
+        ...state,
+        filterCategories: action.payload
+      };
+    }
+    case CLEAR_APPROVAL_FILTER: {
+      return {
+        ...state,
+        filterCategories: []
       };
     }
     case RESET_APPROVALS: {
