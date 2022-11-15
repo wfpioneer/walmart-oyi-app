@@ -26,12 +26,12 @@ export const initialState: ApprovalState = {
   selectedItemQty: 0,
   isAllSelected: false
 };
-const isCheckedElsetotalItemQty = (isChecked: boolean, categoryObj: {
+const isCheckedElseTotalItemQty = (isChecked: boolean, categoryObj: {
   checkedItemQty: number;
   totalItemQty: number;
 }) => (isChecked ? categoryObj.totalItemQty : 0);
 
-const isCheckedElsetoggledItems = (isChecked: boolean,
+const isCheckedElseToggledItems = (isChecked: boolean,
   toggledItems: ApprovalCategory[], categoryIndices: number[]) => (isChecked
   ? toggledItems.length - categoryIndices.length : 0);
 
@@ -113,14 +113,14 @@ export const Approvals = (
       const toggledCategories: Category = Object.fromEntries(Object.entries(categories)
         .map(([catNbr, categoryObj]) => [catNbr, {
           ...categoryObj,
-          checkedItemQty: isCheckedElsetotalItemQty(isChecked, categoryObj)
+          checkedItemQty: isCheckedElseTotalItemQty(isChecked, categoryObj)
         }]));
 
       return {
         ...state,
         approvalList: toggledItems,
         categories: toggledCategories,
-        selectedItemQty: isCheckedElsetoggledItems(isChecked, toggledItems, categoryIndices),
+        selectedItemQty: isCheckedElseToggledItems(isChecked, toggledItems, categoryIndices),
         isAllSelected: isChecked
       };
     }

@@ -408,7 +408,8 @@ export default {
     FAILED_ITEMS: 'Artículos Fallidos',
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo',
     MANAGER_APPROVAL: 'Aprobación de Gerencia',
-    APPROVAL_LOADING_MSG: 'Las aprobaciones de muchos artículos pueden llevar un momento, por favor espera'
+    APPROVAL_LOADING_MSG: 'Las aprobaciones de muchos artículos pueden llevar un momento, por favor espera',
+    SOURCE: 'Fuente de aprovacíon'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',

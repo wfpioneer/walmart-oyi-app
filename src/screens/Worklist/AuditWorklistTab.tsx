@@ -19,7 +19,7 @@ import { area } from '../../models/User';
 import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
-import ItemCard from "../../components/ItemCard/ItemCard";
+import ItemCard from '../../components/ItemCard/ItemCard';
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
