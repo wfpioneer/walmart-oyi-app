@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Dispatch } from 'redux';
 import { useRoute } from '@react-navigation/native';
 import styles from './FilterMenu.style';
@@ -30,30 +29,11 @@ import { WorklistItemI } from '../../../models/WorklistItem';
 import { WorklistState } from '../../../state/reducers/Worklist';
 import { WorklistGoal, WorklistSummary } from '../../../models/WorklistSummary';
 import { RenderCategoryCollapsibleCard } from '../../../components/CategoryCollapsibleCard/CategoryCollapsibleCard';
+import { MenuCard } from '../../../components/FilterMenuCard/FilterMenuCard';
 
-interface MenuCardProps {
-  title: string;
-  subtext: string;
-  opened: boolean;
-}
 interface FilteredArea extends area {
   isSelected: boolean;
 }
-
-export const MenuCard = (props: MenuCardProps): JSX.Element => {
-  const iconName = props.opened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
-  return (
-    <>
-      <View style={styles.menuCardText}>
-        <Text>{props.title}</Text>
-        <Text style={styles.subtitleText}>{props.subtext}</Text>
-      </View>
-      <View style={styles.arrowView}>
-        <MaterialIcons name={iconName} size={25} color={COLOR.GREY_700} />
-      </View>
-    </>
-  );
-};
 
 export const renderExceptionFilterCard = (
   item: FilterListItem,
@@ -391,6 +371,7 @@ export const getCategoryMap = (
       selected: isSelected
     };
   });
+  // console.log(categoryMap)
   return categoryMap.sort(
     (firstItem: any, secondItem: any) => firstItem.catgNbr - secondItem.catgNbr
   );
@@ -461,10 +442,10 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         categoryMap={categoryMap}
         categoryOpen={categoryOpen}
         filterCategories={filterCategories}
-        dispatch={dispatch}
         source="worklist"
-        toggleCategories={toggleCategories}
-        updateFilterCatgories={updateFilterCategories}
+        // already toggled in the component, just needs to get into redux
+        toggleCategories={(updatedCatOpen: boolean) => dispatch(toggleCategories(updatedCatOpen))}
+        updateFilterCatgories={(updatedCats: string[]) => dispatch(updateFilterCategories(updatedCats))}
       />
       <RenderExceptionTypeCard
         exceptionOpen={exceptionOpen}

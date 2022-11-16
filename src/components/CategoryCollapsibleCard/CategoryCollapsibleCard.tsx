@@ -5,18 +5,16 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { Dispatch } from 'redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FilteredCategory } from '../../models/FilterListItem';
-import { MenuCard } from '../../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import COLOR from '../../themes/Color';
 import styles from './CategoryCollapsibleCard.style';
+import { MenuCard } from '../FilterMenuCard/FilterMenuCard';
 
 export const renderCategoryFilterCard = (
   item: FilteredCategory,
-  dispatch: Dispatch<any>,
   filterCategories: string[],
   source: string,
   updateFilterCategories: (categories: string[]) => void
@@ -30,12 +28,12 @@ export const renderCategoryFilterCard = (
       trackEvent(`${source}_update_filter_categories`, {
         categories: JSON.stringify(filterCategories)
       });
-      return dispatch(updateFilterCategories(filterCategories));
+      return updateFilterCategories(filterCategories);
     }
 
     const replacementFilter = filterCategories;
     replacementFilter.push(`${item.catgNbr} - ${item.catgName}`);
-    return dispatch(updateFilterCategories(replacementFilter));
+    return updateFilterCategories(replacementFilter);
   };
   return (
     <TouchableOpacity
@@ -65,18 +63,26 @@ export const renderCategoryFilterCard = (
   );
 };
 
+/**
+ *
+ * @param props Note for toggleCategories: The component already toggles
+ * the boolean value inside this component, so the function supplied
+ * will not need to do any toggling
+ * @returns A card for a filter menu that will show all the available
+ * categories that are available for the given set of data. Each category
+ * is filterable and will be added to/removed from the filterCategories prop
+ * when its check box is checked or unchecked
+ */
 export const RenderCategoryCollapsibleCard = (props: {
     categoryMap: FilteredCategory[];
     categoryOpen: boolean;
     filterCategories: string[];
-    dispatch: Dispatch<any>;
     source: string;
     toggleCategories: (open: boolean) => void;
     updateFilterCatgories: (categories: string[]) => void
   }): JSX.Element => {
   const {
-    categoryMap, categoryOpen, filterCategories,
-    dispatch, source,
+    categoryMap, categoryOpen, filterCategories, source,
     toggleCategories, updateFilterCatgories
   } = props;
   const categoryNumberMap = categoryMap.map(
@@ -106,7 +112,7 @@ export const RenderCategoryCollapsibleCard = (props: {
       <TouchableOpacity
         style={styles.menuCard}
         onPress={() => {
-          dispatch(toggleCategories(!categoryOpen));
+          toggleCategories(!categoryOpen);
         }}
       >
         <MenuCard
@@ -120,7 +126,6 @@ export const RenderCategoryCollapsibleCard = (props: {
         data={filteredCategories}
         renderItem={({ item }) => renderCategoryFilterCard(
           item,
-          dispatch,
           filterCategories,
           source,
           updateFilterCatgories

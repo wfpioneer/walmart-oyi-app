@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FlatList,
   Text,
@@ -9,47 +9,61 @@ import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FilteredCategory } from '../../../models/FilterListItem';
-import { ApprovalListItem } from '../../../models/ApprovalListItem';
+import { ApprovalListItem, approvalRequestSource } from '../../../models/ApprovalListItem';
 import { RenderCategoryCollapsibleCard } from '../../../components/CategoryCollapsibleCard/CategoryCollapsibleCard';
-import { UseStateType } from '../../../models/Generics.d';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
-import { MenuCard } from '../../Worklist/FilterMenu/FilterMenu';
+import { MenuCard } from '../../../components/FilterMenuCard/FilterMenuCard';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import styles from './ApprovalFilter.style';
 import COLOR from '../../../themes/Color';
 import { strings } from '../../../locales';
+import {
+  clearFilter,
+  toggleCategories, toggleSources, updateFilterCategories, updateFilterSources
+} from '../../../state/actions/Approvals';
 
 interface ApprovalFilterProps {
   dispatch: Dispatch<any>;
-  categoryOpenState: UseStateType<boolean>;
-  sourceOpenState: UseStateType<boolean>;
   approvalList: ApprovalListItem[];
-  filteredCategoriesState: UseStateType<string[]>;
-  filteredSourcesState: UseStateType<string[]>;
+  categoryOpen: boolean;
+  sourceOpen: boolean;
+  filteredCategories: string[];
+  filteredSources: string[];
 }
 
 export const renderSourceFilterCard = (
   item: FilteredCategory,
   dispatch: Dispatch<any>,
   filterSources: string[],
-  updateFilterSources: (categories: string[]) => void
+  updateFilterSrcs: (categories: string[]) => void
 ): JSX.Element => {
   const onItemPress = () => {
     if (item.selected) {
       filterSources.splice(
-        filterSources.indexOf(`${item.catgNbr} - ${item.catgName}`),
+        filterSources.indexOf(item.catgName),
         1
       );
       trackEvent('approvals_update_filter_source', {
         categories: JSON.stringify(filterSources)
       });
-      return dispatch(updateFilterSources(filterSources));
+      return updateFilterSrcs(filterSources);
     }
 
     const replacementFilter = filterSources;
-    replacementFilter.push(`${item.catgNbr} - ${item.catgName}`);
-    return dispatch(updateFilterSources(replacementFilter));
+    replacementFilter.push(item.catgName);
+    return updateFilterSrcs(replacementFilter);
   };
+  let displayName = '';
+  switch (item.catgName) {
+    case approvalRequestSource.Audits:
+      displayName = strings('AUDITS.AUDITS');
+      break;
+    case approvalRequestSource.ItemDetails:
+      displayName = strings('GENERICS.ITEMS');
+      break;
+    default:
+      displayName = strings('GENERICS.NOT_FOUND');
+  }
   return (
     <TouchableOpacity
       testID="category button"
@@ -57,22 +71,14 @@ export const renderSourceFilterCard = (
       onPress={onItemPress}
     >
       <View style={styles.selectionView}>
-        {item.selected ? (
-          <MaterialCommunityIcons
-            name="checkbox-marked-outline"
-            size={15}
-            color={COLOR.MAIN_THEME_COLOR}
-          />
-        ) : (
-          <MaterialCommunityIcons
-            name="checkbox-blank-outline"
-            size={15}
-            color={COLOR.MAIN_THEME_COLOR}
-          />
-        )}
+        <MaterialCommunityIcons
+          name={item.selected ? 'checkbox-marked-outline' : 'checkbox-blank-outline'}
+          size={15}
+          color={COLOR.MAIN_THEME_COLOR}
+        />
       </View>
       <Text style={styles.categoryFilterText} numberOfLines={2}>
-        {`${item.catgNbr} - ${item.catgName} `}
+        {displayName}
       </Text>
     </TouchableOpacity>
   );
@@ -83,11 +89,11 @@ export const RenderSourceCollapsibleCard = (props: {
     sourceOpen: boolean;
     filterSources: string[];
     dispatch: Dispatch<any>;
-    updateFilterSources: (categories: string[]) => void;
-    toggleSources: (open: boolean) => void;
+    updateFilterSrcs: (categories: string[]) => void;
+    toggleSrcs: (open: boolean) => void;
   }): JSX.Element => {
   const {
-    sourceMap, sourceOpen, filterSources, dispatch, updateFilterSources, toggleSources
+    sourceMap, sourceOpen, filterSources, dispatch, updateFilterSrcs, toggleSrcs
   } = props;
 
   const sourceNameMap = sourceMap.map(
@@ -96,6 +102,8 @@ export const RenderSourceCollapsibleCard = (props: {
   const sourceNameSet = new Set();
   sourceNameMap.forEach(item => sourceNameSet.add(item));
 
+  // console.log(sourceMap)
+
   const filteredSources = sourceMap.filter((item: any) => {
     if (sourceNameSet.has(item.catgName)) {
       sourceNameSet.delete(item.catgName);
@@ -103,6 +111,8 @@ export const RenderSourceCollapsibleCard = (props: {
     }
     return false;
   });
+
+  // console.log(filteredSources)
 
   let categorySubtext = '';
   if (filterSources.length === 0) {
@@ -118,7 +128,8 @@ export const RenderSourceCollapsibleCard = (props: {
       <TouchableOpacity
         style={styles.menuCard}
         onPress={() => {
-          dispatch(toggleSources(!sourceOpen));
+          toggleSrcs(!sourceOpen);
+          // console.log(sourceOpen)
         }}
       >
         <MenuCard
@@ -130,9 +141,9 @@ export const RenderSourceCollapsibleCard = (props: {
       {sourceOpen && (
       <FlatList
         data={filteredSources}
-        renderItem={({ item }) => renderSourceFilterCard(item, dispatch, filterSources, updateFilterSources)}
+        renderItem={({ item }) => renderSourceFilterCard(item, dispatch, filterSources, updateFilterSrcs)}
         style={styles.categoryList}
-        keyExtractor={(item: any) => item.catgNbr.toString()}
+        keyExtractor={(item: any) => item.catgName}
       />
       )}
     </>
@@ -151,6 +162,7 @@ export const getCategoryMap = (
       selected: isSelected
     };
   });
+  // console.log(categoryMap)
   return categoryMap.sort(
     (firstItem: any, secondItem: any) => firstItem.catgNbr - secondItem.catgNbr
   );
@@ -163,65 +175,81 @@ export const getSourceMap = (
   const sourceMap: FilteredCategory[] = approvalItems.map(item => {
     const isSelected = filteredSources.indexOf(item.approvalRequestSource) !== -1;
     return {
-      catgName: item.approvalRequestSource,
+      catgName: item.approvalRequestSource || '',
       selected: isSelected
     };
   });
   return sourceMap.sort((firstItem: FilteredCategory, secondItem: FilteredCategory) => (
-    firstItem.catgName.localeCompare(secondItem.catgName)
+    firstItem.catgName.toLowerCase() < secondItem.catgName.toLowerCase()
+      ? -1
+      : Number(firstItem.catgName.toLowerCase() > secondItem.catgName.toLowerCase())
   ));
+};
+
+export const onClearPress = (dispatch: Dispatch<any>): void => {
+  trackEvent('approvals_clear_filter');
+  dispatch(clearFilter());
 };
 
 export const ApprovalFilterScreen = (props: ApprovalFilterProps) => {
   const {
     dispatch,
-    categoryOpenState,
     approvalList,
-    filteredCategoriesState,
-    filteredSourcesState,
-    sourceOpenState
+    categoryOpen,
+    filteredCategories,
+    filteredSources,
+    sourceOpen
   } = props;
 
   return (
-    <View>
+    <View style={styles.menuContainer}>
+      <View style={styles.headerBar}>
+        <Text style={styles.refineText}>{strings('WORKLIST.REFINE')}</Text>
+        <TouchableOpacity
+          style={styles.clearButton}
+          onPress={() => onClearPress(props.dispatch)}
+        >
+          <Text style={styles.clearText}>{strings('WORKLIST.CLEAR')}</Text>
+        </TouchableOpacity>
+      </View>
       <RenderCategoryCollapsibleCard
-        categoryMap={getCategoryMap(approvalList, filteredCategoriesState[0])}
-        categoryOpen={categoryOpenState[0]}
-        dispatch={dispatch}
-        filterCategories={filteredCategoriesState[0]}
-        updateFilterCatgories={filteredCategoriesState[1]}
+        categoryMap={getCategoryMap(approvalList, filteredCategories)}
+        categoryOpen={categoryOpen}
+        filterCategories={filteredCategories}
+        updateFilterCatgories={(updatedCats: string[]) => dispatch(updateFilterCategories(updatedCats))}
         source="approval"
-        toggleCategories={categoryOpenState[1]}
+        toggleCategories={(updatedCatOpen: boolean) => dispatch(toggleCategories(updatedCatOpen))}
       />
       <RenderSourceCollapsibleCard
-        sourceMap={getSourceMap(approvalList, filteredSourcesState[0])}
+        sourceMap={getSourceMap(approvalList, filteredSources)}
         dispatch={dispatch}
-        filterSources={filteredSourcesState[0]}
-        sourceOpen={sourceOpenState[0]}
-        toggleSources={sourceOpenState[1]}
-        updateFilterSources={filteredSourcesState[1]}
+        filterSources={filteredSources}
+        sourceOpen={sourceOpen}
+        updateFilterSrcs={(updatedSources: string[]) => dispatch(updateFilterSources(updatedSources))}
+        toggleSrcs={(updatedOpen: boolean) => dispatch(toggleSources(updatedOpen))}
       />
-      <Text>Hekki</Text>
     </View>
   );
 };
 
 const ApprovalFilter = () => {
-  const categoryOpenState = useState(false);
-  const sourceOpenState = useState(false);
-  const filterCategoriesState = useState<Array<string>>([]);
-  const filterSourcesState = useState<Array<string>>([]);
-  const { approvalList } = useTypedSelector(state => state.Approvals);
+  const {
+    approvalList,
+    categoryOpen,
+    sourceOpen,
+    filterCategories,
+    filterSources
+  } = useTypedSelector(state => state.Approvals);
   const dispatch = useDispatch();
 
   return (
     <ApprovalFilterScreen
       dispatch={dispatch}
-      categoryOpenState={categoryOpenState}
-      sourceOpenState={sourceOpenState}
+      categoryOpen={categoryOpen}
+      sourceOpen={sourceOpen}
       approvalList={approvalList}
-      filteredCategoriesState={filterCategoriesState}
-      filteredSourcesState={filterSourcesState}
+      filteredCategories={filterCategories}
+      filteredSources={filterSources}
     />
   );
 };

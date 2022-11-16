@@ -43,18 +43,16 @@ export const renderCloseButton = (dispatch: Dispatch<any>): JSX.Element => (
 );
 
 const renderHeaderRight = (dispatch: Dispatch<any>, selectAll: boolean, toggleMenu: UseStateType<boolean>[1]) => (
-  <View>
+  <View style={styles.headerRightView}>
+    <TouchableOpacity onPress={() => toggleMenu(isOpen => !isOpen)}>
+      <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
+    </TouchableOpacity>
     <TouchableOpacity onPress={() => dispatch(toggleAllItems(!selectAll))}>
       <View style={styles.selectAllButton}>
         {selectAll ? <Text style={styles.selectAllText}>{strings('APPROVAL.DESELECT_ALL')}</Text>
           : <Text style={styles.selectAllText}>{strings('APPROVAL.SELECT_ALL')}</Text>}
       </View>
     </TouchableOpacity>
-    <View style={styles.headerRightPadding}>
-      <TouchableOpacity onPress={() => toggleMenu(isOpen => !isOpen)}>
-        <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
-      </TouchableOpacity>
-    </View>
   </View>
 );
 
@@ -84,7 +82,13 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.E
         friction: 8,
         useNativeDriver: true
       })}
-      onChange={() => toggleMenu(isOpen => !isOpen)}
+      onChange={isOpen => {
+        if (!isOpen && menuOpen) {
+          toggleMenu(false);
+        } else if (isOpen && !menuOpen) {
+          toggleMenu(true);
+        }
+      }}
     >
       <Stack.Navigator
         screenOptions={{
@@ -101,7 +105,7 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.E
             headerTitle: selectedItemQty === 0 ? () => renderApprovalTitle(approvalAmount)
               : () => renderSelectedItemQty(selectedItemQty),
             headerRight: () => renderHeaderRight(dispatch, selectAll, toggleMenu),
-            headerRightContainerStyle: styles.headerRightPadding,
+            headerRightContainerStyle: styles.headerRightView,
             headerLeftContainerStyle: styles.headerLeftPadding,
             headerLeft: (selectedItemQty !== 0 && !selectAll) ? () => renderCloseButton(dispatch) : undefined
           }}
