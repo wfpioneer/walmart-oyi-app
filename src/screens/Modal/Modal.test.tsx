@@ -3,11 +3,14 @@ import {
   Text, View
 } from 'react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import store from '../../state';
-import { ActivityModalComponent, CustomModalComponent } from './Modal';
 import {
-  hideActivityModal, hideInfoModal, showActivityModal, showInfoModal
+  ActivityModalComponent, CustomModalComponent, renderActivityIndicator, renderContentView
+} from './Modal';
+import {
+  HIDE_INFO_MODAL, hideActivityModal, hideInfoModal, showActivityModal, showInfoModal
 } from '../../state/actions/Modal';
 
 const mockDispatch = jest.fn();
@@ -20,7 +23,8 @@ jest.mock('react-redux', () => {
   };
 });
 
-jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 
 describe('ActivityModalComponent', () => {
   it('show when show activity is set to false', () => {
@@ -45,17 +49,20 @@ describe('ActivityModalComponent', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('show content modal when show info modal is true', () => {
-    const renderer = ShallowRenderer.createRenderer();
+  it('show content modal when show info modal is true also on btnOk action call dispatch', () => {
     store.dispatch(hideActivityModal());
     store.dispatch(showInfoModal('title', 'content'));
-    renderer.render(
+    const { toJSON, getByTestId } = render(
       <Provider store={store}>
         <ActivityModalComponent />
       </Provider>
     );
 
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
+
+    const modalCancelButton = getByTestId('btnOk');
+    fireEvent.press(modalCancelButton);
+    expect(mockDispatch).toHaveBeenCalledWith({ type: HIDE_INFO_MODAL });
   });
 
   it('should hide info modal when show info modal is set to false', () => {
