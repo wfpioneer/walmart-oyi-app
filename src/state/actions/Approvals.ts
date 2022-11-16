@@ -8,6 +8,7 @@ export const RESET_APPROVALS = 'APPROVAL/RESET_APPROVALS';
 export const UPDATE_APPROVAL_FILTER_CATEGORIES = 'APPROVAL/UPDATE_APPROVAL_FILTER_CATEGORIES';
 export const CLEAR_APPROVAL_FILTER = 'APPROVAL/CLEAR_APPROVAL_FILTER';
 export const TOGGLE_FILTER_CATEGORIES = 'APPROVAL/TOGGLE_FILTER_CATEGORIES';
+export const TOGGLE_FILTER_MENU = 'APPROVAL/TOGGLE_FILTER_MENU';
 
 export const setApprovalList = (approvals: ApprovalCategory[], headerIndices: number[]) => ({
   type: SET_APPROVAL_LIST,
@@ -58,6 +59,11 @@ export const clearApprovalFilter = () => ({
   type: CLEAR_APPROVAL_FILTER
 } as const);
 
+export const toggleFilterMenu = (menuOpen: boolean) => ({
+  type: TOGGLE_FILTER_MENU,
+  payload: menuOpen
+} as const);
+
 export type Actions =
   | ReturnType<typeof setApprovalList>
   | ReturnType<typeof toggleAllItems>
@@ -66,4 +72,5 @@ export type Actions =
   | ReturnType<typeof resetApprovals>
   | ReturnType<typeof updateApprovalFilterCategories>
   | ReturnType<typeof clearApprovalFilter>
-  | ReturnType<typeof toggleFilterCategories>;
+  | ReturnType<typeof toggleFilterCategories>
+  | ReturnType<typeof toggleFilterMenu>;

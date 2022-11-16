@@ -19,8 +19,12 @@ const styles = StyleSheet.create({
   headerLeftPadding: {
     paddingLeft: 10
   },
-  selectAllButton: {
+  headerContainer: {
+    flexDirection: 'row',
     flex: 1,
+    alignItems: 'center'
+  },
+  selectAllButton: {
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center',

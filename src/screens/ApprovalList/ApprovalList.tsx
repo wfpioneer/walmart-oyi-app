@@ -172,17 +172,6 @@ export const renderFilterPills = (
   dispatch: Dispatch<any>,
   filterCategories: string[],
 ): JSX.Element => {
-  // if (listFilter.type === 'AREA') {
-  //   const removeAreaFilter = () => {
-  //     const removedArea = areas.find(item => item.area === listFilter.value);
-  //     const updatedFilteredCategories = filterCategories.filter(
-  //       category => removedArea && !(removedArea.categories.includes(Number(category.split('-')[0])))
-  //     );
-  //     dispatch(updateFilterCategories(updatedFilteredCategories));
-  //   };
-  //   return <FilterPillButton filterText={listFilter.value} onClosePress={removeAreaFilter} />;
-  // }
-
   if (listFilter.type === 'CATEGORY') {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
