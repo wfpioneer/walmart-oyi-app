@@ -102,8 +102,6 @@ export const RenderSourceCollapsibleCard = (props: {
   const sourceNameSet = new Set();
   sourceNameMap.forEach(item => sourceNameSet.add(item));
 
-  // console.log(sourceMap)
-
   const filteredSources = sourceMap.filter((item: any) => {
     if (sourceNameSet.has(item.catgName)) {
       sourceNameSet.delete(item.catgName);
@@ -111,8 +109,6 @@ export const RenderSourceCollapsibleCard = (props: {
     }
     return false;
   });
-
-  // console.log(filteredSources)
 
   let categorySubtext = '';
   if (filterSources.length === 0) {
@@ -129,7 +125,6 @@ export const RenderSourceCollapsibleCard = (props: {
         style={styles.menuCard}
         onPress={() => {
           toggleSrcs(!sourceOpen);
-          // console.log(sourceOpen)
         }}
       >
         <MenuCard
@@ -162,7 +157,6 @@ export const getCategoryMap = (
       selected: isSelected
     };
   });
-  // console.log(categoryMap)
   return categoryMap.sort(
     (firstItem: any, secondItem: any) => firstItem.catgNbr - secondItem.catgNbr
   );

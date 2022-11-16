@@ -371,7 +371,6 @@ export const getCategoryMap = (
       selected: isSelected
     };
   });
-  // console.log(categoryMap)
   return categoryMap.sort(
     (firstItem: any, secondItem: any) => firstItem.catgNbr - secondItem.catgNbr
   );
