@@ -7,7 +7,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import store from '../../state';
 import {
-  ActivityModalComponent, CustomModalComponent, renderActivityIndicator, renderContentView
+  ActivityModalComponent, CustomModalComponent
 } from './Modal';
 import {
   HIDE_INFO_MODAL, hideActivityModal, hideInfoModal, showActivityModal, showInfoModal
