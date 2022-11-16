@@ -92,6 +92,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
                 Object {
                   "fontSize": 16,
                   "paddingBottom": 0,
+                  "textAlign": "right",
                   "width": 504,
                 }
               }

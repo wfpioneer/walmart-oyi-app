@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
   calcPaperTape: {
     width: (4 * width) / buttonScale + 4,
     paddingBottom: 0,
-    fontSize: 16
+    fontSize: 16,
+    textAlign: 'right'
   }
 });
 

@@ -30,6 +30,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -875,6 +876,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -1720,6 +1722,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -2565,6 +2568,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -3410,6 +3414,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -4255,6 +4260,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -5100,6 +5106,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -5945,6 +5952,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -6790,6 +6798,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -7635,6 +7644,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -8480,6 +8490,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -9325,6 +9336,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: er
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -10170,6 +10182,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: in
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -11015,6 +11028,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -11860,6 +11874,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -12705,6 +12720,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -13550,6 +13566,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -14395,6 +14412,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -15240,6 +15258,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -16085,6 +16104,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -16930,6 +16950,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -17775,6 +17796,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -18620,6 +18642,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -19465,6 +19488,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -20310,6 +20334,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -21155,6 +21180,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -22000,6 +22026,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -22845,6 +22872,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -23690,6 +23718,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -24535,6 +24564,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -25380,6 +25410,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -26225,6 +26256,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -27070,6 +27102,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -27915,6 +27948,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -28760,6 +28794,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -29605,6 +29640,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -30450,6 +30486,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -31295,6 +31332,7 @@ exports[`Test Calculator component renders the calculator 1`] = `
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -31929,6 +31967,7 @@ exports[`Test Calculator component renders the calculator component with paper t
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
@@ -32774,6 +32813,7 @@ exports[`Test Calculator component renders the calculator modal component with t
           Object {
             "fontSize": 16,
             "paddingBottom": 0,
+            "textAlign": "right",
             "width": 504,
           }
         }
