@@ -3,6 +3,7 @@ import {
   Actions,
   CLEAR_APPROVAL_FILTER,
   RESET_APPROVALS, SET_APPROVAL_LIST, TOGGLE_ALL_ITEMS, TOGGLE_CATEGORY,
+  TOGGLE_FILTER_CATEGORIES,
   TOGGLE_ITEM,
   UPDATE_APPROVAL_FILTER_CATEGORIES
 } from '../actions/Approvals';
@@ -20,7 +21,8 @@ export interface ApprovalState {
   categoryIndices: Array<number>;
   selectedItemQty: number;
   isAllSelected: boolean;
-  filterCategories: string[]
+  filterCategories: string[];
+  categoryOpen: boolean;
 }
 export const initialState: ApprovalState = {
   approvalList: [],
@@ -28,7 +30,8 @@ export const initialState: ApprovalState = {
   categoryIndices: [],
   selectedItemQty: 0,
   isAllSelected: false,
-  filterCategories: []
+  filterCategories: [],
+  categoryOpen: false
 };
 
 const isCheckedElsetotalItemQty = (isChecked: boolean, categoryObj: {
@@ -202,6 +205,12 @@ export const Approvals = (
       return {
         ...state,
         filterCategories: []
+      };
+    }
+    case TOGGLE_FILTER_CATEGORIES: {
+      return {
+        ...state,
+        categoryOpen: action.payload
       };
     }
     case RESET_APPROVALS: {

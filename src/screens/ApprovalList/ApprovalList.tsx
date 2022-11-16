@@ -18,12 +18,13 @@ import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
-import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
+import { setApprovalList, toggleAllItems, updateApprovalFilterCategories } from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
+import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
@@ -47,6 +48,7 @@ interface ApprovalListProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  filterCategories: string[]
 }
 interface UpdateResponse {
   message: string;
@@ -164,12 +166,42 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
     </CustomModalComponent>
   );
 };
+
+export const renderFilterPills = (
+  listFilter: { type: string; value: string },
+  dispatch: Dispatch<any>,
+  filterCategories: string[],
+): JSX.Element => {
+  // if (listFilter.type === 'AREA') {
+  //   const removeAreaFilter = () => {
+  //     const removedArea = areas.find(item => item.area === listFilter.value);
+  //     const updatedFilteredCategories = filterCategories.filter(
+  //       category => removedArea && !(removedArea.categories.includes(Number(category.split('-')[0])))
+  //     );
+  //     dispatch(updateFilterCategories(updatedFilteredCategories));
+  //   };
+  //   return <FilterPillButton filterText={listFilter.value} onClosePress={removeAreaFilter} />;
+  // }
+
+  if (listFilter.type === 'CATEGORY') {
+    const removeFilter = () => {
+      const replacementFilter = filterCategories;
+      replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
+      dispatch(updateApprovalFilterCategories(replacementFilter));
+    };
+    return <FilterPillButton filterText={listFilter.value} onClosePress={removeFilter} />;
+  }
+
+  return <View />;
+};
+
 const getUpdateApprovalApiResult = (props: ApprovalListProps, updateApprovalApi: AsyncState) => {
   const {
     dispatch
   } = props;
   return updateApprovalApi.result?.status === 207 && renderPopUp(updateApprovalApi, dispatch);
 };
+
 const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: AsyncState) => {
   const {
     dispatch
@@ -180,12 +212,15 @@ const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: AsyncSta
     dispatch(setApprovalList(filteredData, headerIndices));
   }
 };
+
 export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, getApprovalApi, trackEventCall, useEffectHook,
     useFocusEffectHook, navigation, route, filteredList,
-    categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi
+    categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi,
+    filterCategories
   } = props;
+  let newFilteredList = filteredList;
 
   // Get Approval List Items
   useEffectHook(() => navigation.addListener('focus', () => {
@@ -269,11 +304,31 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     );
   }
 
+  const typedFilterCategoryList = filterCategories.map(category => ({ type: 'CATEGORY', value: category }));
+
+  if (filterCategories.length !== 0) {
+    newFilteredList = newFilteredList.filter(approvalItem => filterCategories
+      .indexOf(`${approvalItem.categoryNbr} - ${approvalItem.categoryDescription}`) !== -1);
+  }
+
   return (
     <View style={styles.mainContainer}>
+      { (filterCategories.length > 0) && (
+      <View style={styles.filterContainer}>
+        <FlatList
+          data={[...typedFilterCategoryList]}
+          horizontal
+          renderItem={({ item }) => renderFilterPills(
+            item, dispatch, filterCategories
+          )}
+          style={styles.filterList}
+          keyExtractor={item => item.value}
+        />
+      </View>
+      ) }
       {getUpdateApprovalApiResult(props, updateApprovalApi)}
       <FlatList
-        data={filteredList}
+        data={newFilteredList}
         keyExtractor={(item: ApprovalCategory, index: number) => {
           if (item.categoryHeader) {
             return item.categoryDescription.toString();
@@ -294,7 +349,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
           </View>
       )}
         style={styles.mainContainer}
-        extraData={filteredList}
+        extraData={newFilteredList}
       />
       {selectedItemQty > 0
         && (
@@ -312,7 +367,9 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 const ApprovalList = (): JSX.Element => {
   const getApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
-  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
+  const {
+    approvalList, categoryIndices, selectedItemQty, filterCategories
+  } = useTypedSelector(state => state.Approvals);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -330,6 +387,7 @@ const ApprovalList = (): JSX.Element => {
       trackEventCall={trackEvent}
       selectedItemQty={selectedItemQty}
       validateSessionCall={validateSession}
+      filterCategories={filterCategories}
     />
   );
 };

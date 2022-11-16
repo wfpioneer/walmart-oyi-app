@@ -9,3 +9,9 @@ export interface FilteredCategory {
     catgName: string;
     selected: boolean;
   }
+
+export interface ApprovalFilteredCategory {
+    categoryNbr: number;
+    categoryDescription: string;
+    selected: boolean;
+  }
