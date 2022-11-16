@@ -58,8 +58,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   calcPaperTape: {
+    width: (4 * width) / buttonScale + 4,
     paddingBottom: 0,
-    fontSize: 14
+    fontSize: 16
   }
 });
 

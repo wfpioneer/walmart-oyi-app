@@ -28,8 +28,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -55,17 +56,6 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -810,7 +800,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -828,7 +818,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -883,13 +873,14 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        5/7=
+        5/7=0.7143
       </TextInput>
     </View>
     <View>
@@ -1727,13 +1718,14 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        8=
+        8=8
       </TextInput>
     </View>
     <View>
@@ -2571,8 +2563,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -3415,13 +3408,14 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        8=8
       </TextInput>
     </View>
     <View>
@@ -3442,17 +3436,6 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -4197,7 +4180,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -4215,7 +4198,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -4270,8 +4253,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -4297,17 +4281,6 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -5052,7 +5025,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -5070,7 +5043,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -5125,13 +5098,14 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        8=8
       </TextInput>
     </View>
     <View>
@@ -5152,17 +5126,6 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -5907,7 +5870,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -5925,7 +5888,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -5980,13 +5943,14 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        8=8
       </TextInput>
     </View>
     <View>
@@ -6007,17 +5971,6 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -6762,7 +6715,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -6780,7 +6733,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -6835,8 +6788,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -7679,13 +7633,14 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        8=8
       </TextInput>
     </View>
     <View>
@@ -7706,17 +7661,6 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -8461,7 +8405,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -8479,7 +8423,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -8534,8 +8478,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -8561,17 +8506,6 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <View
     style={
       Object {
@@ -9316,7 +9250,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -9334,7 +9268,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
@@ -9389,13 +9323,14 @@ exports[`Test Calculator component presses buttons to make invalid equations: er
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        5/7=0.7143
       </TextInput>
     </View>
     <View>
@@ -10233,8 +10168,9 @@ exports[`Test Calculator component presses buttons to make invalid equations: in
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -11077,8 +11013,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -11921,8 +11858,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -12765,8 +12703,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -13609,8 +13548,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -14453,8 +14393,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -15297,8 +15238,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -16141,8 +16083,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -16985,8 +16928,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -17829,8 +17773,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -18673,8 +18618,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -19517,13 +19463,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        3.14*2=6.2800
       </TextInput>
     </View>
     <View>
@@ -20361,13 +20308,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        2+6-4=
+        2+6-4=4
       </TextInput>
     </View>
     <View>
@@ -21205,8 +21153,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -22049,8 +21998,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -22893,13 +22843,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        3.14*2=
+        3.14*2=6.2800
       </TextInput>
     </View>
     <View>
@@ -23737,13 +23688,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        2+6-4=
+        2+6-4=4
       </TextInput>
     </View>
     <View>
@@ -24581,13 +24533,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        2+3/4=
+        2+3/4=2.7500
       </TextInput>
     </View>
     <View>
@@ -25425,8 +25378,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -26269,13 +26223,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        2+3/4=2.7500
       </TextInput>
     </View>
     <View>
@@ -27113,13 +27068,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        2+3/4=2.7500
       </TextInput>
     </View>
     <View>
@@ -27957,13 +27913,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        2+3/4=
+        2+3/4=2.7500
       </TextInput>
     </View>
     <View>
@@ -28801,13 +28758,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        
+        2+6-4=4
       </TextInput>
     </View>
     <View>
@@ -29645,8 +29603,9 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -30489,13 +30448,14 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        3.14*2=
+        3.14*2=6.2800
       </TextInput>
     </View>
     <View>
@@ -31333,8 +31293,9 @@ exports[`Test Calculator component renders the calculator 1`] = `
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -31966,13 +31927,14 @@ exports[`Test Calculator component renders the calculator component with paper t
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
-        4-2=2*4=8-3=
+        4-2=2*4=8-3=5
       </TextInput>
     </View>
     <View>
@@ -32810,8 +32772,9 @@ exports[`Test Calculator component renders the calculator modal component with t
       <TextInput
         style={
           Object {
-            "fontSize": 14,
+            "fontSize": 16,
             "paddingBottom": 0,
+            "width": 504,
           }
         }
         testID="calc-paper-tape"
@@ -32837,17 +32800,6 @@ exports[`Test Calculator component renders the calculator modal component with t
       </TextInput>
     </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#d32f2f",
-        "fontSize": 16,
-        "paddingHorizontal": 10,
-      }
-    }
-  >
-    [missing "en.AUDITS.INVALID_EQUATION" translation]
-  </Text>
   <Text
     style={
       Object {
@@ -33603,7 +33555,7 @@ exports[`Test Calculator component renders the calculator modal component with t
     <View
       accessibilityState={
         Object {
-          "disabled": true,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -33621,7 +33573,7 @@ exports[`Test Calculator component renders the calculator modal component with t
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#5FA7F2",
+          "backgroundColor": "#0071e9",
           "borderColor": "#000000",
           "borderRadius": 7,
           "borderWidth": 1,
