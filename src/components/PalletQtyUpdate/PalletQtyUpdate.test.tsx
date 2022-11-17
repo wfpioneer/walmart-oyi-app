@@ -2,7 +2,7 @@ import React, { Dispatch } from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import PalletQtyUpdate, {
   assignHandleTextChange, calculateDecreaseQty, calculateIncreaseQty,
-  validateQty, validateSameQty
+  validateQty
 } from './PalletQtyUpdate';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
@@ -98,12 +98,6 @@ describe('testing PalletQtyUpdate component', () => {
       mockSetNewQty.mockReset();
       calculateIncreaseQty(10, mockSetNewQty);
       expect(mockSetNewQty).toHaveBeenCalled();
-    });
-    it('test validateSameQty', () => {
-      let results = validateSameQty(10, 10);
-      expect(results).toStrictEqual(true);
-      results = validateSameQty(10, 11);
-      expect(results).toStrictEqual(false);
     });
     it('test validateQty', () => {
       let results = validateQty(-10);
