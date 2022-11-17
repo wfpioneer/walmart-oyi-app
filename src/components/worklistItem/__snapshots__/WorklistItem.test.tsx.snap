@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorklistItem Component Renders an WorklistItem component 1`] = `
+<TouchableOpacity
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "flexDirection": "row",
+      "height": 100,
+      "justifyContent": "flex-start",
+      "marginBottom": 2,
+      "paddingHorizontal": 15,
+      "paddingVertical": 5,
+    }
+  }
+  testID="btnCard"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "flex": 1,
+        "height": 100,
+        "justifyContent": "space-evenly",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#d938ab",
+          "fontSize": 12,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      [missing "en.EXCEPTION.NIL_PICK" translation]
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 12,
+        }
+      }
+    >
+      Test
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#616161",
+          "fontSize": 12,
+        }
+      }
+    >
+      1234
+    </Text>
+  </View>
+</TouchableOpacity>
+`;
