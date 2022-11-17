@@ -11,13 +11,14 @@ import styles from './Calculator.style';
 import { strings } from '../../locales';
 
 const operandRegex = /\+|\*|\/|(?<=(\d|\)))-|^-$/;
+const allOperandRegex = /-|\+|\*|\/|(?<=(\d|\)))-|^-$/;
 const openParent = /\(/;
 const closeParent = /\)/;
 const decimalNotPartOfNumberRegex = /.\.\D|.\.$|^\.\D|\.\.|^\.$|\d*\.\d*\.\d*/;
 const parenthesesRegex = new RegExp(`${openParent.source}|${closeParent.source}`);
 const opAndParentRegex = new RegExp(`${operandRegex.source}|${parenthesesRegex.source}`);
 const lastOpOrParentRegex = new RegExp(`(${opAndParentRegex.source})(?!.*(${opAndParentRegex.source}))`);
-const doubleOperandRegex = new RegExp(`(${operandRegex.source}){2}`);
+const doubleOperandRegex = new RegExp(`(${allOperandRegex.source}){2}`);
 const emptyParentsRegex = new RegExp(`${openParent.source}${closeParent.source}`);
 const opAtStartRegex = new RegExp(`^(${operandRegex.source})`);
 const opAtEndRegex = new RegExp(`(${operandRegex.source})$`);
@@ -33,7 +34,9 @@ interface CalculatorProps {
 const Calculator = (props: CalculatorProps) => {
   const { onEquals, showNegValidation } = props;
   const [calcText, setCalcText] = useState('');
+  const [calcPaperTape, setCalcPaperTape] = useState('');
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
+  const [currentCalculatedValue, setCurrentCalculatedValue] = useState('');
 
   const doOrCanParenthesesClose = (index: number, parentsMustClose: boolean, openingParents = 0): boolean => {
     const nextOpeningParent = calcText.indexOf('(', index);
@@ -85,6 +88,13 @@ const Calculator = (props: CalculatorProps) => {
     setIsCalcInvalid(false);
   };
 
+  const onClearAll = () => {
+    setCalcText('');
+    setCalcPaperTape('');
+    setCurrentCalculatedValue('');
+    setIsCalcInvalid(false);
+  };
+
   const onDelete = (shouldDeleteNumber = false) => {
     if (calcText.length) {
       if (shouldDeleteNumber) {
@@ -105,12 +115,24 @@ const Calculator = (props: CalculatorProps) => {
     }
   };
 
+  const updatePaperTape = (newCalcText: string, result: string) => {
+    const firstNumber = newCalcText ? newCalcText.split(operandRegex)[0] : '';
+    if (currentCalculatedValue.toString() === firstNumber) {
+      const stringToAppendWith = calcPaperTape.replace(/[^=]+$/, '');
+      setCalcPaperTape(`${stringToAppendWith}${newCalcText}=${result}`);
+    } else {
+      setCalcPaperTape(`${newCalcText}=${result}`);
+    }
+  };
+
   const onEqualsPress = () => {
     if (isValidSyntax(true)) {
       const calculatedValue = evaluate(calcText);
       const valueHasDecimalNumber = calculatedValue % 1 !== 0;
       const result: string = valueHasDecimalNumber
         ? format(calculatedValue, { precision: 4, notation: 'fixed' }) : calculatedValue;
+      updatePaperTape(calcText, result);
+      setCurrentCalculatedValue(result);
       setCalcText(result);
       if (onEquals) {
         onEquals(Number(result));
@@ -121,21 +143,37 @@ const Calculator = (props: CalculatorProps) => {
   };
 
   const onType = (char: string) => {
-    setCalcText(`${calcText}${char}`);
+    // Enter new value and intiating new calc
+    if (currentCalculatedValue && currentCalculatedValue === calcText && char.search(operandRegex) < 0) {
+      setCalcText(`${char}`);
+    } else if (currentCalculatedValue && calcText === '' && char.search(operandRegex) >= 0) {
+      // Enter operand after clearing the input
+      setCalcText(`${currentCalculatedValue}${char}`);
+    } else {
+      setCalcText(`${calcText}${char}`);
+    }
     setIsCalcInvalid(false);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputView}>
-        <TextInput
-          editable={false}
-          style={{ ...styles.input, color: COLOR.BLACK }}
-        >
-          {calcText}
-        </TextInput>
+        <View>
+          <TextInput testID="calc-paper-tape" style={styles.calcPaperTape}>
+            {calcPaperTape}
+          </TextInput>
+        </View>
+        <View>
+          <TextInput
+            editable={false}
+            testID="calc-text"
+            style={{ ...styles.input, color: COLOR.BLACK }}
+          >
+            {calcText}
+          </TextInput>
+        </View>
       </View>
-      {(!isValidSyntax() || isCalcInvalid) && (
+      {isCalcInvalid && (
         <Text style={isCalcInvalid ? styles.highlightedErrorText : styles.errorText}>
           {strings('AUDITS.INVALID_EQUATION')}
         </Text>
@@ -149,7 +187,7 @@ const Calculator = (props: CalculatorProps) => {
         <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="clear">
           <Text style={styles.calcButtonText}>C</Text>
         </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="allClear">
+        <Pressable style={styles.calcButtonView} onPress={() => onClearAll()} testID="allClear">
           <Text style={styles.calcButtonText}>AC</Text>
         </Pressable>
         <Pressable
@@ -218,9 +256,9 @@ const Calculator = (props: CalculatorProps) => {
           style={{
             ...styles.calcButtonView,
             ...styles.equalBtn,
-            backgroundColor: isValidSyntax() && calcText.length ? COLOR.MAIN_THEME_COLOR : COLOR.DISABLED_BLUE
+            backgroundColor: calcText.length ? COLOR.MAIN_THEME_COLOR : COLOR.DISABLED_BLUE
           }}
-          disabled={!(isValidSyntax() && calcText.length)}
+          disabled={!(calcText.length)}
           onPress={() => onEqualsPress()}
           testID="equals"
         >

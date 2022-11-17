@@ -33,7 +33,7 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={worklistItemOnPress}>
+    <TouchableOpacity testID="btnCard" style={styles.container} onPress={worklistItemOnPress}>
       <View style={styles.content}>
         <Text style={styles.exceptionType}>
           { exceptionTypeToDisplayString(exceptionType) }
