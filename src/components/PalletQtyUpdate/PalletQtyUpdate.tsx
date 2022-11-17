@@ -24,7 +24,6 @@ const ERROR_FORMATTING_OPTIONS = {
 };
 
 export const validateQty = (qty: number) => MIN_QTY <= qty && qty <= MAX_QTY;
-export const validateSameQty = (qty: number, newQty: number) => qty === newQty;
 
 export const calculateDecreaseQty = (newQty: any,
   setNewQty: React.Dispatch<React.SetStateAction<number>>) => {
@@ -146,7 +145,7 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
           title={strings('APPROVAL.CONFIRM')}
           style={styles.button}
           type={ButtonType.PRIMARY}
-          disabled={!validateQty(newQty) || validateSameQty(qty, newQty)}
+          disabled={!validateQty(newQty)}
           onPress={() => handleSubmit(newQty)}
         />
       </View>

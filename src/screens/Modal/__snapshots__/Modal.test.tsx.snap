@@ -1,0 +1,413 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivityModalComponent should hide info modal when show info modal is set to false 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ActivityModalComponent />
+</Context.Provider>
+`;
+
+exports[`ActivityModalComponent show activity loader when show activity is set to true 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ActivityModalComponent />
+</Context.Provider>
+`;
+
+exports[`ActivityModalComponent show content modal when show info modal is true also on btnOk action call dispatch 1`] = `
+<Modal
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#ffffffff",
+          "borderRadius": 5,
+          "justifyContent": "center",
+          "padding": 15,
+        }
+      }
+    >
+      <Icon
+        color="#0071e9"
+        name="info"
+        size={30}
+        style={
+          Object {
+            "textAlign": "center",
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 20,
+            "textAlign": "center",
+          }
+        }
+      >
+        title
+      </Text>
+      <Text
+        style={
+          Object {
+            "textAlign": "center",
+          }
+        }
+      >
+        content
+      </Text>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#0071e9",
+            "borderRadius": 4,
+            "height": 30,
+            "justifyContent": "center",
+            "marginTop": 10,
+            "opacity": 1,
+          }
+        }
+        testID="btnOk"
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+            }
+          }
+        >
+          [missing "en.GENERICS.OK" translation]
+        </Text>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`ActivityModalComponent show when show activity is set to false 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ActivityModalComponent />
+</Context.Provider>
+`;
+
+exports[`Test CustomModalComponent Component should render component visible set to true 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "center",
+            "paddingBottom": 12,
+            "paddingHorizontal": 8,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": 10,
+          },
+        ]
+      }
+    >
+      <View>
+        <Text>
+          Test Component
+        </Text>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`Test CustomModalComponent Component should render component visible set to true and modalType as FormHeader 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 8,
+            "justifyContent": "center",
+            "paddingBottom": 12,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": 10,
+          },
+        ]
+      }
+    >
+      <View>
+        <Text>
+          Test Component
+        </Text>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`Test CustomModalComponent Component should render component visible set to true and modalType as error 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "padding": 10,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": 10,
+          },
+        ]
+      }
+    >
+      <View>
+        <Text>
+          Test Component
+        </Text>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`Test CustomModalComponent Component should render component visible set to true and modalType as popup 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": 10,
+          },
+        ]
+      }
+    >
+      <View>
+        <Text>
+          Test Component
+        </Text>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`Test CustomModalComponent Component should render component when visible set to false 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={false}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "center",
+            "paddingBottom": 12,
+            "paddingHorizontal": 8,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": 10,
+          },
+        ]
+      }
+    >
+      <View>
+        <Text>
+          Test Component
+        </Text>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
