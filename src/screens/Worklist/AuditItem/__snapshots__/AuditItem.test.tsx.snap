@@ -293,7 +293,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             <View
               accessibilityState={
                 Object {
-                  "disabled": true,
+                  "disabled": false,
                 }
               }
               accessible={true}
@@ -309,7 +309,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#BABBBE",
+                  "backgroundColor": "#0071e9",
                   "borderRadius": 5,
                   "elevation": 1,
                   "flex": 1,
