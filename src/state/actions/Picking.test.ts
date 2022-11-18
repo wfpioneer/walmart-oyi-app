@@ -14,6 +14,8 @@ import {
   SET_PICK_CREATE_RESERVE,
   SET_SELECTED_TAB,
   SHOW_PICKING_MENU,
+  TOGGLE_MULTI_BIN,
+  TOGGLE_MULTI_PICK,
   UPDATE_PICKS,
   deletePicks,
   initializePicklist,
@@ -24,7 +26,8 @@ import {
   setPickCreateReserve,
   setSelectedTab,
   showPickingMenu,
-  updatePicks
+  toggleMultiBin,
+  toggleMultiPick, updatePicks
 } from './Picking';
 import { Tabs } from '../../models/Picking.d';
 
@@ -86,6 +89,18 @@ describe('Picking action tests', () => {
     const showPickingMenuResult = showPickingMenu(true);
     expect(showPickingMenuResult).toStrictEqual({
       type: SHOW_PICKING_MENU,
+      payload: true
+    });
+
+    const toggleMultiBinResult = toggleMultiBin(true);
+    expect(toggleMultiBinResult).toStrictEqual({
+      type: TOGGLE_MULTI_BIN,
+      payload: true
+    });
+
+    const toggleMultiPickResult = toggleMultiPick(true);
+    expect(toggleMultiPickResult).toStrictEqual({
+      type: TOGGLE_MULTI_PICK,
       payload: true
     });
   });
