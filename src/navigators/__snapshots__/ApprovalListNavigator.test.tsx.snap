@@ -72,174 +72,181 @@ exports[`ApprovalList Navigator Renders the SelectedItemQty component  1`] = `
 `;
 
 exports[`ApprovalList Navigator Renders the approval list navigator component 1`] = `
-<StackNavigator
-  screenOptions={
-    Object {
-      "headerMode": "float",
-      "headerStyle": Object {
-        "backgroundColor": "#0071e9",
-      },
-      "headerTintColor": "#ffffffff",
-    }
-  }
+<SideMenu
+  animationFunction={[Function]}
+  animationStyle={[Function]}
+  autoClosing={true}
+  bounceBackOnOverdraw={true}
+  disableGestures={false}
+  edgeHitWidth={60}
+  hiddenMenuOffset={0}
+  isOpen={false}
+  menu={<ApprovalFilter />}
+  menuPosition="right"
+  onAnimationComplete={[Function]}
+  onChange={[Function]}
+  onMove={[Function]}
+  onSliding={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  openMenuOffset={500}
+  toleranceX={10}
+  toleranceY={10}
 >
-  <Screen
-    component={[Function]}
-    name="Approval"
-    options={
+  <StackNavigator
+    screenOptions={
       Object {
-        "headerLeft": undefined,
-        "headerLeftContainerStyle": Object {
-          "paddingLeft": 10,
+        "headerMode": "float",
+        "headerStyle": Object {
+          "backgroundColor": "#0071e9",
         },
-        "headerRight": [Function],
-        "headerRightContainerStyle": Object {
-          "paddingRight": 16,
-        },
-        "headerTitle": [Function],
+        "headerTintColor": "#ffffffff",
       }
     }
-  />
-  <Screen
-    component={[Function]}
-    name="ApproveSummary"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+  >
+    <Screen
+      component={[Function]}
+      name="Approval"
+      options={
+        Object {
+          "headerLeft": undefined,
+          "headerLeftContainerStyle": Object {
+            "paddingLeft": 10,
+          },
+          "headerRight": [Function],
+          "headerRightContainerStyle": Object {
+            "alignItems": "center",
+            "flexDirection": "row-reverse",
+            "paddingRight": 16,
+          },
+          "headerTitle": [Function],
+        }
       }
-    }
-  />
-  <Screen
-    component={[Function]}
-    name="RejectSummary"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+    />
+    <Screen
+      component={[Function]}
+      name="ApproveSummary"
+      options={
+        Object {
+          "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+        }
       }
-    }
-  />
-</StackNavigator>
+    />
+    <Screen
+      component={[Function]}
+      name="RejectSummary"
+      options={
+        Object {
+          "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+        }
+      }
+    />
+  </StackNavigator>
+</SideMenu>
 `;
 
 exports[`ApprovalList Navigator Renders the closeButton component  1`] = `
-<GenericTouchable
-  activeOpacity={0.2}
-  delayLongPress={600}
-  extraButtonProps={
-    Object {
-      "exclusive": true,
-      "rippleColor": "transparent",
-    }
-  }
+<TouchableOpacity
+  hostRef={null}
   onPress={[Function]}
-  onStateChange={[Function]}
-  style={
-    Array [
-      Object {},
-      Object {
-        "opacity": 1,
-      },
-    ]
-  }
 >
   <mockConstructor
     color="#ffffffff"
     name="close"
     size={22}
   />
-</GenericTouchable>
+</TouchableOpacity>
 `;
 
 exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
-<GenericTouchable
-  activeOpacity={0.2}
-  delayLongPress={600}
-  extraButtonProps={
-    Object {
-      "exclusive": true,
-      "rippleColor": "transparent",
-    }
-  }
-  onPress={[Function]}
-  onStateChange={[Function]}
+<View
   style={
-    Array [
-      Object {},
-      Object {
-        "opacity": 1,
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row-reverse",
+      "paddingRight": 16,
+    }
   }
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "flex-start",
-        "width": "100%",
-      }
-    }
+  <TouchableOpacity
+    onPress={[Function]}
   >
-    <Text
+    <mockConstructor
+      color="#ffffffff"
+      name="filter-list"
+      size={25}
+    />
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
       style={
         Object {
-          "color": "#ffffffff",
-          "fontSize": 16,
-          "fontWeight": "bold",
+          "alignItems": "center",
+          "flexDirection": "row",
+          "margin": 15,
         }
       }
     >
-      [missing "en.APPROVAL.DESELECT_ALL" translation]
-    </Text>
-  </View>
-</GenericTouchable>
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.APPROVAL.DESELECT_ALL" translation]
+      </Text>
+    </View>
+  </TouchableOpacity>
+</View>
 `;
 
 exports[`ApprovalList Navigator Renders the select all button header 1`] = `
-<GenericTouchable
-  activeOpacity={0.2}
-  delayLongPress={600}
-  extraButtonProps={
-    Object {
-      "exclusive": true,
-      "rippleColor": "transparent",
-    }
-  }
-  onPress={[Function]}
-  onStateChange={[Function]}
+<View
   style={
-    Array [
-      Object {},
-      Object {
-        "opacity": 1,
-      },
-    ]
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row-reverse",
+      "paddingRight": 16,
+    }
   }
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "flex-start",
-        "width": "100%",
-      }
-    }
+  <TouchableOpacity
+    onPress={[Function]}
   >
-    <Text
+    <mockConstructor
+      color="#ffffffff"
+      name="filter-list"
+      size={25}
+    />
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
       style={
         Object {
-          "color": "#ffffffff",
-          "fontSize": 16,
-          "fontWeight": "bold",
+          "alignItems": "center",
+          "flexDirection": "row",
+          "margin": 15,
         }
       }
     >
-      [missing "en.APPROVAL.SELECT_ALL" translation]
-    </Text>
-  </View>
-</GenericTouchable>
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.APPROVAL.SELECT_ALL" translation]
+      </Text>
+    </View>
+  </TouchableOpacity>
+</View>
 `;

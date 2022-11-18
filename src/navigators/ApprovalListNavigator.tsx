@@ -42,7 +42,9 @@ export const renderCloseButton = (dispatch: Dispatch<any>): JSX.Element => (
   </TouchableOpacity>
 );
 
-const renderHeaderRight = (dispatch: Dispatch<any>, selectAll: boolean, toggleMenu: UseStateType<boolean>[1]) => (
+export const renderHeaderRight = (
+  dispatch: Dispatch<any>, selectAll: boolean, toggleMenu: UseStateType<boolean>[1]
+) => (
   <View style={styles.headerRightView}>
     <TouchableOpacity onPress={() => toggleMenu(isOpen => !isOpen)}>
       <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />

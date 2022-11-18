@@ -6,6 +6,12 @@ import { mockCategoryMap } from '../../mockData/mockWorkList';
 import { RenderCategoryCollapsibleCard, renderCategoryFilterCard } from './CategoryCollapsibleCard';
 import { trackEvent } from '../../utils/AppCenterTool';
 
+jest.mock('../../utils/AppCenterTool.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
+  trackEvent: jest.fn()
+}));
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 const mockDispatch = jest.fn();
 const mockFilterCategories: string[] = [
   '3 - OFFICE SUPPLIES',
@@ -20,6 +26,9 @@ const mockItem: FilteredCategory[] = [
 ];
 const mockUpdateCats = jest.fn();
 describe('Category collapsible card for filtration render tests', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it('Test the renderCategoryCollapsibleCard and calls dispatch()', () => {
     const { toJSON, getByText } = render(
       <RenderCategoryCollapsibleCard
