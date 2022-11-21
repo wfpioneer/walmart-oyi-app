@@ -1,6 +1,9 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect
+  DependencyList, Dispatch, EffectCallback, useCallback, useEffect, useRef
 } from 'react';
+import {
+  BottomSheetModal
+} from '@gorhom/bottom-sheet';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
 import { trackEvent } from 'appcenter-analytics';
@@ -29,7 +32,8 @@ import {
   setPickCreateFloor,
   setPickCreateItem,
   setPickCreateReserve,
-  setSelectedTab
+  setSelectedTab,
+  showPickingMenu
 } from '../../state/actions/Picking';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
@@ -53,6 +57,8 @@ interface PickingTabNavigatorProps {
   selectedTab: Tabs;
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
+  bottomSheetModalRef: React.RefObject<BottomSheetModal>;
+  pickingMenu: boolean;
 }
 
 export const getItemDetailsApiHook = (
@@ -194,11 +200,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     updatePicklistStatusApi,
     selectedTab,
     useCallbackHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    bottomSheetModalRef,
+    pickingMenu
   } = props;
 
   let scannedSubscription: EmitterSubscription;
-
   const quickPickList = picklist.filter(item => item.quickPick);
   const pickBinList = picklist.filter(
     item => !item.quickPick
@@ -260,6 +267,16 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     [updatePicklistStatusApi]
   );
 
+  useEffectHook(() => {
+    if (bottomSheetModalRef.current) {
+      if (pickingMenu) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [pickingMenu]);
+
   return (
     <Tab.Navigator
       initialRouteName={selectedTab}
@@ -280,14 +297,18 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           ) : undefined
         }}
         listeners={{
-          focus: () => dispatch(setSelectedTab(Tabs.QUICKPICK))
+          focus: () => {
+            dispatch(setSelectedTab(Tabs.QUICKPICK));
+            dispatch(showPickingMenu(false));
+          }
         }}
       >
         {() => (
           <QuickPickTab
             quickPickItems={quickPickList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen
@@ -308,7 +329,9 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           <PickBinTab
             pickBinList={pickBinList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+            bottomSheetModalRef={bottomSheetModalRef}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen
@@ -322,14 +345,18 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           ) : undefined
         }}
         listeners={{
-          focus: () => dispatch(setSelectedTab(Tabs.SALESFLOOR))
+          focus: () => {
+            dispatch(showPickingMenu(false));
+            dispatch(setSelectedTab(Tabs.SALESFLOOR));
+          }
         }}
       >
         {() => (
           <SalesFloorTab
             readyToWorklist={salesFloorList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
     </Tab.Navigator>
@@ -343,6 +370,8 @@ export const PickingTabs = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
   const navigation = useNavigation();
   const route = useRoute();
   return (
@@ -358,6 +387,8 @@ export const PickingTabs = (): JSX.Element => {
       selectedTab={selectedTab}
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
+      bottomSheetModalRef={bottomSheetModalRef}
+      pickingMenu={pickingMenu}
     />
   );
 };
