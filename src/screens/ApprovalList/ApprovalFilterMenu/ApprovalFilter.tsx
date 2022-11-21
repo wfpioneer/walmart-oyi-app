@@ -167,7 +167,8 @@ export const getSourceMap = (
   filteredSources: string[]
 ): FilteredCategory[] => {
   const sourceMap: FilteredCategory[] = approvalItems.map(item => {
-    const isSelected = filteredSources.indexOf(item.approvalRequestSource) !== -1;
+    const source = item.approvalRequestSource || '';
+    const isSelected = filteredSources.indexOf(source) !== -1;
     return {
       catgName: item.approvalRequestSource || '',
       selected: isSelected
