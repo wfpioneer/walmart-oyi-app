@@ -478,8 +478,8 @@ export default {
     NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
     ADDITIONAL_ITEMS: '卡板有其它商品',
     QUANTITY_STOCKED: '楼面陈列数量',
-    ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
-    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
+    ACCEPT_MULTIPLE_BINS: '批量接收上架任务',
+    ACCEPT_MULTIPLE_PICKS: '批量接收补货任务'
   },
   BINNING: {
     BINNING: '上架',
