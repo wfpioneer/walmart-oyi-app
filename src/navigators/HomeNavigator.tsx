@@ -57,7 +57,7 @@ const mapDispatchToProps = {
 
 const Stack = createStackNavigator();
 
-const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) => {
+export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) => {
   const options = [
     strings('HOME.CHANGE_LANGUAGE'),
     strings('GENERICS.SIGN_OUT'),
@@ -131,15 +131,17 @@ const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) =>
   });
 };
 
-const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: (bool: boolean) => void) => (
-  <TouchableOpacity onPress={() => {
-    if (isManualScanEnabled) {
-      trackEvent('disable_manual_scan');
-    } else {
-      trackEvent('enable_manual_scan');
-    }
-    setManualScanFunc(!isManualScanEnabled);
-  }}
+export const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: (bool: boolean) => void) => (
+  <TouchableOpacity
+    testID="btnScan"
+    onPress={() => {
+      if (isManualScanEnabled) {
+        trackEvent('disable_manual_scan');
+      } else {
+        trackEvent('enable_manual_scan');
+      }
+      setManualScanFunc(!isManualScanEnabled);
+    }}
   >
     <View style={styles.leftButton}>
       <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
@@ -147,7 +149,7 @@ const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: (
   </TouchableOpacity>
 );
 
-const renderCamButton = () => (
+export const renderCamButton = () => (
   <TouchableOpacity onPress={() => { openCamera(); }}>
     <View style={styles.camButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
@@ -155,11 +157,13 @@ const renderCamButton = () => (
   </TouchableOpacity>
 );
 
-const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: any) => (
-  <TouchableOpacity onPress={() => {
-    trackEvent('menu_button_click');
-    showSignOutMenu(props, navigation);
-  }}
+export const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: any) => (
+  <TouchableOpacity
+    testID="btnShowMenu"
+    onPress={() => {
+      trackEvent('menu_button_click');
+      showSignOutMenu(props, navigation);
+    }}
   >
     <View style={styles.rightButton}>
       <Image
@@ -170,7 +174,7 @@ const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: an
   </TouchableOpacity>
 );
 
-const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) => {
+export const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) => {
   const { isManualScanEnabled } = props;
 
   return (
