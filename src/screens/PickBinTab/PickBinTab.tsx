@@ -28,6 +28,8 @@ interface PickBinTabScreenProps {
   dispatch: Dispatch<any>;
   refreshing: boolean;
   onRefresh: () => void;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 
 const ASSIGNED_TO_ME = 'assignedToMe';
@@ -37,7 +39,7 @@ const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletL
 
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
-    pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing
+    pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
   } = props;
   const { multiBin, multiPick } = user.configs;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
@@ -63,6 +65,8 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
               groupItems
               currentTab={Tabs.PICK}
               dispatch={dispatch}
+              multiBinEnabled={multiBinEnabled}
+              multiPickEnabled={multiPickEnabled}
             />
           );
         }}
@@ -100,6 +104,7 @@ const PickBinTab = (props: PickBinTabProps) => {
   const { pickBinList, onRefresh, refreshing } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
+  const { multiBinEnabled, multiPickEnabled } = useTypedSelector(state => state.Picking);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
 
   return (
@@ -110,6 +115,8 @@ const PickBinTab = (props: PickBinTabProps) => {
       dispatch={dispatch}
       refreshing={refreshing}
       onRefresh={onRefresh}
+      multiBinEnabled={multiBinEnabled}
+      multiPickEnabled={multiPickEnabled}
     />
   );
 };

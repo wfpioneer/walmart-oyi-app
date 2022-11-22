@@ -23,6 +23,8 @@ describe('Picking Navigator', () => {
         isManualScanEnabled={false}
         selectedTab={Tabs.PICK}
         pickingMenu={false}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

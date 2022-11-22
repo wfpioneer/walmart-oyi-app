@@ -40,16 +40,20 @@ exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
 
 exports[`Picking Navigator Renders the Picking Navigator 1`] = `
 <StackNavigator
-  screenOptions={[Function]}
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
 >
   <Screen
     component={[Function]}
     name="PickingTabs"
-    options={
-      Object {
-        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}

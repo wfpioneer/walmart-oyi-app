@@ -80,6 +80,81 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 </ForwardRef(SafeAreaView)>
 `;
 
+exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with accept multiPick and multiBin buttons 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#eeeeee",
+        "padding": 10,
+      }
+    }
+  >
+    <Button
+      backgroundColor="#BABBBE"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "paddingBottom": 4,
+          "width": "100%",
+        }
+      }
+      title="[missing \\"en.PICKING.ACCEPT_MULTI_BIN\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+    <Button
+      backgroundColor="#BABBBE"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "paddingBottom": 4,
+          "width": "100%",
+        }
+      }
+      title="[missing \\"en.PICKING.ACCEPT_MULTI_PICK\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component without AssignedToMe List and zone 1`] = `
 <ForwardRef(SafeAreaView)
   style={
