@@ -12,6 +12,8 @@ import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
+import Button, { ButtonType } from '../../components/buttons/Button';
+import COLOR from '../../themes/Color';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
@@ -36,6 +38,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
     pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing
   } = props;
+  const { multiBin, multiPick } = user.configs;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
   const groupedPickListByZone = groupBy(otherPickList,
     (item: PickListItem) => getZoneFromPalletLocation(item.palletLocationName));
@@ -66,8 +69,25 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         refreshing={refreshing}
         onRefresh={onRefresh}
       />
+
       <View style={styles.scanItemLabel}>
-        <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
+        { (!multiBin && !multiPick) && <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>}
+        { multiBin && (
+        <Button
+          style={styles.buttonStyle}
+          type={ButtonType.PRIMARY}
+          backgroundColor={COLOR.DISABLED_GREY}
+          title={strings('PICKING.ACCEPT_MULTI_BIN')}
+        />
+        )}
+        {multiPick && (
+        <Button
+          style={styles.buttonStyle}
+          type={ButtonType.PRIMARY}
+          backgroundColor={COLOR.DISABLED_GREY}
+          title={strings('PICKING.ACCEPT_MULTI_PICK')}
+        />
+        )}
       </View>
     </SafeAreaView>
   );

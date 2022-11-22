@@ -477,7 +477,9 @@ export default {
       '已完成多个补货，补货清单已更新',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
     ADDITIONAL_ITEMS: '卡板有其它商品',
-    QUANTITY_STOCKED: '楼面陈列数量'
+    QUANTITY_STOCKED: '楼面陈列数量',
+    ACCEPT_MULTI_BIN: ' 批量接收上架任务',
+    ACCEPT_MULTI_PICK: '批量接收补货任务'
   },
   BINNING: {
     BINNING: '上架',

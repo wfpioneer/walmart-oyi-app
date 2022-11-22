@@ -4,6 +4,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -43,6 +44,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -82,6 +84,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",

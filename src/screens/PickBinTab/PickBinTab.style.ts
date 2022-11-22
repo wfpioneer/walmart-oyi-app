@@ -5,12 +5,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: COLOR.WHITE
   },
   scanItemLabel: {
     alignItems: 'center',
     backgroundColor: COLOR.GREY_200,
     padding: 10
+  },
+  buttonStyle: {
+    width: '100%',
+    paddingBottom: 4
   }
 });
 
