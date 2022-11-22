@@ -53,6 +53,8 @@ interface PickingTabNavigatorProps {
   selectedTab: Tabs;
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 
 export const getItemDetailsApiHook = (
@@ -194,7 +196,9 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     updatePicklistStatusApi,
     selectedTab,
     useCallbackHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    multiBinEnabled,
+    multiPickEnabled
   } = props;
 
   let scannedSubscription: EmitterSubscription;
@@ -266,7 +270,15 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
       screenOptions={{
         tabBarActiveTintColor: COLOR.MAIN_THEME_COLOR,
         tabBarInactiveTintColor: COLOR.GREY_700,
-        tabBarItemStyle: styles.tabBarStyle
+        tabBarItemStyle: styles.tabBarStyle,
+        swipeEnabled: !multiBinEnabled && !multiPickEnabled
+      }}
+      screenListeners={{
+        tabPress: tabEvent => {
+          if (multiBinEnabled || multiPickEnabled) {
+            tabEvent.preventDefault();
+          }
+        }
       }}
     >
       <Tab.Screen
@@ -287,7 +299,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           <QuickPickTab
             quickPickItems={quickPickList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen
@@ -308,7 +321,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           <PickBinTab
             pickBinList={pickBinList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen
@@ -329,7 +343,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           <SalesFloorTab
             readyToWorklist={salesFloorList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
     </Tab.Navigator>
@@ -338,7 +353,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
 export const PickingTabs = (): JSX.Element => {
   const dispatch = useDispatch();
-  const picklist = useTypedSelector(state => state.Picking.pickList);
+  const { multiBinEnabled, multiPickEnabled, pickList } = useTypedSelector(state => state.Picking);
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
@@ -347,7 +362,7 @@ export const PickingTabs = (): JSX.Element => {
   const route = useRoute();
   return (
     <PickingTabNavigator
-      picklist={picklist}
+      picklist={pickList}
       dispatch={dispatch}
       navigation={navigation}
       route={route}
@@ -358,6 +373,8 @@ export const PickingTabs = (): JSX.Element => {
       selectedTab={selectedTab}
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
+      multiBinEnabled={multiBinEnabled}
+      multiPickEnabled={multiPickEnabled}
     />
   );
 };

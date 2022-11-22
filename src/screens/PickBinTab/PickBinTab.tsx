@@ -14,6 +14,7 @@ import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
+import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
@@ -78,6 +79,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
           type={ButtonType.PRIMARY}
           backgroundColor={COLOR.DISABLED_GREY}
           title={strings('PICKING.ACCEPT_MULTI_BIN')}
+          onPress={() => dispatch(toggleMultiBin(true))}
         />
         )}
         {multiPick && (
@@ -86,6 +88,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
           type={ButtonType.PRIMARY}
           backgroundColor={COLOR.DISABLED_GREY}
           title={strings('PICKING.ACCEPT_MULTI_PICK')}
+          onPress={() => dispatch(toggleMultiPick(true))}
         />
         )}
       </View>
