@@ -845,6 +845,12 @@ export const disabledContinue = (
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
 
+export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
+  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(b.locationName);
+
+  return locations.sort(sortLocationNames);
+};
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent,
@@ -1142,14 +1148,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       });
     }
     return locationLst;
-  };
-
-  const sortReserveLocations = (locations: ItemPalletInfo[]) => {
-    const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => (
-      a.locationName.localeCompare(b.locationName)
-    );
-
-    return locations.sort(sortLocationNames);
   };
 
   const getReserveLocationList = (locations: ItemPalletInfo[]) => {

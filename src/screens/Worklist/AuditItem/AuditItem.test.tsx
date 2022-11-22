@@ -41,6 +41,7 @@ import AuditItem, {
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
   reportMissingPalletApiHook,
+  sortReserveLocations,
   updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
@@ -998,6 +999,75 @@ describe('AuditItemScreen', () => {
       );
       fireEvent.press(modalAcceptButton);
       expect(mockDispatch).toHaveBeenCalledTimes(2);
+    });
+
+    it.only('tests sortReserveLocations', () => {
+      const locations = [{
+        palletId: 6775,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'A1-8',
+        mixedPallet: true,
+        newQty: 1
+      },
+      {
+        palletId: 6776,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'C1-2',
+        mixedPallet: true,
+        newQty: 1
+      },
+      {
+        palletId: 6777,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'B1-1',
+        mixedPallet: true,
+        newQty: 1
+      },
+      {
+        palletId: 6778,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'A1-1',
+        mixedPallet: true,
+        newQty: 1
+      }];
+      const sortedLocations = [{
+        palletId: 6778,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'A1-1',
+        mixedPallet: true,
+        newQty: 1
+      },
+      {
+        palletId: 6775,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'A1-8',
+        mixedPallet: true,
+        newQty: 1
+      },
+      {
+        palletId: 6777,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'B1-1',
+        mixedPallet: true,
+        newQty: 1
+      },
+      {
+        palletId: 6776,
+        quantity: 1,
+        sectionId: 3,
+        locationName: 'C1-2',
+        mixedPallet: true,
+        newQty: 1
+      }];
+      const result = sortReserveLocations(locations);
+      expect(result).toEqual(sortedLocations);
     });
   });
 });
