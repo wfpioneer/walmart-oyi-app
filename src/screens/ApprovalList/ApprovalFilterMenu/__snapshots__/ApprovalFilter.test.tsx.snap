@@ -1,0 +1,301 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ApprovalFilterScreen
+    approvalList={
+      Array [
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "SNACKS",
+          "categoryNbr": 1,
+          "daysLeft": 3,
+          "dollarChange": 150.5,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-27T00:00:00.000Z",
+          "initiatedUserId": "Associate Employee",
+          "isChecked": false,
+          "itemName": "Nature Valley Crunchy Cereal Bars ",
+          "itemNbr": 123,
+          "newQuantity": 20,
+          "oldQuantity": 5,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000123,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 50,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Red Apples",
+          "itemNbr": 456,
+          "newQuantity": 10,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000456,
+        },
+        Object {
+          "approvalRequestSource": "itemdetails",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 40,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Cabbage",
+          "itemNbr": 457,
+          "newQuantity": 15,
+          "oldQuantity": 30,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000457,
+        },
+        Object {
+          "approvalRequestSource": "audits",
+          "approvalStatus": "Pending",
+          "categoryDescription": "FRUITS/VEGETABLES",
+          "categoryNbr": 2,
+          "daysLeft": 2,
+          "dollarChange": 80,
+          "imageUrl": undefined,
+          "initiatedTimestamp": "2021-03-28T00:00:00.000Z",
+          "initiatedUserId": "Associate Worker",
+          "isChecked": false,
+          "itemName": "Strawberries",
+          "itemNbr": 458,
+          "newQuantity": 40,
+          "oldQuantity": 20,
+          "subCategoryDescription": "",
+          "subCategoryNbr": 1,
+          "upcNbr": 40000000458,
+        },
+      ]
+    }
+    categoryOpen={false}
+    dispatch={[MockFunction]}
+    filteredCategories={Array []}
+    filteredSources={Array []}
+    sourceOpen={false}
+  />
+</Context.Provider>
+`;
+
+exports[`Approval filter render tests Test renders the filter menu component and calls onPress Function 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "flexDirection": "row",
+        "height": 60,
+        "justifyContent": "flex-start",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffffff",
+          "flex": 1,
+          "marginLeft": 15,
+        }
+      }
+    >
+      [missing "en.WORKLIST.REFINE" translation]
+    </Text>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 0.5,
+          "marginRight": 15,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#ffffffff",
+            "textAlign": "right",
+          }
+        }
+      >
+        [missing "en.WORKLIST.CLEAR" translation]
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 15,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text>
+        [missing "en.WORKLIST.CATEGORY" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.WORKLIST.ALL" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 0.1,
+        }
+      }
+    >
+      <Icon
+        color="#616161"
+        name="keyboard-arrow-down"
+        size={25}
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 15,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text>
+        [missing "en.APPROVAL.SOURCE" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#9e9e9e",
+            "fontSize": 12,
+          }
+        }
+      >
+        [missing "en.WORKLIST.ALL" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 0.1,
+        }
+      }
+    >
+      <Icon
+        color="#616161"
+        name="keyboard-arrow-down"
+        size={25}
+      />
+    </View>
+  </View>
+</View>
+`;

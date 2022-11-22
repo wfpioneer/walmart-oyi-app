@@ -291,7 +291,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
@@ -383,7 +383,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
@@ -573,7 +573,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
@@ -665,7 +665,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
