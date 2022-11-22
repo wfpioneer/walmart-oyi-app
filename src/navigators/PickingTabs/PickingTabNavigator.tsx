@@ -1,5 +1,5 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect
+  DependencyList, EffectCallback, useCallback, useEffect
 } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
@@ -14,10 +14,11 @@ import {
   useRoute
 } from '@react-navigation/native';
 import { Badge } from 'react-native-paper';
+import { Dispatch } from 'redux';
 import { strings } from '../../locales';
 import QuickPickTab from '../../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import PickBinTab from '../../screens/PickBinTab/PickBinTab';
+import PickBinTab, { disableMultiPickBin } from '../../screens/PickBinTab/PickBinTab';
 import SalesFloorTab from '../../screens/SalesFloorTab/SalesFloorTabScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
@@ -29,9 +30,7 @@ import {
   setPickCreateFloor,
   setPickCreateItem,
   setPickCreateReserve,
-  setSelectedTab,
-  toggleMultiBin,
-  toggleMultiPick
+  setSelectedTab
 } from '../../state/actions/Picking';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
@@ -183,15 +182,6 @@ export const updatePicklistStatusApiHook = (
     if (updatePicklistStatusApi.isWaiting) {
       dispatch(showActivityModal());
     }
-  }
-};
-
-export const disableMultiPickBin = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
-  if (multiBinEnabled) {
-    dispatch(toggleMultiBin(false));
-  }
-  if (multiPickEnabled) {
-    dispatch(toggleMultiPick(false));
   }
 };
 

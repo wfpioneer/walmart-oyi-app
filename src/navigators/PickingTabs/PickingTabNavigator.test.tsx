@@ -3,7 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
-  PickingTabNavigator, disableMultiPickBin, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+  PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -11,7 +11,6 @@ import { AsyncState } from '../../models/AsyncState';
 import { mockPickLists } from '../../mockData/mockPickList';
 import getItemDetails from '../../mockData/getItemDetails';
 import { Tabs } from '../../models/Picking.d';
-import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -270,13 +269,5 @@ describe('Manage PickingNavigator externalized function tests', () => {
     mockDispatch.mockReset();
     updatePicklistStatusApiHook(updateIsLoadingApi, mockDispatch, true);
     expect(mockDispatch).toBeCalledTimes(1);
-  });
-
-  it('Tests disableMultiPickBin function', () => {
-    disableMultiPickBin(true, true, mockDispatch);
-
-    expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin(false));
-    expect(mockDispatch).toHaveBeenCalledWith(toggleMultiPick(false));
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
   });
 });

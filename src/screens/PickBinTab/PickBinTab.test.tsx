@@ -1,10 +1,11 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { PickBinTabScreen } from './PickBinTab';
+import { PickBinTabScreen, disableMultiPickBin } from './PickBinTab';
 import { mockPickLists } from '../../mockData/mockPickList';
 import { PickStatus } from '../../models/Picking.d';
 import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
+import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 
 const user: User = {
   userId: 'vn51wu8',
@@ -151,6 +152,21 @@ describe('PickBinTabScreen', () => {
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests PickBinTab externalized function tests', () => {
+    const mockDispatch = jest.fn();
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('Tests disableMultiPickBin function', () => {
+      disableMultiPickBin(true, true, mockDispatch);
+
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin(false));
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiPick(false));
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
   });
 });

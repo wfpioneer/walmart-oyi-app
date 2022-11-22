@@ -16,7 +16,6 @@ import Button, { ButtonType } from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
-import { disableMultiPickBin } from '../../navigators/PickingTabs/PickingTabNavigator';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
@@ -39,6 +38,14 @@ const ASSIGNED_TO_ME = 'assignedToMe';
 const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletLocation ? palletLocation.substring(0,
   palletLocation.indexOf('-')).replace(/[\d.]+$/, '') : '');
 
+export const disableMultiPickBin = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
+  if (multiBinEnabled) {
+    dispatch(toggleMultiBin(false));
+  }
+  if (multiPickEnabled) {
+    dispatch(toggleMultiPick(false));
+  }
+};
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
     pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
