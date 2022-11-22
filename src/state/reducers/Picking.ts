@@ -10,7 +10,8 @@ import {
   SET_PICK_CREATE_RESERVE,
   SET_SELECTED_TAB,
   SHOW_PICKING_MENU,
-  UPDATE_PICKS
+  TOGGLE_MULTI_BIN,
+  TOGGLE_MULTI_PICK, UPDATE_PICKS
 } from '../actions/Picking';
 import Location from '../../models/Location';
 
@@ -21,7 +22,9 @@ export interface PickingState {
   pickCreateFloorLocations: Location[];
   pickCreateReserveLocations: Location[];
   selectedTab: Tabs;
-  pickingMenu: boolean
+  pickingMenu: boolean;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 
 const initialState: PickingState = {
@@ -38,7 +41,9 @@ const initialState: PickingState = {
   pickCreateFloorLocations: [],
   pickCreateReserveLocations: [],
   selectedTab: Tabs.PICK,
-  pickingMenu: false
+  pickingMenu: false,
+  multiBinEnabled: false,
+  multiPickEnabled: false
 };
 
 export const Picking = (
@@ -108,6 +113,16 @@ export const Picking = (
       return {
         ...state,
         pickingMenu: action.payload
+      };
+    case TOGGLE_MULTI_BIN:
+      return {
+        ...state,
+        multiBinEnabled: action.payload
+      };
+    case TOGGLE_MULTI_PICK:
+      return {
+        ...state,
+        multiPickEnabled: action.payload
       };
     case RESET_PICKLIST:
       return initialState;

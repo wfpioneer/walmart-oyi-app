@@ -11,6 +11,8 @@ export const SET_PICK_CREATE_FLOOR = 'PICKLIST/SET_PICK_CREATE_FLOOR';
 export const SET_PICK_CREATE_RESERVE = 'PICKLIST/SET_PICK_CREATE_RESERVE';
 export const SET_SELECTED_TAB = 'PICKLIST/SET_SELECTED_TAB';
 export const SHOW_PICKING_MENU = 'PICKLIST/SHOW_PICKING_MENU';
+export const TOGGLE_MULTI_PICK = 'PICKLIST/TOGGLE_MULTI_PICK';
+export const TOGGLE_MULTI_BIN = 'PICKLIST/TOGGLE_MULTI_BIN'
 
 export const initializePicklist = (plItems: PickListItem[]) => ({
   type: INITIALIZE_PICKLIST,
@@ -61,6 +63,16 @@ export const showPickingMenu = (show: boolean) => ({
   payload: show
 } as const);
 
+export const toggleMultiPick = (togglePick: boolean) => ({
+  type: TOGGLE_MULTI_PICK,
+  payload: togglePick
+} as const);
+
+export const toggleMultiBin = (toggleBin: boolean) => ({
+  type: TOGGLE_MULTI_BIN,
+  payload: toggleBin
+} as const);
+
 export type Actions =
   | ReturnType<typeof initializePicklist>
   | ReturnType<typeof updatePicks>
@@ -71,4 +83,6 @@ export type Actions =
   | ReturnType<typeof setPickCreateReserve>
   | ReturnType<typeof setSelectedTab>
   | ReturnType<typeof resetPickList>
-  | ReturnType<typeof showPickingMenu>;
+  | ReturnType<typeof showPickingMenu>
+  | ReturnType<typeof toggleMultiBin>
+  | ReturnType<typeof toggleMultiPick>;
