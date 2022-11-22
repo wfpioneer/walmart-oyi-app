@@ -41,13 +41,14 @@ import AuditItem, {
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
   reportMissingPalletApiHook,
+  sortReserveLocations,
   updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
-import { itemPallets } from '../../../mockData/getItemPallets';
+import { itemPallets, locations, sortedLocations } from '../../../mockData/getItemPallets';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 
@@ -998,6 +999,11 @@ describe('AuditItemScreen', () => {
       );
       fireEvent.press(modalAcceptButton);
       expect(mockDispatch).toHaveBeenCalledTimes(2);
+    });
+
+    it('tests sortReserveLocations', () => {
+      const result = sortReserveLocations(locations);
+      expect(result).toEqual(sortedLocations);
     });
   });
 });
