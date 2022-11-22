@@ -44,7 +44,7 @@ export const renderScanButton = (
     }}
     testID="manual-scan"
   >
-    <View style={styles.leftButton}>
+    <View style={{ ...styles.leftButton, ...styles.scanButton }}>
       <MaterialCommunityIcons
         name="barcode-scan"
         size={20}
@@ -63,8 +63,8 @@ export const kebabMenuButton = (
       dispatch(showPickingMenu(!pickingMenu));
       trackEvent('multi_picking_menu_button_click');
     }}
-    style={styles.leftButton}
     testID="picking-menu"
+    style={styles.leftButton}
   >
     <MaterialCommunityIcons
       name="dots-vertical"
@@ -104,6 +104,9 @@ export const PickingNavigatorStack = (
           headerTintColor: COLOR.WHITE,
           headerRight: () => (
             <View style={styles.headerContainer}>
+              {routeName === 'Pick' && (multiBin || multiPick)
+                ? kebabMenuButton(pickingMenu, dispatch)
+                : null}
               {routeName === 'QuickPick' || routeName === 'Pick'
                 ? renderScanButton(dispatch, isManualScanEnabled)
                 : null}
@@ -116,13 +119,7 @@ export const PickingNavigatorStack = (
         name="PickingTabs"
         component={PickingTabs}
         options={{
-          headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => {
-            if (selectedTab === Tabs.PICK && (multiBin || multiPick)) {
-              return kebabMenuButton(pickingMenu, dispatch);
-            }
-            return null;
-          }
+          headerTitle: strings('PICKING.PICKING')
         }}
       />
       <Stack.Screen
