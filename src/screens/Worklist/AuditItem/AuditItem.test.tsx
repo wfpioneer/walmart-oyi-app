@@ -48,7 +48,7 @@ import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
-import { itemPallets } from '../../../mockData/getItemPallets';
+import { itemPallets, locations, sortedLocations } from '../../../mockData/getItemPallets';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 
@@ -1001,71 +1001,7 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
 
-    it.('tests sortReserveLocations', () => {
-      const locations = [{
-        palletId: 6775,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'A1-8',
-        mixedPallet: true,
-        newQty: 1
-      },
-      {
-        palletId: 6776,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'C1-2',
-        mixedPallet: true,
-        newQty: 1
-      },
-      {
-        palletId: 6777,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'B1-1',
-        mixedPallet: true,
-        newQty: 1
-      },
-      {
-        palletId: 6778,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'A1-1',
-        mixedPallet: true,
-        newQty: 1
-      }];
-      const sortedLocations = [{
-        palletId: 6778,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'A1-1',
-        mixedPallet: true,
-        newQty: 1
-      },
-      {
-        palletId: 6775,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'A1-8',
-        mixedPallet: true,
-        newQty: 1
-      },
-      {
-        palletId: 6777,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'B1-1',
-        mixedPallet: true,
-        newQty: 1
-      },
-      {
-        palletId: 6776,
-        quantity: 1,
-        sectionId: 3,
-        locationName: 'C1-2',
-        mixedPallet: true,
-        newQty: 1
-      }];
+    it('tests sortReserveLocations', () => {
       const result = sortReserveLocations(locations);
       expect(result).toEqual(sortedLocations);
     });
