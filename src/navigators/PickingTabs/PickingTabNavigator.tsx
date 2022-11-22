@@ -285,6 +285,11 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
         tabBarInactiveTintColor: COLOR.GREY_700,
         tabBarItemStyle: styles.tabBarStyle
       }}
+      screenListeners={{
+        beforeRemove: () => {
+          dispatch(showPickingMenu(false));
+        }
+      }}
     >
       <Tab.Screen
         name={Tabs.QUICKPICK}
@@ -346,8 +351,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
         }}
         listeners={{
           focus: () => {
-            dispatch(showPickingMenu(false));
             dispatch(setSelectedTab(Tabs.SALESFLOOR));
+            dispatch(showPickingMenu(false));
           }
         }}
       >

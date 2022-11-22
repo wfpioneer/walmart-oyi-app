@@ -474,8 +474,8 @@ export default {
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
     ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
     QUANTITY_STOCKED: 'Cantidad abastecida',
-    ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
-    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
+    ACCEPT_MULTIPLE_BINS: 'Aceptar Múltiples ingresos a bodega',
+    ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos'
   },
   BINNING: {
     BINNING: 'Bodega',

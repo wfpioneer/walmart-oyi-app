@@ -3,6 +3,11 @@
 exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
 <MaterialTopTabNavigator
   initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+    }
+  }
   screenOptions={
     Object {
       "tabBarActiveTintColor": "#0071e9",
@@ -68,6 +73,11 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
 exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1`] = `
 <MaterialTopTabNavigator
   initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+    }
+  }
   screenOptions={
     Object {
       "tabBarActiveTintColor": "#0071e9",
@@ -133,6 +143,11 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1
 exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks and show picking menu to true 1`] = `
 <MaterialTopTabNavigator
   initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+    }
+  }
   screenOptions={
     Object {
       "tabBarActiveTintColor": "#0071e9",
