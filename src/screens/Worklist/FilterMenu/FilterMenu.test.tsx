@@ -7,13 +7,10 @@ import store from '../../../state';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import {
   FilterMenuComponent,
-  MenuCard,
   RenderAreaCard,
-  RenderCategoryCollapsibleCard,
   RenderExceptionTypeCard,
   renderAreaCheckbox,
   renderAreaFilterCard,
-  renderCategoryFilterCard,
   renderExceptionFilterCard,
   renderExceptionRadioFilterCard
 } from './FilterMenu';
@@ -44,10 +41,6 @@ describe('FilterMenu Component', () => {
     '12 - WINE'
   ];
   const mockFilterExeceptions: string[] = ['NSFL'];
-  const mockItem: FilteredCategory[] = [
-    { catgNbr: 7, catgName: 'TOYS', selected: false },
-    { catgNbr: 12, catgName: 'WINE', selected: true }
-  ];
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -125,52 +118,6 @@ describe('FilterMenu Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it('Renders MenuCard with the dropdown icon Open', () => {
-    const { toJSON } = render(
-      <MenuCard
-        title="Menu Card Title"
-        subtext="Sub Text Opened"
-        opened={true}
-      />
-    );
-    expect(toJSON()).toMatchSnapshot();
-  });
-
-  it('Renders MenuCard with the dropdown icon Closed', () => {
-    const { toJSON } = render(
-      <MenuCard
-        title="Menu Card Title"
-        subtext="Sub Text Closed"
-        opened={false}
-      />
-    );
-    expect(toJSON()).toMatchSnapshot();
-  });
-
-  it('Tests renderCategoryFilterCard component and calls onItemPress without an item selected', async () => {
-    const { toJSON, findByTestId } = render(
-      renderCategoryFilterCard(mockItem[0], mockDispatch, mockFilterCategories)
-    );
-    const catButton = findByTestId('category button');
-    fireEvent.press(await catButton);
-    expect(mockDispatch).toBeCalledTimes(1);
-
-    expect(toJSON()).toMatchSnapshot();
-  });
-
-  // This could be tested by re-rendering using render.update(), but we want to ensure that the correct Icon is rendered
-  it('Tests renderCategoryFilterCard component and calls onItemPress with an item selected', async () => {
-    const { toJSON, findByTestId } = render(
-      renderCategoryFilterCard(mockItem[1], mockDispatch, mockFilterCategories)
-    );
-    const catButton = findByTestId('category button');
-    fireEvent.press(await catButton);
-    expect(trackEvent).toBeCalledTimes(1);
-    expect(mockDispatch).toBeCalledTimes(1);
-
-    expect(toJSON()).toMatchSnapshot();
-  });
-
   it('Test the renderExceptionFilterCard component with an item selected', () => {
     const mockFilterItemSelected: FilterListItem = {
       value: 'NP',
@@ -216,36 +163,6 @@ describe('FilterMenu Component', () => {
     fireEvent.press(exceptionButton);
     expect(trackEvent).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
-    expect(toJSON()).toMatchSnapshot();
-  });
-
-  it('Test the renderCategoryCollapsibleCard and calls dispatch()', () => {
-    const { toJSON, getByText } = render(
-      <RenderCategoryCollapsibleCard
-        categoryMap={mockCategoryMap}
-        categoryOpen={false}
-        filterCategories={mockFilterCategories}
-        dispatch={mockDispatch}
-      />
-    );
-    const menuButton = getByText(strings('WORKLIST.CATEGORY'));
-    fireEvent.press(menuButton);
-    expect(mockDispatch).toBeCalledTimes(1);
-    expect(toJSON()).toMatchSnapshot();
-  });
-
-  it('Test renders the renderCategoryCollapsibleCard and filteredCategories FlatList ', () => {
-    // You cannot use queries if the component contains a FlatList and isn't a PureComponent
-    const { toJSON, getByText } = render(
-      <RenderCategoryCollapsibleCard
-        categoryMap={mockCategoryMap}
-        categoryOpen={true}
-        filterCategories={mockFilterCategories}
-        dispatch={mockDispatch}
-      />
-    );
-    const categoryButton = getByText(strings('WORKLIST.CATEGORY'));
-    fireEvent.press(categoryButton);
     expect(toJSON()).toMatchSnapshot();
   });
 
