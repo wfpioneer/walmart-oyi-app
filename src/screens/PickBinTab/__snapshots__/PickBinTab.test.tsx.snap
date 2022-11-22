@@ -40,6 +40,39 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 </ForwardRef(SafeAreaView)>
 `;
 
+exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with "cancel & continue" buttons if multiPick/multiBin is enabled 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with AssignedToMe List and zone 1`] = `
 <ForwardRef(SafeAreaView)
   style={
@@ -126,7 +159,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
         }
       }
       title="[missing \\"en.PICKING.ACCEPT_MULTI_BIN\\" translation]"
-      titleColor="#ffffffff"
+      titleColor="#000000"
       titleFontSize={16}
       titleFontWeight="normal"
       type={1}
@@ -145,7 +178,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
         }
       }
       title="[missing \\"en.PICKING.ACCEPT_MULTI_PICK\\" translation]"
-      titleColor="#ffffffff"
+      titleColor="#000000"
       titleFontSize={16}
       titleFontWeight="normal"
       type={1}

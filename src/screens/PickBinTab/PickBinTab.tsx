@@ -15,6 +15,8 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import COLOR from '../../themes/Color';
 import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
+import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
+import { disableMultiPickBin } from '../../navigators/PickingTabs/PickingTabNavigator';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
@@ -74,28 +76,40 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         refreshing={refreshing}
         onRefresh={onRefresh}
       />
-
-      <View style={styles.scanItemLabel}>
-        { (!multiBin && !multiPick) && <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>}
-        { multiBin && (
-        <Button
-          style={styles.buttonStyle}
-          type={ButtonType.PRIMARY}
-          backgroundColor={COLOR.DISABLED_GREY}
-          title={strings('PICKING.ACCEPT_MULTI_BIN')}
-          onPress={() => dispatch(toggleMultiBin(true))}
-        />
+      {multiBinEnabled || multiPickEnabled
+        ? (
+          <ButtonBottomTab
+            leftTitle={strings('GENERICS.CANCEL')}
+            onLeftPress={() => disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch)}
+            rightTitle={strings('GENERICS.CONTINUE')}
+            onRightPress={() => undefined} // TODO handle continue flow https://jira.walmart.com/browse/INTLSAOPS-8630
+          />
+        )
+        : (
+          <View style={styles.scanItemLabel}>
+            { (!multiBin && !multiPick) && <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>}
+            { multiBin && (
+            <Button
+              style={styles.buttonStyle}
+              type={ButtonType.PRIMARY}
+              backgroundColor={COLOR.DISABLED_GREY}
+              title={strings('PICKING.ACCEPT_MULTI_BIN')}
+              onPress={() => dispatch(toggleMultiBin(true))}
+              titleColor={COLOR.BLACK}
+            />
+            )}
+            {multiPick && (
+            <Button
+              style={styles.buttonStyle}
+              type={ButtonType.PRIMARY}
+              backgroundColor={COLOR.DISABLED_GREY}
+              title={strings('PICKING.ACCEPT_MULTI_PICK')}
+              onPress={() => dispatch(toggleMultiPick(true))}
+              titleColor={COLOR.BLACK}
+            />
+            )}
+          </View>
         )}
-        {multiPick && (
-        <Button
-          style={styles.buttonStyle}
-          type={ButtonType.PRIMARY}
-          backgroundColor={COLOR.DISABLED_GREY}
-          title={strings('PICKING.ACCEPT_MULTI_PICK')}
-          onPress={() => dispatch(toggleMultiPick(true))}
-        />
-        )}
-      </View>
     </SafeAreaView>
   );
 };

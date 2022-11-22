@@ -62,6 +62,28 @@ describe('PickBinTabScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
+    it('Test renders the PickBinTabScreen component with "cancel & continue" buttons if multiPick/multiBin is enabled',
+      () => {
+        const renderer = ShallowRenderer.createRenderer();
+        const flaggedUser: User = {
+          ...user,
+          configs: { ...user.configs, multiBin: true, multiPick: true }
+        };
+        renderer.render(
+          <PickBinTabScreen
+            pickBinList={mockPickLists}
+            user={flaggedUser}
+            isManualScanEnabled={false}
+            dispatch={jest.fn()}
+            refreshing={false}
+            onRefresh={jest.fn()}
+            multiBinEnabled={true}
+            multiPickEnabled={true}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
+
     it('Test renders the PickBinTabScreen component with AssignedToMe List and zone', () => {
       const renderer = ShallowRenderer.createRenderer();
       const newMockPickList = [...mockPickLists, {

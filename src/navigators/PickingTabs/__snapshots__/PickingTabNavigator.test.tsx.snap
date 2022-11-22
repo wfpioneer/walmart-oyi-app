@@ -39,6 +39,7 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -110,6 +111,7 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with "swipeEnabled:
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -181,6 +183,7 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }

@@ -4,7 +4,7 @@ import React, {
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
 import { trackEvent } from 'appcenter-analytics';
-import { EmitterSubscription } from 'react-native';
+import { BackHandler, EmitterSubscription } from 'react-native';
 import { useDispatch } from 'react-redux';
 import {
   NavigationProp,
@@ -29,7 +29,9 @@ import {
   setPickCreateFloor,
   setPickCreateItem,
   setPickCreateReserve,
-  setSelectedTab
+  setSelectedTab,
+  toggleMultiBin,
+  toggleMultiPick
 } from '../../state/actions/Picking';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
@@ -184,6 +186,15 @@ export const updatePicklistStatusApiHook = (
   }
 };
 
+export const disableMultiPickBin = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
+  if (multiBinEnabled) {
+    dispatch(toggleMultiBin(false));
+  }
+  if (multiPickEnabled) {
+    dispatch(toggleMultiPick(false));
+  }
+};
+
 export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Element => {
   const {
     picklist,
@@ -264,6 +275,21 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     [updatePicklistStatusApi]
   );
 
+  // Cancel multi Pick/Bin when pressing back from the device hardware
+  useFocusEffectHook(() => {
+    const onBackPress = () => {
+      if (multiBinEnabled || multiPickEnabled) {
+        disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch);
+        return true;
+      }
+      return false;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  });
+
   return (
     <Tab.Navigator
       initialRouteName={selectedTab}
@@ -314,7 +340,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           ) : undefined
         }}
         listeners={{
-          focus: () => dispatch(setSelectedTab(Tabs.PICK))
+          focus: () => dispatch(setSelectedTab(Tabs.PICK)),
+          beforeRemove: () => {
+            // Reset Picking Tabs to PickBinWorkflow when the navigator is removed from the stack history
+            dispatch(setSelectedTab(Tabs.PICK));
+            disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch);
+          }
         }}
       >
         {() => (
