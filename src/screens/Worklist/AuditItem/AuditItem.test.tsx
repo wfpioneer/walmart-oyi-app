@@ -1001,7 +1001,7 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
 
-    it.only('tests sortReserveLocations', () => {
+    it.('tests sortReserveLocations', () => {
       const locations = [{
         palletId: 6775,
         quantity: 1,
