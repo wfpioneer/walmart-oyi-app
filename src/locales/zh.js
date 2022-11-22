@@ -411,7 +411,8 @@ export default {
     FAILED_ITEMS: '此商品未成功审批',
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试',
     MANAGER_APPROVAL: '副总审批',
-    APPROVAL_LOADING_MSG: '大量审批需求会略慢，请耐心等待.'
+    APPROVAL_LOADING_MSG: '大量审批需求会略慢，请耐心等待.',
+    SOURCE: '审批来源'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: '需店号开启OYI',

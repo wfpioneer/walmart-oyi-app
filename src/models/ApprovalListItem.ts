@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 export interface ApprovalListItem {
   imageUrl?: string;
   itemName: string;

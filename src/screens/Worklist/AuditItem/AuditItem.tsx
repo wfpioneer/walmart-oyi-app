@@ -845,6 +845,12 @@ export const disabledContinue = (
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
 
+export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
+  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(b.locationName);
+
+  return locations.sort(sortLocationNames);
+};
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent,
@@ -1114,6 +1120,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const getFloorLocationList = (locations: Location[]) => {
     const locationLst: LocationList[] = [];
+
     if (locations && locations.length) {
       locations.forEach((loc: Location, index: number) => {
         locationLst.push({
@@ -1146,7 +1153,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const getReserveLocationList = (locations: ItemPalletInfo[]) => {
     const locationLst: LocationList[] = [];
     if (locations && locations.length) {
-      locations.forEach((loc, index) => {
+      const sortedLocations = sortReserveLocations(locations);
+      sortedLocations.forEach((loc, index) => {
         locationLst.push({
           sectionId: loc.sectionId,
           locationName: loc.locationName,
