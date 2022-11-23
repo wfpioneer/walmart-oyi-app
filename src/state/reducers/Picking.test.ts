@@ -1,4 +1,6 @@
-import { mockItem, mockLocations, mockPickLists, mockReserveLocations } from '../../mockData/mockPickList';
+import {
+  mockItem, mockLocations, mockPickLists, mockReserveLocations
+} from '../../mockData/mockPickList';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import {
   deletePicks,
@@ -9,7 +11,8 @@ import {
   setPickCreateItem,
   setPickCreateReserve,
   setSelectedTab,
-  updatePicks
+  toggleMultiBin,
+  toggleMultiPick, updatePicks
 } from '../actions/Picking';
 import { Picking, PickingState } from './Picking';
 
@@ -29,7 +32,9 @@ describe('Picking reducer tests', () => {
       pickCreateFloorLocations: [],
       pickCreateReserveLocations: [],
       pickingMenu: false,
-      selectedTab: Tabs.PICK
+      selectedTab: Tabs.PICK,
+      multiBinEnabled: false,
+      multiPickEnabled: false
     };
 
     const changedState: PickingState = {
@@ -46,7 +51,9 @@ describe('Picking reducer tests', () => {
       pickCreateFloorLocations: [],
       pickCreateReserveLocations: [],
       pickingMenu: false,
-      selectedTab: Tabs.PICK
+      selectedTab: Tabs.PICK,
+      multiBinEnabled: false,
+      multiPickEnabled: false
     };
 
     changedState.pickList = mockPickLists;
@@ -96,6 +103,16 @@ describe('Picking reducer tests', () => {
     changedState.pickCreateFloorLocations = [];
     changedState.pickCreateReserveLocations = mockReserveLocations;
     testResults = Picking(initialState, setPickCreateReserve(mockReserveLocations));
+    expect(testResults).toStrictEqual(changedState);
+
+    changedState.pickCreateReserveLocations = [];
+    changedState.multiBinEnabled = true;
+    testResults = Picking(initialState, toggleMultiBin(true));
+    expect(testResults).toStrictEqual(changedState);
+
+    changedState.multiBinEnabled = false;
+    changedState.multiPickEnabled = true;
+    testResults = Picking(initialState, toggleMultiPick(true));
     expect(testResults).toStrictEqual(changedState);
   });
 });
