@@ -474,7 +474,12 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
     ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
-    QUANTITY_STOCKED: 'Cantidad abastecida'
+    QUANTITY_STOCKED: 'Cantidad abastecida',
+    ACCEPT_MULTI_BIN: 'Aceptar Múltiples ingresos a bodega',
+    ACCEPT_MULTI_PICK: 'Aceptar Múltiples Pickeos',
+    ACCEPT_FOLLOWING_PICKS: 'Aceptar los siguientes pickeos?',
+    ACCEPT_FOLLOWING_BINS: 'Aceptar los siguientes ingresos a bodega?',
+    LOC_LABEL: 'Ubi'
   },
   BINNING: {
     BINNING: 'Bodega',

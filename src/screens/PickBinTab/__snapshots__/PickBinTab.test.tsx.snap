@@ -1,5 +1,151 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component when user clicks continue on multi pick/bin mode 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    minHeight={150}
+    modalType="FormHeader"
+    onClose={[Function]}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#0071e9",
+            "borderTopEndRadius": 8,
+            "borderTopStartRadius": 8,
+            "padding": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 18,
+            }
+          }
+        >
+          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+        </Text>
+      </View>
+      <View>
+        <View
+          style={
+            Object {
+              "padding": 12,
+            }
+          }
+        >
+          <Text>
+            [missing "en.PICKING.ACCEPT_FOLLOWING_PICKS" translation]
+          </Text>
+        </View>
+        <FlatList
+          data={Array []}
+          keyExtractor={[Function]}
+          renderItem={[Function]}
+          style={
+            Object {
+              "borderWidth": 1,
+              "flexGrow": 0,
+              "margin": 12,
+              "maxHeight": 120,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 0,
+            "flexDirection": "row",
+            "margin": 12,
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingRight": 12,
+              "width": "50%",
+            }
+          }
+          testID="cancelButton"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingLeft": 12,
+              "width": "50%",
+            }
+          }
+          testID="acceptButton"
+          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={true}
+    renderItem={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#eeeeee",
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
+    </Text>
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component while refreshing 1`] = `
 <ForwardRef(SafeAreaView)
   style={
@@ -10,6 +156,113 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="FormHeader"
+    onClose={[Function]}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#0071e9",
+            "borderTopEndRadius": 8,
+            "borderTopStartRadius": 8,
+            "padding": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 18,
+            }
+          }
+        >
+          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+        </Text>
+      </View>
+      <View>
+        <View
+          style={
+            Object {
+              "padding": 12,
+            }
+          }
+        >
+          <Text>
+            [missing "en.PICKING.ACCEPT_FOLLOWING_PICKS" translation]
+          </Text>
+        </View>
+        <FlatList
+          data={Array []}
+          keyExtractor={[Function]}
+          renderItem={[Function]}
+          style={
+            Object {
+              "borderWidth": 1,
+              "flexGrow": 0,
+              "margin": 12,
+              "maxHeight": 120,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 0,
+            "flexDirection": "row",
+            "margin": 12,
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingRight": 12,
+              "width": "50%",
+            }
+          }
+          testID="cancelButton"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingLeft": 12,
+              "width": "50%",
+            }
+          }
+          testID="acceptButton"
+          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
   <FlatList
     data={
       Array [
@@ -49,6 +302,113 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="FormHeader"
+    onClose={[Function]}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#0071e9",
+            "borderTopEndRadius": 8,
+            "borderTopStartRadius": 8,
+            "padding": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 18,
+            }
+          }
+        >
+          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+        </Text>
+      </View>
+      <View>
+        <View
+          style={
+            Object {
+              "padding": 12,
+            }
+          }
+        >
+          <Text>
+            [missing "en.PICKING.ACCEPT_FOLLOWING_PICKS" translation]
+          </Text>
+        </View>
+        <FlatList
+          data={Array []}
+          keyExtractor={[Function]}
+          renderItem={[Function]}
+          style={
+            Object {
+              "borderWidth": 1,
+              "flexGrow": 0,
+              "margin": 12,
+              "maxHeight": 120,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 0,
+            "flexDirection": "row",
+            "margin": 12,
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingRight": 12,
+              "width": "50%",
+            }
+          }
+          testID="cancelButton"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingLeft": 12,
+              "width": "50%",
+            }
+          }
+          testID="acceptButton"
+          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
   <FlatList
     data={
       Array [
@@ -88,6 +448,113 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="FormHeader"
+    onClose={[Function]}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#0071e9",
+            "borderTopEndRadius": 8,
+            "borderTopStartRadius": 8,
+            "padding": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 18,
+            }
+          }
+        >
+          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+        </Text>
+      </View>
+      <View>
+        <View
+          style={
+            Object {
+              "padding": 12,
+            }
+          }
+        >
+          <Text>
+            [missing "en.PICKING.ACCEPT_FOLLOWING_PICKS" translation]
+          </Text>
+        </View>
+        <FlatList
+          data={Array []}
+          keyExtractor={[Function]}
+          renderItem={[Function]}
+          style={
+            Object {
+              "borderWidth": 1,
+              "flexGrow": 0,
+              "margin": 12,
+              "maxHeight": 120,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 0,
+            "flexDirection": "row",
+            "margin": 12,
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingRight": 12,
+              "width": "50%",
+            }
+          }
+          testID="cancelButton"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingLeft": 12,
+              "width": "50%",
+            }
+          }
+          testID="acceptButton"
+          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
   <FlatList
     data={
       Array [
@@ -115,4 +582,666 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     </Text>
   </View>
 </ForwardRef(SafeAreaView)>
+`;
+
+exports[`PickBinTabScreen tests externalized function on pickBinTab Screen tests rendered output for renderMultipickConfirmationDialog when multiBin was enabled 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 8,
+            "justifyContent": "center",
+            "paddingBottom": 12,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": 150,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#0071e9",
+              "borderTopEndRadius": 8,
+              "borderTopStartRadius": 8,
+              "padding": 12,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ffffffff",
+                "fontSize": 18,
+              }
+            }
+          >
+            [missing "en.PICKING.ACCEPT_MULTI_BIN" translation]
+          </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "padding": 12,
+              }
+            }
+          >
+            <Text>
+              [missing "en.PICKING.ACCEPT_FOLLOWING_BINS" translation]
+            </Text>
+          </View>
+          <RCTScrollView
+            data={
+              Array [
+                Object {
+                  "assignedAssociate": "Associate 1",
+                  "category": 71,
+                  "createTs": "2022-04-02T12:55:31.9633333Z",
+                  "createdBy": "Associate 1",
+                  "id": 418,
+                  "isSelected": true,
+                  "itemDesc": "Teapot",
+                  "itemNbr": 734,
+                  "moveToFront": true,
+                  "palletId": "4321",
+                  "palletLocationId": 1672,
+                  "palletLocationName": "C1-2",
+                  "quickPick": false,
+                  "salesFloorLocationId": 1673,
+                  "salesFloorLocationName": "C1-3",
+                  "status": "accepted pick",
+                  "upcNbr": "000041800003",
+                },
+                Object {
+                  "assignedAssociate": "Associate 1",
+                  "category": 71,
+                  "createTs": "2022-02-09T12:55:31.9633333Z",
+                  "createdBy": "Manager 1",
+                  "id": 3,
+                  "isSelected": true,
+                  "itemDesc": "Swiffer",
+                  "itemNbr": 845,
+                  "moveToFront": true,
+                  "palletId": "5432",
+                  "palletLocationId": 2345,
+                  "palletLocationName": "BREW1-2",
+                  "quickPick": false,
+                  "salesFloorLocationId": 2345,
+                  "salesFloorLocationName": "BREW1-2",
+                  "status": "accepted pick",
+                  "upcNbr": "000052900004",
+                },
+              ]
+            }
+            getItem={[Function]}
+            getItemCount={[Function]}
+            keyExtractor={[Function]}
+            onContentSizeChange={[Function]}
+            onLayout={[Function]}
+            onMomentumScrollBegin={[Function]}
+            onMomentumScrollEnd={[Function]}
+            onScroll={[Function]}
+            onScrollBeginDrag={[Function]}
+            onScrollEndDrag={[Function]}
+            removeClippedSubviews={false}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            stickyHeaderIndices={Array []}
+            style={
+              Object {
+                "borderWidth": 1,
+                "flexGrow": 0,
+                "margin": 12,
+                "maxHeight": 120,
+              }
+            }
+            viewabilityConfigCallbackPairs={Array []}
+          >
+            <View>
+              <View
+                onLayout={[Function]}
+                style={null}
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-evenly",
+                      "paddingVertical": 5,
+                    }
+                  }
+                >
+                  <Text>
+                    [missing "en.LOCATION.PALLET" translation] 4321
+                  </Text>
+                  <Text>
+                    [missing "en.PICKING.LOC_LABEL" translation]: C1-2
+                  </Text>
+                </View>
+              </View>
+              <View
+                onLayout={[Function]}
+                style={null}
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-evenly",
+                      "paddingVertical": 5,
+                    }
+                  }
+                >
+                  <Text>
+                    [missing "en.LOCATION.PALLET" translation] 5432
+                  </Text>
+                  <Text>
+                    [missing "en.PICKING.LOC_LABEL" translation]: BREW1-2
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </RCTScrollView>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 0,
+              "flexDirection": "row",
+              "margin": 12,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 45,
+                },
+                Object {
+                  "paddingRight": 12,
+                  "width": "50%",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "borderColor": "#0071e9",
+                    "borderRadius": 5,
+                    "borderWidth": 1,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+                testID="cancelButton"
+              >
+                <Text
+                  style={
+                    Object {
+                      "color": "#0071e9",
+                      "fontFamily": "Roboto-Medium",
+                      "fontSize": 16,
+                      "fontWeight": "normal",
+                      "textAlign": undefined,
+                    }
+                  }
+                >
+                  [missing "en.GENERICS.CANCEL" translation]
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 45,
+                },
+                Object {
+                  "paddingLeft": 12,
+                  "width": "50%",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#0071e9",
+                    "borderRadius": 5,
+                    "elevation": 1,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+                testID="acceptButton"
+              >
+                <Text
+                  style={
+                    Object {
+                      "color": "#ffffffff",
+                      "fontFamily": "Roboto-Medium",
+                      "fontSize": 16,
+                      "fontWeight": "normal",
+                      "textAlign": undefined,
+                    }
+                  }
+                >
+                  [missing "en.PICKING.ACCEPT" translation]
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`PickBinTabScreen tests externalized function on pickBinTab Screen tests rendered output for renderMultipickConfirmationDialog when multiPick was enabled 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 8,
+            "justifyContent": "center",
+            "paddingBottom": 12,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": 150,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#0071e9",
+              "borderTopEndRadius": 8,
+              "borderTopStartRadius": 8,
+              "padding": 12,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#ffffffff",
+                "fontSize": 18,
+              }
+            }
+          >
+            [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+          </Text>
+        </View>
+        <View>
+          <View
+            style={
+              Object {
+                "padding": 12,
+              }
+            }
+          >
+            <Text>
+              [missing "en.PICKING.ACCEPT_FOLLOWING_PICKS" translation]
+            </Text>
+          </View>
+          <RCTScrollView
+            data={
+              Array [
+                Object {
+                  "assignedAssociate": "Associate 1",
+                  "category": 71,
+                  "createTs": "2022-04-02T12:55:31.9633333Z",
+                  "createdBy": "Associate 1",
+                  "id": 418,
+                  "isSelected": true,
+                  "itemDesc": "Teapot",
+                  "itemNbr": 734,
+                  "moveToFront": true,
+                  "palletId": "4321",
+                  "palletLocationId": 1672,
+                  "palletLocationName": "C1-2",
+                  "quickPick": false,
+                  "salesFloorLocationId": 1673,
+                  "salesFloorLocationName": "C1-3",
+                  "status": "accepted pick",
+                  "upcNbr": "000041800003",
+                },
+                Object {
+                  "assignedAssociate": "Associate 1",
+                  "category": 71,
+                  "createTs": "2022-02-09T12:55:31.9633333Z",
+                  "createdBy": "Manager 1",
+                  "id": 3,
+                  "isSelected": true,
+                  "itemDesc": "Swiffer",
+                  "itemNbr": 845,
+                  "moveToFront": true,
+                  "palletId": "5432",
+                  "palletLocationId": 2345,
+                  "palletLocationName": "BREW1-2",
+                  "quickPick": false,
+                  "salesFloorLocationId": 2345,
+                  "salesFloorLocationName": "BREW1-2",
+                  "status": "accepted pick",
+                  "upcNbr": "000052900004",
+                },
+              ]
+            }
+            getItem={[Function]}
+            getItemCount={[Function]}
+            keyExtractor={[Function]}
+            onContentSizeChange={[Function]}
+            onLayout={[Function]}
+            onMomentumScrollBegin={[Function]}
+            onMomentumScrollEnd={[Function]}
+            onScroll={[Function]}
+            onScrollBeginDrag={[Function]}
+            onScrollEndDrag={[Function]}
+            removeClippedSubviews={false}
+            renderItem={[Function]}
+            scrollEventThrottle={50}
+            stickyHeaderIndices={Array []}
+            style={
+              Object {
+                "borderWidth": 1,
+                "flexGrow": 0,
+                "margin": 12,
+                "maxHeight": 120,
+              }
+            }
+            viewabilityConfigCallbackPairs={Array []}
+          >
+            <View>
+              <View
+                onLayout={[Function]}
+                style={null}
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-evenly",
+                      "paddingVertical": 5,
+                    }
+                  }
+                >
+                  <Text>
+                    [missing "en.LOCATION.PALLET" translation] 4321
+                  </Text>
+                  <Text>
+                    [missing "en.PICKING.LOC_LABEL" translation]: C1-2
+                  </Text>
+                </View>
+              </View>
+              <View
+                onLayout={[Function]}
+                style={null}
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-evenly",
+                      "paddingVertical": 5,
+                    }
+                  }
+                >
+                  <Text>
+                    [missing "en.LOCATION.PALLET" translation] 5432
+                  </Text>
+                  <Text>
+                    [missing "en.PICKING.LOC_LABEL" translation]: BREW1-2
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </RCTScrollView>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 0,
+              "flexDirection": "row",
+              "margin": 12,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 45,
+                },
+                Object {
+                  "paddingRight": 12,
+                  "width": "50%",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "borderColor": "#0071e9",
+                    "borderRadius": 5,
+                    "borderWidth": 1,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+                testID="cancelButton"
+              >
+                <Text
+                  style={
+                    Object {
+                      "color": "#0071e9",
+                      "fontFamily": "Roboto-Medium",
+                      "fontSize": 16,
+                      "fontWeight": "normal",
+                      "textAlign": undefined,
+                    }
+                  }
+                >
+                  [missing "en.GENERICS.CANCEL" translation]
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 45,
+                },
+                Object {
+                  "paddingLeft": 12,
+                  "width": "50%",
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#0071e9",
+                    "borderRadius": 5,
+                    "elevation": 1,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "opacity": 1,
+                  }
+                }
+                testID="acceptButton"
+              >
+                <Text
+                  style={
+                    Object {
+                      "color": "#ffffffff",
+                      "fontFamily": "Roboto-Medium",
+                      "fontSize": 16,
+                      "fontWeight": "normal",
+                      "textAlign": undefined,
+                    }
+                  }
+                >
+                  [missing "en.PICKING.ACCEPT" translation]
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
 `;
