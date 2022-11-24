@@ -12,7 +12,9 @@ import {
   setPickCreateReserve,
   setSelectedTab,
   toggleMultiBin,
-  toggleMultiPick, updatePicks
+  toggleMultiPick,
+  updateMultiPickSelection,
+  updatePicks
 } from '../actions/Picking';
 import { Picking, PickingState } from './Picking';
 
@@ -114,5 +116,10 @@ describe('Picking reducer tests', () => {
     changedState.multiPickEnabled = true;
     testResults = Picking(initialState, toggleMultiPick(true));
     expect(testResults).toStrictEqual(changedState);
+
+    const newInitialState = { ...initialState, pickList: mockPickLists };
+    const updatePickList = mockPickLists.map(itm => ({ ...itm, isSelected: true }));
+    testResults = Picking(newInitialState, updateMultiPickSelection(mockPickLists, true));
+    expect(testResults.pickList).toStrictEqual(updatePickList);
   });
 });
