@@ -11,7 +11,7 @@ import { groupBy, partition } from 'lodash';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { showPickingMenu } from '../../state/actions/Picking';
+import { showPickingMenu, toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 import User from '../../models/User';
 import { PickListItem, Tabs } from '../../models/Picking.d';
 import ListGroup from '../../components/ListGroup/ListGroup';
@@ -24,6 +24,8 @@ interface PickBinTabProps {
   refreshing: boolean;
   onRefresh: () => void;
   bottomSheetModalRef: React.RefObject<BottomSheetModal>;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 interface PickBinTabScreenProps {
   pickBinList: PickListItem[];
@@ -32,6 +34,8 @@ interface PickBinTabScreenProps {
   dispatch: Dispatch<any>;
   refreshing: boolean;
   onRefresh: () => void;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 interface BottomSheetCardProps {
   text: string,
@@ -45,7 +49,7 @@ const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletL
 
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
-    pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing
+    pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
   } = props;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
   const groupedPickListByZone = groupBy(otherPickList,
@@ -70,6 +74,8 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
               groupItems
               currentTab={Tabs.PICK}
               dispatch={dispatch}
+              multiPickEnabled={multiPickEnabled}
+              multiBinEnabled={multiBinEnabled}
             />
           );
         }}
@@ -98,9 +104,19 @@ const BottomSheetCard = (props: BottomSheetCardProps): JSX.Element => {
   );
 };
 
+const acceptMultiBinClick = (dispatch: Dispatch<any>) => {
+  dispatch(toggleMultiBin(true));
+  dispatch(showPickingMenu(false));
+};
+
+const acceptMultiPickClick = (dispatch: Dispatch<any>) => {
+  dispatch(toggleMultiPick(true));
+  dispatch(showPickingMenu(false));
+};
+
 const PickBinTab = (props: PickBinTabProps) => {
   const {
-    pickBinList, onRefresh, refreshing, bottomSheetModalRef
+    pickBinList, onRefresh, refreshing, bottomSheetModalRef, multiBinEnabled, multiPickEnabled
   } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
@@ -129,6 +145,8 @@ const PickBinTab = (props: PickBinTabProps) => {
         dispatch={dispatch}
         refreshing={refreshing}
         onRefresh={onRefresh}
+        multiBinEnabled={multiBinEnabled}
+        multiPickEnabled={multiPickEnabled}
       />
       <BottomSheetModal
         ref={bottomSheetModalRef}
@@ -140,13 +158,13 @@ const PickBinTab = (props: PickBinTabProps) => {
       >
         {multiBin && (
         <BottomSheetCard
-          onPress={() => {}}
+          onPress={() => acceptMultiBinClick(dispatch)}
           text={strings('PICKING.ACCEPT_MULTIPLE_BINS')}
         />
         )}
         {multiPick && (
         <BottomSheetCard
-          onPress={() => {}}
+          onPress={() => acceptMultiPickClick(dispatch)}
           text={strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
         />
         )}

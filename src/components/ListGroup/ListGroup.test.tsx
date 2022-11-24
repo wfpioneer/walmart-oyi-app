@@ -22,6 +22,8 @@ describe('ListGroup', () => {
           title="ABAR-2"
           currentTab={Tabs.PICK}
           dispatch={jest.fn()}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -57,6 +59,82 @@ describe('ListGroup', () => {
           title="ABAR-2"
           currentTab={Tabs.PICK}
           dispatch={jest.fn()}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Test renders the ListGroup component with groupItems and multiBinEnabled as true', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const newMockPickLists: PickListItem[] = [
+        ...mockPickLists,
+        {
+          assignedAssociate: '',
+          category: 46,
+          createTs: '2022-04-03T12:55:31.9633333Z',
+          createdBy: 'Associate 2',
+          id: 4,
+          itemDesc: 'Candy',
+          itemNbr: 7344,
+          moveToFront: true,
+          palletId: '4321',
+          palletLocationId: 1672,
+          palletLocationName: 'C1-2-1',
+          quickPick: false,
+          salesFloorLocationId: 1673,
+          salesFloorLocationName: 'C1-3',
+          status: PickStatus.READY_TO_BIN,
+          upcNbr: '000041800004'
+        }
+      ];
+      renderer.render(
+        <ListGroup
+          groupItems={true}
+          pickListItems={newMockPickLists}
+          title="ABAR-2"
+          currentTab={Tabs.PICK}
+          dispatch={jest.fn()}
+          multiBinEnabled={true}
+          multiPickEnabled={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Test renders the ListGroup component with groupItems and multiPickEnabled as true', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const newMockPickLists: PickListItem[] = [
+        ...mockPickLists,
+        {
+          assignedAssociate: '',
+          category: 46,
+          createTs: '2022-04-03T12:55:31.9633333Z',
+          createdBy: 'Associate 2',
+          id: 4,
+          itemDesc: 'Candy',
+          itemNbr: 7344,
+          moveToFront: true,
+          palletId: '4321',
+          palletLocationId: 1672,
+          palletLocationName: 'C1-2-1',
+          quickPick: false,
+          salesFloorLocationId: 1673,
+          salesFloorLocationName: 'C1-3',
+          status: PickStatus.READY_TO_PICK,
+          upcNbr: '000041800004'
+        }
+      ];
+      renderer.render(
+        <ListGroup
+          groupItems={true}
+          pickListItems={newMockPickLists}
+          title="ABAR-2"
+          currentTab={Tabs.PICK}
+          dispatch={jest.fn()}
+          multiBinEnabled={false}
+          multiPickEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -69,6 +147,9 @@ describe('ListGroup', () => {
           toggleIsOpened={jest.fn}
           isOpened={true}
           title="ABAR-1"
+          showCheckboxSel={false}
+          pickListWithStatusReady={[]}
+          dispatch={jest.fn()}
         />
       );
       expect(toJSON()).toMatchSnapshot();
@@ -79,6 +160,9 @@ describe('ListGroup', () => {
           toggleIsOpened={jest.fn}
           isOpened={false}
           title="ABAR-1"
+          showCheckboxSel={false}
+          pickListWithStatusReady={[]}
+          dispatch={jest.fn()}
         />
       );
       expect(toJSON()).toMatchSnapshot();
@@ -90,6 +174,9 @@ describe('ListGroup', () => {
           toggleIsOpened={mockToggleOpen}
           isOpened={false}
           title="ABAR-1"
+          showCheckboxSel={false}
+          pickListWithStatusReady={[]}
+          dispatch={jest.fn()}
         />
       );
       const collapsibleCard = await findByTestId('collapsible-card');
@@ -103,9 +190,25 @@ describe('ListGroup', () => {
           toggleIsOpened={jest.fn}
           isOpened={false}
           title="ABAR-1"
+          showCheckboxSel={false}
+          pickListWithStatusReady={[]}
+          dispatch={jest.fn()}
         />
       );
       expect(findByText('ABAR-1')).toBeTruthy();
+    });
+    it('should tests CollapsibleCard with showCheckboxSel is true', async () => {
+      const mockDispatch = jest.fn();
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<CollapsibleCard
+        toggleIsOpened={jest.fn}
+        isOpened={false}
+        title="ABAR-1"
+        showCheckboxSel={true}
+        pickListWithStatusReady={[{ ...mockPickLists[0], status: PickStatus.READY_TO_BIN }]}
+        dispatch={mockDispatch}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
 });

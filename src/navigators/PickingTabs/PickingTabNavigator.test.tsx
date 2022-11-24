@@ -62,6 +62,8 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={false}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -83,6 +85,8 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={false}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -104,6 +108,54 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={true}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and multi pick selection enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+        multiBinEnabled={false}
+        multiPickEnabled={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and multi bin selection enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+        multiBinEnabled={true}
+        multiPickEnabled={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

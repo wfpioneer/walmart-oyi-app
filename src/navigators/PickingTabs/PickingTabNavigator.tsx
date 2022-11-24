@@ -59,6 +59,8 @@ interface PickingTabNavigatorProps {
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
   bottomSheetModalRef: React.RefObject<BottomSheetModal>;
   pickingMenu: boolean;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 
 export const getItemDetailsApiHook = (
@@ -202,7 +204,9 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     useCallbackHook,
     useFocusEffectHook,
     bottomSheetModalRef,
-    pickingMenu
+    pickingMenu,
+    multiBinEnabled,
+    multiPickEnabled
   } = props;
 
   let scannedSubscription: EmitterSubscription;
@@ -336,6 +340,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
             refreshing={getPicklistsApi.isWaiting}
             onRefresh={() => dispatch(getPicklists())}
             bottomSheetModalRef={bottomSheetModalRef}
+            multiBinEnabled={multiBinEnabled}
+            multiPickEnabled={multiPickEnabled}
           />
         )}
       </Tab.Screen>
@@ -370,18 +376,19 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
 export const PickingTabs = (): JSX.Element => {
   const dispatch = useDispatch();
-  const picklist = useTypedSelector(state => state.Picking.pickList);
+  const {
+    pickList, pickingMenu, multiBinEnabled, multiPickEnabled
+  } = useTypedSelector(state => state.Picking);
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
   const navigation = useNavigation();
   const route = useRoute();
   return (
     <PickingTabNavigator
-      picklist={picklist}
+      picklist={pickList}
       dispatch={dispatch}
       navigation={navigation}
       route={route}
@@ -394,6 +401,8 @@ export const PickingTabs = (): JSX.Element => {
       useFocusEffectHook={useFocusEffect}
       bottomSheetModalRef={bottomSheetModalRef}
       pickingMenu={pickingMenu}
+      multiBinEnabled={multiBinEnabled}
+      multiPickEnabled={multiPickEnabled}
     />
   );
 };

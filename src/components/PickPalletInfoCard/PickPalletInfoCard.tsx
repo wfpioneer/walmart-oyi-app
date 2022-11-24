@@ -2,11 +2,14 @@ import React, { Dispatch } from 'react';
 import {
   FlatList, Pressable, Text, View
 } from 'react-native';
+import { Checkbox } from 'react-native-paper';
 import { strings } from '../../locales';
 import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
 import { updatePicklistStatus } from '../../state/actions/saga';
+import { updateMultiPickSelection } from '../../state/actions/Picking';
 import PickItemInfo from '../PickItemInfoCard/PickItemInfoCard';
 import styles from './PickPalletInfoCard.style';
+import COLOR from '../../themes/Color';
 
 interface PickPalletInfoProps {
   palletId: string;
@@ -16,11 +19,21 @@ interface PickPalletInfoProps {
   palletLocation: string;
   dispatch: Dispatch<any>
   canDelete: boolean;
+  isSelected?: boolean;
+  showCheckBoxSel: boolean;
 }
+
+const toggleMultiPickSelection = (
+  isSelected: boolean,
+  dispatch: Dispatch<any>,
+  items: PickListItem[]
+) => {
+  dispatch(updateMultiPickSelection(items, !isSelected));
+};
 
 const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const {
-    onPress, palletId, pickListItems, pickStatus, palletLocation, dispatch, canDelete
+    onPress, palletId, pickListItems, pickStatus, palletLocation, dispatch, canDelete, isSelected, showCheckBoxSel
   } = props;
 
   const palletsItems = pickListItems.filter(item => item.palletId === palletId);
@@ -46,10 +59,20 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={onPress} testID="palletPress">
-        <View style={styles.header}>
-          <Text>{`${strings('PALLET.PALLET_ID')} ${palletId}`}</Text>
+        <View style={showCheckBoxSel ? styles.header : { ...styles.header, padding: 10 }}>
+          <View style={styles.palletInfoSel}>
+            {showCheckBoxSel && (
+            <Checkbox
+              status={isSelected ? 'checked' : 'unchecked'}
+              onPress={() => toggleMultiPickSelection(!!isSelected, dispatch, pickListItems)}
+              color={COLOR.MAIN_THEME_COLOR}
+              uncheckedColor={COLOR.MAIN_THEME_COLOR}
+            />
+            )}
+            <Text>{`${strings('PALLET.PALLET_ID')} ${palletId}`}</Text>
+          </View>
           <Text>{strings(`PICKING.${pickStatusString()}`)}</Text>
-          <Text>{palletLocation}</Text>
+          <Text style={showCheckBoxSel ? styles.textRightPadding : {}}>{palletLocation}</Text>
         </View>
         <FlatList
           data={palletsItems}
@@ -63,3 +86,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
 };
 
 export default PickPalletInfoCard;
+
+PickPalletInfoCard.defaultProps = {
+  isSelected: false
+};

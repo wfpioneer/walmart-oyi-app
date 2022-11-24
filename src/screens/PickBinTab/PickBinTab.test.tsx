@@ -34,6 +34,8 @@ describe('PickBinTabScreen', () => {
           dispatch={jest.fn()}
           refreshing={false}
           onRefresh={jest.fn()}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -67,6 +69,8 @@ describe('PickBinTabScreen', () => {
           dispatch={jest.fn()}
           refreshing={false}
           onRefresh={jest.fn}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -99,6 +103,77 @@ describe('PickBinTabScreen', () => {
           dispatch={jest.fn()}
           refreshing={true}
           onRefresh={jest.fn}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Test renders PickBinTabScreen component with multi pick enabled and atleast 1 pick ready to start', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const newMockPickList = [...mockPickLists, {
+        assignedAssociate: '',
+        category: 46,
+        createTs: '2022-04-03T12:55:31.9633333Z',
+        createdBy: 'Associate 2',
+        id: 4,
+        itemDesc: 'Candy',
+        itemNbr: 7344,
+        moveToFront: true,
+        palletId: '4321',
+        palletLocationId: 1672,
+        palletLocationName: 'C1-2-1',
+        quickPick: false,
+        salesFloorLocationId: 1673,
+        salesFloorLocationName: 'C1-3',
+        status: PickStatus.READY_TO_PICK,
+        upcNbr: '000041800004'
+      }];
+      renderer.render(
+        <PickBinTabScreen
+          pickBinList={newMockPickList}
+          user={user}
+          isManualScanEnabled={false}
+          dispatch={jest.fn()}
+          refreshing={false}
+          onRefresh={jest.fn}
+          multiBinEnabled={false}
+          multiPickEnabled={true}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Test renders PickBinTabScreen component with multi bin enabled and atleast 1 bin ready to start', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const newMockPickList = [...mockPickLists, {
+        assignedAssociate: '',
+        category: 46,
+        createTs: '2022-04-03T12:55:31.9633333Z',
+        createdBy: 'Associate 2',
+        id: 4,
+        itemDesc: 'Candy',
+        itemNbr: 7344,
+        moveToFront: true,
+        palletId: '4321',
+        palletLocationId: 1672,
+        palletLocationName: 'C1-2-1',
+        quickPick: false,
+        salesFloorLocationId: 1673,
+        salesFloorLocationName: 'C1-3',
+        status: PickStatus.READY_TO_BIN,
+        upcNbr: '000041800004',
+        isSelected: true
+      }];
+      renderer.render(
+        <PickBinTabScreen
+          pickBinList={newMockPickList}
+          user={user}
+          isManualScanEnabled={false}
+          dispatch={jest.fn()}
+          refreshing={false}
+          onRefresh={jest.fn}
+          multiBinEnabled={true}
+          multiPickEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

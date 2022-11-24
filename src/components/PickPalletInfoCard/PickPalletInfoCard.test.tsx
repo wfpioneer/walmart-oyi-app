@@ -56,6 +56,8 @@ describe('Pick pallet info card render tests', () => {
           pickStatus={status}
           canDelete={false}
           dispatch={jest.fn()}
+          isSelected={false}
+          showCheckBoxSel={false}
         />
       );
 
@@ -75,6 +77,8 @@ describe('Pick pallet info card render tests', () => {
         pickStatus={PickStatus.READY_TO_PICK}
         canDelete={false}
         dispatch={jest.fn()}
+        isSelected={false}
+        showCheckBoxSel={false}
       />
     );
 
@@ -92,6 +96,8 @@ describe('Pick pallet info card render tests', () => {
         pickStatus={PickStatus.COMPLETE}
         canDelete={false}
         dispatch={jest.fn()}
+        isSelected={false}
+        showCheckBoxSel={false}
       />
     );
 
@@ -99,5 +105,45 @@ describe('Pick pallet info card render tests', () => {
     fireEvent.press(button);
 
     expect(mockPressPallet).toBeCalledTimes(1);
+  });
+
+  it('renders the card with items and show checkbox in pallet title', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(
+      <PickPalletInfoCard
+        onPress={jest.fn()}
+        palletId="2"
+        palletLocation="ABAR1-1"
+        pickListItems={mockPickListItems}
+        pickStatus={PickStatus.READY_TO_PICK}
+        canDelete={false}
+        dispatch={jest.fn()}
+        isSelected={false}
+        showCheckBoxSel={true}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the card with items and show pallet selected', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(
+      <PickPalletInfoCard
+        onPress={jest.fn()}
+        palletId="2"
+        palletLocation="ABAR1-1"
+        pickListItems={mockPickListItems}
+        pickStatus={PickStatus.READY_TO_PICK}
+        canDelete={false}
+        dispatch={jest.fn()}
+        isSelected={true}
+        showCheckBoxSel={true}
+      />
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });
