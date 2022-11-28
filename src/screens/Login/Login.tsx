@@ -293,7 +293,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
             dispatch(loginUser(updatedUser));
             trackEvent('user_sign_in');
             if (user.countryCode !== 'US') {
-              dispatch((updatedUser));
+              dispatch(getFluffyFeatures(updatedUser));
             }
           }}
           onSignOut={() => signOutUser(dispatch)}
