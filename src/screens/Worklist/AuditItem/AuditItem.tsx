@@ -816,8 +816,8 @@ export const renderCalculatorModal = (
     <CalculatorModal
       visible={showCalcModal}
       disableAcceptButton={(value: string): boolean => {
-        const calcValue = Number(value);
-        return !(calcValue % 1 === 0 && calcValue >= 0);
+        const calcValue = parseFloat(value);
+        return !(typeof (calcValue) === 'number' && calcValue % 1 === 0 && calcValue >= 0);
       }}
       showAcceptButton={true}
       onClose={() => setShowCalcModal(false)}
