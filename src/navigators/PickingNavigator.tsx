@@ -30,6 +30,8 @@ interface PickingNavigatorProps {
   dispatch: Dispatch<any>;
   selectedTab: Tabs;
   pickingMenu: boolean;
+  multiPick:boolean;
+  multiBin: boolean;
 }
 
 export const renderScanButton = (
@@ -42,7 +44,7 @@ export const renderScanButton = (
     }}
     testID="manual-scan"
   >
-    <View style={styles.leftButton}>
+    <View style={{ ...styles.leftButton, ...styles.scanButton }}>
       <MaterialCommunityIcons
         name="barcode-scan"
         size={20}
@@ -59,8 +61,9 @@ export const kebabMenuButton = (
   <Pressable
     onPress={() => {
       dispatch(showPickingMenu(!pickingMenu));
-      trackEvent('picking_menu_button_click');
+      trackEvent('multi_picking_menu_button_click');
     }}
+    testID="picking-menu"
     style={styles.leftButton}
   >
     <MaterialCommunityIcons
@@ -75,7 +78,7 @@ export const PickingNavigatorStack = (
   props: PickingNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch, isManualScanEnabled, selectedTab, pickingMenu
+    dispatch, isManualScanEnabled, selectedTab, pickingMenu, multiBin, multiPick
   } = props;
 
   const navigate = (hlProps: HeaderBackButtonProps) => {
@@ -94,13 +97,16 @@ export const PickingNavigatorStack = (
   return (
     <Stack.Navigator
       screenOptions={({ route: screenRoute }) => {
-        const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? 'Pick';
+        const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? selectedTab ?? 'Pick';
         return {
           headerMode: 'float',
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
           headerTintColor: COLOR.WHITE,
           headerRight: () => (
             <View style={styles.headerContainer}>
+              {routeName === 'Pick' && (multiBin || multiPick)
+                ? kebabMenuButton(pickingMenu, dispatch)
+                : null}
               {routeName === 'QuickPick' || routeName === 'Pick'
                 ? renderScanButton(dispatch, isManualScanEnabled)
                 : null}
@@ -175,12 +181,15 @@ const PickingNavigator = (): JSX.Element => {
   const { selectedTab, pickingMenu } = useTypedSelector(state => state.Picking);
   const dispatch = useDispatch();
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { multiBin, multiPick } = useTypedSelector(state => state.User.configs);
   return (
     <PickingNavigatorStack
       dispatch={dispatch}
       isManualScanEnabled={isManualScanEnabled}
       selectedTab={selectedTab}
       pickingMenu={pickingMenu}
+      multiBin={multiBin}
+      multiPick={multiPick}
     />
   );
 };

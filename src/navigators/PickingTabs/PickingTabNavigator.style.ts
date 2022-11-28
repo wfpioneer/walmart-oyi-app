@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   quickPickBadge: {
@@ -17,6 +19,27 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     borderEndWidth: 0.5,
     borderColor: COLOR.GREY_500
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200
+  },
+  sheetContainer: {
+    flexDirection: 'row',
+    height: 45
+  },
+  touchableOpacity: {
+    borderColor: COLOR.GREY_200,
+    borderWidth: 1,
+    width,
+    flexDirection: 'row'
+  },
+  textView: {
+    justifyContent: 'center',
+    flex: 1
+  },
+  text: {
+    fontSize: 16,
+    paddingLeft: 20
   }
 });
 

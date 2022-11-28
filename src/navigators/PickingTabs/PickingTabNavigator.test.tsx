@@ -3,7 +3,10 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
-  PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+  BottomSheetModal
+} from '@gorhom/bottom-sheet';
+import {
+  BottomSheetCard, PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -11,7 +14,6 @@ import { AsyncState } from '../../models/AsyncState';
 import { mockPickLists } from '../../mockData/mockPickList';
 import getItemDetails from '../../mockData/getItemDetails';
 import { Tabs } from '../../models/Picking.d';
-import mockUser from '../../mockData/mockUser';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -76,6 +78,19 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('BottomSheet card', () => {
+  it('Renders BottomSheetCard', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <BottomSheetCard
+        text="Test"
+        onPress={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
