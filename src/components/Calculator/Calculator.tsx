@@ -38,7 +38,7 @@ const Calculator = (props: CalculatorProps) => {
   const [calcPaperTape, setCalcPaperTape] = useState('');
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
   const [currentCalculatedValue, setCurrentCalculatedValue] = useState('');
-  const scrollRef = React.useRef<any>();
+  const scrollRef = useRef<any>();
 
   const scrollToEnd = () => {
     if (scrollRef.current) {
