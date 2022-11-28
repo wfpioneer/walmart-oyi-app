@@ -410,7 +410,6 @@ export const PickingTabs = (): JSX.Element => {
     ),
     []
   );
-
   return (
     <BottomSheetModalProvider>
       <PickingTabNavigator
