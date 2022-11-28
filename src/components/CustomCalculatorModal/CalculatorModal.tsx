@@ -30,6 +30,7 @@ const CalculatorModal = (props: CalculatorModalProps) => {
       <View style={styles.containerPadding} />
       <Calculator
         onEquals={((value: number) => setCalcValue(value.toString()))}
+        onClear={() => setCalcValue('')}
         showNegValidation={true}
       />
       <View style={styles.buttonContainer}>

@@ -28,11 +28,12 @@ const opAtEdgeOfParentRegex = new RegExp(
 
 interface CalculatorProps {
   onEquals?: (result: number) => void;
+  onClear?: () => void;
   showNegValidation?: boolean
 }
 
 const Calculator = (props: CalculatorProps) => {
-  const { onEquals, showNegValidation } = props;
+  const { onEquals, onClear, showNegValidation } = props;
   const [calcText, setCalcText] = useState('');
   const [calcPaperTape, setCalcPaperTape] = useState('');
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
@@ -83,12 +84,15 @@ const Calculator = (props: CalculatorProps) => {
     || !doOrCanParenthesesClose(0, isOnSubmit)
   ));
 
-  const onClear = () => {
+  const onClearPress = () => {
     setCalcText('');
     setIsCalcInvalid(false);
   };
 
-  const onClearAll = () => {
+  const onClearAllPress = () => {
+    if (onClear) {
+      onClear();
+    }
     setCalcText('');
     setCalcPaperTape('');
     setCurrentCalculatedValue('');
@@ -130,7 +134,7 @@ const Calculator = (props: CalculatorProps) => {
       const calculatedValue = evaluate(calcText);
       const valueHasDecimalNumber = calculatedValue % 1 !== 0;
       const result: string = valueHasDecimalNumber
-        ? format(calculatedValue, { precision: 4, notation: 'fixed' }) : calculatedValue;
+        ? format(calculatedValue, { precision: 1, notation: 'fixed' }) : calculatedValue.toString();
       updatePaperTape(calcText, result);
       setCurrentCalculatedValue(result);
       setCalcText(result);
@@ -174,7 +178,7 @@ const Calculator = (props: CalculatorProps) => {
         </View>
       </View>
       {isCalcInvalid && (
-        <Text style={isCalcInvalid ? styles.highlightedErrorText : styles.errorText}>
+        <Text style={styles.highlightedErrorText}>
           {strings('AUDITS.INVALID_EQUATION')}
         </Text>
       )}
@@ -183,87 +187,90 @@ const Calculator = (props: CalculatorProps) => {
           {strings('AUDITS.NEGATIVE_VALIDATION')}
         </Text>
       )}
-      <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onClear()} testID="clear">
-          <Text style={styles.calcButtonText}>C</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onClearAll()} testID="allClear">
-          <Text style={styles.calcButtonText}>AC</Text>
-        </Pressable>
-        <Pressable
-          style={styles.calcButtonView}
-          onPress={() => onDelete()}
-          onLongPress={() => onDelete(true)}
-          delayLongPress={1500}
-          testID="delete"
-        >
-          <Text style={styles.calcButtonText}>Del</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('/')} testID="divide">
-          <Text style={styles.calcButtonText}>/</Text>
-        </Pressable>
-      </View>
-      <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('7')} testID="seven">
-          <Text style={styles.calcButtonText}>7</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('8')} testID="eight">
-          <Text style={styles.calcButtonText}>8</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('9')} testID="nine">
-          <Text style={styles.calcButtonText}>9</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('*')} testID="multiply">
-          <Text style={styles.calcButtonText}>*</Text>
-        </Pressable>
-      </View>
-      <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('4')} testID="four">
-          <Text style={styles.calcButtonText}>4</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('5')} testID="five">
-          <Text style={styles.calcButtonText}>5</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('6')} testID="six">
-          <Text style={styles.calcButtonText}>6</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('-')} testID="subtract">
-          <Text style={styles.calcButtonText}>-</Text>
-        </Pressable>
-      </View>
-      <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('1')} testID="one">
-          <Text style={styles.calcButtonText}>1</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('2')} testID="two">
-          <Text style={styles.calcButtonText}>2</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('3')} testID="three">
-          <Text style={styles.calcButtonText}>3</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('+')} testID="add">
-          <Text style={styles.calcButtonText}>+</Text>
-        </Pressable>
-      </View>
-      <View style={styles.buttonRow}>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('.')} testID="decimal">
-          <Text style={styles.calcButtonText}>.</Text>
-        </Pressable>
-        <Pressable style={styles.calcButtonView} onPress={() => onType('0')} testID="zero">
-          <Text style={styles.calcButtonText}>0</Text>
-        </Pressable>
-        <Pressable
-          style={{
-            ...styles.calcButtonView,
-            ...styles.equalBtn,
-            backgroundColor: calcText.length ? COLOR.MAIN_THEME_COLOR : COLOR.DISABLED_BLUE
-          }}
-          disabled={!(calcText.length)}
-          onPress={() => onEqualsPress()}
-          testID="equals"
-        >
-          <Text style={styles.calcButtonText}>=</Text>
-        </Pressable>
+      <View style={styles.keyboardContainer}>
+        <View style={styles.buttonRow}>
+          <Pressable style={styles.calcButtonView} onPress={() => onClearPress()} testID="clear">
+            <Text style={styles.calcButtonText}>C</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onClearAllPress()} testID="allClear">
+            <Text style={styles.calcButtonText}>AC</Text>
+          </Pressable>
+          <Pressable
+            style={styles.calcButtonView}
+            onPress={() => onDelete()}
+            onLongPress={() => onDelete(true)}
+            delayLongPress={1500}
+            testID="delete"
+          >
+            <Text style={styles.calcButtonText}>Del</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('/')} testID="divide">
+            <Text style={styles.calcButtonText}>/</Text>
+          </Pressable>
+        </View>
+        <View style={styles.buttonRow}>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('7')} testID="seven">
+            <Text style={styles.calcButtonText}>7</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('8')} testID="eight">
+            <Text style={styles.calcButtonText}>8</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('9')} testID="nine">
+            <Text style={styles.calcButtonText}>9</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('*')} testID="multiply">
+            <Text style={styles.calcButtonText}>*</Text>
+          </Pressable>
+        </View>
+        <View style={styles.buttonRow}>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('4')} testID="four">
+            <Text style={styles.calcButtonText}>4</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('5')} testID="five">
+            <Text style={styles.calcButtonText}>5</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('6')} testID="six">
+            <Text style={styles.calcButtonText}>6</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('-')} testID="subtract">
+            <Text style={styles.calcButtonText}>-</Text>
+          </Pressable>
+        </View>
+        <View style={styles.buttonRow}>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('1')} testID="one">
+            <Text style={styles.calcButtonText}>1</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('2')} testID="two">
+            <Text style={styles.calcButtonText}>2</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('3')} testID="three">
+            <Text style={styles.calcButtonText}>3</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('+')} testID="add">
+            <Text style={styles.calcButtonText}>+</Text>
+          </Pressable>
+        </View>
+        <View style={styles.buttonRow}>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('.')} testID="decimal">
+            <Text style={styles.calcButtonText}>.</Text>
+          </Pressable>
+          <Pressable style={styles.calcButtonView} onPress={() => onType('0')} testID="zero">
+            <Text style={styles.calcButtonText}>0</Text>
+          </Pressable>
+          <Pressable
+            style={{
+              ...styles.calcButtonView,
+              ...styles.equalBtn,
+              backgroundColor: (currentCalculatedValue === calcText || !calcText.length)
+                ? COLOR.GREY : COLOR.MAIN_THEME_COLOR
+            }}
+            disabled={currentCalculatedValue === calcText || !calcText.length}
+            onPress={() => onEqualsPress()}
+            testID="equals"
+          >
+            <Text style={styles.calcButtonText}>=</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -271,6 +278,7 @@ const Calculator = (props: CalculatorProps) => {
 
 Calculator.defaultProps = {
   onEquals: () => {},
+  onClear: () => {},
   showNegValidation: false
 };
 
