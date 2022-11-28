@@ -36,7 +36,9 @@ import {
   setPickCreateItem,
   setPickCreateReserve,
   setSelectedTab,
-  showPickingMenu
+  showPickingMenu,
+  toggleMultiBin,
+  toggleMultiPick
 } from '../../state/actions/Picking';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
@@ -467,13 +469,19 @@ export const PickingTabs = (): JSX.Element => {
       >
         {multiBin && (
         <BottomSheetCard
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(toggleMultiBin(true));
+            dispatch(showPickingMenu(false));
+          }}
           text={strings('PICKING.ACCEPT_MULTIPLE_BINS')}
         />
         )}
         {multiPick && (
         <BottomSheetCard
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(toggleMultiPick(true));
+            dispatch(showPickingMenu(false));
+          }}
           text={strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
         />
         )}

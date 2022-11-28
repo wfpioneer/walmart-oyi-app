@@ -146,44 +146,9 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       }
     }
   >
-    <Button
-      backgroundColor="#BABBBE"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "paddingBottom": 4,
-          "width": "100%",
-        }
-      }
-      title="[missing \\"en.PICKING.ACCEPT_MULTI_BIN\\" translation]"
-      titleColor="#000000"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
-    <Button
-      backgroundColor="#BABBBE"
-      disabled={false}
-      height={45}
-      onPress={[Function]}
-      radius={5}
-      style={
-        Object {
-          "paddingBottom": 4,
-          "width": "100%",
-        }
-      }
-      title="[missing \\"en.PICKING.ACCEPT_MULTI_PICK\\" translation]"
-      titleColor="#000000"
-      titleFontSize={16}
-      titleFontWeight="normal"
-      type={1}
-      width={-1}
-    />
+    <Text>
+      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
+    </Text>
   </View>
 </ForwardRef(SafeAreaView)>
 `;

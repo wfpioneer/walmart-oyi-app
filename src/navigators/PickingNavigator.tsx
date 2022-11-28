@@ -66,7 +66,8 @@ export const kebabMenuButton = (
       trackEvent('multi_picking_menu_button_click');
     }}
     testID="picking-menu"
-    style={styles.leftButton}
+    style={({ pressed }) => [styles.leftButton, { opacity: pressed ? 0.5 : 1 }]}
+
   >
     <MaterialCommunityIcons
       name="dots-vertical"

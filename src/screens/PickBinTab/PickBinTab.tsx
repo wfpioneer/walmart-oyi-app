@@ -12,8 +12,6 @@ import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
-import Button, { ButtonType } from '../../components/buttons/Button';
-import COLOR from '../../themes/Color';
 import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
@@ -94,27 +92,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         )
         : (
           <View style={styles.scanItemLabel}>
-            { (!multiBin && !multiPick) && <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>}
-            { multiBin && (
-            <Button
-              style={styles.buttonStyle}
-              type={ButtonType.PRIMARY}
-              backgroundColor={COLOR.DISABLED_GREY}
-              title={strings('PICKING.ACCEPT_MULTI_BIN')}
-              onPress={() => dispatch(toggleMultiBin(true))}
-              titleColor={COLOR.BLACK}
-            />
-            )}
-            {multiPick && (
-            <Button
-              style={styles.buttonStyle}
-              type={ButtonType.PRIMARY}
-              backgroundColor={COLOR.DISABLED_GREY}
-              title={strings('PICKING.ACCEPT_MULTI_PICK')}
-              onPress={() => dispatch(toggleMultiPick(true))}
-              titleColor={COLOR.BLACK}
-            />
-            )}
+            <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
           </View>
         )}
     </SafeAreaView>
