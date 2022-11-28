@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useMemo
+  useCallback, useEffect, useMemo, useRef
 } from 'react';
 import {
   FlatList, SafeAreaView, Text, TouchableOpacity, View
@@ -23,7 +23,6 @@ interface PickBinTabProps {
   pickBinList: PickListItem[];
   refreshing: boolean;
   onRefresh: () => void;
-  bottomSheetModalRef: React.RefObject<BottomSheetModal>;
   multiBinEnabled: boolean;
   multiPickEnabled: boolean;
 }
@@ -116,13 +115,25 @@ const acceptMultiPickClick = (dispatch: Dispatch<any>) => {
 
 const PickBinTab = (props: PickBinTabProps) => {
   const {
-    pickBinList, onRefresh, refreshing, bottomSheetModalRef, multiBinEnabled, multiPickEnabled
+    pickBinList, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
   } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const { multiBin, multiPick } = useTypedSelector(state => state.User.configs);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
+  const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  useEffect(() => {
+    if (bottomSheetModalRef.current) {
+      if (pickingMenu) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [pickingMenu]);
 
   const renderBackdrop = useCallback(
     // eslint-disable-next-line no-shadow
