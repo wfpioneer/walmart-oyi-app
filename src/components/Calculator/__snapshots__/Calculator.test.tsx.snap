@@ -24,21 +24,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -870,21 +885,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        5/7=0.7143
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          5/7=0.7143
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -1716,21 +1746,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        8=8
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          8=8
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -2562,21 +2607,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -3408,21 +3468,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        8=8
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          8=8
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -4254,21 +4329,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -5100,21 +5190,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        8=8
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          8=8
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -5946,21 +6051,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        8=8
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          8=8
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -6792,21 +6912,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -7638,21 +7773,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        8=8
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          8=8
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -8484,21 +8634,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -9330,21 +9495,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: er
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        5/7=0.7143
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          5/7=0.7143
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -10176,21 +10356,36 @@ exports[`Test Calculator component presses buttons to make invalid equations: in
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -11022,21 +11217,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -11868,21 +12078,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -12714,21 +12939,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -13560,21 +13800,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -14406,21 +14661,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -15252,21 +15522,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -16098,21 +16383,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -16944,21 +17244,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -17790,21 +18105,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -18636,21 +18966,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -19482,21 +19827,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        3.14*2=6.2800
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          3.14*2=6.2800
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -20328,21 +20688,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        2+6-4=4
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          2+6-4=4
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -21174,21 +21549,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -22020,21 +22410,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -22866,21 +23271,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        3.14*2=6.2800
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          3.14*2=6.2800
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -23712,21 +24132,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        2+6-4=4
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          2+6-4=4
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -24558,21 +24993,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        2+3/4=2.7500
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          2+3/4=2.7500
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -25404,21 +25854,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -26250,21 +26715,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        2+3/4=2.7500
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          2+3/4=2.7500
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -27096,21 +27576,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        2+3/4=2.7500
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          2+3/4=2.7500
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -27942,21 +28437,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        2+3/4=2.7500
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          2+3/4=2.7500
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -28788,21 +29298,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        2+6-4=4
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          2+6-4=4
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -29634,21 +30159,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -30480,21 +31020,36 @@ exports[`Test Calculator component renders and presses all the buttons into equa
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        3.14*2=6.2800
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          3.14*2=6.2800
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -31326,21 +31881,34 @@ exports[`Test Calculator component renders the calculator 1`] = `
       }
     }
   >
-    <View>
-      <TextInput
+    <ScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
+        }
+      }
+    >
+      <Text
         style={
           Object {
             "fontSize": 16,
-            "paddingBottom": 0,
+            "paddingHorizontal": 2,
+            "paddingVertical": 4,
             "textAlign": "right",
-            "width": 504,
           }
         }
         testID="calc-paper-tape"
       >
         
-      </TextInput>
-    </View>
+      </Text>
+    </ScrollView>
     <View>
       <TextInput
         editable={false}
@@ -31961,21 +32529,36 @@ exports[`Test Calculator component renders the calculator component with paper t
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        4-2=2*4=8-3=5
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          4-2=2*4=8-3=5
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
@@ -32807,21 +33390,36 @@ exports[`Test Calculator component renders the calculator modal component with t
       }
     }
   >
-    <View>
-      <TextInput
-        style={
-          Object {
-            "fontSize": 16,
-            "paddingBottom": 0,
-            "textAlign": "right",
-            "width": 504,
-          }
+    <RCTScrollView
+      automaticallyAdjustContentInsets={true}
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Object {
+          "direction": "rtl",
+          "flexDirection": "row",
+          "flexGrow": 0,
+          "maxWidth": 504,
         }
-        testID="calc-paper-tape"
-      >
-        
-      </TextInput>
-    </View>
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "paddingHorizontal": 2,
+              "paddingVertical": 4,
+              "textAlign": "right",
+            }
+          }
+          testID="calc-paper-tape"
+        >
+          
+        </Text>
+      </View>
+    </RCTScrollView>
     <View>
       <TextInput
         editable={false}
