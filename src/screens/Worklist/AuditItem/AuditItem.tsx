@@ -1122,6 +1122,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     const locationLst: LocationList[] = [];
 
     if (locations && locations.length) {
+      const sortLocations = (a: Location, b: Location) => (
+        a.zoneName.localeCompare(b.zoneName)
+                  || a.aisleName.localeCompare(b.aisleName)
+                  || a.sectionName.localeCompare(b.sectionName)
+      );
+
+      locations.sort(sortLocations);
       locations.forEach((loc: Location, index: number) => {
         locationLst.push({
           sectionId: loc.sectionId,
