@@ -3,7 +3,10 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
-  PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+  BottomSheetModal
+} from '@gorhom/bottom-sheet';
+import {
+  BottomSheetCard, PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -102,6 +105,19 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         multiBinEnabled={false}
         multiPickEnabled={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('BottomSheet card', () => {
+  it('Renders BottomSheetCard', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <BottomSheetCard
+        text="Test"
+        onPress={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
