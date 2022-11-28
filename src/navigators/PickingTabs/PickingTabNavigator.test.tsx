@@ -6,7 +6,7 @@ import {
   BottomSheetModal
 } from '@gorhom/bottom-sheet';
 import {
-  PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+  BottomSheetCard, PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -104,6 +104,19 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('BottomSheet card', () => {
+  it('Renders BottomSheetCard', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <BottomSheetCard
+        text="Test"
+        onPress={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
