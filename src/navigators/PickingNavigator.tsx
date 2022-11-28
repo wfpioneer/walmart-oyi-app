@@ -97,7 +97,7 @@ export const PickingNavigatorStack = (
   return (
     <Stack.Navigator
       screenOptions={({ route: screenRoute }) => {
-        const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? 'Pick';
+        const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? selectedTab ?? 'Pick';
         return {
           headerMode: 'float',
           headerStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR },
