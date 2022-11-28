@@ -307,9 +307,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           ) : undefined
         }}
         listeners={{
-          focus: () => {
-            dispatch(setSelectedTab(Tabs.QUICKPICK));
-          }
+          focus: () => dispatch(setSelectedTab(Tabs.QUICKPICK))
         }}
       >
         {() => (
@@ -353,9 +351,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           ) : undefined
         }}
         listeners={{
-          focus: () => {
-            dispatch(setSelectedTab(Tabs.SALESFLOOR));
-          }
+          focus: () => dispatch(setSelectedTab(Tabs.SALESFLOOR))
         }}
       >
         {() => (

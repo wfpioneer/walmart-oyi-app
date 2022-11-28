@@ -74,12 +74,11 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
 };
 
 const PickBinTab = (props: PickBinTabProps) => {
-  const {
-    pickBinList, onRefresh, refreshing
-  } = props;
+  const { pickBinList, onRefresh, refreshing } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
+
   return (
     <PickBinTabScreen
       pickBinList={pickBinList}
