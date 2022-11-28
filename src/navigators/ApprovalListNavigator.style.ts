@@ -13,18 +13,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: -2
   },
-  headerRightPadding: {
-    paddingRight: 16
+  headerRightView: {
+    paddingRight: 16,
+    flexDirection: 'row-reverse',
+    alignItems: 'center'
   },
   headerLeftPadding: {
     paddingLeft: 10
   },
   selectAllButton: {
-    flex: 1,
     flexDirection: 'row',
-    width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    margin: 15
   },
   selectAllText: {
     color: COLOR.WHITE,

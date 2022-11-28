@@ -84,7 +84,7 @@ export const mockApprovals: ApprovalListItem[] = [{
   initiatedUserId: INITIATED_USER_ID.ASSOCIATE_WORKER,
   initiatedTimestamp: INITIATED_TIMESTAMP.DAY2,
   approvalStatus: approvalStatus.Pending,
-  approvalRequestSource: approvalRequestSource.ItemDetails,
+  approvalRequestSource: approvalRequestSource.Audits,
   isChecked: false,
   daysLeft: 2
 }];

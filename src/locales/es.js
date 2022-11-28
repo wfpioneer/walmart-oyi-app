@@ -57,7 +57,8 @@ export default {
     UNASSIGNED: 'Sin asignar',
     SELECTED: 'Seleccionado',
     UPDATE: 'Actualizar Configuración',
-    WARNING_LABEL: 'Aviso'
+    WARNING_LABEL: 'Aviso',
+    CLOSE: 'Cerrar'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -226,7 +227,8 @@ export default {
     UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
     CREATE_PALLET: 'Crear Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet creado con éxito',
-    CREATE_PALLET_FAILED: 'Falló la creación de pallet'
+    CREATE_PALLET_FAILED: 'Falló la creación de pallet',
+    DELETE_ONCE_MERGED: 'El pallet %{palletId} será eliminado una vez combinado'
   },
   LOCATION: {
     TITLE: 'Todas las Ubicaciones',
@@ -405,7 +407,9 @@ export default {
     FAILED_APPROVE: 'Las solicitudes fallaron al aprobarse',
     FAILED_ITEMS: 'Artículos Fallidos',
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo',
-    MANAGER_APPROVAL: 'Aprobación de Gerencia'
+    MANAGER_APPROVAL: 'Aprobación de Gerencia',
+    APPROVAL_LOADING_MSG: 'Las aprobaciones de muchos artículos pueden llevar un momento, por favor espera',
+    SOURCE: 'Fuente de aprovacíon'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
@@ -484,7 +488,7 @@ export default {
     PALLET_BIN_PARTIAL: 'No todos los pallets se agruparon, %{number} fallido',
     WARNING_LABEL: 'Aviso',
     WARNING_DESCRIPTION: 'Si navega afuera de esta pantalla los pallets ya escaneados no se agruparán',
-    LAST_LOC: 'última ubicación',
+    LAST_LOC: 'Última ubicación en bodega',
     FIRST_ITEM: 'Primer articulo',
     EMPTY_PALLET: 'Pallet vacía',
     PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo'
@@ -513,6 +517,11 @@ export default {
     SCAN_PALLET_ERROR: 'El pallet escaneado debe coincidir con el pallet asociado al artículo',
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Auditoría completada correctamente',
     COMPLETE_AUDIT_ITEM_ERROR: 'No se pudo completar la auditoría. Inténtalo de nuevo',
-    OPEN_AUDIT_LABEL: 'Abrir Auditoría'
+    OPEN_AUDIT_LABEL: 'Abrir Auditoría',
+    INVALID_EQUATION: 'Fórmula invalida, por favor verifica la operación',
+    NO_PALLETS_FOUND_FOR_ITEM: 'No hay pallets encontrados para este artículo',
+    NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor',
+    ITEMS: 'Artículos',
+    CUSTOM_ITEMS: 'Artículos'
   }
 };

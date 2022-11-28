@@ -36,6 +36,13 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         ]
       }
     >
+      <Modal
+        animationType="none"
+        hardwareAccelerated={false}
+        onRequestClose={[Function]}
+        transparent={true}
+        visible={false}
+      />
       <View>
         <Text
           style={
@@ -286,7 +293,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             <View
               accessibilityState={
                 Object {
-                  "disabled": true,
+                  "disabled": false,
                 }
               }
               accessible={true}
@@ -302,7 +309,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#5FA7F2",
+                  "backgroundColor": "#0071e9",
                   "borderRadius": 5,
                   "elevation": 1,
                   "flex": 1,
@@ -558,6 +565,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -868,6 +877,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1161,6 +1172,13 @@ Array [
     transparent={true}
     visible={false}
   />,
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <View
     style={
       Object {
@@ -1211,6 +1229,7 @@ Array [
             Object {
               "flexDirection": "column",
               "flexShrink": 1,
+              "justifyContent": "space-around",
               "padding": 5,
             }
           }
@@ -1468,7 +1487,7 @@ Array [
               }
             >
               <Text>
-                [missing "en.AUDITS.NO_LOCATION_AVAILABLE" translation]
+                [missing "en.AUDITS.NO_PALLETS_FOUND_FOR_ITEM" translation]
               </Text>
             </View>
           </View>
@@ -1556,50 +1575,7 @@ Array [
                     }
                   }
                 >
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.CLAIMS_QTY" translation]  0
-                    </Text>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.FLY_CLOUD_QTY" translation]  0
-                    </Text>
-                  </View>
-                  <View>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.CONSOLIDATED_QTY" translation]  0
-                    </Text>
-                    <Text
-                      style={
-                        Object {
-                          "padding": 8,
-                          "textAlign": "right",
-                        }
-                      }
-                    >
-                      [missing "en.ITEM.IN_TRANSIT_FLY_QTY" translation]  0
-                    </Text>
-                  </View>
+                  <View />
                 </View>
               </View>
             </View>
@@ -1647,7 +1623,7 @@ Array [
             }
           }
         >
-          0 [missing "en.GENERICS.ITEMS" translation]
+          0 [missing "en.AUDITS.ITEMS" translation]
         </Text>
       </View>
       <View
@@ -1736,8 +1712,9 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     <PalletQtyUpdate
       handleClose={[Function]}
       handleSubmit={[Function]}
-      palletId="4928"
+      palletId={4928}
       qty={0}
+      showCalculator={false}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -1762,6 +1739,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1943,6 +1922,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -1990,6 +1971,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
     </React.Fragment>
   </CustomModalComponent>
+  <CalculatorModal
+    disableAcceptButton={[Function]}
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButton={true}
+    visible={false}
+  />
   <View
     style={
       Object {
@@ -2043,6 +2031,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           locationType="floor"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View
@@ -2059,6 +2048,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           locationType="reserve"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View>
@@ -2066,6 +2056,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           claimsOH={0}
           collapsed={false}
           consolidatorOH={0}
+          countryCode="CN"
           flyCloudInTransitOH={0}
           flyCloudOH={0}
           loading={true}
@@ -2154,8 +2145,9 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <PalletQtyUpdate
       handleClose={[Function]}
       handleSubmit={[Function]}
-      palletId="4928"
+      palletId={4928}
       qty={0}
+      showCalculator={false}
     />
   </CustomModalComponent>
   <CustomModalComponent
@@ -2180,6 +2172,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2369,6 +2363,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           Object {
             "alignContent": "space-around",
             "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
             "width": "100%",
           }
         }
@@ -2416,6 +2412,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
     </React.Fragment>
   </CustomModalComponent>
+  <CalculatorModal
+    disableAcceptButton={[Function]}
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButton={true}
+    visible={false}
+  />
   <View
     style={
       Object {
@@ -2469,6 +2472,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationType="floor"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View
@@ -2485,6 +2489,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationType="reserve"
           onRetry={[Function]}
           scanRequired={false}
+          showCalculator={false}
         />
       </View>
       <View>
@@ -2492,6 +2497,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           claimsOH={5}
           collapsed={false}
           consolidatorOH={10}
+          countryCode="CN"
           flyCloudInTransitOH={0}
           flyCloudOH={0}
           loading={false}

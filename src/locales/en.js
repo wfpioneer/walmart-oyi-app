@@ -57,7 +57,8 @@ export default {
     UNASSIGNED: 'unassigned',
     SELECTED: 'selected',
     UPDATE: 'Update Configuration',
-    WARNING_LABEL: 'Warning'
+    WARNING_LABEL: 'Warning',
+    CLOSE: 'Close'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -123,7 +124,7 @@ export default {
     CLAIMS_QTY: 'Claims',
     CONSOLIDATED_QTY: 'Consolidated',
     FLY_CLOUD_QTY: 'Fly Cloud',
-    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud Qty',
+    IN_TRANSIT_FLY_QTY: 'In Transit Fly Cloud',
     ERROR_SALES_HISTORY: 'Unable to retrieve sales history',
     ITEM_NUMBER: 'Item Number',
     OH_CHANGE_HISTORY: 'On Hands Change History',
@@ -227,7 +228,8 @@ export default {
     UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
     CREATE_PALLET: 'Create Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet created successfully',
-    CREATE_PALLET_FAILED: 'Failed to create pallet'
+    CREATE_PALLET_FAILED: 'Failed to create pallet',
+    DELETE_ONCE_MERGED: 'Pallet ID %{palletId} will be deleted once merged'
   },
   LOCATION: {
     TITLE: 'All locations',
@@ -407,7 +409,9 @@ export default {
     FAILED_APPROVE: 'Requests Failed to Approve',
     FAILED_ITEMS: 'Items Failed',
     UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.',
-    MANAGER_APPROVAL: 'Manager Approval'
+    MANAGER_APPROVAL: 'Manager Approval',
+    APPROVAL_LOADING_MSG: 'Large approval requests may take some time, please be patient',
+    SOURCE: 'Approval source'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
@@ -486,7 +490,7 @@ export default {
     PALLET_BIN_PARTIAL: 'Not all pallets binned, %{number} failed',
     WARNING_LABEL: 'Warning',
     WARNING_DESCRIPTION: 'If you navigate away from this screen the pallets already scanned will not be binned',
-    LAST_LOC: 'Last Loc',
+    LAST_LOC: 'Last Bin Loc',
     FIRST_ITEM: 'First Item',
     EMPTY_PALLET: 'Empty Pallet',
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
@@ -515,6 +519,11 @@ export default {
     SCAN_PALLET_ERROR: 'Pallet scanned must match pallet associated to the item',
     COMPLETE_AUDIT_ITEM_SUCCESS: 'Item audit successfully completed',
     COMPLETE_AUDIT_ITEM_ERROR: 'Item audit completion unsuccessful. Please try again.',
-    OPEN_AUDIT_LABEL: 'Open Audit'
+    OPEN_AUDIT_LABEL: 'Open Audit',
+    INVALID_EQUATION: 'Invalid formula, please check the operation',
+    NO_PALLETS_FOUND_FOR_ITEM: 'No Pallets found for the item',
+    NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
+    ITEMS: 'Items',
+    CUSTOM_ITEMS: 'Items'
   }
 };

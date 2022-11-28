@@ -34,6 +34,10 @@ export interface Configurations {
   showRollOverAudit: boolean;
   showOpenAuditLink: boolean;
   scanRequired: boolean;
+  showCalculator: boolean;
+  showItemImages: boolean;
+  multiPick: boolean;
+  multiBin: boolean;
 }
 
 export interface area {

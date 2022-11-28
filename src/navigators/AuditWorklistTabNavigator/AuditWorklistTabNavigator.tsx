@@ -11,7 +11,7 @@ import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import CompletedAuditWorklist from '../../screens/Worklist/AuditWorklist/CompletedAuditWorklist';
 import TodoAuditWorklist from '../../screens/Worklist/AuditWorklist/TodoAuditWorklist';
-import { getWorklist } from '../../state/actions/saga';
+import { getWorklistAudits } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
@@ -31,14 +31,14 @@ interface AuditWorklistTabNavigatorProps {
 
 const Tab = createMaterialTopTabNavigator();
 
-const getWorklistApiHook = (
-  getWorklistApi: AsyncState,
+const getWorklistAuditApiHook = (
+  getWorklistAuditApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>
 ) => {
   if (navigation.isFocused()) {
-    if (!getWorklistApi.isWaiting && getWorklistApi.result && getWorklistApi.result.data) {
-      dispatch(setWorklistItems(getWorklistApi.result.data as WorklistItemI[]));
+    if (!getWorklistAuditApi.isWaiting && getWorklistAuditApi.result && getWorklistAuditApi.result.data) {
+      dispatch(setWorklistItems(getWorklistAuditApi.result.data as WorklistItemI[]));
     }
   }
 };
@@ -56,7 +56,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
     useEffectHook
   } = props;
-  const getWorklistApi: AsyncState = useTypedSelector(state => state.async.getWorklist);
+  const getWorklistAuditApi: AsyncState = useTypedSelector(state => state.async.getWorklistAudits);
   const { showRollOverAudit } = useTypedSelector(state => state.User.configs);
   const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummary.result?.data);
   const selectedWorklistGoal = WorklistGoal.AUDITS;
@@ -69,7 +69,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
       if (!disableAuditWL) {
         auditWlType.push('AU');
       }
-      dispatch(getWorklist({ worklistType: auditWlType }));
+      dispatch(getWorklistAudits({ worklistType: auditWlType }));
     });
   };
   // Get Audit worklist items call
@@ -79,7 +79,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     }, [navigation])
   );
 
-  useEffectHook(() => getWorklistApiHook(getWorklistApi, dispatch, navigation), [getWorklistApi]);
+  useEffectHook(() => getWorklistAuditApiHook(getWorklistAuditApi, dispatch, navigation), [getWorklistAuditApi]);
 
   return (
     <Tab.Navigator

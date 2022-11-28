@@ -27,17 +27,13 @@ exports[`BinningScreen Tests rendering binningItemCard component should match sn
       <View
         style={
           Object {
-            "flexDirection": "row",
-            "justifyContent": "space-between",
             "marginBottom": 5,
           }
         }
       >
-        <View>
-          <Text>
-            [missing "en.PALLET.PALLET_ID" translation]: 123456
-          </Text>
-        </View>
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 123456
+        </Text>
       </View>
       <View>
         <Text>
@@ -204,7 +200,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <TouchableOpacity
+          <Memo(Pressable)
             onPress={[Function]}
           >
             <mockConstructor
@@ -212,7 +208,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </TouchableOpacity>
+          </Memo(Pressable)>
           <View
             style={
               Object {
@@ -420,7 +416,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <TouchableOpacity
+          <Memo(Pressable)
             onPress={[Function]}
           >
             <mockConstructor
@@ -428,7 +424,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </TouchableOpacity>
+          </Memo(Pressable)>
           <View
             style={
               Object {
@@ -636,7 +632,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <TouchableOpacity
+          <Memo(Pressable)
             onPress={[Function]}
           >
             <mockConstructor
@@ -644,7 +640,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </TouchableOpacity>
+          </Memo(Pressable)>
           <View
             style={
               Object {
@@ -838,7 +834,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             }
           }
         >
-          <TouchableOpacity
+          <Memo(Pressable)
             onPress={[Function]}
           >
             <mockConstructor
@@ -846,7 +842,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               name="barcode-scan"
               size={100}
             />
-          </TouchableOpacity>
+          </Memo(Pressable)>
           <View
             style={
               Object {

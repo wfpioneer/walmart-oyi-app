@@ -57,7 +57,8 @@ export default {
     UNASSIGNED: '未分配',
     SELECTED: '已选择',
     UPDATE: '更新配置',
-    WARNING_LABEL: '警示'
+    WARNING_LABEL: '警示',
+    CLOSE: '关闭'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -226,7 +227,8 @@ export default {
     UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失',
     CREATE_PALLET: '创建卡板',
     CREATE_PALLET_SUCCESS: '卡板创建成功',
-    CREATE_PALLET_FAILED: '卡板创建失败'
+    CREATE_PALLET_FAILED: '卡板创建失败',
+    DELETE_ONCE_MERGED: '一旦合并卡板%{palletId}将被删除'
   },
   LOCATION: {
     TITLE: '所有位置',
@@ -408,7 +410,9 @@ export default {
     FAILED_APPROVE: '审批未成功',
     FAILED_ITEMS: '此商品未成功审批',
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试',
-    MANAGER_APPROVAL: '副总审批'
+    MANAGER_APPROVAL: '副总审批',
+    APPROVAL_LOADING_MSG: '大量审批需求会略慢，请耐心等待.',
+    SOURCE: '审批来源'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: '需店号开启OYI',
@@ -489,7 +493,7 @@ export default {
     PALLET_BIN_SUCCESS: '卡板上架成功',
     PALLET_BIN_FAILURE: '卡板上架失败',
     PALLET_BIN_PARTIAL: '部分卡板上架成功，%{number} 失败',
-    LAST_LOC: '上一个位置',
+    LAST_LOC: '上一次高货架储位',
     FIRST_ITEM: '第一个item',
     EMPTY_PALLET: '空卡板',
     PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态'
@@ -518,6 +522,11 @@ export default {
     SCAN_PALLET_ERROR: '扫描的卡板必须和关联的商品匹配',
     COMPLETE_AUDIT_ITEM_SUCCESS: '成功-商品盘点完成成功',
     COMPLETE_AUDIT_ITEM_ERROR: '失败-商品盘点完成失败，请重试',
-    OPEN_AUDIT_LABEL: '计划外盘点'
+    OPEN_AUDIT_LABEL: '计划外盘点',
+    INVALID_EQUATION: '无效公式，请检查操作',
+    NO_PALLETS_FOUND_FOR_ITEM: '未找到此item卡板信息',
+    NEGATIVE_VALIDATION: '无效结果，位置数量不可小于0',
+    ITEMS: '个库存',
+    CUSTOM_ITEMS: '个 item'
   }
 };

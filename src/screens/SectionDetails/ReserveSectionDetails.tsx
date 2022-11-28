@@ -24,6 +24,7 @@ import { setPerishableCategories, setupPallet } from '../../state/actions/Pallet
 import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
 import { Configurations } from '../../models/User';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
+import { setIsToolBarNavigation } from '../../state/actions/Location';
 
 interface ReserveSectionDetailsProps {
   getSectionDetailsApi: AsyncState;
@@ -64,8 +65,8 @@ export const showActivitySpinner = (
   getPalletDetailsWaiting: boolean,
   getPalletDetailsComplete: boolean,
   getSectionDetailsWaiting: boolean
-) => (getPalletDetailsWaiting && configWaiting) || (getPalletDetailsWaiting)
-|| (getSectionDetailsWaiting) || (configWaiting && getPalletDetailsComplete);
+) => (configWaiting) || (getPalletDetailsWaiting)
+|| (getSectionDetailsWaiting) || (!configWaiting && getPalletDetailsComplete);
 
 export const getPalletDetailsApiHook = (
   getPalletDetailsApi: AsyncState,
@@ -221,6 +222,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
       if (configComplete && getPalletDetailsComplete) {
         navigation.navigate('PalletManagement', { screen: 'ManagePallet' });
         setGetPalletDetailsComplete(false);
+        dispatch(setIsToolBarNavigation(false));
       }
     }
   }, [getPalletDetailsComplete, configComplete]);

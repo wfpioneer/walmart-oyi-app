@@ -635,34 +635,12 @@ export const renderLocationComponent = (
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.FLOOR')}</Text>
         {floorLocations && floorLocations.length >= 1
-          ? <Text>{floorLocations[0].locationName}</Text>
-          : (
-            <Button
-              type={3}
-              title={strings(GENERICS_ADD)}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              titleFontSize={12}
-              titleFontWeight="bold"
-              height={28}
-              onPress={() => handleLocationAction(props, itemDetails)}
-            />
-          )}
+          && <Text>{floorLocations[0].locationName}</Text>}
       </View>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
         {reserveLocations && reserveLocations.length >= 1
-          ? !additionalItemDetails && <Text>{reserveLocations[0].locationName}</Text>
-          : (
-            <Button
-              type={3}
-              title={strings(GENERICS_ADD)}
-              titleColor={COLOR.MAIN_THEME_COLOR}
-              titleFontSize={12}
-              titleFontWeight="bold"
-              height={28}
-              onPress={() => handleLocationAction(props, itemDetails)}
-            />
-          )}
+          && !additionalItemDetails && <Text>{reserveLocations[0].locationName}</Text> }
       </View>
       {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>

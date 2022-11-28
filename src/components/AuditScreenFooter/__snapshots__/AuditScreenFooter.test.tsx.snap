@@ -31,7 +31,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
         }
       }
     >
-      20 [missing "en.GENERICS.ITEMS" translation]
+      20 [missing "en.AUDITS.ITEMS" translation]
     </Text>
   </View>
   <View
@@ -77,7 +77,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#5FA7F2",
+              "backgroundColor": "#BABBBE",
               "borderRadius": 5,
               "elevation": 1,
               "flex": 1,
@@ -138,7 +138,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
         }
       }
     >
-      20 [missing "en.GENERICS.ITEMS" translation]
+      20 [missing "en.AUDITS.ITEMS" translation]
     </Text>
   </View>
   <View

@@ -44,7 +44,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             itemNumber={itemNbr || 0}
             description={itemName || ''}
             imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
-            onHandQty={11}
+            onHandQty={undefined}
             onClick={() => {
               onItemCardClick(itemNbr || 0);
             }}
@@ -63,7 +63,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             {category}
           </Text>
           <Text>
-            {`${listOfItems.length} ${strings('GENERICS.ITEMS')}`}
+            {`${listOfItems.length} ${strings('AUDITS.CUSTOM_ITEMS')}`}
           </Text>
         </View>
         <TouchableOpacity

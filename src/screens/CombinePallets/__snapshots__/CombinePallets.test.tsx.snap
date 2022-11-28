@@ -5,7 +5,6 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
   style={
     Object {
       "backgroundColor": "#ffffffff",
-      "flex": 1,
     }
   }
 >
@@ -25,9 +24,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
           "fontSize": 18,
         }
       }
-    >
-      [missing "en.PALLET.SCAN_PALLET" translation]
-    </Text>
+    />
   </View>
   <FlatList
     ListEmptyComponent={
@@ -81,21 +78,35 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       }
     }
   >
-    <Text
-      style={
-        Object {
-          "alignSelf": "center",
-          "fontSize": 16,
-        }
-      }
-    >
-      [missing "en.PALLET.PALLET_MERGE" translation]
-    </Text>
     <View
       style={
         Object {
-          "marginVertical": 20,
-          "paddingHorizontal": 20,
+          "alignItems": "center",
+          "borderBottomWidth": 1,
+          "borderColor": "#757575",
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "paddingVertical": 12,
+          }
+        }
+      >
+        [missing "en.PALLET.PALLET_MERGE" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomWidth": 2,
+          "borderColor": "#757575",
+          "paddingHorizontal": 10,
+          "paddingVertical": 10,
+          "width": "100%",
         }
       }
     >
@@ -106,7 +117,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
           }
         }
       >
-        [missing "en.LOCATION.PALLET" translation]: 1
+        [missing "en.PALLET.PALLET_ID" translation]: 1
       </Text>
       <Text
         style={
@@ -118,35 +129,98 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
         [missing "en.GENERICS.ITEMS" translation]: 2
       </Text>
     </View>
-    <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "marginBottom": 15,
-          "width": "100%",
-        }
-      }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
+    <React.Fragment>
+      <View
         style={
           Object {
-            "width": "90%",
+            "alignItems": "center",
+            "paddingVertical": 16,
+            "width": "100%",
           }
         }
-        title="[missing \\"en.GENERICS.SAVE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+            }
+          }
+        >
+          [missing "en.PALLET.DELETE_ONCE_MERGED" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+            }
+          }
+        >
+          <Memo(Pressable)
+            onPress={[Function]}
+          >
+            <mockConstructor
+              color="#000000"
+              name="barcode-scan"
+              size={100}
+            />
+          </Memo(Pressable)>
+          <View
+            style={
+              Object {
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.PALLET.SCAN_PALLET" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "marginBottom": 14,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.GENERICS.OR" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+    </React.Fragment>
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "flexDirection": "row",
+          "marginBottom": 15,
+          "width": "90%",
+        }
+      }
+      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
   </View>
 </View>
 `;
@@ -204,8 +278,8 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
     <View
       style={
         Object {
-          "marginVertical": 20,
           "paddingHorizontal": 20,
+          "paddingVertical": 10,
         }
       }
     >
@@ -216,7 +290,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
           }
         }
       >
-        [missing "en.LOCATION.PALLET" translation]: 1
+        [missing "en.PALLET.PALLET_ID" translation]: 1
       </Text>
       <Text
         style={
@@ -228,35 +302,28 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
         [missing "en.GENERICS.ITEMS" translation]: 2
       </Text>
     </View>
-    <View
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
       style={
         Object {
+          "alignItems": "center",
+          "alignSelf": "center",
           "flexDirection": "row",
-          "justifyContent": "center",
           "marginBottom": 15,
-          "width": "100%",
+          "width": "90%",
         }
       }
-    >
-      <Button
-        backgroundColor="#0071e9"
-        disabled={true}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "width": "90%",
-          }
-        }
-        title="[missing \\"en.GENERICS.SAVE\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
+      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
   </View>
 </View>
 `;

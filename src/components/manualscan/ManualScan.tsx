@@ -37,12 +37,13 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
   return (
     <View style={styles.container}>
       <TextInput
+        testID="txtEntry"
         ref={textInputRef}
         style={styles.textInput}
         value={value}
-        onChangeText={(text: string) => props.keyboardType === 'numeric'
+        onChangeText={(text: string) => (props.keyboardType === 'numeric'
           ? onChangeText(text.replace(itemRegex, ''))
-          : onChangeText(text)}
+          : onChangeText(text))}
         selectionColor={COLOR.MAIN_THEME_COLOR}
         placeholder={props.placeholder}
         onSubmitEditing={(event: any) => onSubmit(event.nativeEvent.text)}
@@ -54,6 +55,7 @@ const ManualScanComponent: FC<ManualScanProps> = (props = defaultProps) => {
           icon={ModalCloseIcon}
           type={IconButtonType.NO_BORDER}
           onPress={clearText}
+          testID="clearbutton"
         />
       )}
     </View>

@@ -14,7 +14,7 @@ const AuditScreenFooter = ({ totalCount, onContinueClick, disabledContinue }: Au
   <View style={styles.container}>
     <View style={styles.totalCntVw}>
       <Text style={styles.totalCnt}>
-        {`${totalCount} ${strings('GENERICS.ITEMS')}`}
+        {`${totalCount} ${strings('AUDITS.ITEMS')}`}
       </Text>
     </View>
     <View style={styles.continueBtn}>

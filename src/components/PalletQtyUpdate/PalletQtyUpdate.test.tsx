@@ -2,7 +2,7 @@ import React, { Dispatch } from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import PalletQtyUpdate, {
   assignHandleTextChange, calculateDecreaseQty, calculateIncreaseQty,
-  validateQty, validateSameQty
+  validateQty
 } from './PalletQtyUpdate';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
@@ -21,9 +21,22 @@ describe('testing PalletQtyUpdate component', () => {
       const { toJSON } = render(
         <PalletQtyUpdate
           qty={10}
-          palletId="4598"
+          palletId={4598}
           handleSubmit={mockHandleSubmit}
           handleClose={mockHandleClose}
+          showCalculator={false}
+        />
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+    it('render component with showcalculator true', () => {
+      const { toJSON } = render(
+        <PalletQtyUpdate
+          qty={10}
+          palletId={4598}
+          handleSubmit={mockHandleSubmit}
+          handleClose={mockHandleClose}
+          showCalculator={true}
         />
       );
       expect(toJSON()).toMatchSnapshot();
@@ -32,9 +45,10 @@ describe('testing PalletQtyUpdate component', () => {
       const { toJSON } = render(
         <PalletQtyUpdate
           qty={-11}
-          palletId="4598"
+          palletId={4598}
           handleSubmit={mockHandleSubmit}
           handleClose={mockHandleClose}
+          showCalculator={true}
         />
       );
       expect(toJSON()).toMatchSnapshot();
@@ -43,9 +57,10 @@ describe('testing PalletQtyUpdate component', () => {
       const { getByTestId } = render(
         <PalletQtyUpdate
           qty={11}
-          palletId="4598"
+          palletId={4598}
           handleSubmit={mockHandleSubmit}
           handleClose={mockHandleClose}
+          showCalculator={false}
         />
       );
       const testIncrease = getByTestId('increaseButton');
@@ -83,12 +98,6 @@ describe('testing PalletQtyUpdate component', () => {
       mockSetNewQty.mockReset();
       calculateIncreaseQty(10, mockSetNewQty);
       expect(mockSetNewQty).toHaveBeenCalled();
-    });
-    it('test validateSameQty', () => {
-      let results = validateSameQty(10, 10);
-      expect(results).toStrictEqual(true);
-      results = validateSameQty(10, 11);
-      expect(results).toStrictEqual(false);
     });
     it('test validateQty', () => {
       let results = validateQty(-10);

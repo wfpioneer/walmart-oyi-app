@@ -14,13 +14,15 @@ export interface LocationList {
     sectionId: number;
     locationName: string;
     quantity: number;
-    palletId: string;
+    palletId: number;
     increment: () => void;
     decrement: () => void;
     onDelete: () => void;
     qtyChange: (qty: string) => void;
     onEndEditing: () => void;
+    onInputPress: () => void;
     scanned?: boolean;
+    locationType: LocationType
 }
 
 interface LocationListCardProp {
@@ -32,14 +34,21 @@ interface LocationListCardProp {
   error: boolean;
   onRetry: () => void;
   scanRequired: boolean;
+  showCalculator: boolean;
 }
 
 const renderLocationCard = ({
-  item, locationType, scanRequired, index
+  item, locationType, scanRequired, index, showCalculator
 }:
-  { item: LocationList, locationType: LocationType, scanRequired: boolean, index: number }) => {
+  {
+    item: LocationList,
+    locationType: LocationType,
+    scanRequired: boolean,
+    index: number,
+    showCalculator: boolean
+  }) => {
   const {
-    locationName, quantity, palletId, increment, decrement, onDelete, qtyChange, scanned, onEndEditing
+    locationName, quantity, palletId, increment, decrement, onDelete, onInputPress, qtyChange, scanned
   } = item;
   return (
     <View style={styles.locationCard} key={`${locationName}-${index}`}>
@@ -48,13 +57,14 @@ const renderLocationCard = ({
         locationType={locationType}
         onQtyIncrement={increment}
         onTextChange={qtyChange}
+        onInputPress={onInputPress}
         onQtyDecrement={decrement}
-        palletID={palletId}
+        palletId={palletId}
         scannerEnabled={scanRequired}
         quantity={quantity}
         onLocationDelete={onDelete}
         scanned={scanned}
-        onEndEditing={onEndEditing}
+        showCalculator={showCalculator}
       />
     </View>
   );
@@ -68,7 +78,8 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
     loading,
     error,
     onRetry,
-    scanRequired
+    scanRequired,
+    showCalculator
   } = props;
   const locationTitle = locationType === 'floor' ? strings('LOCATION.FLOOR') : strings('LOCATION.RESERVE');
 
@@ -144,12 +155,13 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
         <>
           {
             locationList.length ? locationList.map((item, index) => renderLocationCard({
-              item, locationType, scanRequired, index
+              item, locationType, scanRequired, index, showCalculator
             }))
               : (
                 <View style={styles.nolocation}>
                   <Text>
-                    {strings('AUDITS.NO_LOCATION_AVAILABLE')}
+                    { locationType === 'floor' ? strings('AUDITS.NO_LOCATION_AVAILABLE')
+                      : strings('AUDITS.NO_PALLETS_FOUND_FOR_ITEM')}
                   </Text>
                 </View>
               )

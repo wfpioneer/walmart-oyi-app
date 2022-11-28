@@ -123,21 +123,25 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
     }
   }, [approvalApi]);
 
-  if (approvalApi.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={approvalApi.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
   approvalList.forEach(item => {
     validateQuantity(item, checkedList, increaseItems, decreaseItems, resolvedTime);
   });
+
+  if (approvalApi.isWaiting) {
+    const msgWhenApprovalItemCntExceeds = 50;
+    return (
+      <View style={styles.activityIndicator}>
+        <ActivityIndicator
+          animating={approvalApi.isWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+        />
+        {checkedList.length > msgWhenApprovalItemCntExceeds
+          && <Text style={styles.approvalLoaderMsg}>{strings('APPROVAL.APPROVAL_LOADING_MSG')}</Text>}
+      </View>
+    );
+  }
 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
