@@ -55,8 +55,8 @@ export const renderMultipickConfirmationDialog = (
       <View>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>
-            {multiBinEnabled && strings('PICKING.ACCEPT_MULTI_BIN')}
-            {multiPickEnabled && strings('PICKING.ACCEPT_MULTI_PICK')}
+            {multiBinEnabled && strings('PICKING.ACCEPT_MULTIPLE_BINS')}
+            {multiPickEnabled && strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
           </Text>
         </View>
         <View>

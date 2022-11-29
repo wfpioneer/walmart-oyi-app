@@ -1,10 +1,13 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect
+  DependencyList, Dispatch, EffectCallback, useCallback, useEffect, useMemo, useRef
 } from 'react';
+import {
+  BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView
+} from '@gorhom/bottom-sheet';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
 import { trackEvent } from 'appcenter-analytics';
-import { EmitterSubscription } from 'react-native';
+import { EmitterSubscription, Text, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import {
   NavigationProp,
@@ -29,7 +32,8 @@ import {
   setPickCreateFloor,
   setPickCreateItem,
   setPickCreateReserve,
-  setSelectedTab
+  setSelectedTab,
+  showPickingMenu
 } from '../../state/actions/Picking';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
@@ -53,6 +57,13 @@ interface PickingTabNavigatorProps {
   selectedTab: Tabs;
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
+  bottomSheetModalRef: React.RefObject<BottomSheetModal>;
+  pickingMenu: boolean;
+}
+
+interface BottomSheetCardProps {
+  text: string,
+  onPress: () => void
 }
 
 export const getItemDetailsApiHook = (
@@ -194,11 +205,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     updatePicklistStatusApi,
     selectedTab,
     useCallbackHook,
-    useFocusEffectHook
+    useFocusEffectHook,
+    bottomSheetModalRef,
+    pickingMenu
   } = props;
 
   let scannedSubscription: EmitterSubscription;
-
   const quickPickList = picklist.filter(item => item.quickPick);
   const pickBinList = picklist.filter(
     item => !item.quickPick
@@ -260,6 +272,16 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     [updatePicklistStatusApi]
   );
 
+  useEffectHook(() => {
+    if (bottomSheetModalRef.current) {
+      if (pickingMenu) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [pickingMenu]);
+
   return (
     <Tab.Navigator
       initialRouteName={selectedTab}
@@ -267,6 +289,11 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
         tabBarActiveTintColor: COLOR.MAIN_THEME_COLOR,
         tabBarInactiveTintColor: COLOR.GREY_700,
         tabBarItemStyle: styles.tabBarStyle
+      }}
+      screenListeners={{
+        beforeRemove: () => {
+          dispatch(showPickingMenu(false));
+        }
       }}
     >
       <Tab.Screen
@@ -287,7 +314,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           <QuickPickTab
             quickPickItems={quickPickList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen
@@ -308,7 +336,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           <PickBinTab
             pickBinList={pickBinList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
       <Tab.Screen
@@ -329,10 +358,25 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           <SalesFloorTab
             readyToWorklist={salesFloorList}
             refreshing={getPicklistsApi.isWaiting}
-            onRefresh={() => dispatch(getPicklists())}/>
+            onRefresh={() => dispatch(getPicklists())}
+          />
         )}
       </Tab.Screen>
     </Tab.Navigator>
+  );
+};
+
+export const BottomSheetCard = (props: BottomSheetCardProps): JSX.Element => {
+  const { text, onPress } = props;
+
+  return (
+    <BottomSheetView style={styles.sheetContainer}>
+      <TouchableOpacity style={styles.touchableOpacity} onPress={onPress}>
+        <BottomSheetView style={styles.textView}>
+          <Text style={styles.text}>{text}</Text>
+        </BottomSheetView>
+      </TouchableOpacity>
+    </BottomSheetView>
   );
 };
 
@@ -343,22 +387,64 @@ export const PickingTabs = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
   const navigation = useNavigation();
   const route = useRoute();
+  const { multiBin, multiPick } = useTypedSelector(state => state.User.configs);
+  const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
+
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
   return (
-    <PickingTabNavigator
-      picklist={picklist}
-      dispatch={dispatch}
-      navigation={navigation}
-      route={route}
-      useEffectHook={useEffect}
-      getItemDetailsApi={getItemDetailsApi}
-      getPicklistsApi={getPicklistApi}
-      updatePicklistStatusApi={updatePicklistStatusApi}
-      selectedTab={selectedTab}
-      useCallbackHook={useCallback}
-      useFocusEffectHook={useFocusEffect}
-    />
+    <BottomSheetModalProvider>
+      <PickingTabNavigator
+        picklist={picklist}
+        dispatch={dispatch}
+        navigation={navigation}
+        route={route}
+        useEffectHook={useEffect}
+        getItemDetailsApi={getItemDetailsApi}
+        getPicklistsApi={getPicklistApi}
+        updatePicklistStatusApi={updatePicklistStatusApi}
+        selectedTab={selectedTab}
+        useCallbackHook={useCallback}
+        useFocusEffectHook={useFocusEffect}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={pickingMenu}
+      />
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        index={0}
+        snapPoints={snapPoints}
+        style={styles.bottomSheetModal}
+        backdropComponent={renderBackdrop}
+        onDismiss={() => dispatch(showPickingMenu(false))}
+      >
+        {multiBin && (
+        <BottomSheetCard
+          onPress={() => {}}
+          text={strings('PICKING.ACCEPT_MULTIPLE_BINS')}
+        />
+        )}
+        {multiPick && (
+        <BottomSheetCard
+          onPress={() => {}}
+          text={strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
+        />
+        )}
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

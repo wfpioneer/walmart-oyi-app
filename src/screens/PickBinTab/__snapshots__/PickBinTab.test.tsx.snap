@@ -36,7 +36,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
             }
           }
         >
-          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+          [missing "en.PICKING.ACCEPT_MULTIPLE_PICKS" translation]
         </Text>
       </View>
       <View>
@@ -182,7 +182,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
             }
           }
         >
-          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+          [missing "en.PICKING.ACCEPT_MULTIPLE_PICKS" translation]
         </Text>
       </View>
       <View>
@@ -328,7 +328,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
             }
           }
         >
-          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+          [missing "en.PICKING.ACCEPT_MULTIPLE_PICKS" translation]
         </Text>
       </View>
       <View>
@@ -474,7 +474,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
             }
           }
         >
-          [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+          [missing "en.PICKING.ACCEPT_MULTIPLE_PICKS" translation]
         </Text>
       </View>
       <View>
@@ -638,7 +638,7 @@ exports[`PickBinTabScreen tests externalized function on pickBinTab Screen tests
               }
             }
           >
-            [missing "en.PICKING.ACCEPT_MULTI_BIN" translation]
+            [missing "en.PICKING.ACCEPT_MULTIPLE_BINS" translation]
           </Text>
         </View>
         <View>
@@ -969,7 +969,7 @@ exports[`PickBinTabScreen tests externalized function on pickBinTab Screen tests
               }
             }
           >
-            [missing "en.PICKING.ACCEPT_MULTI_PICK" translation]
+            [missing "en.PICKING.ACCEPT_MULTIPLE_PICKS" translation]
           </Text>
         </View>
         <View>

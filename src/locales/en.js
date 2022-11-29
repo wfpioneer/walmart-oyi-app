@@ -477,11 +477,11 @@ export default {
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
     ADDITIONAL_ITEMS: 'Pallet contains additional items',
     QUANTITY_STOCKED: 'Quantity Stocked',
-    ACCEPT_MULTI_BIN: 'Accept Multiple Bins',
-    ACCEPT_MULTI_PICK: 'Accept Multiple Picks',
     ACCEPT_FOLLOWING_PICKS: 'Accept the following picks?',
     ACCEPT_FOLLOWING_BINS: 'Accept the following bins?',
-    LOC_LABEL: 'Loc'
+    LOC_LABEL: 'Loc',
+    ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
+    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
   },
   BINNING: {
     BINNING: 'Binning',
