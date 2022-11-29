@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     borderWidth: 1,
     borderRadius: 7,
-    margin: 2
+    margin: 3
   },
   input: {
     width: (4 * width) / buttonScale + 4,
@@ -40,11 +40,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   equalBtn: {
-    width: (2 * width) / buttonScale
+    width: ((2 * width) / buttonScale) + 2
   },
   calcButtonText: {
     fontSize: 30,
     color: COLOR.WHITE
+  },
+  keyboardContainer: {
+    margin: 2
   },
   errorText: {
     fontSize: 16,
