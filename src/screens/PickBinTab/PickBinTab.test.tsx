@@ -1,10 +1,11 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { PickBinTabScreen } from './PickBinTab';
+import { PickBinTabScreen, disableMultiPickBin } from './PickBinTab';
 import { mockPickLists } from '../../mockData/mockPickList';
 import { PickStatus } from '../../models/Picking.d';
 import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
+import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 
 const user: User = {
   userId: 'vn51wu8',
@@ -34,10 +35,55 @@ describe('PickBinTabScreen', () => {
           dispatch={jest.fn()}
           refreshing={false}
           onRefresh={jest.fn()}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('Test renders the PickBinTabScreen component with accept multiPick and multiBin buttons', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const flaggedUser: User = {
+        ...user,
+        configs: { ...user.configs, multiBin: true, multiPick: true }
+      };
+      renderer.render(
+        <PickBinTabScreen
+          pickBinList={mockPickLists}
+          user={flaggedUser}
+          isManualScanEnabled={false}
+          dispatch={jest.fn()}
+          refreshing={false}
+          onRefresh={jest.fn()}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Test renders the PickBinTabScreen component with "cancel & continue" buttons if multiPick/multiBin is enabled',
+      () => {
+        const renderer = ShallowRenderer.createRenderer();
+        const flaggedUser: User = {
+          ...user,
+          configs: { ...user.configs, multiBin: true, multiPick: true }
+        };
+        renderer.render(
+          <PickBinTabScreen
+            pickBinList={mockPickLists}
+            user={flaggedUser}
+            isManualScanEnabled={false}
+            dispatch={jest.fn()}
+            refreshing={false}
+            onRefresh={jest.fn()}
+            multiBinEnabled={true}
+            multiPickEnabled={true}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
 
     it('Test renders the PickBinTabScreen component with AssignedToMe List and zone', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -67,6 +113,8 @@ describe('PickBinTabScreen', () => {
           dispatch={jest.fn()}
           refreshing={false}
           onRefresh={jest.fn}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -99,9 +147,26 @@ describe('PickBinTabScreen', () => {
           dispatch={jest.fn()}
           refreshing={true}
           onRefresh={jest.fn}
+          multiBinEnabled={false}
+          multiPickEnabled={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests PickBinTab externalized function tests', () => {
+    const mockDispatch = jest.fn();
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('Tests disableMultiPickBin function', () => {
+      disableMultiPickBin(true, true, mockDispatch);
+
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin(false));
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiPick(false));
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
   });
 });
