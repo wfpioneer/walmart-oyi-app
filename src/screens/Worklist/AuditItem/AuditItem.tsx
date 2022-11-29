@@ -233,7 +233,9 @@ export const calculateFloorLocDecreaseQty = (
 ) => {
   const OH_MIN = 1;
   const OH_MAX = 9999;
-  if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
+  if (newOHQty > OH_MAX) {
+    dispatch(updateFloorLocationQty(locationName, OH_MAX));
+  } else if (newOHQty > OH_MIN) {
     dispatch(updateFloorLocationQty(locationName, newOHQty - 1));
   }
 };
@@ -243,8 +245,11 @@ export const calculateFloorLocIncreaseQty = (
   locationName: string,
   dispatch: Dispatch<any>
 ) => {
+  const OH_MIN = 1;
   const OH_MAX = 9999;
-  if (newOHQty < OH_MAX) {
+  if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
+    dispatch(updateFloorLocationQty(locationName, OH_MIN));
+  } else if (newOHQty < OH_MAX) {
     dispatch(updateFloorLocationQty(locationName, (newOHQty || 0) + 1));
   }
 };

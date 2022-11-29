@@ -2,10 +2,12 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
+  mainContainer: {
+    backgroundColor: COLOR.WHITE
+  },
   container: {
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    backgroundColor: COLOR.WHITE,
     paddingHorizontal: 10,
     paddingVertical: 8,
     flexDirection: 'row'
@@ -48,5 +50,11 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center'
+  },
+  errorText: {
+    fontSize: 14,
+    color: COLOR.RED_700,
+    textAlign: 'center',
+    paddingBottom: 5
   }
 });
