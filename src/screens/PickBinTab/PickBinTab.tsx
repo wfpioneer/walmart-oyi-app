@@ -12,13 +12,13 @@ import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
+import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
+import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
   refreshing: boolean;
   onRefresh: () => void;
-  multiBinEnabled: boolean;
-  multiPickEnabled: boolean;
 }
 interface PickBinTabScreenProps {
   pickBinList: PickListItem[];
@@ -36,6 +36,14 @@ const ASSIGNED_TO_ME = 'assignedToMe';
 const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletLocation ? palletLocation.substring(0,
   palletLocation.indexOf('-')).replace(/[\d.]+$/, '') : '');
 
+export const disableMultiPickBin = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
+  if (multiBinEnabled) {
+    dispatch(toggleMultiBin(false));
+  }
+  if (multiPickEnabled) {
+    dispatch(toggleMultiPick(false));
+  }
+};
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
     pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
@@ -63,8 +71,8 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
               groupItems
               currentTab={Tabs.PICK}
               dispatch={dispatch}
-              multiPickEnabled={multiPickEnabled}
               multiBinEnabled={multiBinEnabled}
+              multiPickEnabled={multiPickEnabled}
             />
           );
         }}
@@ -72,19 +80,31 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         refreshing={refreshing}
         onRefresh={onRefresh}
       />
-      <View style={styles.scanItemLabel}>
-        <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
-      </View>
+      {multiBinEnabled || multiPickEnabled
+        ? (
+          <ButtonBottomTab
+            leftTitle={strings('GENERICS.CANCEL')}
+            onLeftPress={() => disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch)}
+            rightTitle={strings('GENERICS.CONTINUE')}
+            onRightPress={() => undefined} // TODO handle continue flow https://jira.walmart.com/browse/INTLSAOPS-8630
+          />
+        )
+        : (
+          <View style={styles.scanItemLabel}>
+            <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
+          </View>
+        )}
     </SafeAreaView>
   );
 };
 
 const PickBinTab = (props: PickBinTabProps) => {
   const {
-    pickBinList, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
+    pickBinList, onRefresh, refreshing
   } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
+  const { multiBinEnabled, multiPickEnabled } = useTypedSelector(state => state.Picking);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
 
   return (

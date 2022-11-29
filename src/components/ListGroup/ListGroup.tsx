@@ -23,8 +23,8 @@ interface ListGroupProps {
   groupItems?: boolean;
   currentTab: Tabs;
   dispatch: Dispatch<any>;
-  multiBinEnabled: boolean;
-  multiPickEnabled: boolean;
+  multiBinEnabled?: boolean;
+  multiPickEnabled?: boolean;
 }
 
 interface CollapsibleCardProps {
@@ -37,8 +37,8 @@ interface CollapsibleCardProps {
 }
 
 const getItemsByStatusEnabled = (
-  multiBinEnabled: boolean,
-  multiPickEnabled: boolean,
+  multiBinEnabled: boolean | undefined,
+  multiPickEnabled: boolean | undefined,
   items: PickListItem[]
 ): PickListItem[] => {
   if (multiBinEnabled) {
@@ -145,15 +145,19 @@ const renderPickPalletInfoList = (
   navigation: NavigationProp<any>,
   currentTab: Tabs,
   dispatch: Dispatch<any>,
-  multiBinEnabled: boolean,
-  multiPickEnabled: boolean
+  multiBinEnabled: boolean | undefined,
+  multiPickEnabled: boolean | undefined
 ) => {
   const item = items[0];
   const showCheckBox = (multiBinEnabled && item.status === PickStatus.READY_TO_BIN)
   || (multiPickEnabled && item.status === PickStatus.READY_TO_PICK);
   return (
     <PickPalletInfoCard
-      onPress={() => handleWorkflowNav(currentTab, items, navigation, dispatch)}
+      onPress={() => {
+        if (!multiBinEnabled && !multiPickEnabled) {
+          handleWorkflowNav(currentTab, items, navigation, dispatch);
+        }
+      }}
       palletId={item.palletId}
       palletLocation={item.palletLocationName}
       pickListItems={items}
@@ -161,7 +165,7 @@ const renderPickPalletInfoList = (
       canDelete={true}
       dispatch={dispatch}
       isSelected={item.isSelected}
-      showCheckBoxSel={showCheckBox}
+      showCheckBoxSel={!!showCheckBox}
     />
   );
 };
@@ -171,8 +175,8 @@ const renderGroupItems = (
   navigation: NavigationProp<any>,
   currentTab: Tabs,
   dispatch: Dispatch<any>,
-  multiBinEnabled: boolean,
-  multiPickEnabled: boolean
+  multiBinEnabled: boolean | undefined,
+  multiPickEnabled: boolean | undefined
 ) => {
   const groupedItemList = getGroupItemsBasedOnPallet(items);
   const sortedPalletIdsBasedonLocation = uniq(
@@ -199,13 +203,17 @@ const renderItems = (
   items: PickListItem[],
   navigation: NavigationProp<any>,
   currentTab: Tabs,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  multiBinEnabled: boolean | undefined,
+  multiPickEnabled: boolean | undefined
 ) => {
   const pickListItems = sortPickListByCreatedDate(items);
   return (
     <FlatList
       data={pickListItems}
-      renderItem={({ item }) => renderPickPalletInfoList([item], navigation, currentTab, dispatch, false, false)}
+      renderItem={({ item }) => renderPickPalletInfoList(
+        [item], navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled
+      )}
       scrollEnabled={false}
       keyExtractor={(item, index) => `ListGroup-${item}-${index}`}
     />
@@ -238,7 +246,7 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
         <View>
           {groupItems
             ? renderGroupItems(pickListItems, navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled)
-            : renderItems(pickListItems, navigation, currentTab, dispatch)}
+            : renderItems(pickListItems, navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled)}
         </View>
       )}
     </View>
@@ -246,7 +254,9 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
 };
 
 ListGroup.defaultProps = {
-  groupItems: false
+  groupItems: false,
+  multiBinEnabled: false,
+  multiPickEnabled: false
 };
 
 export default ListGroup;

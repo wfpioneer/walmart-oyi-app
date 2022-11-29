@@ -68,6 +68,31 @@ describe('Picking Tab Navigator', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('Renders the Pick TabNavigator with "swipeEnabled: false" if multi Bin/Pick is enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={[]}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={true}
+        multiPickEnabled={true}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders the Pick TabNavigator with Active Picks', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(

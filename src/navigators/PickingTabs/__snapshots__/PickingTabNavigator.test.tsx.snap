@@ -49,10 +49,12 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
   screenListeners={
     Object {
       "beforeRemove": [Function],
+      "tabPress": [Function],
     }
   }
   screenOptions={
     Object {
+      "swipeEnabled": true,
       "tabBarActiveTintColor": "#0071e9",
       "tabBarInactiveTintColor": "#616161",
       "tabBarItemStyle": Object {
@@ -81,6 +83,80 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
+    name="Pick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="SalesFloor"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;
+
+exports[`Picking Tab Navigator Renders the Pick TabNavigator with "swipeEnabled: false" if multi Bin/Pick is enabled 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "tabPress": [Function],
+    }
+  }
+  screenOptions={
+    Object {
+      "swipeEnabled": false,
+      "tabBarActiveTintColor": "#0071e9",
+      "tabBarInactiveTintColor": "#616161",
+      "tabBarItemStyle": Object {
+        "borderColor": "#9e9e9e",
+        "borderEndWidth": 0.5,
+      },
+    }
+  }
+>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="QuickPick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -119,10 +195,12 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1
   screenListeners={
     Object {
       "beforeRemove": [Function],
+      "tabPress": [Function],
     }
   }
   screenOptions={
     Object {
+      "swipeEnabled": true,
       "tabBarActiveTintColor": "#0071e9",
       "tabBarInactiveTintColor": "#616161",
       "tabBarItemStyle": Object {
@@ -151,6 +229,7 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -189,10 +268,12 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks a
   screenListeners={
     Object {
       "beforeRemove": [Function],
+      "tabPress": [Function],
     }
   }
   screenOptions={
     Object {
+      "swipeEnabled": false,
       "tabBarActiveTintColor": "#0071e9",
       "tabBarInactiveTintColor": "#616161",
       "tabBarItemStyle": Object {
@@ -221,6 +302,7 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks a
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -259,10 +341,12 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks a
   screenListeners={
     Object {
       "beforeRemove": [Function],
+      "tabPress": [Function],
     }
   }
   screenOptions={
     Object {
+      "swipeEnabled": false,
       "tabBarActiveTintColor": "#0071e9",
       "tabBarInactiveTintColor": "#616161",
       "tabBarItemStyle": Object {
@@ -291,6 +375,7 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks a
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -329,10 +414,12 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks a
   screenListeners={
     Object {
       "beforeRemove": [Function],
+      "tabPress": [Function],
     }
   }
   screenOptions={
     Object {
+      "swipeEnabled": true,
       "tabBarActiveTintColor": "#0071e9",
       "tabBarInactiveTintColor": "#616161",
       "tabBarItemStyle": Object {
@@ -361,6 +448,7 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks a
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }

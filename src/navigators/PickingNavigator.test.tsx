@@ -29,6 +29,8 @@ describe('Picking Navigator', () => {
         isManualScanEnabled={false}
         selectedTab={Tabs.PICK}
         pickingMenu={false}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
         multiBin={false}
         multiPick={false}
       />
@@ -44,6 +46,8 @@ describe('Picking Navigator', () => {
         isManualScanEnabled={false}
         selectedTab={Tabs.PICK}
         pickingMenu={false}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
         multiBin={true}
         multiPick={false}
       />

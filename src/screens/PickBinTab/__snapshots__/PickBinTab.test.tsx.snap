@@ -4,6 +4,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -23,19 +24,12 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     refreshing={false}
     renderItem={[Function]}
   />
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#eeeeee",
-        "padding": 10,
-      }
-    }
-  >
-    <Text>
-      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
-    </Text>
-  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
 </ForwardRef(SafeAreaView)>
 `;
 
@@ -43,6 +37,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -62,19 +57,12 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     refreshing={false}
     renderItem={[Function]}
   />
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#eeeeee",
-        "padding": 10,
-      }
-    }
-  >
-    <Text>
-      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
-    </Text>
-  </View>
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
 </ForwardRef(SafeAreaView)>
 `;
 
@@ -82,6 +70,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -117,10 +106,44 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 </ForwardRef(SafeAreaView)>
 `;
 
+exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with "cancel & continue" buttons if multiPick/multiBin is enabled 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with AssignedToMe List and zone 1`] = `
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -156,10 +179,51 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
 </ForwardRef(SafeAreaView)>
 `;
 
+exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with accept multiPick and multiBin buttons 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#eeeeee",
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
+    </Text>
+  </View>
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component without AssignedToMe List and zone 1`] = `
 <ForwardRef(SafeAreaView)
   style={
     Object {
+      "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
