@@ -6,7 +6,7 @@ import {
   BottomSheetModal
 } from '@gorhom/bottom-sheet';
 import {
-  PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+  BottomSheetCard, PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -42,6 +42,7 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 let routeProp: RouteProp<any, string>;
+let bottomSheetModalRef: React.RefObject<BottomSheetModal>;
 
 describe('Picking Tab Navigator', () => {
   it('Renders the Pick TabNavigator', () => {
@@ -61,6 +62,8 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         multiBinEnabled={false}
         multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -82,6 +85,8 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         multiBinEnabled={false}
         multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -103,6 +108,8 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         multiBinEnabled={false}
         multiPickEnabled={true}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -124,6 +131,44 @@ describe('Picking Tab Navigator', () => {
         useFocusEffectHook={jest.fn}
         multiBinEnabled={true}
         multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and picking menu as true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('BottomSheet card', () => {
+  it('Renders BottomSheetCard', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <BottomSheetCard
+        text="Test"
+        onPress={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

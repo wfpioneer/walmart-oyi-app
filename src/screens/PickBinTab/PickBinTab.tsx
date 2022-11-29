@@ -1,17 +1,11 @@
-import React, {
-  useCallback, useEffect, useMemo, useRef
-} from 'react';
+import React from 'react';
 import {
-  FlatList, SafeAreaView, Text, TouchableOpacity, View
+  FlatList, SafeAreaView, Text, View
 } from 'react-native';
-import {
-  BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView
-} from '@gorhom/bottom-sheet';
 import { groupBy, partition } from 'lodash';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { showPickingMenu, toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 import User from '../../models/User';
 import { PickListItem, Tabs } from '../../models/Picking.d';
 import ListGroup from '../../components/ListGroup/ListGroup';
@@ -35,10 +29,6 @@ interface PickBinTabScreenProps {
   onRefresh: () => void;
   multiBinEnabled: boolean;
   multiPickEnabled: boolean;
-}
-interface BottomSheetCardProps {
-  text: string,
-  onPress: () => void
 }
 
 const ASSIGNED_TO_ME = 'assignedToMe';
@@ -89,98 +79,25 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   );
 };
 
-const BottomSheetCard = (props: BottomSheetCardProps): JSX.Element => {
-  const { text, onPress } = props;
-
-  return (
-    <BottomSheetView style={styles.sheetContainer}>
-      <TouchableOpacity style={styles.touchableOpacity} onPress={onPress}>
-        <BottomSheetView style={styles.textView}>
-          <Text style={styles.text}>{text}</Text>
-        </BottomSheetView>
-      </TouchableOpacity>
-    </BottomSheetView>
-  );
-};
-
-const acceptMultiBinClick = (dispatch: Dispatch<any>) => {
-  dispatch(toggleMultiBin(true));
-  dispatch(showPickingMenu(false));
-};
-
-const acceptMultiPickClick = (dispatch: Dispatch<any>) => {
-  dispatch(toggleMultiPick(true));
-  dispatch(showPickingMenu(false));
-};
-
 const PickBinTab = (props: PickBinTabProps) => {
   const {
     pickBinList, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
   } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
-  const { multiBin, multiPick } = useTypedSelector(state => state.User.configs);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
-  const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  useEffect(() => {
-    if (bottomSheetModalRef.current) {
-      if (pickingMenu) {
-        bottomSheetModalRef.current.present();
-      } else {
-        bottomSheetModalRef.current.dismiss();
-      }
-    }
-  }, [pickingMenu]);
-
-  const renderBackdrop = useCallback(
-    // eslint-disable-next-line no-shadow
-    props => (
-      <BottomSheetBackdrop
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-      />
-    ),
-    []
-  );
   return (
-    <BottomSheetModalProvider>
-      <PickBinTabScreen
-        pickBinList={pickBinList}
-        user={user}
-        isManualScanEnabled={isManualScanEnabled}
-        dispatch={dispatch}
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-        multiBinEnabled={multiBinEnabled}
-        multiPickEnabled={multiPickEnabled}
-      />
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        index={0}
-        snapPoints={snapPoints}
-        style={styles.bottomSheetModal}
-        backdropComponent={renderBackdrop}
-        onDismiss={() => dispatch(showPickingMenu(false))}
-      >
-        {multiBin && (
-        <BottomSheetCard
-          onPress={() => acceptMultiBinClick(dispatch)}
-          text={strings('PICKING.ACCEPT_MULTIPLE_BINS')}
-        />
-        )}
-        {multiPick && (
-        <BottomSheetCard
-          onPress={() => acceptMultiPickClick(dispatch)}
-          text={strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
-        />
-        )}
-      </BottomSheetModal>
-    </BottomSheetModalProvider>
+    <PickBinTabScreen
+      pickBinList={pickBinList}
+      user={user}
+      isManualScanEnabled={isManualScanEnabled}
+      dispatch={dispatch}
+      refreshing={refreshing}
+      onRefresh={onRefresh}
+      multiBinEnabled={multiBinEnabled}
+      multiPickEnabled={multiPickEnabled}
+    />
   );
 };
 
