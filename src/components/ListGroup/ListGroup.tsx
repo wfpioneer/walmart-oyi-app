@@ -105,7 +105,7 @@ const renderPickPalletInfoList = (
       palletLocation={item.palletLocationName}
       pickListItems={items}
       pickStatus={item.status}
-      canDelete={true}
+      canDelete={!multiBinEnabled && !multiPickEnabled}
       dispatch={dispatch}
     />
   );
