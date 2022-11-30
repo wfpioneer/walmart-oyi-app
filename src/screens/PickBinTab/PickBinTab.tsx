@@ -163,7 +163,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
             leftTitle={strings('GENERICS.CANCEL')}
             onLeftPress={() => dispatch(resetMultiPickBinSelection())}
             rightTitle={strings('GENERICS.CONTINUE')}
-            onRightPress={() => undefined} // TODO handle continue flow https://jira.walmart.com/browse/INTLSAOPS-8630
+            onRightPress={() => setShowMultiPickConfirmationDialog(true)}
           />
         )
         : (
