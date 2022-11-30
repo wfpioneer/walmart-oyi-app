@@ -42,6 +42,7 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 let routeProp: RouteProp<any, string>;
+let bottomSheetModalRef: React.RefObject<BottomSheetModal>;
 
 describe('Picking Tab Navigator', () => {
   it('Renders the Pick TabNavigator', () => {
@@ -59,10 +60,39 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('Renders the Pick TabNavigator with "swipeEnabled: false" if multi Bin/Pick is enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={[]}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={true}
+        multiPickEnabled={true}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders the Pick TabNavigator with Active Picks', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
@@ -78,6 +108,34 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders the Pick TabNavigator with Active Picks and show picking menu to true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

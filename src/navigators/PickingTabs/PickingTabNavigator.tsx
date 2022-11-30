@@ -1,5 +1,5 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect, useMemo, useRef
+  DependencyList, EffectCallback, useCallback, useEffect, useMemo, useRef
 } from 'react';
 import {
   BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView
@@ -7,7 +7,9 @@ import {
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
 import { trackEvent } from 'appcenter-analytics';
-import { EmitterSubscription, Text, TouchableOpacity } from 'react-native';
+import {
+  BackHandler, EmitterSubscription, Text, TouchableOpacity
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import {
   NavigationProp,
@@ -17,10 +19,11 @@ import {
   useRoute
 } from '@react-navigation/native';
 import { Badge } from 'react-native-paper';
+import { Dispatch } from 'redux';
 import { strings } from '../../locales';
 import QuickPickTab from '../../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import PickBinTab from '../../screens/PickBinTab/PickBinTab';
+import PickBinTab, { disableMultiPickBin } from '../../screens/PickBinTab/PickBinTab';
 import SalesFloorTab from '../../screens/SalesFloorTab/SalesFloorTabScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
@@ -33,7 +36,9 @@ import {
   setPickCreateItem,
   setPickCreateReserve,
   setSelectedTab,
-  showPickingMenu
+  showPickingMenu,
+  toggleMultiBin,
+  toggleMultiPick
 } from '../../state/actions/Picking';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
@@ -57,6 +62,8 @@ interface PickingTabNavigatorProps {
   selectedTab: Tabs;
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
   bottomSheetModalRef: React.RefObject<BottomSheetModal>;
   pickingMenu: boolean;
 }
@@ -206,6 +213,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     selectedTab,
     useCallbackHook,
     useFocusEffectHook,
+    multiBinEnabled,
+    multiPickEnabled,
     bottomSheetModalRef,
     pickingMenu
   } = props;
@@ -272,6 +281,20 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     [updatePicklistStatusApi]
   );
 
+  // Cancel multi Pick/Bin when pressing back from the device hardware
+  useFocusEffectHook(() => {
+    const onBackPress = () => {
+      if (multiBinEnabled || multiPickEnabled) {
+        disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch);
+        return true;
+      }
+      return false;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  });
   useEffectHook(() => {
     if (bottomSheetModalRef.current) {
       if (pickingMenu) {
@@ -288,9 +311,15 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
       screenOptions={{
         tabBarActiveTintColor: COLOR.MAIN_THEME_COLOR,
         tabBarInactiveTintColor: COLOR.GREY_700,
-        tabBarItemStyle: styles.tabBarStyle
+        tabBarItemStyle: styles.tabBarStyle,
+        swipeEnabled: !multiBinEnabled && !multiPickEnabled
       }}
       screenListeners={{
+        tabPress: tabEvent => {
+          if (multiBinEnabled || multiPickEnabled) {
+            tabEvent.preventDefault();
+          }
+        },
         beforeRemove: () => {
           dispatch(showPickingMenu(false));
         }
@@ -329,7 +358,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           ) : undefined
         }}
         listeners={{
-          focus: () => dispatch(setSelectedTab(Tabs.PICK))
+          focus: () => dispatch(setSelectedTab(Tabs.PICK)),
+          beforeRemove: () => {
+            // Reset Picking Tabs to PickBinWorkflow when the navigator is removed from the stack history
+            dispatch(setSelectedTab(Tabs.PICK));
+            disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch);
+          }
         }}
       >
         {() => (
@@ -382,7 +416,7 @@ export const BottomSheetCard = (props: BottomSheetCardProps): JSX.Element => {
 
 export const PickingTabs = (): JSX.Element => {
   const dispatch = useDispatch();
-  const picklist = useTypedSelector(state => state.Picking.pickList);
+  const { multiBinEnabled, multiPickEnabled, pickList } = useTypedSelector(state => state.Picking);
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
@@ -409,7 +443,7 @@ export const PickingTabs = (): JSX.Element => {
   return (
     <BottomSheetModalProvider>
       <PickingTabNavigator
-        picklist={picklist}
+        picklist={pickList}
         dispatch={dispatch}
         navigation={navigation}
         route={route}
@@ -422,6 +456,8 @@ export const PickingTabs = (): JSX.Element => {
         useFocusEffectHook={useFocusEffect}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={pickingMenu}
+        multiBinEnabled={multiBinEnabled}
+        multiPickEnabled={multiPickEnabled}
       />
       <BottomSheetModal
         ref={bottomSheetModalRef}
@@ -433,13 +469,19 @@ export const PickingTabs = (): JSX.Element => {
       >
         {multiBin && (
         <BottomSheetCard
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(toggleMultiBin(true));
+            dispatch(showPickingMenu(false));
+          }}
           text={strings('PICKING.ACCEPT_MULTIPLE_BINS')}
         />
         )}
         {multiPick && (
         <BottomSheetCard
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(toggleMultiPick(true));
+            dispatch(showPickingMenu(false));
+          }}
           text={strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
         />
         )}
