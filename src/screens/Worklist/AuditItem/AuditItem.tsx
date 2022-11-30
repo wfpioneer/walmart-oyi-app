@@ -263,7 +263,7 @@ export const calculatePalletDecreaseQty = (
   const OH_MAX = 9999;
   if (newOHQty > OH_MAX) {
     dispatch(updatePalletQty(palletId, OH_MAX));
-  } else if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
+  } else if (newOHQty > OH_MIN) {
     dispatch(updatePalletQty(palletId, newOHQty - 1));
   }
 };
