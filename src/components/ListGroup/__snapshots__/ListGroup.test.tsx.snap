@@ -120,7 +120,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 </View>
 `;
 
-exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard with showCheckboxSel is true 1`] = `
+exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard with showCheckbox is true 1`] = `
 <View
   style={
     Object {
@@ -204,7 +204,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
         },
       ]
     }
-    showCheckboxSel={true}
+    showCheckbox={true}
     title="ABAR-2"
     toggleIsOpened={[Function]}
   />
@@ -251,7 +251,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
         },
       ]
     }
-    showCheckboxSel={true}
+    showCheckbox={true}
     title="ABAR-2"
     toggleIsOpened={[Function]}
   />
@@ -277,7 +277,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     dispatch={[MockFunction]}
     isOpened={true}
     pickListWithStatusReady={Array []}
-    showCheckboxSel={false}
+    showCheckbox={false}
     title="ABAR-2"
     toggleIsOpened={[Function]}
   />
@@ -337,7 +337,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     dispatch={[MockFunction]}
     isOpened={true}
     pickListWithStatusReady={Array []}
-    showCheckboxSel={false}
+    showCheckbox={false}
     title="ABAR-2"
     toggleIsOpened={[Function]}
   />

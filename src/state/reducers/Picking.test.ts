@@ -5,6 +5,7 @@ import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import {
   deletePicks,
   initializePicklist,
+  resetMultiPickBinSelection,
   resetPickList,
   selectPicks,
   setPickCreateFloor,
@@ -121,5 +122,13 @@ describe('Picking reducer tests', () => {
     const updatePickList = mockPickLists.map(itm => ({ ...itm, isSelected: true }));
     testResults = Picking(newInitialState, updateMultiPickSelection(mockPickLists, true));
     expect(testResults.pickList).toStrictEqual(updatePickList);
+
+    testResults = Picking(
+      newInitialState,
+      resetMultiPickBinSelection()
+    );
+    expect(testResults).toStrictEqual({
+      ...newInitialState, pickList: newInitialState.pickList.map(itm => ({ ...itm, isSelected: false }))
+    });
   });
 });

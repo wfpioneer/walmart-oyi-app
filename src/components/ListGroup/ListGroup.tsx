@@ -31,7 +31,7 @@ interface CollapsibleCardProps {
   title: string;
   isOpened: boolean;
   toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  showCheckboxSel: boolean;
+  showCheckbox: boolean;
   pickListWithStatusReady: PickListItem[];
   dispatch: Dispatch<any>;
 }
@@ -52,11 +52,11 @@ const getItemsByStatusEnabled = (
 
 const getGroupHeaderCheckStatus = (pickListWithStatusReady: PickListItem[]):
   ('checked' | 'unchecked' | 'indeterminate') => {
-  const selPickList = pickListWithStatusReady.filter(itm => itm.isSelected);
-  if (selPickList?.length && selPickList?.length === pickListWithStatusReady.length) {
+  const selectedPicklist = pickListWithStatusReady.filter(itm => itm.isSelected);
+  if (selectedPicklist?.length && selectedPicklist?.length === pickListWithStatusReady.length) {
     return 'checked';
   }
-  if (selPickList?.length) {
+  if (selectedPicklist?.length) {
     return 'indeterminate';
   }
   return 'unchecked';
@@ -75,14 +75,14 @@ const toggleMultiPickSelection = (
 
 export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
   const {
-    title, isOpened, toggleIsOpened, showCheckboxSel, dispatch, pickListWithStatusReady
+    title, isOpened, toggleIsOpened, showCheckbox, dispatch, pickListWithStatusReady
   } = props;
   const iconName = isOpened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
   const checkedStatus = getGroupHeaderCheckStatus(pickListWithStatusReady);
   return (
-    <View style={showCheckboxSel ? styles.menuSelContainer : styles.menuContainer}>
+    <View style={showCheckbox ? styles.menuCheckBoxContainer : styles.menuContainer}>
       <View style={styles.titleContainer}>
-        {showCheckboxSel && (
+        {showCheckbox && (
         <Checkbox
           status={checkedStatus}
           onPress={() => toggleMultiPickSelection(
@@ -99,7 +99,7 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
       <TouchableOpacity
         testID="collapsible-card"
         onPress={() => toggleIsOpened(!isOpened)}
-        style={showCheckboxSel ? styles.arrowPadding : {}}
+        style={showCheckbox ? styles.arrowPadding : {}}
       >
         <MaterialIcons name={iconName} size={25} color={COLOR.BLACK} />
       </TouchableOpacity>
@@ -165,7 +165,7 @@ const renderPickPalletInfoList = (
       canDelete={!multiBinEnabled && !multiPickEnabled}
       dispatch={dispatch}
       isSelected={item.isSelected}
-      showCheckBoxSel={!!showCheckBox}
+      showCheckbox={!!showCheckBox}
     />
   );
 };
@@ -228,7 +228,7 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
   const [listGroupOpen, toggleListGroup] = useState(true);
   const navigation = useNavigation();
   const pickListWithStatusReady = getItemsByStatusEnabled(multiBinEnabled, multiPickEnabled, pickListItems);
-  const showCheckboxSel = !!groupItems
+  const showCheckbox = !!groupItems
   && currentTab === Tabs.PICK
   && !!pickListWithStatusReady?.length;
 
@@ -239,7 +239,7 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
         isOpened={listGroupOpen}
         toggleIsOpened={toggleListGroup}
         pickListWithStatusReady={pickListWithStatusReady}
-        showCheckboxSel={showCheckboxSel}
+        showCheckbox={showCheckbox}
         dispatch={dispatch}
       />
       {listGroupOpen && (

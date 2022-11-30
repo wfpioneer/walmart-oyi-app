@@ -7,6 +7,7 @@ import {
 import {
   DELETE_PICKS,
   INITIALIZE_PICKLIST,
+  RESET_MULTI_PICK_BIN_SELECTION,
   RESET_PICKLIST,
   SELECT_PICKS,
   SET_PICK_CREATE_FLOOR,
@@ -20,6 +21,7 @@ import {
   UPDATE_PICKS,
   deletePicks,
   initializePicklist,
+  resetMultiPickBinSelection,
   resetPickList,
   selectPicks,
   setPickCreateFloor,
@@ -48,10 +50,15 @@ describe('Picking action tests', () => {
       payload: mockPickLists
     });
 
-    const updateMultiPickSel = updateMultiPickSelection(mockPickLists, true);
-    expect(updateMultiPickSel).toStrictEqual({
+    const updateMultiPickSelectionResult = updateMultiPickSelection(mockPickLists, true);
+    expect(updateMultiPickSelectionResult).toStrictEqual({
       type: UPDATE_MULTI_PICK_SELECTION,
-      payload: { pickItems: mockPickLists, isSelected: true }
+      payload: { pickListItems: mockPickLists, isSelected: true }
+    });
+
+    const resetMultiPickBinSelectionResult = resetMultiPickBinSelection();
+    expect(resetMultiPickBinSelectionResult).toStrictEqual({
+      type: RESET_MULTI_PICK_BIN_SELECTION
     });
 
     const select = selectPicks([1, 2, 3]);

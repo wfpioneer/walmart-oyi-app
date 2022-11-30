@@ -20,7 +20,7 @@ interface PickPalletInfoProps {
   dispatch: Dispatch<any>
   canDelete: boolean;
   isSelected?: boolean;
-  showCheckBoxSel: boolean;
+  showCheckbox: boolean;
 }
 
 const toggleMultiPickSelection = (
@@ -33,7 +33,7 @@ const toggleMultiPickSelection = (
 
 const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const {
-    onPress, palletId, pickListItems, pickStatus, palletLocation, dispatch, canDelete, isSelected, showCheckBoxSel
+    onPress, palletId, pickListItems, pickStatus, palletLocation, dispatch, canDelete, isSelected, showCheckbox
   } = props;
 
   const palletsItems = pickListItems.filter(item => item.palletId === palletId);
@@ -59,9 +59,9 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={onPress} testID="palletPress">
-        <View style={showCheckBoxSel ? styles.header : { ...styles.header, padding: 10 }}>
+        <View style={showCheckbox ? styles.header : { ...styles.header, padding: 10 }}>
           <View style={styles.palletInfoSel}>
-            {showCheckBoxSel && (
+            {showCheckbox && (
             <Checkbox
               status={isSelected ? 'checked' : 'unchecked'}
               onPress={() => toggleMultiPickSelection(!!isSelected, dispatch, pickListItems)}
@@ -72,7 +72,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
             <Text>{`${strings('PALLET.PALLET_ID')} ${palletId}`}</Text>
           </View>
           <Text>{strings(`PICKING.${pickStatusString()}`)}</Text>
-          <Text style={showCheckBoxSel ? styles.textRightPadding : {}}>{palletLocation}</Text>
+          <Text style={showCheckbox ? styles.textRightPadding : {}}>{palletLocation}</Text>
         </View>
         <FlatList
           data={palletsItems}

@@ -147,7 +147,7 @@ describe('ListGroup', () => {
           toggleIsOpened={jest.fn}
           isOpened={true}
           title="ABAR-1"
-          showCheckboxSel={false}
+          showCheckbox={false}
           pickListWithStatusReady={[]}
           dispatch={jest.fn()}
         />
@@ -160,7 +160,7 @@ describe('ListGroup', () => {
           toggleIsOpened={jest.fn}
           isOpened={false}
           title="ABAR-1"
-          showCheckboxSel={false}
+          showCheckbox={false}
           pickListWithStatusReady={[]}
           dispatch={jest.fn()}
         />
@@ -174,7 +174,7 @@ describe('ListGroup', () => {
           toggleIsOpened={mockToggleOpen}
           isOpened={false}
           title="ABAR-1"
-          showCheckboxSel={false}
+          showCheckbox={false}
           pickListWithStatusReady={[]}
           dispatch={jest.fn()}
         />
@@ -190,21 +190,21 @@ describe('ListGroup', () => {
           toggleIsOpened={jest.fn}
           isOpened={false}
           title="ABAR-1"
-          showCheckboxSel={false}
+          showCheckbox={false}
           pickListWithStatusReady={[]}
           dispatch={jest.fn()}
         />
       );
       expect(findByText('ABAR-1')).toBeTruthy();
     });
-    it('should tests CollapsibleCard with showCheckboxSel is true', async () => {
+    it('should tests CollapsibleCard with showCheckbox is true', async () => {
       const mockDispatch = jest.fn();
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<CollapsibleCard
         toggleIsOpened={jest.fn}
         isOpened={false}
         title="ABAR-1"
-        showCheckboxSel={true}
+        showCheckbox={true}
         pickListWithStatusReady={[{ ...mockPickLists[0], status: PickStatus.READY_TO_BIN }]}
         dispatch={mockDispatch}
       />);

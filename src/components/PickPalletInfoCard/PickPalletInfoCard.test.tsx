@@ -57,7 +57,7 @@ describe('Pick pallet info card render tests', () => {
           canDelete={false}
           dispatch={jest.fn()}
           isSelected={false}
-          showCheckBoxSel={false}
+          showCheckbox={false}
         />
       );
 
@@ -78,7 +78,7 @@ describe('Pick pallet info card render tests', () => {
         canDelete={false}
         dispatch={jest.fn()}
         isSelected={false}
-        showCheckBoxSel={false}
+        showCheckbox={false}
       />
     );
 
@@ -97,7 +97,7 @@ describe('Pick pallet info card render tests', () => {
         canDelete={false}
         dispatch={jest.fn()}
         isSelected={false}
-        showCheckBoxSel={false}
+        showCheckbox={false}
       />
     );
 
@@ -120,7 +120,7 @@ describe('Pick pallet info card render tests', () => {
         canDelete={false}
         dispatch={jest.fn()}
         isSelected={false}
-        showCheckBoxSel={true}
+        showCheckbox={true}
       />
     );
 
@@ -140,7 +140,7 @@ describe('Pick pallet info card render tests', () => {
         canDelete={false}
         dispatch={jest.fn()}
         isSelected={true}
-        showCheckBoxSel={true}
+        showCheckbox={true}
       />
     );
 

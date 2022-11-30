@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.HAVELOCK_BLUE,
     padding: 10
   },
-  menuSelContainer: {
+  menuCheckBoxContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     borderBottomWidth: 1,

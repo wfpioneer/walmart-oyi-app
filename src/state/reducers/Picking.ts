@@ -3,6 +3,7 @@ import {
   Actions,
   DELETE_PICKS,
   INITIALIZE_PICKLIST,
+  RESET_MULTI_PICK_BIN_SELECTION,
   RESET_PICKLIST,
   SELECT_PICKS,
   SET_PICK_CREATE_FLOOR,
@@ -129,17 +130,25 @@ export const Picking = (
         multiPickEnabled: action.payload
       };
     case UPDATE_MULTI_PICK_SELECTION: {
-      const { pickItems, isSelected } = action.payload;
-      const newPickList = [...state.pickList];
-      pickItems.forEach(updItem => {
-        const item = newPickList.find(pickItem => pickItem.id === updItem.id);
+      const { pickListItems, isSelected } = action.payload;
+      const updatedPickList = [...state.pickList];
+      pickListItems.forEach(updItem => {
+        const item = updatedPickList.find(pickItem => pickItem.id === updItem.id);
         if (item) {
           item.isSelected = isSelected;
         }
       });
       return {
         ...state,
-        pickList: newPickList
+        pickList: updatedPickList
+      };
+    }
+    case RESET_MULTI_PICK_BIN_SELECTION: {
+      return {
+        ...state,
+        pickList: state.pickList.map(pickItem => ({ ...pickItem, isSelected: false })),
+        multiBinEnabled: false,
+        multiPickEnabled: false
       };
     }
     case RESET_PICKLIST:
