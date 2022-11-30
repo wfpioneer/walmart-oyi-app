@@ -7,6 +7,7 @@ import {
 import {
   DELETE_PICKS,
   INITIALIZE_PICKLIST,
+  RESET_MULTI_PICK_BIN_SELECTION,
   RESET_PICKLIST,
   SELECT_PICKS,
   SET_PICK_CREATE_FLOOR,
@@ -16,9 +17,11 @@ import {
   SHOW_PICKING_MENU,
   TOGGLE_MULTI_BIN,
   TOGGLE_MULTI_PICK,
+  UPDATE_MULTI_PICK_SELECTION,
   UPDATE_PICKS,
   deletePicks,
   initializePicklist,
+  resetMultiPickBinSelection,
   resetPickList,
   selectPicks,
   setPickCreateFloor,
@@ -27,7 +30,9 @@ import {
   setSelectedTab,
   showPickingMenu,
   toggleMultiBin,
-  toggleMultiPick, updatePicks
+  toggleMultiPick,
+  updateMultiPickSelection,
+  updatePicks
 } from './Picking';
 import { Tabs } from '../../models/Picking.d';
 
@@ -43,6 +48,17 @@ describe('Picking action tests', () => {
     expect(update).toStrictEqual({
       type: UPDATE_PICKS,
       payload: mockPickLists
+    });
+
+    const updateMultiPickSelectionResult = updateMultiPickSelection(mockPickLists, true);
+    expect(updateMultiPickSelectionResult).toStrictEqual({
+      type: UPDATE_MULTI_PICK_SELECTION,
+      payload: { pickListItems: mockPickLists, isSelected: true }
+    });
+
+    const resetMultiPickBinSelectionResult = resetMultiPickBinSelection();
+    expect(resetMultiPickBinSelectionResult).toStrictEqual({
+      type: RESET_MULTI_PICK_BIN_SELECTION
     });
 
     const select = selectPicks([1, 2, 3]);

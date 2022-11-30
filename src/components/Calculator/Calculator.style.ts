@@ -61,10 +61,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   calcPaperTape: {
-    width: (4 * width) / buttonScale + 4,
-    paddingBottom: 0,
     fontSize: 16,
-    textAlign: 'right'
+    textAlign: 'right',
+    paddingVertical: 4,
+    paddingHorizontal: 2
+  },
+  inputScrollView: {
+    direction: 'rtl',
+    flexDirection: 'row',
+    flexGrow: 0,
+    maxWidth: (4 * width) / buttonScale + 4
   }
 });
 
