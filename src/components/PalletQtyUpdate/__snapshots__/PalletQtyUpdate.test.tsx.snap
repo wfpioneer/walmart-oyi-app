@@ -84,7 +84,7 @@ Array [
           testID="decreaseButton"
         >
           <mockMaterialCommunityIcons
-            color="#5FA7F2"
+            color="#BABBBE"
             name="minus"
             size={18}
           />

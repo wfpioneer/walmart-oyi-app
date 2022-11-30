@@ -58,7 +58,8 @@ export default {
     SELECTED: 'Seleccionado',
     UPDATE: 'Actualizar Configuración',
     WARNING_LABEL: 'Aviso',
-    CLOSE: 'Cerrar'
+    CLOSE: 'Cerrar',
+    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',

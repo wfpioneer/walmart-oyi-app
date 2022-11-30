@@ -261,7 +261,9 @@ export const calculatePalletDecreaseQty = (
 ) => {
   const OH_MIN = 0;
   const OH_MAX = 9999;
-  if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
+  if (newOHQty > OH_MAX) {
+    dispatch(updatePalletQty(palletId, OH_MAX));
+  } else if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
     dispatch(updatePalletQty(palletId, newOHQty - 1));
   }
 };
@@ -271,8 +273,11 @@ export const calculatePalletIncreaseQty = (
   palletId: number,
   dispatch: Dispatch<any>
 ) => {
+  const OH_MIN = 0;
   const OH_MAX = 9999;
-  if (newOHQty < OH_MAX) {
+  if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
+    dispatch(updatePalletQty(palletId, OH_MIN));
+  } else if (newOHQty < OH_MAX) {
     dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1));
   }
 };
