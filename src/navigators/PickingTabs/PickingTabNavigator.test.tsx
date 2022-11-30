@@ -116,8 +116,53 @@ describe('Picking Tab Navigator', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-
-  it('Renders the Pick TabNavigator with Active Picks and show picking menu to true', () => {
+  it('Renders the Pick TabNavigator with Active Picks and multi pick selection enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={true}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and multi bin selection enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={true}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and picking menu as true', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <PickingTabNavigator
