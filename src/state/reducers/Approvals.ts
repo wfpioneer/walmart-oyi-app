@@ -2,11 +2,15 @@ import { cloneDeep } from 'lodash';
 import {
   Actions,
   CLEAR_APPROVAL_FILTER,
-  RESET_APPROVALS, SET_APPROVAL_LIST, TOGGLE_ALL_ITEMS, TOGGLE_CATEGORY,
-  TOGGLE_FILTER_CATEGORIES,
-  TOGGLE_FILTER_MENU,
-  TOGGLE_ITEM,
-  UPDATE_APPROVAL_FILTER_CATEGORIES
+  CLEAR_FILTER,
+  RESET_APPROVALS,
+  SET_APPROVAL_LIST,
+  TOGGLE_ALL_ITEMS,
+  TOGGLE_CATEGORIES, TOGGLE_CATEGORY, TOGGLE_FILTER_CATEGORIES, TOGGLE_FILTER_MENU, TOGGLE_ITEM,
+  TOGGLE_SOURCES,
+  UPDATE_APPROVAL_FILTER_CATEGORIES,
+  UPDATE_FILTER_CATEGORIES,
+  UPDATE_FILTER_SOURCES
 } from '../actions/Approvals';
 import { ApprovalCategory } from '../../models/ApprovalListItem';
 
@@ -22,9 +26,11 @@ export interface ApprovalState {
   categoryIndices: Array<number>;
   selectedItemQty: number;
   isAllSelected: boolean;
-  filterCategories: string[];
+  menuOpen: boolean; // HERE
   categoryOpen: boolean;
-  menuOpen: boolean;
+  sourceOpen: boolean;
+  filterCategories: string[];
+  filterSources: string[];
 }
 export const initialState: ApprovalState = {
   approvalList: [],
@@ -32,17 +38,18 @@ export const initialState: ApprovalState = {
   categoryIndices: [],
   selectedItemQty: 0,
   isAllSelected: false,
-  filterCategories: [],
+  menuOpen: false, // here
   categoryOpen: false,
-  menuOpen: false
+  sourceOpen: false,
+  filterCategories: [],
+  filterSources: []
 };
-
-const isCheckedElsetotalItemQty = (isChecked: boolean, categoryObj: {
+const isCheckedElseTotalItemQty = (isChecked: boolean, categoryObj: {
   checkedItemQty: number;
   totalItemQty: number;
 }) => (isChecked ? categoryObj.totalItemQty : 0);
 
-const isCheckedElsetoggledItems = (isChecked: boolean,
+const isCheckedElseToggledItems = (isChecked: boolean,
   toggledItems: ApprovalCategory[], categoryIndices: number[]) => (isChecked
   ? toggledItems.length - categoryIndices.length : 0);
 
@@ -124,14 +131,14 @@ export const Approvals = (
       const toggledCategories: Category = Object.fromEntries(Object.entries(categories)
         .map(([catNbr, categoryObj]) => [catNbr, {
           ...categoryObj,
-          checkedItemQty: isCheckedElsetotalItemQty(isChecked, categoryObj)
+          checkedItemQty: isCheckedElseTotalItemQty(isChecked, categoryObj)
         }]));
 
       return {
         ...state,
         approvalList: toggledItems,
         categories: toggledCategories,
-        selectedItemQty: isCheckedElsetoggledItems(isChecked, toggledItems, categoryIndices),
+        selectedItemQty: isCheckedElseToggledItems(isChecked, toggledItems, categoryIndices),
         isAllSelected: isChecked
       };
     }
@@ -225,6 +232,32 @@ export const Approvals = (
     case RESET_APPROVALS: {
       return initialState;
     }
+    case TOGGLE_CATEGORIES:
+      return {
+        ...state,
+        categoryOpen: action.payload
+      };
+    case TOGGLE_SOURCES:
+      return {
+        ...state,
+        sourceOpen: action.payload
+      };
+    case UPDATE_FILTER_CATEGORIES:
+      return {
+        ...state,
+        filterCategories: action.payload
+      };
+    case UPDATE_FILTER_SOURCES:
+      return {
+        ...state,
+        filterSources: action.payload
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filterCategories: [],
+        filterSources: []
+      };
     default:
       return state;
   }

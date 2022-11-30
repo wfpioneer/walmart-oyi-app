@@ -411,7 +411,8 @@ export default {
     FAILED_ITEMS: '此商品未成功审批',
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试',
     MANAGER_APPROVAL: '副总审批',
-    APPROVAL_LOADING_MSG: '大量审批需求会略慢，请耐心等待.'
+    APPROVAL_LOADING_MSG: '大量审批需求会略慢，请耐心等待.',
+    SOURCE: '审批来源'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: '需店号开启OYI',
@@ -477,7 +478,9 @@ export default {
       '已完成多个补货，补货清单已更新',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
     ADDITIONAL_ITEMS: '卡板有其它商品',
-    QUANTITY_STOCKED: '楼面陈列数量'
+    QUANTITY_STOCKED: '楼面陈列数量',
+    ACCEPT_MULTIPLE_BINS: '批量接收上架任务',
+    ACCEPT_MULTIPLE_PICKS: '批量接收补货任务'
   },
   BINNING: {
     BINNING: '上架',

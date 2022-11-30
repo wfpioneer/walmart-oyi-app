@@ -13,15 +13,17 @@ const styles = StyleSheet.create({
     borderRadius: 8
   },
   inputView: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
     borderWidth: 1,
     borderRadius: 7,
-    margin: 2
+    margin: 3
   },
   input: {
     width: (4 * width) / buttonScale + 4,
-    height: width / buttonScale,
+    height: width / (buttonScale + 1),
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'right'
   },
   buttonRow: {
     flexDirection: 'row'
@@ -38,11 +40,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   equalBtn: {
-    width: (2 * width) / buttonScale
+    width: ((2 * width) / buttonScale) + 2
   },
   calcButtonText: {
     fontSize: 30,
     color: COLOR.WHITE
+  },
+  keyboardContainer: {
+    margin: 2
   },
   errorText: {
     fontSize: 16,
@@ -54,6 +59,12 @@ const styles = StyleSheet.create({
     color: COLOR.WHITE,
     backgroundColor: COLOR.RED,
     paddingHorizontal: 10
+  },
+  calcPaperTape: {
+    width: (4 * width) / buttonScale + 4,
+    paddingBottom: 0,
+    fontSize: 16,
+    textAlign: 'right'
   }
 });
 

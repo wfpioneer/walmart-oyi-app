@@ -3,7 +3,9 @@ import React, {
   Dispatch, EffectCallback, useEffect
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { Platform, Text, View } from 'react-native';
+import {
+  NativeModules, Platform, Text, View
+} from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
@@ -74,6 +76,25 @@ export interface LoginScreenProps {
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
+const getSystemLanguage = (): string => {
+  let sysLang = '';
+  if (NativeModules.I18nManager) {
+    sysLang = NativeModules.I18nManager.localeIdentifier;
+  } else if (NativeModules.SettingsManager?.settings?.AppleLanguages?.length) {
+    // eslint-disable-next-line prefer-destructuring
+    sysLang = NativeModules.SettingsManager.settings.AppleLanguages[0];
+  }
+
+  if (sysLang) {
+    sysLang = sysLang.substring(0, 2);
+    if (sysLang !== 'en' && sysLang !== 'es' && sysLang !== 'zh') {
+      return 'en';
+    }
+    return sysLang;
+  }
+  return 'en';
+};
+
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
 const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => void, onSubmitCN: () => void}) => {
   const { onSignOut, onSubmitCN, onSubmitMX } = props;
@@ -115,23 +136,7 @@ export const signInUser = (dispatch: Dispatch<any>): void => {
     WMSSO.setEnv('STG');
   }
   WMSSO.getUser().then((user: WMSSOUser) => {
-    if (!user.userId) {
-      const countryCode = user.countryCode.toLowerCase();
-      switch (countryCode) {
-        case 'us':
-          setLanguage('en');
-          break;
-        case 'cn':
-          setLanguage('zh');
-          break;
-        case 'mx':
-          setLanguage('es');
-          break;
-        default:
-          setLanguage('en');
-          break;
-      }
-    }
+    setLanguage(getSystemLanguage());
     setUserId(user.userId);
     dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
     trackEvent('user_sign_in');
@@ -288,7 +293,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
             dispatch(loginUser(updatedUser));
             trackEvent('user_sign_in');
             if (user.countryCode !== 'US') {
-              dispatch((updatedUser));
+              dispatch(getFluffyFeatures(updatedUser));
             }
           }}
           onSignOut={() => signOutUser(dispatch)}

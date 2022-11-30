@@ -408,7 +408,8 @@ export default {
     FAILED_ITEMS: 'Artículos Fallidos',
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo',
     MANAGER_APPROVAL: 'Aprobación de Gerencia',
-    APPROVAL_LOADING_MSG: 'Las aprobaciones de muchos artículos pueden llevar un momento, por favor espera'
+    APPROVAL_LOADING_MSG: 'Las aprobaciones de muchos artículos pueden llevar un momento, por favor espera',
+    SOURCE: 'Fuente de aprovacíon'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
@@ -473,7 +474,9 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
     ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
-    QUANTITY_STOCKED: 'Cantidad abastecida'
+    QUANTITY_STOCKED: 'Cantidad abastecida',
+    ACCEPT_MULTIPLE_BINS: 'Aceptar Múltiples ingresos a bodega',
+    ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos'
   },
   BINNING: {
     BINNING: 'Bodega',

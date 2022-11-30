@@ -13,22 +13,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginLeft: -2
   },
-  headerRightPadding: {
-    paddingRight: 16
+  headerRightView: {
+    paddingRight: 16,
+    flexDirection: 'row-reverse',
+    alignItems: 'center'
   },
   headerLeftPadding: {
     paddingLeft: 10
   },
-  headerContainer: {
+  headerContainer: { // Double check
     flexDirection: 'row',
     flex: 1,
     alignItems: 'center'
   },
   selectAllButton: {
     flexDirection: 'row',
-    width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    margin: 15
   },
   selectAllText: {
     color: COLOR.WHITE,

@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Navigator Renders the Home navigator component 1`] = `
+<StackNavigator
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "type": [Function],
+      }
+    }
+    listeners={
+      Object {
+        "blur": [Function],
+      }
+    }
+    name="HomeScreen"
+    options={[Function]}
+  />
+</StackNavigator>
+`;
+
+exports[`Home Navigator Renders the cameraButton header icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": 55,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="camera"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`Home Navigator Renders the home header when isManualScanEnabled is false 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="btnScan"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#ffffffff"
+        name="barcode-scan"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="btnShowMenu"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "width": 55,
+        }
+      }
+    >
+      <Image
+        source=""
+        style={
+          Object {
+            "height": 25,
+            "marginRight": 10,
+            "width": 25,
+          }
+        }
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Home Navigator Renders the home header when isManualScanEnabled is true 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="btnScan"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#ffffffff"
+        name="barcode-scan"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="btnShowMenu"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "width": 55,
+        }
+      }
+    >
+      <Image
+        source=""
+        style={
+          Object {
+            "height": 25,
+            "marginRight": 10,
+            "width": 25,
+          }
+        }
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Home Navigator Renders the home menu button and onclick call track event 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="btnShowMenu"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": 55,
+      }
+    }
+  >
+    <Image
+      source=""
+      style={
+        Object {
+          "height": 25,
+          "marginRight": 10,
+          "width": 25,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Home Navigator Renders the scanButton header icon when manual scan set to false 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="btnScan"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`Home Navigator Renders the scanButton header icon when manual scan set to true 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="btnScan"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</View>
+`;

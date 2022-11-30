@@ -9,6 +9,12 @@ export const UPDATE_APPROVAL_FILTER_CATEGORIES = 'APPROVAL/UPDATE_APPROVAL_FILTE
 export const CLEAR_APPROVAL_FILTER = 'APPROVAL/CLEAR_APPROVAL_FILTER';
 export const TOGGLE_FILTER_CATEGORIES = 'APPROVAL/TOGGLE_FILTER_CATEGORIES';
 export const TOGGLE_FILTER_MENU = 'APPROVAL/TOGGLE_FILTER_MENU';
+// DOUBLE CHECK
+export const TOGGLE_CATEGORIES = 'APPROVAL/TOGGLE_CATEGORIES';
+export const TOGGLE_SOURCES = 'APPROVAL/TOGGLE_SOURCES';
+export const UPDATE_FILTER_CATEGORIES = 'APPROVAL/UPDATE_FILTER_CATEGORIES';
+export const UPDATE_FILTER_SOURCES = 'APPROVAL/UPDATE_FILTER_SOURCES';
+export const CLEAR_FILTER = 'APPROVAL/CLEAR_FILTER';
 
 export const setApprovalList = (approvals: ApprovalCategory[], headerIndices: number[]) => ({
   type: SET_APPROVAL_LIST,
@@ -63,6 +69,30 @@ export const toggleFilterMenu = (menuOpen: boolean) => ({
   type: TOGGLE_FILTER_MENU,
   payload: menuOpen
 } as const);
+// Double check
+export const toggleCategories = (categoriesOpen: boolean) => ({
+  type: TOGGLE_CATEGORIES,
+  payload: categoriesOpen
+} as const);
+
+export const toggleSources = (sourcesOpen: boolean) => ({
+  type: TOGGLE_SOURCES,
+  payload: sourcesOpen
+} as const);
+
+export const updateFilterCategories = (filterCategories: string[]) => ({
+  type: UPDATE_FILTER_CATEGORIES,
+  payload: filterCategories
+} as const);
+
+export const updateFilterSources = (filterSources: string[]) => ({
+  type: UPDATE_FILTER_SOURCES,
+  payload: filterSources
+} as const);
+
+export const clearFilter = () => ({
+  type: CLEAR_FILTER
+} as const);
 
 export type Actions =
   | ReturnType<typeof setApprovalList>
@@ -70,7 +100,12 @@ export type Actions =
   | ReturnType<typeof toggleCategory>
   | ReturnType<typeof toggleItem>
   | ReturnType<typeof resetApprovals>
-  | ReturnType<typeof updateApprovalFilterCategories>
+  | ReturnType<typeof updateApprovalFilterCategories> // here
   | ReturnType<typeof clearApprovalFilter>
   | ReturnType<typeof toggleFilterCategories>
-  | ReturnType<typeof toggleFilterMenu>;
+  | ReturnType<typeof toggleFilterMenu> // to here
+  | ReturnType<typeof toggleCategories>
+  | ReturnType<typeof toggleSources>
+  | ReturnType<typeof updateFilterCategories>
+  | ReturnType<typeof updateFilterSources>
+  | ReturnType<typeof clearFilter>;

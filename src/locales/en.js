@@ -410,7 +410,8 @@ export default {
     FAILED_ITEMS: 'Items Failed',
     UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.',
     MANAGER_APPROVAL: 'Manager Approval',
-    APPROVAL_LOADING_MSG: 'Large approval requests may take some time, please be patient'
+    APPROVAL_LOADING_MSG: 'Large approval requests may take some time, please be patient',
+    SOURCE: 'Approval source'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
@@ -475,7 +476,9 @@ export default {
     UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
     ADDITIONAL_ITEMS: 'Pallet contains additional items',
-    QUANTITY_STOCKED: 'Quantity Stocked'
+    QUANTITY_STOCKED: 'Quantity Stocked',
+    ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
+    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
   },
   BINNING: {
     BINNING: 'Binning',

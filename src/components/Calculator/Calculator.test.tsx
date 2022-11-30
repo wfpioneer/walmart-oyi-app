@@ -229,4 +229,62 @@ describe('Test Calculator component', () => {
     rerender(<Calculator showNegValidation={true} />);
     expect(toJSON()).toMatchSnapshot();
   });
+  it('renders the calculator component with paper tape on continuous calculation', () => {
+    const { getByTestId, rerender, toJSON } = render(<Calculator showNegValidation={true} />);
+    const two = getByTestId('two');
+    const three = getByTestId('three');
+    const four = getByTestId('four');
+    const subtract = getByTestId('subtract');
+    const multiply = getByTestId('multiply');
+    const equals = getByTestId('equals');
+    const clear = getByTestId('clear');
+    pressButtonAndRerender(four, rerender);
+    pressButtonAndRerender(subtract, rerender);
+    pressButtonAndRerender(two, rerender);
+    pressButtonAndRerender(equals, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('4-2=2');
+    expect(getByTestId('calc-text').props.children).toEqual('2');
+    pressButtonAndRerender(multiply, rerender);
+    pressButtonAndRerender(four, rerender);
+    pressButtonAndRerender(equals, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('4-2=2*4=8');
+    expect(getByTestId('calc-text').props.children).toEqual('8');
+    // clear the current calc and click on any operand
+    pressButtonAndRerender(clear, rerender);
+    pressButtonAndRerender(subtract, rerender);
+    pressButtonAndRerender(three, rerender);
+    pressButtonAndRerender(equals, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('4-2=2*4=8-3=5');
+    expect(getByTestId('calc-text').props.children).toEqual('5');
+    expect(toJSON()).toMatchSnapshot();
+    // clear the current calc and clicking on any value
+    pressButtonAndRerender(clear, rerender);
+    pressButtonAndRerender(three, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('4-2=2*4=8-3=5');
+    expect(getByTestId('calc-text').props.children).toEqual('3');
+    pressButtonAndRerender(multiply, rerender);
+    pressButtonAndRerender(four, rerender);
+    pressButtonAndRerender(equals, rerender);
+    // should show the paper tape with new calculation
+    expect(getByTestId('calc-paper-tape').props.children).toBe('3*4=12');
+    expect(getByTestId('calc-text').props.children).toEqual('12');
+  });
+  it('test calculator component for allClear button press functionality', () => {
+    const mockClear = jest.fn();
+    const { getByTestId, rerender } = render(<Calculator onClear={mockClear} showNegValidation={true} />);
+    const two = getByTestId('two');
+    const four = getByTestId('four');
+    const multiply = getByTestId('multiply');
+    const equals = getByTestId('equals');
+    pressButtonAndRerender(two, rerender);
+    pressButtonAndRerender(multiply, rerender);
+    pressButtonAndRerender(four, rerender);
+    pressButtonAndRerender(equals, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('2*4=8');
+    expect(getByTestId('calc-text').props.children).toEqual('8');
+    const allClearButton = getByTestId('allClear');
+    pressButtonAndRerender(allClearButton, rerender);
+    expect(getByTestId('calc-paper-tape').props.children).toBe('');
+    expect(getByTestId('calc-text').props.children).toEqual('');
+  });
 });
