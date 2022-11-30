@@ -13,10 +13,9 @@ import ApprovalList from '../screens/ApprovalList/ApprovalList';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import styles from './ApprovalListNavigator.style';
-import { toggleAllItems, toggleFilterMenu } from '../state/actions/Approvals';
+import { toggleAllItems } from '../state/actions/Approvals';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { ApprovalSummary } from '../screens/ApprovalSummary/ApprovalSummary';
-import { ApprovalFilterMenu } from '../screens/ApprovalList/ApprovalFilterMenu/ApprovalFilterMenu';
 import ApprovalFilter from '../screens/ApprovalList/ApprovalFilterMenu/ApprovalFilter';
 import { UseStateType } from '../models/Generics.d';
 
@@ -43,14 +42,6 @@ export const renderCloseButton = (dispatch: Dispatch<any>): JSX.Element => (
   </TouchableOpacity>
 );
 
-export const renderFilterMenuButton = (dispatch: Dispatch<any>, menuOpen: boolean) => (
-  <View style={styles.headerLeftPadding}>
-    <TouchableOpacity onPress={() => dispatch(toggleFilterMenu(!menuOpen))}>
-      <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
-    </TouchableOpacity>
-  </View>
-); // Double check here
-
 export const renderHeaderRight = (
   dispatch: Dispatch<any>, selectAll: boolean, toggleMenu: UseStateType<boolean>[1]
 ) => (
@@ -72,13 +63,12 @@ interface ApprovalNavigatorProps {
   dispatch: Dispatch<any>;
   selectAll: boolean;
   selectedItemQty: number;
-  menuOpen: boolean;
   filterMenuState: UseStateType<boolean>;
 }
 
 export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.Element => {
   const {
-    result, dispatch, selectAll, selectedItemQty, filterMenuState, menuOpen
+    result, dispatch, selectAll, selectedItemQty, filterMenuState
   } = props;
   const [menuOpen, toggleMenu] = filterMenuState;
 
@@ -87,7 +77,6 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.E
   const menu = <ApprovalFilter />;
   return (
     <SideMenu
-      // menu={<ApprovalFilterMenu />}
       menu={menu}
       menuPosition="right"
       isOpen={menuOpen}
@@ -98,9 +87,6 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.E
       })}
       onChange={isOpen => {
         if (!isOpen && menuOpen) {
-        //   dispatch(toggleFilterMenu(false));
-        // } else if (isOpen && !menuOpen) {
-        //   dispatch(toggleFilterMenu(true));
           toggleMenu(false);
         } else if (isOpen && !menuOpen) {
           toggleMenu(true);
@@ -121,13 +107,6 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.E
           options={{
             headerTitle: selectedItemQty === 0 ? () => renderApprovalTitle(approvalAmount)
               : () => renderSelectedItemQty(selectedItemQty),
-            // headerRight: () => (
-            //   <View style={styles.headerContainer}>
-            //     {renderSelectAllButton(dispatch, selectAll)}
-            //     {renderFilterMenuButton(dispatch, menuOpen)}
-            //   </View>
-            // ),
-            // headerRightContainerStyle: styles.headerRightPadding,
             headerRight: () => renderHeaderRight(dispatch, selectAll, toggleMenu),
             headerRightContainerStyle: styles.headerRightView,
             headerLeftContainerStyle: styles.headerLeftPadding,
@@ -155,7 +134,7 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.E
 
 export const ApprovalListNavigator = (): JSX.Element => {
   const { result } = useTypedSelector(state => state.async.getApprovalList);
-  const { isAllSelected, selectedItemQty, menuOpen } = useTypedSelector(state => state.Approvals);
+  const { isAllSelected, selectedItemQty } = useTypedSelector(state => state.Approvals);
   const dispatch = useDispatch();
   const filterMenuState = useState(false);
   return (
@@ -164,7 +143,6 @@ export const ApprovalListNavigator = (): JSX.Element => {
       dispatch={dispatch}
       selectAll={isAllSelected}
       selectedItemQty={selectedItemQty}
-      menuOpen={menuOpen}
       filterMenuState={filterMenuState}
     />
   );

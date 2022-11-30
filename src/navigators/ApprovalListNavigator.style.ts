@@ -21,11 +21,6 @@ const styles = StyleSheet.create({
   headerLeftPadding: {
     paddingLeft: 10
   },
-  headerContainer: { // Double check
-    flexDirection: 'row',
-    flex: 1,
-    alignItems: 'center'
-  },
   selectAllButton: {
     flexDirection: 'row',
     alignItems: 'center',

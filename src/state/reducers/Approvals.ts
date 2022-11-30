@@ -1,14 +1,14 @@
 import { cloneDeep } from 'lodash';
 import {
   Actions,
-  CLEAR_APPROVAL_FILTER,
   CLEAR_FILTER,
   RESET_APPROVALS,
   SET_APPROVAL_LIST,
   TOGGLE_ALL_ITEMS,
-  TOGGLE_CATEGORIES, TOGGLE_CATEGORY, TOGGLE_FILTER_CATEGORIES, TOGGLE_FILTER_MENU, TOGGLE_ITEM,
+  TOGGLE_CATEGORIES,
+  TOGGLE_CATEGORY,
+  TOGGLE_ITEM,
   TOGGLE_SOURCES,
-  UPDATE_APPROVAL_FILTER_CATEGORIES,
   UPDATE_FILTER_CATEGORIES,
   UPDATE_FILTER_SOURCES
 } from '../actions/Approvals';
@@ -26,7 +26,6 @@ export interface ApprovalState {
   categoryIndices: Array<number>;
   selectedItemQty: number;
   isAllSelected: boolean;
-  menuOpen: boolean; // HERE
   categoryOpen: boolean;
   sourceOpen: boolean;
   filterCategories: string[];
@@ -38,7 +37,6 @@ export const initialState: ApprovalState = {
   categoryIndices: [],
   selectedItemQty: 0,
   isAllSelected: false,
-  menuOpen: false, // here
   categoryOpen: false,
   sourceOpen: false,
   filterCategories: [],
@@ -203,30 +201,6 @@ export const Approvals = (
         categories: updatedCategories,
         selectedItemQty: isCheckedSelectedItemQty(checked, selectedQtyToAdd, currCheckedQty, totalCategoryQty),
         isAllSelected: updatedItemCat.every(item => item.isChecked === true)
-      };
-    }
-    case UPDATE_APPROVAL_FILTER_CATEGORIES: {
-      return {
-        ...state,
-        filterCategories: action.payload
-      };
-    }
-    case CLEAR_APPROVAL_FILTER: {
-      return {
-        ...state,
-        filterCategories: []
-      };
-    }
-    case TOGGLE_FILTER_CATEGORIES: {
-      return {
-        ...state,
-        categoryOpen: action.payload
-      };
-    }
-    case TOGGLE_FILTER_MENU: {
-      return {
-        ...state,
-        menuOpen: action.payload
       };
     }
     case RESET_APPROVALS: {
