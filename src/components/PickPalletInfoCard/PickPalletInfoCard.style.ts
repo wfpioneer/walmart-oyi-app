@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  palletInfoSel: {
+  palletInfoSelection: {
     flexDirection: 'row',
     alignItems: 'center'
   },

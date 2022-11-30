@@ -60,7 +60,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
     <View style={styles.container}>
       <Pressable onPress={onPress} testID="palletPress">
         <View style={showCheckbox ? styles.header : { ...styles.header, padding: 10 }}>
-          <View style={styles.palletInfoSel}>
+          <View style={styles.palletInfoSelection}>
             {showCheckbox && (
             <Checkbox
               status={isSelected ? 'checked' : 'unchecked'}
