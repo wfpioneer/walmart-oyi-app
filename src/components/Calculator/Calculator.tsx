@@ -1,7 +1,8 @@
 import { evaluate, format } from 'mathjs';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Pressable,
+  ScrollView,
   Text,
   TextInput,
   View
@@ -38,6 +39,13 @@ const Calculator = (props: CalculatorProps) => {
   const [calcPaperTape, setCalcPaperTape] = useState('');
   const [isCalcInvalid, setIsCalcInvalid] = useState(false);
   const [currentCalculatedValue, setCurrentCalculatedValue] = useState('');
+  const scrollRef = useRef<any>();
+
+  const scrollToEnd = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollToEnd({ animated: false });
+    }
+  };
 
   const doOrCanParenthesesClose = (index: number, parentsMustClose: boolean, openingParents = 0): boolean => {
     const nextOpeningParent = calcText.indexOf('(', index);
@@ -162,11 +170,18 @@ const Calculator = (props: CalculatorProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.inputView}>
-        <View>
-          <TextInput testID="calc-paper-tape" style={styles.calcPaperTape}>
+        <ScrollView
+          horizontal={true}
+          style={styles.inputScrollView}
+          automaticallyAdjustContentInsets={true}
+          showsHorizontalScrollIndicator={false}
+          onContentSizeChange={scrollToEnd}
+          ref={scrollRef}
+        >
+          <Text testID="calc-paper-tape" style={styles.calcPaperTape}>
             {calcPaperTape}
-          </TextInput>
-        </View>
+          </Text>
+        </ScrollView>
         <View>
           <TextInput
             editable={false}

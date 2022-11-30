@@ -15,7 +15,7 @@ import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
-import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
+import { resetMultiPickBinSelection, toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 interface PickBinTabProps {
@@ -155,13 +155,13 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         }}
         keyExtractor={(item, index) => `listGroup-${item}-${index}`}
         refreshing={refreshing}
-        onRefresh={onRefresh}
+        onRefresh={(!multiBinEnabled && !multiPickEnabled) ? onRefresh : null}
       />
       {multiBinEnabled || multiPickEnabled
         ? (
           <ButtonBottomTab
             leftTitle={strings('GENERICS.CANCEL')}
-            onLeftPress={() => disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch)}
+            onLeftPress={() => dispatch(resetMultiPickBinSelection())}
             rightTitle={strings('GENERICS.CONTINUE')}
             onRightPress={() => undefined} // TODO handle continue flow https://jira.walmart.com/browse/INTLSAOPS-8630
           />
@@ -176,7 +176,9 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
 };
 
 const PickBinTab = (props: PickBinTabProps) => {
-  const { pickBinList, onRefresh, refreshing } = props;
+  const {
+    pickBinList, onRefresh, refreshing
+  } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const { multiBinEnabled, multiPickEnabled } = useTypedSelector(state => state.Picking);

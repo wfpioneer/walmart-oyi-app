@@ -1,5 +1,307 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test renders PickBinTabScreen component with multi bin enabled and atleast 1 bin ready to start 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="FormHeader"
+    onClose={[Function]}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#0071e9",
+            "borderTopEndRadius": 8,
+            "borderTopStartRadius": 8,
+            "padding": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 18,
+            }
+          }
+        >
+          [missing "en.PICKING.ACCEPT_MULTIPLE_BINS" translation]
+        </Text>
+      </View>
+      <View>
+        <View
+          style={
+            Object {
+              "padding": 12,
+            }
+          }
+        >
+          <Text>
+            [missing "en.PICKING.ACCEPT_FOLLOWING_BINS" translation]
+          </Text>
+        </View>
+        <FlatList
+          data={
+            Array [
+              Object {
+                "assignedAssociate": "",
+                "category": 46,
+                "createTs": "2022-04-03T12:55:31.9633333Z",
+                "createdBy": "Associate 2",
+                "id": 4,
+                "isSelected": true,
+                "itemDesc": "Candy",
+                "itemNbr": 7344,
+                "moveToFront": true,
+                "palletId": "4321",
+                "palletLocationId": 1672,
+                "palletLocationName": "C1-2-1",
+                "quickPick": false,
+                "salesFloorLocationId": 1673,
+                "salesFloorLocationName": "C1-3",
+                "status": "ready to bin",
+                "upcNbr": "000041800004",
+              },
+            ]
+          }
+          keyExtractor={[Function]}
+          renderItem={[Function]}
+          style={
+            Object {
+              "borderWidth": 1,
+              "flexGrow": 0,
+              "margin": 12,
+              "maxHeight": 120,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 0,
+            "flexDirection": "row",
+            "margin": 12,
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingRight": 12,
+              "width": "50%",
+            }
+          }
+          testID="cancelButton"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingLeft": 12,
+              "width": "50%",
+            }
+          }
+          testID="acceptButton"
+          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={null}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test renders PickBinTabScreen component with multi pick enabled and atleast 1 pick ready to start 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="FormHeader"
+    onClose={[Function]}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#0071e9",
+            "borderTopEndRadius": 8,
+            "borderTopStartRadius": 8,
+            "padding": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 18,
+            }
+          }
+        >
+          [missing "en.PICKING.ACCEPT_MULTIPLE_PICKS" translation]
+        </Text>
+      </View>
+      <View>
+        <View
+          style={
+            Object {
+              "padding": 12,
+            }
+          }
+        >
+          <Text>
+            [missing "en.PICKING.ACCEPT_FOLLOWING_PICKS" translation]
+          </Text>
+        </View>
+        <FlatList
+          data={Array []}
+          keyExtractor={[Function]}
+          renderItem={[Function]}
+          style={
+            Object {
+              "borderWidth": 1,
+              "flexGrow": 0,
+              "margin": 12,
+              "maxHeight": 120,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 0,
+            "flexDirection": "row",
+            "margin": 12,
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingRight": 12,
+              "width": "50%",
+            }
+          }
+          testID="cancelButton"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "paddingLeft": 12,
+              "width": "50%",
+            }
+          }
+          testID="acceptButton"
+          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </View>
+  </CustomModalComponent>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={null}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests rendered output for renderMultipickConfirmationDialog when multiBin was enabled 1`] = `
 <Modal
   animationType="none"
@@ -1077,7 +1379,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       ]
     }
     keyExtractor={[Function]}
-    onRefresh={[MockFunction]}
+    onRefresh={null}
     refreshing={false}
     renderItem={[Function]}
   />
