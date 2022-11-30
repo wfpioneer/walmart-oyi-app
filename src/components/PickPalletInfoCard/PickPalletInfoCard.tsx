@@ -34,9 +34,9 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
         picklistItems: [{
           picklistId: item.id,
           locationId: item.palletLocationId,
-          locationName: item.palletLocationName
-        }],
-        palletId: item.palletId
+          locationName: item.palletLocationName,
+          palletId: item.palletId
+        }]
       }))}
     />
   );
