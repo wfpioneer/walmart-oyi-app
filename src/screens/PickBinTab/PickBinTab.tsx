@@ -70,7 +70,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         }}
         keyExtractor={(item, index) => `listGroup-${item}-${index}`}
         refreshing={refreshing}
-        onRefresh={onRefresh}
+        onRefresh={(!multiBinEnabled && !multiPickEnabled) ? onRefresh : null}
       />
       {multiBinEnabled || multiPickEnabled
         ? (

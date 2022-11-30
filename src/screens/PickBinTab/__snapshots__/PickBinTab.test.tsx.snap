@@ -20,7 +20,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       ]
     }
     keyExtractor={[Function]}
-    onRefresh={[Function]}
+    onRefresh={null}
     refreshing={false}
     renderItem={[Function]}
   />
@@ -53,7 +53,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       ]
     }
     keyExtractor={[Function]}
-    onRefresh={[Function]}
+    onRefresh={null}
     refreshing={false}
     renderItem={[Function]}
   />
@@ -126,7 +126,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       ]
     }
     keyExtractor={[Function]}
-    onRefresh={[MockFunction]}
+    onRefresh={null}
     refreshing={false}
     renderItem={[Function]}
   />
