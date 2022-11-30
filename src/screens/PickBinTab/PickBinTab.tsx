@@ -15,6 +15,8 @@ import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
+import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
+import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
@@ -30,6 +32,8 @@ interface PickBinTabScreenProps {
   onRefresh: () => void;
   showMultiPickConfirmationDialog: boolean;
   setShowMultiPickConfirmationDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 
 const ASSIGNED_TO_ME = 'assignedToMe';
@@ -103,9 +107,18 @@ export const renderMultipickConfirmationDialog = (
   );
 };
 
+export const disableMultiPickBin = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
+  if (multiBinEnabled) {
+    dispatch(toggleMultiBin(false));
+  }
+  if (multiPickEnabled) {
+    dispatch(toggleMultiPick(false));
+  }
+};
+
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
-    pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing,
+    pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing, multiBinEnabled, multiPickEnabled,
     setShowMultiPickConfirmationDialog, showMultiPickConfirmationDialog
   } = props;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
@@ -119,7 +132,8 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
       {/* placeholder for ManualScan need to implement functionality later */}
       {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
       {renderMultipickConfirmationDialog(
-        pickBinList, showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog, false, true
+        pickBinList, showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog,
+        multiBinEnabled, multiPickEnabled
       )}
       <FlatList
         data={allGroupKeys}
@@ -134,6 +148,8 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
               groupItems
               currentTab={Tabs.PICK}
               dispatch={dispatch}
+              multiBinEnabled={multiBinEnabled}
+              multiPickEnabled={multiPickEnabled}
             />
           );
         }}
@@ -141,9 +157,20 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         refreshing={refreshing}
         onRefresh={onRefresh}
       />
-      <View style={styles.scanItemLabel}>
-        <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
-      </View>
+      {multiBinEnabled || multiPickEnabled
+        ? (
+          <ButtonBottomTab
+            leftTitle={strings('GENERICS.CANCEL')}
+            onLeftPress={() => disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch)}
+            rightTitle={strings('GENERICS.CONTINUE')}
+            onRightPress={() => undefined} // TODO handle continue flow https://jira.walmart.com/browse/INTLSAOPS-8630
+          />
+        )
+        : (
+          <View style={styles.scanItemLabel}>
+            <Text>{strings('PICKING.SCAN_ITEM_LABEL')}</Text>
+          </View>
+        )}
     </SafeAreaView>
   );
 };
@@ -152,6 +179,7 @@ const PickBinTab = (props: PickBinTabProps) => {
   const { pickBinList, onRefresh, refreshing } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
+  const { multiBinEnabled, multiPickEnabled } = useTypedSelector(state => state.Picking);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const [showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog] = useState(false);
 
@@ -165,6 +193,8 @@ const PickBinTab = (props: PickBinTabProps) => {
       onRefresh={onRefresh}
       showMultiPickConfirmationDialog={showMultiPickConfirmationDialog}
       setShowMultiPickConfirmationDialog={setShowMultiPickConfirmationDialog}
+      multiBinEnabled={multiBinEnabled}
+      multiPickEnabled={multiPickEnabled}
     />
   );
 };
