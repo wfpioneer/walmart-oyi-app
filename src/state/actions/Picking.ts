@@ -12,7 +12,9 @@ export const SET_PICK_CREATE_RESERVE = 'PICKLIST/SET_PICK_CREATE_RESERVE';
 export const SET_SELECTED_TAB = 'PICKLIST/SET_SELECTED_TAB';
 export const SHOW_PICKING_MENU = 'PICKLIST/SHOW_PICKING_MENU';
 export const TOGGLE_MULTI_PICK = 'PICKLIST/TOGGLE_MULTI_PICK';
-export const TOGGLE_MULTI_BIN = 'PICKLIST/TOGGLE_MULTI_BIN'
+export const TOGGLE_MULTI_BIN = 'PICKLIST/TOGGLE_MULTI_BIN';
+export const UPDATE_MULTI_PICK_SELECTION = 'PICKLIST/UPDATE_MULTI_PICK_SELECTION';
+export const RESET_MULTI_PICK_BIN_SELECTION = 'PICKLIST/RESET_MULTI_PICK_BIN_SELECTION';
 
 export const initializePicklist = (plItems: PickListItem[]) => ({
   type: INITIALIZE_PICKLIST,
@@ -73,6 +75,15 @@ export const toggleMultiBin = (toggleBin: boolean) => ({
   payload: toggleBin
 } as const);
 
+export const updateMultiPickSelection = (pickListItems: PickListItem[], isSelected: boolean) => ({
+  type: UPDATE_MULTI_PICK_SELECTION,
+  payload: { pickListItems, isSelected }
+} as const);
+
+export const resetMultiPickBinSelection = () => ({
+  type: RESET_MULTI_PICK_BIN_SELECTION
+} as const);
+
 export type Actions =
   | ReturnType<typeof initializePicklist>
   | ReturnType<typeof updatePicks>
@@ -85,4 +96,6 @@ export type Actions =
   | ReturnType<typeof resetPickList>
   | ReturnType<typeof showPickingMenu>
   | ReturnType<typeof toggleMultiBin>
-  | ReturnType<typeof toggleMultiPick>;
+  | ReturnType<typeof toggleMultiPick>
+  | ReturnType<typeof updateMultiPickSelection>
+  | ReturnType<typeof resetMultiPickBinSelection>;
