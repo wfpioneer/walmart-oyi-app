@@ -1,12 +1,11 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
-import { PickBinTabScreen, disableMultiPickBin, renderMultipickConfirmationDialog } from './PickBinTab';
+import { PickBinTabScreen, renderMultipickConfirmationDialog } from './PickBinTab';
 import { mockPickLists } from '../../mockData/mockPickList';
 import { PickStatus } from '../../models/Picking.d';
 import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
-import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
 
 const user: User = {
   userId: 'vn51wu8',
@@ -170,18 +169,6 @@ describe('PickBinTabScreen', () => {
     const mockShowMultiPickConfirmationDialog = true;
     const mockSetShowMultiPickConfirmationDialog = jest.fn();
     const updatedPickList = mockPickLists.map(pickList => ({ ...pickList, isSelected: true }));
-    const mockDispatch = jest.fn();
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('Tests disableMultiPickBin function', () => {
-      disableMultiPickBin(true, true, mockDispatch);
-
-      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin(false));
-      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiPick(false));
-      expect(mockDispatch).toHaveBeenCalledTimes(2);
-    });
     it('Test renders PickBinTabScreen component with multi pick enabled and atleast 1 pick ready to start', () => {
       const renderer = ShallowRenderer.createRenderer();
       const newMockPickList = [...mockPickLists, {

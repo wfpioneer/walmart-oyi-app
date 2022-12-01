@@ -154,6 +154,8 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     renderItem={[Function]}
   />
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -294,6 +296,8 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     renderItem={[Function]}
   />
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={true}
     leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -1384,6 +1388,8 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     renderItem={[Function]}
   />
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={true}
     leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
