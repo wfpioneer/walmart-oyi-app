@@ -15,7 +15,7 @@ import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
-import { resetMultiPickBinSelection, toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
+import { resetMultiPickBinSelection } from '../../state/actions/Picking';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 interface PickBinTabProps {
@@ -42,13 +42,15 @@ const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletL
   palletLocation.indexOf('-')).replace(/[\d.]+$/, '') : '');
 
 export const renderMultipickConfirmationDialog = (
-  pickBinList: PickListItem[],
+  selectedItems: PickListItem[],
   showMultiPickConfirmationDialog: boolean,
   setShowMultiPickConfirmationDialog: React.Dispatch<React.SetStateAction<boolean>>,
   multiBinEnabled: boolean,
   multiPickEnabled: boolean
 ) => {
-  const selectedItems = pickBinList.filter(item => item.isSelected);
+  const uniqueSelectedItems = selectedItems.filter((value, index, self) => index === self.findIndex(t => (
+    t.palletId === value.palletId && t.palletLocationName === value.palletLocationName
+  )));
   return (
     <CustomModalComponent
       isVisible={showMultiPickConfirmationDialog}
@@ -71,7 +73,7 @@ export const renderMultipickConfirmationDialog = (
             </Text>
           </View>
           <FlatList
-            data={selectedItems}
+            data={uniqueSelectedItems}
             renderItem={({ item }) => (
               <View style={styles.pickBinItemView}>
                 <Text>{`${strings('LOCATION.PALLET')} ${item.palletId}`}</Text>
@@ -107,15 +109,6 @@ export const renderMultipickConfirmationDialog = (
   );
 };
 
-export const disableMultiPickBin = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
-  if (multiBinEnabled) {
-    dispatch(toggleMultiBin(false));
-  }
-  if (multiPickEnabled) {
-    dispatch(toggleMultiPick(false));
-  }
-};
-
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
     pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing, multiBinEnabled, multiPickEnabled,
@@ -126,13 +119,14 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
     (item: PickListItem) => getZoneFromPalletLocation(item.palletLocationName));
   const sortedZones = Object.keys(groupedPickListByZone).sort((a, b) => (a > b ? 1 : -1));
   const allGroupKeys = [ASSIGNED_TO_ME, ...sortedZones];
+  const selectedItems = pickBinList.filter(item => item.isSelected);
 
   return (
     <SafeAreaView style={styles.container}>
       {/* placeholder for ManualScan need to implement functionality later */}
       {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
       {renderMultipickConfirmationDialog(
-        pickBinList, showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog,
+        selectedItems, showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog,
         multiBinEnabled, multiPickEnabled
       )}
       <FlatList
@@ -162,8 +156,10 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
           <ButtonBottomTab
             leftTitle={strings('GENERICS.CANCEL')}
             onLeftPress={() => dispatch(resetMultiPickBinSelection())}
+            disableLeftButton={false}
             rightTitle={strings('GENERICS.CONTINUE')}
             onRightPress={() => setShowMultiPickConfirmationDialog(true)}
+            disableRightButton={!selectedItems.length}
           />
         )
         : (
