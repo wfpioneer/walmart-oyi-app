@@ -114,10 +114,12 @@ export const PickingNavigatorStack = (
             headerTitle: strings('PICKING.PICKING'),
             headerRight: () => (
               <View style={styles.headerContainer}>
-                {routeName === 'Pick' && (multiBin || multiPick)
+                {routeName === 'Pick' && (multiBin || multiPick) && (!multiBinEnabled && !multiPickEnabled)
                   ? kebabMenuButton(pickingMenu, dispatch)
                   : null}
-                {(routeName === 'QuickPick' || routeName === 'Pick') && (!multiBinEnabled && !multiPickEnabled)
+                {!pickingMenu
+                && (routeName === 'QuickPick' || routeName === 'Pick')
+                && (!multiBinEnabled && !multiPickEnabled)
                   ? renderScanButton(dispatch, isManualScanEnabled)
                   : null}
               </View>

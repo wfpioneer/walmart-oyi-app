@@ -23,7 +23,7 @@ import { Dispatch } from 'redux';
 import { strings } from '../../locales';
 import QuickPickTab from '../../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import PickBinTab, { disableMultiPickBin } from '../../screens/PickBinTab/PickBinTab';
+import PickBinTab from '../../screens/PickBinTab/PickBinTab';
 import SalesFloorTab from '../../screens/SalesFloorTab/SalesFloorTabScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
@@ -31,6 +31,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { getItemDetails, getPicklists } from '../../state/actions/saga';
 import {
   initializePicklist,
+  resetMultiPickBinSelection,
   resetPickList,
   setPickCreateFloor,
   setPickCreateItem,
@@ -285,7 +286,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   useFocusEffectHook(() => {
     const onBackPress = () => {
       if (multiBinEnabled || multiPickEnabled) {
-        disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch);
+        dispatch(resetMultiPickBinSelection());
         return true;
       }
       return false;
@@ -362,7 +363,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
           beforeRemove: () => {
             // Reset Picking Tabs to PickBinWorkflow when the navigator is removed from the stack history
             dispatch(setSelectedTab(Tabs.PICK));
-            disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch);
+            dispatch(resetMultiPickBinSelection());
           }
         }}
       >

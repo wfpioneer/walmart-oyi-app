@@ -12,7 +12,7 @@ import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './PickBinTab.style';
 import ManualScan from '../../components/manualscan/ManualScan';
-import { toggleMultiBin, toggleMultiPick } from '../../state/actions/Picking';
+import { resetMultiPickBinSelection } from '../../state/actions/Picking';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 interface PickBinTabProps {
@@ -36,19 +36,10 @@ const ASSIGNED_TO_ME = 'assignedToMe';
 const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletLocation ? palletLocation.substring(0,
   palletLocation.indexOf('-')).replace(/[\d.]+$/, '') : '');
 
-export const disableMultiPickBin = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
-  if (multiBinEnabled) {
-    dispatch(toggleMultiBin(false));
-  }
-  if (multiPickEnabled) {
-    dispatch(toggleMultiPick(false));
-  }
-};
 export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
   const {
     pickBinList, user, isManualScanEnabled, dispatch, onRefresh, refreshing, multiBinEnabled, multiPickEnabled
   } = props;
-  const { multiBin, multiPick } = user.configs;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
   const groupedPickListByZone = groupBy(otherPickList,
     (item: PickListItem) => getZoneFromPalletLocation(item.palletLocationName));
@@ -79,13 +70,13 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
         }}
         keyExtractor={(item, index) => `listGroup-${item}-${index}`}
         refreshing={refreshing}
-        onRefresh={onRefresh}
+        onRefresh={(!multiBinEnabled && !multiPickEnabled) ? onRefresh : null}
       />
       {multiBinEnabled || multiPickEnabled
         ? (
           <ButtonBottomTab
             leftTitle={strings('GENERICS.CANCEL')}
-            onLeftPress={() => disableMultiPickBin(multiBinEnabled, multiPickEnabled, dispatch)}
+            onLeftPress={() => dispatch(resetMultiPickBinSelection())}
             rightTitle={strings('GENERICS.CONTINUE')}
             onRightPress={() => undefined} // TODO handle continue flow https://jira.walmart.com/browse/INTLSAOPS-8630
           />
@@ -100,7 +91,9 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
 };
 
 const PickBinTab = (props: PickBinTabProps) => {
-  const { pickBinList, onRefresh, refreshing } = props;
+  const {
+    pickBinList, onRefresh, refreshing
+  } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const { multiBinEnabled, multiPickEnabled } = useTypedSelector(state => state.Picking);

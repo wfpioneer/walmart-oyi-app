@@ -1,5 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders PickBinTabScreen component with multi bin enabled and atleast 1 bin ready to start 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={null}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
+</ForwardRef(SafeAreaView)>
+`;
+
+exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders PickBinTabScreen component with multi pick enabled and atleast 1 pick ready to start 1`] = `
+<ForwardRef(SafeAreaView)
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <FlatList
+    data={
+      Array [
+        "assignedToMe",
+        "BREW",
+        "C",
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={null}
+    refreshing={false}
+    renderItem={[Function]}
+  />
+  <ButtonBottomTab
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
+</ForwardRef(SafeAreaView)>
+`;
+
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component while refreshing 1`] = `
 <ForwardRef(SafeAreaView)
   style={
@@ -60,7 +126,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       ]
     }
     keyExtractor={[Function]}
-    onRefresh={[MockFunction]}
+    onRefresh={null}
     refreshing={false}
     renderItem={[Function]}
   />
