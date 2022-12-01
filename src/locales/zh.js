@@ -59,7 +59,7 @@ export default {
     UPDATE: '更新配置',
     WARNING_LABEL: '警示',
     CLOSE: '关闭',
-    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}'
+    NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
