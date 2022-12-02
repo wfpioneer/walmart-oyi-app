@@ -166,7 +166,9 @@ export const getPicklistApiHook = (
 export const updatePicklistStatusApiHook = (
   updatePicklistStatusApi: AsyncState,
   dispatch: Dispatch<any>,
-  screenIsFocused: boolean
+  screenIsFocused: boolean,
+  multiBinEnabled: boolean,
+  multiPickEnabled: boolean
 ) => {
   if (screenIsFocused) {
     // on api success
@@ -179,6 +181,9 @@ export const updatePicklistStatusApiHook = (
         visibilityTime: 4000,
         position: 'bottom'
       });
+      if (multiBinEnabled || multiPickEnabled) {
+        dispatch(resetMultiPickBinSelection());
+      }
       dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
       dispatch(getPicklists());
     }
@@ -278,7 +283,9 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   );
 
   useEffectHook(
-    () => updatePicklistStatusApiHook(updatePicklistStatusApi, dispatch, navigation.isFocused()),
+    () => updatePicklistStatusApiHook(
+      updatePicklistStatusApi, dispatch, navigation.isFocused(), multiBinEnabled, multiPickEnabled
+    ),
     [updatePicklistStatusApi]
   );
 

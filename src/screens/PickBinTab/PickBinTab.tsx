@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import COLOR from '../../themes/Color';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
-import { PickListItem, Tabs } from '../../models/Picking.d';
+import { PickAction, PickListItem, Tabs } from '../../models/Picking.d';
 import ListGroup from '../../components/ListGroup/ListGroup';
 import { strings } from '../../locales';
 import styles from './PickBinTab.style';
@@ -17,6 +17,7 @@ import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { resetMultiPickBinSelection } from '../../state/actions/Picking';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
+import { updatePicklistStatus } from '../../state/actions/saga';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
@@ -45,12 +46,22 @@ export const renderMultipickConfirmationDialog = (
   selectedItems: PickListItem[],
   showMultiPickConfirmationDialog: boolean,
   setShowMultiPickConfirmationDialog: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
   multiBinEnabled: boolean,
   multiPickEnabled: boolean
 ) => {
   const uniqueSelectedItems = selectedItems.filter((value, index, self) => index === self.findIndex(t => (
     t.palletId === value.palletId && t.palletLocationName === value.palletLocationName
   )));
+  const updatePicklistRequestPayload = {
+    headers: { action: multiBinEnabled ? PickAction.ACCEPT_BIN : PickAction.ACCEPT_PICK },
+    picklistItems: selectedItems.map(item => ({
+      picklistId: item.id,
+      locationId: item.palletLocationId,
+      locationName: item.palletLocationName,
+      palletId: item.palletId
+    }))
+  };
   return (
     <CustomModalComponent
       isVisible={showMultiPickConfirmationDialog}
@@ -97,7 +108,7 @@ export const renderMultipickConfirmationDialog = (
             testID="acceptButton"
             title={strings('PICKING.ACCEPT')}
             onPress={() => {
-              // Handle the API call to update the pick
+              dispatch(updatePicklistStatus(updatePicklistRequestPayload));
               setShowMultiPickConfirmationDialog(false);
             }}
             type={ButtonType.PRIMARY}
@@ -126,7 +137,7 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
       {/* placeholder for ManualScan need to implement functionality later */}
       {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
       {renderMultipickConfirmationDialog(
-        selectedItems, showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog,
+        selectedItems, showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog, dispatch,
         multiBinEnabled, multiPickEnabled
       )}
       <FlatList
