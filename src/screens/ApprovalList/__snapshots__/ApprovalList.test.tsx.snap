@@ -419,6 +419,8 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
     }
   />
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
