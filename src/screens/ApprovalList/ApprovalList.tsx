@@ -18,7 +18,9 @@ import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
-import { setApprovalList, toggleAllItems, updateApprovalFilterCategories } from '../../state/actions/Approvals';
+import {
+  setApprovalList, toggleAllItems, updateFilterCategories, updateFilterSources
+} from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
@@ -48,7 +50,8 @@ interface ApprovalListProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
-  filterCategories: string[]
+  filterCategories: string[];
+  filterSources: string[];
 }
 interface UpdateResponse {
   message: string;
@@ -171,16 +174,25 @@ export const renderFilterPills = (
   listFilter: { type: string; value: string },
   dispatch: Dispatch<any>,
   filterCategories: string[],
+  filterSources: string[],
 ): JSX.Element => {
   if (listFilter.type === 'CATEGORY') {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
       replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
-      dispatch(updateApprovalFilterCategories(replacementFilter));
+      dispatch(updateFilterCategories(replacementFilter));
     };
     return <FilterPillButton filterText={listFilter.value} onClosePress={removeFilter} />;
   }
 
+  if (listFilter.type === 'SOURCE') {
+    const removeSourceFilter = () => {
+      const removeSource = filterSources;
+      removeSource.splice(filterSources.indexOf(listFilter.value), 1);
+      dispatch(updateFilterSources(removeSource));
+    };
+    return <FilterPillButton filterText={listFilter.value} onClosePress={removeSourceFilter} />;
+  }
   return <View />;
 };
 
@@ -207,7 +219,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     dispatch, getApprovalApi, trackEventCall, useEffectHook,
     useFocusEffectHook, navigation, route, filteredList,
     categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi,
-    filterCategories
+    filterCategories, filterSources
   } = props;
   let newFilteredList = filteredList;
 
@@ -294,21 +306,50 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   }
 
   const typedFilterCategoryList = filterCategories.map(category => ({ type: 'CATEGORY', value: category }));
+  const typedFilterSourceList = filterSources.map(source => ({ type: 'SOURCE', value: source }));
 
   if (filterCategories.length !== 0) {
     newFilteredList = newFilteredList.filter(approvalItem => filterCategories
       .indexOf(`${approvalItem.categoryNbr} - ${approvalItem.categoryDescription}`) !== -1);
   }
 
+  if (filterSources.length !== 0) {
+    const tempMap: Map<number, ApprovalCategory[]> = new Map();
+
+    newFilteredList = newFilteredList.filter(approvalItem => {
+      const catgList = tempMap.get(approvalItem.categoryNbr);
+      const getIndex = filterSources.indexOf(approvalItem.approvalRequestSource) !== -1;
+      // List is prefiltered so this will grab the Category Header first
+      if (!catgList) {
+        tempMap.set(approvalItem.categoryNbr, [approvalItem]);
+      } else if (tempMap.has(approvalItem.categoryNbr) && getIndex) {
+        catgList.push(approvalItem);
+        tempMap.set(approvalItem.categoryNbr, catgList);
+      }
+      return getIndex || approvalItem.categoryHeader;
+    });
+
+    // WE should check catgList length or we need to set the filtered result into the map
+    const tempList: ApprovalCategory[] = [];
+    newFilteredList.forEach(item => {
+      const catgList = tempMap.get(item.categoryNbr);
+      if (catgList !== undefined && catgList.length > 1) {
+        tempMap.delete(item.categoryNbr);
+        tempList.push(...catgList);
+      }
+    });
+    newFilteredList = tempList;
+  }
+
   return (
     <View style={styles.mainContainer}>
-      { (filterCategories.length > 0) && (
+      { (filterCategories.length > 0 || filterSources.length > 0) && (
       <View style={styles.filterContainer}>
         <FlatList
-          data={[...typedFilterCategoryList]}
+          data={[...typedFilterCategoryList, ...typedFilterSourceList]}
           horizontal
           renderItem={({ item }) => renderFilterPills(
-            item, dispatch, filterCategories
+            item, dispatch, filterCategories, filterSources
           )}
           style={styles.filterList}
           keyExtractor={item => item.value}
@@ -357,7 +398,7 @@ const ApprovalList = (): JSX.Element => {
   const getApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const {
-    approvalList, categoryIndices, selectedItemQty, filterCategories
+    approvalList, categoryIndices, selectedItemQty, filterCategories, filterSources
   } = useTypedSelector(state => state.Approvals);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -377,6 +418,7 @@ const ApprovalList = (): JSX.Element => {
       selectedItemQty={selectedItemQty}
       validateSessionCall={validateSession}
       filterCategories={filterCategories}
+      filterSources={filterSources}
     />
   );
 };
