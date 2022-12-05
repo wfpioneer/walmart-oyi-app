@@ -9,11 +9,13 @@ interface ButtonBottomTabProps{
   onLeftPress: () => void;
   rightTitle: string;
   onRightPress: () => void;
+  disableLeftButton?: boolean;
+  disableRightButton?: boolean;
 }
 
 export const ButtonBottomTab = (props: ButtonBottomTabProps): JSX.Element => {
   const {
-    leftTitle, onLeftPress, rightTitle, onRightPress
+    leftTitle, onLeftPress, rightTitle, onRightPress, disableLeftButton, disableRightButton
   } = props;
   return (
     <View style={styles.mainBarContainer}>
@@ -23,13 +25,20 @@ export const ButtonBottomTab = (props: ButtonBottomTabProps): JSX.Element => {
         titleColor={COLOR.MAIN_THEME_COLOR}
         type={ButtonType.SOLID_WHITE}
         onPress={() => onLeftPress()}
+        disabled={disableLeftButton}
       />
       <Button
         style={styles.buttonAlign}
         title={rightTitle}
         type={ButtonType.PRIMARY}
         onPress={() => onRightPress()}
+        disabled={disableRightButton}
       />
     </View>
   );
+};
+
+ButtonBottomTab.defaultProps = {
+  disableLeftButton: false,
+  disableRightButton: false
 };
