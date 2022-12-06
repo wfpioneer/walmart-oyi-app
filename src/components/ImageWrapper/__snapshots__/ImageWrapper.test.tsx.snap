@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageWrapper Component Renders a ImageWrapper with country code CN 1`] = `
+<View>
+  <FastImage
+    resizeMode="contain"
+    source=""
+    style={
+      Object {
+        "height": 80,
+        "width": 80,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`ImageWrapper Component Renders a ImageWrapper with country code MX 1`] = `
+<View>
+  <FastImage
+    resizeMode="contain"
+    source={
+      Object {
+        "priority": "normal",
+        "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/12345m.jpg",
+      }
+    }
+    style={
+      Object {
+        "height": 80,
+        "width": 80,
+      }
+    }
+  />
+</View>
+`;
