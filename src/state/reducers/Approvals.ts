@@ -187,9 +187,6 @@ export const Approvals = (
 
       // Deep Clone Categories Object
       const updatedCategories = cloneDeep(currCategories);
-
-      // const totalCategoryQty = updatedCategories[categoryNbr].totalItemQty;
-
       const updatedItemCat: ApprovalCategory[] = [...currList];
       let selectedQtyToAdd = currCheckedQty;
       let updateCheckedQty = 0;

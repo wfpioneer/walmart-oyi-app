@@ -27,6 +27,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
+import { FilterType } from '../../models/FilterListItem';
 
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
@@ -59,6 +60,7 @@ interface UpdateResponse {
   itemNbr: number;
   statusCode: number;
 }
+const PARTIAL_SUCCESS_STATUS = 207;
 
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
   const sortedData = [...listData];
@@ -171,12 +173,12 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
 };
 
 export const renderFilterPills = (
-  listFilter: { type: string; value: string },
+  listFilter: { type: FilterType; value: string },
   dispatch: Dispatch<any>,
   filterCategories: string[],
   filterSources: string[],
 ): JSX.Element => {
-  if (listFilter.type === 'CATEGORY') {
+  if (listFilter.type === FilterType.CATEGORY) {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
       replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
@@ -185,7 +187,7 @@ export const renderFilterPills = (
     return <FilterPillButton filterText={listFilter.value} onClosePress={removeFilter} />;
   }
 
-  if (listFilter.type === 'SOURCE') {
+  if (listFilter.type === FilterType.SOURCE) {
     const removeSourceFilter = () => {
       const removeSource = filterSources;
       removeSource.splice(filterSources.indexOf(listFilter.value), 1);
@@ -200,7 +202,7 @@ const getUpdateApprovalApiResult = (props: ApprovalListProps, updateApprovalApi:
   const {
     dispatch
   } = props;
-  return updateApprovalApi.result?.status === 207 && renderPopUp(updateApprovalApi, dispatch);
+  return updateApprovalApi.result?.status === PARTIAL_SUCCESS_STATUS && renderPopUp(updateApprovalApi, dispatch);
 };
 
 const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: AsyncState) => {
@@ -305,8 +307,8 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     );
   }
 
-  const typedFilterCategoryList = filterCategories.map(category => ({ type: 'CATEGORY', value: category }));
-  const typedFilterSourceList = filterSources.map(source => ({ type: 'SOURCE', value: source }));
+  const typedFilterCategoryList = filterCategories.map(category => ({ type: FilterType.CATEGORY, value: category }));
+  const typedFilterSourceList = filterSources.map(source => ({ type: FilterType.SOURCE, value: source }));
 
   if (filterCategories.length !== 0) {
     newFilteredList = newFilteredList.filter(approvalItem => filterCategories
