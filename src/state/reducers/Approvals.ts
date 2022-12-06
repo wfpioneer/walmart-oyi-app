@@ -42,14 +42,6 @@ export const initialState: ApprovalState = {
   filterCategories: [],
   filterSources: []
 };
-const isCheckedElseTotalItemQty = (isChecked: boolean, categoryObj: {
-  checkedItemQty: number;
-  totalItemQty: number;
-}) => (isChecked ? categoryObj.totalItemQty : 0);
-
-const isCheckedElseToggledItems = (isChecked: boolean,
-  toggledItems: ApprovalCategory[], categoryIndices: number[]) => (isChecked
-  ? toggledItems.length - categoryIndices.length : 0);
 
 const isSelectedItemQty = (isSelected: boolean, selectedItemQty: number) => (isSelected
   ? selectedItemQty + 1 : selectedItemQty - 1);
@@ -57,14 +49,6 @@ const isSelectedItemQty = (isSelected: boolean, selectedItemQty: number) => (isS
 const isSelectedItem = (isSelectedItemQuantity: boolean) => (isSelectedItemQuantity ? 1 : -1);
 
 const isCheckedTotalCategoryQty = (checked: boolean, totalCategoryQty: number) => (checked ? totalCategoryQty : 0);
-
-const isCheckedSelectedItemQty = (checked: boolean, selectedQtyToAdd: number,
-  currCheckedQty: number, totalCategoryQty: number) => (checked
-  ? selectedQtyToAdd : currCheckedQty - totalCategoryQty);
-
-const isCheckedSelectedQtyToAdd = (updatedItemCat: ApprovalCategory[],
-  index: number) => (!updatedItemCat[index].isChecked
-  ? 1 : 0);
 
 const filterCheckedListValidate = (filterCheckedList: ApprovalCategory[], newApprovalList: ApprovalCategory[],
   newCategories: Category) => {
@@ -84,6 +68,7 @@ const filterCheckedListValidate = (filterCheckedList: ApprovalCategory[], newApp
     }
   });
 };
+
 export const Approvals = (
   state = initialState,
   action: Actions
