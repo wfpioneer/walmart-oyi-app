@@ -314,31 +314,33 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   }
 
   if (filterSources.length !== 0) {
-    const tempMap: Map<number, ApprovalCategory[]> = new Map();
+    const approvalMap: Map<number, ApprovalCategory[]> = new Map();
 
     newFilteredList = newFilteredList.filter(approvalItem => {
-      const catgList = tempMap.get(approvalItem.categoryNbr);
+      const catgList = approvalMap.get(approvalItem.categoryNbr);
       const getIndex = filterSources.indexOf(approvalItem.approvalRequestSource) !== -1;
-      // List is prefiltered so this will grab the Category Header first
+
+      // List is pre-sorted so this will grab the Category Header first
       if (!catgList) {
-        tempMap.set(approvalItem.categoryNbr, [approvalItem]);
-      } else if (tempMap.has(approvalItem.categoryNbr) && getIndex) {
+        approvalMap.set(approvalItem.categoryNbr, [approvalItem]);
+      } else if (approvalMap.has(approvalItem.categoryNbr) && getIndex) {
         catgList.push(approvalItem);
-        tempMap.set(approvalItem.categoryNbr, catgList);
+        approvalMap.set(approvalItem.categoryNbr, catgList);
       }
       return getIndex || approvalItem.categoryHeader;
     });
 
-    // WE should check catgList length or we need to set the filtered result into the map
-    const tempList: ApprovalCategory[] = [];
+    const updatedList: ApprovalCategory[] = [];
+
+    // Creates a new approval list and inserts Categories that have filtered items
     newFilteredList.forEach(item => {
-      const catgList = tempMap.get(item.categoryNbr);
+      const catgList = approvalMap.get(item.categoryNbr);
       if (catgList !== undefined && catgList.length > 1) {
-        tempMap.delete(item.categoryNbr);
-        tempList.push(...catgList);
+        approvalMap.delete(item.categoryNbr);
+        updatedList.push(...catgList);
       }
     });
-    newFilteredList = tempList;
+    newFilteredList = updatedList;
   }
 
   return (
