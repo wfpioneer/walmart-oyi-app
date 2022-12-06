@@ -480,7 +480,10 @@ export default {
     ADDITIONAL_ITEMS: '卡板有其它商品',
     QUANTITY_STOCKED: '楼面陈列数量',
     ACCEPT_MULTIPLE_BINS: '批量接收上架任务',
-    ACCEPT_MULTIPLE_PICKS: '批量接收补货任务'
+    ACCEPT_MULTIPLE_PICKS: '批量接收补货任务',
+    ACCEPT_FOLLOWING_PICKS: '接受这些补货任务清单?',
+    ACCEPT_FOLLOWING_BINS: '接受这些上架任务清单?',
+    LOC_LABEL: '货架位置'
   },
   BINNING: {
     BINNING: '上架',
