@@ -158,7 +158,7 @@ describe('PickBinTabScreen', () => {
           showMultiPickConfirmationDialog={true}
           setShowMultiPickConfirmationDialog={jest.fn()}
           multiBinEnabled={false}
-          multiPickEnabled={false}
+          multiPickEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -168,6 +168,7 @@ describe('PickBinTabScreen', () => {
   describe('Tests PickBinTab externalized function tests', () => {
     const mockShowMultiPickConfirmationDialog = true;
     const mockSetShowMultiPickConfirmationDialog = jest.fn();
+    const mockDispatch = jest.fn();
     const updatedPickList = mockPickLists.map(pickList => ({ ...pickList, isSelected: true }));
     it('Test renders PickBinTabScreen component with multi pick enabled and atleast 1 pick ready to start', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -250,6 +251,7 @@ describe('PickBinTabScreen', () => {
         updatedPickList,
         mockShowMultiPickConfirmationDialog,
         mockSetShowMultiPickConfirmationDialog,
+        mockDispatch,
         mockMultiBin,
         mockMultiPick
       ));
@@ -262,6 +264,7 @@ describe('PickBinTabScreen', () => {
         updatedPickList,
         mockShowMultiPickConfirmationDialog,
         mockSetShowMultiPickConfirmationDialog,
+        mockDispatch,
         mockMultiBin,
         mockMultiPick
       ));
@@ -274,6 +277,7 @@ describe('PickBinTabScreen', () => {
         updatedPickList,
         mockShowMultiPickConfirmationDialog,
         mockSetShowMultiPickConfirmationDialog,
+        mockDispatch,
         mockMultiBin,
         mockMultiPick
       ));
@@ -282,7 +286,7 @@ describe('PickBinTabScreen', () => {
       fireEvent.press(cancelButton);
       expect(mockSetShowMultiPickConfirmationDialog).toHaveBeenCalledWith(false);
       fireEvent.press(acceptButton);
-      // TODO: Need to check whether the API been properly called
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'SAGA/UPDATE_PICKLIST_STATUS' }));
       expect(mockSetShowMultiPickConfirmationDialog).toHaveBeenCalledWith(false);
     });
   });
