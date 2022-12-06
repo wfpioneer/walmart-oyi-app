@@ -334,9 +334,11 @@ describe('Manage PickingNavigator externalized function tests', () => {
       ...defaultAsyncState,
       isWaiting: true
     };
+    const mockMultiBinEnabled = false;
+    const mockMultiPickEnabled = true;
     // on update success
-    updatePicklistStatusApiHook(updateSuccessApi, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(3);
+    updatePicklistStatusApiHook(updateSuccessApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
+    expect(mockDispatch).toBeCalledTimes(4);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'success',
       text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
@@ -348,7 +350,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     mockDispatch.mockReset();
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
-    updatePicklistStatusApiHook(updateFailureApi, mockDispatch, true);
+    updatePicklistStatusApiHook(updateFailureApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
     expect(mockDispatch).toBeCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
@@ -359,7 +361,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     });
     // on api request
     mockDispatch.mockReset();
-    updatePicklistStatusApiHook(updateIsLoadingApi, mockDispatch, true);
+    updatePicklistStatusApiHook(updateIsLoadingApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
     expect(mockDispatch).toBeCalledTimes(1);
   });
 });
