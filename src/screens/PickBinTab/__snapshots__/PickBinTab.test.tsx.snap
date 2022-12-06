@@ -1004,7 +1004,9 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
               "fontSize": 18,
             }
           }
-        />
+        >
+          [missing "en.PICKING.ACCEPT_MULTIPLE_PICKS" translation]
+        </Text>
       </View>
       <View>
         <View
@@ -1014,7 +1016,9 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
             }
           }
         >
-          <Text />
+          <Text>
+            [missing "en.PICKING.ACCEPT_FOLLOWING_PICKS" translation]
+          </Text>
         </View>
         <FlatList
           data={Array []}
@@ -1091,23 +1095,18 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       ]
     }
     keyExtractor={[Function]}
-    onRefresh={[Function]}
+    onRefresh={null}
     refreshing={true}
     renderItem={[Function]}
   />
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#eeeeee",
-        "padding": 10,
-      }
-    }
-  >
-    <Text>
-      [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
-    </Text>
-  </View>
+  <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={true}
+    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    onLeftPress={[Function]}
+    onRightPress={[Function]}
+    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+  />
 </ForwardRef(SafeAreaView)>
 `;
 
