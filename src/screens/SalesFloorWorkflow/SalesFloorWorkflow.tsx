@@ -256,12 +256,12 @@ export const binApisEffect = (
         picklistId: pick.id,
         locationId: pick.palletLocationId,
         locationName: pick.palletLocationName,
-        itemQty: pick.itemQty
+        itemQty: pick.itemQty,
+        palletId: pick.palletId
       }));
 
       dispatch(updatePicklistStatus({
         headers: { action: PickAction.READY_TO_BIN },
-        palletId: selectedPicks[0].palletId,
         picklistItems: selectedPickItems
       }));
       dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
@@ -494,14 +494,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
       picklistId: pick.id,
       locationId: pick.palletLocationId,
       locationName: pick.palletLocationName,
-      itemQty: pick.itemQty
+      itemQty: pick.itemQty,
+      palletId: pick.palletId
     }));
     // dispatch picks to complete
     dispatch(
       updatePicklistStatus({
         headers: { action: PickAction.COMPLETE },
-        picklistItems: selectedPickItems,
-        palletId: selectedPicks[0].palletId
+        picklistItems: selectedPickItems
       })
     );
   };

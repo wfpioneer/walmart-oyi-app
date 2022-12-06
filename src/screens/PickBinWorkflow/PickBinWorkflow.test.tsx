@@ -70,7 +70,9 @@ const pickStateMissingProps: PickingState = {
   pickCreateFloorLocations: [],
   pickCreateReserveLocations: [],
   selectedTab: Tabs.QUICKPICK,
-  pickingMenu: false
+  pickingMenu: false,
+  multiBinEnabled: false,
+  multiPickEnabled: false
 };
 const pickingState: PickingState = {
   ...pickStateMissingProps,

@@ -476,7 +476,10 @@ export default {
     ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
     QUANTITY_STOCKED: 'Cantidad abastecida',
     ACCEPT_MULTIPLE_BINS: 'Aceptar Múltiples ingresos a bodega',
-    ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos'
+    ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos',
+    ACCEPT_FOLLOWING_PICKS: 'Aceptar los siguientes pickeos?',
+    ACCEPT_FOLLOWING_BINS: 'Aceptar los siguientes ingresos a bodega?',
+    LOC_LABEL: 'Ubi'
   },
   BINNING: {
     BINNING: 'Bodega',
