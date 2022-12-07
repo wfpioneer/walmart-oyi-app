@@ -9,93 +9,122 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     }
   }
 >
-  <Text
-    style={
-      Object {
-        "color": "#d938ab",
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "marginBottom": 4,
-        "marginTop": 16,
-      }
-    }
-  >
-    [missing "en.EXCEPTION.NSFL" translation]
-  </Text>
-  <Text
-    style={
-      Object {
-        "fontSize": 16,
-        "fontWeight": "bold",
-        "marginVertical": 4,
-      }
-    }
-  >
-    Test item
-  </Text>
   <View
     style={
       Object {
         "flexDirection": "row",
-        "marginBottom": 4,
-        "marginTop": 4,
+        "justifyContent": "flex-start",
       }
     }
   >
-    <Text
+    <View
       style={
         Object {
-          "color": "#616161",
-          "fontSize": 12,
+          "flexGrow": 0,
+          "paddingRight": 10,
+          "paddingTop": 10,
         }
       }
     >
-      [missing "en.ITEM.ITEM" translation] 10359
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#616161",
-          "fontSize": 12,
-          "marginHorizontal": 8,
+      <ImageWrapper
+        countryCode="MX"
+        imageStyle={
+          Object {
+            "height": 100,
+            "width": 100,
+          }
         }
-      }
-    >
-      |
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#616161",
-          "fontSize": 12,
+        itemNumber={10359}
+      />
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "#d938ab",
+            "fontSize": 12,
+            "fontWeight": "bold",
+          }
         }
-      }
-    >
-      [missing "en.ITEM.UPC" translation] 286201035990
-    </Text>
+      >
+        [missing "en.EXCEPTION.NSFL" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginVertical": 4,
+          }
+        }
+      >
+        Test item
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 4,
+            "marginTop": 4,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.ITEM" translation] 10359
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+              "marginHorizontal": 8,
+            }
+          }
+        >
+          |
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.UPC" translation] 286201035990
+        </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "marginBottom": 4,
+          }
+        }
+      >
+        [missing "en.ITEM.STATUS" translation]: Active
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "marginBottom": 4,
+          }
+        }
+      >
+        [missing "en.ITEM.CATEGORY" translation]: 17-test
+      </Text>
+    </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#616161",
-        "fontSize": 12,
-        "marginBottom": 4,
-      }
-    }
-  >
-    [missing "en.ITEM.STATUS" translation]: Active
-  </Text>
-  <Text
-    style={
-      Object {
-        "color": "#616161",
-        "fontSize": 12,
-        "marginBottom": 4,
-      }
-    }
-  >
-    [missing "en.ITEM.CATEGORY" translation]: 17-test
-  </Text>
   <CollapsibleCard
     icon=""
     isOpened={false}
@@ -180,93 +209,122 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     }
   }
 >
-  <Text
-    style={
-      Object {
-        "color": "#d938ab",
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "marginBottom": 4,
-        "marginTop": 16,
-      }
-    }
-  >
-    [missing "en.EXCEPTION.NSFL" translation]
-  </Text>
-  <Text
-    style={
-      Object {
-        "fontSize": 16,
-        "fontWeight": "bold",
-        "marginVertical": 4,
-      }
-    }
-  >
-    Test item
-  </Text>
   <View
     style={
       Object {
         "flexDirection": "row",
-        "marginBottom": 4,
-        "marginTop": 4,
+        "justifyContent": "flex-start",
       }
     }
   >
-    <Text
+    <View
       style={
         Object {
-          "color": "#616161",
-          "fontSize": 12,
+          "flexGrow": 0,
+          "paddingRight": 10,
+          "paddingTop": 10,
         }
       }
     >
-      [missing "en.ITEM.ITEM" translation] 10359
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#616161",
-          "fontSize": 12,
-          "marginHorizontal": 8,
+      <ImageWrapper
+        countryCode="MX"
+        imageStyle={
+          Object {
+            "height": 100,
+            "width": 100,
+          }
         }
-      }
-    >
-      |
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#616161",
-          "fontSize": 12,
+        itemNumber={10359}
+      />
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "#d938ab",
+            "fontSize": 12,
+            "fontWeight": "bold",
+          }
         }
-      }
-    >
-      [missing "en.ITEM.UPC" translation] 286201035990
-    </Text>
+      >
+        [missing "en.EXCEPTION.NSFL" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginVertical": 4,
+          }
+        }
+      >
+        Test item
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 4,
+            "marginTop": 4,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.ITEM" translation] 10359
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+              "marginHorizontal": 8,
+            }
+          }
+        >
+          |
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.UPC" translation] 286201035990
+        </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "marginBottom": 4,
+          }
+        }
+      >
+        [missing "en.ITEM.STATUS" translation]: Active
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "marginBottom": 4,
+          }
+        }
+      >
+        [missing "en.ITEM.CATEGORY" translation]: 17-test
+      </Text>
+    </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#616161",
-        "fontSize": 12,
-        "marginBottom": 4,
-      }
-    }
-  >
-    [missing "en.ITEM.STATUS" translation]: Active
-  </Text>
-  <Text
-    style={
-      Object {
-        "color": "#616161",
-        "fontSize": 12,
-        "marginBottom": 4,
-      }
-    }
-  >
-    [missing "en.ITEM.CATEGORY" translation]: 17-test
-  </Text>
   <Text
     style={
       Object {
@@ -309,93 +367,122 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     }
   }
 >
-  <Text
-    style={
-      Object {
-        "color": "#d938ab",
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "marginBottom": 4,
-        "marginTop": 16,
-      }
-    }
-  >
-    [missing "en.EXCEPTION.NSFL" translation]
-  </Text>
-  <Text
-    style={
-      Object {
-        "fontSize": 16,
-        "fontWeight": "bold",
-        "marginVertical": 4,
-      }
-    }
-  >
-    Test item
-  </Text>
   <View
     style={
       Object {
         "flexDirection": "row",
-        "marginBottom": 4,
-        "marginTop": 4,
+        "justifyContent": "flex-start",
       }
     }
   >
-    <Text
+    <View
       style={
         Object {
-          "color": "#616161",
-          "fontSize": 12,
+          "flexGrow": 0,
+          "paddingRight": 10,
+          "paddingTop": 10,
         }
       }
     >
-      [missing "en.ITEM.ITEM" translation] 10359
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#616161",
-          "fontSize": 12,
-          "marginHorizontal": 8,
+      <ImageWrapper
+        countryCode="MX"
+        imageStyle={
+          Object {
+            "height": 100,
+            "width": 100,
+          }
         }
-      }
-    >
-      |
-    </Text>
-    <Text
-      style={
-        Object {
-          "color": "#616161",
-          "fontSize": 12,
+        itemNumber={10359}
+      />
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "#d938ab",
+            "fontSize": 12,
+            "fontWeight": "bold",
+          }
         }
-      }
-    >
-      [missing "en.ITEM.UPC" translation] 286201035990
-    </Text>
+      >
+        [missing "en.EXCEPTION.NSFL" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "marginVertical": 4,
+          }
+        }
+      >
+        Test item
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 4,
+            "marginTop": 4,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.ITEM" translation] 10359
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+              "marginHorizontal": 8,
+            }
+          }
+        >
+          |
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.ITEM.UPC" translation] 286201035990
+        </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "marginBottom": 4,
+          }
+        }
+      >
+        [missing "en.ITEM.STATUS" translation]: Active
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "#616161",
+            "fontSize": 12,
+            "marginBottom": 4,
+          }
+        }
+      >
+        [missing "en.ITEM.CATEGORY" translation]: 17-test
+      </Text>
+    </View>
   </View>
-  <Text
-    style={
-      Object {
-        "color": "#616161",
-        "fontSize": 12,
-        "marginBottom": 4,
-      }
-    }
-  >
-    [missing "en.ITEM.STATUS" translation]: Active
-  </Text>
-  <Text
-    style={
-      Object {
-        "color": "#616161",
-        "fontSize": 12,
-        "marginBottom": 4,
-      }
-    }
-  >
-    [missing "en.ITEM.CATEGORY" translation]: 17-test
-  </Text>
   <CollapsibleCard
     icon=""
     isOpened={false}

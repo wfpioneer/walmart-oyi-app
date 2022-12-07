@@ -45,7 +45,8 @@ describe('ItemInfo Component', () => {
     price: 14,
     exceptionType: 'NSFL',
     additionalItemDetails: mockAdditionalItemDetails,
-    showAdditionalItemDetails: false
+    showAdditionalItemDetails: false,
+    countryCode: 'MX'
   };
 
   describe('Tests rendering ItemInfo', () => {
@@ -63,6 +64,7 @@ describe('ItemInfo Component', () => {
           navigationForPrint={navigationProp}
           showAdditionalItemDetails={false}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
+          countryCode={mockItem.countryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -82,7 +84,7 @@ describe('ItemInfo Component', () => {
         navigationForPrint={navigationProp}
         showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
-
+        countryCode={mockItem.countryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -102,7 +104,7 @@ describe('ItemInfo Component', () => {
         navigationForPrint={mockNavigationProp}
         showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
-
+        countryCode={mockItem.countryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -122,6 +124,7 @@ describe('ItemInfo Component', () => {
           navigationForPrint={navigationProp}
           showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
+          countryCode={mockItem.countryCode}
         />
       );
       const collapsibleCard = getByTestId('collapsible-card');
@@ -146,6 +149,7 @@ describe('ItemInfo Component', () => {
           navigationForPrint={navigationProp}
           showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
+          countryCode={mockItem.countryCode}
         />
       );
       const printPriceSignButton = getByTestId('print-price-sign');

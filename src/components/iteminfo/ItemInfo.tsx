@@ -22,6 +22,7 @@ export type ItemInfoProps = {
   navigationForPrint?: NavigationProp<any>;
   additionalItemDetails?: AdditionalItemDetailsProps;
   showAdditionalItemDetails: boolean;
+  countryCode: string;
 };
 
 export type AdditionalItemDetailsProps = {
@@ -76,7 +77,8 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
 const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
-    price, exceptionType, navigationForPrint: navigation, showAdditionalItemDetails, additionalItemDetails
+    price, exceptionType, navigationForPrint: navigation, showAdditionalItemDetails, additionalItemDetails,
+    countryCode
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -117,7 +119,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
         <View style={styles.imageView}>
           <ImageWrapper
             itemNumber={itemNbr}
-            countryCode="MX"
+            countryCode={countryCode}
             imageStyle={styles.image}
           />
         </View>
