@@ -4,6 +4,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { WorklistHomeScreen } from './WorklistHome';
 import { mockConfig } from '../../mockData/mockConfig';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -21,6 +22,13 @@ const navigationProp: NavigationProp<any> = {
   navigate: jest.fn()
 };
 const mockDispatch = jest.fn();
+
+jest.mock('../../utils/AppCenterTool', () => ({
+  ...jest.requireActual('../../utils/AppCenterTool'),
+  initialize: jest.fn(),
+  trackEvent: jest.fn(() => Promise.resolve()),
+  setUserId: jest.fn(() => Promise.resolve())
+}));
 
 describe('WorkListHome', () => {
   afterEach(() => {
@@ -61,6 +69,7 @@ describe('WorkListHome', () => {
     );
     const itemWorklistButton = getByTestId('itemWorkListButton');
     fireEvent.press(itemWorklistButton);
+    expect(trackEvent).toHaveBeenCalledWith('item_worklists_click');
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 
@@ -74,6 +83,7 @@ describe('WorkListHome', () => {
     );
     const palletWorkListButton = getByTestId('palletWorkListButton');
     fireEvent.press(palletWorkListButton);
+    expect(trackEvent).toHaveBeenCalledWith('missing_pallet_worklists_click');
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 
@@ -87,6 +97,7 @@ describe('WorkListHome', () => {
     );
     const palletWorkListButton = getByTestId('auditWorkListButton');
     fireEvent.press(palletWorkListButton);
+    expect(trackEvent).toHaveBeenCalledWith('audit_worklists_click');
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 });
