@@ -96,7 +96,7 @@ export default class PalletManagementService {
 
     return Request.patch(
       `${urls.locationUrl}/pallet/upc`,
-      payload
+      payload.PalletList
     );
   }
 }
