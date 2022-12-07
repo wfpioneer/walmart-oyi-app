@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 export interface FilterListItem {
     value: string;
     display: string;
@@ -9,3 +10,10 @@ export interface FilteredCategory {
     catgName: string;
     selected: boolean;
   }
+
+export enum FilterType {
+  CATEGORY = 'CATEGORY',
+  EXCEPTION = 'EXCEPTION',
+  SOURCE = 'SOURCE',
+  AREA = 'AREA'
+}
