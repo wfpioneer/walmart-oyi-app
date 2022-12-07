@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
+const center = 'center';
 export default StyleSheet.create({
   mainContainer: {
     backgroundColor: COLOR.WHITE
   },
   container: {
-    alignItems: 'center',
+    alignItems: center,
     justifyContent: 'space-evenly',
     paddingHorizontal: 10,
     paddingVertical: 8,
@@ -14,8 +15,8 @@ export default StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: center,
+    alignItems: center
   },
   location: {
     fontSize: 16,
@@ -49,12 +50,12 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    alignItems: 'center'
+    alignItems: center
   },
   errorText: {
     fontSize: 14,
     color: COLOR.RED_700,
-    textAlign: 'center',
+    textAlign: center,
     paddingBottom: 5
   }
 });
