@@ -864,12 +864,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Pickl
 </Text>
 `;
 
-exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Reserve Item Needed' to Add to Picklist 1`] = `
-<Text>
-  [missing "en.ITEM.RESERVE_NEEDED" translation]
-</Text>
-`;
-
 exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders a Loader when waiting for Picklist response 1`] = `
 <ActivityIndicator
   animating={true}

@@ -620,7 +620,7 @@ export const renderAddPicklistButton = (
     );
   }
 
-  return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
+  return <></>;
 };
 
 export const renderLocationComponent = (
