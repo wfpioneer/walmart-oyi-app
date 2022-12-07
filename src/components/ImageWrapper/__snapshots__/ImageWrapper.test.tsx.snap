@@ -3,6 +3,7 @@
 exports[`ImageWrapper Component Renders a ImageWrapper with country code CN 1`] = `
 <View>
   <FastImage
+    onError={[Function]}
     resizeMode="contain"
     source=""
     style={
@@ -18,6 +19,7 @@ exports[`ImageWrapper Component Renders a ImageWrapper with country code CN 1`] 
 exports[`ImageWrapper Component Renders a ImageWrapper with country code MX 1`] = `
 <View>
   <FastImage
+    onError={[Function]}
     resizeMode="contain"
     source={
       Object {

@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './ImageWrapper.style';
-import { imageApiUrlCN, postApiCall, uuidApiUrlCN } from './ImageWrapperUtils';
+import { postApiCall } from './ImageWrapperUtils';
+import {
+  Environment, getEnvironment
+} from '../../utils/environment';
 
 interface ImageWrapperProps {
   itemNumber: number,
   countryCode: string;
   imageStyle?: any,
 }
+
+const urls: Environment = getEnvironment();
 
 // eslint-disable-next-line max-len
 export const getMXImageUri = (itemNumber: number) => `https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/${itemNumber}m.jpg`;
@@ -48,7 +53,7 @@ export const getCNImageUri = (
   };
 
   try {
-    postApiCall(uuidApiUrlCN, JSON.stringify(uuidDataParams))
+    postApiCall(urls.itemImageUUIDUrl, JSON.stringify(uuidDataParams))
       .then(res => res.json())
       .then(data => {
         const { status, entities, totalRecords } = data.response;
@@ -57,7 +62,7 @@ export const getCNImageUri = (
           uuid = entities[0].id;
         }
         if (uuid) {
-          postApiCall(imageApiUrlCN, JSON.stringify(getImgDataParams(uuid)))
+          postApiCall(urls.itemImageUrl, JSON.stringify(getImgDataParams(uuid)))
             .then(res => res.json())
             .then(imgResponseData => {
               const {
@@ -71,12 +76,15 @@ export const getCNImageUri = (
                 }
               }
             })
-            .catch(console.error);
+            // eslint-disable-next-line no-console
+            .catch(error => console.log('❌ ', 'while fetching image using uuid ', error));
         }
       })
-      .catch(console.error);
+      // eslint-disable-next-line no-console
+      .catch(error => console.log('❌ ', 'while fetching image uuid ', error));
   } catch (err) {
-    console.error('error while fetching item image', err);
+    // eslint-disable-next-line no-console
+    console.log('❌ ', 'error while fetching item image ', err);
   }
 };
 
@@ -103,6 +111,7 @@ const ImageWrapper = ({
           }
           : require('../../assets/images/placeholder.png')}
         resizeMode={FastImage.resizeMode.contain}
+        onError={() => setImageUri(undefined)}
       />
     </View>
   );

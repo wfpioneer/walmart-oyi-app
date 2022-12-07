@@ -3,12 +3,24 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { render } from '@testing-library/react-native';
 import ImageWrapper from './ImageWrapper';
 import * as utils from './ImageWrapperUtils';
+import { getEnvironment } from '../../utils/environment';
 
 const mockSetImgState = jest.fn();
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: jest.fn().mockImplementation(init => [init, mockSetImgState])
 }));
+
+jest.mock('../../utils/environment', () => {
+  const environments = jest.requireActual('../../utils/environment');
+  return {
+    ...environments,
+    getEnvironment: jest.fn().mockImplementation(() => ({
+      itemImageUUIDUrl: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
+      itemImageUrl: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+    }))
+  };
+});
 
 const mockUUIDSuccessResponse = {
   response: {
@@ -20,7 +32,6 @@ const mockUUIDSuccessResponse = {
   }
 };
 
-const mockUUIDAprUrlCN = utils.uuidApiUrlCN;
 const mockImageSuccessResponse = {
   response: {
     entities: [{
@@ -60,9 +71,11 @@ const mockFetchImgPromise = Promise.resolve({
   json: () => mockImgJsonPromise
 });
 
+const urls = getEnvironment();
+const mockUUIDAprUrlCN = urls.itemImageUUIDUrl;
+
 jest.mock('./ImageWrapperUtils', () => {
   const actual = jest.requireActual('./ImageWrapperUtils');
-  // The code from the previous step
   return {
     ...actual,
     postApiCall: jest.fn().mockImplementation((url: string, data: any) => {
@@ -127,6 +140,6 @@ describe('ImageWrapper Component', () => {
     };
 
     expect(utils.postApiCall).toBeCalledTimes(1);
-    expect(utils.postApiCall).toBeCalledWith(utils.uuidApiUrlCN, JSON.stringify(uuidDataParams));
+    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUUIDUrl, JSON.stringify(uuidDataParams));
   });
 });
