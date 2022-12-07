@@ -590,7 +590,7 @@ export const updateOHQtyApiHook = (
       const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
         {
           palletId: item.palletId,
-          expirationDate: '', // We do not track this. We may need to call this if it changes the pallets expiry date
+          expirationDate: '', // This is fine as it does not update the expiration date on the pallet
           upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
         }
       ));
