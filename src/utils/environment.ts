@@ -10,6 +10,8 @@ export interface Environment {
   managerApprovalUrl: string;
   locationUrl: string;
   configUrl: string;
+  itemImageUUIDUrl: string;
+  itemImageUrl: string;
 }
 
 export interface Environments {
@@ -86,8 +88,10 @@ export const getEnvironment = (): Environment => {
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.dev.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`,
-      configUrl: `https://intl-oyi-config-api.${countryCode}.dev.walmart.com`
-
+      configUrl: `https://intl-oyi-config-api.${countryCode}.dev.walmart.com`,
+      itemImageUUIDUrl: countryCode === 'CN' ? 'https://samsclubcnds.riversand.com/api/entityappservice/get' : '',
+      itemImageUrl: countryCode === 'CN'
+        ? 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl' : ''
     },
     stage: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
@@ -98,8 +102,10 @@ export const getEnvironment = (): Environment => {
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.stg.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
-      configUrl: `https://intl-oyi-config-api.${countryCode}.stg.walmart.com`
-
+      configUrl: `https://intl-oyi-config-api.${countryCode}.stg.walmart.com`,
+      itemImageUUIDUrl: countryCode === 'CN' ? 'https://samsclubcnds.riversand.com/api/entityappservice/get' : '',
+      itemImageUrl: countryCode === 'CN'
+        ? 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl' : ''
     },
     prod: {
       orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
@@ -110,8 +116,10 @@ export const getEnvironment = (): Environment => {
       managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.prod.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
-      configUrl: `https://intl-oyi-config-api.${countryCode}.prod.walmart.com`
-
+      configUrl: `https://intl-oyi-config-api.${countryCode}.prod.walmart.com`,
+      itemImageUUIDUrl: countryCode === 'CN' ? 'https://samsclubcnds.riversand.com/api/entityappservice/get' : '',
+      itemImageUrl: countryCode === 'CN'
+        ? 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl' : ''
     }
 
   };

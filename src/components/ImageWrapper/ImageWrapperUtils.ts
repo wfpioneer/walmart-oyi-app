@@ -1,8 +1,5 @@
 import KEY from '../../constant/Key';
 
-export const uuidApiUrlCN = 'https://samsclubcnds.riversand.com/api/entityappservice/get';
-export const imageApiUrlCN = 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl';
-
 export const postApiCall = (apiUrl: string, data: string): Promise<Response> => {
   const headers = {
     'Content-Type': 'application/json',
