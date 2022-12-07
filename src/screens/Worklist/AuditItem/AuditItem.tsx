@@ -116,7 +116,6 @@ export interface AuditItemScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
-  userConfigs: Configurations;
   itemNumber: number;
   showItemNotFoundMsg: boolean;
   setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
@@ -1388,15 +1387,12 @@ const AuditItem = (): JSX.Element => {
     state => state.async.getItemDetails
   );
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
-  const userConfig = useTypedSelector(state => state.User.configs); // TODO fix all of these UserConfigs
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const reportMissingPalletApi = useTypedSelector(state => state.async.reportMissingPallet);
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
-  const { userId } = useTypedSelector(state => state.User);
-  const userFeatures = useTypedSelector(state => state.User.features);
-  const userConfigs = useTypedSelector(state => state.User.configs);
+  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -1447,7 +1443,6 @@ const AuditItem = (): JSX.Element => {
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
-      userConfigs={userConfigs}
       userId={userId}
       itemNumber={itemNumber}
       showItemNotFoundMsg={showItemNotFoundMsg}

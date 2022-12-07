@@ -141,7 +141,6 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   useEffectHook: jest.fn(),
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
-  userConfigs: mockConfig,
   itemNumber: 0,
   setShowItemNotFoundMsg: jest.fn(),
   showItemNotFoundMsg: false,
