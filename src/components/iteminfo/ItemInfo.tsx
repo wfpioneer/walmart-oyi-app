@@ -9,6 +9,7 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import CollapsibleCard from '../CollapsibleCard/CollapsibleCard';
 import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 export type ItemInfoProps = {
   itemName: string;
@@ -112,15 +113,26 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
 
   return (
     <View style={styles.mainContainer}>
-      {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
-      <Text style={styles.itemNameText}>{itemName}</Text>
-      <View style={styles.nbrContainer}>
-        <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
-        <Text style={styles.nbrDivider}>|</Text>
-        <Text style={styles.upcNbrText}>{`${strings('ITEM.UPC')} ${upcNbr}`}</Text>
+      <View style={styles.imageContainer}>
+        <View style={styles.imageView}>
+          <ImageWrapper
+            itemNumber={itemNbr}
+            countryCode="MX"
+            imageStyle={styles.image}
+          />
+        </View>
+        <View>
+          {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
+          <Text style={styles.itemNameText}>{itemName}</Text>
+          <View style={styles.nbrContainer}>
+            <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
+            <Text style={styles.nbrDivider}>|</Text>
+            <Text style={styles.upcNbrText}>{`${strings('ITEM.UPC')} ${upcNbr}`}</Text>
+          </View>
+          <Text style={styles.statusText}>{`${strings('ITEM.STATUS')}: ${status}`}</Text>
+          <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
+        </View>
       </View>
-      <Text style={styles.statusText}>{`${strings('ITEM.STATUS')}: ${status}`}</Text>
-      <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
       {showAdditionalItemDetails && additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
       <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
       {navigation && (
