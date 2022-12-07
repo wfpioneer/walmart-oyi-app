@@ -16,8 +16,8 @@ jest.mock('../../utils/environment', () => {
   return {
     ...environments,
     getEnvironment: jest.fn().mockImplementation(() => ({
-      itemImageUUIDUrl: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrl: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
     }))
   };
 });
@@ -72,7 +72,7 @@ const mockFetchImgPromise = Promise.resolve({
 });
 
 const urls = getEnvironment();
-const mockUUIDAprUrlCN = urls.itemImageUUIDUrl;
+const mockUUIDAprUrlCN = urls.itemImageUUIDUrlCN;
 
 jest.mock('./ImageWrapperUtils', () => {
   const actual = jest.requireActual('./ImageWrapperUtils');
@@ -142,7 +142,7 @@ describe('ImageWrapper Component', () => {
     const mockUUID = mockUUIDSuccessResponse.response.entities[0].id;
     const imgDataParam = getImgDataParams(mockUUID);
     await waitFor(() => expect(utils.postApiCall).toHaveBeenCalledTimes(2));
-    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUUIDUrl, JSON.stringify(uuidDataParams));
-    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUrl, JSON.stringify(imgDataParam));
+    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUUIDUrlCN, JSON.stringify(uuidDataParams));
+    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUrlCN, JSON.stringify(imgDataParam));
   });
 });
