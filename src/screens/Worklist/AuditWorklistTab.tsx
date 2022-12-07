@@ -20,6 +20,7 @@ import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 import ItemCard from '../../components/ItemCard/ItemCard';
+import { FilterType } from '../../models/FilterListItem';
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
@@ -130,14 +131,14 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
 };
 
 export const renderFilterPills = (
-  listFilter: { type: string; value: string },
+  listFilter: { type: FilterType; value: string },
   dispatch: Dispatch<any>,
   filterCategories: string[],
   filterExceptions: string[],
   fullExceptionList: Map<string, string>,
   areas: area[]
 ): JSX.Element => {
-  if (listFilter.type === 'EXCEPTION') {
+  if (listFilter.type === FilterType.EXCEPTION) {
     const exception = fullExceptionList.get(listFilter.value);
     if (exception) {
       const removeFilter = () => {
@@ -150,7 +151,7 @@ export const renderFilterPills = (
 
     return <View />;
   }
-  if (listFilter.type === 'AREA') {
+  if (listFilter.type === FilterType.AREA) {
     const removeAreaFilter = () => {
       const removedArea = areas.find(item => item.area === listFilter.value);
       const updatedFilteredCategories = filterCategories.filter(
@@ -161,7 +162,7 @@ export const renderFilterPills = (
     return <FilterPillButton filterText={listFilter.value} onClosePress={removeAreaFilter} />;
   }
 
-  if (listFilter.type === 'CATEGORY') {
+  if (listFilter.type === FilterType.CATEGORY) {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
       replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
@@ -213,7 +214,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
 
   const typedFilterAreaOrCategoryList = enableAreaFilter
-    ? configAreas.reduce((acc: { type: string, value: string}[], item: area) => {
+    ? configAreas.reduce((acc: { type: FilterType, value: string}[], item: area) => {
       const isSelected = item.categories.every(
         categoryNbr => filteredCategoryNbr.includes(categoryNbr)
       );
@@ -221,17 +222,21 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         categoryNbr => filteredCategoryNbr.includes(categoryNbr)
       );
       if (isSelected && item.categories.length !== 0) {
-        acc.push({ type: 'AREA', value: item.area });
+        acc.push({ type: FilterType.AREA, value: item.area });
       } else if (isPartiallySelected) {
         const partiallySelectedCategoryList = filterCategories.filter(
           category => item.categories.includes(Number(category.split('-')[0]))
         );
-        partiallySelectedCategoryList.forEach((category: string) => acc.push({ type: 'CATEGORY', value: category }));
+        partiallySelectedCategoryList.forEach((category: string) => acc.push(
+          { type: FilterType.CATEGORY, value: category }
+        ));
       }
       return acc;
-    }, []) : filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
+    }, []) : filterCategories.map((category: string) => ({ type: FilterType.CATEGORY, value: category }));
 
-  const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
+  const typedFilterExceptions = filterExceptions.map((exception: string) => (
+    { type: FilterType.EXCEPTION, value: exception }
+  ));
 
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter(worklistItem => filterCategories
