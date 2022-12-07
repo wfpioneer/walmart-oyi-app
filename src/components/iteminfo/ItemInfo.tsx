@@ -9,6 +9,7 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import CollapsibleCard from '../CollapsibleCard/CollapsibleCard';
 import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
+import { TrackEventSource } from '../../models/Generics.d';
 
 export type ItemInfoProps = {
   itemName: string;
@@ -29,7 +30,8 @@ export type AdditionalItemDetailsProps = {
   grossProfit: number,
   vendorPackQty: number,
   basePrice: number,
-  margin: number
+  margin: number,
+  source?: TrackEventSource
 }
 
 export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetailsProps): JSX.Element => {

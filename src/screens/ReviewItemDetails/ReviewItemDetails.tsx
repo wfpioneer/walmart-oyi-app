@@ -58,6 +58,7 @@ import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
+import { TrackEventSource } from '../../models/Generics.d';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -65,6 +66,8 @@ const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
+
+const REVIEW_ITEM_DETAILS = 'Review_Item_Details';
 
 export interface ItemDetailsScreenProps {
   scannedEvent: { value: string | null; type: string | null; };
@@ -131,7 +134,7 @@ export const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) =>
     navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
+    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'update_OH_qty_click', itemNbr: itemDetails.itemNbr });
     setOhQtyModalVisible(true);
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
@@ -141,7 +144,7 @@ export const handleLocationAction = (props: HandleProps, itemDetails: ItemDetail
     navigation, trackEventCall, validateSessionCall, route, userId
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
+    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'location_details_click', itemNbr: itemDetails.itemNbr });
     navigation.navigate('LocationDetails');
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
@@ -151,7 +154,7 @@ export const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails
     navigation, trackEventCall, validateSessionCall, route, userId, dispatch
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
+    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'add_to_picklist_click', itemDetails: JSON.stringify(itemDetails) });
     dispatch(addToPicklist({
       itemNumber: itemDetails.itemNbr
     }));
@@ -361,8 +364,14 @@ const onMoreOHChangeHistoryClick = (
 export const renderPickHistory = (
   props: HandleProps,
   pickHistoryList: PickHistory[],
-  result: AxiosResponse
+  result: AxiosResponse,
+  itemNbr: number
 ) => {
+  const pickHistorySource: TrackEventSource = {
+    screen: REVIEW_ITEM_DETAILS,
+    action: 'pick_history_click',
+    otherInfo: { itemNbr }
+  };
   if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
     if (result.data.picklistHistory.code === SUCCESS_STATUS) {
       if (pickHistoryList && pickHistoryList.length) {
@@ -372,7 +381,7 @@ export const renderPickHistory = (
           return date2 > date1 ? 1 : -1;
         });
         return (
-          <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+          <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
             {data.slice(0, 5).map(item => (
               <RenderItemHistoryCard
                 key={item.id}
@@ -398,7 +407,7 @@ export const renderPickHistory = (
         );
       }
       return (
-        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
           </View>
@@ -407,7 +416,7 @@ export const renderPickHistory = (
     }
     if (result.data.picklistHistory.code === NO_RESULTS_STATUS) {
       return (
-        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
           </View>
@@ -416,7 +425,7 @@ export const renderPickHistory = (
     }
   }
   return (
-    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
@@ -429,6 +438,11 @@ export const renderReplenishmentHistory = (
   itemDetails: ItemDetails
 ) => {
   const { deliveryHistory } = itemDetails;
+  const replenishmentHistorySource: TrackEventSource = {
+    screen: REVIEW_ITEM_DETAILS,
+    action: 'replenishment_history_clicked',
+    otherInfo: { itemNbr: itemDetails.itemNbr }
+  };
   if (deliveryHistory?.deliveries && deliveryHistory.deliveries.length) {
     const data = [...deliveryHistory.deliveries].sort((a, b) => {
       const date1 = new Date(a.date);
@@ -436,7 +450,7 @@ export const renderReplenishmentHistory = (
       return date2 > date1 ? 1 : -1;
     });
     return (
-      <CollapsibleCard title={strings('ITEM.HISTORY')}>
+      <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
         {data.slice(0, 5).map((item, index) => {
           const key = `delivery-${index}`;
           return (
@@ -451,7 +465,7 @@ export const renderReplenishmentHistory = (
     );
   }
   return (
-    <CollapsibleCard title={strings('ITEM.HISTORY')}>
+    <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
       <View style={styles.noDataContainer}>
         <Text>{strings('ITEM.NO_HISTORY')}</Text>
       </View>
@@ -480,8 +494,14 @@ export const renderReplenishmentCard = (
 export const renderOHChangeHistory = (
   props: HandleProps,
   ohChangeHistory: OHChangeHistory[],
-  result: AxiosResponse
+  result: AxiosResponse,
+  itemNbr: number
 ) => {
+  const ohChangeHistorySource: TrackEventSource = {
+    screen: REVIEW_ITEM_DETAILS,
+    action: 'OH_change_history_click',
+    otherInfo: { itemNbr }
+  };
   if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
     if (result.data.itemOhChangeHistory.code === SUCCESS_STATUS) {
       if (ohChangeHistory && ohChangeHistory.length) {
@@ -491,7 +511,7 @@ export const renderOHChangeHistory = (
           return date2 > date1 ? 1 : -1;
         });
         return (
-          <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+          <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
             {data.slice(0, 5).map(item => (
               <RenderItemHistoryCard
                 key={item.id}
@@ -517,7 +537,7 @@ export const renderOHChangeHistory = (
         );
       }
       return (
-        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
           </View>
@@ -526,7 +546,7 @@ export const renderOHChangeHistory = (
     }
     if (result.data.itemOhChangeHistory.code === NO_RESULTS_STATUS) {
       return (
-        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
           </View>
@@ -535,7 +555,7 @@ export const renderOHChangeHistory = (
     }
   }
   return (
-    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
@@ -695,7 +715,7 @@ const completeAction = () => {
 };
 
 export const renderScanForNoActionButton = (
-  props: (RenderProps & HandleProps), itemDetails: ItemDetails
+  props: (RenderProps & HandleProps), itemNbr: number
 ): JSX.Element => {
   const {
     actionCompleted, completeItemApi, validateSessionCall, trackEventCall,
@@ -724,8 +744,8 @@ export const renderScanForNoActionButton = (
         style={styles.scanForNoActionButton}
         onPress={() => {
           validateSessionCall(navigation, route.name).then(() => {
-            trackEventCall('item_details_scan_for_no_action_button_click',
-              { itemDetails: JSON.stringify(itemDetails) });
+            trackEventCall(REVIEW_ITEM_DETAILS,
+              { action: 'scan_for_no_action_click', itemNbr });
             return dispatch(setManualScan(!isManualScanEnabled));
           }).catch(() => {
             trackEventCall('session_timeout', { user: userId });
@@ -806,7 +826,7 @@ export const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any,
   } = props;
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'barcode_scan', value: scan.value, type: scan.type });
       if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
         if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
           dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
@@ -848,18 +868,18 @@ export const handleCreateNewPick = (
   dispatch(createNewPick(createPickPayload));
 };
 
-export const onValidateBackPress = (props: ItemDetailsScreenProps) => {
+export const onValidateBackPress = (props: ItemDetailsScreenProps, itemNbr: number) => {
   const {
     exceptionType, actionCompleted, dispatch, trackEventCall
   } = props;
   if (!actionCompleted) {
     if (exceptionType === 'po') {
-      trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'back_press_action_incomplete', exceptionType, itemNbr });
       dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
       return true;
     }
     if (exceptionType === 'nsfl') {
-      trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'back_press_action_incomplete', exceptionType, itemNbr });
       dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
       return true;
     }
@@ -963,7 +983,7 @@ export const isError = (
             testID="scanErrorRetry"
             style={styles.errorButton}
             onPress={() => {
-              trackEventCall('item_details_api_retry', { barcode: scannedValue });
+              trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
               return additionalItemDetails ? dispatch(getItemDetailsV2({ id: parseInt(scannedValue, 10) }))
                 : dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
             }}
@@ -1089,7 +1109,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   useFocusEffectHook(
     () => {
-      const onBackPress = () => onValidateBackPress(props);
+      const onBackPress = () => onValidateBackPress(props, itemDetails.itemNbr);
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
@@ -1148,8 +1168,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   }
 
   const toggleSalesGraphView = () => {
-    trackEventCall('item_details_toggle_graph_click',
-      { itemDetails: JSON.stringify(itemDetails), isGraphView: !isSalesMetricsGraphView });
+    trackEventCall(REVIEW_ITEM_DETAILS, {
+      action: 'toggle_graph_click',
+      itemDetails: JSON.stringify(itemDetails),
+      isGraphView: !isSalesMetricsGraphView
+    });
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
@@ -1160,7 +1183,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNumber: itemDetails.itemNbr });
       if (additionalItemDetails) {
         dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
         dispatch(getItemDetailsV2({ id: itemDetails.itemNbr }));
@@ -1243,7 +1266,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 vendorPackQty: itemDetails.vendorPackQty,
                 grossProfit: itemDetails.grossProfit,
                 size: itemDetails.size,
-                basePrice: itemDetails.basePrice
+                basePrice: itemDetails.basePrice,
+                source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' }
               }}
             />
             <SFTCard
@@ -1258,7 +1282,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             {additionalItemDetails && (
               <>
                 <View style={styles.historyContainer}>
-                  {renderOHChangeHistory(props, itemOhChangeHistory, result)}
+                  {renderOHChangeHistory(props, itemOhChangeHistory, result, itemDetails.itemNbr)}
                 </View>
                 <View style={styles.historyContainer}>
                   {renderReplenishmentCard(itemDetails)}
@@ -1285,7 +1309,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             {additionalItemDetails && (
               <View style={styles.historyContainer}>
-                {renderPickHistory(props, picklistHistory, result)}
+                {renderPickHistory(props, picklistHistory, result, itemDetails.itemNbr)}
               </View>
             )}
             {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
@@ -1293,7 +1317,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           </View>
           )}
       </ScrollView>
-      {renderScanForNoActionButton(props, itemDetails)}
+      {renderScanForNoActionButton(props, itemDetails.itemNbr)}
     </View>
   );
 };
