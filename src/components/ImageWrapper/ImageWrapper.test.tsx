@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { render } from '@testing-library/react-native';
-import ImageWrapper from './ImageWrapper';
+import { render, waitFor } from '@testing-library/react-native';
+import ImageWrapper, { getImgDataParams } from './ImageWrapper';
 import * as utils from './ImageWrapperUtils';
 import { getEnvironment } from '../../utils/environment';
 
@@ -114,7 +114,7 @@ describe('ImageWrapper Component', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Should call post api to fetch image for country code CN', () => {
+  it('Should call post api to fetch image for country code CN', async () => {
     render(
       <ImageWrapper
         countryCode="CN"
@@ -139,7 +139,10 @@ describe('ImageWrapper Component', () => {
       }
     };
 
-    expect(utils.postApiCall).toBeCalledTimes(1);
+    const mockUUID = mockUUIDSuccessResponse.response.entities[0].id;
+    const imgDataParam = getImgDataParams(mockUUID);
+    await waitFor(() => expect(utils.postApiCall).toHaveBeenCalledTimes(2));
     expect(utils.postApiCall).toBeCalledWith(urls.itemImageUUIDUrl, JSON.stringify(uuidDataParams));
+    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUrl, JSON.stringify(imgDataParam));
   });
 });
