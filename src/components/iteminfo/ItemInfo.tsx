@@ -23,6 +23,7 @@ export type ItemInfoProps = {
   additionalItemDetails?: AdditionalItemDetailsProps;
   showAdditionalItemDetails: boolean;
   countryCode: string;
+  showItemImage: boolean;
 };
 
 export type AdditionalItemDetailsProps = {
@@ -78,7 +79,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
     price, exceptionType, navigationForPrint: navigation, showAdditionalItemDetails, additionalItemDetails,
-    countryCode
+    countryCode, showItemImage
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -116,6 +117,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.imageContainer}>
+        {showItemImage && (
         <View style={styles.imageView}>
           <ImageWrapper
             itemNumber={itemNbr}
@@ -123,6 +125,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
             imageStyle={styles.image}
           />
         </View>
+        )}
         <View>
           {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
           <Text style={styles.itemNameText}>{itemName}</Text>

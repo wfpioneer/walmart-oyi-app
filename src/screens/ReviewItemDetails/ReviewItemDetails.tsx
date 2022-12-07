@@ -1248,6 +1248,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 basePrice: itemDetails.basePrice
               }}
               countryCode={countryCode}
+              showItemImage={userConfigs.showItemImage}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}

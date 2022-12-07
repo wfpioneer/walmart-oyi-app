@@ -1877,6 +1877,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -2653,6 +2654,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={true}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -3350,6 +3352,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="777555333"
       />
@@ -3887,6 +3890,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -4420,6 +4424,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -4974,6 +4979,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -5528,6 +5534,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -6082,6 +6089,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -6636,6 +6644,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />

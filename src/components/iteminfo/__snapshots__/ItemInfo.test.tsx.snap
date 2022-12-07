@@ -17,26 +17,6 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       }
     }
   >
-    <View
-      style={
-        Object {
-          "flexGrow": 0,
-          "paddingRight": 10,
-          "paddingTop": 10,
-        }
-      }
-    >
-      <ImageWrapper
-        countryCode="MX"
-        imageStyle={
-          Object {
-            "height": 100,
-            "width": 100,
-          }
-        }
-        itemNumber={10359}
-      />
-    </View>
     <View>
       <Text
         style={
@@ -217,26 +197,6 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       }
     }
   >
-    <View
-      style={
-        Object {
-          "flexGrow": 0,
-          "paddingRight": 10,
-          "paddingTop": 10,
-        }
-      }
-    >
-      <ImageWrapper
-        countryCode="MX"
-        imageStyle={
-          Object {
-            "height": 100,
-            "width": 100,
-          }
-        }
-        itemNumber={10359}
-      />
-    </View>
     <View>
       <Text
         style={
@@ -375,26 +335,6 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       }
     }
   >
-    <View
-      style={
-        Object {
-          "flexGrow": 0,
-          "paddingRight": 10,
-          "paddingTop": 10,
-        }
-      }
-    >
-      <ImageWrapper
-        countryCode="MX"
-        imageStyle={
-          Object {
-            "height": 100,
-            "width": 100,
-          }
-        }
-        itemNumber={10359}
-      />
-    </View>
     <View>
       <Text
         style={

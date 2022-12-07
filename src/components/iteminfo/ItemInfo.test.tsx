@@ -46,7 +46,8 @@ describe('ItemInfo Component', () => {
     exceptionType: 'NSFL',
     additionalItemDetails: mockAdditionalItemDetails,
     showAdditionalItemDetails: false,
-    countryCode: 'MX'
+    countryCode: 'MX',
+    showItemImage: false
   };
 
   describe('Tests rendering ItemInfo', () => {
@@ -65,6 +66,7 @@ describe('ItemInfo Component', () => {
           showAdditionalItemDetails={false}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
+          showItemImage={mockItem.showItemImage}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -85,6 +87,7 @@ describe('ItemInfo Component', () => {
         showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
+        showItemImage={mockItem.showItemImage}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -105,6 +108,7 @@ describe('ItemInfo Component', () => {
         showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
+        showItemImage={mockItem.showItemImage}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -125,6 +129,7 @@ describe('ItemInfo Component', () => {
           showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
+          showItemImage={mockItem.showItemImage}
         />
       );
       const collapsibleCard = getByTestId('collapsible-card');
@@ -150,6 +155,7 @@ describe('ItemInfo Component', () => {
           showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
+          showItemImage={mockItem.showItemImage}
         />
       );
       const printPriceSignButton = getByTestId('print-price-sign');
