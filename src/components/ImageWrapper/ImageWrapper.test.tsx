@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { render } from '@testing-library/react-native';
-import ImageWrapper from './ImageWrapper';
+import { render, waitFor } from '@testing-library/react-native';
+import ImageWrapper, { getImgDataParams } from './ImageWrapper';
 import * as utils from './ImageWrapperUtils';
 import { getEnvironment } from '../../utils/environment';
 
@@ -16,8 +16,8 @@ jest.mock('../../utils/environment', () => {
   return {
     ...environments,
     getEnvironment: jest.fn().mockImplementation(() => ({
-      itemImageUUIDUrl: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrl: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
     }))
   };
 });
@@ -72,7 +72,7 @@ const mockFetchImgPromise = Promise.resolve({
 });
 
 const urls = getEnvironment();
-const mockUUIDAprUrlCN = urls.itemImageUUIDUrl;
+const mockUUIDAprUrlCN = urls.itemImageUUIDUrlCN;
 
 jest.mock('./ImageWrapperUtils', () => {
   const actual = jest.requireActual('./ImageWrapperUtils');
@@ -114,7 +114,7 @@ describe('ImageWrapper Component', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Should call post api to fetch image for country code CN', () => {
+  it('Should call post api to fetch image for country code CN', async () => {
     render(
       <ImageWrapper
         countryCode="CN"
@@ -139,7 +139,10 @@ describe('ImageWrapper Component', () => {
       }
     };
 
-    expect(utils.postApiCall).toBeCalledTimes(1);
-    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUUIDUrl, JSON.stringify(uuidDataParams));
+    const mockUUID = mockUUIDSuccessResponse.response.entities[0].id;
+    const imgDataParam = getImgDataParams(mockUUID);
+    await waitFor(() => expect(utils.postApiCall).toHaveBeenCalledTimes(2));
+    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUUIDUrlCN, JSON.stringify(uuidDataParams));
+    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUrlCN, JSON.stringify(imgDataParam));
   });
 });

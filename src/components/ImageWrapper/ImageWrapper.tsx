@@ -53,7 +53,7 @@ export const getCNImageUri = (
   };
 
   try {
-    postApiCall(urls.itemImageUUIDUrl, JSON.stringify(uuidDataParams))
+    postApiCall(urls.itemImageUUIDUrlCN, JSON.stringify(uuidDataParams))
       .then(res => res.json())
       .then(data => {
         const { status, entities, totalRecords } = data.response;
@@ -62,7 +62,7 @@ export const getCNImageUri = (
           uuid = entities[0].id;
         }
         if (uuid) {
-          postApiCall(urls.itemImageUrl, JSON.stringify(getImgDataParams(uuid)))
+          postApiCall(urls.itemImageUrlCN, JSON.stringify(getImgDataParams(uuid)))
             .then(res => res.json())
             .then(imgResponseData => {
               const {
