@@ -65,6 +65,7 @@ interface ApprovalNavigatorProps {
   selectedItemQty: number;
   filterMenuState: UseStateType<boolean>;
 }
+
 export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.Element => {
   const {
     result, dispatch, selectAll, selectedItemQty, filterMenuState
