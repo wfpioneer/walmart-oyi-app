@@ -88,7 +88,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showItemImages: action.payload.showItemImages || false,
           multiBin: action.payload.multiBin || false,
           multiPick: action.payload.multiPick || false,
-          showItemImage: action.payload.showItemImage || false,
+          showItemImage: action.payload.showItemImage || false
         }
       };
     default:
