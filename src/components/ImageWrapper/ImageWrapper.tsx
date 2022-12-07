@@ -76,12 +76,15 @@ export const getCNImageUri = (
                 }
               }
             })
-            .catch(error => console.error('while fetching image using uuid ', error));
+            // eslint-disable-next-line no-console
+            .catch(error => console.log('❌ ', 'while fetching image using uuid ', error));
         }
       })
-      .catch(error => console.error('while fetching image uuid ', error));
+      // eslint-disable-next-line no-console
+      .catch(error => console.log('❌ ', 'while fetching image uuid ', error));
   } catch (err) {
-    console.error('error while fetching item image', err);
+    // eslint-disable-next-line no-console
+    console.log('❌ ', 'error while fetching item image ', err);
   }
 };
 
