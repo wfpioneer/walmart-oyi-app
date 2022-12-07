@@ -50,6 +50,8 @@ describe('ApprovalListScreen', () => {
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
           updateApprovalApi={defaultAsyncState}
+          filterCategories={[]}
+          filterSources={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -71,6 +73,8 @@ describe('ApprovalListScreen', () => {
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
           updateApprovalApi={defaultAsyncState}
+          filterCategories={[]}
+          filterSources={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -101,6 +105,8 @@ describe('ApprovalListScreen', () => {
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
           updateApprovalApi={defaultAsyncState}
+          filterCategories={[]}
+          filterSources={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -146,6 +152,8 @@ describe('ApprovalListScreen', () => {
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
           updateApprovalApi={defaultAsyncState}
+          filterCategories={[]}
+          filterSources={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -173,6 +181,8 @@ describe('ApprovalListScreen', () => {
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
           updateApprovalApi={defaultAsyncState}
+          filterCategories={[]}
+          filterSources={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -194,6 +204,8 @@ describe('ApprovalListScreen', () => {
           trackEventCall={jest.fn()}
           validateSessionCall={jest.fn()}
           updateApprovalApi={mockFailedData}
+          filterCategories={[]}
+          filterSources={[]}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
