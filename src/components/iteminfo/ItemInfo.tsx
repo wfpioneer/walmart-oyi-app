@@ -41,7 +41,8 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
     vendorPackQty,
     grossProfit,
     size,
-    basePrice
+    basePrice,
+    source
   } = additionalItemDetails;
 
   const qtyRows: ItemDetailsListRow[] = [
@@ -66,7 +67,7 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
   ];
 
   return (
-    <CollapsibleCard title={strings('ITEM.ADDITIONAL_ITEM_DETAILS')}>
+    <CollapsibleCard title={strings('ITEM.ADDITIONAL_ITEM_DETAILS')} source={source}>
       <View testID="additional-item-details">
         <ItemDetailsList rows={qtyRows} indentAfterFirstRow={false} />
       </View>
