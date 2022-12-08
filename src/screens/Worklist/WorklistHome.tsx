@@ -27,7 +27,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         onPress={() => {
           dispatch(clearFilter());
           dispatch(setWorklistType('ITEM'));
-          trackEvent('item_worklists_click');
+          trackEvent('Worklist_Home', { action: 'item_worklist_click' });
           navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
         }}
         style={styles.button}
@@ -38,7 +38,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         <Button
           title={strings('WORKLIST.PALLET_WORKLIST')}
           onPress={() => {
-            trackEvent('missing_pallet_worklists_click');
+            trackEvent('Worklist_Home', { action: 'missing_pallet_worklist_click' });
             navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' });
           }}
           type={ButtonType.PRIMARY}
@@ -53,7 +53,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
           onPress={() => {
             dispatch(clearFilter());
             dispatch(setWorklistType('AUDIT'));
-            trackEvent('audit_worklists_click');
+            trackEvent('Worklist_Home', { action: 'audit_worklist_click' });
             navigation.navigate('AuditWorklistNavigator', { screen: 'AuditWorklistTabs' });
           }}
           type={ButtonType.PRIMARY}

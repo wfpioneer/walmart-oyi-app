@@ -69,7 +69,7 @@ describe('WorkListHome', () => {
     );
     const itemWorklistButton = getByTestId('itemWorkListButton');
     fireEvent.press(itemWorklistButton);
-    expect(trackEvent).toHaveBeenCalledWith('item_worklists_click');
+    expect(trackEvent).toHaveBeenCalledWith('Worklist_Home', { action: 'item_worklist_click' });
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 
@@ -83,7 +83,7 @@ describe('WorkListHome', () => {
     );
     const palletWorkListButton = getByTestId('palletWorkListButton');
     fireEvent.press(palletWorkListButton);
-    expect(trackEvent).toHaveBeenCalledWith('missing_pallet_worklists_click');
+    expect(trackEvent).toHaveBeenCalledWith('Worklist_Home', { action: 'missing_pallet_worklist_click' });
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 
@@ -97,7 +97,7 @@ describe('WorkListHome', () => {
     );
     const palletWorkListButton = getByTestId('auditWorkListButton');
     fireEvent.press(palletWorkListButton);
-    expect(trackEvent).toHaveBeenCalledWith('audit_worklists_click');
+    expect(trackEvent).toHaveBeenCalledWith('Worklist_Home', { action: 'audit_worklist_click' });
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 });
