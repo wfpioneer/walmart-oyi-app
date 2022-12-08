@@ -441,7 +441,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderScanForNoActionButton({ ...mockHandleProps, actionCompleted: true }, itemDetail[123])
+        renderScanForNoActionButton({ ...mockHandleProps, actionCompleted: true }, itemDetail[123].itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -455,7 +455,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       renderer.render(
         renderScanForNoActionButton({ ...mockHandleProps, completeItemApi: noActionWaiting },
-          itemDetail[123])
+          itemDetail[123].itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -468,7 +468,7 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         renderScanForNoActionButton(mockHandleProps,
-          itemDetail[123])
+          itemDetail[123].itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -791,7 +791,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(navigationProp.navigate).toHaveBeenCalledWith('LocationDetails');
     });
     it('test handleAddToPicklist', async () => {
-      await handleAddToPicklist(mockHandleProps, itemDetail[123]);
+      await handleAddToPicklist(mockHandleProps, itemDetail[123].itemNbr);
       expect(mockHandleProps.dispatch).toHaveBeenCalledWith(
         {
           payload: {
@@ -1019,16 +1019,16 @@ describe('ReviewItemDetailsScreen', () => {
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       mockItemDetailsScreenProps.actionCompleted = true;
-      onValidateBackPress(mockItemDetailsScreenProps);
+      onValidateBackPress(mockItemDetailsScreenProps, 3);
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionCompleteResults);
       mockDispatch.mockReset();
       mockItemDetailsScreenProps.actionCompleted = false;
       mockItemDetailsScreenProps.exceptionType = 'po';
-      onValidateBackPress(mockItemDetailsScreenProps);
+      onValidateBackPress(mockItemDetailsScreenProps, 3);
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompletePOResults);
       mockDispatch.mockReset();
       mockItemDetailsScreenProps.exceptionType = 'nsfl';
-      onValidateBackPress(mockItemDetailsScreenProps);
+      onValidateBackPress(mockItemDetailsScreenProps, 3);
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompleteNSFLResults);
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });
@@ -1259,7 +1259,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, mockApiResponse)
+        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, mockApiResponse, 1)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1267,7 +1267,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.itemOhChangeHistory.code = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], mockApiResponse)
+        renderOHChangeHistory(mockHandleProps, [], mockApiResponse, 2)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.data.itemOhChangeHistory.code = 200;
@@ -1277,7 +1277,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.itemOhChangeHistory.code = 409;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], mockApiResponse)
+        renderOHChangeHistory(mockHandleProps, [], mockApiResponse, 3)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.status = 200;
@@ -1302,7 +1302,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse)
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, 4)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1310,7 +1310,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.picklistHistory.code = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, [], mockApiResponse)
+        renderPickHistory(mockHandleProps, [], mockApiResponse, 5)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.data.picklistHistory.code = 200;
@@ -1320,7 +1320,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.picklistHistory.code = 409;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse)
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, 6)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.status = 200;

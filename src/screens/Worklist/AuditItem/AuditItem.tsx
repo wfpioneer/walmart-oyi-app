@@ -233,7 +233,9 @@ export const calculateFloorLocDecreaseQty = (
 ) => {
   const OH_MIN = 1;
   const OH_MAX = 9999;
-  if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
+  if (newOHQty > OH_MAX) {
+    dispatch(updateFloorLocationQty(locationName, OH_MAX));
+  } else if (newOHQty > OH_MIN) {
     dispatch(updateFloorLocationQty(locationName, newOHQty - 1));
   }
 };
@@ -243,8 +245,11 @@ export const calculateFloorLocIncreaseQty = (
   locationName: string,
   dispatch: Dispatch<any>
 ) => {
+  const OH_MIN = 1;
   const OH_MAX = 9999;
-  if (newOHQty < OH_MAX) {
+  if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
+    dispatch(updateFloorLocationQty(locationName, OH_MIN));
+  } else if (newOHQty < OH_MAX) {
     dispatch(updateFloorLocationQty(locationName, (newOHQty || 0) + 1));
   }
 };
@@ -256,7 +261,9 @@ export const calculatePalletDecreaseQty = (
 ) => {
   const OH_MIN = 0;
   const OH_MAX = 9999;
-  if (newOHQty > OH_MIN && !(newOHQty > OH_MAX)) {
+  if (newOHQty > OH_MAX) {
+    dispatch(updatePalletQty(palletId, OH_MAX));
+  } else if (newOHQty > OH_MIN) {
     dispatch(updatePalletQty(palletId, newOHQty - 1));
   }
 };
@@ -266,8 +273,11 @@ export const calculatePalletIncreaseQty = (
   palletId: number,
   dispatch: Dispatch<any>
 ) => {
+  const OH_MIN = 0;
   const OH_MAX = 9999;
-  if (newOHQty < OH_MAX) {
+  if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
+    dispatch(updatePalletQty(palletId, OH_MIN));
+  } else if (newOHQty < OH_MAX) {
     dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1));
   }
 };
