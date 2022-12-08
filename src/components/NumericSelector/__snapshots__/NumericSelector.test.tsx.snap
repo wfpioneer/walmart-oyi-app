@@ -22,7 +22,7 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
     height={15}
     icon={
       <mockConstructor
-        color="#5FA7F2"
+        color="#BABBBE"
         name="minus"
         size={18}
       />
@@ -122,7 +122,7 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
     height={15}
     icon={
       <mockConstructor
-        color="#5FA7F2"
+        color="#BABBBE"
         name="plus"
         size={18}
       />

@@ -4,12 +4,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
 <View
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "space-evenly",
-      "paddingHorizontal": 10,
-      "paddingVertical": 8,
     }
   }
 >
@@ -17,68 +12,80 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-            "fontWeight": "bold",
-          }
-        }
-      >
-        A1-1
-      </Text>
-    </View>
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 12,
-            "marginTop": 1,
-          }
-        }
-      >
-        [missing "en.LOCATION.PALLET" translation] 1234
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
         "flexDirection": "row",
         "justifyContent": "space-evenly",
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
       }
     }
   >
-    <View>
-      <NumericSelector
-        isValid={true}
-        maxValue={9999}
-        minValue={0}
-        onDecreaseQty={[Function]}
-        onEndEditing={[Function]}
-        onIncreaseQty={[Function]}
-        onTextChange={[Function]}
-        value={12}
-      />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          A1-1
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 12,
+              "marginTop": 1,
+            }
+          }
+        >
+          [missing "en.LOCATION.PALLET" translation] 1234
+        </Text>
+      </View>
     </View>
-    <View>
-      <TouchableOpacity
-        onPress={[Function]}
-      >
-        <mockConstructor
-          color="#545F7A"
-          name="trash-can"
-          size={40}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+        }
+      }
+    >
+      <View>
+        <NumericSelector
+          isValid={true}
+          maxValue={9999}
+          minValue={0}
+          onDecreaseQty={[Function]}
+          onEndEditing={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={12}
         />
-      </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>
@@ -88,12 +95,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
 <View
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "space-evenly",
-      "paddingHorizontal": 10,
-      "paddingVertical": 8,
     }
   }
 >
@@ -101,56 +103,68 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-            "fontWeight": "bold",
-          }
-        }
-      >
-        A1-1
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
         "flexDirection": "row",
         "justifyContent": "space-evenly",
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
       }
     }
   >
-    <View>
-      <NumericSelector
-        isValid={true}
-        maxValue={9999}
-        minValue={1}
-        onDecreaseQty={[Function]}
-        onEndEditing={[Function]}
-        onIncreaseQty={[Function]}
-        onTextChange={[Function]}
-        value={12}
-      />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          A1-1
+        </Text>
+      </View>
     </View>
-    <View>
-      <TouchableOpacity
-        onPress={[Function]}
-      >
-        <mockConstructor
-          color="#545F7A"
-          name="trash-can"
-          size={40}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+        }
+      }
+    >
+      <View>
+        <NumericSelector
+          isValid={true}
+          maxValue={9999}
+          minValue={1}
+          onDecreaseQty={[Function]}
+          onEndEditing={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={12}
         />
-      </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>
@@ -160,12 +174,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
 <View
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "space-evenly",
-      "paddingHorizontal": 10,
-      "paddingVertical": 8,
     }
   }
 >
@@ -173,55 +182,67 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "fontSize": 16,
-            "fontWeight": "bold",
-          }
-        }
-      >
-        A1-1
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
         "flexDirection": "row",
         "justifyContent": "space-evenly",
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
       }
     }
   >
-    <View>
-      <CustomNumericSelector
-        isValid={true}
-        maxValue={9999}
-        minValue={1}
-        onDecreaseQty={[Function]}
-        onIncreaseQty={[Function]}
-        onInputPress={[Function]}
-        value={12}
-      />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          A1-1
+        </Text>
+      </View>
     </View>
-    <View>
-      <TouchableOpacity
-        onPress={[Function]}
-      >
-        <mockConstructor
-          color="#545F7A"
-          name="trash-can"
-          size={40}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+        }
+      }
+    >
+      <View>
+        <CustomNumericSelector
+          isValid={true}
+          maxValue={9999}
+          minValue={1}
+          onDecreaseQty={[Function]}
+          onIncreaseQty={[Function]}
+          onInputPress={[Function]}
+          value={12}
         />
-      </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>
@@ -231,12 +252,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 <View
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "space-evenly",
-      "paddingHorizontal": 10,
-      "paddingVertical": 8,
     }
   }
 >
@@ -244,70 +260,82 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "#ef5350",
-            "fontSize": 16,
-            "fontWeight": "bold",
-          }
-        }
-      >
-        A1-1
-      </Text>
-    </View>
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "#ef5350",
-            "fontSize": 12,
-            "marginTop": 1,
-          }
-        }
-      >
-        [missing "en.LOCATION.PALLET" translation] 1234
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
         "flexDirection": "row",
         "justifyContent": "space-evenly",
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
       }
     }
   >
-    <View>
-      <NumericSelector
-        isValid={true}
-        maxValue={9999}
-        minValue={0}
-        onDecreaseQty={[Function]}
-        onEndEditing={[Function]}
-        onIncreaseQty={[Function]}
-        onTextChange={[Function]}
-        value={12}
-      />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#ef5350",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          A1-1
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#ef5350",
+              "fontSize": 12,
+              "marginTop": 1,
+            }
+          }
+        >
+          [missing "en.LOCATION.PALLET" translation] 1234
+        </Text>
+      </View>
     </View>
-    <View>
-      <TouchableOpacity
-        onPress={[Function]}
-      >
-        <mockConstructor
-          color="#545F7A"
-          name="trash-can"
-          size={40}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+        }
+      }
+    >
+      <View>
+        <NumericSelector
+          isValid={true}
+          maxValue={9999}
+          minValue={0}
+          onDecreaseQty={[Function]}
+          onEndEditing={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={12}
         />
-      </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>
@@ -317,12 +345,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 <View
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "#ffffffff",
-      "flexDirection": "row",
-      "justifyContent": "space-evenly",
-      "paddingHorizontal": 10,
-      "paddingVertical": 8,
     }
   }
 >
@@ -330,70 +353,82 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "#33691E",
-            "fontSize": 16,
-            "fontWeight": "bold",
-          }
-        }
-      >
-        A1-1
-      </Text>
-    </View>
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "#33691E",
-            "fontSize": 12,
-            "marginTop": 1,
-          }
-        }
-      >
-        [missing "en.LOCATION.PALLET" translation] 1234
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
         "flexDirection": "row",
         "justifyContent": "space-evenly",
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
       }
     }
   >
-    <View>
-      <NumericSelector
-        isValid={true}
-        maxValue={9999}
-        minValue={0}
-        onDecreaseQty={[Function]}
-        onEndEditing={[Function]}
-        onIncreaseQty={[Function]}
-        onTextChange={[Function]}
-        value={12}
-      />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#33691E",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          A1-1
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#33691E",
+              "fontSize": 12,
+              "marginTop": 1,
+            }
+          }
+        >
+          [missing "en.LOCATION.PALLET" translation] 1234
+        </Text>
+      </View>
     </View>
-    <View>
-      <TouchableOpacity
-        onPress={[Function]}
-      >
-        <mockConstructor
-          color="#545F7A"
-          name="trash-can"
-          size={40}
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+        }
+      }
+    >
+      <View>
+        <NumericSelector
+          isValid={true}
+          maxValue={9999}
+          minValue={0}
+          onDecreaseQty={[Function]}
+          onEndEditing={[Function]}
+          onIncreaseQty={[Function]}
+          onTextChange={[Function]}
+          value={12}
         />
-      </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#545F7A"
+            name="trash-can"
+            size={40}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
 </View>
