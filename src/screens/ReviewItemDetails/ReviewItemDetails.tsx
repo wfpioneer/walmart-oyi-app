@@ -1183,7 +1183,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNumber: itemDetails.itemNbr });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
       if (additionalItemDetails) {
         dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
         dispatch(getItemDetailsV2({ id: itemDetails.itemNbr }));
