@@ -31,6 +31,8 @@ interface ListItemProps {
   item: WorklistItemI;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
+  showItemImage: boolean;
+  countryCode: string;
 }
 
 export interface AuditWorklistTabScreenProps {
@@ -45,6 +47,8 @@ export interface AuditWorklistTabScreenProps {
     filterExceptions: string[];
     filterCategories: string[];
     onRefresh: () => void;
+    showItemImage: boolean;
+    countryCode: string;
 }
 
 const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispatch: Dispatch<any>) => {
@@ -53,7 +57,9 @@ const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispat
 };
 
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
-  const { dispatch, item, navigation } = props;
+  const {
+    dispatch, item, navigation, showItemImage, countryCode
+  } = props;
   if (item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = item;
     return (
@@ -74,6 +80,8 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       }}
       loading={false}
       onHandQty={undefined}
+      showItemImage={showItemImage}
+      countryCode={countryCode}
     />
   );
 };
@@ -177,7 +185,8 @@ export const renderFilterPills = (
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
     items, refreshing, dispatch, navigation, error,
-    areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh
+    areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh,
+    showItemImage, countryCode
   } = props;
 
   const fullExceptionList = ExceptionList.getInstance();
@@ -270,7 +279,15 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
       ) }
       <FlatList
         data={convertDataToDisplayList(filteredData, true)}
-        renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
+        renderItem={({ item }) => (
+          <RenderWorklistItem
+            item={item}
+            dispatch={dispatch}
+            navigation={navigation}
+            showItemImage={showItemImage}
+            countryCode={countryCode}
+          />
+        )}
         keyExtractor={(item: WorklistItemI, index: number) => {
           if (item.worklistType === 'CATEGORY') {
             return item.catgName.toString();
@@ -293,7 +310,8 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
   const items = toDo ? toDoItems : completedItems;
   const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
-  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
+  const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
 
   return (
@@ -309,6 +327,8 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       filterExceptions={filterExceptions}
       filterCategories={filterCategories}
       onRefresh={onRefresh}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
     />
   );
 };

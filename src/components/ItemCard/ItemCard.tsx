@@ -5,6 +5,7 @@ import {
 import styles from './ItemCard.style';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 interface ItemCardProps {
   imageUrl: { uri: string } | undefined,
@@ -12,11 +13,14 @@ interface ItemCardProps {
   onHandQty: number | undefined,
   description: string,
   onClick: (itemNumber: number) => void;
-  loading: boolean
+  loading: boolean;
+  countryCode: string;
+  showItemImage: boolean;
 }
 
 const ItemCard = ({
-  imageUrl, itemNumber, description, onClick, loading, onHandQty
+  imageUrl, itemNumber, description, onClick, loading, onHandQty,
+  countryCode, showItemImage
 }: ItemCardProps) => (
   <View style={{ width: '100%' }}>
     <TouchableOpacity
@@ -28,10 +32,18 @@ const ItemCard = ({
       }}
       testID="itemCard"
     >
-      <Image
-        style={styles.image}
-        source={(!loading && imageUrl) || require('../../assets/images/placeholder.png')}
-      />
+      {showItemImage && !loading ? (
+        <ImageWrapper
+          countryCode={countryCode}
+          itemNumber={itemNumber}
+        />
+      )
+        : (
+          <Image
+            style={styles.image}
+            source={(!loading && imageUrl) || require('../../assets/images/placeholder.png')}
+          />
+        )}
       {loading && (
       <View style={styles.loader} testID="loader">
         <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
