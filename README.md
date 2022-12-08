@@ -70,6 +70,12 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
     * During the looper build process, we create this file using the proper values pulled from the `APPCENTER_SECRET`
       looper-encrypted values defined in our `.looper.yml` and `.looper.staging.yml`
 
+### CN Item Image Secrets
+
+* For CN Market images for item are fetched by calling image api and it uses client id and auth key, so locally create a new file Secrets.json under src/constant/ directory and add those keys.
+* You can find those secrets in https://confluence.walmart.com/display/ISCM/OYI+Property+Secrets copy and paste in Secrets.json
+* After adding the above secrets, image can be shown for CN market locally in dev environment.
+
 ### To run the app
 
 * Clone the repo
