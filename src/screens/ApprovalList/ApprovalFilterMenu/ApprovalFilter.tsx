@@ -36,12 +36,24 @@ export const renderSourceFilterCard = (
   filterSources: string[],
   updateFilterSrcs: (categories: string[]) => void
 ): JSX.Element => {
+  // TODO Remove when no approval items lack a source
+  if (!item.catgName) {
+    return (<></>);
+  }
   const onItemPress = () => {
     if (item.selected) {
       filterSources.splice(
         filterSources.indexOf(item.catgName),
         1
       );
+      // items before audits don't have approval source so we pair it
+      // with itemdetails sources as that was the only possibility before audits
+      // ditto on the todo
+      if (item.catgName === approvalRequestSource.ItemDetails) {
+        filterSources.splice(
+          filterSources.indexOf('', 1)
+        );
+      }
       trackEvent('approvals_update_filter_source', {
         categories: JSON.stringify(filterSources)
       });
@@ -50,6 +62,10 @@ export const renderSourceFilterCard = (
 
     const replacementFilter = filterSources;
     replacementFilter.push(item.catgName);
+    // ditto on the todo
+    if (item.catgName === approvalRequestSource.ItemDetails) {
+      replacementFilter.push('');
+    }
     return updateFilterSrcs(replacementFilter);
   };
   let displayName = '';
@@ -112,9 +128,9 @@ export const RenderSourceCollapsibleCard = (props: {
   if (filterSources.length === 0) {
     categorySubtext = strings('WORKLIST.ALL');
   } else {
-    categorySubtext = `${filterSources.length} ${strings(
-      'GENERICS.SELECTED'
-    )}`;
+    // Ditto on the todo
+    const displayLength = filterSources.includes('') ? filterSources.length - 1 : filterSources.length;
+    categorySubtext = `${displayLength} ${strings('GENERICS.SELECTED')}`;
   }
 
   return (
