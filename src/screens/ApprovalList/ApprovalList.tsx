@@ -206,7 +206,18 @@ export const renderFilterPills = (
       }
       dispatch(updateFilterSources(removeSource));
     };
-    return <FilterPillButton filterText={listFilter.value} onClosePress={removeSourceFilter} />;
+    let displayName = '';
+    switch (listFilter.value) {
+      case approvalSource.Audits:
+        displayName = strings('AUDITS.AUDITS');
+        break;
+      case approvalSource.ItemDetails:
+        displayName = strings('GENERICS.ITEMS');
+        break;
+      default:
+        displayName = strings('GENERICS.NOT_FOUND');
+    }
+    return <FilterPillButton filterText={displayName} onClosePress={removeSourceFilter} />;
   }
   return <View />;
 };
