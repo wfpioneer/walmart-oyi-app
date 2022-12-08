@@ -73,7 +73,7 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 ### CN Item Image Secrets
 
 * For CN Market images for item are fetched by calling image api and it uses client id and auth key, so locally create a new file Secrets.json under src/constant/ directory and add those keys.
-* You can find those secrets in https://confluence.walmart.com/display/ISCM/OYI+Property+Secrets copy and paste in Secrets.json
+* You can find those secrets in https://confluence.walmart.com/pages/viewpage.action?pageId=1060167829#OYIPropertySecrets-CNItemImageAPISecrets copy and paste in Secrets.json
 * After adding the above secrets, image can be shown for CN market locally in dev environment.
 
 ### To run the app
