@@ -149,14 +149,14 @@ export const handleLocationAction = (props: HandleProps, itemDetails: ItemDetail
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
-export const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleAddToPicklist = (props: HandleProps, itemNbr: number) => {
   const {
     navigation, trackEventCall, validateSessionCall, route, userId, dispatch
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'add_to_picklist_click', itemDetails: JSON.stringify(itemDetails) });
+    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'add_to_picklist_click', itemNbr });
     dispatch(addToPicklist({
-      itemNumber: itemDetails.itemNbr
+      itemNumber: itemNbr
     }));
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
@@ -617,7 +617,7 @@ export const renderAddPicklistButton = (
           titleFontSize={12}
           titleFontWeight="bold"
           height={28}
-          onPress={() => handleAddToPicklist(props, itemDetails)}
+          onPress={() => handleAddToPicklist(props, itemDetails.itemNbr)}
         />
       </View>
     );
@@ -634,7 +634,7 @@ export const renderAddPicklistButton = (
         height={28}
         onPress={() => {
           // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails);
+          userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails.itemNbr);
         }}
       />
     );
@@ -1170,7 +1170,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const toggleSalesGraphView = () => {
     trackEventCall(REVIEW_ITEM_DETAILS, {
       action: 'toggle_graph_click',
-      itemDetails: JSON.stringify(itemDetails),
+      itemNbr: itemDetails.itemNbr,
       isGraphView: !isSalesMetricsGraphView
     });
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
