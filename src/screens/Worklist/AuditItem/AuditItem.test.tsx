@@ -861,6 +861,13 @@ describe('AuditItemScreen', () => {
       ));
     });
 
+    it('tests calculateFloorLocDecreaseQty when newOHQty is greater than max value', () => {
+      calculateFloorLocDecreaseQty(99999, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 9999 } }
+      ));
+    });
+
     it('tests calculateFloorLocDecreaseQty when newOHQty is less than or equals min value', () => {
       calculateFloorLocDecreaseQty(1, 'A1-1', mockDispatch);
       expect(mockDispatch).not.toBeCalled();
@@ -871,6 +878,13 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
         { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 23 } }
+      ));
+    });
+
+    it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than min value', () => {
+      calculateFloorLocIncreaseQty(-22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 1 } }
       ));
     });
 
@@ -887,6 +901,13 @@ describe('AuditItemScreen', () => {
       ));
     });
 
+    it('tests calculatePalletDecreaseQty when newOHQty is greater than max value', () => {
+      calculatePalletDecreaseQty(99999, 4597, mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 9999 } }
+      ));
+    });
+
     it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
       calculatePalletDecreaseQty(0, 4597, mockDispatch);
       expect(mockDispatch).not.toBeCalled();
@@ -897,6 +918,13 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
         { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23 } }
+      ));
+    });
+
+    it('tests calculatePalletIncreaseQty when newOHQty is lesser than min value', () => {
+      calculatePalletIncreaseQty(-22, 4597, mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0 } }
       ));
     });
 
