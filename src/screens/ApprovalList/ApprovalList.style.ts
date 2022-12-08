@@ -47,6 +47,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     paddingHorizontal: 8
+  },
+  filterContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    height: 50,
+    width: '100%'
+  },
+  filterList: {
+    paddingHorizontal: 0
   }
 });
 export default styles;

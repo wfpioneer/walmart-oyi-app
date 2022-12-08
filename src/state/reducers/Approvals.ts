@@ -2,7 +2,11 @@ import { cloneDeep } from 'lodash';
 import {
   Actions,
   CLEAR_FILTER,
-  RESET_APPROVALS, SET_APPROVAL_LIST, TOGGLE_ALL_ITEMS, TOGGLE_CATEGORIES, TOGGLE_CATEGORY,
+  RESET_APPROVALS,
+  SET_APPROVAL_LIST,
+  TOGGLE_ALL_ITEMS,
+  TOGGLE_CATEGORIES,
+  TOGGLE_CATEGORY,
   TOGGLE_ITEM,
   TOGGLE_SOURCES,
   UPDATE_FILTER_CATEGORIES,
@@ -38,14 +42,6 @@ export const initialState: ApprovalState = {
   filterCategories: [],
   filterSources: []
 };
-const isCheckedElseTotalItemQty = (isChecked: boolean, categoryObj: {
-  checkedItemQty: number;
-  totalItemQty: number;
-}) => (isChecked ? categoryObj.totalItemQty : 0);
-
-const isCheckedElseToggledItems = (isChecked: boolean,
-  toggledItems: ApprovalCategory[], categoryIndices: number[]) => (isChecked
-  ? toggledItems.length - categoryIndices.length : 0);
 
 const isSelectedItemQty = (isSelected: boolean, selectedItemQty: number) => (isSelected
   ? selectedItemQty + 1 : selectedItemQty - 1);
@@ -53,14 +49,6 @@ const isSelectedItemQty = (isSelected: boolean, selectedItemQty: number) => (isS
 const isSelectedItem = (isSelectedItemQuantity: boolean) => (isSelectedItemQuantity ? 1 : -1);
 
 const isCheckedTotalCategoryQty = (checked: boolean, totalCategoryQty: number) => (checked ? totalCategoryQty : 0);
-
-const isCheckedSelectedItemQty = (checked: boolean, selectedQtyToAdd: number,
-  currCheckedQty: number, totalCategoryQty: number) => (checked
-  ? selectedQtyToAdd : currCheckedQty - totalCategoryQty);
-
-const isCheckedSelectedQtyToAdd = (updatedItemCat: ApprovalCategory[],
-  index: number) => (!updatedItemCat[index].isChecked
-  ? 1 : 0);
 
 const filterCheckedListValidate = (filterCheckedList: ApprovalCategory[], newApprovalList: ApprovalCategory[],
   newCategories: Category) => {
@@ -80,6 +68,7 @@ const filterCheckedListValidate = (filterCheckedList: ApprovalCategory[], newApp
     }
   });
 };
+
 export const Approvals = (
   state = initialState,
   action: Actions
@@ -116,23 +105,43 @@ export const Approvals = (
       };
     }
     case TOGGLE_ALL_ITEMS: {
-      const { approvalList, categoryIndices, categories } = state;
+      const {
+        approvalList, categories, filterCategories, filterSources, selectedItemQty
+      } = state;
       const isChecked = action.payload.selectAll;
-      const toggledItems: ApprovalCategory[] = approvalList.map(item => (
-        { ...item, isChecked }));
 
-      // iterates over the checkedItemQty for the categories obj, then converts the array back into an Object
-      const toggledCategories: Category = Object.fromEntries(Object.entries(categories)
-        .map(([catNbr, categoryObj]) => [catNbr, {
-          ...categoryObj,
-          checkedItemQty: isCheckedElseTotalItemQty(isChecked, categoryObj)
-        }]));
+      const catgMap: Map<string, {checkedItemQty: number; totalItemQty: number;}> = new Map(Object.entries(categories));
+      let updatedSelectedItemQty = selectedItemQty;
+
+      const toggledItems: ApprovalCategory[] = approvalList.map(item => {
+        const isFilteredCatg = filterCategories.length === 0
+        || filterCategories.indexOf(`${item.categoryNbr} - ${item.categoryDescription}`) !== -1;
+        const isFilteredSource = filterSources.length === 0 || filterSources.indexOf(item.approvalRequestSource) !== -1;
+
+        if ((isFilteredCatg && isFilteredSource) || item.categoryHeader) {
+          const updateToggledCatg = catgMap.get(item.categoryNbr.toString());
+
+          if (updateToggledCatg && !item.categoryHeader) {
+            if (!item.isChecked && isChecked) {
+              updateToggledCatg.checkedItemQty += 1;
+              updatedSelectedItemQty += 1;
+            } else if (item.isChecked && !isChecked) {
+              updateToggledCatg.checkedItemQty -= 1;
+              updatedSelectedItemQty -= 1;
+            }
+          }
+
+          return (item.categoryHeader && !isFilteredCatg) ? { ...item } : { ...item, isChecked };
+        }
+        return { ...item };
+      });
+      const toggledCategories: Category = Object.fromEntries(catgMap);
 
       return {
         ...state,
         approvalList: toggledItems,
         categories: toggledCategories,
-        selectedItemQty: isCheckedElseToggledItems(isChecked, toggledItems, categoryIndices),
+        selectedItemQty: isChecked ? updatedSelectedItemQty : 0,
         isAllSelected: isChecked
       };
     }
@@ -171,31 +180,43 @@ export const Approvals = (
       };
     }
     case TOGGLE_CATEGORY: {
-      const { approvalList: currList, categories: currCategories, selectedItemQty: currCheckedQty } = state;
+      const {
+        approvalList: currList, categories: currCategories, selectedItemQty: currCheckedQty, filterSources
+      } = state;
       const { categoryNbr, isSelected: checked } = action.payload;
 
-      const updatedItemCat: ApprovalCategory[] = [...currList];
-      let selectedQtyToAdd = currCheckedQty;
-
-      updatedItemCat.forEach((item, index) => {
-        if (item.categoryNbr === categoryNbr) {
-          if (!item.categoryHeader) {
-            selectedQtyToAdd += isCheckedSelectedQtyToAdd(updatedItemCat, index);
-          }
-          updatedItemCat[index].isChecked = checked;
-        }
-      });
       // Deep Clone Categories Object
       const updatedCategories = cloneDeep(currCategories);
+      const updatedItemCat: ApprovalCategory[] = [...currList];
+      let selectedQtyToAdd = currCheckedQty;
+      let updateCheckedQty = 0;
 
-      const totalCategoryQty = updatedCategories[categoryNbr].totalItemQty;
-      updatedCategories[categoryNbr].checkedItemQty = isCheckedTotalCategoryQty(checked, totalCategoryQty);
+      updatedItemCat.forEach((item, index) => {
+        const isItemSource = filterSources.indexOf(item.approvalRequestSource) !== -1 || filterSources.length === 0;
+        // Possibly refactor to make this look nicer
+        if (item.categoryNbr === categoryNbr) {
+          if (isItemSource || item.categoryHeader) {
+            if (!item.categoryHeader) {
+              if (!item.isChecked && checked) {
+                selectedQtyToAdd += 1;
+                updateCheckedQty += 1;
+              } else if (item.isChecked && !checked) {
+                selectedQtyToAdd -= 1;
+                updateCheckedQty -= 1;
+              }
+            }
+            updatedItemCat[index].isChecked = checked;
+          }
+        }
+      });
+
+      updatedCategories[categoryNbr].checkedItemQty = isCheckedTotalCategoryQty(checked, updateCheckedQty);
 
       return {
         ...state,
         approvalList: updatedItemCat,
         categories: updatedCategories,
-        selectedItemQty: isCheckedSelectedItemQty(checked, selectedQtyToAdd, currCheckedQty, totalCategoryQty),
+        selectedItemQty: selectedQtyToAdd,
         isAllSelected: updatedItemCat.every(item => item.isChecked === true)
       };
     }
