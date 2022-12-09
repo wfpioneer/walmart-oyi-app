@@ -10,6 +10,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import CollapsibleCard from '../CollapsibleCard/CollapsibleCard';
 import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
+import { TrackEventSource } from '../../models/Generics.d';
 
 export type ItemInfoProps = {
   itemName: string;
@@ -32,7 +33,8 @@ export type AdditionalItemDetailsProps = {
   grossProfit: number,
   vendorPackQty: number,
   basePrice: number,
-  margin: number
+  margin: number,
+  source?: TrackEventSource
 }
 
 export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetailsProps): JSX.Element => {
@@ -42,7 +44,8 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
     vendorPackQty,
     grossProfit,
     size,
-    basePrice
+    basePrice,
+    source
   } = additionalItemDetails;
 
   const qtyRows: ItemDetailsListRow[] = [
@@ -67,7 +70,7 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
   ];
 
   return (
-    <CollapsibleCard title={strings('ITEM.ADDITIONAL_ITEM_DETAILS')}>
+    <CollapsibleCard title={strings('ITEM.ADDITIONAL_ITEM_DETAILS')} source={source}>
       <View testID="additional-item-details">
         <ItemDetailsList rows={qtyRows} indentAfterFirstRow={false} />
       </View>
