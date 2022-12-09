@@ -99,6 +99,8 @@ const ImageWrapper = ({
       } else {
         setImageUri(getMXImageUri(itemNumber));
       }
+    } else {
+      setImageUri('');
     }
   }, [itemNumber]);
 
