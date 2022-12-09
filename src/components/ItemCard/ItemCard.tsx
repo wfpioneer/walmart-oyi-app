@@ -32,18 +32,12 @@ const ItemCard = ({
       }}
       testID="itemCard"
     >
-      {showItemImage && !loading ? (
+      {showItemImage && (
         <ImageWrapper
           countryCode={countryCode}
           itemNumber={itemNumber}
         />
-      )
-        : (
-          <Image
-            style={styles.image}
-            source={(!loading && imageUrl) || require('../../assets/images/placeholder.png')}
-          />
-        )}
+      )}
       {loading && (
       <View style={styles.loader} testID="loader">
         <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
