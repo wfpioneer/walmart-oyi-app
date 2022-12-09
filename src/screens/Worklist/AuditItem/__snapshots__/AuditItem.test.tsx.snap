@@ -1986,11 +1986,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     }
   >
     <ItemCard
+      countryCode="CN"
       description=""
       itemNumber={0}
       loading={true}
       onClick={[Function]}
       onHandQty={0}
+      showItemImage={false}
     />
   </View>
   <ScrollView
@@ -2427,11 +2429,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     }
   >
     <ItemCard
+      countryCode="CN"
       description="Test Item That is Really, Really Long (and has parenthesis)"
       itemNumber={1234567890}
       loading={false}
       onClick={[Function]}
       onHandQty={42}
+      showItemImage={false}
     />
   </View>
   <ScrollView

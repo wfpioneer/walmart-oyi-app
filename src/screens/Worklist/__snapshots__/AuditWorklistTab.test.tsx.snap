@@ -1,6 +1,139 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit worklist with errors 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "paddingHorizontal": 15,
+      "paddingVertical": 15,
+    }
+  }
+>
+  <Icon
+    color="#e57373"
+    name="error"
+    size={60}
+  />
+  <Text
+    style={
+      Object {
+        "marginVertical": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.WORKLIST.WORKLIST_ITEM_API_ERROR" translation]
+  </Text>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#e57373",
+        "borderRadius": 4,
+        "height": 40,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      [missing "en.GENERICS.RETRY" translation]
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders completed Audit worklist items 1`] = `
+<React.Fragment>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "FRESH BAKERY",
+          "catgNbr": 88,
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FRESH BAKERY",
+          "catgNbr": 88,
+          "completed": true,
+          "completedTs": "2022-09-15T13:32:41+05:30",
+          "completedUserId": "vn51wu8",
+          "itemName": "BAKERY ITEM",
+          "itemNbr": 123789456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "111122223333",
+          "worklistType": "RA",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "itemCount": 2,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": true,
+          "completedTs": "2022-09-15T13:32:41+05:30",
+          "completedUserId": "vn51wu8",
+          "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
+          "itemNbr": 1234567890,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559999",
+          "worklistType": "AU",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": true,
+          "completedTs": "2022-09-15T13:32:41+05:30",
+          "completedUserId": "vn51wu8",
+          "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
+          "itemNbr": 1234567899,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559934",
+          "worklistType": "AU",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "itemCount": 1,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "completed": true,
+          "completedTs": "2022-09-15T13:32:41+05:30",
+          "completedUserId": "vn51wu8",
+          "itemName": "ELECTRONIC ITEM",
+          "itemNbr": 987654321,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777555333",
+          "worklistType": "AU",
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[Function]}
+    refreshing={false}
+    renderItem={[Function]}
+    windowSize={3}
+  />
+</React.Fragment>
+`;
+
+exports[`AuditWorklistTab Tests rendering Audit worklist component Renders completed Audit worklist items with images 1`] = `
 <React.Fragment>
   <FlatList
     data={
