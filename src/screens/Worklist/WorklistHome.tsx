@@ -9,6 +9,7 @@ import { strings } from '../../locales';
 import { clearFilter, setWorklistType } from '../../state/actions/Worklist';
 import { Configurations } from '../../models/User';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 export interface WorklistHomeScreenProps {
   navigation: NavigationProp<any>;
@@ -26,6 +27,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
         onPress={() => {
           dispatch(clearFilter());
           dispatch(setWorklistType('ITEM'));
+          trackEvent('Worklist_Home', { action: 'item_worklist_click' });
           navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
         }}
         style={styles.button}
@@ -35,7 +37,10 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
       && (
         <Button
           title={strings('WORKLIST.PALLET_WORKLIST')}
-          onPress={() => navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' })}
+          onPress={() => {
+            trackEvent('Worklist_Home', { action: 'missing_pallet_worklist_click' });
+            navigation.navigate('MissingPalletWorklist', { screen: 'MissingPalletWorklistTabs' });
+          }}
           type={ButtonType.PRIMARY}
           style={styles.button}
           testID="palletWorkListButton"
@@ -48,6 +53,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
           onPress={() => {
             dispatch(clearFilter());
             dispatch(setWorklistType('AUDIT'));
+            trackEvent('Worklist_Home', { action: 'audit_worklist_click' });
             navigation.navigate('AuditWorklistNavigator', { screen: 'AuditWorklistTabs' });
           }}
           type={ButtonType.PRIMARY}
