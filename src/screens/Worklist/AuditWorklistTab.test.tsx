@@ -2,6 +2,8 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp } from '@react-navigation/native';
+import { AxiosError } from 'axios';
+import { object } from 'prop-types';
 import {
   mockCompletedAuditWorklist, mockToDoAuditWorklist
 } from '../../mockData/mockWorkList';
@@ -10,9 +12,18 @@ import {
 } from './AuditWorklistTab';
 import { ExceptionList } from './FullExceptionList';
 import { mockAreas } from '../../mockData/mockConfig';
+import { FilterType } from '../../models/FilterListItem';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+
+const mockError: AxiosError = {
+  config: {},
+  isAxiosError: true,
+  message: '500 Network Error',
+  name: 'Network Error',
+  toJSON: () => object
+};
 
 let navigationProp: NavigationProp<any>;
 describe('AuditWorklistTab', () => {
@@ -26,15 +37,15 @@ describe('AuditWorklistTab', () => {
           toDo
           navigation={navigationProp}
           dispatch={mockDispatch}
-          collapsed={false}
-          setCollapsed={jest.fn}
           refreshing={false}
-          error={undefined}
+          error={null}
           filterCategories={[]}
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
           onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -48,15 +59,59 @@ describe('AuditWorklistTab', () => {
           toDo={false}
           navigation={navigationProp}
           dispatch={mockDispatch}
-          collapsed={false}
-          setCollapsed={jest.fn}
           refreshing={false}
-          error={undefined}
+          error={null}
           filterCategories={[]}
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
           onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Audit worklist with errors', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <AuditWorklistTabScreen
+          items={mockCompletedAuditWorklist}
+          toDo={false}
+          navigation={navigationProp}
+          dispatch={mockDispatch}
+          refreshing={false}
+          error={mockError}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
+          onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completed Audit worklist items with images', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <AuditWorklistTabScreen
+          items={mockCompletedAuditWorklist}
+          toDo={false}
+          navigation={navigationProp}
+          dispatch={mockDispatch}
+          refreshing={false}
+          error={null}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
+          onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -119,7 +174,7 @@ describe('Tests rendering Filter `Pills`', () => {
 
   it('Renders a filter button for list filter type EXCEPTION', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const exceptionFilter = { type: 'EXCEPTION', value: 'RA' };
+    const exceptionFilter = { type: FilterType.EXCEPTION, value: 'RA' };
     renderer.render(
       renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions, exceptionList, [])
     );
@@ -127,7 +182,7 @@ describe('Tests rendering Filter `Pills`', () => {
   });
   it('Renders empty view element for non-existing EXCEPTION value', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const exceptionFilter = { type: 'EXCEPTION', value: 'Not An Exception' };
+    const exceptionFilter = { type: FilterType.EXCEPTION, value: 'Not An Exception' };
     renderer.render(
       renderFilterPills(exceptionFilter, jest.fn(), [], [], exceptionList, [])
     );
@@ -136,7 +191,7 @@ describe('Tests rendering Filter `Pills`', () => {
 
   it('Renders a filter button for list filter type CATEGORY ', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const categoryFilter = { type: 'CATEGORY', value: '99 - ELECTRONICS' };
+    const categoryFilter = { type: FilterType.CATEGORY, value: '99 - ELECTRONICS' };
     const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
     renderer.render(
       renderFilterPills(categoryFilter, jest.fn(), filterCategories, [], exceptionList, areas)
@@ -146,7 +201,7 @@ describe('Tests rendering Filter `Pills`', () => {
 
   it('Renders a filter button for list filter type AREA', () => {
     const renderer = ShallowRenderer.createRenderer();
-    const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+    const areaFilter = { type: FilterType.AREA, value: 'ELECTRONICS' };
     const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH'];
     const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
     renderer.render(
@@ -156,7 +211,7 @@ describe('Tests rendering Filter `Pills`', () => {
   });
 
   it('should dispatch updateFilterCategories action with removed filtered categories', () => {
-    const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+    const areaFilter = { type: FilterType.AREA, value: 'ELECTRONICS' };
     const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH', '5-OFFICE SUPPLIES'];
     const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
     const mockDispatch = jest.fn();

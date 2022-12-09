@@ -113,7 +113,6 @@ export interface AuditItemScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
-  userConfigs: Configurations;
   itemNumber: number;
   showItemNotFoundMsg: boolean;
   setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
@@ -147,6 +146,7 @@ export interface AuditItemScreenProps {
   showCalcModalState: UseStateType<boolean>;
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
+  showItemImage: boolean;
 }
 
 export const isError = (
@@ -899,7 +899,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     getItemPalletsError,
     showCalcModalState,
     locationListState,
-    countryCode
+    countryCode,
+    showItemImage
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1268,6 +1269,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
           onClick={() => {}}
           loading={getItemDetailsApi.isWaiting}
+          countryCode={countryCode}
+          showItemImage={userConfig.showItemImage}
         />
       </View>
       <ScrollView
@@ -1350,7 +1353,6 @@ const AuditItem = (): JSX.Element => {
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const { userId } = useTypedSelector(state => state.User);
   const userFeatures = useTypedSelector(state => state.User.features);
-  const userConfigs = useTypedSelector(state => state.User.configs);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -1401,7 +1403,6 @@ const AuditItem = (): JSX.Element => {
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
-      userConfigs={userConfigs}
       userId={userId}
       itemNumber={itemNumber}
       showItemNotFoundMsg={showItemNotFoundMsg}

@@ -138,7 +138,6 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   useEffectHook: jest.fn(),
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
-  userConfigs: mockConfig,
   itemNumber: 0,
   setShowItemNotFoundMsg: jest.fn(),
   showItemNotFoundMsg: false,
@@ -169,7 +168,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   setGetItemPalletsError: jest.fn(),
   showCalcModalState: [false, jest.fn()],
   locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
-  countryCode: 'CN'
+  countryCode: 'CN',
+  showItemImage: false
 };
 
 describe('AuditItemScreen', () => {
