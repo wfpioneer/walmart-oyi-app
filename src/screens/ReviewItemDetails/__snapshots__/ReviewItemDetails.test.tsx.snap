@@ -1930,6 +1930,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -1952,6 +1953,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -2709,6 +2711,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -2731,6 +2734,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={true}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -3436,6 +3440,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="99 - Store Use"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Small, Store Use Item"
         itemNbr={987654321}
@@ -3458,6 +3463,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="777555333"
       />
@@ -3976,6 +3982,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -3998,6 +4005,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -4512,6 +4520,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -4534,6 +4543,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -5069,6 +5079,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -5091,6 +5102,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -5626,6 +5638,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -5648,6 +5661,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -6183,6 +6197,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -6205,6 +6220,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />
@@ -6740,6 +6756,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         category="93 - Meat PI"
+        countryCode="MX"
         exceptionType="nsfl"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
@@ -6762,6 +6779,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
         price={2000.94}
         showAdditionalItemDetails={false}
+        showItemImage={false}
         status="Active"
         upcNbr="000055559999"
       />

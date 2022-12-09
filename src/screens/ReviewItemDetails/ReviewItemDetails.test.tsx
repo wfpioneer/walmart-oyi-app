@@ -147,7 +147,8 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   useEffectHook: jest.fn(),
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
-  userConfigs: mockConfig
+  userConfigs: mockConfig,
+  countryCode: 'MX'
 };
 
 describe('ReviewItemDetailsScreen', () => {
