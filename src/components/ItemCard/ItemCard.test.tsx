@@ -6,7 +6,6 @@ describe('SortBar Component', () => {
     const mockOnClick = jest.fn();
     const { toJSON, getByTestId } = render(ItemCard({
       itemNumber: 1234,
-      imageUrl: require('../../assets/images/sams_logo.jpeg'),
       description: 'test item',
       onClick: mockOnClick,
       onHandQty: 12,
@@ -28,7 +27,6 @@ describe('SortBar Component', () => {
     const mockOnClick = jest.fn();
     const { toJSON, getByTestId } = render(ItemCard({
       itemNumber: 1234,
-      imageUrl: require('../../assets/images/sams_logo.jpeg'),
       description: 'test item',
       onClick: mockOnClick,
       onHandQty: 12,
@@ -49,7 +47,6 @@ describe('SortBar Component', () => {
   it('Test renders ItemCard without onHands quantity', () => {
     const { toJSON } = render(ItemCard({
       itemNumber: 1234,
-      imageUrl: require('../../assets/images/sams_logo.jpeg'),
       description: 'test item',
       onClick: jest.fn(),
       onHandQty: undefined,
@@ -64,7 +61,6 @@ describe('SortBar Component', () => {
   it('Test renders ItemCard with images', () => {
     const { toJSON } = render(ItemCard({
       itemNumber: 1234,
-      imageUrl: require('../../assets/images/sams_logo.jpeg'),
       description: 'test item',
       onClick: jest.fn(),
       onHandQty: undefined,

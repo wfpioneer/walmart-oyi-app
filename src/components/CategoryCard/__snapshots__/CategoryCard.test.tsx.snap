@@ -268,15 +268,37 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 }
                 testID="itemCard"
               >
-                <Image
-                  source=""
-                  style={
-                    Object {
-                      "height": 85,
-                      "width": 85,
+                <View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "overflow": "hidden",
+                        },
+                        Object {
+                          "height": 80,
+                          "width": 80,
+                        },
+                      ]
                     }
-                  }
-                />
+                  >
+                    <FastImageView
+                      defaultSource={null}
+                      onFastImageError={[Function]}
+                      resizeMode="contain"
+                      source={null}
+                      style={
+                        Object {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
                 <View
                   style={
                     Object {
@@ -387,15 +409,37 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 }
                 testID="itemCard"
               >
-                <Image
-                  source=""
-                  style={
-                    Object {
-                      "height": 85,
-                      "width": 85,
+                <View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "overflow": "hidden",
+                        },
+                        Object {
+                          "height": 80,
+                          "width": 80,
+                        },
+                      ]
                     }
-                  }
-                />
+                  >
+                    <FastImageView
+                      defaultSource={null}
+                      onFastImageError={[Function]}
+                      resizeMode="contain"
+                      source={null}
+                      style={
+                        Object {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
                 <View
                   style={
                     Object {
@@ -506,15 +550,37 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 }
                 testID="itemCard"
               >
-                <Image
-                  source=""
-                  style={
-                    Object {
-                      "height": 85,
-                      "width": 85,
+                <View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "overflow": "hidden",
+                        },
+                        Object {
+                          "height": 80,
+                          "width": 80,
+                        },
+                      ]
                     }
-                  }
-                />
+                  >
+                    <FastImageView
+                      defaultSource={null}
+                      onFastImageError={[Function]}
+                      resizeMode="contain"
+                      source={null}
+                      style={
+                        Object {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
                 <View
                   style={
                     Object {
@@ -625,15 +691,37 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 }
                 testID="itemCard"
               >
-                <Image
-                  source=""
-                  style={
-                    Object {
-                      "height": 85,
-                      "width": 85,
+                <View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "overflow": "hidden",
+                        },
+                        Object {
+                          "height": 80,
+                          "width": 80,
+                        },
+                      ]
                     }
-                  }
-                />
+                  >
+                    <FastImageView
+                      defaultSource={null}
+                      onFastImageError={[Function]}
+                      resizeMode="contain"
+                      source={null}
+                      style={
+                        Object {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
                 <View
                   style={
                     Object {

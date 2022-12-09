@@ -67,12 +67,11 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
     );
   }
   const {
-    itemName, itemNbr, imageURLKey
+    itemName, itemNbr
   } = item;
 
   return (
     <ItemCard
-      imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
       itemNumber={itemNbr || 0}
       description={itemName || ''}
       onClick={(itemNumber: number) => {

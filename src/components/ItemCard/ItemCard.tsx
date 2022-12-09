@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ActivityIndicator, Image, Platform, Text, TouchableOpacity, View
+  ActivityIndicator, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import styles from './ItemCard.style';
 import COLOR from '../../themes/Color';
@@ -8,7 +8,6 @@ import { strings } from '../../locales';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 interface ItemCardProps {
-  imageUrl: { uri: string } | undefined,
   itemNumber: number,
   onHandQty: number | undefined,
   description: string,
@@ -19,7 +18,7 @@ interface ItemCardProps {
 }
 
 const ItemCard = ({
-  imageUrl, itemNumber, description, onClick, loading, onHandQty,
+  itemNumber, description, onClick, loading, onHandQty,
   countryCode, showItemImage
 }: ItemCardProps) => (
   <View style={{ width: '100%' }}>
@@ -32,12 +31,10 @@ const ItemCard = ({
       }}
       testID="itemCard"
     >
-      {showItemImage && (
-        <ImageWrapper
-          countryCode={countryCode}
-          itemNumber={itemNumber}
-        />
-      )}
+      <ImageWrapper
+        countryCode={countryCode}
+        itemNumber={showItemImage ? itemNumber : 0}
+      />
       {loading && (
       <View style={styles.loader} testID="loader">
         <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
