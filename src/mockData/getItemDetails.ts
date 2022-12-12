@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import ItemDetails, { OHChangeHistory } from '../models/ItemDetails';
 import { approvalRequestSource, approvalStatus } from '../models/ApprovalListItem';
+import Location from '../models/Location';
 /* eslint-disable quote-props */
 
 enum LOCATION_TYPES {
@@ -833,7 +834,7 @@ export const pickListMockHistory = [{
   createTS: '2021-06-23'
 }];
 
-export const mockReserveLocations = [
+export const mockReserveLocations: Location[] = [
   {
     zoneId: 0,
     aisleId: 1,
@@ -844,7 +845,8 @@ export const mockReserveLocations = [
     locationName: 'A1-1',
     type: LOCATION_TYPES.RESERVE,
     typeNbr: 7,
-    qty: 10
+    qty: 10,
+    newQty: 0
   },
   {
     zoneId: 0,
@@ -856,7 +858,8 @@ export const mockReserveLocations = [
     locationName: 'A1-2',
     type: LOCATION_TYPES.RESERVE,
     typeNbr: 7,
-    qty: 20
+    qty: 20,
+    newQty: 0
   },
   {
     zoneId: 1,
@@ -868,7 +871,8 @@ export const mockReserveLocations = [
     locationName: 'B1-1',
     type: LOCATION_TYPES.RESERVE,
     typeNbr: 7,
-    qty: 30
+    qty: 30,
+    newQty: 0
   },
   {
     zoneId: 3,
@@ -880,7 +884,8 @@ export const mockReserveLocations = [
     locationName: 'D1-1',
     type: LOCATION_TYPES.RESERVE,
     typeNbr: 7,
-    qty: 50
+    qty: 50,
+    newQty: 0
   }
 ];
 
