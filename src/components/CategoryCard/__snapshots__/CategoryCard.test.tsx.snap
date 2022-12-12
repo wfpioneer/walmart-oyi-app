@@ -242,6 +242,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             <View
               style={
                 Object {
+                  "marginTop": 2,
                   "width": "100%",
                 }
               }
@@ -263,42 +264,12 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     "flexDirection": "row",
                     "opacity": 1,
                     "padding": 5,
+                    "paddingLeft": 10,
                     "width": "100%",
                   }
                 }
                 testID="itemCard"
               >
-                <View>
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "overflow": "hidden",
-                        },
-                        Object {
-                          "height": 80,
-                          "width": 80,
-                        },
-                      ]
-                    }
-                  >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
-                      resizeMode="contain"
-                      source={null}
-                      style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
-                      }
-                    />
-                  </View>
-                </View>
                 <View
                   style={
                     Object {
@@ -310,7 +281,13 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   }
                   testID="item-details"
                 >
-                  <View>
+                  <View
+                    style={
+                      Object {
+                        "paddingBottom": 10,
+                      }
+                    }
+                  >
                     <Text
                       style={
                         Object {
@@ -383,6 +360,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             <View
               style={
                 Object {
+                  "marginTop": 2,
                   "width": "100%",
                 }
               }
@@ -404,42 +382,12 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     "flexDirection": "row",
                     "opacity": 1,
                     "padding": 5,
+                    "paddingLeft": 10,
                     "width": "100%",
                   }
                 }
                 testID="itemCard"
               >
-                <View>
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "overflow": "hidden",
-                        },
-                        Object {
-                          "height": 80,
-                          "width": 80,
-                        },
-                      ]
-                    }
-                  >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
-                      resizeMode="contain"
-                      source={null}
-                      style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
-                      }
-                    />
-                  </View>
-                </View>
                 <View
                   style={
                     Object {
@@ -451,7 +399,13 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   }
                   testID="item-details"
                 >
-                  <View>
+                  <View
+                    style={
+                      Object {
+                        "paddingBottom": 10,
+                      }
+                    }
+                  >
                     <Text
                       style={
                         Object {
@@ -524,6 +478,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             <View
               style={
                 Object {
+                  "marginTop": 2,
                   "width": "100%",
                 }
               }
@@ -545,42 +500,12 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     "flexDirection": "row",
                     "opacity": 1,
                     "padding": 5,
+                    "paddingLeft": 10,
                     "width": "100%",
                   }
                 }
                 testID="itemCard"
               >
-                <View>
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "overflow": "hidden",
-                        },
-                        Object {
-                          "height": 80,
-                          "width": 80,
-                        },
-                      ]
-                    }
-                  >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
-                      resizeMode="contain"
-                      source={null}
-                      style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
-                      }
-                    />
-                  </View>
-                </View>
                 <View
                   style={
                     Object {
@@ -592,7 +517,13 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   }
                   testID="item-details"
                 >
-                  <View>
+                  <View
+                    style={
+                      Object {
+                        "paddingBottom": 10,
+                      }
+                    }
+                  >
                     <Text
                       style={
                         Object {
@@ -665,6 +596,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             <View
               style={
                 Object {
+                  "marginTop": 2,
                   "width": "100%",
                 }
               }
@@ -686,42 +618,12 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                     "flexDirection": "row",
                     "opacity": 1,
                     "padding": 5,
+                    "paddingLeft": 10,
                     "width": "100%",
                   }
                 }
                 testID="itemCard"
               >
-                <View>
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "overflow": "hidden",
-                        },
-                        Object {
-                          "height": 80,
-                          "width": 80,
-                        },
-                      ]
-                    }
-                  >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
-                      resizeMode="contain"
-                      source={null}
-                      style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
-                      }
-                    />
-                  </View>
-                </View>
                 <View
                   style={
                     Object {
@@ -733,7 +635,13 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   }
                   testID="item-details"
                 >
-                  <View>
+                  <View
+                    style={
+                      Object {
+                        "paddingBottom": 10,
+                      }
+                    }
+                  >
                     <Text
                       style={
                         Object {
