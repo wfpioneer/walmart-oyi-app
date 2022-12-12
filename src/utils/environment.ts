@@ -80,7 +80,7 @@ export const getEnvironment = (): Environment => {
 
   const environments: Environments = {
     dev: {
-      orchestrationURL: 'https://intl-oyi-orchestration-api.dev.walmart.com',
+      orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.dev.walmart.com`,
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.dev.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`,
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
@@ -93,7 +93,7 @@ export const getEnvironment = (): Environment => {
       itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
     },
     stage: {
-      orchestrationURL: 'https://intl-oyi-orchestration-api.stg.walmart.com',
+      orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.stg.walmart.com`,
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.stg.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`,
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
@@ -106,7 +106,7 @@ export const getEnvironment = (): Environment => {
       itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
     },
     prod: {
-      orchestrationURL: 'https://intl-oyi-orchestration-api.prod.walmart.com',
+      orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.prod.walmart.com`,
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.prod.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`,
       fluffyURL: 'https://api-proxy.prod.soa-api-proxy.platform.glb.prod.walmart.com'
