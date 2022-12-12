@@ -7,6 +7,7 @@ import {
   DELETE_FROM_PRINTER_LIST,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_ITEM_NBR,
   REMOVE_MULT_FROM_PRINT_QUEUE_BY_UPC,
+  RESET_PRINT_QUEUE,
   SET_LOCATION_LABEL_PRINTER,
   SET_LOCATION_PRINT_QUEUE,
   SET_PALLET_LABEL_PRINTER,
@@ -29,6 +30,7 @@ import {
   deleteFromPrinterList,
   removeMultipleFromPrintQueueByItemNbr,
   removeMultipleFromPrintQueueByUpc,
+  resetPrintQueue,
   setLocationLabelPrinter,
   setLocationPrintQueue,
   setPalletLabelPrinter,
@@ -201,5 +203,9 @@ describe('testing action creators', () => {
       type: UPDATE_PRINTER_BY_ID,
       payload: { id: '1', printer: mockPrinterList[0] }
     });
+  });
+  it('testing resetPrintQueue', () => {
+    const results = resetPrintQueue();
+    expect(results).toStrictEqual({ type: RESET_PRINT_QUEUE });
   });
 });
