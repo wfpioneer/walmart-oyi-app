@@ -33,7 +33,7 @@ const ItemCard = ({
     >
       <ImageWrapper
         countryCode={countryCode}
-        itemNumber={!showItemImage ? itemNumber : 0}
+        itemNumber={showItemImage ? itemNumber : 0}
       />
       {loading && (
       <View style={styles.loader} testID="loader">
