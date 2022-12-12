@@ -58,7 +58,8 @@ export default {
     SELECTED: 'Seleccionado',
     UPDATE: 'Actualizar Configuración',
     WARNING_LABEL: 'Aviso',
-    CLOSE: 'Cerrar'
+    CLOSE: 'Cerrar',
+    NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -474,7 +475,12 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
     ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
-    QUANTITY_STOCKED: 'Cantidad abastecida'
+    QUANTITY_STOCKED: 'Cantidad abastecida',
+    ACCEPT_MULTIPLE_BINS: 'Aceptar Múltiples ingresos a bodega',
+    ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos',
+    ACCEPT_FOLLOWING_PICKS: 'Aceptar los siguientes pickeos?',
+    ACCEPT_FOLLOWING_BINS: 'Aceptar los siguientes ingresos a bodega?',
+    LOC_LABEL: 'Ubi'
   },
   BINNING: {
     BINNING: 'Bodega',

@@ -359,6 +359,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
     titleStyle={Object {}}
     toggleIsOpened={[Function]}
+    trackEventSource={
+      Object {
+        "action": "OH_change_history_click",
+        "otherInfo": Object {
+          "itemNbr": 1,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
   />
 </View>
 `;
@@ -371,6 +380,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
     titleStyle={Object {}}
     toggleIsOpened={[Function]}
+    trackEventSource={
+      Object {
+        "action": "OH_change_history_click",
+        "otherInfo": Object {
+          "itemNbr": 3,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
   />
 </View>
 `;
@@ -383,6 +401,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
     titleStyle={Object {}}
     toggleIsOpened={[Function]}
+    trackEventSource={
+      Object {
+        "action": "OH_change_history_click",
+        "otherInfo": Object {
+          "itemNbr": 2,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
   />
 </View>
 `;
@@ -395,6 +422,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
     title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
     titleStyle={Object {}}
     toggleIsOpened={[Function]}
+    trackEventSource={
+      Object {
+        "action": "pick_history_click",
+        "otherInfo": Object {
+          "itemNbr": 4,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
   />
 </View>
 `;
@@ -407,6 +443,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
     title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
     titleStyle={Object {}}
     toggleIsOpened={[Function]}
+    trackEventSource={
+      Object {
+        "action": "pick_history_click",
+        "otherInfo": Object {
+          "itemNbr": 6,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
   />
 </View>
 `;
@@ -419,6 +464,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
     title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
     titleStyle={Object {}}
     toggleIsOpened={[Function]}
+    trackEventSource={
+      Object {
+        "action": "pick_history_click",
+        "otherInfo": Object {
+          "itemNbr": 5,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
   />
 </View>
 `;
@@ -464,6 +518,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   <CollapsibleCard
     icon=""
     isOpened={false}
+    source={
+      Object {
+        "action": "replenishment_history_clicked",
+        "otherInfo": Object {
+          "itemNbr": 1234567890,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
     title="[missing \\"en.ITEM.HISTORY\\" translation]"
     titleStyle={Object {}}
   >
@@ -524,6 +587,15 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   <CollapsibleCard
     icon=""
     isOpened={false}
+    source={
+      Object {
+        "action": "replenishment_history_clicked",
+        "otherInfo": Object {
+          "itemNbr": 987654321,
+        },
+        "screen": "Review_Item_Details",
+      }
+    }
     title="[missing \\"en.ITEM.HISTORY\\" translation]"
     titleStyle={Object {}}
   >
@@ -1850,6 +1922,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -2625,6 +2701,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -2698,6 +2778,15 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <CollapsibleCard
             icon=""
             isOpened={false}
+            source={
+              Object {
+                "action": "OH_change_history_click",
+                "otherInfo": Object {
+                  "itemNbr": 1234567890,
+                },
+                "screen": "Review_Item_Details",
+              }
+            }
             title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
             titleStyle={Object {}}
           >
@@ -2766,6 +2855,15 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <CollapsibleCard
               icon=""
               isOpened={false}
+              source={
+                Object {
+                  "action": "replenishment_history_clicked",
+                  "otherInfo": Object {
+                    "itemNbr": 1234567890,
+                  },
+                  "screen": "Review_Item_Details",
+                }
+              }
               title="[missing \\"en.ITEM.HISTORY\\" translation]"
               titleStyle={Object {}}
             >
@@ -2890,6 +2988,15 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <CollapsibleCard
           icon=""
           isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
           title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
           titleStyle={Object {}}
         >
@@ -3321,6 +3428,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -3857,6 +3968,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -4389,6 +4504,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -4942,6 +5061,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -5495,6 +5618,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -6048,6 +6175,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }
@@ -6601,6 +6732,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
+            "source": Object {
+              "action": "additional_item_details_click",
+              "screen": "Review_Item_Details",
+            },
             "vendorPackQty": 33,
           }
         }

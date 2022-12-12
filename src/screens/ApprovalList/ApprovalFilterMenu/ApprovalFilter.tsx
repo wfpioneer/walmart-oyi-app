@@ -33,7 +33,6 @@ interface ApprovalFilterProps {
 
 export const renderSourceFilterCard = (
   item: FilteredCategory,
-  dispatch: Dispatch<any>,
   filterSources: string[],
   updateFilterSrcs: (categories: string[]) => void
 ): JSX.Element => {
@@ -88,12 +87,11 @@ export const RenderSourceCollapsibleCard = (props: {
     sourceMap: FilteredCategory[];
     sourceOpen: boolean;
     filterSources: string[];
-    dispatch: Dispatch<any>;
     updateFilterSrcs: (categories: string[]) => void;
     toggleSrcs: (open: boolean) => void;
   }): JSX.Element => {
   const {
-    sourceMap, sourceOpen, filterSources, dispatch, updateFilterSrcs, toggleSrcs
+    sourceMap, sourceOpen, filterSources, updateFilterSrcs, toggleSrcs
   } = props;
 
   const sourceNameMap = sourceMap.map(
@@ -136,7 +134,7 @@ export const RenderSourceCollapsibleCard = (props: {
       {sourceOpen && (
       <FlatList
         data={filteredSources}
-        renderItem={({ item }) => renderSourceFilterCard(item, dispatch, filterSources, updateFilterSrcs)}
+        renderItem={({ item }) => renderSourceFilterCard(item, filterSources, updateFilterSrcs)}
         style={styles.categoryList}
         keyExtractor={(item: any) => item.catgName}
       />
@@ -217,7 +215,6 @@ export const ApprovalFilterScreen = (props: ApprovalFilterProps) => {
       />
       <RenderSourceCollapsibleCard
         sourceMap={getSourceMap(approvalList, filteredSources)}
-        dispatch={dispatch}
         filterSources={filteredSources}
         sourceOpen={sourceOpen}
         updateFilterSrcs={(updatedSources: string[]) => dispatch(updateFilterSources(updatedSources))}

@@ -18,7 +18,8 @@ import {
   CombinePalletsRequest,
   GetPalletDetailsRequest,
   PostBinPalletsRequest,
-  UpdateItemQuantityRequest
+  UpdateItemQuantityRequest,
+  UpdateMultiPalletUPCQtyRequest
 } from '../../services/PalletManagement.service';
 import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 import User from '../../models/User';
@@ -79,6 +80,7 @@ export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
 export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
 export const REPORT_MISSING_PALLET = 'SAGA/REPORT_MISSING_PALLET';
 export const GET_ITEM_PALLETS = 'SAGA/GET_ITEM_PALLETS';
+export const UPDATE_MULTI_PALLET_UPC_QTY = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY';
 
 // TODO Remove this dispatch call once the BE has been pushed to Production
 export const getItemDetailsV2 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V2, payload } as const);
@@ -218,8 +220,8 @@ export const updatePicklistStatus = (payload: {
     locationId: number;
     locationName: string;
     itemQty?: number;
+    palletId: string
   }[];
-  palletId: string;
 }) => ({
   type: UPDATE_PICKLIST_STATUS,
   payload
@@ -244,10 +246,13 @@ export const reportMissingPallet = (payload: {
     locationName: string;
     sectionId: number;
 }) => ({ type: REPORT_MISSING_PALLET, payload } as const);
-
 export const getItemPallets = (payload: {
   itemNbr: number;
 }) => ({ type: GET_ITEM_PALLETS, payload } as const);
+export const updateMultiPalletUPCQty = (payload: UpdateMultiPalletUPCQtyRequest) => ({
+  type: UPDATE_MULTI_PALLET_UPC_QTY,
+  payload
+} as const);
 
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
@@ -294,4 +299,5 @@ export type SagaParams =
   & Pick<ReturnType<typeof createNewPick>, 'payload'>
   & Pick<ReturnType<typeof postCreatePallet>, 'payload'>
   & Pick<ReturnType<typeof reportMissingPallet>, 'payload'>
-  & Pick<ReturnType<typeof getItemPallets>, 'payload'>;
+  & Pick<ReturnType<typeof getItemPallets>, 'payload'>
+  & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>;

@@ -5,22 +5,29 @@ const styles = StyleSheet.create({
   menuContainer: {
     alignItems: 'center',
     flexDirection: 'row',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
     borderBottomWidth: 1,
-    backgroundColor: COLOR.HAVELOCK_BLUE
+    backgroundColor: COLOR.HAVELOCK_BLUE,
+    padding: 10
+  },
+  menuCheckBoxContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    backgroundColor: COLOR.HAVELOCK_BLUE,
+    paddingVertical: 5
   },
   titleContainer: {
     flex: 1,
     justifyContent: 'flex-start',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   titleText: {
+    flex: 1,
     fontSize: 16
   },
-  arrowView: {
-    flex: 0.1,
-    paddingLeft: 5
+  arrowPadding: {
+    paddingRight: 10
   }
 });
 

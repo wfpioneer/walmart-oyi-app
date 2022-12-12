@@ -180,15 +180,14 @@ export const updatePicklistItemsStatus = (items: PickListItem[], action: PickAct
   const picklistItems = items.map(item => ({
     picklistId: item.id,
     locationId: item.palletLocationId,
-    locationName: item.palletLocationName
+    locationName: item.palletLocationName,
+    palletId: item.palletId
   }));
-  const { palletId } = items[0];
   dispatch(updatePicklistStatus({
     headers: {
       action
     },
-    picklistItems,
-    palletId
+    picklistItems
   }));
 };
 

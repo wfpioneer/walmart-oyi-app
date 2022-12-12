@@ -14,6 +14,7 @@ import { sessionEnd } from '../../utils/sessionTimeout';
 import { assignFluffyFeatures, setConfigs } from '../../state/actions/User';
 import { getClubConfig } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
+import { resetPrintQueue } from '../../state/actions/Print';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
@@ -270,7 +271,8 @@ describe('Tests login screen functions', () => {
       navigationProp
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(7);
+    expect(mockDispatch).toHaveBeenCalledTimes(8);
+    expect(mockDispatch).toHaveBeenCalledWith(resetPrintQueue());
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
     expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());

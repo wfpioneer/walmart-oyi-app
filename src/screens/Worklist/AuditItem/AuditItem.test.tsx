@@ -42,6 +42,7 @@ import AuditItem, {
   renderpalletQtyUpdateModal,
   reportMissingPalletApiHook,
   sortReserveLocations,
+  updateMultiPalletUPCQtyApiHook,
   updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
@@ -51,6 +52,8 @@ import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { itemPallets, locations, sortedLocations } from '../../../mockData/getItemPallets';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
+import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
+import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -138,7 +141,6 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   useEffectHook: jest.fn(),
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
-  userConfigs: mockConfig,
   itemNumber: 0,
   setShowItemNotFoundMsg: jest.fn(),
   showItemNotFoundMsg: false,
@@ -169,7 +171,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   setGetItemPalletsError: jest.fn(),
   showCalcModalState: [false, jest.fn()],
   locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
-  countryCode: 'CN'
+  countryCode: 'CN',
+  updateMultiPalletUPCQtyApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
@@ -657,7 +660,7 @@ describe('AuditItemScreen', () => {
       expect(navigationProp.goBack).not.toHaveBeenCalled();
     });
 
-    it('Tests calculateTotalOHQty funcitionality', () => {
+    it('Tests calculateTotalOHQty functionality', () => {
       const mockFloorLocations = mockItemDetails.location.floor;
       const mockReserveLocations = itemPallets.pallets;
       const itemDetails = getMockItemDetails('123');
@@ -671,13 +674,25 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests updateOHQtyApiHook on success', () => {
-      const setShowOnHands = jest.fn();
+      const mockReserveLocations: ItemPalletInfo[] = [
+        {
+          palletId: 123,
+          quantity: 10,
+          sectionId: 123,
+          locationName: '1b-1',
+          mixedPallet: true,
+          newQty: 1,
+          scanned: true
+        }
+      ];
       updateOHQtyApiHook(
         successApi,
         mockDispatch,
         navigationProp,
-        setShowOnHands
+        mockReserveLocations,
+        mockItemDetails
       );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'success',
@@ -685,19 +700,26 @@ describe('AuditItemScreen', () => {
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      expect(mockDispatch).toBeCalledTimes(1);
-      expect(setShowOnHands).toHaveBeenCalledWith(false);
-      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_OH_QTY.RESET });
+      expect(mockDispatch).toHaveBeenCalledWith(updateMultiPalletUPCQty({
+        PalletList: [{
+          expirationDate: '',
+          palletId: mockReserveLocations[0].palletId,
+          upcs: [{ upcNbr: mockItemDetails.upcNbr, quantity: mockReserveLocations[0].newQty }]
+        }]
+      }));
     });
 
     it('Tests updateOHQtyApiHook on failure', () => {
-      const setShowOnHands = jest.fn();
       updateOHQtyApiHook(
         failureApi,
         mockDispatch,
         navigationProp,
-        setShowOnHands
+        itemPallets.pallets,
+        mockItemDetails
       );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -707,9 +729,50 @@ describe('AuditItemScreen', () => {
       });
     });
 
+    it('Tests updateMultiPalletUPCQtyApiHook on success', () => {
+      const setShowOnHands = jest.fn();
+      updateMultiPalletUPCQtyApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands
+      );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      expect(setShowOnHands).toHaveBeenCalledWith(false);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests updateMultiPalletUPCQtyApiHook on failure', () => {
+      const setShowOnHands = jest.fn();
+      updateMultiPalletUPCQtyApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands
+      );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('PALLET.SAVE_PALLET_FAILURE'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    });
+
     it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
       const { toJSON } = render(
         renderConfirmOnHandsModal(
+          defaultAsyncState,
           defaultAsyncState,
           true,
           mockSetShowOnHandsConfirmModal,
@@ -726,9 +789,14 @@ describe('AuditItemScreen', () => {
         ...defaultAsyncState,
         isWaiting: true
       };
+      const mockUpdateMultiPalletUPCQtyLoading: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
       const { toJSON } = render(
         renderConfirmOnHandsModal(
           mockUpdateOHQtyLoading,
+          mockUpdateMultiPalletUPCQtyLoading,
           true,
           mockSetShowOnHandsConfirmModal,
           50,
@@ -742,6 +810,7 @@ describe('AuditItemScreen', () => {
     it('Tests renderConfirmOnHandsModal confirm button action', () => {
       const { getByTestId } = render(
         renderConfirmOnHandsModal(
+          defaultAsyncState,
           defaultAsyncState,
           true,
           mockSetShowOnHandsConfirmModal,
@@ -758,6 +827,7 @@ describe('AuditItemScreen', () => {
     it('Tests renderConfirmOnHandsModal cancel button action', () => {
       const { getByTestId } = render(
         renderConfirmOnHandsModal(
+          defaultAsyncState,
           defaultAsyncState,
           true,
           mockSetShowOnHandsConfirmModal,
@@ -861,6 +931,13 @@ describe('AuditItemScreen', () => {
       ));
     });
 
+    it('tests calculateFloorLocDecreaseQty when newOHQty is greater than max value', () => {
+      calculateFloorLocDecreaseQty(99999, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 9999 } }
+      ));
+    });
+
     it('tests calculateFloorLocDecreaseQty when newOHQty is less than or equals min value', () => {
       calculateFloorLocDecreaseQty(1, 'A1-1', mockDispatch);
       expect(mockDispatch).not.toBeCalled();
@@ -871,6 +948,13 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
         { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 23 } }
+      ));
+    });
+
+    it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than min value', () => {
+      calculateFloorLocIncreaseQty(-22, 'A1-1', mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 1 } }
       ));
     });
 
@@ -887,6 +971,13 @@ describe('AuditItemScreen', () => {
       ));
     });
 
+    it('tests calculatePalletDecreaseQty when newOHQty is greater than max value', () => {
+      calculatePalletDecreaseQty(99999, 4597, mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 9999 } }
+      ));
+    });
+
     it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
       calculatePalletDecreaseQty(0, 4597, mockDispatch);
       expect(mockDispatch).not.toBeCalled();
@@ -897,6 +988,13 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toBeCalled();
       expect(mockDispatch).toBeCalledWith(expect.objectContaining(
         { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23 } }
+      ));
+    });
+
+    it('tests calculatePalletIncreaseQty when newOHQty is lesser than min value', () => {
+      calculatePalletIncreaseQty(-22, 4597, mockDispatch);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
+        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0 } }
       ));
     });
 

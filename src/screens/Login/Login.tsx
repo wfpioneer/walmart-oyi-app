@@ -38,6 +38,7 @@ import {
   savePrinter
 } from '../../utils/asyncStorageUtils';
 import {
+  resetPrintQueue,
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
@@ -151,6 +152,7 @@ export const signOutUser = (dispatch: Dispatch<any>): void => {
   trackEvent('user_sign_out', { lastPage: 'Login' });
   WMSSO.signOutUser().then(() => {
     dispatch(logoutUser());
+    dispatch(resetPrintQueue());
     if (Platform.OS === 'android') {
       dispatch(hideActivityModal());
     }
@@ -163,7 +165,7 @@ export const userConfigsApiHook = (
   getClubConfigApiState: AsyncState,
   user: User,
   dispatch: Dispatch<any>,
-  getPrinterDetailsFromAsyncStorage: () => Promise<void>,
+  getPrinterDetailsFromAsyncStorage: (dispatchAction: Dispatch<any>) => Promise<void>,
   navigation: NavigationProp<any>
 ) => {
   if (getFluffyApiState.isWaiting || getClubConfigApiState.isWaiting) {
@@ -189,7 +191,7 @@ export const userConfigsApiHook = (
   if (!getClubConfigApiState.isWaiting && getClubConfigApiState.result) {
     dispatch(setConfigs(getClubConfigApiState.result.data));
     if (getClubConfigApiState.result.data.printingUpdate) {
-      getPrinterDetailsFromAsyncStorage();
+      getPrinterDetailsFromAsyncStorage(dispatch);
     }
     dispatch(hideActivityModal());
     navigation.reset({
@@ -208,7 +210,7 @@ export const userConfigsApiHook = (
   }
 };
 
-export const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
+export const getPrinterDetailsFromAsyncStorage = async (dispatch: Dispatch<any>): Promise<void> => {
   const printerList = await getPrinterList();
   const priceLabelPrinter = await getPriceLabelPrinter();
   const palletLabelPrinter = await getPalletLabelPrinter();
@@ -219,7 +221,7 @@ export const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
       defPrinter.desc = strings('GENERICS.DEFAULT');
       defPrinter.name = strings('PRINT.FRONT_DESK');
     }
-    setPrinterList(printerList);
+    dispatch(setPrinterList(printerList));
   } else {
     const defaultPrinter: Printer = {
       type: PrinterType.LASER,
@@ -228,16 +230,16 @@ export const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
       id: '000000000000',
       labelsAvailable: ['price']
     };
-    setPrinterList([defaultPrinter]);
+    dispatch(setPrinterList([defaultPrinter]));
     savePrinter(defaultPrinter);
   }
   if (priceLabelPrinter && priceLabelPrinter.id === '000000000000') {
     priceLabelPrinter.desc = strings('GENERICS.DEFAULT');
     priceLabelPrinter.name = strings('PRINT.FRONT_DESK');
   }
-  setPriceLabelPrinter(priceLabelPrinter);
-  setPalletLabelPrinter(palletLabelPrinter);
-  setLocationLabelPrinter(locationLabelPrinter);
+  dispatch(setPriceLabelPrinter(priceLabelPrinter));
+  dispatch(setPalletLabelPrinter(palletLabelPrinter));
+  dispatch(setLocationLabelPrinter(locationLabelPrinter));
 };
 
 export const LoginScreen = (props: LoginScreenProps) => {

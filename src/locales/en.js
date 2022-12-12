@@ -58,7 +58,8 @@ export default {
     SELECTED: 'selected',
     UPDATE: 'Update Configuration',
     WARNING_LABEL: 'Warning',
-    CLOSE: 'Close'
+    CLOSE: 'Close',
+    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -476,7 +477,12 @@ export default {
     UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
     ADDITIONAL_ITEMS: 'Pallet contains additional items',
-    QUANTITY_STOCKED: 'Quantity Stocked'
+    QUANTITY_STOCKED: 'Quantity Stocked',
+    ACCEPT_FOLLOWING_PICKS: 'Accept the following picks?',
+    ACCEPT_FOLLOWING_BINS: 'Accept the following bins?',
+    LOC_LABEL: 'Loc',
+    ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
+    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
   },
   BINNING: {
     BINNING: 'Binning',
