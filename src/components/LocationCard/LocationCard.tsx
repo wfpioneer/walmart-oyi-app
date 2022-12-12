@@ -7,7 +7,6 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { strings } from '../../locales';
 import NumericSelector from '../NumericSelector/NumericSelector';
-import CustomNumericSelector from '../NumericSelector/CustomNumericSelector';
 import styles from './LocationCard.style';
 import COLOR from '../../themes/Color';
 
@@ -19,7 +18,7 @@ interface LocationCardProp {
     onQtyIncrement(): void;
     onQtyDecrement(): void;
     onTextChange(text: string): void;
-    onInputPress(): void;
+    onCalcPress(): void;
     onLocationDelete(): void;
     onEndEditing?: () => void;
     scannerEnabled: boolean;
@@ -54,7 +53,7 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
     onEndEditing,
     scannerEnabled,
     scanned,
-    onInputPress,
+    onCalcPress,
     showCalculator
   } = props;
 
@@ -78,36 +77,37 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
           </View>
           )}
         </View>
-        <View style={styles.actionContainer}>
+        <View style={showCalculator
+          ? { ...styles.actionContainer, flex: 1.2, justifyContent: 'space-between' }
+          : styles.actionContainer}
+        >
           <View>
-            {showCalculator
-              ? (
-                <CustomNumericSelector
-                  onDecreaseQty={onQtyDecrement}
-                  onIncreaseQty={onQtyIncrement}
-                  minValue={MIN}
-                  maxValue={MAX}
-                  value={quantity}
-                  isValid={isValidQty}
-                  onInputPress={onInputPress}
-                />
-              )
-              : (
-                <NumericSelector
-                  onDecreaseQty={onQtyDecrement}
-                  onIncreaseQty={onQtyIncrement}
-                  onTextChange={onTextChange}
-                  minValue={MIN}
-                  maxValue={MAX}
-                  value={quantity}
-                  isValid={isValidQty}
-                  onEndEditing={onEndEditing}
-                />
-              )}
+            <NumericSelector
+              onDecreaseQty={onQtyDecrement}
+              onIncreaseQty={onQtyIncrement}
+              onTextChange={onTextChange}
+              minValue={MIN}
+              maxValue={MAX}
+              value={quantity}
+              isValid={isValidQty}
+              onEndEditing={onEndEditing}
+            />
           </View>
+          {showCalculator && (
+          <View style={styles.calculatorView}>
+            <TouchableOpacity
+              onPress={onCalcPress}
+              testID="calc-button"
+            >
+              <View>
+                <MaterialCommunityIcons name="calculator" size={30} color={COLOR.MAIN_THEME_COLOR} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          )}
           <View>
             <TouchableOpacity onPress={() => { onLocationDelete(); }}>
-              <MaterialCommunityIcons name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
+              <MaterialCommunityIcons name="trash-can" size={30} color={COLOR.TRACKER_GREY} />
             </TouchableOpacity>
           </View>
         </View>
