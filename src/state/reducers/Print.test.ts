@@ -8,6 +8,7 @@ import {
   deleteFromPrinterList,
   removeMultipleFromPrintQueueByItemNbr,
   removeMultipleFromPrintQueueByUpc,
+  resetPrintQueue,
   setLocationLabelPrinter,
   setLocationPrintQueue,
   setPalletLabelPrinter,
@@ -209,6 +210,18 @@ describe('testing printing reducer', () => {
       printerList: mockPrinterList
     };
     const results = Print(initialSt, updatePrinterByID({ id: '123', printer: newPrinterList[0] }));
+    expect(results).toStrictEqual(expectedChangedState);
+  });
+  it('test reducer with resetPrintQueue', () => {
+    const initialSt: StateType = {
+      ...initialState,
+      printQueue: mockPrintQueue
+    };
+    const expectedChangedState: StateType = {
+      ...initialState,
+      printQueue: []
+    };
+    const results = Print(initialSt, resetPrintQueue());
     expect(results).toStrictEqual(expectedChangedState);
   });
 });
