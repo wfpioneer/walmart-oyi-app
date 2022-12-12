@@ -52,6 +52,7 @@ import {
   GET_ITEM_PALLETS,
   NO_ACTION,
   REPORT_MISSING_PALLET,
+  UPDATE_MULTI_PALLET_UPC_QTY,
   UPDATE_OH_QTY
 } from '../../../state/actions/asyncAPI';
 import {
@@ -61,6 +62,7 @@ import {
   getLocationDetails,
   noAction,
   reportMissingPallet,
+  updateMultiPalletUPCQty,
   updateOHQty
 } from '../../../state/actions/saga';
 
@@ -88,6 +90,7 @@ import Button from '../../../components/buttons/Button';
 import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
+import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -147,6 +150,7 @@ export interface AuditItemScreenProps {
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   showItemImage: boolean;
+  updateMultiPalletUPCQtyApi: AsyncState;
 }
 
 export const isError = (
@@ -580,7 +584,8 @@ export const updateOHQtyApiHook = (
   updateOHQtyApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>
+  reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null
 ) => {
   if (navigation.isFocused()) {
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
@@ -591,14 +596,52 @@ export const updateOHQtyApiHook = (
         visibilityTime: SNACKBAR_TIMEOUT
       });
       dispatch({ type: UPDATE_OH_QTY.RESET });
-      setShowOnHandsConfirmationModal(false);
-      navigation.goBack();
+
+      const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
+        {
+          palletId: item.palletId,
+          expirationDate: '', // This is fine as it does not update the expiration date on the pallet
+          upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
+        }
+      ));
+      dispatch(updateMultiPalletUPCQty({ PalletList: newPalletList }));
     }
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
       Toast.show({
         type: 'error',
         position: 'bottom',
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    }
+  }
+};
+
+export const updateMultiPalletUPCQtyApiHook = (
+  updateMultiPalletUPCQtyApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
+
+) => {
+  if (navigation.isFocused()) {
+    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+
+      dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      setShowOnHandsConfirmationModal(false);
+      navigation.goBack();
+    }
+    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('PALLET.SAVE_PALLET_FAILURE'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
     }
@@ -700,6 +743,7 @@ export const renderDeleteLocationModal = (
 
 export const renderConfirmOnHandsModal = (
   updateOHQtyApi: AsyncState,
+  updateMultiPalletUPCQtyApi: AsyncState,
   showOnHandsConfirmationModal: boolean,
   setShowOnHandsConfirmationModal: React.Dispatch<
     React.SetStateAction<boolean>
@@ -720,9 +764,9 @@ export const renderConfirmOnHandsModal = (
       modalType="Popup"
       minHeight={150}
     >
-      {updateOHQtyApi.isWaiting ? (
+      {updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting ? (
         <ActivityIndicator
-          animating={updateOHQtyApi.isWaiting}
+          animating={updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting}
           hidesWhenStopped
           color={COLOR.MAIN_THEME_COLOR}
           size="large"
@@ -900,7 +944,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     showCalcModalState,
     locationListState,
     countryCode,
-    showItemImage
+    showItemImage,
+    updateMultiPalletUPCQtyApi
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1012,8 +1057,17 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateOHQtyApi,
     dispatch,
     navigation,
+    reserveLocations,
+    itemDetails
+  ), [updateOHQtyApi]);
+
+  // Update Multiple Pallet's UPC Qty API
+  useEffectHook(() => updateMultiPalletUPCQtyApiHook(
+    updateMultiPalletUPCQtyApi,
+    dispatch,
+    navigation,
     setShowOnHandsConfirmationModal
-  ));
+  ), [updateMultiPalletUPCQtyApi]);
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
@@ -1251,6 +1305,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       )}
       {renderConfirmOnHandsModal(
         updateOHQtyApi,
+        updateMultiPalletUPCQtyApi,
         showOnHandsConfirmationModal,
         setShowOnHandsConfirmationModal,
         totalOHQty,
@@ -1345,13 +1400,12 @@ const AuditItem = (): JSX.Element => {
     state => state.async.getItemDetails
   );
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
-  const userConfig = useTypedSelector(state => state.User.configs);
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const reportMissingPalletApi = useTypedSelector(state => state.async.reportMissingPallet);
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
-  const { userId } = useTypedSelector(state => state.User);
-  const userFeatures = useTypedSelector(state => state.User.features);
+  const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
+  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -1425,6 +1479,7 @@ const AuditItem = (): JSX.Element => {
       // @ts-expect-error typechecking error with location type
       locationListState={locationListState}
       countryCode={countryCode}
+      updateMultiPalletUPCQtyApi={updateMultiPalletUPCQtyApi}
     />
   );
 };
