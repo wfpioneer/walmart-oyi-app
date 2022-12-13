@@ -1212,7 +1212,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               dispatch(updateFloorLocationQty(loc.locationName, 0));
             }
           },
-          onInputPress: () => {
+          onCalcPress: () => {
             setLocation({ locationName: loc.locationName, locationType: 'floor', palletId: 0 });
             setShowCalcModal(true);
           }
@@ -1245,7 +1245,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               dispatch(updatePalletQty(loc.palletId, 0));
             }
           },
-          onInputPress: () => {
+          onCalcPress: () => {
             setLocation({ locationName: loc.locationName, locationType: 'reserve', palletId: loc.palletId });
             setShowCalcModal(true);
           }
