@@ -16,6 +16,7 @@ import { FilterPillButton } from '../../components/filterPillButton/FilterPillBu
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 import { area } from '../../models/User';
 import { FilterType } from '../../models/FilterListItem';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface ListItemProps {
   item: WorklistItemI;
@@ -37,6 +38,8 @@ interface WorklistProps {
   navigation: NavigationProp<any>;
   enableAreaFilter: boolean;
 }
+
+const screen = 'Item_Worklist';
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const { dispatch, item, navigation } = props;
   if (item.worklistType === 'CATEGORY') {
@@ -53,10 +56,14 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
     <WorklistItem
       exceptionType={worklistType}
       itemDescription={itemName || ''}
-      upcNbr={upcNbr || ''}
       itemNumber={itemNbr || 0}
       dispatch={dispatch}
       navigation={navigation}
+      trackEventSource={{
+        screen,
+        action: 'worklist_item_click',
+        otherInfo: { upc: upcNbr || '', itemNbr: itemNbr || 0, itemDescription: itemName || '' }
+      }}
     />
   );
 };
@@ -166,7 +173,17 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
       <View style={styles.errorView}>
         <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
         <Text style={styles.errorText}>{strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}</Text>
-        <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={
+          () => {
+            trackEvent(screen, {
+              action: 'get_worklist_api_retry'
+            });
+            onRefresh();
+          }
+        }
+        >
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
       </View>
@@ -243,6 +260,14 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
     });
   }
 
+  const toggleGroupView = (toggle: boolean) => {
+    trackEvent(screen, {
+      action: 'update_group_toggle_view',
+      isGroupView: toggle.toString()
+    });
+    updateGroupToggle(toggle);
+  };
+
   return (
     <View style={styles.container}>
       { (filterCategories.length > 0 || filterExceptions.length > 0) && (
@@ -259,14 +284,14 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
         </View>
       ) }
       <View style={styles.viewSwitcher}>
-        <TouchableOpacity onPress={() => updateGroupToggle(false)}>
+        <TouchableOpacity onPress={() => toggleGroupView(false)}>
           <MaterialIcons
             name="menu"
             size={25}
             color={!groupToggle ? COLOR.BLACK : COLOR.GREY}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => updateGroupToggle(true)}>
+        <TouchableOpacity onPress={() => toggleGroupView(true)}>
           <MaterialIcons
             name="list"
             size={25}

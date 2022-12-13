@@ -165,7 +165,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
     [missing "en.WORKLIST.WORKLIST_ITEM_API_ERROR" translation]
   </Text>
   <TouchableOpacity
-    onPress={[MockFunction]}
+    onPress={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -190,7 +190,17 @@ exports[`WorklistScreen Tests rendering WorklistItem Renders a single worklist i
   exceptionType="C"
   itemDescription="WINE ITEM"
   itemNumber={456789123}
-  upcNbr="444455556666"
+  trackEventSource={
+    Object {
+      "action": "worklist_item_click",
+      "otherInfo": Object {
+        "itemDescription": "WINE ITEM",
+        "itemNbr": 456789123,
+        "upc": "444455556666",
+      },
+      "screen": "Item_Worklist",
+    }
+  }
 />
 `;
 

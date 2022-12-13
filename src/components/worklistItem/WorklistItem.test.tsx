@@ -39,9 +39,13 @@ describe('WorklistItem Component', () => {
         exceptionType="NP"
         itemDescription="Test"
         itemNumber={1234}
-        upcNbr="4321"
         navigation={navigationProp}
         dispatch={jest.fn}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -54,9 +58,13 @@ describe('WorklistItem Component', () => {
         exceptionType="NP"
         itemDescription="Test"
         itemNumber={1234}
-        upcNbr="4321"
         navigation={navigationProp}
         dispatch={mockDispatch}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
       />
     );
     const btnCard = getByTestId('btnCard');
