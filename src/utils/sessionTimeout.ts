@@ -7,6 +7,7 @@ import store from '../state';
 import { trackEvent } from './AppCenterTool';
 import { clearEndTime } from '../state/actions/SessionTimeout';
 import { resetApprovals } from '../state/actions/Approvals';
+import { resetPrintQueue } from '../state/actions/Print';
 
 const sessionLength = 2;
 export const sessionEnd = (): number => {
@@ -25,6 +26,7 @@ export function validateSession(navigation: NavigationProp<any>, route?: string)
       WMSSO.signOutUser().then(() => {
         store.dispatch(resetApprovals());
         store.dispatch(logoutUser());
+        store.dispatch(resetPrintQueue());
         // Replace the current screen with the LoginScreen
         navigation.dispatch(
           StackActions.replace('Login')

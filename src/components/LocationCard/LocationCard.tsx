@@ -60,55 +60,63 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
 
   const MIN = locationType === 'floor' ? 1 : 0;
   const MAX = 9999;
+  const isValidQty = validateQty(quantity, MIN, MAX);
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <View>
-          <Text style={getContentStyle(locationType, scannerEnabled, scanned, true)}>
-            {location}
-          </Text>
+    <View style={styles.mainContainer}>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <View>
+            <Text style={getContentStyle(locationType, scannerEnabled, scanned, true)}>
+              {location}
+            </Text>
+          </View>
+          {locationType === 'reserve' && (
+          <View>
+            <Text style={getContentStyle(locationType, scannerEnabled, scanned, false)}>
+              {`${strings('LOCATION.PALLET')} ${palletId}`}
+            </Text>
+          </View>
+          )}
         </View>
-        {locationType === 'reserve' && (
-        <View>
-          <Text style={getContentStyle(locationType, scannerEnabled, scanned, false)}>
-            {`${strings('LOCATION.PALLET')} ${palletId}`}
-          </Text>
+        <View style={styles.actionContainer}>
+          <View>
+            {showCalculator
+              ? (
+                <CustomNumericSelector
+                  onDecreaseQty={onQtyDecrement}
+                  onIncreaseQty={onQtyIncrement}
+                  minValue={MIN}
+                  maxValue={MAX}
+                  value={quantity}
+                  isValid={isValidQty}
+                  onInputPress={onInputPress}
+                />
+              )
+              : (
+                <NumericSelector
+                  onDecreaseQty={onQtyDecrement}
+                  onIncreaseQty={onQtyIncrement}
+                  onTextChange={onTextChange}
+                  minValue={MIN}
+                  maxValue={MAX}
+                  value={quantity}
+                  isValid={isValidQty}
+                  onEndEditing={onEndEditing}
+                />
+              )}
+          </View>
+          <View>
+            <TouchableOpacity onPress={() => { onLocationDelete(); }}>
+              <MaterialCommunityIcons name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
+            </TouchableOpacity>
+          </View>
         </View>
-        )}
       </View>
-      <View style={styles.actionContainer}>
-        <View>
-          {showCalculator
-            ? (
-              <CustomNumericSelector
-                onDecreaseQty={onQtyDecrement}
-                onIncreaseQty={onQtyIncrement}
-                minValue={MIN}
-                maxValue={MAX}
-                value={quantity}
-                isValid={validateQty(quantity, MIN, MAX)}
-                onInputPress={onInputPress}
-              />
-            )
-            : (
-              <NumericSelector
-                onDecreaseQty={onQtyDecrement}
-                onIncreaseQty={onQtyIncrement}
-                onTextChange={onTextChange}
-                minValue={MIN}
-                maxValue={MAX}
-                value={quantity}
-                isValid={validateQty(quantity, MIN, MAX)}
-                onEndEditing={onEndEditing}
-              />
-            )}
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => { onLocationDelete(); }}>
-            <MaterialCommunityIcons name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
-          </TouchableOpacity>
-        </View>
+      {!isValidQty && (
+      <View>
+        <Text style={styles.errorText}>{strings('GENERICS.NUMBER_MIN_MAX', { minimum: MIN, maximum: MAX })}</Text>
       </View>
+      )}
     </View>
   );
 };

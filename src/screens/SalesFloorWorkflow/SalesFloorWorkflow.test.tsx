@@ -59,7 +59,9 @@ const pickStateMissingProps = {
   pickCreateFloorLocations: [],
   pickCreateReserveLocations: [],
   selectedTab: Tabs.QUICKPICK,
-  pickingMenu: false
+  pickingMenu: false,
+  multiBinEnabled: false,
+  multiPickEnabled: false
 };
 
 const mockIsFocused = jest.fn(() => true);

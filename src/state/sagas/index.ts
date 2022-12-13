@@ -89,7 +89,10 @@ const genericSagas = [
   makeAsyncSaga(
     saga.REPORT_MISSING_PALLET, actions.reportMissingPallet, ReportMissingPalletService.reportMissingPallet
   ),
-  makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets)
+  makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets),
+  makeAsyncSaga(
+    saga.UPDATE_MULTI_PALLET_UPC_QTY, actions.updateMultiPalletUPCQty, PalletManagementService.updateMultiPalletUPCQty
+  )
 ];
 
 export default function* rootSaga() {

@@ -279,7 +279,7 @@ describe('Assign Location externalized function tests', () => {
       ...defaultAsyncState,
       error: {
         status: 409,
-        message: 'Request failed due to: LOCATION_NOT_FOUND for URI: /bin',
+        message: 'Request failed due to: LOCATION_NOT_FOUND for URI: /bin'
       }
     };
     const failPalletNotReadyApi: AsyncState = {
