@@ -49,7 +49,7 @@ export default StyleSheet.create({
   actionContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     alignItems: center
   },
   errorText: {
@@ -57,5 +57,6 @@ export default StyleSheet.create({
     color: COLOR.RED_700,
     textAlign: center,
     paddingBottom: 5
-  }
+  },
+  calculatorView: { paddingLeft: 8 }
 });
