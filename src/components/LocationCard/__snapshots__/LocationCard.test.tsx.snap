@@ -59,7 +59,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
-          "justifyContent": "space-evenly",
+          "justifyContent": "space-around",
         }
       }
     >
@@ -82,7 +82,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={40}
+            size={30}
           />
         </TouchableOpacity>
       </View>
@@ -138,7 +138,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
-          "justifyContent": "space-evenly",
+          "justifyContent": "space-around",
         }
       }
     >
@@ -161,7 +161,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={40}
+            size={30}
           />
         </TouchableOpacity>
       </View>
@@ -215,22 +215,43 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
       style={
         Object {
           "alignItems": "center",
-          "flex": 1,
+          "flex": 1.2,
           "flexDirection": "row",
-          "justifyContent": "space-evenly",
+          "justifyContent": "space-between",
         }
       }
     >
       <View>
-        <CustomNumericSelector
+        <NumericSelector
           isValid={true}
           maxValue={9999}
           minValue={1}
           onDecreaseQty={[Function]}
+          onEndEditing={[Function]}
           onIncreaseQty={[Function]}
-          onInputPress={[Function]}
+          onTextChange={[Function]}
           value={12}
         />
+      </View>
+      <View
+        style={
+          Object {
+            "paddingLeft": 8,
+          }
+        }
+      >
+        <TouchableOpacity
+          onPress={[Function]}
+          testID="calc-button"
+        >
+          <View>
+            <mockConstructor
+              color="#0071e9"
+              name="calculator"
+              size={30}
+            />
+          </View>
+        </TouchableOpacity>
       </View>
       <View>
         <TouchableOpacity
@@ -239,7 +260,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={40}
+            size={30}
           />
         </TouchableOpacity>
       </View>
@@ -309,7 +330,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
-          "justifyContent": "space-evenly",
+          "justifyContent": "space-around",
         }
       }
     >
@@ -332,7 +353,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={40}
+            size={30}
           />
         </TouchableOpacity>
       </View>
@@ -402,7 +423,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
-          "justifyContent": "space-evenly",
+          "justifyContent": "space-around",
         }
       }
     >
@@ -425,7 +446,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
           <mockConstructor
             color="#545F7A"
             name="trash-can"
-            size={40}
+            size={30}
           />
         </TouchableOpacity>
       </View>
