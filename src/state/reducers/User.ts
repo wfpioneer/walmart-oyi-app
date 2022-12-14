@@ -44,7 +44,7 @@ export const initialState: User = {
     multiBin: false,
     multiPick: false,
     showItemImage: false,
-    feedback: false
+    showFeedback: false
   }
 };
 
@@ -90,7 +90,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           multiBin: action.payload.multiBin || false,
           multiPick: action.payload.multiPick || false,
           showItemImage: action.payload.showItemImage || false,
-          feedback: action.payload.feedback || false
+          showFeedback: action.payload.showFeedback || false
         }
       };
     default:
