@@ -189,7 +189,8 @@ export const handleOHQtySubmit = (itemDetails: ItemDetails, newOHQty: number, di
       dollarChange: change,
       initiatedTimestamp: moment().toISOString(),
       approvalRequestSource: approvalRequestSource.ItemDetails
-    }
+    },
+    worklistType: 'AU'
   }));
 };
 

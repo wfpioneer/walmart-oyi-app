@@ -54,11 +54,12 @@ const onItemClick = (
   itemNumber: number,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
-  trackEventCall: typeof trackEvent
+  trackEventCall: typeof trackEvent,
+  worklistType: string
 ) => {
   dispatch(setAuditItemNumber(itemNumber));
   trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
-  navigation.navigate('AuditItem');
+  navigation.navigate('AuditItem', { worklistType });
 };
 
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
@@ -81,7 +82,7 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       itemNumber={itemNbr || 0}
       description={itemName || ''}
       onClick={(itemNumber: number) => {
-        onItemClick(itemNumber, navigation, dispatch, trackEventCall);
+        onItemClick(itemNumber, navigation, dispatch, trackEventCall, item.worklistType);
       }}
       loading={false}
       onHandQty={undefined}

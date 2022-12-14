@@ -749,7 +749,8 @@ export const renderConfirmOnHandsModal = (
   >,
   updatedQuantity: number,
   itemDetails: ItemDetails | null,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  worklistType: string
 ) => {
   const onHandsQty = itemDetails?.onHandsQty || 0;
   const basePrice = itemDetails?.basePrice || 0;
@@ -845,7 +846,8 @@ export const renderConfirmOnHandsModal = (
                       newQuantity: updatedQuantity,
                       oldQuantity: onHandsQty,
                       upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
-                    }
+                    },
+                    worklistType
                   })
                 );
               }}
@@ -1308,7 +1310,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         setShowOnHandsConfirmationModal,
         totalOHQty,
         itemDetails,
-        dispatch
+        dispatch,
+        route.params?.worklistType ?? ''
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (

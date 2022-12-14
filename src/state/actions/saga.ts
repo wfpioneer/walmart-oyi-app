@@ -109,7 +109,8 @@ export const addLocation = (payload: {
   locationTypeNbr: number;
 }) => ({ type: ADD_LOCATION, payload } as const);
 export const updateOHQty = (payload: {
-  data: Partial<ApprovalListItem>
+  data: Partial<ApprovalListItem>,
+  worklistType?: string
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
 export const addToPicklist = (payload: {
   headers?: AxiosRequestHeaders;
