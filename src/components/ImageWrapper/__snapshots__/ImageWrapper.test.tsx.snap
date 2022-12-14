@@ -21,12 +21,7 @@ exports[`ImageWrapper Component Renders a ImageWrapper with country code MX 1`] 
   <FastImage
     onError={[Function]}
     resizeMode="contain"
-    source={
-      Object {
-        "priority": "normal",
-        "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/12345m.jpg",
-      }
-    }
+    source=""
     style={
       Object {
         "height": 80,

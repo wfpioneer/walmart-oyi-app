@@ -9,6 +9,7 @@ import { setScannedEvent } from '../../state/actions/Global';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { exceptionTypeToDisplayString } from '../../screens/Worklist/FullExceptionList';
 import { TrackEventSource } from '../../models/Generics.d';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 interface WorklistItemProps {
   exceptionType: string;
@@ -17,11 +18,13 @@ interface WorklistItemProps {
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
   trackEventSource: TrackEventSource;
+  countryCode: string;
+  showItemImage: boolean;
 }
 
 export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   const {
-    navigation, dispatch, exceptionType, itemDescription, itemNumber, trackEventSource
+    navigation, dispatch, exceptionType, itemDescription, itemNumber, trackEventSource, countryCode, showItemImage
   } = props;
   const worklistItemOnPress = () => {
     trackEvent(trackEventSource.screen, {
@@ -34,6 +37,13 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
 
   return (
     <TouchableOpacity testID="btnCard" style={styles.container} onPress={worklistItemOnPress}>
+      {showItemImage && (
+      <ImageWrapper
+        itemNumber={itemNumber}
+        countryCode={countryCode}
+        imageStyle={styles.image}
+      />
+      )}
       <View style={styles.content}>
         <Text style={styles.exceptionType}>
           { exceptionTypeToDisplayString(exceptionType) }
