@@ -26,6 +26,7 @@ export interface ConfigResponse {
   showItemImages: boolean;
   multiPick: boolean;
   multiBin: boolean;
+  showItemImage: boolean;
 }
 
 export default class ConfigService {

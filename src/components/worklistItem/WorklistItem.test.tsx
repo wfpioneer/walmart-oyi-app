@@ -42,6 +42,25 @@ describe('WorklistItem Component', () => {
         upcNbr="4321"
         navigation={navigationProp}
         dispatch={jest.fn}
+        countryCode="MX"
+        showItemImage={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders an WorklistItem component with image', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <WorklistItem
+        exceptionType="NP"
+        itemDescription="Test"
+        itemNumber={1234}
+        upcNbr="4321"
+        navigation={navigationProp}
+        dispatch={jest.fn}
+        countryCode="MX"
+        showItemImage={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -57,6 +76,8 @@ describe('WorklistItem Component', () => {
         upcNbr="4321"
         navigation={navigationProp}
         dispatch={mockDispatch}
+        countryCode="MX"
+        showItemImage={true}
       />
     );
     const btnCard = getByTestId('btnCard');
