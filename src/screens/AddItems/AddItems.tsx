@@ -90,11 +90,19 @@ export const scanItemListener = (
   section: { id: number | string; name: string; },
   dispatch: Dispatch<any>,
   setAddItemsApiStart: React.Dispatch<React.SetStateAction<number>>,
-  isFocused: boolean
+  isFocused: boolean,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
   if (isFocused) {
     if (scannedEvent.value) {
       setAddItemsApiStart(moment().valueOf());
+      trackEventCall('Section_Details', {
+        action: 'add_item_to_floor',
+        upc: scannedEvent.value,
+        sectionId: section.id.toString(),
+        locationTypeNbr: SALES_FLOOR_LOCATION_TYPE
+      });
+
       dispatch(addLocation({
         upc: scannedEvent.value,
         sectionId: section.id.toString(),
@@ -138,7 +146,7 @@ export const AddItemsScreen = (props: AddItemsScreenProps): JSX.Element => {
   // Barcode event listener effect
   useEffectHook(() => {
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      scanItemListener(scan, section, dispatch, setAddItemsApiStart, navigation.isFocused());
+      scanItemListener(scan, section, dispatch, setAddItemsApiStart, navigation.isFocused(), trackEventCall);
     });
 
     return () => {

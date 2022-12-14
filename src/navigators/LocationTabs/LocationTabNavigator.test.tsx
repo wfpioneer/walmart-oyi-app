@@ -533,7 +533,7 @@ describe('Test Location Tabs', (): void => {
     });
 
     it('ensures handleClearSection works properly', () => {
-      handleClearSection(mockDispatch, 1, ClearLocationTarget.FLOOR, mockSetDisplayConfirmation);
+      handleClearSection(mockDispatch, 1, ClearLocationTarget.FLOOR, mockSetDisplayConfirmation, jest.fn);
 
       expect(mockDispatch).toBeCalledTimes(1);
     });

@@ -44,6 +44,7 @@ import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAP
 import User from '../../models/User';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
+import { TrackEventSource } from '../../models/Generics.d';
 
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
@@ -84,13 +85,27 @@ interface TabHeaderProps {
     isReserve: boolean;
     isDisabled: boolean;
 }
+const sectionDetailsScreen = 'Section_Details';
 
 export const handleClearSection = (
   dispatch: Dispatch<any>,
   locationId: number,
   target: ClearLocationTarget,
-  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  trackEventCall: (eventName: string, params?: any) => void
 ): void => {
+  const eventSrc: TrackEventSource = {
+    screen: sectionDetailsScreen,
+    action: 'clearing_section',
+    otherInfo: {
+      target: target.toString()
+    }
+  };
+  trackEventCall(eventSrc.screen, {
+    action: eventSrc.action,
+    ...eventSrc.otherInfo
+  });
+
   setDisplayClearConfirmation(false);
   dispatch(clearLocation({ locationId, target }));
 };
@@ -430,6 +445,18 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   }
 
   const handleRemoveSection = () => {
+    const eventSrc: TrackEventSource = {
+      screen: sectionDetailsScreen,
+      action: 'removing_section_from_aisle',
+      otherInfo: {
+        sectionId: section.id
+      }
+    };
+    trackEventCall(eventSrc.screen, {
+      action: eventSrc.action,
+      ...eventSrc.otherInfo
+    });
+
     setDisplayRemoveConfirmation(false);
     dispatch(removeSection(section.id));
   };
@@ -453,7 +480,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           : strings('LOCATION.CLEAR_SECTION_RESERVE_MESSAGE')}
         subtext2={strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}
         handleConfirm={() => selectedTab
-          && handleClearSection(dispatch, section.id, selectedTab, setDisplayClearConfirmation)}
+          && handleClearSection(dispatch, section.id, selectedTab, setDisplayClearConfirmation, trackEventCall)}
         errorText={strings('LOCATION.CLEAR_SECTION_FAIL')}
       />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
@@ -461,6 +488,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         location={getLocationName(getSectionDetailsApi.isWaiting, sectionExists, locationName)}
         details={getSectionDetailsLabel(getSectionDetailsApi.isWaiting, floorItems, reserveItems)}
         buttonPress={() => {
+          trackEventCall(sectionDetailsScreen, {
+            action: 'print_section_label_navigation'
+          });
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
           dispatch(setIsToolBarNavigation(false));
@@ -489,6 +519,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 e.preventDefault();
                 dispatch(hideLocationPopup());
               }
+              trackEventCall(sectionDetailsScreen, {
+                action: 'moved_to_floor_tab'
+              });
             },
             focus: () => setSelectedTab(ClearLocationTarget.FLOOR)
           }}
@@ -512,6 +545,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               if (itemPopupVisible) {
                 dispatch(hideItemPopup());
               }
+              trackEventCall(sectionDetailsScreen, {
+                action: 'moved_to_pallet_tab'
+              });
             },
             focus: () => setSelectedTab(ClearLocationTarget.RESERVE)
           }}

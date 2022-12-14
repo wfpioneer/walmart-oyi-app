@@ -23,13 +23,20 @@ export type FloorItemRowProps = {
   item: SectionDetailsItem;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
+  trackEventCall: (eventName: string, params?: any) => void;
 };
 
 const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
-  const { item, dispatch, navigation } = props;
+  const {
+    item, dispatch, navigation, trackEventCall
+  } = props;
   const user = useTypedSelector(state => state.User);
   const location = useTypedSelector(state => state.Location);
   const itemOnPress = () => {
+    trackEventCall('Section_Details', {
+      action: 'navigating_to_review_item_details_screen',
+      itemNbr: item.itemNbr.toString()
+    });
     dispatch(
       setScannedEvent({ type: 'Section', value: item.itemNbr.toString() })
     );
