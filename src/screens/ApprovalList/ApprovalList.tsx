@@ -9,7 +9,12 @@ import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
-import { ApprovalCategory, ApprovalListItem, approvalStatus } from '../../models/ApprovalListItem';
+import {
+  ApprovalCategory,
+  ApprovalListItem,
+  approvalRequestSource as approvalSource,
+  approvalStatus
+} from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getApprovalList } from '../../state/actions/saga';
@@ -178,6 +183,10 @@ export const renderFilterPills = (
   filterCategories: string[],
   filterSources: string[],
 ): JSX.Element => {
+  if (!listFilter.value) {
+    // TODO Remove when no approval items lack a source
+    return (<></>);
+  }
   if (listFilter.type === FilterType.CATEGORY) {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
@@ -191,9 +200,24 @@ export const renderFilterPills = (
     const removeSourceFilter = () => {
       const removeSource = filterSources;
       removeSource.splice(filterSources.indexOf(listFilter.value), 1);
+      // Ditto with the todo
+      if (listFilter.value === approvalSource.ItemDetails) {
+        removeSource.splice(removeSource.indexOf(''), 1);
+      }
       dispatch(updateFilterSources(removeSource));
     };
-    return <FilterPillButton filterText={listFilter.value} onClosePress={removeSourceFilter} />;
+    let displayName = '';
+    switch (listFilter.value) {
+      case approvalSource.Audits:
+        displayName = strings('AUDITS.AUDITS');
+        break;
+      case approvalSource.ItemDetails:
+        displayName = strings('GENERICS.ITEMS');
+        break;
+      default:
+        displayName = strings('GENERICS.NOT_FOUND');
+    }
+    return <FilterPillButton filterText={displayName} onClosePress={removeSourceFilter} />;
   }
   return <View />;
 };
@@ -320,7 +344,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
     newFilteredList = newFilteredList.filter(approvalItem => {
       const catgList = approvalMap.get(approvalItem.categoryNbr);
-      const getIndex = filterSources.indexOf(approvalItem.approvalRequestSource) !== -1;
+      const getIndex = filterSources.indexOf(approvalItem.approvalRequestSource || '') !== -1;
 
       // List is pre-sorted so this will grab the Category Header first
       if (!catgList) {
