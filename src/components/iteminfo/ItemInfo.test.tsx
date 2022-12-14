@@ -45,7 +45,9 @@ describe('ItemInfo Component', () => {
     price: 14,
     exceptionType: 'NSFL',
     additionalItemDetails: mockAdditionalItemDetails,
-    showAdditionalItemDetails: false
+    showAdditionalItemDetails: false,
+    countryCode: 'MX',
+    showItemImage: false
   };
 
   describe('Tests rendering ItemInfo', () => {
@@ -63,6 +65,8 @@ describe('ItemInfo Component', () => {
           navigationForPrint={navigationProp}
           showAdditionalItemDetails={false}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
+          countryCode={mockItem.countryCode}
+          showItemImage={mockItem.showItemImage}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -82,7 +86,8 @@ describe('ItemInfo Component', () => {
         navigationForPrint={navigationProp}
         showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
-
+        countryCode={mockItem.countryCode}
+        showItemImage={mockItem.showItemImage}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -102,7 +107,8 @@ describe('ItemInfo Component', () => {
         navigationForPrint={mockNavigationProp}
         showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
-
+        countryCode={mockItem.countryCode}
+        showItemImage={mockItem.showItemImage}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -122,6 +128,8 @@ describe('ItemInfo Component', () => {
           navigationForPrint={navigationProp}
           showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
+          countryCode={mockItem.countryCode}
+          showItemImage={mockItem.showItemImage}
         />
       );
       const collapsibleCard = getByTestId('collapsible-card');
@@ -146,6 +154,8 @@ describe('ItemInfo Component', () => {
           navigationForPrint={navigationProp}
           showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
+          countryCode={mockItem.countryCode}
+          showItemImage={mockItem.showItemImage}
         />
       );
       const printPriceSignButton = getByTestId('print-price-sign');

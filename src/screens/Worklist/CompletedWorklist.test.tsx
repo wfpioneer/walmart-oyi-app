@@ -27,6 +27,8 @@ describe('CompletedWorklistScreen', () => {
           navigation={navigationProp}
           areas={[]}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -49,6 +51,8 @@ describe('CompletedWorklistScreen', () => {
           navigation={navigationProp}
           areas={[]}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -71,6 +75,8 @@ describe('CompletedWorklistScreen', () => {
           navigation={navigationProp}
           areas={[]}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -93,6 +99,8 @@ describe('CompletedWorklistScreen', () => {
           navigation={navigationProp}
           areas={[]}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -115,6 +123,8 @@ describe('CompletedWorklistScreen', () => {
           navigation={navigationProp}
           areas={[]}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -135,6 +145,8 @@ describe('CompletedWorklistScreen', () => {
           navigation={navigationProp}
           areas={[]}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

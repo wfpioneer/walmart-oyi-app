@@ -19,7 +19,7 @@ describe('LocationCard', () => {
         scanned={false}
         quantity={12}
         onLocationDelete={jest.fn}
-        onInputPress={jest.fn}
+        onCalcPress={jest.fn}
         showCalculator={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -38,7 +38,7 @@ describe('LocationCard', () => {
         scanned={false}
         quantity={12}
         onLocationDelete={jest.fn}
-        onInputPress={jest.fn}
+        onCalcPress={jest.fn}
         showCalculator={true}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -57,7 +57,7 @@ describe('LocationCard', () => {
         scanned={false}
         quantity={12}
         onLocationDelete={jest.fn}
-        onInputPress={jest.fn}
+        onCalcPress={jest.fn}
         showCalculator={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -76,7 +76,7 @@ describe('LocationCard', () => {
         scanned={false}
         quantity={12}
         onLocationDelete={jest.fn}
-        onInputPress={jest.fn}
+        onCalcPress={jest.fn}
         showCalculator={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -95,7 +95,7 @@ describe('LocationCard', () => {
         scanned={true}
         quantity={12}
         onLocationDelete={jest.fn}
-        onInputPress={jest.fn}
+        onCalcPress={jest.fn}
         showCalculator={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();

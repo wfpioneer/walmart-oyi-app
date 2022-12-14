@@ -37,5 +37,6 @@ export const mockConfig: Configurations = {
   showCalculator: false,
   showItemImages: false,
   multiBin: false,
-  multiPick: false
+  multiPick: false,
+  showItemImage: false
 };
