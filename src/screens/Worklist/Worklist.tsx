@@ -21,6 +21,8 @@ interface ListItemProps {
   item: WorklistItemI;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
+  countryCode: string;
+  showItemImage: boolean;
 }
 
 interface WorklistProps {
@@ -36,9 +38,13 @@ interface WorklistProps {
   areas: area[];
   navigation: NavigationProp<any>;
   enableAreaFilter: boolean;
+  countryCode: string;
+  showItemImage: boolean;
 }
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
-  const { dispatch, item, navigation } = props;
+  const {
+    dispatch, item, navigation, countryCode, showItemImage
+  } = props;
   if (item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = item;
     return (
@@ -57,6 +63,8 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       itemNumber={itemNbr || 0}
       dispatch={dispatch}
       navigation={navigation}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
     />
   );
 };
@@ -158,7 +166,8 @@ export const renderFilterPills = (
 export const Worklist = (props: WorklistProps): JSX.Element => {
   const {
     data, dispatch, error, filterCategories, filterExceptions,
-    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas, enableAreaFilter
+    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas, enableAreaFilter,
+    countryCode, showItemImage
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   if (error) {
@@ -282,7 +291,15 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
           }
           return item.itemNbr + index.toString();
         }}
-        renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
+        renderItem={({ item }) => (
+          <RenderWorklistItem
+            item={item}
+            dispatch={dispatch}
+            navigation={navigation}
+            countryCode={countryCode}
+            showItemImage={showItemImage}
+          />
+        )}
         onRefresh={onRefresh}
         refreshing={refreshing}
         style={styles.list}
