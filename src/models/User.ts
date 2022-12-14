@@ -38,6 +38,7 @@ export interface Configurations {
   showItemImages: boolean;
   multiPick: boolean;
   multiBin: boolean;
+  showItemImage: boolean;
 }
 
 export interface area {
