@@ -99,6 +99,7 @@ export interface ItemDetailsScreenProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
   userConfigs: Configurations;
+  countryCode: string;
 }
 
 export interface HandleProps {
@@ -640,7 +641,7 @@ export const renderAddPicklistButton = (
     );
   }
 
-  return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
+  return <></>;
 };
 
 export const renderLocationComponent = (
@@ -1032,7 +1033,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall,
     useEffectHook,
     useFocusEffectHook,
-    floorLocations, userFeatures, userConfigs
+    floorLocations, userFeatures, userConfigs,
+    countryCode
   } = props;
 
   const { additionalItemDetails } = userConfigs;
@@ -1269,6 +1271,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 basePrice: itemDetails.basePrice,
                 source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' }
               }}
+              countryCode={countryCode}
+              showItemImage={userConfigs.showItemImage}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
@@ -1330,7 +1334,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const getItemDetailsV2Api = useTypedSelector(state => state.async.getItemDetailsV2);
-  const { userId } = useTypedSelector(state => state.User);
+  const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
     exceptionType,
     actionCompleted,
@@ -1396,6 +1400,7 @@ const ReviewItemDetails = (): JSX.Element => {
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
       userConfigs={userConfigs}
+      countryCode={countryCode}
     />
   );
 };
