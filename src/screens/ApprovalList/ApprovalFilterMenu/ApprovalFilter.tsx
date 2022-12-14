@@ -184,7 +184,7 @@ export const getSourceMap = (
     const source = item.approvalRequestSource || '';
     const isSelected = filteredSources.indexOf(source) !== -1;
     return {
-      catgName: item.approvalRequestSource || '',
+      catgName: source,
       selected: isSelected
     };
   });

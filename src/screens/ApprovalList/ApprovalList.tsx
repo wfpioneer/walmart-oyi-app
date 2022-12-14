@@ -344,7 +344,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
     newFilteredList = newFilteredList.filter(approvalItem => {
       const catgList = approvalMap.get(approvalItem.categoryNbr);
-      const getIndex = filterSources.indexOf(approvalItem.approvalRequestSource) !== -1;
+      const getIndex = filterSources.indexOf(approvalItem.approvalRequestSource || '') !== -1;
 
       // List is pre-sorted so this will grab the Category Header first
       if (!catgList) {
