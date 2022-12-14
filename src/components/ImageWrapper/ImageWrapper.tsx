@@ -31,7 +31,7 @@ export const getImgDataParams = (uuid: string) => ({
   }
 });
 
-export const getCNImageUri = (
+export const setCNImageUri = (
   itemNumber: number,
   setImageUri: React.Dispatch<React.SetStateAction<any>>
 ) => {
@@ -52,6 +52,7 @@ export const getCNImageUri = (
     }
   };
 
+  setImageUri('');
   try {
     postApiCall(urls.itemImageUUIDUrlCN, JSON.stringify(uuidDataParams))
       .then(res => res.json())
@@ -91,14 +92,18 @@ export const getCNImageUri = (
 const ImageWrapper = ({
   itemNumber, imageStyle, countryCode
 }: ImageWrapperProps) => {
-  const [imageUri, setImageUri] = useState(
-    countryCode === 'MX' ? getMXImageUri(itemNumber) : undefined
-  );
+  const [imageUri, setImageUri] = useState('');
   useEffect(() => {
-    if (countryCode === 'CN') {
-      getCNImageUri(itemNumber, setImageUri);
+    if (itemNumber > 0) {
+      if (countryCode === 'CN') {
+        setCNImageUri(itemNumber, setImageUri);
+      } else {
+        setImageUri(getMXImageUri(itemNumber));
+      }
+    } else {
+      setImageUri('');
     }
-  }, []);
+  }, [itemNumber]);
 
   return (
     <View>
@@ -111,7 +116,7 @@ const ImageWrapper = ({
           }
           : require('../../assets/images/placeholder.png')}
         resizeMode={FastImage.resizeMode.contain}
-        onError={() => setImageUri(undefined)}
+        onError={() => setImageUri('')}
       />
     </View>
   );
