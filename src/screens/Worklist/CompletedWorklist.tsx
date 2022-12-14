@@ -20,12 +20,15 @@ interface CompletedWorklistProps {
     navigation: NavigationProp<any>;
     areas: area[];
     enableAreaFilter: boolean;
+    countryCode: string;
+    showItemImage: boolean;
 }
 
 export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
-    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter
+    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
+    countryCode, showItemImage
   } = props;
 
   let completedItems: WorklistItemI[] | undefined;
@@ -48,6 +51,8 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
       navigation={navigation}
       areas={areas}
       enableAreaFilter={enableAreaFilter}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
     />
   );
 };
@@ -56,7 +61,8 @@ export const CompletedWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
+  const { countryCode } = useTypedSelector(state => state.User);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -73,6 +79,8 @@ export const CompletedWorklist = (): JSX.Element => {
       navigation={navigation}
       areas={areas}
       enableAreaFilter={enableAreaFilter}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
     />
   );
 };
