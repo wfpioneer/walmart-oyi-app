@@ -7,6 +7,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PalletWorklist } from './PalletWorklist';
 import { AsyncState } from '../../models/AsyncState';
 import { getPalletWorklist } from '../../state/actions/saga';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface CompletedWorklistScreenProps {
   getMPWorklistApi: AsyncState;
@@ -19,6 +20,7 @@ interface CompletedWorklistScreenProps {
   updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
   selectedTab: Tabs;
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: (eventName: string, params?: any) => void;
 }
 
 interface CompletedWorklistProps {
@@ -38,7 +40,8 @@ export const CompletedPalletWorklistScreen = (
     groupToggle,
     updateGroupToggle,
     selectedTab,
-    setPalletClicked
+    setPalletClicked,
+    trackEventCall
   } = props;
 
   const { isWaiting, error, result } = getMPWorklistApi;
@@ -59,13 +62,17 @@ export const CompletedPalletWorklistScreen = (
       clearPalletAPI={clearPalletAPI}
       navigation={navigation}
       useEffectHook={useEffect}
-      onRefresh={() => dispatch(getPalletWorklist({ worklistType: ['MP'] }))}
+      onRefresh={() => {
+        trackEventCall('pallet_worklists_screen', { action: 'get_worklist_api_retry' });
+        dispatch(getPalletWorklist({ worklistType: ['MP'] }));
+      }}
       refreshing={isWaiting}
       error={error}
       groupToggle={groupToggle}
       updateGroupToggle={updateGroupToggle}
       selectedTab={selectedTab}
       setPalletClicked={setPalletClicked}
+      trackEventCall={trackEventCall}
     />
   );
 };
@@ -91,6 +98,7 @@ export const CompletedPalletWorklist = (props: CompletedWorklistProps): JSX.Elem
       updateGroupToggle={updateGroupToggle}
       selectedTab={selectedTab}
       setPalletClicked={setPalletClicked}
+      trackEventCall={trackEvent}
     />
   );
 };

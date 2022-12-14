@@ -63,19 +63,27 @@ describe('ScanPalletScreen', () => {
     it('Test getScannedPalletEffect while scanning the pallet as same as selected pallet ', () => {
       const mockScannedEvent = { type: 'TEST', value: '7987' };
       const mockSelectedWorklistPalletId = '7987';
-      getScannedPalletEffect(navigationProp, mockScannedEvent, mockSelectedWorklistPalletId, mockDispatch);
+      const mockTrackEventCall = jest.fn();
+      getScannedPalletEffect(
+        navigationProp, mockScannedEvent, mockSelectedWorklistPalletId, mockDispatch, mockTrackEventCall
+      );
+      expect(mockTrackEventCall).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(1);
     });
     it('Test getScannedPalletEffect while scanning the pallet different from selected pallet ', () => {
       const mockScannedEvent = { type: 'TEST', value: '7987' };
       const mockSelectedWorklistPalletId = '7989';
-      getScannedPalletEffect(navigationProp, mockScannedEvent, mockSelectedWorklistPalletId, mockDispatch);
+      const mockTrackEventCall = jest.fn();
+      getScannedPalletEffect(
+        navigationProp, mockScannedEvent, mockSelectedWorklistPalletId, mockDispatch, mockTrackEventCall
+      );
       expect(Toast.show).toBeCalledWith({
         type: 'error',
         text1: strings('WORKLIST.SCAN_PALLET_ERROR'),
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
+      expect(mockTrackEventCall).not.toBeCalled();
       expect(mockDispatch).toBeCalledTimes(1);
     });
   });
