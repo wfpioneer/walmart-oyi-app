@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StarsComponent should render Stars component with intial value and defined size 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-0"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={25}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-1"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={25}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-2"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={25}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-3"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={25}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-4"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={25}
+      />
+    </TouchableOpacity>
+  </View>
+  <View>
+    <Text>
+      
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`StarsComponent should render the component based on props 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-0"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={30}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-1"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={30}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-2"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={30}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-3"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={30}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+      testID="star-icon-4"
+    >
+      <Icon
+        color="#FFD966"
+        name="star-outline"
+        size={30}
+      />
+    </TouchableOpacity>
+  </View>
+  <View>
+    <Text>
+      
+    </Text>
+  </View>
+</View>
+`;
