@@ -11,8 +11,8 @@ import {
   AuditWorklistTabScreen, renderFilterPills
 } from './AuditWorklistTab';
 import { ExceptionList } from './FullExceptionList';
-import { mockAreas } from '../../mockData/mockConfig';
 import { FilterType } from '../../models/FilterListItem';
+import { mockAreas } from '../../mockData/mockConfig';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
@@ -46,6 +46,7 @@ describe('AuditWorklistTab', () => {
           onRefresh={() => {}}
           countryCode="MX"
           showItemImage={false}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -68,6 +69,7 @@ describe('AuditWorklistTab', () => {
           onRefresh={() => {}}
           countryCode="MX"
           showItemImage={false}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -90,6 +92,7 @@ describe('AuditWorklistTab', () => {
           onRefresh={() => {}}
           countryCode="MX"
           showItemImage={false}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -112,6 +115,7 @@ describe('AuditWorklistTab', () => {
           onRefresh={() => {}}
           countryCode="MX"
           showItemImage={true}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -230,6 +234,8 @@ describe('Tests rendering Filter `Pills`', () => {
     const renderer = ShallowRenderer.createRenderer();
     const invalidFilter = { type: '', value: '' };
     renderer.render(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore need to do bad filter type here
       renderFilterPills(invalidFilter, jest.fn(), [], [], exceptionList, [])
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

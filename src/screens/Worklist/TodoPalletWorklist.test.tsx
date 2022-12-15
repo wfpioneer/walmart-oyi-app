@@ -7,6 +7,7 @@ import {
   mockMissingPalletWorklistComplete,
   mockMissingPalletWorklistTodo
 } from '../../mockData/mockWorkList';
+import { Tabs } from '../../models/PalletWorklist';
 
 let navigationProp: NavigationProp<any>;
 
@@ -17,6 +18,7 @@ describe('TodoPalletWorklistScreen', () => {
     value: null,
     result: null
   };
+  const mockTrackEventCall = jest.fn();
 
   it('Renders an array of incomplete pallet worklist items with incomplete and complete items', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -39,6 +41,9 @@ describe('TodoPalletWorklistScreen', () => {
         navigation={navigationProp}
         groupToggle={false}
         updateGroupToggle={jest.fn()}
+        selectedTab={Tabs.COMPLETED}
+        setPalletClicked={jest.fn()}
+        trackEventCall={mockTrackEventCall}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

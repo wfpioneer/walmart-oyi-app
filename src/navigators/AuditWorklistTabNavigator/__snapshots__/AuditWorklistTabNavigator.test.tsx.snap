@@ -25,16 +25,18 @@ exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator com
   }
 >
   <AuditWorklistTabNavigator
-    dispatch={[Function]}
+    dispatch={[MockFunction]}
     route={
       Object {
         "key": "",
         "name": "AuditWorklistTabs",
       }
     }
-    useCallbackHook={[Function]}
-    useFocusEffectHook={[Function]}
-    validateSessionCall={[Function]}
+    trackEventCall={[MockFunction]}
+    useCallbackHook={[MockFunction]}
+    useEffectHook={[MockFunction]}
+    useFocusEffectHook={[MockFunction]}
+    validateSessionCall={[MockFunction]}
   />
 </Context.Provider>
 `;

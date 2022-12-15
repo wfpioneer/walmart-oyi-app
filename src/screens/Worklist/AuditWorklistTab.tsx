@@ -21,6 +21,7 @@ import { FilterPillButton } from '../../components/filterPillButton/FilterPillBu
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 import ItemCard from '../../components/ItemCard/ItemCard';
 import { FilterType } from '../../models/FilterListItem';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
@@ -33,6 +34,7 @@ interface ListItemProps {
   navigation: NavigationProp<any>;
   showItemImage: boolean;
   countryCode: string;
+  trackEventCall: typeof trackEvent;
 }
 
 export interface AuditWorklistTabScreenProps {
@@ -49,16 +51,23 @@ export interface AuditWorklistTabScreenProps {
     onRefresh: () => void;
     showItemImage: boolean;
     countryCode: string;
+    trackEventCall: typeof trackEvent;
 }
 
-const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispatch: Dispatch<any>) => {
+const onItemClick = (
+  itemNumber: number,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent
+) => {
   dispatch(setAuditItemNumber(itemNumber));
+  trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
   navigation.navigate('AuditItem');
 };
 
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const {
-    dispatch, item, navigation, showItemImage, countryCode
+    dispatch, item, navigation, showItemImage, countryCode, trackEventCall
   } = props;
   if (item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = item;
@@ -75,7 +84,7 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       itemNumber={itemNbr || 0}
       description={itemName || ''}
       onClick={(itemNumber: number) => {
-        onItemClick(itemNumber, navigation, dispatch);
+        onItemClick(itemNumber, navigation, dispatch, trackEventCall);
       }}
       loading={false}
       onHandQty={undefined}
@@ -183,7 +192,7 @@ export const renderFilterPills = (
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, refreshing, dispatch, navigation, error,
+    items, refreshing, dispatch, navigation, error, trackEventCall,
     areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh,
     showItemImage, countryCode
   } = props;
@@ -285,6 +294,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
             navigation={navigation}
             showItemImage={showItemImage}
             countryCode={countryCode}
+            trackEventCall={trackEventCall}
           />
         )}
         keyExtractor={(item: WorklistItemI, index: number) => {
@@ -328,6 +338,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       onRefresh={onRefresh}
       countryCode={countryCode}
       showItemImage={showItemImage}
+      trackEventCall={trackEvent}
     />
   );
 };
