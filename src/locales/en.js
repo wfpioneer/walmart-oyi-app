@@ -532,5 +532,12 @@ export default {
     NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
     ITEMS: 'Items',
     CUSTOM_ITEMS: 'Items'
+  },
+  FEEDBACK: {
+    VERY_POOR_RATE_LABEL: 'Very Poor',
+    POOR_RATE_LABEL: 'Poor',
+    AVERAGE_RATE_LABEL: 'Average',
+    GOOD_RATE_LABEL: 'Good',
+    EXCELLENT_RATE_LABEL: 'Excellent'
   }
 };
