@@ -17,12 +17,14 @@ describe('AuditWorklistTab Navigator', () => {
     renderer.render(
       <Provider store={store}>
         <AuditWorklistTabNavigator
-          dispatch={jest.fn}
+          dispatch={jest.fn()}
           navigation={navigationProp}
           route={routeProp}
-          validateSessionCall={jest.fn}
-          useCallbackHook={jest.fn}
-          useFocusEffectHook={jest.fn}
+          validateSessionCall={jest.fn()}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       </Provider>
     );
