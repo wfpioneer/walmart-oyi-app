@@ -1262,7 +1262,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         noAction({
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
-          scannedValue: itemNumber.toString()
+          scannedValue: itemNumber.toString(),
+          headers: { worklistType: route.params?.worklistType ?? 'AU' }
         })
       );
     } else {
@@ -1311,7 +1312,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         totalOHQty,
         itemDetails,
         dispatch,
-        route.params?.worklistType ?? ''
+        route.params?.worklistType ?? 'AU'
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (

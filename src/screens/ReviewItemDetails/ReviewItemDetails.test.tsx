@@ -1234,8 +1234,7 @@ describe('ReviewItemDetailsScreen', () => {
             newQuantity: 10,
             oldQuantity: 42,
             upcNbr: 55559999
-          },
-          worklistType: 'AU'
+          }
         },
         type: 'SAGA/UPDATE_OH_QTY'
       };
