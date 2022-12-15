@@ -52,6 +52,7 @@ export const setCNImageUri = (
     }
   };
 
+  setImageUri('');
   try {
     postApiCall(urls.itemImageUUIDUrlCN, JSON.stringify(uuidDataParams))
       .then(res => res.json())

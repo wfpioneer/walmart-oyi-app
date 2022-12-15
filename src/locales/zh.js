@@ -534,5 +534,12 @@ export default {
     NEGATIVE_VALIDATION: '无效结果，位置数量不可小于0',
     ITEMS: '个库存',
     CUSTOM_ITEMS: '个 item'
+  },
+  FEEDBACK: {
+    VERY_POOR_RATE_LABEL: '很差',
+    POOR_RATE_LABEL: '差',
+    AVERAGE_RATE_LABEL: '一般',
+    GOOD_RATE_LABEL: '好',
+    EXCELLENT_RATE_LABEL: '非常好'
   }
 };

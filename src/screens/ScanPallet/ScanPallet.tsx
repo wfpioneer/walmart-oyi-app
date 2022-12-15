@@ -41,10 +41,13 @@ export const getScannedPalletEffect = (
   navigation: NavigationProp<any>,
   scannedEvent: { type: string | null; value: string | null },
   selectedWorklistPalletId: string,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
   if (navigation.isFocused() && scannedEvent.value) {
     if (scannedEvent.value === selectedWorklistPalletId) {
+      trackEventCall('scan_pallet_screen',
+        { action: 'added_pallet_for_adding_location', palletId: scannedEvent.value });
       navigateScanLocationScreen(navigation);
     } else {
       Toast.show({
@@ -82,7 +85,7 @@ export const ScanPalletScreen = (props: ScanPalletScreenProps): JSX.Element => {
   }, []);
 
   useEffectHook(() => getScannedPalletEffect(
-    navigation, scannedEvent, selectedWorklistPalletId, dispatch
+    navigation, scannedEvent, selectedWorklistPalletId, dispatch, trackEventCall
   ), [scannedEvent]);
 
   return (

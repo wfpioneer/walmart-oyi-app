@@ -613,23 +613,6 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('renders \'Reserve Item Needed\' to Add to Picklist', () => {
-      const noReserveItemDetails = {
-        ...itemDetail[123],
-        location: {
-          floor: undefined,
-          reserve: undefined,
-          count: 0
-        }
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        renderAddPicklistButton({
-          ...mockHandleProps
-        }, noReserveItemDetails, jest.fn())
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
   });
   // TODO Keep temporary tests until we refactor Modal.tsx for global usage in app
   describe('Tests Rendering Scanned Barcode Error', () => {
