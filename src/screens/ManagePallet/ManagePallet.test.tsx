@@ -29,6 +29,7 @@ import {
 import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
+import { mockConfig } from '../../mockData/mockConfig';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -110,6 +111,7 @@ describe('ManagePalletScreen', () => {
     getParent: jest.fn(),
     getState: jest.fn()
   };
+  const mockCountryCode = 'MX';
   let routeProp: RouteProp<any, string>;
   describe('Tests rendering the PalletManagement Screen', () => {
     it('Renders the PalletManagement default ', () => {
@@ -143,6 +145,8 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
+          userConfigs={mockConfig}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -178,6 +182,8 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
+          userConfigs={mockConfig}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -214,6 +220,8 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
+          userConfigs={mockConfig}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -254,6 +262,8 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
+          userConfigs={mockConfig}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -289,6 +299,8 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
+          userConfigs={mockConfig}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -328,6 +340,8 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
+          userConfigs={mockConfig}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -375,6 +389,8 @@ describe('ManagePalletScreen', () => {
           setConfirmBackNavigate={jest.fn()}
           createPallet={false}
           postCreatePalletApi={defaultAsyncState}
+          userConfigs={mockConfig}
+          countryCode={mockCountryCode}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
