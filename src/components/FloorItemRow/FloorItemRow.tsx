@@ -18,6 +18,7 @@ import styles from './FloorItemRow.style';
 import { currencies, strings } from '../../locales';
 import { SectionDetailsItem } from '../../models/LocationItems';
 import { setScannedEvent } from '../../state/actions/Global';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 export type FloorItemRowProps = {
   item: SectionDetailsItem;
@@ -53,6 +54,16 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
       onPress={() => itemOnPress()}
     >
       <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          {user.configs.showItemImage
+          && (
+          <ImageWrapper
+            itemNumber={item.itemNbr}
+            countryCode={user.countryCode}
+            imageStyle={styles.itemImage}
+          />
+          )}
+        </View>
         <View style={styles.content}>
           <View style={styles.pallet}>
             <Text style={styles.itemNbr}>
