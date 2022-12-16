@@ -1,5 +1,6 @@
 import React, {
   EffectCallback,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -314,60 +315,66 @@ const AisleList = (): JSX.Element => {
     navigation.navigate('AddZone');
   };
 
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => dispatch(hideLocationPopup())}
-        disabled={!locationPopupVisible}
-        style={locationPopupVisible ? styles.disabledContainer : styles.safeAreaView}
+      <AisleScreen
+        zoneId={zoneId}
+        zoneName={zoneName}
+        navigation={navigation}
+        dispatch={dispatch}
+        getAllAisles={getAllAisles}
+        deleteZoneApi={deleteZoneApi}
+        isManualScanEnabled={isManualScanEnabled}
+        getAislesApiStart={getAislesApiStart}
+        setGetAislesApiStart={setGetAislesApiStart}
+        deleteZoneApiStart={deleteZoneApiStart}
+        setDeleteZoneApiStart={setDeleteZoneApiStart}
+        displayConfirmation={displayConfirmation}
+        setDisplayConfirmation={setDisplayConfirmation}
+        route={route}
+        useEffectHook={useEffect}
+        trackEventCall={trackEvent}
+        locationPopupVisible={locationPopupVisible}
+        activityModal={activityModal}
+      />
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+        backdropComponent={renderBackdrop}
       >
-        <AisleScreen
-          zoneId={zoneId}
-          zoneName={zoneName}
-          navigation={navigation}
-          dispatch={dispatch}
-          getAllAisles={getAllAisles}
-          deleteZoneApi={deleteZoneApi}
-          isManualScanEnabled={isManualScanEnabled}
-          getAislesApiStart={getAislesApiStart}
-          setGetAislesApiStart={setGetAislesApiStart}
-          deleteZoneApiStart={deleteZoneApiStart}
-          setDeleteZoneApiStart={setDeleteZoneApiStart}
-          displayConfirmation={displayConfirmation}
-          setDisplayConfirmation={setDisplayConfirmation}
-          route={route}
-          useEffectHook={useEffect}
-          trackEventCall={trackEvent}
-          locationPopupVisible={locationPopupVisible}
-          activityModal={activityModal}
-        />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
-          index={0}
-          onDismiss={() => dispatch(hideLocationPopup())}
-          style={styles.bottomSheetModal}
-          backdropComponent={BottomSheetBackdrop}
-        >
-          <BottomSheetView>
-            <BottomSheetAddCard
-              onPress={handleAddAisles}
-              text={strings('LOCATION.ADD_AISLES')}
-              isManagerOption={false}
-              isVisible={true}
-            />
-            <BottomSheetRemoveCard
-              onPress={() => {
-                dispatch(hideLocationPopup());
-                setDisplayConfirmation(true);
-              }}
-              text={strings('LOCATION.REMOVE_ZONE')}
-              isVisible={userFeatures.includes('manager approval')}
-            />
-          </BottomSheetView>
-        </BottomSheetModal>
-      </TouchableOpacity>
+        <BottomSheetView>
+          <BottomSheetAddCard
+            onPress={handleAddAisles}
+            text={strings('LOCATION.ADD_AISLES')}
+            isManagerOption={false}
+            isVisible={true}
+          />
+          <BottomSheetRemoveCard
+            onPress={() => {
+              dispatch(hideLocationPopup());
+              setDisplayConfirmation(true);
+            }}
+            text={strings('LOCATION.REMOVE_ZONE')}
+            isVisible={userFeatures.includes('manager approval')}
+          />
+        </BottomSheetView>
+      </BottomSheetModal>
     </BottomSheetModalProvider>
   );
 };

@@ -1,5 +1,6 @@
 import React, {
   EffectCallback,
+  useCallback,
   useEffect,
   useMemo, useRef,
   useState
@@ -529,14 +530,21 @@ const SectionList = (): JSX.Element => {
     navigation.navigate('AddSection');
   };
 
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => dispatch(hideLocationPopup())}
-        disabled={!location.locationPopupVisible}
-        style={location.locationPopupVisible ? styles.disabledContainer : styles.safeAreaView}
-      >
         <SectionScreen
           aisleId={aisleId}
           aisleName={aisleName}
@@ -568,7 +576,7 @@ const SectionList = (): JSX.Element => {
           index={0}
           onDismiss={() => dispatch(hideLocationPopup())}
           style={styles.bottomSheetModal}
-          backdropComponent={BottomSheetBackdrop}
+          backdropComponent={renderBackdrop}
         >
           <BottomSheetPrintCard
             isVisible={locationManagementEdit()}
@@ -607,7 +615,6 @@ const SectionList = (): JSX.Element => {
             }}
           />
         </BottomSheetModal>
-      </TouchableOpacity>
     </BottomSheetModalProvider>
   );
 };
