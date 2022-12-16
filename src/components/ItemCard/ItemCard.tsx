@@ -38,7 +38,7 @@ const ItemCard = ({
       }}
       testID="itemCard"
     >
-      {showItemImage && (
+      {showItemImage && !loading && (
       <ImageWrapper
         countryCode={countryCode}
         itemNumber={itemNumber}

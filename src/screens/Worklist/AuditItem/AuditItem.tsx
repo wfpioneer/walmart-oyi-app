@@ -149,7 +149,6 @@ export interface AuditItemScreenProps {
   showCalcModalState: UseStateType<boolean>;
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
-  showItemImage: boolean;
   updateMultiPalletUPCQtyApi: AsyncState;
 }
 
@@ -944,7 +943,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     showCalcModalState,
     locationListState,
     countryCode,
-    showItemImage,
     updateMultiPalletUPCQtyApi
   } = props;
   let scannedSubscription: EmitterSubscription;

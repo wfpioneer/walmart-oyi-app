@@ -172,7 +172,6 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showCalcModalState: [false, jest.fn()],
   locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
   countryCode: 'CN',
-  showItemImage: false,
   updateMultiPalletUPCQtyApi: defaultAsyncState
 };
 

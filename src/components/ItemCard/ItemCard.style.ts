@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
   loaderContainer: {
     backgroundColor: COLOR.GREY_TRANSPARENT,
     padding: 5,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    height: 80
   },
   image: {
     height: 85,
