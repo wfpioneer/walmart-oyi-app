@@ -35,7 +35,7 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
   const itemOnPress = () => {
     trackEventCall('Section_Details', {
       action: 'navigating_to_review_item_details_screen',
-      itemNbr: item.itemNbr.toString()
+      itemNbr: item.itemNbr
     });
     dispatch(
       setScannedEvent({ type: 'Section', value: item.itemNbr.toString() })

@@ -46,7 +46,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
     trackEventCall('Section_Details', {
       action: 'deleting_pallet_from_location',
       palletId: reservePallet.id,
-      sectionId: section.id.toString()
+      sectionId: section.id
     });
     dispatch(deletePallet({
       palletId: reservePallet.id

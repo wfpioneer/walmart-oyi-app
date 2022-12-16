@@ -44,12 +44,12 @@ import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAP
 import User from '../../models/User';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
-import { TrackEventSource } from '../../models/Generics.d';
 
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
 const LOCATION_PALLETS = 'LOCATION.PALLETS';
 const LOCATION_ITEMS = 'LOCATION.ITEMS';
+const SECTION_DETAILS = 'Section_Details';
 
 export interface LocationProps {
     floorItems: SectionDetailsItem[];
@@ -85,7 +85,6 @@ interface TabHeaderProps {
     isReserve: boolean;
     isDisabled: boolean;
 }
-const sectionDetailsScreen = 'Section_Details';
 
 export const handleClearSection = (
   dispatch: Dispatch<any>,
@@ -94,16 +93,9 @@ export const handleClearSection = (
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
   trackEventCall: (eventName: string, params?: any) => void
 ): void => {
-  const eventSrc: TrackEventSource = {
-    screen: sectionDetailsScreen,
+  trackEventCall(SECTION_DETAILS, {
     action: 'clearing_section',
-    otherInfo: {
-      target: target.toString()
-    }
-  };
-  trackEventCall(eventSrc.screen, {
-    action: eventSrc.action,
-    ...eventSrc.otherInfo
+    target
   });
 
   setDisplayClearConfirmation(false);
@@ -445,16 +437,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   }
 
   const handleRemoveSection = () => {
-    const eventSrc: TrackEventSource = {
-      screen: sectionDetailsScreen,
+    trackEventCall(SECTION_DETAILS, {
       action: 'removing_section_from_aisle',
-      otherInfo: {
-        sectionId: section.id
-      }
-    };
-    trackEventCall(eventSrc.screen, {
-      action: eventSrc.action,
-      ...eventSrc.otherInfo
+      sectionId: section.id
     });
 
     setDisplayRemoveConfirmation(false);
@@ -488,7 +473,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         location={getLocationName(getSectionDetailsApi.isWaiting, sectionExists, locationName)}
         details={getSectionDetailsLabel(getSectionDetailsApi.isWaiting, floorItems, reserveItems)}
         buttonPress={() => {
-          trackEventCall(sectionDetailsScreen, {
+          trackEventCall(SECTION_DETAILS, {
             action: 'print_section_label_navigation'
           });
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
@@ -519,7 +504,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 e.preventDefault();
                 dispatch(hideLocationPopup());
               }
-              trackEventCall(sectionDetailsScreen, {
+              trackEventCall(SECTION_DETAILS, {
                 action: 'moved_to_floor_tab'
               });
             },
@@ -545,7 +530,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               if (itemPopupVisible) {
                 dispatch(hideItemPopup());
               }
-              trackEventCall(sectionDetailsScreen, {
+              trackEventCall(SECTION_DETAILS, {
                 action: 'moved_to_pallet_tab'
               });
             },
@@ -627,7 +612,12 @@ const LocationTabs = () : JSX.Element => {
         ref={bottomSheetLocationDetailsModalRef}
         snapPoints={user.features.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
-        onDismiss={() => dispatch(hideLocationPopup())}
+        onDismiss={() => {
+          trackEvent(SECTION_DETAILS, {
+            action: 'hide_section_detail_bottom_sheet_modal'
+          });
+          dispatch(hideLocationPopup());
+        }}
         style={styles.bottomSheetModal}
         backdropComponent={BottomSheetBackdrop}
       >

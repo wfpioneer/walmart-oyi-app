@@ -118,7 +118,7 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
       trackEventCall('Section_Details', {
         action: 'adding_pallet_to_location',
         palletId,
-        sectionId: section.id.toString()
+        sectionId: section.id
       });
       dispatch(addPallet({
         palletId,

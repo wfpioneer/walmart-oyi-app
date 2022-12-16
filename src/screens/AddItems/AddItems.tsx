@@ -99,7 +99,7 @@ export const scanItemListener = (
       trackEventCall('Section_Details', {
         action: 'add_item_to_floor',
         upc: scannedEvent.value,
-        sectionId: section.id.toString(),
+        sectionId: section.id,
         locationTypeNbr: SALES_FLOOR_LOCATION_TYPE
       });
 
