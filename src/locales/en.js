@@ -538,6 +538,8 @@ export default {
     POOR_RATE_LABEL: 'Poor',
     AVERAGE_RATE_LABEL: 'Average',
     GOOD_RATE_LABEL: 'Good',
-    EXCELLENT_RATE_LABEL: 'Excellent'
+    EXCELLENT_RATE_LABEL: 'Excellent',
+    RATING_LABEL: 'Choose a rating',
+    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here'
   }
 };

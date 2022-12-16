@@ -541,6 +541,8 @@ export default {
     POOR_RATE_LABEL: '差',
     AVERAGE_RATE_LABEL: '一般',
     GOOD_RATE_LABEL: '好',
-    EXCELLENT_RATE_LABEL: '非常好'
+    EXCELLENT_RATE_LABEL: '非常好',
+    RATING_LABEL: '选择分值',
+    COMMENT_PLACEHOLDER_LABEL: '在此输入评价'
   }
 };
