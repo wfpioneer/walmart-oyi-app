@@ -9,6 +9,7 @@ import { strings } from '../../locales';
 import NumericSelector from '../NumericSelector/NumericSelector';
 import styles from './PalletItemCard.style';
 import COLOR from '../../themes/Color';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 interface PalletItemCardProp {
     itemName: string;
@@ -26,6 +27,8 @@ interface PalletItemCardProp {
     isValid: boolean;
     isAdded: boolean;
     onEndEditing(): void;
+    showItemImage: boolean;
+    countryCode: string;
   }
 
 export const styleSelector = (isAdded: boolean, isEdited: boolean): Record<string, any> => {
@@ -51,10 +54,19 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
     maxValue,
     isValid,
     isAdded,
-    onEndEditing
+    onEndEditing,
+    showItemImage,
+    countryCode
   } = props;
   return (
     <View style={styleSelector(isAdded, markEdited)}>
+      {showItemImage
+      && (
+      <ImageWrapper
+        countryCode={countryCode}
+        itemNumber={Number(itemNumber)}
+      />
+      )}
       <View style={styles.content}>
         <View style={styles.itemHeader}>
           <Text style={styles.textHeader}>
@@ -97,7 +109,7 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
               onEndEditing={onEndEditing}
             />
           </View>
-          <View style={styles.delete}>
+          <View>
             <TouchableOpacity onPress={() => { deleteItem(); }}>
               <MaterialCommunityIcons name="trash-can" size={40} color={COLOR.TRACKER_GREY} />
             </TouchableOpacity>
