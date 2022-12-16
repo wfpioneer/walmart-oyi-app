@@ -65,6 +65,7 @@ import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import ItemDetails from '../../models/ItemDetails';
 import { CustomModalComponent } from '../Modal/Modal';
+import { Configurations } from '../../models/User';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
 
@@ -95,6 +96,8 @@ interface ManagePalletProps {
   setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>;
   createPallet: boolean;
   postCreatePalletApi: AsyncState;
+  userConfigs: Configurations;
+  countryCode: string;
 }
 interface ApiResult {
   data: any;
@@ -196,7 +199,12 @@ export const isAddedItemPerishable = (items: PalletItem[], perishableCategories:
   return isPerishableItemExist(addedItems, perishableCategories);
 };
 
-const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
+const itemCard = (
+  { item }: { item: PalletItem },
+  dispatch: Dispatch<any>,
+  userConfigs: Configurations,
+  countryCode: string
+) => {
   if (!item.deleted) {
     return (
       <PalletItemCard
@@ -215,6 +223,8 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         price={item.price}
         upc={item.upcNbr}
         onEndEditing={() => onEndEditing(item, dispatch)}
+        showItemImage={userConfigs.showItemImage}
+        countryCode={countryCode}
       />
     );
   }
@@ -628,7 +638,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
     useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
-    createPallet, postCreatePalletApi
+    createPallet, postCreatePalletApi, countryCode, userConfigs
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
@@ -915,7 +925,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           <FlatList
             data={items}
             removeClippedSubviews={false}
-            renderItem={item => itemCard(item, dispatch)}
+            renderItem={item => itemCard(item, dispatch, userConfigs, countryCode)}
             keyExtractor={(item: PalletItem) => item.upcNbr}
           />
         </View>
@@ -954,6 +964,7 @@ const ManagePallet = (): JSX.Element => {
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [displayWarningModal, setDisplayWarningModal] = useState(false);
   const [confirmBackNavigate, setConfirmBackNavigate] = useState(false);
+  const { configs, countryCode } = useTypedSelector(state => state.User);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['55%'], []);
@@ -1019,6 +1030,8 @@ const ManagePallet = (): JSX.Element => {
           setConfirmBackNavigate={setConfirmBackNavigate}
           createPallet={createPallet}
           postCreatePalletApi={postCreatePalletApi}
+          userConfigs={configs}
+          countryCode={countryCode}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

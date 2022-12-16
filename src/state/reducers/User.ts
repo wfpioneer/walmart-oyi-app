@@ -42,7 +42,8 @@ export const initialState: User = {
     showCalculator: false,
     multiBin: false,
     multiPick: false,
-    showItemImage: false
+    showItemImage: false,
+    showFeedback: false
   }
 };
 
@@ -86,7 +87,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showCalculator: action.payload.showCalculator || false,
           multiBin: action.payload.multiBin || false,
           multiPick: action.payload.multiPick || false,
-          showItemImage: action.payload.showItemImage || false
+          showItemImage: action.payload.showItemImage || false,
+          showFeedback: action.payload.showFeedback || false
         }
       };
     default:

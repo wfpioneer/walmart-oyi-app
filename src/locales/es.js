@@ -529,5 +529,12 @@ export default {
     NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor',
     ITEMS: 'Artículos',
     CUSTOM_ITEMS: 'Artículos'
+  },
+  FEEDBACK: {
+    VERY_POOR_RATE_LABEL: 'Muy Malo',
+    POOR_RATE_LABEL: 'Malo',
+    AVERAGE_RATE_LABEL: 'Regular',
+    GOOD_RATE_LABEL: 'Bueno',
+    EXCELLENT_RATE_LABEL: 'Excelente'
   }
 };
