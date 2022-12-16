@@ -12,6 +12,7 @@ import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
 import Home from '../screens/Home/Home';
+import Feedback from '../screens/Feedback/Feedback';
 import COLOR from '../themes/Color';
 import styles from './HomeNavigator.style';
 import { setLanguage, strings } from '../locales';
@@ -63,6 +64,7 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
   const options = [
     strings('HOME.CHANGE_LANGUAGE'),
     strings('GENERICS.SIGN_OUT'),
+    strings('GENERICS.FEEDBACK'),
     strings('GENERICS.CANCEL')
   ];
 
@@ -130,6 +132,10 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
           props.hideActivityModal();
         }
       });
+    }
+    if (buttonIndex === 2) {
+      props.navigation.navigate('FeedbackScreen');
+      trackEvent('feedback', { lastPage: 'Feedback' });
     }
   });
 };
@@ -217,6 +223,17 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
         }
       }}
 
+    />
+    <Stack.Screen
+      name="FeedbackScreen"
+      component={Feedback}
+      options={() => ({
+        headerTitle: () => (
+          <View>
+            <Text style={styles.headerTitle}>{strings('GENERICS.FEEDBACK')}</Text>
+          </View>
+        )
+      })}
     />
   </Stack.Navigator>
 );

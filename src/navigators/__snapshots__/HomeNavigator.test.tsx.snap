@@ -29,6 +29,11 @@ exports[`Home Navigator Renders the Home navigator component 1`] = `
     name="HomeScreen"
     options={[Function]}
   />
+  <Screen
+    component={[Function]}
+    name="FeedbackScreen"
+    options={[Function]}
+  />
 </StackNavigator>
 `;
 
