@@ -8,28 +8,28 @@ import styles from './WorklistItem.style';
 import { setScannedEvent } from '../../state/actions/Global';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { exceptionTypeToDisplayString } from '../../screens/Worklist/FullExceptionList';
+import { TrackEventSource } from '../../models/Generics.d';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 interface WorklistItemProps {
   exceptionType: string;
   itemDescription: string;
   itemNumber: number;
-  upcNbr: string;
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
+  trackEventSource: TrackEventSource;
   countryCode: string;
   showItemImage: boolean;
 }
 
 export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   const {
-    navigation, dispatch, exceptionType, itemDescription, itemNumber, upcNbr, countryCode, showItemImage
+    navigation, dispatch, exceptionType, itemDescription, itemNumber, trackEventSource, countryCode, showItemImage
   } = props;
   const worklistItemOnPress = () => {
-    trackEvent('worklist_item_click', {
-      upc: upcNbr,
-      itemNbr: itemNumber,
-      itemDescription
+    trackEvent(trackEventSource.screen, {
+      action: trackEventSource.action,
+      ...trackEventSource.otherInfo
     });
     dispatch(setScannedEvent({ type: 'worklist', value: itemNumber.toString() }));
     navigation.navigate('ReviewItemDetails', { screen: 'ReviewItemDetailsHome' });
