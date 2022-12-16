@@ -43,7 +43,8 @@ export const initialState: User = {
     showItemImages: false,
     multiBin: false,
     multiPick: false,
-    showItemImage: false
+    showItemImage: false,
+    showFeedback: false
   }
 };
 
@@ -88,7 +89,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showItemImages: action.payload.showItemImages || false,
           multiBin: action.payload.multiBin || false,
           multiPick: action.payload.multiPick || false,
-          showItemImage: action.payload.showItemImage || false
+          showItemImage: action.payload.showItemImage || false,
+          showFeedback: action.payload.showFeedback || false
         }
       };
     default:
