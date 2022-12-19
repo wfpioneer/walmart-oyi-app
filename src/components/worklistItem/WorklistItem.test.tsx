@@ -39,9 +39,36 @@ describe('WorklistItem Component', () => {
         exceptionType="NP"
         itemDescription="Test"
         itemNumber={1234}
-        upcNbr="4321"
         navigation={navigationProp}
         dispatch={jest.fn}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
+        countryCode="MX"
+        showItemImage={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders an WorklistItem component with image', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <WorklistItem
+        exceptionType="NP"
+        itemDescription="Test"
+        itemNumber={1234}
+        navigation={navigationProp}
+        dispatch={jest.fn}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
+        countryCode="MX"
+        showItemImage={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -54,9 +81,15 @@ describe('WorklistItem Component', () => {
         exceptionType="NP"
         itemDescription="Test"
         itemNumber={1234}
-        upcNbr="4321"
         navigation={navigationProp}
         dispatch={mockDispatch}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
+        countryCode="MX"
+        showItemImage={true}
       />
     );
     const btnCard = getByTestId('btnCard');

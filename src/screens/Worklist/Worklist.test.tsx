@@ -12,6 +12,7 @@ import {
 } from './Worklist';
 import { ExceptionList } from './FullExceptionList';
 import { mockAreas } from '../../mockData/mockConfig';
+import { FilterType } from '../../models/FilterListItem';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
@@ -37,6 +38,31 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders todo worklist data with image', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <Worklist
+          data={mockWorkListToDo}
+          refreshing={false}
+          onRefresh={jest.fn()}
+          error={undefined}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          areas={mockAreas}
+          enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -58,6 +84,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -79,6 +107,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -100,6 +130,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -120,6 +152,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -140,6 +174,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -161,6 +197,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -170,14 +208,26 @@ describe('WorklistScreen', () => {
     it('Renders the category header for worklist type CATEGORY', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <RenderWorklistItem item={mockCategoryList[0]} dispatch={jest.fn()} navigation={navigationProp} />
+        <RenderWorklistItem
+          item={mockCategoryList[0]}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          countryCode="MX"
+          showItemImage={false}
+        />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders a single worklist item', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <RenderWorklistItem item={mockCategoryList[1]} dispatch={jest.fn()} navigation={navigationProp} />
+        <RenderWorklistItem
+          item={mockCategoryList[1]}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          countryCode="MX"
+          showItemImage={false}
+        />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -188,7 +238,7 @@ describe('WorklistScreen', () => {
 
     it('Renders a filter button for list filter type EXCEPTION', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const exceptionFilter = { type: 'EXCEPTION', value: 'NSFL' };
+      const exceptionFilter = { type: FilterType.EXCEPTION, value: 'NSFL' };
       renderer.render(
         renderFilterPills(exceptionFilter, jest.fn(), [], filterExceptions, exceptionList, [])
       );
@@ -196,7 +246,7 @@ describe('WorklistScreen', () => {
     });
     it('Renders empty view element for non-existing EXCEPTION value', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const exceptionFilter = { type: 'EXCEPTION', value: 'Not An Exception' };
+      const exceptionFilter = { type: FilterType.EXCEPTION, value: 'Not An Exception' };
       renderer.render(
         renderFilterPills(exceptionFilter, jest.fn(), [], [], exceptionList, [])
       );
@@ -205,7 +255,7 @@ describe('WorklistScreen', () => {
 
     it('Renders a filter button for list filter type CATEGORY ', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const categoryFilter = { type: 'CATEGORY', value: '99 - ELECTRONICS' };
+      const categoryFilter = { type: FilterType.CATEGORY, value: '99 - ELECTRONICS' };
       const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
       renderer.render(
         renderFilterPills(categoryFilter, jest.fn(), filterCategories, [], exceptionList, areas)
@@ -215,7 +265,7 @@ describe('WorklistScreen', () => {
 
     it('Renders a filter button for list filter type AREA', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+      const areaFilter = { type: FilterType.AREA, value: 'ELECTRONICS' };
       const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH'];
       const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
       renderer.render(
@@ -225,7 +275,7 @@ describe('WorklistScreen', () => {
     });
 
     it('should dispatch updateFilterCategories action with removed filtered categories', () => {
-      const areaFilter = { type: 'AREA', value: 'ELECTRONICS' };
+      const areaFilter = { type: FilterType.AREA, value: 'ELECTRONICS' };
       const mockFilterCategories = ['99- MOBILE', '100-SMARTPHONE', '101-SMARTWATCH', '5-OFFICE SUPPLIES'];
       const areas = [...mockAreas, { area: 'ELECTRONICS', categories: [99, 100, 101] }];
       const mockDispatch = jest.fn();
@@ -267,6 +317,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -288,6 +340,8 @@ describe('WorklistScreen', () => {
           navigation={navigationProp}
           areas={mockAreas}
           enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

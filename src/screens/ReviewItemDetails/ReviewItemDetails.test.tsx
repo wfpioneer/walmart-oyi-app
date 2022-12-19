@@ -147,7 +147,8 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   useEffectHook: jest.fn(),
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
-  userConfigs: mockConfig
+  userConfigs: mockConfig,
+  countryCode: 'MX'
 };
 
 describe('ReviewItemDetailsScreen', () => {
@@ -609,23 +610,6 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           addToPicklistStatus: addPicklistError
         }, itemDetail[123], jest.fn())
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('renders \'Reserve Item Needed\' to Add to Picklist', () => {
-      const noReserveItemDetails = {
-        ...itemDetail[123],
-        location: {
-          floor: undefined,
-          reserve: undefined,
-          count: 0
-        }
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        renderAddPicklistButton({
-          ...mockHandleProps
-        }, noReserveItemDetails, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

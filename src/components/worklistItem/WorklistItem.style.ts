@@ -13,10 +13,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   image: {
-    height: 50,
-    width: 50,
-    marginRight: 10,
-    resizeMode: 'stretch'
+    marginRight: 15
   },
   content: {
     alignItems: 'flex-start',
