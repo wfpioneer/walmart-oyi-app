@@ -18,7 +18,7 @@ import {
 } from '../../state/actions/User';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 import {
-  getClubConfig, getFluffyFeatures, getUserConfig, updateUserConfig
+  getClubConfig, getFluffyFeatures, updateUserConfig
 } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';

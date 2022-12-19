@@ -16,6 +16,7 @@ import WorklistCard from '../../components/worklistcard/WorklistCard';
 import GoalCircle from '../../components/goalcircle/GoalCircle';
 import { strings } from '../../locales';
 import { getWorklistSummary } from '../../state/actions/saga';
+import { UserConfigResponse } from '../../services/UserConfig.service';
 import COLOR from '../../themes/Color';
 import { setWorklistType, updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -25,7 +26,9 @@ import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
+import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
 
+export const resetUserConfigUpdateApiState = () => ({ type: UPDATE_USER_CONFIG.RESET });
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
   userConfig: state.User.configs,
@@ -39,7 +42,8 @@ const mapDispatchToProps = {
   setManualScan,
   getWorklistSummary,
   updateFilterExceptions,
-  setWorklistType
+  setWorklistType,
+  resetUserConfigUpdateApiState
 };
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -57,13 +61,13 @@ interface HomeScreenProps {
   navigation: NavigationProp<any>;
   updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
-  userConfig: Configurations
+  userConfig: Configurations;
+  resetUserConfigUpdateApiState: () => void;
 }
 
 interface HomeScreenState {
   activeGoal: number;
   errorModalVisible: boolean;
-  showFeedbackModal: boolean;
 }
 
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
@@ -74,7 +78,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   constructor(props: HomeScreenProps) {
     super(props);
 
-    this.state = { activeGoal: 0, errorModalVisible: false, showFeedbackModal: false };
+    this.state = { activeGoal: 0, errorModalVisible: false };
 
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
@@ -104,49 +108,62 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   }
 
   renderFeedbackModal = () => {
-    let loginCount;
-    // if (!this.props.userConfigUpdateApiState.isWaiting
-    //   && this.props.userConfigUpdateApiState.result.status === 200
-    //   && this.props.userConfigUpdateApiState.result)
-    //   {
+    const LoginDivisibleCountToShowFeedback = 10;
+    let showFeedback = false;
+    if (!this.props.userConfigUpdateApiState.isWaiting
+      && this.props.userConfigUpdateApiState.result
+      && this.props.userConfigUpdateApiState.result.status === 200) {
+      const userConfigRes: UserConfigResponse = this.props.userConfigUpdateApiState.result.data;
+      showFeedback = (userConfigRes.loginCount % LoginDivisibleCountToShowFeedback) === 0;
 
-    //   }
-    if (true) {
-      return (
-        <CustomModalComponent
-          isVisible={this.state.showFeedbackModal}
-          onClose={() => this.setState({ showFeedbackModal: false })}
-          modalType="Form"
-        >
-          <View>
-            <View style={styles.descriptionText}>
-              <Text>
-                {strings('FEEDBACK.FEEDBACK_REQUEST')}
-              </Text>
+      if (showFeedback) {
+        return (
+          <CustomModalComponent
+            isVisible={true}
+            onClose={() => {
+              this.props.resetUserConfigUpdateApiState();
+            }}
+            modalType="Form"
+          >
+            <View style={styles.modalContainer}>
+              <View>
+                <Text style={styles.descriptionText}>
+                  {strings('FEEDBACK.FEEDBACK_REQUEST')}
+                </Text>
+              </View>
+              <View style={styles.actionRow}>
+                <Button
+                  testID="noButton"
+                  title={strings('FEEDBACK.NO')}
+                  onPress={() => {
+                    this.props.resetUserConfigUpdateApiState();
+                  }}
+                  type={ButtonType.SOLID_WHITE}
+                  titleColor={COLOR.MAIN_THEME_COLOR}
+                  style={styles.button}
+                />
+                <Button
+                  testID="yesButton"
+                  title={strings('FEEDBACK.YES')}
+                  onPress={() => {
+                    // TO DO navigation to feedback
+                    this.props.resetUserConfigUpdateApiState();
+                  }}
+                  type={ButtonType.PRIMARY}
+                  style={styles.button}
+                />
+              </View>
             </View>
-            <View style={styles.actionRow}>
-              <Button
-                testID="noButton"
-                title={strings('FEEDBACK.NO')}
-                onPress={() => setShowMultiPickConfirmationDialog(false)}
-                type={ButtonType.SOLID_WHITE}
-                titleColor={COLOR.MAIN_THEME_COLOR}
-                style={styles.cancelButton}
-              />
-              <Button
-                testID="yesButton"
-                title={strings('FEEDBACK.YES')}
-                onPress={() => {
-                  // TO DO navigation to feedback
-                }}
-                type={ButtonType.PRIMARY}
-                style={styles.acceptButton}
-              />
-            </View>
-          </View>
-        </CustomModalComponent>
-      );
+          </CustomModalComponent>
+        );
+      }
+      this.props.resetUserConfigUpdateApiState();
     }
+    if (!this.props.userConfigUpdateApiState.isWaiting
+        && this.props.userConfigUpdateApiState.error) {
+      this.props.resetUserConfigUpdateApiState();
+    }
+    return null;
   };
 
   render(): ReactNode {
@@ -304,6 +321,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
+        {this.renderFeedbackModal()}
         <CustomModalComponent
           isVisible={this.state.errorModalVisible}
           onClose={() => this.setState({ errorModalVisible: false })}

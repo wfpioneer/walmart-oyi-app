@@ -540,6 +540,9 @@ export default {
     POOR_RATE_LABEL: '差',
     AVERAGE_RATE_LABEL: '一般',
     GOOD_RATE_LABEL: '好',
-    EXCELLENT_RATE_LABEL: '非常好'
+    EXCELLENT_RATE_LABEL: '非常好',
+    FEEDBACK_REQUEST: '您想对OYI进行反馈吗？',
+    YES: '是',
+    NO: '否'
   }
 };

@@ -40,11 +40,13 @@ const homeScreenProps: any = {
   setManualScan: jest.fn(),
   isManualScanEnabled: false,
   worklistSummaryApiState: { ...defaultAsyncState },
+  userConfigUpdateApiState: { ...defaultAsyncState },
   getWorklistSummary: jest.fn(),
   navigation: navigationProp,
   updateFilterExceptions: jest.fn(),
   route: jest.fn(),
-  userConfig: mockConfig
+  userConfig: mockConfig,
+  resetUserConfigUpdateApiState: jest.fn()
 };
 
 // opt out of type checking in order to create mocks that don't exactly match
@@ -259,6 +261,74 @@ describe('HomeScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     }));
+
+    it('renders with User config api status 200 and login count 1', () => {
+      const mockUserConfig = {
+        loginCount: 1
+      };
+
+      props = {
+        ...homeScreenProps,
+        userConfigUpdateApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockUserConfig
+          }
+        }
+      };
+
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <HomeScreen
+          {...props}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders with User config api with error', () => {
+      props = {
+        ...homeScreenProps,
+        userConfigUpdateApiState: {
+          ...defaultAsyncState,
+          error: {
+            message: 'network error'
+          }
+        }
+      };
+
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <HomeScreen
+          {...props}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('renders with User config api status 200 and login count 10, that will render feedback modal', () => {
+      const mockUserConfig = {
+        loginCount: 10
+      };
+
+      props = {
+        ...homeScreenProps,
+        userConfigUpdateApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockUserConfig
+          }
+        }
+      };
+
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <HomeScreen
+          {...props}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Constructor', () => {

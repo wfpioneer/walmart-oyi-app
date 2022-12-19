@@ -271,7 +271,7 @@ describe('Tests login screen functions', () => {
       navigationProp
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(8);
+    expect(mockDispatch).toHaveBeenCalledTimes(9);
     expect(mockDispatch).toHaveBeenCalledWith(resetPrintQueue());
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
@@ -327,7 +327,7 @@ describe('Tests login screen functions', () => {
     );
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
     expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
-    expect(mockDispatch).toHaveBeenCalledTimes(4);
+    expect(mockDispatch).toHaveBeenCalledTimes(5);
     expect(navigationProp.reset).toHaveBeenCalledWith({
       index: 0,
       routes: [{ name: 'Tabs' }]

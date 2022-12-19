@@ -575,6 +575,12 @@ exports[`HomeScreen rendering renders pure version number if build environment i
 </ForwardRef(SafeAreaView)>
 `;
 
+exports[`HomeScreen rendering renders with User config api status 200 and login count 1 1`] = `null`;
+
+exports[`HomeScreen rendering renders with User config api status 200 and login count 10, that will render feedback modal 1`] = `null`;
+
+exports[`HomeScreen rendering renders with User config api with error 1`] = `null`;
+
 exports[`HomeScreen rendering renders wl summaries when api data has summaries, mp and audits enabled with rollover flag true 1`] = `
 <ForwardRef(SafeAreaView)
   style={
