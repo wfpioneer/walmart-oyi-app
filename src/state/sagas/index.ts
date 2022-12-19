@@ -30,6 +30,7 @@ import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 import ReportMissingPalletService from '../../services/ReportMissingPallet.service';
 import GetItemPalletsService from '../../services/GetItemPallets.service';
+import FeedBackService from '../../services/Feedback.service';
 
 const genericSagas = [
   // TODO remove this saga once the BE orchestration changes are pushed to Production
@@ -92,7 +93,8 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets),
   makeAsyncSaga(
     saga.UPDATE_MULTI_PALLET_UPC_QTY, actions.updateMultiPalletUPCQty, PalletManagementService.updateMultiPalletUPCQty
-  )
+  ),
+  makeAsyncSaga(saga.SUBMIT_FEEDBACK_RATING, actions.submitFeedbackRating, FeedBackService.submitFeedbackRating)
 ];
 
 export default function* rootSaga() {

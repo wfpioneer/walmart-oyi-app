@@ -156,3 +156,6 @@ export const getItemPallets = makeAsyncActionCreators(GET_ITEM_PALLETS);
 
 export const UPDATE_MULTI_PALLET_UPC_QTY = makeAsyncActionTypes('API/UPDATE_MULTI_PALLET_UPC_QTY');
 export const updateMultiPalletUPCQty = makeAsyncActionCreators(UPDATE_MULTI_PALLET_UPC_QTY);
+
+export const SUBMIT_FEEDBACK_RATING = makeAsyncActionTypes('API/SUBMIT_FEEDBACK_RATING');
+export const submitFeedbackRating = makeAsyncActionCreators(SUBMIT_FEEDBACK_RATING);

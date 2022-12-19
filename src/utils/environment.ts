@@ -12,6 +12,7 @@ export interface Environment {
   configUrl: string;
   itemImageUUIDUrlCN: string;
   itemImageUrlCN: string;
+  atmtUrl: string;
 }
 
 export interface Environments {
@@ -90,7 +91,8 @@ export const getEnvironment = (): Environment => {
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.dev.walmart.com`,
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
+      atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
     },
     stage: {
       orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.stg.walmart.com`,
@@ -103,7 +105,8 @@ export const getEnvironment = (): Environment => {
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.stg.walmart.com`,
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
+      atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
     },
     prod: {
       orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.prod.walmart.com`,
@@ -116,7 +119,8 @@ export const getEnvironment = (): Environment => {
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.prod.walmart.com`,
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
+      atmtUrl: 'https://api.atmt-feedback.prod.walmart.com'
     }
 
   };
