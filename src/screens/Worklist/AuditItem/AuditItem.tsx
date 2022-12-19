@@ -212,7 +212,8 @@ export const addLocationHandler = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  floorLocations: Location[]
+  floorLocations: Location[],
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
   dispatch(
     setupScreen(
@@ -226,6 +227,7 @@ export const addLocationHandler = (
       false
     )
   );
+  trackEventCall('Audit_Item', { action: 'add_new_floor_location_click', itemNumber: itemDetails?.itemNbr });
   navigation.navigate('AddLocation');
 };
 
@@ -691,7 +693,8 @@ export const renderDeleteLocationModal = (
   deleteLocationConfirmed: (locType: string) => void,
   locationName: string,
   locationType: string,
-  palletId: number
+  palletId: number,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => (
   <CustomModalComponent
     isVisible={showDeleteConfirmationModal}
@@ -724,7 +727,10 @@ export const renderDeleteLocationModal = (
             title={strings('GENERICS.CANCEL')}
             backgroundColor={COLOR.MAIN_THEME_COLOR}
             testID="modal-cancel-button"
-            onPress={() => setShowDeleteConfirmationModal(false)}
+            onPress={() => {
+              setShowDeleteConfirmationModal(false);
+              trackEventCall('Audit_Item', { action: 'cancel_delete_location_popup_click' });
+            }}
           />
           <Button
             style={styles.button}
@@ -732,7 +738,10 @@ export const renderDeleteLocationModal = (
               ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
             testID="modal-confirm-button"
             backgroundColor={COLOR.TRACKER_RED}
-            onPress={() => deleteLocationConfirmed(locationType)}
+            onPress={() => {
+              deleteLocationConfirmed(locationType);
+              trackEventCall('Audit_Item', { action: 'confirm_delete_location_click', locationType });
+            }}
           />
         </View>
       </>
@@ -1153,7 +1162,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('audit_delete_floor_location_click', { location: JSON.stringify(loc), index: locIndex });
+      trackEventCall('Audit_Item',
+        { action: 'delete_floor_location_click', location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'floor',
@@ -1168,7 +1178,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteReserveLocation = (loc: ItemPalletInfo, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('audit_delete_reserve_location_click', { location: JSON.stringify(loc), index: locIndex });
+      trackEventCall('Audit_Item',
+        { action: 'report_missing_pallet_click', location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'reserve',
@@ -1255,6 +1266,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty;
+    trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
     if (itemOHQty === totalOHQty) {
       dispatch(
         noAction({
@@ -1299,7 +1311,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         deleteLocationConfirmed,
         locToConfirm.locationName,
         locToConfirm.locationArea,
-        locToConfirm.palletId
+        locToConfirm.palletId,
+        trackEventCall
       )}
       {renderConfirmOnHandsModal(
         updateOHQtyApi,
@@ -1320,7 +1333,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           description={itemDetails ? itemDetails.itemName : ''}
           imageUrl={undefined}
           onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
-          onClick={() => {}}
+          onClick={() => {
+            trackEventCall('Audit_Item', { action: 'item_card_click', itemNumber: itemDetails?.itemNbr });
+          }}
           loading={getItemDetailsApi.isWaiting}
         />
       </View>
@@ -1337,7 +1352,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             <LocationListCard
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
-              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations)}
+              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
               loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
               error={!!(getItemDetailsApi.error || getLocationApi.error)}
               onRetry={() => {}}

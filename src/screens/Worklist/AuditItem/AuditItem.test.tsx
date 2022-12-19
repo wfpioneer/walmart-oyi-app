@@ -104,6 +104,8 @@ const navigationProp: NavigationProp<any> = {
   getId: jest.fn()
 };
 
+const mockTrackEventCall = jest.fn();
+
 const routeProp: RouteProp<any, string> = {
   key: 'test',
   name: 'test'
@@ -332,7 +334,9 @@ describe('AuditItemScreen', () => {
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      addLocationHandler(mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor);
+      addLocationHandler(
+        mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor, mockTrackEventCall
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockNavigate).toBeCalledTimes(1);
     });
@@ -469,7 +473,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -487,7 +492,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -501,7 +507,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -521,7 +528,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
@@ -575,7 +583,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        1234
+        1234,
+        mockTrackEventCall
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -589,7 +598,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        1234
+        1234,
+        mockTrackEventCall
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -609,7 +619,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        1234
+        1234,
+        mockTrackEventCall
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
