@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Feedback Screen should render the screen based on props 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "space-between",
+        "padding": 20,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Text>
+        [missing "en.FEEDBACK.RATING_LABEL" translation]
+      </Text>
+      <Stars
+        initialValue={0}
+        onValueChange={[Function]}
+        size={30}
+        starCount={5}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "borderColor": "#c5c5c5",
+          "borderWidth": 1,
+          "marginVertical": 20,
+        }
+      }
+    >
+      <TextInput
+        multiline={true}
+        numberOfLines={10}
+        placeholder="[missing \\"en.FEEDBACK.COMMENT_PLACEHOLDER_LABEL\\" translation]"
+        placeholderTextColor="#c5c5c5"
+        style={
+          Object {
+            "textAlignVertical": "top",
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "paddingVertical": 20,
+        }
+      }
+    >
+      <Button
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </View>
+</KeyboardAvoidingView>
+`;

@@ -3,18 +3,26 @@ import { COLOR } from '../../themes/Color';
 
 export default StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'column'
+    padding: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  rateContainer: {
+    alignItems: 'center'
   },
   textAreaContainer: {
     borderColor: COLOR.GREY,
     borderWidth: 1,
-    padding: 5
+    marginVertical: 20
   },
   textArea: {
-    height: 150
+    textAlignVertical: 'top'
   },
-  buttonContainer: {},
-  submitButton: {}
+  buttonContainer: {
+    paddingVertical: 20
+  },
+  safeAreaView: {
+    flex: 1
+  }
 });
