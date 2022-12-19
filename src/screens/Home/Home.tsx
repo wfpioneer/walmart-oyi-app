@@ -20,7 +20,7 @@ import COLOR from '../../themes/Color';
 import { setWorklistType, updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -105,27 +105,48 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   renderFeedbackModal = () => {
     let loginCount;
-    if ( user)
-    return (
-      <CustomModalComponent
-        isVisible={this.state.showFeedbackModal}
-        onClose={() => this.setState({ showFeedbackModal: false })}
-        modalType="Form"
-      >
-        <PalletQtyUpdate
-          palletId={scannedPalletId}
-          qty={newPalletQty || qty || 0}
-          handleClose={() => {
-            setShowPalletQtyUpdateModal(false);
-          }}
-          handleSubmit={(newQty: number) => {
-            dispatch(updatePalletQty(scannedPalletId, newQty));
-            setShowPalletQtyUpdateModal(false);
-          }}
-          showCalculator={showCalculator}
-        />
-      </CustomModalComponent>
-    );
+    // if (!this.props.userConfigUpdateApiState.isWaiting
+    //   && this.props.userConfigUpdateApiState.result.status === 200
+    //   && this.props.userConfigUpdateApiState.result)
+    //   {
+
+    //   }
+    if (true) {
+      return (
+        <CustomModalComponent
+          isVisible={this.state.showFeedbackModal}
+          onClose={() => this.setState({ showFeedbackModal: false })}
+          modalType="Form"
+        >
+          <View>
+            <View style={styles.descriptionText}>
+              <Text>
+                {strings('FEEDBACK.FEEDBACK_REQUEST')}
+              </Text>
+            </View>
+            <View style={styles.actionRow}>
+              <Button
+                testID="noButton"
+                title={strings('FEEDBACK.NO')}
+                onPress={() => setShowMultiPickConfirmationDialog(false)}
+                type={ButtonType.SOLID_WHITE}
+                titleColor={COLOR.MAIN_THEME_COLOR}
+                style={styles.cancelButton}
+              />
+              <Button
+                testID="yesButton"
+                title={strings('FEEDBACK.YES')}
+                onPress={() => {
+                  // TO DO navigation to feedback
+                }}
+                type={ButtonType.PRIMARY}
+                style={styles.acceptButton}
+              />
+            </View>
+          </View>
+        </CustomModalComponent>
+      );
+    }
   };
 
   render(): ReactNode {

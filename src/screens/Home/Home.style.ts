@@ -76,5 +76,13 @@ export default StyleSheet.create({
   barcodeErrorText: {
     fontSize: 16,
     textAlign: 'center'
+  },
+  actionRow: {
+    flex: 0,
+    margin: 12,
+    flexDirection: 'row'
+  },
+  descriptionText: {
+    padding: 12
   }
 });
