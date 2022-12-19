@@ -156,3 +156,9 @@ export const getItemPallets = makeAsyncActionCreators(GET_ITEM_PALLETS);
 
 export const UPDATE_MULTI_PALLET_UPC_QTY = makeAsyncActionTypes('API/UPDATE_MULTI_PALLET_UPC_QTY');
 export const updateMultiPalletUPCQty = makeAsyncActionCreators(UPDATE_MULTI_PALLET_UPC_QTY);
+
+export const GET_USER_CONFIG = makeAsyncActionTypes('API/GET_USER_CONFIG');
+export const getUserConfig = makeAsyncActionCreators(GET_USER_CONFIG);
+
+export const UPDATE_USER_CONFIG = makeAsyncActionTypes('API/UPDATE_USER_CONFIG');
+export const updateUserConfig = makeAsyncActionCreators(UPDATE_USER_CONFIG);

@@ -17,7 +17,9 @@ import {
   assignFluffyFeatures, loginUser, logoutUser, setConfigs
 } from '../../state/actions/User';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
-import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
+import {
+  getClubConfig, getFluffyFeatures, getUserConfig, updateUserConfig
+} from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -182,10 +184,12 @@ export const userConfigsApiHook = (
     }
     dispatch(resetFluffyFeaturesApiState());
     dispatch(getClubConfig());
+    dispatch(updateUserConfig());
   } else if (getFluffyApiState.error) {
     // TODO Display toast/popup letting user know roles could not be retrieved
     dispatch(getClubConfig());
     dispatch(resetFluffyFeaturesApiState());
+    dispatch(updateUserConfig());
   }
 
   if (!getClubConfigApiState.isWaiting && getClubConfigApiState.result) {
