@@ -13,7 +13,7 @@ export type CategoryCardProps = {
   listOfItems: WorklistItemI[];
   category: string;
   collapsed: boolean;
-  onItemCardClick: (itemNumber: number) => void;
+  onItemCardClick: (itemNumber: number, worklistType: string) => void;
   showItemImage: boolean;
   countryCode: string;
 };
@@ -37,7 +37,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
   // placeholder render item
   const renderItem = ({ item }: { item: WorklistItemI }) => {
     const {
-      itemName, itemNbr
+      itemName, itemNbr, worklistType
     } = item;
     return (
       <TouchableOpacity style={styles.itemContainer}>
@@ -47,7 +47,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             description={itemName || ''}
             onHandQty={undefined}
             onClick={() => {
-              onItemCardClick(itemNbr || 0);
+              onItemCardClick(itemNbr || 0, worklistType);
             }}
             loading={false}
             showItemImage={showItemImage}

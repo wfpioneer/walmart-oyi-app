@@ -50,11 +50,12 @@ const onItemClick = (
   itemNumber: number,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
-  trackEventCall: typeof trackEvent
+  trackEventCall: typeof trackEvent,
+  worklistType: string
 ) => {
   dispatch(setAuditItemNumber(itemNumber));
   trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
-  navigation.navigate('AuditItem');
+  navigation.navigate('AuditItem', { worklistType });
 };
 
 const renderCategoryCard = (
@@ -66,8 +67,8 @@ const renderCategoryCard = (
     category={category}
     listOfItems={items}
     collapsed={collapsed}
-    onItemCardClick={(itemNumber: number) => {
-      onItemClick(itemNumber, navigation, dispatch, trackEventCall);
+    onItemCardClick={(itemNumber: number, worklistType: string) => {
+      onItemClick(itemNumber, navigation, dispatch, trackEventCall, worklistType);
     }}
     showItemImage={showItemImage}
     countryCode={countryCode}
