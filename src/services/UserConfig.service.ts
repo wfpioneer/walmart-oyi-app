@@ -3,11 +3,11 @@ import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
 export interface UserConfigResponse {
-    userId: string;
-    clubNbr: number;
-    countryCode: string;
-    lastLogin: string;
-    loginCount: number;
+  userId: string;
+  clubNbr: number;
+  countryCode: string;
+  lastLogin: string;
+  loginCount: number;
 }
 
 export default class ConfigService {

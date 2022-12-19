@@ -30,7 +30,8 @@ const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
   userConfig: state.User.configs,
   isManualScanEnabled: state.Global.isManualScanEnabled,
-  worklistSummaryApiState: state.async.getWorklistSummary
+  worklistSummaryApiState: state.async.getWorklistSummary,
+  userConfigUpdateApiState: state.async.updateUserConfig
 });
 
 const mapDispatchToProps = {
@@ -51,6 +52,7 @@ interface HomeScreenProps {
   setWorklistType: (worklistType: string) => void;
   isManualScanEnabled: boolean;
   worklistSummaryApiState: AsyncState;
+  userConfigUpdateApiState: AsyncState;
   getWorklistSummary: () => void;
   navigation: NavigationProp<any>;
   updateFilterExceptions: (worklistTypes: string[]) => void;
@@ -61,6 +63,7 @@ interface HomeScreenProps {
 interface HomeScreenState {
   activeGoal: number;
   errorModalVisible: boolean;
+  showFeedbackModal: boolean;
 }
 
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
@@ -71,7 +74,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   constructor(props: HomeScreenProps) {
     super(props);
 
-    this.state = { activeGoal: 0, errorModalVisible: false };
+    this.state = { activeGoal: 0, errorModalVisible: false, showFeedbackModal: false };
 
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
@@ -99,6 +102,31 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     if (this.scannedSubscription) { this.scannedSubscription.remove(); }
     this.navigationRemoveListener();
   }
+
+  renderFeedbackModal = () => {
+    let loginCount;
+    if ( user)
+    return (
+      <CustomModalComponent
+        isVisible={this.state.showFeedbackModal}
+        onClose={() => this.setState({ showFeedbackModal: false })}
+        modalType="Form"
+      >
+        <PalletQtyUpdate
+          palletId={scannedPalletId}
+          qty={newPalletQty || qty || 0}
+          handleClose={() => {
+            setShowPalletQtyUpdateModal(false);
+          }}
+          handleSubmit={(newQty: number) => {
+            dispatch(updatePalletQty(scannedPalletId, newQty));
+            setShowPalletQtyUpdateModal(false);
+          }}
+          showCalculator={showCalculator}
+        />
+      </CustomModalComponent>
+    );
+  };
 
   render(): ReactNode {
     if (this.props.worklistSummaryApiState.isWaiting) {

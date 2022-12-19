@@ -537,6 +537,9 @@ export default {
     POOR_RATE_LABEL: 'Poor',
     AVERAGE_RATE_LABEL: 'Average',
     GOOD_RATE_LABEL: 'Good',
-    EXCELLENT_RATE_LABEL: 'Excellent'
+    EXCELLENT_RATE_LABEL: 'Excellent',
+    FEEDBACK_REQUEST: 'Would you like to provide feedback about OYI?',
+    YES: 'Yes',
+    NO: 'No'
   }
 };
