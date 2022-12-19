@@ -47,7 +47,7 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
           <Button
             title={strings('GENERICS.SUBMIT')}
             type={ButtonType.PRIMARY}
-          // dispatch action needs to be called when clicking submit
+            // TODO: dispatch action needs to be called when clicking submit
             onPress={() => {}}
           />
         </View>
