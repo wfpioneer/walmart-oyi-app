@@ -1322,10 +1322,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         <ItemCard
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
-          imageUrl={undefined}
           onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
           onClick={() => {}}
           loading={getItemDetailsApi.isWaiting}
+          countryCode={countryCode}
+          showItemImage={userConfig.showItemImage}
         />
       </View>
       <ScrollView

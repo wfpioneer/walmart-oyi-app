@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = `
+exports[`SortBar Component Test renders ItemCard with images 1`] = `
 <View
   style={
     Object {
+      "marginTop": 2,
       "width": "100%",
     }
   }
@@ -30,19 +31,42 @@ exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = 
     }
     testID="itemCard"
   >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../src/assets/images/sams_logo.jpeg",
+    <View>
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Object {
+              "height": 80,
+              "width": 80,
+            },
+          ]
         }
-      }
-      style={
-        Object {
-          "height": 85,
-          "width": 85,
-        }
-      }
-    />
+      >
+        <FastImageView
+          defaultSource={null}
+          onFastImageError={[Function]}
+          resizeMode="contain"
+          source={
+            Object {
+              "priority": "normal",
+              "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234m.jpg",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
     <View
       style={
         Object {
@@ -54,7 +78,91 @@ exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = 
       }
       testID="item-details"
     >
+      <View
+        style={Object {}}
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.GENERICS.ITEM" translation] 1234
+        </Text>
+      </View>
       <View>
+        <Text
+          style={
+            Object {
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 14,
+              "marginVertical": 2,
+            }
+          }
+        >
+          test item
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = `
+<View
+  style={
+    Object {
+      "marginTop": 2,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "opacity": 1,
+        "padding": 5,
+        "paddingLeft": 10,
+        "width": "100%",
+      }
+    }
+    testID="itemCard"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "flexShrink": 1,
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+      testID="item-details"
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
         <Text
           style={
             Object {
@@ -91,6 +199,7 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
 <View
   style={
     Object {
+      "marginTop": 2,
       "width": "100%",
     }
   }
@@ -112,24 +221,12 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
         "flexDirection": "row",
         "opacity": 1,
         "padding": 5,
+        "paddingLeft": 10,
         "width": "100%",
       }
     }
     testID="itemCard"
   >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../src/assets/images/sams_logo.jpeg",
-        }
-      }
-      style={
-        Object {
-          "height": 85,
-          "width": 85,
-        }
-      }
-    />
     <View
       style={
         Object {
@@ -141,7 +238,13 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
       }
       testID="item-details"
     >
-      <View>
+      <View
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
         <Text
           style={
             Object {
@@ -192,6 +295,7 @@ exports[`SortBar Component Test renders default ItemCard when loading is true 1`
 <View
   style={
     Object {
+      "marginTop": 2,
       "width": "100%",
     }
   }
@@ -211,21 +315,13 @@ exports[`SortBar Component Test renders default ItemCard when loading is true 1`
       Object {
         "backgroundColor": "#f4f4f9",
         "flexDirection": "row",
+        "height": 60,
         "opacity": 1,
         "padding": 5,
       }
     }
     testID="itemCard"
   >
-    <Image
-      source=""
-      style={
-        Object {
-          "height": 85,
-          "width": 85,
-        }
-      }
-    />
     <View
       style={
         Object {

@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 const styles = StyleSheet.create({
+  mainContainer: { width: '100%', marginTop: 2 },
   container: {
     backgroundColor: COLOR.WHITE,
     width: '100%',
@@ -11,7 +12,8 @@ const styles = StyleSheet.create({
   loaderContainer: {
     backgroundColor: COLOR.GREY_TRANSPARENT,
     padding: 5,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    height: 80
   },
   image: {
     height: 85,
@@ -28,6 +30,9 @@ const styles = StyleSheet.create({
     color: COLOR.GREY_700,
     flexWrap: 'wrap',
     flexShrink: 1
+  },
+  itemNbrView: {
+    paddingBottom: 10
   },
   itemDesc: {
     fontSize: 14,
