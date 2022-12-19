@@ -40,6 +40,8 @@ export interface AuditWorklistTabScreenProps {
     filterExceptions: string[];
     filterCategories: string[];
     onRefresh: () => void;
+    showItemImage: boolean;
+    countryCode: string;
     trackEventCall: typeof trackEvent;
     collapsedState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 }
@@ -57,7 +59,8 @@ const onItemClick = (
 
 const renderCategoryCard = (
   category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>,
-  dispatch: Dispatch<any>, trackEventCall: typeof trackEvent
+  dispatch: Dispatch<any>, trackEventCall: typeof trackEvent,
+  showItemImage: boolean, countryCode: string
 ) => (
   <CategoryCard
     category={category}
@@ -66,6 +69,8 @@ const renderCategoryCard = (
     onItemCardClick={(itemNumber: number) => {
       onItemClick(itemNumber, navigation, dispatch, trackEventCall);
     }}
+    showItemImage={showItemImage}
+    countryCode={countryCode}
   />
 );
 
@@ -115,8 +120,9 @@ export const renderFilterPills = (
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, refreshing, dispatch, navigation, error, trackEventCall, collapsedState,
-    areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh
+    items, refreshing, dispatch, navigation, error, trackEventCall,
+    areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh,
+    showItemImage, countryCode, collapsedState
   } = props;
 
   const [collapsed, setCollapsed] = collapsedState;
@@ -215,7 +221,8 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
       <FlatList
         data={auditItemKeys}
         renderItem={({ item: key }) => renderCategoryCard(
-          key, itemsBasedOnCategory[key], collapsed, navigation, dispatch, trackEventCall
+          key, itemsBasedOnCategory[key], collapsed, navigation, dispatch, trackEventCall,
+          showItemImage, countryCode
         )}
         keyExtractor={item => `category-${item}`}
         onRefresh={onRefresh}
@@ -234,7 +241,8 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
   const items = toDo ? toDoItems : completedItems;
   const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
-  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
+  const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const collapsedState = useState(false);
   return (
@@ -250,6 +258,8 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       filterExceptions={filterExceptions}
       filterCategories={filterCategories}
       onRefresh={onRefresh}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
       trackEventCall={trackEvent}
       collapsedState={collapsedState}
     />
