@@ -778,7 +778,8 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          'AU'
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -801,7 +802,8 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          'AU'
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -816,7 +818,8 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          'AU'
         )
       );
       const modalConfirmButton = getByTestId('modal-confirm-button');
@@ -833,7 +836,8 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          'AU'
         )
       );
       const modalConfirmButton = getByTestId('modal-cancel-button');
