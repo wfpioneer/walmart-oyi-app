@@ -13,6 +13,21 @@ describe('Tests CategoryCard Component', () => {
         collapsed={false}
         category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
         onItemCardClick={jest.fn()}
+        countryCode="MX"
+        showItemImage={false}
+      />
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+  it('should tests CategoryCard when the card is opened and with images', async () => {
+    const { toJSON } = render(
+      <CategoryCard
+        listOfItems={mockToDoAuditWorklist}
+        collapsed={false}
+        category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
+        onItemCardClick={jest.fn()}
+        countryCode="MX"
+        showItemImage={true}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -24,6 +39,8 @@ describe('Tests CategoryCard Component', () => {
         collapsed={true}
         category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
         onItemCardClick={jest.fn()}
+        countryCode="MX"
+        showItemImage={false}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -35,6 +52,8 @@ describe('Tests CategoryCard Component', () => {
         collapsed={true}
         category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
         onItemCardClick={jest.fn()}
+        countryCode="MX"
+        showItemImage={false}
       />
     );
     expect(findByText(`43 - ${CATEGORY_NAME.FOODSERVICE}`)).toBeTruthy();

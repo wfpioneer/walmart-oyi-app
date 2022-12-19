@@ -37,6 +37,7 @@ describe('AuditWorklistTab', () => {
           toDo
           navigation={navigationProp}
           dispatch={mockDispatch}
+          collapsedState={[false, jest.fn()]}
           refreshing={false}
           error={null}
           filterCategories={[]}
@@ -60,6 +61,7 @@ describe('AuditWorklistTab', () => {
           toDo={false}
           navigation={navigationProp}
           dispatch={mockDispatch}
+          collapsedState={[false, jest.fn()]}
           refreshing={false}
           error={null}
           filterCategories={[]}
@@ -83,6 +85,7 @@ describe('AuditWorklistTab', () => {
           toDo={false}
           navigation={navigationProp}
           dispatch={mockDispatch}
+          collapsedState={[false, jest.fn()]}
           refreshing={false}
           error={mockError}
           filterCategories={[]}
@@ -106,6 +109,7 @@ describe('AuditWorklistTab', () => {
           toDo={false}
           navigation={navigationProp}
           dispatch={mockDispatch}
+          collapsedState={[false, jest.fn()]}
           refreshing={false}
           error={null}
           filterCategories={[]}
@@ -121,9 +125,8 @@ describe('AuditWorklistTab', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  // commenting out these tests as the collapsable functionality temporarily removed and will be added back in another
-  // story
-  /* describe('Tests rendering AuditWorklistTab component with collapsible prop', () => {
+
+  describe('Tests rendering AuditWorklistTab component with collapsible prop', () => {
     it('Renders the worklist items in collapsible mode when collapse button clicked', () => {
       const { toJSON, getByTestId } = render(
         <AuditWorklistTabScreen
@@ -131,15 +134,17 @@ describe('AuditWorklistTab', () => {
           toDo
           navigation={navigationProp}
           dispatch={mockDispatch}
-          collapsed={false}
-          setCollapsed={jest.fn}
+          collapsedState={[false, jest.fn()]}
           refreshing={false}
-          error={undefined}
+          error={null}
           filterCategories={[]}
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
           onRefresh={() => {}}
+          trackEventCall={jest.fn()}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
@@ -153,22 +158,24 @@ describe('AuditWorklistTab', () => {
           toDo
           navigation={navigationProp}
           dispatch={mockDispatch}
-          collapsed={true}
-          setCollapsed={jest.fn}
+          collapsedState={[true, jest.fn()]}
           refreshing={false}
-          error={undefined}
+          error={null}
           filterCategories={[]}
           filterExceptions={[]}
           areas={mockAreas}
           enableAreaFilter={false}
           onRefresh={() => {}}
+          trackEventCall={jest.fn()}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
       fireEvent.press(btnCollapse);
       expect(toJSON()).toMatchSnapshot();
     });
-  }); */
+  });
 });
 
 describe('Tests rendering Filter `Pills`', () => {
