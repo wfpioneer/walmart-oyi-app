@@ -1,5 +1,6 @@
 import React, {
   EffectCallback,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -302,48 +303,54 @@ const ZoneList = (): JSX.Element => {
     dispatch(getZoneNames());
   };
 
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => dispatch(hideLocationPopup())}
-        disabled={!location.locationPopupVisible}
-        style={location.locationPopupVisible ? styles.disabledContainer : styles.safeAreaView}
+      <ZoneScreen
+        siteId={siteId}
+        dispatch={dispatch}
+        getZoneApi={getZoneApi}
+        isManualScanEnabled={isManualScanEnabled}
+        navigation={navigation}
+        route={route}
+        useEffectHook={useEffect}
+        apiStart={apiStart}
+        setApiStart={setApiStart}
+        trackEventCall={trackEvent}
+        locationPopupVisible={location.locationPopupVisible}
+        getZoneNamesApi={getZoneNamesApi}
+        errorVisible={errorVisible}
+        setErrorVisible={setErrorVisible}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => dispatch(hideLocationPopup())}
+        style={styles.bottomSheetModal}
+        backdropComponent={renderBackdrop}
       >
-        <ZoneScreen
-          siteId={siteId}
-          dispatch={dispatch}
-          getZoneApi={getZoneApi}
-          isManualScanEnabled={isManualScanEnabled}
-          navigation={navigation}
-          route={route}
-          useEffectHook={useEffect}
-          apiStart={apiStart}
-          setApiStart={setApiStart}
-          trackEventCall={trackEvent}
-          locationPopupVisible={location.locationPopupVisible}
-          getZoneNamesApi={getZoneNamesApi}
-          errorVisible={errorVisible}
-          setErrorVisible={setErrorVisible}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
+        <BottomSheetAddCard
+          isManagerOption={true}
+          isVisible={true}
+          text={strings('LOCATION.ADD_ZONE')}
+          onPress={handleAddZone}
         />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          snapPoints={snapPoints}
-          index={0}
-          onDismiss={() => dispatch(hideLocationPopup())}
-          style={styles.bottomSheetModal}
-          backdropComponent={BottomSheetBackdrop}
-        >
-          <BottomSheetAddCard
-            isManagerOption={true}
-            isVisible={true}
-            text={strings('LOCATION.ADD_ZONE')}
-            onPress={handleAddZone}
-          />
-        </BottomSheetModal>
-      </TouchableOpacity>
+      </BottomSheetModal>
     </BottomSheetModalProvider>
   );
 };

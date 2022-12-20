@@ -85,14 +85,6 @@ const styles = StyleSheet.create({
   delButton: {
     flex: 1,
     paddingHorizontal: 10
-  },
-  disabledContainer: {
-    flex: 1,
-    opacity: 0.2,
-    backgroundColor: COLOR.BLACK_TRANSPARENT_200
-  },
-  safeAreaView: {
-    flex: 1
   }
 });
 

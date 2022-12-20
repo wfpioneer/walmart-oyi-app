@@ -23,9 +23,10 @@ export interface ConfigResponse {
   showOpenAuditLink: boolean;
   scanRequired: boolean;
   showCalculator: boolean;
-  showItemImages: boolean;
   multiPick: boolean;
   multiBin: boolean;
+  showItemImage: boolean;
+  showFeedback: boolean;
 }
 
 export default class ConfigService {

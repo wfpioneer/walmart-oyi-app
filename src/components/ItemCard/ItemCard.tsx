@@ -1,26 +1,36 @@
 import React from 'react';
 import {
-  ActivityIndicator, Image, Platform, Text, TouchableOpacity, View
+  ActivityIndicator, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import styles from './ItemCard.style';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 interface ItemCardProps {
-  imageUrl: { uri: string } | undefined,
   itemNumber: number,
   onHandQty: number | undefined,
   description: string,
   onClick: (itemNumber: number) => void;
-  loading: boolean
+  loading: boolean;
+  countryCode: string;
+  showItemImage: boolean;
 }
 
+const getContainerStyle = (isLoading: boolean, showItemImage: boolean) => {
+  if (isLoading) {
+    return showItemImage ? styles.loaderContainer : { ...styles.loaderContainer, height: 60 };
+  }
+  return showItemImage ? styles.container : { ...styles.container, paddingLeft: 10 };
+};
+
 const ItemCard = ({
-  imageUrl, itemNumber, description, onClick, loading, onHandQty
+  itemNumber, description, onClick, loading, onHandQty,
+  countryCode, showItemImage
 }: ItemCardProps) => (
-  <View style={{ width: '100%' }}>
+  <View style={styles.mainContainer}>
     <TouchableOpacity
-      style={!loading ? styles.container : styles.loaderContainer}
+      style={getContainerStyle(loading, showItemImage)}
       onPress={() => {
         if (!loading) {
           onClick(itemNumber);
@@ -28,10 +38,12 @@ const ItemCard = ({
       }}
       testID="itemCard"
     >
-      <Image
-        style={styles.image}
-        source={(!loading && imageUrl) || require('../../assets/images/placeholder.png')}
+      {showItemImage && !loading && (
+      <ImageWrapper
+        countryCode={countryCode}
+        itemNumber={itemNumber}
       />
+      )}
       {loading && (
       <View style={styles.loader} testID="loader">
         <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
@@ -39,7 +51,7 @@ const ItemCard = ({
       )}
       {!loading && (
       <View style={styles.itemDetails} testID="item-details">
-        <View>
+        <View style={!showItemImage ? styles.itemNbrView : {}}>
           <Text style={styles.itemNbr}>{`${strings('GENERICS.ITEM')} ${itemNumber}`}</Text>
         </View>
         <View>
