@@ -4,11 +4,16 @@ import { Environment, getEnvironment } from '../utils/environment';
 import { ApprovalListItem } from '../models/ApprovalListItem';
 
 export default class UpdateOHQtyService {
-  public static updateOHQty(payload: { data: ApprovalListItem}): Promise<AxiosResponse<unknown>> {
+  public static updateOHQty(payload: {
+    data: ApprovalListItem;
+    worklistType?: string;
+  }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
+    const { data, worklistType } = payload;
     return Request.post(
       `${urls.orchestrationURL}/managerapproval/items`,
-      payload.data,
+      data,
+      { headers: worklistType ? { worklistType } : undefined }
     );
   }
 }
