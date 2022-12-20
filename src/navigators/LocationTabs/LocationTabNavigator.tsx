@@ -1,5 +1,5 @@
 import React, {
-  EffectCallback, useEffect, useMemo, useRef, useState
+  EffectCallback, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
@@ -579,6 +579,19 @@ const LocationTabs = () : JSX.Element => {
     }
   }, [locationPopupVisible]);
 
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
       <LocationTabsNavigator
@@ -619,7 +632,7 @@ const LocationTabs = () : JSX.Element => {
           dispatch(hideLocationPopup());
         }}
         style={styles.bottomSheetModal}
-        backdropComponent={BottomSheetBackdrop}
+        backdropComponent={renderBackdrop}
       >
         <BottomSheetView>
           <BottomSheetClearCard

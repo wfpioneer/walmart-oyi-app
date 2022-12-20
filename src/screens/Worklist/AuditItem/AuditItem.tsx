@@ -749,7 +749,8 @@ export const renderConfirmOnHandsModal = (
   >,
   updatedQuantity: number,
   itemDetails: ItemDetails | null,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  worklistType: string
 ) => {
   const onHandsQty = itemDetails?.onHandsQty || 0;
   const basePrice = itemDetails?.basePrice || 0;
@@ -845,7 +846,8 @@ export const renderConfirmOnHandsModal = (
                       newQuantity: updatedQuantity,
                       oldQuantity: onHandsQty,
                       upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
-                    }
+                    },
+                    worklistType
                   })
                 );
               }}
@@ -1260,7 +1262,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         noAction({
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
-          scannedValue: itemNumber.toString()
+          scannedValue: itemNumber.toString(),
+          headers: { worklistType: route.params?.worklistType ?? 'AU' }
         })
       );
     } else {
@@ -1308,7 +1311,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         setShowOnHandsConfirmationModal,
         totalOHQty,
         itemDetails,
-        dispatch
+        dispatch,
+        route.params?.worklistType ?? 'AU'
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
@@ -1318,10 +1322,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         <ItemCard
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
-          imageUrl={undefined}
           onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
           onClick={() => {}}
           loading={getItemDetailsApi.isWaiting}
+          countryCode={countryCode}
+          showItemImage={userConfig.showItemImage}
         />
       </View>
       <ScrollView
