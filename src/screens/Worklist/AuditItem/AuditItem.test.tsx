@@ -798,7 +798,8 @@ describe('AuditItemScreen', () => {
           50,
           mockItemDetails,
           mockDispatch,
-          mockTrackEventCall
+          mockTrackEventCall,
+          'AU'
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -822,7 +823,8 @@ describe('AuditItemScreen', () => {
           50,
           mockItemDetails,
           mockDispatch,
-          mockTrackEventCall
+          mockTrackEventCall,
+          'AU'
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -838,7 +840,8 @@ describe('AuditItemScreen', () => {
           50,
           mockItemDetails,
           mockDispatch,
-          mockTrackEventCall
+          mockTrackEventCall,
+          'AU'
         )
       );
       const modalConfirmButton = getByTestId('modal-confirm-button');
@@ -859,7 +862,8 @@ describe('AuditItemScreen', () => {
           50,
           mockItemDetails,
           mockDispatch,
-          mockTrackEventCall
+          mockTrackEventCall,
+          'AU'
         )
       );
       const modalConfirmButton = getByTestId('modal-cancel-button');
