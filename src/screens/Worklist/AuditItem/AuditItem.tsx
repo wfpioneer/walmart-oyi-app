@@ -729,7 +729,7 @@ export const renderDeleteLocationModal = (
             testID="modal-cancel-button"
             onPress={() => {
               setShowDeleteConfirmationModal(false);
-              trackEventCall('Audit_Item', { action: 'cancel_delete_location_popup_click' });
+              trackEventCall('Audit_Item', { action: 'cancel_delete_location_click', locationType });
             }}
           />
           <Button
@@ -740,7 +740,13 @@ export const renderDeleteLocationModal = (
             backgroundColor={COLOR.TRACKER_RED}
             onPress={() => {
               deleteLocationConfirmed(locationType);
-              trackEventCall('Audit_Item', { action: 'confirm_delete_location_click', locationType });
+              if (locationType === 'reserve') {
+                trackEventCall('Audit_Item',
+                  { action: 'missing_pallet_confirmation_click', palletId });
+              } else {
+                trackEventCall('Audit_Item',
+                  { action: 'confirm_delete_location_click', locName: locationName });
+              }
             }}
           />
         </View>
@@ -758,7 +764,8 @@ export const renderConfirmOnHandsModal = (
   >,
   updatedQuantity: number,
   itemDetails: ItemDetails | null,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
   const onHandsQty = itemDetails?.onHandsQty || 0;
   const basePrice = itemDetails?.basePrice || 0;
@@ -832,7 +839,11 @@ export const renderConfirmOnHandsModal = (
               title={strings('APPROVAL.GO_BACK')}
               titleColor={COLOR.MAIN_THEME_COLOR}
               testID="modal-cancel-button"
-              onPress={() => setShowOnHandsConfirmationModal(false)}
+              onPress={() => {
+                trackEventCall('Audit_Item',
+                  { action: 'cancel_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr });
+                setShowOnHandsConfirmationModal(false);
+              }}
               type={2}
             />
             <Button
@@ -841,6 +852,13 @@ export const renderConfirmOnHandsModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={() => {
+                trackEventCall('Audit_Item',
+                  {
+                    action: 'complete_audit_item_click',
+                    type: 'OH_qty_update',
+                    itemNumber: itemDetails?.itemNbr,
+                    upcNbr: itemDetails?.upcNbr
+                  });
                 dispatch(
                   updateOHQty({
                     data: {
@@ -971,7 +989,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused() && userConfig.scanRequired) {
         validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall('section_details_scan', {
+          trackEventCall('Audit_Item', {
+            action: 'section_details_scan',
             value: scan.value,
             type: scan.type
           });
@@ -1121,14 +1140,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name)
       .then(() => {
-        trackEventCall('refresh_item_details', { itemNumber });
+        trackEventCall('Audit_Item', { action: 'refresh_item_details', itemNumber });
         dispatch(clearAuditScreenData());
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemNumber }));
         dispatch(getItemPallets({ itemNbr: itemNumber }));
       })
       .catch(() => {
-        trackEventCall('session_timeout', { user: userId });
+        trackEventCall('Audit_Item', { action: 'session_timeout', user: userId });
       });
   };
 
@@ -1321,7 +1340,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         setShowOnHandsConfirmationModal,
         totalOHQty,
         itemDetails,
-        dispatch
+        dispatch,
+        trackEventCall
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
