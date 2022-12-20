@@ -71,7 +71,8 @@ interface ZoneProps {
 const getZoneErrorModal = (
   errorVisible: boolean,
   setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  trackEventCall: (eventName: string, params?: any) => void
 ): JSX.Element => (
   <CustomModalComponent
     isVisible={errorVisible}
@@ -87,13 +88,19 @@ const getZoneErrorModal = (
         style={styles.modalButton}
         title={strings('GENERICS.CANCEL')}
         backgroundColor={COLOR.TRACKER_RED}
-        onPress={() => setErrorVisible(false)}
+        onPress={() => {
+          trackEventCall('Zone_List_Screen', { action: 'cancel_get_zones_error_modal_popup_click' });
+          setErrorVisible(false);
+        }}
       />
       <Button
         style={styles.modalButton}
         title={strings('GENERICS.RETRY')}
         backgroundColor={COLOR.MAIN_THEME_COLOR}
-        onPress={() => dispatch(getZoneNames())}
+        onPress={() => {
+          trackEventCall('Zone_List_Screen', { action: 'get_zone_names_retry_click' });
+          dispatch(getZoneNames());
+        }}
       />
     </View>
   </CustomModalComponent>
@@ -122,7 +129,7 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
   // calls the get all zone api
   useEffectHook(() => navigation.addListener('focus', () => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('get_zones_api_call');
+      trackEventCall('Zone_List_Screen', { action: 'get_zones_api_call' });
       setApiStart(moment().valueOf());
       dispatch(getAllZones());
     }).catch(() => { });
@@ -133,7 +140,7 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          trackEventCall('section_details_scan', { value: scan.value, type: scan.type });
+          trackEventCall('Zone_List_Screen', { action: 'section_details_scan', value: scan.value, type: scan.type });
           dispatch(setScannedEvent(scan));
           dispatch(setManualScan(false));
           navigation.navigate('SectionDetails');
@@ -154,7 +161,8 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
 
     // on api failure
     if (!getZoneApi.isWaiting && getZoneApi.error) {
-      trackEventCall('get_zones_failure', {
+      trackEventCall('Zone_List_Screen', {
+        event: 'get_zones_failure',
         errorDetails: getZoneApi.error.message || getZoneApi.error,
         duration: moment().valueOf() - apiStart
       });
@@ -216,7 +224,7 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
         <TouchableOpacity
           style={styles.errorButton}
           onPress={() => {
-            trackEventCall('location_api_retry',);
+            trackEventCall('Zone_List_Screen', { action: 'location_api_retry' });
             dispatch(getAllZones());
           }}
         >
@@ -240,7 +248,7 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
 
   return (
     <View>
-      {getZoneErrorModal(errorVisible, setErrorVisible, dispatch)}
+      {getZoneErrorModal(errorVisible, setErrorVisible, dispatch, trackEventCall)}
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
       <LocationHeader
         location={`${strings('GENERICS.CLUB')} ${siteId}`}
@@ -297,6 +305,7 @@ const ZoneList = (): JSX.Element => {
   }, [location]);
 
   const handleAddZone = () => {
+    trackEvent('Zone_List_Screen', { action: 'add_zone_click' });
     dispatch(hideLocationPopup());
     bottomSheetModalRef.current?.dismiss();
     dispatch(setCreateFlow(CREATE_FLOW.CREATE_ZONE));
@@ -340,7 +349,10 @@ const ZoneList = (): JSX.Element => {
         ref={bottomSheetModalRef}
         snapPoints={snapPoints}
         index={0}
-        onDismiss={() => dispatch(hideLocationPopup())}
+        onDismiss={() => {
+          trackEvent('Zone_List_Screen', { action: 'hide_zone_bottom_sheet_modal' });
+          dispatch(hideLocationPopup());
+        }}
         style={styles.bottomSheetModal}
         backdropComponent={renderBackdrop}
       >

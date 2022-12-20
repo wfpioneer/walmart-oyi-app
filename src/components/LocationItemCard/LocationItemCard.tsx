@@ -5,6 +5,7 @@ import {
   NavigationProp
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
+import { trackEvent } from 'appcenter-analytics';
 import styles from './LocationItemCard.style';
 import { COLOR } from '../../themes/Color';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
@@ -52,6 +53,7 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
         if (locationType === LocationType.SECTION) {
           dispatch(resetScannedEvent());
         }
+        trackEvent('location_item_card_click', { destination: destinationScreen });
         navigator.navigate(destinationScreen);
       }}
       disabled={locationPopupVisible}
