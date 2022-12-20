@@ -146,8 +146,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
                   testID="yesButton"
                   title={strings('FEEDBACK.YES')}
                   onPress={() => {
-                    // TO DO navigation to feedback
                     this.props.resetUserConfigUpdateApiState();
+                    this.props.navigation.navigate('FeedbackScreen');
                   }}
                   type={ButtonType.PRIMARY}
                   style={styles.button}
