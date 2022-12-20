@@ -42,6 +42,7 @@ describe('AddZoneScreen', () => {
       dispatch={jest.fn()}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      trackEventCall={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -59,6 +60,7 @@ describe('AddZoneScreen', () => {
       dispatch={jest.fn()}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      trackEventCall={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -76,6 +78,7 @@ describe('AddZoneScreen', () => {
       dispatch={jest.fn()}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      trackEventCall={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -93,6 +96,7 @@ describe('AddZoneScreen', () => {
       dispatch={jest.fn()}
       navigation={navigationProp}
       useEffectHook={jest.fn()}
+      trackEventCall={jest.fn()}
     />);
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

@@ -259,6 +259,7 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
             destinationScreen={LocationType.AISLE}
             dispatch={dispatch}
             locationPopupVisible={locationPopupVisible}
+            trackEventCall={trackEventCall}
           />
         )}
         keyExtractor={item => item.zoneName}

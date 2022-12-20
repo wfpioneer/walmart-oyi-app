@@ -39,6 +39,7 @@ describe('Test Location Item Card', () => {
         navigator={navigationProp}
         destinationScreen={LocationType.AISLE}
         locationPopupVisible={false}
+        trackEventCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -59,6 +60,7 @@ describe('Test Location Item Card', () => {
         navigator={navigationProp}
         destinationScreen={LocationType.SECTION}
         locationPopupVisible={false}
+        trackEventCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -79,6 +81,7 @@ describe('Test Location Item Card', () => {
         navigator={navigationProp}
         destinationScreen={LocationType.SECTION_DETAILS}
         locationPopupVisible={false}
+        trackEventCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

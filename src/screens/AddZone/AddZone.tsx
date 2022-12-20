@@ -11,6 +11,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import { Picker } from '@react-native-picker/picker';
 import { useDispatch } from 'react-redux';
+import { trackEvent } from '../../utils/AppCenterTool';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
 import Button from '../../components/buttons/Button';
@@ -33,6 +34,7 @@ interface AddZoneScreenProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  trackEventCall: typeof trackEvent
 }
 
 const NEW_ZONE_AISLE_MIN = 1;
@@ -82,7 +84,8 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
     setNumberOfAisles,
     setSelectedZone,
     useEffectHook,
-    zones
+    zones,
+    trackEventCall
   } = props;
 
   // Navigation Listener clear zone name api when leaving this screen
@@ -138,6 +141,10 @@ export const AddZoneScreen = (props: AddZoneScreenProps): JSX.Element => {
   const handleContinue = () => {
     switch (createFlow) {
       case CREATE_FLOW.CREATE_AISLE:
+        trackEventCall('Aisle_List', {
+          action: 'adding_aisles_to_zone',
+          zone: selectedZone
+        });
         dispatch(setAislesToCreate(numberOfAisles));
         break;
       default:
@@ -242,6 +249,7 @@ const AddZone = (): JSX.Element => {
       dispatch={dispatch}
       navigation={navigation}
       useEffectHook={useEffect}
+      trackEventCall={trackEvent}
     />
   );
 };
