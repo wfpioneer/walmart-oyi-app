@@ -29,6 +29,7 @@ import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
 import { LocationIdName } from '../../state/reducers/Location';
 import Location from '../../models/Location';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface SectionDetailsProps {
   getSectionDetailsApi: AsyncState;
@@ -186,6 +187,7 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
             item={item}
             dispatch={dispatch}
             navigation={navigation}
+            trackEventCall={trackEvent}
           />
         )}
         keyExtractor={(item, idx) => `${item.itemNbr}${idx}`}
@@ -295,6 +297,11 @@ const SectionDetails = (): JSX.Element => {
           isVisible={true}
           text={strings('LOCATION.EDIT_ITEM')}
           onPress={() => {
+            trackEvent('Section_Details', {
+              action: 'edit_item_clicked',
+              itemNbr: selectedItem?.itemNbr,
+              sectionId: selectedSection?.id
+            });
             handleEditItem(selectedItem, dispatch, navigation, selectedZone, selectedAisle, selectedSection);
           }}
         />
@@ -302,6 +309,11 @@ const SectionDetails = (): JSX.Element => {
           isVisible={true}
           text={strings('LOCATION.REMOVE_ITEM')}
           onPress={() => {
+            trackEvent('Section_Details', {
+              action: 'remove_item_clicked',
+              itemNbr: selectedItem?.itemNbr,
+              sectionId: selectedSection?.id
+            });
             dispatch(hideItemPopup());
             setDisplayConfirmation(true);
           }}
