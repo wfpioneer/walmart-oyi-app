@@ -11,7 +11,6 @@ export const asyncReducer = combineReducers({
   getWorklistAudits: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT),
   getPalletWorklist: makeAsyncReducer(asyncActions.GET_PALLET_WORKLIST),
   editLocation: makeAsyncReducer(asyncActions.EDIT_LOCATION),
-  addToPicklist: makeAsyncReducer(asyncActions.ADD_TO_PICKLIST),
   addLocation: makeAsyncReducer(asyncActions.ADD_LOCATION),
   updateOHQty: makeAsyncReducer(asyncActions.UPDATE_OH_QTY),
   getWorklistSummary: makeAsyncReducer(asyncActions.GET_WORKLIST_SUMMARY),

@@ -112,10 +112,6 @@ export const updateOHQty = (payload: {
   data: Partial<ApprovalListItem>,
   worklistType?: string
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
-export const addToPicklist = (payload: {
-  headers?: AxiosRequestHeaders;
-  itemNumber: number;
-}) => ({ type: ADD_TO_PICKLIST, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const deleteLocation = (payload: {
   headers?: AxiosRequestHeaders;
@@ -265,7 +261,6 @@ export type SagaParams =
   & Pick<ReturnType<typeof editLocation>, 'payload'>
   & Pick<ReturnType<typeof addLocation>, 'payload'>
   & Pick<ReturnType<typeof updateOHQty>, 'payload'>
-  & Pick<ReturnType<typeof addToPicklist>, 'payload'>
   & Pick<ReturnType<typeof deleteLocation>, 'payload'>
   & Pick<ReturnType<typeof noAction>, 'payload'>
   & Pick<ReturnType<typeof printSign>, 'payload'>

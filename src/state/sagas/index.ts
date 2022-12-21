@@ -9,7 +9,6 @@ import GetWorklistService, { GetWorklistAuditService } from '../../services/GetW
 import GetPalletWorklistService from '../../services/GetPalletWorklist.service';
 import EditLocationService from '../../services/EditLocation.service';
 import UpdateOHQtyService from '../../services/UpdateOHQty.service';
-import AddToPicklistService from '../../services/AddToPicklist.service';
 import AddLocationService from '../../services/AddLocation.service';
 import WorklistSummaryService from '../../services/WorklistSummary.service';
 import DeleteLocationService from '../../services/DeleteLocation.service';
@@ -44,7 +43,6 @@ const genericSagas = [
     GetPalletWorklistService.getPalletWorklist
   ),
   makeAsyncSaga(saga.EDIT_LOCATION, actions.editLocation, EditLocationService.editLocation),
-  makeAsyncSaga(saga.ADD_TO_PICKLIST, actions.addToPicklist, AddToPicklistService.addToPicklist),
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
