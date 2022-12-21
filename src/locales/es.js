@@ -536,6 +536,8 @@ export default {
     POOR_RATE_LABEL: 'Malo',
     AVERAGE_RATE_LABEL: 'Regular',
     GOOD_RATE_LABEL: 'Bueno',
-    EXCELLENT_RATE_LABEL: 'Excelente'
+    EXCELLENT_RATE_LABEL: 'Excelente',
+    RATING_LABEL: 'Elige una calificación',
+    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario'
   }
 };
