@@ -87,6 +87,7 @@ describe('BinningScreen', () => {
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -129,6 +130,7 @@ describe('BinningScreen', () => {
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -152,6 +154,7 @@ describe('BinningScreen', () => {
           displayWarningModal={true}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -165,7 +168,7 @@ describe('BinningScreen', () => {
       const mockDispatch = jest.fn();
       const mockSetPalletClicked = jest.fn();
       renderer.render(
-        binningItemCard({ item }, mockDispatch, mockSetPalletClicked)
+        binningItemCard({ item }, mockDispatch, mockSetPalletClicked, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

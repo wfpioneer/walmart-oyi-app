@@ -49,6 +49,7 @@ interface AssignLocationProps {
   updatePicklistStatusApi: AsyncState;
   deletePicks: boolean;
   setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: typeof trackEvent
 }
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -119,7 +120,8 @@ export const binPalletsApiEffect = (
   dispatch: Dispatch<any>,
   route: RouteProp<any, string>,
   selectedPicks: PickListItem[],
-  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>
+  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
   if (navigation.isFocused()) {
     if (!binPalletsApi.isWaiting) {
@@ -180,6 +182,9 @@ export const binPalletsApiEffect = (
               });
             }
           } else {
+            trackEventCall('Binning_Screen', {
+              event: 'pallets_binned_successfully'
+            });
             Toast.show({
               type: 'success',
               position: 'bottom',
@@ -263,7 +268,8 @@ export const binPalletsApiEffect = (
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState,
-    navigation, dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi, deletePicks, setDeletePicks
+    navigation, dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi, deletePicks, setDeletePicks,
+    trackEventCall
   } = props;
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
 
@@ -292,7 +298,8 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     const scannerListener = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          trackEvent('bin_location_scanned', {
+          trackEventCall('Binnig_Screen', {
+            action: 'bin_location_scanned',
             barcode: scan.value,
             type: scan.type
           });
@@ -323,7 +330,8 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     dispatch,
     route,
     selectedPicks,
-    setDeletePicks
+    setDeletePicks,
+    trackEventCall
   ), [binPalletsApi]);
 
   useEffectHook(() => (
@@ -403,6 +411,7 @@ function AssignLocation(): JSX.Element {
       updatePicklistStatusApi={updatePicklistStatusApi}
       deletePicks={deletePicks}
       setDeletePicks={setDeletePicks}
+      trackEventCall={trackEvent}
     />
   );
 }
