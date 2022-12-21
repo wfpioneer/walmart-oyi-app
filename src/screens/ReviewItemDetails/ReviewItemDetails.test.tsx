@@ -20,7 +20,7 @@ itemDetail, {
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
-  getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleAddToPicklist,
+  getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales,
   handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError,
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
@@ -101,7 +101,6 @@ const mockHandleProps: (HandleProps & RenderProps) = {
   setOhQtyModalVisible: jest.fn(),
   actionCompleted: false,
   isManualScanEnabled: false,
-  addToPicklistStatus: defaultAsyncState,
   completeItemApi: defaultAsyncState,
   userConfigs: mockConfig
 };
@@ -112,7 +111,6 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   isWaiting: false,
   error: null,
   result: null,
-  addToPicklistStatus: defaultAsyncState,
   completeItemApi: defaultAsyncState,
   createNewPickApi: defaultAsyncState,
   updateOHQtyApi: defaultAsyncState,
@@ -559,56 +557,13 @@ describe('ReviewItemDetailsScreen', () => {
   // TODO once create pick dialog and api are fully implemented into item review screen we need to add tests for
   // TODO testing the api when picking is enabled
   describe('Tests rendering for Adding an Item to the Picklist', () => {
-    it('renders \'Item Added to Picklist \'', () => {
+    it('renders \'Added to Picklist Button \' with Picking enabled', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const addPicklistResult = {
-        isWaiting: false,
-        value: null,
-        error: null,
-        result: {
-          data: {
-            code: '200',
-            description: 'Manual Pick created for Item Nbr [123] with Pick Need [1]'
-          },
-          status: 200
-        }
-      };
+      const pickingEnabledProps = mockHandleProps;
+      pickingEnabledProps.userConfigs = { ...mockConfig, picking: true };
       renderer.render(
         renderAddPicklistButton({
-          ...mockHandleProps,
-          addToPicklistStatus: addPicklistResult
-        }, itemDetail[123], jest.fn())
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('renders \'Add to Picklist Error\' Retry', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const addPicklistError = {
-        isWaiting: false,
-        value: null,
-        error: ' Network Error ',
-        result: null
-      };
-      renderer.render(
-        renderAddPicklistButton({
-          ...mockHandleProps,
-          addToPicklistStatus: addPicklistError
-        }, itemDetail[123], jest.fn())
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('renders a Loader when waiting for Picklist response', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const addPicklistError = {
-        isWaiting: true,
-        value: null,
-        error: null,
-        result: null
-      };
-      renderer.render(
-        renderAddPicklistButton({
-          ...mockHandleProps,
-          addToPicklistStatus: addPicklistError
+          ...pickingEnabledProps
         }, itemDetail[123], jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -790,17 +745,6 @@ describe('ReviewItemDetailsScreen', () => {
     it('test handleLocationUpdate', async () => {
       await handleLocationAction(mockHandleProps, itemDetail[123]);
       expect(navigationProp.navigate).toHaveBeenCalledWith('LocationDetails');
-    });
-    it('test handleAddToPicklist', async () => {
-      await handleAddToPicklist(mockHandleProps, itemDetail[123].itemNbr);
-      expect(mockHandleProps.dispatch).toHaveBeenCalledWith(
-        {
-          payload: {
-            itemNumber: 1234567890
-          },
-          type: 'SAGA/ADD_TO_PICKLIST'
-        }
-      );
     });
     it('test getFloorItemDetails', () => {
       const expectedResults = [
