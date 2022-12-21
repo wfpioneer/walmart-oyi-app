@@ -63,7 +63,9 @@ describe('Home Navigator', () => {
     clubNbr: 1234,
     updatePrinterByID: jest.fn(),
     priceLabelPrinter: defPrinter as Printer,
-    setPriceLabelPrinter: jest.fn()
+    setPriceLabelPrinter: jest.fn(),
+    resetPrintQueue: jest.fn(),
+    clearLocationPrintQueue: jest.fn()
   };
 
   it('Renders the Home navigator component', () => {
