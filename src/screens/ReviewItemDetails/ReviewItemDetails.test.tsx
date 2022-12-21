@@ -987,7 +987,6 @@ describe('ReviewItemDetailsScreen', () => {
       await onValidateScannedEvent(mockItemDetailsScreenProps);
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(3, { type: 'API/ADD_TO_PICKLIST/RESET' });
     });
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
