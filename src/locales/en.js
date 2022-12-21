@@ -59,7 +59,8 @@ export default {
     UPDATE: 'Update Configuration',
     WARNING_LABEL: 'Warning',
     CLOSE: 'Close',
-    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}'
+    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
+    FEEDBACK: 'Feedback'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
