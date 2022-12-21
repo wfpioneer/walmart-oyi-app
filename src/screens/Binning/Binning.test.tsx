@@ -63,6 +63,7 @@ describe('BinningScreen', () => {
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
