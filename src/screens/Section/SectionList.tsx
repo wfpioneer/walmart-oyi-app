@@ -56,6 +56,7 @@ import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 
 const MANAGER_APPROVAL = 'manager approval';
+const SCREEN_NAME = 'Section_List';
 
 const NoSectionMessage = (): JSX.Element => (
   <View style={styles.noSections}>
@@ -267,7 +268,7 @@ export const ClearItemsModal = (props: ClearItemsModalProps): JSX.Element => {
           style={styles.delButton}
           title={strings('GENERICS.CANCEL')}
           backgroundColor={COLOR.MAIN_THEME_COLOR}
-            // No need for modal close fn because no apis have been sent
+          // No need for modal close fn because no apis have been sent
           onPress={() => setDisplayConfirmation(false)}
         />
         <Button
@@ -420,6 +421,11 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
   }
 
   const handleDeleteAisle = () => {
+    trackEventCall(SCREEN_NAME, {
+      action: 'removing_aisle_from_location',
+      aisleId,
+      aisleName
+    });
     setDeleteAisleApiStart(moment().valueOf());
     setDisplayConfirmation(false);
     dispatch(
@@ -431,6 +437,11 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
 
   const handleClearItems = () => {
     setDisplayConfirmation(false);
+    trackEventCall(SCREEN_NAME, {
+      action: 'clearing_aisle_from_location',
+      locationId: aisleId,
+      target: clearLocationTarget
+    });
     dispatch(clearLocation({ locationId: aisleId, target: clearLocationTarget }));
   };
 
@@ -528,6 +539,10 @@ const SectionList = (): JSX.Element => {
     if (bottomSheetModalRef.current) {
       bottomSheetModalRef.current.dismiss();
     }
+    trackEvent(SCREEN_NAME, {
+      action: 'adding_section',
+      aisleName
+    });
     navigation.navigate('AddSection');
   };
 
@@ -575,7 +590,12 @@ const SectionList = (): JSX.Element => {
         ref={bottomSheetModalRef}
         snapPoints={user.features.includes(MANAGER_APPROVAL) ? managerSnapPoints : associateSnapPoints}
         index={0}
-        onDismiss={() => dispatch(hideLocationPopup())}
+        onDismiss={() => {
+          trackEvent(SCREEN_NAME, {
+            action: 'hide_ section_bottom_sheet_modal'
+          });
+          dispatch(hideLocationPopup());
+        }}
         style={styles.bottomSheetModal}
         backdropComponent={renderBackdrop}
       >
@@ -588,6 +608,9 @@ const SectionList = (): JSX.Element => {
               bottomSheetModalRef.current.dismiss();
             }
             dispatch(setPrintingLocationLabels(LocationName.AISLE));
+            trackEvent(SCREEN_NAME, {
+              action: 'printing_all_section_labels'
+            });
             navigation.navigate('PrintPriceSign');
             dispatch(setIsToolBarNavigation(false));
           }}
