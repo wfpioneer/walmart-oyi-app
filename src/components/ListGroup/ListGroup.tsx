@@ -16,6 +16,7 @@ import {
 import styles from './ListGroup.style';
 import COLOR from '../../themes/Color';
 import { selectPicks, updateMultiPickSelection } from '../../state/actions/Picking';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface ListGroupProps {
   title: string;
@@ -134,8 +135,10 @@ const handleWorkflowNav = (
 ) => {
   dispatch(selectPicks(items.reduce((pickIds: number[], pickItem) => [...pickIds, pickItem.id], [])));
   if (currentTab !== Tabs.SALESFLOOR && pickOrBin(items[0])) {
+    trackEvent('Picking_Screen', { event: 'navigation_to_pick_bin_workflow_screen' });
     navigation.navigate('PickBinWorkflow');
   } else {
+    trackEvent('Picking_Screen', { event: 'navigation_to_sales_floor_workflow_screen' });
     navigation.navigate('SalesFloorWorkflow');
   }
 };

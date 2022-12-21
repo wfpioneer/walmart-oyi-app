@@ -23,6 +23,8 @@ jest.mock('../../state/actions/Modal', () => ({
   hideActivityModal: jest.fn()
 }));
 
+const mockTrackEventCall = jest.fn();
+
 const basePickItem: PickListItem = {
   assignedAssociate: '',
   category: 3,
@@ -151,6 +153,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -179,6 +182,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -207,6 +211,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -235,6 +240,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -263,6 +269,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -291,6 +298,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -319,6 +327,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -347,6 +356,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={jest.fn()}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
 
@@ -387,6 +397,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={setSelectedPicklistAction}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
     const acceptButton = findByText(strings('PICKING.ACCEPT'));
@@ -431,6 +442,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={setSelectedPicklistAction}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
     const releaseButton = findByText(strings('PICKING.RELEASE'));
@@ -475,6 +487,7 @@ describe('PickBin Workflow render tests', () => {
         setSelectedPicklistAction={setSelectedPicklistAction}
         showContinueActionDialog={false}
         setShowContinueActionDialog={jest.fn}
+        trackEventCall={mockTrackEventCall}
       />
     );
     const binButton = findByText(strings('PICKING.BIN'));
@@ -507,6 +520,7 @@ describe('PickBin Workflow render tests', () => {
           dispatch={jest.fn}
           items={mockSelectedItems}
           setSelectedPicklistAction={jest.fn}
+          trackEventCall={mockTrackEventCall}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -520,6 +534,7 @@ describe('PickBin Workflow render tests', () => {
           dispatch={mockDispatch}
           items={mockSelectedItems}
           setSelectedPicklistAction={mockSetSelectedPicklistAction}
+          trackEventCall={mockTrackEventCall}
         />
       );
       const readyToWorkActionButton = findByText(strings('PICKING.READY_TO_WORK'));
@@ -536,6 +551,7 @@ describe('PickBin Workflow render tests', () => {
           dispatch={mockDispatch}
           items={mockSelectedItems}
           setSelectedPicklistAction={mockSetSelectedPicklistAction}
+          trackEventCall={mockTrackEventCall}
         />
       );
       const completeActionButton = findByText(strings('PICKING.COMPLETE'));
@@ -552,6 +568,7 @@ describe('PickBin Workflow render tests', () => {
           dispatch={mockDispatch}
           items={mockSelectedItems}
           setSelectedPicklistAction={mockSetSelectedPicklistAction}
+          trackEventCall={mockTrackEventCall}
         />
       );
       const cancelButton = findByText(strings('GENERICS.CANCEL'));
