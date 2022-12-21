@@ -5,7 +5,7 @@ import {
   NavigationProp
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
-import { trackEvent } from 'appcenter-analytics';
+import { trackEvent } from '../../utils/AppCenterTool';
 import styles from './LocationItemCard.style';
 import { COLOR } from '../../themes/Color';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
