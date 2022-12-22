@@ -9,7 +9,7 @@ export default class GetApprovalListService {
   ): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
-      `${urls.managerApprovalUrl}/managerapproval/items`,
+      `${urls.worklistURL}/managerapproval/items`,
       {
         itemId: payload.itemNbr,
         status: payload.status,
