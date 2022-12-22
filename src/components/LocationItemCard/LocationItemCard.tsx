@@ -67,7 +67,7 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
             screenName = 'Section_List';
             break;
           default:
-            screenName = '';
+            screenName = 'screen_not_found';
         }
         trackEventCall(screenName, {
           action: 'location_item_card_clicked',
