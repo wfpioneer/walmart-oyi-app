@@ -538,6 +538,8 @@ export default {
     GOOD_RATE_LABEL: 'Bueno',
     EXCELLENT_RATE_LABEL: 'Excelente',
     RATING_LABEL: 'Elige una calificación',
-    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario'
+    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario',
+    SUBMIT_FEEDBACK_SUCCESS: 'La retroalimentación se ha enviado con éxito',
+    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.' // TODO NEED ERROR TRANSLATION
   }
 };

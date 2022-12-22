@@ -1,18 +1,35 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import {
-  Keyboard, KeyboardAvoidingView, Text, TextInput, View
+  Keyboard,
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import COLOR from '../../themes/Color';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import Stars from '../../components/stars/Stars';
 import { strings } from '../../locales';
 import styles from './Feedback.style';
+import { submitFeedbackRating } from '../../state/actions/saga';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
+import User from '../../models/User';
+import { AsyncState } from '../../models/AsyncState';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 export interface FeedbackScreenProps {
   dispatch: Dispatch<any>;
   rate: number;
   setRate: React.Dispatch<React.SetStateAction<number>>;
+  feedback: string;
+  setFeedBack: React.Dispatch<React.SetStateAction<string>>;
+  AppUser: User;
+  useEffectHook: typeof useEffect;
+  FeedbackRatingApiStatus: AsyncState;
+  navigation: NavigationProp<any>;
 }
 
 const handleUnhandledTouches = () => {
@@ -20,8 +37,52 @@ const handleUnhandledTouches = () => {
   return false;
 };
 
+export const FeedbackRatingApiStatusHook = (
+  FeedbackRatingApiStatus: AsyncState,
+  navigation: NavigationProp<any>
+) => {
+  if (navigation.isFocused()) {
+    if (!FeedbackRatingApiStatus.isWaiting && FeedbackRatingApiStatus.result) {
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('FEEDBACK.SUBMIT_FEEDBACK_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      navigation.goBack();
+    }
+    if (!FeedbackRatingApiStatus.isWaiting && FeedbackRatingApiStatus.error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('FEEDBACK.SUBMIT_FEEDBACK_FAILURE'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    }
+  }
+};
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require('../../../package.json');
+
 export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
-  const { rate, setRate, dispatch } = props;
+  const {
+    dispatch,
+    feedback,
+    FeedbackRatingApiStatus,
+    rate,
+    setFeedBack,
+    setRate,
+    AppUser,
+    useEffectHook,
+    navigation
+  } = props;
+
+  // Feedback Service Response
+  useEffectHook(
+    () => FeedbackRatingApiStatusHook(FeedbackRatingApiStatus, navigation),
+    [FeedbackRatingApiStatus]
+  );
+
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -41,14 +102,28 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
             placeholderTextColor={COLOR.GREY}
             numberOfLines={10}
             multiline={true}
+            value={feedback}
+            onChangeText={(text: string) => setFeedBack(text)}
           />
         </View>
         <View style={styles.buttonContainer}>
           <Button
             title={strings('GENERICS.SUBMIT')}
             type={ButtonType.PRIMARY}
-            // TODO: dispatch action needs to be called when clicking submit
-            onPress={() => {}}
+            onPress={() => {
+              dispatch(
+                submitFeedbackRating({
+                  body: feedback,
+                  countryCd: AppUser.countryCode,
+                  score: rate,
+                  storeNbr: AppUser.siteId,
+                  subject: 'OYI App Feedback',
+                  userId: AppUser.userId,
+                  version: pkg.version
+                })
+              );
+            }}
+            disabled={rate === 0}
           />
         </View>
       </View>
@@ -58,12 +133,25 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
 
 const Feedback = (): JSX.Element => {
   const [rate, setRate] = useState(0);
+  const [feedback, setFeedback] = useState('');
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const AppUser = useTypedSelector(state => state.User);
+  const FeedbackRatingApiStatus = useTypedSelector(
+    state => state.async.submitFeedbackRating
+  );
+
   return (
     <FeedbackScreen
       dispatch={dispatch}
       rate={rate}
       setRate={setRate}
+      feedback={feedback}
+      setFeedBack={setFeedback}
+      AppUser={AppUser}
+      useEffectHook={useEffect}
+      FeedbackRatingApiStatus={FeedbackRatingApiStatus}
+      navigation={navigation}
     />
   );
 };

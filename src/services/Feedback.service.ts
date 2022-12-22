@@ -1,12 +1,12 @@
 import { AxiosResponse } from 'axios';
+import Config from 'react-native-config';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
 export interface submitFeedbackRequest {
   countryCd: string;
   body: string; // (comments go here),
-  productId: 'a63ee07d-93e6-41ca-807e-050481497dc3'; // (will be different for prod)
-  storeNbr: string;
+  storeNbr: number;
   userId: string;
   subject: string; // OYI App Test Feedback,
   version: string;
@@ -17,6 +17,15 @@ export default class FeedBackService {
     payload: submitFeedbackRequest
   ): Promise<AxiosResponse<any>> {
     const urls: Environment = getEnvironment();
-    return Request.post(`${urls.atmtUrl}/feedback/api/v2/ratings`, payload);
+    // TODO add productId for Production
+    const productId = Config.Environment === 'prod' ? '' : 'a63ee07d-93e6-41ca-807e-050481497dc3';
+
+    return Request.post(
+      `${urls.atmtUrl}/feedback/api/v2/ratings`,
+      {
+        ...payload,
+        productId
+      }
+    );
   }
 }

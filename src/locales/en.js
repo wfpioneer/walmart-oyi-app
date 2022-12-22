@@ -540,6 +540,8 @@ export default {
     GOOD_RATE_LABEL: 'Good',
     EXCELLENT_RATE_LABEL: 'Excellent',
     RATING_LABEL: 'Choose a rating',
-    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here'
+    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here',
+    SUBMIT_FEEDBACK_SUCCESS: 'Feedback has successfully been submitted',
+    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.'
   }
 };

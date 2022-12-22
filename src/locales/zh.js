@@ -543,6 +543,8 @@ export default {
     GOOD_RATE_LABEL: '好',
     EXCELLENT_RATE_LABEL: '非常好',
     RATING_LABEL: '选择分值',
-    COMMENT_PLACEHOLDER_LABEL: '在此输入评价'
+    COMMENT_PLACEHOLDER_LABEL: '在此输入评价',
+    SUBMIT_FEEDBACK_SUCCESS: '反馈提交成功',
+    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.' // TODO NEED ERROR TRANSLATION
   }
 };
