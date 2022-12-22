@@ -59,7 +59,8 @@ export default {
     UPDATE: 'Update Configuration',
     WARNING_LABEL: 'Warning',
     CLOSE: 'Close',
-    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}'
+    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
+    FEEDBACK: 'Feedback'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -540,6 +541,8 @@ export default {
     EXCELLENT_RATE_LABEL: 'Excellent',
     FEEDBACK_REQUEST: 'Would you like to provide feedback about OYI?',
     YES: 'Yes',
-    NO: 'No'
+    NO: 'No',
+    RATING_LABEL: 'Choose a rating',
+    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here'
   }
 };

@@ -218,7 +218,17 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         />
       </View>
       ) }
-      {auditItemKeys.length > 0 && <CollapseAllBar collapsed={collapsed} onclick={() => setCollapsed(!collapsed)} />}
+      {auditItemKeys.length > 0
+        && (
+        <CollapseAllBar
+          collapsed={collapsed}
+          onclick={() => {
+            trackEventCall('Audit_Worklist',
+              { action: `${collapsed ? 'expand' : 'collapse'}_audit_item_worklists_click` });
+            setCollapsed(!collapsed);
+          }}
+        />
+        )}
       <FlatList
         data={auditItemKeys}
         renderItem={({ item: key }) => renderCategoryCard(
