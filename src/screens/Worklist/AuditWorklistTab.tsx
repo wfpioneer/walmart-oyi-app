@@ -224,7 +224,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           collapsed={collapsed}
           onclick={() => {
             trackEventCall('Audit_Worklist',
-              { action: `${collapsed ? 'collapse' : 'expand'}_audit_item_worklists_click` });
+              { action: `${collapsed ? 'expand' : 'collapse'}_audit_item_worklists_click` });
             setCollapsed(!collapsed);
           }}
         />

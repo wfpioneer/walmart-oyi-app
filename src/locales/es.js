@@ -59,7 +59,8 @@ export default {
     UPDATE: 'Actualizar Configuración',
     WARNING_LABEL: 'Aviso',
     CLOSE: 'Cerrar',
-    NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}'
+    NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}',
+    FEEDBACK: 'Retroalimentación'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -535,6 +536,8 @@ export default {
     POOR_RATE_LABEL: 'Malo',
     AVERAGE_RATE_LABEL: 'Regular',
     GOOD_RATE_LABEL: 'Bueno',
-    EXCELLENT_RATE_LABEL: 'Excelente'
+    EXCELLENT_RATE_LABEL: 'Excelente',
+    RATING_LABEL: 'Elige una calificación',
+    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario'
   }
 };
