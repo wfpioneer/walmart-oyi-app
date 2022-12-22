@@ -192,8 +192,8 @@ export const updatePicklistItemsStatus = (
     palletId: item.palletId
   }));
   trackEventCall('PickBinWorklow_Screen', {
-    event: 'update_picklist_status_action',
-    action,
+    action: 'update_picklist_status_action',
+    pickAction: action,
     picklistItems
   });
   dispatch(updatePicklistStatus({
@@ -220,7 +220,7 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
     const picklistIds = items.map(item => item.id);
     setShowContinueActionDialog(false);
     trackEventCall('PickBinWorklow_Screen', {
-      event: 'update_pallet_not_found_action',
+      action: 'update_pallet_not_found_action',
       palletId,
       picklistIds
     });

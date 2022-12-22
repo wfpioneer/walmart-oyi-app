@@ -131,6 +131,10 @@ const pickingState: PickingState = {
 };
 
 describe('PickBin Workflow render tests', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders screen with ready to pick item selected', () => {
     const renderer = ShallowRenderer.createRenderer();
 
@@ -406,6 +410,13 @@ describe('PickBin Workflow render tests', () => {
     expect(queryAllByText(strings('GENERICS.CONTINUE'))).toHaveLength(0);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(setSelectedPicklistAction).toBeCalledTimes(1);
+    expect(mockTrackEventCall).toBeCalledWith('PickBinWorklow_Screen', {
+      action: 'update_picklist_status_action',
+      pickAction: 'acceptPick',
+      picklistItems: [{
+        locationId: 4, locationName: 'ABAR1-2', palletId: '43', picklistId: 0
+      }]
+    });
   });
 
   it('Tests PickBinWorkflow component and calls Release action for updating the picklist', async () => {
@@ -451,6 +462,7 @@ describe('PickBin Workflow render tests', () => {
     expect(queryAllByText(strings('GENERICS.CONTINUE'))).toHaveLength(1);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(setSelectedPicklistAction).toBeCalledTimes(1);
+    expect(mockTrackEventCall).toBeCalledWith('PickBinWorkflow_Screen', { action: 'release_selected_picks_click' });
   });
 
   it('Tests Binning Navigation while clicking on Bin button', async () => {
@@ -494,15 +506,21 @@ describe('PickBin Workflow render tests', () => {
     fireEvent.press(await binButton);
     expect(navigationProp.navigate).toHaveBeenCalled();
     expect(mockDispatch).toBeCalledTimes(2);
+    expect(mockTrackEventCall).toBeCalledWith('PickBinWorkflow_Screen', {
+      action: 'bin_selected_picklist_click',
+      palletDetails: {
+        id: '43',
+        items: [{ itemDesc: 'generic description', itemNbr: 1, upcNbr: '1234567890123' }],
+        lastLocation: 'ABAR1-2'
+      }
+    });
   });
 
   describe('ContinueActionDialog render tests', () => {
     const mockSetSelectedPicklistAction = jest.fn();
     const mockSetShowContinueActionDialog = jest.fn();
     const mockDispatch = jest.fn();
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
+
     const mockSelectedItems: PickListItem[] = [
       {
         ...basePickItem,
@@ -542,6 +560,13 @@ describe('PickBin Workflow render tests', () => {
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetSelectedPicklistAction).toHaveBeenCalledWith(PickAction.READY_TO_WORK);
       expect(mockSetShowContinueActionDialog).toHaveBeenCalledWith(false);
+      expect(mockTrackEventCall).toBeCalledWith('PickBinWorklow_Screen', {
+        action: 'update_picklist_status_action',
+        pickAction: 'readyToWork',
+        picklistItems: [{
+          locationId: 4, locationName: 'ABAR1-2', palletId: '41', picklistId: 2
+        }]
+      });
     });
     it('tests complete action functionality', async () => {
       const { findByText } = render(
@@ -559,6 +584,13 @@ describe('PickBin Workflow render tests', () => {
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetSelectedPicklistAction).toHaveBeenCalledWith(PickAction.COMPLETE);
       expect(mockSetShowContinueActionDialog).toHaveBeenCalledWith(false);
+      expect(mockTrackEventCall).toBeCalledWith('PickBinWorklow_Screen', {
+        action: 'update_picklist_status_action',
+        pickAction: 'complete',
+        picklistItems: [{
+          locationId: 4, locationName: 'ABAR1-2', palletId: '41', picklistId: 2
+        }]
+      });
     });
     it('tests cancel action functionality', async () => {
       const { findByText } = render(
@@ -574,14 +606,12 @@ describe('PickBin Workflow render tests', () => {
       const cancelButton = findByText(strings('GENERICS.CANCEL'));
       fireEvent.press(await cancelButton);
       expect(mockSetShowContinueActionDialog).toHaveBeenCalledWith(false);
+      expect(mockTrackEventCall).toBeCalledWith('PickBinWorklow_Screen', { action: 'close_continue_dialog_action' });
     });
   });
 
   describe('Manage PickBinWorkflow externalized function tests', () => {
     const mockDispatch = jest.fn();
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
 
     const mockSelectedItems: PickListItem[] = [
       {
