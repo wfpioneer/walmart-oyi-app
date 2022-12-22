@@ -486,6 +486,7 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
             navigator={navigation}
             destinationScreen={LocationType.SECTION_DETAILS}
             locationPopupVisible={locationPopupVisible}
+            trackEventCall={trackEventCall}
           />
         )}
         keyExtractor={item => item.sectionName}
