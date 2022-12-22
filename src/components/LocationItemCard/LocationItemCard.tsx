@@ -56,12 +56,18 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
           dispatch(resetScannedEvent());
         }
         let screenName = '';
-        if (locationType === LocationType.AISLE) {
-          screenName = 'Aisle_List';
-        } else if (locationType === LocationType.ZONE) {
-          screenName = 'Zone_List';
-        } else if (locationType === LocationType.SECTION) {
-          screenName = 'Section_List';
+        switch (locationType) {
+          case LocationType.AISLE:
+            screenName = 'Aisle_List';
+            break;
+          case LocationType.ZONE:
+            screenName = 'Zone_List';
+            break;
+          case LocationType.SECTION:
+            screenName = 'Section_List';
+            break;
+          default:
+            screenName = '';
         }
         trackEventCall(screenName, {
           action: 'location_item_card_clicked',

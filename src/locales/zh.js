@@ -59,7 +59,8 @@ export default {
     UPDATE: '更新配置',
     WARNING_LABEL: '警示',
     CLOSE: '关闭',
-    NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间'
+    NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间',
+    FEEDBACK: '反馈'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -540,6 +541,8 @@ export default {
     POOR_RATE_LABEL: '差',
     AVERAGE_RATE_LABEL: '一般',
     GOOD_RATE_LABEL: '好',
-    EXCELLENT_RATE_LABEL: '非常好'
+    EXCELLENT_RATE_LABEL: '非常好',
+    RATING_LABEL: '选择分值',
+    COMMENT_PLACEHOLDER_LABEL: '在此输入评价'
   }
 };
