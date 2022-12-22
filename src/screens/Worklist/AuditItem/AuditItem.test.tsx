@@ -104,6 +104,8 @@ const navigationProp: NavigationProp<any> = {
   getId: jest.fn()
 };
 
+const mockTrackEventCall = jest.fn();
+
 const routeProp: RouteProp<any, string> = {
   key: 'test',
   name: 'test'
@@ -332,9 +334,13 @@ describe('AuditItemScreen', () => {
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      addLocationHandler(mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor);
+      addLocationHandler(
+        mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor, mockTrackEventCall
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockNavigate).toBeCalledTimes(1);
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item',
+        { action: 'add_new_floor_location_click', itemNumber: 1234567890 });
     });
 
     it('tests getFloorLocationsResult', () => {
@@ -469,7 +475,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -487,7 +494,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -501,7 +509,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -521,11 +530,14 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'floor',
-        0
+        0,
+        mockTrackEventCall
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item',
+        { action: 'confirm_delete_location_click', locName: 'A1-1' });
     });
 
     it('Tests deleteFloorLocationApiHook on 200 success for deleting location', () => {
@@ -575,7 +587,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        1234
+        1234,
+        mockTrackEventCall
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -589,7 +602,8 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        1234
+        1234,
+        mockTrackEventCall
       ));
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
@@ -598,6 +612,7 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
+      expect(mockTrackEventCall).toBeCalledTimes(2);
     });
 
     it('Tests renderDeleteLocationModal confirm button action', () => {
@@ -609,11 +624,15 @@ describe('AuditItemScreen', () => {
         mockDeleteLocationConfirmed,
         mockLocationName,
         'reserve',
-        1234
+        1234,
+        mockTrackEventCall
       ));
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
+      expect(mockTrackEventCall).toBeCalledWith(
+        'Audit_Item', { action: 'missing_pallet_confirmation_click', palletId: 1234 }
+      );
     });
 
     it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
@@ -778,7 +797,9 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          mockTrackEventCall,
+          'AU'
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -801,7 +822,9 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          mockTrackEventCall,
+          'AU'
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -816,12 +839,17 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          mockTrackEventCall,
+          'AU'
         )
       );
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
+        action: 'complete_audit_item_click', itemNumber: 1234567890, type: 'OH_qty_update', upcNbr: '000055559999'
+      });
     });
 
     it('Tests renderConfirmOnHandsModal cancel button action', () => {
@@ -833,12 +861,16 @@ describe('AuditItemScreen', () => {
           mockSetShowOnHandsConfirmModal,
           50,
           mockItemDetails,
-          mockDispatch
+          mockDispatch,
+          mockTrackEventCall,
+          'AU'
         )
       );
       const modalConfirmButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalConfirmButton);
       expect(mockSetShowOnHandsConfirmModal).toHaveBeenCalledWith(false);
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item',
+        { action: 'cancel_OH_qty_update', itemNumber: 1234567890, upcNbr: '000055559999' });
     });
 
     it('Test disabledContinue functionality return true when any of the locaion is empty', () => {

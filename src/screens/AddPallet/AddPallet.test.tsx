@@ -31,6 +31,7 @@ describe('AddPalletScreen', () => {
         section={{ id: 1, name: '1' }}
         addAPI={getSectionEmptyResponse}
         locationName={locationName}
+        trackEventCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -47,6 +48,7 @@ describe('AddPalletScreen', () => {
         section={{ id: 1, name: '1' }}
         locationName={locationName}
         addAPI={getSectionEmptyResponse}
+        trackEventCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -69,6 +71,7 @@ describe('AddPalletScreen', () => {
           addAPI={apiIsWaiting}
           section={{ id: 1, name: '1' }}
           locationName={locationName}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -84,6 +87,7 @@ describe('AddPalletScreen', () => {
           addAPI={getSectionEmptyResponse}
           section={{ id: 1, name: '1' }}
           locationName={locationName}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

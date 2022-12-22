@@ -58,6 +58,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
       }
     }
     setPalletClicked={[MockFunction]}
+    trackEventCall={[MockFunction]}
   />
 </Context.Provider>
 `;
@@ -127,6 +128,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
       }
     }
     setPalletClicked={[MockFunction]}
+    trackEventCall={[MockFunction]}
   />
 </Context.Provider>
 `;
@@ -174,6 +176,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
       }
     }
     setPalletClicked={[MockFunction]}
+    trackEventCall={[MockFunction]}
   />
 </Context.Provider>
 `;

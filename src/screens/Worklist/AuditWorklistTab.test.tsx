@@ -2,6 +2,8 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp } from '@react-navigation/native';
+import { AxiosError } from 'axios';
+import { object } from 'prop-types';
 import {
   mockCompletedAuditWorklist, mockToDoAuditWorklist
 } from '../../mockData/mockWorkList';
@@ -14,6 +16,14 @@ import { mockAreas } from '../../mockData/mockConfig';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+
+const mockError: AxiosError = {
+  config: {},
+  isAxiosError: true,
+  message: '500 Network Error',
+  name: 'Network Error',
+  toJSON: () => object
+};
 
 let navigationProp: NavigationProp<any>;
 describe('AuditWorklistTab', () => {
@@ -35,6 +45,8 @@ describe('AuditWorklistTab', () => {
           areas={mockAreas}
           enableAreaFilter={false}
           onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={false}
           trackEventCall={jest.fn()}
         />
       );
@@ -57,6 +69,56 @@ describe('AuditWorklistTab', () => {
           areas={mockAreas}
           enableAreaFilter={false}
           onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={false}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Audit worklist with errors', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <AuditWorklistTabScreen
+          items={mockCompletedAuditWorklist}
+          toDo={false}
+          navigation={navigationProp}
+          dispatch={mockDispatch}
+          collapsedState={[false, jest.fn()]}
+          refreshing={false}
+          error={mockError}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
+          onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={false}
+          trackEventCall={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completed Audit worklist items with images', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <AuditWorklistTabScreen
+          items={mockCompletedAuditWorklist}
+          toDo={false}
+          navigation={navigationProp}
+          dispatch={mockDispatch}
+          collapsedState={[false, jest.fn()]}
+          refreshing={false}
+          error={null}
+          filterCategories={[]}
+          filterExceptions={[]}
+          areas={mockAreas}
+          enableAreaFilter={false}
+          onRefresh={() => {}}
+          countryCode="MX"
+          showItemImage={true}
           trackEventCall={jest.fn()}
         />
       );
@@ -81,6 +143,8 @@ describe('AuditWorklistTab', () => {
           enableAreaFilter={false}
           onRefresh={() => {}}
           trackEventCall={jest.fn()}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
@@ -103,6 +167,8 @@ describe('AuditWorklistTab', () => {
           enableAreaFilter={false}
           onRefresh={() => {}}
           trackEventCall={jest.fn()}
+          countryCode="MX"
+          showItemImage={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');

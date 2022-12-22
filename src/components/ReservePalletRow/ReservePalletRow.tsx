@@ -21,9 +21,12 @@ export type ReservePalletRowProps = {
   section: { id: number, name: string },
   reservePallet: ReserveDetailsPallet,
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: (eventName: string, params?: any) => void;
 };
 const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
-  const { section, reservePallet, setPalletClicked } = props;
+  const {
+    section, reservePallet, setPalletClicked, trackEventCall
+  } = props;
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
@@ -40,6 +43,11 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
     }
   }, [delPalletAPI]);
   const deleteConfirmed = () => {
+    trackEventCall('Section_Details', {
+      action: 'deleting_pallet_from_location',
+      palletId: reservePallet.id,
+      sectionId: section.id
+    });
     dispatch(deletePallet({
       palletId: reservePallet.id
     }));

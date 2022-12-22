@@ -1189,6 +1189,7 @@ Array [
     <View
       style={
         Object {
+          "marginTop": 2,
           "width": "100%",
         }
       }
@@ -1210,20 +1211,12 @@ Array [
             "flexDirection": "row",
             "opacity": 1,
             "padding": 5,
+            "paddingLeft": 10,
             "width": "100%",
           }
         }
         testID="itemCard"
       >
-        <Image
-          source=""
-          style={
-            Object {
-              "height": 85,
-              "width": 85,
-            }
-          }
-        />
         <View
           style={
             Object {
@@ -1235,7 +1228,13 @@ Array [
           }
           testID="item-details"
         >
-          <View>
+          <View
+            style={
+              Object {
+                "paddingBottom": 10,
+              }
+            }
+          >
             <Text
               style={
                 Object {
@@ -1986,11 +1985,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     }
   >
     <ItemCard
+      countryCode="CN"
       description=""
       itemNumber={0}
       loading={true}
       onClick={[Function]}
       onHandQty={0}
+      showItemImage={false}
     />
   </View>
   <ScrollView
@@ -2427,11 +2428,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     }
   >
     <ItemCard
+      countryCode="CN"
       description="Test Item That is Really, Really Long (and has parenthesis)"
       itemNumber={1234567890}
       loading={false}
       onClick={[Function]}
       onHandQty={42}
+      showItemImage={false}
     />
   </View>
   <ScrollView
