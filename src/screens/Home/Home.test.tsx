@@ -269,6 +269,14 @@ describe('HomeScreen', () => {
 
       props = {
         ...homeScreenProps,
+        userConfig: { ...mockConfig, showFeedback: true },
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockZeroCompleteWorklistSummaries
+          }
+        },
         userConfigUpdateApiState: {
           ...defaultAsyncState,
           result: {
@@ -289,6 +297,14 @@ describe('HomeScreen', () => {
     it('renders with User config api with error', () => {
       props = {
         ...homeScreenProps,
+        userConfig: { ...mockConfig, showFeedback: true },
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockZeroCompleteWorklistSummaries
+          }
+        },
         userConfigUpdateApiState: {
           ...defaultAsyncState,
           error: {
@@ -312,6 +328,14 @@ describe('HomeScreen', () => {
 
       props = {
         ...homeScreenProps,
+        userConfig: { ...mockConfig, showFeedback: true },
+        worklistSummaryApiState: {
+          ...defaultAsyncState,
+          result: {
+            status: 200,
+            data: mockZeroCompleteWorklistSummaries
+          }
+        },
         userConfigUpdateApiState: {
           ...defaultAsyncState,
           result: {

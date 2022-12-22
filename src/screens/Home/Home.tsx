@@ -109,14 +109,14 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
   renderFeedbackModal = () => {
     const LoginDivisibleCountToShowFeedback = 10;
-    let showFeedback = false;
+    let showFeedbackModal = false;
     if (!this.props.userConfigUpdateApiState.isWaiting
       && this.props.userConfigUpdateApiState.result
       && this.props.userConfigUpdateApiState.result.status === 200) {
       const userConfigRes: UserConfigResponse = this.props.userConfigUpdateApiState.result.data;
-      showFeedback = (userConfigRes.loginCount % LoginDivisibleCountToShowFeedback) === 0;
+      showFeedbackModal = (userConfigRes.loginCount % LoginDivisibleCountToShowFeedback) === 0;
 
-      if (showFeedback) {
+      if (showFeedbackModal) {
         return (
           <CustomModalComponent
             isVisible={true}
@@ -321,7 +321,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
-        {this.renderFeedbackModal()}
+        {this.props.userConfig.showFeedback && this.renderFeedbackModal()}
         <CustomModalComponent
           isVisible={this.state.errorModalVisible}
           onClose={() => this.setState({ errorModalVisible: false })}
