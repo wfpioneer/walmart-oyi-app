@@ -59,7 +59,8 @@ export default {
     UPDATE: 'Update Configuration',
     WARNING_LABEL: 'Warning',
     CLOSE: 'Close',
-    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}'
+    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
+    FEEDBACK: 'Feedback'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -537,6 +538,8 @@ export default {
     POOR_RATE_LABEL: 'Poor',
     AVERAGE_RATE_LABEL: 'Average',
     GOOD_RATE_LABEL: 'Good',
-    EXCELLENT_RATE_LABEL: 'Excellent'
+    EXCELLENT_RATE_LABEL: 'Excellent',
+    RATING_LABEL: 'Choose a rating',
+    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here'
   }
 };
