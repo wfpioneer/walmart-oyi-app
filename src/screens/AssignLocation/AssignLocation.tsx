@@ -120,8 +120,7 @@ export const binPalletsApiEffect = (
   dispatch: Dispatch<any>,
   route: RouteProp<any, string>,
   selectedPicks: PickListItem[],
-  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>,
-  trackEventCall: (eventName: string, params?: any) => void
+  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!binPalletsApi.isWaiting) {
@@ -182,9 +181,6 @@ export const binPalletsApiEffect = (
               });
             }
           } else {
-            trackEventCall('Binning_Screen', {
-              event: 'pallets_binned_successfully'
-            });
             Toast.show({
               type: 'success',
               position: 'bottom',
@@ -298,7 +294,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     const scannerListener = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          trackEventCall('Binnig_Screen', {
+          trackEventCall('Binning_Screen', {
             action: 'bin_location_scanned',
             barcode: scan.value,
             type: scan.type
@@ -330,8 +326,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     dispatch,
     route,
     selectedPicks,
-    setDeletePicks,
-    trackEventCall
+    setDeletePicks
   ), [binPalletsApi]);
 
   useEffectHook(() => (
