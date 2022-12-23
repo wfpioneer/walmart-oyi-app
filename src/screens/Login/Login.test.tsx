@@ -271,7 +271,7 @@ describe('Tests login screen functions', () => {
       navigationProp
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(9);
+    expect(mockDispatch).toHaveBeenCalledTimes(10);
     expect(mockDispatch).toHaveBeenCalledWith(resetPrintQueue());
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
