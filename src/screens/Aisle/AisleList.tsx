@@ -42,6 +42,7 @@ import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 
+const SCREEN_NAME = 'Aisle_List';
 const NoAisleMessage = (): JSX.Element => (
   <View style={styles.noAisles}>
     <Text style={styles.noAislesText}>{strings('LOCATION.NO_AISLES_AVAILABLE')}</Text>
@@ -201,6 +202,10 @@ export const AisleScreen = (props: AisleProps): JSX.Element => {
   ), [deleteZoneApi]);
 
   const handleDeleteZone = () => {
+    trackEventCall(SCREEN_NAME, {
+      action: 'removing_zone',
+      zone: zoneName
+    });
     setDeleteZoneApiStart(moment().valueOf());
     setDisplayConfirmation(false);
     dispatch(deleteZone(zoneId));
@@ -268,6 +273,7 @@ export const AisleScreen = (props: AisleProps): JSX.Element => {
             destinationScreen={LocationType.SECTION}
             dispatch={dispatch}
             locationPopupVisible={locationPopupVisible}
+            trackEventCall={trackEvent}
           />
         )}
         keyExtractor={item => item.aisleName}
@@ -354,7 +360,12 @@ const AisleList = (): JSX.Element => {
         ref={bottomSheetModalRef}
         snapPoints={userFeatures.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
-        onDismiss={() => dispatch(hideLocationPopup())}
+        onDismiss={() => {
+          trackEvent(SCREEN_NAME, {
+            action: 'hide_aisle_bottom_sheet_modal'
+          });
+          dispatch(hideLocationPopup());
+        }}
         style={styles.bottomSheetModal}
         backdropComponent={renderBackdrop}
       >
