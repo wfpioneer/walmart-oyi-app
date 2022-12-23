@@ -6,6 +6,7 @@ import {
   HomeNavigatorComponent, renderCamButton, renderHomeHeader, renderHomeMenuButton, renderHomeScanButton
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
+import { mockConfig } from '../mockData/mockConfig';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
@@ -63,7 +64,11 @@ describe('Home Navigator', () => {
     clubNbr: 1234,
     updatePrinterByID: jest.fn(),
     priceLabelPrinter: defPrinter as Printer,
-    setPriceLabelPrinter: jest.fn()
+    setPriceLabelPrinter: jest.fn(),
+    resetScannedEvent: jest.fn(),
+    scannedEvent: { value: null, type: null },
+    resetPrintQueue: jest.fn(),
+    userConfig: mockConfig
   };
 
   it('Renders the Home navigator component', () => {

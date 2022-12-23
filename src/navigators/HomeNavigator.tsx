@@ -19,7 +19,7 @@ import styles from './HomeNavigator.style';
 import { setLanguage, strings } from '../locales';
 import { logoutUser } from '../state/actions/User';
 import { hideActivityModal, showActivityModal } from '../state/actions/Modal';
-import { setManualScan } from '../state/actions/Global';
+import { resetScannedEvent, setManualScan } from '../state/actions/Global';
 import { trackEvent } from '../utils/AppCenterTool';
 import { openCamera } from '../utils/scannerUtils';
 import { Printer, PrinterType } from '../models/Printer';
@@ -41,11 +41,15 @@ interface HomeNavigatorComponentProps {
   priceLabelPrinter: Printer;
   setPriceLabelPrinter: (payload: Printer) => void;
   resetPrintQueue: () => void;
-  userConfig: Configurations
+  userConfig: Configurations;
+  scannedEvent: { value: any; type: string | null};
+  resetScannedEvent: () => void;
+
 }
 
 const mapStateToProps = (state: any) => ({
   isManualScanEnabled: state.Global.isManualScanEnabled,
+  scannedEvent: state.Global.scannedEvent,
   clubNbr: state.User.siteId,
   priceLabelPrinter: state.Print.priceLabelPrinter,
   userConfig: state.User.configs
@@ -58,7 +62,8 @@ const mapDispatchToProps = {
   setManualScan,
   updatePrinterByID,
   setPriceLabelPrinter,
-  resetPrintQueue
+  resetPrintQueue,
+  resetScannedEvent
 };
 
 const Stack = createStackNavigator();
@@ -241,6 +246,9 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
         blur: () => {
           if (props.isManualScanEnabled) {
             props.setManualScan(false);
+          }
+          if (props.scannedEvent) {
+            props.resetScannedEvent();
           }
         }
       }}
