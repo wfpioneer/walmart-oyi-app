@@ -5,7 +5,7 @@ import { Environment, getEnvironment } from '../utils/environment';
 
 export interface submitFeedbackRequest {
   countryCd: string;
-  body: string; // (comments go here),
+  body: string;
   storeNbr: number;
   userId: string;
   subject: string; // OYI App Test Feedback,

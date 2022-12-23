@@ -548,6 +548,6 @@ export default {
     RATING_LABEL: '选择分值',
     COMMENT_PLACEHOLDER_LABEL: '在此输入评价',
     SUBMIT_FEEDBACK_SUCCESS: '反馈提交成功',
-    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.' // TODO NEED ERROR TRANSLATION
+    SUBMIT_FEEDBACK_FAILURE: '无法提交反馈，请重试.'
   }
 };

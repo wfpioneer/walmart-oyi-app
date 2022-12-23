@@ -1,5 +1,6 @@
 import React, { Dispatch, useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Keyboard,
   KeyboardAvoidingView,
   Text,
@@ -19,6 +20,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import User from '../../models/User';
 import { AsyncState } from '../../models/AsyncState';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { SUBMIT_FEEDBACK_RATING } from '../../state/actions/asyncAPI';
 
 export interface FeedbackScreenProps {
   dispatch: Dispatch<any>;
@@ -39,7 +41,8 @@ const handleUnhandledTouches = () => {
 
 export const FeedbackRatingApiStatusHook = (
   FeedbackRatingApiStatus: AsyncState,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
 ) => {
   if (navigation.isFocused()) {
     if (!FeedbackRatingApiStatus.isWaiting && FeedbackRatingApiStatus.result) {
@@ -49,6 +52,7 @@ export const FeedbackRatingApiStatusHook = (
         text1: strings('FEEDBACK.SUBMIT_FEEDBACK_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
+      dispatch({ type: SUBMIT_FEEDBACK_RATING.RESET });
       navigation.goBack();
     }
     if (!FeedbackRatingApiStatus.isWaiting && FeedbackRatingApiStatus.error) {
@@ -58,6 +62,7 @@ export const FeedbackRatingApiStatusHook = (
         text1: strings('FEEDBACK.SUBMIT_FEEDBACK_FAILURE'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
+      dispatch({ type: SUBMIT_FEEDBACK_RATING.RESET });
     }
   }
 };
@@ -79,10 +84,25 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
 
   // Feedback Service Response
   useEffectHook(
-    () => FeedbackRatingApiStatusHook(FeedbackRatingApiStatus, navigation),
+    () => FeedbackRatingApiStatusHook(
+      FeedbackRatingApiStatus,
+      navigation,
+      dispatch
+    ),
     [FeedbackRatingApiStatus]
   );
 
+  if (FeedbackRatingApiStatus.isWaiting) {
+    return (
+      <ActivityIndicator
+        animating={FeedbackRatingApiStatus.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}

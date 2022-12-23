@@ -543,6 +543,6 @@ export default {
     RATING_LABEL: 'Elige una calificación',
     COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario',
     SUBMIT_FEEDBACK_SUCCESS: 'La retroalimentación se ha enviado con éxito',
-    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.' // TODO NEED ERROR TRANSLATION
+    SUBMIT_FEEDBACK_FAILURE: 'Incapaz de enviar retroalimentación. Por favor inténtalo de nuevo.'
   }
 };
