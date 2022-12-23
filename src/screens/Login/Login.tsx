@@ -40,6 +40,7 @@ import {
   savePrinter
 } from '../../utils/asyncStorageUtils';
 import {
+  clearLocationPrintQueue,
   resetPrintQueue,
   setLocationLabelPrinter,
   setPalletLabelPrinter,
@@ -155,6 +156,7 @@ export const signOutUser = (dispatch: Dispatch<any>): void => {
   WMSSO.signOutUser().then(() => {
     dispatch(logoutUser());
     dispatch(resetPrintQueue());
+    dispatch(clearLocationPrintQueue());
     if (Platform.OS === 'android') {
       dispatch(hideActivityModal());
     }
