@@ -159,3 +159,9 @@ export const updateMultiPalletUPCQty = makeAsyncActionCreators(UPDATE_MULTI_PALL
 
 export const SUBMIT_FEEDBACK_RATING = makeAsyncActionTypes('API/SUBMIT_FEEDBACK_RATING');
 export const submitFeedbackRating = makeAsyncActionCreators(SUBMIT_FEEDBACK_RATING);
+
+export const GET_USER_CONFIG = makeAsyncActionTypes('API/GET_USER_CONFIG');
+export const getUserConfig = makeAsyncActionCreators(GET_USER_CONFIG);
+
+export const UPDATE_USER_CONFIG = makeAsyncActionTypes('API/UPDATE_USER_CONFIG');
+export const updateUserConfig = makeAsyncActionCreators(UPDATE_USER_CONFIG);

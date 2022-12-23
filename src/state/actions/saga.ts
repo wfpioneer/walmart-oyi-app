@@ -83,6 +83,8 @@ export const REPORT_MISSING_PALLET = 'SAGA/REPORT_MISSING_PALLET';
 export const GET_ITEM_PALLETS = 'SAGA/GET_ITEM_PALLETS';
 export const UPDATE_MULTI_PALLET_UPC_QTY = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY';
 export const SUBMIT_FEEDBACK_RATING = 'SAGA/SUBMIT_FEEDBACK_RATING';
+export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
+export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 
 // TODO Remove this dispatch call once the BE has been pushed to Production
 export const getItemDetailsV2 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V2, payload } as const);
@@ -260,6 +262,8 @@ export const submitFeedbackRating = (payload: submitFeedbackRequest) => ({
   type: SUBMIT_FEEDBACK_RATING,
   payload
 } as const);
+export const getUserConfig = () => ({ type: GET_USER_CONFIG } as const);
+export const updateUserConfig = () => ({ type: UPDATE_USER_CONFIG } as const);
 
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
