@@ -66,6 +66,7 @@ describe('Home Navigator', () => {
     priceLabelPrinter: defPrinter as Printer,
     setPriceLabelPrinter: jest.fn(),
     resetPrintQueue: jest.fn(),
+    clearLocationPrintQueue: jest.fn(),
     userConfig: mockConfig
   };
 

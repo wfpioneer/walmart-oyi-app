@@ -14,22 +14,22 @@ const styles = StyleSheet.create({
     marginLeft: -2
   },
   headerRightView: {
-    paddingRight: 16,
+    flex: 1,
     flexDirection: 'row-reverse',
     alignItems: 'center'
   },
-  headerLeftPadding: {
-    paddingLeft: 10
-  },
   selectAllButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    margin: 15
+    marginRight: 8,
+    maxWidth: 150,
+    minWidth: 80
   },
   selectAllText: {
     color: COLOR.WHITE,
     fontSize: 16,
     fontWeight: 'bold'
+  },
+  filterList: {
+    marginRight: 8
   }
 });
 
