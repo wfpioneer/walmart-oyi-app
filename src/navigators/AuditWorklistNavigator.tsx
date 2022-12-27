@@ -155,7 +155,7 @@ export const AuditWorklistNavigatorStack = (
             } else if (screen.target && screen.target.includes('AuditWorklistTabs') && !isBottomTabEnabled) {
               dispatch(setBottomTab(true));
             }
-            if (scannedEvent) {
+            if (scannedEvent.value) {
               dispatch(resetScannedEvent());
             }
           }
