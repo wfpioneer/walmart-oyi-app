@@ -65,8 +65,6 @@ describe('Home Navigator', () => {
     updatePrinterByID: jest.fn(),
     priceLabelPrinter: defPrinter as Printer,
     setPriceLabelPrinter: jest.fn(),
-    resetScannedEvent: jest.fn(),
-    scannedEvent: { value: null, type: null },
     resetPrintQueue: jest.fn(),
     userConfig: mockConfig
   };

@@ -32,6 +32,8 @@ describe('AuditItemWorklist Navigator', () => {
         menuOpen={false}
         isBottomTabEnabled={true}
         calcOpen={false}
+        showCalculator={true}
+        scannedEvent={{ value: null, type: null }}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

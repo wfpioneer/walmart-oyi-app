@@ -9,7 +9,7 @@ import Config from 'react-native-config';
 import COLOR from '../themes/Color';
 import ReviewItemDetails from '../screens/ReviewItemDetails/ReviewItemDetails';
 import { strings } from '../locales';
-import { resetScannedEvent, setCalcOpen, setManualScan } from '../state/actions/Global';
+import { setCalcOpen, setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './ReviewItemDetailsNavigator.style';
 import LocationDetails from '../screens/LocationDetails/LocationDetails';
@@ -25,7 +25,7 @@ import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 const Stack = createStackNavigator();
 
 const ReviewItemDetailsNavigator = () => {
-  const { isManualScanEnabled, calcOpen, scannedEvent } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, calcOpen } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
   const { showCalculator } = useTypedSelector(state => state.User.configs);
   const { title } = useTypedSelector(state => state.ItemHistory);
@@ -142,11 +142,6 @@ const ReviewItemDetailsNavigator = () => {
           beforeRemove: () => {
             dispatch({ type: GET_ITEM_DETAILS.RESET });
             dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
-          },
-          blur: () => {
-            if (scannedEvent) {
-              dispatch(resetScannedEvent());
-            }
           }
         }}
       />
