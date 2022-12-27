@@ -143,6 +143,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -175,6 +176,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
         ]
       }
       pickStatus="accepted bin"
+      showCheckbox={false}
     />
     <View
       style={
@@ -266,6 +268,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -298,6 +301,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
         ]
       }
       pickStatus="accepted bin"
+      showCheckbox={false}
     />
     <View
       style={
@@ -350,6 +354,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -382,6 +387,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
         ]
       }
       pickStatus="accepted bin"
+      showCheckbox={false}
     />
     <View
       style={
@@ -454,6 +460,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -486,6 +493,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
         ]
       }
       pickStatus="accepted pick"
+      showCheckbox={false}
     />
     <View
       style={
@@ -577,6 +585,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -609,6 +618,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
         ]
       }
       pickStatus="accepted pick"
+      showCheckbox={false}
     />
     <View
       style={
@@ -661,6 +671,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -693,6 +704,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
         ]
       }
       pickStatus="accepted pick"
+      showCheckbox={false}
     />
     <View
       style={
@@ -783,6 +795,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -833,6 +846,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
         ]
       }
       pickStatus="ready to bin"
+      showCheckbox={false}
     />
     <View
       style={
@@ -905,6 +919,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
     setSelectedPicklistAction={[MockFunction]}
     setShowContinueActionDialog={[Function]}
     showContinueActionDialog={false}
+    trackEventCall={[MockFunction]}
   />
   <React.Fragment>
     <PickPalletInfoCard
@@ -937,6 +952,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
         ]
       }
       pickStatus="ready to pick"
+      showCheckbox={false}
     />
     <View
       style={

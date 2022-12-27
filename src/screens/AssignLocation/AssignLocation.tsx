@@ -226,7 +226,7 @@ export const binPalletsApiEffect = (
           } else if (errorResponse.message.includes('PALLET_NOT_FOUND')) {
             if (route.params?.source === 'picking') {
               setDeletePicks(true);
-              updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch);
+              updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch, trackEvent);
             } else {
               Toast.show({
                 position: 'bottom',

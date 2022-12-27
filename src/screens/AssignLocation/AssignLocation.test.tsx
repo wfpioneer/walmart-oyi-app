@@ -35,6 +35,11 @@ const mockGoBack = jest.fn();
 const navigationProp: NavigationProp<any> = { navigate: mockNavigate, isFocused: mockIsFocused, goBack: mockGoBack };
 const mockDispatch = jest.fn();
 
+jest.mock('../../utils/AppCenterTool.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
+  trackEvent: jest.fn()
+}));
+
 describe('Assign Location screen render tests', () => {
   const routeProp: RouteProp<any, string> = { key: '', name: 'AssignLocation' };
 
