@@ -32,7 +32,7 @@ import Button from '../../components/buttons/Button';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
 import {
@@ -1130,6 +1130,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   };
 
   const navigateToAuditItemScreen = () => {
+    if (scannedEvent.value) {
+      dispatch(resetScannedEvent());
+    }
     dispatch(setAuditItemNumber(itemDetails.itemNbr));
     navigation.navigate('AuditItem');
   };

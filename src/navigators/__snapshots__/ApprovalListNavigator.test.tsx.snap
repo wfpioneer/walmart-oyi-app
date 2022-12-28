@@ -109,14 +109,11 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
       options={
         Object {
           "headerLeft": undefined,
-          "headerLeftContainerStyle": Object {
-            "paddingLeft": 10,
-          },
           "headerRight": [Function],
           "headerRightContainerStyle": Object {
             "alignItems": "center",
+            "flex": 1,
             "flexDirection": "row-reverse",
-            "paddingRight": 16,
           },
           "headerTitle": [Function],
         }
@@ -162,45 +159,55 @@ exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "flex": 1,
       "flexDirection": "row-reverse",
-      "paddingRight": 16,
     }
   }
 >
-  <TouchableOpacity
-    onPress={[Function]}
-  >
-    <mockConstructor
-      color="#ffffffff"
-      name="filter-list"
-      size={25}
-    />
-  </TouchableOpacity>
-  <TouchableOpacity
-    onPress={[Function]}
-  >
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "margin": 15,
-        }
+  <View
+    style={
+      Object {
+        "marginRight": 8,
       }
+    }
+  >
+    <TouchableOpacity
+      onPress={[Function]}
     >
-      <Text
+      <mockConstructor
+        color="#ffffffff"
+        name="filter-list"
+        size={25}
+      />
+    </TouchableOpacity>
+  </View>
+  <View>
+    <TouchableOpacity
+      onPress={[Function]}
+    >
+      <View
         style={
           Object {
-            "color": "#ffffffff",
-            "fontSize": 16,
-            "fontWeight": "bold",
+            "marginRight": 8,
+            "maxWidth": 150,
+            "minWidth": 80,
           }
         }
       >
-        [missing "en.APPROVAL.DESELECT_ALL" translation]
-      </Text>
-    </View>
-  </TouchableOpacity>
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.APPROVAL.DESELECT_ALL" translation]
+        </Text>
+      </View>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -209,44 +216,54 @@ exports[`ApprovalList Navigator Renders the select all button header 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "flex": 1,
       "flexDirection": "row-reverse",
-      "paddingRight": 16,
     }
   }
 >
-  <TouchableOpacity
-    onPress={[Function]}
-  >
-    <mockConstructor
-      color="#ffffffff"
-      name="filter-list"
-      size={25}
-    />
-  </TouchableOpacity>
-  <TouchableOpacity
-    onPress={[Function]}
-  >
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "flexDirection": "row",
-          "margin": 15,
-        }
+  <View
+    style={
+      Object {
+        "marginRight": 8,
       }
+    }
+  >
+    <TouchableOpacity
+      onPress={[Function]}
     >
-      <Text
+      <mockConstructor
+        color="#ffffffff"
+        name="filter-list"
+        size={25}
+      />
+    </TouchableOpacity>
+  </View>
+  <View>
+    <TouchableOpacity
+      onPress={[Function]}
+    >
+      <View
         style={
           Object {
-            "color": "#ffffffff",
-            "fontSize": 16,
-            "fontWeight": "bold",
+            "marginRight": 8,
+            "maxWidth": 150,
+            "minWidth": 80,
           }
         }
       >
-        [missing "en.APPROVAL.SELECT_ALL" translation]
-      </Text>
-    </View>
-  </TouchableOpacity>
+        <Text
+          style={
+            Object {
+              "color": "#ffffffff",
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        >
+          [missing "en.APPROVAL.SELECT_ALL" translation]
+        </Text>
+      </View>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
