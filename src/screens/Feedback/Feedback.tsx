@@ -124,6 +124,7 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
             multiline={true}
             value={feedback}
             onChangeText={(text: string) => setFeedBack(text)}
+            testID="Feedback Input"
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -144,6 +145,7 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
               );
             }}
             disabled={rate === 0}
+            testID="Submit Feedback"
           />
         </View>
       </View>
