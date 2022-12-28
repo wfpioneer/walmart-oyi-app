@@ -12,7 +12,7 @@ export default class UpdateApprovalListService {
     const urls: Environment = getEnvironment();
 
     return Request.put(
-      `${urls.managerApprovalUrl}/managerapproval/items`,
+      `${urls.worklistURL}/managerapproval/items`,
       payload.approvalItems,
       {
         headers: payload.headers,
