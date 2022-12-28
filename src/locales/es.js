@@ -537,6 +537,9 @@ export default {
     AVERAGE_RATE_LABEL: 'Regular',
     GOOD_RATE_LABEL: 'Bueno',
     EXCELLENT_RATE_LABEL: 'Excelente',
+    FEEDBACK_REQUEST: '¿Quieres proporcionar retroalimentación de OYI?',
+    YES: 'Si',
+    NO: 'No',
     RATING_LABEL: 'Elige una calificación',
     COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario'
   }
