@@ -28,7 +28,7 @@ export interface FeedbackScreenProps {
   setRate: React.Dispatch<React.SetStateAction<number>>;
   feedback: string;
   setFeedBack: React.Dispatch<React.SetStateAction<string>>;
-  AppUser: User;
+  appUser: User;
   useEffectHook: typeof useEffect;
   FeedbackRatingApiStatus: AsyncState;
   navigation: NavigationProp<any>;
@@ -44,8 +44,8 @@ export const FeedbackRatingApiStatusHook = (
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
 ) => {
-  if (navigation.isFocused()) {
-    if (!FeedbackRatingApiStatus.isWaiting && FeedbackRatingApiStatus.result) {
+  if (navigation.isFocused() && !FeedbackRatingApiStatus.isWaiting) {
+    if (FeedbackRatingApiStatus.result) {
       Toast.show({
         type: 'success',
         position: 'bottom',
@@ -55,7 +55,7 @@ export const FeedbackRatingApiStatusHook = (
       dispatch({ type: SUBMIT_FEEDBACK_RATING.RESET });
       navigation.goBack();
     }
-    if (!FeedbackRatingApiStatus.isWaiting && FeedbackRatingApiStatus.error) {
+    if (FeedbackRatingApiStatus.error) {
       Toast.show({
         type: 'error',
         position: 'bottom',
@@ -77,7 +77,7 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
     rate,
     setFeedBack,
     setRate,
-    AppUser,
+    appUser,
     useEffectHook,
     navigation
   } = props;
@@ -135,11 +135,11 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
               dispatch(
                 submitFeedbackRating({
                   body: feedback,
-                  countryCd: AppUser.countryCode,
+                  countryCd: appUser.countryCode,
                   score: rate,
-                  storeNbr: AppUser.siteId,
+                  storeNbr: appUser.siteId,
                   subject: 'OYI App Feedback',
-                  userId: AppUser.userId,
+                  userId: appUser.userId,
                   version: pkg.version
                 })
               );
@@ -158,7 +158,7 @@ const Feedback = (): JSX.Element => {
   const [feedback, setFeedback] = useState('');
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const AppUser = useTypedSelector(state => state.User);
+  const appUser = useTypedSelector(state => state.User);
   const FeedbackRatingApiStatus = useTypedSelector(
     state => state.async.submitFeedbackRating
   );
@@ -170,7 +170,7 @@ const Feedback = (): JSX.Element => {
       setRate={setRate}
       feedback={feedback}
       setFeedBack={setFeedback}
-      AppUser={AppUser}
+      appUser={appUser}
       useEffectHook={useEffect}
       FeedbackRatingApiStatus={FeedbackRatingApiStatus}
       navigation={navigation}
