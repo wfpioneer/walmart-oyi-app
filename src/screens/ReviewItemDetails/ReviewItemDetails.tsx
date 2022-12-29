@@ -626,31 +626,49 @@ export const renderAddPicklistButton = (
 
   if (reserve && reserve.length >= 1) {
     return (
-      <Button
-        type={3}
-        title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
-        titleColor={COLOR.MAIN_THEME_COLOR}
-        titleFontSize={12}
-        titleFontWeight="bold"
-        height={28}
-        onPress={() => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails.itemNbr);
-        }}
-      />
+      <View style={styles.addToPicklistContainer}>
+        <Button
+          type={3}
+          title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={12}
+          titleFontWeight="bold"
+          height={28}
+          onPress={() => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails.itemNbr);
+          }}
+        />
+      </View>
     );
   }
 
   return <></>;
 };
 
+export const renderReserveAdjustmentButton = (navigation: NavigationProp<any>) => (
+  <View style={styles.reserveAdjustMentContainer}>
+    <Button
+      type={3}
+      title={strings('ITEM.RESERVE_ADJUSTMENT')}
+      titleColor={COLOR.MAIN_THEME_COLOR}
+      titleFontSize={12}
+      titleFontWeight="bold"
+      height={28}
+      onPress={() => { navigation.navigate(''); }}
+    />
+  </View>
+);
+
 export const renderLocationComponent = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
-  const { floorLocations, reserveLocations, userConfigs } = props;
-  const { additionalItemDetails } = userConfigs;
+  const {
+    floorLocations, reserveLocations, userConfigs, navigation
+  } = props;
+  const { additionalItemDetails, reserveAdjustment } = userConfigs;
   return (
     <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
@@ -665,6 +683,7 @@ export const renderLocationComponent = (
       </View>
       {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
+        {reserveAdjustment && renderReserveAdjustmentButton(navigation)}
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
     </View>

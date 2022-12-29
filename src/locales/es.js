@@ -143,7 +143,8 @@ export default {
     MARGIN: 'Margen',
     GROSS_PROFIT: 'Ganancia Bruta',
     HISTORY: 'Historial',
-    NO_HISTORY: 'No hay historial disponible'
+    NO_HISTORY: 'No hay historial disponible',
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment' // TODO translations needed
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

@@ -143,7 +143,8 @@ export default {
     MARGIN: 'Margin',
     GROSS_PROFIT: 'Gross Profit',
     HISTORY: 'History',
-    NO_HISTORY: 'No history available'
+    NO_HISTORY: 'No history available',
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

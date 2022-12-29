@@ -39,6 +39,7 @@ export interface Configurations {
   multiBin: boolean;
   showItemImage: boolean;
   showFeedback: boolean;
+  reserveAdjustment: boolean;
 }
 
 export interface area {
