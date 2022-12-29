@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Feedback Screen renders the loading screen when FeedBackRatingApiStatus is called 1`] = `
+exports[`Feedback Screen renders the loading screen when feedbackRatingApiStatus is called 1`] = `
 <ActivityIndicator
   animating={true}
   color="#0071e9"

@@ -8,7 +8,7 @@ import mockUser from '../../mockData/mockUser';
 import { AsyncState } from '../../models/AsyncState';
 import { SUBMIT_FEEDBACK_RATING } from '../../state/actions/asyncAPI';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
-import { FeedbackRatingApiStatusHook, FeedbackScreen } from './Feedback';
+import { FeedbackScreen, feedbackRatingApiStatusHook } from './Feedback';
 import { submitFeedbackRating } from '../../state/actions/saga';
 
 jest.mock('../../../package.json', () => ({
@@ -64,7 +64,7 @@ describe('Feedback Screen', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-  it('renders the loading screen when FeedBackRatingApiStatus is called', () => {
+  it('renders the loading screen when feedbackRatingApiStatus is called', () => {
     const renderer = ShallowRenderer.createRenderer();
     const feedbackApiIsWaiting: AsyncState = {
       ...defaultAsyncApi,
@@ -87,7 +87,7 @@ describe('Feedback Screen', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('Tests FeedbackRatingApiStatusHook on success', () => {
+  it('Tests feedbackRatingApiStatusHook on success', () => {
     const feedbackApiSuccess: AsyncState = {
       ...defaultAsyncApi,
       result: {
@@ -105,7 +105,7 @@ describe('Feedback Screen', () => {
         }
       }
     };
-    FeedbackRatingApiStatusHook(
+    feedbackRatingApiStatusHook(
       feedbackApiSuccess,
       navigationProp,
       mockDispatch
@@ -122,12 +122,12 @@ describe('Feedback Screen', () => {
     expect(navigationProp.goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('Tests FeedbackRatingApiStatusHook on failure', () => {
+  it('Tests feedbackRatingApiStatusHook on failure', () => {
     const feedbackApiError: AsyncState = {
       ...defaultAsyncApi,
       error: 'Network Error'
     };
-    FeedbackRatingApiStatusHook(feedbackApiError, navigationProp, mockDispatch);
+    feedbackRatingApiStatusHook(feedbackApiError, navigationProp, mockDispatch);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
       position: 'bottom',

@@ -39,7 +39,7 @@ const handleUnhandledTouches = () => {
   return false;
 };
 
-export const FeedbackRatingApiStatusHook = (
+export const feedbackRatingApiStatusHook = (
   feedbackRatingApiStatus: AsyncState,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
@@ -84,7 +84,7 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
 
   // Feedback Service Response
   useEffectHook(
-    () => FeedbackRatingApiStatusHook(
+    () => feedbackRatingApiStatusHook(
       feedbackRatingApiStatus,
       navigation,
       dispatch
