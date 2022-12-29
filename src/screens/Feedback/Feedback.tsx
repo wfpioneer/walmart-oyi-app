@@ -30,7 +30,7 @@ export interface FeedbackScreenProps {
   setFeedBack: React.Dispatch<React.SetStateAction<string>>;
   appUser: User;
   useEffectHook: typeof useEffect;
-  FeedbackRatingApiStatus: AsyncState;
+  feedbackRatingApiStatus: AsyncState;
   navigation: NavigationProp<any>;
 }
 
@@ -40,12 +40,12 @@ const handleUnhandledTouches = () => {
 };
 
 export const FeedbackRatingApiStatusHook = (
-  FeedbackRatingApiStatus: AsyncState,
+  feedbackRatingApiStatus: AsyncState,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>
 ) => {
-  if (navigation.isFocused() && !FeedbackRatingApiStatus.isWaiting) {
-    if (FeedbackRatingApiStatus.result) {
+  if (navigation.isFocused() && !feedbackRatingApiStatus.isWaiting) {
+    if (feedbackRatingApiStatus.result) {
       Toast.show({
         type: 'success',
         position: 'bottom',
@@ -55,7 +55,7 @@ export const FeedbackRatingApiStatusHook = (
       dispatch({ type: SUBMIT_FEEDBACK_RATING.RESET });
       navigation.goBack();
     }
-    if (FeedbackRatingApiStatus.error) {
+    if (feedbackRatingApiStatus.error) {
       Toast.show({
         type: 'error',
         position: 'bottom',
@@ -73,7 +73,7 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
   const {
     dispatch,
     feedback,
-    FeedbackRatingApiStatus,
+    feedbackRatingApiStatus,
     rate,
     setFeedBack,
     setRate,
@@ -85,17 +85,17 @@ export const FeedbackScreen = (props: FeedbackScreenProps): JSX.Element => {
   // Feedback Service Response
   useEffectHook(
     () => FeedbackRatingApiStatusHook(
-      FeedbackRatingApiStatus,
+      feedbackRatingApiStatus,
       navigation,
       dispatch
     ),
-    [FeedbackRatingApiStatus]
+    [feedbackRatingApiStatus]
   );
 
-  if (FeedbackRatingApiStatus.isWaiting) {
+  if (feedbackRatingApiStatus.isWaiting) {
     return (
       <ActivityIndicator
-        animating={FeedbackRatingApiStatus.isWaiting}
+        animating={feedbackRatingApiStatus.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -159,7 +159,7 @@ const Feedback = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const appUser = useTypedSelector(state => state.User);
-  const FeedbackRatingApiStatus = useTypedSelector(
+  const feedbackRatingApiStatus = useTypedSelector(
     state => state.async.submitFeedbackRating
   );
 
@@ -172,7 +172,7 @@ const Feedback = (): JSX.Element => {
       setFeedBack={setFeedback}
       appUser={appUser}
       useEffectHook={useEffect}
-      FeedbackRatingApiStatus={FeedbackRatingApiStatus}
+      feedbackRatingApiStatus={feedbackRatingApiStatus}
       navigation={navigation}
     />
   );

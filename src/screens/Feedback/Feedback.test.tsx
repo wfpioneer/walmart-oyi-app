@@ -58,7 +58,7 @@ describe('Feedback Screen', () => {
         setFeedBack={mockSetFeedback}
         navigation={navigationProp}
         appUser={mockUser}
-        FeedbackRatingApiStatus={defaultAsyncApi}
+        feedbackRatingApiStatus={defaultAsyncApi}
         useEffectHook={jest.fn()}
       />
     );
@@ -80,7 +80,7 @@ describe('Feedback Screen', () => {
         setFeedBack={mockSetFeedback}
         navigation={navigationProp}
         appUser={mockUser}
-        FeedbackRatingApiStatus={feedbackApiIsWaiting}
+        feedbackRatingApiStatus={feedbackApiIsWaiting}
         useEffectHook={jest.fn()}
       />
     );
@@ -150,7 +150,7 @@ describe('Feedback Screen', () => {
         setFeedBack={mockSetFeedback}
         navigation={navigationProp}
         appUser={mockUser}
-        FeedbackRatingApiStatus={defaultAsyncApi}
+        feedbackRatingApiStatus={defaultAsyncApi}
         useEffectHook={jest.fn()}
       />
     );
@@ -170,7 +170,7 @@ describe('Feedback Screen', () => {
         setFeedBack={mockSetFeedback}
         navigation={navigationProp}
         appUser={mockUser}
-        FeedbackRatingApiStatus={defaultAsyncApi}
+        feedbackRatingApiStatus={defaultAsyncApi}
         useEffectHook={jest.fn()}
       />
     );
