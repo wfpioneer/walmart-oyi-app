@@ -56,6 +56,7 @@ export const asyncReducer = combineReducers({
   reportMissingPallet: makeAsyncReducer(asyncActions.REPORT_MISSING_PALLET),
   getItemPallets: makeAsyncReducer(asyncActions.GET_ITEM_PALLETS),
   updateMultiPalletUPCQty: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY),
+  submitFeedbackRating: makeAsyncReducer(asyncActions.SUBMIT_FEEDBACK_RATING),
   getUserConfig: makeAsyncReducer(asyncActions.GET_USER_CONFIG),
   updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG)
 });

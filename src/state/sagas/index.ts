@@ -30,6 +30,7 @@ import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 import ReportMissingPalletService from '../../services/ReportMissingPallet.service';
 import GetItemPalletsService from '../../services/GetItemPallets.service';
+import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
 
 const genericSagas = [
@@ -94,6 +95,7 @@ const genericSagas = [
   makeAsyncSaga(
     saga.UPDATE_MULTI_PALLET_UPC_QTY, actions.updateMultiPalletUPCQty, PalletManagementService.updateMultiPalletUPCQty
   ),
+  makeAsyncSaga(saga.SUBMIT_FEEDBACK_RATING, actions.submitFeedbackRating, FeedBackService.submitFeedbackRating),
   makeAsyncSaga(saga.GET_USER_CONFIG, actions.getUserConfig, UserConfigService.getUserConfig),
   makeAsyncSaga(saga.UPDATE_USER_CONFIG, actions.updateUserConfig, UserConfigService.updateUserConfig)
 ];
