@@ -47,7 +47,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, NO_ACTION, UPDATE_OH_QTY
+  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, NO_ACTION, UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
@@ -865,7 +865,6 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
         }
-        dispatch({ type: ADD_TO_PICKLIST.RESET });
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
