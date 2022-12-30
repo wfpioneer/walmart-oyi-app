@@ -144,7 +144,7 @@ export default {
     GROSS_PROFIT: 'Ganancia Bruta',
     HISTORY: 'Historial',
     NO_HISTORY: 'No hay historial disponible',
-    RESERVE_ADJUSTMENT: 'Reserve Adjustment' // TODO translations needed
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

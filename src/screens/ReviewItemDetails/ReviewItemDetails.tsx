@@ -606,7 +606,7 @@ export const renderReserveAdjustmentButton = (navigation: NavigationProp<any>) =
       titleFontSize={12}
       titleFontWeight="bold"
       height={28}
-      onPress={() => { navigation.navigate(''); }}
+      onPress={() => { navigation.navigate('ReserveAdjustment'); }}
     />
   </View>
 );
