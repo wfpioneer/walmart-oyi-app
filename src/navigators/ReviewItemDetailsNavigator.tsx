@@ -21,6 +21,7 @@ import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2 } from '../state/actions/asyncAPI
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
+import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdjustment';
 
 const Stack = createStackNavigator();
 
@@ -206,6 +207,32 @@ const ReviewItemDetailsNavigator = () => {
         component={AuditItem}
         options={{
           headerTitle: strings('AUDITS.AUDIT_ITEM'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {showCalculator && renderCalcButton()}
+              {renderPrintQueueButton()}
+              {renderScanButton()}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="ReserveAdjustment"
+        component={ReserveAdjustment}
+        options={{
+          headerTitle: strings('ITEM.RESERVE_ADJUSTMENT'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false,
+          headerLeft: props => (
+            // Shouldn't need to do this, but not showing on its own for some reason
+            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
+            <HeaderBackButton
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...props}
+              onPress={navigateBack}
+            />
+          ),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {showCalculator && renderCalcButton()}

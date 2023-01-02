@@ -1985,6 +1985,15 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     }
   >
     <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
       countryCode="CN"
       description=""
       itemNumber={0}
@@ -1992,6 +2001,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       onClick={[Function]}
       onHandQty={0}
       showItemImage={false}
+      showOHItems={false}
     />
   </View>
   <ScrollView
@@ -2428,6 +2438,15 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     }
   >
     <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
       countryCode="CN"
       description="Test Item That is Really, Really Long (and has parenthesis)"
       itemNumber={1234567890}
@@ -2435,6 +2454,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       onClick={[Function]}
       onHandQty={42}
       showItemImage={false}
+      showOHItems={false}
     />
   </View>
   <ScrollView

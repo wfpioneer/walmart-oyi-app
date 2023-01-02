@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReserveAdjustmentScreen renders loader for Location List while getting reserve locations for the item 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "marginBottom": 6,
+      }
+    }
+  >
+    <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
+      countryCode="CN"
+      description="Test Item That is Really, Really Long (and has parenthesis)"
+      itemNumber={1234567890}
+      loading={false}
+      onClick={[Function]}
+      onHandQty={42}
+      showItemImage={false}
+      showOHItems={true}
+    />
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+        "marginBottom": 6,
+      }
+    }
+    nestedScrollEnabled={true}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+  >
+    <LocationListCard
+      error={false}
+      loading={true}
+      locationList={Array []}
+      locationType="reserve"
+      onRetry={[Function]}
+      scanRequired={false}
+      showCalculator={false}
+    />
+  </ScrollView>
+  <ItemSeparator />
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={true}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "marginHorizontal": 15,
+          "marginVertical": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</View>
+`;
+
+exports[`ReserveAdjustmentScreen renders the details for a item with non-null status 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "marginBottom": 6,
+      }
+    }
+  >
+    <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
+      countryCode="CN"
+      description="Test Item That is Really, Really Long (and has parenthesis)"
+      itemNumber={1234567890}
+      loading={false}
+      onClick={[Function]}
+      onHandQty={42}
+      showItemImage={false}
+      showOHItems={true}
+    />
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+        "marginBottom": 6,
+      }
+    }
+    nestedScrollEnabled={true}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={false}
+      />
+    }
+  >
+    <LocationListCard
+      error={false}
+      loading={false}
+      locationList={Array []}
+      locationType="reserve"
+      onRetry={[Function]}
+      scanRequired={false}
+      showCalculator={false}
+    />
+  </ScrollView>
+  <ItemSeparator />
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+      }
+    }
+  >
+    <Button
+      backgroundColor="#0071e9"
+      disabled={false}
+      height={45}
+      onPress={[Function]}
+      radius={5}
+      style={
+        Object {
+          "marginHorizontal": 15,
+          "marginVertical": 10,
+        }
+      }
+      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      titleColor="#ffffffff"
+      titleFontSize={16}
+      titleFontWeight="normal"
+      type={1}
+      width={-1}
+    />
+  </View>
+</View>
+`;

@@ -143,7 +143,8 @@ export default {
     MARGIN: '利润',
     GROSS_PROFIT: '毛利',
     HISTORY: '历史信息',
-    NO_HISTORY: '无历史记录信息'
+    NO_HISTORY: '无历史记录信息',
+    RESERVE_ADJUSTMENT: '储位库存数量调整'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',

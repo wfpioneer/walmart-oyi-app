@@ -44,6 +44,19 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  content: {
+    paddingVertical: 6,
+    paddingHorizontal: 20,
+    color: COLOR.GREY_700
+  },
+  contentList: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  otherOHDetails: {
+    backgroundColor: COLOR.WHITE
   }
 });
 

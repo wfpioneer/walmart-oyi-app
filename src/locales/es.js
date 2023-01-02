@@ -192,7 +192,8 @@ export default {
     Was_Medium: 'Promo - Mediano',
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
-    INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización'
+    INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
