@@ -144,7 +144,7 @@ export default {
     GROSS_PROFIT: '毛利',
     HISTORY: '历史信息',
     NO_HISTORY: '无历史记录信息',
-    RESERVE_ADJUSTMENT: 'Reserve Adjustment' // TODO translations needed
+    RESERVE_ADJUSTMENT: '储位库存数量调整'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
