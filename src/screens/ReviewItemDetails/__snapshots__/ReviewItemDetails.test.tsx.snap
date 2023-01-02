@@ -893,49 +893,26 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Added to Picklist Button ' with Picking enabled 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "height": 28,
-      },
-      undefined,
-    ]
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "flex-end",
+    }
   }
 >
-  <View
-    style={
-      Object {
-        "flex": 1,
-      }
-    }
-  >
-    <TouchableOpacity
-      activeOpacity={0.8}
-      disabled={false}
-      onPress={[Function]}
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#00000000",
-          "flex": 1,
-          "justifyContent": "center",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "color": "#0071e9",
-            "fontFamily": "Roboto-Medium",
-            "fontSize": 12,
-            "fontWeight": "bold",
-            "textAlign": undefined,
-          }
-        }
-      >
-        [missing "en.GENERICS.ADD" translation][missing "en.ITEM.TO_PICKLIST" translation]
-      </Text>
-    </TouchableOpacity>
-  </View>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={28}
+    onPress={[Function]}
+    radius={5}
+    title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+    titleColor="#0071e9"
+    titleFontSize={12}
+    titleFontWeight="bold"
+    type={3}
+    width={-1}
+  />
 </View>
 `;
 
@@ -1489,7 +1466,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
@@ -1546,7 +1522,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
@@ -1606,7 +1581,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
@@ -1660,7 +1634,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
@@ -2000,7 +1973,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -2882,7 +2854,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -3489,7 +3460,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -4015,7 +3985,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -4541,7 +4510,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -5088,7 +5056,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -5635,7 +5602,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -6182,7 +6148,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
@@ -6729,7 +6694,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }

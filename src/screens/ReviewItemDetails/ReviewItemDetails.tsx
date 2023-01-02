@@ -580,42 +580,62 @@ export const renderAddPicklistButton = (
 
   if (reserve && reserve.length >= 1) {
     return userConfigs.picking ? (
-      <Button
-        type={3}
-        title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
-        titleColor={COLOR.MAIN_THEME_COLOR}
-        titleFontSize={12}
-        titleFontWeight="bold"
-        height={28}
-        onPress={() => { setCreatePickModalVisible(true); }}
-      />
+      <View style={styles.addToPicklistContainer}>
+        <Button
+          type={3}
+          title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          titleFontSize={12}
+          titleFontWeight="bold"
+          height={28}
+          onPress={() => { setCreatePickModalVisible(true); }}
+        />
+      </View>
     ) : <></>;
   }
 
   return <></>;
 };
 
+export const renderReserveAdjustmentButton = (navigation: NavigationProp<any>) => (
+  <View style={styles.reserveAdjustMentContainer}>
+    <Button
+      type={3}
+      title={strings('ITEM.RESERVE_ADJUSTMENT')}
+      titleColor={COLOR.MAIN_THEME_COLOR}
+      titleFontSize={12}
+      titleFontWeight="bold"
+      height={28}
+      onPress={() => { navigation.navigate('ReserveAdjustment'); }}
+    />
+  </View>
+);
+
 export const renderLocationComponent = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
-  const { floorLocations, reserveLocations, userConfigs } = props;
-  const { additionalItemDetails } = userConfigs;
+  const {
+    floorLocations, reserveLocations, userConfigs, navigation
+  } = props;
+  const { additionalItemDetails, reserveAdjustment } = userConfigs;
+  const hasFloorLocations = floorLocations && floorLocations.length >= 1;
+  const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
   return (
     <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.FLOOR')}</Text>
-        {floorLocations && floorLocations.length >= 1
-          && <Text>{floorLocations[0].locationName}</Text>}
+        {hasFloorLocations && <Text>{floorLocations[0].locationName}</Text>}
       </View>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
-        {reserveLocations && reserveLocations.length >= 1
+        {hasReserveLocations
           && !additionalItemDetails && <Text>{reserveLocations[0].locationName}</Text> }
       </View>
       {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
+        {(reserveAdjustment && hasReserveLocations) && renderReserveAdjustmentButton(navigation)}
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
     </View>

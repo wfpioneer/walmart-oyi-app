@@ -21,6 +21,7 @@ import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2 } from '../state/actions/asyncAPI
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
+import ReserveAdjustment from '../screens/ReserveAdjustment/ReserveAdjustment';
 
 const Stack = createStackNavigator();
 
@@ -209,6 +210,19 @@ const ReviewItemDetailsNavigator = () => {
           headerRight: () => (
             <View style={styles.headerContainer}>
               {showCalculator && renderCalcButton()}
+              {renderPrintQueueButton()}
+              {renderScanButton()}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="ReserveAdjustment"
+        component={ReserveAdjustment}
+        options={{
+          headerTitle: strings('ITEM.RESERVE_ADJUSTMENT'),
+          headerRight: () => (
+            <View style={styles.headerContainer}>
               {renderPrintQueueButton()}
               {renderScanButton()}
             </View>
