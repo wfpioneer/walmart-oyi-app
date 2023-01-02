@@ -7,11 +7,11 @@ export interface Environment {
   worklistURL: string;
   printingUrl: string;
   fluffyURL: string;
-  managerApprovalUrl: string;
   locationUrl: string;
   configUrl: string;
   itemImageUUIDUrlCN: string;
   itemImageUrlCN: string;
+  atmtUrl: string;
 }
 
 export interface Environments {
@@ -26,7 +26,6 @@ interface ApplicationKey {
   locationName: string;
   printingName: string;
   worklistName: string;
-  managerApprovalName: string;
   fluffyName: string;
   configName: string;
 }
@@ -38,7 +37,6 @@ export const svcName: ApplicationKey = {
   printingName: 'OYI_PRINTING_API',
   worklistName: 'OYI_WORKLIST_API',
   configName: 'OYI_CONFIG_API',
-  managerApprovalName: 'OYI_MANAGER_APPROVAL_API',
   fluffyName: 'IntlMobileAuthorizationPlatform'
 };
 
@@ -85,12 +83,12 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`,
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
-      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.dev.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.dev.walmart.com`,
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
+      atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
     },
     stage: {
       orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.stg.walmart.com`,
@@ -98,12 +96,12 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`,
       fluffyURL: 'https://api-proxy.stg.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
-      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.stg.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.stg.walmart.com`,
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
+      atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
     },
     prod: {
       orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.prod.walmart.com`,
@@ -111,12 +109,12 @@ export const getEnvironment = (): Environment => {
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`,
       fluffyURL: 'https://api-proxy.prod.soa-api-proxy.platform.glb.prod.walmart.com'
         + '/api-proxy/service/IntlMobileAuthorizationPlatform',
-      managerApprovalUrl: `https://intl-oyi-manager-approval-api.${countryCode}.prod.walmart.com`,
       locationUrl: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.prod.walmart.com`,
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
+      atmtUrl: 'https://api.atmt-feedback.prod.walmart.com'
     }
 
   };

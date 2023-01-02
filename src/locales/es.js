@@ -541,6 +541,8 @@ export default {
     YES: 'Si',
     NO: 'No',
     RATING_LABEL: 'Elige una calificación',
-    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario'
+    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario',
+    SUBMIT_FEEDBACK_SUCCESS: 'La retroalimentación se ha enviado con éxito',
+    SUBMIT_FEEDBACK_FAILURE: 'Incapaz de enviar retroalimentación. Por favor inténtalo de nuevo.'
   }
 };

@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Feedback Screen renders the loading screen when feedbackRatingApiStatus is called 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#0071e9"
+  hidesWhenStopped={true}
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
 exports[`Feedback Screen should render the screen based on props 1`] = `
 <KeyboardAvoidingView
   behavior="height"
@@ -32,7 +48,7 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
         [missing "en.FEEDBACK.RATING_LABEL" translation]
       </Text>
       <Stars
-        initialValue={0}
+        initialValue={3}
         onValueChange={[Function]}
         size={30}
         starCount={5}
@@ -50,6 +66,7 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
       <TextInput
         multiline={true}
         numberOfLines={10}
+        onChangeText={[Function]}
         placeholder="[missing \\"en.FEEDBACK.COMMENT_PLACEHOLDER_LABEL\\" translation]"
         placeholderTextColor="#c5c5c5"
         style={
@@ -57,6 +74,8 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
             "textAlignVertical": "top",
           }
         }
+        testID="Feedback Input"
+        value=""
       />
     </View>
     <View
@@ -72,6 +91,7 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
         height={45}
         onPress={[Function]}
         radius={5}
+        testID="Submit Feedback"
         title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}

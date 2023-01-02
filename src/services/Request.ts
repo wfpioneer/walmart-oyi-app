@@ -65,8 +65,6 @@ class Request {
             interceptRequest.headers[WM_SVC_NAME] = svcName.orchestrationName;
           } else if (request.url.includes(envUrls.itemDetailsURL)) {
             interceptRequest.headers[WM_SVC_NAME] = svcName.itemDetailsName;
-          } else if (request.url.includes(envUrls.managerApprovalUrl)) {
-            interceptRequest.headers[WM_SVC_NAME] = svcName.managerApprovalName;
           } else if (request.url.includes(envUrls.locationUrl)) {
             interceptRequest.headers[WM_SVC_NAME] = svcName.locationName;
           } else if (request.url.includes(envUrls.printingUrl)) {
@@ -76,6 +74,9 @@ class Request {
           }
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
+          if (request.url.includes(envUrls.atmtUrl)) {
+            interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.token;
+          }
         }
         return interceptRequest;
       },

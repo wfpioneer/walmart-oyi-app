@@ -11,7 +11,6 @@ export const asyncReducer = combineReducers({
   getWorklistAudits: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT),
   getPalletWorklist: makeAsyncReducer(asyncActions.GET_PALLET_WORKLIST),
   editLocation: makeAsyncReducer(asyncActions.EDIT_LOCATION),
-  addToPicklist: makeAsyncReducer(asyncActions.ADD_TO_PICKLIST),
   addLocation: makeAsyncReducer(asyncActions.ADD_LOCATION),
   updateOHQty: makeAsyncReducer(asyncActions.UPDATE_OH_QTY),
   getWorklistSummary: makeAsyncReducer(asyncActions.GET_WORKLIST_SUMMARY),
@@ -56,6 +55,7 @@ export const asyncReducer = combineReducers({
   reportMissingPallet: makeAsyncReducer(asyncActions.REPORT_MISSING_PALLET),
   getItemPallets: makeAsyncReducer(asyncActions.GET_ITEM_PALLETS),
   updateMultiPalletUPCQty: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY),
+  submitFeedbackRating: makeAsyncReducer(asyncActions.SUBMIT_FEEDBACK_RATING),
   getUserConfig: makeAsyncReducer(asyncActions.GET_USER_CONFIG),
   updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG)
 });
