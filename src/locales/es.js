@@ -143,7 +143,8 @@ export default {
     MARGIN: 'Margen',
     GROSS_PROFIT: 'Ganancia Bruta',
     HISTORY: 'Historial',
-    NO_HISTORY: 'No hay historial disponible'
+    NO_HISTORY: 'No hay historial disponible',
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
