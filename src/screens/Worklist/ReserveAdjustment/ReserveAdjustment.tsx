@@ -37,7 +37,7 @@ import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/A
 import { GET_ITEM_PALLETS } from '../../../state/actions/asyncAPI';
 import { getItemPallets } from '../../../state/actions/saga';
 import {
-  setReserveLocations
+  setReserveLocations, updatePalletQty
 } from '../../../state/actions/ReserveAdjustmentScreen';
 import styles from './ReserveAdjustment.style';
 
@@ -62,9 +62,37 @@ export interface ReserveAdjustmentScreenProps {
     setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
     useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
     userId: string;
-  }
+}
 
-const getReserveLocationList = (locations: ItemPalletInfo[]) => {
+export const calculatePalletDecreaseQty = (
+  newOHQty: number,
+  palletId: number,
+  dispatch: Dispatch<any>
+) => {
+  const OH_MIN = 0;
+  const OH_MAX = 9999;
+  if (newOHQty > OH_MAX) {
+    dispatch(updatePalletQty(palletId, OH_MAX));
+  } else if (newOHQty > OH_MIN) {
+    dispatch(updatePalletQty(palletId, newOHQty - 1));
+  }
+};
+
+export const calculatePalletIncreaseQty = (
+  newOHQty: number,
+  palletId: number,
+  dispatch: Dispatch<any>
+) => {
+  const OH_MIN = 0;
+  const OH_MAX = 9999;
+  if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
+    dispatch(updatePalletQty(palletId, OH_MIN));
+  } else if (newOHQty < OH_MAX) {
+    dispatch(updatePalletQty(palletId, (newOHQty || 0) + 1));
+  }
+};
+
+const getReserveLocationList = (locations: ItemPalletInfo[], dispatch: Dispatch<any>) => {
   const locationLst: LocationList[] = [];
   if (locations && locations.length) {
     const sortedLocations = sortReserveLocations(locations);
@@ -76,11 +104,17 @@ const getReserveLocationList = (locations: ItemPalletInfo[]) => {
         scanned: loc.scanned,
         palletId: loc.palletId,
         locationType: 'reserve',
-        increment: () => {},
-        decrement: () => {},
+        increment: () => calculatePalletIncreaseQty(loc.newQty, loc.palletId, dispatch),
+        decrement: () => calculatePalletDecreaseQty(loc.newQty, loc.palletId, dispatch),
         onDelete: () => {},
-        qtyChange: () => {},
-        onEndEditing: () => {},
+        qtyChange: (qty: string) => {
+          dispatch(updatePalletQty(loc.palletId, parseInt(qty, 10)));
+        },
+        onEndEditing: () => {
+          if (typeof (loc.newQty) !== 'number' || Number.isNaN(loc.newQty)) {
+            dispatch(updatePalletQty(loc.palletId, 0));
+          }
+        },
         onCalcPress: () => {}
       });
     });
@@ -182,7 +216,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     useCallbackHook(() => {
       validateSession(navigation, route.name).then(() => {
         if (itemDetails?.itemNbr) {
-          dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
+          dispatch(getItemPallets({ itemNbr: 720 }));
         }
       });
     }, [navigation])
@@ -219,7 +253,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         }
       >
         <LocationListCard
-          locationList={getReserveLocationList(reserveLocations)}
+          locationList={getReserveLocationList(reserveLocations, dispatch)}
           locationType="reserve"
           loading={getItemPalletsApi.isWaiting}
           error={getItemPalletsError}
@@ -277,3 +311,6 @@ const ReserveAdjustment = (): JSX.Element => {
 };
 
 export default ReserveAdjustment;
+function setShowCalcModal(arg0: boolean) {
+  throw new Error('Function not implemented.');
+}

@@ -4,12 +4,13 @@ import {
   Actions,
   CLEAR_RESERVE_ADJUSTMENT_SCREEN_DATA,
   SET_ITEM_DETAILS,
-  SET_RESERVE_LOCATIONS
+  SET_RESERVE_LOCATIONS,
+  UPDATE_PALLET_QTY
 } from '../actions/ReserveAdjustmentScreen';
 
 export interface ReserveAdjustmentScreenState {
-   itemDetails: ItemDetails | null,
-   reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null;
+  reserveLocations: ItemPalletInfo[];
 }
 
 export const initialState: ReserveAdjustmentScreenState = {
@@ -17,7 +18,10 @@ export const initialState: ReserveAdjustmentScreenState = {
   reserveLocations: []
 };
 
-export const ReserveAdjustmentScreen = (state = initialState, action: Actions) : ReserveAdjustmentScreenState => {
+export const ReserveAdjustmentScreen = (
+  state = initialState,
+  action: Actions
+): ReserveAdjustmentScreenState => {
   switch (action.type) {
     case SET_ITEM_DETAILS:
       return {
@@ -29,6 +33,17 @@ export const ReserveAdjustmentScreen = (state = initialState, action: Actions) :
         ...state,
         reserveLocations: action.payload
       };
+    case UPDATE_PALLET_QTY: {
+      const { reserveLocations } = state;
+      const { palletId, newQty } = action.payload;
+      const updatedLocations = reserveLocations.map(loc => {
+        if (loc.palletId === palletId) {
+          return { ...loc, newQty };
+        }
+        return loc;
+      });
+      return { ...state, reserveLocations: updatedLocations };
+    }
     case CLEAR_RESERVE_ADJUSTMENT_SCREEN_DATA:
       return initialState;
     default:
