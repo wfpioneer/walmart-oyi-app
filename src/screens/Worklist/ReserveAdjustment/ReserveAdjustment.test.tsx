@@ -78,7 +78,6 @@ const defaultAsyncState: AsyncState = {
 };
 
 const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
-  getItemDetailsApi: defaultAsyncState,
   itemDetails: null,
   userId: 'testUser',
   route: routeProp,
@@ -101,13 +100,6 @@ describe('ReserveAdjustmentScreen', () => {
   it('renders the details for a item with non-null status', () => {
     const testProps: ReserveAdjustmentScreenProps = {
       ...mockReserveAdjustmentScreenProps,
-      getItemDetailsApi: {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: getMockItemDetails('123')
-        }
-      },
       itemDetails: getMockItemDetails('123')
     };
     const renderer = ShallowRenderer.createRenderer();
