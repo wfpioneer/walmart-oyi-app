@@ -101,6 +101,7 @@ const getReserveLocationList = (locations: ItemPalletInfo[], dispatch: Dispatch<
         sectionId: loc.sectionId,
         locationName: loc.locationName,
         quantity: loc.newQty,
+        oldQuantity: loc.quantity,
         scanned: loc.scanned,
         palletId: loc.palletId,
         locationType: 'reserve',
