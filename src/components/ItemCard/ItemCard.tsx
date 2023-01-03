@@ -19,10 +19,11 @@ interface ItemCardProps {
   itemNumber: number,
   onHandQty: number | undefined,
   description: string,
-  onClick: (itemNumber: number) => void;
   loading: boolean;
   countryCode: string;
   showItemImage: boolean;
+  onClick?: (itemNumber: number) => void;
+  disabled?: boolean;
   showOHItems?: boolean;
   OHItemInfo?: OHItemInfoI;
 }
@@ -127,17 +128,18 @@ const OtherOnHandsItems = (props: OtherOnHandsItemsProps) => {
 };
 
 const ItemCard = ({
-  itemNumber, description, onClick, loading, onHandQty,
+  itemNumber, description, onClick, loading, onHandQty, disabled,
   countryCode, showItemImage, showOHItems, OHItemInfo
 }: ItemCardProps) => (
   <View style={styles.mainContainer}>
     <TouchableOpacity
       style={getContainerStyle(loading, showItemImage)}
       onPress={() => {
-        if (!loading) {
+        if (!loading && onClick) {
           onClick(itemNumber);
         }
       }}
+      disabled={disabled}
       testID="itemCard"
     >
       {showItemImage && !loading && (
@@ -173,7 +175,9 @@ const ItemCard = ({
 
 ItemCard.defaultProps = {
   showOHItems: false,
-  OHItemInfo: defaultOHItemValues
+  OHItemInfo: defaultOHItemValues,
+  disabled: false,
+  onClick: () => {}
 };
 
 OtherOnHandsItems.defaultProps = {

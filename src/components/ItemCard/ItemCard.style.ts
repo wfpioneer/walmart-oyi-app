@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingVertical: 6,
-    paddingHorizontal: 20,
+    paddingHorizontal: 25,
     color: COLOR.GREY_700
   },
   contentList: {

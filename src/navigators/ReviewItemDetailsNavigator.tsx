@@ -230,7 +230,9 @@ const ReviewItemDetailsNavigator = () => {
             <HeaderBackButton
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...props}
-              onPress={navigateBack}
+              onPress={() => {
+                navigation.navigate('ReviewItemDetailsHome');
+              }}
             />
           ),
           headerRight: () => (
