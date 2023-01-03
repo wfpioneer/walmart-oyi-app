@@ -78,7 +78,6 @@ const defaultAsyncState: AsyncState = {
 };
 
 const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
-  getItemDetailsApi: defaultAsyncState,
   itemDetails: null,
   userId: 'testUser',
   route: routeProp,
@@ -94,20 +93,25 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
   getItemPalletsError: false,
   setGetItemPalletsError: jest.fn(),
   countryCode: 'CN',
-  useCallbackHook: jest.fn()
+  useCallbackHook: jest.fn(),
+  reportMissingPalletApi: defaultAsyncState,
+  locToConfirm: {
+    locationName: '',
+    locationArea: '',
+    locationIndex: -1,
+    locationTypeNbr: -1,
+    palletId: 0,
+    sectionId: 0
+  },
+  setLocToConfirm: jest.fn(),
+  setShowDeleteConfirmationModal: jest.fn(),
+  showDeleteConfirmationModal: false
 };
 
 describe('ReserveAdjustmentScreen', () => {
   it('renders the details for a item with non-null status', () => {
     const testProps: ReserveAdjustmentScreenProps = {
       ...mockReserveAdjustmentScreenProps,
-      getItemDetailsApi: {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: getMockItemDetails('123')
-        }
-      },
       itemDetails: getMockItemDetails('123')
     };
     const renderer = ShallowRenderer.createRenderer();

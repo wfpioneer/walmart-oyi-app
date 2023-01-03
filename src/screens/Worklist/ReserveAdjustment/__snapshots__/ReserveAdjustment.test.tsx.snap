@@ -10,6 +10,79 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.WORKLIST.MISSING_PALLET_CONFIRMATION" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -105,6 +178,79 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.WORKLIST.MISSING_PALLET_CONFIRMATION" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
