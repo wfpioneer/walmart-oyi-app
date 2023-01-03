@@ -94,7 +94,15 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
   getItemPalletsError: false,
   setGetItemPalletsError: jest.fn(),
   countryCode: 'CN',
-  useCallbackHook: jest.fn()
+  useCallbackHook: jest.fn(),
+  isManualScanEnabled: false,
+  scannedEvent: {
+    value: null,
+    type: null
+  },
+  scannedPalletId: 0,
+  showPalletQtyUpdateModal: false,
+  setShowPalletQtyUpdateModal: jest.fn()
 };
 
 describe('ReserveAdjustmentScreen', () => {

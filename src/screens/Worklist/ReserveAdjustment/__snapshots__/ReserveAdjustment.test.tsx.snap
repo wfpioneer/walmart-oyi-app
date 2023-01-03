@@ -10,6 +10,20 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <PalletQtyUpdate
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      palletId={0}
+      qty={0}
+      showCalculator={false}
+    />
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -104,6 +118,20 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <PalletQtyUpdate
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      palletId={0}
+      qty={0}
+      showCalculator={false}
+    />
+  </CustomModalComponent>
   <View
     style={
       Object {
