@@ -20,6 +20,7 @@ import {
 
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import Toast from 'react-native-toast-message';
 import COLOR from '../../../themes/Color';
 import LocationListCard, { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import { useTypedSelector } from '../../../state/reducers/RootReducer';
@@ -37,9 +38,15 @@ import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/A
 import { GET_ITEM_PALLETS } from '../../../state/actions/asyncAPI';
 import { getItemPallets } from '../../../state/actions/saga';
 import {
-  setReserveLocations, updatePalletQty
+  setReserveLocations, setScannedPalletId, updatePalletQty, updatePalletScannedStatus
 } from '../../../state/actions/ReserveAdjustmentScreen';
 import styles from './ReserveAdjustment.style';
+import ManualScanComponent from '../../../components/manualscan/ManualScan';
+import { barcodeEmitter } from '../../../utils/scannerUtils';
+import { resetScannedEvent, setScannedEvent } from '../../../state/actions/Global';
+import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { CustomModalComponent } from '../../Modal/Modal';
+import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
 
 export interface ReserveAdjustmentScreenProps {
     getItemDetailsApi: AsyncState;
@@ -62,6 +69,11 @@ export interface ReserveAdjustmentScreenProps {
     setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
     useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
     userId: string;
+    isManualScanEnabled: boolean;
+    scannedEvent: { value: string | null; type: string | null };
+    scannedPalletId: number;
+    showPalletQtyUpdateModal: boolean;
+    setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const calculatePalletDecreaseQty = (
@@ -159,6 +171,70 @@ export const getItemPalletsApiHook = (
   }
 };
 
+export const renderpalletQtyUpdateModal = (
+  scannedPalletId: number,
+  reserveLocations: ItemPalletInfo[],
+  dispatch: Dispatch<any>,
+  showPalletQtyUpdateModal: boolean,
+  setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>,
+  showCalculator: boolean,
+  vendorPackQty?: number,
+) => {
+  const palletInfo = reserveLocations.find(
+    pallet => pallet.palletId === scannedPalletId
+  );
+  const qty = palletInfo?.quantity === vendorPackQty ? palletInfo?.quantity : 0;
+  const newPalletQty = palletInfo?.newQty;
+
+  return (
+    <CustomModalComponent
+      isVisible={showPalletQtyUpdateModal}
+      onClose={() => setShowPalletQtyUpdateModal(false)}
+      modalType="Form"
+    >
+      <PalletQtyUpdate
+        palletId={scannedPalletId}
+        qty={newPalletQty || qty || 0}
+        handleClose={() => {
+          setShowPalletQtyUpdateModal(false);
+        }}
+        handleSubmit={(newQty: number) => {
+          dispatch(updatePalletQty(scannedPalletId, newQty));
+          setShowPalletQtyUpdateModal(false);
+        }}
+        showCalculator={showCalculator}
+      />
+    </CustomModalComponent>
+  );
+};
+
+export const getScannedPalletEffect = (
+  navigation: NavigationProp<any>,
+  scannedEvent: { type: string | null; value: string | null },
+  reserveLocations: ItemPalletInfo[],
+  dispatch: Dispatch<any>,
+  setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (navigation.isFocused() && scannedEvent.value) {
+    const scannedPallet = parseInt(scannedEvent.value, 10);
+    const matchedPallet = reserveLocations.find(
+      loc => loc.palletId === scannedPallet
+    );
+    if (matchedPallet) {
+      setShowPalletQtyUpdateModal(true);
+      dispatch(setScannedPalletId(scannedPallet));
+      dispatch(updatePalletScannedStatus(scannedPallet, true));
+    } else {
+      Toast.show({
+        type: 'error',
+        text1: strings('AUDITS.SCAN_PALLET_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+    }
+    dispatch(resetScannedEvent());
+  }
+};
 const ItemSeparator = () => <View style={styles.separator} />;
 
 export const disabledContinue = (
@@ -186,7 +262,13 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     itemDetails,
     reserveLocations,
     getItemPalletsError,
-    setGetItemPalletsError, userId
+    setGetItemPalletsError,
+    userId,
+    isManualScanEnabled,
+    scannedEvent,
+    scannedPalletId,
+    showPalletQtyUpdateModal,
+    setShowPalletQtyUpdateModal
   } = props;
 
   const handleReserveLocsRetry = () => {
@@ -212,6 +294,38 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
       });
   };
 
+  // Scanned Pallet Event Listener
+  useEffectHook(
+    () => getScannedPalletEffect(
+      navigation,
+      scannedEvent,
+      reserveLocations,
+      dispatch,
+      setShowPalletQtyUpdateModal
+    ),
+    [scannedEvent]
+  );
+
+  // Scanner listener
+  useEffectHook(() => {
+    const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused() && userConfig.scanRequired) {
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall('Audit_Item', {
+            action: 'section_details_scan',
+            value: scan.value,
+            type: scan.type
+          });
+          dispatch(setScannedEvent(scan));
+        });
+      }
+    });
+    return () => {
+      scannedSubscription.remove();
+      dispatch(resetScannedEvent());
+    };
+  }, []);
+
   // Get Picklist Api call
   useFocusEffectHook(
     useCallbackHook(() => {
@@ -231,6 +345,18 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
 
   return (
     <View style={styles.container}>
+      {renderpalletQtyUpdateModal(
+        scannedPalletId,
+        reserveLocations,
+        dispatch,
+        showPalletQtyUpdateModal,
+        setShowPalletQtyUpdateModal,
+        userConfig.showCalculator,
+        itemDetails?.vendorPackQty
+      )}
+      {isManualScanEnabled && (
+      <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
+      )}
       <View style={styles.marginBottomStyles}>
         <ItemCard
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
@@ -281,8 +407,10 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
 const ReserveAdjustment = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
-  const { itemDetails, reserveLocations } = useTypedSelector(state => state.ReserveAdjustmentScreen);
+  const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
+  const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);
+  const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -307,11 +435,13 @@ const ReserveAdjustment = (): JSX.Element => {
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
       userId={userId}
+      isManualScanEnabled={isManualScanEnabled}
+      scannedEvent={scannedEvent}
+      scannedPalletId={scannedPalletId}
+      showPalletQtyUpdateModal={showPalletQtyUpdateModal}
+      setShowPalletQtyUpdateModal={setShowPalletQtyUpdateModal}
     />
   );
 };
 
 export default ReserveAdjustment;
-function setShowCalcModal(arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
