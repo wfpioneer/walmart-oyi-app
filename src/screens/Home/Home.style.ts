@@ -43,9 +43,7 @@ export default StyleSheet.create({
     color: COLOR.GREY_500
   },
   modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: '100%'
   },
   barcodeErrorContainer: {
     width: '90%',
@@ -76,5 +74,17 @@ export default StyleSheet.create({
   barcodeErrorText: {
     fontSize: 16,
     textAlign: 'center'
+  },
+  actionRow: {
+    flexDirection: 'row'
+  },
+  descriptionText: {
+    padding: 15,
+    textAlign: 'center'
+  },
+  button: {
+    flex: 1,
+    marginHorizontal: 10,
+    marginVertical: 5
   }
 });

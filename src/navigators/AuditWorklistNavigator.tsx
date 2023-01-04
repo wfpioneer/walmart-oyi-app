@@ -12,7 +12,9 @@ import { useDispatch } from 'react-redux';
 import SelectLocationType from '../screens/SelectLocationType/SelectLocationType';
 import { strings } from '../locales';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
-import { setBottomTab, setCalcOpen, setManualScan } from '../state/actions/Global';
+import {
+  resetScannedEvent, setBottomTab, setCalcOpen, setManualScan
+} from '../state/actions/Global';
 import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import COLOR from '../themes/Color';
@@ -32,6 +34,7 @@ interface AuditWorklistNavProps {
   menuOpen: boolean;
   isBottomTabEnabled: boolean;
   calcOpen: boolean;
+  scannedEvent: { value: string | null; type: string | null };
 }
 
 export const renderScanButton = (
@@ -109,7 +112,8 @@ export const AuditWorklistNavigatorStack = (
     navigation,
     menuOpen,
     isBottomTabEnabled,
-    calcOpen
+    calcOpen,
+    scannedEvent
   } = props;
 
   const navigateBack = () => {
@@ -150,6 +154,9 @@ export const AuditWorklistNavigatorStack = (
               dispatch(setBottomTab(false));
             } else if (screen.target && screen.target.includes('AuditWorklistTabs') && !isBottomTabEnabled) {
               dispatch(setBottomTab(true));
+            }
+            if (scannedEvent.value) {
+              dispatch(resetScannedEvent());
             }
           }
         }}
@@ -209,7 +216,9 @@ export const AuditWorklistNavigatorStack = (
 const AuditWorklistNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { isManualScanEnabled, isBottomTabEnabled, calcOpen } = useTypedSelector(state => state.Global);
+  const {
+    isManualScanEnabled, isBottomTabEnabled, calcOpen, scannedEvent
+  } = useTypedSelector(state => state.Global);
   const { auditWorklists, showCalculator } = useTypedSelector(state => state.User.configs);
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
@@ -223,6 +232,7 @@ const AuditWorklistNavigator = (): JSX.Element => {
       menuOpen={menuOpen}
       isBottomTabEnabled={isBottomTabEnabled}
       calcOpen={calcOpen}
+      scannedEvent={scannedEvent}
     />
   );
 };

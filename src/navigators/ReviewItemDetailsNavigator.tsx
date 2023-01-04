@@ -9,7 +9,7 @@ import Config from 'react-native-config';
 import COLOR from '../themes/Color';
 import ReviewItemDetails from '../screens/ReviewItemDetails/ReviewItemDetails';
 import { strings } from '../locales';
-import { setManualScan } from '../state/actions/Global';
+import { setCalcOpen, setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './ReviewItemDetailsNavigator.style';
 import LocationDetails from '../screens/LocationDetails/LocationDetails';
@@ -21,20 +21,35 @@ import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2 } from '../state/actions/asyncAPI
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
+import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdjustment';
 
 const Stack = createStackNavigator();
 
 const ReviewItemDetailsNavigator = () => {
-  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, calcOpen } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const { showCalculator } = useTypedSelector(state => state.User.configs);
   const { title } = useTypedSelector(state => state.ItemHistory);
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
 
   const renderScanButton = () => (
     <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
-      <View style={styles.leftButton}>
+      <View style={styles.iconBtn}>
         <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+      </View>
+    </TouchableOpacity>
+  );
+
+  const renderCalcButton = (): JSX.Element => (
+    <TouchableOpacity
+      onPress={() => {
+        dispatch(setCalcOpen(!calcOpen));
+      }}
+      testID="calc-button"
+    >
+      <View style={styles.iconBtn}>
+        <MaterialCommunityIcon name="calculator" size={20} color={COLOR.WHITE} />
       </View>
     </TouchableOpacity>
   );
@@ -54,7 +69,7 @@ const ReviewItemDetailsNavigator = () => {
       navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
     }}
     >
-      <View style={styles.rightButton}>
+      <View style={styles.iconBtn}>
         <MaterialCommunityIcon
           name="printer"
           size={20}
@@ -194,8 +209,26 @@ const ReviewItemDetailsNavigator = () => {
           headerTitle: strings('AUDITS.AUDIT_ITEM'),
           headerRight: () => (
             <View style={styles.headerContainer}>
-              {renderScanButton()}
+              {showCalculator && renderCalcButton()}
               {renderPrintQueueButton()}
+              {renderScanButton()}
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
+        name="ReserveAdjustment"
+        component={ReserveAdjustment}
+        options={{
+          headerTitle: strings('ITEM.RESERVE_ADJUSTMENT'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false,
+          headerRight: () => (
+            <View style={styles.headerContainer}>
+              {showCalculator && renderCalcButton()}
+              {renderPrintQueueButton()}
+              {renderScanButton()}
             </View>
           )
         }}

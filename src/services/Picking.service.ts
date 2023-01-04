@@ -56,7 +56,7 @@ export default class PickingService {
     const urls: Environment = getEnvironment();
 
     return Request.post(
-      `${urls.locationUrl}/picklist`,
+      `${urls.orchestrationURL}/picklist`,
       payload
     );
   }

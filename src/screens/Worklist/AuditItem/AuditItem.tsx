@@ -212,7 +212,8 @@ export const addLocationHandler = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  floorLocations: Location[]
+  floorLocations: Location[],
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
   dispatch(
     setupScreen(
@@ -226,6 +227,7 @@ export const addLocationHandler = (
       false
     )
   );
+  trackEventCall('Audit_Item', { action: 'add_new_floor_location_click', itemNumber: itemDetails?.itemNbr });
   navigation.navigate('AddLocation');
 };
 
@@ -691,7 +693,8 @@ export const renderDeleteLocationModal = (
   deleteLocationConfirmed: (locType: string) => void,
   locationName: string,
   locationType: string,
-  palletId: number
+  palletId: number,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => (
   <CustomModalComponent
     isVisible={showDeleteConfirmationModal}
@@ -724,7 +727,10 @@ export const renderDeleteLocationModal = (
             title={strings('GENERICS.CANCEL')}
             backgroundColor={COLOR.MAIN_THEME_COLOR}
             testID="modal-cancel-button"
-            onPress={() => setShowDeleteConfirmationModal(false)}
+            onPress={() => {
+              setShowDeleteConfirmationModal(false);
+              trackEventCall('Audit_Item', { action: 'cancel_delete_location_click', locationType });
+            }}
           />
           <Button
             style={styles.button}
@@ -732,7 +738,16 @@ export const renderDeleteLocationModal = (
               ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
             testID="modal-confirm-button"
             backgroundColor={COLOR.TRACKER_RED}
-            onPress={() => deleteLocationConfirmed(locationType)}
+            onPress={() => {
+              deleteLocationConfirmed(locationType);
+              if (locationType === 'reserve') {
+                trackEventCall('Audit_Item',
+                  { action: 'missing_pallet_confirmation_click', palletId });
+              } else {
+                trackEventCall('Audit_Item',
+                  { action: 'confirm_delete_location_click', locName: locationName });
+              }
+            }}
           />
         </View>
       </>
@@ -750,6 +765,7 @@ export const renderConfirmOnHandsModal = (
   updatedQuantity: number,
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
+  trackEventCall: (eventName: string, params?: any) => void,
   worklistType: string
 ) => {
   const onHandsQty = itemDetails?.onHandsQty || 0;
@@ -824,7 +840,11 @@ export const renderConfirmOnHandsModal = (
               title={strings('APPROVAL.GO_BACK')}
               titleColor={COLOR.MAIN_THEME_COLOR}
               testID="modal-cancel-button"
-              onPress={() => setShowOnHandsConfirmationModal(false)}
+              onPress={() => {
+                trackEventCall('Audit_Item',
+                  { action: 'cancel_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr });
+                setShowOnHandsConfirmationModal(false);
+              }}
               type={2}
             />
             <Button
@@ -833,6 +853,13 @@ export const renderConfirmOnHandsModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={() => {
+                trackEventCall('Audit_Item',
+                  {
+                    action: 'complete_audit_item_click',
+                    type: 'OH_qty_update',
+                    itemNumber: itemDetails?.itemNbr,
+                    upcNbr: itemDetails?.upcNbr
+                  });
                 dispatch(
                   updateOHQty({
                     data: {
@@ -964,7 +991,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused() && userConfig.scanRequired) {
         validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall('section_details_scan', {
+          trackEventCall('Audit_Item', {
+            action: 'section_details_scan',
             value: scan.value,
             type: scan.type
           });
@@ -1114,14 +1142,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name)
       .then(() => {
-        trackEventCall('refresh_item_details', { itemNumber });
+        trackEventCall('Audit_Item', { action: 'refresh_item_details', itemNumber });
         dispatch(clearAuditScreenData());
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemNumber }));
         dispatch(getItemPallets({ itemNbr: itemNumber }));
       })
       .catch(() => {
-        trackEventCall('session_timeout', { user: userId });
+        trackEventCall('Audit_Item', { action: 'session_timeout', user: userId });
       });
   };
 
@@ -1155,7 +1183,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('audit_delete_floor_location_click', { location: JSON.stringify(loc), index: locIndex });
+      trackEventCall('Audit_Item',
+        { action: 'delete_floor_location_click', location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'floor',
@@ -1170,7 +1199,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteReserveLocation = (loc: ItemPalletInfo, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEvent('audit_delete_reserve_location_click', { location: JSON.stringify(loc), index: locIndex });
+      trackEventCall('Audit_Item',
+        { action: 'report_missing_pallet_click', location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'reserve',
@@ -1257,6 +1287,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty;
+    trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
     if (itemOHQty === totalOHQty) {
       dispatch(
         noAction({
@@ -1302,7 +1333,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         deleteLocationConfirmed,
         locToConfirm.locationName,
         locToConfirm.locationArea,
-        locToConfirm.palletId
+        locToConfirm.palletId,
+        trackEventCall
       )}
       {renderConfirmOnHandsModal(
         updateOHQtyApi,
@@ -1312,6 +1344,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         totalOHQty,
         itemDetails,
         dispatch,
+        trackEventCall,
         route.params?.worklistType ?? 'AU'
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
@@ -1323,7 +1356,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
           onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
-          onClick={() => {}}
+          onClick={() => {
+            trackEventCall('Audit_Item', { action: 'item_card_click', itemNumber: itemDetails?.itemNbr });
+          }}
           loading={getItemDetailsApi.isWaiting}
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
@@ -1342,7 +1377,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             <LocationListCard
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
-              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations)}
+              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
               loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
               error={!!(getItemDetailsApi.error || getLocationApi.error)}
               onRetry={() => {}}
