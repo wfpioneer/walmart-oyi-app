@@ -248,6 +248,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -366,6 +371,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -484,6 +494,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -602,6 +617,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -862,6 +882,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1011,6 +1036,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1160,6 +1190,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -1309,6 +1344,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               }
             >
               <View
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
