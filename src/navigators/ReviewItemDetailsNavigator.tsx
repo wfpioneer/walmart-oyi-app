@@ -224,17 +224,6 @@ const ReviewItemDetailsNavigator = () => {
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
-          headerLeft: props => (
-            // Shouldn't need to do this, but not showing on its own for some reason
-            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
-            <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...props}
-              onPress={() => {
-                navigation.navigate('ReviewItemDetailsHome');
-              }}
-            />
-          ),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {showCalculator && renderCalcButton()}
