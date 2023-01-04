@@ -1195,6 +1195,11 @@ Array [
       }
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1978,13 +1983,24 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     }
   >
     <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
       countryCode="CN"
       description=""
+      disabled={false}
       itemNumber={0}
       loading={true}
       onClick={[Function]}
       onHandQty={0}
       showItemImage={false}
+      showOHItems={false}
     />
   </View>
   <ScrollView
@@ -2415,13 +2431,24 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     }
   >
     <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
       countryCode="CN"
       description="Test Item That is Really, Really Long (and has parenthesis)"
+      disabled={false}
       itemNumber={1234567890}
       loading={false}
       onClick={[Function]}
       onHandQty={42}
       showItemImage={false}
+      showOHItems={false}
     />
   </View>
   <ScrollView
