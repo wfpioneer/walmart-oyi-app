@@ -413,9 +413,9 @@ describe('PickBin Workflow render tests', () => {
     expect(mockTrackEventCall).toBeCalledWith('PickBinWorklow_Screen', {
       action: 'update_picklist_status_action',
       pickAction: 'acceptPick',
-      picklistItems: [{
-        locationId: 4, locationName: 'ABAR1-2', palletId: '43', picklistId: 0
-      }]
+      picklistItems: JSON.stringify([{
+        picklistId: 0, locationId: 4, locationName: 'ABAR1-2', palletId: '43'
+      }])
     });
   });
 
@@ -508,11 +508,11 @@ describe('PickBin Workflow render tests', () => {
     expect(mockDispatch).toBeCalledTimes(2);
     expect(mockTrackEventCall).toBeCalledWith('PickBinWorkflow_Screen', {
       action: 'bin_selected_picklist_click',
-      palletDetails: {
+      palletDetails: JSON.stringify({
         id: '43',
-        items: [{ itemDesc: 'generic description', itemNbr: 1, upcNbr: '1234567890123' }],
-        lastLocation: 'ABAR1-2'
-      }
+        lastLocation: 'ABAR1-2',
+        items: [{ itemNbr: 1, itemDesc: 'generic description', upcNbr: '1234567890123' }]
+      })
     });
   });
 
@@ -563,9 +563,9 @@ describe('PickBin Workflow render tests', () => {
       expect(mockTrackEventCall).toBeCalledWith('PickBinWorklow_Screen', {
         action: 'update_picklist_status_action',
         pickAction: 'readyToWork',
-        picklistItems: [{
-          locationId: 4, locationName: 'ABAR1-2', palletId: '41', picklistId: 2
-        }]
+        picklistItems: JSON.stringify([{
+          picklistId: 2, locationId: 4, locationName: 'ABAR1-2', palletId: '41'
+        }])
       });
     });
     it('tests complete action functionality', async () => {
@@ -587,9 +587,9 @@ describe('PickBin Workflow render tests', () => {
       expect(mockTrackEventCall).toBeCalledWith('PickBinWorklow_Screen', {
         action: 'update_picklist_status_action',
         pickAction: 'complete',
-        picklistItems: [{
-          locationId: 4, locationName: 'ABAR1-2', palletId: '41', picklistId: 2
-        }]
+        picklistItems: JSON.stringify([{
+          picklistId: 2, locationId: 4, locationName: 'ABAR1-2', palletId: '41'
+        }])
       });
     });
     it('tests cancel action functionality', async () => {
