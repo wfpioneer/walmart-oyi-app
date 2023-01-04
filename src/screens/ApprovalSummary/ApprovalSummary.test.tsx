@@ -34,6 +34,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -52,6 +53,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -70,6 +72,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -88,6 +91,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -105,6 +109,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -122,6 +127,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -148,6 +154,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -168,6 +175,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={true}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -186,6 +194,7 @@ describe('ApprovalSummaryScreen', () => {
           validateSessionCall={jest.fn()}
           errorModalVisible={false}
           setErrorModalVisible={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

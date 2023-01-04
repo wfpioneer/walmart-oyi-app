@@ -22,6 +22,7 @@ import Button from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface ApprovalSummaryProps {
   route: RouteProp<any, string>;
@@ -33,6 +34,7 @@ interface ApprovalSummaryProps {
   dispatch: Dispatch<any>
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  trackEventCall: typeof trackEvent
 }
 interface ItemQuantity {
   oldQty: number;
@@ -82,7 +84,7 @@ const routeActionType = (route: RouteProp<any, string>) => (route.name === 'Appr
 export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element => {
   const {
     route, navigation, approvalList, approvalApi, dispatch, useEffectHook,
-    validateSessionCall, errorModalVisible, setErrorModalVisible
+    validateSessionCall, errorModalVisible, setErrorModalVisible, trackEventCall
   } = props;
   const checkedList: ApprovalCategory[] = [];
   const resolvedTime = moment().toISOString();
@@ -145,6 +147,8 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
+      trackEventCall('Approval_Summary_Screen',
+        { action: `${route.name === 'ApproveSummary' ? 'approve' : 'reject'}_selected_items_OH_change`, checkedList });
       const actionType = routeActionType(route);
       dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
     });
@@ -207,6 +211,7 @@ export const ApprovalSummary = (): JSX.Element => {
       validateSessionCall={validateSession}
       errorModalVisible={errorModalVisible}
       setErrorModalVisible={setErrorModalVisible}
+      trackEventCall={trackEvent}
     />
   );
 };

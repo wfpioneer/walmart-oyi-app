@@ -9,6 +9,7 @@ jest.mock('../utils/AppCenterTool.ts', () => jest.requireActual('../utils/__mock
 jest.mock('../utils/sessionTimeout.ts', () => jest.requireActual('../utils/__mocks__/sessTimeout'));
 
 const mockSetFilterMenu = jest.fn();
+const mockTrackEventCall = jest.fn();
 const filterMenuStateMock: UseStateType<boolean> = [false, mockSetFilterMenu];
 describe('ApprovalList Navigator', () => {
   it('Renders the approval list navigator component', () => {
@@ -20,6 +21,7 @@ describe('ApprovalList Navigator', () => {
         selectAll={false}
         selectedItemQty={0}
         filterMenuState={filterMenuStateMock}
+        trackEventCall={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -28,14 +30,14 @@ describe('ApprovalList Navigator', () => {
   it('Renders the select all button header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      renderHeaderRight(jest.fn(), false, filterMenuStateMock[1])
+      renderHeaderRight(jest.fn(), false, filterMenuStateMock[1], mockTrackEventCall)
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
   it('Renders the deselect all button header', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      renderHeaderRight(jest.fn(), true, filterMenuStateMock[1])
+      renderHeaderRight(jest.fn(), true, filterMenuStateMock[1], mockTrackEventCall)
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
