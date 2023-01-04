@@ -69,6 +69,7 @@ describe('Tests Reserve Section Details Screen', () => {
           perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          palletInfo={{ id: '1234' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -102,6 +103,7 @@ describe('Tests Reserve Section Details Screen', () => {
           perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          palletInfo={{ id: '1234' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -137,6 +139,7 @@ describe('Tests Reserve Section Details Screen', () => {
           perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          palletInfo={{ id: '1234' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -170,6 +173,7 @@ describe('Tests Reserve Section Details Screen', () => {
           perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          palletInfo={{ id: '1234' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -201,6 +205,7 @@ describe('Tests Reserve Section Details Screen', () => {
           perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          palletInfo={{ id: '1234' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -231,6 +236,7 @@ describe('Tests Reserve Section Details Screen', () => {
           perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
+          palletInfo={{ id: '1234' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

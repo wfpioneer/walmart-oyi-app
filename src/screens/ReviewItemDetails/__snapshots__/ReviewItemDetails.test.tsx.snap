@@ -890,24 +890,16 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 </Modal>
 `;
 
-exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Add to Picklist Error' Retry 1`] = `
+exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Added to Picklist Button ' with Picking enabled 1`] = `
 <View
   style={
     Object {
-      "alignItems": "flex-end",
-      "justifyContent": "center",
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "flex-end",
     }
   }
 >
-  <Text
-    style={
-      Object {
-        "color": "#f44336",
-      }
-    }
-  >
-    [missing "en.ITEM.ADDED_TO_PICKLIST_ERROR" translation]
-  </Text>
   <Button
     backgroundColor="#0071e9"
     disabled={false}
@@ -922,34 +914,6 @@ exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Pickl
     width={-1}
   />
 </View>
-`;
-
-exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Item Added to Picklist ' 1`] = `
-<Text
-  style={
-    Object {
-      "color": "#33691E",
-    }
-  }
->
-  [missing "en.ITEM.ADDED_TO_PICKLIST" translation]
-</Text>
-`;
-
-exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders a Loader when waiting for Picklist response 1`] = `
-<ActivityIndicator
-  animating={true}
-  color="#0071e9"
-  hidesWhenStopped={true}
-  size="large"
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
-/>
 `;
 
 exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Negative On Hands Quantity 1`] = `
@@ -1502,24 +1466,11 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
   >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={28}
-      onPress={[Function]}
-      radius={5}
-      title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={12}
-      titleFontWeight="bold"
-      type={3}
-      width={-1}
-    />
+    <React.Fragment />
   </View>
 </View>
 `;
@@ -1571,24 +1522,11 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
   >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={28}
-      onPress={[Function]}
-      radius={5}
-      title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={12}
-      titleFontWeight="bold"
-      type={3}
-      width={-1}
-    />
+    <React.Fragment />
   </View>
 </View>
 `;
@@ -1643,24 +1581,11 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
   >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={28}
-      onPress={[Function]}
-      radius={5}
-      title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={12}
-      titleFontWeight="bold"
-      type={3}
-      width={-1}
-    />
+    <React.Fragment />
   </View>
 </View>
 `;
@@ -1709,24 +1634,11 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     style={
       Object {
         "flexDirection": "row",
-        "justifyContent": "flex-end",
         "paddingVertical": 8,
       }
     }
   >
-    <Button
-      backgroundColor="#0071e9"
-      disabled={false}
-      height={28}
-      onPress={[Function]}
-      radius={5}
-      title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-      titleColor="#0071e9"
-      titleFontSize={12}
-      titleFontWeight="bold"
-      type={3}
-      width={-1}
-    />
+    <React.Fragment />
   </View>
 </View>
 `;
@@ -2061,24 +1973,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -2955,24 +2854,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -3574,24 +3460,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -4112,24 +3985,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -4650,24 +4510,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -5209,24 +5056,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -5768,24 +5602,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -6327,24 +6148,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>
@@ -6886,24 +6694,11 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             style={
               Object {
                 "flexDirection": "row",
-                "justifyContent": "flex-end",
                 "paddingVertical": 8,
               }
             }
           >
-            <Button
-              backgroundColor="#0071e9"
-              disabled={false}
-              height={28}
-              onPress={[Function]}
-              radius={5}
-              title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
-              titleColor="#0071e9"
-              titleFontSize={12}
-              titleFontWeight="bold"
-              type={3}
-              width={-1}
-            />
+            <React.Fragment />
           </View>
         </View>
       </SFTCard>

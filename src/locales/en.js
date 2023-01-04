@@ -59,7 +59,8 @@ export default {
     UPDATE: 'Update Configuration',
     WARNING_LABEL: 'Warning',
     CLOSE: 'Close',
-    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}'
+    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
+    FEEDBACK: 'Feedback'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -142,7 +143,8 @@ export default {
     MARGIN: 'Margin',
     GROSS_PROFIT: 'Gross Profit',
     HISTORY: 'History',
-    NO_HISTORY: 'No history available'
+    NO_HISTORY: 'No history available',
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -537,6 +539,13 @@ export default {
     POOR_RATE_LABEL: 'Poor',
     AVERAGE_RATE_LABEL: 'Average',
     GOOD_RATE_LABEL: 'Good',
-    EXCELLENT_RATE_LABEL: 'Excellent'
+    EXCELLENT_RATE_LABEL: 'Excellent',
+    FEEDBACK_REQUEST: 'Would you like to provide feedback about OYI?',
+    YES: 'Yes',
+    NO: 'No',
+    RATING_LABEL: 'Choose a rating',
+    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here',
+    SUBMIT_FEEDBACK_SUCCESS: 'Feedback has successfully been submitted',
+    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.'
   }
 };

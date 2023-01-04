@@ -21,6 +21,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import { showInfoModal } from '../../state/actions/Modal';
 import { LocationIdName } from '../../state/reducers/Location';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 interface AddPalletScreenProps {
@@ -32,6 +33,7 @@ interface AddPalletScreenProps {
   section: LocationIdName;
   locationName: string;
   addAPI: AsyncState;
+  trackEventCall: (eventName: string, params?: any) => void;
 }
 
 export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
@@ -43,7 +45,8 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
     useEffectHook,
     section,
     locationName,
-    addAPI
+    addAPI,
+    trackEventCall
   } = props;
 
   const palletIDRegex = /^[0-9]+$/;
@@ -112,6 +115,11 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
 
   const submitPalletId = () => {
     if (palletId.match(palletIDRegex)) {
+      trackEventCall('Section_Details', {
+        action: 'adding_pallet_to_location',
+        palletId,
+        sectionId: section.id
+      });
       dispatch(addPallet({
         palletId,
         sectionId: section.id
@@ -168,6 +176,7 @@ const AddPallet = (): JSX.Element => {
       section={section}
       locationName={locationName}
       addAPI={addAPI}
+      trackEventCall={trackEvent}
     />
   );
 };

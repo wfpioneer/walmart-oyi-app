@@ -15,9 +15,10 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
+import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  addToPicklist, createNewPick, getItemDetails, getItemDetailsV2, noAction, updateOHQty
+  createNewPick, getItemDetails, getItemDetailsV2, noAction, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -32,7 +33,7 @@ import Button from '../../components/buttons/Button';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
 import {
@@ -47,7 +48,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, NO_ACTION, UPDATE_OH_QTY
+  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, NO_ACTION, UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
@@ -73,7 +74,6 @@ export interface ItemDetailsScreenProps {
   scannedEvent: { value: string | null; type: string | null; };
   isManualScanEnabled: boolean;
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
-  addToPicklistStatus: AsyncState;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -115,7 +115,6 @@ export interface HandleProps {
 export interface RenderProps {
   actionCompleted: boolean;
   completeItemApi: AsyncState;
-  addToPicklistStatus: AsyncState;
   isManualScanEnabled: boolean;
   floorLocations?: Location[];
   reserveLocations?: Location[];
@@ -147,18 +146,6 @@ export const handleLocationAction = (props: HandleProps, itemDetails: ItemDetail
   validateSessionCall(navigation, route.name).then(() => {
     trackEventCall(REVIEW_ITEM_DETAILS, { action: 'location_details_click', itemNbr: itemDetails.itemNbr });
     navigation.navigate('LocationDetails');
-  }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
-};
-
-export const handleAddToPicklist = (props: HandleProps, itemNbr: number) => {
-  const {
-    navigation, trackEventCall, validateSessionCall, route, userId, dispatch
-  } = props;
-  validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'add_to_picklist_click', itemNbr });
-    dispatch(addToPicklist({
-      itemNumber: itemNbr
-    }));
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
@@ -590,27 +577,11 @@ export const renderAddPicklistButton = (
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
   const { reserve } = itemDetails.location;
-  const { addToPicklistStatus, userConfigs } = props;
-  if (addToPicklistStatus?.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={addToPicklistStatus?.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
+  const { userConfigs } = props;
 
-  if (addToPicklistStatus?.result) {
-    return <Text style={styles.picklistSuccessText}>{strings('ITEM.ADDED_TO_PICKLIST')}</Text>;
-  }
-
-  if (addToPicklistStatus?.error) {
-    return (
-      <View style={styles.picklistErrorView}>
-        <Text style={styles.picklistErrorText}>{strings('ITEM.ADDED_TO_PICKLIST_ERROR')}</Text>
+  if (reserve && reserve.length >= 1) {
+    return userConfigs.picking ? (
+      <View style={styles.addToPicklistContainer}>
         <Button
           type={3}
           title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
@@ -618,53 +589,62 @@ export const renderAddPicklistButton = (
           titleFontSize={12}
           titleFontWeight="bold"
           height={28}
-          onPress={() => handleAddToPicklist(props, itemDetails.itemNbr)}
+          onPress={() => { setCreatePickModalVisible(true); }}
         />
       </View>
-    );
-  }
-
-  if (reserve && reserve.length >= 1) {
-    return (
-      <Button
-        type={3}
-        title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
-        titleColor={COLOR.MAIN_THEME_COLOR}
-        titleFontSize={12}
-        titleFontWeight="bold"
-        height={28}
-        onPress={() => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails.itemNbr);
-        }}
-      />
-    );
+    ) : <></>;
   }
 
   return <></>;
 };
 
+export const renderReserveAdjustmentButton = (
+  itemDetails: ItemDetails,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => (
+  <View style={styles.reserveAdjustMentContainer}>
+    <Button
+      type={3}
+      title={strings('ITEM.RESERVE_ADJUSTMENT')}
+      titleColor={COLOR.MAIN_THEME_COLOR}
+      titleFontSize={12}
+      titleFontWeight="bold"
+      height={28}
+      onPress={() => {
+        dispatch(setItemDetails(itemDetails));
+        navigation.navigate('ReserveAdjustment');
+      }}
+    />
+  </View>
+);
+
 export const renderLocationComponent = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
-  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
 ): JSX.Element => {
-  const { floorLocations, reserveLocations, userConfigs } = props;
-  const { additionalItemDetails } = userConfigs;
+  const {
+    floorLocations, reserveLocations, userConfigs, navigation
+  } = props;
+  const { additionalItemDetails, reserveAdjustment } = userConfigs;
+  const hasFloorLocations = floorLocations && floorLocations.length >= 1;
+  const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
   return (
     <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.FLOOR')}</Text>
-        {floorLocations && floorLocations.length >= 1
-          && <Text>{floorLocations[0].locationName}</Text>}
+        {hasFloorLocations && <Text>{floorLocations[0].locationName}</Text>}
       </View>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
-        {reserveLocations && reserveLocations.length >= 1
+        {hasReserveLocations
           && !additionalItemDetails && <Text>{reserveLocations[0].locationName}</Text> }
       </View>
       {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
+        {(reserveAdjustment && hasReserveLocations) && renderReserveAdjustmentButton(itemDetails, navigation, dispatch)}
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
     </View>
@@ -914,7 +894,6 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
         }
-        dispatch({ type: ADD_TO_PICKLIST.RESET });
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -1111,7 +1090,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   useFocusEffectHook(
     () => {
-      const onBackPress = () => onValidateBackPress(props, itemDetails.itemNbr);
+      const onBackPress = () => onValidateBackPress(props, itemDetails?.itemNbr || 0);
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
@@ -1179,6 +1158,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   };
 
   const navigateToAuditItemScreen = () => {
+    if (scannedEvent.value) {
+      dispatch(resetScannedEvent());
+    }
     dispatch(setAuditItemNumber(itemDetails.itemNbr));
     navigation.navigate('AuditItem');
   };
@@ -1309,7 +1291,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnTxt={getTopRightBtnTxt(locationCount)}
               topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
-              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
+              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible, dispatch)}
             </SFTCard>
             {additionalItemDetails && (
               <View style={styles.historyContainer}>
@@ -1329,7 +1311,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
@@ -1364,7 +1345,6 @@ const ReviewItemDetails = (): JSX.Element => {
       isWaiting={userConfigs.additionalItemDetails ? getItemDetailsV2Api.isWaiting : isWaiting}
       error={userConfigs.additionalItemDetails ? getItemDetailsV2Api.error : error}
       result={userConfigs.additionalItemDetails ? getItemDetailsV2Api.result : result}
-      addToPicklistStatus={addToPicklistStatus}
       completeItemApi={completeItemApi}
       createNewPickApi={createNewPickApi}
       updateOHQtyApi={updateOHQtyApi}

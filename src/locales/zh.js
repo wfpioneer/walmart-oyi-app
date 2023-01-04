@@ -59,7 +59,8 @@ export default {
     UPDATE: '更新配置',
     WARNING_LABEL: '警示',
     CLOSE: '关闭',
-    NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间'
+    NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间',
+    FEEDBACK: '反馈'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -142,7 +143,8 @@ export default {
     MARGIN: '利润',
     GROSS_PROFIT: '毛利',
     HISTORY: '历史信息',
-    NO_HISTORY: '无历史记录信息'
+    NO_HISTORY: '无历史记录信息',
+    RESERVE_ADJUSTMENT: '储位库存数量调整'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -540,6 +542,13 @@ export default {
     POOR_RATE_LABEL: '差',
     AVERAGE_RATE_LABEL: '一般',
     GOOD_RATE_LABEL: '好',
-    EXCELLENT_RATE_LABEL: '非常好'
+    EXCELLENT_RATE_LABEL: '非常好',
+    FEEDBACK_REQUEST: '您想对OYI进行反馈吗？',
+    YES: '是',
+    NO: '否',
+    RATING_LABEL: '选择分值',
+    COMMENT_PLACEHOLDER_LABEL: '在此输入评价',
+    SUBMIT_FEEDBACK_SUCCESS: '反馈提交成功',
+    SUBMIT_FEEDBACK_FAILURE: '无法提交反馈，请重试.'
   }
 };

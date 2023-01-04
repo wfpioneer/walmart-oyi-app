@@ -26,7 +26,12 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow section={mockSection} reservePallet={mockReservePallet} setPalletClicked={jest.fn()} />
+        <ReservePalletRow
+          section={mockSection}
+          reservePallet={mockReservePallet}
+          setPalletClicked={jest.fn()}
+          trackEventCall={jest.fn()}
+        />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -48,6 +53,7 @@ describe('ReservePalletRow Component', () => {
           section={mockSection}
           reservePallet={mockReservePalletLongFirstItemName}
           setPalletClicked={jest.fn()}
+          trackEventCall={jest.fn()}
         />
       </Provider>
     );
@@ -59,7 +65,12 @@ describe('ReservePalletRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <ReservePalletRow section={mockSection} reservePallet={mockReservePalletNoItems} setPalletClicked={jest.fn()} />
+        <ReservePalletRow
+          section={mockSection}
+          reservePallet={mockReservePalletNoItems}
+          setPalletClicked={jest.fn()}
+          trackEventCall={jest.fn()}
+        />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -72,6 +83,7 @@ describe('ReservePalletRow Component', () => {
           section={mockSection}
           reservePallet={mockReservePallet}
           setPalletClicked={mockSetPalletClicked}
+          trackEventCall={jest.fn()}
         />
       </Provider>
     );

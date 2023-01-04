@@ -10,6 +10,7 @@ import { COLOR } from '../../themes/Color';
 import { selectAisle, selectSection, selectZone } from '../../state/actions/Location';
 import { LocationType } from '../../models/LocationType';
 import { resetScannedEvent } from '../../state/actions/Global';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface LocationItemCardProp {
   location: string
@@ -21,6 +22,7 @@ interface LocationItemCardProp {
   navigator: NavigationProp<any>,
   destinationScreen: LocationType,
   dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent
 }
 
 const mapLocTypeToActionCreator = {
@@ -39,7 +41,8 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
     locationPopupVisible,
     navigator,
     destinationScreen,
-    dispatch
+    dispatch,
+    trackEventCall
   } = props;
 
   return (
@@ -52,6 +55,25 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
         if (locationType === LocationType.SECTION) {
           dispatch(resetScannedEvent());
         }
+        let screenName = '';
+        switch (locationType) {
+          case LocationType.AISLE:
+            screenName = 'Aisle_List';
+            break;
+          case LocationType.ZONE:
+            screenName = 'Zone_List';
+            break;
+          case LocationType.SECTION:
+            screenName = 'Section_List';
+            break;
+          default:
+            screenName = 'screen_not_found';
+        }
+        trackEventCall(screenName, {
+          action: 'location_item_card_clicked',
+          locationName,
+          destinationScreen
+        });
         navigator.navigate(destinationScreen);
       }}
       disabled={locationPopupVisible}

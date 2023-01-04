@@ -32,6 +32,7 @@ import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
 import { setupPallet } from '../../state/actions/PalletManagement';
 import { Pallet } from '../../models/PalletManagementTypes';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface PBWorkflowProps {
   userFeatures: string[];
@@ -46,6 +47,7 @@ interface PBWorkflowProps {
   setSelectedPicklistAction: React.Dispatch<React.SetStateAction<PickAction|null>>;
   showContinueActionDialog: boolean;
   setShowContinueActionDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: typeof trackEvent;
 }
 
 interface ContinueActionDialogProps {
@@ -53,7 +55,8 @@ interface ContinueActionDialogProps {
   setShowContinueActionDialog: React.Dispatch<React.SetStateAction<boolean>>;
   dispatch: Dispatch<any>;
   items: PickListItem[];
-  setSelectedPicklistAction: React.Dispatch<React.SetStateAction<PickAction|null>>
+  setSelectedPicklistAction: React.Dispatch<React.SetStateAction<PickAction|null>>;
+  trackEventCall: typeof trackEvent;
 }
 
 const resetApis = (dispatch: Dispatch<any>) => {
@@ -176,13 +179,23 @@ export const updatePalletNotFoundApiHook = (
   }
 };
 
-export const updatePicklistItemsStatus = (items: PickListItem[], action: PickAction, dispatch: Dispatch<any>) => {
+export const updatePicklistItemsStatus = (
+  items: PickListItem[],
+  action: PickAction,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent
+) => {
   const picklistItems = items.map(item => ({
     picklistId: item.id,
     locationId: item.palletLocationId,
     locationName: item.palletLocationName,
     palletId: item.palletId
   }));
+  trackEventCall('PickBinWorklow_Screen', {
+    action: 'update_picklist_status_action',
+    pickAction: action,
+    picklistItems: JSON.stringify(picklistItems)
+  });
   dispatch(updatePicklistStatus({
     headers: {
       action
@@ -193,26 +206,36 @@ export const updatePicklistItemsStatus = (items: PickListItem[], action: PickAct
 
 export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
   const {
-    showContinueActionDialog, setShowContinueActionDialog, dispatch, items, setSelectedPicklistAction
+    showContinueActionDialog, setShowContinueActionDialog, dispatch, items, setSelectedPicklistAction, trackEventCall
   } = props;
   // Continue Action handler
   const handleContinueAction = (action: PickAction) => {
     setShowContinueActionDialog(false);
     setSelectedPicklistAction(action);
-    updatePicklistItemsStatus(items, action, dispatch);
+    updatePicklistItemsStatus(items, action, dispatch, trackEventCall);
   };
 
   const handlePalletNotFound = () => {
     const { palletId } = items[0];
     const picklistIds = items.map(item => item.id);
     setShowContinueActionDialog(false);
+    trackEventCall('PickBinWorklow_Screen', {
+      action: 'update_pallet_not_found_action',
+      palletId,
+      picklistIds: JSON.stringify(picklistIds)
+    });
     dispatch(updatePalletNotFound({ palletId, picklistIds }));
   };
 
   return (
     <CustomModalComponent
       isVisible={showContinueActionDialog}
-      onClose={() => setShowContinueActionDialog(false)}
+      onClose={() => {
+        trackEventCall('PickBinWorklow_Screen', {
+          action: 'close_continue_dialog_action'
+        });
+        setShowContinueActionDialog(false);
+      }}
       modalType="Popup"
     >
       <>
@@ -243,7 +266,12 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
             title={strings('GENERICS.CANCEL')}
             titleColor={COLOR.MAIN_THEME_COLOR}
             type={ButtonType.SOLID_WHITE}
-            onPress={() => setShowContinueActionDialog(false)}
+            onPress={() => {
+              trackEventCall('PickBinWorklow_Screen', {
+                action: 'close_continue_dialog_action'
+              });
+              setShowContinueActionDialog(false);
+            }}
           />
         </View>
       </>
@@ -255,7 +283,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
   const {
     userFeatures, userId, pickingState, updatePicklistStatusApi, useEffectHook, dispatch, navigation,
     selectedPicklistAction, setSelectedPicklistAction, showContinueActionDialog,
-    setShowContinueActionDialog, updatePalletNotFoundApi
+    setShowContinueActionDialog, updatePalletNotFoundApi, trackEventCall
   } = props;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
@@ -280,13 +308,15 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const { status } = items[0];
     const action = status === PickStatus.READY_TO_PICK ? PickAction.ACCEPT_PICK : PickAction.ACCEPT_BIN;
     setSelectedPicklistAction(action);
-    updatePicklistItemsStatus(items, action, dispatch);
+    trackEventCall('PickBinWorkflow_Screen', { action: 'accept_selected_picklist_click' });
+    updatePicklistItemsStatus(items, action, dispatch, trackEventCall);
   };
 
   const handleRelease = (items: PickListItem[]) => {
     const action = PickAction.RELEASE;
+    trackEventCall('PickBinWorkflow_Screen', { action: 'release_selected_picks_click' });
     setSelectedPicklistAction(action);
-    updatePicklistItemsStatus(items, action, dispatch);
+    updatePicklistItemsStatus(items, action, dispatch, trackEventCall);
   };
 
   const handleBin = (items: PickListItem[]) => {
@@ -302,6 +332,10 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
       }))
     };
     dispatch(clearPallets());
+    trackEventCall(
+      'PickBinWorkflow_Screen',
+      { action: 'bin_selected_picklist_click', palletDetails: JSON.stringify(palletDetails) }
+    );
     dispatch(addPallet(palletDetails));
     navigation.navigate('Binning', {
       screen: 'AssignLocation',
@@ -371,6 +405,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         dispatch={dispatch}
         items={selectedPicks}
         setSelectedPicklistAction={setSelectedPicklistAction}
+        trackEventCall={trackEventCall}
       />
       {selectedPicks.length > 0 ? (
         <>
@@ -382,6 +417,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
             pickStatus={selectedPicks[0].status}
             canDelete={false}
             dispatch={dispatch}
+            showCheckbox={false}
           />
           <View style={styles.actionButtonsView}>
             {actionButtonsView()}
@@ -426,6 +462,10 @@ const PickBinWorkflow = () => {
       },
       items: []
     };
+    trackEvent('PickBinWorkflow_Screen', {
+      action: 'print_pallet_label_action',
+      palletDetails
+    });
     dispatch(setupPallet(palletDetails));
     dispatch(setPrintingPalletLabel());
     navigation.navigate('PrintPriceSign');
@@ -452,6 +492,7 @@ const PickBinWorkflow = () => {
           setSelectedPicklistAction={setSelectedPicklistAction}
           showContinueActionDialog={showContinueActionDialog}
           setShowContinueActionDialog={setShowContinueActionDialog}
+          trackEventCall={trackEvent}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

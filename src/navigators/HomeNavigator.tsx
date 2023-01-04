@@ -11,7 +11,9 @@ import WMSSO from 'react-native-wmsso';
 import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
+import { Configurations } from '../models/User';
 import Home from '../screens/Home/Home';
+import Feedback from '../screens/Feedback/Feedback';
 import COLOR from '../themes/Color';
 import styles from './HomeNavigator.style';
 import { setLanguage, strings } from '../locales';
@@ -25,7 +27,9 @@ import {
   savePrinter,
   setPriceLabelPrinter as setPriceLabelPrinterAsyncStorage
 } from '../utils/asyncStorageUtils';
-import { resetPrintQueue, setPriceLabelPrinter, updatePrinterByID } from '../state/actions/Print';
+import {
+  clearLocationPrintQueue, resetPrintQueue, setPriceLabelPrinter, updatePrinterByID
+} from '../state/actions/Print';
 
 interface HomeNavigatorComponentProps {
   logoutUser: () => void;
@@ -39,12 +43,15 @@ interface HomeNavigatorComponentProps {
   priceLabelPrinter: Printer;
   setPriceLabelPrinter: (payload: Printer) => void;
   resetPrintQueue: () => void;
+  clearLocationPrintQueue: () => void;
+  userConfig: Configurations
 }
 
 const mapStateToProps = (state: any) => ({
   isManualScanEnabled: state.Global.isManualScanEnabled,
   clubNbr: state.User.siteId,
-  priceLabelPrinter: state.Print.priceLabelPrinter
+  priceLabelPrinter: state.Print.priceLabelPrinter,
+  userConfig: state.User.configs
 });
 
 const mapDispatchToProps = {
@@ -54,7 +61,8 @@ const mapDispatchToProps = {
   setManualScan,
   updatePrinterByID,
   setPriceLabelPrinter,
-  resetPrintQueue
+  resetPrintQueue,
+  clearLocationPrintQueue
 };
 
 const Stack = createStackNavigator();
@@ -65,6 +73,14 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
     strings('GENERICS.SIGN_OUT'),
     strings('GENERICS.CANCEL')
   ];
+
+  const { showFeedback } = props.userConfig;
+
+  // to insert feedback into the menu before "Cancel"
+  // option based on user config
+  if (showFeedback) {
+    options.splice(2, 0, strings('GENERICS.FEEDBACK'));
+  }
 
   const updateDefaultPrinter = () => {
     const defPrinter = {
@@ -84,52 +100,69 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
 
   ActionSheet.showActionSheetWithOptions({
     options,
-    cancelButtonIndex: 2
+    // toggle cancel option index based on feedback config
+    cancelButtonIndex: showFeedback ? 3 : 2
   },
+  // eslint-disable-next-line consistent-return
   buttonIndex => {
-    if (buttonIndex === 0) {
-      const languageOptions = [
-        'English',
-        'Español',
-        '汉语',
-        strings('GENERICS.CANCEL')
-      ];
-      ActionSheet.showActionSheetWithOptions({
-        options: languageOptions,
-        cancelButtonIndex: 3
-      }, selectedLanguageIndex => {
-        switch (selectedLanguageIndex) {
-          case 0:
-            setLanguage('en');
-            updateDefaultPrinter();
-            trackEvent('change_language', { language: 'en' });
-            return navigation.dispatch(StackActions.replace('Tabs'));
-          case 1:
-            setLanguage('es');
-            updateDefaultPrinter();
-            trackEvent('change_language', { language: 'es' });
-            return navigation.dispatch(StackActions.replace('Tabs'));
-          case 2:
-            setLanguage('zh');
-            updateDefaultPrinter();
-            trackEvent('change_language', { language: 'zh' });
-            return navigation.dispatch(StackActions.replace('Tabs'));
-          default:
-            return null;
+    const languageOptions = [
+      'English',
+      'Español',
+      '汉语',
+      strings('GENERICS.CANCEL')
+    ];
+    switch (buttonIndex) {
+      case 0:
+        ActionSheet.showActionSheetWithOptions(
+          {
+            options: languageOptions,
+            // toggle cancel option index based on feedback config
+            cancelButtonIndex: showFeedback ? 3 : 2
+          },
+          selectedLanguageIndex => {
+            switch (selectedLanguageIndex) {
+              case 0:
+                setLanguage('en');
+                updateDefaultPrinter();
+                trackEvent('change_language', { language: 'en' });
+                return navigation.dispatch(StackActions.replace('Tabs'));
+              case 1:
+                setLanguage('es');
+                updateDefaultPrinter();
+                trackEvent('change_language', { language: 'es' });
+                return navigation.dispatch(StackActions.replace('Tabs'));
+              case 2:
+                setLanguage('zh');
+                updateDefaultPrinter();
+                trackEvent('change_language', { language: 'zh' });
+                return navigation.dispatch(StackActions.replace('Tabs'));
+              default:
+                return null;
+            }
+          }
+        );
+        break;
+      case 1:
+        props.showActivityModal();
+        trackEvent('user_sign_out', { lastPage: 'Home' });
+        WMSSO.signOutUser().then(() => {
+          props.navigation.replace('Login');
+          props.logoutUser();
+          props.resetPrintQueue();
+          props.clearLocationPrintQueue();
+          if (Platform.OS === 'android') {
+            props.hideActivityModal();
+          }
+        });
+        break;
+      case 2:
+        if (showFeedback) {
+          props.navigation.navigate('FeedbackScreen');
+          trackEvent('feedback_screen', { lastPage: 'Home' });
         }
-      });
-    }
-    if (buttonIndex === 1) {
-      props.showActivityModal();
-      trackEvent('user_sign_out', { lastPage: 'Home' });
-      WMSSO.signOutUser().then(() => {
-        props.navigation.replace('Login');
-        props.logoutUser();
-        props.resetPrintQueue();
-        if (Platform.OS === 'android') {
-          props.hideActivityModal();
-        }
-      });
+        break;
+      default:
+        return null;
     }
   });
 };
@@ -217,6 +250,17 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
         }
       }}
 
+    />
+    <Stack.Screen
+      name="FeedbackScreen"
+      component={Feedback}
+      options={() => ({
+        headerTitle: () => (
+          <View>
+            <Text style={styles.headerTitle}>{strings('GENERICS.FEEDBACK')}</Text>
+          </View>
+        )
+      })}
     />
   </Stack.Navigator>
 );
