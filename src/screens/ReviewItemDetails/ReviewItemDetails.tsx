@@ -1090,7 +1090,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   useFocusEffectHook(
     () => {
-      const onBackPress = () => onValidateBackPress(props, itemDetails.itemNbr);
+      const onBackPress = () => onValidateBackPress(props, itemDetails?.itemNbr || 0);
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
