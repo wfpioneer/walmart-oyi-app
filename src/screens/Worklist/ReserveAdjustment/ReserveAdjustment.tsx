@@ -49,7 +49,6 @@ import { CustomModalComponent } from '../../Modal/Modal';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
 
 export interface ReserveAdjustmentScreenProps {
-    getItemDetailsApi: AsyncState;
     getItemPalletsApi: AsyncState;
     reserveLocations: ItemPalletInfo[];
     route: RouteProp<any, string>;
@@ -142,23 +141,22 @@ export const getItemPalletsApiHook = (
   existingReserveLocations: ItemPalletInfo[],
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  if (navigation.isFocused()) {
+  if (navigation.isFocused() && !getItemPalletsApi.isWaiting) {
     // on api success
-    if (!getItemPalletsApi.isWaiting && getItemPalletsApi.result) {
+    if (getItemPalletsApi.result) {
       if (getItemPalletsApi.result.status === 200) {
         const { data } = getItemPalletsApi.result;
         const updatedReserveLocations = getUpdatedReserveLocations(data.pallets, existingReserveLocations);
         dispatch(setReserveLocations(updatedReserveLocations));
-      }
-      // item does not have any location
-      if (getItemPalletsApi.result.status === 204) {
+      } else if (getItemPalletsApi.result.status === 204) {
+        // item does not have any location
         dispatch(setReserveLocations([]));
       }
       dispatch({ type: GET_ITEM_PALLETS.RESET });
       setGetItemPalletsError(false);
     }
     // No pallets associated with the item
-    if (!getItemPalletsApi.isWaiting && getItemPalletsApi.error) {
+    if (getItemPalletsApi.error) {
       if (getItemPalletsApi.error.response && getItemPalletsApi.error.response.status === 409
         && getItemPalletsApi.error.response.data.errorEnum === 'NO_PALLETS_FOUND_FOR_ITEM') {
         dispatch(setReserveLocations([]));
@@ -257,7 +255,6 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     useFocusEffectHook,
     userConfig,
     countryCode,
-    getItemDetailsApi,
     getItemPalletsApi,
     itemDetails,
     reserveLocations,
@@ -275,6 +272,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     validateSessionCall(navigation, route.name).then(() => {
       if (itemDetails?.itemNbr) {
         dispatch({ type: GET_ITEM_PALLETS.RESET });
+        setGetItemPalletsError(false);
         dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
       }
     }).catch(() => { });
@@ -362,11 +360,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
           onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
-          onClick={() => {
-            trackEventCall('Reserve_Adjustment_Screen',
-              { action: 'item_card_click', itemNumber: itemDetails?.itemNbr });
-          }}
-          loading={getItemDetailsApi.isWaiting}
+          loading={false}
+          disabled
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
           showOHItems
@@ -405,7 +400,6 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
 };
 
 const ReserveAdjustment = (): JSX.Element => {
-  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
@@ -418,7 +412,6 @@ const ReserveAdjustment = (): JSX.Element => {
 
   return (
     <ReserveAdjustmentScreen
-      getItemDetailsApi={getItemDetailsApi}
       getItemPalletsApi={getItemPalletsApi}
       route={route}
       dispatch={dispatch}

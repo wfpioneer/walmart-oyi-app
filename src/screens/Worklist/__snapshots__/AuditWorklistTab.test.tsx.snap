@@ -353,6 +353,11 @@ Array [
                     }
                   >
                     <View
+                      accessibilityState={
+                        Object {
+                          "disabled": false,
+                        }
+                      }
                       accessible={true}
                       collapsable={false}
                       focusable={true}
@@ -471,6 +476,11 @@ Array [
                     }
                   >
                     <View
+                      accessibilityState={
+                        Object {
+                          "disabled": false,
+                        }
+                      }
                       accessible={true}
                       collapsable={false}
                       focusable={true}
@@ -692,6 +702,11 @@ Array [
                     }
                   >
                     <View
+                      accessibilityState={
+                        Object {
+                          "disabled": false,
+                        }
+                      }
                       accessible={true}
                       collapsable={false}
                       focusable={true}
@@ -913,6 +928,11 @@ Array [
                     }
                   >
                     <View
+                      accessibilityState={
+                        Object {
+                          "disabled": false,
+                        }
+                      }
                       accessible={true}
                       collapsable={false}
                       focusable={true}
