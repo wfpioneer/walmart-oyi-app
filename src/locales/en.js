@@ -143,7 +143,8 @@ export default {
     MARGIN: 'Margin',
     GROSS_PROFIT: 'Gross Profit',
     HISTORY: 'History',
-    NO_HISTORY: 'No history available'
+    NO_HISTORY: 'No history available',
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -543,6 +544,8 @@ export default {
     YES: 'Yes',
     NO: 'No',
     RATING_LABEL: 'Choose a rating',
-    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here'
+    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here',
+    SUBMIT_FEEDBACK_SUCCESS: 'Feedback has successfully been submitted',
+    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.'
   }
 };

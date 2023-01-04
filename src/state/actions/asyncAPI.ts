@@ -28,9 +28,6 @@ export const editLocation = makeAsyncActionCreators(EDIT_LOCATION);
 export const ADD_LOCATION = makeAsyncActionTypes('API/ADD_LOCATION');
 export const addLocation = makeAsyncActionCreators(ADD_LOCATION);
 
-export const ADD_TO_PICKLIST = makeAsyncActionTypes('API/ADD_TO_PICKLIST');
-export const addToPicklist = makeAsyncActionCreators(ADD_TO_PICKLIST);
-
 export const GET_WORKLIST_SUMMARY = makeAsyncActionTypes('API/GET_WORKLIST_SUMMARY');
 export const getWorklistSummary = makeAsyncActionCreators(GET_WORKLIST_SUMMARY);
 
@@ -156,6 +153,9 @@ export const getItemPallets = makeAsyncActionCreators(GET_ITEM_PALLETS);
 
 export const UPDATE_MULTI_PALLET_UPC_QTY = makeAsyncActionTypes('API/UPDATE_MULTI_PALLET_UPC_QTY');
 export const updateMultiPalletUPCQty = makeAsyncActionCreators(UPDATE_MULTI_PALLET_UPC_QTY);
+
+export const SUBMIT_FEEDBACK_RATING = makeAsyncActionTypes('API/SUBMIT_FEEDBACK_RATING');
+export const submitFeedbackRating = makeAsyncActionCreators(SUBMIT_FEEDBACK_RATING);
 
 export const GET_USER_CONFIG = makeAsyncActionTypes('API/GET_USER_CONFIG');
 export const getUserConfig = makeAsyncActionCreators(GET_USER_CONFIG);

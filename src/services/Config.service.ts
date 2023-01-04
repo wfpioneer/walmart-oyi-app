@@ -27,6 +27,7 @@ export interface ConfigResponse {
   multiBin: boolean;
   showItemImage: boolean;
   showFeedback: boolean;
+  reserveAdjustment: boolean;
 }
 
 export default class ConfigService {

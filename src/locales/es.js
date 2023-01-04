@@ -143,7 +143,8 @@ export default {
     MARGIN: 'Margen',
     GROSS_PROFIT: 'Ganancia Bruta',
     HISTORY: 'Historial',
-    NO_HISTORY: 'No hay historial disponible'
+    NO_HISTORY: 'No hay historial disponible',
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -541,6 +542,8 @@ export default {
     YES: 'Si',
     NO: 'No',
     RATING_LABEL: 'Elige una calificación',
-    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario'
+    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario',
+    SUBMIT_FEEDBACK_SUCCESS: 'La retroalimentación se ha enviado con éxito',
+    SUBMIT_FEEDBACK_FAILURE: 'Incapaz de enviar retroalimentación. Por favor inténtalo de nuevo.'
   }
 };

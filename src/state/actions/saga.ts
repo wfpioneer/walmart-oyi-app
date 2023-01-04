@@ -26,6 +26,7 @@ import User from '../../models/User';
 import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { CreatePallet } from '../../models/PalletManagementTypes';
+import { submitFeedbackRequest } from '../../services/Feedback.service';
 
 // TODO Remove this Action once the BE has been pushed to Production
 export const GET_ITEM_DETAILS_V2 = 'SAGA/GET_ITEM_DETAILS_V2';
@@ -81,6 +82,7 @@ export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
 export const REPORT_MISSING_PALLET = 'SAGA/REPORT_MISSING_PALLET';
 export const GET_ITEM_PALLETS = 'SAGA/GET_ITEM_PALLETS';
 export const UPDATE_MULTI_PALLET_UPC_QTY = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY';
+export const SUBMIT_FEEDBACK_RATING = 'SAGA/SUBMIT_FEEDBACK_RATING';
 export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
 export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 
@@ -114,10 +116,6 @@ export const updateOHQty = (payload: {
   data: Partial<ApprovalListItem>,
   worklistType?: string
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
-export const addToPicklist = (payload: {
-  headers?: AxiosRequestHeaders;
-  itemNumber: number;
-}) => ({ type: ADD_TO_PICKLIST, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const deleteLocation = (payload: {
   headers?: AxiosRequestHeaders;
@@ -256,6 +254,10 @@ export const updateMultiPalletUPCQty = (payload: UpdateMultiPalletUPCQtyRequest)
   type: UPDATE_MULTI_PALLET_UPC_QTY,
   payload
 } as const);
+export const submitFeedbackRating = (payload: submitFeedbackRequest) => ({
+  type: SUBMIT_FEEDBACK_RATING,
+  payload
+} as const);
 export const getUserConfig = () => ({ type: GET_USER_CONFIG } as const);
 export const updateUserConfig = () => ({ type: UPDATE_USER_CONFIG } as const);
 
@@ -269,7 +271,6 @@ export type SagaParams =
   & Pick<ReturnType<typeof editLocation>, 'payload'>
   & Pick<ReturnType<typeof addLocation>, 'payload'>
   & Pick<ReturnType<typeof updateOHQty>, 'payload'>
-  & Pick<ReturnType<typeof addToPicklist>, 'payload'>
   & Pick<ReturnType<typeof deleteLocation>, 'payload'>
   & Pick<ReturnType<typeof noAction>, 'payload'>
   & Pick<ReturnType<typeof printSign>, 'payload'>
@@ -305,4 +306,5 @@ export type SagaParams =
   & Pick<ReturnType<typeof postCreatePallet>, 'payload'>
   & Pick<ReturnType<typeof reportMissingPallet>, 'payload'>
   & Pick<ReturnType<typeof getItemPallets>, 'payload'>
-  & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>;
+  & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>
+  & Pick<ReturnType<typeof submitFeedbackRating>, 'payload'>;

@@ -78,8 +78,16 @@ const styles = StyleSheet.create({
   },
   renderPickListContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
     paddingVertical: 8
+  },
+  reserveAdjustMentContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  addToPicklistContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row'
   },
   modalContainer: {
     flex: 1,
