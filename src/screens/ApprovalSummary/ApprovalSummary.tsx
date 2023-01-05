@@ -148,7 +148,10 @@ export const ApprovalSummaryScreen = (props: ApprovalSummaryProps): JSX.Element 
   const handleApprovalSubmit = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall('Approval_Summary_Screen',
-        { action: `${route.name === 'ApproveSummary' ? 'approve' : 'reject'}_selected_items_OH_change`, checkedList });
+        {
+          action: `${route.name === 'ApproveSummary' ? 'approve' : 'reject'}_selected_items_OH_change`,
+          selectedItems: JSON.stringify(checkedList)
+        });
       const actionType = routeActionType(route);
       dispatch(updateApprovalList({ approvalItems: checkedList, headers: { action: actionType } }));
     });
