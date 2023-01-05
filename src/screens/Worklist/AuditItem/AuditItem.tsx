@@ -8,7 +8,6 @@ import React, {
 import {
   ActivityIndicator,
   EmitterSubscription,
-  RefreshControl,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -941,7 +940,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     getItemDetailsApi,
     deleteFloorLocationApi,
     updateOHQtyApi,
-    userId,
     route,
     dispatch,
     navigation,
@@ -1138,20 +1136,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       </View>
     );
   }
-
-  const handleRefresh = () => {
-    validateSessionCall(navigation, route.name)
-      .then(() => {
-        trackEventCall('Audit_Item', { action: 'refresh_item_details', itemNumber });
-        dispatch(clearAuditScreenData());
-        dispatch({ type: GET_ITEM_DETAILS.RESET });
-        dispatch(getItemDetails({ id: itemNumber }));
-        dispatch(getItemPallets({ itemNbr: itemNumber }));
-      })
-      .catch(() => {
-        trackEventCall('Audit_Item', { action: 'session_timeout', user: userId });
-      });
-  };
 
   const deleteLocationConfirmed = (locType: string) => {
     if (locType === 'reserve') {
@@ -1370,9 +1354,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         ref={scrollViewRef}
         contentContainerStyle={styles.container}
         nestedScrollEnabled={true}
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={handleRefresh} />
-        }
       >
         <View style={styles.container}>
           <View style={styles.marginBottomStyle}>
