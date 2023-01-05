@@ -15,6 +15,7 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
+import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   createNewPick, getItemDetails, getItemDetailsV2, noAction, updateOHQty
@@ -597,7 +598,11 @@ export const renderAddPicklistButton = (
   return <></>;
 };
 
-export const renderReserveAdjustmentButton = (navigation: NavigationProp<any>) => (
+export const renderReserveAdjustmentButton = (
+  itemDetails: ItemDetails,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => (
   <View style={styles.reserveAdjustMentContainer}>
     <Button
       type={3}
@@ -606,7 +611,10 @@ export const renderReserveAdjustmentButton = (navigation: NavigationProp<any>) =
       titleFontSize={12}
       titleFontWeight="bold"
       height={28}
-      onPress={() => { navigation.navigate('ReserveAdjustment'); }}
+      onPress={() => {
+        dispatch(setItemDetails(itemDetails));
+        navigation.navigate('ReserveAdjustment');
+      }}
     />
   </View>
 );
@@ -614,7 +622,8 @@ export const renderReserveAdjustmentButton = (navigation: NavigationProp<any>) =
 export const renderLocationComponent = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
-  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
 ): JSX.Element => {
   const {
     floorLocations, reserveLocations, userConfigs, navigation
@@ -635,7 +644,7 @@ export const renderLocationComponent = (
       </View>
       {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
-        {(reserveAdjustment && hasReserveLocations) && renderReserveAdjustmentButton(navigation)}
+        {(reserveAdjustment && hasReserveLocations) && renderReserveAdjustmentButton(itemDetails, navigation, dispatch)}
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
     </View>
@@ -1081,7 +1090,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   useFocusEffectHook(
     () => {
-      const onBackPress = () => onValidateBackPress(props, itemDetails.itemNbr);
+      const onBackPress = () => onValidateBackPress(props, itemDetails?.itemNbr || 0);
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
@@ -1282,7 +1291,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnTxt={getTopRightBtnTxt(locationCount)}
               topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
-              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
+              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible, dispatch)}
             </SFTCard>
             {additionalItemDetails && (
               <View style={styles.historyContainer}>
