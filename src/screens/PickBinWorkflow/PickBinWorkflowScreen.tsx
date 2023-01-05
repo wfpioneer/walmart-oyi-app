@@ -194,7 +194,7 @@ export const updatePicklistItemsStatus = (
   trackEventCall('PickBinWorklow_Screen', {
     action: 'update_picklist_status_action',
     pickAction: action,
-    picklistItems
+    picklistItems: JSON.stringify(picklistItems)
   });
   dispatch(updatePicklistStatus({
     headers: {
@@ -222,7 +222,7 @@ export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
     trackEventCall('PickBinWorklow_Screen', {
       action: 'update_pallet_not_found_action',
       palletId,
-      picklistIds
+      picklistIds: JSON.stringify(picklistIds)
     });
     dispatch(updatePalletNotFound({ palletId, picklistIds }));
   };
@@ -332,7 +332,10 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
       }))
     };
     dispatch(clearPallets());
-    trackEventCall('PickBinWorkflow_Screen', { action: 'bin_selected_picklist_click', palletDetails });
+    trackEventCall(
+      'PickBinWorkflow_Screen',
+      { action: 'bin_selected_picklist_click', palletDetails: JSON.stringify(palletDetails) }
+    );
     dispatch(addPallet(palletDetails));
     navigation.navigate('Binning', {
       screen: 'AssignLocation',
