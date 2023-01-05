@@ -18,7 +18,6 @@ import {
 import { partition } from 'lodash';
 import moment from 'moment';
 import { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
@@ -66,9 +65,10 @@ import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import ItemDetails from '../../models/ItemDetails';
 import { CustomModalComponent } from '../Modal/Modal';
 import { Configurations } from '../../models/User';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
-
+const SCREEN_NAME = 'Manage_Pallet_Screen';
 interface ManagePalletProps {
   dispatch: Dispatch<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -98,6 +98,7 @@ interface ManagePalletProps {
   postCreatePalletApi: AsyncState;
   userConfigs: Configurations;
   countryCode: string;
+  trackEventCall: typeof trackEvent;
 }
 interface ApiResult {
   data: any;
@@ -203,7 +204,8 @@ const itemCard = (
   { item }: { item: PalletItem },
   dispatch: Dispatch<any>,
   userConfigs: Configurations,
-  countryCode: string
+  countryCode: string,
+  trackEventCall: typeof trackEvent
 ) => {
   if (!item.deleted) {
     return (
@@ -211,7 +213,13 @@ const itemCard = (
         decreaseQuantity={() => handleDecreaseQuantity(item, dispatch)}
         increaseQuantity={() => handleIncreaseQuantity(item, dispatch)}
         onTextChange={text => handleTextChange(item, dispatch, text)}
-        deleteItem={() => deleteItemDetail(item, dispatch)}
+        deleteItem={() => {
+          deleteItemDetail(item, dispatch);
+          trackEventCall(SCREEN_NAME, {
+            action: 'deleting_item_from_the_pallet',
+            item: JSON.stringify(item)
+          });
+        }}
         isAdded={item.added}
         isValid={true}
         itemName={item.itemDesc}
@@ -638,7 +646,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
     useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
-    createPallet, postCreatePalletApi, countryCode, userConfigs
+    createPallet, postCreatePalletApi, countryCode, userConfigs, trackEventCall
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
@@ -679,7 +687,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          trackEvent('Items_Details_scanned', {
+          trackEventCall(SCREEN_NAME, {
+            action: 'Items_Details_scanned',
             barcode: scan.value,
             type: scan.type
           });
@@ -746,6 +755,9 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   const submit = () => {
     if (createPallet) {
+      trackEventCall(SCREEN_NAME, {
+        action: 'created_pallet_with_added_items'
+      });
       postCreateNewPallet();
     } else {
       const palletId = id;
@@ -781,6 +793,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       );
       // Calls update pallet item qty api
       handleUpdateItems(items, palletInfo, dispatch, updatedExpirationDate);
+
+      trackEventCall(SCREEN_NAME, {
+        action: 'updated_pallets_ with_changes'
+      });
     }
   };
 
@@ -925,7 +941,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           <FlatList
             data={items}
             removeClippedSubviews={false}
-            renderItem={item => itemCard(item, dispatch, userConfigs, countryCode)}
+            renderItem={item => itemCard(item, dispatch, userConfigs, countryCode, trackEventCall)}
             keyExtractor={(item: PalletItem) => item.upcNbr}
           />
         </View>
@@ -1032,6 +1048,7 @@ const ManagePallet = (): JSX.Element => {
           postCreatePalletApi={postCreatePalletApi}
           userConfigs={configs}
           countryCode={countryCode}
+          trackEventCall={trackEvent}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

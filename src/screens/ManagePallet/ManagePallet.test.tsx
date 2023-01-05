@@ -147,6 +147,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -184,6 +185,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -222,6 +224,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -264,6 +267,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -301,6 +305,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -342,6 +347,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -391,6 +397,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
