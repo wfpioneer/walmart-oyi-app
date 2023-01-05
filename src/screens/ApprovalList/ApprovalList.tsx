@@ -290,13 +290,13 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
   const handleApproveSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('handle_approve_summary_click');
+      trackEventCall('Approval_Screen', { action: 'handle_approve_summary_click' });
       navigation.navigate('ApproveSummary');
     });
   };
   const handleRejectSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('handle_reject_summary_click');
+      trackEventCall('Approval_Screen', { action: 'handle_reject_summary_click' });
       navigation.navigate('RejectSummary');
     });
   };
@@ -321,7 +321,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
         <TouchableOpacity
           style={styles.errorButton}
           onPress={() => {
-            trackEventCall('approval_list_api_retry',);
+            trackEventCall('Approval_Screen', { action: 'approval_list_api_retry' });
             dispatch(getApprovalList({}));
           }}
         >

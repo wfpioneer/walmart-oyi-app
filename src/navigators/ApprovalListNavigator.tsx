@@ -18,6 +18,7 @@ import { useTypedSelector } from '../state/reducers/RootReducer';
 import { ApprovalSummary } from '../screens/ApprovalSummary/ApprovalSummary';
 import ApprovalFilter from '../screens/ApprovalList/ApprovalFilterMenu/ApprovalFilter';
 import { UseStateType } from '../models/Generics.d';
+import { trackEvent } from '../utils/AppCenterTool';
 
 const Stack = createStackNavigator();
 
@@ -43,7 +44,7 @@ export const renderCloseButton = (dispatch: Dispatch<any>): JSX.Element => (
 );
 
 export const renderHeaderRight = (
-  dispatch: Dispatch<any>, selectAll: boolean, toggleMenu: UseStateType<boolean>[1]
+  dispatch: Dispatch<any>, selectAll: boolean, toggleMenu: UseStateType<boolean>[1], trackEventCall: typeof trackEvent
 ) => (
   <View style={styles.headerRightView}>
     <View style={styles.filterList}>
@@ -52,7 +53,11 @@ export const renderHeaderRight = (
       </TouchableOpacity>
     </View>
     <View>
-      <TouchableOpacity onPress={() => dispatch(toggleAllItems(!selectAll))}>
+      <TouchableOpacity onPress={() => {
+        trackEventCall('Approval_Screen', { action: selectAll ? 'de_select_all_items' : 'select_all_items' });
+        dispatch(toggleAllItems(!selectAll));
+      }}
+      >
         <View style={styles.selectAllButton}>
           {selectAll ? <Text style={styles.selectAllText}>{strings('APPROVAL.DESELECT_ALL')}</Text>
             : <Text style={styles.selectAllText}>{strings('APPROVAL.SELECT_ALL')}</Text>}
@@ -68,11 +73,12 @@ interface ApprovalNavigatorProps {
   selectAll: boolean;
   selectedItemQty: number;
   filterMenuState: UseStateType<boolean>;
+  trackEventCall: typeof trackEvent
 }
 
 export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.Element => {
   const {
-    result, dispatch, selectAll, selectedItemQty, filterMenuState
+    result, dispatch, selectAll, selectedItemQty, filterMenuState, trackEventCall
   } = props;
   const [menuOpen, toggleMenu] = filterMenuState;
 
@@ -111,7 +117,7 @@ export const ApprovalListNavigatorStack = (props: ApprovalNavigatorProps): JSX.E
           options={{
             headerTitle: selectedItemQty === 0 ? () => renderApprovalTitle(approvalAmount)
               : () => renderSelectedItemQty(selectedItemQty),
-            headerRight: () => renderHeaderRight(dispatch, selectAll, toggleMenu),
+            headerRight: () => renderHeaderRight(dispatch, selectAll, toggleMenu, trackEventCall),
             headerRightContainerStyle: styles.headerRightView,
             headerLeft: (selectedItemQty !== 0 && !selectAll) ? () => renderCloseButton(dispatch) : undefined
           }}
@@ -147,6 +153,7 @@ export const ApprovalListNavigator = (): JSX.Element => {
       selectAll={isAllSelected}
       selectedItemQty={selectedItemQty}
       filterMenuState={filterMenuState}
+      trackEventCall={trackEvent}
     />
   );
 };
