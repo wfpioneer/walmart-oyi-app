@@ -60,6 +60,7 @@ describe('Assign Location screen render tests', () => {
       deletePicks={false}
       pickingState={mockPickingState}
       updatePicklistStatusApi={defaultAsyncState}
+      trackEventCall={jest.fn()}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -81,6 +82,7 @@ describe('Assign Location screen render tests', () => {
       deletePicks={false}
       pickingState={mockPickingState}
       updatePicklistStatusApi={defaultAsyncState}
+      trackEventCall={jest.fn()}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -103,6 +105,7 @@ describe('Assign Location screen render tests', () => {
       deletePicks={false}
       pickingState={mockPickingState}
       updatePicklistStatusApi={defaultAsyncState}
+      trackEventCall={jest.fn()}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
