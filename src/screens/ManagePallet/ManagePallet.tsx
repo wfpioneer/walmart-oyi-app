@@ -240,7 +240,11 @@ const itemCard = (
 };
 
 export const handleUpdateItems = (
-  items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>, updatedExpirationDate?: string
+  items: PalletItem[],
+  palletInfo: PalletInfo,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
+  updatedExpirationDate?: string
 ): void => {
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
@@ -248,6 +252,12 @@ export const handleUpdateItems = (
   const isAddNoUpdate = items.some(item => item.added) && !updatePalletItems.length;
 
   if (updatePalletItems.length > 0 || (isExpiryDateChanged(palletInfo) && !isAddNoUpdate)) {
+    trackEventCall(SCREEN_NAME, {
+      action: 'updated_pallets_ with_changes',
+      palletId: palletInfo.id,
+      palletItem: JSON.stringify(updatePalletItems),
+      palletExpiration: updatedExpirationDate
+    });
     dispatch(updatePalletItemQty({
       palletId: palletInfo.id,
       palletItem: updatePalletItems,
@@ -260,6 +270,7 @@ export const handleAddItems = (
   id: string,
   items: PalletItem[],
   dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
   expirationDate?: string
 ): void => {
   // Filter Items by added flag
@@ -267,6 +278,12 @@ export const handleAddItems = (
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
   if (addPalletItems.length > 0) {
+    trackEventCall(SCREEN_NAME, {
+      action: 'added_items_to_pallet',
+      palletId: id,
+      items: JSON.stringify(addPalletItems),
+      expirationDate
+    });
     dispatch(addPalletUPCs({ palletId: id, items: addPalletItems, expirationDate }));
   }
 };
@@ -750,14 +767,15 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       numberOfPallets: 1,
       items: items.map(item => ({ upcNbr: item.upcNbr, qty: item.newQuantity }))
     };
+    trackEventCall(SCREEN_NAME, {
+      action: 'created_pallet_with_added_items',
+      createPallet: JSON.stringify(createPalletPayload)
+    });
     dispatch(postCreatePallet(createPalletPayload));
   };
 
   const submit = () => {
     if (createPallet) {
-      trackEventCall(SCREEN_NAME, {
-        action: 'created_pallet_with_added_items'
-      });
       postCreateNewPallet();
     } else {
       const palletId = id;
@@ -789,14 +807,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         palletId,
         items,
         dispatch,
+        trackEventCall,
         updatedExpirationDate
       );
       // Calls update pallet item qty api
-      handleUpdateItems(items, palletInfo, dispatch, updatedExpirationDate);
-
-      trackEventCall(SCREEN_NAME, {
-        action: 'updated_pallets_ with_changes'
-      });
+      handleUpdateItems(items, palletInfo, dispatch, trackEventCall, updatedExpirationDate);
     }
   };
 
