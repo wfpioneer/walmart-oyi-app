@@ -22,7 +22,6 @@ import {
 
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import Toast from 'react-native-toast-message';
 import { CustomModalComponent } from '../../Modal/Modal';
 import COLOR from '../../../themes/Color';
 import LocationListCard, { LocationList } from '../../../components/LocationListCard/LocationListCard';
@@ -38,17 +37,17 @@ import ItemCard from '../../../components/ItemCard/ItemCard';
 import { strings } from '../../../locales';
 import Button, { ButtonType } from '../../../components/buttons/Button';
 import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/AuditItem';
-import { GET_ITEM_PALLETS, REPORT_MISSING_PALLET } from '../../../state/actions/asyncAPI';
-import { getItemPallets, reportMissingPallet } from '../../../state/actions/saga';
+import { DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS } from '../../../state/actions/asyncAPI';
+import { deletePallet, deleteUpcs, getItemPallets } from '../../../state/actions/saga';
 import {
   setReserveLocations
 } from '../../../state/actions/ReserveAdjustmentScreen';
 import styles from './ReserveAdjustment.style';
-import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 
 export interface ReserveAdjustmentScreenProps {
     getItemPalletsApi: AsyncState;
-    reportMissingPalletApi: AsyncState;
+    deleteUpcsApi: AsyncState;
+    deletePalletApi: AsyncState;
     reserveLocations: ItemPalletInfo[];
     route: RouteProp<any, string>;
     dispatch: Dispatch<any>;
@@ -76,6 +75,7 @@ export interface ReserveAdjustmentScreenProps {
       locationTypeNbr: number;
       palletId: number;
       sectionId: number;
+      mixedPallet: boolean;
     };
     setLocToConfirm: React.Dispatch<React.SetStateAction<{
       locationName: string;
@@ -84,6 +84,7 @@ export interface ReserveAdjustmentScreenProps {
       locationTypeNbr: number;
       palletId: number;
       sectionId: number;
+      mixedPallet: boolean;
     }>>;
   }
 
@@ -149,44 +150,9 @@ export const getItemPalletsApiHook = (
   }
 };
 
-export const reportMissingPalletApiHook = (
-  reportMissingPalletApi: AsyncState,
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>,
-  setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  palletId: number,
-  itemNbr?: number
-) => {
-  if (navigation.isFocused()) {
-    if (!reportMissingPalletApi.isWaiting && reportMissingPalletApi.result) {
-      setShowDeleteConfirmationModal(false);
-      if (reportMissingPalletApi.result.status === 200) {
-        Toast.show({
-          type: 'success',
-          text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', { palletId }),
-          visibilityTime: SNACKBAR_TIMEOUT,
-          position: 'bottom'
-        });
-        if (itemNbr) {
-          dispatch(getItemPallets({ itemNbr }));
-        }
-        dispatch({ type: REPORT_MISSING_PALLET.RESET });
-      }
-    } else if (!reportMissingPalletApi.isWaiting && reportMissingPalletApi.error) {
-      setShowDeleteConfirmationModal(false);
-      Toast.show({
-        type: 'error',
-        text1: strings('WORKLIST.MISSING_PALLET_API_ERROR'),
-        visibilityTime: SNACKBAR_TIMEOUT,
-        position: 'bottom'
-      });
-      dispatch({ type: REPORT_MISSING_PALLET.RESET });
-    }
-  }
-};
-
 export const renderDeleteLocationModal = (
-  reportMissingPalletApi: AsyncState,
+  deletePalletApi: AsyncState,
+  deleteUpcsApi: AsyncState,
   showDeleteConfirmationModal: boolean,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   palletId: number,
@@ -199,62 +165,70 @@ export const renderDeleteLocationModal = (
     locationTypeNbr: number;
     palletId: number;
     sectionId: number;
-  }
-) => (
-  <CustomModalComponent
-    isVisible={showDeleteConfirmationModal}
-    onClose={() => setShowDeleteConfirmationModal(false)}
-    modalType="Error"
-    minHeight={100}
-  >
-    {reportMissingPalletApi.isWaiting ? (
-      <ActivityIndicator
-        animating={reportMissingPalletApi.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    ) : (
-      <>
-        <Text style={styles.message}>
-          {reportMissingPalletApi.error
-            ? strings('WORKLIST.MISSING_PALLET_API_ERROR')
-            : `${strings('WORKLIST.MISSING_PALLET_CONFIRMATION', { palletId })}`}
-        </Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            style={styles.button}
-            title={strings('GENERICS.CANCEL')}
-            backgroundColor={COLOR.MAIN_THEME_COLOR}
-            testID="modal-cancel-button"
-            onPress={() => {
-              setShowDeleteConfirmationModal(false);
-              trackEventCall('Reserve_Adjustment_Screen', { action: 'cancel_delete_location_click' });
-            }}
-          />
-          <Button
-            style={styles.button}
-            title={reportMissingPalletApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
-            testID="modal-confirm-button"
-            backgroundColor={COLOR.TRACKER_RED}
-            onPress={() => {
-              trackEventCall('Reserve_Adjustment_Screen',
-                { action: 'missing_pallet_confirmation_click', palletId });
-              dispatch(
-                reportMissingPallet({
-                  palletId: locToConfirm.palletId,
-                  locationName: locToConfirm.locationName,
-                  sectionId: locToConfirm.sectionId
-                })
-              );
-            }}
-          />
-        </View>
-      </>
-    )}
-  </CustomModalComponent>
-);
+    mixedPallet: boolean;
+  },
+  upcNbr?: string
+) => {
+  const apiIsWaiting = deletePalletApi.isWaiting || deleteUpcsApi.isWaiting;
+  const apiHasError = deletePalletApi.error || deleteUpcsApi.error;
+  return (
+    <CustomModalComponent
+      isVisible={showDeleteConfirmationModal}
+      onClose={() => setShowDeleteConfirmationModal(false)}
+      modalType="Error"
+      minHeight={100}
+    >
+      {apiIsWaiting ? (
+        <ActivityIndicator
+          animating={apiIsWaiting}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.activityIndicator}
+        />
+      ) : (
+        <>
+          <Text style={styles.message}>
+            {apiHasError
+              ? strings('ITEM.DELETE_PALLET_FAILURE')
+              : `${strings('MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION')}`}
+          </Text>
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              testID="modal-cancel-button"
+              onPress={() => {
+                setShowDeleteConfirmationModal(false);
+                trackEventCall('Reserve_Adjustment_Screen', { action: 'cancel_delete_location_click' });
+              }}
+            />
+            <Button
+              style={styles.button}
+              title={apiHasError ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              testID="modal-confirm-button"
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={() => {
+                trackEventCall('Reserve_Adjustment_Screen',
+                  { action: 'missing_pallet_confirmation_click', palletId });
+                if (locToConfirm.mixedPallet && upcNbr) {
+                  dispatch(deleteUpcs({
+                    palletId: locToConfirm.palletId.toString(),
+                    removeExpirationDate: false,
+                    upcs: [upcNbr]
+                  }));
+                } else {
+                  dispatch(deletePallet({ palletId: locToConfirm.palletId }));
+                }
+              }}
+            />
+          </View>
+        </>
+      )}
+    </CustomModalComponent>
+  );
+};
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -288,7 +262,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     setLocToConfirm,
     setShowDeleteConfirmationModal,
     showDeleteConfirmationModal,
-    reportMissingPalletApi
+    deletePalletApi,
+    deleteUpcsApi
   } = props;
 
   const handleReserveLocsRetry = () => {
@@ -311,7 +286,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         locationIndex: locIndex,
         locationTypeNbr: 0,
         palletId: loc.palletId,
-        sectionId: loc.sectionId
+        sectionId: loc.sectionId,
+        mixedPallet: loc.mixedPallet
       });
       setShowDeleteConfirmationModal(true);
     }).catch(() => { });
@@ -342,14 +318,26 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     }, [navigation])
   );
 
-  // report missing pallet API
-  useEffectHook(
-    () => reportMissingPalletApiHook(
-      reportMissingPalletApi, dispatch, navigation,
-      setShowDeleteConfirmationModal, locToConfirm.palletId, itemDetails?.itemNbr
-    ),
-    [reportMissingPalletApi]
-  );
+  useEffect(() => {
+    // on api success
+    if (navigation.isFocused() && !deletePalletApi.isWaiting && deletePalletApi.result && showDeleteConfirmationModal) {
+      setShowDeleteConfirmationModal(false);
+      const updatedReserveLocations = reserveLocations.filter(loc => loc.palletId !== locToConfirm.palletId);
+      dispatch(setReserveLocations(updatedReserveLocations));
+      dispatch({ type: DELETE_PALLET.RESET });
+    }
+  }, [deletePalletApi]);
+
+  useEffect(() => {
+    if (navigation.isFocused() && !deleteUpcsApi.isWaiting && deleteUpcsApi.result && showDeleteConfirmationModal) {
+      if (deleteUpcsApi.result.status === 200) {
+        setShowDeleteConfirmationModal(false);
+        const updatedReserveLocations = reserveLocations.filter(loc => loc.palletId !== locToConfirm.palletId);
+        dispatch(setReserveLocations(updatedReserveLocations));
+        dispatch({ type: DELETE_UPCS.RESET });
+      }
+    }
+  }, [deleteUpcsApi]);
 
   // Get Pallets api
   useEffectHook(
@@ -360,13 +348,15 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   return (
     <View style={styles.container}>
       {renderDeleteLocationModal(
-        reportMissingPalletApi,
+        deletePalletApi,
+        deleteUpcsApi,
         showDeleteConfirmationModal,
         setShowDeleteConfirmationModal,
         locToConfirm.palletId,
         trackEventCall,
         dispatch,
-        locToConfirm
+        locToConfirm,
+        itemDetails?.upcNbr
       )}
       <View style={styles.marginBottomStyles}>
         <ItemCard
@@ -414,7 +404,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
 
 const ReserveAdjustment = (): JSX.Element => {
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
-  const reportMissingPalletApi = useTypedSelector(state => state.async.reportMissingPallet);
+  const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
+  const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
   const { itemDetails, reserveLocations } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
   const route = useRoute();
@@ -427,7 +418,8 @@ const ReserveAdjustment = (): JSX.Element => {
     locationIndex: -1,
     locationTypeNbr: -1,
     sectionId: 0,
-    palletId: 0
+    palletId: 0,
+    mixedPallet: false
   });
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 
@@ -453,7 +445,8 @@ const ReserveAdjustment = (): JSX.Element => {
       setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
       locToConfirm={locToConfirm}
       setLocToConfirm={setLocToConfirm}
-      reportMissingPalletApi={reportMissingPalletApi}
+      deleteUpcsApi={deleteUpcsApi}
+      deletePalletApi={deletePalletApi}
     />
   );
 };

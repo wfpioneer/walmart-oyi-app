@@ -144,7 +144,8 @@ export default {
     GROSS_PROFIT: 'Gross Profit',
     HISTORY: 'History',
     NO_HISTORY: 'No history available',
-    RESERVE_ADJUSTMENT: 'Reserve Adjustment'
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment',
+    DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

@@ -1,5 +1,202 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized function tests renders delete location modal based on the props and testing confirm delete actions 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "padding": 10,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": 100,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-cancel-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.CANCEL" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#D6512D",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-confirm-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.OK" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`ReserveAdjustmentScreen renders loader for Location List while getting reserve locations for the item 1`] = `
 <View
   style={
@@ -27,7 +224,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
           }
         }
       >
-        [missing "en.WORKLIST.MISSING_PALLET_CONFIRMATION" translation]
+        [missing "en.MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION" translation]
       </Text>
       <View
         style={
@@ -195,7 +392,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
           }
         }
       >
-        [missing "en.WORKLIST.MISSING_PALLET_CONFIRMATION" translation]
+        [missing "en.MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION" translation]
       </Text>
       <View
         style={
