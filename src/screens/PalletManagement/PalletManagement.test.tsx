@@ -39,6 +39,7 @@ describe('PalletManagementScreen', () => {
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockConfig}
           isManualScanEnabled={true}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -64,6 +65,7 @@ describe('PalletManagementScreen', () => {
           getPalletConfigApi={defaultAsyncState}
           userConfig={mockConfig}
           isManualScanEnabled={true}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -116,7 +118,7 @@ describe('PalletManagementScreen', () => {
       getPalletDetailsApiHook(successNoPalletAsyncState, dispatch, setGetInfoComplete);
       expect(Toast.show).toBeCalledTimes(1);
 
-      // @ts-ignore
+      // @ts-expect-error mockReset is accessible during run time
       Toast.show.mockReset();
       getPalletDetailsApiHook(failureAsyncState, dispatch, setGetInfoComplete);
       expect(Toast.show).toBeCalledTimes(1);

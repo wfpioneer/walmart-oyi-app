@@ -34,6 +34,7 @@ import { Configurations } from '../../models/User';
 import ManualScan from '../../components/manualscan/ManualScan';
 import Button, { ButtonType } from '../../components/buttons/Button';
 
+const SCREEN_NAME = 'Pallet_Management_Screen';
 interface PalletManagementProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   configComplete: boolean;
@@ -47,6 +48,7 @@ interface PalletManagementProps {
   getPalletConfigApi: AsyncState;
   userConfig: Configurations;
   isManualScanEnabled: boolean;
+  trackEventCall: typeof trackEvent;
 }
 
 export const showActivitySpinner = (
@@ -143,7 +145,8 @@ export const PalletManagementScreen = (
     getPalletDetailsApi,
     getPalletConfigApi,
     userConfig,
-    isManualScanEnabled
+    isManualScanEnabled,
+    trackEventCall
   } = props;
 
   let scannedSubscription: EmitterSubscription;
@@ -195,16 +198,21 @@ export const PalletManagementScreen = (
   useEffectHook(() => {
     if (navigation.isFocused()) {
       if (configComplete && getInfoComplete) {
+        trackEventCall(SCREEN_NAME, {
+          action: 'initiating_manage_pallet_flow'
+        });
         navigation.navigate('ManagePallet');
         setGetInfoComplete(false);
       }
     }
   }, [configComplete, getInfoComplete]);
-
-  if (showActivitySpinner(getPalletConfigApi.isWaiting, configComplete, getPalletDetailsApi.isWaiting, getInfoComplete)) {
+  const showActivitySpinnerResult = showActivitySpinner(
+    getPalletConfigApi.isWaiting, configComplete, getPalletDetailsApi.isWaiting, getInfoComplete
+  );
+  if (showActivitySpinnerResult) {
     return (
       <ActivityIndicator
-        animating={showActivitySpinner(getPalletConfigApi.isWaiting, configComplete, getPalletDetailsApi.isWaiting, getInfoComplete)}
+        animating={showActivitySpinnerResult}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -239,6 +247,9 @@ export const PalletManagementScreen = (
             type={ButtonType.PRIMARY}
             style={styles.btnCreate}
             onPress={() => {
+              trackEventCall(SCREEN_NAME, {
+                action: 'initiating_create_pallet_flow'
+              });
               dispatch(setCreatePalletState(true));
               navigation.navigate('ManagePallet');
             }}
@@ -274,6 +285,7 @@ const PalletManagement = (): JSX.Element => {
       route={route}
       dispatch={dispatch}
       userConfig={userConfig}
+      trackEventCall={trackEvent}
     />
   );
 };
