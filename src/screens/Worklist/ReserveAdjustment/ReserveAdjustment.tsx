@@ -202,7 +202,6 @@ export const renderDeleteLocationModal = (
   deleteUpcsApi: AsyncState,
   showDeleteConfirmationModal: boolean,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  palletId: number,
   trackEventCall: (eventName: string, params?: any) => void,
   dispatch: Dispatch<any>,
   locToConfirm: {
@@ -258,7 +257,7 @@ export const renderDeleteLocationModal = (
               backgroundColor={COLOR.TRACKER_RED}
               onPress={() => {
                 trackEventCall('Reserve_Adjustment_Screen',
-                  { action: 'missing_pallet_confirmation_click', palletId });
+                  { action: 'missing_pallet_confirmation_click', palletId: locToConfirm.palletId });
                 if (locToConfirm.mixedPallet && upcNbr) {
                   dispatch(deleteUpcs({
                     palletId: locToConfirm.palletId.toString(),
@@ -382,6 +381,23 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     setShowPalletQtyUpdateModal
   } = props;
 
+  const handleDeletePalletSuccess = (type: string) => {
+    setShowDeleteConfirmationModal(false);
+    // reset locToConfirm
+    setLocToConfirm({
+      locationName: '',
+      locationArea: '',
+      locationIndex: -1,
+      locationTypeNbr: -1,
+      sectionId: 0,
+      palletId: 0,
+      mixedPallet: false
+    });
+    const updatedReserveLocations = reserveLocations.filter(loc => loc.palletId !== locToConfirm.palletId);
+    dispatch(setReserveLocations(updatedReserveLocations));
+    dispatch({ type });
+  };
+
   const handleReserveLocsRetry = () => {
     validateSessionCall(navigation, route.name).then(() => {
       if (itemDetails?.itemNbr) {
@@ -389,7 +405,9 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         setGetItemPalletsError(false);
         dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
       }
-    }).catch(() => { });
+    }).catch(() => {
+      trackEventCall('Reserve_Adjustment_Screen', { action: 'session_timeout', user: userId });
+    });
   };
 
   const handleDeleteReserveLocation = (loc: ItemPalletInfo, locIndex: number) => {
@@ -406,7 +424,9 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         mixedPallet: loc.mixedPallet
       });
       setShowDeleteConfirmationModal(true);
-    }).catch(() => { });
+    }).catch(() => {
+      trackEventCall('Reserve_Adjustment_Screen', { action: 'session_timeout', user: userId });
+    });
   };
 
   const handleRefresh = () => {
@@ -467,22 +487,17 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   );
 
   useEffect(() => {
-    // on api success
+    // on delete pallet api success
     if (navigation.isFocused() && !deletePalletApi.isWaiting && deletePalletApi.result && showDeleteConfirmationModal) {
-      setShowDeleteConfirmationModal(false);
-      const updatedReserveLocations = reserveLocations.filter(loc => loc.palletId !== locToConfirm.palletId);
-      dispatch(setReserveLocations(updatedReserveLocations));
-      dispatch({ type: DELETE_PALLET.RESET });
+      handleDeletePalletSuccess(DELETE_PALLET.RESET);
     }
   }, [deletePalletApi]);
 
   useEffect(() => {
+    // on delete upc from pallet api success
     if (navigation.isFocused() && !deleteUpcsApi.isWaiting && deleteUpcsApi.result && showDeleteConfirmationModal) {
       if (deleteUpcsApi.result.status === 200) {
-        setShowDeleteConfirmationModal(false);
-        const updatedReserveLocations = reserveLocations.filter(loc => loc.palletId !== locToConfirm.palletId);
-        dispatch(setReserveLocations(updatedReserveLocations));
-        dispatch({ type: DELETE_UPCS.RESET });
+        handleDeletePalletSuccess(DELETE_UPCS.RESET);
       }
     }
   }, [deleteUpcsApi]);
@@ -500,7 +515,6 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         deleteUpcsApi,
         showDeleteConfirmationModal,
         setShowDeleteConfirmationModal,
-        locToConfirm.palletId,
         trackEventCall,
         dispatch,
         locToConfirm,

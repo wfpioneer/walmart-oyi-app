@@ -190,7 +190,6 @@ describe('ReserveAdjustmentScreen', () => {
     const mockItemDetails = getMockItemDetails('123');
     const mockShowDeleteConfirmationModal = true;
     const mockSetShowDeleteConfirmationModal = jest.fn();
-    const mockPalletId = 55689;
     const mockTrackEvent = jest.fn();
     const mockUpcNbr = '12345678';
 
@@ -260,7 +259,6 @@ describe('ReserveAdjustmentScreen', () => {
         defaultAsyncState,
         mockShowDeleteConfirmationModal,
         mockSetShowDeleteConfirmationModal,
-        mockPalletId,
         mockTrackEvent,
         mockDispatch,
         mockLocToConfirm,
@@ -278,7 +276,6 @@ describe('ReserveAdjustmentScreen', () => {
         defaultAsyncState,
         mockShowDeleteConfirmationModal,
         mockSetShowDeleteConfirmationModal,
-        mockPalletId,
         mockTrackEvent,
         mockDispatch,
         updatedMockLocToConfirm,
