@@ -517,6 +517,7 @@ export default {
     EXPAND_ALL: 'Expandir todo',
     VALIDATE_QUANTITY: 'Valida la cantidad en cada ubicación',
     VALIDATE_SCAN_QUANTITY: 'Escanea cada pallet y valida la cantidad',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: 'Valida la cantidad por pallet',
     OTHER_ON_HANDS: 'Otras ubicaciones',
     PALLET_COUNT: 'Por favor ingresa el conteo del pallet',
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',
