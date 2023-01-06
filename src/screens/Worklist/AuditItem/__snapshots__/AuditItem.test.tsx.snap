@@ -1293,14 +1293,7 @@ Array [
       }
     }
     nestedScrollEnabled={true}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[Function]}
-        refreshing={false}
-      />
-    }
   >
-    <RCTRefreshControl />
     <View>
       <View
         style={
@@ -1474,7 +1467,7 @@ Array [
                       }
                     }
                   >
-                    [missing "en.AUDITS.VALIDATE_SCAN_QUANTITY" translation]
+                    [missing "en.AUDITS.VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED" translation]
                   </Text>
                 </View>
               </View>
@@ -2018,12 +2011,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       }
     }
     nestedScrollEnabled={true}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[Function]}
-        refreshing={false}
-      />
-    }
   >
     <View
       style={
@@ -2472,12 +2459,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       }
     }
     nestedScrollEnabled={true}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[Function]}
-        refreshing={false}
-      />
-    }
   >
     <View
       style={
