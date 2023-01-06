@@ -521,6 +521,7 @@ export default {
     EXPAND_ALL: '全部展开',
     VALIDATE_QUANTITY: '实盘每一个位置数量',
     VALIDATE_SCAN_QUANTITY: '扫描卡板并实盘数量',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: '校准每个卡板库存数量',
     OTHER_ON_HANDS: '其它库存',
     PALLET_COUNT: '请输入卡板库存数量',
     CONFIRM_AUDIT: '确认现货盘点结果',
