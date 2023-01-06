@@ -518,6 +518,7 @@ export default {
     EXPAND_ALL: 'Expand all',
     VALIDATE_QUANTITY: 'Validate quantity in each location',
     VALIDATE_SCAN_QUANTITY: 'Scan each pallet and validate quantity',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: 'Validate quantity on each pallet',
     OTHER_ON_HANDS: 'Other On-Hands',
     PALLET_COUNT: 'Please enter the count for pallet',
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',

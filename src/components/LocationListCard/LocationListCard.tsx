@@ -72,6 +72,20 @@ const renderLocationCard = ({
   );
 };
 
+const getSubTextBasedonLocType = (locType: LocationType, scanRequired: boolean) => {
+  switch (locType) {
+    case 'floor':
+      return strings('AUDITS.VALIDATE_QUANTITY');
+    case 'reserve':
+      if (scanRequired) {
+        return strings('AUDITS.VALIDATE_SCAN_QUANTITY');
+      }
+      return strings('AUDITS.VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED');
+    default:
+      return '';
+  }
+};
+
 const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
   const {
     locationList,
@@ -98,8 +112,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
                 {`${locationTitle}`}
               </Text>
               <Text style={styles.subText}>
-                {locationType === 'reserve' ? strings('AUDITS.VALIDATE_SCAN_QUANTITY')
-                  : strings('AUDITS.VALIDATE_QUANTITY')}
+                {getSubTextBasedonLocType(locationType, scanRequired)}
               </Text>
             </View>
           </View>
@@ -131,8 +144,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
               {`${locationTitle} ${!loading ? `(${locationList.length})` : ''}`}
             </Text>
             <Text style={styles.subText}>
-              {locationType === 'reserve' ? strings('AUDITS.VALIDATE_SCAN_QUANTITY')
-                : strings('AUDITS.VALIDATE_QUANTITY')}
+              {getSubTextBasedonLocType(locationType, scanRequired)}
             </Text>
           </View>
         </View>
