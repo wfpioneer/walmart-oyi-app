@@ -21,6 +21,7 @@ describe('LocationCard', () => {
         onLocationDelete={jest.fn}
         onCalcPress={jest.fn}
         showCalculator={false}
+        showQtyChanged={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -40,6 +41,7 @@ describe('LocationCard', () => {
         onLocationDelete={jest.fn}
         onCalcPress={jest.fn}
         showCalculator={true}
+        showQtyChanged={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -59,6 +61,7 @@ describe('LocationCard', () => {
         onLocationDelete={jest.fn}
         onCalcPress={jest.fn}
         showCalculator={false}
+        showQtyChanged={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -78,6 +81,7 @@ describe('LocationCard', () => {
         onLocationDelete={jest.fn}
         onCalcPress={jest.fn}
         showCalculator={false}
+        showQtyChanged={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -97,6 +101,27 @@ describe('LocationCard', () => {
         onLocationDelete={jest.fn}
         onCalcPress={jest.fn}
         showCalculator={false}
+        showQtyChanged={false}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders the card with locationType reserve, showQtyChanged true', () => {
+      renderer.render(<LocationCard
+        location="A1-1"
+        locationType="reserve"
+        onQtyIncrement={jest.fn}
+        onEndEditing={jest.fn}
+        onTextChange={jest.fn}
+        onQtyDecrement={jest.fn}
+        palletId={1234}
+        scannerEnabled={true}
+        scanned={true}
+        quantity={12}
+        onLocationDelete={jest.fn}
+        onCalcPress={jest.fn}
+        showCalculator={false}
+        showQtyChanged={true}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
