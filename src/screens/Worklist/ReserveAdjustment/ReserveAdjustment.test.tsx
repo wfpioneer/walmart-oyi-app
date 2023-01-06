@@ -1,22 +1,25 @@
 /* eslint-disable react/jsx-props-no-spreading */
 // adding this exception as a valid exception to the no spreading props rule is when there are a large amount of props
-import {
-  NavigationProp,
-  RouteProp
-} from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
+import Toast from 'react-native-toast-message';
 import { mockConfig } from '../../../mockData/mockConfig';
 import {
   ReserveAdjustmentScreen,
   ReserveAdjustmentScreenProps,
   getItemPalletsApiHook,
-  renderDeleteLocationModal
+  getScannedPalletEffect,
+  renderDeleteLocationModal,
+  renderpalletQtyUpdateModal
 } from './ReserveAdjustment';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
 import { ItemPalletInfo } from '../../../models/AuditItem';
+import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { strings } from '../../../locales';
+import { itemPallets } from '../../../mockData/getItemPallets';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -126,7 +129,15 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
   },
   setLocToConfirm: jest.fn(),
   setShowDeleteConfirmationModal: jest.fn(),
-  showDeleteConfirmationModal: false
+  showDeleteConfirmationModal: false,
+  isManualScanEnabled: false,
+  scannedEvent: {
+    value: null,
+    type: null
+  },
+  scannedPalletId: 0,
+  showPalletQtyUpdateModal: false,
+  setShowPalletQtyUpdateModal: jest.fn()
 };
 
 describe('ReserveAdjustmentScreen', () => {
@@ -154,6 +165,24 @@ describe('ReserveAdjustmentScreen', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
+  it('Snapshot test for update pallet qty modal', () => {
+    const mockShowPalletQtyModal = true;
+    const mocksetShowPalletQtyUpdateModal = jest.fn();
+    const mockVendorPackQty = 3;
+    const mockDispatch = jest.fn();
+    const { toJSON } = render(
+      renderpalletQtyUpdateModal(
+        4988,
+        itemPallets.pallets,
+        mockDispatch,
+        mockShowPalletQtyModal,
+        mocksetShowPalletQtyUpdateModal,
+        false,
+        mockVendorPackQty
+      )
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
   describe('Manage ReserveAdjustmentScreen externalized function tests', () => {
     const mockDispatch = jest.fn();
     const mockSetGetItemPalletsError = jest.fn();
@@ -165,6 +194,10 @@ describe('ReserveAdjustmentScreen', () => {
     const mockTrackEvent = jest.fn();
     const mockUpcNbr = '12345678';
 
+    const mockScannedEvent = {
+      type: 'TEST',
+      value: '4598'
+    };
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -262,6 +295,45 @@ describe('ReserveAdjustmentScreen', () => {
           ]
         },
         type: 'SAGA/DELETE_UPCS'
+      });
+    });
+    it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      getScannedPalletEffect(
+        navigationProp,
+        mockScannedEvent,
+        itemPallets.pallets,
+        mockDispatch,
+        mocksetShowPalletQtyUpdateModal
+      );
+      expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalled();
+      expect(mocksetShowPalletQtyUpdateModal).toHaveBeenCalledWith(true);
+      expect(mockDispatch).toHaveBeenCalled();
+    });
+    it('Tests getScannedPalletEffect shows error toast if the scanned pallet not associated with the item', () => {
+      const mocksetShowPalletQtyUpdateModal = jest.fn();
+      const mockReserveLocations = [
+        {
+          palletId: 5999,
+          quantity: 22,
+          sectionId: 5578,
+          locationName: 'D1-4',
+          mixedPallet: false,
+          newQty: 16
+        }
+      ];
+      getScannedPalletEffect(
+        navigationProp,
+        mockScannedEvent,
+        mockReserveLocations,
+        mockDispatch,
+        mocksetShowPalletQtyUpdateModal
+      );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.SCAN_PALLET_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
       });
     });
   });
