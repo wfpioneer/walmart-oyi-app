@@ -1467,7 +1467,7 @@ Array [
                       }
                     }
                   >
-                    [missing "en.AUDITS.VALIDATE_SCAN_QUANTITY" translation]
+                    [missing "en.AUDITS.VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED" translation]
                   </Text>
                 </View>
               </View>
