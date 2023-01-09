@@ -192,6 +192,16 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
     flexDirection: 'row',
     justifyContent: 'flex-end'
+  },
+  bgWhite: {
+    backgroundColor: COLOR.WHITE
+  },
+  errorContainer: {
+    backgroundColor: COLOR.WHITE,
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

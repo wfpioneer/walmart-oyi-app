@@ -477,6 +477,67 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with api waiting 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.REPLENISHMENT" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.ON_ORDER" translation]
+    </Text>
+    <Text>
+      48
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+      }
+    }
+  >
+    <ActivityIndicator
+      animating={true}
+      color="#0071e9"
+      hidesWhenStopped={true}
+      size="large"
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with delivery history 1`] = `
 <View>
   <View
@@ -522,7 +583,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
       Object {
         "action": "replenishment_history_clicked",
         "otherInfo": Object {
-          "itemNbr": 1234567890,
+          "itemNbr": 123,
         },
         "screen": "Review_Item_Details",
       }
@@ -531,18 +592,97 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
     titleStyle={Object {}}
   >
     <RenderItemHistoryCard
-      date="2022-07-26"
-      qty={23}
-    />
-    <RenderItemHistoryCard
-      date="2022-07-25"
-      qty={44}
-    />
-    <RenderItemHistoryCard
-      date="2022-06-23"
-      qty={23}
+      date="2022-10-03T17:55:50Z"
+      qty={9}
     />
   </CollapsibleCard>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders replenishment card with error 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.REPLENISHMENT" translation]
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 1,
+        "paddingHorizontal": 10,
+        "paddingVertical": 8,
+      }
+    }
+  >
+    <Text>
+      [missing "en.ITEM.ON_ORDER" translation]
+    </Text>
+    <Text>
+      48
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+        "justifyContent": "center",
+        "padding": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.ERROR_PI_DELIVERY_HISTORY" translation]
+    </Text>
+    <TouchableOpacity
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#e57373",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 10,
+          "width": "95%",
+        }
+      }
+      testID="piHistoryError"
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -591,7 +731,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
       Object {
         "action": "replenishment_history_clicked",
         "otherInfo": Object {
-          "itemNbr": 987654321,
+          "itemNbr": 123,
         },
         "screen": "Review_Item_Details",
       }
@@ -698,6 +838,371 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders 
     <Text>
       50
     </Text>
+  </View>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders renderSalesGraphV3 card with api waiting 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "stretch",
+      "backgroundColor": "#ffffffff",
+      "marginTop": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#f5f5f5",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingHorizontal": 10,
+        "paddingVertical": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "marginLeft": 0,
+            }
+          }
+        >
+          [missing "en.ITEM.SALES_METRICS" translation]
+        </Text>
+        
+      </View>
+    </View>
+  </View>
+  <ActivityIndicator
+    animating={true}
+    color="#0071e9"
+    hidesWhenStopped={true}
+    size="large"
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+  />
+  <View />
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "padding": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#757575",
+        }
+      }
+    >
+      [missing "en.ITEM.TOGGLE_GRAPH" translation]
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders renderSalesGraphV3 card with error 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "stretch",
+      "backgroundColor": "#ffffffff",
+      "marginTop": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#f5f5f5",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingHorizontal": 10,
+        "paddingVertical": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "marginLeft": 0,
+            }
+          }
+        >
+          [missing "en.ITEM.SALES_METRICS" translation]
+        </Text>
+        
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+        "justifyContent": "center",
+        "padding": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.ERROR_PI_SALES_HISTORY" translation]
+    </Text>
+    <TouchableOpacity
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#e57373",
+          "borderRadius": 4,
+          "height": 40,
+          "justifyContent": "center",
+          "marginVertical": 10,
+          "width": "95%",
+        }
+      }
+      testID="piHistoryError"
+    >
+      <Text>
+        [missing "en.GENERICS.RETRY" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "padding": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={24}
+          onPress={[Function]}
+          radius={5}
+          title="[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={14}
+          titleFontWeight="bold"
+          type={3}
+          width={-1}
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders renderSalesGraphV3 card with sales history 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "stretch",
+      "backgroundColor": "#ffffffff",
+      "marginTop": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#f5f5f5",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingHorizontal": 10,
+        "paddingVertical": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "marginLeft": 0,
+            }
+          }
+        >
+          [missing "en.ITEM.SALES_METRICS" translation]
+        </Text>
+        
+      </View>
+    </View>
+  </View>
+  <SalesMetrics
+    isGraphView={false}
+    itemSalesHistory={
+      Object {
+        "daily": Array [
+          Object {
+            "day": "2023-01-09T00:00:00.000Z",
+            "value": 0,
+          },
+          Object {
+            "day": "2023-01-08T00:00:00.000Z",
+            "value": 0,
+          },
+          Object {
+            "day": "2023-01-07T00:00:00.000Z",
+            "value": 0,
+          },
+          Object {
+            "day": "2023-01-06T00:00:00.000Z",
+            "value": 0,
+          },
+          Object {
+            "day": "2023-01-05T00:00:00.000Z",
+            "value": 0,
+          },
+          Object {
+            "day": "2023-01-04T00:00:00.000Z",
+            "value": 0,
+          },
+          Object {
+            "day": "2023-01-03T00:00:00.000Z",
+            "value": 0,
+          },
+        ],
+        "dailyAvgSales": 0,
+        "weekly": Array [
+          Object {
+            "value": 0,
+            "week": 49,
+          },
+          Object {
+            "value": 0,
+            "week": 48,
+          },
+          Object {
+            "value": 0,
+            "week": 47,
+          },
+          Object {
+            "value": 0,
+            "week": 46,
+          },
+          Object {
+            "value": 0,
+            "week": 45,
+          },
+        ],
+        "weeklyAvgSales": 0,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "padding": 16,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "flex-end",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={24}
+          onPress={[Function]}
+          radius={5}
+          title="[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={14}
+          titleFontWeight="bold"
+          type={3}
+          width={-1}
+        />
+      </View>
+    </View>
   </View>
 </View>
 `;
@@ -1997,171 +2502,63 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "code": 200,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
-                    "date": "2022-06-23",
-                    "qty": 23,
-                  },
-                  Object {
-                    "date": "2022-07-25",
-                    "qty": 44,
-                  },
-                  Object {
-                    "date": "2022-07-26",
-                    "qty": 23,
-                  },
-                ],
-              },
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 10,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 100,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 39,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 26,
-                    "week": 52,
-                  },
-                  Object {
-                    "value": 45,
-                    "week": 53,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 54,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 55,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 100,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 39,
+                  "week": 51,
+                },
+                Object {
+                  "value": 26,
+                  "week": 52,
+                },
+                Object {
+                  "value": 45,
+                  "week": 53,
+                },
+                Object {
+                  "value": 34,
+                  "week": 54,
+                },
+                Object {
+                  "value": 34,
+                  "week": 55,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />
@@ -2749,34 +3146,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                 48
               </Text>
             </View>
-            <CollapsibleCard
-              icon=""
-              isOpened={false}
-              source={
-                Object {
-                  "action": "replenishment_history_clicked",
-                  "otherInfo": Object {
-                    "itemNbr": 1234567890,
-                  },
-                  "screen": "Review_Item_Details",
-                }
-              }
-              title="[missing \\"en.ITEM.HISTORY\\" translation]"
-              titleStyle={Object {}}
-            >
-              <RenderItemHistoryCard
-                date="2022-07-26"
-                qty={23}
-              />
-              <RenderItemHistoryCard
-                date="2022-07-25"
-                qty={44}
-              />
-              <RenderItemHistoryCard
-                date="2022-06-23"
-                qty={23}
-              />
-            </CollapsibleCard>
+            <View />
           </View>
         </View>
       </React.Fragment>
@@ -2916,176 +3286,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
         title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
       >
-        <SalesMetrics
-          isGraphView={false}
-          itemDetails={
-            Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "code": 200,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
-                    "date": "2022-06-23",
-                    "qty": 23,
-                  },
-                  Object {
-                    "date": "2022-07-25",
-                    "qty": 44,
-                  },
-                  Object {
-                    "date": "2022-07-26",
-                    "qty": 23,
-                  },
-                ],
-              },
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 10,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 100,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 39,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 26,
-                    "week": 52,
-                  },
-                  Object {
-                    "value": 45,
-                    "week": 53,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 54,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 55,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
-            }
-          }
-        />
+        <View />
       </SFTCard>
     </View>
   </ScrollView>
@@ -3484,150 +3685,59 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Store Use",
-              "categoryNbr": 99,
-              "claimsOnHandQty": 5,
-              "cloudQty": 42,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 0,
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Small, Store Use Item",
-              "itemNbr": 987654321,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 20,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 0,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 10,
-                    "week": 1,
-                  },
-                  Object {
-                    "value": 27,
-                    "week": 2,
-                  },
-                  Object {
-                    "value": 10,
-                    "week": 3,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "777555333",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 0,
+                  "week": 51,
+                },
+                Object {
+                  "value": 10,
+                  "week": 1,
+                },
+                Object {
+                  "value": 27,
+                  "week": 2,
+                },
+                Object {
+                  "value": 10,
+                  "week": 3,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />
@@ -4009,150 +4119,59 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 40,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 0,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 10,
-                    "week": 1,
-                  },
-                  Object {
-                    "value": 27,
-                    "week": 2,
-                  },
-                  Object {
-                    "value": 10,
-                    "week": 3,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 0,
+                  "week": 51,
+                },
+                Object {
+                  "value": 10,
+                  "week": 1,
+                },
+                Object {
+                  "value": 27,
+                  "week": 2,
+                },
+                Object {
+                  "value": 10,
+                  "week": 3,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />
@@ -4534,171 +4553,63 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "code": 200,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
-                    "date": "2022-06-23",
-                    "qty": 23,
-                  },
-                  Object {
-                    "date": "2022-07-25",
-                    "qty": 44,
-                  },
-                  Object {
-                    "date": "2022-07-26",
-                    "qty": 23,
-                  },
-                ],
-              },
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 10,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 100,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 39,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 26,
-                    "week": 52,
-                  },
-                  Object {
-                    "value": 45,
-                    "week": 53,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 54,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 55,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 100,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 39,
+                  "week": 51,
+                },
+                Object {
+                  "value": 26,
+                  "week": 52,
+                },
+                Object {
+                  "value": 45,
+                  "week": 53,
+                },
+                Object {
+                  "value": 34,
+                  "week": 54,
+                },
+                Object {
+                  "value": 34,
+                  "week": 55,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />
@@ -5080,171 +4991,63 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "code": 200,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
-                    "date": "2022-06-23",
-                    "qty": 23,
-                  },
-                  Object {
-                    "date": "2022-07-25",
-                    "qty": 44,
-                  },
-                  Object {
-                    "date": "2022-07-26",
-                    "qty": 23,
-                  },
-                ],
-              },
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 10,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 100,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 39,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 26,
-                    "week": 52,
-                  },
-                  Object {
-                    "value": 45,
-                    "week": 53,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 54,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 55,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 100,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 39,
+                  "week": 51,
+                },
+                Object {
+                  "value": 26,
+                  "week": 52,
+                },
+                Object {
+                  "value": 45,
+                  "week": 53,
+                },
+                Object {
+                  "value": 34,
+                  "week": 54,
+                },
+                Object {
+                  "value": 34,
+                  "week": 55,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />
@@ -5626,171 +5429,63 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "code": 200,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
-                    "date": "2022-06-23",
-                    "qty": 23,
-                  },
-                  Object {
-                    "date": "2022-07-25",
-                    "qty": 44,
-                  },
-                  Object {
-                    "date": "2022-07-26",
-                    "qty": 23,
-                  },
-                ],
-              },
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 10,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 100,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 39,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 26,
-                    "week": 52,
-                  },
-                  Object {
-                    "value": 45,
-                    "week": 53,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 54,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 55,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 100,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 39,
+                  "week": 51,
+                },
+                Object {
+                  "value": 26,
+                  "week": 52,
+                },
+                Object {
+                  "value": 45,
+                  "week": 53,
+                },
+                Object {
+                  "value": 34,
+                  "week": 54,
+                },
+                Object {
+                  "value": 34,
+                  "week": 55,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />
@@ -6172,171 +5867,63 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "code": 200,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
-                    "date": "2022-06-23",
-                    "qty": 23,
-                  },
-                  Object {
-                    "date": "2022-07-25",
-                    "qty": 44,
-                  },
-                  Object {
-                    "date": "2022-07-26",
-                    "qty": 23,
-                  },
-                ],
-              },
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 10,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 100,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 39,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 26,
-                    "week": 52,
-                  },
-                  Object {
-                    "value": 45,
-                    "week": 53,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 54,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 55,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 100,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 39,
+                  "week": 51,
+                },
+                Object {
+                  "value": 26,
+                  "week": 52,
+                },
+                Object {
+                  "value": 45,
+                  "week": 53,
+                },
+                Object {
+                  "value": 34,
+                  "week": 54,
+                },
+                Object {
+                  "value": 34,
+                  "week": 55,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />
@@ -6718,171 +6305,63 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
-          itemDetails={
+          itemSalesHistory={
             Object {
-              "backroomQty": 6,
-              "basePrice": 15.05,
-              "categoryDesc": "Meat PI",
-              "categoryNbr": 93,
-              "claimsOnHandQty": 5,
-              "cloudQty": undefined,
-              "code": 200,
-              "color": "red",
-              "completed": false,
-              "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
-                    "date": "2022-06-23",
-                    "qty": 23,
-                  },
-                  Object {
-                    "date": "2022-07-25",
-                    "qty": 44,
-                  },
-                  Object {
-                    "date": "2022-07-26",
-                    "qty": 23,
-                  },
-                ],
-              },
-              "exceptionType": "nsfl",
-              "grossProfit": 2.5,
-              "imageBlobKey": undefined,
-              "imageUrlKey": undefined,
-              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
-              "itemNbr": 1234567890,
-              "location": Object {
-                "count": 5,
-                "floor": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Sales Floor",
-                    "typeNbr": 8,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 0,
-                    "aisleName": "1",
-                    "locationName": "A1-2",
-                    "sectionId": 2,
-                    "sectionName": "2",
-                    "type": "End Cap",
-                    "typeNbr": 12,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-3",
-                    "sectionId": 3,
-                    "sectionName": "3",
-                    "type": "Pod",
-                    "typeNbr": 13,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-4",
-                    "sectionId": 4,
-                    "sectionName": "4",
-                    "type": "Display",
-                    "typeNbr": 11,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-                "reserve": Array [
-                  Object {
-                    "aisleId": 1,
-                    "aisleName": "1",
-                    "locationName": "A1-1",
-                    "qty": 10,
-                    "sectionId": 1,
-                    "sectionName": "1",
-                    "type": "Reserve",
-                    "typeNbr": 7,
-                    "zoneId": 0,
-                    "zoneName": "A",
-                  },
-                ],
-              },
-              "margin": 14,
-              "onHandsQty": 42,
-              "pendingOnHandsQty": -999,
-              "price": 2000.94,
-              "replenishment": Object {
-                "onOrder": 48,
-              },
-              "sales": Object {
-                "daily": Array [
-                  Object {
-                    "day": "2020-07-08",
-                    "value": 100,
-                  },
-                  Object {
-                    "day": "2020-07-09",
-                    "value": 0,
-                  },
-                  Object {
-                    "day": "2020-07-10",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-11",
-                    "value": 10,
-                  },
-                  Object {
-                    "day": "2020-07-12",
-                    "value": 42,
-                  },
-                  Object {
-                    "day": "2020-07-13",
-                    "value": 5,
-                  },
-                  Object {
-                    "day": "2020-07-14",
-                    "value": 1,
-                  },
-                ],
-                "dailyAvgSales": 15,
-                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
-                    "value": 39,
-                    "week": 51,
-                  },
-                  Object {
-                    "value": 26,
-                    "week": 52,
-                  },
-                  Object {
-                    "value": 45,
-                    "week": 53,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 54,
-                  },
-                  Object {
-                    "value": 34,
-                    "week": 55,
-                  },
-                ],
-                "weeklyAvgSales": 10,
-              },
-              "size": 88,
-              "status": "Active",
-              "upcNbr": "000055559999",
-              "vendorPackQty": 33,
+              "daily": Array [
+                Object {
+                  "day": "2020-07-08",
+                  "value": 100,
+                },
+                Object {
+                  "day": "2020-07-09",
+                  "value": 0,
+                },
+                Object {
+                  "day": "2020-07-10",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-11",
+                  "value": 10,
+                },
+                Object {
+                  "day": "2020-07-12",
+                  "value": 42,
+                },
+                Object {
+                  "day": "2020-07-13",
+                  "value": 5,
+                },
+                Object {
+                  "day": "2020-07-14",
+                  "value": 1,
+                },
+              ],
+              "dailyAvgSales": 15,
+              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+              "weekly": Array [
+                Object {
+                  "value": 39,
+                  "week": 51,
+                },
+                Object {
+                  "value": 26,
+                  "week": 52,
+                },
+                Object {
+                  "value": 45,
+                  "week": 53,
+                },
+                Object {
+                  "value": 34,
+                  "week": 54,
+                },
+                Object {
+                  "value": 34,
+                  "week": 55,
+                },
+              ],
+              "weeklyAvgSales": 10,
             }
           }
         />

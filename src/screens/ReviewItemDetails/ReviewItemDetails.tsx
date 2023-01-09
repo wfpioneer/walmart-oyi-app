@@ -18,7 +18,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  createNewPick, getItemDetails, getItemDetailsV2, noAction, updateOHQty
+  createNewPick, getItemDetails, getItemDetailsV3, getItemPiHistory, getItemPiSalesHistory, noAction, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -48,7 +48,8 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, NO_ACTION, UPDATE_OH_QTY
+  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
+  NO_ACTION, UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
@@ -74,6 +75,8 @@ export interface ItemDetailsScreenProps {
   scannedEvent: { value: string | null; type: string | null; };
   isManualScanEnabled: boolean;
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
+  isPiHistWaiting: boolean; piHistError: AxiosError | null; piHistResult: AxiosResponse | null;
+  isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -422,60 +425,122 @@ export const renderPickHistory = (
   );
 };
 
-export const renderReplenishmentHistory = (
-  itemDetails: ItemDetails
+const onPiSalesHistRetryClick = (
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
+  dispatch: Dispatch<any>
 ) => {
-  const { deliveryHistory } = itemDetails;
-  const replenishmentHistorySource: TrackEventSource = {
-    screen: REVIEW_ITEM_DETAILS,
-    action: 'replenishment_history_clicked',
-    otherInfo: { itemNbr: itemDetails.itemNbr }
-  };
-  if (deliveryHistory?.deliveries && deliveryHistory.deliveries.length) {
-    const data = [...deliveryHistory.deliveries].sort((a, b) => {
-      const date1 = new Date(a.date);
-      const date2 = new Date(b.date);
-      return date2 > date1 ? 1 : -1;
-    });
+  trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_sales_hist_retry_click', itemNbr });
+  dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+  return dispatch(getItemPiSalesHistory(itemNbr));
+};
+
+const onPiHistRetryClick = (
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
+  dispatch: Dispatch<any>
+) => {
+  trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_sales_hist_retry_click', itemNbr });
+  dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+  return dispatch(getItemPiHistory(itemNbr));
+};
+
+export const renderPiHistoryOrPiSalesHistoryError = (
+  isPiHist: boolean,
+  error: AxiosError | null,
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
+  dispatch: Dispatch<any>,
+  message?: string
+) => {
+  if (error || message) {
     return (
-      <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
-        {data.slice(0, 5).map((item, index) => {
-          const key = `delivery-${index}`;
-          return (
-            <RenderItemHistoryCard
-              key={key}
-              date={item.date}
-              qty={item.qty}
-            />
-          );
-        })}
-      </CollapsibleCard>
+      <View style={styles.errorContainer}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>
+          {strings(isPiHist ? 'ITEM.ERROR_PI_DELIVERY_HISTORY' : 'ITEM.ERROR_PI_SALES_HISTORY')}
+        </Text>
+        <TouchableOpacity
+          testID="piHistoryError"
+          style={styles.errorButton}
+          onPress={() => {
+            if (isPiHist) {
+              onPiHistRetryClick(trackEventCall, itemNbr, dispatch);
+            } else {
+              onPiSalesHistRetryClick(trackEventCall, itemNbr, dispatch);
+            }
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
   return (
-    <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
-      <View style={styles.noDataContainer}>
-        <Text>{strings('ITEM.NO_HISTORY')}</Text>
-      </View>
-    </CollapsibleCard>
+    <View />
   );
 };
 
-export const renderReplenishmentCard = (
-  itemDetails: ItemDetails
+export const renderReplenishmentHistory = (
+  result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  dispatch: Dispatch<any>
 ) => {
-  const { replenishment } = itemDetails;
-  return (
-    <View>
-      <View style={styles.replenishmentContainer}>
-        <Text>{strings('ITEM.REPLENISHMENT')}</Text>
+  if (isWaiting) {
+    return (
+      <View style={styles.bgWhite}>
+        <ActivityIndicator
+          animating={true}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.completeActivityIndicator}
+        />
       </View>
-      <View style={styles.replenishmentOrder}>
-        <Text>{strings('ITEM.ON_ORDER')}</Text>
-        <Text>{replenishment.onOrder}</Text>
-      </View>
-      {renderReplenishmentHistory(itemDetails)}
-    </View>
+    );
+  }
+
+  if (result?.status === SUCCESS_STATUS) {
+    const deliveryHistory = result?.data;
+    const replenishmentHistorySource: TrackEventSource = {
+      screen: REVIEW_ITEM_DETAILS,
+      action: 'replenishment_history_clicked',
+      otherInfo: { itemNbr }
+    };
+    if (deliveryHistory?.deliveries && deliveryHistory.deliveries.length) {
+      const data = [...deliveryHistory.deliveries].sort((a, b) => {
+        const date1 = new Date(a.date);
+        const date2 = new Date(b.date);
+        return date2 > date1 ? 1 : -1;
+      });
+      return (
+        <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
+          {data.slice(0, 5).map((item, index) => {
+            const key = `delivery-${index}`;
+            return (
+              <RenderItemHistoryCard
+                key={key}
+                date={item.date}
+                qty={item.qty}
+              />
+            );
+          })}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
+        <View style={styles.noDataContainer}>
+          <Text>{strings('ITEM.NO_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return renderPiHistoryOrPiSalesHistoryError(
+    true,
+    error,
+    trackEventCall, itemNbr, dispatch,
+    result?.data?.message
   );
 };
 
@@ -651,6 +716,54 @@ export const renderLocationComponent = (
   );
 };
 
+export const renderReplenishmentCard = (
+  itemDetails: ItemDetails,
+  result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  dispatch: Dispatch<any>
+) => (
+  <View>
+    <View style={styles.replenishmentContainer}>
+      <Text>{strings('ITEM.REPLENISHMENT')}</Text>
+    </View>
+    <View style={styles.replenishmentOrder}>
+      <Text>{strings('ITEM.ON_ORDER')}</Text>
+      <Text>{itemDetails.replenishment.onOrder}</Text>
+    </View>
+    {renderReplenishmentHistory(result, error, isWaiting, trackEventCall, itemNbr, dispatch)}
+  </View>
+);
+
+export const renderSalesGraphV3 = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
+  isSalesMetricsGraphView: boolean, result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  dispatch: Dispatch<any>): JSX.Element => (
+    <SFTCard
+      title={strings('ITEM.SALES_METRICS')}
+      subTitle={updatedSalesTS}
+      bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
+      bottomRightBtnAction={isWaiting ? undefined : [toggleSalesGraphView]}
+    >
+      {isWaiting && (
+      <ActivityIndicator
+        animating={true}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.completeActivityIndicator}
+      />
+      )}
+      {result?.status === SUCCESS_STATUS
+        ? <SalesMetrics itemSalesHistory={result?.data} isGraphView={isSalesMetricsGraphView} />
+        : renderPiHistoryOrPiSalesHistoryError(
+          false,
+          error,
+          trackEventCall, itemNbr, dispatch,
+          result?.data?.message
+        )}
+    </SFTCard>
+);
+
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
   // Checks orchestration response status for itemDetails only.
@@ -663,7 +776,7 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
         bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
         bottomRightBtnAction={[toggleSalesGraphView]}
       >
-        <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+        <SalesMetrics itemSalesHistory={itemDetails.sales} isGraphView={isSalesMetricsGraphView} />
       </SFTCard>
     );
   }
@@ -675,7 +788,7 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
         bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
         bottomRightBtnAction={[toggleSalesGraphView]}
       >
-        <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+        <SalesMetrics itemSalesHistory={itemDetails.sales} isGraphView={isSalesMetricsGraphView} />
       </SFTCard>
     );
   }
@@ -882,14 +995,19 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         // TODO revert V2 changes once BE orchestration is pushed to production
         if (userConfigs.additionalItemDetails) {
           dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
+          dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+          dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+          const itemNbr = parseInt(scannedEvent.value, 10);
           dispatch(
-            getItemDetailsV2(
+            getItemDetailsV3(
               {
-                id: parseInt(scannedEvent.value, 10),
+                id: itemNbr,
                 getMetadataHistory: userConfigs.additionalItemDetails
               }
             )
           );
+          dispatch(getItemPiHistory(itemNbr));
+          dispatch(getItemPiSalesHistory(itemNbr));
         } else {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
@@ -964,7 +1082,7 @@ export const isError = (
             style={styles.errorButton}
             onPress={() => {
               trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
-              return additionalItemDetails ? dispatch(getItemDetailsV2({ id: parseInt(scannedValue, 10) }))
+              return additionalItemDetails ? dispatch(getItemDetailsV3({ id: parseInt(scannedValue, 10) }))
                 : dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
             }}
           >
@@ -992,6 +1110,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const {
     scannedEvent, isManualScanEnabled,
     isWaiting, error, result,
+    isPiHistWaiting, piHistError, piHistResult,
+    isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
     completeItemApi,
     createNewPickApi,
     updateOHQtyApi,
@@ -1170,7 +1290,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
       if (additionalItemDetails) {
         dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
-        dispatch(getItemDetailsV2({ id: itemDetails.itemNbr }));
+        dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+        dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+        dispatch(getItemDetailsV3({ id: itemDetails.itemNbr }));
+        dispatch(getItemPiHistory(itemDetails.itemNbr));
+        dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
       } else {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemDetails.itemNbr }));
@@ -1271,7 +1395,10 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                   {renderOHChangeHistory(props, itemOhChangeHistory, result, itemDetails.itemNbr)}
                 </View>
                 <View style={styles.historyContainer}>
-                  {renderReplenishmentCard(itemDetails)}
+                  {renderReplenishmentCard(
+                    itemDetails, piHistResult, piHistError, isPiHistWaiting,
+                    trackEventCall, itemDetails.itemNbr, dispatch
+                  )}
                 </View>
               </>
             )}
@@ -1298,8 +1425,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 {renderPickHistory(props, picklistHistory, result, itemDetails.itemNbr)}
               </View>
             )}
-            {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
-              itemDetails, isSalesMetricsGraphView)}
+            {!additionalItemDetails && (renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
+              itemDetails, isSalesMetricsGraphView))}
+            {additionalItemDetails && (
+              renderSalesGraphV3(updatedSalesTS, toggleSalesGraphView, isSalesMetricsGraphView,
+                piSalesHistResult, piSalesHistError, isPiSalesHistWaiting, trackEventCall,
+                itemDetails.itemNbr, dispatch))}
           </View>
           )}
       </ScrollView>
@@ -1314,7 +1445,9 @@ const ReviewItemDetails = (): JSX.Element => {
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
-  const getItemDetailsV2Api = useTypedSelector(state => state.async.getItemDetailsV2);
+  const getItemDetailsV3Api = useTypedSelector(state => state.async.getItemDetailsV3);
+  const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
+  const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
     exceptionType,
@@ -1342,9 +1475,15 @@ const ReviewItemDetails = (): JSX.Element => {
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
-      isWaiting={userConfigs.additionalItemDetails ? getItemDetailsV2Api.isWaiting : isWaiting}
-      error={userConfigs.additionalItemDetails ? getItemDetailsV2Api.error : error}
-      result={userConfigs.additionalItemDetails ? getItemDetailsV2Api.result : result}
+      isWaiting={userConfigs.additionalItemDetails ? getItemDetailsV3Api.isWaiting : isWaiting}
+      error={userConfigs.additionalItemDetails ? getItemDetailsV3Api.error : error}
+      result={userConfigs.additionalItemDetails ? getItemDetailsV3Api.result : result}
+      isPiHistWaiting={userConfigs.additionalItemDetails ? getItemPiHistoryApi.isWaiting : false}
+      piHistError={getItemPiHistoryApi.error}
+      piHistResult={getItemPiHistoryApi.result}
+      isPiSalesHistWaiting={getItemPiSalesHistoryApi.isWaiting}
+      piSalesHistError={getItemPiSalesHistoryApi.error}
+      piSalesHistResult={getItemPiSalesHistoryApi.result}
       completeItemApi={completeItemApi}
       createNewPickApi={createNewPickApi}
       updateOHQtyApi={updateOHQtyApi}

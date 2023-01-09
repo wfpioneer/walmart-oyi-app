@@ -144,7 +144,9 @@ export default {
     GROSS_PROFIT: 'Gross Profit',
     HISTORY: 'History',
     NO_HISTORY: 'No history available',
-    RESERVE_ADJUSTMENT: 'Reserve Adjustment'
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment',
+    ERROR_PI_DELIVERY_HISTORY: 'There was an error pulling the delivery history. Please try again.',
+    ERROR_PI_SALES_HISTORY: 'There was an error pulling the sales history. Please try again.'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

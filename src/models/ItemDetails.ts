@@ -40,6 +40,29 @@ export interface PickHistory {
   createTS: string
 }
 
+export interface ItemSalesHistory {
+  lastUpdateTs: string;
+  dailyAvgSales: number;
+  daily: {
+    day: string;
+    value: number;
+  }[];
+  weeklyAvgSales: number;
+  weekly: {
+    week: number;
+    value: number;
+  }[];
+  error?: string
+}
+
+export interface ItemDeliveryHistory {
+  deliveries?: {
+    date: string;
+    qty: number;
+  }[];
+  error?: string;
+}
+
 interface ItemDetails {
   code: number;
   message?: string;
@@ -75,27 +98,8 @@ interface ItemDetails {
     reserve?: Location[];
     count: number;
   };
-  sales: {
-    lastUpdateTs: string;
-    dailyAvgSales: number;
-    daily: {
-      day: string;
-      value: number;
-    }[];
-    weeklyAvgSales: number;
-    weekly: {
-      week: number;
-      value: number;
-    }[];
-    error?: string
-  };
-  deliveryHistory: {
-    deliveries?: {
-      date: string;
-      qty: number;
-    }[];
-    error?: string;
-  }
+  sales: ItemSalesHistory;
+  deliveryHistory: ItemDeliveryHistory;
 }
 export interface ItemOHChangeHistory {
   code: number;
