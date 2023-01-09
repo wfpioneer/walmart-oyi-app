@@ -98,8 +98,8 @@ interface ItemDetails {
     reserve?: Location[];
     count: number;
   };
-  sales: ItemSalesHistory;
-  deliveryHistory: ItemDeliveryHistory;
+  sales?: ItemSalesHistory;
+  deliveryHistory?: ItemDeliveryHistory;
 }
 export interface ItemOHChangeHistory {
   code: number;
