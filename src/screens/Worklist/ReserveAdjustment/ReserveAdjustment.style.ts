@@ -23,5 +23,26 @@ export default StyleSheet.create({
   },
   marginBottomStyles: {
     marginBottom: 6
+  },
+  buttonContainer: {
+    width: '100%',
+    justifyContent: 'space-evenly',
+    alignContent: 'space-around',
+    flexDirection: 'row',
+    paddingTop: 10
+  },
+  button: {
+    flex: 1,
+    paddingHorizontal: 10
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 15
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

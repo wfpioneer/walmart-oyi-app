@@ -3,14 +3,15 @@
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
-import { render } from '@testing-library/react-native';
 import { mockConfig } from '../../../mockData/mockConfig';
 import {
   ReserveAdjustmentScreen,
   ReserveAdjustmentScreenProps,
   getItemPalletsApiHook,
   getScannedPalletEffect,
+  renderDeleteLocationModal,
   renderpalletQtyUpdateModal
 } from './ReserveAdjustment';
 import { AsyncState } from '../../../models/AsyncState';
@@ -81,6 +82,23 @@ const defaultAsyncState: AsyncState = {
   result: null
 };
 
+const successApi: AsyncState = {
+  ...defaultAsyncState,
+  result: {
+    status: 200
+  }
+};
+
+const mockLocToConfirm = {
+  locationName: 'ABAR1-1',
+  locationArea: '',
+  locationIndex: 1,
+  locationTypeNbr: 4567,
+  sectionId: 0,
+  palletId: 55689,
+  mixedPallet: false
+};
+
 const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
   itemDetails: null,
   userId: 'testUser',
@@ -98,6 +116,20 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
   setGetItemPalletsError: jest.fn(),
   countryCode: 'CN',
   useCallbackHook: jest.fn(),
+  deletePalletApi: defaultAsyncState,
+  deleteUpcsApi: defaultAsyncState,
+  locToConfirm: {
+    locationName: '',
+    locationArea: '',
+    locationIndex: -1,
+    locationTypeNbr: -1,
+    palletId: 0,
+    sectionId: 0,
+    mixedPallet: false
+  },
+  setLocToConfirm: jest.fn(),
+  setShowDeleteConfirmationModal: jest.fn(),
+  showDeleteConfirmationModal: false,
   isManualScanEnabled: false,
   scannedEvent: {
     value: null,
@@ -156,6 +188,11 @@ describe('ReserveAdjustmentScreen', () => {
     const mockSetGetItemPalletsError = jest.fn();
     const mockExistingReserveLocations: ItemPalletInfo[] = [];
     const mockItemDetails = getMockItemDetails('123');
+    const mockShowDeleteConfirmationModal = true;
+    const mockSetShowDeleteConfirmationModal = jest.fn();
+    const mockTrackEvent = jest.fn();
+    const mockUpcNbr = '12345678';
+
     const mockScannedEvent = {
       type: 'TEST',
       value: '4598'
@@ -163,7 +200,7 @@ describe('ReserveAdjustmentScreen', () => {
     afterEach(() => {
       jest.clearAllMocks();
     });
-    const successApi: AsyncState = {
+    const successItemPalletsApi: AsyncState = {
       ...defaultAsyncState,
       result: {
         data: mockItemDetails,
@@ -176,7 +213,7 @@ describe('ReserveAdjustmentScreen', () => {
     };
     it('Tests getItemPalletsApiHook on 200 success for a item', () => {
       getItemPalletsApiHook(
-        successApi,
+        successItemPalletsApi,
         mockDispatch,
         navigationProp,
         mockExistingReserveLocations,
@@ -215,6 +252,47 @@ describe('ReserveAdjustmentScreen', () => {
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetGetItemPalletsError).toBeCalledWith(true);
+    });
+    it('renders delete location modal based on the props and testing confirm delete actions', () => {
+      const { toJSON, getByTestId } = render(renderDeleteLocationModal(
+        successApi,
+        defaultAsyncState,
+        mockShowDeleteConfirmationModal,
+        mockSetShowDeleteConfirmationModal,
+        mockTrackEvent,
+        mockDispatch,
+        mockLocToConfirm,
+        mockUpcNbr
+      ));
+      expect(toJSON()).toMatchSnapshot();
+      const confirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(confirmButton);
+      expect(mockDispatch).toHaveBeenCalledWith({ payload: { palletId: 55689 }, type: 'SAGA/DELETE_PALLET' });
+    });
+    it('testing confirm delete actions when the pallet is mixed pallet', () => {
+      const updatedMockLocToConfirm = { ...mockLocToConfirm, mixedPallet: true };
+      const { getByTestId } = render(renderDeleteLocationModal(
+        successApi,
+        defaultAsyncState,
+        mockShowDeleteConfirmationModal,
+        mockSetShowDeleteConfirmationModal,
+        mockTrackEvent,
+        mockDispatch,
+        updatedMockLocToConfirm,
+        mockUpcNbr
+      ));
+      const confirmButton = getByTestId('modal-confirm-button');
+      fireEvent.press(confirmButton);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        payload: {
+          palletId: '55689',
+          removeExpirationDate: false,
+          upcs: [
+            '12345678'
+          ]
+        },
+        type: 'SAGA/DELETE_UPCS'
+      });
     });
     it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
       const mocksetShowPalletQtyUpdateModal = jest.fn();

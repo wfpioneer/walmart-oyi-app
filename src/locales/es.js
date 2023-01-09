@@ -144,7 +144,8 @@ export default {
     GROSS_PROFIT: 'Ganancia Bruta',
     HISTORY: 'Historial',
     NO_HISTORY: 'No hay historial disponible',
-    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega',
+    DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
