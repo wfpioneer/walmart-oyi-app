@@ -11,6 +11,7 @@ import {
   ReserveAdjustmentScreenProps,
   getItemPalletsApiHook,
   getScannedPalletEffect,
+  renderCalculatorModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal
 } from './ReserveAdjustment';
@@ -20,6 +21,7 @@ import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { strings } from '../../../locales';
 import { itemPallets } from '../../../mockData/getItemPallets';
+import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -137,7 +139,10 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
   },
   scannedPalletId: 0,
   showPalletQtyUpdateModal: false,
-  setShowPalletQtyUpdateModal: jest.fn()
+  setShowPalletQtyUpdateModal: jest.fn(),
+  showCalcModalState: [false, jest.fn()],
+  locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
+  updateMultiPalletUPCQtyApi: defaultAsyncState
 };
 
 describe('ReserveAdjustmentScreen', () => {
@@ -332,6 +337,58 @@ describe('ReserveAdjustmentScreen', () => {
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
+    });
+    it('Tests renderCalculatorModal close button action', () => {
+      const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
+        locationName: 'A1-1',
+        locationType: 'floor',
+        palletId: 3
+      };
+      const mockSetShowCalc = jest.fn();
+      const { getByTestId } = render(
+        renderCalculatorModal(
+          mockLocationListItem,
+          true,
+          mockSetShowCalc,
+          mockDispatch
+        )
+      );
+      const modalCloseButton = getByTestId('modal-close-button');
+      fireEvent.press(modalCloseButton);
+      expect(mockSetShowCalc).toHaveBeenCalledWith(false);
+      expect(mockSetShowCalc).toHaveBeenCalledTimes(1);
+    });
+
+    it('Tests renderCalculatorModal accept button action', () => {
+      const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
+        locationName: 'A1-1',
+        locationType: 'floor',
+        palletId: 3
+      };
+      const mockSetShowCalc = jest.fn();
+      jest.spyOn(React, 'useState').mockImplementation(() => ([5, jest.fn]));
+      const { getByTestId, update } = render(
+        renderCalculatorModal(
+          mockLocationListItem,
+          true,
+          mockSetShowCalc,
+          mockDispatch
+        )
+      );
+      const modalAcceptButton = getByTestId('modal-accept-button');
+      fireEvent.press(modalAcceptButton);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+
+      update(
+        renderCalculatorModal(
+          { ...mockLocationListItem, locationType: 'reserve' },
+          true,
+          mockSetShowCalc,
+          mockDispatch
+        )
+      );
+      fireEvent.press(modalAcceptButton);
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
   });
 });

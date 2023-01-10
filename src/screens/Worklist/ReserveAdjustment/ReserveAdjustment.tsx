@@ -39,7 +39,9 @@ import { strings } from '../../../locales';
 import Button, { ButtonType } from '../../../components/buttons/Button';
 import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/AuditItem';
 import { DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS } from '../../../state/actions/asyncAPI';
-import { deletePallet, deleteUpcs, getItemPallets } from '../../../state/actions/saga';
+import {
+  deletePallet, deleteUpcs, getItemPallets, updateMultiPalletUPCQty
+} from '../../../state/actions/saga';
 import {
   setReserveLocations, setScannedPalletId, updatePalletQty, updatePalletScannedStatus
 } from '../../../state/actions/ReserveAdjustmentScreen';
@@ -49,6 +51,8 @@ import { barcodeEmitter } from '../../../utils/scannerUtils';
 import { resetScannedEvent, setScannedEvent } from '../../../state/actions/Global';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
+import { UseStateType } from '../../../models/Generics';
+import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 
 export interface ReserveAdjustmentScreenProps {
     getItemPalletsApi: AsyncState;
@@ -97,6 +101,9 @@ export interface ReserveAdjustmentScreenProps {
       sectionId: number;
       mixedPallet: boolean;
     }>>;
+    updateMultiPalletUPCQtyApi: AsyncState;
+    showCalcModalState: UseStateType<boolean>;
+    locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
 }
 
 export const calculatePalletDecreaseQty = (
@@ -130,7 +137,9 @@ export const calculatePalletIncreaseQty = (
 const getReserveLocationList = (
   locations: ItemPalletInfo[],
   dispatch: Dispatch<any>,
-  handleDeleteReserveLocation: (loc: ItemPalletInfo, locIndex: number) => void
+  handleDeleteReserveLocation: (loc: ItemPalletInfo, locIndex: number) => void,
+  setLocation: React.Dispatch<React.SetStateAction<Pick<LocationList, 'locationName' | 'palletId' | 'locationType'>>>,
+  setShowCalcModal: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const locationLst: LocationList[] = [];
   if (locations && locations.length) {
@@ -155,7 +164,10 @@ const getReserveLocationList = (
             dispatch(updatePalletQty(loc.palletId, 0));
           }
         },
-        onCalcPress: () => {}
+        onCalcPress: () => {
+          setLocation({ locationName: loc.locationName, locationType: 'reserve', palletId: loc.palletId });
+          setShowCalcModal(true);
+        }
       });
     });
   }
@@ -350,6 +362,33 @@ export const disabledContinue = (
   loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
 );
 
+export const renderCalculatorModal = (
+  locationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>,
+  showCalcModal: boolean,
+  setShowCalcModal: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+) => {
+  const { locationName, palletId } = locationListItem;
+  return (
+    <CalculatorModal
+      visible={showCalcModal}
+      disableAcceptButton={(value: string): boolean => {
+        const calcValue = parseFloat(value);
+        return !(typeof (calcValue) === 'number' && calcValue % 1 === 0 && calcValue >= 0);
+      }}
+      showAcceptButton={true}
+      onClose={() => setShowCalcModal(false)}
+      onAccept={(value: string) => {
+        const calcValue = Number(value);
+        if (locationName !== '') {
+          dispatch(updatePalletQty(palletId, calcValue));
+          setShowCalcModal(false);
+        }
+      }}
+    />
+  );
+};
+
 export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JSX.Element => {
   const {
     route,
@@ -378,8 +417,14 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     scannedEvent,
     scannedPalletId,
     showPalletQtyUpdateModal,
-    setShowPalletQtyUpdateModal
+    setShowPalletQtyUpdateModal,
+    updateMultiPalletUPCQtyApi,
+    locationListState,
+    showCalcModalState
   } = props;
+
+  const [showCalcModal, setShowCalcModal] = showCalcModalState;
+  const [location, setLocation] = locationListState;
 
   const handleDeletePalletSuccess = (type: string) => {
     setShowDeleteConfirmationModal(false);
@@ -529,6 +574,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         userConfig.showCalculator,
         itemDetails?.vendorPackQty
       )}
+      {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
       <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
       )}
@@ -552,7 +598,13 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         }
       >
         <LocationListCard
-          locationList={getReserveLocationList(reserveLocations, dispatch, handleDeleteReserveLocation)}
+          locationList={getReserveLocationList(
+            reserveLocations,
+            dispatch,
+            handleDeleteReserveLocation,
+            setLocation,
+            setShowCalcModal
+          )}
           locationType="reserve"
           loading={getItemPalletsApi.isWaiting}
           error={getItemPalletsError}
@@ -580,6 +632,7 @@ const ReserveAdjustment = (): JSX.Element => {
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
+  const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
   const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);
@@ -598,7 +651,12 @@ const ReserveAdjustment = (): JSX.Element => {
     mixedPallet: false
   });
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
-
+  const showCalcModalState = useState(false);
+  const locationListState = useState({
+    locationName: '',
+    locationType: 'floor',
+    palletId: '-1'
+  });
   return (
     <ReserveAdjustmentScreen
       getItemPalletsApi={getItemPalletsApi}
@@ -628,6 +686,10 @@ const ReserveAdjustment = (): JSX.Element => {
       scannedPalletId={scannedPalletId}
       showPalletQtyUpdateModal={showPalletQtyUpdateModal}
       setShowPalletQtyUpdateModal={setShowPalletQtyUpdateModal}
+      updateMultiPalletUPCQtyApi={updateMultiPalletUPCQtyApi}
+      showCalcModalState={showCalcModalState}
+      // @ts-expect-error typechecking error with location type
+      locationListState={locationListState}
     />
   );
 };
