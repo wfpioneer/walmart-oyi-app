@@ -57,7 +57,7 @@ import { UseStateType } from '../../../models/Generics.d';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 
-const SCREEN_NAME = 'Reserve_Adjustment_Screen';
+export const SCREEN_NAME = 'Reserve_Adjustment_Screen';
 
 export interface ReserveAdjustmentScreenProps {
     getItemPalletsApi: AsyncState;
@@ -263,7 +263,7 @@ export const renderDeleteLocationModal = (
               testID="modal-cancel-button"
               onPress={() => {
                 setShowDeleteConfirmationModal(false);
-                trackEventCall('Reserve_Adjustment_Screen', { action: 'cancel_delete_location_click' });
+                trackEventCall(SCREEN_NAME, { action: 'cancel_delete_location_click' });
               }}
             />
             <Button
@@ -272,7 +272,7 @@ export const renderDeleteLocationModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.TRACKER_RED}
               onPress={() => {
-                trackEventCall('Reserve_Adjustment_Screen',
+                trackEventCall(SCREEN_NAME,
                   { action: 'missing_pallet_confirmation_click', palletId: locToConfirm.palletId });
                 if (locToConfirm.mixedPallet && upcNbr) {
                   dispatch(deleteUpcs({
@@ -459,8 +459,9 @@ export const renderConfirmOnHandsModal = (
               titleColor={COLOR.MAIN_THEME_COLOR}
               testID="modal-cancel-button"
               onPress={() => {
-                trackEventCall(SCREEN_NAME,
-                  { action: 'cancel_multi_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr });
+                trackEventCall(SCREEN_NAME, {
+                  action: 'cancel_multi_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr
+                });
                 setShowOnHandsConfirmationModal(false);
               }}
               type={2}
@@ -620,13 +621,13 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
       }
     }).catch(() => {
-      trackEventCall('Reserve_Adjustment_Screen', { action: 'session_timeout', user: userId });
+      trackEventCall(SCREEN_NAME, { action: 'session_timeout', user: userId });
     });
   };
 
   const handleDeleteReserveLocation = (loc: ItemPalletInfo, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('Audit_Item',
+      trackEventCall(SCREEN_NAME,
         { action: 'report_missing_pallet_click', location: JSON.stringify(loc), index: locIndex });
       setLocToConfirm({
         locationName: loc.locationName,
@@ -639,21 +640,21 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
       });
       setShowDeleteConfirmationModal(true);
     }).catch(() => {
-      trackEventCall('Reserve_Adjustment_Screen', { action: 'session_timeout', user: userId });
+      trackEventCall(SCREEN_NAME, { action: 'session_timeout', user: userId });
     });
   };
 
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name)
       .then(() => {
-        trackEventCall('Reserve_Adjustment_Screen',
+        trackEventCall(SCREEN_NAME,
           { action: 'refresh_reserve_loc', itemNumber: itemDetails?.itemNbr });
         if (itemDetails?.itemNbr) {
           dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
         }
       })
       .catch(() => {
-        trackEventCall('Reserve_Adjustment_Screen', { action: 'session_timeout', user: userId });
+        trackEventCall(SCREEN_NAME, { action: 'session_timeout', user: userId });
       });
   };
 
@@ -674,7 +675,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused() && userConfig.scanRequired) {
         validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall('Audit_Item', {
+          trackEventCall(SCREEN_NAME, {
             action: 'section_details_scan',
             value: scan.value,
             type: scan.type
