@@ -28,7 +28,7 @@ import {
   setPriceLabelPrinter as setPriceLabelPrinterAsyncStorage
 } from '../utils/asyncStorageUtils';
 import {
-  clearLocationPrintQueue, resetPrintQueue, setPriceLabelPrinter, updatePrinterByID
+  setPriceLabelPrinter, updatePrinterByID
 } from '../state/actions/Print';
 
 interface HomeNavigatorComponentProps {
@@ -42,8 +42,6 @@ interface HomeNavigatorComponentProps {
   updatePrinterByID: (payload: any) => void;
   priceLabelPrinter: Printer;
   setPriceLabelPrinter: (payload: Printer) => void;
-  resetPrintQueue: () => void;
-  clearLocationPrintQueue: () => void;
   userConfig: Configurations
 }
 
@@ -60,9 +58,7 @@ const mapDispatchToProps = {
   hideActivityModal,
   setManualScan,
   updatePrinterByID,
-  setPriceLabelPrinter,
-  resetPrintQueue,
-  clearLocationPrintQueue
+  setPriceLabelPrinter
 };
 
 const Stack = createStackNavigator();
@@ -148,8 +144,6 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
         WMSSO.signOutUser().then(() => {
           props.navigation.replace('Login');
           props.logoutUser();
-          props.resetPrintQueue();
-          props.clearLocationPrintQueue();
           if (Platform.OS === 'android') {
             props.hideActivityModal();
           }

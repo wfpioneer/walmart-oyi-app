@@ -19,11 +19,13 @@ import { ItemHistory } from './ItemHistory';
 import { AuditWorklist } from './AuditWorklist';
 import { AuditItemScreen } from './AuditItemScreen';
 import { ReserveAdjustmentScreen } from './ReserveAdjustmentScreen';
-
+import {
+  USER_LOGOUT
+} from '../actions/User';
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
  */
-const RootReducer = combineReducers({
+const AppReducer = combineReducers({
   User: UserReducer,
   modal,
   async: asyncReducer,
@@ -44,6 +46,14 @@ const RootReducer = combineReducers({
   AuditItemScreen,
   ReserveAdjustmentScreen
 });
+
+const RootReducer = (state: any, action: any) => {
+  if (action.type === USER_LOGOUT) {
+    return AppReducer(undefined, action);
+  }
+
+  return AppReducer(state, action);
+};
 
 export default RootReducer;
 
