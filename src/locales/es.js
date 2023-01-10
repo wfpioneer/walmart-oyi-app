@@ -145,6 +145,8 @@ export default {
     HISTORY: 'Historial',
     NO_HISTORY: 'No hay historial disponible',
     RESERVE_ADJUSTMENT: 'Ajuste de Bodega',
+    ERROR_PI_DELIVERY_HISTORY: 'Hubo un error mostrando el historial de entregas. Por favor inténtalo de nuevo',
+    ERROR_PI_SALES_HISTORY: 'Hubo un error mostrando el historial de ventas. Por favor inténtalo de nuevo',
     DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo'
   },
   PRINT: {
