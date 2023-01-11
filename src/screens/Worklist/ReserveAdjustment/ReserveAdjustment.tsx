@@ -849,7 +849,7 @@ const ReserveAdjustment = (): JSX.Element => {
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
   const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);
-  const showPalletQtyUpdateState = useState(false);
+  const showPalletQtyModalState = useState(false);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -897,7 +897,7 @@ const ReserveAdjustment = (): JSX.Element => {
       isManualScanEnabled={isManualScanEnabled}
       scannedEvent={scannedEvent}
       scannedPalletId={scannedPalletId}
-      showPalletQtyUpdateState={showPalletQtyUpdateState}
+      showPalletQtyModalState={showPalletQtyModalState}
       updateMultiPalletUPCQtyApi={updateMultiPalletUPCQtyApi}
       showCalcModalState={showCalcModalState}
       // @ts-expect-error typechecking error with location type
