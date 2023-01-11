@@ -83,7 +83,8 @@ export default {
     UNKNOWN: 'Unknown',
     MISSING_PALLETS: 'Missing Pallets',
     AUDITS: 'Audits',
-    ROLLOVER_AUDITS: 'Rollover Audits'
+    ROLLOVER_AUDITS: 'Rollover Audits',
+    NEG_SALES_FLOOR_QTY: 'Negative Sales Floor Quantity'
   },
   ITEM: {
     TITLE: 'Review item details',
