@@ -1104,6 +1104,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders re
   </View>
   <SalesMetrics
     isGraphView={false}
+    itemNbr={123}
     itemSalesHistory={
       Object {
         "daily": Array [
@@ -2502,6 +2503,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={1234567890}
           itemSalesHistory={
             Object {
               "daily": Array [
@@ -3685,6 +3687,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={987654321}
           itemSalesHistory={
             Object {
               "daily": Array [
@@ -4119,6 +4122,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={1234567890}
           itemSalesHistory={
             Object {
               "daily": Array [
@@ -4553,6 +4557,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={1234567890}
           itemSalesHistory={
             Object {
               "daily": Array [
@@ -4991,6 +4996,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={1234567890}
           itemSalesHistory={
             Object {
               "daily": Array [
@@ -5429,6 +5435,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={1234567890}
           itemSalesHistory={
             Object {
               "daily": Array [
@@ -5867,6 +5874,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={1234567890}
           itemSalesHistory={
             Object {
               "daily": Array [
@@ -6305,6 +6313,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       >
         <SalesMetrics
           isGraphView={false}
+          itemNbr={1234567890}
           itemSalesHistory={
             Object {
               "daily": Array [

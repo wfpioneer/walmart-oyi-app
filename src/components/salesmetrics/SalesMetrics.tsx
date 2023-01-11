@@ -86,7 +86,7 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
   );
 };
 
-const SalesMetrics = (props: {itemSalesHistory: ItemSalesHistory; isGraphView: boolean}) => {
+const SalesMetrics = (props: {itemSalesHistory: ItemSalesHistory; isGraphView: boolean; itemNbr: number}) => {
   const [isDailyPeriod, setIsDailyPeriod] = useState(true);
   const {
     daily, weekly, dailyAvgSales, weeklyAvgSales
@@ -105,7 +105,7 @@ const SalesMetrics = (props: {itemSalesHistory: ItemSalesHistory; isGraphView: b
   const handleDailyTimePeriodChange = (isDaily: boolean) => () => {
     trackEvent(
       'item_details_sales_metrics_change_period',
-      { itemDetails: JSON.stringify(props.itemSalesHistory), isDaily }
+      { itemNbr: props.itemNbr, itemSalesHistory: JSON.stringify(props.itemSalesHistory), isDaily }
     );
     setIsDailyPeriod(isDaily);
   };

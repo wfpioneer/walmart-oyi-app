@@ -754,7 +754,7 @@ export const renderSalesGraphV3 = (updatedSalesTS: string | undefined, toggleSal
       />
       )}
       {result?.status === SUCCESS_STATUS
-        ? <SalesMetrics itemSalesHistory={result?.data} isGraphView={isSalesMetricsGraphView} />
+        ? <SalesMetrics itemNbr={itemNbr} itemSalesHistory={result?.data} isGraphView={isSalesMetricsGraphView} />
         : renderPiHistoryOrPiSalesHistoryError(
           false,
           error,
@@ -768,7 +768,8 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
   result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
   // Checks orchestration response status for itemDetails only.
 
-  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
+  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS)
+    || (itemDetails.sales && itemDetails.sales.error === undefined)) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -776,11 +777,15 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
         bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
         bottomRightBtnAction={[toggleSalesGraphView]}
       >
-        <SalesMetrics itemSalesHistory={itemDetails.sales} isGraphView={isSalesMetricsGraphView} />
+        <SalesMetrics
+          itemNbr={itemDetails.itemNbr}
+          itemSalesHistory={itemDetails.sales}
+          isGraphView={isSalesMetricsGraphView}
+        />
       </SFTCard>
     );
   }
-  if ((result && result.status !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
+  if ((result && result.status !== MULTI_STATUS) || itemDetails.sales?.error === undefined) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -788,7 +793,11 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
         bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
         bottomRightBtnAction={[toggleSalesGraphView]}
       >
-        <SalesMetrics itemSalesHistory={itemDetails.sales} isGraphView={isSalesMetricsGraphView} />
+        <SalesMetrics
+          itemNbr={itemDetails.itemNbr}
+          itemSalesHistory={itemDetails.sales}
+          isGraphView={isSalesMetricsGraphView}
+        />
       </SFTCard>
     );
   }
@@ -1054,7 +1063,7 @@ export const getLocationCount = (props: ItemDetailsScreenProps) => {
 };
 
 export const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales.lastUpdateTs')
-  ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
+  ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales?.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
   : undefined);
 
 export const isError = (
