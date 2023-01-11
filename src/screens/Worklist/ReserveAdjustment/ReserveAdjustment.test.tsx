@@ -28,7 +28,8 @@ import { strings } from '../../../locales';
 import { itemPallets } from '../../../mockData/getItemPallets';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import { UPDATE_MULTI_PALLET_UPC_QTY } from '../../../state/actions/asyncAPI';
-import { UPDATE_PALLET_QTY, setReserveLocations } from '../../../state/actions/ReserveAdjustmentScreen';
+import { UPDATE_PALLET_QTY } from '../../../state/actions/ReserveAdjustmentScreen';
+import { setScannedEvent } from '../../../state/actions/Global';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -477,7 +478,8 @@ describe('ReserveAdjustmentScreen', () => {
         successApi,
         mockDispatch,
         navigationProp,
-        setShowOnHands
+        setShowOnHands,
+        mockItemDetails.itemNbr
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -487,10 +489,13 @@ describe('ReserveAdjustmentScreen', () => {
         text1: strings('ITEM.UPDATE_MULTI_PALLET_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_MULTI_PALLET_UPC_QTY.RESET
       });
+      expect(mockDispatch).toHaveBeenCalledWith(setScannedEvent(
+        { type: 'worklist', value: mockItemDetails.itemNbr.toString() }
+      ));
       expect(setShowOnHands).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
@@ -501,7 +506,8 @@ describe('ReserveAdjustmentScreen', () => {
         failureApi,
         mockDispatch,
         navigationProp,
-        setShowOnHands
+        setShowOnHands,
+        mockItemDetails.itemNbr
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);

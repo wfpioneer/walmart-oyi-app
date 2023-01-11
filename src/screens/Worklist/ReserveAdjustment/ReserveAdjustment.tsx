@@ -523,15 +523,15 @@ export const disabledContinue = (
   reserveLocations: ItemPalletInfo[],
   scanRequired: boolean,
   getItemPalletApiLoading: boolean
-): boolean => getItemPalletApiLoading || reserveLocations.some(
+): boolean => getItemPalletApiLoading || reserveLocations.length === 0 || reserveLocations.some(
   loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
 );
-
 export const updateMultiPalletUPCQtyApiHook = (
   updateMultiPalletUPCQtyApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
+  itemNbr: number
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
@@ -544,6 +544,7 @@ export const updateMultiPalletUPCQtyApiHook = (
 
       dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
       setShowOnHandsConfirmationModal(false);
+      dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
       navigation.goBack();
     }
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
@@ -695,7 +696,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     useCallbackHook(() => {
       validateSession(navigation, route.name).then(() => {
         if (itemDetails?.itemNbr) {
-          dispatch(getItemPallets({ itemNbr: 720 }));
+          dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
         }
       });
     }, [navigation])
@@ -728,17 +729,11 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     updateMultiPalletUPCQtyApi,
     dispatch,
     navigation,
-    setShowOnHandsConfirmationModal
+    setShowOnHandsConfirmationModal,
+    itemDetails?.itemNbr || 0
   ), [updateMultiPalletUPCQtyApi]);
 
   const calculateTotalOHQty = () => {
-    // const floorLocationsCount = floorLocations.reduce(
-    //   (acc: number, loc: Location) => {
-    //     const qty = typeof loc.newQty === 'number' ? loc.newQty : loc.qty;
-    //     return acc + (qty || 0);
-    //   },
-    //   0
-    // );
     const reserveLocationsCount = reserveLocations.reduce(
       (acc: number, loc: ItemPalletInfo) => {
         const qty = typeof loc.newQty === 'number' ? loc.newQty : loc.quantity;
@@ -750,7 +745,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
       + (itemDetails?.inTransitCloudQty || 0)
       + (itemDetails?.cloudQty || 0)
       + (itemDetails?.consolidatedOnHandQty || 0);
-    return /* floorLocationsCount + */ reserveLocationsCount + otherOHTotalCount;
+    return reserveLocationsCount + otherOHTotalCount;
   };
 
   return (

@@ -1701,7 +1701,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
   >
     <Button
       backgroundColor="#0071e9"
-      disabled={false}
+      disabled={true}
       height={45}
       onPress={[Function]}
       radius={5}
