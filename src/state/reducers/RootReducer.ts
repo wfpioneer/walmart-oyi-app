@@ -4,7 +4,7 @@ import { UserReducer } from './User';
 import { modal } from './Modal';
 import asyncReducer from './asyncAPI';
 import { Global } from './Global';
-import { worklist } from './Worklist';
+import { Worklist } from './Worklist';
 import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
 import { Location } from './Location';
@@ -28,7 +28,7 @@ const RootReducer = combineReducers({
   modal,
   async: asyncReducer,
   Global,
-  Worklist: worklist,
+  Worklist,
   Print,
   ItemDetailScreen,
   Location,

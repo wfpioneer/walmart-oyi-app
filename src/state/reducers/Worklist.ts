@@ -30,7 +30,7 @@ export const initialState: WorklistState = {
   workListType: null
 };
 
-export const worklist = (state = initialState, action: Actions) => {
+export const Worklist = (state = initialState, action: Actions): WorklistState => {
   switch (action.type) {
     case TOGGLE_MENU:
       return {
