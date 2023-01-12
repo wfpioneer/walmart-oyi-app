@@ -83,7 +83,8 @@ export default {
     UNKNOWN: 'desconocida',
     MISSING_PALLETS: 'Pallets Faltantes',
     AUDITS: 'Auditorías',
-    ROLLOVER_AUDITS: 'Auditorías Atrasadas'
+    ROLLOVER_AUDITS: 'Auditorías Atrasadas',
+    NEG_SALES_FLOOR_QTY: 'Negativos Piso'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
