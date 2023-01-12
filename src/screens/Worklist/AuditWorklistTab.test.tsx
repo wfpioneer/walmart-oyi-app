@@ -12,7 +12,8 @@ import {
 } from './AuditWorklistTab';
 import { ExceptionList } from './FullExceptionList';
 import { FilterType } from '../../models/FilterListItem';
-import { mockAreas } from '../../mockData/mockConfig';
+import { mockAreas, mockConfig } from '../../mockData/mockConfig';
+import { Configurations } from '../../models/User';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
@@ -42,12 +43,12 @@ describe('AuditWorklistTab', () => {
           error={null}
           filterCategories={[]}
           filterExceptions={[]}
-          areas={mockAreas}
-          enableAreaFilter={false}
           onRefresh={() => {}}
           countryCode="MX"
-          showItemImage={false}
           trackEventCall={jest.fn()}
+          config={mockConfig}
+          isLoadedState={[false, jest.fn()]}
+          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -66,12 +67,12 @@ describe('AuditWorklistTab', () => {
           error={null}
           filterCategories={[]}
           filterExceptions={[]}
-          areas={mockAreas}
-          enableAreaFilter={false}
           onRefresh={() => {}}
           countryCode="MX"
-          showItemImage={false}
           trackEventCall={jest.fn()}
+          config={mockConfig}
+          isLoadedState={[false, jest.fn()]}
+          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -90,12 +91,12 @@ describe('AuditWorklistTab', () => {
           error={mockError}
           filterCategories={[]}
           filterExceptions={[]}
-          areas={mockAreas}
-          enableAreaFilter={false}
           onRefresh={() => {}}
           countryCode="MX"
-          showItemImage={false}
           trackEventCall={jest.fn()}
+          config={mockConfig}
+          isLoadedState={[false, jest.fn()]}
+          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -103,6 +104,7 @@ describe('AuditWorklistTab', () => {
 
     it('Renders completed Audit worklist items with images', () => {
       const renderer = ShallowRenderer.createRenderer();
+      const itemImageShownConfig: Configurations = { ...mockConfig, showItemImage: true };
       renderer.render(
         <AuditWorklistTabScreen
           items={mockCompletedAuditWorklist}
@@ -114,12 +116,12 @@ describe('AuditWorklistTab', () => {
           error={null}
           filterCategories={[]}
           filterExceptions={[]}
-          areas={mockAreas}
-          enableAreaFilter={false}
           onRefresh={() => {}}
           countryCode="MX"
-          showItemImage={true}
           trackEventCall={jest.fn()}
+          config={itemImageShownConfig}
+          isLoadedState={[false, jest.fn()]}
+          useEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -139,12 +141,12 @@ describe('AuditWorklistTab', () => {
           error={null}
           filterCategories={[]}
           filterExceptions={[]}
-          areas={mockAreas}
-          enableAreaFilter={false}
           onRefresh={() => {}}
           trackEventCall={jest.fn()}
           countryCode="MX"
-          showItemImage={false}
+          config={mockConfig}
+          isLoadedState={[false, jest.fn()]}
+          useEffectHook={jest.fn()}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
@@ -163,12 +165,12 @@ describe('AuditWorklistTab', () => {
           error={null}
           filterCategories={[]}
           filterExceptions={[]}
-          areas={mockAreas}
-          enableAreaFilter={false}
           onRefresh={() => {}}
           trackEventCall={jest.fn()}
           countryCode="MX"
-          showItemImage={false}
+          config={mockConfig}
+          isLoadedState={[false, jest.fn()]}
+          useEffectHook={jest.fn()}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
