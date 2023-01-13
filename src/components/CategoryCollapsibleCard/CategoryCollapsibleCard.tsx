@@ -25,7 +25,9 @@ export const renderCategoryFilterCard = (
         filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`),
         1
       );
-      trackEvent(`${source}_update_filter_categories`, {
+      trackEvent(source, {
+        action: 'update_filter_categories',
+        removedCategory: `${item.catgNbr} - ${item.catgName}`,
         categories: JSON.stringify(filterCategories)
       });
       return updateFilterCategories(filterCategories);
@@ -33,6 +35,12 @@ export const renderCategoryFilterCard = (
 
     const replacementFilter = filterCategories;
     replacementFilter.push(`${item.catgNbr} - ${item.catgName}`);
+
+    trackEvent(source, {
+      action: 'update_filter_categories',
+      addedCategory: `${item.catgNbr} - ${item.catgName}`,
+      categories: JSON.stringify(replacementFilter)
+    });
     return updateFilterCategories(replacementFilter);
   };
   return (
@@ -79,7 +87,7 @@ export const RenderCategoryCollapsibleCard = (props: {
     filterCategories: string[];
     source: string;
     toggleCategories: (open: boolean) => void;
-    updateFilterCatgories: (categories: string[]) => void
+    updateFilterCatgories: (categories: string[]) => void;
   }): JSX.Element => {
   const {
     categoryMap, categoryOpen, filterCategories, source,
@@ -112,6 +120,10 @@ export const RenderCategoryCollapsibleCard = (props: {
       <TouchableOpacity
         style={styles.menuCard}
         onPress={() => {
+          trackEvent(source, {
+            action: 'toggle_categories_filter',
+            categoryOpen: !categoryOpen
+          });
           toggleCategories(!categoryOpen);
         }}
       >
