@@ -12,7 +12,7 @@ export default class PrintService {
   }): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.post(
-      `${urls.orchestrationURL}/print/price-sign`,
+      `${urls.orchestrationURL}/print/v1/price-sign`,
       payload.printList,
       { headers: payload.headers, timeout: TIMEOUT }
     );
