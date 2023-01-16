@@ -6,7 +6,7 @@ import {
   updateFilterCategories,
   updateFilterExceptions
 } from '../actions/Worklist';
-import { WorklistState, initialState, worklist } from './Worklist';
+import { WorklistState, initialState, Worklist } from './Worklist';
 
 describe('testing Worklist reducer', () => {
   it('testing Worklist reducer', () => {
@@ -15,37 +15,37 @@ describe('testing Worklist reducer', () => {
     // Changed state
     let testChangedState: WorklistState = { ...initialState, menuOpen: true };
     // toggleMenu action
-    let testResults = worklist(testInitialState, toggleMenu(true));
+    let testResults = Worklist(testInitialState, toggleMenu(true));
     expect(testResults).toStrictEqual(testChangedState);
     testChangedState = { ...initialState, menuOpen: false };
-    testResults = worklist(testInitialState, toggleMenu(false));
+    testResults = Worklist(testInitialState, toggleMenu(false));
     expect(testResults).toStrictEqual(testChangedState);
     // toggleCategories action
     testChangedState = { ...initialState, categoryOpen: false };
-    testResults = worklist(testInitialState, toggleCategories(false));
+    testResults = Worklist(testInitialState, toggleCategories(false));
     expect(testResults).toStrictEqual(testChangedState);
     testChangedState = { ...initialState, categoryOpen: true };
-    testResults = worklist(testInitialState, toggleCategories(true));
+    testResults = Worklist(testInitialState, toggleCategories(true));
     expect(testResults).toStrictEqual(testChangedState);
     // toggleExceptions action
     testChangedState = { ...initialState, exceptionOpen: false };
-    testResults = worklist(testInitialState, toggleExceptions(false));
+    testResults = Worklist(testInitialState, toggleExceptions(false));
     expect(testResults).toStrictEqual(testChangedState);
     testChangedState = { ...initialState, exceptionOpen: true };
-    testResults = worklist(testInitialState, toggleExceptions(true));
+    testResults = Worklist(testInitialState, toggleExceptions(true));
     expect(testResults).toStrictEqual(testChangedState);
     // updateFilterCategories action
     const testFilterCategories = ['3 - OFFICE SUPPLIES', '31 - OFFICE ELECTRONICS'];
     testChangedState = { ...initialState, filterCategories: testFilterCategories };
-    testResults = worklist(testInitialState, updateFilterCategories(testFilterCategories));
+    testResults = Worklist(testInitialState, updateFilterCategories(testFilterCategories));
     expect(testResults).toStrictEqual(testChangedState);
     // updateFilterExceptions action
     const testFilterExceptions = ['PO'];
     testChangedState = { ...initialState, filterExceptions: testFilterExceptions };
-    testResults = worklist(testInitialState, updateFilterExceptions(testFilterExceptions));
+    testResults = Worklist(testInitialState, updateFilterExceptions(testFilterExceptions));
     expect(testResults).toStrictEqual(testChangedState);
     // clearFilter action
-    testResults = worklist(testInitialState, clearFilter());
+    testResults = Worklist(testInitialState, clearFilter());
     expect(testResults).toStrictEqual(testInitialState);
   });
 });
