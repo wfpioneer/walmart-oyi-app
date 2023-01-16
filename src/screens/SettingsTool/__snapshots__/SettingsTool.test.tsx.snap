@@ -285,6 +285,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={true}
         title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_printer_collapsible_card",
+          }
+        }
       />
     </View>
     <View
@@ -444,6 +450,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={true}
         title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_features_collapsible_card",
+          }
+        }
       />
     </View>
     <ForwardRef
@@ -590,6 +602,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={true}
         title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_printer_collapsible_card",
+          }
+        }
       />
     </View>
     <View
@@ -749,6 +767,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={false}
         title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_features_collapsible_card",
+          }
+        }
       />
     </View>
   </View>
@@ -811,6 +835,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={false}
         title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_printer_collapsible_card",
+          }
+        }
       />
     </View>
     <View
@@ -829,6 +859,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={true}
         title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_features_collapsible_card",
+          }
+        }
       />
     </View>
     <ForwardRef
@@ -975,6 +1011,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={true}
         title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_printer_collapsible_card",
+          }
+        }
       />
     </View>
     <View
@@ -1134,6 +1176,12 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
         isOpened={true}
         title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
         toggleIsOpened={[MockFunction]}
+        trackEventCall={[MockFunction]}
+        trackEventInfo={
+          Object {
+            "action": "toggle_features_collapsible_card",
+          }
+        }
       />
     </View>
     <ForwardRef
