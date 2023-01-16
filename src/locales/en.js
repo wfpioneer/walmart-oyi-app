@@ -146,6 +146,8 @@ export default {
     HISTORY: 'History',
     NO_HISTORY: 'No history available',
     RESERVE_ADJUSTMENT: 'Reserve Adjustment',
+    ERROR_PI_DELIVERY_HISTORY: 'There was an error pulling the delivery history. Please try again.',
+    ERROR_PI_SALES_HISTORY: 'There was an error pulling the sales history. Please try again.',
     DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again'
   },
   PRINT: {

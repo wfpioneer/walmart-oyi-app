@@ -25,7 +25,7 @@ import ReviewItemDetails, {
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
   renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReplenishmentCard, renderReserveLocQtys, renderScanForNoActionButton, updateOHQtyApiHook
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -111,6 +111,12 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   isWaiting: false,
   error: null,
   result: null,
+  isPiHistWaiting: false,
+  piHistError: null,
+  piHistResult: null,
+  isPiSalesHistWaiting: false,
+  piSalesHistError: null,
+  piSalesHistResult: null,
   completeItemApi: defaultAsyncState,
   createNewPickApi: defaultAsyncState,
   updateOHQtyApi: defaultAsyncState,
@@ -516,7 +522,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: itemDetail[123].location.floor,
           reserveLocations: itemDetail[123].location.reserve
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -527,7 +533,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: itemDetail[123].location.floor,
           reserveLocations: []
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -538,7 +544,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: [],
           reserveLocations: itemDetail[123].location.reserve
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -549,7 +555,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: [],
           reserveLocations: []
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1282,16 +1288,84 @@ describe('ReviewItemDetailsScreen', () => {
   });
   describe('Tests Rendering \'renderReplenishments\'', () => {
     it('Renders replenishment card with delivery history', () => {
+      const result = {
+        ...defaultResult,
+        data: { deliveries: [{ date: '2022-10-03T17:55:50Z', qty: 9 }] }
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderReplenishmentCard(itemDetail[123])
+        renderReplenishmentCard(itemDetail[123], result, null, false, jest.fn(), 123, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders replenishment card with no delivery history', () => {
+      const result = {
+        ...defaultResult,
+        data: { deliveries: [] }
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderReplenishmentCard(itemDetail[789])
+        renderReplenishmentCard(itemDetail[123], result, null, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders replenishment card with error', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderReplenishmentCard(itemDetail[123], null, mockError, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders replenishment card with api waiting', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderReplenishmentCard(itemDetail[123], null, null, true, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests Rendering \'renderSalesGraphV3\'', () => {
+    it('Renders renderSalesGraphV3 card with sales history', () => {
+      const result = {
+        ...defaultResult,
+        data: {
+          dailyAvgSales: 0.0,
+          weeklyAvgSales: 0.0,
+          daily: [
+            { day: '2023-01-09T00:00:00.000Z', value: 0 },
+            { day: '2023-01-08T00:00:00.000Z', value: 0 },
+            { day: '2023-01-07T00:00:00.000Z', value: 0 },
+            { day: '2023-01-06T00:00:00.000Z', value: 0 },
+            { day: '2023-01-05T00:00:00.000Z', value: 0 },
+            { day: '2023-01-04T00:00:00.000Z', value: 0 },
+            { day: '2023-01-03T00:00:00.000Z', value: 0 }
+          ],
+          weekly: [
+            { week: 49, value: 0 },
+            { week: 48, value: 0 },
+            { week: 47, value: 0 },
+            { week: 46, value: 0 },
+            { week: 45, value: 0 }
+          ]
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderSalesGraphV3('', jest.fn(), false, result, null, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders renderSalesGraphV3 card with error', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderSalesGraphV3('', jest.fn(), false, null, mockError, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders renderSalesGraphV3 card with api waiting', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderSalesGraphV3('', jest.fn(), false, null, null, true, jest.fn(), 123, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

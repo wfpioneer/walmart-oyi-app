@@ -146,6 +146,8 @@ export default {
     HISTORY: '历史信息',
     NO_HISTORY: '无历史记录信息',
     RESERVE_ADJUSTMENT: '储位库存数量调整',
+    ERROR_PI_DELIVERY_HISTORY: '提取历史到货信息出错，请重试',
+    ERROR_PI_SALES_HISTORY: '提取历史销售信息出错，请重试',
     DELETE_PALLET_FAILURE: '删除卡板失败，请重试'
   },
   PRINT: {
