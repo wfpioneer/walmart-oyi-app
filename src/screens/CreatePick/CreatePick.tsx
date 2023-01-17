@@ -262,6 +262,8 @@ export const CreatePickScreen = (props: CreatePickProps) => {
           price={item.price}
           status={item.status || ''}
           showAdditionalItemDetails={false}
+          countryCode="MX"
+          showItemImage={false}
         />
       </View>
       <View style={styles.pickParamView}>
