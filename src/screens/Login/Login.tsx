@@ -155,8 +155,6 @@ export const signOutUser = (dispatch: Dispatch<any>): void => {
   trackEvent('user_sign_out', { lastPage: 'Login' });
   WMSSO.signOutUser().then(() => {
     dispatch(logoutUser());
-    dispatch(resetPrintQueue());
-    dispatch(clearLocationPrintQueue());
     if (Platform.OS === 'android') {
       dispatch(hideActivityModal());
     }
