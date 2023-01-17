@@ -80,7 +80,11 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
   edgeHitWidth={60}
   hiddenMenuOffset={0}
   isOpen={false}
-  menu={<FilterMenu />}
+  menu={
+    <FilterMenu
+      screenName="Audit_Worklist"
+    />
+  }
   menuPosition="right"
   onAnimationComplete={[Function]}
   onChange={[Function]}

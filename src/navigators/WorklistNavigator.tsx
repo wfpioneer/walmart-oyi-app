@@ -68,7 +68,7 @@ export const WorklistNavigator = (): JSX.Element => {
     navigation.goBack();
   };
 
-  const menu = <FilterMenu />;
+  const menu = <FilterMenu screenName="Item_Worklist" />;
   return (
     <SideMenu
       menu={menu}
