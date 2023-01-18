@@ -147,6 +147,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -184,6 +185,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -222,6 +224,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -264,6 +267,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -301,6 +305,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -342,6 +347,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -391,6 +397,7 @@ describe('ManagePalletScreen', () => {
           postCreatePalletApi={defaultAsyncState}
           userConfigs={mockConfig}
           countryCode={mockCountryCode}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -399,6 +406,7 @@ describe('ManagePalletScreen', () => {
 
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
+    const mockTrackEventCall = jest.fn();
     const palletInfo: PalletInfo = {
       id: '3'
     };
@@ -468,8 +476,9 @@ describe('ManagePalletScreen', () => {
 
     it('tests handleUpdateItems calls dispatch if added/deleted flags are false and has newQty', () => {
       const items = [...mockItems];
-      handleUpdateItems(items, palletInfo, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch, mockTrackEventCall);
       expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockTrackEventCall).toBeCalledTimes(1);
     });
 
     it('tests handleUpdateItems does not call dispatch if either add/deleted flag is true or has no newQty', () => {
@@ -478,27 +487,29 @@ describe('ManagePalletScreen', () => {
         { ...mockItems[1], added: true },
         { ...mockItems[2], deleted: true }
       ];
-      handleUpdateItems(items, palletInfo, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch, mockTrackEventCall);
       expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockTrackEventCall).not.toHaveBeenCalled();
     });
 
     it('tests handleUpdateItems dispatches when expiration date changed', () => {
       const items: PalletItem[] = [];
       palletInfo.expirationDate = '03/07/2023';
       palletInfo.newExpirationDate = '03/05/2023';
-      handleUpdateItems(items, palletInfo, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch, mockTrackEventCall);
       expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockTrackEventCall).toBeCalledTimes(1);
     });
 
     it('tests handleUpdateItems doesnt dispatch when expiry date changed back', () => {
       const items: PalletItem[] = [];
       palletInfo.newExpirationDate = '03/07/2023';
-      handleUpdateItems(items, palletInfo, mockDispatch);
+      handleUpdateItems(items, palletInfo, mockDispatch, mockTrackEventCall);
       expect(mockDispatch).toBeCalledTimes(0);
+      expect(mockTrackEventCall).toBeCalledTimes(0);
     });
 
     it('Calls dispatch if the "added" flag is true for at least one palletItem', () => {
-      const dispatch = jest.fn();
       const mockAddPallet: PalletItem[] = [
         ...mockItems,
         {
@@ -506,14 +517,15 @@ describe('ManagePalletScreen', () => {
           added: true
         }
       ];
-      handleAddItems(palletInfo.id, mockAddPallet, dispatch);
-      expect(dispatch).toHaveBeenCalled();
+      handleAddItems(palletInfo.id, mockAddPallet, mockDispatch, mockTrackEventCall);
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockTrackEventCall).toHaveBeenCalled()
     });
 
     it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
-      const dispatch = jest.fn();
-      handleAddItems(palletInfo.id, mockItems, dispatch);
-      expect(dispatch).not.toHaveBeenCalled();
+      handleAddItems(palletInfo.id, mockItems, mockDispatch, mockTrackEventCall);
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockTrackEventCall).not.toHaveBeenCalled();
     });
 
     it('Tests getPalletDetailsApiHook on success', () => {

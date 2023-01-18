@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { groupBy, partition } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import {
@@ -14,7 +14,7 @@ import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 import { strings } from '../../locales';
-import { area } from '../../models/User';
+import { Configurations, area } from '../../models/User';
 import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
@@ -22,6 +22,9 @@ import { FilterType } from '../../models/FilterListItem';
 import { trackEvent } from '../../utils/AppCenterTool';
 import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
+import { UseStateType } from '../../models/Generics.d';
+
+const ROLLOVER_AUDITS = 'RA';
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
@@ -35,15 +38,15 @@ export interface AuditWorklistTabScreenProps {
     toDo: boolean;
     refreshing: boolean;
     error: AxiosError | null;
-    areas: area[];
-    enableAreaFilter: boolean;
     filterExceptions: string[];
     filterCategories: string[];
     onRefresh: () => void;
-    showItemImage: boolean;
     countryCode: string;
+    config: Configurations;
     trackEventCall: typeof trackEvent;
-    collapsedState: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    collapsedState: UseStateType<boolean>;
+    isLoadedState: UseStateType<boolean>;
+    useEffectHook: typeof useEffect;
 }
 
 const onItemClick = (
@@ -121,13 +124,29 @@ export const renderFilterPills = (
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, refreshing, dispatch, navigation, error, trackEventCall,
-    areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh,
-    showItemImage, countryCode, collapsedState
+    items, refreshing, dispatch, navigation, error, useEffectHook,
+    trackEventCall, config, filterExceptions, filterCategories,
+    onRefresh, countryCode, collapsedState, isLoadedState
   } = props;
+  const {
+    areas, enableAreaFilter, showItemImage, showRollOverAudit
+  } = config;
+  const [isLoaded, setIsLoaded] = isLoadedState;
 
   const [collapsed, setCollapsed] = collapsedState;
   const fullExceptionList = ExceptionList.getInstance();
+
+  const isRollOverComplete = () => !items.some(item => item.worklistType === ROLLOVER_AUDITS && !item.completed);
+  useEffectHook(() => {
+    if (!isLoaded
+      && showRollOverAudit
+      && !isRollOverComplete()) {
+      if (!filterExceptions.includes(ROLLOVER_AUDITS)) {
+        dispatch(updateFilterExceptions([...filterExceptions, ROLLOVER_AUDITS]));
+      }
+      setIsLoaded(true);
+    }
+  }, [filterCategories, items, showRollOverAudit]);
 
   if (error) {
     return (
@@ -236,7 +255,10 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           showItemImage, countryCode
         )}
         keyExtractor={item => `category-${item}`}
-        onRefresh={onRefresh}
+        onRefresh={() => {
+          setIsLoaded(false);
+          onRefresh();
+        }}
         refreshing={refreshing}
         windowSize={3}
       />
@@ -252,10 +274,11 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
   const items = toDo ? toDoItems : completedItems;
   const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
-  const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
+  const { configs } = useTypedSelector(state => state.User);
   const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const collapsedState = useState(false);
+  const isLoadedState = useState(false);
   return (
     <AuditWorklistTabScreen
       items={items}
@@ -264,15 +287,15 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       toDo={toDo}
       refreshing={isWaiting}
       error={error}
-      areas={areas}
-      enableAreaFilter={enableAreaFilter}
       filterExceptions={filterExceptions}
       filterCategories={filterCategories}
       onRefresh={onRefresh}
       countryCode={countryCode}
-      showItemImage={showItemImage}
       trackEventCall={trackEvent}
       collapsedState={collapsedState}
+      config={configs}
+      useEffectHook={useEffect}
+      isLoadedState={isLoadedState}
     />
   );
 };

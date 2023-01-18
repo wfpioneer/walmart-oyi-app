@@ -83,7 +83,8 @@ export default {
     UNKNOWN: '未知错误',
     MISSING_PALLETS: '不在储位卡板',
     AUDITS: '盘点',
-    ROLLOVER_AUDITS: '上周遗留盘点清单'
+    ROLLOVER_AUDITS: '上周遗留盘点清单',
+    NEG_SALES_FLOOR_QTY: '楼面负现货数量'
   },
   ITEM: {
     TITLE: '查看商品明细',
@@ -144,7 +145,10 @@ export default {
     GROSS_PROFIT: '毛利',
     HISTORY: '历史信息',
     NO_HISTORY: '无历史记录信息',
-    RESERVE_ADJUSTMENT: '储位库存数量调整'
+    RESERVE_ADJUSTMENT: '储位库存数量调整',
+    ERROR_PI_DELIVERY_HISTORY: '提取历史到货信息出错，请重试',
+    ERROR_PI_SALES_HISTORY: '提取历史销售信息出错，请重试',
+    DELETE_PALLET_FAILURE: '删除卡板失败，请重试'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -521,6 +525,7 @@ export default {
     EXPAND_ALL: '全部展开',
     VALIDATE_QUANTITY: '实盘每一个位置数量',
     VALIDATE_SCAN_QUANTITY: '扫描卡板并实盘数量',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: '校准每个卡板库存数量',
     OTHER_ON_HANDS: '其它库存',
     PALLET_COUNT: '请输入卡板库存数量',
     CONFIRM_AUDIT: '确认现货盘点结果',

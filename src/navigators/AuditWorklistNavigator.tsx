@@ -125,7 +125,7 @@ export const AuditWorklistNavigatorStack = (
   };
   return (
     <SideMenu
-      menu={<FilterMenu />}
+      menu={<FilterMenu screenName="Audit_Worklist" />}
       menuPosition="right"
       isOpen={menuOpen}
       animationFunction={(prop, value) => Animated.spring(prop, {

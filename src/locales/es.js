@@ -83,7 +83,8 @@ export default {
     UNKNOWN: 'desconocida',
     MISSING_PALLETS: 'Pallets Faltantes',
     AUDITS: 'Auditorías',
-    ROLLOVER_AUDITS: 'Auditorías Atrasadas'
+    ROLLOVER_AUDITS: 'Auditorías Atrasadas',
+    NEG_SALES_FLOOR_QTY: 'Negativos Piso'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -144,7 +145,10 @@ export default {
     GROSS_PROFIT: 'Ganancia Bruta',
     HISTORY: 'Historial',
     NO_HISTORY: 'No hay historial disponible',
-    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega',
+    ERROR_PI_DELIVERY_HISTORY: 'Hubo un error mostrando el historial de entregas. Por favor inténtalo de nuevo',
+    ERROR_PI_SALES_HISTORY: 'Hubo un error mostrando el historial de ventas. Por favor inténtalo de nuevo',
+    DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -517,6 +521,7 @@ export default {
     EXPAND_ALL: 'Expandir todo',
     VALIDATE_QUANTITY: 'Valida la cantidad en cada ubicación',
     VALIDATE_SCAN_QUANTITY: 'Escanea cada pallet y valida la cantidad',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: 'Valida la cantidad por pallet',
     OTHER_ON_HANDS: 'Otras ubicaciones',
     PALLET_COUNT: 'Por favor ingresa el conteo del pallet',
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',

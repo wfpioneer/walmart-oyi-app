@@ -25,7 +25,7 @@ export const toggleExceptions = (exceptionsOpen: boolean) => ({
 export const toggleArea = (areaOpen: boolean) => ({
   type: TOGGLE_AREA,
   payload: areaOpen
-});
+} as const);
 
 export const updateFilterCategories = (filterCategories: string[]) => ({
   type: UPDATE_FILTER_CATEGORIES,
