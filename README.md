@@ -41,7 +41,7 @@ A few of the strategic benefits of OYI are:
 - Be more effective - Take actions without the need for switching apps.
 - See your progress - Use the dashboard to check how you are doing.
 
-For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Your+Inventory
+For more information go to https://confluence.walmart.com/display/ISCM/Own+Your+Inventory
 
 ## Getting Started
 
@@ -64,7 +64,7 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
     * If creating a `Stage` or `Prod` build locally, you'll need to be sure you have an `appcenter-config.json` file
       defined as follows:
         * Create a file: `android/app/src/main/assets/appcenter-config.json` containing the Stage config from
-          our [Secret Properties Confluence Page ]( https://collaboration.wal-mart.com/pages/viewpage.action?pageId=627157432#OYIPropertySecrets-OYI-APPappcenter-config.json )
+          our [Secret Properties Confluence Page]( https://confluence.walmart.com/pages/viewpage.action?pageId=1060167829#OYIPropertySecrets-OYI-APPappcenter-config.json )
           matching the desired environment.
     * This file is ignored in our `.gitignore`
     * During the looper build process, we create this file using the proper values pulled from the `APPCENTER_SECRET`
@@ -73,7 +73,7 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 ### CN Item Image Secrets
 
 * For CN Market images for item are fetched by calling image api and it uses client id and auth key, so locally create a new file Secrets.json under src/constant/ directory and add those keys.
-* You can find those secrets in https://confluence.walmart.com/pages/viewpage.action?pageId=1060167829#OYIPropertySecrets-CNItemImageAPISecrets copy and paste in Secrets.json
+* You can find those secrets in <https://confluence.walmart.com/pages/viewpage.action?pageId=1060167829#OYIPropertySecrets-CNItemImageAPISecrets> copy and paste in Secrets.json
 * After adding the above secrets, image can be shown for CN market locally in dev environment.
 
 ### To run the app
@@ -86,7 +86,7 @@ For more information go to https://collaboration.wal-mart.com/display/ISCM/Own+Y
 * Hit play
     * Note that you must have an emulator set up with Walmart certificates.
     * Also, you must have the WMSSO apk installed on the emulator
-    * For more information go to https://collaboration.wal-mart.com/display/ISCM/Front-End+React+Native+Onboarding
+    * For more information go to <https://confluence.walmart.com/display/ISCM/Front-End+React+Native+Onboarding>
     
 ### To run the app on an actual Android device
 
