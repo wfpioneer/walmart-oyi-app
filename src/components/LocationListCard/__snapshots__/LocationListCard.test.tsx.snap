@@ -95,9 +95,14 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
   >
     <View
       style={
-        Object {
-          "backgroundColor": "#ffffffff",
-        }
+        Array [
+          Object {
+            "backgroundColor": "#ffffffff",
+          },
+          Object {
+            "backgroundColor": "#FFFFE0",
+          },
+        ]
       }
     >
       <View
@@ -409,9 +414,14 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
   >
     <View
       style={
-        Object {
-          "backgroundColor": "#ffffffff",
-        }
+        Array [
+          Object {
+            "backgroundColor": "#ffffffff",
+          },
+          Object {
+            "backgroundColor": "#FFFFE0",
+          },
+        ]
       }
     >
       <View

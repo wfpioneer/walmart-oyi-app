@@ -22,6 +22,7 @@ import User, { Configurations } from '../../models/User';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface SettingsToolProps {
   printerOpen: boolean;
@@ -39,8 +40,9 @@ interface SettingsToolProps {
   getFluffyApiState: AsyncState;
   user: User;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  trackEventCall: typeof trackEvent
 }
-
+const SETTING_TOOLS = 'Setting_Tools';
 const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: GET_CLUB_CONFIG.RESET });
   dispatch({ type: GET_FLUFFY_ROLES.RESET });
@@ -99,7 +101,9 @@ export const getConfigAndFluffyFeaturesApiHook = (
 interface CollapsibleCardProps {
   title: string;
   isOpened: boolean;
-  toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>
+  toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: typeof trackEvent;
+  trackEventInfo: any;
 }
 export const featureCard = (featureName: string, isEnabled: boolean): JSX.Element => (
   <View style={styles.featureCardContainer}>
@@ -123,7 +127,9 @@ export const printerCard = (printerTitle: string, printer: Printer | null, chang
 );
 
 export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
-  const { title, isOpened, toggleIsOpened } = props;
+  const {
+    title, isOpened, toggleIsOpened, trackEventCall, trackEventInfo
+  } = props;
   const iconName = isOpened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
 
   return (
@@ -131,7 +137,16 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>{ title }</Text>
       </View>
-      <TouchableOpacity style={styles.arrowView} onPress={() => toggleIsOpened(!isOpened)}>
+      <TouchableOpacity
+        style={styles.arrowView}
+        onPress={() => {
+          trackEventCall(SETTING_TOOLS, {
+            ...trackEventInfo,
+            isCardOpened: !isOpened
+          });
+          toggleIsOpened(!isOpened);
+        }}
+      >
         <MaterialIcons name={iconName} size={25} color={COLOR.GREY_700} />
       </TouchableOpacity>
     </>
@@ -143,7 +158,7 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
     featuresOpen, printerOpen, toggleFeaturesList, togglePrinterList,
     locationLabelPrinter, palletLabelPrinter, priceLabelPrinter,
     userFeatures, userConfigs, dispatch, navigation, user, getClubConfigApiState,
-    getFluffyApiState, useEffectHook
+    getFluffyApiState, useEffectHook, trackEventCall
   } = props;
 
   useEffectHook(() => getConfigAndFluffyFeaturesApiHook(
@@ -154,11 +169,18 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
   ), [getClubConfigApiState, getFluffyApiState]);
 
   const changePrinter = (printerType: PrintingType) => {
+    trackEventCall(SETTING_TOOLS, {
+      action: 'change_printer_clicked',
+      printerType
+    });
     dispatch(setPrintingType(printerType));
     navigation.navigate('PrintPriceSign', { screen: 'PrinterList' });
   };
 
   const onSubmit = () => {
+    trackEventCall(SETTING_TOOLS, {
+      action: 'update_configurations_clicked'
+    });
     dispatch(getFluffyFeatures(user));
     dispatch(getClubConfig());
   };
@@ -244,6 +266,10 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
             title={strings('PRINT.CHANGE_TITLE')}
             isOpened={printerOpen}
             toggleIsOpened={togglePrinterList}
+            trackEventCall={trackEventCall}
+            trackEventInfo={{
+              action: 'toggle_printer_collapsible_card'
+            }}
           />
         </View>
         {printerOpen && (printerCard(
@@ -266,6 +292,10 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
             title={strings('SETTINGS.FEATURES')}
             isOpened={featuresOpen}
             toggleIsOpened={toggleFeaturesList}
+            trackEventCall={trackEventCall}
+            trackEventInfo={{
+              action: 'toggle_features_collapsible_card'
+            }}
           />
         </View>
         {featuresOpen && (
@@ -322,6 +352,7 @@ const SettingsTool = (): JSX.Element => {
       getClubConfigApiState={getClubConfigApiState}
       getFluffyApiState={getFluffyApiState}
       useEffectHook={useEffect}
+      trackEventCall={trackEvent}
     />
   );
 };

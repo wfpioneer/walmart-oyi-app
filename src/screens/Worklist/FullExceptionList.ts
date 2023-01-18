@@ -18,7 +18,8 @@ export class ExceptionList {
        ['NSFL', strings('EXCEPTION.NSFL')],
        ['MP', strings('EXCEPTION.MISSING_PALLETS')],
        ['AU', strings('EXCEPTION.AUDITS')],
-       ['RA', strings('EXCEPTION.ROLLOVER_AUDITS')]
+       ['RA', strings('EXCEPTION.ROLLOVER_AUDITS')],
+       ['NSFQ', strings('EXCEPTION.NEG_SALES_FLOOR_QTY')]
      ]);
    }
 

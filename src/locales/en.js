@@ -83,7 +83,8 @@ export default {
     UNKNOWN: 'Unknown',
     MISSING_PALLETS: 'Missing Pallets',
     AUDITS: 'Audits',
-    ROLLOVER_AUDITS: 'Rollover Audits'
+    ROLLOVER_AUDITS: 'Rollover Audits',
+    NEG_SALES_FLOOR_QTY: 'Negative Sales Floor Quantity'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -144,7 +145,10 @@ export default {
     GROSS_PROFIT: 'Gross Profit',
     HISTORY: 'History',
     NO_HISTORY: 'No history available',
-    RESERVE_ADJUSTMENT: 'Reserve Adjustment'
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment',
+    ERROR_PI_DELIVERY_HISTORY: 'There was an error pulling the delivery history. Please try again.',
+    ERROR_PI_SALES_HISTORY: 'There was an error pulling the sales history. Please try again.',
+    DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -518,6 +522,7 @@ export default {
     EXPAND_ALL: 'Expand all',
     VALIDATE_QUANTITY: 'Validate quantity in each location',
     VALIDATE_SCAN_QUANTITY: 'Scan each pallet and validate quantity',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: 'Validate quantity on each pallet',
     OTHER_ON_HANDS: 'Other On-Hands',
     PALLET_COUNT: 'Please enter the count for pallet',
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',

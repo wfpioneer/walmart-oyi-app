@@ -24,6 +24,7 @@ interface LocationCardProp {
     scannerEnabled: boolean;
     scanned?: boolean;
     showCalculator: boolean;
+    showQtyChanged: boolean
   }
 
 export const getContentStyle = (
@@ -54,14 +55,15 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
     scannerEnabled,
     scanned,
     onCalcPress,
-    showCalculator
+    showCalculator,
+    showQtyChanged
   } = props;
 
   const MIN = locationType === 'floor' ? 1 : 0;
   const MAX = 9999;
   const isValidQty = validateQty(quantity, MIN, MAX);
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, showQtyChanged && { backgroundColor: COLOR.YELLOW }]}>
       <View style={styles.container}>
         <View style={styles.content}>
           <View>

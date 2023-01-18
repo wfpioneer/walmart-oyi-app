@@ -63,6 +63,7 @@ describe('FilterMenu Component', () => {
           selectedWorklistGoal={WorklistGoal.ITEMS}
           wlSummary={mockItemNPalletNAuditWorklistSummary}
           showRollOverAudit={false}
+          screenName="Worklist"
         />
       </Provider>
     );
@@ -85,6 +86,7 @@ describe('FilterMenu Component', () => {
           selectedWorklistGoal={WorklistGoal.AUDITS}
           wlSummary={mockItemNPalletNAuditWorklistSummary}
           showRollOverAudit={false}
+          screenName="Worklist"
         />
       </Provider>
     );
@@ -107,13 +109,14 @@ describe('FilterMenu Component', () => {
           selectedWorklistGoal={WorklistGoal.ITEMS}
           wlSummary={mockItemNPalletNAuditWorklistSummary}
           showRollOverAudit={false}
+          screenName="Worklist"
         />
       </Provider>
     );
     // You can query string translations
     const clearButton = findByText(strings('WORKLIST.CLEAR'));
     fireEvent.press(await clearButton);
-    expect(trackEvent).toBeCalledTimes(1);
+    expect(trackEvent).toBeCalledTimes(2);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
   });
@@ -125,7 +128,7 @@ describe('FilterMenu Component', () => {
       selected: true
     };
     const { toJSON, getByTestId } = render(
-      renderExceptionFilterCard(mockFilterItemSelected, mockDispatch, mockFilterExeceptions)
+      renderExceptionFilterCard(mockFilterItemSelected, mockDispatch, mockFilterExeceptions, 'Worklist')
     );
     const exceptionButton = getByTestId('exception button');
     fireEvent.press(exceptionButton);
@@ -141,11 +144,11 @@ describe('FilterMenu Component', () => {
       selected: false
     };
     const { toJSON, getByTestId } = render(
-      renderExceptionFilterCard(mockFilterItem, mockDispatch, mockFilterExeceptions)
+      renderExceptionFilterCard(mockFilterItem, mockDispatch, mockFilterExeceptions, 'Worklist')
     );
     const exceptionButton = getByTestId('exception button');
     fireEvent.press(exceptionButton);
-    expect(trackEvent).toBeCalledTimes(0);
+    expect(trackEvent).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
   });
@@ -157,7 +160,7 @@ describe('FilterMenu Component', () => {
       selected: true
     };
     const { toJSON, getByTestId } = render(
-      renderExceptionRadioFilterCard(mockFilterItem, mockDispatch)
+      renderExceptionRadioFilterCard(mockFilterItem, mockDispatch, 'worklist')
     );
     const exceptionButton = getByTestId('radio exception button');
     fireEvent.press(exceptionButton);
@@ -175,6 +178,7 @@ describe('FilterMenu Component', () => {
         isAudits={false}
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
         disableAuditWL={false}
+        screenName="Worklist"
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
@@ -192,6 +196,7 @@ describe('FilterMenu Component', () => {
         isAudits={false}
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
         disableAuditWL={true}
+        screenName="Worklist"
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
@@ -208,6 +213,7 @@ describe('FilterMenu Component', () => {
         areas={mockAreas}
         filterCategories={mockFilterCategories}
         categoryMap={mockCategoryMap}
+        screenName="Worklist"
       />
     );
     const menuButton = getByText(strings('WORKLIST.AREA'));
@@ -242,7 +248,8 @@ describe('FilterMenu Component', () => {
         mockFilterCategoryMap,
         mockDispatch,
         mockFilterCategories,
-        []
+        [],
+        'worklist'
       )
     );
     const areaPress = getByTestId('area button');
@@ -259,7 +266,8 @@ describe('FilterMenu Component', () => {
         mockFilterCategoryMap,
         mockDispatch,
         [...mockFilterCategories, '5 - FOODSERVICE'],
-        mockFilteredCategoryNbr
+        mockFilteredCategoryNbr,
+        'worklist'
       )
     );
     fireEvent.press(areaPress);
@@ -293,7 +301,8 @@ describe('FilterMenu Component', () => {
         mockFilterCatgMap,
         mockDispatch,
         mockFilteredCategories,
-        mockFilteredCategoryNbr
+        mockFilteredCategoryNbr,
+        'worklist'
       )
     );
     const areaButton = getByTestId('area button');

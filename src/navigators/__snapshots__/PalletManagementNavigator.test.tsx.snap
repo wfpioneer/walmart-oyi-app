@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PalletManagement Navigator Renders and Calls the Kebab Menu button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="pallet_menu"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingRight": 10,
+      }
+    }
+  >
+    <Image
+      source=""
+      style={
+        Object {
+          "height": 25,
+          "marginRight": 10,
+          "width": 25,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`PalletManagement Navigator Renders and Calls the Manual Scan Button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="barcode-scan"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 15,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`PalletManagement Navigator Renders the PalletManagement Navigator 1`] = `
+<StackNavigator
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="PalletManagementHome"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.PALLET_MANAGEMENT\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ManagePallet"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.MANAGE_PALLET\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="CombinePallets"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.COMBINE_PALLETS\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`PalletManagement Navigator Renders the PalletManagement Navigator when create pallet is true 1`] = `
+<StackNavigator
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="PalletManagementHome"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.PALLET_MANAGEMENT\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ManagePallet"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.MANAGE_PALLET\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="CombinePallets"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PALLET.COMBINE_PALLETS\\" translation]",
+      }
+    }
+  />
+</StackNavigator>
+`;
