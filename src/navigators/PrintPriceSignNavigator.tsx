@@ -15,23 +15,23 @@ import PrintListTabs from './PrintListTabNavigator';
 
 const Stack = createStackNavigator();
 
+export const getHeaderTitle = (printingLocationLabels: string, printingPalletLabel: boolean) => {
+  let title;
+  if (printingLocationLabels) {
+    title = strings('PRINT.LOCATION_TITLE');
+  } else if (printingPalletLabel) {
+    title = strings('PRINT.PALLET_TITLE');
+  } else {
+    title = strings('PRINT.MAIN_TITLE');
+  }
+  return title;
+};
+
 const PrintPriceSignNavigator = (): JSX.Element => {
   const navigation = useNavigation();
   const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
   const user = useTypedSelector(state => state.User);
   const isPrintUpdate = user.features.includes('printing update') || user.configs.printingUpdate;
-
-  const getHeaderTitle = () => {
-    let title;
-    if (printingLocationLabels) {
-      title = strings('PRINT.LOCATION_TITLE');
-    } else if (printingPalletLabel) {
-      title = strings('PRINT.PALLET_TITLE');
-    } else {
-      title = strings('PRINT.MAIN_TITLE');
-    }
-    return title;
-  };
 
   return (
     <Stack.Navigator
@@ -45,7 +45,7 @@ const PrintPriceSignNavigator = (): JSX.Element => {
         name="PrintPriceSignScreen"
         component={PrintPriceSign}
         options={{
-          headerTitle: getHeaderTitle(),
+          headerTitle: getHeaderTitle(printingLocationLabels, printingPalletLabel),
           headerTitleAlign: 'left',
           headerTitleStyle: styles.headerTitle,
           headerBackTitleVisible: false
