@@ -46,7 +46,8 @@ const homeScreenProps: any = {
   updateFilterExceptions: jest.fn(),
   route: jest.fn(),
   userConfig: mockConfig,
-  resetUserConfigUpdateApiState: jest.fn()
+  resetUserConfigUpdateApiState: jest.fn(),
+  userFeatures: ['']
 };
 
 // opt out of type checking in order to create mocks that don't exactly match
@@ -164,6 +165,7 @@ describe('HomeScreen', () => {
         props = {
           ...homeScreenProps,
           userConfig: { ...mockConfig, palletWorklists: true, auditWorklists: true },
+          userFeatures: ['on hands change'],
           worklistSummaryApiState: {
             ...defaultAsyncState,
             result: {
@@ -186,6 +188,7 @@ describe('HomeScreen', () => {
           userConfig: {
             ...mockConfig, palletWorklists: true, auditWorklists: true, showRollOverAudit: true
           },
+          userFeatures: ['on hands change'],
           worklistSummaryApiState: {
             ...defaultAsyncState,
             result: {
