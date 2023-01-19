@@ -15,6 +15,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import mockUser from '../../mockData/mockUser';
 
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -136,6 +137,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
@@ -161,6 +163,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
@@ -186,6 +189,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
@@ -211,6 +215,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
