@@ -20,7 +20,8 @@
           android:theme="@style/AppTheme"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
         android:launchMode="singleTask"
-        android:windowSoftInputMode="adjustResize">
+        android:windowSoftInputMode="adjustResize"
+        android:screenOrientation="portrait">
       </activity>
         <activity
             android:name=".SplashActivity"
