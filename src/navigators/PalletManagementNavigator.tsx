@@ -28,6 +28,7 @@ export const renderScanButton = (
   isManualScanEnabled: boolean
 ): JSX.Element => (
   <TouchableOpacity
+    testID="barcode-scan"
     onPress={() => {
       dispatch(setManualScan(!isManualScanEnabled));
     }}
@@ -43,10 +44,12 @@ export const renderScanButton = (
 );
 
 export const renderManagePalletKebabButton = (managePalletMenu: boolean, dispatch: Dispatch<any>) => (
-  <TouchableOpacity onPress={() => {
-    dispatch(showManagePalletMenu(!managePalletMenu));
-    trackEvent('pallet_menu_button_click');
-  }}
+  <TouchableOpacity
+    testID="pallet_menu"
+    onPress={() => {
+      dispatch(showManagePalletMenu(!managePalletMenu));
+      trackEvent('pallet_menu_button_click');
+    }}
   >
     <View style={styles.rightButton}>
       <Image
