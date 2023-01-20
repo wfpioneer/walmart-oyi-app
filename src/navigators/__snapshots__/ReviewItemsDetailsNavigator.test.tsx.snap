@@ -1,0 +1,386 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
+<StackNavigator
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+      }
+    }
+    name="ReviewItemDetailsHome"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerLeft": [Function],
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.ITEM.TITLE\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="LocationDetails"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.TITLE\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="EditLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ItemHistory"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerLeft": [Function],
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AuditItem"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ReserveAdjustment"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.ITEM.RESERVE_ADJUSTMENT\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator with actioncompleted ture 1`] = `
+<StackNavigator
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+      }
+    }
+    name="ReviewItemDetailsHome"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerLeft": [Function],
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.ITEM.TITLE\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="LocationDetails"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.TITLE\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="EditLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ItemHistory"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerLeft": [Function],
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AuditItem"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="ReserveAdjustment"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.ITEM.RESERVE_ADJUSTMENT\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`ReviewItemsDetailsNavigation Render calcutator button  1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="calc-button"
+>
+  <View
+    style={
+      Object {
+        "width": 35,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="calculator"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`ReviewItemsDetailsNavigation Render open camera button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="open-camera"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": 55,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="camera"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`ReviewItemsDetailsNavigation Render print queue button  1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="print-queue-button"
+>
+  <View
+    style={
+      Object {
+        "width": 35,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="printer"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
+exports[`ReviewItemsDetailsNavigation Renders and Calls the Manual Scan Button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="barcode-scan"
+>
+  <View
+    style={
+      Object {
+        "width": 35,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</View>
+`;

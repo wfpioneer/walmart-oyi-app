@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -23,25 +23,29 @@ import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdjustment';
 
+interface ReviewItemDetailsNavigatorProps {
+  isManualScanEnabled:boolean;
+  calcOpen:boolean;
+  exceptionType: string | null | undefined;
+  actionCompleted:boolean;
+  showCalculator:boolean;
+  title:string;
+  dispatch:Dispatch<any>;
+  navigation:NavigationProp<any>;
+}
 const Stack = createStackNavigator();
 
-const ReviewItemDetailsNavigator = () => {
-  const { isManualScanEnabled, calcOpen } = useTypedSelector(state => state.Global);
-  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
-  const { showCalculator } = useTypedSelector(state => state.User.configs);
-  const { title } = useTypedSelector(state => state.ItemHistory);
-  const dispatch = useDispatch();
-  const navigation: NavigationProp<any> = useNavigation();
-
-  const renderScanButton = () => (
-    <TouchableOpacity onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
+export const renderScanButton = (dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean): JSX.Element => (
+    <TouchableOpacity testID="barcode-scan" onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
       <View style={styles.iconBtn}>
         <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
       </View>
     </TouchableOpacity>
-  );
+);
 
-  const renderCalcButton = (): JSX.Element => (
+export const renderCalcButton = (dispatch: Dispatch<any>,
+  calcOpen:boolean): JSX.Element => (
     <TouchableOpacity
       onPress={() => {
         dispatch(setCalcOpen(!calcOpen));
@@ -52,60 +56,63 @@ const ReviewItemDetailsNavigator = () => {
         <MaterialCommunityIcon name="calculator" size={20} color={COLOR.WHITE} />
       </View>
     </TouchableOpacity>
-  );
+);
+export const renderCamButton = () => (
+  <TouchableOpacity testID="open-camera" onPress={() => { openCamera(); }}>
+    <View style={styles.camButton}>
+      <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
+);
+export const renderPrintQueueButton = (navigation: NavigationProp<any>): JSX.Element => (
 
-  const renderCamButton = () => (
-    <TouchableOpacity onPress={() => { openCamera(); }}>
-      <View style={styles.camButton}>
-        <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
-      </View>
-    </TouchableOpacity>
-  );
-
-  // TODO add "badge" to show signs currently in queue
-  const renderPrintQueueButton = () => (
-    <TouchableOpacity onPress={() => {
+  <TouchableOpacity
+    testID="print-queue-button"
+    onPress={() => {
       trackEvent('print_queue_list_click');
       navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
     }}
-    >
-      <View style={styles.iconBtn}>
-        <MaterialCommunityIcon
-          name="printer"
-          size={20}
-          color={COLOR.WHITE}
-        />
-      </View>
-    </TouchableOpacity>
-  );
+  >
+    <View style={styles.iconBtn}>
+      <MaterialCommunityIcon
+        name="printer"
+        size={20}
+        color={COLOR.WHITE}
+      />
+    </View>
+  </TouchableOpacity>
+);
 
-  const navigateBack = () => {
-    if (!actionCompleted) {
-      if (exceptionType === 'po') {
-        return dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
-      }
-      if (exceptionType === 'nsfl') {
-        return dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
-      }
+export const navigateBack = (dispatch: Dispatch<any>,
+  actionCompleted:boolean, exceptionType: string | null | undefined, navigation:NavigationProp<any>) => {
+  if (!actionCompleted) {
+    if (exceptionType === 'po') {
+      return dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
     }
+    if (exceptionType === 'nsfl') {
+      return dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
+    }
+  }
 
-    dispatch(setManualScan(false));
-    return navigation.goBack();
-  };
+  dispatch(setManualScan(false));
+  return navigation.goBack();
+};
+export const navigateHistoryBack = (dispatch: Dispatch<any>, navigation:NavigationProp<any>) => {
+  dispatch(clearItemHistory());
+  navigation.navigate('ReviewItemDetailsHome');
+};
+export const renderCloseButton = (dispatch: Dispatch<any>, navigation:NavigationProp<any>):JSX.Element => (
+  <TouchableOpacity onPress={() => navigateHistoryBack(dispatch, navigation)}>
+    <View style={styles.closeButton}>
+      <MaterialCommunityIcon name="close" size={24} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
+);
 
-  const navigateHistoryBack = () => {
-    dispatch(clearItemHistory());
-    navigation.navigate('ReviewItemDetailsHome');
-  };
-
-  const renderCloseButton = () => (
-    <TouchableOpacity onPress={navigateHistoryBack}>
-      <View style={styles.closeButton}>
-        <MaterialCommunityIcon name="close" size={24} color={COLOR.WHITE} />
-      </View>
-    </TouchableOpacity>
-  );
-
+export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigatorProps): JSX.Element => {
+  const {
+    isManualScanEnabled, calcOpen, exceptionType, actionCompleted, showCalculator, title, dispatch, navigation
+  } = props;
   return (
     <Stack.Navigator
       screenOptions={{
@@ -122,20 +129,20 @@ const ReviewItemDetailsNavigator = () => {
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
-          headerLeft: props => (
+          headerLeft: prop => (
             // Shouldn't need to do this, but not showing on its own for some reason
             // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
             <HeaderBackButton
               // eslint-disable-next-line react/jsx-props-no-spreading
-              {...props}
-              onPress={navigateBack}
+              {...prop}
+              onPress={() => navigateBack(dispatch, actionCompleted, exceptionType, navigation)}
             />
           ),
           headerRight: () => (
             <View style={styles.headerContainer}>
               {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
-              {renderScanButton()}
-              {renderPrintQueueButton()}
+              {renderScanButton(dispatch, isManualScanEnabled)}
+              {renderPrintQueueButton(navigation)}
             </View>
           )
         }}
@@ -197,7 +204,7 @@ const ReviewItemDetailsNavigator = () => {
           headerLeft: () => null,
           headerRight: () => (
             <View>
-              {renderCloseButton()}
+              {renderCloseButton(dispatch, navigation)}
             </View>
           )
         }}
@@ -209,9 +216,9 @@ const ReviewItemDetailsNavigator = () => {
           headerTitle: strings('AUDITS.AUDIT_ITEM'),
           headerRight: () => (
             <View style={styles.headerContainer}>
-              {showCalculator && renderCalcButton()}
-              {renderPrintQueueButton()}
-              {renderScanButton()}
+              {showCalculator && renderCalcButton(dispatch, calcOpen)}
+              {renderPrintQueueButton(navigation)}
+              {renderScanButton(dispatch, isManualScanEnabled)}
             </View>
           )
         }}
@@ -226,14 +233,35 @@ const ReviewItemDetailsNavigator = () => {
           headerBackTitleVisible: false,
           headerRight: () => (
             <View style={styles.headerContainer}>
-              {showCalculator && renderCalcButton()}
-              {renderPrintQueueButton()}
-              {renderScanButton()}
+              {showCalculator && renderCalcButton(dispatch, calcOpen)}
+              {renderPrintQueueButton(navigation)}
+              {renderScanButton(dispatch, isManualScanEnabled)}
             </View>
           )
         }}
       />
     </Stack.Navigator>
+  );
+};
+const ReviewItemDetailsNavigator = ():JSX.Element => {
+  const { isManualScanEnabled, calcOpen } = useTypedSelector(state => state.Global);
+  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
+  const { showCalculator } = useTypedSelector(state => state.User.configs);
+  const { title } = useTypedSelector(state => state.ItemHistory);
+  const dispatch = useDispatch();
+  const navigation: NavigationProp<any> = useNavigation();
+  return (
+    <ReviewItemDetailsNavigatorStack
+      isManualScanEnabled={isManualScanEnabled}
+      calcOpen={calcOpen}
+      exceptionType={exceptionType}
+      actionCompleted={actionCompleted}
+      showCalculator={showCalculator}
+      title={title}
+      dispatch={dispatch}
+      navigation={navigation}
+
+    />
   );
 };
 
