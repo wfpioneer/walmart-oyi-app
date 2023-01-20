@@ -34,13 +34,11 @@ import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
-import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
 import {
   resetLocations,
   setActionCompleted,
-  setupScreen,
-  updatePendingOHQty
+  setupScreen
 } from '../../state/actions/ItemDetailScreen';
 import { hideActivityModal, showActivityModal, showInfoModal } from '../../state/actions/Modal';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -49,14 +47,13 @@ import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
   CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
-  NO_ACTION, UPDATE_OH_QTY
+  NO_ACTION
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
 import { Configurations } from '../../models/User';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { MOVE_TO_FRONT } from '../CreatePick/CreatePick';
-import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
@@ -79,7 +76,6 @@ export interface ItemDetailsScreenProps {
   isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
-  updateOHQtyApi: AsyncState;
   userId: string;
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations?: Location[];
@@ -95,7 +91,6 @@ export interface ItemDetailsScreenProps {
   selectedSection: string; setSelectedSection: React.Dispatch<React.SetStateAction<string>>;
   numberOfPallets: number; setNumberOfPallets: React.Dispatch<React.SetStateAction<number>>;
   isQuickPick: boolean; setIsQuickPick: React.Dispatch<React.SetStateAction<boolean>>;
-  newOHQty: number; setNewOHQty: React.Dispatch<React.SetStateAction<number>>;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -129,16 +124,21 @@ export interface HistoryCardPropsI {
   qty: number;
 }
 
-const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
-  || exceptionType === 'C' || exceptionType === 'NSFL';
-
-export const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleUpdateQty = (
+  props: HandleProps,
+  itemDetails: ItemDetails,
+  scannedEvent: { value: string | null; type: string | null; }
+) => {
   const {
-    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
+    navigation, trackEventCall, validateSessionCall, route, dispatch, userId
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
     trackEventCall(REVIEW_ITEM_DETAILS, { action: 'update_OH_qty_click', itemNbr: itemDetails.itemNbr });
-    setOhQtyModalVisible(true);
+    if (scannedEvent.value) {
+      dispatch(resetScannedEvent());
+    }
+    dispatch(setAuditItemNumber(itemDetails.itemNbr));
+    navigation.navigate('AuditItem');
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
@@ -150,37 +150,6 @@ export const handleLocationAction = (props: HandleProps, itemDetails: ItemDetail
     trackEventCall(REVIEW_ITEM_DETAILS, { action: 'location_details_click', itemNbr: itemDetails.itemNbr });
     navigation.navigate('LocationDetails');
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
-};
-
-export const handleOHQtyClose = (
-  onHandQty: number,
-  dispatch: Dispatch<any>,
-  setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-  setNewOHQty: React.Dispatch<React.SetStateAction<number>>
-) => {
-  dispatch({ type: UPDATE_OH_QTY.RESET });
-  setNewOHQty(onHandQty);
-  setOhQtyModalVisible(false);
-};
-
-export const handleOHQtySubmit = (itemDetails: ItemDetails, newOHQty: number, dispatch: Dispatch<any>) => {
-  const {
-    basePrice, categoryNbr, itemName, itemNbr, onHandsQty, upcNbr
-  } = itemDetails;
-  const change = basePrice * (newOHQty - itemDetails.onHandsQty);
-  dispatch(updateOHQty({
-    data: {
-      itemName,
-      itemNbr,
-      upcNbr: parseInt(upcNbr, 10),
-      categoryNbr,
-      oldQuantity: onHandsQty,
-      newQuantity: newOHQty,
-      dollarChange: change,
-      initiatedTimestamp: moment().toISOString(),
-      approvalRequestSource: approvalRequestSource.ItemDetails
-    }
-  }));
 };
 
 export const renderOHQtyComponent = (itemDetails: ItemDetails): JSX.Element => {
@@ -287,26 +256,6 @@ export const createNewPickApiHook = (
   // create new pick api isWaiting
   if (isFocused && createNewPickApi.isWaiting) {
     dispatch(showActivityModal());
-  }
-};
-
-export const updateOHQtyApiHook = (
-  updateOHQtyApi: AsyncState,
-  dispatch: Dispatch<any>,
-  isFocused: boolean,
-  newOHQty: number,
-  exceptionType: string,
-  setOhQtyModalVisible: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  if (isFocused) {
-    if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
-      dispatch(updatePendingOHQty(newOHQty));
-      if (validateExceptionType(exceptionType)) {
-        dispatch(setActionCompleted());
-      }
-      dispatch({ type: UPDATE_OH_QTY.RESET });
-      setOhQtyModalVisible(false);
-    }
   }
 };
 
@@ -1123,20 +1072,17 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
     completeItemApi,
     createNewPickApi,
-    updateOHQtyApi,
     userId, actionCompleted, pendingOnHandsQty,
     route,
     dispatch,
     navigation,
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
-    ohQtyModalVisible, setOhQtyModalVisible,
     createPickModalVisible, setCreatePickModalVisible,
     errorModalVisible, setErrorModalVisible,
     selectedSection, setSelectedSection,
     numberOfPallets, setNumberOfPallets,
     isQuickPick, setIsQuickPick,
-    newOHQty, setNewOHQty,
     trackEventCall,
     validateSessionCall,
     useEffectHook,
@@ -1171,12 +1117,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   const locationCount = getLocationCount(props);
   const updatedSalesTS = getUpdatedSales(itemDetails);
-
-  // Set Item Details
-  useEffectHook(() => {
-    onValidateItemDetails(dispatch, itemDetails);
-    setNewOHQty(itemDetails?.onHandsQty || 0);
-  }, [itemDetails]);
 
   // Barcode event listener effect
   useEffectHook(() => {
@@ -1226,15 +1166,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }
   );
-
-  useEffectHook(() => updateOHQtyApiHook(
-    updateOHQtyApi,
-    dispatch,
-    navigation.isFocused(),
-    newOHQty,
-    itemDetails?.exceptionType || '',
-    setOhQtyModalVisible
-  ), [updateOHQtyApi]);
 
   // Get Item Details Error
   if (!isWaiting && (error || (itemDetails && itemDetails.message))) {
@@ -1316,24 +1247,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
       <CustomModalComponent
-        isVisible={ohQtyModalVisible}
-        onClose={() => setOhQtyModalVisible(false)}
-        modalType="Form"
-      >
-        <OHQtyUpdate
-          onHandsQty={itemDetails?.onHandsQty || 0}
-          newOHQty={newOHQty}
-          setNewOHQty={setNewOHQty}
-          isWaiting={updateOHQtyApi.isWaiting}
-          error={updateOHQtyApi.error}
-          handleClose={() => handleOHQtyClose(itemDetails?.onHandsQty || 0,
-            dispatch,
-            setOhQtyModalVisible,
-            setNewOHQty)}
-          handleSubmit={() => handleOHQtySubmit(itemDetails, newOHQty, dispatch)}
-        />
-      </CustomModalComponent>
-      <CustomModalComponent
         isVisible={createPickModalVisible}
         onClose={() => setCreatePickModalVisible(false)}
         modalType="Form"
@@ -1394,7 +1307,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               iconName="pallet"
               topRightBtnTxt={getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
                 ? strings('GENERICS.CHANGE') : undefined}
-              topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
+              topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent)}
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
@@ -1453,7 +1366,6 @@ const ReviewItemDetails = (): JSX.Element => {
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
-  const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const getItemDetailsV3Api = useTypedSelector(state => state.async.getItemDetailsV3);
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
@@ -1478,7 +1390,6 @@ const ReviewItemDetails = (): JSX.Element => {
   const [selectedSection, setSelectedSection] = useState('');
   const [numberOfPallets, setNumberOfPallets] = useState(1);
   const [isQuickPick, setIsQuickPick] = useState(false);
-  const [newOHQty, setNewOHQty] = useState(0);
 
   return (
     <ReviewItemDetailsScreen
@@ -1495,7 +1406,6 @@ const ReviewItemDetails = (): JSX.Element => {
       piSalesHistResult={getItemPiSalesHistoryApi.result}
       completeItemApi={completeItemApi}
       createNewPickApi={createNewPickApi}
-      updateOHQtyApi={updateOHQtyApi}
       userId={userId}
       exceptionType={exceptionType}
       actionCompleted={actionCompleted}
@@ -1520,8 +1430,6 @@ const ReviewItemDetails = (): JSX.Element => {
       setNumberOfPallets={setNumberOfPallets}
       isQuickPick={isQuickPick}
       setIsQuickPick={setIsQuickPick}
-      newOHQty={newOHQty}
-      setNewOHQty={setNewOHQty}
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
