@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native';
 import COLOR from '../themes/Color';
@@ -16,7 +16,7 @@ import PrintListTabs from './PrintListTabNavigator';
 const Stack = createStackNavigator();
 
 const PrintPriceSignNavigator = (): JSX.Element => {
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
   const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
   const user = useTypedSelector(state => state.User);
   const isPrintUpdate = user.features.includes('printing update') || user.configs.printingUpdate;
