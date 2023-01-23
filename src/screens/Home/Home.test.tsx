@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { mockConfig } from '../../mockData/mockConfig';
@@ -11,7 +11,7 @@ import {
   mockZeroCompleteWorklistSummaries
 } from '../../mockData/mockWorklistSummary';
 import { AsyncState } from '../../models/AsyncState';
-import { HomeScreen } from './Home';
+import { HomeScreen, HomeScreenProps } from './Home';
 
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
@@ -46,20 +46,26 @@ const defaultAsyncState: AsyncState = {
   result: null
 };
 
-const homeScreenProps: any = {
+const routeProp: RouteProp<any, string> = {
+  key: 'test',
+  name: 'test'
+};
+
+const homeScreenProps: HomeScreenProps = {
   userName: 'testUser',
   setScannedEvent: jest.fn(),
   setManualScan: jest.fn(),
+  setWorklistType: jest.fn(),
   isManualScanEnabled: false,
   worklistSummaryApiState: { ...defaultAsyncState },
   userConfigUpdateApiState: { ...defaultAsyncState },
   getWorklistSummary: jest.fn(),
   navigation: navigationProp,
   updateFilterExceptions: jest.fn(),
-  route: jest.fn(),
+  route: routeProp,
   userConfig: mockConfig,
   resetUserConfigUpdateApiState: jest.fn(),
-  userFeatures: ['']
+  userFeatures: []
 };
 
 // opt out of type checking in order to create mocks that don't exactly match

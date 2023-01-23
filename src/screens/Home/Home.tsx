@@ -50,7 +50,7 @@ const mapDispatchToProps = {
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
 
-interface HomeScreenProps {
+export interface HomeScreenProps {
   userName: string;
   setScannedEvent: (scan: any) => void;
   setManualScan: (isManualScan: boolean) => void;
