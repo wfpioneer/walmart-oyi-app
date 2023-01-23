@@ -927,7 +927,8 @@ export const disabledContinue = (
   );
 
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
-  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(b.locationName);
+  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(b.locationName,
+    undefined, { numeric: true });
 
   return locations.sort(sortLocationNames);
 };
