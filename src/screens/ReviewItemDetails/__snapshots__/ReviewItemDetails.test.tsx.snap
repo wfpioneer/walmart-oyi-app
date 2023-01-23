@@ -2587,7 +2587,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -2599,7 +2599,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -3312,7 +3312,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -3324,7 +3324,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -3767,7 +3767,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -3779,7 +3779,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -4202,7 +4202,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -4214,7 +4214,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -4641,7 +4641,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -4653,7 +4653,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -5080,7 +5080,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -5092,7 +5092,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -5519,7 +5519,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -5531,7 +5531,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -5958,7 +5958,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -5970,7 +5970,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -6397,7 +6397,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   >
     <mockMaterialCommunityIcons
       color="#ffffffff"
-      name="barcode-scan"
+      name="map-marker-plus"
       size={20}
     />
     <Text
@@ -6409,7 +6409,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
     </Text>
   </TouchableOpacity>
 </View>
