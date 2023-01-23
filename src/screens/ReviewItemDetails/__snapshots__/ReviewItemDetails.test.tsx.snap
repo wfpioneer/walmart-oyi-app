@@ -2236,22 +2236,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     modalType="Form"
     onClose={[Function]}
   >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
     <CreatePickDialog
       isQuickPick={false}
       locations={
@@ -2897,22 +2881,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     modalType="Form"
     onClose={[Function]}
   >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
     <CreatePickDialog
       isQuickPick={false}
       locations={
@@ -3417,22 +3385,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     modalType="Form"
     onClose={[Function]}
   >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
     <CreatePickDialog
       isQuickPick={false}
       locations={
@@ -3856,22 +3808,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     modalType="Form"
     onClose={[Function]}
   >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
     <CreatePickDialog
       isQuickPick={false}
       locations={
@@ -4284,22 +4220,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         width={-1}
       />
     </View>
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
   </CustomModalComponent>
   <CustomModalComponent
     animationType="none"
@@ -4730,22 +4650,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     modalType="Form"
     onClose={[Function]}
   >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
     <CreatePickDialog
       isQuickPick={false}
       locations={
@@ -5162,22 +5066,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         width={-1}
       />
     </View>
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
   </CustomModalComponent>
   <CustomModalComponent
     animationType="none"
@@ -5608,22 +5496,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     modalType="Form"
     onClose={[Function]}
   >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
     <CreatePickDialog
       isQuickPick={false}
       locations={
@@ -6040,22 +5912,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         width={-1}
       />
     </View>
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={true}
-    modalType="Form"
-    onClose={[Function]}
-  >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
   </CustomModalComponent>
   <CustomModalComponent
     animationType="none"
