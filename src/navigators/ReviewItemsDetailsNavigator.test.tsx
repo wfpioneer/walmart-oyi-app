@@ -4,7 +4,9 @@ import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
   ReviewItemDetailsNavigatorStack,
-  navigateBack, renderCalcButton, renderCamButton, renderPrintQueueButton, renderScanButton
+  navigateBack, navigateHistoryBack,
+  renderCalcButton, renderCamButton,
+  renderCloseButton, renderPrintQueueButton, renderScanButton
 } from './ReviewItemDetailsNavigator';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
@@ -25,7 +27,21 @@ jest.mock('../utils/AppCenterTool.ts', () => ({
   trackEvent: jest.fn()
 }));
 
-let navigationProp: NavigationProp<any>;
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
+};
 
 describe('ReviewItemsDetailsNavigation', () => {
   it('Render ReviewItemsNavigator', () => {
@@ -77,17 +93,38 @@ describe('ReviewItemsDetailsNavigation', () => {
     expect(toJSON()).toMatchSnapshot();
   });
   it('Render print queue button ', () => {
-    const { toJSON } = render(
+    const { toJSON, getByTestId } = render(
       renderPrintQueueButton(navigationProp)
     );
+    const printButton = getByTestId('print-queue-button');
+    fireEvent.press(printButton);
+    expect(navigationProp.navigate).toHaveBeenCalled();
     expect(toJSON()).toMatchSnapshot();
   });
 
   it('Render navigateBack button ', () => {
     const mockDispatch = jest.fn();
+    navigateBack(mockDispatch, true, 'null', navigationProp);
+    expect(navigationProp.goBack).toHaveBeenCalled();
     navigateBack(mockDispatch, false, 'po', navigationProp);
     expect(mockDispatch).toHaveBeenCalled();
     navigateBack(mockDispatch, false, 'nsfl', navigationProp);
     expect(mockDispatch).toHaveBeenCalled();
+  });
+  it('Render navigateHistoryBack button', () => {
+    const mockDispatch = jest.fn();
+    navigateHistoryBack(mockDispatch, navigationProp);
+    expect(mockDispatch).toHaveBeenCalled();
+    expect(navigationProp.navigate).toHaveBeenCalled();
+  });
+  it('Render close button', () => {
+    const mockDispatch = jest.fn();
+    const { getByTestId } = render(
+      renderCloseButton(mockDispatch, navigationProp)
+    );
+    const closeButton = getByTestId('close-button');
+    fireEvent.press(closeButton);
+    expect(mockDispatch).toHaveBeenCalled();
+    expect(navigationProp.navigate).toHaveBeenCalled();
   });
 });

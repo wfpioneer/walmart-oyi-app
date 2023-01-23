@@ -102,7 +102,7 @@ export const navigateHistoryBack = (dispatch: Dispatch<any>, navigation:Navigati
   navigation.navigate('ReviewItemDetailsHome');
 };
 export const renderCloseButton = (dispatch: Dispatch<any>, navigation:NavigationProp<any>):JSX.Element => (
-  <TouchableOpacity onPress={() => navigateHistoryBack(dispatch, navigation)}>
+  <TouchableOpacity testID="close-button" onPress={() => navigateHistoryBack(dispatch, navigation)}>
     <View style={styles.closeButton}>
       <MaterialCommunityIcon name="close" size={24} color={COLOR.WHITE} />
     </View>
