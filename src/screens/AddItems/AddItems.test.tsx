@@ -13,8 +13,6 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMateria
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -22,7 +20,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
