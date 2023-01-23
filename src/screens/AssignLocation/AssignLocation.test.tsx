@@ -30,9 +30,23 @@ const defaultScannedEvent = {
 const mockNavigate = jest.fn();
 const mockIsFocused = jest.fn(() => true);
 const mockGoBack = jest.fn();
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const navigationProp: NavigationProp<any> = { navigate: mockNavigate, isFocused: mockIsFocused, goBack: mockGoBack };
+
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: mockGoBack,
+  isFocused: mockIsFocused,
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: mockNavigate,
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
+};
+
 const mockDispatch = jest.fn();
 
 jest.mock('../../utils/AppCenterTool.ts', () => ({

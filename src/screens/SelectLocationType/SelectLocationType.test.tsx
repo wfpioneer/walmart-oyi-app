@@ -22,8 +22,9 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn(),
+  getState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -54,7 +55,8 @@ describe('SelectLocationTypeScreen', () => {
     sectionName: '1',
     locationName: 'A1-1',
     type: '8',
-    typeNbr: 8
+    typeNbr: 8,
+    newQty: 0
   };
 
   const defaultItemNbr = 0;
@@ -302,7 +304,8 @@ describe('SelectLocationTypeScreen', () => {
       type: '',
       typeNbr: 1,
       zoneId: 400,
-      zoneName: 'Test'
+      zoneName: 'Test',
+      newQty: 0
     };
     it('Test AddLocationApiHook', () => {
       const successApi: AsyncState = {
