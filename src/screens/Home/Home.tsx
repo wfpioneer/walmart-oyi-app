@@ -34,7 +34,8 @@ const mapStateToProps = (state: RootState) => ({
   userConfig: state.User.configs,
   isManualScanEnabled: state.Global.isManualScanEnabled,
   worklistSummaryApiState: state.async.getWorklistSummary,
-  userConfigUpdateApiState: state.async.updateUserConfig
+  userConfigUpdateApiState: state.async.updateUserConfig,
+  userFeatures: state.User.features
 });
 
 const mapDispatchToProps = {
@@ -49,7 +50,7 @@ const mapDispatchToProps = {
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
 
-interface HomeScreenProps {
+export interface HomeScreenProps {
   userName: string;
   setScannedEvent: (scan: any) => void;
   setManualScan: (isManualScan: boolean) => void;
@@ -63,6 +64,7 @@ interface HomeScreenProps {
   route: RouteProp<any, string>;
   userConfig: Configurations;
   resetUserConfigUpdateApiState: () => void;
+  userFeatures: string[];
 }
 
 interface HomeScreenState {
@@ -226,7 +228,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderGoalCircles = () => data.map((goal, index) => {
       const goalTitle = getWorklistGoalTitle(goal.worklistGoal);
       const palletWorklistsEnabled = this.props.userConfig.palletWorklists;
-      const auditsWorklistsEnabled = this.props.userConfig.auditWorklists;
+      const auditsWorklistsEnabled = this.props.userConfig.auditWorklists
+        && this.props.userFeatures.includes('on hands change');
 
       // Disabled pallet worklist Goal Circle based on feature flag
       if (!palletWorklistsEnabled && goal.worklistGoal === WorklistGoal.PALLETS) {
