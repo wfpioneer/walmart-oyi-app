@@ -2,9 +2,8 @@ import { StyleSheet } from 'react-native';
 import COLOR from '../../themes/Color';
 
 export default StyleSheet.create({
-
   headerText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold'
   },
   errorLabel: {
@@ -12,7 +11,7 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   effectiveDateHeaderItem: {
-    fontSize: 16,
+    fontSize: 15,
     color: COLOR.BLACK,
     textAlign: 'center'
   },
@@ -22,7 +21,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   modifiedEffectiveDateContainer: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: COLOR.YELLOW,
