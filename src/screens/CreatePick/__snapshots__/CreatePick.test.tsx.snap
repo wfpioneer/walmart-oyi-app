@@ -19,11 +19,13 @@ exports[`Create Pick screen render tests renders the screen when items are move 
   >
     <ItemInfo
       category="72 - Deli"
+      countryCode="US"
       exceptionType={null}
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
       showAdditionalItemDetails={false}
+      showItemImage={false}
       status=""
       upcNbr="8675309"
     />
@@ -214,11 +216,13 @@ exports[`Create Pick screen render tests renders the screen with item with floor
   >
     <ItemInfo
       category="72 - Deli"
+      countryCode="US"
       exceptionType={null}
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
       showAdditionalItemDetails={false}
+      showItemImage={false}
       status=""
       upcNbr="8675309"
     />
@@ -411,11 +415,13 @@ exports[`Create Pick screen render tests renders the screen with no reserve loca
   >
     <ItemInfo
       category="72 - Deli"
+      countryCode="US"
       exceptionType={null}
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
       showAdditionalItemDetails={false}
+      showItemImage={false}
       status=""
       upcNbr="8675309"
     />
@@ -606,11 +612,13 @@ exports[`Create Pick screen render tests renders the screen without floor locati
   >
     <ItemInfo
       category="72 - Deli"
+      countryCode="US"
       exceptionType={null}
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
       showAdditionalItemDetails={false}
+      showItemImage={false}
       status=""
       upcNbr="8675309"
     />

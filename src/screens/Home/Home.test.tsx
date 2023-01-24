@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { mockConfig } from '../../mockData/mockConfig';
@@ -22,9 +23,20 @@ jest.mock('react-native-config', () => {
     ENVIRONMENT: ' DEV'
   };
 });
-const navigationProp = {
+const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
-  navigate: jest.fn()
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 
 const defaultAsyncState: AsyncState = {
