@@ -16,31 +16,19 @@ export default StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     marginBottom: 5
   },
   headerItem: {
     flexDirection: 'column',
-    alignItems: 'center',
-    paddingHorizontal: 5
-  },
-  headerItemEdit: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: COLOR.YELLOW,
-    paddingHorizontal: 5,
-    borderWidth: 1
+    alignItems: 'center'
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold'
   },
   headerItemText: {
-    fontSize: 16
-  },
-  headerRequiredText: {
-    fontSize: 16,
-    color: COLOR.DEEP_RED
+    fontSize: 15
   },
   instructionLabel: {
     borderColor: COLOR.BLACK,
@@ -97,23 +85,6 @@ export default StyleSheet.create({
   errorLabel: {
     color: COLOR.RED_500,
     textAlign: 'center'
-  },
-  effectiveDateHeaderItem: {
-    fontSize: 16,
-    color: COLOR.BLACK,
-    textAlign: 'center'
-  },
-  effectiveDateContainer: {
-    paddingHorizontal: 10,
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  modifiedEffectiveDateContainer: {
-    paddingHorizontal: 10,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: COLOR.YELLOW,
-    borderWidth: 1
   },
   buttonWarningContainer: {
     flexDirection: 'row',

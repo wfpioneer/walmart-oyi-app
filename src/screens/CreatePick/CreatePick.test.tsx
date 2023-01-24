@@ -15,6 +15,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import mockUser from '../../mockData/mockUser';
 
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -25,8 +26,6 @@ const defaultAsyncState: AsyncState = {
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -34,7 +33,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 
 const mockLocations: Location[] = [
@@ -47,7 +49,8 @@ const mockLocations: Location[] = [
     type: 'floor',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    newQty: 0
   },
   {
     aisleId: 2,
@@ -58,7 +61,8 @@ const mockLocations: Location[] = [
     type: 'floor',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    newQty: 0
   }
 ];
 
@@ -72,7 +76,8 @@ const mockReserveLocations: Location[] = [
     type: 'floor',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    newQty: 0
   },
   {
     aisleId: 3,
@@ -83,7 +88,8 @@ const mockReserveLocations: Location[] = [
     type: 'floor',
     typeNbr: 2,
     zoneId: 1,
-    zoneName: 'ABAR'
+    zoneName: 'ABAR',
+    newQty: 0
   }
 ];
 
@@ -131,6 +137,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
@@ -156,6 +163,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
@@ -181,6 +189,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
@@ -206,6 +215,7 @@ describe('Create Pick screen render tests', () => {
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
+        countryCode={mockUser.countryCode}
       />
     );
 
