@@ -1457,9 +1457,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           </View>
           )}
       </ScrollView>
-      {exceptionType === 'nsfl'
-        ? renderScanForNoActionButton(props, itemDetails.itemNbr)
-        : renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
+      {exceptionType === 'NSFL' && (floorLocations && floorLocations.length === 0)
+        ? renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))
+        : renderScanForNoActionButton(props, itemDetails.itemNbr)}
     </View>
   );
 };
