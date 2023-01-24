@@ -28,6 +28,7 @@ import AuditItem, {
   calculateTotalOHQty,
   completeItemApiHook,
   deleteFloorLocationApiHook,
+  deletePalletApiHook,
   disabledContinue,
   getFloorLocationsResult,
   getItemDetailsApiHook,
@@ -40,7 +41,6 @@ import AuditItem, {
   renderConfirmOnHandsModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
-  reportMissingPalletApiHook,
   sortReserveLocations,
   updateMultiPalletUPCQtyApiHook,
   updateOHQtyApiHook
@@ -166,7 +166,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   },
   setLocToConfirm: jest.fn(),
   deleteFloorLocationApi: defaultAsyncState,
-  reportMissingPalletApi: defaultAsyncState,
+  deletePalletApi: defaultAsyncState,
   showOnHandsConfirmState: [false, jest.fn()],
   updateOHQtyApi: defaultAsyncState,
   getItemPalletsError: false,
@@ -575,13 +575,13 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderDeleteLocationModal should render modal with loader', () => {
-      const mockReportMissingPalletApiState = {
+      const mockdeletePalletApiState = {
         ...defaultAsyncState,
         isWaiting: true
       };
       const { toJSON } = render(renderDeleteLocationModal(
         defaultAsyncState,
-        mockReportMissingPalletApiState,
+        mockdeletePalletApiState,
         true,
         mockSetShowDeleteConfirmationModal,
         mockDeleteLocationConfirmed,
@@ -631,12 +631,12 @@ describe('AuditItemScreen', () => {
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
       expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item', { action: 'missing_pallet_confirmation_click', palletId: 1234 }
+        'Audit_Item', { action: 'delete_pallet_confirmation_click', palletId: 1234 }
       );
     });
 
-    it('Tests reportMissingPalletApiHook on 200 success for deleting location', () => {
-      reportMissingPalletApiHook(
+    it('Tests deletePalletApiHook on 200 success for deleting location', () => {
+      deletePalletApiHook(
         successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234
       );
       expect(mockDispatch).toBeCalledTimes(2);
@@ -657,8 +657,8 @@ describe('AuditItemScreen', () => {
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
 
-    it('Tests reportMissingPalletApiHook on failure', () => {
-      reportMissingPalletApiHook(
+    it('Tests deletePalletApiHook on failure', () => {
+      deletePalletApiHook(
         failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234
       );
       expect(mockDispatch).toBeCalledTimes(1);

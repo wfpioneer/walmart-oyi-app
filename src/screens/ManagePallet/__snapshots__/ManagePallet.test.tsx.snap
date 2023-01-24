@@ -136,7 +136,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
-          "marginHorizontal": 10,
+          "marginHorizontal": 5,
         }
       }
     >
@@ -145,14 +145,13 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -162,7 +161,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -174,14 +173,13 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -191,7 +189,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -203,14 +201,13 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -220,7 +217,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -512,7 +509,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
-          "marginHorizontal": 10,
+          "marginHorizontal": 5,
         }
       }
     >
@@ -521,14 +518,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -538,7 +534,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -550,14 +546,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -567,7 +562,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -579,14 +574,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -596,7 +590,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -888,7 +882,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
-          "marginHorizontal": 10,
+          "marginHorizontal": 5,
         }
       }
     >
@@ -897,14 +891,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -914,7 +907,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -926,14 +919,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -943,7 +935,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -955,14 +947,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -972,7 +963,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -1264,7 +1255,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
-          "marginHorizontal": 10,
+          "marginHorizontal": 5,
         }
       }
     >
@@ -1273,14 +1264,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -1290,7 +1280,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -1302,14 +1292,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -1319,7 +1308,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -1331,14 +1320,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -1348,7 +1336,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -1640,7 +1628,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
-          "marginHorizontal": 10,
+          "marginHorizontal": 5,
         }
       }
     >
@@ -1649,14 +1637,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -1666,7 +1653,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -1678,14 +1665,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -1695,7 +1681,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -1707,14 +1693,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -1724,7 +1709,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -2016,7 +2001,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
-          "marginHorizontal": 10,
+          "marginHorizontal": 5,
         }
       }
     >
@@ -2025,14 +2010,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -2042,7 +2026,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -2054,14 +2038,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -2071,7 +2054,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -2083,14 +2066,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -2100,7 +2082,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -2392,7 +2374,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
-          "marginHorizontal": 10,
+          "marginHorizontal": 5,
         }
       }
     >
@@ -2401,14 +2383,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -2418,7 +2399,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -2430,14 +2411,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -2447,7 +2427,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
@@ -2459,14 +2439,13 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           Object {
             "alignItems": "center",
             "flexDirection": "column",
-            "paddingHorizontal": 5,
           }
         }
       >
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "fontWeight": "bold",
             }
           }
@@ -2476,7 +2455,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
         <Text
           style={
             Object {
-              "fontSize": 16,
+              "fontSize": 15,
             }
           }
         >
