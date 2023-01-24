@@ -15,10 +15,13 @@ export interface WorklistHomeScreenProps {
   navigation: NavigationProp<any>;
   dispatch: Dispatch<any>;
   configs: Configurations;
+  userFeatures: string[];
 }
 
 export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
-  const { navigation, dispatch, configs } = props;
+  const {
+    navigation, dispatch, configs, userFeatures
+  } = props;
 
   return (
     <View style={styles.container}>
@@ -46,7 +49,7 @@ export const WorklistHomeScreen = (props: WorklistHomeScreenProps) => {
           testID="palletWorkListButton"
         />
       )}
-      { configs.auditWorklists
+      { configs.auditWorklists && userFeatures.includes('on hands change')
         && (
         <Button
           title={strings('WORKLIST.AUDIT_WORKLIST')}
@@ -69,11 +72,13 @@ const WorklistHome = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const configs = useTypedSelector(state => state.User.configs);
+  const userFeatures = useTypedSelector(state => state.User.features);
   return (
     <WorklistHomeScreen
       navigation={navigation}
       dispatch={dispatch}
       configs={configs}
+      userFeatures={userFeatures}
     />
   );
 };

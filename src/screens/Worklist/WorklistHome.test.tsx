@@ -42,6 +42,7 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={mockConfig}
+        userFeatures={['on hands change']}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -54,6 +55,7 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={{ ...mockConfig, palletWorklists: true, auditWorklists: true }}
+        userFeatures={['on hands change']}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -65,6 +67,7 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={mockConfig}
+        userFeatures={['on hands change']}
       />
     );
     const itemWorklistButton = getByTestId('itemWorkListButton');
@@ -79,6 +82,7 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={{ ...mockConfig, palletWorklists: true }}
+        userFeatures={['on hands change']}
       />
     );
     const palletWorkListButton = getByTestId('palletWorkListButton');
@@ -93,6 +97,7 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={{ ...mockConfig, auditWorklists: true }}
+        userFeatures={['on hands change']}
       />
     );
     const palletWorkListButton = getByTestId('auditWorkListButton');
