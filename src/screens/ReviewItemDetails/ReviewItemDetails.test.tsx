@@ -21,11 +21,11 @@ import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
   getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales,
-  handleCreateNewPick, handleLocationAction, handleUpdateQty, isError,
+  handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError,
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
   renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -119,6 +119,7 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   piSalesHistResult: null,
   completeItemApi: defaultAsyncState,
   createNewPickApi: defaultAsyncState,
+  updateOHQtyApi: defaultAsyncState,
   userId: 'testUser',
   exceptionType: null,
   actionCompleted: false,
@@ -143,6 +144,8 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   setNumberOfPallets: jest.fn(),
   isQuickPick: false,
   setIsQuickPick: jest.fn(),
+  newOHQty: 0,
+  setNewOHQty: jest.fn(),
   trackEventCall: jest.fn(),
   validateSessionCall: jest.fn(() => Promise.resolve()),
   useEffectHook: jest.fn(),
@@ -199,6 +202,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve
@@ -222,21 +226,10 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
-        userConfigs: { ...mockConfig, additionalItemDetails: true }
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ReviewItemDetailsScreen {...testProps} />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('renders show openAudit link when showOpenAuditLink Flag is true', () => {
-      const testProps: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
         userConfigs: { ...mockConfig, additionalItemDetails: true }
       };
       const renderer = ShallowRenderer.createRenderer();
@@ -255,6 +248,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
@@ -275,6 +269,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
@@ -295,6 +290,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
@@ -315,6 +311,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve
@@ -334,6 +331,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[456].onHandsQty,
         pendingOnHandsQty: itemDetail[456].pendingOnHandsQty,
         floorLocations: itemDetail[456].location.floor,
         reserveLocations: itemDetail[456].location.reserve
@@ -354,6 +352,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 200
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
@@ -418,6 +417,7 @@ describe('ReviewItemDetailsScreen', () => {
           status: 207
         },
         exceptionType: 'NSFL',
+        newOHQty: itemDetail[321].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve
@@ -731,6 +731,24 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'SAGA/CREATE_NEW_PICK'
       });
+    });
+    it('test handleUpdateQty', async () => {
+      await handleUpdateQty(
+        mockHandleProps, itemDetail[123], { value: '123', type: 'UPC-A' }, mockHandleProps.userConfigs
+      );
+      expect(mockHandleProps.setOhQtyModalVisible).toHaveBeenCalledWith(true);
+
+      await handleUpdateQty(
+        mockHandleProps,
+        itemDetail[123],
+        { value: '123', type: 'UPC-A' },
+        { ...mockHandleProps.userConfigs, auditWorklists: true }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenCalledTimes(2);
+      expect(mockHandleProps.dispatch).toHaveBeenCalledWith({ type: 'GLOBAL/RESET_SCANNED_EVENT' });
+      expect(mockHandleProps.dispatch).toHaveBeenCalledWith(
+        { payload: 1234567890, type: 'AUDIT_WORKLIST/SET_AUDIT_ITEM_NUMBER' }
+      );
     });
     it('test handleLocationUpdate', async () => {
       await handleLocationAction(mockHandleProps, itemDetail[123]);
@@ -1122,6 +1140,57 @@ describe('ReviewItemDetailsScreen', () => {
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
       getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], 100);
       expect(getPendingOnHandsQtyResult).toStrictEqual(false);
+    });
+    it('test updateOHQtyApiHook', () => {
+      const apiResponse = {
+        ...defaultAsyncState,
+        onIsWaiting: false,
+        result: {
+          data: 'test'
+        }
+      };
+      const mockSetOhQtyModalVisible = jest.fn();
+      updateOHQtyApiHook(apiResponse, mockDispatch, true, 10, 'NSFL', mockSetOhQtyModalVisible);
+      expect(mockDispatch).toHaveBeenCalledTimes(3);
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        1,
+        { payload: 10, type: 'ITEM_DETAILS_SCREEN/UPDATE_PENDING_OH_QTY' }
+      );
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: 'API/UPDATE_OH_QTY/RESET' });
+      expect(mockSetOhQtyModalVisible).toHaveBeenCalledWith(false);
+    });
+    it('test handleOHQtyClose', () => {
+      const testOHQty = 10;
+      const mockSetOhQtyModalVisible = jest.fn();
+      const mocksetNewOHQty = jest.fn();
+      handleOHQtyClose(testOHQty, mockDispatch, mockSetOhQtyModalVisible, mocksetNewOHQty);
+      expect(mockDispatch).toHaveBeenCalledWith({ type: 'API/UPDATE_OH_QTY/RESET' });
+      expect(mockSetOhQtyModalVisible).toHaveBeenCalledWith(false);
+      expect(mocksetNewOHQty).toHaveBeenCalledWith(testOHQty);
+    });
+    it('test handleOHQtySubmit', () => {
+      const mockDate = new Date(1647369000000);
+      jest.spyOn(global, 'Date').mockImplementation(() => (mockDate as unknown) as string);
+      Date.now = () => 1647369000000;
+      const expectedAction = {
+        payload: {
+          data: {
+            approvalRequestSource: 'itemdetails',
+            categoryNbr: 93,
+            dollarChange: -48009.6,
+            initiatedTimestamp: '2022-03-15T18:30:00.000Z',
+            itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
+            itemNbr: 1234567890,
+            newQuantity: 10,
+            oldQuantity: 42,
+            upcNbr: 55559999
+          }
+        },
+        type: 'SAGA/UPDATE_OH_QTY'
+      };
+      handleOHQtySubmit(itemDetail[123], 10, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
     });
   });
   describe('Tests Rendering \'renderOHChangeHistory\'', () => {
