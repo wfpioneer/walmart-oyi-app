@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tools Navigator Renders the Tools Navigator 1`] = `
+<SideMenu
+  animationFunction={[Function]}
+  animationStyle={[Function]}
+  autoClosing={true}
+  bounceBackOnOverdraw={true}
+  disableGestures={false}
+  edgeHitWidth={60}
+  hiddenMenuOffset={0}
+  isOpen={true}
+  menu={
+    <FilterMenu
+      screenName="Item_Worklist"
+    />
+  }
+  menuPosition="right"
+  onAnimationComplete={[Function]}
+  onChange={[Function]}
+  onMove={[Function]}
+  onSliding={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  openMenuOffset={500}
+  toleranceX={10}
+  toleranceY={10}
+>
+  <StackNavigator
+    screenOptions={
+      Object {
+        "headerMode": "float",
+        "headerStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "headerTintColor": "#ffffffff",
+      }
+    }
+  >
+    <Screen
+      component={[Function]}
+      name="ITEMWORKLIST"
+      options={[Function]}
+    />
+  </StackNavigator>
+</SideMenu>
+`;
+
+exports[`Tools Navigator Renders the worklist Navigator 1`] = `
+<SideMenu
+  animationFunction={[Function]}
+  animationStyle={[Function]}
+  autoClosing={true}
+  bounceBackOnOverdraw={true}
+  disableGestures={false}
+  edgeHitWidth={60}
+  hiddenMenuOffset={0}
+  isOpen={true}
+  menu={
+    <FilterMenu
+      screenName="Item_Worklist"
+    />
+  }
+  menuPosition="right"
+  onAnimationComplete={[Function]}
+  onChange={[Function]}
+  onMove={[Function]}
+  onSliding={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  openMenuOffset={500}
+  toleranceX={10}
+  toleranceY={10}
+>
+  <StackNavigator
+    screenOptions={
+      Object {
+        "headerMode": "float",
+        "headerStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "headerTintColor": "#ffffffff",
+      }
+    }
+  >
+    <Screen
+      component={[Function]}
+      name="ITEMWORKLIST"
+      options={[Function]}
+    />
+  </StackNavigator>
+</SideMenu>
+`;
+
+exports[`Tools Navigator Renders the worklist Tabs 1`] = `
+<MaterialTopTabNavigator
+  screenOptions={
+    Object {
+      "tabBarActiveTintColor": "#ffffffff",
+      "tabBarIndicatorStyle": Object {
+        "backgroundColor": "#ffffffff",
+      },
+      "tabBarStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.WORKLIST.TODO\\" translation]"
+  />
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
+  />
+</MaterialTopTabNavigator>
+`;
+
+exports[`worklist Navigator Renders the worklist Navigator 1`] = `
+<SideMenu
+  animationFunction={[Function]}
+  animationStyle={[Function]}
+  autoClosing={true}
+  bounceBackOnOverdraw={true}
+  disableGestures={false}
+  edgeHitWidth={60}
+  hiddenMenuOffset={0}
+  isOpen={true}
+  menu={
+    <FilterMenu
+      screenName="Item_Worklist"
+    />
+  }
+  menuPosition="right"
+  onAnimationComplete={[Function]}
+  onChange={[Function]}
+  onMove={[Function]}
+  onSliding={[Function]}
+  onStartShouldSetResponderCapture={[Function]}
+  openMenuOffset={500}
+  toleranceX={10}
+  toleranceY={10}
+>
+  <StackNavigator
+    screenOptions={
+      Object {
+        "headerMode": "float",
+        "headerStyle": Object {
+          "backgroundColor": "#0071e9",
+        },
+        "headerTintColor": "#ffffffff",
+      }
+    }
+  >
+    <Screen
+      component={[Function]}
+      name="ITEMWORKLIST"
+      options={[Function]}
+    />
+  </StackNavigator>
+</SideMenu>
+`;
+
+exports[`worklist Navigator Renders the worklist Tabs 1`] = `
+<MaterialTopTabNavigator
+  screenOptions={
+    Object {
+      "tabBarActiveTintColor": "#ffffffff",
+      "tabBarIndicatorStyle": Object {
+        "backgroundColor": "#ffffffff",
+      },
+      "tabBarStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.WORKLIST.TODO\\" translation]"
+  />
+  <Screen
+    component={[Function]}
+    name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
+  />
+</MaterialTopTabNavigator>
+`;
