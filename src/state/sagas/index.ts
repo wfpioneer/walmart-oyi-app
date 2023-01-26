@@ -35,6 +35,13 @@ import UserConfigService from '../../services/UserConfig.service';
 const genericSagas = [
   // TODO remove this saga once the BE orchestration changes are pushed to Production
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V2, actions.getItemDetailsV2, GetItemDetailsService.getItemDetailsV2),
+  makeAsyncSaga(saga.GET_ITEM_DETAILS_V3, actions.getItemDetailsV3, GetItemDetailsService.getItemDetailsV3),
+  makeAsyncSaga(saga.GET_ITEM_PIHISTORY, actions.getItemPiHistory, GetItemDetailsService.getItemPiHistory),
+  makeAsyncSaga(
+    saga.GET_ITEM_PISALESHISTORY,
+    actions.getItemPiSalesHistory,
+    GetItemDetailsService.getItemPiSalesHistory
+  ),
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
