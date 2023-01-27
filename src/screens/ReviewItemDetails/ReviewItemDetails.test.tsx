@@ -239,18 +239,6 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders show openAudit link when showOpenAuditLink Flag is true', () => {
-      const testProps: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
-        userConfigs: { ...mockConfig, additionalItemDetails: true }
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ReviewItemDetailsScreen {...testProps} />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
     it('renders the details for a single item with ohQtyModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
@@ -745,8 +733,22 @@ describe('ReviewItemDetailsScreen', () => {
       });
     });
     it('test handleUpdateQty', async () => {
-      await handleUpdateQty(mockHandleProps, itemDetail[123]);
+      await handleUpdateQty(
+        mockHandleProps, itemDetail[123], { value: '123', type: 'UPC-A' }, mockHandleProps.userConfigs
+      );
       expect(mockHandleProps.setOhQtyModalVisible).toHaveBeenCalledWith(true);
+
+      await handleUpdateQty(
+        mockHandleProps,
+        itemDetail[123],
+        { value: '123', type: 'UPC-A' },
+        { ...mockHandleProps.userConfigs, auditWorklists: true }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenCalledTimes(2);
+      expect(mockHandleProps.dispatch).toHaveBeenCalledWith({ type: 'GLOBAL/RESET_SCANNED_EVENT' });
+      expect(mockHandleProps.dispatch).toHaveBeenCalledWith(
+        { payload: 1234567890, type: 'AUDIT_WORKLIST/SET_AUDIT_ITEM_NUMBER' }
+      );
     });
     it('test handleLocationUpdate', async () => {
       await handleLocationAction(mockHandleProps, itemDetail[123]);
