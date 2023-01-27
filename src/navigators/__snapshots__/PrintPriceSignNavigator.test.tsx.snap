@@ -4,6 +4,7 @@ exports[`PrintPriceSignNavigator render tests render with print title as Main 1`
 <Context.Provider
   value={
     Object {
+      "getServerState": undefined,
       "store": Object {
         "@@observable": [Function],
         "dispatch": [Function],
@@ -17,7 +18,6 @@ exports[`PrintPriceSignNavigator render tests render with print title as Main 1`
         "handleChangeWrapper": [Function],
         "isSubscribed": [Function],
         "notifyNestedSubs": [Function],
-        "onStateChange": [Function],
         "trySubscribe": [Function],
         "tryUnsubscribe": [Function],
       },

@@ -18,7 +18,7 @@ import {
   renderConfirmOnHandsModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
-  updateMultiPalletUPCQtyApiHook
+  updateMultiPalletUPCQtyV2ApiHook
 } from './ReserveAdjustment';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
@@ -27,7 +27,7 @@ import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { strings } from '../../../locales';
 import { itemPallets } from '../../../mockData/getItemPallets';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
-import { UPDATE_MULTI_PALLET_UPC_QTY } from '../../../state/actions/asyncAPI';
+import { UPDATE_MULTI_PALLET_UPC_QTY_V2 } from '../../../state/actions/asyncAPI';
 import { UPDATE_PALLET_QTY } from '../../../state/actions/ReserveAdjustmentScreen';
 import { setScannedEvent } from '../../../state/actions/Global';
 
@@ -151,7 +151,7 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
     { locationName: '', locationType: 'floor', palletId: 0 },
     jest.fn()
   ],
-  updateMultiPalletUPCQtyApi: defaultAsyncState,
+  updateMultiPalletUPCQtyV2Api: defaultAsyncState,
   showOnHandsConfirmState: [false, jest.fn()]
 };
 
@@ -472,9 +472,9 @@ describe('ReserveAdjustmentScreen', () => {
       expect(mockDispatch).toHaveBeenCalledTimes(2);
     });
 
-    it('Tests updateMultiPalletUPCQtyApiHook on success', () => {
+    it('Tests updateMultiPalletUPCQtyV2ApiHook on success', () => {
       const setShowOnHands = jest.fn();
-      updateMultiPalletUPCQtyApiHook(
+      updateMultiPalletUPCQtyV2ApiHook(
         successApi,
         mockDispatch,
         navigationProp,
@@ -491,7 +491,7 @@ describe('ReserveAdjustmentScreen', () => {
       });
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockDispatch).toHaveBeenCalledWith({
-        type: UPDATE_MULTI_PALLET_UPC_QTY.RESET
+        type: UPDATE_MULTI_PALLET_UPC_QTY_V2.RESET
       });
       expect(mockDispatch).toHaveBeenCalledWith(setScannedEvent(
         { type: 'worklist', value: mockItemDetails.itemNbr.toString() }
@@ -500,9 +500,9 @@ describe('ReserveAdjustmentScreen', () => {
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
 
-    it('Tests updateMultiPalletUPCQtyApiHook on failure', () => {
+    it('Tests updateMultiPalletUPCQtyV2ApiHook on failure', () => {
       const setShowOnHands = jest.fn();
-      updateMultiPalletUPCQtyApiHook(
+      updateMultiPalletUPCQtyV2ApiHook(
         failureApi,
         mockDispatch,
         navigationProp,
@@ -519,7 +519,7 @@ describe('ReserveAdjustmentScreen', () => {
       });
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({
-        type: UPDATE_MULTI_PALLET_UPC_QTY.RESET
+        type: UPDATE_MULTI_PALLET_UPC_QTY_V2.RESET
       });
     });
 
