@@ -132,13 +132,26 @@ export interface HistoryCardPropsI {
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
   || exceptionType === 'C' || exceptionType === 'NSFL';
 
-export const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleUpdateQty = (
+  props: HandleProps,
+  itemDetails: ItemDetails,
+  scannedEvent: { value: string | null; type: string | null; },
+  userConfigs: Configurations
+) => {
   const {
-    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
+    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId, dispatch
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
     trackEventCall(REVIEW_ITEM_DETAILS, { action: 'update_OH_qty_click', itemNbr: itemDetails.itemNbr });
-    setOhQtyModalVisible(true);
+    if (userConfigs.auditWorklists) {
+      if (scannedEvent.value) {
+        dispatch(resetScannedEvent());
+      }
+      dispatch(setAuditItemNumber(itemDetails.itemNbr));
+      navigation.navigate('AuditItem');
+    } else {
+      setOhQtyModalVisible(true);
+    }
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
@@ -1301,14 +1314,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
-  const navigateToAuditItemScreen = () => {
-    if (scannedEvent.value) {
-      dispatch(resetScannedEvent());
-    }
-    dispatch(setAuditItemNumber(itemDetails.itemNbr));
-    navigation.navigate('AuditItem');
-  };
-
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
@@ -1374,14 +1379,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         {!isWaiting && itemDetails
           && (
           <View>
-            {userConfigs.showOpenAuditLink
-            && (
-            <View style={styles.openAuditContainer}>
-              <TouchableOpacity onPress={navigateToAuditItemScreen}>
-                <Text style={styles.openAuditText}>{strings('AUDITS.OPEN_AUDIT_LABEL')}</Text>
-              </TouchableOpacity>
-            </View>
-            )}
             <ItemInfo
               itemName={itemDetails.itemName}
               itemNbr={itemDetails.itemNbr}
@@ -1409,7 +1406,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               iconName="pallet"
               topRightBtnTxt={getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
                 ? strings('GENERICS.CHANGE') : undefined}
-              topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
+              topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
