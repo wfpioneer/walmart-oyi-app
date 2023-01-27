@@ -31,6 +31,7 @@ const renderBottomRightBtns = (textArray: string[], actionFunc?: Function[]) => 
         {textArray.map((value, index) => (
           <View key={value} style={styles.bottomRowBtn}>
             <Button
+              testID={`bottomRightBtn-${index}`}
               type={ButtonType.NO_BORDER}
               title={value}
               onPress={() => actionFunc[index]()}
@@ -80,6 +81,7 @@ const SFTCard = (props: SFTCardProps) => {
         </View>
         {topRightBtnTxt && topRightBtnAction && (
         <Button
+          testID="topRightBtn"
           type={ButtonType.NO_BORDER}
           title={topRightBtnTxt}
           onPress={topRightBtnAction}
