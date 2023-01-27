@@ -39,10 +39,10 @@ import { currencies, strings } from '../../../locales';
 import Button, { ButtonType } from '../../../components/buttons/Button';
 import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/AuditItem';
 import {
-  DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY
+  DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY_V2
 } from '../../../state/actions/asyncAPI';
 import {
-  deletePallet, deleteUpcs, getItemPallets, updateMultiPalletUPCQty
+  deletePallet, deleteUpcs, getItemPallets, updateMultiPalletUPCQtyV2
 } from '../../../state/actions/saga';
 import {
   setReserveLocations, setScannedPalletId, updatePalletQty, updatePalletScannedStatus
@@ -104,7 +104,7 @@ export interface ReserveAdjustmentScreenProps {
       sectionId: number;
       mixedPallet: boolean;
     }>>;
-    updateMultiPalletUPCQtyApi: AsyncState;
+    updateMultiPalletUPCQtyV2Api: AsyncState;
     showCalcModalState: UseStateType<boolean>;
     locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
     showOnHandsConfirmState: UseStateType<boolean>;
@@ -367,7 +367,7 @@ export const qtyStyleChange = (
 };
 
 export const renderConfirmOnHandsModal = (
-  updateMultiPalletUPCQtyApi: AsyncState,
+  updateMultiPalletUPCQtyV2Api: AsyncState,
   showOnHandsConfirmationModal: boolean,
   setShowOnHandsConfirmationModal: React.Dispatch<
     React.SetStateAction<boolean>
@@ -398,9 +398,9 @@ export const renderConfirmOnHandsModal = (
       modalType="Popup"
       minHeight={150}
     >
-      {updateMultiPalletUPCQtyApi.isWaiting ? (
+      {updateMultiPalletUPCQtyV2Api.isWaiting ? (
         <ActivityIndicator
-          animating={updateMultiPalletUPCQtyApi.isWaiting}
+          animating={updateMultiPalletUPCQtyV2Api.isWaiting}
           hidesWhenStopped
           color={COLOR.MAIN_THEME_COLOR}
           size="large"
@@ -479,7 +479,7 @@ export const renderConfirmOnHandsModal = (
                     itemNumber: itemDetails?.itemNbr,
                     upcNbr: itemDetails?.upcNbr
                   });
-                dispatch(updateMultiPalletUPCQty({ PalletList: newPalletList }));
+                dispatch(updateMultiPalletUPCQtyV2({ itemNbr: itemDetails?.itemNbr, PalletList: newPalletList }));
               }}
               disabled={itemDetails === null}
             />
@@ -526,15 +526,15 @@ export const disabledContinue = (
 ): boolean => getItemPalletApiLoading || reserveLocations.length === 0 || reserveLocations.some(
   loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
 );
-export const updateMultiPalletUPCQtyApiHook = (
-  updateMultiPalletUPCQtyApi: AsyncState,
+export const updateMultiPalletUPCQtyV2ApiHook = (
+  updateMultiPalletUPCQtyV2Api: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   itemNbr: number
 ) => {
   if (navigation.isFocused()) {
-    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
+    if (!updateMultiPalletUPCQtyV2Api.isWaiting && updateMultiPalletUPCQtyV2Api.result) {
       Toast.show({
         type: 'success',
         position: 'bottom',
@@ -542,19 +542,19 @@ export const updateMultiPalletUPCQtyApiHook = (
         visibilityTime: SNACKBAR_TIMEOUT
       });
 
-      dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY_V2.RESET });
       setShowOnHandsConfirmationModal(false);
       dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
       navigation.goBack();
     }
-    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
+    if (!updateMultiPalletUPCQtyV2Api.isWaiting && updateMultiPalletUPCQtyV2Api.error) {
       Toast.show({
         type: 'error',
         position: 'bottom',
         text1: strings('ITEM.UPDATE_MULTI_PALLET_FAILURE'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY_V2.RESET });
     }
   }
 };
@@ -586,7 +586,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     scannedEvent,
     scannedPalletId,
     showPalletQtyModalState,
-    updateMultiPalletUPCQtyApi,
+    updateMultiPalletUPCQtyV2Api,
     locationListState,
     showCalcModalState,
     showOnHandsConfirmState
@@ -725,13 +725,13 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   );
 
   // Update Multiple Pallet's UPC Qty API
-  useEffectHook(() => updateMultiPalletUPCQtyApiHook(
-    updateMultiPalletUPCQtyApi,
+  useEffectHook(() => updateMultiPalletUPCQtyV2ApiHook(
+    updateMultiPalletUPCQtyV2Api,
     dispatch,
     navigation,
     setShowOnHandsConfirmationModal,
     itemDetails?.itemNbr || 0
-  ), [updateMultiPalletUPCQtyApi]);
+  ), [updateMultiPalletUPCQtyV2Api]);
 
   const calculateTotalOHQty = () => {
     const reserveLocationsCount = reserveLocations.reduce(
@@ -770,7 +770,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         itemDetails?.vendorPackQty
       )}
       {renderConfirmOnHandsModal(
-        updateMultiPalletUPCQtyApi,
+        updateMultiPalletUPCQtyV2Api,
         showOnHandsConfirmationModal,
         setShowOnHandsConfirmationModal,
         calculateTotalOHQty(),
@@ -840,7 +840,7 @@ const ReserveAdjustment = (): JSX.Element => {
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
-  const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
+  const updateMultiPalletUPCQtyV2Api = useTypedSelector(state => state.async.updateMultiPalletUPCQtyV2);
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
   const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);
@@ -893,7 +893,7 @@ const ReserveAdjustment = (): JSX.Element => {
       scannedEvent={scannedEvent}
       scannedPalletId={scannedPalletId}
       showPalletQtyModalState={showPalletQtyModalState}
-      updateMultiPalletUPCQtyApi={updateMultiPalletUPCQtyApi}
+      updateMultiPalletUPCQtyV2Api={updateMultiPalletUPCQtyV2Api}
       showCalcModalState={showCalcModalState}
       // @ts-expect-error typechecking error with location type
       locationListState={locationListState}
