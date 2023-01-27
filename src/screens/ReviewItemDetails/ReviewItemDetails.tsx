@@ -882,6 +882,19 @@ export const renderScanForNoActionButton = (
   );
 };
 
+const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
+  if (actionCompleted) {
+    return <View />;
+  }
+
+  return (
+    <TouchableOpacity style={styles.scanForNoActionButton} onPress={onPress}>
+      <MaterialCommunityIcon name="map-marker-plus" size={20} color={COLOR.WHITE} />
+      <Text style={styles.buttonText}>{strings('MISSING_PALLET_WORKLIST.ADD_LOCATION')}</Text>
+    </TouchableOpacity>
+  );
+};
+
 // Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
 export const renderBarcodeErrorModal = (
   isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
@@ -1155,7 +1168,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     useEffectHook,
     useFocusEffectHook,
     floorLocations, userFeatures, userConfigs,
-    countryCode
+    countryCode,
+    exceptionType
   } = props;
 
   const { additionalItemDetails } = userConfigs;
@@ -1440,7 +1454,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           </View>
           )}
       </ScrollView>
-      {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+      {exceptionType === 'NSFL' && (floorLocations && floorLocations.length === 0)
+        ? renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))
+        : renderScanForNoActionButton(props, itemDetails.itemNbr)}
     </View>
   );
 };
