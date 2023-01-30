@@ -47,6 +47,7 @@ const LocationItemCard = (props: LocationItemCardProp) : JSX.Element => {
 
   return (
     <TouchableOpacity
+      testID="btnCard"
       style={styles.item}
       onPress={() => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
