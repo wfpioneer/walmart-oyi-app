@@ -1,6 +1,5 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
-import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import LocationItemCard from './LocationItemCard';
 import { LocationType } from '../../models/LocationType';
@@ -11,15 +10,6 @@ jest.mock('../../utils/AppCenterTool.ts', () => ({
 }));
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
-
-// const mockDispatch = jest.fn();
-// jest.mock('react-redux', () => {
-//   const ActualReactRedux = jest.requireActual('react-redux');
-//   return {
-//     ...ActualReactRedux,
-//     useDispatch: () => mockDispatch
-//   };
-// });
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
