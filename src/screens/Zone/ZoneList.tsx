@@ -68,7 +68,7 @@ interface ZoneProps {
   trackEventCall: (eventName: string, params?: any) => void,
   locationPopupVisible: boolean
 }
-const getZoneErrorModal = (
+export const getZoneErrorModal = (
   errorVisible: boolean,
   setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>,
@@ -85,6 +85,7 @@ const getZoneErrorModal = (
     </Text>
     <View style={styles.buttonContainer}>
       <Button
+        testID="btnErrCancel"
         style={styles.modalButton}
         title={strings('GENERICS.CANCEL')}
         backgroundColor={COLOR.TRACKER_RED}
@@ -94,6 +95,7 @@ const getZoneErrorModal = (
         }}
       />
       <Button
+        testID="btnErrRetry"
         style={styles.modalButton}
         title={strings('GENERICS.RETRY')}
         backgroundColor={COLOR.MAIN_THEME_COLOR}
@@ -105,6 +107,42 @@ const getZoneErrorModal = (
     </View>
   </CustomModalComponent>
 );
+
+export const getZoneNamesApiEffectHook = (
+  getZoneNamesApi: AsyncState,
+  dispatch: Dispatch<any>,
+  errorVisible: boolean,
+  setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  navigation: NavigationProp<any>,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  // on api success
+  if (!getZoneNamesApi.isWaiting && getZoneNamesApi.result) {
+    dispatch(setPossibleZones(getZoneNamesApi.result.data));
+    dispatch(setAisles([]));
+    dispatch(setAislesToCreate(0));
+    if (errorVisible) {
+      setErrorVisible(false);
+    }
+    navigation.navigate('AddZone');
+    // Delay loading indicator to prevent screen flicker on navigation.
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 0);
+  }
+
+  // on api failure
+  if (!getZoneNamesApi.isWaiting && getZoneNamesApi.error) {
+    setIsLoading(false);
+    // Alert Modal
+    setErrorVisible(true);
+  }
+
+  // on api call
+  if (getZoneNamesApi.isWaiting) {
+    setIsLoading(true);
+  }
+};
 
 export const ZoneScreen = (props: ZoneProps): JSX.Element => {
   const {
@@ -175,34 +213,14 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
     }
   }, [getZoneApi]);
   // Get Zone Names Api
-  useEffectHook(() => {
-    // on api success
-    if (!getZoneNamesApi.isWaiting && getZoneNamesApi.result) {
-      dispatch(setPossibleZones(getZoneNamesApi.result.data));
-      dispatch(setAisles([]));
-      dispatch(setAislesToCreate(0));
-      if (errorVisible) {
-        setErrorVisible(false);
-      }
-      navigation.navigate('AddZone');
-      // Delay loading indicator to prevent screen flicker on navigation.
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 0);
-    }
-
-    // on api failure
-    if (!getZoneNamesApi.isWaiting && getZoneNamesApi.error) {
-      setIsLoading(false);
-      // Alert Modal
-      setErrorVisible(true);
-    }
-
-    // on api call
-    if (getZoneNamesApi.isWaiting) {
-      setIsLoading(true);
-    }
-  }, [getZoneNamesApi]);
+  useEffectHook(() => getZoneNamesApiEffectHook(
+    getZoneNamesApi,
+    dispatch,
+    errorVisible,
+    setErrorVisible,
+    navigation,
+    setIsLoading
+  ), [getZoneNamesApi]);
 
   if (isLoading) {
     return (
@@ -347,6 +365,7 @@ const ZoneList = (): JSX.Element => {
         setIsLoading={setIsLoading}
       />
       <BottomSheetModal
+        name="test"
         ref={bottomSheetModalRef}
         snapPoints={snapPoints}
         index={0}
