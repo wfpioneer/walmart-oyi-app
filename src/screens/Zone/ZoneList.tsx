@@ -379,7 +379,6 @@ const ZoneList = (): JSX.Element => {
         setIsLoading={setIsLoading}
       />
       <BottomSheetModal
-        name="test"
         ref={bottomSheetModalRef}
         snapPoints={snapPoints}
         index={0}

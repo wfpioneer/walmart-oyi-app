@@ -3,7 +3,9 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import ZoneList, { ZoneScreen, getZoneErrorModal, getZoneNamesApiEffectHook, getZoneApiEffectHook } from './ZoneList';
+import ZoneList, {
+  ZoneScreen, getZoneApiEffectHook, getZoneErrorModal, getZoneNamesApiEffectHook
+} from './ZoneList';
 import { AsyncState } from '../../models/AsyncState';
 import { mockZones } from '../../mockData/zoneDetails';
 import store from '../../state';
