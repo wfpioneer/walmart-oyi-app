@@ -58,7 +58,9 @@ export default {
     SELECTED: 'selected',
     UPDATE: 'Update Configuration',
     WARNING_LABEL: 'Warning',
-    CLOSE: 'Close'
+    CLOSE: 'Close',
+    NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
+    FEEDBACK: 'Feedback'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -81,7 +83,8 @@ export default {
     UNKNOWN: 'Unknown',
     MISSING_PALLETS: 'Missing Pallets',
     AUDITS: 'Audits',
-    ROLLOVER_AUDITS: 'Rollover Audits'
+    ROLLOVER_AUDITS: 'Rollover Audits',
+    NEG_SALES_FLOOR_QTY: 'Negative Sales Floor Quantity'
   },
   ITEM: {
     TITLE: 'Review item details',
@@ -141,7 +144,11 @@ export default {
     MARGIN: 'Margin',
     GROSS_PROFIT: 'Gross Profit',
     HISTORY: 'History',
-    NO_HISTORY: 'No history available'
+    NO_HISTORY: 'No history available',
+    RESERVE_ADJUSTMENT: 'Reserve Adjustment',
+    ERROR_PI_DELIVERY_HISTORY: 'There was an error pulling the delivery history. Please try again.',
+    ERROR_PI_SALES_HISTORY: 'There was an error pulling the sales history. Please try again.',
+    DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -410,7 +417,8 @@ export default {
     FAILED_ITEMS: 'Items Failed',
     UPDATE_API_ERROR: 'There was an error updating the approval status. \n Please try again.',
     MANAGER_APPROVAL: 'Manager Approval',
-    APPROVAL_LOADING_MSG: 'Large approval requests may take some time, please be patient'
+    APPROVAL_LOADING_MSG: 'Large approval requests may take some time, please be patient',
+    SOURCE: 'Approval source'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'A Club Number is required to use OYI',
@@ -475,7 +483,12 @@ export default {
     UPDATE_PICK_FAILED_TRY_AGAIN_PLURAL: 'Failed to update picks. Please try again',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No reserve pallets available',
     ADDITIONAL_ITEMS: 'Pallet contains additional items',
-    QUANTITY_STOCKED: 'Quantity Stocked'
+    QUANTITY_STOCKED: 'Quantity Stocked',
+    ACCEPT_FOLLOWING_PICKS: 'Accept the following picks?',
+    ACCEPT_FOLLOWING_BINS: 'Accept the following bins?',
+    LOC_LABEL: 'Loc',
+    ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
+    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
   },
   BINNING: {
     BINNING: 'Binning',
@@ -509,6 +522,7 @@ export default {
     EXPAND_ALL: 'Expand all',
     VALIDATE_QUANTITY: 'Validate quantity in each location',
     VALIDATE_SCAN_QUANTITY: 'Scan each pallet and validate quantity',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: 'Validate quantity on each pallet',
     OTHER_ON_HANDS: 'Other On-Hands',
     PALLET_COUNT: 'Please enter the count for pallet',
     CONFIRM_AUDIT: 'Confirm On-Hands Audit',
@@ -524,5 +538,19 @@ export default {
     NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
     ITEMS: 'Items',
     CUSTOM_ITEMS: 'Items'
+  },
+  FEEDBACK: {
+    VERY_POOR_RATE_LABEL: 'Very Poor',
+    POOR_RATE_LABEL: 'Poor',
+    AVERAGE_RATE_LABEL: 'Average',
+    GOOD_RATE_LABEL: 'Good',
+    EXCELLENT_RATE_LABEL: 'Excellent',
+    FEEDBACK_REQUEST: 'Would you like to provide feedback about OYI?',
+    YES: 'Yes',
+    NO: 'No',
+    RATING_LABEL: 'Choose a rating',
+    COMMENT_PLACEHOLDER_LABEL: 'Enter any comments here',
+    SUBMIT_FEEDBACK_SUCCESS: 'Feedback has successfully been submitted',
+    SUBMIT_FEEDBACK_FAILURE: 'Unable to submit feedback. Please try again.'
   }
 };

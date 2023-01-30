@@ -35,6 +35,8 @@ const navigationProp: NavigationProp<any> = {
   navigate: jest.fn()
 };
 
+const mockTrackEventCall = jest.fn();
+
 describe('Tests rendering PalletWorklist screen', () => {
   const mockDispatch = jest.fn();
   const mockOnRefresh = jest.fn();
@@ -75,6 +77,7 @@ describe('Tests rendering PalletWorklist screen', () => {
         updateGroupToggle={jest.fn()}
         selectedTab={Tabs.TODO}
         setPalletClicked={jest.fn()}
+        trackEventCall={mockTrackEventCall}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -98,6 +101,7 @@ describe('Tests rendering PalletWorklist screen', () => {
         updateGroupToggle={jest.fn()}
         selectedTab={Tabs.TODO}
         setPalletClicked={jest.fn()}
+        trackEventCall={mockTrackEventCall}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -120,6 +124,7 @@ describe('Tests rendering PalletWorklist screen', () => {
         updateGroupToggle={jest.fn()}
         selectedTab={Tabs.TODO}
         setPalletClicked={jest.fn()}
+        trackEventCall={mockTrackEventCall}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -238,19 +243,46 @@ describe('Tests rendering PalletWorklist screen', () => {
 
     it('should dispatch getPalletDetails API when called from Completed worklist tab', () => {
       const mockIsCompletedTab = true;
-      onPalletCardClick(mockItem, 2, 1, mockSetActiveItemIndex, mockSetPalletClicked, mockDispatch, mockIsCompletedTab);
+      onPalletCardClick(
+        mockItem,
+        2,
+        1,
+        mockSetActiveItemIndex,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockIsCompletedTab,
+        mockTrackEventCall
+      );
       expect(mockDispatch).toBeCalled();
       expect(mockSetPalletClicked).toBeCalledWith(true);
     });
 
     it('should dispatch getPalletDetails API when called from Todo worklist tab and index matches activeIndex', () => {
-      onPalletCardClick(mockItem, 2, 2, mockSetActiveItemIndex, mockSetPalletClicked, mockDispatch, false);
+      onPalletCardClick(
+        mockItem,
+        2,
+        2,
+        mockSetActiveItemIndex,
+        mockSetPalletClicked,
+        mockDispatch,
+        false,
+        mockTrackEventCall
+      );
       expect(mockDispatch).toBeCalled();
       expect(mockSetPalletClicked).toBeCalledWith(true);
     });
 
     it('should dispatch getPalletDetails API when called from Completed worklist tab', () => {
-      onPalletCardClick(mockItem, 2, 1, mockSetActiveItemIndex, mockSetPalletClicked, mockDispatch, false);
+      onPalletCardClick(
+        mockItem,
+        2,
+        1,
+        mockSetActiveItemIndex,
+        mockSetPalletClicked,
+        mockDispatch,
+        false,
+        mockTrackEventCall
+      );
       expect(mockSetActiveItemIndex).toBeCalled();
       expect(mockSetActiveItemIndex).toHaveBeenCalledWith(2);
     });

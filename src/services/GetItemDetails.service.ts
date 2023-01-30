@@ -35,4 +35,34 @@ export default class GetItemDetailsService {
       { timeout: TIMEOUT }
     );
   }
+
+  public static getItemDetailsV3(payload: GetItemDetailsPayload): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    const summaryParam = payload.getSummary ? `?summaryDetails=${payload.getSummary}` : '';
+    const excludeHistoryParam = payload.getExcludeHistory ? `?excludeHistory'=${payload.getExcludeHistory}` : '';
+    const metadataHistoryParam = payload.getMetadataHistory ? `?metadataHistory=${payload.getMetadataHistory}` : '';
+    return Request.get(
+      `${urls.orchestrationURL}/v1/item/${payload.id}${summaryParam}${excludeHistoryParam}${metadataHistoryParam}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static getItemPiHistory(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.itemDetailsURL}/item/pihistory/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static getItemPiSalesHistory(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.itemDetailsURL}/item/pisaleshistory/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
 }

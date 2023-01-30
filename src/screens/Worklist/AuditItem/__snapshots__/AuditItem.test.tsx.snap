@@ -118,7 +118,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               testID="decreaseButton"
             >
               <mockMaterialCommunityIcons
-                color="#5FA7F2"
+                color="#BABBBE"
                 name="minus"
                 size={18}
               />
@@ -293,7 +293,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             <View
               accessibilityState={
                 Object {
-                  "disabled": true,
+                  "disabled": false,
                 }
               }
               accessible={true}
@@ -309,7 +309,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#BABBBE",
+                  "backgroundColor": "#0071e9",
                   "borderRadius": 5,
                   "elevation": 1,
                   "flex": 1,
@@ -1189,11 +1189,17 @@ Array [
     <View
       style={
         Object {
+          "marginTop": 2,
           "width": "100%",
         }
       }
     >
       <View
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -1210,20 +1216,12 @@ Array [
             "flexDirection": "row",
             "opacity": 1,
             "padding": 5,
+            "paddingLeft": 10,
             "width": "100%",
           }
         }
         testID="itemCard"
       >
-        <Image
-          source=""
-          style={
-            Object {
-              "height": 85,
-              "width": 85,
-            }
-          }
-        />
         <View
           style={
             Object {
@@ -1235,7 +1233,13 @@ Array [
           }
           testID="item-details"
         >
-          <View>
+          <View
+            style={
+              Object {
+                "paddingBottom": 10,
+              }
+            }
+          >
             <Text
               style={
                 Object {
@@ -1289,14 +1293,7 @@ Array [
       }
     }
     nestedScrollEnabled={true}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[Function]}
-        refreshing={false}
-      />
-    }
   >
-    <RCTRefreshControl />
     <View>
       <View
         style={
@@ -1470,7 +1467,7 @@ Array [
                       }
                     }
                   >
-                    [missing "en.AUDITS.VALIDATE_SCAN_QUANTITY" translation]
+                    [missing "en.AUDITS.VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED" translation]
                   </Text>
                 </View>
               </View>
@@ -1972,9 +1969,10 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     </React.Fragment>
   </CustomModalComponent>
   <CalculatorModal
+    disableAcceptButton={[Function]}
     onAccept={[Function]}
     onClose={[Function]}
-    showAcceptButtonOn={[Function]}
+    showAcceptButton={true}
     visible={false}
   />
   <View
@@ -1985,11 +1983,24 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     }
   >
     <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
+      countryCode="CN"
       description=""
+      disabled={false}
       itemNumber={0}
       loading={true}
       onClick={[Function]}
       onHandQty={0}
+      showItemImage={false}
+      showOHItems={false}
     />
   </View>
   <ScrollView
@@ -2000,12 +2011,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       }
     }
     nestedScrollEnabled={true}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[Function]}
-        refreshing={false}
-      />
-    }
   >
     <View
       style={
@@ -2055,6 +2060,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           claimsOH={0}
           collapsed={false}
           consolidatorOH={0}
+          countryCode="CN"
           flyCloudInTransitOH={0}
           flyCloudOH={0}
           loading={true}
@@ -2411,9 +2417,10 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     </React.Fragment>
   </CustomModalComponent>
   <CalculatorModal
+    disableAcceptButton={[Function]}
     onAccept={[Function]}
     onClose={[Function]}
-    showAcceptButtonOn={[Function]}
+    showAcceptButton={true}
     visible={false}
   />
   <View
@@ -2424,11 +2431,24 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     }
   >
     <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
+      countryCode="CN"
       description="Test Item That is Really, Really Long (and has parenthesis)"
+      disabled={false}
       itemNumber={1234567890}
       loading={false}
       onClick={[Function]}
       onHandQty={42}
+      showItemImage={false}
+      showOHItems={false}
     />
   </View>
   <ScrollView
@@ -2439,12 +2459,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       }
     }
     nestedScrollEnabled={true}
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[Function]}
-        refreshing={false}
-      />
-    }
   >
     <View
       style={
@@ -2494,6 +2508,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           claimsOH={5}
           collapsed={false}
           consolidatorOH={10}
+          countryCode="CN"
           flyCloudInTransitOH={0}
           flyCloudOH={0}
           loading={false}

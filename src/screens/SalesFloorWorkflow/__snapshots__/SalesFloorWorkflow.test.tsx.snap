@@ -119,6 +119,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
   <PickPalletInfoCard
     canDelete={false}
     dispatch={[MockFunction]}
+    isSelected={false}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -349,6 +350,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
   <PickPalletInfoCard
     canDelete={false}
     dispatch={[MockFunction]}
+    isSelected={false}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -602,6 +604,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
   <PickPalletInfoCard
     canDelete={false}
     dispatch={[MockFunction]}
+    isSelected={false}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
@@ -815,6 +818,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   <PickPalletInfoCard
     canDelete={false}
     dispatch={[MockFunction]}
+    isSelected={false}
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"

@@ -52,6 +52,7 @@ export const COLOR = {
   WHITE: '#ffffffff',
   RED: '#ec0439',
   GREEN: '#33691E',
+  GOLD: '#FFD966',
 
   GREY: '#c5c5c5',
   ORANGE: '#e74517',

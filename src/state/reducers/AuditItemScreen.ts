@@ -9,7 +9,8 @@ import {
   SET_RESERVE_LOCATIONS,
   SET_SCANNED_PALLET_ID,
   UPDATE_FLOOR_LOCATION_QTY,
-  UPDATE_PALLET_QTY
+  UPDATE_PALLET_QTY,
+  UPDATE_SCANNED_PALLET_STATUS
 } from '../actions/AuditItemScreen';
 
 export interface AuditItemScreenState {
@@ -53,10 +54,10 @@ export const AuditItemScreen = (state = initialState, action: Actions) : AuditIt
       };
     case UPDATE_PALLET_QTY: {
       const { reserveLocations } = state;
-      const { palletId, newQty, scanned } = action.payload;
+      const { palletId, newQty } = action.payload;
       const updatedLocations = reserveLocations.map(loc => {
         if (loc.palletId === palletId) {
-          return { ...loc, newQty, scanned };
+          return { ...loc, newQty };
         }
         return loc;
       });
@@ -72,6 +73,17 @@ export const AuditItemScreen = (state = initialState, action: Actions) : AuditIt
         return loc;
       });
       return { ...state, floorLocations: updatedLocations };
+    }
+    case UPDATE_SCANNED_PALLET_STATUS: {
+      const { reserveLocations } = state;
+      const { palletId, scanned } = action.payload;
+      const updateReserveLocations = reserveLocations.map(loc => {
+        if (loc.palletId === palletId) {
+          return { ...loc, scanned };
+        }
+        return loc;
+      });
+      return { ...state, reserveLocations: updateReserveLocations };
     }
     case CLEAR_AUDIT_SCREEN_DATA:
       return initialState;

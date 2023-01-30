@@ -45,5 +45,13 @@ export default StyleSheet.create({
     width: 25,
     height: 20,
     backgroundColor: COLOR.WHITE
+  },
+  itemImage: {
+    height: 70,
+    width: 70
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   }
 });

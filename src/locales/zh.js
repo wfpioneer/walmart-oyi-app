@@ -58,7 +58,9 @@ export default {
     SELECTED: '已选择',
     UPDATE: '更新配置',
     WARNING_LABEL: '警示',
-    CLOSE: '关闭'
+    CLOSE: '关闭',
+    NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间',
+    FEEDBACK: '反馈'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -81,7 +83,8 @@ export default {
     UNKNOWN: '未知错误',
     MISSING_PALLETS: '不在储位卡板',
     AUDITS: '盘点',
-    ROLLOVER_AUDITS: '上周遗留盘点清单'
+    ROLLOVER_AUDITS: '上周遗留盘点清单',
+    NEG_SALES_FLOOR_QTY: '楼面负现货数量'
   },
   ITEM: {
     TITLE: '查看商品明细',
@@ -141,7 +144,11 @@ export default {
     MARGIN: '利润',
     GROSS_PROFIT: '毛利',
     HISTORY: '历史信息',
-    NO_HISTORY: '无历史记录信息'
+    NO_HISTORY: '无历史记录信息',
+    RESERVE_ADJUSTMENT: '储位库存数量调整',
+    ERROR_PI_DELIVERY_HISTORY: '提取历史到货信息出错，请重试',
+    ERROR_PI_SALES_HISTORY: '提取历史销售信息出错，请重试',
+    DELETE_PALLET_FAILURE: '删除卡板失败，请重试'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -411,7 +418,8 @@ export default {
     FAILED_ITEMS: '此商品未成功审批',
     UPDATE_API_ERROR: '更新审批状态时发生错误，\n请再试',
     MANAGER_APPROVAL: '副总审批',
-    APPROVAL_LOADING_MSG: '大量审批需求会略慢，请耐心等待.'
+    APPROVAL_LOADING_MSG: '大量审批需求会略慢，请耐心等待.',
+    SOURCE: '审批来源'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: '需店号开启OYI',
@@ -477,7 +485,12 @@ export default {
       '已完成多个补货，补货清单已更新',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: '高货架无卡板可取',
     ADDITIONAL_ITEMS: '卡板有其它商品',
-    QUANTITY_STOCKED: '楼面陈列数量'
+    QUANTITY_STOCKED: '楼面陈列数量',
+    ACCEPT_MULTIPLE_BINS: '批量接收上架任务',
+    ACCEPT_MULTIPLE_PICKS: '批量接收补货任务',
+    ACCEPT_FOLLOWING_PICKS: '接受这些补货任务清单?',
+    ACCEPT_FOLLOWING_BINS: '接受这些上架任务清单?',
+    LOC_LABEL: '货架位置'
   },
   BINNING: {
     BINNING: '上架',
@@ -512,6 +525,7 @@ export default {
     EXPAND_ALL: '全部展开',
     VALIDATE_QUANTITY: '实盘每一个位置数量',
     VALIDATE_SCAN_QUANTITY: '扫描卡板并实盘数量',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: '校准每个卡板库存数量',
     OTHER_ON_HANDS: '其它库存',
     PALLET_COUNT: '请输入卡板库存数量',
     CONFIRM_AUDIT: '确认现货盘点结果',
@@ -527,5 +541,19 @@ export default {
     NEGATIVE_VALIDATION: '无效结果，位置数量不可小于0',
     ITEMS: '个库存',
     CUSTOM_ITEMS: '个 item'
+  },
+  FEEDBACK: {
+    VERY_POOR_RATE_LABEL: '很差',
+    POOR_RATE_LABEL: '差',
+    AVERAGE_RATE_LABEL: '一般',
+    GOOD_RATE_LABEL: '好',
+    EXCELLENT_RATE_LABEL: '非常好',
+    FEEDBACK_REQUEST: '您想对OYI进行反馈吗？',
+    YES: '是',
+    NO: '否',
+    RATING_LABEL: '选择分值',
+    COMMENT_PLACEHOLDER_LABEL: '在此输入评价',
+    SUBMIT_FEEDBACK_SUCCESS: '反馈提交成功',
+    SUBMIT_FEEDBACK_FAILURE: '无法提交反馈，请重试.'
   }
 };

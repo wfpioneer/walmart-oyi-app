@@ -104,7 +104,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
   </CustomModalComponent>
   <SortBar
     isGrouped={false}
-    updateGroupToggle={[MockFunction]}
+    updateGroupToggle={[Function]}
   />
   <FlatList
     data={

@@ -9,7 +9,12 @@ import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { ApprovalCard } from '../../components/approvalCard/ApprovalCard';
-import { ApprovalCategory, ApprovalListItem, approvalStatus } from '../../models/ApprovalListItem';
+import {
+  ApprovalCategory,
+  ApprovalListItem,
+  approvalRequestSource as approvalSource,
+  approvalStatus
+} from '../../models/ApprovalListItem';
 import styles from './ApprovalList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getApprovalList } from '../../state/actions/saga';
@@ -18,12 +23,16 @@ import { strings } from '../../locales';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { ApprovalCategorySeparator } from '../../components/CategorySeparatorCards/ApprovalCategorySeparator';
 import { validateSession } from '../../utils/sessionTimeout';
-import { setApprovalList, toggleAllItems } from '../../state/actions/Approvals';
+import {
+  setApprovalList, toggleAllItems, updateFilterCategories, updateFilterSources
+} from '../../state/actions/Approvals';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { AsyncState } from '../../models/AsyncState';
 import { UPDATE_APPROVAL_LIST } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
+import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
+import { FilterType } from '../../models/FilterListItem';
 
 export interface CategoryFilter {
   filteredData: ApprovalCategory[];
@@ -47,6 +56,8 @@ interface ApprovalListProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   trackEventCall: (eventName: string, params?: any) => void;
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
+  filterCategories: string[];
+  filterSources: string[];
 }
 interface UpdateResponse {
   message: string;
@@ -54,6 +65,7 @@ interface UpdateResponse {
   itemNbr: number;
   statusCode: number;
 }
+const PARTIAL_SUCCESS_STATUS = 207;
 
 export const convertApprovalListData = (listData: ApprovalListItem[]): CategoryFilter => {
   const sortedData = [...listData];
@@ -164,12 +176,59 @@ export const renderPopUp = (updateApprovalApi: AsyncState, dispatch:Dispatch<any
     </CustomModalComponent>
   );
 };
+
+export const renderFilterPills = (
+  listFilter: { type: FilterType; value: string },
+  dispatch: Dispatch<any>,
+  filterCategories: string[],
+  filterSources: string[],
+): JSX.Element => {
+  if (!listFilter.value) {
+    // TODO Remove when no approval items lack a source
+    return (<></>);
+  }
+  if (listFilter.type === FilterType.CATEGORY) {
+    const removeFilter = () => {
+      const replacementFilter = filterCategories;
+      replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
+      dispatch(updateFilterCategories(replacementFilter));
+    };
+    return <FilterPillButton filterText={listFilter.value} onClosePress={removeFilter} />;
+  }
+
+  if (listFilter.type === FilterType.SOURCE) {
+    const removeSourceFilter = () => {
+      const removeSource = filterSources;
+      removeSource.splice(filterSources.indexOf(listFilter.value), 1);
+      // Ditto with the todo
+      if (listFilter.value === approvalSource.ItemDetails) {
+        removeSource.splice(removeSource.indexOf(''), 1);
+      }
+      dispatch(updateFilterSources(removeSource));
+    };
+    let displayName = '';
+    switch (listFilter.value) {
+      case approvalSource.Audits:
+        displayName = strings('AUDITS.AUDITS');
+        break;
+      case approvalSource.ItemDetails:
+        displayName = strings('GENERICS.ITEMS');
+        break;
+      default:
+        displayName = strings('GENERICS.NOT_FOUND');
+    }
+    return <FilterPillButton filterText={displayName} onClosePress={removeSourceFilter} />;
+  }
+  return <View />;
+};
+
 const getUpdateApprovalApiResult = (props: ApprovalListProps, updateApprovalApi: AsyncState) => {
   const {
     dispatch
   } = props;
-  return updateApprovalApi.result?.status === 207 && renderPopUp(updateApprovalApi, dispatch);
+  return updateApprovalApi.result?.status === PARTIAL_SUCCESS_STATUS && renderPopUp(updateApprovalApi, dispatch);
 };
+
 const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: AsyncState) => {
   const {
     dispatch
@@ -180,12 +239,15 @@ const getApprovalApiResult = (props: ApprovalListProps, getApprovalApi: AsyncSta
     dispatch(setApprovalList(filteredData, headerIndices));
   }
 };
+
 export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
   const {
     dispatch, getApprovalApi, trackEventCall, useEffectHook,
     useFocusEffectHook, navigation, route, filteredList,
-    categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi
+    categoryIndices, selectedItemQty, validateSessionCall, updateApprovalApi,
+    filterCategories, filterSources
   } = props;
+  let newFilteredList = filteredList;
 
   // Get Approval List Items
   useEffectHook(() => navigation.addListener('focus', () => {
@@ -228,13 +290,13 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 
   const handleApproveSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('handle_approve_summary_click');
+      trackEventCall('Approval_Screen', { action: 'handle_approve_summary_click' });
       navigation.navigate('ApproveSummary');
     });
   };
   const handleRejectSummary = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('handle_reject_summary_click');
+      trackEventCall('Approval_Screen', { action: 'handle_reject_summary_click' });
       navigation.navigate('RejectSummary');
     });
   };
@@ -259,7 +321,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
         <TouchableOpacity
           style={styles.errorButton}
           onPress={() => {
-            trackEventCall('approval_list_api_retry',);
+            trackEventCall('Approval_Screen', { action: 'approval_list_api_retry' });
             dispatch(getApprovalList({}));
           }}
         >
@@ -269,11 +331,62 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
     );
   }
 
+  const typedFilterCategoryList = filterCategories.map(category => ({ type: FilterType.CATEGORY, value: category }));
+  const typedFilterSourceList = filterSources.map(source => ({ type: FilterType.SOURCE, value: source }));
+
+  if (filterCategories.length !== 0) {
+    newFilteredList = newFilteredList.filter(approvalItem => filterCategories
+      .indexOf(`${approvalItem.categoryNbr} - ${approvalItem.categoryDescription}`) !== -1);
+  }
+
+  if (filterSources.length !== 0) {
+    const approvalMap: Map<number, ApprovalCategory[]> = new Map();
+
+    newFilteredList = newFilteredList.filter(approvalItem => {
+      const catgList = approvalMap.get(approvalItem.categoryNbr);
+      const getIndex = filterSources.indexOf(approvalItem.approvalRequestSource || '') !== -1;
+
+      // List is pre-sorted so this will grab the Category Header first
+      if (!catgList) {
+        approvalMap.set(approvalItem.categoryNbr, [approvalItem]);
+      } else if (approvalMap.has(approvalItem.categoryNbr) && getIndex) {
+        catgList.push(approvalItem);
+        approvalMap.set(approvalItem.categoryNbr, catgList);
+      }
+      return getIndex || approvalItem.categoryHeader;
+    });
+
+    const updatedList: ApprovalCategory[] = [];
+
+    // Creates a new approval list and inserts Categories that have filtered items
+    newFilteredList.forEach(item => {
+      const catgList = approvalMap.get(item.categoryNbr);
+      if (catgList !== undefined && catgList.length > 1) {
+        approvalMap.delete(item.categoryNbr);
+        updatedList.push(...catgList);
+      }
+    });
+    newFilteredList = updatedList;
+  }
+
   return (
     <View style={styles.mainContainer}>
+      { (filterCategories.length > 0 || filterSources.length > 0) && (
+      <View style={styles.filterContainer}>
+        <FlatList
+          data={[...typedFilterCategoryList, ...typedFilterSourceList]}
+          horizontal
+          renderItem={({ item }) => renderFilterPills(
+            item, dispatch, filterCategories, filterSources
+          )}
+          style={styles.filterList}
+          keyExtractor={item => item.value}
+        />
+      </View>
+      ) }
       {getUpdateApprovalApiResult(props, updateApprovalApi)}
       <FlatList
-        data={filteredList}
+        data={newFilteredList}
         keyExtractor={(item: ApprovalCategory, index: number) => {
           if (item.categoryHeader) {
             return item.categoryDescription.toString();
@@ -294,7 +407,7 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
           </View>
       )}
         style={styles.mainContainer}
-        extraData={filteredList}
+        extraData={newFilteredList}
       />
       {selectedItemQty > 0
         && (
@@ -312,7 +425,9 @@ export const ApprovalListScreen = (props: ApprovalListProps): JSX.Element => {
 const ApprovalList = (): JSX.Element => {
   const getApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
-  const { approvalList, categoryIndices, selectedItemQty } = useTypedSelector(state => state.Approvals);
+  const {
+    approvalList, categoryIndices, selectedItemQty, filterCategories, filterSources
+  } = useTypedSelector(state => state.Approvals);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
@@ -330,6 +445,8 @@ const ApprovalList = (): JSX.Element => {
       trackEventCall={trackEvent}
       selectedItemQty={selectedItemQty}
       validateSessionCall={validateSession}
+      filterCategories={filterCategories}
+      filterSources={filterSources}
     />
   );
 };

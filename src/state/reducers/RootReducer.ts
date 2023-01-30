@@ -4,7 +4,7 @@ import { UserReducer } from './User';
 import { modal } from './Modal';
 import asyncReducer from './asyncAPI';
 import { Global } from './Global';
-import { worklist } from './Worklist';
+import { Worklist } from './Worklist';
 import { ItemDetailScreen } from './ItemDetailScreen';
 import { Print } from './Print';
 import { Location } from './Location';
@@ -18,16 +18,19 @@ import { PalletWorklist } from './PalletWorklist';
 import { ItemHistory } from './ItemHistory';
 import { AuditWorklist } from './AuditWorklist';
 import { AuditItemScreen } from './AuditItemScreen';
-
+import { ReserveAdjustmentScreen } from './ReserveAdjustmentScreen';
+import {
+  USER_LOGOUT
+} from '../actions/User';
 /**
  * This is the root reducers,this RootReducer combine all sub reducers.git
  */
-const RootReducer = combineReducers({
+const AppReducer = combineReducers({
   User: UserReducer,
   modal,
   async: asyncReducer,
   Global,
-  Worklist: worklist,
+  Worklist,
   Print,
   ItemDetailScreen,
   Location,
@@ -40,8 +43,17 @@ const RootReducer = combineReducers({
   PalletWorklist,
   ItemHistory,
   AuditWorklist,
-  AuditItemScreen
+  AuditItemScreen,
+  ReserveAdjustmentScreen
 });
+
+const RootReducer = (state: any, action: any) => {
+  if (action.type === USER_LOGOUT) {
+    return AppReducer(undefined, action);
+  }
+
+  return AppReducer(state, action);
+};
 
 export default RootReducer;
 

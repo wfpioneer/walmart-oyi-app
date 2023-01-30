@@ -9,7 +9,6 @@ import GetWorklistService, { GetWorklistAuditService } from '../../services/GetW
 import GetPalletWorklistService from '../../services/GetPalletWorklist.service';
 import EditLocationService from '../../services/EditLocation.service';
 import UpdateOHQtyService from '../../services/UpdateOHQty.service';
-import AddToPicklistService from '../../services/AddToPicklist.service';
 import AddLocationService from '../../services/AddLocation.service';
 import WorklistSummaryService from '../../services/WorklistSummary.service';
 import DeleteLocationService from '../../services/DeleteLocation.service';
@@ -30,10 +29,19 @@ import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 import ReportMissingPalletService from '../../services/ReportMissingPallet.service';
 import GetItemPalletsService from '../../services/GetItemPallets.service';
+import FeedBackService from '../../services/Feedback.service';
+import UserConfigService from '../../services/UserConfig.service';
 
 const genericSagas = [
   // TODO remove this saga once the BE orchestration changes are pushed to Production
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V2, actions.getItemDetailsV2, GetItemDetailsService.getItemDetailsV2),
+  makeAsyncSaga(saga.GET_ITEM_DETAILS_V3, actions.getItemDetailsV3, GetItemDetailsService.getItemDetailsV3),
+  makeAsyncSaga(saga.GET_ITEM_PIHISTORY, actions.getItemPiHistory, GetItemDetailsService.getItemPiHistory),
+  makeAsyncSaga(
+    saga.GET_ITEM_PISALESHISTORY,
+    actions.getItemPiSalesHistory,
+    GetItemDetailsService.getItemPiSalesHistory
+  ),
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
@@ -44,7 +52,6 @@ const genericSagas = [
     GetPalletWorklistService.getPalletWorklist
   ),
   makeAsyncSaga(saga.EDIT_LOCATION, actions.editLocation, EditLocationService.editLocation),
-  makeAsyncSaga(saga.ADD_TO_PICKLIST, actions.addToPicklist, AddToPicklistService.addToPicklist),
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
@@ -89,7 +96,13 @@ const genericSagas = [
   makeAsyncSaga(
     saga.REPORT_MISSING_PALLET, actions.reportMissingPallet, ReportMissingPalletService.reportMissingPallet
   ),
-  makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets)
+  makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets),
+  makeAsyncSaga(
+    saga.UPDATE_MULTI_PALLET_UPC_QTY, actions.updateMultiPalletUPCQty, PalletManagementService.updateMultiPalletUPCQty
+  ),
+  makeAsyncSaga(saga.SUBMIT_FEEDBACK_RATING, actions.submitFeedbackRating, FeedBackService.submitFeedbackRating),
+  makeAsyncSaga(saga.GET_USER_CONFIG, actions.getUserConfig, UserConfigService.getUserConfig),
+  makeAsyncSaga(saga.UPDATE_USER_CONFIG, actions.updateUserConfig, UserConfigService.updateUserConfig)
 ];
 
 export default function* rootSaga() {

@@ -15,9 +15,10 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { AxiosError, AxiosResponse } from 'axios';
+import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  addToPicklist, createNewPick, getItemDetails, getItemDetailsV2, noAction, updateOHQty
+  createNewPick, getItemDetails, getItemDetailsV3, getItemPiHistory, getItemPiSalesHistory, noAction, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -32,7 +33,7 @@ import Button from '../../components/buttons/Button';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setManualScan, setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
 import {
@@ -47,7 +48,8 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  ADD_TO_PICKLIST, CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, NO_ACTION, UPDATE_OH_QTY
+  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
+  NO_ACTION, UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
@@ -58,6 +60,7 @@ import { approvalRequestSource } from '../../models/ApprovalListItem';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
+import { TrackEventSource } from '../../models/Generics.d';
 
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
 const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
@@ -66,11 +69,14 @@ const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
 
+const REVIEW_ITEM_DETAILS = 'Review_Item_Details';
+
 export interface ItemDetailsScreenProps {
   scannedEvent: { value: string | null; type: string | null; };
   isManualScanEnabled: boolean;
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
-  addToPicklistStatus: AsyncState;
+  isPiHistWaiting: boolean; piHistError: AxiosError | null; piHistResult: AxiosResponse | null;
+  isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
   completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -96,6 +102,7 @@ export interface ItemDetailsScreenProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
   userFeatures: string[];
   userConfigs: Configurations;
+  countryCode: string;
 }
 
 export interface HandleProps {
@@ -111,7 +118,6 @@ export interface HandleProps {
 export interface RenderProps {
   actionCompleted: boolean;
   completeItemApi: AsyncState;
-  addToPicklistStatus: AsyncState;
   isManualScanEnabled: boolean;
   floorLocations?: Location[];
   reserveLocations?: Location[];
@@ -126,13 +132,26 @@ export interface HistoryCardPropsI {
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
   || exceptionType === 'C' || exceptionType === 'NSFL';
 
-export const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleUpdateQty = (
+  props: HandleProps,
+  itemDetails: ItemDetails,
+  scannedEvent: { value: string | null; type: string | null; },
+  userConfigs: Configurations
+) => {
   const {
-    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
+    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId, dispatch
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall('item_details_oh_quantity_update_click', { itemDetails: JSON.stringify(itemDetails) });
-    setOhQtyModalVisible(true);
+    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'update_OH_qty_click', itemNbr: itemDetails.itemNbr });
+    if (userConfigs.auditWorklists) {
+      if (scannedEvent.value) {
+        dispatch(resetScannedEvent());
+      }
+      dispatch(setAuditItemNumber(itemDetails.itemNbr));
+      navigation.navigate('AuditItem');
+    } else {
+      setOhQtyModalVisible(true);
+    }
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
@@ -141,20 +160,8 @@ export const handleLocationAction = (props: HandleProps, itemDetails: ItemDetail
     navigation, trackEventCall, validateSessionCall, route, userId
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall('item_details_location_details_click', { itemDetails: JSON.stringify(itemDetails) });
+    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'location_details_click', itemNbr: itemDetails.itemNbr });
     navigation.navigate('LocationDetails');
-  }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
-};
-
-export const handleAddToPicklist = (props: HandleProps, itemDetails: ItemDetails) => {
-  const {
-    navigation, trackEventCall, validateSessionCall, route, userId, dispatch
-  } = props;
-  validateSessionCall(navigation, route.name).then(() => {
-    trackEventCall('item_details_add_to_picklist_click', { itemDetails: JSON.stringify(itemDetails) });
-    dispatch(addToPicklist({
-      itemNumber: itemDetails.itemNbr
-    }));
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
@@ -361,8 +368,14 @@ const onMoreOHChangeHistoryClick = (
 export const renderPickHistory = (
   props: HandleProps,
   pickHistoryList: PickHistory[],
-  result: AxiosResponse
+  result: AxiosResponse,
+  itemNbr: number
 ) => {
+  const pickHistorySource: TrackEventSource = {
+    screen: REVIEW_ITEM_DETAILS,
+    action: 'pick_history_click',
+    otherInfo: { itemNbr }
+  };
   if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
     if (result.data.picklistHistory.code === SUCCESS_STATUS) {
       if (pickHistoryList && pickHistoryList.length) {
@@ -372,7 +385,7 @@ export const renderPickHistory = (
           return date2 > date1 ? 1 : -1;
         });
         return (
-          <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+          <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
             {data.slice(0, 5).map(item => (
               <RenderItemHistoryCard
                 key={item.id}
@@ -398,7 +411,7 @@ export const renderPickHistory = (
         );
       }
       return (
-        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
           </View>
@@ -407,7 +420,7 @@ export const renderPickHistory = (
     }
     if (result.data.picklistHistory.code === NO_RESULTS_STATUS) {
       return (
-        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
           </View>
@@ -416,7 +429,7 @@ export const renderPickHistory = (
     }
   }
   return (
-    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')}>
+    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
@@ -425,63 +438,136 @@ export const renderPickHistory = (
   );
 };
 
-export const renderReplenishmentHistory = (
-  itemDetails: ItemDetails
+const onPiSalesHistRetryClick = (
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
+  dispatch: Dispatch<any>
 ) => {
-  const { deliveryHistory } = itemDetails;
-  if (deliveryHistory?.deliveries && deliveryHistory.deliveries.length) {
-    const data = [...deliveryHistory.deliveries].sort((a, b) => {
-      const date1 = new Date(a.date);
-      const date2 = new Date(b.date);
-      return date2 > date1 ? 1 : -1;
-    });
+  trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_sales_hist_retry_click', itemNbr });
+  dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+  return dispatch(getItemPiSalesHistory(itemNbr));
+};
+
+const onPiHistRetryClick = (
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
+  dispatch: Dispatch<any>
+) => {
+  trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_sales_hist_retry_click', itemNbr });
+  dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+  return dispatch(getItemPiHistory(itemNbr));
+};
+
+export const renderPiHistoryOrPiSalesHistoryError = (
+  isPiHist: boolean,
+  error: AxiosError | null,
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
+  dispatch: Dispatch<any>,
+  message?: string
+) => {
+  if (error || message) {
     return (
-      <CollapsibleCard title={strings('ITEM.HISTORY')}>
-        {data.slice(0, 5).map((item, index) => {
-          const key = `delivery-${index}`;
-          return (
-            <RenderItemHistoryCard
-              key={key}
-              date={item.date}
-              qty={item.qty}
-            />
-          );
-        })}
-      </CollapsibleCard>
+      <View style={styles.errorContainer}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>
+          {strings(isPiHist ? 'ITEM.ERROR_PI_DELIVERY_HISTORY' : 'ITEM.ERROR_PI_SALES_HISTORY')}
+        </Text>
+        <TouchableOpacity
+          testID="piHistoryError"
+          style={styles.errorButton}
+          onPress={() => {
+            if (isPiHist) {
+              onPiHistRetryClick(trackEventCall, itemNbr, dispatch);
+            } else {
+              onPiSalesHistRetryClick(trackEventCall, itemNbr, dispatch);
+            }
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
   return (
-    <CollapsibleCard title={strings('ITEM.HISTORY')}>
-      <View style={styles.noDataContainer}>
-        <Text>{strings('ITEM.NO_HISTORY')}</Text>
-      </View>
-    </CollapsibleCard>
+    <View />
   );
 };
 
-export const renderReplenishmentCard = (
-  itemDetails: ItemDetails
+export const renderReplenishmentHistory = (
+  result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  dispatch: Dispatch<any>
 ) => {
-  const { replenishment } = itemDetails;
-  return (
-    <View>
-      <View style={styles.replenishmentContainer}>
-        <Text>{strings('ITEM.REPLENISHMENT')}</Text>
+  if (isWaiting) {
+    return (
+      <View style={styles.bgWhite}>
+        <ActivityIndicator
+          animating={true}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.completeActivityIndicator}
+        />
       </View>
-      <View style={styles.replenishmentOrder}>
-        <Text>{strings('ITEM.ON_ORDER')}</Text>
-        <Text>{replenishment.onOrder}</Text>
-      </View>
-      {renderReplenishmentHistory(itemDetails)}
-    </View>
+    );
+  }
+
+  if (result?.status === SUCCESS_STATUS) {
+    const deliveryHistory = result?.data;
+    const replenishmentHistorySource: TrackEventSource = {
+      screen: REVIEW_ITEM_DETAILS,
+      action: 'replenishment_history_clicked',
+      otherInfo: { itemNbr }
+    };
+    if (deliveryHistory?.deliveries && deliveryHistory.deliveries.length) {
+      const data = [...deliveryHistory.deliveries].sort((a, b) => {
+        const date1 = new Date(a.date);
+        const date2 = new Date(b.date);
+        return date2 > date1 ? 1 : -1;
+      });
+      return (
+        <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
+          {data.slice(0, 5).map((item, index) => {
+            const key = `delivery-${index}`;
+            return (
+              <RenderItemHistoryCard
+                key={key}
+                date={item.date}
+                qty={item.qty}
+              />
+            );
+          })}
+        </CollapsibleCard>
+      );
+    }
+    return (
+      <CollapsibleCard title={strings('ITEM.HISTORY')} source={replenishmentHistorySource}>
+        <View style={styles.noDataContainer}>
+          <Text>{strings('ITEM.NO_HISTORY')}</Text>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return renderPiHistoryOrPiSalesHistoryError(
+    true,
+    error,
+    trackEventCall, itemNbr, dispatch,
+    result?.data?.message
   );
 };
 
 export const renderOHChangeHistory = (
   props: HandleProps,
   ohChangeHistory: OHChangeHistory[],
-  result: AxiosResponse
+  result: AxiosResponse,
+  itemNbr: number
 ) => {
+  const ohChangeHistorySource: TrackEventSource = {
+    screen: REVIEW_ITEM_DETAILS,
+    action: 'OH_change_history_click',
+    otherInfo: { itemNbr }
+  };
   if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
     if (result.data.itemOhChangeHistory.code === SUCCESS_STATUS) {
       if (ohChangeHistory && ohChangeHistory.length) {
@@ -491,7 +577,7 @@ export const renderOHChangeHistory = (
           return date2 > date1 ? 1 : -1;
         });
         return (
-          <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+          <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
             {data.slice(0, 5).map(item => (
               <RenderItemHistoryCard
                 key={item.id}
@@ -517,7 +603,7 @@ export const renderOHChangeHistory = (
         );
       }
       return (
-        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
           </View>
@@ -526,7 +612,7 @@ export const renderOHChangeHistory = (
     }
     if (result.data.itemOhChangeHistory.code === NO_RESULTS_STATUS) {
       return (
-        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
           </View>
@@ -535,7 +621,7 @@ export const renderOHChangeHistory = (
     }
   }
   return (
-    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')}>
+    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
@@ -569,27 +655,11 @@ export const renderAddPicklistButton = (
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
   const { reserve } = itemDetails.location;
-  const { addToPicklistStatus, userConfigs } = props;
-  if (addToPicklistStatus?.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={addToPicklistStatus?.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
+  const { userConfigs } = props;
 
-  if (addToPicklistStatus?.result) {
-    return <Text style={styles.picklistSuccessText}>{strings('ITEM.ADDED_TO_PICKLIST')}</Text>;
-  }
-
-  if (addToPicklistStatus?.error) {
-    return (
-      <View style={styles.picklistErrorView}>
-        <Text style={styles.picklistErrorText}>{strings('ITEM.ADDED_TO_PICKLIST_ERROR')}</Text>
+  if (reserve && reserve.length >= 1) {
+    return userConfigs.picking ? (
+      <View style={styles.addToPicklistContainer}>
         <Button
           type={3}
           title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
@@ -597,64 +667,122 @@ export const renderAddPicklistButton = (
           titleFontSize={12}
           titleFontWeight="bold"
           height={28}
-          onPress={() => handleAddToPicklist(props, itemDetails)}
+          onPress={() => { setCreatePickModalVisible(true); }}
         />
       </View>
-    );
+    ) : <></>;
   }
 
-  if (reserve && reserve.length >= 1) {
-    return (
-      <Button
-        type={3}
-        title={strings(GENERICS_ADD) + strings('ITEM.TO_PICKLIST')}
-        titleColor={COLOR.MAIN_THEME_COLOR}
-        titleFontSize={12}
-        titleFontWeight="bold"
-        height={28}
-        onPress={() => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          userConfigs.picking ? setCreatePickModalVisible(true) : handleAddToPicklist(props, itemDetails);
-        }}
-      />
-    );
-  }
-
-  return <Text>{strings('ITEM.RESERVE_NEEDED')}</Text>;
+  return <></>;
 };
+
+export const renderReserveAdjustmentButton = (
+  itemDetails: ItemDetails,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => (
+  <View style={styles.reserveAdjustMentContainer}>
+    <Button
+      type={3}
+      title={strings('ITEM.RESERVE_ADJUSTMENT')}
+      titleColor={COLOR.MAIN_THEME_COLOR}
+      titleFontSize={12}
+      titleFontWeight="bold"
+      height={28}
+      onPress={() => {
+        dispatch(setItemDetails(itemDetails));
+        navigation.navigate('ReserveAdjustment');
+      }}
+    />
+  </View>
+);
 
 export const renderLocationComponent = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
-  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
 ): JSX.Element => {
-  const { floorLocations, reserveLocations, userConfigs } = props;
-  const { additionalItemDetails } = userConfigs;
+  const {
+    floorLocations, reserveLocations, userConfigs, navigation
+  } = props;
+  const { additionalItemDetails, reserveAdjustment } = userConfigs;
+  const hasFloorLocations = floorLocations && floorLocations.length >= 1;
+  const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
   return (
     <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.FLOOR')}</Text>
-        {floorLocations && floorLocations.length >= 1
-          && <Text>{floorLocations[0].locationName}</Text>}
+        {hasFloorLocations && <Text>{floorLocations[0].locationName}</Text>}
       </View>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
-        {reserveLocations && reserveLocations.length >= 1
+        {hasReserveLocations
           && !additionalItemDetails && <Text>{reserveLocations[0].locationName}</Text> }
       </View>
       {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
+        {(reserveAdjustment && hasReserveLocations) && renderReserveAdjustmentButton(itemDetails, navigation, dispatch)}
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
       </View>
     </View>
   );
 };
 
+export const renderReplenishmentCard = (
+  itemDetails: ItemDetails,
+  result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  dispatch: Dispatch<any>
+) => (
+  <View>
+    <View style={styles.replenishmentContainer}>
+      <Text>{strings('ITEM.REPLENISHMENT')}</Text>
+    </View>
+    <View style={styles.replenishmentOrder}>
+      <Text>{strings('ITEM.ON_ORDER')}</Text>
+      <Text>{itemDetails.replenishment.onOrder}</Text>
+    </View>
+    {renderReplenishmentHistory(result, error, isWaiting, trackEventCall, itemNbr, dispatch)}
+  </View>
+);
+
+export const renderSalesGraphV3 = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
+  isSalesMetricsGraphView: boolean, result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  dispatch: Dispatch<any>): JSX.Element => (
+    <SFTCard
+      title={strings('ITEM.SALES_METRICS')}
+      subTitle={updatedSalesTS}
+      bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
+      bottomRightBtnAction={isWaiting ? undefined : [toggleSalesGraphView]}
+    >
+      {isWaiting && (
+      <ActivityIndicator
+        animating={true}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.completeActivityIndicator}
+      />
+      )}
+      {result?.status === SUCCESS_STATUS
+        ? <SalesMetrics itemNbr={itemNbr} itemSalesHistory={result?.data} isGraphView={isSalesMetricsGraphView} />
+        : renderPiHistoryOrPiSalesHistoryError(
+          false,
+          error,
+          trackEventCall, itemNbr, dispatch,
+          result?.data?.message
+        )}
+    </SFTCard>
+);
+
 export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
   result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
   // Checks orchestration response status for itemDetails only.
 
-  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
+  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS)
+    || (itemDetails.sales && itemDetails.sales.error === undefined)) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -662,11 +790,15 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
         bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
         bottomRightBtnAction={[toggleSalesGraphView]}
       >
-        <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+        <SalesMetrics
+          itemNbr={itemDetails.itemNbr}
+          itemSalesHistory={itemDetails.sales}
+          isGraphView={isSalesMetricsGraphView}
+        />
       </SFTCard>
     );
   }
-  if ((result && result.status !== MULTI_STATUS) || itemDetails.sales.error === undefined) {
+  if ((result && result.status !== MULTI_STATUS) || itemDetails.sales?.error === undefined) {
     return (
       <SFTCard
         title={strings('ITEM.SALES_METRICS')}
@@ -674,7 +806,11 @@ export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSales
         bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
         bottomRightBtnAction={[toggleSalesGraphView]}
       >
-        <SalesMetrics itemDetails={itemDetails} isGraphView={isSalesMetricsGraphView} />
+        <SalesMetrics
+          itemNbr={itemDetails.itemNbr}
+          itemSalesHistory={itemDetails.sales}
+          isGraphView={isSalesMetricsGraphView}
+        />
       </SFTCard>
     );
   }
@@ -695,7 +831,7 @@ const completeAction = () => {
 };
 
 export const renderScanForNoActionButton = (
-  props: (RenderProps & HandleProps), itemDetails: ItemDetails
+  props: (RenderProps & HandleProps), itemNbr: number
 ): JSX.Element => {
   const {
     actionCompleted, completeItemApi, validateSessionCall, trackEventCall,
@@ -724,8 +860,8 @@ export const renderScanForNoActionButton = (
         style={styles.scanForNoActionButton}
         onPress={() => {
           validateSessionCall(navigation, route.name).then(() => {
-            trackEventCall('item_details_scan_for_no_action_button_click',
-              { itemDetails: JSON.stringify(itemDetails) });
+            trackEventCall(REVIEW_ITEM_DETAILS,
+              { action: 'scan_for_no_action_click', itemNbr });
             return dispatch(setManualScan(!isManualScanEnabled));
           }).catch(() => {
             trackEventCall('session_timeout', { user: userId });
@@ -742,6 +878,19 @@ export const renderScanForNoActionButton = (
     <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
       <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
       <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
+  if (actionCompleted) {
+    return <View />;
+  }
+
+  return (
+    <TouchableOpacity style={styles.scanForNoActionButton} onPress={onPress}>
+      <MaterialCommunityIcon name="map-marker-plus" size={20} color={COLOR.WHITE} />
+      <Text style={styles.buttonText}>{strings('MISSING_PALLET_WORKLIST.ADD_LOCATION')}</Text>
     </TouchableOpacity>
   );
 };
@@ -806,7 +955,7 @@ export const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any,
   } = props;
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('item_details_scan', { value: scan.value, type: scan.type });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'barcode_scan', value: scan.value, type: scan.type });
       if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
         if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
           dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
@@ -848,18 +997,18 @@ export const handleCreateNewPick = (
   dispatch(createNewPick(createPickPayload));
 };
 
-export const onValidateBackPress = (props: ItemDetailsScreenProps) => {
+export const onValidateBackPress = (props: ItemDetailsScreenProps, itemNbr: number) => {
   const {
     exceptionType, actionCompleted, dispatch, trackEventCall
   } = props;
   if (!actionCompleted) {
     if (exceptionType === 'po') {
-      trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'back_press_action_incomplete', exceptionType, itemNbr });
       dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
       return true;
     }
     if (exceptionType === 'nsfl') {
-      trackEventCall('item_details_back_press_action_incomplete', { exceptionType });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'back_press_action_incomplete', exceptionType, itemNbr });
       dispatch(showInfoModal(strings('ITEM.NO_FLOOR_LOCATION'), strings('ITEM.NO_FLOOR_LOCATION_DETAILS')));
       return true;
     }
@@ -881,19 +1030,23 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         // TODO revert V2 changes once BE orchestration is pushed to production
         if (userConfigs.additionalItemDetails) {
           dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
+          dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+          dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+          const itemNbr = parseInt(scannedEvent.value, 10);
           dispatch(
-            getItemDetailsV2(
+            getItemDetailsV3(
               {
-                id: parseInt(scannedEvent.value, 10),
+                id: itemNbr,
                 getMetadataHistory: userConfigs.additionalItemDetails
               }
             )
           );
+          dispatch(getItemPiHistory(itemNbr));
+          dispatch(getItemPiSalesHistory(itemNbr));
         } else {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
         }
-        dispatch({ type: ADD_TO_PICKLIST.RESET });
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -936,7 +1089,7 @@ export const getLocationCount = (props: ItemDetailsScreenProps) => {
 };
 
 export const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales.lastUpdateTs')
-  ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
+  ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales?.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
   : undefined);
 
 export const isError = (
@@ -963,8 +1116,8 @@ export const isError = (
             testID="scanErrorRetry"
             style={styles.errorButton}
             onPress={() => {
-              trackEventCall('item_details_api_retry', { barcode: scannedValue });
-              return additionalItemDetails ? dispatch(getItemDetailsV2({ id: parseInt(scannedValue, 10) }))
+              trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
+              return additionalItemDetails ? dispatch(getItemDetailsV3({ id: parseInt(scannedValue, 10) }))
                 : dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
             }}
           >
@@ -992,6 +1145,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const {
     scannedEvent, isManualScanEnabled,
     isWaiting, error, result,
+    isPiHistWaiting, piHistError, piHistResult,
+    isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
     completeItemApi,
     createNewPickApi,
     updateOHQtyApi,
@@ -1012,7 +1167,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall,
     useEffectHook,
     useFocusEffectHook,
-    floorLocations, userFeatures, userConfigs
+    floorLocations, userFeatures, userConfigs,
+    countryCode,
+    exceptionType
   } = props;
 
   const { additionalItemDetails } = userConfigs;
@@ -1089,7 +1246,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   useFocusEffectHook(
     () => {
-      const onBackPress = () => onValidateBackPress(props);
+      const onBackPress = () => onValidateBackPress(props, itemDetails?.itemNbr || 0);
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
@@ -1148,22 +1305,24 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   }
 
   const toggleSalesGraphView = () => {
-    trackEventCall('item_details_toggle_graph_click',
-      { itemDetails: JSON.stringify(itemDetails), isGraphView: !isSalesMetricsGraphView });
+    trackEventCall(REVIEW_ITEM_DETAILS, {
+      action: 'toggle_graph_click',
+      itemNbr: itemDetails.itemNbr,
+      isGraphView: !isSalesMetricsGraphView
+    });
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
-  };
-
-  const navigateToAuditItemScreen = () => {
-    dispatch(setAuditItemNumber(itemDetails.itemNbr));
-    navigation.navigate('AuditItem');
   };
 
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall('refresh_item_details', { itemNumber: itemDetails.itemNbr });
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
       if (additionalItemDetails) {
         dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
-        dispatch(getItemDetailsV2({ id: itemDetails.itemNbr }));
+        dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+        dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+        dispatch(getItemDetailsV3({ id: itemDetails.itemNbr }));
+        dispatch(getItemPiHistory(itemDetails.itemNbr));
+        dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
       } else {
         dispatch({ type: GET_ITEM_DETAILS.RESET });
         dispatch(getItemDetails({ id: itemDetails.itemNbr }));
@@ -1219,14 +1378,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         {!isWaiting && itemDetails
           && (
           <View>
-            {userConfigs.showOpenAuditLink
-            && (
-            <View style={styles.openAuditContainer}>
-              <TouchableOpacity onPress={navigateToAuditItemScreen}>
-                <Text style={styles.openAuditText}>{strings('AUDITS.OPEN_AUDIT_LABEL')}</Text>
-              </TouchableOpacity>
-            </View>
-            )}
             <ItemInfo
               itemName={itemDetails.itemName}
               itemNbr={itemDetails.itemNbr}
@@ -1243,25 +1394,31 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 vendorPackQty: itemDetails.vendorPackQty,
                 grossProfit: itemDetails.grossProfit,
                 size: itemDetails.size,
-                basePrice: itemDetails.basePrice
+                basePrice: itemDetails.basePrice,
+                source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' }
               }}
+              countryCode={countryCode}
+              showItemImage={userConfigs.showItemImage}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
               topRightBtnTxt={getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
                 ? strings('GENERICS.CHANGE') : undefined}
-              topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
+              topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
             {additionalItemDetails && (
               <>
                 <View style={styles.historyContainer}>
-                  {renderOHChangeHistory(props, itemOhChangeHistory, result)}
+                  {renderOHChangeHistory(props, itemOhChangeHistory, result, itemDetails.itemNbr)}
                 </View>
                 <View style={styles.historyContainer}>
-                  {renderReplenishmentCard(itemDetails)}
+                  {renderReplenishmentCard(
+                    itemDetails, piHistResult, piHistError, isPiHistWaiting,
+                    trackEventCall, itemDetails.itemNbr, dispatch
+                  )}
                 </View>
               </>
             )}
@@ -1281,19 +1438,25 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnTxt={getTopRightBtnTxt(locationCount)}
               topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
-              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible)}
+              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible, dispatch)}
             </SFTCard>
             {additionalItemDetails && (
               <View style={styles.historyContainer}>
-                {renderPickHistory(props, picklistHistory, result)}
+                {renderPickHistory(props, picklistHistory, result, itemDetails.itemNbr)}
               </View>
             )}
-            {renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
-              itemDetails, isSalesMetricsGraphView)}
+            {!additionalItemDetails && (renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
+              itemDetails, isSalesMetricsGraphView))}
+            {additionalItemDetails && (
+              renderSalesGraphV3(updatedSalesTS, toggleSalesGraphView, isSalesMetricsGraphView,
+                piSalesHistResult, piSalesHistError, isPiSalesHistWaiting, trackEventCall,
+                itemDetails.itemNbr, dispatch))}
           </View>
           )}
       </ScrollView>
-      {renderScanForNoActionButton(props, itemDetails)}
+      {exceptionType === 'NSFL' && (floorLocations && floorLocations.length === 0)
+        ? renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))
+        : renderScanForNoActionButton(props, itemDetails.itemNbr)}
     </View>
   );
 };
@@ -1301,12 +1464,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const addToPicklistStatus = useTypedSelector(state => state.async.addToPicklist);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
-  const getItemDetailsV2Api = useTypedSelector(state => state.async.getItemDetailsV2);
-  const { userId } = useTypedSelector(state => state.User);
+  const getItemDetailsV3Api = useTypedSelector(state => state.async.getItemDetailsV3);
+  const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
+  const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
+  const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
     exceptionType,
     actionCompleted,
@@ -1333,10 +1497,15 @@ const ReviewItemDetails = (): JSX.Element => {
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
-      isWaiting={userConfigs.additionalItemDetails ? getItemDetailsV2Api.isWaiting : isWaiting}
-      error={userConfigs.additionalItemDetails ? getItemDetailsV2Api.error : error}
-      result={userConfigs.additionalItemDetails ? getItemDetailsV2Api.result : result}
-      addToPicklistStatus={addToPicklistStatus}
+      isWaiting={userConfigs.additionalItemDetails ? getItemDetailsV3Api.isWaiting : isWaiting}
+      error={userConfigs.additionalItemDetails ? getItemDetailsV3Api.error : error}
+      result={userConfigs.additionalItemDetails ? getItemDetailsV3Api.result : result}
+      isPiHistWaiting={userConfigs.additionalItemDetails ? getItemPiHistoryApi.isWaiting : false}
+      piHistError={getItemPiHistoryApi.error}
+      piHistResult={getItemPiHistoryApi.result}
+      isPiSalesHistWaiting={getItemPiSalesHistoryApi.isWaiting}
+      piSalesHistError={getItemPiSalesHistoryApi.error}
+      piSalesHistResult={getItemPiSalesHistoryApi.result}
       completeItemApi={completeItemApi}
       createNewPickApi={createNewPickApi}
       updateOHQtyApi={updateOHQtyApi}
@@ -1372,6 +1541,7 @@ const ReviewItemDetails = (): JSX.Element => {
       useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
       userConfigs={userConfigs}
+      countryCode={countryCode}
     />
   );
 };

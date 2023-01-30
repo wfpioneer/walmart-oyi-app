@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
-import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
+import { Pallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
 import { LocationItem, ReserveDetailsPallet, SectionDetailsPallet } from '../../models/LocationItems';
@@ -24,6 +24,7 @@ import { setPerishableCategories, setupPallet } from '../../state/actions/Pallet
 import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
 import { Configurations } from '../../models/User';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
+import { setIsToolBarNavigation } from '../../state/actions/Location';
 
 interface ReserveSectionDetailsProps {
   getSectionDetailsApi: AsyncState;
@@ -44,6 +45,7 @@ interface ReserveSectionDetailsProps {
   perishableCategories: number[];
   useFocusEffectHook: (effect: EffectCallback) => void;
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
+  palletInfo: PalletInfo
 }
 // Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
 export const combineReserveArrays = (
@@ -171,7 +173,8 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     getPalletConfigApi,
     perishableCategories,
     useFocusEffectHook,
-    useCallbackHook
+    useCallbackHook,
+    palletInfo
   } = props;
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
   || undefined;
@@ -219,8 +222,13 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
   useEffectHook(() => {
     if (navigation.isFocused()) {
       if (configComplete && getPalletDetailsComplete) {
+        trackEventCall('Section_Details', {
+          action: 'navigating_to_manage_pallet_screen',
+          palletId: palletInfo.id
+        });
         navigation.navigate('PalletManagement', { screen: 'ManagePallet' });
         setGetPalletDetailsComplete(false);
+        dispatch(setIsToolBarNavigation(false));
       }
     }
   }, [getPalletDetailsComplete, configComplete]);
@@ -268,6 +276,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
             section={locationItem?.section || { id: 0, name: '' }}
             reservePallet={item}
             setPalletClicked={setPalletClicked}
+            trackEventCall={trackEvent}
           />
         )}
         keyExtractor={(item, idx) => `${item.id}${idx}`}
@@ -286,7 +295,7 @@ const ReserveSectionDetails = (): JSX.Element => {
   const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
-  const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
+  const { perishableCategories, palletInfo } = useTypedSelector(state => state.PalletManagement);
   const userConfig = useTypedSelector(state => state.User.configs);
   const [configComplete, setConfigComplete] = useState(false);
   const [getPalletDetailsComplete, setGetPalletDetailsComplete] = useState(false);
@@ -315,6 +324,7 @@ const ReserveSectionDetails = (): JSX.Element => {
         perishableCategories={perishableCategories}
         useFocusEffectHook={useFocusEffect}
         useCallbackHook={useCallback}
+        palletInfo={palletInfo}
       />
     </>
   );

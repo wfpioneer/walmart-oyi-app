@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Dispatch } from 'redux';
 import { useRoute } from '@react-navigation/native';
 import styles from './FilterMenu.style';
@@ -29,84 +28,18 @@ import { area } from '../../../models/User';
 import { WorklistItemI } from '../../../models/WorklistItem';
 import { WorklistState } from '../../../state/reducers/Worklist';
 import { WorklistGoal, WorklistSummary } from '../../../models/WorklistSummary';
+import { RenderCategoryCollapsibleCard } from '../../../components/CategoryCollapsibleCard/CategoryCollapsibleCard';
+import { MenuCard } from '../../../components/FilterMenuCard/FilterMenuCard';
 
-interface MenuCardProps {
-  title: string;
-  subtext: string;
-  opened: boolean;
-}
 interface FilteredArea extends area {
   isSelected: boolean;
 }
 
-export const MenuCard = (props: MenuCardProps): JSX.Element => {
-  const iconName = props.opened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
-  return (
-    <>
-      <View style={styles.menuCardText}>
-        <Text>{props.title}</Text>
-        <Text style={styles.subtitleText}>{props.subtext}</Text>
-      </View>
-      <View style={styles.arrowView}>
-        <MaterialIcons name={iconName} size={25} color={COLOR.GREY_700} />
-      </View>
-    </>
-  );
-};
-
-export const renderCategoryFilterCard = (
-  item: FilteredCategory,
-  dispatch: Dispatch<any>,
-  filterCategories: string[]
-): JSX.Element => {
-  const onItemPress = () => {
-    if (item.selected) {
-      filterCategories.splice(
-        filterCategories.indexOf(`${item.catgNbr} - ${item.catgName}`),
-        1
-      );
-      trackEvent('worklist_update_filter_categories', {
-        categories: JSON.stringify(filterCategories)
-      });
-      return dispatch(updateFilterCategories(filterCategories));
-    }
-
-    const replacementFilter = filterCategories;
-    replacementFilter.push(`${item.catgNbr} - ${item.catgName}`);
-    return dispatch(updateFilterCategories(replacementFilter));
-  };
-  return (
-    <TouchableOpacity
-      testID="category button"
-      style={styles.categoryFilterCard}
-      onPress={onItemPress}
-    >
-      <View style={styles.selectionView}>
-        {item.selected ? (
-          <MaterialCommunityIcons
-            name="checkbox-marked-outline"
-            size={15}
-            color={COLOR.MAIN_THEME_COLOR}
-          />
-        ) : (
-          <MaterialCommunityIcons
-            name="checkbox-blank-outline"
-            size={15}
-            color={COLOR.MAIN_THEME_COLOR}
-          />
-        )}
-      </View>
-      <Text style={styles.categoryFilterText} numberOfLines={2}>
-        {`${item.catgNbr} - ${item.catgName} `}
-      </Text>
-    </TouchableOpacity>
-  );
-};
-
 export const renderExceptionFilterCard = (
   item: FilterListItem,
   dispatch: Dispatch<any>,
-  filterExceptions: string[]
+  filterExceptions: string[],
+  screenName: string
 ): JSX.Element => {
   const onItemPress = () => {
     if (item.selected) {
@@ -114,13 +47,20 @@ export const renderExceptionFilterCard = (
         filterExceptions.indexOf(item.value),
         1
       );
-      trackEvent('worklist_update_filter_exceptions', {
+      trackEvent(screenName, {
+        action: 'worklist_update_filter_exceptions',
+        removedException: item.value,
         exception: JSON.stringify(filterExceptions)
       });
       return dispatch(updateFilterExceptions(filterExceptions));
     }
     const replacementFilter = filterExceptions;
     replacementFilter.push(item.value);
+    trackEvent(screenName, {
+      action: 'worklist_update_filter_exceptions',
+      addedException: item.value,
+      exception: JSON.stringify(replacementFilter)
+    });
     return dispatch(updateFilterExceptions(replacementFilter));
   };
   return (
@@ -187,7 +127,8 @@ export const renderAreaFilterCard = (
   workListCatgMap: Map<number, FilteredCategory>,
   dispatch: Dispatch<any>,
   filterCategories: string[],
-  filteredCategoryNbr: number[]
+  filteredCategoryNbr: number[],
+  screenName: string
 ): JSX.Element => {
   const isPartiallySelected = item.categories.some(categoryNbr => filteredCategoryNbr.includes(categoryNbr));
   const onAreaPress = () => {
@@ -200,6 +141,11 @@ export const renderAreaFilterCard = (
         if (category && !category.selected) {
           filteredAreas.push(`${category.catgNbr} - ${category.catgName}`);
         }
+      });
+      trackEvent(screenName, {
+        action: 'worklist_update_filter_categories',
+        addedArea: item.area,
+        categories: JSON.stringify(filteredAreas)
       });
       return dispatch(updateFilterCategories(filteredAreas));
     }
@@ -215,6 +161,11 @@ export const renderAreaFilterCard = (
     });
 
     const newFilteredCategories: string[] = [...filterCategoriesMap.values()];
+    trackEvent(screenName, {
+      action: 'worklist_update_filter_categories',
+      removedArea: item.area,
+      categories: JSON.stringify(newFilteredCategories)
+    });
     return dispatch(updateFilterCategories(newFilteredCategories));
   };
 
@@ -237,9 +188,11 @@ export const renderAreaFilterCard = (
 export const renderExceptionRadioFilterCard = (
   item: FilterListItem,
   dispatch: Dispatch<any>,
+  screenName: string
 ): JSX.Element => {
   const onItemPress = () => {
-    trackEvent('worklist_update_filter_exceptions', {
+    trackEvent(screenName, {
+      action: 'worklist_update_filter_exceptions',
       exception: JSON.stringify(item.value)
     });
     return dispatch(updateFilterExceptions([item.value]));
@@ -278,9 +231,10 @@ export const RenderAreaCard = (props: {
   areas: area[];
   filterCategories: string[];
   categoryMap: FilteredCategory[];
+  screenName: string;
 }): JSX.Element => {
   const {
-    areaOpen, dispatch, areas, filterCategories, categoryMap
+    areaOpen, dispatch, areas, filterCategories, categoryMap, screenName
   } = props;
   const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
 
@@ -325,6 +279,10 @@ export const RenderAreaCard = (props: {
       <TouchableOpacity
         style={styles.menuCard}
         onPress={() => {
+          trackEvent(screenName, {
+            action: 'toggle_area_filter',
+            areaOpen: !areaOpen
+          });
           dispatch(toggleArea(!areaOpen));
         }}
       >
@@ -342,67 +300,11 @@ export const RenderAreaCard = (props: {
             workListCatgMap,
             dispatch,
             filterCategories,
-            filteredCategoryNbr
+            filteredCategoryNbr,
+            screenName
           )}
           style={styles.categoryList}
           keyExtractor={(item: area) => item.area}
-        />
-      )}
-    </>
-  );
-};
-
-export const RenderCategoryCollapsibleCard = (props: {
-  categoryMap: FilteredCategory[];
-  categoryOpen: boolean;
-  filterCategories: string[];
-  dispatch: Dispatch<any>;
-}): JSX.Element => {
-  const {
-    categoryMap, categoryOpen, filterCategories, dispatch
-  } = props;
-  const categoryNumberMap = categoryMap.map(
-    (item: FilteredCategory) => item.catgNbr
-  );
-  const categoryNumberSet = new Set();
-  categoryNumberMap.forEach((item: any) => categoryNumberSet.add(item));
-  const filteredCategories = categoryMap.filter((item: any) => {
-    if (categoryNumberSet.has(item.catgNbr)) {
-      categoryNumberSet.delete(item.catgNbr);
-      return true;
-    }
-    return false;
-  });
-
-  let categorySubtext = '';
-  if (filterCategories.length === 0) {
-    categorySubtext = strings('WORKLIST.ALL');
-  } else {
-    categorySubtext = `${filterCategories.length} ${strings(
-      'GENERICS.SELECTED'
-    )}`;
-  }
-
-  return (
-    <>
-      <TouchableOpacity
-        style={styles.menuCard}
-        onPress={() => {
-          dispatch(toggleCategories(!categoryOpen));
-        }}
-      >
-        <MenuCard
-          title={strings('WORKLIST.CATEGORY')}
-          subtext={categorySubtext}
-          opened={categoryOpen}
-        />
-      </TouchableOpacity>
-      {categoryOpen && (
-        <FlatList
-          data={filteredCategories}
-          renderItem={({ item }) => renderCategoryFilterCard(item, dispatch, filterCategories)}
-          style={styles.categoryList}
-          keyExtractor={(item: any) => item.catgNbr.toString()}
         />
       )}
     </>
@@ -416,9 +318,10 @@ export const RenderExceptionTypeCard = (props: {
   wlSummary: WorklistSummary | undefined;
   isAudits: boolean,
   disableAuditWL: boolean;
+  screenName: string;
 }): JSX.Element => {
   const {
-    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits, disableAuditWL
+    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits, disableAuditWL, screenName
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   const exceptionMap: FilterListItem[] = [];
@@ -457,6 +360,10 @@ export const RenderExceptionTypeCard = (props: {
       <TouchableOpacity
         style={styles.menuCard}
         onPress={() => {
+          trackEvent(screenName, {
+            action: 'toggle_ exceptions_filter',
+            exceptionOpen: !exceptionOpen
+          });
           dispatch(toggleExceptions(!exceptionOpen));
         }}
       >
@@ -469,8 +376,8 @@ export const RenderExceptionTypeCard = (props: {
       {exceptionOpen && (
         <FlatList
           data={exceptionMap}
-          renderItem={({ item }) => (isAudits ? renderExceptionRadioFilterCard(item, dispatch)
-            : renderExceptionFilterCard(item, dispatch, filterExceptions))}
+          renderItem={({ item }) => (isAudits ? renderExceptionRadioFilterCard(item, dispatch, screenName)
+            : renderExceptionFilterCard(item, dispatch, filterExceptions, screenName))}
           style={styles.categoryList}
           keyExtractor={(item: any) => item.value}
         />
@@ -520,7 +427,8 @@ interface FilterMenuProps {
   enableAreaFilter: boolean;
   wlSummary: WorklistSummary[];
   selectedWorklistGoal: WorklistGoal;
-  showRollOverAudit: boolean
+  showRollOverAudit: boolean;
+  screenName: string;
 }
 
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
@@ -536,7 +444,8 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
     enableAreaFilter,
     wlSummary,
     selectedWorklistGoal,
-    showRollOverAudit
+    showRollOverAudit,
+    screenName
   } = props;
   const worklistIndex = wlSummary.findIndex(item => item.worklistGoal === selectedWorklistGoal);
   const disableAuditWL = showRollOverAudit && !isRollOverComplete(wlSummary[worklistIndex]);
@@ -547,7 +456,12 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         <Text style={styles.refineText}>{strings('WORKLIST.REFINE')}</Text>
         <TouchableOpacity
           style={styles.clearButton}
-          onPress={() => onClearPress(props.dispatch)}
+          onPress={() => {
+            trackEvent(screenName, {
+              action: 'clear_filters_clicked'
+            });
+            onClearPress(props.dispatch);
+          }}
         >
           <Text style={styles.clearText}>{strings('WORKLIST.CLEAR')}</Text>
         </TouchableOpacity>
@@ -560,13 +474,17 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         areas={areas}
         filterCategories={filterCategories}
         categoryMap={categoryMap}
+        screenName={screenName}
       />
       )}
       <RenderCategoryCollapsibleCard
         categoryMap={categoryMap}
         categoryOpen={categoryOpen}
         filterCategories={filterCategories}
-        dispatch={dispatch}
+        source={screenName}
+        // already toggled in the component, just needs to get into redux
+        toggleCategories={(updatedCatOpen: boolean) => dispatch(toggleCategories(updatedCatOpen))}
+        updateFilterCatgories={(updatedCats: string[]) => dispatch(updateFilterCategories(updatedCats))}
       />
       <RenderExceptionTypeCard
         exceptionOpen={exceptionOpen}
@@ -575,15 +493,17 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         wlSummary={wlSummary[worklistIndex]}
         isAudits={selectedWorklistGoal === WorklistGoal.AUDITS}
         disableAuditWL={disableAuditWL}
+        screenName={screenName}
       />
     </View>
   );
 };
 
-export const FilterMenu = (): JSX.Element => {
+export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
   const dispatch = useDispatch();
   const workListApi = useTypedSelector(state => state.async.getWorklist);
   const workListAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
+  const { screenName } = props;
   const {
     categoryOpen,
     filterCategories,
@@ -617,6 +537,7 @@ export const FilterMenu = (): JSX.Element => {
       wlSummary={wlSummary || []}
       selectedWorklistGoal={selectedWorklistGoal}
       showRollOverAudit={showRollOverAudit}
+      screenName={screenName}
     />
   );
 };

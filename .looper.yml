@@ -86,6 +86,10 @@ envs:
       # Application Portfolio Management
       APM_ID: 'APM0007047'
 
+      # CN Image Auth Client ID and Secret
+      CN_IMAGE_AUTH_CLIENT_ID: ENC[c7gsJUW4bWJg2IHKIcxhhLmYVh6NQxbzVzN9D+zYC4R09VQzh5cdpTOdCdyEEZYo]
+      CN_IMAGE_AUTH_SECRET: ENC[exyE4QqpRmHvnPE7bkcM28gdR8Vf+pn8RnRRmRwOMKZ+BmNOdJej/2RhNgtwAALxS63uoYmnfHHwFO+S6IFzCHT1VDOHlx2lM50J3IQRlig=]
+
       projects:
         - rootDir: './android'
           type: android
@@ -112,6 +116,9 @@ tools:
 
 flows:
   gradlew-wrapper:
+    - group("writing API secrets"):
+      - 'echo "Building src/constant/Secrets.json using looper-encrypted secrets"'
+      - 'echo "{ \"CN_IMAGE_AUTH_CLIENT_ID\": \"$CN_IMAGE_AUTH_CLIENT_ID\", \"CN_IMAGE_AUTH_SECRET\": \"$CN_IMAGE_AUTH_SECRET\" }" >> ../src/constant/Secrets.json'
     - group("npm install"):
         - npm ci
         - TZ='America/Chicago' npm run test:coverage

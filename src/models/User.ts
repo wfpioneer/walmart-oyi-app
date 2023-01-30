@@ -35,7 +35,11 @@ export interface Configurations {
   showOpenAuditLink: boolean;
   scanRequired: boolean;
   showCalculator: boolean;
-  showItemImages: boolean;
+  multiPick: boolean;
+  multiBin: boolean;
+  showItemImage: boolean;
+  showFeedback: boolean;
+  reserveAdjustment: boolean;
 }
 
 export interface area {

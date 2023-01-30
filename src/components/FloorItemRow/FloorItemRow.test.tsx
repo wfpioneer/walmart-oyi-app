@@ -14,7 +14,12 @@ describe('FloorItemRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <FloorItemRow item={mockFloorItem} dispatch={jest.fn()} navigation={navigationProp} />
+        <FloorItemRow
+          item={mockFloorItem}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          trackEventCall={jest.fn()}
+        />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -26,7 +31,12 @@ describe('FloorItemRow Component', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
-        <FloorItemRow item={mockFloorItemLongName} dispatch={jest.fn()} navigation={navigationProp} />
+        <FloorItemRow
+          item={mockFloorItemLongName}
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          trackEventCall={jest.fn()}
+        />
       </Provider>
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

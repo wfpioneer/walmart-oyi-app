@@ -3,13 +3,15 @@ import { fireEvent, render } from '@testing-library/react-native';
 import CalculatorModal from './CalculatorModal';
 
 describe('Calculator Modal render tests', () => {
+  const mockDisableAcceptButtonFn = jest.fn(() => false);
   it('render modal with visible true', () => {
     const component = (
       <CalculatorModal
         visible={true}
         onAccept={jest.fn()}
         onClose={jest.fn()}
-        showAcceptButtonOn={() => true}
+        showAcceptButton={true}
+        disableAcceptButton={mockDisableAcceptButtonFn}
       />
     );
     const { toJSON } = render(component);
@@ -22,7 +24,8 @@ describe('Calculator Modal render tests', () => {
         visible={false}
         onAccept={jest.fn()}
         onClose={jest.fn()}
-        showAcceptButtonOn={() => true}
+        showAcceptButton={true}
+        disableAcceptButton={mockDisableAcceptButtonFn}
       />
     );
     const { toJSON } = render(component);
@@ -35,7 +38,8 @@ describe('Calculator Modal render tests', () => {
         visible={false}
         onAccept={jest.fn()}
         onClose={jest.fn()}
-        showAcceptButtonOn={() => true}
+        showAcceptButton={true}
+        disableAcceptButton={mockDisableAcceptButtonFn}
       />
     );
     const { toJSON } = render(component);
@@ -49,7 +53,8 @@ describe('Calculator Modal render tests', () => {
         visible={true}
         onAccept={jest.fn()}
         onClose={mockClose}
-        showAcceptButtonOn={() => true}
+        showAcceptButton={true}
+        disableAcceptButton={mockDisableAcceptButtonFn}
       />
     );
     const { getByTestId } = render(component);
@@ -65,12 +70,31 @@ describe('Calculator Modal render tests', () => {
         visible={true}
         onAccept={mockAccept}
         onClose={jest.fn()}
-        showAcceptButtonOn={() => true}
+        showAcceptButton={true}
+        disableAcceptButton={mockDisableAcceptButtonFn}
       />
     );
     const { getByTestId } = render(component);
     const modalAcceptButton = getByTestId('modal-accept-button');
     fireEvent.press(modalAcceptButton);
     expect(mockAccept).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not call mock accept on accept btn click when disableAcceptButton is true', () => {
+    const mockAccept = jest.fn();
+    const mockDisableAcceptBtnFn = jest.fn(() => true);
+    const component = (
+      <CalculatorModal
+        visible={true}
+        onAccept={mockAccept}
+        onClose={jest.fn()}
+        showAcceptButton={true}
+        disableAcceptButton={mockDisableAcceptBtnFn}
+      />
+    );
+    const { getByTestId } = render(component);
+    const modalAcceptButton = getByTestId('modal-accept-button');
+    fireEvent.press(modalAcceptButton);
+    expect(mockAccept).not.toHaveBeenCalled();
   });
 });

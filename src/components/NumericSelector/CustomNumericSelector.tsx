@@ -20,7 +20,7 @@ interface CustomNumericSelectorProps {
 const renderPlusMinusBtn = (name: 'plus' | 'minus', isDisabled: boolean) => (
   <MaterialCommunityIcon
     name={name}
-    color={isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
+    color={isDisabled ? COLOR.DISABLED_GREY : COLOR.MAIN_THEME_COLOR}
     size={18}
   />
 );

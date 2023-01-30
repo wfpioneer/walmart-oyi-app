@@ -5,13 +5,15 @@ import * as asyncActions from '../actions/asyncAPI';
 export const asyncReducer = combineReducers({
   // TODO remove this reducer once the BE orchestration changes have been pushed to production
   getItemDetailsV2: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS_V2),
+  getItemDetailsV3: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS_V3),
+  getItemPiHistory: makeAsyncReducer(asyncActions.GET_ITEM_PIHISTORY),
+  getItemPiSalesHistory: makeAsyncReducer(asyncActions.GET_ITEM_PISALESHISTORY),
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
   getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS),
   getWorklist: makeAsyncReducer(asyncActions.GET_WORKLIST),
   getWorklistAudits: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT),
   getPalletWorklist: makeAsyncReducer(asyncActions.GET_PALLET_WORKLIST),
   editLocation: makeAsyncReducer(asyncActions.EDIT_LOCATION),
-  addToPicklist: makeAsyncReducer(asyncActions.ADD_TO_PICKLIST),
   addLocation: makeAsyncReducer(asyncActions.ADD_LOCATION),
   updateOHQty: makeAsyncReducer(asyncActions.UPDATE_OH_QTY),
   getWorklistSummary: makeAsyncReducer(asyncActions.GET_WORKLIST_SUMMARY),
@@ -54,7 +56,11 @@ export const asyncReducer = combineReducers({
   updatePalletNotFound: makeAsyncReducer(asyncActions.UPDATE_PALLET_NOT_FOUND),
   createNewPick: makeAsyncReducer(asyncActions.CREATE_NEW_PICK),
   reportMissingPallet: makeAsyncReducer(asyncActions.REPORT_MISSING_PALLET),
-  getItemPallets: makeAsyncReducer(asyncActions.GET_ITEM_PALLETS)
+  getItemPallets: makeAsyncReducer(asyncActions.GET_ITEM_PALLETS),
+  updateMultiPalletUPCQty: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY),
+  submitFeedbackRating: makeAsyncReducer(asyncActions.SUBMIT_FEEDBACK_RATING),
+  getUserConfig: makeAsyncReducer(asyncActions.GET_USER_CONFIG),
+  updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG)
 });
 
 export default asyncReducer;

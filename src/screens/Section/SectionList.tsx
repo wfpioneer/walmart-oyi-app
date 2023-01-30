@@ -1,5 +1,6 @@
 import React, {
   EffectCallback,
+  useCallback,
   useEffect,
   useMemo, useRef,
   useState
@@ -41,6 +42,7 @@ import {
   hideLocationPopup,
   setAislesToCreateToExistingAisle,
   setCreateFlow,
+  setIsToolBarNavigation,
   setSections
 } from '../../state/actions/Location';
 import BottomSheetAddCard from '../../components/BottomSheetAddCard/BottomSheetAddCard';
@@ -54,6 +56,7 @@ import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 
 const MANAGER_APPROVAL = 'manager approval';
+const SCREEN_NAME = 'Section_List';
 
 const NoSectionMessage = (): JSX.Element => (
   <View style={styles.noSections}>
@@ -265,7 +268,7 @@ export const ClearItemsModal = (props: ClearItemsModalProps): JSX.Element => {
           style={styles.delButton}
           title={strings('GENERICS.CANCEL')}
           backgroundColor={COLOR.MAIN_THEME_COLOR}
-            // No need for modal close fn because no apis have been sent
+          // No need for modal close fn because no apis have been sent
           onPress={() => setDisplayConfirmation(false)}
         />
         <Button
@@ -418,6 +421,11 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
   }
 
   const handleDeleteAisle = () => {
+    trackEventCall(SCREEN_NAME, {
+      action: 'removing_aisle_from_location',
+      aisleId,
+      aisleName
+    });
     setDeleteAisleApiStart(moment().valueOf());
     setDisplayConfirmation(false);
     dispatch(
@@ -429,6 +437,11 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
 
   const handleClearItems = () => {
     setDisplayConfirmation(false);
+    trackEventCall(SCREEN_NAME, {
+      action: 'clearing_aisle_from_location',
+      locationId: aisleId,
+      target: clearLocationTarget
+    });
     dispatch(clearLocation({ locationId: aisleId, target: clearLocationTarget }));
   };
 
@@ -473,6 +486,7 @@ export const SectionScreen = (props: SectionProps): JSX.Element => {
             navigator={navigation}
             destinationScreen={LocationType.SECTION_DETAILS}
             locationPopupVisible={locationPopupVisible}
+            trackEventCall={trackEventCall}
           />
         )}
         keyExtractor={item => item.sectionName}
@@ -525,87 +539,106 @@ const SectionList = (): JSX.Element => {
     if (bottomSheetModalRef.current) {
       bottomSheetModalRef.current.dismiss();
     }
+    trackEvent(SCREEN_NAME, {
+      action: 'adding_section',
+      aisleName
+    });
     navigation.navigate('AddSection');
   };
 
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => dispatch(hideLocationPopup())}
-        disabled={!location.locationPopupVisible}
-        style={location.locationPopupVisible ? styles.disabledContainer : styles.safeAreaView}
+      <SectionScreen
+        aisleId={aisleId}
+        aisleName={aisleName}
+        zoneName={zoneName}
+        navigation={navigation}
+        dispatch={dispatch}
+        getAllSections={getAllSections}
+        isManualScanEnabled={isManualScanEnabled}
+        apiStart={apiStart}
+        setApiStart={setApiStart}
+        route={route}
+        useEffectHook={useEffect}
+        trackEventCall={trackEvent}
+        locationPopupVisible={location.locationPopupVisible}
+        displayConfirmation={displayConfirmation}
+        setDisplayConfirmation={setDisplayConfirmation}
+        deleteAisleApi={deleteAisleApi}
+        deleteAisleApiStart={deleteAisleApiStart}
+        setDeleteAisleApiStart={setDeleteAisleApiStart}
+        isClearAisle={isClearAisle}
+        clearAisleApi={clearAisleApi}
+        clearLocationTarget={clearLocationTarget}
+        setClearLocationTarget={setClearLocationTarget}
+        activityModal={activityModal}
+      />
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={user.features.includes(MANAGER_APPROVAL) ? managerSnapPoints : associateSnapPoints}
+        index={0}
+        onDismiss={() => {
+          trackEvent(SCREEN_NAME, {
+            action: 'hide_ section_bottom_sheet_modal'
+          });
+          dispatch(hideLocationPopup());
+        }}
+        style={styles.bottomSheetModal}
+        backdropComponent={renderBackdrop}
       >
-        <SectionScreen
-          aisleId={aisleId}
-          aisleName={aisleName}
-          zoneName={zoneName}
-          navigation={navigation}
-          dispatch={dispatch}
-          getAllSections={getAllSections}
-          isManualScanEnabled={isManualScanEnabled}
-          apiStart={apiStart}
-          setApiStart={setApiStart}
-          route={route}
-          useEffectHook={useEffect}
-          trackEventCall={trackEvent}
-          locationPopupVisible={location.locationPopupVisible}
-          displayConfirmation={displayConfirmation}
-          setDisplayConfirmation={setDisplayConfirmation}
-          deleteAisleApi={deleteAisleApi}
-          deleteAisleApiStart={deleteAisleApiStart}
-          setDeleteAisleApiStart={setDeleteAisleApiStart}
-          isClearAisle={isClearAisle}
-          clearAisleApi={clearAisleApi}
-          clearLocationTarget={clearLocationTarget}
-          setClearLocationTarget={setClearLocationTarget}
-          activityModal={activityModal}
+        <BottomSheetPrintCard
+          isVisible={locationManagementEdit()}
+          text={strings('LOCATION.PRINT_SECTION')}
+          onPress={() => {
+            dispatch(hideLocationPopup());
+            if (bottomSheetModalRef.current) {
+              bottomSheetModalRef.current.dismiss();
+            }
+            dispatch(setPrintingLocationLabels(LocationName.AISLE));
+            trackEvent(SCREEN_NAME, {
+              action: 'printing_all_section_labels'
+            });
+            navigation.navigate('PrintPriceSign');
+            dispatch(setIsToolBarNavigation(false));
+          }}
         />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          snapPoints={user.features.includes(MANAGER_APPROVAL) ? managerSnapPoints : associateSnapPoints}
-          index={0}
-          onDismiss={() => dispatch(hideLocationPopup())}
-          style={styles.bottomSheetModal}
-          backdropComponent={BottomSheetBackdrop}
-        >
-          <BottomSheetPrintCard
-            isVisible={locationManagementEdit()}
-            text={strings('LOCATION.PRINT_SECTION')}
-            onPress={() => {
-              dispatch(hideLocationPopup());
-              if (bottomSheetModalRef.current) {
-                bottomSheetModalRef.current.dismiss();
-              }
-              dispatch(setPrintingLocationLabels(LocationName.AISLE));
-              navigation.navigate('PrintPriceSign');
-            }}
-          />
-          <BottomSheetAddCard
-            isVisible={true}
-            text={strings('LOCATION.ADD_SECTIONS')}
-            onPress={handleAddSections}
-          />
-          <BottomSheetClearCard
-            isVisible={user.features.includes(MANAGER_APPROVAL)}
-            text={strings('LOCATION.CLEAR_AISLE')}
-            onPress={() => {
-              dispatch(hideLocationPopup());
-              setDisplayConfirmation(true);
-              setIsClearAisle(true);
-            }}
-          />
-          <BottomSheetSectionRemoveCard
-            isVisible={user.features.includes(MANAGER_APPROVAL)}
-            text={strings('LOCATION.REMOVE_AISLE')}
-            onPress={() => {
-              dispatch(hideLocationPopup());
-              setDisplayConfirmation(true);
-              setIsClearAisle(false);
-            }}
-          />
-        </BottomSheetModal>
-      </TouchableOpacity>
+        <BottomSheetAddCard
+          isVisible={true}
+          text={strings('LOCATION.ADD_SECTIONS')}
+          onPress={handleAddSections}
+        />
+        <BottomSheetClearCard
+          isVisible={user.features.includes(MANAGER_APPROVAL)}
+          text={strings('LOCATION.CLEAR_AISLE')}
+          onPress={() => {
+            dispatch(hideLocationPopup());
+            setDisplayConfirmation(true);
+            setIsClearAisle(true);
+          }}
+        />
+        <BottomSheetSectionRemoveCard
+          isVisible={user.features.includes(MANAGER_APPROVAL)}
+          text={strings('LOCATION.REMOVE_AISLE')}
+          onPress={() => {
+            dispatch(hideLocationPopup());
+            setDisplayConfirmation(true);
+            setIsClearAisle(false);
+          }}
+        />
+      </BottomSheetModal>
     </BottomSheetModalProvider>
   );
 };

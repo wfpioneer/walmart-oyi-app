@@ -44,7 +44,10 @@ exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist
     ]
   }
   refreshing={false}
+  selectedTab="Completed"
   setDisplayConfirmation={[MockFunction]}
+  setPalletClicked={[MockFunction]}
+  trackEventCall={[MockFunction]}
   updateGroupToggle={[MockFunction]}
   useEffectHook={[Function]}
 />

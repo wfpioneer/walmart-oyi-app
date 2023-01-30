@@ -6,6 +6,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './CollapsibleCard.style';
 import COLOR from '../../themes/Color';
+import { TrackEventSource } from '../../models/Generics.d';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface CollapsibleHeaderCardProps {
     title: string;
@@ -13,6 +15,7 @@ interface CollapsibleHeaderCardProps {
     toggleIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
     icon: string;
     titleStyle: TextStyle | undefined;
+    trackEventSource: TrackEventSource | undefined;
 }
 
 interface CollapsibleCardProps {
@@ -21,11 +24,12 @@ interface CollapsibleCardProps {
     children: ReactNode | ReactElement;
     icon?: string;
     titleStyle?: TextStyle;
+    source?: TrackEventSource;
 }
 
 export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.Element => {
   const {
-    icon, title, isOpened, toggleIsOpened, titleStyle
+    icon, title, isOpened, toggleIsOpened, titleStyle, trackEventSource
   } = props;
   const iconName = isOpened ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
 
@@ -46,7 +50,15 @@ export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.El
       <TouchableOpacity
         testID="collapsible-card"
         style={styles.arrowView}
-        onPress={() => toggleIsOpened(!isOpened)}
+        onPress={() => {
+          toggleIsOpened(!isOpened);
+          if (trackEventSource) {
+            trackEvent(trackEventSource.screen, {
+              action: trackEventSource.action,
+              ...trackEventSource.otherInfo
+            });
+          }
+        }}
       >
         <MaterialIcons name={iconName} size={25} color={COLOR.BLACK} />
       </TouchableOpacity>
@@ -56,7 +68,7 @@ export const CollapsibleHeaderCard = (props: CollapsibleHeaderCardProps): JSX.El
 
 export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
   const {
-    icon, title, children, isOpened, titleStyle
+    icon, title, children, isOpened, titleStyle, source
   } = props;
 
   const [cardOpen, toggleCardOpen] = useState(isOpened || false);
@@ -69,6 +81,7 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
         toggleIsOpened={toggleCardOpen}
         icon={icon || ''}
         titleStyle={titleStyle}
+        trackEventSource={source}
       />
       {cardOpen && (
       <View>
@@ -82,7 +95,8 @@ export const CollapsibleCard = (props: CollapsibleCardProps): JSX.Element => {
 CollapsibleCard.defaultProps = {
   isOpened: false,
   icon: '',
-  titleStyle: {}
+  titleStyle: {},
+  source: undefined
 };
 
 export default CollapsibleCard;

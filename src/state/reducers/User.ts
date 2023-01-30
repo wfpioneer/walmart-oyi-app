@@ -40,7 +40,11 @@ export const initialState: User = {
     showOpenAuditLink: false,
     scanRequired: false,
     showCalculator: false,
-    showItemImages: false
+    multiBin: false,
+    multiPick: false,
+    showItemImage: false,
+    showFeedback: false,
+    reserveAdjustment: false
   }
 };
 
@@ -82,7 +86,11 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showOpenAuditLink: action.payload.showOpenAuditLink || false,
           scanRequired: action.payload.scanRequired || false,
           showCalculator: action.payload.showCalculator || false,
-          showItemImages: action.payload.showItemImages
+          multiBin: action.payload.multiBin || false,
+          multiPick: action.payload.multiPick || false,
+          showItemImage: action.payload.showItemImage || false,
+          showFeedback: action.payload.showFeedback || false,
+          reserveAdjustment: action.payload.reserveAdjustment || false
         }
       };
     default:

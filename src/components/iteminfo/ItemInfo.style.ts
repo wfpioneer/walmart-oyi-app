@@ -8,18 +8,21 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    margin: 24
+    justifyContent: 'flex-start'
   },
   nbrContainer: {
     flexDirection: 'row',
     marginTop: 4,
     marginBottom: 4
   },
+  imageView: {
+    flexGrow: 0,
+    paddingRight: 10,
+    paddingTop: 10
+  },
   image: {
-    height: 100,
     width: 100,
-    resizeMode: 'stretch'
+    height: 100
   },
   nbrDivider: {
     marginHorizontal: 8,
@@ -29,8 +32,6 @@ const styles = StyleSheet.create({
   exceptionText: {
     color: COLOR.PINK,
     fontWeight: 'bold',
-    marginTop: 16,
-    marginBottom: 4,
     fontSize: 12
   },
   itemNameText: {

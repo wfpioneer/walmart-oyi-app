@@ -24,7 +24,7 @@ export const numberInputFilter = (text: string): string => text.replace(/[^0-9-]
 const renderPlusMinusBtn = (name: 'plus' | 'minus', isDisabled: boolean) => (
   <MaterialCommunityIcon
     name={name}
-    color={isDisabled ? COLOR.DISABLED_BLUE : COLOR.MAIN_THEME_COLOR}
+    color={isDisabled ? COLOR.DISABLED_GREY : COLOR.MAIN_THEME_COLOR}
     size={18}
   />
 );
@@ -41,7 +41,8 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
     value,
     onEndEditing
   } = props;
-  const isMinimum = value <= minValue;
+  const inputVal = typeof (value) === 'number' && !Number.isNaN(value) ? value.toString() : '';
+  const isMinimum = value <= minValue || inputVal === '';
   const isMaximum = value >= maxValue;
   return (
     <View
@@ -65,7 +66,7 @@ const NumericSelector = (props: NumericSelectorProps): JSX.Element => {
         style={styles.input}
         keyboardType="numeric"
         onChangeText={text => onTextChange(numberInputFilter(text))}
-        value={typeof (value) === 'number' && !Number.isNaN(value) ? value.toString() : ''}
+        value={inputVal}
         onEndEditing={onEndEditing}
       />
       <IconButton

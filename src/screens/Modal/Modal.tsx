@@ -69,7 +69,7 @@ export const ActivityModalComponent = (): JSX.Element => {
       <MaterialIcons name="info" size={30} color={COLOR.MAIN_THEME_COLOR} style={styles.normalText} />
       <Text style={styles.titleText}>{modalContent ? modalContent.title : ''}</Text>
       <Text style={styles.normalText}>{modalContent ? modalContent.text : ''}</Text>
-      <TouchableOpacity style={styles.okButton} onPress={() => dispatch(hideInfoModal())}>
+      <TouchableOpacity testID="btnOk" style={styles.okButton} onPress={() => dispatch(hideInfoModal())}>
         <Text style={styles.okText}>{strings('GENERICS.OK')}</Text>
       </TouchableOpacity>
     </View>

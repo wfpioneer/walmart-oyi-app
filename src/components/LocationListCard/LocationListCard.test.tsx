@@ -8,12 +8,16 @@ const mockLocationList: LocationList[] = [{
   sectionId: 1502,
   locationName: 'A1-1',
   quantity: 22,
+  oldQuantity: 11,
   palletId: 4928,
   increment: jest.fn,
   decrement: jest.fn,
   onDelete: jest.fn,
   qtyChange: jest.fn,
-  onEndEditing: jest.fn
+  onEndEditing: jest.fn,
+  onCalcPress: jest.fn,
+  scanned: false,
+  locationType: 'floor'
 }];
 
 describe('Tests LocationListCard Component', () => {
@@ -26,6 +30,21 @@ describe('Tests LocationListCard Component', () => {
         error={false}
         onRetry={jest.fn}
         scanRequired={false}
+        showCalculator={false}
+      />
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+  it('should tests redering LocationListCard with location list and calculator', async () => {
+    const { toJSON } = render(
+      <LocationListCard
+        locationList={mockLocationList}
+        locationType="floor"
+        loading={false}
+        error={false}
+        onRetry={jest.fn}
+        scanRequired={false}
+        showCalculator={true}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -39,6 +58,7 @@ describe('Tests LocationListCard Component', () => {
         error={true}
         onRetry={jest.fn}
         scanRequired={false}
+        showCalculator={false}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -52,6 +72,7 @@ describe('Tests LocationListCard Component', () => {
         error={false}
         onRetry={jest.fn}
         scanRequired={false}
+        showCalculator={false}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -67,6 +88,7 @@ describe('Tests LocationListCard Component', () => {
         error={false}
         onRetry={jest.fn}
         scanRequired={false}
+        showCalculator={false}
       />
     );
     const addLocationButton = getByTestId('add-location');
@@ -84,6 +106,7 @@ describe('Tests LocationListCard Component', () => {
         error={true}
         onRetry={mockRetryCallbackFn}
         scanRequired={false}
+        showCalculator={false}
       />
     );
     const retryButton = getByTestId('retry-button');

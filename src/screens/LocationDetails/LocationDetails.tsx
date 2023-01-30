@@ -259,6 +259,12 @@ const LocationDetails = (): JSX.Element => {
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
   const locations = useTypedSelector(state => state.async.getLocation);
+  const sortNames = (a: Location, b: Location) => a.locationName.localeCompare(b.locationName, undefined, {
+    numeric: true
+  });
+  floorLocations.sort(sortNames);
+  reserveLocations.sort(sortNames);
+
   return (
     <LocationDetailsScreen
       delAPI={delAPI}

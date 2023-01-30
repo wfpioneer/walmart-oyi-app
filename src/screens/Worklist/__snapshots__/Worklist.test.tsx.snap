@@ -165,7 +165,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
     [missing "en.WORKLIST.WORKLIST_ITEM_API_ERROR" translation]
   </Text>
   <TouchableOpacity
-    onPress={[MockFunction]}
+    onPress={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -186,11 +186,23 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
 
 exports[`WorklistScreen Tests rendering WorklistItem Renders a single worklist item 1`] = `
 <WorklistItem
+  countryCode="MX"
   dispatch={[MockFunction]}
   exceptionType="C"
   itemDescription="WINE ITEM"
   itemNumber={456789123}
-  upcNbr="444455556666"
+  showItemImage={false}
+  trackEventSource={
+    Object {
+      "action": "worklist_item_click",
+      "otherInfo": Object {
+        "itemDescription": "WINE ITEM",
+        "itemNbr": 456789123,
+        "upc": "444455556666",
+      },
+      "screen": "Item_Worklist",
+    }
+  }
 />
 `;
 
@@ -761,6 +773,151 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 `;
 
 exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "paddingHorizontal": 15,
+        "paddingVertical": 5,
+        "width": "100%",
+      }
+    }
+  >
+    <TouchableOpacity
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="menu"
+        size={25}
+      />
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#c5c5c5"
+        name="list"
+        size={25}
+      />
+    </TouchableOpacity>
+  </View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "itemCount": 6,
+          "worklistType": "CATEGORY",
+        },
+        Object {
+          "catgName": "FOODSERVICE",
+          "catgNbr": 93,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
+          "itemNbr": 1234567890,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "000055559999",
+          "worklistType": "NSFL",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 99,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "ELECTRONIC ITEM",
+          "itemNbr": 987654321,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777555333",
+          "worklistType": "NO",
+        },
+        Object {
+          "catgName": "FRESH BAKERY",
+          "catgNbr": 88,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "BAKERY ITEM",
+          "itemNbr": 123789456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "111122223333",
+          "worklistType": "NO",
+        },
+        Object {
+          "catgName": "WINE",
+          "catgNbr": 19,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "WINE ITEM",
+          "itemNbr": 456789123,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "444455556666",
+          "worklistType": "C",
+        },
+        Object {
+          "catgName": "PHARMACY RX",
+          "catgNbr": 87,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "PHARMACY ITEM",
+          "itemNbr": 789123456,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "777788889999",
+          "worklistType": "C",
+        },
+        Object {
+          "catgName": "ELECTRONICS",
+          "catgNbr": 199,
+          "completed": false,
+          "completedTs": undefined,
+          "completedUserId": undefined,
+          "itemName": "PHARMACY ITEM 1",
+          "itemNbr": 789123457,
+          "subCatgName": undefined,
+          "subCatgNbr": 0,
+          "upcNbr": "667788889999",
+          "worklistType": "NS",
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    onRefresh={[MockFunction]}
+    refreshing={false}
+    renderItem={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data with image 1`] = `
 <View
   style={
     Object {

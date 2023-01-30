@@ -13,8 +13,6 @@ jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMateria
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -22,7 +20,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -154,9 +155,9 @@ describe('AddItemScreen', () => {
       const expectedAddLocationAction = {
         type: 'SAGA/ADD_LOCATION',
         payload: {
-        locationTypeNbr: 8,
-        sectionId: '1',
-        upc: '1234567890'
+          locationTypeNbr: 8,
+          sectionId: '1',
+          upc: '1234567890'
         }
       };
       const expectedManualScanAction = {
@@ -164,7 +165,7 @@ describe('AddItemScreen', () => {
         payload: false
       };
       const mockSetAddItemsApiStart = jest.fn();
-      scanItemListener(mockScannedEvent, mockSection, mockDispatch, mockSetAddItemsApiStart, true);
+      scanItemListener(mockScannedEvent, mockSection, mockDispatch, mockSetAddItemsApiStart, true, jest.fn());
       expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedAddLocationAction);
       expect(mockDispatch).toHaveBeenNthCalledWith(2, expectedManualScanAction);
       expect(mockSetAddItemsApiStart).toHaveBeenCalled();

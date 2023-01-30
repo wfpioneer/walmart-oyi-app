@@ -20,12 +20,12 @@ itemDetail, {
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
-  getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleAddToPicklist,
+  getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales,
   handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError,
   isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
   onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
   renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReplenishmentCard, renderReserveLocQtys, renderScanForNoActionButton, updateOHQtyApiHook
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -101,7 +101,6 @@ const mockHandleProps: (HandleProps & RenderProps) = {
   setOhQtyModalVisible: jest.fn(),
   actionCompleted: false,
   isManualScanEnabled: false,
-  addToPicklistStatus: defaultAsyncState,
   completeItemApi: defaultAsyncState,
   userConfigs: mockConfig
 };
@@ -112,7 +111,12 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   isWaiting: false,
   error: null,
   result: null,
-  addToPicklistStatus: defaultAsyncState,
+  isPiHistWaiting: false,
+  piHistError: null,
+  piHistResult: null,
+  isPiSalesHistWaiting: false,
+  piSalesHistError: null,
+  piSalesHistResult: null,
   completeItemApi: defaultAsyncState,
   createNewPickApi: defaultAsyncState,
   updateOHQtyApi: defaultAsyncState,
@@ -147,7 +151,8 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   useEffectHook: jest.fn(),
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
-  userConfigs: mockConfig
+  userConfigs: mockConfig,
+  countryCode: 'MX'
 };
 
 describe('ReviewItemDetailsScreen', () => {
@@ -225,18 +230,6 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
         floorLocations: itemDetail[123].location.floor,
         reserveLocations: itemDetail[123].location.reserve,
-        userConfigs: { ...mockConfig, additionalItemDetails: true }
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ReviewItemDetailsScreen {...testProps} />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('renders show openAudit link when showOpenAuditLink Flag is true', () => {
-      const testProps: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
         userConfigs: { ...mockConfig, additionalItemDetails: true }
       };
       const renderer = ShallowRenderer.createRenderer();
@@ -441,7 +434,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderScanForNoActionButton({ ...mockHandleProps, actionCompleted: true }, itemDetail[123])
+        renderScanForNoActionButton({ ...mockHandleProps, actionCompleted: true }, itemDetail[123].itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -455,7 +448,7 @@ describe('ReviewItemDetailsScreen', () => {
       };
       renderer.render(
         renderScanForNoActionButton({ ...mockHandleProps, completeItemApi: noActionWaiting },
-          itemDetail[123])
+          itemDetail[123].itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -468,7 +461,7 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         renderScanForNoActionButton(mockHandleProps,
-          itemDetail[123])
+          itemDetail[123].itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -517,7 +510,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: itemDetail[123].location.floor,
           reserveLocations: itemDetail[123].location.reserve
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -528,7 +521,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: itemDetail[123].location.floor,
           reserveLocations: []
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -539,7 +532,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: [],
           reserveLocations: itemDetail[123].location.reserve
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -550,7 +543,7 @@ describe('ReviewItemDetailsScreen', () => {
           ...mockHandleProps,
           floorLocations: [],
           reserveLocations: []
-        }, itemDetail[123], jest.fn())
+        }, itemDetail[123], jest.fn(), jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -558,74 +551,14 @@ describe('ReviewItemDetailsScreen', () => {
   // TODO once create pick dialog and api are fully implemented into item review screen we need to add tests for
   // TODO testing the api when picking is enabled
   describe('Tests rendering for Adding an Item to the Picklist', () => {
-    it('renders \'Item Added to Picklist \'', () => {
+    it('renders \'Added to Picklist Button \' with Picking enabled', () => {
       const renderer = ShallowRenderer.createRenderer();
-      const addPicklistResult = {
-        isWaiting: false,
-        value: null,
-        error: null,
-        result: {
-          data: {
-            code: '200',
-            description: 'Manual Pick created for Item Nbr [123] with Pick Need [1]'
-          },
-          status: 200
-        }
-      };
+      const pickingEnabledProps = mockHandleProps;
+      pickingEnabledProps.userConfigs = { ...mockConfig, picking: true };
       renderer.render(
         renderAddPicklistButton({
-          ...mockHandleProps,
-          addToPicklistStatus: addPicklistResult
+          ...pickingEnabledProps
         }, itemDetail[123], jest.fn())
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('renders \'Add to Picklist Error\' Retry', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const addPicklistError = {
-        isWaiting: false,
-        value: null,
-        error: ' Network Error ',
-        result: null
-      };
-      renderer.render(
-        renderAddPicklistButton({
-          ...mockHandleProps,
-          addToPicklistStatus: addPicklistError
-        }, itemDetail[123], jest.fn())
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('renders a Loader when waiting for Picklist response', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const addPicklistError = {
-        isWaiting: true,
-        value: null,
-        error: null,
-        result: null
-      };
-      renderer.render(
-        renderAddPicklistButton({
-          ...mockHandleProps,
-          addToPicklistStatus: addPicklistError
-        }, itemDetail[123], jest.fn())
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('renders \'Reserve Item Needed\' to Add to Picklist', () => {
-      const noReserveItemDetails = {
-        ...itemDetail[123],
-        location: {
-          floor: undefined,
-          reserve: undefined,
-          count: 0
-        }
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        renderAddPicklistButton({
-          ...mockHandleProps
-        }, noReserveItemDetails, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -800,23 +733,26 @@ describe('ReviewItemDetailsScreen', () => {
       });
     });
     it('test handleUpdateQty', async () => {
-      await handleUpdateQty(mockHandleProps, itemDetail[123]);
+      await handleUpdateQty(
+        mockHandleProps, itemDetail[123], { value: '123', type: 'UPC-A' }, mockHandleProps.userConfigs
+      );
       expect(mockHandleProps.setOhQtyModalVisible).toHaveBeenCalledWith(true);
+
+      await handleUpdateQty(
+        mockHandleProps,
+        itemDetail[123],
+        { value: '123', type: 'UPC-A' },
+        { ...mockHandleProps.userConfigs, auditWorklists: true }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenCalledTimes(2);
+      expect(mockHandleProps.dispatch).toHaveBeenCalledWith({ type: 'GLOBAL/RESET_SCANNED_EVENT' });
+      expect(mockHandleProps.dispatch).toHaveBeenCalledWith(
+        { payload: 1234567890, type: 'AUDIT_WORKLIST/SET_AUDIT_ITEM_NUMBER' }
+      );
     });
     it('test handleLocationUpdate', async () => {
       await handleLocationAction(mockHandleProps, itemDetail[123]);
       expect(navigationProp.navigate).toHaveBeenCalledWith('LocationDetails');
-    });
-    it('test handleAddToPicklist', async () => {
-      await handleAddToPicklist(mockHandleProps, itemDetail[123]);
-      expect(mockHandleProps.dispatch).toHaveBeenCalledWith(
-        {
-          payload: {
-            itemNumber: 1234567890
-          },
-          type: 'SAGA/ADD_TO_PICKLIST'
-        }
-      );
     });
     it('test getFloorItemDetails', () => {
       const expectedResults = [
@@ -1036,16 +972,16 @@ describe('ReviewItemDetailsScreen', () => {
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
       mockItemDetailsScreenProps.actionCompleted = true;
-      onValidateBackPress(mockItemDetailsScreenProps);
+      onValidateBackPress(mockItemDetailsScreenProps, 3);
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionCompleteResults);
       mockDispatch.mockReset();
       mockItemDetailsScreenProps.actionCompleted = false;
       mockItemDetailsScreenProps.exceptionType = 'po';
-      onValidateBackPress(mockItemDetailsScreenProps);
+      onValidateBackPress(mockItemDetailsScreenProps, 3);
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompletePOResults);
       mockDispatch.mockReset();
       mockItemDetailsScreenProps.exceptionType = 'nsfl';
-      onValidateBackPress(mockItemDetailsScreenProps);
+      onValidateBackPress(mockItemDetailsScreenProps, 3);
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompleteNSFLResults);
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });
@@ -1059,7 +995,6 @@ describe('ReviewItemDetailsScreen', () => {
       await onValidateScannedEvent(mockItemDetailsScreenProps);
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(3, { type: 'API/ADD_TO_PICKLIST/RESET' });
     });
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -1276,7 +1211,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, mockApiResponse)
+        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, mockApiResponse, 1)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1284,7 +1219,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.itemOhChangeHistory.code = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], mockApiResponse)
+        renderOHChangeHistory(mockHandleProps, [], mockApiResponse, 2)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.data.itemOhChangeHistory.code = 200;
@@ -1294,7 +1229,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.itemOhChangeHistory.code = 409;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], mockApiResponse)
+        renderOHChangeHistory(mockHandleProps, [], mockApiResponse, 3)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.status = 200;
@@ -1319,7 +1254,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse)
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, 4)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1327,7 +1262,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.picklistHistory.code = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, [], mockApiResponse)
+        renderPickHistory(mockHandleProps, [], mockApiResponse, 5)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.data.picklistHistory.code = 200;
@@ -1337,7 +1272,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockApiResponse.data.picklistHistory.code = 409;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse)
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, 6)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.status = 200;
@@ -1355,16 +1290,84 @@ describe('ReviewItemDetailsScreen', () => {
   });
   describe('Tests Rendering \'renderReplenishments\'', () => {
     it('Renders replenishment card with delivery history', () => {
+      const result = {
+        ...defaultResult,
+        data: { deliveries: [{ date: '2022-10-03T17:55:50Z', qty: 9 }] }
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderReplenishmentCard(itemDetail[123])
+        renderReplenishmentCard(itemDetail[123], result, null, false, jest.fn(), 123, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders replenishment card with no delivery history', () => {
+      const result = {
+        ...defaultResult,
+        data: { deliveries: [] }
+      };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderReplenishmentCard(itemDetail[789])
+        renderReplenishmentCard(itemDetail[123], result, null, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders replenishment card with error', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderReplenishmentCard(itemDetail[123], null, mockError, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders replenishment card with api waiting', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderReplenishmentCard(itemDetail[123], null, null, true, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+  describe('Tests Rendering \'renderSalesGraphV3\'', () => {
+    it('Renders renderSalesGraphV3 card with sales history', () => {
+      const result = {
+        ...defaultResult,
+        data: {
+          dailyAvgSales: 0.0,
+          weeklyAvgSales: 0.0,
+          daily: [
+            { day: '2023-01-09T00:00:00.000Z', value: 0 },
+            { day: '2023-01-08T00:00:00.000Z', value: 0 },
+            { day: '2023-01-07T00:00:00.000Z', value: 0 },
+            { day: '2023-01-06T00:00:00.000Z', value: 0 },
+            { day: '2023-01-05T00:00:00.000Z', value: 0 },
+            { day: '2023-01-04T00:00:00.000Z', value: 0 },
+            { day: '2023-01-03T00:00:00.000Z', value: 0 }
+          ],
+          weekly: [
+            { week: 49, value: 0 },
+            { week: 48, value: 0 },
+            { week: 47, value: 0 },
+            { week: 46, value: 0 },
+            { week: 45, value: 0 }
+          ]
+        }
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderSalesGraphV3('', jest.fn(), false, result, null, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders renderSalesGraphV3 card with error', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderSalesGraphV3('', jest.fn(), false, null, mockError, false, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders renderSalesGraphV3 card with api waiting', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderSalesGraphV3('', jest.fn(), false, null, null, true, jest.fn(), 123, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

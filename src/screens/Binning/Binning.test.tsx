@@ -28,8 +28,6 @@ const defaultScannedEvent = {
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -37,7 +35,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 
 let routeProp: RouteProp<any, string>;
@@ -63,6 +64,7 @@ describe('BinningScreen', () => {
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -87,6 +89,7 @@ describe('BinningScreen', () => {
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -129,6 +132,7 @@ describe('BinningScreen', () => {
           displayWarningModal={false}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -152,6 +156,7 @@ describe('BinningScreen', () => {
           displayWarningModal={true}
           setDisplayWarningModal={jest.fn}
           useCallbackHook={jest.fn}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -165,7 +170,7 @@ describe('BinningScreen', () => {
       const mockDispatch = jest.fn();
       const mockSetPalletClicked = jest.fn();
       renderer.render(
-        binningItemCard({ item }, mockDispatch, mockSetPalletClicked)
+        binningItemCard({ item }, mockDispatch, mockSetPalletClicked, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

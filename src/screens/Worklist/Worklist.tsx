@@ -15,11 +15,15 @@ import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
 import { area } from '../../models/User';
+import { FilterType } from '../../models/FilterListItem';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface ListItemProps {
   item: WorklistItemI;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
+  countryCode: string;
+  showItemImage: boolean;
 }
 
 interface WorklistProps {
@@ -35,9 +39,15 @@ interface WorklistProps {
   areas: area[];
   navigation: NavigationProp<any>;
   enableAreaFilter: boolean;
+  countryCode: string;
+  showItemImage: boolean;
 }
+
+const screen = 'Item_Worklist';
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
-  const { dispatch, item, navigation } = props;
+  const {
+    dispatch, item, navigation, countryCode, showItemImage
+  } = props;
   if (item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = item;
     return (
@@ -52,10 +62,16 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
     <WorklistItem
       exceptionType={worklistType}
       itemDescription={itemName || ''}
-      upcNbr={upcNbr || ''}
       itemNumber={itemNbr || 0}
       dispatch={dispatch}
       navigation={navigation}
+      trackEventSource={{
+        screen,
+        action: 'worklist_item_click',
+        otherInfo: { upc: upcNbr || '', itemNbr: itemNbr || 0, itemDescription: itemName || '' }
+      }}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
     />
   );
 };
@@ -111,14 +127,14 @@ export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boo
 };
 
 export const renderFilterPills = (
-  listFilter: { type: string; value: string },
+  listFilter: { type: FilterType; value: string },
   dispatch: Dispatch<any>,
   filterCategories: string[],
   filterExceptions: string[],
   fullExceptionList: Map<string, string>,
   areas: area[]
 ): JSX.Element => {
-  if (listFilter.type === 'EXCEPTION') {
+  if (listFilter.type === FilterType.EXCEPTION) {
     const exception = fullExceptionList.get(listFilter.value);
     if (exception) {
       const removeFilter = () => {
@@ -131,7 +147,7 @@ export const renderFilterPills = (
 
     return <View />;
   }
-  if (listFilter.type === 'AREA') {
+  if (listFilter.type === FilterType.AREA) {
     const removeAreaFilter = () => {
       const removedArea = areas.find(item => item.area === listFilter.value);
       const updatedFilteredCategories = filterCategories.filter(
@@ -142,7 +158,7 @@ export const renderFilterPills = (
     return <FilterPillButton filterText={listFilter.value} onClosePress={removeAreaFilter} />;
   }
 
-  if (listFilter.type === 'CATEGORY') {
+  if (listFilter.type === FilterType.CATEGORY) {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
       replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
@@ -157,7 +173,8 @@ export const renderFilterPills = (
 export const Worklist = (props: WorklistProps): JSX.Element => {
   const {
     data, dispatch, error, filterCategories, filterExceptions,
-    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas, enableAreaFilter
+    groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas, enableAreaFilter,
+    countryCode, showItemImage
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   if (error) {
@@ -165,7 +182,17 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
       <View style={styles.errorView}>
         <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
         <Text style={styles.errorText}>{strings('WORKLIST.WORKLIST_ITEM_API_ERROR')}</Text>
-        <TouchableOpacity style={styles.errorButton} onPress={onRefresh}>
+        <TouchableOpacity
+          style={styles.errorButton}
+          onPress={
+          () => {
+            trackEvent(screen, {
+              action: 'get_worklist_api_retry'
+            });
+            onRefresh();
+          }
+        }
+        >
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
       </View>
@@ -203,7 +230,7 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
   const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
 
   const typedFilterAreaOrCategoryList = enableAreaFilter
-    ? configAreas.reduce((acc: { type: string, value: string}[], item: area) => {
+    ? configAreas.reduce((acc: { type: FilterType, value: string}[], item: area) => {
       const isSelected = item.categories.every(
         categoryNbr => filteredCategoryNbr.includes(categoryNbr)
       );
@@ -211,17 +238,21 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
         categoryNbr => filteredCategoryNbr.includes(categoryNbr)
       );
       if (isSelected && item.categories.length !== 0) {
-        acc.push({ type: 'AREA', value: item.area });
+        acc.push({ type: FilterType.AREA, value: item.area });
       } else if (isPartiallySelected) {
         const partiallySelectedCategoryList = filterCategories.filter(
           category => item.categories.includes(Number(category.split('-')[0]))
         );
-        partiallySelectedCategoryList.forEach((category: string) => acc.push({ type: 'CATEGORY', value: category }));
+        partiallySelectedCategoryList.forEach((category: string) => acc.push(
+          { type: FilterType.CATEGORY, value: category }
+        ));
       }
       return acc;
-    }, []) : filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
+    }, []) : filterCategories.map((category: string) => ({ type: FilterType.CATEGORY, value: category }));
 
-  const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
+  const typedFilterExceptions = filterExceptions.map((exception: string) => (
+    { type: FilterType.EXCEPTION, value: exception }
+  ));
 
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter(worklistItem => filterCategories
@@ -237,6 +268,14 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
       return false;
     });
   }
+
+  const toggleGroupView = (toggle: boolean) => {
+    trackEvent(screen, {
+      action: 'update_group_toggle_view',
+      isGroupView: toggle.toString()
+    });
+    updateGroupToggle(toggle);
+  };
 
   return (
     <View style={styles.container}>
@@ -254,14 +293,14 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
         </View>
       ) }
       <View style={styles.viewSwitcher}>
-        <TouchableOpacity onPress={() => updateGroupToggle(false)}>
+        <TouchableOpacity onPress={() => toggleGroupView(false)}>
           <MaterialIcons
             name="menu"
             size={25}
             color={!groupToggle ? COLOR.BLACK : COLOR.GREY}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => updateGroupToggle(true)}>
+        <TouchableOpacity onPress={() => toggleGroupView(true)}>
           <MaterialIcons
             name="list"
             size={25}
@@ -277,7 +316,15 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
           }
           return item.itemNbr + index.toString();
         }}
-        renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
+        renderItem={({ item }) => (
+          <RenderWorklistItem
+            item={item}
+            dispatch={dispatch}
+            navigation={navigation}
+            countryCode={countryCode}
+            showItemImage={showItemImage}
+          />
+        )}
         onRefresh={onRefresh}
         refreshing={refreshing}
         style={styles.list}

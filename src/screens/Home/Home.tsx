@@ -16,21 +16,26 @@ import WorklistCard from '../../components/worklistcard/WorklistCard';
 import GoalCircle from '../../components/goalcircle/GoalCircle';
 import { strings } from '../../locales';
 import { getWorklistSummary } from '../../state/actions/saga';
+import { UserConfigResponse } from '../../services/UserConfig.service';
 import COLOR from '../../themes/Color';
 import { setWorklistType, updateFilterExceptions } from '../../state/actions/Worklist';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
-import Button from '../../components/buttons/Button';
+import Button, { ButtonType } from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
+import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
 
+export const resetUserConfigUpdateApiState = () => ({ type: UPDATE_USER_CONFIG.RESET });
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.additional.displayName,
   userConfig: state.User.configs,
   isManualScanEnabled: state.Global.isManualScanEnabled,
-  worklistSummaryApiState: state.async.getWorklistSummary
+  worklistSummaryApiState: state.async.getWorklistSummary,
+  userConfigUpdateApiState: state.async.updateUserConfig,
+  userFeatures: state.User.features
 });
 
 const mapDispatchToProps = {
@@ -38,24 +43,28 @@ const mapDispatchToProps = {
   setManualScan,
   getWorklistSummary,
   updateFilterExceptions,
-  setWorklistType
+  setWorklistType,
+  resetUserConfigUpdateApiState
 };
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
 
-interface HomeScreenProps {
+export interface HomeScreenProps {
   userName: string;
   setScannedEvent: (scan: any) => void;
   setManualScan: (isManualScan: boolean) => void;
   setWorklistType: (worklistType: string) => void;
   isManualScanEnabled: boolean;
   worklistSummaryApiState: AsyncState;
+  userConfigUpdateApiState: AsyncState;
   getWorklistSummary: () => void;
   navigation: NavigationProp<any>;
   updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
-  userConfig: Configurations
+  userConfig: Configurations;
+  resetUserConfigUpdateApiState: () => void;
+  userFeatures: string[];
 }
 
 interface HomeScreenState {
@@ -99,6 +108,65 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     if (this.scannedSubscription) { this.scannedSubscription.remove(); }
     this.navigationRemoveListener();
   }
+
+  renderFeedbackModal = () => {
+    const LoginDivisibleCountToShowFeedback = 10;
+    let showFeedbackModal = false;
+    if (!this.props.userConfigUpdateApiState.isWaiting
+      && this.props.userConfigUpdateApiState.result
+      && this.props.userConfigUpdateApiState.result.status === 200) {
+      const userConfigRes: UserConfigResponse = this.props.userConfigUpdateApiState.result.data;
+      showFeedbackModal = (userConfigRes.loginCount % LoginDivisibleCountToShowFeedback) === 0;
+
+      if (showFeedbackModal) {
+        return (
+          <CustomModalComponent
+            isVisible={true}
+            onClose={() => {
+              this.props.resetUserConfigUpdateApiState();
+            }}
+            modalType="Form"
+          >
+            <View style={styles.modalContainer}>
+              <View>
+                <Text style={styles.descriptionText}>
+                  {strings('FEEDBACK.FEEDBACK_REQUEST')}
+                </Text>
+              </View>
+              <View style={styles.actionRow}>
+                <Button
+                  testID="noButton"
+                  title={strings('FEEDBACK.NO')}
+                  onPress={() => {
+                    this.props.resetUserConfigUpdateApiState();
+                  }}
+                  type={ButtonType.SOLID_WHITE}
+                  titleColor={COLOR.MAIN_THEME_COLOR}
+                  style={styles.button}
+                />
+                <Button
+                  testID="yesButton"
+                  title={strings('FEEDBACK.YES')}
+                  onPress={() => {
+                    this.props.resetUserConfigUpdateApiState();
+                    this.props.navigation.navigate('FeedbackScreen');
+                  }}
+                  type={ButtonType.PRIMARY}
+                  style={styles.button}
+                />
+              </View>
+            </View>
+          </CustomModalComponent>
+        );
+      }
+      this.props.resetUserConfigUpdateApiState();
+    }
+    if (!this.props.userConfigUpdateApiState.isWaiting
+        && this.props.userConfigUpdateApiState.error) {
+      this.props.resetUserConfigUpdateApiState();
+    }
+    return null;
+  };
 
   render(): ReactNode {
     if (this.props.worklistSummaryApiState.isWaiting) {
@@ -160,7 +228,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderGoalCircles = () => data.map((goal, index) => {
       const goalTitle = getWorklistGoalTitle(goal.worklistGoal);
       const palletWorklistsEnabled = this.props.userConfig.palletWorklists;
-      const auditsWorklistsEnabled = this.props.userConfig.auditWorklists;
+      const auditsWorklistsEnabled = this.props.userConfig.auditWorklists
+        && this.props.userFeatures.includes('on hands change');
 
       // Disabled pallet worklist Goal Circle based on feature flag
       if (!palletWorklistsEnabled && goal.worklistGoal === WorklistGoal.PALLETS) {
@@ -255,6 +324,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     return (
       <SafeAreaView style={styles.safeAreaView}>
+        {this.props.userConfig.showFeedback && this.renderFeedbackModal()}
         <CustomModalComponent
           isVisible={this.state.errorModalVisible}
           onClose={() => this.setState({ errorModalVisible: false })}

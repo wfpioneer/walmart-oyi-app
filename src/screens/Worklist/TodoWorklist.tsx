@@ -20,12 +20,15 @@ interface TodoWorklistProps {
   navigation: NavigationProp<any>;
   areas: area[];
   enableAreaFilter: boolean;
+  countryCode: string;
+  showItemImage: boolean;
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
-    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter
+    groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
+    countryCode, showItemImage
   } = props;
 
   let todoData: WorklistItemI[] | undefined;
@@ -48,6 +51,8 @@ export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
       navigation={navigation}
       areas={areas}
       enableAreaFilter={enableAreaFilter}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
     />
   );
 };
@@ -56,7 +61,8 @@ export const TodoWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
+  const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
+  const { countryCode } = useTypedSelector(state => state.User);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   return (
@@ -72,6 +78,8 @@ export const TodoWorklist = (): JSX.Element => {
       navigation={navigation}
       areas={areas}
       enableAreaFilter={enableAreaFilter}
+      countryCode={countryCode}
+      showItemImage={showItemImage}
     />
   );
 };

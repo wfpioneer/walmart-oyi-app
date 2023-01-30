@@ -3,7 +3,9 @@ import React, {
   Dispatch, EffectCallback, useEffect
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { Platform, Text, View } from 'react-native';
+import {
+  NativeModules, Platform, Text, View
+} from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
@@ -15,7 +17,9 @@ import {
   assignFluffyFeatures, loginUser, logoutUser, setConfigs
 } from '../../state/actions/User';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
-import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
+import {
+  getClubConfig, getFluffyFeatures, updateUserConfig
+} from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -36,6 +40,8 @@ import {
   savePrinter
 } from '../../utils/asyncStorageUtils';
 import {
+  clearLocationPrintQueue,
+  resetPrintQueue,
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
@@ -73,6 +79,25 @@ export interface LoginScreenProps {
   dispatch: Dispatch<any>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
+
+const getSystemLanguage = (): string => {
+  let sysLang = '';
+  if (NativeModules.I18nManager) {
+    sysLang = NativeModules.I18nManager.localeIdentifier;
+  } else if (NativeModules.SettingsManager?.settings?.AppleLanguages?.length) {
+    // eslint-disable-next-line prefer-destructuring
+    sysLang = NativeModules.SettingsManager.settings.AppleLanguages[0];
+  }
+
+  if (sysLang) {
+    sysLang = sysLang.substring(0, 2);
+    if (sysLang !== 'en' && sysLang !== 'es' && sysLang !== 'zh') {
+      return 'en';
+    }
+    return sysLang;
+  }
+  return 'en';
+};
 
 const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
 const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => void, onSubmitCN: () => void}) => {
@@ -115,23 +140,7 @@ export const signInUser = (dispatch: Dispatch<any>): void => {
     WMSSO.setEnv('STG');
   }
   WMSSO.getUser().then((user: WMSSOUser) => {
-    if (!user.userId) {
-      const countryCode = user.countryCode.toLowerCase();
-      switch (countryCode) {
-        case 'us':
-          setLanguage('en');
-          break;
-        case 'cn':
-          setLanguage('zh');
-          break;
-        case 'mx':
-          setLanguage('es');
-          break;
-        default:
-          setLanguage('en');
-          break;
-      }
-    }
+    setLanguage(getSystemLanguage());
     setUserId(user.userId);
     dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
     trackEvent('user_sign_in');
@@ -158,7 +167,7 @@ export const userConfigsApiHook = (
   getClubConfigApiState: AsyncState,
   user: User,
   dispatch: Dispatch<any>,
-  getPrinterDetailsFromAsyncStorage: () => Promise<void>,
+  getPrinterDetailsFromAsyncStorage: (dispatchAction: Dispatch<any>) => Promise<void>,
   navigation: NavigationProp<any>
 ) => {
   if (getFluffyApiState.isWaiting || getClubConfigApiState.isWaiting) {
@@ -175,16 +184,18 @@ export const userConfigsApiHook = (
     }
     dispatch(resetFluffyFeaturesApiState());
     dispatch(getClubConfig());
+    dispatch(updateUserConfig());
   } else if (getFluffyApiState.error) {
     // TODO Display toast/popup letting user know roles could not be retrieved
     dispatch(getClubConfig());
     dispatch(resetFluffyFeaturesApiState());
+    dispatch(updateUserConfig());
   }
 
   if (!getClubConfigApiState.isWaiting && getClubConfigApiState.result) {
     dispatch(setConfigs(getClubConfigApiState.result.data));
     if (getClubConfigApiState.result.data.printingUpdate) {
-      getPrinterDetailsFromAsyncStorage();
+      getPrinterDetailsFromAsyncStorage(dispatch);
     }
     dispatch(hideActivityModal());
     navigation.reset({
@@ -203,7 +214,7 @@ export const userConfigsApiHook = (
   }
 };
 
-export const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
+export const getPrinterDetailsFromAsyncStorage = async (dispatch: Dispatch<any>): Promise<void> => {
   const printerList = await getPrinterList();
   const priceLabelPrinter = await getPriceLabelPrinter();
   const palletLabelPrinter = await getPalletLabelPrinter();
@@ -214,7 +225,7 @@ export const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
       defPrinter.desc = strings('GENERICS.DEFAULT');
       defPrinter.name = strings('PRINT.FRONT_DESK');
     }
-    setPrinterList(printerList);
+    dispatch(setPrinterList(printerList));
   } else {
     const defaultPrinter: Printer = {
       type: PrinterType.LASER,
@@ -223,16 +234,16 @@ export const getPrinterDetailsFromAsyncStorage = async (): Promise<void> => {
       id: '000000000000',
       labelsAvailable: ['price']
     };
-    setPrinterList([defaultPrinter]);
+    dispatch(setPrinterList([defaultPrinter]));
     savePrinter(defaultPrinter);
   }
   if (priceLabelPrinter && priceLabelPrinter.id === '000000000000') {
     priceLabelPrinter.desc = strings('GENERICS.DEFAULT');
     priceLabelPrinter.name = strings('PRINT.FRONT_DESK');
   }
-  setPriceLabelPrinter(priceLabelPrinter);
-  setPalletLabelPrinter(palletLabelPrinter);
-  setLocationLabelPrinter(locationLabelPrinter);
+  dispatch(setPriceLabelPrinter(priceLabelPrinter));
+  dispatch(setPalletLabelPrinter(palletLabelPrinter));
+  dispatch(setLocationLabelPrinter(locationLabelPrinter));
 };
 
 export const LoginScreen = (props: LoginScreenProps) => {
@@ -288,7 +299,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
             dispatch(loginUser(updatedUser));
             trackEvent('user_sign_in');
             if (user.countryCode !== 'US') {
-              dispatch((updatedUser));
+              dispatch(getFluffyFeatures(updatedUser));
             }
           }}
           onSignOut={() => signOutUser(dispatch)}

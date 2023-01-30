@@ -4,6 +4,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { WorklistHomeScreen } from './WorklistHome';
 import { mockConfig } from '../../mockData/mockConfig';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -22,6 +23,13 @@ const navigationProp: NavigationProp<any> = {
 };
 const mockDispatch = jest.fn();
 
+jest.mock('../../utils/AppCenterTool', () => ({
+  ...jest.requireActual('../../utils/AppCenterTool'),
+  initialize: jest.fn(),
+  trackEvent: jest.fn(() => Promise.resolve()),
+  setUserId: jest.fn(() => Promise.resolve())
+}));
+
 describe('WorkListHome', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -34,6 +42,7 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={mockConfig}
+        userFeatures={['on hands change']}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -46,6 +55,7 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={{ ...mockConfig, palletWorklists: true, auditWorklists: true }}
+        userFeatures={['on hands change']}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -57,10 +67,12 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={mockConfig}
+        userFeatures={['on hands change']}
       />
     );
     const itemWorklistButton = getByTestId('itemWorkListButton');
     fireEvent.press(itemWorklistButton);
+    expect(trackEvent).toHaveBeenCalledWith('Worklist_Home', { action: 'item_worklist_click' });
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 
@@ -70,10 +82,12 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={{ ...mockConfig, palletWorklists: true }}
+        userFeatures={['on hands change']}
       />
     );
     const palletWorkListButton = getByTestId('palletWorkListButton');
     fireEvent.press(palletWorkListButton);
+    expect(trackEvent).toHaveBeenCalledWith('Worklist_Home', { action: 'missing_pallet_worklist_click' });
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 
@@ -83,10 +97,12 @@ describe('WorkListHome', () => {
         navigation={navigationProp}
         dispatch={mockDispatch}
         configs={{ ...mockConfig, auditWorklists: true }}
+        userFeatures={['on hands change']}
       />
     );
     const palletWorkListButton = getByTestId('auditWorkListButton');
     fireEvent.press(palletWorkListButton);
+    expect(trackEvent).toHaveBeenCalledWith('Worklist_Home', { action: 'audit_worklist_click' });
     expect(navigationProp.navigate).toBeCalledTimes(1);
   });
 });

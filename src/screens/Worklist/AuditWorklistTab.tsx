@@ -1,6 +1,6 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { partition } from 'lodash';
-import React from 'react';
+import { groupBy, partition } from 'lodash';
+import React, { useEffect, useState } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import {
@@ -10,26 +10,25 @@ import { AxiosError } from 'axios';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorklistItemI } from '../../models/WorklistItem';
-import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 import { strings } from '../../locales';
-import { area } from '../../models/User';
+import { Configurations, area } from '../../models/User';
 import { ExceptionList } from './FullExceptionList';
 import { FilterPillButton } from '../../components/filterPillButton/FilterPillButton';
 import { updateFilterCategories, updateFilterExceptions } from '../../state/actions/Worklist';
-import ItemCard from "../../components/ItemCard/ItemCard";
+import { FilterType } from '../../models/FilterListItem';
+import { trackEvent } from '../../utils/AppCenterTool';
+import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
+import CategoryCard from '../../components/CategoryCard/CategoryCard';
+import { UseStateType } from '../../models/Generics.d';
+
+const ROLLOVER_AUDITS = 'RA';
 
 export interface AuditWorklistTabProps {
     toDo: boolean;
     onRefresh: () => void;
-}
-
-interface ListItemProps {
-  item: WorklistItemI;
-  dispatch: Dispatch<any>;
-  navigation: NavigationProp<any>;
 }
 
 export interface AuditWorklistTabScreenProps {
@@ -39,105 +38,55 @@ export interface AuditWorklistTabScreenProps {
     toDo: boolean;
     refreshing: boolean;
     error: AxiosError | null;
-    areas: area[];
-    enableAreaFilter: boolean;
     filterExceptions: string[];
     filterCategories: string[];
     onRefresh: () => void;
+    countryCode: string;
+    config: Configurations;
+    trackEventCall: typeof trackEvent;
+    collapsedState: UseStateType<boolean>;
+    isLoadedState: UseStateType<boolean>;
+    useEffectHook: typeof useEffect;
 }
 
-const onItemClick = (itemNumber: number, navigation: NavigationProp<any>, dispatch: Dispatch<any>) => {
+const onItemClick = (
+  itemNumber: number,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
+  worklistType: string
+) => {
   dispatch(setAuditItemNumber(itemNumber));
-  navigation.navigate('AuditItem');
+  trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
+  navigation.navigate('AuditItem', { worklistType });
 };
 
-export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
-  const { dispatch, item, navigation } = props;
-  if (item.worklistType === 'CATEGORY') {
-    const { catgName, itemCount } = item;
-    return (
-      <WorklistHeader title={catgName} numberOfItems={itemCount || 0} />
-    );
-  }
-  const {
-    itemName, itemNbr, imageURLKey
-  } = item;
-
-  return (
-    <ItemCard
-      imageUrl={imageURLKey ? { uri: imageURLKey } : undefined}
-      itemNumber={itemNbr || 0}
-      description={itemName || ''}
-      onClick={(itemNumber: number) => {
-        onItemClick(itemNumber, navigation, dispatch);
-      }}
-      loading={false}
-      onHandQty={undefined}
-    />
-  );
-};
-
-export const convertDataToDisplayList = (data: WorklistItemI[], groupToggle: boolean): WorklistItemI[] => {
-  if (!groupToggle) {
-    const workListItems = data || [];
-    return [
-      {
-        worklistType: 'CATEGORY',
-        catgName: strings('WORKLIST.ALL'),
-        itemCount: workListItems.length
-      },
-      ...workListItems
-    ];
-  }
-
-  const sortedData = data;
-  // first, sort by category number
-  sortedData.sort((firstEl: WorklistItemI, secondEl: WorklistItemI) => {
-    if (firstEl.catgNbr && secondEl.catgNbr) {
-      return firstEl.catgNbr - secondEl.catgNbr;
-    }
-    return 0;
-  });
-
-  const returnData: WorklistItemI[] = [];
-
-  // next, insert into the array where the category numbers change
-  let previousItem: WorklistItemI;
-  let previousCategoryIndex: number;
-  sortedData.forEach(item => {
-    if (!previousItem || (previousItem.catgNbr !== item.catgNbr)) {
-      previousItem = item;
-      returnData.push({
-        worklistType: 'CATEGORY',
-        catgName: item.catgName || '',
-        catgNbr: item.catgNbr,
-        itemCount: 1
-      });
-      previousCategoryIndex = returnData.length - 1;
-      returnData.push(item);
-    } else {
-      previousItem = item;
-      if (returnData[previousCategoryIndex].itemCount) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        returnData[previousCategoryIndex].itemCount += 1;
-      }
-      returnData.push(item);
-    }
-  });
-
-  return returnData;
-};
+const renderCategoryCard = (
+  category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>, trackEventCall: typeof trackEvent,
+  showItemImage: boolean, countryCode: string
+) => (
+  <CategoryCard
+    category={category}
+    listOfItems={items}
+    collapsed={collapsed}
+    onItemCardClick={(itemNumber: number, worklistType: string) => {
+      onItemClick(itemNumber, navigation, dispatch, trackEventCall, worklistType);
+    }}
+    showItemImage={showItemImage}
+    countryCode={countryCode}
+  />
+);
 
 export const renderFilterPills = (
-  listFilter: { type: string; value: string },
+  listFilter: { type: FilterType; value: string },
   dispatch: Dispatch<any>,
   filterCategories: string[],
   filterExceptions: string[],
   fullExceptionList: Map<string, string>,
   areas: area[]
 ): JSX.Element => {
-  if (listFilter.type === 'EXCEPTION') {
+  if (listFilter.type === FilterType.EXCEPTION) {
     const exception = fullExceptionList.get(listFilter.value);
     if (exception) {
       const removeFilter = () => {
@@ -150,7 +99,7 @@ export const renderFilterPills = (
 
     return <View />;
   }
-  if (listFilter.type === 'AREA') {
+  if (listFilter.type === FilterType.AREA) {
     const removeAreaFilter = () => {
       const removedArea = areas.find(item => item.area === listFilter.value);
       const updatedFilteredCategories = filterCategories.filter(
@@ -161,7 +110,7 @@ export const renderFilterPills = (
     return <FilterPillButton filterText={listFilter.value} onClosePress={removeAreaFilter} />;
   }
 
-  if (listFilter.type === 'CATEGORY') {
+  if (listFilter.type === FilterType.CATEGORY) {
     const removeFilter = () => {
       const replacementFilter = filterCategories;
       replacementFilter.splice(filterCategories.indexOf(listFilter.value), 1);
@@ -175,11 +124,29 @@ export const renderFilterPills = (
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, refreshing, dispatch, navigation, error,
-    areas, enableAreaFilter, filterExceptions, filterCategories, onRefresh
+    items, refreshing, dispatch, navigation, error, useEffectHook,
+    trackEventCall, config, filterExceptions, filterCategories,
+    onRefresh, countryCode, collapsedState, isLoadedState
   } = props;
+  const {
+    areas, enableAreaFilter, showItemImage, showRollOverAudit
+  } = config;
+  const [isLoaded, setIsLoaded] = isLoadedState;
 
+  const [collapsed, setCollapsed] = collapsedState;
   const fullExceptionList = ExceptionList.getInstance();
+
+  const isRollOverComplete = () => !items.some(item => item.worklistType === ROLLOVER_AUDITS && !item.completed);
+  useEffectHook(() => {
+    if (!isLoaded
+      && showRollOverAudit
+      && !isRollOverComplete()) {
+      if (!filterExceptions.includes(ROLLOVER_AUDITS)) {
+        dispatch(updateFilterExceptions([...filterExceptions, ROLLOVER_AUDITS]));
+      }
+      setIsLoaded(true);
+    }
+  }, [filterCategories, items, showRollOverAudit]);
 
   if (error) {
     return (
@@ -213,7 +180,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const filteredCategoryNbr: number[] = filterCategories.map(category => Number(category.split('-')[0]));
 
   const typedFilterAreaOrCategoryList = enableAreaFilter
-    ? configAreas.reduce((acc: { type: string, value: string}[], item: area) => {
+    ? configAreas.reduce((acc: { type: FilterType, value: string}[], item: area) => {
       const isSelected = item.categories.every(
         categoryNbr => filteredCategoryNbr.includes(categoryNbr)
       );
@@ -221,17 +188,21 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         categoryNbr => filteredCategoryNbr.includes(categoryNbr)
       );
       if (isSelected && item.categories.length !== 0) {
-        acc.push({ type: 'AREA', value: item.area });
+        acc.push({ type: FilterType.AREA, value: item.area });
       } else if (isPartiallySelected) {
         const partiallySelectedCategoryList = filterCategories.filter(
           category => item.categories.includes(Number(category.split('-')[0]))
         );
-        partiallySelectedCategoryList.forEach((category: string) => acc.push({ type: 'CATEGORY', value: category }));
+        partiallySelectedCategoryList.forEach((category: string) => acc.push(
+          { type: FilterType.CATEGORY, value: category }
+        ));
       }
       return acc;
-    }, []) : filterCategories.map((category: string) => ({ type: 'CATEGORY', value: category }));
+    }, []) : filterCategories.map((category: string) => ({ type: FilterType.CATEGORY, value: category }));
 
-  const typedFilterExceptions = filterExceptions.map((exception: string) => ({ type: 'EXCEPTION', value: exception }));
+  const typedFilterExceptions = filterExceptions.map((exception: string) => (
+    { type: FilterType.EXCEPTION, value: exception }
+  ));
 
   if (filterCategories.length !== 0) {
     filteredData = filteredData.filter(worklistItem => filterCategories
@@ -248,6 +219,9 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
     });
   }
 
+  const itemsBasedOnCategory = groupBy(filteredData, item => `${item.catgNbr} - ${item.catgName}`);
+  const auditItemKeys = Object.keys(itemsBasedOnCategory);
+
   return (
     <>
       { (filterCategories.length > 0 || (filterExceptions.length > 0)) && (
@@ -263,16 +237,28 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         />
       </View>
       ) }
+      {auditItemKeys.length > 0
+        && (
+        <CollapseAllBar
+          collapsed={collapsed}
+          onclick={() => {
+            trackEventCall('Audit_Worklist',
+              { action: `${collapsed ? 'expand' : 'collapse'}_audit_item_worklists_click` });
+            setCollapsed(!collapsed);
+          }}
+        />
+        )}
       <FlatList
-        data={convertDataToDisplayList(filteredData, true)}
-        renderItem={({ item }) => <RenderWorklistItem item={item} dispatch={dispatch} navigation={navigation} />}
-        keyExtractor={(item: WorklistItemI, index: number) => {
-          if (item.worklistType === 'CATEGORY') {
-            return item.catgName.toString();
-          }
-          return item.itemNbr + index.toString();
+        data={auditItemKeys}
+        renderItem={({ item: key }) => renderCategoryCard(
+          key, itemsBasedOnCategory[key], collapsed, navigation, dispatch, trackEventCall,
+          showItemImage, countryCode
+        )}
+        keyExtractor={item => `category-${item}`}
+        onRefresh={() => {
+          setIsLoaded(false);
+          onRefresh();
         }}
-        onRefresh={onRefresh}
         refreshing={refreshing}
         windowSize={3}
       />
@@ -288,9 +274,11 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
   const items = toDo ? toDoItems : completedItems;
   const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
-  const { areas, enableAreaFilter } = useTypedSelector(state => state.User.configs);
+  const { configs } = useTypedSelector(state => state.User);
+  const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
-
+  const collapsedState = useState(false);
+  const isLoadedState = useState(false);
   return (
     <AuditWorklistTabScreen
       items={items}
@@ -299,11 +287,15 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       toDo={toDo}
       refreshing={isWaiting}
       error={error}
-      areas={areas}
-      enableAreaFilter={enableAreaFilter}
       filterExceptions={filterExceptions}
       filterCategories={filterCategories}
       onRefresh={onRefresh}
+      countryCode={countryCode}
+      trackEventCall={trackEvent}
+      collapsedState={collapsedState}
+      config={configs}
+      useEffectHook={useEffect}
+      isLoadedState={isLoadedState}
     />
   );
 };

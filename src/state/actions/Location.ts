@@ -28,6 +28,7 @@ export const HIDE_ITEM_POPUP = 'LOCATION/HIDE_ITEM_POPUP';
 export const SET_SELECTED_ITEM = 'LOCATION/SET_SELECTED_ITEM';
 export const CLEAR_SELECTED_ITEM = 'LOCATION/CLEAR_SELECTED_ITEM';
 export const SET_PALLET_IDS = 'LOCATION/SET_PALLET_IDS';
+export const SET_IS_TOOL_BAR_NAVIGATION = 'LOCATION/SET_IS_TOOL_BAR_NAVIGATION';
 
 export const selectZone = (id: number, name: string) => ({
   type: SELECT_ZONE,
@@ -135,6 +136,11 @@ export const clearSelectedItem = () => ({
   type: CLEAR_SELECTED_ITEM
 } as const);
 
+export const setIsToolBarNavigation = (isToolBarNavigation: boolean) => ({
+  type: SET_IS_TOOL_BAR_NAVIGATION,
+  payload: isToolBarNavigation
+} as const);
+
 export type Actions =
   ReturnType<typeof selectZone>
   | ReturnType<typeof setZones>
@@ -156,3 +162,4 @@ export type Actions =
   | ReturnType<typeof setSelectedItem>
   | ReturnType<typeof clearSelectedItem>
   | ReturnType<typeof setPalletIds>
+  | ReturnType<typeof setIsToolBarNavigation>

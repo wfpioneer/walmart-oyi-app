@@ -24,6 +24,7 @@ export const SET_PALLET_LABEL_PRINTER = 'PRINT/SET_PALLET_LABEL_PRINTER';
 export const SET_PRINTING_TYPE = 'PRINT/SET_PRINTING_TYPE';
 export const SET_PRINTER_LIST = 'PRINT/SET_PRINTER_LIST';
 export const UPDATE_PRINTER_BY_ID = 'PRINT/UPDATE_PRINTER_BY_ID';
+export const RESET_PRINT_QUEUE = 'PRINT/RESET_PRINT_QUEUE';
 
 export const setSelectedPrinter = (printer: Printer) => ({
   type: SET_SELECTED_PRINTER,
@@ -131,6 +132,10 @@ export const updatePrinterByID = (payload: {id: string, printer : Printer}) => (
   payload
 } as const);
 
+export const resetPrintQueue = () => ({
+  type: RESET_PRINT_QUEUE
+} as const);
+
 export type Actions =
 | ReturnType<typeof setSelectedPrinter>
 | ReturnType<typeof setSignType>
@@ -154,3 +159,4 @@ export type Actions =
 | ReturnType<typeof setPrintingType>
 | ReturnType<typeof setPrinterList>
 | ReturnType<typeof updatePrinterByID>
+| ReturnType<typeof resetPrintQueue>

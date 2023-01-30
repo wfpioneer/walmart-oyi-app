@@ -18,7 +18,6 @@ import {
 import { partition } from 'lodash';
 import moment from 'moment';
 import { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-import { trackEvent } from 'appcenter-analytics';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
@@ -65,9 +64,11 @@ import { setPrintingPalletLabel } from '../../state/actions/Print';
 import ApiConfirmationModal from '../Modal/ApiConfirmationModal';
 import ItemDetails from '../../models/ItemDetails';
 import { CustomModalComponent } from '../Modal/Modal';
+import { Configurations } from '../../models/User';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const TRY_AGAIN = 'GENERICS.TRY_AGAIN';
-
+const SCREEN_NAME = 'Manage_Pallet_Screen';
 interface ManagePalletProps {
   dispatch: Dispatch<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -95,6 +96,9 @@ interface ManagePalletProps {
   setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>;
   createPallet: boolean;
   postCreatePalletApi: AsyncState;
+  userConfigs: Configurations;
+  countryCode: string;
+  trackEventCall: typeof trackEvent;
 }
 interface ApiResult {
   data: any;
@@ -196,14 +200,26 @@ export const isAddedItemPerishable = (items: PalletItem[], perishableCategories:
   return isPerishableItemExist(addedItems, perishableCategories);
 };
 
-const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
+const itemCard = (
+  { item }: { item: PalletItem },
+  dispatch: Dispatch<any>,
+  userConfigs: Configurations,
+  countryCode: string,
+  trackEventCall: typeof trackEvent
+) => {
   if (!item.deleted) {
     return (
       <PalletItemCard
         decreaseQuantity={() => handleDecreaseQuantity(item, dispatch)}
         increaseQuantity={() => handleIncreaseQuantity(item, dispatch)}
         onTextChange={text => handleTextChange(item, dispatch, text)}
-        deleteItem={() => deleteItemDetail(item, dispatch)}
+        deleteItem={() => {
+          deleteItemDetail(item, dispatch);
+          trackEventCall(SCREEN_NAME, {
+            action: 'deleting_item_from_the_pallet',
+            item: JSON.stringify(item)
+          });
+        }}
         isAdded={item.added}
         isValid={true}
         itemName={item.itemDesc}
@@ -215,6 +231,8 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
         price={item.price}
         upc={item.upcNbr}
         onEndEditing={() => onEndEditing(item, dispatch)}
+        showItemImage={userConfigs.showItemImage}
+        countryCode={countryCode}
       />
     );
   }
@@ -222,7 +240,11 @@ const itemCard = ({ item }: { item: PalletItem }, dispatch: Dispatch<any>) => {
 };
 
 export const handleUpdateItems = (
-  items: PalletItem[], palletInfo: PalletInfo, dispatch: Dispatch<any>, updatedExpirationDate?: string
+  items: PalletItem[],
+  palletInfo: PalletInfo,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
+  updatedExpirationDate?: string
 ): void => {
   const updatePalletItems = items.filter(item => isQuantityChanged(item) && !item.added && !item.deleted)
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
@@ -230,6 +252,12 @@ export const handleUpdateItems = (
   const isAddNoUpdate = items.some(item => item.added) && !updatePalletItems.length;
 
   if (updatePalletItems.length > 0 || (isExpiryDateChanged(palletInfo) && !isAddNoUpdate)) {
+    trackEventCall(SCREEN_NAME, {
+      action: 'updated_pallets_ with_changes',
+      palletId: palletInfo.id,
+      palletItem: JSON.stringify(updatePalletItems),
+      palletExpiration: updatedExpirationDate
+    });
     dispatch(updatePalletItemQty({
       palletId: palletInfo.id,
       palletItem: updatePalletItems,
@@ -242,6 +270,7 @@ export const handleAddItems = (
   id: string,
   items: PalletItem[],
   dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
   expirationDate?: string
 ): void => {
   // Filter Items by added flag
@@ -249,6 +278,12 @@ export const handleAddItems = (
     .map(item => ({ ...item, quantity: item.newQuantity ?? item.quantity }));
 
   if (addPalletItems.length > 0) {
+    trackEventCall(SCREEN_NAME, {
+      action: 'added_items_to_pallet',
+      palletId: id,
+      items: JSON.stringify(addPalletItems),
+      expirationDate
+    });
     dispatch(addPalletUPCs({ palletId: id, items: addPalletItems, expirationDate }));
   }
 };
@@ -628,7 +663,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
     isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
     useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
-    createPallet, postCreatePalletApi
+    createPallet, postCreatePalletApi, countryCode, userConfigs, trackEventCall
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
   let scannedSubscription: EmitterSubscription;
@@ -669,7 +704,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          trackEvent('Items_Details_scanned', {
+          trackEventCall(SCREEN_NAME, {
+            action: 'Items_Details_scanned',
             barcode: scan.value,
             type: scan.type
           });
@@ -731,6 +767,10 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       numberOfPallets: 1,
       items: items.map(item => ({ upcNbr: item.upcNbr, qty: item.newQuantity }))
     };
+    trackEventCall(SCREEN_NAME, {
+      action: 'created_pallet_with_added_items',
+      createPallet: JSON.stringify(createPalletPayload)
+    });
     dispatch(postCreatePallet(createPalletPayload));
   };
 
@@ -767,10 +807,11 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         palletId,
         items,
         dispatch,
+        trackEventCall,
         updatedExpirationDate
       );
       // Calls update pallet item qty api
-      handleUpdateItems(items, palletInfo, dispatch, updatedExpirationDate);
+      handleUpdateItems(items, palletInfo, dispatch, trackEventCall, updatedExpirationDate);
     }
   };
 
@@ -915,7 +956,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
           <FlatList
             data={items}
             removeClippedSubviews={false}
-            renderItem={item => itemCard(item, dispatch)}
+            renderItem={item => itemCard(item, dispatch, userConfigs, countryCode, trackEventCall)}
             keyExtractor={(item: PalletItem) => item.upcNbr}
           />
         </View>
@@ -954,6 +995,7 @@ const ManagePallet = (): JSX.Element => {
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [displayWarningModal, setDisplayWarningModal] = useState(false);
   const [confirmBackNavigate, setConfirmBackNavigate] = useState(false);
+  const { configs, countryCode } = useTypedSelector(state => state.User);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['55%'], []);
@@ -1019,6 +1061,9 @@ const ManagePallet = (): JSX.Element => {
           setConfirmBackNavigate={setConfirmBackNavigate}
           createPallet={createPallet}
           postCreatePalletApi={postCreatePalletApi}
+          userConfigs={configs}
+          countryCode={countryCode}
+          trackEventCall={trackEvent}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

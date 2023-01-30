@@ -291,7 +291,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
@@ -383,7 +383,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
@@ -419,6 +419,8 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
     }
   />
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -573,7 +575,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,
@@ -665,7 +667,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "upcNbr": 40000000457,
         },
         Object {
-          "approvalRequestSource": "itemdetails",
+          "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryNbr": 2,

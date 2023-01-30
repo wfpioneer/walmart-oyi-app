@@ -2,15 +2,18 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     flex: 1,
-    justifyContent: 'space-evenly'
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
   leftButton: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 15
+    paddingRight: 10
+  },
+  scanButton: {
+    paddingRight: 20
   }
 });
 

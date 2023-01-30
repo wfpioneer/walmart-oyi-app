@@ -10,6 +10,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   clearSelectedItem,
   hideItemPopup,
+  setIsToolBarNavigation,
   setSelectedItem,
   showItemPopup
 } from '../../state/actions/Location';
@@ -17,22 +18,31 @@ import styles from './FloorItemRow.style';
 import { currencies, strings } from '../../locales';
 import { SectionDetailsItem } from '../../models/LocationItems';
 import { setScannedEvent } from '../../state/actions/Global';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
 
 export type FloorItemRowProps = {
   item: SectionDetailsItem;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
+  trackEventCall: (eventName: string, params?: any) => void;
 };
 
 const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
-  const { item, dispatch, navigation } = props;
+  const {
+    item, dispatch, navigation, trackEventCall
+  } = props;
   const user = useTypedSelector(state => state.User);
   const location = useTypedSelector(state => state.Location);
   const itemOnPress = () => {
+    trackEventCall('Section_Details', {
+      action: 'navigating_to_review_item_details_screen',
+      itemNbr: item.itemNbr
+    });
     dispatch(
       setScannedEvent({ type: 'Section', value: item.itemNbr.toString() })
     );
     navigation.navigate('ReviewItemDetails', { screen: 'ReviewItemDetailsHome' });
+    dispatch(setIsToolBarNavigation(false));
   };
 
   const locationManagementEdit = () => user.features.includes('location management edit')
@@ -44,6 +54,16 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
       onPress={() => itemOnPress()}
     >
       <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          {user.configs.showItemImage
+          && (
+          <ImageWrapper
+            itemNumber={item.itemNbr}
+            countryCode={user.countryCode}
+            imageStyle={styles.itemImage}
+          />
+          )}
+        </View>
         <View style={styles.content}>
           <View style={styles.pallet}>
             <Text style={styles.itemNbr}>

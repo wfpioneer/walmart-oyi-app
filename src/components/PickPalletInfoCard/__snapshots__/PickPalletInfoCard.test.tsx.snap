@@ -16,6 +16,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -23,13 +24,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.ACCEPTED_BIN" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -59,6 +71,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -66,13 +79,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.ACCEPTED_PICK" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -102,6 +126,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -109,13 +134,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.COMPLETE" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -145,6 +181,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -152,13 +189,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.DELETED" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -188,6 +236,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -195,13 +244,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.NO_PALLETS_FOUND" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -231,6 +291,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -238,13 +299,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.READY_TO_BIN" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -274,6 +346,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -281,13 +354,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.READY_TO_PICK" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -317,6 +401,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -324,13 +409,24 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.READY_TO_WORK" translation]
       </Text>
-      <Text>
+      <Text
+        style={Object {}}
+      >
         ABAR1-1
       </Text>
     </View>
@@ -360,6 +456,7 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -367,13 +464,152 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
         }
       }
     >
-      <Text>
-        [missing "en.PALLET.PALLET_ID" translation] 2
-      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
         [missing "en.PICKING.READY_TO_PICK" translation]
       </Text>
+      <Text
+        style={Object {}}
+      >
+        ABAR1-1
+      </Text>
+    </View>
+    <FlatList
+      data={Array []}
+      keyExtractor={[Function]}
+      renderItem={[Function]}
+      scrollEnabled={false}
+    />
+  </Memo(Pressable)>
+</View>
+`;
+
+exports[`Pick pallet info card render tests renders the card with items and show checkbox in pallet title 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "column",
+      "width": "100%",
+    }
+  }
+>
+  <Memo(Pressable)
+    onPress={[MockFunction]}
+    testID="palletPress"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#dbecff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <withTheme(Checkbox)
+          color="#0071e9"
+          onPress={[Function]}
+          status="unchecked"
+          uncheckedColor="#0071e9"
+        />
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
       <Text>
+        [missing "en.PICKING.READY_TO_PICK" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "paddingRight": 10,
+          }
+        }
+      >
+        ABAR1-1
+      </Text>
+    </View>
+    <FlatList
+      data={Array []}
+      keyExtractor={[Function]}
+      renderItem={[Function]}
+      scrollEnabled={false}
+    />
+  </Memo(Pressable)>
+</View>
+`;
+
+exports[`Pick pallet info card render tests renders the card with items and show pallet selected 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "column",
+      "width": "100%",
+    }
+  }
+>
+  <Memo(Pressable)
+    onPress={[MockFunction]}
+    testID="palletPress"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#dbecff",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <withTheme(Checkbox)
+          color="#0071e9"
+          onPress={[Function]}
+          status="checked"
+          uncheckedColor="#0071e9"
+        />
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation] 2
+        </Text>
+      </View>
+      <Text>
+        [missing "en.PICKING.READY_TO_PICK" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "paddingRight": 10,
+          }
+        }
+      >
         ABAR1-1
       </Text>
     </View>

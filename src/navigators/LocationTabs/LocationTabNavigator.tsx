@@ -1,5 +1,5 @@
 import React, {
-  EffectCallback, useEffect, useMemo, useRef, useState
+  EffectCallback, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   ActivityIndicator, Text, TouchableOpacity, View
@@ -30,7 +30,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import LocationManualScan from '../../components/LocationManualScan/LocationManualScan';
-import { hideItemPopup, hideLocationPopup } from '../../state/actions/Location';
+import { hideItemPopup, hideLocationPopup, setIsToolBarNavigation } from '../../state/actions/Location';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
 import BottomSheetRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import { setPrintingLocationLabels } from '../../state/actions/Print';
@@ -49,6 +49,7 @@ const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
 const LOCATION_PALLETS = 'LOCATION.PALLETS';
 const LOCATION_ITEMS = 'LOCATION.ITEMS';
+const SECTION_DETAILS = 'Section_Details';
 
 export interface LocationProps {
     floorItems: SectionDetailsItem[];
@@ -89,8 +90,14 @@ export const handleClearSection = (
   dispatch: Dispatch<any>,
   locationId: number,
   target: ClearLocationTarget,
-  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>
+  setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>,
+  trackEventCall: (eventName: string, params?: any) => void
 ): void => {
+  trackEventCall(SECTION_DETAILS, {
+    action: 'clearing_section',
+    target
+  });
+
   setDisplayClearConfirmation(false);
   dispatch(clearLocation({ locationId, target }));
 };
@@ -213,7 +220,7 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
   const {
     headerText, isEditEnabled, isReserve, isDisabled
   } = props;
-  const navigation = useNavigation();
+  const navigation: NavigationProp<any> = useNavigation();
   const addNewLocation = () => {
     navigation.navigate('AddItems');
   };
@@ -364,6 +371,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       validateSession(navigation, route.name).then(() => {
         if (!scannedEvent.value) {
           dispatch(getSectionDetails({ sectionId: section.id.toString() }));
+          dispatch(setIsToolBarNavigation(true));
         }
       });
     });
@@ -429,6 +437,11 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   }
 
   const handleRemoveSection = () => {
+    trackEventCall(SECTION_DETAILS, {
+      action: 'removing_section_from_aisle',
+      sectionId: section.id
+    });
+
     setDisplayRemoveConfirmation(false);
     dispatch(removeSection(section.id));
   };
@@ -452,7 +465,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
           : strings('LOCATION.CLEAR_SECTION_RESERVE_MESSAGE')}
         subtext2={strings('LOCATION.CLEAR_SECTION_WONT_DELETE')}
         handleConfirm={() => selectedTab
-          && handleClearSection(dispatch, section.id, selectedTab, setDisplayClearConfirmation)}
+          && handleClearSection(dispatch, section.id, selectedTab, setDisplayClearConfirmation, trackEventCall)}
         errorText={strings('LOCATION.CLEAR_SECTION_FAIL')}
       />
       {isManualScanEnabled && <LocationManualScan keyboardType="default" />}
@@ -460,8 +473,12 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         location={getLocationName(getSectionDetailsApi.isWaiting, sectionExists, locationName)}
         details={getSectionDetailsLabel(getSectionDetailsApi.isWaiting, floorItems, reserveItems)}
         buttonPress={() => {
+          trackEventCall(SECTION_DETAILS, {
+            action: 'print_section_label_navigation'
+          });
           dispatch(setPrintingLocationLabels(LocationName.SECTION));
           navigation.navigate('PrintPriceSign');
+          dispatch(setIsToolBarNavigation(false));
         }}
         buttonText={locationManagementEdit() ? strings('LOCATION.PRINT_LABEL') : undefined}
         isDisabled={!sectionExists}
@@ -487,6 +504,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
                 e.preventDefault();
                 dispatch(hideLocationPopup());
               }
+              trackEventCall(SECTION_DETAILS, {
+                action: 'moved_to_floor_tab'
+              });
             },
             focus: () => setSelectedTab(ClearLocationTarget.FLOOR)
           }}
@@ -510,6 +530,9 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
               if (itemPopupVisible) {
                 dispatch(hideItemPopup());
               }
+              trackEventCall(SECTION_DETAILS, {
+                action: 'moved_to_pallet_tab'
+              });
             },
             focus: () => setSelectedTab(ClearLocationTarget.RESERVE)
           }}
@@ -556,6 +579,19 @@ const LocationTabs = () : JSX.Element => {
     }
   }, [locationPopupVisible]);
 
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
       <LocationTabsNavigator
@@ -589,9 +625,14 @@ const LocationTabs = () : JSX.Element => {
         ref={bottomSheetLocationDetailsModalRef}
         snapPoints={user.features.includes('manager approval') ? managerSnapPoints : associateSnapPoints}
         index={0}
-        onDismiss={() => dispatch(hideLocationPopup())}
+        onDismiss={() => {
+          trackEvent(SECTION_DETAILS, {
+            action: 'hide_section_detail_bottom_sheet_modal'
+          });
+          dispatch(hideLocationPopup());
+        }}
         style={styles.bottomSheetModal}
-        backdropComponent={BottomSheetBackdrop}
+        backdropComponent={renderBackdrop}
       >
         <BottomSheetView>
           <BottomSheetClearCard

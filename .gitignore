@@ -74,3 +74,6 @@ buck-out/
 # App Center Secrets files
 android/app/src/main/assets/appcenter-config.json
 android/app/src/main/assets/appcenter-config-prod.json
+
+# Secrets file
+src/constant/Secrets.json

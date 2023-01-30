@@ -10,7 +10,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.PALE_BLUE,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10
+    alignItems: 'center'
+  },
+  palletInfoSelection: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  textRightPadding: {
+    paddingRight: 10
   },
   itemList: {
     margin: 10

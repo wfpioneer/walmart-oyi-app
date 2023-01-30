@@ -7,7 +7,7 @@ import { scaleBand } from 'd3-scale';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import Button from '../buttons/Button';
-import ItemDetails from '../../models/ItemDetails';
+import { ItemSalesHistory } from '../../models/ItemDetails';
 import styles from './SalesMetrics.style';
 import { trackEvent } from '../../utils/AppCenterTool';
 import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
@@ -86,11 +86,11 @@ const renderChart = (chartData: {label: string; value: number}[], isDailyPeriod:
   );
 };
 
-const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) => {
+const SalesMetrics = (props: {itemSalesHistory: ItemSalesHistory; isGraphView: boolean; itemNbr: number}) => {
   const [isDailyPeriod, setIsDailyPeriod] = useState(true);
   const {
     daily, weekly, dailyAvgSales, weeklyAvgSales
-  } = props.itemDetails.sales;
+  } = props.itemSalesHistory;
 
   const salesTimePeriodText = isDailyPeriod ? strings('GENERICS.DAILY') : strings('GENERICS.WEEKLY');
   const dailyChartData = daily.map(data => ({
@@ -103,7 +103,10 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
   }));
 
   const handleDailyTimePeriodChange = (isDaily: boolean) => () => {
-    trackEvent('item_details_sales_metrics_change_period', { itemDetails: JSON.stringify(props.itemDetails), isDaily });
+    trackEvent(
+      'item_details_sales_metrics_change_period',
+      { itemNbr: props.itemNbr, itemSalesHistory: JSON.stringify(props.itemSalesHistory), isDaily }
+    );
     setIsDailyPeriod(isDaily);
   };
 
@@ -111,6 +114,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
     <View style={styles.mainContainer}>
       <View style={styles.topButtonContainer}>
         <Button
+          testID="dailyViewBtn"
           title={strings('GENERICS.DAILY')}
           titleFontSize={12}
           titleFontWeight="bold"
@@ -123,6 +127,7 @@ const SalesMetrics = (props: {itemDetails: ItemDetails; isGraphView: boolean}) =
           onPress={handleDailyTimePeriodChange(true)}
         />
         <Button
+          testID="weeklyViewBtn"
           title={strings('GENERICS.WEEKLY')}
           titleFontSize={12}
           titleFontWeight="bold"

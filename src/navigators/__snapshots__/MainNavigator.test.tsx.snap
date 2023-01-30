@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainNavigator Renders the main navigator component 1`] = `
+<ForwardRef(NavigationContainerInner)>
+  <StackNavigator
+    screenOptions={
+      Object {
+        "headerShown": false,
+      }
+    }
+  >
+    <Screen
+      component={[Function]}
+      name="Login"
+    />
+    <Screen
+      component={[Function]}
+      name="Tabs"
+    />
+    <Screen
+      component={[Function]}
+      name="ReviewItemDetails"
+    />
+    <Screen
+      component={[Function]}
+      name="PrintPriceSign"
+    />
+    <Screen
+      component={[Function]}
+      name="PalletManagement"
+    />
+    <Screen
+      component={[Function]}
+      name="SettingsTool"
+    />
+    <Screen
+      component={[Function]}
+      name="Binning"
+    />
+    <Screen
+      component={[Function]}
+      name="Picking"
+    />
+    <Screen
+      component={[Function]}
+      name="WorklistNavigator"
+    />
+  </StackNavigator>
+</ForwardRef(NavigationContainerInner)>
+`;

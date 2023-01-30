@@ -43,6 +43,7 @@ interface PalletWorkListProps {
   updateGroupToggle: React.Dispatch<React.SetStateAction<boolean>>;
   selectedTab: Tabs;
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: (eventName: string, params?: any) => void;
 }
 interface ListItemProps {
   item: MissingPalletWorklistItemI;
@@ -55,6 +56,7 @@ interface ListItemProps {
   activeItemIndex: number;
   dispatch: Dispatch<any>;
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: (eventName: string, params?: any) => void;
 }
 
 export const clearPalletAPIHook = (
@@ -109,10 +111,12 @@ export const onPalletCardClick = (
   setActiveItemIndex: React.Dispatch<React.SetStateAction<number>>,
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>,
-  isCompletedTab: boolean
+  isCompletedTab: boolean,
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
   if (activeItemIndex === index || isCompletedTab) {
     setPalletClicked(true);
+    trackEventCall('pallet_worklists_screen', { action: 'pallet_worklist_item_click', id: item.palletId.toString() });
     dispatch(getPalletDetails({ palletIds: [item.palletId.toString()], isAllItems: true }));
   } else {
     setActiveItemIndex(index);
@@ -122,7 +126,7 @@ export const onPalletCardClick = (
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const {
     item, handleAddLocationClick, handleDeleteClick, expanded, setPalletClicked,
-    setActiveItemIndex, itemIndex, selectedTab, activeItemIndex, dispatch
+    setActiveItemIndex, itemIndex, selectedTab, activeItemIndex, dispatch, trackEventCall
   } = props;
   if (item.palletId === 0) {
     const { lastKnownPalletLocationName, itemCount } = item;
@@ -141,7 +145,14 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       addCallback={() => handleAddLocationClick(item.palletId.toString())}
       deleteCallback={() => handleDeleteClick(item.palletId.toString())}
       navigateCallback={() => onPalletCardClick(
-        item, itemIndex, activeItemIndex, setActiveItemIndex, setPalletClicked, dispatch, selectedTab === Tabs.COMPLETED
+        item,
+        itemIndex,
+        activeItemIndex,
+        setActiveItemIndex,
+        setPalletClicked,
+        dispatch,
+        selectedTab === Tabs.COMPLETED,
+        trackEventCall
       )}
     />
   );
@@ -268,7 +279,8 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
     groupToggle,
     updateGroupToggle,
     selectedTab,
-    setPalletClicked
+    setPalletClicked,
+    trackEventCall
   } = props;
 
   const [activeItemIndex, setActiveItemIndex] = useState(1);
@@ -295,16 +307,19 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
   }, [groupToggle, refreshing]);
 
   const onDeletePress = () => {
+    trackEventCall('pallet_worklist_screen', { action: 'delete_pallet_confirmation_click', palletId: deletePalletId });
     dispatch(clearPallet({ palletId: deletePalletId }));
   };
 
   const handleDeleteClick = (palletId: string) => {
     setDisplayConfirmation(true);
+    trackEventCall('pallet_worklist_screen', { action: 'delete_pallet_click', palletId });
     setDeletePalletId(palletId);
   };
 
   const handleAddLocationClick = (palletId: string) => {
     dispatch(setSelectedWorklistPalletId(palletId));
+    trackEventCall('pallet_worklist_screen', { action: 'add_location_click', palletId });
     navigation.navigate('ScanPallet');
   };
 
@@ -354,7 +369,11 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
             style={styles.delButton}
             title={strings('GENERICS.CANCEL')}
             backgroundColor={COLOR.MAIN_THEME_COLOR}
-            onPress={() => setDisplayConfirmation(false)}
+            onPress={() => {
+              trackEventCall('pallet_worklist_screen',
+                { action: 'cancel_delete_pallet_confirmation_click', palletId: deletePalletId });
+              setDisplayConfirmation(false);
+            }}
           />
           <Button
             style={styles.delButton}
@@ -366,7 +385,10 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
       </CustomModalComponent>
       <SortBar
         isGrouped={groupToggle}
-        updateGroupToggle={updateGroupToggle}
+        updateGroupToggle={val => {
+          trackEventCall('pallet_worklists_screen', { action: 'update_group_toggle_view', groupToggle: val });
+          updateGroupToggle(val);
+        }}
       />
       <FlatList
         data={convertDataToDisplayList(palletWorklist, groupToggle)}
@@ -388,6 +410,7 @@ export const PalletWorklist = (props: PalletWorkListProps) => {
             itemIndex={index}
             selectedTab={selectedTab}
             setPalletClicked={setPalletClicked}
+            trackEventCall={trackEventCall}
           />
         )}
         onRefresh={onRefresh}

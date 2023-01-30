@@ -1,37 +1,153 @@
 import React from 'react';
 import {
-  ActivityIndicator, Image, Platform, Text, TouchableOpacity, View
+  ActivityIndicator, Platform, Text, TouchableOpacity, View
 } from 'react-native';
 import styles from './ItemCard.style';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
+import ImageWrapper from '../ImageWrapper/ImageWrapper';
+
+interface OHItemInfoI {
+  claimsOH: number,
+  consolidatorOH: number,
+  flyCloudInTransitOH: number,
+  flyCloudOH: number,
+  salesFloorOH: number
+}
 
 interface ItemCardProps {
-  imageUrl: { uri: string } | undefined,
   itemNumber: number,
   onHandQty: number | undefined,
   description: string,
-  onClick: (itemNumber: number) => void;
-  loading: boolean
+  loading: boolean;
+  countryCode: string;
+  showItemImage: boolean;
+  onClick?: (itemNumber: number) => void;
+  disabled?: boolean;
+  showOHItems?: boolean;
+  OHItemInfo?: OHItemInfoI;
 }
 
+interface OtherOnHandsItemsProps {
+  countryCode: string;
+  OHItemInfo?: OHItemInfoI
+}
+
+const defaultOHItemValues = {
+  claimsOH: 0,
+  consolidatorOH: 0,
+  flyCloudInTransitOH: 0,
+  flyCloudOH: 0,
+  salesFloorOH: 0
+};
+
+const getContainerStyle = (isLoading: boolean, showItemImage: boolean) => {
+  if (isLoading) {
+    return showItemImage ? styles.loaderContainer : { ...styles.loaderContainer, height: 60 };
+  }
+  return showItemImage ? styles.container : { ...styles.container, paddingLeft: 10 };
+};
+
+const OtherOnHandsItems = (props: OtherOnHandsItemsProps) => {
+  const { countryCode, OHItemInfo } = props;
+  const ClaimsText = () => (
+    <Text style={styles.content}>
+      {`${strings(
+        'ITEM.CLAIMS_QTY'
+      )}  ${OHItemInfo?.claimsOH}`}
+    </Text>
+  );
+
+  const ConsolidatedText = () => (
+    <View>
+      <Text style={styles.content}>
+        {`${strings(
+          'ITEM.CONSOLIDATED_QTY'
+        )}  ${OHItemInfo?.consolidatorOH}`}
+      </Text>
+    </View>
+  );
+
+  const FlyCloudText = () => (
+    <View>
+      <Text style={styles.content}>
+        {`${strings(
+          'ITEM.FLY_CLOUD_QTY'
+        )}  ${OHItemInfo?.flyCloudOH}`}
+      </Text>
+    </View>
+  );
+
+  const InTransitOHText = () => (
+    <View>
+      <Text style={styles.content}>
+        {`${strings(
+          'ITEM.IN_TRANSIT_FLY_QTY'
+        )}  ${OHItemInfo?.flyCloudInTransitOH}`}
+      </Text>
+    </View>
+  );
+  const SalesFloorText = () => (
+    <View>
+      <Text style={styles.content}>
+        {`${strings(
+          'ITEM.SALES_FLOOR_QTY'
+        )}  ${OHItemInfo?.salesFloorOH}`}
+      </Text>
+    </View>
+  );
+  return (
+    <View style={styles.otherOHDetails}>
+      <View>
+        {countryCode === 'MX' && (
+        <>
+          <View style={styles.contentList}>
+            <ClaimsText />
+            <SalesFloorText />
+          </View>
+          <View style={styles.contentList}>
+            <ConsolidatedText />
+          </View>
+        </>
+        )}
+        {countryCode === 'CN' && (
+        <>
+          <View style={styles.contentList}>
+            <ClaimsText />
+            <SalesFloorText />
+          </View>
+          <View style={styles.contentList}>
+            <FlyCloudText />
+            <InTransitOHText />
+          </View>
+        </>
+        )}
+      </View>
+    </View>
+  );
+};
+
 const ItemCard = ({
-  imageUrl, itemNumber, description, onClick, loading, onHandQty
+  itemNumber, description, onClick, loading, onHandQty, disabled,
+  countryCode, showItemImage, showOHItems, OHItemInfo
 }: ItemCardProps) => (
-  <View style={{ width: '100%' }}>
+  <View style={styles.mainContainer}>
     <TouchableOpacity
-      style={!loading ? styles.container : styles.loaderContainer}
+      style={getContainerStyle(loading, showItemImage)}
       onPress={() => {
-        if (!loading) {
+        if (!loading && onClick) {
           onClick(itemNumber);
         }
       }}
+      disabled={disabled}
       testID="itemCard"
     >
-      <Image
-        style={styles.image}
-        source={(!loading && imageUrl) || require('../../assets/images/placeholder.png')}
+      {showItemImage && !loading && (
+      <ImageWrapper
+        countryCode={countryCode}
+        itemNumber={itemNumber}
       />
+      )}
       {loading && (
       <View style={styles.loader} testID="loader">
         <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
@@ -39,7 +155,7 @@ const ItemCard = ({
       )}
       {!loading && (
       <View style={styles.itemDetails} testID="item-details">
-        <View>
+        <View style={!showItemImage ? styles.itemNbrView : {}}>
           <Text style={styles.itemNbr}>{`${strings('GENERICS.ITEM')} ${itemNumber}`}</Text>
         </View>
         <View>
@@ -53,7 +169,19 @@ const ItemCard = ({
       </View>
       )}
     </TouchableOpacity>
+    {showOHItems && <OtherOnHandsItems countryCode={countryCode} OHItemInfo={OHItemInfo} />}
   </View>
 );
+
+ItemCard.defaultProps = {
+  showOHItems: false,
+  OHItemInfo: defaultOHItemValues,
+  disabled: false,
+  onClick: () => {}
+};
+
+OtherOnHandsItems.defaultProps = {
+  OHItemInfo: defaultOHItemValues
+};
 
 export default ItemCard;

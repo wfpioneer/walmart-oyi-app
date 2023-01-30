@@ -35,8 +35,9 @@ describe('SettingsToolScreen', () => {
   const navigationProp: NavigationProp<any> = {
     addListener: jest.fn(),
     canGoBack: jest.fn(),
-    dangerouslyGetParent: jest.fn(),
-    dangerouslyGetState: jest.fn(),
+    getParent: jest.fn(),
+    getId: jest.fn(),
+    getState: jest.fn(),
     dispatch: jest.fn(),
     goBack: jest.fn(),
     isFocused: jest.fn(() => true),
@@ -73,6 +74,7 @@ describe('SettingsToolScreen', () => {
           getFluffyApiState={defaultAsyncState}
           useEffectHook={jest.fn}
           user={mockUser}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -97,6 +99,7 @@ describe('SettingsToolScreen', () => {
           getFluffyApiState={defaultAsyncState}
           useEffectHook={jest.fn}
           user={mockUser}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -121,6 +124,7 @@ describe('SettingsToolScreen', () => {
           getFluffyApiState={defaultAsyncState}
           useEffectHook={jest.fn}
           user={mockUser}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -145,6 +149,7 @@ describe('SettingsToolScreen', () => {
           getFluffyApiState={defaultAsyncState}
           useEffectHook={jest.fn}
           user={mockUser}
+          trackEventCall={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -168,6 +173,7 @@ describe('SettingsToolScreen', () => {
           getFluffyApiState={defaultAsyncState}
           useEffectHook={jest.fn}
           user={mockUser}
+          trackEventCall={jest.fn()}
         />
       );
       const updateButton = getByTestId('updateButton');
@@ -215,6 +221,8 @@ describe('SettingsToolScreen', () => {
           title=""
           isOpened={false}
           toggleIsOpened={jest.fn()}
+          trackEventCall={jest.fn()}
+          trackEventInfo={{ action: 'test' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -225,6 +233,8 @@ describe('SettingsToolScreen', () => {
           title=""
           isOpened={true}
           toggleIsOpened={jest.fn()}
+          trackEventCall={jest.fn()}
+          trackEventInfo={{ action: 'test' }}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

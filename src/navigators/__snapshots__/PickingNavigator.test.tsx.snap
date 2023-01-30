@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Picking Navigator Renders and Calls the Kebab Menu button 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "paddingRight": 10,
+      },
+      Object {
+        "opacity": 1,
+      },
+    ]
+  }
+  testID="picking-menu"
+>
+  <Icon
+    color="#ffffffff"
+    name="dots-vertical"
+    size={30}
+  />
+</View>
+`;
+
 exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
 <View
   accessible={true}
@@ -23,9 +59,8 @@ exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "flex": 1,
         "justifyContent": "center",
-        "paddingHorizontal": 15,
+        "paddingRight": 20,
       }
     }
   >
@@ -40,16 +75,83 @@ exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
 
 exports[`Picking Navigator Renders the Picking Navigator 1`] = `
 <StackNavigator
-  screenOptions={[Function]}
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
 >
   <Screen
     component={[Function]}
     name="PickingTabs"
+    options={[Function]}
+  />
+  <Screen
+    component={[Function]}
+    name="PickBinWorkflow"
     options={
       Object {
+        "headerLeft": [Function],
+        "headerRight": [Function],
         "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
       }
     }
+  />
+  <Screen
+    component={[Function]}
+    name="SalesFloorWorkflow"
+    options={
+      Object {
+        "headerLeft": [Function],
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="CreatePick"
+    options={
+      Object {
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.PICKING.CREATE_PICK\\" translation]",
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="AddLocation"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitleAlign": "left",
+      }
+    }
+  />
+</StackNavigator>
+`;
+
+exports[`Picking Navigator Renders the Picking Navigator with kebab menu 1`] = `
+<StackNavigator
+  screenOptions={
+    Object {
+      "headerMode": "float",
+      "headerStyle": Object {
+        "backgroundColor": "#0071e9",
+      },
+      "headerTintColor": "#ffffffff",
+    }
+  }
+>
+  <Screen
+    component={[Function]}
+    name="PickingTabs"
+    options={[Function]}
   />
   <Screen
     component={[Function]}

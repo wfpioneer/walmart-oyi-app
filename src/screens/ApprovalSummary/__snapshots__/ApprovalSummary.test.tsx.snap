@@ -87,6 +87,8 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -182,6 +184,8 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -277,6 +281,8 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -372,6 +378,8 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -467,6 +475,8 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -562,6 +572,8 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -714,6 +726,8 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
@@ -809,6 +823,8 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     />
   </View>
   <ButtonBottomTab
+    disableLeftButton={false}
+    disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}

@@ -36,6 +36,14 @@ export interface GetPalletConfigResponse {
   perishableCategories: number[];
 }
 
+export interface UpdateMultiPalletUPCQtyRequest {
+  PalletList: {
+    palletId: number;
+    expirationDate: string;
+    upcs: Pick<PalletItem, 'quantity' | 'upcNbr'>[];
+  }[];
+}
+
 export default class PalletManagementService {
   public static updateItemQuantity(payload: UpdateItemQuantityRequest): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
@@ -80,6 +88,15 @@ export default class PalletManagementService {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.locationUrl}/pallet/pallet-config`
+    );
+  }
+
+  public static updateMultiPalletUPCQty(payload: UpdateMultiPalletUPCQtyRequest): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+
+    return Request.patch(
+      `${urls.locationUrl}/pallet/upc`,
+      payload.PalletList
     );
   }
 }

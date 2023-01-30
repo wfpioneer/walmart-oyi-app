@@ -4,6 +4,8 @@ import PalletItemCard, { styleSelector } from './PalletItemCard';
 import styles from './PalletItemCard.style';
 
 describe('PalletItemCard', () => {
+  const mockCountryCode = 'MX';
+  const mockShowItemImage = false;
   describe('Tests rendering PalletItemCard', () => {
     const renderer = ShallowRenderer.createRenderer();
     it('PalletItemCard with valid input', () => {
@@ -22,6 +24,9 @@ describe('PalletItemCard', () => {
         maxValue={2}
         isValid={true}
         isAdded={false}
+        onEndEditing={jest.fn}
+        showItemImage={mockShowItemImage}
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -42,6 +47,9 @@ describe('PalletItemCard', () => {
         maxValue={2}
         isValid={true}
         isAdded={false}
+        onEndEditing={jest.fn}
+        showItemImage={mockShowItemImage}
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -62,6 +70,32 @@ describe('PalletItemCard', () => {
         maxValue={2}
         isValid={true}
         isAdded={true}
+        onEndEditing={jest.fn}
+        showItemImage={mockShowItemImage}
+        countryCode={mockCountryCode}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders the card with Item Image', () => {
+      renderer.render(<PalletItemCard
+        itemName="Item1"
+        price={12.78}
+        upc="23423423423"
+        itemNumber="234234234"
+        decreaseQuantity={jest.fn()}
+        increaseQuantity={jest.fn()}
+        numberOfItems={1}
+        deleteItem={jest.fn()}
+        onTextChange={jest.fn()}
+        markEdited={false}
+        minValue={1}
+        maxValue={2}
+        isValid={true}
+        isAdded={true}
+        onEndEditing={jest.fn}
+        showItemImage
+        countryCode={mockCountryCode}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

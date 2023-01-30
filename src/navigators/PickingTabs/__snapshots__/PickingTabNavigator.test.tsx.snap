@@ -1,10 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BottomSheet card Renders BottomSheetCard 1`] = `
+<Memo(BottomSheetView)
+  style={
+    Object {
+      "flexDirection": "row",
+      "height": 45,
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[MockFunction]}
+    style={
+      Object {
+        "borderColor": "#eeeeee",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "width": 750,
+      }
+    }
+  >
+    <Memo(BottomSheetView)
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "paddingLeft": 20,
+          }
+        }
+      >
+        Test
+      </Text>
+    </Memo(BottomSheetView)>
+  </TouchableOpacity>
+</Memo(BottomSheetView)>
+`;
+
 exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
 <MaterialTopTabNavigator
   initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "tabPress": [Function],
+    }
+  }
   screenOptions={
     Object {
+      "swipeEnabled": true,
       "tabBarActiveTintColor": "#0071e9",
       "tabBarInactiveTintColor": "#616161",
       "tabBarItemStyle": Object {
@@ -33,6 +83,80 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
+    name="Pick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="SalesFloor"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;
+
+exports[`Picking Tab Navigator Renders the Pick TabNavigator with "swipeEnabled: false" if multi Bin/Pick is enabled 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "tabPress": [Function],
+    }
+  }
+  screenOptions={
+    Object {
+      "swipeEnabled": false,
+      "tabBarActiveTintColor": "#0071e9",
+      "tabBarInactiveTintColor": "#616161",
+      "tabBarItemStyle": Object {
+        "borderColor": "#9e9e9e",
+        "borderEndWidth": 0.5,
+      },
+    }
+  }
+>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="QuickPick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }
@@ -68,8 +192,15 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator 1`] = `
 exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1`] = `
 <MaterialTopTabNavigator
   initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "tabPress": [Function],
+    }
+  }
   screenOptions={
     Object {
+      "swipeEnabled": true,
       "tabBarActiveTintColor": "#0071e9",
       "tabBarInactiveTintColor": "#616161",
       "tabBarItemStyle": Object {
@@ -98,6 +229,226 @@ exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks 1
   <Screen
     listeners={
       Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
+    name="Pick"
+    options={
+      Object {
+        "tabBarBadge": [Function],
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="SalesFloor"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;
+
+exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks and multi bin selection enabled 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "tabPress": [Function],
+    }
+  }
+  screenOptions={
+    Object {
+      "swipeEnabled": false,
+      "tabBarActiveTintColor": "#0071e9",
+      "tabBarInactiveTintColor": "#616161",
+      "tabBarItemStyle": Object {
+        "borderColor": "#9e9e9e",
+        "borderEndWidth": 0.5,
+      },
+    }
+  }
+>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="QuickPick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
+    name="Pick"
+    options={
+      Object {
+        "tabBarBadge": [Function],
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="SalesFloor"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;
+
+exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks and multi pick selection enabled 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "tabPress": [Function],
+    }
+  }
+  screenOptions={
+    Object {
+      "swipeEnabled": false,
+      "tabBarActiveTintColor": "#0071e9",
+      "tabBarInactiveTintColor": "#616161",
+      "tabBarItemStyle": Object {
+        "borderColor": "#9e9e9e",
+        "borderEndWidth": 0.5,
+      },
+    }
+  }
+>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="QuickPick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "beforeRemove": [Function],
+        "focus": [Function],
+      }
+    }
+    name="Pick"
+    options={
+      Object {
+        "tabBarBadge": [Function],
+        "title": "[missing \\"en.PICKING.PICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="SalesFloor"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+</MaterialTopTabNavigator>
+`;
+
+exports[`Picking Tab Navigator Renders the Pick TabNavigator with Active Picks and picking menu as true 1`] = `
+<MaterialTopTabNavigator
+  initialRouteName="Pick"
+  screenListeners={
+    Object {
+      "beforeRemove": [Function],
+      "tabPress": [Function],
+    }
+  }
+  screenOptions={
+    Object {
+      "swipeEnabled": true,
+      "tabBarActiveTintColor": "#0071e9",
+      "tabBarInactiveTintColor": "#616161",
+      "tabBarItemStyle": Object {
+        "borderColor": "#9e9e9e",
+        "borderEndWidth": 0.5,
+      },
+    }
+  }
+>
+  <Screen
+    listeners={
+      Object {
+        "focus": [Function],
+      }
+    }
+    name="QuickPick"
+    options={
+      Object {
+        "tabBarBadge": undefined,
+        "title": "[missing \\"en.PICKING.QUICKPICK\\" translation]",
+      }
+    }
+  >
+    [Function]
+  </Screen>
+  <Screen
+    listeners={
+      Object {
+        "beforeRemove": [Function],
         "focus": [Function],
       }
     }

@@ -18,6 +18,7 @@ import { AsyncState } from '../../models/AsyncState';
 import { setWorklistItems } from '../../state/actions/AuditWorklist';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 interface AuditWorklistTabNavigatorProps {
   dispatch: Dispatch<any>;
@@ -27,6 +28,7 @@ interface AuditWorklistTabNavigatorProps {
   useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
   validateSessionCall: (navigation: NavigationProp<any>, routeName: any) => any;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  trackEventCall: typeof trackEvent;
 }
 
 const Tab = createMaterialTopTabNavigator();
@@ -54,7 +56,7 @@ const isRollOverComplete = (wlSummary: WorklistSummary) => {
 export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps) => {
   const {
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
-    useEffectHook
+    useEffectHook, trackEventCall
   } = props;
   const getWorklistAuditApi: AsyncState = useTypedSelector(state => state.async.getWorklistAudits);
   const { showRollOverAudit } = useTypedSelector(state => state.User.configs);
@@ -69,6 +71,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
       if (!disableAuditWL) {
         auditWlType.push('AU');
       }
+      trackEventCall('Audit_Worklist', { action: 'get_worklist_api_retry' });
       dispatch(getWorklistAudits({ worklistType: auditWlType }));
     });
   };
@@ -111,6 +114,7 @@ const AuditWorklistTabs = () => {
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
       useEffectHook={useEffect}
+      trackEventCall={trackEvent}
     />
   );
 };

@@ -49,6 +49,7 @@ interface AssignLocationProps {
   updatePicklistStatusApi: AsyncState;
   deletePicks: boolean;
   setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>;
+  trackEventCall: typeof trackEvent
 }
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -225,7 +226,7 @@ export const binPalletsApiEffect = (
           } else if (errorResponse.message.includes('PALLET_NOT_FOUND')) {
             if (route.params?.source === 'picking') {
               setDeletePicks(true);
-              updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch);
+              updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch, trackEvent);
             } else {
               Toast.show({
                 position: 'bottom',
@@ -263,7 +264,8 @@ export const binPalletsApiEffect = (
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState,
-    navigation, dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi, deletePicks, setDeletePicks
+    navigation, dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi, deletePicks, setDeletePicks,
+    trackEventCall
   } = props;
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
 
@@ -292,7 +294,8 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     const scannerListener = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
-          trackEvent('bin_location_scanned', {
+          trackEventCall('Binning_Screen', {
+            action: 'bin_location_scanned',
             barcode: scan.value,
             type: scan.type
           });
@@ -403,6 +406,7 @@ function AssignLocation(): JSX.Element {
       updatePicklistStatusApi={updatePicklistStatusApi}
       deletePicks={deletePicks}
       setDeletePicks={setDeletePicks}
+      trackEventCall={trackEvent}
     />
   );
 }

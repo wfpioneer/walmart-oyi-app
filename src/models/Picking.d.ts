@@ -40,6 +40,7 @@ export interface PickListItem {
   quantityLeft?: number;
   newQuantityLeft?: number;
   itemQty?: number;
+  isSelected?: boolean;
 }
 
 export interface PickCreateItem {

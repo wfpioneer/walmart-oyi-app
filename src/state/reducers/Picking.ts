@@ -3,6 +3,7 @@ import {
   Actions,
   DELETE_PICKS,
   INITIALIZE_PICKLIST,
+  RESET_MULTI_PICK_BIN_SELECTION,
   RESET_PICKLIST,
   SELECT_PICKS,
   SET_PICK_CREATE_FLOOR,
@@ -10,6 +11,9 @@ import {
   SET_PICK_CREATE_RESERVE,
   SET_SELECTED_TAB,
   SHOW_PICKING_MENU,
+  TOGGLE_MULTI_BIN,
+  TOGGLE_MULTI_PICK,
+  UPDATE_MULTI_PICK_SELECTION,
   UPDATE_PICKS
 } from '../actions/Picking';
 import Location from '../../models/Location';
@@ -21,7 +25,9 @@ export interface PickingState {
   pickCreateFloorLocations: Location[];
   pickCreateReserveLocations: Location[];
   selectedTab: Tabs;
-  pickingMenu: boolean
+  pickingMenu: boolean;
+  multiBinEnabled: boolean;
+  multiPickEnabled: boolean;
 }
 
 const initialState: PickingState = {
@@ -38,7 +44,9 @@ const initialState: PickingState = {
   pickCreateFloorLocations: [],
   pickCreateReserveLocations: [],
   selectedTab: Tabs.PICK,
-  pickingMenu: false
+  pickingMenu: false,
+  multiBinEnabled: false,
+  multiPickEnabled: false
 };
 
 export const Picking = (
@@ -109,6 +117,40 @@ export const Picking = (
         ...state,
         pickingMenu: action.payload
       };
+    case TOGGLE_MULTI_BIN:
+      return {
+        ...state,
+        multiPickEnabled: false,
+        multiBinEnabled: action.payload
+      };
+    case TOGGLE_MULTI_PICK:
+      return {
+        ...state,
+        multiBinEnabled: false,
+        multiPickEnabled: action.payload
+      };
+    case UPDATE_MULTI_PICK_SELECTION: {
+      const { pickListItems, isSelected } = action.payload;
+      const updatedPickList = [...state.pickList];
+      pickListItems.forEach(updItem => {
+        const item = updatedPickList.find(pickItem => pickItem.id === updItem.id);
+        if (item) {
+          item.isSelected = isSelected;
+        }
+      });
+      return {
+        ...state,
+        pickList: updatedPickList
+      };
+    }
+    case RESET_MULTI_PICK_BIN_SELECTION: {
+      return {
+        ...state,
+        pickList: state.pickList.map(pickItem => ({ ...pickItem, isSelected: false })),
+        multiBinEnabled: false,
+        multiPickEnabled: false
+      };
+    }
     case RESET_PICKLIST:
       return initialState;
     default:

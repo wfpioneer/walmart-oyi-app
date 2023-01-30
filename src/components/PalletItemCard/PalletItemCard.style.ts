@@ -9,6 +9,7 @@ export default StyleSheet.create({
     justifyContent,
     backgroundColor: COLOR.WHITE,
     padding: 15,
+    paddingHorizontal: 5,
     marginBottom: 2,
     flexDirection: 'row'
   },
@@ -47,10 +48,6 @@ export default StyleSheet.create({
   itemHeader: {
     flexDirection: 'row'
   },
-  delete: {
-    justifyContent: 'center',
-    paddingLeft: 160
-  },
   itemHeaderFirstRow: {
     flex: 1,
     paddingTop: 10,
@@ -64,7 +61,9 @@ export default StyleSheet.create({
     paddingTop: 5
   },
   numericSelectorView: {
+    width: '100%',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingTop: 10
   },
   delButton: {

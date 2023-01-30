@@ -58,7 +58,9 @@ export default {
     SELECTED: 'Seleccionado',
     UPDATE: 'Actualizar Configuración',
     WARNING_LABEL: 'Aviso',
-    CLOSE: 'Cerrar'
+    CLOSE: 'Cerrar',
+    NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}',
+    FEEDBACK: 'Retroalimentación'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -81,7 +83,8 @@ export default {
     UNKNOWN: 'desconocida',
     MISSING_PALLETS: 'Pallets Faltantes',
     AUDITS: 'Auditorías',
-    ROLLOVER_AUDITS: 'Auditorías Atrasadas'
+    ROLLOVER_AUDITS: 'Auditorías Atrasadas',
+    NEG_SALES_FLOOR_QTY: 'Negativos Piso'
   },
   ITEM: {
     TITLE: 'Revisar detalles del Artículo',
@@ -141,7 +144,11 @@ export default {
     MARGIN: 'Margen',
     GROSS_PROFIT: 'Ganancia Bruta',
     HISTORY: 'Historial',
-    NO_HISTORY: 'No hay historial disponible'
+    NO_HISTORY: 'No hay historial disponible',
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega',
+    ERROR_PI_DELIVERY_HISTORY: 'Hubo un error mostrando el historial de entregas. Por favor inténtalo de nuevo',
+    ERROR_PI_SALES_HISTORY: 'Hubo un error mostrando el historial de ventas. Por favor inténtalo de nuevo',
+    DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -190,7 +197,8 @@ export default {
     Was_Medium: 'Promo - Mediano',
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
-    INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización'
+    INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
+    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -408,7 +416,8 @@ export default {
     FAILED_ITEMS: 'Artículos Fallidos',
     UPDATE_API_ERROR: 'Hubo un error actualizando el estatus de aprobación. \nPor favor inténtalo de nuevo',
     MANAGER_APPROVAL: 'Aprobación de Gerencia',
-    APPROVAL_LOADING_MSG: 'Las aprobaciones de muchos artículos pueden llevar un momento, por favor espera'
+    APPROVAL_LOADING_MSG: 'Las aprobaciones de muchos artículos pueden llevar un momento, por favor espera',
+    SOURCE: 'Fuente de aprovacíon'
   },
   LOGIN: {
     CLUB_NBR_REQUIRED: 'Un número de club es necesario para ingresar a OYI',
@@ -473,7 +482,12 @@ export default {
     PICK_COMPLETED_AND_PICKLIST_UPDATED_PLURAL: 'Los pickeos se han completado y la lista se ha actualizado',
     NO_RESERVE_PALLET_AVAILABLE_ERROR: 'No hay pallet de reserva disponibles',
     ADDITIONAL_ITEMS: 'El pallet contiene artículos adicionales',
-    QUANTITY_STOCKED: 'Cantidad abastecida'
+    QUANTITY_STOCKED: 'Cantidad abastecida',
+    ACCEPT_MULTIPLE_BINS: 'Aceptar Múltiples ingresos a bodega',
+    ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos',
+    ACCEPT_FOLLOWING_PICKS: 'Aceptar los siguientes pickeos?',
+    ACCEPT_FOLLOWING_BINS: 'Aceptar los siguientes ingresos a bodega?',
+    LOC_LABEL: 'Ubi'
   },
   BINNING: {
     BINNING: 'Bodega',
@@ -507,6 +521,7 @@ export default {
     EXPAND_ALL: 'Expandir todo',
     VALIDATE_QUANTITY: 'Valida la cantidad en cada ubicación',
     VALIDATE_SCAN_QUANTITY: 'Escanea cada pallet y valida la cantidad',
+    VALIDATE_SCAN_QUANTITY_WHEN_SCAN_DISABLED: 'Valida la cantidad por pallet',
     OTHER_ON_HANDS: 'Otras ubicaciones',
     PALLET_COUNT: 'Por favor ingresa el conteo del pallet',
     CONFIRM_AUDIT: 'Confirma el cambio de existencia',
@@ -522,5 +537,19 @@ export default {
     NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor',
     ITEMS: 'Artículos',
     CUSTOM_ITEMS: 'Artículos'
+  },
+  FEEDBACK: {
+    VERY_POOR_RATE_LABEL: 'Muy Malo',
+    POOR_RATE_LABEL: 'Malo',
+    AVERAGE_RATE_LABEL: 'Regular',
+    GOOD_RATE_LABEL: 'Bueno',
+    EXCELLENT_RATE_LABEL: 'Excelente',
+    FEEDBACK_REQUEST: '¿Quieres proporcionar retroalimentación de OYI?',
+    YES: 'Si',
+    NO: 'No',
+    RATING_LABEL: 'Elige una calificación',
+    COMMENT_PLACEHOLDER_LABEL: 'Escribe algún comentario',
+    SUBMIT_FEEDBACK_SUCCESS: 'La retroalimentación se ha enviado con éxito',
+    SUBMIT_FEEDBACK_FAILURE: 'Incapaz de enviar retroalimentación. Por favor inténtalo de nuevo.'
   }
 };

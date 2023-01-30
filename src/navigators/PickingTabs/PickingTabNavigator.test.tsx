@@ -3,7 +3,10 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {
-  PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+  BottomSheetModal
+} from '@gorhom/bottom-sheet';
+import {
+  BottomSheetCard, PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -11,7 +14,6 @@ import { AsyncState } from '../../models/AsyncState';
 import { mockPickLists } from '../../mockData/mockPickList';
 import getItemDetails from '../../mockData/getItemDetails';
 import { Tabs } from '../../models/Picking.d';
-import mockUser from '../../mockData/mockUser';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -40,6 +42,7 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 let routeProp: RouteProp<any, string>;
+let bottomSheetModalRef: React.RefObject<BottomSheetModal>;
 
 describe('Picking Tab Navigator', () => {
   it('Renders the Pick TabNavigator', () => {
@@ -57,10 +60,39 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('Renders the Pick TabNavigator with "swipeEnabled: false" if multi Bin/Pick is enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={[]}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={true}
+        multiPickEnabled={true}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
   it('Renders the Pick TabNavigator with Active Picks', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
@@ -76,6 +108,92 @@ describe('Picking Tab Navigator', () => {
         selectedTab={Tabs.PICK}
         useCallbackHook={jest.fn}
         useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and multi pick selection enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={true}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and multi bin selection enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={true}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+  it('Renders the Pick TabNavigator with Active Picks and picking menu as true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={jest.fn}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={jest.fn}
+        useFocusEffectHook={jest.fn}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+});
+
+describe('BottomSheet card', () => {
+  it('Renders BottomSheetCard', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <BottomSheetCard
+        text="Test"
+        onPress={jest.fn()}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -216,9 +334,11 @@ describe('Manage PickingNavigator externalized function tests', () => {
       ...defaultAsyncState,
       isWaiting: true
     };
+    const mockMultiBinEnabled = false;
+    const mockMultiPickEnabled = true;
     // on update success
-    updatePicklistStatusApiHook(updateSuccessApi, mockDispatch, true);
-    expect(mockDispatch).toBeCalledTimes(3);
+    updatePicklistStatusApiHook(updateSuccessApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
+    expect(mockDispatch).toBeCalledTimes(4);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'success',
       text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),
@@ -230,7 +350,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     mockDispatch.mockReset();
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
-    updatePicklistStatusApiHook(updateFailureApi, mockDispatch, true);
+    updatePicklistStatusApiHook(updateFailureApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
     expect(mockDispatch).toBeCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
@@ -241,7 +361,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     });
     // on api request
     mockDispatch.mockReset();
-    updatePicklistStatusApiHook(updateIsLoadingApi, mockDispatch, true);
+    updatePicklistStatusApiHook(updateIsLoadingApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
     expect(mockDispatch).toBeCalledTimes(1);
   });
 });

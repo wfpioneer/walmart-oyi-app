@@ -6,19 +6,23 @@ import {
   SET_SCANNED_PALLET_ID,
   UPDATE_FLOOR_LOCATION_QTY,
   UPDATE_PALLET_QTY,
+  UPDATE_SCANNED_PALLET_STATUS,
   clearAuditScreenData,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
   setScannedPalletId,
   updateFloorLocationQty,
-  updatePalletQty
+  updatePalletQty,
+  updatePalletScannedStatus
 } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
 import { itemPallets } from '../../mockData/getItemPallets';
 
 describe('Audit Item Screen actions', () => {
   const mockItemDetails = getMockItemDetails('123');
+  const mockPalletId = 4567;
+
   it('handles setting item details in AuditItemScreen redux state', () => {
     const setItemDetailsResult = setItemDetails(mockItemDetails);
     expect(setItemDetailsResult).toStrictEqual({
@@ -49,17 +53,14 @@ describe('Audit Item Screen actions', () => {
     });
   });
   it('handles updating the pallet quantity based on palletId', () => {
-    const mockPalletId = 4567;
     const mockNewQty = 22;
-    const mockScanned = true;
-    const updatePalletQtyResult = updatePalletQty(mockPalletId, mockNewQty, mockScanned);
+    const updatePalletQtyResult = updatePalletQty(mockPalletId, mockNewQty);
     expect(updatePalletQtyResult).toStrictEqual({
       type: UPDATE_PALLET_QTY,
-      payload: { palletId: mockPalletId, newQty: mockNewQty, scanned: mockScanned }
+      payload: { palletId: mockPalletId, newQty: mockNewQty }
     });
   });
   it('handles setting the palletId for Audit Item Screen', () => {
-    const mockPalletId = 4567;
     const setScannedPalletIdResult = setScannedPalletId(mockPalletId);
     expect(setScannedPalletIdResult).toStrictEqual({
       type: SET_SCANNED_PALLET_ID,
@@ -73,6 +74,15 @@ describe('Audit Item Screen actions', () => {
     expect(updateFloorLocationQtyResult).toStrictEqual({
       type: UPDATE_FLOOR_LOCATION_QTY,
       payload: { locationName: mockLocationName, newQty: mockNewQty }
+    });
+  });
+
+  it('handles updating the scanned status for a reserve location', () => {
+    const mockScanned = true;
+    const updatePalletScannedStatusResult = updatePalletScannedStatus(mockPalletId, mockScanned);
+    expect(updatePalletScannedStatusResult).toStrictEqual({
+      type: UPDATE_SCANNED_PALLET_STATUS,
+      payload: { palletId: mockPalletId, scanned: mockScanned }
     });
   });
 });

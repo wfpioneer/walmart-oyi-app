@@ -8,14 +8,14 @@ import SelectLocationType from '../screens/SelectLocationType/SelectLocationType
 import AddPallet from '../screens/AddPallet/AddPallet';
 import AddZone from '../screens/AddZone/AddZone';
 import AddSection from '../screens/AddSection/AddSection';
-import { hideLocationPopup, showLocationPopup } from '../state/actions/Location';
+import { hideLocationPopup, setIsToolBarNavigation, showLocationPopup } from '../state/actions/Location';
 import { strings } from '../locales';
 import COLOR from '../themes/Color';
 import ZoneList from '../screens/Zone/ZoneList';
 import AisleList from '../screens/Aisle/AisleList';
 import SectionList from '../screens/Section/SectionList';
 import LocationTabs from './LocationTabs/LocationTabNavigator';
-import { setManualScan } from '../state/actions/Global';
+import { setBottomTab, setManualScan } from '../state/actions/Global';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
 import { useTypedSelector } from '../state/reducers/RootReducer';
@@ -103,6 +103,7 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
       trackEvent('print_queue_list_click');
       dispatch(setPrintingLocationLabels(LocationName.SECTION));
       navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
+      dispatch(setIsToolBarNavigation(false));
     }}
     >
       <View style={styles.rightButton}>
@@ -146,6 +147,9 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         headerTintColor: COLOR.WHITE
       }}
       screenListeners={{
+        focus: () => {
+          dispatch(setIsToolBarNavigation(true));
+        },
         blur: screen => {
           if (screen.target && screensNeedListeners.some(screenName => screen.target?.includes(screenName))) {
             resetLocManualScan(isManualScanEnabled, dispatch);
@@ -234,6 +238,14 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
           headerTitleAlign: 'left',
           headerBackTitleVisible: false
         }}
+        listeners={{
+          focus: () => {
+            dispatch(setBottomTab(false));
+          },
+          beforeRemove: () => {
+            dispatch(setBottomTab(true));
+          }
+        }}
       />
       <Stack.Screen
         name="AddPallet"
@@ -248,12 +260,28 @@ export const LocationManagementNavigatorStack = (props: LocationManagementProps)
         options={{
           headerTitle: strings('LOCATION.ADD_ZONE')
         }}
+        listeners={{
+          focus: () => {
+            dispatch(setBottomTab(false));
+          },
+          beforeRemove: () => {
+            dispatch(setBottomTab(true));
+          }
+        }}
       />
       <Stack.Screen
         name="AddSection"
         component={AddSection}
         options={{
           headerTitle: strings('LOCATION.ADD_SECTIONS')
+        }}
+        listeners={{
+          focus: () => {
+            dispatch(setBottomTab(false));
+          },
+          beforeRemove: () => {
+            dispatch(setBottomTab(true));
+          }
         }}
       />
       <Stack.Screen

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -13,9 +13,18 @@ import { WorklistNavigator } from './WorklistNavigator';
 import { WorklistHomeNavigator } from './WorklistHomeNavigator';
 import { ApprovalListNavigator } from './ApprovalListNavigator';
 import { resetApprovals } from '../state/actions/Approvals';
-import { AVAILABLE_TOOLS, Configurations } from '../models/User';
+import User, { AVAILABLE_TOOLS, Configurations } from '../models/User';
 
 const Tab = createBottomTabNavigator();
+
+interface TabNavigatorProps {
+  user:User;
+  selectedAmount:number;
+  dispatch:Dispatch<any>;
+  palletWorklists:boolean;
+  auditWorklists:boolean;
+  isBottomTabEnabled:boolean
+}
 
 const isToolsEnabled = (userFeatures: string[], configurations: Configurations) => {
   if (configurations.locationManagement || configurations.palletManagement || configurations.settingsTool) {
@@ -25,13 +34,15 @@ const isToolsEnabled = (userFeatures: string[], configurations: Configurations) 
   return enabledTools.length > 0;
 };
 
-const TabNavigator = (): JSX.Element => {
-  // TODO combine userFeatures from both fluffy and config service once it is implemented
-  const user = useTypedSelector(state => state.User);
-  const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
-  const dispatch = useDispatch();
-  const { palletWorklists, auditWorklists } = user.configs;
-  const { isBottomTabEnabled } = useTypedSelector(state => state.Global);
+export const TabNavigatorStack = (props:TabNavigatorProps): JSX.Element => {
+  const {
+    user,
+    selectedAmount,
+    dispatch,
+    palletWorklists,
+    auditWorklists,
+    isBottomTabEnabled
+  } = props;
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -86,6 +97,24 @@ const TabNavigator = (): JSX.Element => {
           />
         )}
     </Tab.Navigator>
+  );
+};
+
+const TabNavigator = (): JSX.Element => {
+  const user = useTypedSelector(state => state.User);
+  const selectedAmount = useTypedSelector(state => state.Approvals.selectedItemQty);
+  const dispatch = useDispatch();
+  const { palletWorklists, auditWorklists } = user.configs;
+  const { isBottomTabEnabled } = useTypedSelector(state => state.Global);
+  return (
+    <TabNavigatorStack
+      user={user}
+      selectedAmount={selectedAmount}
+      dispatch={dispatch}
+      palletWorklists={palletWorklists}
+      auditWorklists={auditWorklists}
+      isBottomTabEnabled={isBottomTabEnabled}
+    />
   );
 };
 
