@@ -108,6 +108,35 @@ export const getZoneErrorModal = (
   </CustomModalComponent>
 );
 
+export const getZoneApiEffectHook = (
+  getZoneApi: AsyncState,
+  dispatch: Dispatch<any>,
+  trackEventCall: (eventName: string, params?: any) => void,
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  apiStart: number
+) => {
+  // on api success
+  if (!getZoneApi.isWaiting && getZoneApi.result) {
+    dispatch(setZones(getZoneApi.result.data || []));
+    setIsLoading(false);
+  }
+
+  // on api failure
+  if (!getZoneApi.isWaiting && getZoneApi.error) {
+    trackEventCall('Zone_List_Screen', {
+      event: 'get_zones_failure',
+      errorDetails: getZoneApi.error.message || getZoneApi.error,
+      duration: moment().valueOf() - apiStart
+    });
+    setIsLoading(false);
+  }
+
+  // on api call
+  if (getZoneApi.isWaiting) {
+    setIsLoading(true);
+  }
+};
+
 export const getZoneNamesApiEffectHook = (
   getZoneNamesApi: AsyncState,
   dispatch: Dispatch<any>,
@@ -190,28 +219,13 @@ export const ZoneScreen = (props: ZoneProps): JSX.Element => {
     };
   }, []);
   // Get Zone Api
-  useEffectHook(() => {
-    // on api success
-    if (!getZoneApi.isWaiting && getZoneApi.result) {
-      dispatch(setZones(getZoneApi.result.data || []));
-      setIsLoading(false);
-    }
-
-    // on api failure
-    if (!getZoneApi.isWaiting && getZoneApi.error) {
-      trackEventCall('Zone_List_Screen', {
-        event: 'get_zones_failure',
-        errorDetails: getZoneApi.error.message || getZoneApi.error,
-        duration: moment().valueOf() - apiStart
-      });
-      setIsLoading(false);
-    }
-
-    // on api call
-    if (getZoneApi.isWaiting) {
-      setIsLoading(true);
-    }
-  }, [getZoneApi]);
+  useEffectHook(() => getZoneApiEffectHook(
+    getZoneApi,
+    dispatch,
+    trackEventCall,
+    setIsLoading,
+    apiStart
+  ), [getZoneApi]);
   // Get Zone Names Api
   useEffectHook(() => getZoneNamesApiEffectHook(
     getZoneNamesApi,

@@ -3,7 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import ZoneList, { ZoneScreen, getZoneErrorModal, getZoneNamesApiEffectHook } from './ZoneList';
+import ZoneList, { ZoneScreen, getZoneErrorModal, getZoneNamesApiEffectHook, getZoneApiEffectHook } from './ZoneList';
 import { AsyncState } from '../../models/AsyncState';
 import { mockZones } from '../../mockData/zoneDetails';
 import store from '../../state';
@@ -365,6 +365,66 @@ describe('Test getZoneNamesApiEffectHook', () => {
     };
     getZoneNamesApiEffectHook(
       isLoadingApi, mockDispatch, true, mockSetErrVisible, navigationProp, mockIsloading
+    );
+    expect(mockIsloading).toHaveBeenCalledWith(true);
+  });
+});
+
+describe('Test getZoneApiEffectHook', () => {
+  const mocktrackEvent = jest.fn();
+  const mockDispatch = jest.fn();
+  const mockIsloading = jest.fn();
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('Tests getZoneApiEffectHook on 200 success', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: [
+          {
+            zoneId: 2,
+            zoneName: 'ABAR',
+            aisleCount: 30
+          }
+        ]
+      }
+    };
+    getZoneApiEffectHook(
+      successApi, mockDispatch, jest.fn(), mockIsloading, 0
+    );
+    expect(mockDispatch).toHaveBeenCalledWith({
+      payload: [
+        {
+          zoneId: 2,
+          zoneName: 'ABAR',
+          aisleCount: 30
+        }
+      ],
+      type: 'LOCATION/SET_ZONES'
+    });
+  });
+  it('Tests getZoneApiEffectHook on failure', () => {
+    const failureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    getZoneApiEffectHook(
+      failureApi, mockDispatch, mocktrackEvent, mockIsloading, 0
+    );
+    expect(mockIsloading).toHaveBeenCalledWith(false);
+    expect(mocktrackEvent).toHaveBeenCalled();
+  });
+  it('Tests getZoneApiEffectHook isWaiting', () => {
+    const isLoadingApi: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    getZoneApiEffectHook(
+      isLoadingApi, mockDispatch, jest.fn(), mockIsloading, 0
     );
     expect(mockIsloading).toHaveBeenCalledWith(true);
   });
