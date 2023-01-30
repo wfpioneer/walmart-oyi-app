@@ -690,6 +690,7 @@ export const renderReserveAdjustmentButton = (
       titleFontWeight="bold"
       height={28}
       onPress={() => {
+        dispatch(resetScannedEvent());
         dispatch(setItemDetails(itemDetails));
         navigation.navigate('ReserveAdjustment');
       }}

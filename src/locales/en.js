@@ -146,6 +146,9 @@ export default {
     HISTORY: 'History',
     NO_HISTORY: 'No history available',
     RESERVE_ADJUSTMENT: 'Reserve Adjustment',
+    SAVE_MODAL: 'Save Quantity Changes?',
+    UPDATE_MULTI_PALLET_SUCCESS: 'Pallet quantities have been updated.',
+    UPDATE_MULTI_PALLET_FAILURE: 'Unable to update pallet quantities, please try again.',
     ERROR_PI_DELIVERY_HISTORY: 'There was an error pulling the delivery history. Please try again.',
     ERROR_PI_SALES_HISTORY: 'There was an error pulling the sales history. Please try again.',
     DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again'
