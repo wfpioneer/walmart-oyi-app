@@ -51,7 +51,8 @@ export const renderSourceFilterCard = (
       // ditto on the todo
       if (item.catgName === approvalRequestSource.ItemDetails) {
         filterSources.splice(
-          filterSources.indexOf('', 1)
+          filterSources.indexOf(''),
+          1
         );
       }
       trackEvent('approvals_update_filter_source', {
