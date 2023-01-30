@@ -1493,6 +1493,12 @@ const ReviewItemDetails = (): JSX.Element => {
   const [isQuickPick, setIsQuickPick] = useState(false);
   const [newOHQty, setNewOHQty] = useState(0);
 
+  const sortNames = (a: Location, b: Location) => a.locationName.localeCompare(b.locationName, undefined, {
+    numeric: true
+  });
+  floorLocations.sort(sortNames);
+  reserveLocations.sort(sortNames);
+
   return (
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
