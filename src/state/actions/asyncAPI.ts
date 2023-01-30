@@ -171,3 +171,6 @@ export const getUserConfig = makeAsyncActionCreators(GET_USER_CONFIG);
 
 export const UPDATE_USER_CONFIG = makeAsyncActionTypes('API/UPDATE_USER_CONFIG');
 export const updateUserConfig = makeAsyncActionCreators(UPDATE_USER_CONFIG);
+
+export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = makeAsyncActionTypes('API/UPDATE_MULTI_PALLET_UPC_QTY_V2');
+export const updateMultiPalletUPCQtyV2 = makeAsyncActionCreators(UPDATE_MULTI_PALLET_UPC_QTY_V2);

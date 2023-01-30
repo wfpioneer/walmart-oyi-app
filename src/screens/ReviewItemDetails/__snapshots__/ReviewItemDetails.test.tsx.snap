@@ -1044,6 +1044,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders re
           height={24}
           onPress={[Function]}
           radius={5}
+          testID="bottomRightBtn-0"
           title="[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]"
           titleColor="#0071e9"
           titleFontSize={14}
@@ -1195,6 +1196,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders re
           height={24}
           onPress={[Function]}
           radius={5}
+          testID="bottomRightBtn-0"
           title="[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]"
           titleColor="#0071e9"
           titleFontSize={14}
