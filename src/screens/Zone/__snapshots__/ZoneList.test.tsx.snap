@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test Zone List Renders Get Zone Name Error Modal if errorVisible is set to true 1`] = `
+exports[`Test Zone List Screen Renders Get Zone Name Error Modal if errorVisible is set to true 1`] = `
 <View>
   <CustomModalComponent
     animationType="none"
@@ -8,7 +8,7 @@ exports[`Test Zone List Renders Get Zone Name Error Modal if errorVisible is set
     modalType="Error"
     onClose={[Function]}
   >
-    <mockConstructor
+    <mockMaterialCommunityIcons
       color="#f44336"
       name="alert"
       size={30}
@@ -51,6 +51,7 @@ exports[`Test Zone List Renders Get Zone Name Error Modal if errorVisible is set
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrCancel"
         title="[missing \\"en.GENERICS.CANCEL\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -70,6 +71,7 @@ exports[`Test Zone List Renders Get Zone Name Error Modal if errorVisible is set
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrRetry"
         title="[missing \\"en.GENERICS.RETRY\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -98,7 +100,7 @@ exports[`Test Zone List Renders Get Zone Name Error Modal if errorVisible is set
 </View>
 `;
 
-exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
+exports[`Test Zone List Screen Renders Manual Scan Component when isManualScanEnabled is set to true 1`] = `
 <View>
   <CustomModalComponent
     animationType="none"
@@ -106,7 +108,7 @@ exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled i
     modalType="Error"
     onClose={[Function]}
   >
-    <mockConstructor
+    <mockMaterialCommunityIcons
       color="#f44336"
       name="alert"
       size={30}
@@ -149,6 +151,7 @@ exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled i
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrCancel"
         title="[missing \\"en.GENERICS.CANCEL\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -168,6 +171,7 @@ exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled i
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrRetry"
         title="[missing \\"en.GENERICS.RETRY\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -199,7 +203,7 @@ exports[`Test Zone List Renders Manual Scan Component when isManualScanEnabled i
 </View>
 `;
 
-exports[`Test Zone List Renders Zone Screen with Data 1`] = `
+exports[`Test Zone List Screen Renders Zone Screen with Data 1`] = `
 <View>
   <CustomModalComponent
     animationType="none"
@@ -207,7 +211,7 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
     modalType="Error"
     onClose={[Function]}
   >
-    <mockConstructor
+    <mockMaterialCommunityIcons
       color="#f44336"
       name="alert"
       size={30}
@@ -250,6 +254,7 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrCancel"
         title="[missing \\"en.GENERICS.CANCEL\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -269,6 +274,7 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrRetry"
         title="[missing \\"en.GENERICS.RETRY\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -475,7 +481,7 @@ exports[`Test Zone List Renders Zone Screen with Data 1`] = `
 </View>
 `;
 
-exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
+exports[`Test Zone List Screen Renders Zone Screen with Empty Data 1`] = `
 <View>
   <CustomModalComponent
     animationType="none"
@@ -483,7 +489,7 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
     modalType="Error"
     onClose={[Function]}
   >
-    <mockConstructor
+    <mockMaterialCommunityIcons
       color="#f44336"
       name="alert"
       size={30}
@@ -526,6 +532,7 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrCancel"
         title="[missing \\"en.GENERICS.CANCEL\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -545,6 +552,7 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrRetry"
         title="[missing \\"en.GENERICS.RETRY\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -573,7 +581,7 @@ exports[`Test Zone List Renders Zone Screen with Empty Data 1`] = `
 </View>
 `;
 
-exports[`Test Zone List Renders Zone Screen with no-zones-message when get all zones response is 204 1`] = `
+exports[`Test Zone List Screen Renders Zone Screen with no-zones-message when get all zones response is 204 1`] = `
 <View>
   <CustomModalComponent
     animationType="none"
@@ -581,7 +589,7 @@ exports[`Test Zone List Renders Zone Screen with no-zones-message when get all z
     modalType="Error"
     onClose={[Function]}
   >
-    <mockConstructor
+    <mockMaterialCommunityIcons
       color="#f44336"
       name="alert"
       size={30}
@@ -624,6 +632,7 @@ exports[`Test Zone List Renders Zone Screen with no-zones-message when get all z
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrCancel"
         title="[missing \\"en.GENERICS.CANCEL\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -643,6 +652,7 @@ exports[`Test Zone List Renders Zone Screen with no-zones-message when get all z
             "paddingHorizontal": 10,
           }
         }
+        testID="btnErrRetry"
         title="[missing \\"en.GENERICS.RETRY\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -671,7 +681,7 @@ exports[`Test Zone List Renders Zone Screen with no-zones-message when get all z
 </View>
 `;
 
-exports[`Test Zone List Test Get Zone Api Response Renders Error Message when result is 400 error 1`] = `
+exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is 400 error 1`] = `
 <View
   style={
     Object {
@@ -683,7 +693,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     }
   }
 >
-  <mockConstructor
+  <mockMaterialCommunityIcons
     color="#e57373"
     name="alert"
     size={40}
@@ -719,7 +729,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
 </View>
 `;
 
-exports[`Test Zone List Test Get Zone Api Response Renders Error Message when result is 424 error 1`] = `
+exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is 424 error 1`] = `
 <View
   style={
     Object {
@@ -731,7 +741,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     }
   }
 >
-  <mockConstructor
+  <mockMaterialCommunityIcons
     color="#e57373"
     name="alert"
     size={40}
@@ -767,7 +777,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
 </View>
 `;
 
-exports[`Test Zone List Test Get Zone Api Response Renders Error Message when result is 500 error 1`] = `
+exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is 500 error 1`] = `
 <View
   style={
     Object {
@@ -779,7 +789,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     }
   }
 >
-  <mockConstructor
+  <mockMaterialCommunityIcons
     color="#e57373"
     name="alert"
     size={40}
@@ -815,7 +825,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
 </View>
 `;
 
-exports[`Test Zone List Test Get Zone Api Response Renders Error Message when result is network error 1`] = `
+exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is network error 1`] = `
 <View
   style={
     Object {
@@ -827,7 +837,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     }
   }
 >
-  <mockConstructor
+  <mockMaterialCommunityIcons
     color="#e57373"
     name="alert"
     size={40}
@@ -863,7 +873,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
 </View>
 `;
 
-exports[`Test Zone List Test Get Zone Api Response Renders Error Message when result is timeout error 1`] = `
+exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is timeout error 1`] = `
 <View
   style={
     Object {
@@ -875,7 +885,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
     }
   }
 >
-  <mockConstructor
+  <mockMaterialCommunityIcons
     color="#e57373"
     name="alert"
     size={40}
@@ -911,7 +921,7 @@ exports[`Test Zone List Test Get Zone Api Response Renders Error Message when re
 </View>
 `;
 
-exports[`Test Zone List Test Get Zone Api Response Renders loading indicator when waiting for Zone Api response 1`] = `
+exports[`Test Zone List Screen Test Get Zone Api Response Renders loading indicator when waiting for Zone Api response 1`] = `
 <ActivityIndicator
   animating={true}
   color="#0071e9"
@@ -925,4 +935,328 @@ exports[`Test Zone List Test Get Zone Api Response Renders loading indicator whe
     }
   }
 />
+`;
+
+exports[`Test ZoneList render ZoneList with default value 1`] = `
+Array [
+  <View
+    onLayout={[Function]}
+    pointerEvents="box-none"
+    style={
+      Array [
+        undefined,
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "bottom": 0,
+          "overflow": "hidden",
+          "top": 0,
+        },
+      ]
+    }
+  />,
+  <View>
+    <Modal
+      animationType="none"
+      hardwareAccelerated={false}
+      onRequestClose={[Function]}
+      transparent={true}
+      visible={false}
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderBottomColor": "#eeeeee",
+          "borderBottomWidth": 2,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "marginHorizontal": 0,
+          "padding": 14,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text>
+          [missing "en.GENERICS.CLUB" translation] 0
+        </Text>
+        <Text
+          style={
+            Object {
+              "color": "#9e9e9e",
+              "fontSize": 12,
+            }
+          }
+        >
+          0 [missing "en.LOCATION.ZONES" translation]
+        </Text>
+      </View>
+    </View>
+    <RCTScrollView
+      ListEmptyComponent={<NoZonesMessage />}
+      contentContainerStyle={
+        Object {
+          "paddingBottom": 100,
+        }
+      }
+      data={Array []}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      keyExtractor={[Function]}
+      onContentSizeChange={[Function]}
+      onLayout={[Function]}
+      onMomentumScrollBegin={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={Array []}
+      viewabilityConfigCallbackPairs={Array []}
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "column",
+              "justifyContent": "center",
+              "paddingTop": 10,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+              }
+            }
+          >
+            [missing "en.LOCATION.NO_ZONES_AVAILABLE" translation]
+          </Text>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>,
+]
+`;
+
+exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignContent": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderColor": "#545F7A",
+            "borderRadius": 10,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "padding": 10,
+            "width": "80%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#f44336"
+        name="alert"
+        size={30}
+        style={
+          Object {
+            "alignSelf": "center",
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.ZONE_NAME_ERROR" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#D6512D",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="btnErrCancel"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.CANCEL" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="btnErrRetry"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
 `;

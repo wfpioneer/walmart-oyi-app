@@ -44,5 +44,42 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  confirmText: {
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  modalQuantityRow: {
+    flexDirection: 'row',
+    width: '90%',
+    borderBottomColor: COLOR.GREY_500,
+    borderBottomWidth: 1,
+    justifyContent: 'space-evenly',
+    paddingVertical: 5
+  },
+  updatedQtyRow: {
+    flexDirection: 'row',
+    width: '90%',
+    justifyContent: 'space-evenly',
+    paddingVertical: 5,
+    marginBottom: 5
+  },
+  rowQuantityTitle: {
+    flex: 1
+  },
+  rowQuantity: {
+    fontSize: 15
+  },
+  negativeChange: {
+    fontSize: 15,
+    alignSelf: 'flex-start',
+    color: COLOR.RED_550,
+    marginLeft: 30
+  },
+  positiveChange: {
+    fontSize: 15,
+    alignSelf: 'flex-start',
+    color: COLOR.GREEN,
+    marginLeft: 30
   }
 });
