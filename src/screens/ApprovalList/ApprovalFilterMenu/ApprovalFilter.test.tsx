@@ -3,10 +3,16 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { Provider } from 'react-redux';
 import { fireEvent, render } from '@testing-library/react-native';
 import store from '../../../state';
-import { ApprovalFilterScreen } from './ApprovalFilter';
+import {
+  ApprovalFilterScreen,
+  RenderSourceCollapsibleCard,
+  renderSourceFilterCard
+} from './ApprovalFilter';
 import { mockApprovals } from '../../../mockData/mockApprovalList';
 import { strings } from '../../../locales';
 import { trackEvent } from '../../../utils/AppCenterTool';
+import { mockCategoryMap } from '../../../mockData/mockWorkList';
+import { FilteredCategory } from '../../../models/FilterListItem';
 
 jest.mock('../../../utils/AppCenterTool.ts', () => ({
   ...jest.requireActual('../../../utils/__mocks__/AppCenterTool'),
@@ -58,5 +64,122 @@ describe('Approval filter render tests', () => {
     expect(trackEvent).toBeCalledTimes(1);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(toJSON()).toMatchSnapshot();
+  });
+});
+
+describe('Approval Filter Externalized Function Tests', () => {
+  const mockUpdateFilterSources = jest.fn();
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('Tests renderSourceFilterCard and calls onPress event', async () => {
+    // Audit Filter Request Source Selected
+    const { findByTestId, update } = render(
+      renderSourceFilterCard(mockCategoryMap[6], [], mockUpdateFilterSources)
+    );
+    const itemPress = findByTestId('category button');
+    fireEvent.press(await itemPress);
+    expect(mockUpdateFilterSources).toBeCalledWith([
+      mockCategoryMap[6].catgName
+    ]);
+
+    // Item Details Filter Request Source Selected
+    update(
+      renderSourceFilterCard(
+        mockCategoryMap[7],
+        [mockCategoryMap[6].catgName],
+        mockUpdateFilterSources
+      )
+    );
+    fireEvent.press(await itemPress);
+    expect(mockUpdateFilterSources).toBeCalledWith([
+      mockCategoryMap[6].catgName,
+      mockCategoryMap[7].catgName,
+      ''
+    ]);
+
+    // TODO Remove when no approval items lack a source
+    const noCatg: FilteredCategory = {
+      catgName: '',
+      selected: false
+    };
+    const renderSourceNoElement = renderSourceFilterCard(
+      noCatg,
+      [],
+      mockUpdateFilterSources
+    );
+    expect(renderSourceNoElement).toStrictEqual(<></>);
+  });
+
+  it('Tests renderSourceFilterCard and calls onPress event de-selecting source filters', async () => {
+    const allSourcesFiltered = [
+      mockCategoryMap[6].catgName,
+      mockCategoryMap[7].catgName,
+      ''
+    ];
+    mockCategoryMap[6].selected = true;
+    mockCategoryMap[7].selected = true;
+
+    // Audit Filter Request Source cleared Selection
+    const { findByTestId, update } = render(
+      renderSourceFilterCard(
+        mockCategoryMap[6],
+        allSourcesFiltered,
+        mockUpdateFilterSources
+      )
+    );
+    const itemPress = findByTestId('category button');
+    fireEvent.press(await itemPress);
+    const removedAuditSource = [mockCategoryMap[7].catgName, ''];
+    expect(trackEvent).toBeCalledWith('approvals_update_filter_source', {
+      categories: JSON.stringify(removedAuditSource)
+    });
+    expect(mockUpdateFilterSources).toBeCalledWith(removedAuditSource);
+
+    // Item Details Filter Request Source Cleared Selection
+    update(
+      renderSourceFilterCard(
+        mockCategoryMap[7],
+        removedAuditSource,
+        mockUpdateFilterSources
+      )
+    );
+    fireEvent.press(await itemPress);
+    expect(trackEvent).toBeCalledWith('approvals_update_filter_source', {
+      categories: JSON.stringify([])
+    });
+    expect(mockUpdateFilterSources).toBeCalledWith([]);
+  });
+
+  it('Tests RenderSourceCollapsibleCard and calls toggle source menu onPress event', async () => {
+    const mockSourceMap = [...mockCategoryMap.slice(-2)];
+    const mockToggleSrcs = jest.fn();
+    const { findByTestId, update } = render(
+      <RenderSourceCollapsibleCard
+        sourceMap={mockSourceMap}
+        sourceOpen={true}
+        filterSources={['audits']}
+        toggleSrcs={mockToggleSrcs}
+        updateFilterSrcs={mockUpdateFilterSources}
+      />
+    );
+
+    const toggleSrcButton = findByTestId('toggle sources');
+    fireEvent.press(await toggleSrcButton);
+    expect(mockToggleSrcs).toBeCalledWith(false);
+
+    // Source open set to false
+    update(
+      <RenderSourceCollapsibleCard
+        sourceMap={mockSourceMap}
+        sourceOpen={false}
+        filterSources={['audits']}
+        toggleSrcs={mockToggleSrcs}
+        updateFilterSrcs={mockUpdateFilterSources}
+      />
+    );
+    fireEvent.press(await toggleSrcButton);
+    expect(mockToggleSrcs).toBeCalledWith(true);
   });
 });

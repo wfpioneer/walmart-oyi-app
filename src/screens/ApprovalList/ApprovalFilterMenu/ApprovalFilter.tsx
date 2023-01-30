@@ -137,6 +137,7 @@ export const RenderSourceCollapsibleCard = (props: {
   return (
     <>
       <TouchableOpacity
+        testID="toggle sources"
         style={styles.menuCard}
         onPress={() => {
           toggleSrcs(!sourceOpen);
