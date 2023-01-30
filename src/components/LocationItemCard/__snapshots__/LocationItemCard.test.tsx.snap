@@ -1,17 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test Location Item Card Renders Location Item Card with mock Aisle data 1`] = `
-<TouchableOpacity
-  disabled={false}
-  onPress={[Function]}
+<View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffffff",
       "marginHorizontal": 0,
       "marginVertical": 1,
+      "opacity": 1,
       "padding": 14,
     }
   }
+  testID="btnCard"
 >
   <View
     style={
@@ -52,28 +67,43 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
         }
       }
     >
-      <mockConstructor
+      <mockMaterialCommunityIcons
         color="#1977d3"
         name="chevron-right"
         size={20}
       />
     </View>
   </View>
-</TouchableOpacity>
+</View>
 `;
 
 exports[`Test Location Item Card Renders Location Item Card with mock Section data 1`] = `
-<TouchableOpacity
-  disabled={false}
-  onPress={[Function]}
+<View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffffff",
       "marginHorizontal": 0,
       "marginVertical": 1,
+      "opacity": 1,
       "padding": 14,
     }
   }
+  testID="btnCard"
 >
   <View
     style={
@@ -114,28 +144,43 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
         }
       }
     >
-      <mockConstructor
+      <mockMaterialCommunityIcons
         color="#1977d3"
         name="chevron-right"
         size={20}
       />
     </View>
   </View>
-</TouchableOpacity>
+</View>
 `;
 
-exports[`Test Location Item Card Renders Location Item Card with mock Zone data 1`] = `
-<TouchableOpacity
-  disabled={false}
-  onPress={[Function]}
+exports[`Test Location Item Card Renders Location Item Card with mock Zone data with card button disabled 1`] = `
+<View
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "backgroundColor": "#ffffffff",
       "marginHorizontal": 0,
       "marginVertical": 1,
+      "opacity": 1,
       "padding": 14,
     }
   }
+  testID="btnCard"
 >
   <View
     style={
@@ -176,12 +221,89 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
         }
       }
     >
-      <mockConstructor
+      <mockMaterialCommunityIcons
         color="#1977d3"
         name="chevron-right"
         size={20}
       />
     </View>
   </View>
-</TouchableOpacity>
+</View>
+`;
+
+exports[`Test Location Item Card Renders Location Item Card with mock Zone data with card click 1`] = `
+<View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "marginHorizontal": 0,
+      "marginVertical": 1,
+      "opacity": 1,
+      "padding": 14,
+    }
+  }
+  testID="btnCard"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 8,
+        }
+      }
+    >
+      <Text>
+        G - Grocery
+      </Text>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#9e9e9e",
+              "fontSize": 12,
+            }
+          }
+        >
+          4 Aisles
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#1977d3"
+        name="chevron-right"
+        size={20}
+      />
+    </View>
+  </View>
+</View>
 `;
