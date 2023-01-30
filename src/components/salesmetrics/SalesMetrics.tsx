@@ -114,6 +114,7 @@ const SalesMetrics = (props: {itemSalesHistory: ItemSalesHistory; isGraphView: b
     <View style={styles.mainContainer}>
       <View style={styles.topButtonContainer}>
         <Button
+          testID="dailyViewBtn"
           title={strings('GENERICS.DAILY')}
           titleFontSize={12}
           titleFontWeight="bold"
@@ -126,6 +127,7 @@ const SalesMetrics = (props: {itemSalesHistory: ItemSalesHistory; isGraphView: b
           onPress={handleDailyTimePeriodChange(true)}
         />
         <Button
+          testID="weeklyViewBtn"
           title={strings('GENERICS.WEEKLY')}
           titleFontSize={12}
           titleFontWeight="bold"

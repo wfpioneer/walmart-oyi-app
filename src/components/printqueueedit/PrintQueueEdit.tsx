@@ -18,14 +18,14 @@ import { PrintPaperSize, PrintQueueItem, Printer } from '../../models/Printer';
 
 import { getPaperSizeBasedOnCountry } from '../../utils/global';
 
-const QTY_MIN = 1;
-const QTY_MAX = 100;
+export const QTY_MIN = 1;
+export const QTY_MAX = 100;
 const ERROR_FORMATTING_OPTIONS = {
   min: QTY_MIN,
   max: numbers(QTY_MAX, { precision: 0 })
 };
 
-const validateQty = (qty: number) => QTY_MIN <= qty && qty <= QTY_MAX;
+export const validateQty = (qty: number) => QTY_MIN <= qty && qty <= QTY_MAX;
 
 const renderPlusMinusBtn = (name: 'plus' | 'minus') => (
   <MaterialCommunityIcon name={name} color={COLOR.MAIN_THEME_COLOR} size={18} />
@@ -96,6 +96,7 @@ const PrintQueueEdit = (props: {
     <>
       <View style={styles.closeContainer}>
         <IconButton
+          testID="closeBtn"
           icon={ModalCloseIcon}
           type={IconButtonType.NO_BORDER}
           onPress={() => setItemIndexToEdit(-1)}
@@ -108,6 +109,7 @@ const PrintQueueEdit = (props: {
         <Text style={styles.copyQtyLabel}>{strings('PRINT.COPY_QTY')}</Text>
         <View style={styles.qtyChangeContainer}>
           <IconButton
+            testID="minusbutton"
             icon={renderPlusMinusBtn('minus')}
             type={IconButtonType.SOLID_WHITE}
             backgroundColor={COLOR.GREY_400}
@@ -117,6 +119,7 @@ const PrintQueueEdit = (props: {
             onPress={handleDecreaseQty}
           />
           <TextInput
+            testID="txtCopies"
             style={[styles.copyQtyInput, isValidQty ? styles.copyQtyInputValid : styles.copyQtyInputInvalid]}
             keyboardType="numeric"
             onChangeText={handleTextChange}
@@ -124,6 +127,7 @@ const PrintQueueEdit = (props: {
             {signQty}
           </TextInput>
           <IconButton
+            testID="plusbutton"
             icon={renderPlusMinusBtn('plus')}
             type={IconButtonType.SOLID_WHITE}
             backgroundColor={COLOR.GREY_400}
@@ -173,6 +177,7 @@ const PrintQueueEdit = (props: {
         </View>
       </View>
       <Button
+        testID="btnSave"
         title={strings('GENERICS.SAVE')}
         type={ButtonType.PRIMARY}
         style={styles.buttonWidth}
