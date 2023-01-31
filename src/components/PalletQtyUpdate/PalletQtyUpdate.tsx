@@ -80,7 +80,8 @@ const PalletQtyUpdate = (props: palletQtyUpdateProps): JSX.Element => {
   };
 
   const onCalcAccept = (value: string) => {
-    assignHandleTextChange(value, setNewQty);
+    assignHandleTextChange(parseInt(value, 10), setNewQty);
+    setCalcOpen(false);
   };
 
   return (
