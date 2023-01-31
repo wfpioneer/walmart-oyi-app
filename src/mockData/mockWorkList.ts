@@ -466,7 +466,10 @@ export const mockCategoryMap: FilteredCategory[] = [
     catgName: CATEGORY_NAME.ELECTRONICS,
     catgNbr: 199,
     selected: false
-  },
+  }
+];
+
+export const mockSourceMap: FilteredCategory[] = [
   {
     catgName: approvalRequestSource.Audits,
     selected: false

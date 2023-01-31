@@ -11,7 +11,7 @@ import {
 import { mockApprovals } from '../../../mockData/mockApprovalList';
 import { strings } from '../../../locales';
 import { trackEvent } from '../../../utils/AppCenterTool';
-import { mockCategoryMap } from '../../../mockData/mockWorkList';
+import { mockSourceMap } from '../../../mockData/mockWorkList';
 import { FilteredCategory } from '../../../models/FilterListItem';
 
 jest.mock('../../../utils/AppCenterTool.ts', () => ({
@@ -76,26 +76,26 @@ describe('Approval Filter Externalized Function Tests', () => {
   it('Tests renderSourceFilterCard and calls onPress event', async () => {
     // Audit Filter Request Source Selected
     const { findByTestId, update } = render(
-      renderSourceFilterCard(mockCategoryMap[6], [], mockUpdateFilterSources)
+      renderSourceFilterCard(mockSourceMap[0], [], mockUpdateFilterSources)
     );
     const itemPress = findByTestId('category button');
     fireEvent.press(await itemPress);
     expect(mockUpdateFilterSources).toBeCalledWith([
-      mockCategoryMap[6].catgName
+      mockSourceMap[0].catgName
     ]);
 
     // Item Details Filter Request Source Selected
     update(
       renderSourceFilterCard(
-        mockCategoryMap[7],
-        [mockCategoryMap[6].catgName],
+        mockSourceMap[1],
+        [mockSourceMap[0].catgName],
         mockUpdateFilterSources
       )
     );
     fireEvent.press(await itemPress);
     expect(mockUpdateFilterSources).toBeCalledWith([
-      mockCategoryMap[6].catgName,
-      mockCategoryMap[7].catgName,
+      mockSourceMap[0].catgName,
+      mockSourceMap[1].catgName,
       ''
     ]);
 
@@ -114,24 +114,24 @@ describe('Approval Filter Externalized Function Tests', () => {
 
   it('Tests renderSourceFilterCard and calls onPress event de-selecting source filters', async () => {
     const allSourcesFiltered = [
-      mockCategoryMap[6].catgName,
-      mockCategoryMap[7].catgName,
+      mockSourceMap[0].catgName,
+      mockSourceMap[1].catgName,
       ''
     ];
-    mockCategoryMap[6].selected = true;
-    mockCategoryMap[7].selected = true;
+    mockSourceMap[0].selected = true;
+    mockSourceMap[1].selected = true;
 
     // Audit Filter Request Source cleared Selection
     const { findByTestId, update } = render(
       renderSourceFilterCard(
-        mockCategoryMap[6],
+        mockSourceMap[0],
         allSourcesFiltered,
         mockUpdateFilterSources
       )
     );
     const itemPress = findByTestId('category button');
     fireEvent.press(await itemPress);
-    const removedAuditSource = [mockCategoryMap[7].catgName, ''];
+    const removedAuditSource = [mockSourceMap[1].catgName, ''];
     expect(trackEvent).toBeCalledWith('approvals_update_filter_source', {
       categories: JSON.stringify(removedAuditSource)
     });
@@ -140,7 +140,7 @@ describe('Approval Filter Externalized Function Tests', () => {
     // Item Details Filter Request Source Cleared Selection
     update(
       renderSourceFilterCard(
-        mockCategoryMap[7],
+        mockSourceMap[1],
         removedAuditSource,
         mockUpdateFilterSources
       )
@@ -153,7 +153,6 @@ describe('Approval Filter Externalized Function Tests', () => {
   });
 
   it('Tests RenderSourceCollapsibleCard and calls toggle source menu onPress event', async () => {
-    const mockSourceMap = [...mockCategoryMap.slice(-2)];
     const mockToggleSrcs = jest.fn();
     const { findByTestId, update } = render(
       <RenderSourceCollapsibleCard
