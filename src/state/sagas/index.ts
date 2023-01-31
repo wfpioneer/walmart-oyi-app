@@ -102,7 +102,12 @@ const genericSagas = [
   ),
   makeAsyncSaga(saga.SUBMIT_FEEDBACK_RATING, actions.submitFeedbackRating, FeedBackService.submitFeedbackRating),
   makeAsyncSaga(saga.GET_USER_CONFIG, actions.getUserConfig, UserConfigService.getUserConfig),
-  makeAsyncSaga(saga.UPDATE_USER_CONFIG, actions.updateUserConfig, UserConfigService.updateUserConfig)
+  makeAsyncSaga(saga.UPDATE_USER_CONFIG, actions.updateUserConfig, UserConfigService.updateUserConfig),
+  makeAsyncSaga(
+    saga.UPDATE_MULTI_PALLET_UPC_QTY_V2,
+    actions.updateMultiPalletUPCQtyV2,
+    PalletManagementService.updateMultiPalletUPCQtyV2
+  )
 ];
 
 export default function* rootSaga() {

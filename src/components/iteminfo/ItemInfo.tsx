@@ -112,11 +112,8 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
       case 'PO':
         exceptionString = strings('EXCEPTION.PO');
         break;
-      case 'AU':
-        exceptionString = strings('EXCEPTION.AUDITS');
-        break;
-      case 'RA':
-        exceptionString = strings('EXCEPTION.AUDITS');
+      case 'NSFQ':
+        exceptionString = strings('EXCEPTION.NEG_SALES_FLOOR_QTY');
         break;
       default:
         break;
