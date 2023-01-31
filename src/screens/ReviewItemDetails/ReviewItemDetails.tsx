@@ -1400,6 +1400,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               }}
               countryCode={countryCode}
               showItemImage={userConfigs.showItemImage}
+              worklistAuditType={itemDetails.worklistAuditType}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
