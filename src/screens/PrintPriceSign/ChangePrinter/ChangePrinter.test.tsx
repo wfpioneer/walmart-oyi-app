@@ -5,17 +5,15 @@ import { Printer, PrinterType } from '../../../models/Printer';
 import { ChangePrinterScreen, isPrinterExists, submitMacAddress } from './ChangePrinter';
 
 jest.mock('../../../utils/asyncStorageUtils', () => {
-  const asycnUtils = jest.requireActual('../../../utils/asyncStorageUtils');
+  const asyncUtils = jest.requireActual('../../../utils/asyncStorageUtils');
   return {
-    ...asycnUtils,
+    ...asyncUtils,
     savePrinter: jest.fn()
   };
 });
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
   isFocused: jest.fn(() => true),
@@ -23,7 +21,10 @@ const navigationProp: NavigationProp<any> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 describe('ChangePrinterScreen', () => {
   const renderer = ShallowRenderer.createRenderer();

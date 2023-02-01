@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { mockConfig } from '../../mockData/mockConfig';
@@ -10,7 +11,7 @@ import {
   mockZeroCompleteWorklistSummaries
 } from '../../mockData/mockWorklistSummary';
 import { AsyncState } from '../../models/AsyncState';
-import { HomeScreen } from './Home';
+import { HomeScreen, HomeScreenProps } from './Home';
 
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
@@ -22,9 +23,20 @@ jest.mock('react-native-config', () => {
     ENVIRONMENT: ' DEV'
   };
 });
-const navigationProp = {
+const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
-  navigate: jest.fn()
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
 };
 
 const defaultAsyncState: AsyncState = {
@@ -34,19 +46,26 @@ const defaultAsyncState: AsyncState = {
   result: null
 };
 
-const homeScreenProps: any = {
+const routeProp: RouteProp<any, string> = {
+  key: 'test',
+  name: 'test'
+};
+
+const homeScreenProps: HomeScreenProps = {
   userName: 'testUser',
   setScannedEvent: jest.fn(),
   setManualScan: jest.fn(),
+  setWorklistType: jest.fn(),
   isManualScanEnabled: false,
   worklistSummaryApiState: { ...defaultAsyncState },
   userConfigUpdateApiState: { ...defaultAsyncState },
   getWorklistSummary: jest.fn(),
   navigation: navigationProp,
   updateFilterExceptions: jest.fn(),
-  route: jest.fn(),
+  route: routeProp,
   userConfig: mockConfig,
-  resetUserConfigUpdateApiState: jest.fn()
+  resetUserConfigUpdateApiState: jest.fn(),
+  userFeatures: []
 };
 
 // opt out of type checking in order to create mocks that don't exactly match
@@ -164,6 +183,7 @@ describe('HomeScreen', () => {
         props = {
           ...homeScreenProps,
           userConfig: { ...mockConfig, palletWorklists: true, auditWorklists: true },
+          userFeatures: ['on hands change'],
           worklistSummaryApiState: {
             ...defaultAsyncState,
             result: {
@@ -186,6 +206,7 @@ describe('HomeScreen', () => {
           userConfig: {
             ...mockConfig, palletWorklists: true, auditWorklists: true, showRollOverAudit: true
           },
+          userFeatures: ['on hands change'],
           worklistSummaryApiState: {
             ...defaultAsyncState,
             result: {

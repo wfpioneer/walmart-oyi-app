@@ -48,6 +48,7 @@ interface CreatePickProps {
   getLocationApi: AsyncState;
   createPickApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  countryCode: string;
 }
 
 export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
@@ -162,7 +163,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   const {
     item, floorLocations, reserveLocations, selectedSectionState, createPickApi,
     palletNumberState, dispatch, navigation, getLocationApi, useEffectHook,
-    selectedTab
+    selectedTab, countryCode
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
@@ -262,6 +263,8 @@ export const CreatePickScreen = (props: CreatePickProps) => {
           price={item.price}
           status={item.status || ''}
           showAdditionalItemDetails={false}
+          countryCode={countryCode}
+          showItemImage={false}
         />
       </View>
       <View style={styles.pickParamView}>
@@ -327,6 +330,7 @@ const CreatePick = () => {
   } = useTypedSelector(state => state.Picking);
   const getLocationsApi = useTypedSelector(state => state.async.getLocation);
   const createPickApi = useTypedSelector(state => state.async.createNewPick);
+  const { countryCode } = useTypedSelector(state => state.User);
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
   const palletNumberState = useState(1);
   const dispatch = useDispatch();
@@ -345,6 +349,7 @@ const CreatePick = () => {
       getLocationApi={getLocationsApi}
       createPickApi={createPickApi}
       useEffectHook={useEffect}
+      countryCode={countryCode}
     />
   );
 };

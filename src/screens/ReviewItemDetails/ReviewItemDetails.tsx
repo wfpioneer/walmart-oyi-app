@@ -132,13 +132,26 @@ export interface HistoryCardPropsI {
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
   || exceptionType === 'C' || exceptionType === 'NSFL';
 
-export const handleUpdateQty = (props: HandleProps, itemDetails: ItemDetails) => {
+export const handleUpdateQty = (
+  props: HandleProps,
+  itemDetails: ItemDetails,
+  scannedEvent: { value: string | null; type: string | null; },
+  userConfigs: Configurations
+) => {
   const {
-    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId
+    navigation, trackEventCall, validateSessionCall, route, setOhQtyModalVisible, userId, dispatch
   } = props;
   validateSessionCall(navigation, route.name).then(() => {
     trackEventCall(REVIEW_ITEM_DETAILS, { action: 'update_OH_qty_click', itemNbr: itemDetails.itemNbr });
-    setOhQtyModalVisible(true);
+    if (userConfigs.auditWorklists) {
+      if (scannedEvent.value) {
+        dispatch(resetScannedEvent());
+      }
+      dispatch(setAuditItemNumber(itemDetails.itemNbr));
+      navigation.navigate('AuditItem');
+    } else {
+      setOhQtyModalVisible(true);
+    }
   }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
@@ -677,6 +690,7 @@ export const renderReserveAdjustmentButton = (
       titleFontWeight="bold"
       height={28}
       onPress={() => {
+        dispatch(resetScannedEvent());
         dispatch(setItemDetails(itemDetails));
         navigation.navigate('ReserveAdjustment');
       }}
@@ -865,6 +879,19 @@ export const renderScanForNoActionButton = (
     <TouchableOpacity style={styles.scanForNoActionButton} onPress={completeAction}>
       <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
       <Text style={styles.buttonText}>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
+  if (actionCompleted) {
+    return <View />;
+  }
+
+  return (
+    <TouchableOpacity style={styles.scanForNoActionButton} onPress={onPress}>
+      <MaterialCommunityIcon name="map-marker-plus" size={20} color={COLOR.WHITE} />
+      <Text style={styles.buttonText}>{strings('MISSING_PALLET_WORKLIST.ADD_LOCATION')}</Text>
     </TouchableOpacity>
   );
 };
@@ -1142,7 +1169,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     useEffectHook,
     useFocusEffectHook,
     floorLocations, userFeatures, userConfigs,
-    countryCode
+    countryCode,
+    exceptionType
   } = props;
 
   const { additionalItemDetails } = userConfigs;
@@ -1286,14 +1314,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
-  const navigateToAuditItemScreen = () => {
-    if (scannedEvent.value) {
-      dispatch(resetScannedEvent());
-    }
-    dispatch(setAuditItemNumber(itemDetails.itemNbr));
-    navigation.navigate('AuditItem');
-  };
-
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
@@ -1359,14 +1379,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         {!isWaiting && itemDetails
           && (
           <View>
-            {userConfigs.showOpenAuditLink
-            && (
-            <View style={styles.openAuditContainer}>
-              <TouchableOpacity onPress={navigateToAuditItemScreen}>
-                <Text style={styles.openAuditText}>{strings('AUDITS.OPEN_AUDIT_LABEL')}</Text>
-              </TouchableOpacity>
-            </View>
-            )}
             <ItemInfo
               itemName={itemDetails.itemName}
               itemNbr={itemDetails.itemNbr}
@@ -1394,7 +1406,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               iconName="pallet"
               topRightBtnTxt={getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
                 ? strings('GENERICS.CHANGE') : undefined}
-              topRightBtnAction={() => handleUpdateQty(props, itemDetails)}
+              topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
@@ -1443,7 +1455,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           </View>
           )}
       </ScrollView>
-      {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+      {exceptionType === 'NSFL' && (floorLocations && floorLocations.length === 0)
+        ? renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))
+        : renderScanForNoActionButton(props, itemDetails.itemNbr)}
     </View>
   );
 };

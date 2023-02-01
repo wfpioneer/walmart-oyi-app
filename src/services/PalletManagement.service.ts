@@ -37,6 +37,7 @@ export interface GetPalletConfigResponse {
 }
 
 export interface UpdateMultiPalletUPCQtyRequest {
+  itemNbr?: number;
   PalletList: {
     palletId: number;
     expirationDate: string;
@@ -97,6 +98,15 @@ export default class PalletManagementService {
     return Request.patch(
       `${urls.locationUrl}/pallet/upc`,
       payload.PalletList
+    );
+  }
+
+  public static updateMultiPalletUPCQtyV2(payload: UpdateMultiPalletUPCQtyRequest): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+
+    return Request.patch(
+      `${urls.orchestrationURL}/pallet/upc`,
+      { itemNbr: payload.itemNbr, updatePalletsDTO: payload.PalletList }
     );
   }
 }
