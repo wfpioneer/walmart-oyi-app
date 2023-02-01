@@ -260,6 +260,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
         "paddingVertical": 15,
       }
     }
+    testID="toggle sources"
   >
     <View
       style={

@@ -1,6 +1,7 @@
 import { WorklistItemI } from '../models/WorklistItem';
 import { MissingPalletWorklistItemI } from '../models/PalletWorklist';
 import { FilteredCategory } from '../models/FilterListItem';
+import { approvalRequestSource } from '../models/ApprovalListItem';
 
 // eslint-disable-next-line no-shadow
 enum ITEM_NAME {
@@ -464,6 +465,17 @@ export const mockCategoryMap: FilteredCategory[] = [
   {
     catgName: CATEGORY_NAME.ELECTRONICS,
     catgNbr: 199,
+    selected: false
+  }
+];
+
+export const mockSourceMap: FilteredCategory[] = [
+  {
+    catgName: approvalRequestSource.Audits,
+    selected: false
+  },
+  {
+    catgName: approvalRequestSource.ItemDetails,
     selected: false
   }
 ];
