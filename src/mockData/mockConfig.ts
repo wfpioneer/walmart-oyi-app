@@ -41,3 +41,30 @@ export const mockConfig: Configurations = {
   showFeedback: false,
   reserveAdjustment: false
 };
+
+export const mockConfigWithFeedback: Configurations = {
+  locationManagement: false,
+  locationManagementEdit: false,
+  palletManagement: false,
+  settingsTool: false,
+  printingUpdate: false,
+  binning: false,
+  palletExpiration: false,
+  backupCategories: '',
+  picking: false,
+  areas: mockAreas,
+  enableAreaFilter: false,
+  palletWorklists: false,
+  additionalItemDetails: false,
+  createPallet: false,
+  auditWorklists: false,
+  showRollOverAudit: false,
+  showOpenAuditLink: false,
+  scanRequired: false,
+  showCalculator: false,
+  multiBin: false,
+  multiPick: false,
+  showItemImage: false,
+  showFeedback: true,
+  reserveAdjustment: false
+};
