@@ -1,13 +1,61 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp, Route } from '@react-navigation/native';
-import { ZoneScreen } from './ZoneList';
+import { fireEvent, render } from '@testing-library/react-native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import ZoneList, {
+  ZoneScreen, getZoneApiEffectHook, getZoneErrorModal, getZoneNamesApiEffectHook
+} from './ZoneList';
 import { AsyncState } from '../../models/AsyncState';
 import { mockZones } from '../../mockData/zoneDetails';
+import store from '../../state';
+
+jest.mock('../../utils/AppCenterTool.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
+  trackEvent: jest.fn()
+}));
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: jest.fn(),
+      dispatch: jest.fn(),
+      isFocused: jest.fn().mockReturnValue(true),
+      goBack: jest.fn(),
+      addListener: jest.fn(),
+      removeListener: jest.fn()
+    }),
+    useRoute: () => ({
+      key: 'test',
+      name: 'test'
+    })
+  };
+});
 
 const MX_TEST_CLUB_NBR = 5522;
-let navigationProp: NavigationProp<any>;
-let routeProp: Route<any>;
+
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getState: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn()
+};
+
+const routeProp: RouteProp<any, string> = {
+  key: 'test',
+  name: 'test'
+};
 
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -16,7 +64,18 @@ const defaultAsyncState: AsyncState = {
   result: null
 };
 
-describe('Test Zone List', () => {
+describe('Test ZoneList', () => {
+  it('render ZoneList with default value', () => {
+    const { toJSON } = render(
+      <Provider store={store}>
+        <ZoneList />
+      </Provider>
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+});
+
+describe('Test Zone List Screen', () => {
   it('Renders Zone Screen with no-zones-message when get all zones response is 204', () => {
     const renderer = ShallowRenderer.createRenderer();
     const getZonesResult = {
@@ -237,5 +296,138 @@ describe('Test Zone List', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+  });
+});
+
+describe('Test getZoneErrorModal', () => {
+  it('render getZoneErrorModal with default value', () => {
+    const mockSetErrVisible = jest.fn();
+    const mockDispatch = jest.fn();
+    const trackEvent = jest.fn();
+    const { toJSON, getByTestId } = render(
+      getZoneErrorModal(true, mockSetErrVisible, mockDispatch, trackEvent)
+    );
+    const retryButton = getByTestId('btnErrRetry');
+    fireEvent.press(retryButton);
+    expect(mockDispatch).toBeCalledWith({ type: 'SAGA/GET_ZONE_NAMES' });
+
+    const cancelButton = getByTestId('btnErrCancel');
+    fireEvent.press(cancelButton);
+    expect(mockSetErrVisible).toBeCalledWith(false);
+    expect(toJSON()).toMatchSnapshot();
+  });
+});
+
+describe('Test getZoneNamesApiEffectHook', () => {
+  const mockSetErrVisible = jest.fn();
+  const mockDispatch = jest.fn();
+  const mockIsloading = jest.fn();
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('Tests getZoneNamesApiEffectHook on 200 success', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: [
+          { zoneName: 'A', description: 'A' },
+          { zoneName: 'B', description: 'B' }
+        ]
+      }
+    };
+    getZoneNamesApiEffectHook(
+      successApi, mockDispatch, true, mockSetErrVisible, navigationProp, mockIsloading
+    );
+    expect(mockDispatch).toHaveBeenCalledWith({
+      payload: [
+        { description: 'A', zoneName: 'A' },
+        { description: 'B', zoneName: 'B' }
+      ],
+      type: 'LOCATION/SET_POSSIBLE_ZONES'
+    });
+    expect(mockSetErrVisible).toHaveBeenCalledWith(false);
+  });
+  it('Tests getZoneNamesApiEffectHook on failure', () => {
+    const failureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    getZoneNamesApiEffectHook(
+      failureApi, mockDispatch, true, mockSetErrVisible, navigationProp, mockIsloading
+    );
+    expect(mockSetErrVisible).toHaveBeenCalledWith(true);
+  });
+  it('Tests getZoneNamesApiEffectHook isWaiting', () => {
+    const isLoadingApi: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    getZoneNamesApiEffectHook(
+      isLoadingApi, mockDispatch, true, mockSetErrVisible, navigationProp, mockIsloading
+    );
+    expect(mockIsloading).toHaveBeenCalledWith(true);
+  });
+});
+
+describe('Test getZoneApiEffectHook', () => {
+  const mocktrackEvent = jest.fn();
+  const mockDispatch = jest.fn();
+  const mockIsloading = jest.fn();
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('Tests getZoneApiEffectHook on 200 success', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: [
+          {
+            zoneId: 2,
+            zoneName: 'ABAR',
+            aisleCount: 30
+          }
+        ]
+      }
+    };
+    getZoneApiEffectHook(
+      successApi, mockDispatch, jest.fn(), mockIsloading, 0
+    );
+    expect(mockDispatch).toHaveBeenCalledWith({
+      payload: [
+        {
+          zoneId: 2,
+          zoneName: 'ABAR',
+          aisleCount: 30
+        }
+      ],
+      type: 'LOCATION/SET_ZONES'
+    });
+  });
+  it('Tests getZoneApiEffectHook on failure', () => {
+    const failureApi: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    getZoneApiEffectHook(
+      failureApi, mockDispatch, mocktrackEvent, mockIsloading, 0
+    );
+    expect(mockIsloading).toHaveBeenCalledWith(false);
+    expect(mocktrackEvent).toHaveBeenCalled();
+  });
+  it('Tests getZoneApiEffectHook isWaiting', () => {
+    const isLoadingApi: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    getZoneApiEffectHook(
+      isLoadingApi, mockDispatch, jest.fn(), mockIsloading, 0
+    );
+    expect(mockIsloading).toHaveBeenCalledWith(true);
   });
 });

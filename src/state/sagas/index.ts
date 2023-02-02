@@ -33,8 +33,6 @@ import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
 
 const genericSagas = [
-  // TODO remove this saga once the BE orchestration changes are pushed to Production
-  makeAsyncSaga(saga.GET_ITEM_DETAILS_V2, actions.getItemDetailsV2, GetItemDetailsService.getItemDetailsV2),
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V3, actions.getItemDetailsV3, GetItemDetailsService.getItemDetailsV3),
   makeAsyncSaga(saga.GET_ITEM_PIHISTORY, actions.getItemPiHistory, GetItemDetailsService.getItemPiHistory),
   makeAsyncSaga(
@@ -102,7 +100,12 @@ const genericSagas = [
   ),
   makeAsyncSaga(saga.SUBMIT_FEEDBACK_RATING, actions.submitFeedbackRating, FeedBackService.submitFeedbackRating),
   makeAsyncSaga(saga.GET_USER_CONFIG, actions.getUserConfig, UserConfigService.getUserConfig),
-  makeAsyncSaga(saga.UPDATE_USER_CONFIG, actions.updateUserConfig, UserConfigService.updateUserConfig)
+  makeAsyncSaga(saga.UPDATE_USER_CONFIG, actions.updateUserConfig, UserConfigService.updateUserConfig),
+  makeAsyncSaga(
+    saga.UPDATE_MULTI_PALLET_UPC_QTY_V2,
+    actions.updateMultiPalletUPCQtyV2,
+    PalletManagementService.updateMultiPalletUPCQtyV2
+  )
 ];
 
 export default function* rootSaga() {

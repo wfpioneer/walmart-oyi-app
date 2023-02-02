@@ -23,19 +23,6 @@ export default class GetItemDetailsService {
     );
   }
 
-  // TODO this will be the new endpoint once the BE is pushed to prod. Then we will replace the above function with this 1
-  public static getItemDetailsV2(payload: GetItemDetailsPayload): Promise<AxiosResponse<unknown>> {
-    const urls: Environment = getEnvironment();
-    const summaryParam = payload.getSummary ? `?summaryDetails=${payload.getSummary}` : '';
-    const excludeHistoryParam = payload.getExcludeHistory ? `?excludeHistory'=${payload.getExcludeHistory}` : '';
-    const metadataHistoryParam = payload.getMetadataHistory ? `?metadataHistory=${payload.getMetadataHistory}` : '';
-    return Request.get(
-      `${urls.orchestrationURL}/item/${payload.id}${summaryParam}${excludeHistoryParam}${metadataHistoryParam}`,
-      undefined,
-      { timeout: TIMEOUT }
-    );
-  }
-
   public static getItemDetailsV3(payload: GetItemDetailsPayload): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     const summaryParam = payload.getSummary ? `?summaryDetails=${payload.getSummary}` : '';

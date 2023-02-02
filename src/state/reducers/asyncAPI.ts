@@ -3,8 +3,6 @@ import { makeAsyncReducer } from './generic/makeAsyncReducer';
 import * as asyncActions from '../actions/asyncAPI';
 
 export const asyncReducer = combineReducers({
-  // TODO remove this reducer once the BE orchestration changes have been pushed to production
-  getItemDetailsV2: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS_V2),
   getItemDetailsV3: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS_V3),
   getItemPiHistory: makeAsyncReducer(asyncActions.GET_ITEM_PIHISTORY),
   getItemPiSalesHistory: makeAsyncReducer(asyncActions.GET_ITEM_PISALESHISTORY),
@@ -60,7 +58,8 @@ export const asyncReducer = combineReducers({
   updateMultiPalletUPCQty: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY),
   submitFeedbackRating: makeAsyncReducer(asyncActions.SUBMIT_FEEDBACK_RATING),
   getUserConfig: makeAsyncReducer(asyncActions.GET_USER_CONFIG),
-  updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG)
+  updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG),
+  updateMultiPalletUPCQtyV2: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY_V2)
 });
 
 export default asyncReducer;
