@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Home Navigator Click action to open camera 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID="camerabtn"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": 55,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="camera"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
 exports[`Home Navigator Renders the Home navigator component 1`] = `
 <StackNavigator
   screenOptions={
@@ -41,6 +79,7 @@ exports[`Home Navigator Renders the cameraButton header icon 1`] = `
 <TouchableOpacity
   hostRef={null}
   onPress={[Function]}
+  testID="camerabtn"
 >
   <View
     style={
