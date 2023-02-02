@@ -7,7 +7,7 @@ import {
   renderHomeScanButton, showSignOutMenu
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
-import { mockConfig, mockConfigWithFeedback } from '../mockData/mockConfig';
+import { mockConfig } from '../mockData/mockConfig';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
@@ -82,22 +82,6 @@ describe('Home Navigator', () => {
     resetPrintQueue: jest.fn(),
     clearLocationPrintQueue: jest.fn(),
     userConfig: mockConfig
-  };
-
-  const componentPropsWithFeedbackEnabled = {
-    logoutUser: jest.fn(),
-    showActivityModal: jest.fn(),
-    hideActivityModal: jest.fn(),
-    navigation: navigationProp,
-    isManualScanEnabled: true,
-    setManualScan: jest.fn(),
-    clubNbr: 1234,
-    updatePrinterByID: jest.fn(),
-    priceLabelPrinter: defPrinter as Printer,
-    setPriceLabelPrinter: jest.fn(),
-    resetPrintQueue: jest.fn(),
-    clearLocationPrintQueue: jest.fn(),
-    userConfig: mockConfigWithFeedback
   };
 
   it('Renders the Home navigator component', () => {
@@ -181,7 +165,8 @@ describe('Home Navigator', () => {
   });
   it('Render showSignoutMenu', () => {
     const actionSheetmock = jest.requireMock('react-native-action-sheet');
-    showSignOutMenu(componentPropsWithFeedbackEnabled, navigationProp);
+    componentProps.userConfig={...mockConfig, showFeedback: true};
+    showSignOutMenu(componentProps, navigationProp);
     expect(actionSheetmock.showActionSheetWithOptions).toBeCalled();
   });
   it('Click action to open camera', () => {
