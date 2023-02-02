@@ -28,8 +28,6 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { CreatePallet } from '../../models/PalletManagementTypes';
 import { submitFeedbackRequest } from '../../services/Feedback.service';
 
-// TODO Remove this Action once the BE has been pushed to Production
-export const GET_ITEM_DETAILS_V2 = 'SAGA/GET_ITEM_DETAILS_V2';
 export const GET_ITEM_DETAILS_V3 = 'SAGA/GET_ITEM_DETAILS_V3';
 
 export const GET_ITEM_PIHISTORY = 'SAGA/GET_ITEM_PIHISTORY';
@@ -91,8 +89,6 @@ export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
 export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY_V2';
 
-// TODO Remove this dispatch call once the BE has been pushed to Production
-export const getItemDetailsV2 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V2, payload } as const);
 export const getItemDetailsV3 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V3, payload } as const);
 
 export const getItemPiHistory = (payload: number) => ({ type: GET_ITEM_PIHISTORY, payload } as const);
@@ -277,7 +273,6 @@ export const updateMultiPalletUPCQtyV2 = (payload: UpdateMultiPalletUPCQtyReques
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
   & Pick<ReturnType<typeof getItemDetails>, 'payload'>
-  & Pick<ReturnType<typeof getItemDetailsV2>, 'payload'>
   & Pick<ReturnType<typeof getItemDetailsV3>, 'payload'>
   & Pick<ReturnType<typeof getItemPiHistory>, 'payload'>
   & Pick<ReturnType<typeof getItemPiSalesHistory>, 'payload'>
