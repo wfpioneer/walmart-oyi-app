@@ -99,7 +99,7 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator 1`] =
     options={
       Object {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PALLET.PALLET_MANAGEMENT\\" translation]",
+        "headerTitle": [Function],
       }
     }
   />
@@ -144,7 +144,7 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator when 
     options={
       Object {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PALLET.PALLET_MANAGEMENT\\" translation]",
+        "headerTitle": [Function],
       }
     }
   />
