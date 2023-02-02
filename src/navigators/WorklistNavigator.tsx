@@ -17,10 +17,15 @@ import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
 import { getWorklist } from '../state/actions/saga';
 
+interface worklistNavigatorProps{
+  dispatch:Dispatch<any>,
+  navigation:NavigationProp<any>
+  menuOpen:boolean
+}
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-const WorklistTabs = () => (
+export const WorklistTabs = () => (
   <Tab.Navigator
     screenOptions={{
       tabBarActiveTintColor: COLOR.WHITE,
@@ -36,7 +41,7 @@ const WorklistTabs = () => (
   </Tab.Navigator>
 );
 
-const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
+export const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
   if (menuOpen) {
     dispatch(toggleMenu(false));
   } else {
@@ -44,19 +49,19 @@ const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
   }
 };
 
-const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean) => (
+export const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean):JSX.Element => (
   <View style={styles.headerRightView}>
-    <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
+    <TouchableOpacity testID="header-right" onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
       <MaterialIcons name="filter-list" size={25} color={COLOR.WHITE} />
     </TouchableOpacity>
   </View>
+
 );
 
-export const WorklistNavigator = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const navigation: NavigationProp<any> = useNavigation();
-  const { menuOpen } = useTypedSelector(state => state.Worklist);
-
+export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Element => {
+  const {
+    dispatch, navigation, menuOpen
+  } = props;
   useEffect(
     () => navigation.addListener('focus', () => {
       dispatch(getWorklist());
@@ -113,3 +118,16 @@ export const WorklistNavigator = (): JSX.Element => {
     </SideMenu>
   );
 };
+export const WorklistNavigator = ():JSX.Element => {
+  const dispatch = useDispatch();
+  const navigation: NavigationProp<any> = useNavigation();
+  const { menuOpen } = useTypedSelector(state => state.Worklist);
+  return (
+    <WorklistNavigatorStack
+      dispatch={dispatch}
+      navigation={navigation}
+      menuOpen={menuOpen}
+    />
+  );
+};
+
