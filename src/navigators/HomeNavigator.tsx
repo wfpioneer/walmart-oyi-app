@@ -180,7 +180,7 @@ export const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScan
 );
 
 export const renderCamButton = () => (
-  <TouchableOpacity onPress={() => { openCamera(); }}>
+  <TouchableOpacity testID="camerabtn" onPress={() => { openCamera(); }}>
     <View style={styles.camButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
