@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderBackButton } from '@react-navigation/elements';
+import { HeaderBackButton, HeaderTitle } from '@react-navigation/elements';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -125,7 +125,11 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         name="ReviewItemDetailsHome"
         component={ReviewItemDetails}
         options={{
-          headerTitle: strings('ITEM.TITLE'),
+          headerTitle: () => (
+            <HeaderTitle style={{ color: COLOR.WHITE }} lineBreakMode="tail" numberOfLines={20}>
+              {strings('ITEM.TITLE')}
+            </HeaderTitle>
+          ),
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
