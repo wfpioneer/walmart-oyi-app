@@ -126,7 +126,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         component={ReviewItemDetails}
         options={{
           headerTitle: () => (
-            <HeaderTitle style={{ color: COLOR.WHITE }} lineBreakMode="tail" numberOfLines={20}>
+            <HeaderTitle style={{ color: COLOR.WHITE }} lineBreakMode="tail" numberOfLines={2}>
               {strings('ITEM.TITLE')}
             </HeaderTitle>
           ),
