@@ -24,6 +24,7 @@ import {
 import { mockAreas } from '../../../mockData/mockConfig';
 import { WorklistGoal } from '../../../models/WorklistSummary';
 import { mockItemNPalletNAuditWorklistSummary } from '../../../mockData/mockWorklistSummary';
+import mockUser from '../../../mockData/mockUser';
 
 jest.mock('../../../utils/AppCenterTool.ts', () => ({
   ...jest.requireActual('../../../utils/__mocks__/AppCenterTool'),
@@ -64,6 +65,7 @@ describe('FilterMenu Component', () => {
           wlSummary={mockItemNPalletNAuditWorklistSummary}
           showRollOverAudit={false}
           screenName="Worklist"
+          userFeatures={mockUser.features}
         />
       </Provider>
     );
@@ -87,6 +89,7 @@ describe('FilterMenu Component', () => {
           wlSummary={mockItemNPalletNAuditWorklistSummary}
           showRollOverAudit={false}
           screenName="Worklist"
+          userFeatures={mockUser.features}
         />
       </Provider>
     );
@@ -110,6 +113,7 @@ describe('FilterMenu Component', () => {
           wlSummary={mockItemNPalletNAuditWorklistSummary}
           showRollOverAudit={false}
           screenName="Worklist"
+          userFeatures={mockUser.features}
         />
       </Provider>
     );
@@ -179,6 +183,7 @@ describe('FilterMenu Component', () => {
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
         disableAuditWL={false}
         screenName="Worklist"
+        disableNSFQWl={false}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
@@ -197,6 +202,7 @@ describe('FilterMenu Component', () => {
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
         disableAuditWL={true}
         screenName="Worklist"
+        disableNSFQWl={true}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));

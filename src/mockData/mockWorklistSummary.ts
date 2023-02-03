@@ -19,16 +19,21 @@ export const mockZeroCompleteWorklistSummaries: WorklistSummary[] = [
       },
       {
         worklistType: 'NO',
-        totalItems: 13,
+        totalItems: 14,
         completedItems: 0
       },
       {
         worklistType: 'NS',
-        totalItems: 0,
+        totalItems: 24,
+        completedItems: 0
+      },
+      {
+        worklistType: 'NSFQ',
+        totalItems: 8,
         completedItems: 0
       }
     ],
-    totalItems: 163,
+    totalItems: 196,
     totalCompletedItems: 0
   }
 ];
@@ -59,10 +64,15 @@ export const mockHalfCompleteWorklistSummaries: WorklistSummary[] = [
         worklistType: 'NS',
         totalItems: 24,
         completedItems: 12
+      },
+      {
+        worklistType: 'NSFQ',
+        totalItems: 8,
+        completedItems: 4
       }
     ],
-    totalItems: 188,
-    totalCompletedItems: 94
+    totalItems: 196,
+    totalCompletedItems: 98
   }
 ];
 
@@ -90,12 +100,17 @@ export const mockAllCompleteWorklistSummaries: WorklistSummary[] = [
       },
       {
         worklistType: 'NS',
-        totalItems: 20,
-        completedItems: 20
+        totalItems: 24,
+        completedItems: 24
+      },
+      {
+        worklistType: 'NSFQ',
+        totalItems: 8,
+        completedItems: 8
       }
     ],
-    totalItems: 184,
-    totalCompletedItems: 184
+    totalItems: 196,
+    totalCompletedItems: 196
   }
 ];
 
@@ -137,10 +152,15 @@ export const mockItemAndPalletWorklistSummary: WorklistSummary[] = [
         worklistType: 'NS',
         totalItems: 24,
         completedItems: 12
+      },
+      {
+        worklistType: 'NSFQ',
+        totalItems: 8,
+        completedItems: 4
       }
     ],
-    totalItems: 188,
-    totalCompletedItems: 94
+    totalItems: 196,
+    totalCompletedItems: 98
   },
   {
     totalCompletedItems: 1,
@@ -181,10 +201,15 @@ export const mockItemNPalletNAuditWorklistSummary: WorklistSummary[] = [
         worklistType: 'NS',
         totalItems: 24,
         completedItems: 12
+      },
+      {
+        worklistType: 'NSFQ',
+        totalItems: 8,
+        completedItems: 4
       }
     ],
-    totalItems: 188,
-    totalCompletedItems: 94
+    totalItems: 196,
+    totalCompletedItems: 98
   },
   {
     totalCompletedItems: 1,

@@ -70,11 +70,12 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
     screenName="Worklist"
     selectedWorklistGoal="ITEMS"
     showRollOverAudit={false}
+    userFeatures={Array []}
     wlSummary={
       Array [
         Object {
-          "totalCompletedItems": 94,
-          "totalItems": 188,
+          "totalCompletedItems": 98,
+          "totalItems": 196,
           "worklistEndGoalPct": 100,
           "worklistGoal": "ITEMS",
           "worklistGoalDuration": "DAILY",
@@ -99,6 +100,11 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
               "completedItems": 12,
               "totalItems": 24,
               "worklistType": "NS",
+            },
+            Object {
+              "completedItems": 4,
+              "totalItems": 8,
+              "worklistType": "NSFQ",
             },
           ],
         },
@@ -213,11 +219,12 @@ exports[`FilterMenu Component ShallowRender FilterMenu with Audits WL Goal 1`] =
     screenName="Worklist"
     selectedWorklistGoal="AUDITS"
     showRollOverAudit={false}
+    userFeatures={Array []}
     wlSummary={
       Array [
         Object {
-          "totalCompletedItems": 94,
-          "totalItems": 188,
+          "totalCompletedItems": 98,
+          "totalItems": 196,
           "worklistEndGoalPct": 100,
           "worklistGoal": "ITEMS",
           "worklistGoalDuration": "DAILY",
@@ -242,6 +249,11 @@ exports[`FilterMenu Component ShallowRender FilterMenu with Audits WL Goal 1`] =
               "completedItems": 12,
               "totalItems": 24,
               "worklistType": "NS",
+            },
+            Object {
+              "completedItems": 4,
+              "totalItems": 8,
+              "worklistType": "NSFQ",
             },
           ],
         },

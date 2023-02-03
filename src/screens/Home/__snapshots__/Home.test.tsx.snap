@@ -140,7 +140,7 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={13}
+      goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
@@ -148,7 +148,7 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={0}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -283,7 +283,7 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={13}
+      goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
@@ -291,7 +291,7 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={0}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -548,7 +548,7 @@ exports[`HomeScreen rendering renders pure version number if build environment i
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={13}
+      goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
@@ -556,7 +556,7 @@ exports[`HomeScreen rendering renders pure version number if build environment i
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={0}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -691,7 +691,7 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={13}
+      goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
@@ -699,7 +699,7 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={0}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -911,7 +911,7 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={13}
+      goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
@@ -919,7 +919,7 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={0}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -1054,7 +1054,7 @@ exports[`HomeScreen rendering renders with User config api with error 1`] = `
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={13}
+      goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
@@ -1062,7 +1062,7 @@ exports[`HomeScreen rendering renders with User config api with error 1`] = `
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={0}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -1221,6 +1221,14 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       completionPercentage={50}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={4}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={8}
+      goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
       onPress={[Function]}
     />
   </ScrollView>
@@ -1502,10 +1510,10 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       onPress={[Function]}
     />
     <WorklistCard
-      complete={20}
+      complete={24}
       completionGoal={95}
       completionPercentage={100}
-      goal={20}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -1640,7 +1648,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={13}
+      goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       onPress={[Function]}
     />
@@ -1648,7 +1656,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       complete={0}
       completionGoal={90}
       completionPercentage={0}
-      goal={0}
+      goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
       onPress={[Function]}
     />
@@ -1957,6 +1965,14 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      onPress={[Function]}
+    />
+    <WorklistCard
+      complete={4}
+      completionGoal={100}
+      completionPercentage={50}
+      goal={8}
+      goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
       onPress={[Function]}
     />
   </ScrollView>
