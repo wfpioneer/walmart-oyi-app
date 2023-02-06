@@ -319,10 +319,10 @@ export const RenderExceptionTypeCard = (props: {
   isAudits: boolean,
   disableAuditWL: boolean;
   screenName: string;
-  disableNSFQWl: boolean
+  disableOnHandsWL: boolean
 }): JSX.Element => {
   const {
-    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits, disableAuditWL, screenName, disableNSFQWl
+    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits, disableAuditWL, screenName, disableOnHandsWL
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   const exceptionMap: FilterListItem[] = [];
@@ -331,7 +331,7 @@ export const RenderExceptionTypeCard = (props: {
     if (disableAuditWL && worklist.worklistType === 'AU') {
       return;
     }
-    if (disableNSFQWl && worklist.worklistType === 'NSFQ') {
+    if (disableOnHandsWL && worklist.worklistType === 'NO') {
       return;
     }
     const exceptionType = fullExceptionList.get(worklist.worklistType);
@@ -455,7 +455,7 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
   } = props;
   const worklistIndex = wlSummary.findIndex(item => item.worklistGoal === selectedWorklistGoal);
   const disableAuditWL = showRollOverAudit && !isRollOverComplete(wlSummary[worklistIndex]);
-  const disableNSFQWl = !userFeatures.includes('on hands change');
+  const disableOnHandsWL = !userFeatures.includes('on hands change');
 
   return (
     <View style={styles.menuContainer}>
@@ -501,7 +501,7 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         isAudits={selectedWorklistGoal === WorklistGoal.AUDITS}
         disableAuditWL={disableAuditWL}
         screenName={screenName}
-        disableNSFQWl={disableNSFQWl}
+        disableOnHandsWL={disableOnHandsWL}
       />
     </View>
   );

@@ -183,7 +183,7 @@ describe('FilterMenu Component', () => {
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
         disableAuditWL={false}
         screenName="Worklist"
-        disableNSFQWl={false}
+        disableOnHandsWL={false}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));
@@ -202,7 +202,7 @@ describe('FilterMenu Component', () => {
         wlSummary={mockItemNPalletNAuditWorklistSummary[0]}
         disableAuditWL={true}
         screenName="Worklist"
-        disableNSFQWl={true}
+        disableOnHandsWL={true}
       />
     );
     const menuButton = getByText(strings('WORKLIST.EXCEPTION_TYPE'));

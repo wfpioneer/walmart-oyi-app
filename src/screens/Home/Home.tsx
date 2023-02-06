@@ -272,7 +272,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           return null;
         }
 
-        if (worklist.worklistType === 'NSFQ' && !this.props.userFeatures.includes('on hands change')) {
+        if (worklist.worklistType === 'NO' && !this.props.userFeatures.includes('on hands change')) {
           return null;
         }
         const worklistType = worklist.worklistType === 'MP'

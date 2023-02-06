@@ -688,14 +688,14 @@ Array [
           "value": "C",
         },
         Object {
-          "display": "[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]",
-          "selected": false,
-          "value": "NO",
-        },
-        Object {
           "display": "[missing \\"en.EXCEPTION.NO_SALES\\" translation]",
           "selected": false,
           "value": "NS",
+        },
+        Object {
+          "display": "[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]",
+          "selected": false,
+          "value": "NSFQ",
         },
       ]
     }
@@ -879,7 +879,7 @@ Array [
               }
             }
           >
-            [missing "en.EXCEPTION.NEGATIVE_ON_HANDS" translation]
+            [missing "en.EXCEPTION.NO_SALES" translation]
           </Text>
         </View>
       </View>
@@ -933,7 +933,7 @@ Array [
               }
             }
           >
-            [missing "en.EXCEPTION.NO_SALES" translation]
+            [missing "en.EXCEPTION.NEG_SALES_FLOOR_QTY" translation]
           </Text>
         </View>
       </View>
