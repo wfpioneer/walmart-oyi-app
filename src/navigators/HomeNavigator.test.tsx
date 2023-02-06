@@ -3,7 +3,8 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp } from '@react-navigation/native';
 import {
-  HomeNavigatorComponent, renderCamButton, renderHomeHeader, renderHomeMenuButton, renderHomeScanButton
+  HomeNavigatorComponent, renderCamButton, renderHomeHeader, renderHomeMenuButton,
+  renderHomeScanButton, showSignOutMenu
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
 import { mockConfig } from '../mockData/mockConfig';
@@ -28,6 +29,19 @@ jest.mock('react-native-config', () => {
     ENVIRONMENT: ' DEV'
   };
 });
+
+jest.mock('react-native-action-sheet', () => {
+  const config = jest.requireActual('react-native-action-sheet');
+  return {
+    ...config,
+    ActionSheet: jest.fn(),
+    showActionSheetWithOptions: jest.fn()
+  };
+});
+
+jest.mock('../utils/scannerUtils', () => ({
+  openCamera: jest.fn()
+}));
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -138,6 +152,30 @@ describe('Home Navigator', () => {
     const { toJSON } = render(
       renderHomeMenuButton(componentProps, navigationProp)
     );
+    expect(toJSON()).toMatchSnapshot();
+  });
+  it('Render homeMenu Button onclick ', () => {
+    const mockAppCenter = jest.requireMock('../utils/AppCenterTool.ts');
+    const { getByTestId } = render(
+      renderHomeMenuButton(componentProps, navigationProp)
+    );
+    const btnScan = getByTestId('btnShowMenu');
+    fireEvent.press(btnScan);
+    expect(mockAppCenter.trackEvent).toBeCalledWith('menu_button_click');
+  });
+  it('Render showSignoutMenu', () => {
+    const actionSheetmock = jest.requireMock('react-native-action-sheet');
+    componentProps.userConfig={...mockConfig, showFeedback: true};
+    showSignOutMenu(componentProps, navigationProp);
+    expect(actionSheetmock.showActionSheetWithOptions).toBeCalled();
+  });
+  it('Click action to open camera', () => {
+    const { getByTestId, toJSON } = render(
+      renderCamButton()
+    );
+    const btn = getByTestId('camerabtn');
+    fireEvent.press(btn);
+
     expect(toJSON()).toMatchSnapshot();
   });
 });
