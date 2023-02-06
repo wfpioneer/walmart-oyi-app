@@ -85,7 +85,7 @@ export const PalletManagementNavigatorStack = (
           headerTitle: () => (
             <HeaderTitle
               style={{ color: COLOR.WHITE }}
-              numberOfLines={24}
+              numberOfLines={2}
               lineBreakMode="tail"
             >
               {strings('PALLET.PALLET_MANAGEMENT')}

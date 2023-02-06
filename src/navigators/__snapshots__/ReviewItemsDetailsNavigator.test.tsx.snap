@@ -25,7 +25,7 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
         "headerBackTitleVisible": false,
         "headerLeft": [Function],
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.ITEM.TITLE\\" translation]",
+        "headerTitle": [Function],
         "headerTitleAlign": "left",
         "headerTitleStyle": Object {
           "fontSize": 18,
