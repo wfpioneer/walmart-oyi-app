@@ -27,4 +27,4 @@ export interface WorklistTypeDetails {
   completedItems: number
 }
 
-export type WorklistType = 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO' | 'MP' | 'AU' | 'RA' | 'NSFQ';
+export type WorklistType = 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO' | 'MP' | 'AU' | 'RA' | 'NSFQ' | 'CATEGORY';

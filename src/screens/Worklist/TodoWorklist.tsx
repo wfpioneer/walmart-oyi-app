@@ -22,19 +22,24 @@ interface TodoWorklistProps {
   enableAreaFilter: boolean;
   countryCode: string;
   showItemImage: boolean;
+  onHandsEnabled: boolean;
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
-    countryCode, showItemImage
+    countryCode, showItemImage, onHandsEnabled
   } = props;
 
   let todoData: WorklistItemI[] | undefined;
 
   if (result && result.data) {
     todoData = result.data.filter((item: WorklistItemI) => item.completed === false);
+  }
+
+  if (todoData && !onHandsEnabled) {
+    todoData = todoData.filter(item => item.worklistType !== 'NO');
   }
 
   return (
@@ -62,9 +67,11 @@ export const TodoWorklist = (): JSX.Element => {
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
-  const { countryCode } = useTypedSelector(state => state.User);
+  const { countryCode, features } = useTypedSelector(state => state.User);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const onHandsEnabled = features.includes('on hands change');
   return (
     <TodoWorklistScreen
       isWaiting={isWaiting}
@@ -80,6 +87,7 @@ export const TodoWorklist = (): JSX.Element => {
       enableAreaFilter={enableAreaFilter}
       countryCode={countryCode}
       showItemImage={showItemImage}
+      onHandsEnabled={onHandsEnabled}
     />
   );
 };
