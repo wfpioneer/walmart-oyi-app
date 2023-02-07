@@ -378,11 +378,9 @@ export const renderConfirmOnHandsModal = (
   trackEventCall: (eventName: string, params?: any) => void,
   reserveLocations: ItemPalletInfo[]
 ) => {
+  // TODO display Reserve Pallet Quantity on confirm and not total on hands qty.
   const onHandsQty = itemDetails?.onHandsQty || 0;
-  const basePrice = itemDetails?.basePrice || 0;
   const changeQuantity = updatedQuantity - onHandsQty;
-  const priceChange = basePrice * changeQuantity;
-  const priceLimit = Math.abs(priceChange) > 1000.0;
   const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
@@ -408,19 +406,9 @@ export const renderConfirmOnHandsModal = (
         />
       ) : (
         <>
-          {priceLimit && (
-            <MaterialCommunityIcon
-              name="alert"
-              size={40}
-              color={COLOR.ORANGE}
-            />
-          )}
           <Text style={styles.confirmText}>
             {strings('ITEM.SAVE_MODAL')}
           </Text>
-          {priceLimit && (
-            <Text>{strings('AUDITS.LARGE_CURRENCY_CHANGE')}</Text>
-          )}
           <View style={styles.modalQuantityRow}>
             <Text style={styles.rowQuantityTitle}>
               {strings('APPROVAL.CURRENT_QUANTITY')}
@@ -430,17 +418,6 @@ export const renderConfirmOnHandsModal = (
           <View style={styles.modalQuantityRow}>
             <Text style={styles.rowQuantityTitle}>
               {strings('GENERICS.CHANGE')}
-            </Text>
-            <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>
-              <MaterialCommunityIcon
-                name={
-                  updatedQuantity > onHandsQty
-                    ? 'arrow-up-bold'
-                    : 'arrow-down-bold'
-                }
-                size={16}
-              />
-              {currencies(priceChange)}
             </Text>
             <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>
               {changeQuantity}

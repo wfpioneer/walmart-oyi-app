@@ -90,23 +90,16 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         ]
       }
     >
-      <mockMaterialCommunityIcons
-        color="#e74517"
-        name="alert"
-        size={40}
-      />
       <Text
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
+            "paddingBottom": 5,
           }
         }
       >
         [missing "en.ITEM.SAVE_MODAL" translation]
-      </Text>
-      <Text>
-        [missing "en.AUDITS.LARGE_CURRENCY_CHANGE" translation]
       </Text>
       <View
         style={
@@ -159,22 +152,6 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
           }
         >
           [missing "en.GENERICS.CHANGE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#33691E",
-              "fontSize": 15,
-              "marginLeft": 30,
-            }
-          }
-        >
-          <mockMaterialCommunityIcons
-            name="arrow-up-bold"
-            size={16}
-          />
-          $12,002.40
         </Text>
         <Text
           style={
@@ -1067,23 +1044,16 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
     onClose={[Function]}
   >
     <React.Fragment>
-      <mockMaterialCommunityIcons
-        color="#e74517"
-        name="alert"
-        size={40}
-      />
       <Text
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
+            "paddingBottom": 5,
           }
         }
       >
         [missing "en.ITEM.SAVE_MODAL" translation]
-      </Text>
-      <Text>
-        [missing "en.AUDITS.LARGE_CURRENCY_CHANGE" translation]
       </Text>
       <View
         style={
@@ -1136,22 +1106,6 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
           }
         >
           [missing "en.GENERICS.CHANGE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#ab2703",
-              "fontSize": 15,
-              "marginLeft": 30,
-            }
-          }
-        >
-          <mockMaterialCommunityIcons
-            name="arrow-down-bold"
-            size={16}
-          />
-          -$40,508.10
         </Text>
         <Text
           style={
@@ -1447,23 +1401,16 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
     onClose={[Function]}
   >
     <React.Fragment>
-      <mockMaterialCommunityIcons
-        color="#e74517"
-        name="alert"
-        size={40}
-      />
       <Text
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
+            "paddingBottom": 5,
           }
         }
       >
         [missing "en.ITEM.SAVE_MODAL" translation]
-      </Text>
-      <Text>
-        [missing "en.AUDITS.LARGE_CURRENCY_CHANGE" translation]
       </Text>
       <View
         style={
@@ -1516,22 +1463,6 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
           }
         >
           [missing "en.GENERICS.CHANGE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#ab2703",
-              "fontSize": 15,
-              "marginLeft": 30,
-            }
-          }
-        >
-          <mockMaterialCommunityIcons
-            name="arrow-down-bold"
-            size={16}
-          />
-          -$40,508.10
         </Text>
         <Text
           style={

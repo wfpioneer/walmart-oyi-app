@@ -47,7 +47,8 @@ export default StyleSheet.create({
   },
   confirmText: {
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 16,
+    paddingBottom: 5
   },
   modalQuantityRow: {
     flexDirection: 'row',
