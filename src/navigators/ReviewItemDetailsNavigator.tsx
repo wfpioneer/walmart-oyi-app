@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderBackButton } from '@react-navigation/elements';
+import { HeaderBackButton, HeaderTitle } from '@react-navigation/elements';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -17,7 +17,7 @@ import SelectLocationType from '../screens/SelectLocationType/SelectLocationType
 import { showInfoModal } from '../state/actions/Modal';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
-import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2 } from '../state/actions/asyncAPI';
+import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V3 } from '../state/actions/asyncAPI';
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
@@ -125,7 +125,11 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         name="ReviewItemDetailsHome"
         component={ReviewItemDetails}
         options={{
-          headerTitle: strings('ITEM.TITLE'),
+          headerTitle: () => (
+            <HeaderTitle style={{ color: COLOR.WHITE }} lineBreakMode="tail" numberOfLines={2}>
+              {strings('ITEM.TITLE')}
+            </HeaderTitle>
+          ),
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
@@ -149,7 +153,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         listeners={{
           beforeRemove: () => {
             dispatch({ type: GET_ITEM_DETAILS.RESET });
-            dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
+            dispatch({ type: GET_ITEM_DETAILS_V3.RESET });
           }
         }}
       />

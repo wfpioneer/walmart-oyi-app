@@ -50,9 +50,7 @@ export const renderSourceFilterCard = (
       // with itemdetails sources as that was the only possibility before audits
       // ditto on the todo
       if (item.catgName === approvalRequestSource.ItemDetails) {
-        filterSources.splice(
-          filterSources.indexOf('', 1)
-        );
+        filterSources.splice(filterSources.indexOf(''), 1);
       }
       trackEvent('approvals_update_filter_source', {
         categories: JSON.stringify(filterSources)
@@ -136,6 +134,7 @@ export const RenderSourceCollapsibleCard = (props: {
   return (
     <>
       <TouchableOpacity
+        testID="toggle sources"
         style={styles.menuCard}
         onPress={() => {
           toggleSrcs(!sourceOpen);
