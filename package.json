@@ -32,10 +32,10 @@
     "axios": "^0.26.0",
     "i18n-js": "^3.5.1",
     "lodash": "^4.17.15",
-    "mathjs": "^11.3.0",
-    "moment": "^2.29.1",
+    "mathjs": "^11.5.1",
+    "moment": "^2.29.4",
     "prop-types": "^15.8.1",
-    "qs": "^6.10.3",
+    "qs": "^6.11.0",
     "react": "^17.0.2",
     "react-devtools": "^4.24.3",
     "react-devtools-core": "^4.24.3",
@@ -64,8 +64,8 @@
     "react-native-wm-barcode": "^2.34.0",
     "react-native-wmsso": "^1.4.6",
     "react-redux": "^8.0.5",
-    "redux": "^4.2.0",
-    "redux-flipper": "^2.0.1",
+    "redux": "^4.2.1",
+    "redux-flipper": "^2.0.2",
     "redux-saga": "^1.2.2"
   },
   "devDependencies": {
@@ -98,10 +98,10 @@
     "jest-sonar-reporter": "^2.0.0",
     "jest-transform-stub": "^2.0.0",
     "metro-react-native-babel-preset": "^0.66.2",
-    "moment-timezone": "^0.5.34",
-    "prettier": "^2.5.1",
+    "moment-timezone": "^0.5.40",
+    "prettier": "^2.8.4",
     "react-test-renderer": "^17.0.2",
-    "typescript": "^4.3.5"
+    "typescript": "^4.9.5"
   },
   "relativeDependencies": {
     "react-native-flipper": "./react-native-flipper"
