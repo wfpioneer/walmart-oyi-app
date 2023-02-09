@@ -54,7 +54,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
 </Modal>
 `;
 
-exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized function tests Tests renderConfirmOnHandsModal with itemDetails onHandsQty 1`] = `
+exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized function tests Tests renderConfirmOnHandsModal snapshot 1`] = `
 <Modal
   animationType="none"
   hardwareAccelerated={false}
@@ -90,112 +90,22 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         ]
       }
     >
+      <mockMaterialCommunityIcons
+        color="#5FA7F2"
+        name="information"
+        size={40}
+      />
       <Text
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingBottom": 5,
+            "paddingBottom": 10,
           }
         }
       >
-        [missing "en.ITEM.SAVE_MODAL" translation]
+        [missing "en.ITEM.RESERVE_CONFIRMATION" translation]
       </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#9e9e9e",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 15,
-            }
-          }
-        >
-          42
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#9e9e9e",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.GENERICS.CHANGE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#33691E",
-              "fontSize": 15,
-              "marginLeft": 30,
-            }
-          }
-        >
-          8
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "marginBottom": 5,
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.AUDITS.UPDATED_QTY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 15,
-            }
-          }
-        >
-          50
-        </Text>
-      </View>
       <View
         style={
           Object {
@@ -1044,112 +954,22 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
     onClose={[Function]}
   >
     <React.Fragment>
+      <mockMaterialCommunityIcons
+        color="#5FA7F2"
+        name="information"
+        size={40}
+      />
       <Text
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingBottom": 5,
+            "paddingBottom": 10,
           }
         }
       >
-        [missing "en.ITEM.SAVE_MODAL" translation]
+        [missing "en.ITEM.RESERVE_CONFIRMATION" translation]
       </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#9e9e9e",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 15,
-            }
-          }
-        >
-          42
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#9e9e9e",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.GENERICS.CHANGE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#ab2703",
-              "fontSize": 15,
-              "marginLeft": 30,
-            }
-          }
-        >
-          -27
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "marginBottom": 5,
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.AUDITS.UPDATED_QTY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 15,
-            }
-          }
-        >
-          15
-        </Text>
-      </View>
       <View
         style={
           Object {
@@ -1401,112 +1221,22 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
     onClose={[Function]}
   >
     <React.Fragment>
+      <mockMaterialCommunityIcons
+        color="#5FA7F2"
+        name="information"
+        size={40}
+      />
       <Text
         style={
           Object {
             "fontSize": 16,
             "fontWeight": "bold",
-            "paddingBottom": 5,
+            "paddingBottom": 10,
           }
         }
       >
-        [missing "en.ITEM.SAVE_MODAL" translation]
+        [missing "en.ITEM.RESERVE_CONFIRMATION" translation]
       </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#9e9e9e",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 15,
-            }
-          }
-        >
-          42
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#9e9e9e",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.GENERICS.CHANGE" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "alignSelf": "flex-start",
-              "color": "#ab2703",
-              "fontSize": 15,
-              "marginLeft": 30,
-            }
-          }
-        >
-          -27
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "justifyContent": "space-evenly",
-            "marginBottom": 5,
-            "paddingVertical": 5,
-            "width": "90%",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          [missing "en.AUDITS.UPDATED_QTY" translation]
-        </Text>
-        <Text
-          style={
-            Object {
-              "fontSize": 15,
-            }
-          }
-        >
-          15
-        </Text>
-      </View>
       <View
         style={
           Object {
