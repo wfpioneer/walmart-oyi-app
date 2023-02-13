@@ -100,6 +100,8 @@ interface ItemDetails {
   };
   sales?: ItemSalesHistory;
   deliveryHistory?: ItemDeliveryHistory;
+  auditCompleted: boolean;
+  worklistAuditType: string;
 }
 export interface ItemOHChangeHistory {
   code: number;
