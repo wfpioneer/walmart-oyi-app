@@ -575,13 +575,12 @@ describe('ReserveAdjustmentScreen', () => {
       expect(mockDispatch).not.toBeCalled();
     });
 
-    it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
+    it('Tests renderConfirmOnHandsModal snapshot', () => {
       const { toJSON } = render(
         renderConfirmOnHandsModal(
           defaultAsyncState,
           true,
           mockSetShowOnHandsConfirmModal,
-          50,
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
@@ -601,7 +600,6 @@ describe('ReserveAdjustmentScreen', () => {
           mockUpdateMultiPalletUPCQtyLoading,
           true,
           mockSetShowOnHandsConfirmModal,
-          50,
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
@@ -617,7 +615,6 @@ describe('ReserveAdjustmentScreen', () => {
           defaultAsyncState,
           true,
           mockSetShowOnHandsConfirmModal,
-          50,
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
@@ -638,7 +635,6 @@ describe('ReserveAdjustmentScreen', () => {
           defaultAsyncState,
           true,
           mockSetShowOnHandsConfirmModal,
-          50,
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
