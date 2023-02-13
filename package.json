@@ -62,7 +62,7 @@
     "react-native-tab-view": "^3.3.4",
     "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-wm-barcode": "^2.36.7",
+    "react-native-wm-barcode": "^2.34.0",
     "react-native-wmsso": "^1.4.8",
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
