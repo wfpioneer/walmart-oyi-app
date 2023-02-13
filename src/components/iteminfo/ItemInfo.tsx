@@ -25,6 +25,7 @@ export type ItemInfoProps = {
   showAdditionalItemDetails: boolean;
   countryCode: string;
   showItemImage: boolean;
+  worklistAuditType?: string;
 };
 
 export type AdditionalItemDetailsProps = {
@@ -82,7 +83,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
     price, exceptionType, navigationForPrint: navigation, showAdditionalItemDetails, additionalItemDetails,
-    countryCode, showItemImage
+    countryCode, showItemImage, worklistAuditType
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -134,6 +135,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
         )}
         <View>
           {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
+          {worklistAuditType && <Text style={styles.auditFlagText}>{strings('AUDITS.AUDITS')}</Text>}
           <Text style={styles.itemNameText}>{itemName}</Text>
           <View style={styles.nbrContainer}>
             <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
