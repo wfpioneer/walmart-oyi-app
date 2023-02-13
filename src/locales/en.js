@@ -151,7 +151,8 @@ export default {
     UPDATE_MULTI_PALLET_FAILURE: 'Unable to update pallet quantities, please try again.',
     ERROR_PI_DELIVERY_HISTORY: 'There was an error pulling the delivery history. Please try again.',
     ERROR_PI_SALES_HISTORY: 'There was an error pulling the sales history. Please try again.',
-    DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again'
+    DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again',
+    RESERVE_CONFIRMATION: 'Save Reserve Pallet Changes?'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
