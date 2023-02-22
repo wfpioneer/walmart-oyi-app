@@ -19,13 +19,13 @@ itemDetail, {
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  callBackbarcodeEmitter, createNewPickApiHook, getExceptionType, getFloorItemDetails, getLocationCount,
-  getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales,
-  handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError,
-  isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateCompleteItemApiErrortHook,
-  onValidateCompleteItemApiResultHook, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
-  renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
+  callBackbarcodeEmitter, completeItemApiHook, createNewPickApiHook, getExceptionType, getFloorItemDetails,
+  getLocationCount, getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt,
+  getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty,
+  isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateItemDetails,
+  onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent,
+  renderOHChangeHistory, renderOHQtyComponent, renderPickHistory, renderReplenishmentCard,
+  renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -156,7 +156,8 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
 };
 
 describe('ReviewItemDetailsScreen', () => {
-  const defaultResult: AxiosResponse = {
+  const defaultResult: AxiosResponse<any> = {
+    // @ts-expect-error type error for AxiosRequestHeaders
     config: {},
     data: {},
     headers: {},
@@ -165,7 +166,7 @@ describe('ReviewItemDetailsScreen', () => {
     request: {}
   };
   const mockError: AxiosError = {
-    config: {},
+    config: undefined,
     isAxiosError: true,
     message: '500 Network Error',
     name: 'Network Error',
@@ -447,8 +448,10 @@ describe('ReviewItemDetailsScreen', () => {
         result: null
       };
       renderer.render(
-        renderScanForNoActionButton({ ...mockHandleProps, completeItemApi: noActionWaiting },
-          itemDetail[123].itemNbr)
+        renderScanForNoActionButton(
+          { ...mockHandleProps, completeItemApi: noActionWaiting },
+          itemDetail[123].itemNbr
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -460,8 +463,10 @@ describe('ReviewItemDetailsScreen', () => {
       });
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderScanForNoActionButton(mockHandleProps,
-          itemDetail[123].itemNbr)
+        renderScanForNoActionButton(
+          mockHandleProps,
+          itemDetail[123].itemNbr
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -586,6 +591,7 @@ describe('ReviewItemDetailsScreen', () => {
     const mockSetSelectedSection = jest.fn();
     const mockSetIsQuickPick = jest.fn();
     const mockSetNumberOfPallets = jest.fn();
+    const mockIsFocused = jest.fn(() => true);
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -951,7 +957,7 @@ describe('ReviewItemDetailsScreen', () => {
       mockItemDetailsScreenProps.dispatch = jest.fn();
       mockItemDetailsScreenProps.setErrorModalVisible = jest.fn();
     });
-    it('test onValidatePackPress', () => {
+    it('test onValidateBackPress', () => {
       const expectedActionCompleteResults = {
         payload: false,
         type: 'GLOBAL/SET_MANUAL_SCAN'
@@ -1003,11 +1009,17 @@ describe('ReviewItemDetailsScreen', () => {
       renderer.render(<View>{onIsWaiting(false)}</View>);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('test onValidateCompleteItemApiResultHook', () => {
-      const completedApi = {
+    it('test completeItemApiHook on successful result', () => {
+      const completedApiNotFound = {
         ...defaultAsyncState,
         result: {
           status: 204
+        }
+      };
+      const completedApiSuccess = {
+        ...defaultAsyncState,
+        result: {
+          status: 200
         }
       };
       const expectedShowModalAction = {
@@ -1018,21 +1030,27 @@ describe('ReviewItemDetailsScreen', () => {
         type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
-      onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, completedApi);
+      mockItemDetailsScreenProps.navigation.isFocused = mockIsFocused;
+      completeItemApiHook(mockItemDetailsScreenProps, completedApiNotFound);
+      expect(mockIsFocused).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalAction);
       mockDispatch.mockReset();
       const mockGoBack = jest.fn();
       navigationProp.goBack = mockGoBack;
-      onValidateCompleteItemApiResultHook(mockItemDetailsScreenProps, defaultAsyncState);
+      completeItemApiHook(mockItemDetailsScreenProps, completedApiSuccess);
       expect(mockDispatch).toHaveBeenCalledWith({ type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED' });
       expect(mockGoBack).toHaveBeenCalledTimes(1);
       navigationProp.goBack = jest.fn();
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });
-    it('test onValidateCompleteItemApiErrortHook', () => {
-      const errorApi = {
+    it('test completeItemApiHook on error result', () => {
+      const errorApi409 = {
         ...defaultAsyncState,
         error: COMPLETE_API_409_ERROR
+      };
+      const errorApi = {
+        ...defaultAsyncState,
+        error: 'Network Error'
       };
       const expectedShowModalAction = {
         payload: {
@@ -1049,10 +1067,12 @@ describe('ReviewItemDetailsScreen', () => {
         type: SHOW_INFO_MODAL
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
-      onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, errorApi);
+      mockItemDetailsScreenProps.navigation.isFocused = mockIsFocused;
+      completeItemApiHook(mockItemDetailsScreenProps, errorApi409);
+      expect(mockIsFocused).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalAction);
       mockDispatch.mockReset();
-      onValidateCompleteItemApiErrortHook(mockItemDetailsScreenProps, defaultAsyncState);
+      completeItemApiHook(mockItemDetailsScreenProps, errorApi);
       expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalCompleteError);
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });

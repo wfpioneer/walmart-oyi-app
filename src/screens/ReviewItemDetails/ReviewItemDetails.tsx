@@ -495,8 +495,11 @@ export const renderPiHistoryOrPiSalesHistoryError = (
 };
 
 export const renderReplenishmentHistory = (
-  result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
-  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  result: AxiosResponse | null,
+  error: AxiosError | null,
+  isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
   dispatch: Dispatch<any>
 ) => {
   if (isWaiting) {
@@ -552,7 +555,9 @@ export const renderReplenishmentHistory = (
   return renderPiHistoryOrPiSalesHistoryError(
     true,
     error,
-    trackEventCall, itemNbr, dispatch,
+    trackEventCall,
+    itemNbr,
+    dispatch,
     result?.data?.message
   );
 };
@@ -732,8 +737,11 @@ export const renderLocationComponent = (
 
 export const renderReplenishmentCard = (
   itemDetails: ItemDetails,
-  result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
-  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
+  result: AxiosResponse | null,
+  error: AxiosError | null,
+  isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
   dispatch: Dispatch<any>
 ) => (
   <View>
@@ -748,17 +756,24 @@ export const renderReplenishmentCard = (
   </View>
 );
 
-export const renderSalesGraphV3 = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
-  isSalesMetricsGraphView: boolean, result: AxiosResponse | null, error: AxiosError | null, isWaiting: boolean,
-  trackEventCall: (eventName: string, params?: any) => void, itemNbr: number,
-  dispatch: Dispatch<any>): JSX.Element => (
-    <SFTCard
-      title={strings('ITEM.SALES_METRICS')}
-      subTitle={updatedSalesTS}
-      bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
-      bottomRightBtnAction={isWaiting ? undefined : [toggleSalesGraphView]}
-    >
-      {isWaiting && (
+export const renderSalesGraphV3 = (
+  updatedSalesTS: string | undefined,
+  toggleSalesGraphView: any,
+  isSalesMetricsGraphView: boolean,
+  result: AxiosResponse | null,
+  error: AxiosError | null,
+  isWaiting: boolean,
+  trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number,
+  dispatch: Dispatch<any>
+): JSX.Element => (
+  <SFTCard
+    title={strings('ITEM.SALES_METRICS')}
+    subTitle={updatedSalesTS}
+    bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
+    bottomRightBtnAction={isWaiting ? undefined : [toggleSalesGraphView]}
+  >
+    {isWaiting && (
       <ActivityIndicator
         animating={true}
         hidesWhenStopped
@@ -766,20 +781,27 @@ export const renderSalesGraphV3 = (updatedSalesTS: string | undefined, toggleSal
         size="large"
         style={styles.completeActivityIndicator}
       />
+    )}
+    {result?.status === SUCCESS_STATUS
+      ? <SalesMetrics itemNbr={itemNbr} itemSalesHistory={result?.data} isGraphView={isSalesMetricsGraphView} />
+      : renderPiHistoryOrPiSalesHistoryError(
+        false,
+        error,
+        trackEventCall,
+        itemNbr,
+        dispatch,
+        result?.data?.message
       )}
-      {result?.status === SUCCESS_STATUS
-        ? <SalesMetrics itemNbr={itemNbr} itemSalesHistory={result?.data} isGraphView={isSalesMetricsGraphView} />
-        : renderPiHistoryOrPiSalesHistoryError(
-          false,
-          error,
-          trackEventCall, itemNbr, dispatch,
-          result?.data?.message
-        )}
-    </SFTCard>
+  </SFTCard>
 );
 
-export const renderSalesGraph = (updatedSalesTS: string | undefined, toggleSalesGraphView: any,
-  result: AxiosResponse | null, itemDetails: ItemDetails, isSalesMetricsGraphView: boolean): JSX.Element => {
+export const renderSalesGraph = (
+  updatedSalesTS: string | undefined,
+  toggleSalesGraphView: any,
+  result: AxiosResponse | null,
+  itemDetails: ItemDetails,
+  isSalesMetricsGraphView: boolean
+): JSX.Element => {
   // Checks orchestration response status for itemDetails only.
 
   if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS)
@@ -831,9 +853,7 @@ const completeAction = () => {
   // dispatch(navigation.goBack());
 };
 
-export const renderScanForNoActionButton = (
-  props: (RenderProps & HandleProps), itemNbr: number
-): JSX.Element => {
+export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), itemNbr: number): JSX.Element => {
   const {
     actionCompleted, completeItemApi, validateSessionCall, trackEventCall,
     dispatch, userId, isManualScanEnabled, navigation, route
@@ -861,8 +881,10 @@ export const renderScanForNoActionButton = (
         style={styles.scanForNoActionButton}
         onPress={() => {
           validateSessionCall(navigation, route.name).then(() => {
-            trackEventCall(REVIEW_ITEM_DETAILS,
-              { action: 'scan_for_no_action_click', itemNbr });
+            trackEventCall(
+              REVIEW_ITEM_DETAILS,
+              { action: 'scan_for_no_action_click', itemNbr }
+            );
             return dispatch(setManualScan(!isManualScanEnabled));
           }).catch(() => {
             trackEventCall('session_timeout', { user: userId });
@@ -1065,22 +1087,29 @@ export const onIsWaiting = (isWaiting: boolean) => (
   )
 );
 
-export const onValidateCompleteItemApiResultHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
+export const completeItemApiHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
   const { dispatch, navigation } = props;
-  if (_.get(completeItemApi.result, 'status') === 204) {
-    dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-  } else {
-    dispatch(setActionCompleted());
-    navigation.goBack();
-  }
-};
+  if (navigation.isFocused()) {
+    // on api success
+    if (!completeItemApi.isWaiting && completeItemApi.result) {
+      dispatch({ type: NO_ACTION.RESET });
+      if (_.get(completeItemApi.result, 'status') === 204) {
+        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
+      } else {
+        dispatch(setActionCompleted());
+        navigation.goBack();
+      }
+    }
 
-export const onValidateCompleteItemApiErrortHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
-  const { dispatch } = props;
-  if (completeItemApi.error === COMPLETE_API_409_ERROR) {
-    dispatch(showInfoModal(strings(ITEM_SCAN_DOESNT_MATCH), strings(ITEM_SCAN_DOESNT_MATCH_DETAILS)));
-  } else {
-    dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
+    // on api failure
+    if (!completeItemApi.isWaiting && completeItemApi.error) {
+      dispatch({ type: NO_ACTION.RESET });
+      if (completeItemApi.error === COMPLETE_API_409_ERROR) {
+        dispatch(showInfoModal(strings(ITEM_SCAN_DOESNT_MATCH), strings(ITEM_SCAN_DOESNT_MATCH_DETAILS)));
+      } else {
+        dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
+      }
+    }
   }
 };
 
@@ -1218,11 +1247,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   // Complete Item Details API
   useEffectHook(() => {
-    // on api success
-    if (!completeItemApi.isWaiting && completeItemApi.result) {
-      onValidateCompleteItemApiResultHook(props, completeItemApi);
-      dispatch({ type: NO_ACTION.RESET });
-    }
+    completeItemApiHook(props, completeItemApi);
   }, [completeItemApi]);
 
   useEffectHook(
@@ -1236,14 +1261,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     ),
     [createNewPickApi]
   );
-
-  useEffectHook(() => {
-    // on api failure
-    if (!completeItemApi.isWaiting && completeItemApi.error) {
-      onValidateCompleteItemApiErrortHook(props, completeItemApi);
-      dispatch({ type: NO_ACTION.RESET });
-    }
-  }, [completeItemApi]);
 
   useFocusEffectHook(
     () => {
@@ -1346,10 +1363,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           setNewOHQty={setNewOHQty}
           isWaiting={updateOHQtyApi.isWaiting}
           error={updateOHQtyApi.error}
-          handleClose={() => handleOHQtyClose(itemDetails?.onHandsQty || 0,
+          handleClose={() => handleOHQtyClose(
+            itemDetails?.onHandsQty || 0,
             dispatch,
             setOhQtyModalVisible,
-            setNewOHQty)}
+            setNewOHQty
+          )}
           handleSubmit={() => handleOHQtySubmit(itemDetails, newOHQty, dispatch)}
         />
       </CustomModalComponent>
@@ -1418,8 +1437,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 </View>
                 <View style={styles.historyContainer}>
                   {renderReplenishmentCard(
-                    itemDetails, piHistResult, piHistError, isPiHistWaiting,
-                    trackEventCall, itemDetails.itemNbr, dispatch
+                    itemDetails,
+                    piHistResult,
+                    piHistError,
+                    isPiHistWaiting,
+                    trackEventCall,
+                    itemDetails.itemNbr,
+                    dispatch
                   )}
                 </View>
               </>
@@ -1447,12 +1471,25 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 {renderPickHistory(props, picklistHistory, result, itemDetails.itemNbr)}
               </View>
             )}
-            {!additionalItemDetails && (renderSalesGraph(updatedSalesTS, toggleSalesGraphView, result,
-              itemDetails, isSalesMetricsGraphView))}
+            {!additionalItemDetails && (renderSalesGraph(
+              updatedSalesTS,
+              toggleSalesGraphView,
+              result,
+              itemDetails,
+              isSalesMetricsGraphView
+            ))}
             {additionalItemDetails && (
-              renderSalesGraphV3(updatedSalesTS, toggleSalesGraphView, isSalesMetricsGraphView,
-                piSalesHistResult, piSalesHistError, isPiSalesHistWaiting, trackEventCall,
-                itemDetails.itemNbr, dispatch))}
+              renderSalesGraphV3(
+                updatedSalesTS,
+                toggleSalesGraphView,
+                isSalesMetricsGraphView,
+                piSalesHistResult,
+                piSalesHistError,
+                isPiSalesHistWaiting,
+                trackEventCall,
+                itemDetails.itemNbr,
+                dispatch
+              ))}
           </View>
           )}
       </ScrollView>
