@@ -29,6 +29,7 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -53,6 +54,7 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -77,6 +79,7 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -101,6 +104,7 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -125,6 +129,7 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -147,6 +152,7 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -151,7 +151,8 @@ export default {
     UPDATE_MULTI_PALLET_FAILURE: '无法更新卡板数量，请重试',
     ERROR_PI_DELIVERY_HISTORY: '提取历史到货信息出错，请重试',
     ERROR_PI_SALES_HISTORY: '提取历史销售信息出错，请重试',
-    DELETE_PALLET_FAILURE: '删除卡板失败，请重试'
+    DELETE_PALLET_FAILURE: '删除卡板失败，请重试',
+    RESERVE_CONFIRMATION: '保存储位卡板库存变更'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',

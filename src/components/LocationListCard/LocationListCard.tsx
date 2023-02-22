@@ -99,7 +99,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
   } = props;
   const locationTitle = locationType === 'floor' ? strings('LOCATION.FLOOR') : strings('LOCATION.RESERVE');
 
-  if (error) {
+  if (error && !loading) {
     return (
       <View>
         <View style={styles.headerContainer}>

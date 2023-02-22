@@ -48,7 +48,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V2, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
+  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V3, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
   NO_ACTION, UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -1030,7 +1030,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
       if (scannedEvent.value) {
         // TODO revert V2 changes once BE orchestration is pushed to production
         if (userConfigs.additionalItemDetails) {
-          dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
+          dispatch({ type: GET_ITEM_DETAILS_V3.RESET });
           dispatch({ type: GET_ITEM_PIHISTORY.RESET });
           dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
           const itemNbr = parseInt(scannedEvent.value, 10);
@@ -1280,6 +1280,18 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     );
   }
 
+  if (isWaiting || !result) {
+    return (
+      <ActivityIndicator
+        animating={isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
   if (_.get(result, 'status') === 204 || _.get(itemDetails, 'code') === 204) {
     return (
       <View style={styles.safeAreaView}>
@@ -1290,18 +1302,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           <Text style={styles.errorText}>{strings('ITEM.ITEM_NOT_FOUND')}</Text>
         </View>
       </View>
-    );
-  }
-
-  if (isWaiting || !result) {
-    return (
-      <ActivityIndicator
-        animating={isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
     );
   }
 
@@ -1318,7 +1318,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
       if (additionalItemDetails) {
-        dispatch({ type: GET_ITEM_DETAILS_V2.RESET });
+        dispatch({ type: GET_ITEM_DETAILS_V3.RESET });
         dispatch({ type: GET_ITEM_PIHISTORY.RESET });
         dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
         dispatch(getItemDetailsV3({ id: itemDetails.itemNbr }));
@@ -1400,6 +1400,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               }}
               countryCode={countryCode}
               showItemImage={userConfigs.showItemImage}
+              worklistAuditType={itemDetails.worklistAuditType}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
@@ -1493,6 +1494,12 @@ const ReviewItemDetails = (): JSX.Element => {
   const [numberOfPallets, setNumberOfPallets] = useState(1);
   const [isQuickPick, setIsQuickPick] = useState(false);
   const [newOHQty, setNewOHQty] = useState(0);
+
+  const sortNames = (a: Location, b: Location) => a.locationName.localeCompare(b.locationName, undefined, {
+    numeric: true
+  });
+  floorLocations.sort(sortNames);
+  reserveLocations.sort(sortNames);
 
   return (
     <ReviewItemDetailsScreen

@@ -35,7 +35,7 @@ import ItemDetails from '../../../models/ItemDetails';
 import { AsyncState } from '../../../models/AsyncState';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import ItemCard from '../../../components/ItemCard/ItemCard';
-import { currencies, strings } from '../../../locales';
+import { strings } from '../../../locales';
 import Button, { ButtonType } from '../../../components/buttons/Button';
 import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/AuditItem';
 import {
@@ -372,17 +372,11 @@ export const renderConfirmOnHandsModal = (
   setShowOnHandsConfirmationModal: React.Dispatch<
     React.SetStateAction<boolean>
   >,
-  updatedQuantity: number,
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
   reserveLocations: ItemPalletInfo[]
 ) => {
-  const onHandsQty = itemDetails?.onHandsQty || 0;
-  const basePrice = itemDetails?.basePrice || 0;
-  const changeQuantity = updatedQuantity - onHandsQty;
-  const priceChange = basePrice * changeQuantity;
-  const priceLimit = Math.abs(priceChange) > 1000.0;
   const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
@@ -408,50 +402,14 @@ export const renderConfirmOnHandsModal = (
         />
       ) : (
         <>
-          {priceLimit && (
-            <MaterialCommunityIcon
-              name="alert"
-              size={40}
-              color={COLOR.ORANGE}
-            />
-          )}
+          <MaterialCommunityIcon
+            name="information"
+            size={40}
+            color={COLOR.DISABLED_BLUE}
+          />
           <Text style={styles.confirmText}>
-            {strings('ITEM.SAVE_MODAL')}
+            {strings('ITEM.RESERVE_CONFIRMATION')}
           </Text>
-          {priceLimit && (
-            <Text>{strings('AUDITS.LARGE_CURRENCY_CHANGE')}</Text>
-          )}
-          <View style={styles.modalQuantityRow}>
-            <Text style={styles.rowQuantityTitle}>
-              {strings('APPROVAL.CURRENT_QUANTITY')}
-            </Text>
-            <Text style={styles.rowQuantity}>{onHandsQty}</Text>
-          </View>
-          <View style={styles.modalQuantityRow}>
-            <Text style={styles.rowQuantityTitle}>
-              {strings('GENERICS.CHANGE')}
-            </Text>
-            <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>
-              <MaterialCommunityIcon
-                name={
-                  updatedQuantity > onHandsQty
-                    ? 'arrow-up-bold'
-                    : 'arrow-down-bold'
-                }
-                size={16}
-              />
-              {currencies(priceChange)}
-            </Text>
-            <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>
-              {changeQuantity}
-            </Text>
-          </View>
-          <View style={styles.updatedQtyRow}>
-            <Text style={styles.rowQuantityTitle}>
-              {strings('AUDITS.UPDATED_QTY')}
-            </Text>
-            <Text style={styles.rowQuantity}>{updatedQuantity}</Text>
-          </View>
           <View style={styles.buttonContainer}>
             <Button
               style={styles.button}
@@ -773,7 +731,6 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         updateMultiPalletUPCQtyV2Api,
         showOnHandsConfirmationModal,
         setShowOnHandsConfirmationModal,
-        calculateTotalOHQty(),
         itemDetails,
         dispatch,
         trackEventCall,

@@ -79,7 +79,10 @@
     "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-expressions": ["error"],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"]
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/function-component-definition": "off",
+    "function-paren-newline": "warn",
+    "react/no-unstable-nested-components": "warn"
   },
   "settings": {
     "import/resolver": {
