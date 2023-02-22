@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12
   },
+  auditFlagText: {
+    color: COLOR.PINK,
+    fontWeight: 'bold',
+    fontSize: 14
+  },
   itemNameText: {
     fontSize: 16,
     fontWeight: 'bold',

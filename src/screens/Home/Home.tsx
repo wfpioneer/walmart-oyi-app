@@ -265,10 +265,14 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderWorklistCards = () => dataSummary.worklistTypes
       .map(worklist => {
         const rollOverAuditWLEnabled = this.props.userConfig.showRollOverAudit;
-        // when show roll over complte is enabled than show only roll over when it is not completed
+        // when show roll over complete is enabled than show only roll over when it is not completed
         // and do not show the audit worklist type
-        // if completeted or no roll over than show both audit worklist
+        // if completed or no roll over than show both audit worklist
         if (worklist.worklistType === 'AU' && rollOverAuditWLEnabled && !isRollOverComplete()) {
+          return null;
+        }
+
+        if (worklist.worklistType === 'NO' && !this.props.userFeatures.includes('on hands change')) {
           return null;
         }
         const worklistType = worklist.worklistType === 'MP'
