@@ -28,6 +28,7 @@ export interface ConfigResponse {
   showItemImage: boolean;
   showFeedback: boolean;
   reserveAdjustment: boolean;
+  manualNoAction: boolean;
 }
 
 export default class ConfigService {

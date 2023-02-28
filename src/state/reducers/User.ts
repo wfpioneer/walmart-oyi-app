@@ -44,7 +44,8 @@ export const initialState: User = {
     multiPick: false,
     showItemImage: false,
     showFeedback: false,
-    reserveAdjustment: false
+    reserveAdjustment: false,
+    manualNoAction: false
   }
 };
 
@@ -90,7 +91,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           multiPick: action.payload.multiPick || false,
           showItemImage: action.payload.showItemImage || false,
           showFeedback: action.payload.showFeedback || false,
-          reserveAdjustment: action.payload.reserveAdjustment || false
+          reserveAdjustment: action.payload.reserveAdjustment || false,
+          manualNoAction: action.payload.manualNoAction || false
         }
       };
     default:

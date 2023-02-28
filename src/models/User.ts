@@ -40,6 +40,7 @@ export interface Configurations {
   showItemImage: boolean;
   showFeedback: boolean;
   reserveAdjustment: boolean;
+  manualNoAction: boolean;
 }
 
 export interface area {
