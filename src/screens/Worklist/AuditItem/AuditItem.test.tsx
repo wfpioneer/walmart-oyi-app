@@ -33,6 +33,7 @@ import AuditItem, {
   getFloorLocationsResult,
   getItemDetailsApiHook,
   getItemPalletsApiHook,
+  getMultiPalletList,
   getScannedPalletEffect,
   getUpdatedReserveLocations,
   isError,
@@ -54,6 +55,7 @@ import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
 import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
+import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -141,8 +143,6 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   trackEventCall: jest.fn(),
   validateSessionCall: jest.fn(() => Promise.resolve()),
   useEffectHook: jest.fn(),
-  useFocusEffectHook: jest.fn(),
-  userFeatures: [],
   itemNumber: 0,
   setShowItemNotFoundMsg: jest.fn(),
   showItemNotFoundMsg: false,
@@ -179,7 +179,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
 
 describe('AuditItemScreen', () => {
   const mockError: AxiosError = {
-    config: {},
+    config: undefined,
     isAxiosError: true,
     message: '500 Network Error',
     name: 'Network Error',
@@ -334,13 +334,13 @@ describe('AuditItemScreen', () => {
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      addLocationHandler(
-        mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor, mockTrackEventCall
-      );
+      addLocationHandler(mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor, mockTrackEventCall);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockNavigate).toBeCalledTimes(1);
-      expect(mockTrackEventCall).toBeCalledWith('Audit_Item',
-        { action: 'add_new_floor_location_click', itemNumber: 1234567890 });
+      expect(mockTrackEventCall).toBeCalledWith(
+        'Audit_Item',
+        { action: 'add_new_floor_location_click', itemNumber: 1234567890 }
+      );
     });
 
     it('tests getFloorLocationsResult', () => {
@@ -536,8 +536,10 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
-      expect(mockTrackEventCall).toBeCalledWith('Audit_Item',
-        { action: 'confirm_delete_location_click', locName: 'A1-1' });
+      expect(mockTrackEventCall).toBeCalledWith(
+        'Audit_Item',
+        { action: 'confirm_delete_location_click', locName: 'A1-1' }
+      );
     });
 
     it('Tests deleteFloorLocationApiHook on 200 success for deleting location', () => {
@@ -630,15 +632,11 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
-      expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item', { action: 'delete_pallet_confirmation_click', palletId: 1234 }
-      );
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', { action: 'delete_pallet_confirmation_click', palletId: 1234 });
     });
 
     it('Tests deletePalletApiHook on 200 success for deleting location', () => {
-      deletePalletApiHook(
-        successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234
-      );
+      deletePalletApiHook(successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
@@ -646,7 +644,14 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests completeItemApiHook on 200 success for completing an item', () => {
-      completeItemApiHook(successApi, mockDispatch, navigationProp);
+      completeItemApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        itemPallets.pallets,
+        mockItemDetails,
+        false
+      );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'success',
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
@@ -657,10 +662,26 @@ describe('AuditItemScreen', () => {
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
 
-    it('Tests deletePalletApiHook on failure', () => {
-      deletePalletApiHook(
-        failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234
+    it('Tests completeItemApiHook on 200 success for completing an item with "hasNewQty" set to true', () => {
+      completeItemApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        itemPallets.pallets,
+        mockItemDetails,
+        true
       );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledTimes(2);
+    });
+
+    it('Tests deletePalletApiHook on failure', () => {
+      deletePalletApiHook(failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
@@ -668,7 +689,7 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
-      completeItemApiHook(failureApi, mockDispatch, navigationProp);
+      completeItemApiHook(failureApi, mockDispatch, navigationProp, itemPallets.pallets, mockItemDetails, false);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
@@ -869,8 +890,10 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalConfirmButton);
       expect(mockSetShowOnHandsConfirmModal).toHaveBeenCalledWith(false);
-      expect(mockTrackEventCall).toBeCalledWith('Audit_Item',
-        { action: 'cancel_OH_qty_update', itemNumber: 1234567890, upcNbr: '000055559999' });
+      expect(mockTrackEventCall).toBeCalledWith(
+        'Audit_Item',
+        { action: 'cancel_OH_qty_update', itemNumber: 1234567890, upcNbr: '000055559999' }
+      );
     });
 
     it('Test disabledContinue functionality return true when any of the locaion is empty', () => {
@@ -1134,6 +1157,18 @@ describe('AuditItemScreen', () => {
     it('tests sortReserveLocations', () => {
       const result = sortReserveLocations(locations);
       expect(result).toEqual(sortedLocations);
+    });
+
+    it('Tests getMultiPalletList function', () => {
+      const palletInfoList = itemPallets.pallets;
+
+      const multiPalletUPCRequestBody: UpdateMultiPalletUPCQtyRequest['PalletList'] = [{
+        palletId: palletInfoList[0].palletId,
+        expirationDate: '',
+        upcs: [{ upcNbr: mockItemDetails.upcNbr || 0, quantity: palletInfoList[0].newQty }]
+      }];
+      const multiPalletListResult = getMultiPalletList(palletInfoList, mockItemDetails);
+      expect(multiPalletListResult).toStrictEqual(multiPalletUPCRequestBody);
     });
   });
 });

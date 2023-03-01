@@ -16,7 +16,6 @@ import {
 import {
   NavigationProp,
   RouteProp,
-  useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -100,6 +99,7 @@ export interface AuditItemScreenProps {
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
   completeItemApi: AsyncState;
+  // eslint-disable-next-line react/no-unused-prop-types
   userId: string;
   floorLocations: Location[];
   reserveLocations: ItemPalletInfo[];
@@ -113,8 +113,6 @@ export interface AuditItemScreenProps {
     route?: string
   ) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  useFocusEffectHook: (effect: EffectCallback) => void;
-  userFeatures: string[];
   itemNumber: number;
   showItemNotFoundMsg: boolean;
   setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
@@ -552,10 +550,25 @@ export const renderpalletQtyUpdateModal = (
   );
 };
 
+export const getMultiPalletList = (reserveLocations: ItemPalletInfo[], itemDetails: ItemDetails | null) => {
+  const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
+    {
+      palletId: item.palletId,
+      expirationDate: '', // This is fine as it does not update the expiration date on the pallet
+      upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
+    }
+  ));
+
+  return newPalletList;
+};
+
 export const completeItemApiHook = (
   completeItemApi: AsyncState,
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null,
+  hasNewQty: boolean
 ) => {
   if (navigation.isFocused()) {
     if (!completeItemApi.isWaiting && completeItemApi.error) {
@@ -575,7 +588,12 @@ export const completeItemApiHook = (
         position: 'bottom'
       });
       dispatch({ type: NO_ACTION.RESET });
-      navigation.goBack();
+      // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
+      if (hasNewQty) {
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+      } else {
+        navigation.goBack();
+      }
     }
   }
 };
@@ -597,14 +615,7 @@ export const updateOHQtyApiHook = (
       });
       dispatch({ type: UPDATE_OH_QTY.RESET });
 
-      const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
-        {
-          palletId: item.palletId,
-          expirationDate: '', // This is fine as it does not update the expiration date on the pallet
-          upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
-        }
-      ));
-      dispatch(updateMultiPalletUPCQty({ PalletList: newPalletList }));
+      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
     }
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
       Toast.show({
@@ -740,11 +751,15 @@ export const renderDeleteLocationModal = (
             onPress={() => {
               deleteLocationConfirmed(locationType);
               if (locationType === 'reserve') {
-                trackEventCall('Audit_Item',
-                  { action: 'delete_pallet_confirmation_click', palletId });
+                trackEventCall(
+                  'Audit_Item',
+                  { action: 'delete_pallet_confirmation_click', palletId }
+                );
               } else {
-                trackEventCall('Audit_Item',
-                  { action: 'confirm_delete_location_click', locName: locationName });
+                trackEventCall(
+                  'Audit_Item',
+                  { action: 'confirm_delete_location_click', locName: locationName }
+                );
               }
             }}
           />
@@ -840,8 +855,10 @@ export const renderConfirmOnHandsModal = (
               titleColor={COLOR.MAIN_THEME_COLOR}
               testID="modal-cancel-button"
               onPress={() => {
-                trackEventCall('Audit_Item',
-                  { action: 'cancel_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr });
+                trackEventCall(
+                  'Audit_Item',
+                  { action: 'cancel_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr }
+                );
                 setShowOnHandsConfirmationModal(false);
               }}
               type={2}
@@ -852,13 +869,15 @@ export const renderConfirmOnHandsModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={() => {
-                trackEventCall('Audit_Item',
+                trackEventCall(
+                  'Audit_Item',
                   {
                     action: 'complete_audit_item_click',
                     type: 'OH_qty_update',
                     itemNumber: itemDetails?.itemNbr,
                     upcNbr: itemDetails?.upcNbr
-                  });
+                  }
+                );
                 dispatch(
                   updateOHQty({
                     data: {
@@ -927,8 +946,11 @@ export const disabledContinue = (
   );
 
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
-  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(b.locationName,
-    undefined, { numeric: true });
+  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(
+    b.locationName,
+    undefined,
+    { numeric: true }
+  );
 
   return locations.sort(sortLocationNames);
 };
@@ -984,6 +1006,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reserveLocations,
     itemDetails
   );
+
+  const hasNewQty = reserveLocations.some(loc => loc.quantity !== loc.newQty);
 
   // Scanner listener
   useEffectHook(() => {
@@ -1045,8 +1069,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Complete Item API
   useEffectHook(
-    () => completeItemApiHook(completeItemApi, dispatch, navigation),
-    [completeItemApi]
+    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, itemDetails, hasNewQty),
+    [completeItemApi, hasNewQty]
   );
 
   // Delete Location API
@@ -1065,8 +1089,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   // report missing pallet API
   useEffectHook(
     () => deletePalletApiHook(
-      deletePalletApi, dispatch, navigation,
-      setShowDeleteConfirmationModal, locToConfirm.palletId, itemNumber
+      deletePalletApi,
+      dispatch,
+      navigation,
+      setShowDeleteConfirmationModal,
+      locToConfirm.palletId,
+      itemNumber
     ),
     [deletePalletApi]
   );
@@ -1166,8 +1194,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('Audit_Item',
-        { action: 'delete_floor_location_click', location: JSON.stringify(loc), index: locIndex });
+      trackEventCall(
+        'Audit_Item',
+        { action: 'delete_floor_location_click', location: JSON.stringify(loc), index: locIndex }
+      );
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'floor',
@@ -1182,8 +1212,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteReserveLocation = (loc: ItemPalletInfo, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('Audit_Item',
-        { action: 'delete_pallet_click', location: JSON.stringify(loc), index: locIndex });
+      trackEventCall(
+        'Audit_Item',
+        { action: 'delete_pallet_click', location: JSON.stringify(loc), index: locIndex }
+      );
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'reserve',
@@ -1473,7 +1505,6 @@ const AuditItem = (): JSX.Element => {
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
-      useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
       userId={userId}
       itemNumber={itemNumber}
