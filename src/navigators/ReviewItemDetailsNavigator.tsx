@@ -25,6 +25,7 @@ import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdjustment';
+import NoActionScan from '../screens/NoActionScan/NoActionScan';
 
 interface ReviewItemDetailsNavigatorProps {
   isManualScanEnabled: boolean;
@@ -165,9 +166,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
       {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage'
         ? renderCamButton()
         : null}
-      {!manualNoAction
-        ? renderScanButton(dispatch, isManualScanEnabled)
-        : null}
+      {renderScanButton(dispatch, isManualScanEnabled)}
       {renderPrintQueueButton(navigation)}
     </View>
   );
@@ -189,6 +188,12 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
       {showCalculator && renderCalcButton(dispatch, calcOpen)}
       {renderPrintQueueButton(navigation)}
       {renderScanButton(dispatch, isManualScanEnabled)}
+    </View>
+  );
+
+  const noActionScanHeaderRight = () => (
+    <View style={styles.headerContainer}>
+      {manualNoAction && renderScanButton(dispatch, isManualScanEnabled)}
     </View>
   );
 
@@ -216,6 +221,17 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
             dispatch({ type: GET_ITEM_DETAILS.RESET });
             dispatch({ type: GET_ITEM_DETAILS_V3.RESET });
           }
+        }}
+      />
+      <Stack.Screen
+        name="NoActionScan"
+        component={NoActionScan}
+        options={{
+          headerTitle: strings('LOCATION.SCAN_ITEM'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false,
+          headerRight: noActionScanHeaderRight
         }}
       />
       <Stack.Screen

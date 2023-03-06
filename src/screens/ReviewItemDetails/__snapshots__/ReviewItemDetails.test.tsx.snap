@@ -295,21 +295,6 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
 
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test onIsWaiting 2`] = `<View />`;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Activity Indicator waiting for No Action Response 1`] = `
-<ActivityIndicator
-  animating={true}
-  color="#0071e9"
-  hidesWhenStopped={true}
-  size="large"
-  style={
-    Object {
-      "alignItems": "center",
-      "justifyContent": "center",
-    }
-  }
-/>
-`;
-
 exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Nothing for' Scan for No Action' button 1`] = `<View />`;
 
 exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Scan for No Action Button if Platform is Android 1`] = `
