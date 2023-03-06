@@ -29,19 +29,18 @@ import { strings } from '../../locales';
 import { styles } from './NoActionScan.style';
 import COLOR from '../../themes/Color';
 import { NO_ACTION } from '../../state/actions/asyncAPI';
-import { showInfoModal } from '../../state/actions/Modal';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
-import {
-  COMPLETE_API_409_ERROR,
-  renderBarcodeErrorModal
-} from '../ReviewItemDetails/ReviewItemDetails';
+import { renderBarcodeErrorModal } from '../ReviewItemDetails/ReviewItemDetails';
 import { noAction } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
-import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 
 const NO_ACTION_SCAN = 'No_Action_Scan';
+export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
+export const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
+export const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
 
-interface NoActionScanScreenProps {
+export interface NoActionScanScreenProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
@@ -118,12 +117,13 @@ export const completeItemApiHook = (
     if (!completeItemApi.isWaiting && completeItemApi.result) {
       dispatch({ type: NO_ACTION.RESET });
       if (completeItemApi.result.status === 204) {
-        dispatch(
-          showInfoModal(
-            strings('ITEM.SCAN_DOESNT_MATCH'),
-            strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')
-          )
-        );
+        Toast.show({
+          type: 'info',
+          text1: strings(ITEM_SCAN_DOESNT_MATCH),
+          text2: strings(ITEM_SCAN_DOESNT_MATCH_DETAILS),
+          visibilityTime: SNACKBAR_TIMEOUT_LONG,
+          position: 'bottom'
+        });
       } else {
         dispatch(setActionCompleted());
         navigation.goBack();
@@ -134,29 +134,19 @@ export const completeItemApiHook = (
     if (!completeItemApi.isWaiting && completeItemApi.error) {
       dispatch({ type: NO_ACTION.RESET });
       if (completeItemApi.error === COMPLETE_API_409_ERROR) {
-        // dispatch(
-        //   showInfoModal(
-        //     strings('ITEM.SCAN_DOESNT_MATCH'),
-        //     strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')
-        //   )
-        // );
         Toast.show({
           type: 'error',
-          text1: strings('ITEM.SCAN_DOESNT_MATCH_DETAILS'),
-          visibilityTime: SNACKBAR_TIMEOUT,
+          text1: strings(ITEM_SCAN_DOESNT_MATCH),
+          text2: strings(ITEM_SCAN_DOESNT_MATCH_DETAILS),
+          visibilityTime: SNACKBAR_TIMEOUT_LONG,
           position: 'bottom'
         });
       } else {
-        // dispatch(
-        //   showInfoModal(
-        //     strings('ITEM.ACTION_COMPLETE_ERROR'),
-        //     strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')
-        //   )
-        // );
         Toast.show({
           type: 'error',
-          text1: strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS'),
-          visibilityTime: SNACKBAR_TIMEOUT,
+          text1: strings('ITEM.ACTION_COMPLETE_ERROR'),
+          text2: strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS'),
+          visibilityTime: SNACKBAR_TIMEOUT_LONG,
           position: 'bottom'
         });
       }
@@ -211,23 +201,6 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
     completeItemApiHook(dispatch, navigation, completeItemApi);
   }, [completeItemApi]);
 
-  // // Navigation Listener
-  // useEffectHook(() => {
-  //   // Resets location api response data when navigating off-screen
-  //   navigation.addListener('focus', () => {
-  //     dispatch(setBottomTab(false));
-  //   });
-  //   navigation.addListener('beforeRemove', () => {
-  //     dispatch(setBottomTab(true));
-  //     dispatch({ type: 'API/ADD_LOCATION/RESET' });
-  //   });
-
-  //   return () => {
-  //     navigation.removeListener('focus', () => {});
-  //     navigation.removeListener('beforeRemove', () => {});
-  //   };
-  // }, []);
-
   if (completeItemApi.isWaiting) {
     return (
       <ActivityIndicator
@@ -259,7 +232,7 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
             color={COLOR.BLACK}
           />
           <View style={styles.scanText}>
-            <Text>{strings('PALLET.SCAN_INSTRUCTIONS')}</Text>
+            <Text>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
           </View>
         </View>
       </View>

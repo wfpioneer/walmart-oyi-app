@@ -61,8 +61,6 @@ import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { TrackEventSource } from '../../models/Generics.d';
 
-export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
-
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
 
@@ -78,8 +76,9 @@ export interface ItemDetailsScreenProps {
   updateOHQtyApi: AsyncState;
   userId: string;
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
-  floorLocations?: Location[];
-  reserveLocations?: Location[];
+  floorLocations: Location[] | undefined;
+  // eslint-disable-next-line react/no-unused-prop-types
+  reserveLocations: Location[] | undefined;
   route: RouteProp<any, string>;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
