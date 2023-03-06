@@ -32,30 +32,35 @@ interface ReviewItemDetailsNavigatorProps {
   title:string;
   dispatch:Dispatch<any>;
   navigation:NavigationProp<any>;
+  manualNoAction: boolean;
 }
 const Stack = createStackNavigator();
 
-export const renderScanButton = (dispatch: Dispatch<any>,
-  isManualScanEnabled: boolean): JSX.Element => (
-    <TouchableOpacity testID="barcode-scan" onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
-      <View style={styles.iconBtn}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
-      </View>
-    </TouchableOpacity>
+export const renderScanButton = (
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean
+): JSX.Element => (
+  <TouchableOpacity testID="barcode-scan" onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
+    <View style={styles.iconBtn}>
+      <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
 );
 
-export const renderCalcButton = (dispatch: Dispatch<any>,
-  calcOpen:boolean): JSX.Element => (
-    <TouchableOpacity
-      onPress={() => {
-        dispatch(setCalcOpen(!calcOpen));
-      }}
-      testID="calc-button"
-    >
-      <View style={styles.iconBtn}>
-        <MaterialCommunityIcon name="calculator" size={20} color={COLOR.WHITE} />
-      </View>
-    </TouchableOpacity>
+export const renderCalcButton = (
+  dispatch: Dispatch<any>,
+  calcOpen:boolean
+): JSX.Element => (
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(setCalcOpen(!calcOpen));
+    }}
+    testID="calc-button"
+  >
+    <View style={styles.iconBtn}>
+      <MaterialCommunityIcon name="calculator" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
 );
 export const renderCamButton = () => (
   <TouchableOpacity testID="open-camera" onPress={() => { openCamera(); }}>
@@ -83,8 +88,12 @@ export const renderPrintQueueButton = (navigation: NavigationProp<any>): JSX.Ele
   </TouchableOpacity>
 );
 
-export const navigateBack = (dispatch: Dispatch<any>,
-  actionCompleted:boolean, exceptionType: string | null | undefined, navigation:NavigationProp<any>) => {
+export const navigateBack = (
+  dispatch: Dispatch<any>,
+  actionCompleted:boolean,
+  exceptionType: string | null | undefined,
+  navigation:NavigationProp<any>
+) => {
   if (!actionCompleted) {
     if (exceptionType === 'po') {
       return dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
@@ -111,7 +120,15 @@ export const renderCloseButton = (dispatch: Dispatch<any>, navigation:Navigation
 
 export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigatorProps): JSX.Element => {
   const {
-    isManualScanEnabled, calcOpen, exceptionType, actionCompleted, showCalculator, title, dispatch, navigation
+    isManualScanEnabled,
+    calcOpen,
+    exceptionType,
+    actionCompleted,
+    showCalculator,
+    title,
+    dispatch,
+    navigation,
+    manualNoAction
   } = props;
   return (
     <Stack.Navigator
@@ -145,7 +162,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerRight: () => (
             <View style={styles.headerContainer}>
               {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
-              {renderScanButton(dispatch, isManualScanEnabled)}
+              {!manualNoAction ? renderScanButton(dispatch, isManualScanEnabled) : null}
               {renderPrintQueueButton(navigation)}
             </View>
           )
@@ -250,7 +267,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
 const ReviewItemDetailsNavigator = ():JSX.Element => {
   const { isManualScanEnabled, calcOpen } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
-  const { showCalculator } = useTypedSelector(state => state.User.configs);
+  const { showCalculator, manualNoAction } = useTypedSelector(state => state.User.configs);
   const { title } = useTypedSelector(state => state.ItemHistory);
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
@@ -264,6 +281,7 @@ const ReviewItemDetailsNavigator = ():JSX.Element => {
       title={title}
       dispatch={dispatch}
       navigation={navigation}
+      manualNoAction={manualNoAction}
 
     />
   );
