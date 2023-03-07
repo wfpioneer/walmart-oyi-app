@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Keyboard,
   KeyboardAvoidingView,
+  Pressable,
   Text,
   View
 } from 'react-native';
@@ -17,13 +18,11 @@ import {
 } from '@react-navigation/native';
 import { trackEvent } from 'appcenter-analytics';
 import Toast from 'react-native-toast-message';
+import Config from 'react-native-config';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import {
-  setManualScan,
-  setScannedEvent
-} from '../../state/actions/Global';
-import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setManualScan } from '../../state/actions/Global';
+import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
 import { styles } from './NoActionScan.style';
@@ -64,11 +63,9 @@ const handleUnhandledTouches = () => {
 
 export const callBackbarcodeEmitter = (
   scan: any,
-  exceptionType: string | undefined | null,
   upcNbr: string,
   itemNbr: number,
   userId: string,
-  actionCompleted: boolean,
   route: RouteProp<any>,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
@@ -85,7 +82,6 @@ export const callBackbarcodeEmitter = (
           type: scan.type
         });
         if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
-          if (exceptionType && !actionCompleted) {
             dispatch(
               noAction({
                 upc: upcNbr,
@@ -94,9 +90,6 @@ export const callBackbarcodeEmitter = (
               })
             );
             dispatch(setManualScan(false));
-          } else {
-            dispatch(setScannedEvent(scan));
-          }
         } else {
           setErrorModalVisible(true);
         }
@@ -126,6 +119,7 @@ export const completeItemApiHook = (
         });
       } else {
         dispatch(setActionCompleted());
+        navigation.goBack();
         navigation.goBack();
       }
     }
@@ -178,11 +172,9 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
       callBackbarcodeEmitter(
         scan,
-        exceptionType,
         upcNbr,
         itemNbr,
         userId,
-        actionCompleted,
         route,
         dispatch,
         navigation,
@@ -226,11 +218,19 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
           <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />
         )}
         <View style={styles.scanContainer}>
-          <MaterialCommunityIcons
-            size={100}
-            name="barcode-scan"
-            color={COLOR.BLACK}
-          />
+          <Pressable onPress={() => {
+            if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+              return openCamera();
+            }
+            return null;
+          }}
+          >
+            <MaterialCommunityIcons
+              size={100}
+              name="barcode-scan"
+              color={COLOR.BLACK}
+            />
+          </Pressable>
           <View style={styles.scanText}>
             <Text>{strings('ITEM.SCAN_FOR_NO_ACTION')}</Text>
           </View>

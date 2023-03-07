@@ -60,6 +60,7 @@ import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { TrackEventSource } from '../../models/Generics.d';
+import { barcodeEmitter } from '../../utils/scannerUtils';
 
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
@@ -947,6 +948,28 @@ export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: Item
   }
 };
 
+export const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any) => {
+  const {
+    userId,
+    route,
+    dispatch,
+    navigation,
+    setErrorModalVisible,
+    trackEventCall,
+    validateSessionCall
+  } = props;
+  if (navigation.isFocused()) {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'barcode_scan', value: scan.value, type: scan.type });
+      if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
+        dispatch(setScannedEvent(scan));
+      } else {
+        setErrorModalVisible(true);
+      }
+    }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+  }
+};
+
 export const handleCreateNewPick = (
   props: ItemDetailsScreenProps,
   itemDetails: ItemDetails,
@@ -1161,6 +1184,16 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     onValidateItemDetails(dispatch, itemDetails);
     setNewOHQty(itemDetails?.onHandsQty || 0);
   }, [itemDetails]);
+
+  // Barcode event listener effect
+  useEffectHook(() => {
+    const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
+      callBackbarcodeEmitter(props, scan);
+    });
+    return () => {
+      scanSubscription.remove();
+    };
+  }, [itemDetails, actionCompleted]);
 
   useEffectHook(
     () => createNewPickApiHook(

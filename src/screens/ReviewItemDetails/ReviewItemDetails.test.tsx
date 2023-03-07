@@ -19,13 +19,13 @@ itemDetail, {
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  createNewPickApiHook, getExceptionType, getFloorItemDetails,
-  getLocationCount, getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt,
-  getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty,
-  isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateItemDetails,
-  onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent,
-  renderOHChangeHistory, renderOHQtyComponent, renderPickHistory, renderReplenishmentCard,
-  renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
+  callBackbarcodeEmitter, createNewPickApiHook, getExceptionType,
+  getFloorItemDetails, getLocationCount, getPendingOnHandsQty, getReserveItemDetails,
+  getTopRightBtnTxt, getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit,
+  handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress,
+  onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal,
+  renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -890,6 +890,32 @@ describe('ReviewItemDetailsScreen', () => {
       };
       onValidateItemDetails(mockDispatch, itemDetail[123]);
       expect(mockDispatch).toHaveBeenCalledWith(expectedResults);
+    });
+
+    it('testing callBackbarcodeEmitter', async () => {
+      const expectedSetScannedEventAction = {
+        payload: {
+          type: 'UPC-A',
+          value: '1234567890098'
+        },
+        type: 'GLOBAL/SET_SCANNED_EVENT'
+      };
+      mockItemDetailsScreenProps.dispatch = mockDispatch;
+
+      await callBackbarcodeEmitter(
+        mockItemDetailsScreenProps,
+        { value: '1234567890098', type: 'UPC-A' },
+      );
+      expect(mockDispatch).toHaveBeenCalledWith(expectedSetScannedEventAction);
+      const mockSetErrorModalVisible = jest.fn();
+      mockItemDetailsScreenProps.setErrorModalVisible = mockSetErrorModalVisible;
+      await callBackbarcodeEmitter(
+        mockItemDetailsScreenProps,
+        { value: '1234567890098', type: 'QRCODE' },
+      );
+      expect(mockSetErrorModalVisible).toHaveBeenCalledWith(true);
+      mockItemDetailsScreenProps.dispatch = jest.fn();
+      mockItemDetailsScreenProps.setErrorModalVisible = jest.fn();
     });
 
     it('test onValidateBackPress', () => {

@@ -188,7 +188,7 @@ describe('NoActionScan', () => {
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
-      expect(mockGoBack).toHaveBeenCalledTimes(1);
+      expect(mockGoBack).toHaveBeenCalledTimes(2);
     });
 
     it('test completeItemApiHook on error result', () => {
@@ -239,22 +239,13 @@ describe('NoActionScan', () => {
         payload: false,
         type: 'GLOBAL/SET_MANUAL_SCAN'
       };
-      const expectedSetScannedEventAction = {
-        payload: {
-          type: 'UPC-A',
-          value: '1234567890098'
-        },
-        type: 'GLOBAL/SET_SCANNED_EVENT'
-      };
 
       mockNoActionScreenProps.dispatch = mockDispatch;
       await callBackbarcodeEmitter(
         { value: '1234567890098', type: 'UPC-A' },
-        mockItemDetails.exceptionType,
         mockItemDetails.upcNbr,
         mockItemDetails.itemNbr,
         mockNoActionScreenProps.userId,
-        mockNoActionScreenProps.actionCompleted,
         mockNoActionScreenProps.route,
         mockDispatch,
         navigationProp,
@@ -269,31 +260,11 @@ describe('NoActionScan', () => {
       );
       mockDispatch.mockReset();
 
-      mockNoActionScreenProps.actionCompleted = true;
-      await callBackbarcodeEmitter(
-        { value: '1234567890098', type: 'UPC-A' },
-        mockItemDetails.exceptionType,
-        mockItemDetails.upcNbr,
-        mockItemDetails.itemNbr,
-        mockNoActionScreenProps.userId,
-        mockNoActionScreenProps.actionCompleted,
-        mockNoActionScreenProps.route,
-        mockDispatch,
-        navigationProp,
-        mockSetErrorModalVisible,
-        mockNoActionScreenProps.trackEventCall,
-        mockNoActionScreenProps.validateSessionCall
-      );
-      expect(mockDispatch).toHaveBeenCalledWith(expectedSetScannedEventAction);
-      mockNoActionScreenProps.actionCompleted = false;
-
       await callBackbarcodeEmitter(
         { value: '1234567890098', type: 'QRCODE' },
-        mockItemDetails.exceptionType,
         mockItemDetails.upcNbr,
         mockItemDetails.itemNbr,
         mockNoActionScreenProps.userId,
-        mockNoActionScreenProps.actionCompleted,
         mockNoActionScreenProps.route,
         mockDispatch,
         navigationProp,
