@@ -18,7 +18,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  createNewPick, getItemDetails, getItemDetailsV3, getItemPiHistory, getItemPiSalesHistory, noAction, updateOHQty
+  createNewPick, getItemDetails, getItemDetailsV3, getItemPiHistory, getItemPiSalesHistory, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -32,7 +32,6 @@ import { strings } from '../../locales';
 import Button from '../../components/buttons/Button';
 import SalesMetrics from '../../components/salesmetrics/SalesMetrics';
 import ManualScanComponent from '../../components/manualscan/ManualScan';
-import { barcodeEmitter } from '../../utils/scannerUtils';
 import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/actions/Global';
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
@@ -49,7 +48,7 @@ import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
   CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V3, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
-  NO_ACTION, UPDATE_OH_QTY
+  UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import ItemDetailsList, { ItemDetailsListRow } from '../../components/ItemDetailsList/ItemDetailsList';
@@ -61,10 +60,7 @@ import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { TrackEventSource } from '../../models/Generics.d';
-
-export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
-const ITEM_SCAN_DOESNT_MATCH = 'ITEM.SCAN_DOESNT_MATCH';
-const ITEM_SCAN_DOESNT_MATCH_DETAILS = 'ITEM.SCAN_DOESNT_MATCH_DETAILS';
+import { barcodeEmitter } from '../../utils/scannerUtils';
 
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
@@ -77,13 +73,13 @@ export interface ItemDetailsScreenProps {
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
   isPiHistWaiting: boolean; piHistError: AxiosError | null; piHistResult: AxiosResponse | null;
   isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
-  completeItemApi: AsyncState;
   createNewPickApi: AsyncState;
   updateOHQtyApi: AsyncState;
   userId: string;
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
-  floorLocations?: Location[];
-  reserveLocations?: Location[];
+  floorLocations: Location[] | undefined;
+  // eslint-disable-next-line react/no-unused-prop-types
+  reserveLocations: Location[] | undefined;
   route: RouteProp<any, string>;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
@@ -117,7 +113,6 @@ export interface HandleProps {
 
 export interface RenderProps {
   actionCompleted: boolean;
-  completeItemApi: AsyncState;
   isManualScanEnabled: boolean;
   floorLocations?: Location[];
   reserveLocations?: Location[];
@@ -855,24 +850,12 @@ const completeAction = () => {
 
 export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), itemNbr: number): JSX.Element => {
   const {
-    actionCompleted, completeItemApi, validateSessionCall, trackEventCall,
-    dispatch, userId, isManualScanEnabled, navigation, route
+    actionCompleted, validateSessionCall, trackEventCall,
+    userId, navigation, route
   } = props;
 
   if (actionCompleted) {
     return <View />;
-  }
-
-  if (completeItemApi?.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={completeItemApi.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.completeActivityIndicator}
-      />
-    );
   }
 
   if (Platform.OS === 'android') {
@@ -885,7 +868,7 @@ export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), 
               REVIEW_ITEM_DETAILS,
               { action: 'scan_for_no_action_click', itemNbr }
             );
-            return dispatch(setManualScan(!isManualScanEnabled));
+            navigation.navigate('NoActionScan');
           }).catch(() => {
             trackEventCall('session_timeout', { user: userId });
           });
@@ -965,10 +948,9 @@ export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: Item
   }
 };
 
-export const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any, itemDetails: ItemDetails) => {
+export const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any) => {
   const {
     userId,
-    actionCompleted,
     route,
     dispatch,
     navigation,
@@ -980,12 +962,7 @@ export const callBackbarcodeEmitter = (props: ItemDetailsScreenProps, scan: any,
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall(REVIEW_ITEM_DETAILS, { action: 'barcode_scan', value: scan.value, type: scan.type });
       if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
-        if (itemDetails && itemDetails.exceptionType && !actionCompleted) {
-          dispatch(noAction({ upc: itemDetails.upcNbr, itemNbr: itemDetails.itemNbr, scannedValue: scan.value }));
-          dispatch(setManualScan(false));
-        } else {
-          dispatch(setScannedEvent(scan));
-        }
+        dispatch(setScannedEvent(scan));
       } else {
         setErrorModalVisible(true);
       }
@@ -1087,32 +1064,6 @@ export const onIsWaiting = (isWaiting: boolean) => (
   )
 );
 
-export const completeItemApiHook = (props: ItemDetailsScreenProps, completeItemApi: AsyncState) => {
-  const { dispatch, navigation } = props;
-  if (navigation.isFocused()) {
-    // on api success
-    if (!completeItemApi.isWaiting && completeItemApi.result) {
-      dispatch({ type: NO_ACTION.RESET });
-      if (_.get(completeItemApi.result, 'status') === 204) {
-        dispatch(showInfoModal(strings('ITEM.SCAN_DOESNT_MATCH'), strings('ITEM.SCAN_DOESNT_MATCH_DETAILS')));
-      } else {
-        dispatch(setActionCompleted());
-        navigation.goBack();
-      }
-    }
-
-    // on api failure
-    if (!completeItemApi.isWaiting && completeItemApi.error) {
-      dispatch({ type: NO_ACTION.RESET });
-      if (completeItemApi.error === COMPLETE_API_409_ERROR) {
-        dispatch(showInfoModal(strings(ITEM_SCAN_DOESNT_MATCH), strings(ITEM_SCAN_DOESNT_MATCH_DETAILS)));
-      } else {
-        dispatch(showInfoModal(strings('ITEM.ACTION_COMPLETE_ERROR'), strings('ITEM.ACTION_COMPLETE_ERROR_DETAILS')));
-      }
-    }
-  }
-};
-
 export const getLocationCount = (props: ItemDetailsScreenProps) => {
   const { floorLocations, reserveLocations } = props;
   return (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
@@ -1177,7 +1128,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     isWaiting, error, result,
     isPiHistWaiting, piHistError, piHistResult,
     isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
-    completeItemApi,
     createNewPickApi,
     updateOHQtyApi,
     userId, actionCompleted, pendingOnHandsQty,
@@ -1238,17 +1188,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   // Barcode event listener effect
   useEffectHook(() => {
     const scanSubscription = barcodeEmitter.addListener('scanned', scan => {
-      callBackbarcodeEmitter(props, scan, itemDetails);
+      callBackbarcodeEmitter(props, scan);
     });
     return () => {
       scanSubscription.remove();
     };
   }, [itemDetails, actionCompleted]);
-
-  // Complete Item Details API
-  useEffectHook(() => {
-    completeItemApiHook(props, completeItemApi);
-  }, [completeItemApi]);
 
   useEffectHook(
     () => createNewPickApiHook(
@@ -1503,7 +1448,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
-  const completeItemApi = useTypedSelector(state => state.async.noAction);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const getItemDetailsV3Api = useTypedSelector(state => state.async.getItemDetailsV3);
@@ -1551,7 +1495,6 @@ const ReviewItemDetails = (): JSX.Element => {
       isPiSalesHistWaiting={getItemPiSalesHistoryApi.isWaiting}
       piSalesHistError={getItemPiSalesHistoryApi.error}
       piSalesHistResult={getItemPiSalesHistoryApi.result}
-      completeItemApi={completeItemApi}
       createNewPickApi={createNewPickApi}
       updateOHQtyApi={updateOHQtyApi}
       userId={userId}

@@ -18,14 +18,14 @@ itemDetail, {
 }
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
-  COMPLETE_API_409_ERROR, HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  callBackbarcodeEmitter, completeItemApiHook, createNewPickApiHook, getExceptionType, getFloorItemDetails,
-  getLocationCount, getPendingOnHandsQty, getReserveItemDetails, getTopRightBtnTxt,
-  getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit, handleUpdateQty,
-  isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress, onValidateItemDetails,
-  onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent,
-  renderOHChangeHistory, renderOHQtyComponent, renderPickHistory, renderReplenishmentCard,
-  renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
+  HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
+  callBackbarcodeEmitter, createNewPickApiHook, getExceptionType,
+  getFloorItemDetails, getLocationCount, getPendingOnHandsQty, getReserveItemDetails,
+  getTopRightBtnTxt, getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit,
+  handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress,
+  onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal,
+  renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -101,7 +101,6 @@ const mockHandleProps: (HandleProps & RenderProps) = {
   setOhQtyModalVisible: jest.fn(),
   actionCompleted: false,
   isManualScanEnabled: false,
-  completeItemApi: defaultAsyncState,
   userConfigs: mockConfig
 };
 
@@ -117,7 +116,6 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   isPiSalesHistWaiting: false,
   piSalesHistError: null,
   piSalesHistResult: null,
-  completeItemApi: defaultAsyncState,
   createNewPickApi: defaultAsyncState,
   updateOHQtyApi: defaultAsyncState,
   userId: 'testUser',
@@ -439,22 +437,7 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('Renders Activity Indicator waiting for No Action Response', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const noActionWaiting = {
-        isWaiting: true,
-        value: null,
-        error: null,
-        result: null
-      };
-      renderer.render(
-        renderScanForNoActionButton(
-          { ...mockHandleProps, completeItemApi: noActionWaiting },
-          itemDetail[123].itemNbr
-        )
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
+
     it('Renders Scan for No Action Button if Platform is Android', () => {
       jest.mock('react-native/Libraries/Utilities/Platform', () => {
         const Platform = jest.requireActual('react-native/Libraries/Utilities/Platform.android.js');
@@ -591,7 +574,6 @@ describe('ReviewItemDetailsScreen', () => {
     const mockSetSelectedSection = jest.fn();
     const mockSetIsQuickPick = jest.fn();
     const mockSetNumberOfPallets = jest.fn();
-    const mockIsFocused = jest.fn(() => true);
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -909,19 +891,8 @@ describe('ReviewItemDetailsScreen', () => {
       onValidateItemDetails(mockDispatch, itemDetail[123]);
       expect(mockDispatch).toHaveBeenCalledWith(expectedResults);
     });
+
     it('testing callBackbarcodeEmitter', async () => {
-      const expectedNoActionResults = {
-        payload: {
-          itemNbr: 1234567890,
-          scannedValue: '1234567890098',
-          upc: '000055559999'
-        },
-        type: 'SAGA/NO_ACTION'
-      };
-      const expectedSetManualScanResults = {
-        payload: false,
-        type: 'GLOBAL/SET_MANUAL_SCAN'
-      };
       const expectedSetScannedEventAction = {
         payload: {
           type: 'UPC-A',
@@ -930,33 +901,23 @@ describe('ReviewItemDetailsScreen', () => {
         type: 'GLOBAL/SET_SCANNED_EVENT'
       };
       mockItemDetailsScreenProps.dispatch = mockDispatch;
+
       await callBackbarcodeEmitter(
         mockItemDetailsScreenProps,
         { value: '1234567890098', type: 'UPC-A' },
-        itemDetail[123]
-      );
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedNoActionResults);
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, expectedSetManualScanResults);
-      mockDispatch.mockReset();
-      mockItemDetailsScreenProps.actionCompleted = true;
-      await callBackbarcodeEmitter(
-        mockItemDetailsScreenProps,
-        { value: '1234567890098', type: 'UPC-A' },
-        itemDetail[123]
       );
       expect(mockDispatch).toHaveBeenCalledWith(expectedSetScannedEventAction);
       const mockSetErrorModalVisible = jest.fn();
-      mockItemDetailsScreenProps.actionCompleted = false;
       mockItemDetailsScreenProps.setErrorModalVisible = mockSetErrorModalVisible;
       await callBackbarcodeEmitter(
         mockItemDetailsScreenProps,
         { value: '1234567890098', type: 'QRCODE' },
-        itemDetail[123]
       );
       expect(mockSetErrorModalVisible).toHaveBeenCalledWith(true);
       mockItemDetailsScreenProps.dispatch = jest.fn();
       mockItemDetailsScreenProps.setErrorModalVisible = jest.fn();
     });
+
     it('test onValidateBackPress', () => {
       const expectedActionCompleteResults = {
         payload: false,
@@ -1009,73 +970,7 @@ describe('ReviewItemDetailsScreen', () => {
       renderer.render(<View>{onIsWaiting(false)}</View>);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('test completeItemApiHook on successful result', () => {
-      const completedApiNotFound = {
-        ...defaultAsyncState,
-        result: {
-          status: 204
-        }
-      };
-      const completedApiSuccess = {
-        ...defaultAsyncState,
-        result: {
-          status: 200
-        }
-      };
-      const expectedShowModalAction = {
-        payload: {
-          text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
-          title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
-        },
-        type: SHOW_INFO_MODAL
-      };
-      mockItemDetailsScreenProps.dispatch = mockDispatch;
-      mockItemDetailsScreenProps.navigation.isFocused = mockIsFocused;
-      completeItemApiHook(mockItemDetailsScreenProps, completedApiNotFound);
-      expect(mockIsFocused).toHaveBeenCalledTimes(1);
-      expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalAction);
-      mockDispatch.mockReset();
-      const mockGoBack = jest.fn();
-      navigationProp.goBack = mockGoBack;
-      completeItemApiHook(mockItemDetailsScreenProps, completedApiSuccess);
-      expect(mockDispatch).toHaveBeenCalledWith({ type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED' });
-      expect(mockGoBack).toHaveBeenCalledTimes(1);
-      navigationProp.goBack = jest.fn();
-      mockItemDetailsScreenProps.dispatch = jest.fn();
-    });
-    it('test completeItemApiHook on error result', () => {
-      const errorApi409 = {
-        ...defaultAsyncState,
-        error: COMPLETE_API_409_ERROR
-      };
-      const errorApi = {
-        ...defaultAsyncState,
-        error: 'Network Error'
-      };
-      const expectedShowModalAction = {
-        payload: {
-          text: '[missing "en.ITEM.SCAN_DOESNT_MATCH_DETAILS" translation]',
-          title: '[missing "en.ITEM.SCAN_DOESNT_MATCH" translation]'
-        },
-        type: SHOW_INFO_MODAL
-      };
-      const expectedShowModalCompleteError = {
-        payload: {
-          text: '[missing "en.ITEM.ACTION_COMPLETE_ERROR_DETAILS" translation]',
-          title: '[missing "en.ITEM.ACTION_COMPLETE_ERROR" translation]'
-        },
-        type: SHOW_INFO_MODAL
-      };
-      mockItemDetailsScreenProps.dispatch = mockDispatch;
-      mockItemDetailsScreenProps.navigation.isFocused = mockIsFocused;
-      completeItemApiHook(mockItemDetailsScreenProps, errorApi409);
-      expect(mockIsFocused).toHaveBeenCalledTimes(1);
-      expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalAction);
-      mockDispatch.mockReset();
-      completeItemApiHook(mockItemDetailsScreenProps, errorApi);
-      expect(mockDispatch).toHaveBeenCalledWith(expectedShowModalCompleteError);
-      mockItemDetailsScreenProps.dispatch = jest.fn();
-    });
+
     it('test getLocationCount', () => {
       let getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
       expect(getLocationCountResult).toStrictEqual(0);
