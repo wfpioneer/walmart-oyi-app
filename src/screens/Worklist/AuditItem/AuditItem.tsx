@@ -633,7 +633,7 @@ export const updateMultiPalletUPCQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-
+  itemNbr: number
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
@@ -646,6 +646,7 @@ export const updateMultiPalletUPCQtyApiHook = (
 
       dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
       setShowOnHandsConfirmationModal(false);
+      dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
       navigation.goBack();
     }
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
@@ -1121,7 +1122,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateMultiPalletUPCQtyApi,
     dispatch,
     navigation,
-    setShowOnHandsConfirmationModal
+    setShowOnHandsConfirmationModal,
+    itemDetails?.itemNbr || 0
   ), [updateMultiPalletUPCQtyApi]);
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
