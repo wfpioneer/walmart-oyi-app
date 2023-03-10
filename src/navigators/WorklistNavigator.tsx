@@ -37,6 +37,11 @@ export const WorklistTabs = () => (
     <Tab.Screen
       name={strings('WORKLIST.COMPLETED')}
       component={CompletedWorklist}
+      listeners={props => ({
+        blur: () => {
+          props.navigation.jumpTo(strings('WORKLIST.TODO'));
+        }
+      })}
     />
   </Tab.Navigator>
 );
@@ -130,4 +135,3 @@ export const WorklistNavigator = ():JSX.Element => {
     />
   );
 };
-
