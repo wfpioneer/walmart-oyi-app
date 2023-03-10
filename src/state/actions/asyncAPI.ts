@@ -1,7 +1,7 @@
 import { makeAsyncActionCreators, makeAsyncActionTypes } from './generic/makeAsyncActions';
 
-export const GET_ITEM_DETAILS_V3 = makeAsyncActionTypes('API/GET_ITEM_DETAILS_V3');
-export const getItemDetailsV3 = makeAsyncActionCreators(GET_ITEM_DETAILS_V3);
+export const GET_ITEM_DETAILS_V4 = makeAsyncActionTypes('API/GET_ITEM_DETAILS_V4');
+export const getItemDetailsV4 = makeAsyncActionCreators(GET_ITEM_DETAILS_V4);
 
 export const GET_ITEM_PIHISTORY = makeAsyncActionTypes('API/GET_ITEM_PIHISTORY');
 export const getItemPiHistory = makeAsyncActionCreators(GET_ITEM_PIHISTORY);
