@@ -56,6 +56,7 @@ import { LocationList } from '../../../components/LocationListCard/LocationListC
 import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
 import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import { setScannedEvent } from '../../../state/actions/Global';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -775,7 +776,8 @@ describe('AuditItemScreen', () => {
         successApi,
         mockDispatch,
         navigationProp,
-        setShowOnHands
+        setShowOnHands,
+        mockItemDetails.itemNbr
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -785,8 +787,12 @@ describe('AuditItemScreen', () => {
         text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        2,
+        setScannedEvent({ type: 'worklist', value: mockItemDetails.itemNbr.toString() })
+      );
+
       expect(setShowOnHands).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
@@ -797,7 +803,8 @@ describe('AuditItemScreen', () => {
         failureApi,
         mockDispatch,
         navigationProp,
-        setShowOnHands
+        setShowOnHands,
+        mockItemDetails.itemNbr
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
