@@ -1963,7 +1963,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
       }
     }
   >
-    <React.Fragment />
+    <View />
   </View>
 </View>
 `;
@@ -2019,7 +2019,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
       }
     }
   >
-    <React.Fragment />
+    <View />
   </View>
 </View>
 `;
@@ -2078,7 +2078,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
       }
     }
   >
-    <React.Fragment />
+    <View />
   </View>
 </View>
 `;
@@ -2131,7 +2131,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
       }
     }
   >
-    <React.Fragment />
+    <View />
   </View>
 </View>
 `;
@@ -2351,7 +2351,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="000055559999"
@@ -2390,27 +2389,95 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <View />
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -2470,10 +2537,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -2488,69 +2597,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
         title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
       >
-        <SalesMetrics
-          isGraphView={false}
-          itemNbr={1234567890}
-          itemSalesHistory={
-            Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 100,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 39,
-                  "week": 51,
-                },
-                Object {
-                  "value": 26,
-                  "week": 52,
-                },
-                Object {
-                  "value": 45,
-                  "week": 53,
-                },
-                Object {
-                  "value": 34,
-                  "week": 54,
-                },
-                Object {
-                  "value": 34,
-                  "week": 55,
-                },
-              ],
-              "weeklyAvgSales": 10,
-            }
-          }
-        />
+        <View />
       </SFTCard>
     </View>
   </ScrollView>
@@ -2813,510 +2860,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders extra details & change/pick history for a single item when AdditionItemDetails Flag is true 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <mockMaterialCommunityIcons
-      color="#f44336"
-      name="alert"
-      size={30}
-      style={
-        Object {
-          "alignSelf": "center",
-        }
-      }
-    />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
-    </Text>
-    <View
-      style={
-        Object {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "width": "100%",
-        }
-      }
-    >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "marginTop": 16,
-            "width": "70%",
-          }
-        }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
-    <OHQtyUpdate
-      error={null}
-      handleClose={[Function]}
-      handleSubmit={[Function]}
-      isWaiting={false}
-      newOHQty={42}
-      onHandsQty={42}
-      setNewOHQty={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Form"
-    onClose={[Function]}
-  >
-    <CreatePickDialog
-      isQuickPick={false}
-      locations={
-        Array [
-          Object {
-            "aisleId": 1,
-            "aisleName": "1",
-            "locationName": "A1-1",
-            "sectionId": 1,
-            "sectionName": "1",
-            "type": "Sales Floor",
-            "typeNbr": 8,
-            "zoneId": 0,
-            "zoneName": "A",
-          },
-          Object {
-            "aisleId": 0,
-            "aisleName": "1",
-            "locationName": "A1-2",
-            "sectionId": 2,
-            "sectionName": "2",
-            "type": "End Cap",
-            "typeNbr": 12,
-            "zoneId": 0,
-            "zoneName": "A",
-          },
-          Object {
-            "aisleId": 1,
-            "aisleName": "1",
-            "locationName": "A1-3",
-            "sectionId": 3,
-            "sectionName": "3",
-            "type": "Pod",
-            "typeNbr": 13,
-            "zoneId": 0,
-            "zoneName": "A",
-          },
-          Object {
-            "aisleId": 1,
-            "aisleName": "1",
-            "locationName": "A1-4",
-            "sectionId": 4,
-            "sectionName": "4",
-            "type": "Display",
-            "typeNbr": 11,
-            "zoneId": 0,
-            "zoneName": "A",
-          },
-        ]
-      }
-      numberOfPallets={1}
-      onClose={[Function]}
-      onSubmit={[Function]}
-      selectedSection=""
-      setIsQuickPick={[MockFunction]}
-      setNumberOfPallets={[MockFunction]}
-      setSelectedSection={[MockFunction]}
-    />
-  </CustomModalComponent>
-  <ScrollView
-    contentContainerStyle={
-      Object {
-        "alignItems": "stretch",
-        "justifyContent": "center",
-      }
-    }
-    refreshControl={
-      <RefreshControlMock
-        onRefresh={[Function]}
-        refreshing={false}
-      />
-    }
-  >
-    <View>
-      <ItemInfo
-        additionalItemDetails={
-          Object {
-            "basePrice": 15.05,
-            "color": "red",
-            "grossProfit": 2.5,
-            "margin": 14,
-            "size": 88,
-            "source": Object {
-              "action": "additional_item_details_click",
-              "screen": "Review_Item_Details",
-            },
-            "vendorPackQty": 33,
-          }
-        }
-        category="93 - Meat PI"
-        countryCode="MX"
-        exceptionType="nsfl"
-        itemName="Test Item That is Really, Really Long (and has parenthesis)"
-        itemNbr={1234567890}
-        navigationForPrint={
-          Object {
-            "addListener": [MockFunction],
-            "canGoBack": [MockFunction],
-            "dispatch": [MockFunction],
-            "getId": [MockFunction],
-            "getParent": [MockFunction],
-            "getState": [MockFunction],
-            "goBack": [MockFunction],
-            "isFocused": [MockFunction],
-            "navigate": [MockFunction],
-            "removeListener": [MockFunction],
-            "reset": [MockFunction],
-            "setOptions": [MockFunction],
-            "setParams": [MockFunction],
-          }
-        }
-        price={2000.94}
-        showAdditionalItemDetails={true}
-        showItemImage={false}
-        status="Active"
-        upcNbr="000055559999"
-      />
-      <SFTCard
-        iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
-        topRightBtnAction={[Function]}
-      >
-        <ItemDetailsList
-          indentAfterFirstRow={true}
-          rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
-                "value": 42,
-              },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
-                "value": 21,
-              },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
-                "value": 6,
-              },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
-                "value": 5,
-              },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
-                "value": 10,
-              },
-            ]
-          }
-        />
-      </SFTCard>
-      <React.Fragment>
-        <View
-          style={
-            Object {
-              "marginTop": 8,
-            }
-          }
-        >
-          <CollapsibleCard
-            icon=""
-            isOpened={false}
-            source={
-              Object {
-                "action": "OH_change_history_click",
-                "otherInfo": Object {
-                  "itemNbr": 1234567890,
-                },
-                "screen": "Review_Item_Details",
-              }
-            }
-            title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-            titleStyle={Object {}}
-          >
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "flex": 1,
-                  "padding": 10,
-                }
-              }
-            >
-              <Text
-                testID="msg-no-pick-data"
-              >
-                [missing "en.ITEM.NO_OH_CHANGE_HISTORY" translation]
-              </Text>
-            </View>
-          </CollapsibleCard>
-        </View>
-        <View
-          style={
-            Object {
-              "marginTop": 8,
-            }
-          }
-        >
-          <View>
-            <View
-              style={
-                Object {
-                  "backgroundColor": "#ffffffff",
-                  "borderBottomColor": "#eeeeee",
-                  "borderBottomWidth": 1,
-                  "padding": 10,
-                }
-              }
-            >
-              <Text>
-                [missing "en.ITEM.REPLENISHMENT" translation]
-              </Text>
-            </View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "borderBottomColor": "#eeeeee",
-                  "borderBottomWidth": 1,
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "marginBottom": 1,
-                  "paddingHorizontal": 10,
-                  "paddingVertical": 8,
-                }
-              }
-            >
-              <Text>
-                [missing "en.ITEM.ON_ORDER" translation]
-              </Text>
-              <Text>
-                48
-              </Text>
-            </View>
-            <View />
-          </View>
-        </View>
-      </React.Fragment>
-      <SFTCard
-        iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
-        topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
-      >
-        <View
-          style={
-            Object {
-              "paddingHorizontal": 8,
-            }
-          }
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "borderBottomColor": "#f5f5f5",
-                "borderBottomWidth": 1,
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "paddingVertical": 14,
-              }
-            }
-          >
-            <Text>
-              [missing "en.ITEM.FLOOR" translation]
-            </Text>
-            <Text>
-              A1-1
-            </Text>
-          </View>
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "borderBottomColor": "#f5f5f5",
-                "borderBottomWidth": 1,
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "paddingVertical": 14,
-              }
-            }
-          >
-            <Text>
-              [missing "en.ITEM.RESERVE" translation]
-            </Text>
-          </View>
-          <View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "paddingLeft": 2,
-                  "paddingRight": 3,
-                  "paddingVertical": 3,
-                }
-              }
-            >
-              <Text>
-                A1-1
-              </Text>
-              <Text>
-                10
-              </Text>
-            </View>
-          </View>
-          <View
-            style={
-              Object {
-                "flexDirection": "row",
-                "paddingVertical": 8,
-              }
-            }
-          >
-            <React.Fragment />
-          </View>
-        </View>
-      </SFTCard>
-      <View
-        style={
-          Object {
-            "marginTop": 8,
-          }
-        }
-      >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "pick_history_click",
-              "otherInfo": Object {
-                "itemNbr": 1234567890,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#ffffffff",
-                "flex": 1,
-                "padding": 10,
-              }
-            }
-          >
-            <Text
-              testID="msg-no-pick-data"
-            >
-              [missing "en.ITEM.NO_PICK_HISTORY" translation]
-            </Text>
-          </View>
-        </CollapsibleCard>
-      </View>
-      <SFTCard
-        bottomRightBtnAction={
-          Array [
-            [Function],
-          ]
-        }
-        bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
-          ]
-        }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
-      >
-        <View />
-      </SFTCard>
-    </View>
-  </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "flexDirection": "row",
-        "height": 40,
-        "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
-      }
-    }
-  >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
-      style={
-        Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
-</View>
-`;
-
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the On Hands Cloud Qty of 42 1`] = `
 <View
   style={
@@ -3516,7 +3059,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="777555333"
@@ -3558,27 +3100,95 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 987654321,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <View />
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -3638,10 +3248,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 987654321,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -3656,65 +3308,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
         title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
       >
-        <SalesMetrics
-          isGraphView={false}
-          itemNbr={987654321}
-          itemSalesHistory={
-            Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 0,
-                  "week": 51,
-                },
-                Object {
-                  "value": 10,
-                  "week": 1,
-                },
-                Object {
-                  "value": 27,
-                  "week": 2,
-                },
-                Object {
-                  "value": 10,
-                  "week": 3,
-                },
-              ],
-              "weeklyAvgSales": 10,
-            }
-          }
-        />
+        <View />
       </SFTCard>
     </View>
   </ScrollView>
@@ -3955,7 +3549,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="000055559999"
@@ -3993,27 +3586,95 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <View />
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -4073,10 +3734,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -4091,65 +3794,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
         title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
       >
-        <SalesMetrics
-          isGraphView={false}
-          itemNbr={1234567890}
-          itemSalesHistory={
-            Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 0,
-                  "week": 51,
-                },
-                Object {
-                  "value": 10,
-                  "week": 1,
-                },
-                Object {
-                  "value": 27,
-                  "week": 2,
-                },
-                Object {
-                  "value": 10,
-                  "week": 3,
-                },
-              ],
-              "weeklyAvgSales": 10,
-            }
-          }
-        />
+        <View />
       </SFTCard>
     </View>
   </ScrollView>
@@ -4390,7 +4035,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="000055559999"
@@ -4428,27 +4072,124 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <CollapsibleCard
+            icon=""
+            isOpened={false}
+            source={
+              Object {
+                "action": "replenishment_history_clicked",
+                "otherInfo": Object {
+                  "itemNbr": 1234567890,
+                },
+                "screen": "Review_Item_Details",
+              }
+            }
+            title="[missing \\"en.ITEM.HISTORY\\" translation]"
+            titleStyle={Object {}}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flex": 1,
+                  "padding": 10,
+                }
+              }
+            >
+              <Text>
+                [missing "en.ITEM.NO_HISTORY" translation]
+              </Text>
+            </View>
+          </CollapsibleCard>
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -4508,10 +4249,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -4531,61 +4314,169 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemNbr={1234567890}
           itemSalesHistory={
             Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 100,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 39,
-                  "week": 51,
-                },
-                Object {
-                  "value": 26,
-                  "week": 52,
-                },
-                Object {
-                  "value": 45,
-                  "week": 53,
-                },
-                Object {
-                  "value": 34,
-                  "week": 54,
-                },
-                Object {
-                  "value": 34,
-                  "week": 55,
-                },
-              ],
-              "weeklyAvgSales": 10,
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
             }
           }
         />
@@ -4829,7 +4720,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="000055559999"
@@ -4867,27 +4757,124 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <CollapsibleCard
+            icon=""
+            isOpened={false}
+            source={
+              Object {
+                "action": "replenishment_history_clicked",
+                "otherInfo": Object {
+                  "itemNbr": 1234567890,
+                },
+                "screen": "Review_Item_Details",
+              }
+            }
+            title="[missing \\"en.ITEM.HISTORY\\" translation]"
+            titleStyle={Object {}}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flex": 1,
+                  "padding": 10,
+                }
+              }
+            >
+              <Text>
+                [missing "en.ITEM.NO_HISTORY" translation]
+              </Text>
+            </View>
+          </CollapsibleCard>
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -4947,10 +4934,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -4970,61 +4999,169 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemNbr={1234567890}
           itemSalesHistory={
             Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 100,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 39,
-                  "week": 51,
-                },
-                Object {
-                  "value": 26,
-                  "week": 52,
-                },
-                Object {
-                  "value": 45,
-                  "week": 53,
-                },
-                Object {
-                  "value": 34,
-                  "week": 54,
-                },
-                Object {
-                  "value": 34,
-                  "week": 55,
-                },
-              ],
-              "weeklyAvgSales": 10,
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
             }
           }
         />
@@ -5268,7 +5405,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="000055559999"
@@ -5306,27 +5442,95 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <View />
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -5386,10 +5590,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -5404,69 +5650,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
         title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
       >
-        <SalesMetrics
-          isGraphView={false}
-          itemNbr={1234567890}
-          itemSalesHistory={
-            Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 100,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 39,
-                  "week": 51,
-                },
-                Object {
-                  "value": 26,
-                  "week": 52,
-                },
-                Object {
-                  "value": 45,
-                  "week": 53,
-                },
-                Object {
-                  "value": 34,
-                  "week": 54,
-                },
-                Object {
-                  "value": 34,
-                  "week": 55,
-                },
-              ],
-              "weeklyAvgSales": 10,
-            }
-          }
-        />
+        <View />
       </SFTCard>
     </View>
   </ScrollView>
@@ -5707,7 +5891,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="000055559999"
@@ -5745,27 +5928,95 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <View />
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -5825,10 +6076,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -5843,69 +6136,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
         title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
       >
-        <SalesMetrics
-          isGraphView={false}
-          itemNbr={1234567890}
-          itemSalesHistory={
-            Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 100,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 39,
-                  "week": 51,
-                },
-                Object {
-                  "value": 26,
-                  "week": 52,
-                },
-                Object {
-                  "value": 45,
-                  "week": 53,
-                },
-                Object {
-                  "value": 34,
-                  "week": 54,
-                },
-                Object {
-                  "value": 34,
-                  "week": 55,
-                },
-              ],
-              "weeklyAvgSales": 10,
-            }
-          }
-        />
+        <View />
       </SFTCard>
     </View>
   </ScrollView>
@@ -6146,7 +6377,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
         price={2000.94}
-        showAdditionalItemDetails={false}
         showItemImage={false}
         status="Active"
         upcNbr="000055559999"
@@ -6184,27 +6414,124 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         />
       </SFTCard>
-      <SFTCard
-        title="[missing \\"en.ITEM.REPLENISHMENT\\" translation]"
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
       >
-        <View
-          style={
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
             Object {
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "paddingHorizontal": 10,
-              "paddingVertical": 16,
+              "action": "OH_change_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
             }
           }
+          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
+          titleStyle={Object {}}
         >
-          <Text>
-            [missing "en.ITEM.ON_ORDER" translation]
-          </Text>
-          <Text>
-            48
-          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <View>
+          <View
+            style={
+              Object {
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "padding": 10,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.REPLENISHMENT" translation]
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffffff",
+                "borderBottomColor": "#eeeeee",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginBottom": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 8,
+              }
+            }
+          >
+            <Text>
+              [missing "en.ITEM.ON_ORDER" translation]
+            </Text>
+            <Text>
+              48
+            </Text>
+          </View>
+          <CollapsibleCard
+            icon=""
+            isOpened={false}
+            source={
+              Object {
+                "action": "replenishment_history_clicked",
+                "otherInfo": Object {
+                  "itemNbr": 1234567890,
+                },
+                "screen": "Review_Item_Details",
+              }
+            }
+            title="[missing \\"en.ITEM.HISTORY\\" translation]"
+            titleStyle={Object {}}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "flex": 1,
+                  "padding": 10,
+                }
+              }
+            >
+              <Text>
+                [missing "en.ITEM.NO_HISTORY" translation]
+              </Text>
+            </View>
+          </CollapsibleCard>
         </View>
-      </SFTCard>
+      </View>
       <SFTCard
         iconName="map-marker-alt"
         title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
@@ -6264,10 +6591,52 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               }
             }
           >
-            <React.Fragment />
+            <View />
           </View>
         </View>
       </SFTCard>
+      <View
+        style={
+          Object {
+            "marginTop": 8,
+          }
+        }
+      >
+        <CollapsibleCard
+          icon=""
+          isOpened={false}
+          source={
+            Object {
+              "action": "pick_history_click",
+              "otherInfo": Object {
+                "itemNbr": 1234567890,
+              },
+              "screen": "Review_Item_Details",
+            }
+          }
+          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
+          titleStyle={Object {}}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#f44336"
+              name="alert"
+              size={40}
+            />
+            <Text>
+              [missing "en.ITEM.ERROR_PICK_HISTORY" translation]
+            </Text>
+          </View>
+        </CollapsibleCard>
+      </View>
       <SFTCard
         bottomRightBtnAction={
           Array [
@@ -6287,61 +6656,169 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           itemNbr={1234567890}
           itemSalesHistory={
             Object {
-              "daily": Array [
-                Object {
-                  "day": "2020-07-08",
-                  "value": 100,
-                },
-                Object {
-                  "day": "2020-07-09",
-                  "value": 0,
-                },
-                Object {
-                  "day": "2020-07-10",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-11",
-                  "value": 10,
-                },
-                Object {
-                  "day": "2020-07-12",
-                  "value": 42,
-                },
-                Object {
-                  "day": "2020-07-13",
-                  "value": 5,
-                },
-                Object {
-                  "day": "2020-07-14",
-                  "value": 1,
-                },
-              ],
-              "dailyAvgSales": 15,
-              "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-              "weekly": Array [
-                Object {
-                  "value": 39,
-                  "week": 51,
-                },
-                Object {
-                  "value": 26,
-                  "week": 52,
-                },
-                Object {
-                  "value": 45,
-                  "week": 53,
-                },
-                Object {
-                  "value": 34,
-                  "week": 54,
-                },
-                Object {
-                  "value": 34,
-                  "week": 55,
-                },
-              ],
-              "weeklyAvgSales": 10,
+              "backroomQty": 6,
+              "basePrice": 1500.3,
+              "categoryDesc": "Meat PI",
+              "categoryNbr": 93,
+              "claimsOnHandQty": 5,
+              "cloudQty": undefined,
+              "code": 200,
+              "color": "blue",
+              "completed": false,
+              "consolidatedOnHandQty": 10,
+              "deliveryHistory": Object {
+                "deliveries": Array [
+                  Object {
+                    "date": "2022-06-23",
+                    "qty": 23,
+                  },
+                  Object {
+                    "date": "2022-07-25",
+                    "qty": 44,
+                  },
+                  Object {
+                    "date": "2022-07-26",
+                    "qty": 23,
+                  },
+                ],
+              },
+              "exceptionType": "nsfl",
+              "grossProfit": 0,
+              "imageBlobKey": undefined,
+              "imageUrlKey": undefined,
+              "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
+              "itemNbr": 1234567890,
+              "location": Object {
+                "count": 5,
+                "floor": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Sales Floor",
+                    "typeNbr": 8,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 0,
+                    "aisleName": "1",
+                    "locationName": "A1-2",
+                    "sectionId": 2,
+                    "sectionName": "2",
+                    "type": "End Cap",
+                    "typeNbr": 12,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-3",
+                    "sectionId": 3,
+                    "sectionName": "3",
+                    "type": "Pod",
+                    "typeNbr": 13,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-4",
+                    "sectionId": 4,
+                    "sectionName": "4",
+                    "type": "Display",
+                    "typeNbr": 11,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+                "reserve": Array [
+                  Object {
+                    "aisleId": 1,
+                    "aisleName": "1",
+                    "locationName": "A1-1",
+                    "qty": 10,
+                    "sectionId": 1,
+                    "sectionName": "1",
+                    "type": "Reserve",
+                    "typeNbr": 7,
+                    "zoneId": 0,
+                    "zoneName": "A",
+                  },
+                ],
+              },
+              "margin": 0,
+              "onHandsQty": 42,
+              "pendingOnHandsQty": -999,
+              "price": 2000.94,
+              "replenishment": Object {
+                "onOrder": 48,
+              },
+              "sales": Object {
+                "daily": Array [
+                  Object {
+                    "day": "2020-07-08",
+                    "value": 100,
+                  },
+                  Object {
+                    "day": "2020-07-09",
+                    "value": 0,
+                  },
+                  Object {
+                    "day": "2020-07-10",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-11",
+                    "value": 10,
+                  },
+                  Object {
+                    "day": "2020-07-12",
+                    "value": 42,
+                  },
+                  Object {
+                    "day": "2020-07-13",
+                    "value": 5,
+                  },
+                  Object {
+                    "day": "2020-07-14",
+                    "value": 1,
+                  },
+                ],
+                "dailyAvgSales": 15,
+                "lastUpdateTs": "2020-07-15T08:02:17-05:00",
+                "weekly": Array [
+                  Object {
+                    "value": 39,
+                    "week": 51,
+                  },
+                  Object {
+                    "value": 26,
+                    "week": 52,
+                  },
+                  Object {
+                    "value": 45,
+                    "week": 53,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 54,
+                  },
+                  Object {
+                    "value": 34,
+                    "week": 55,
+                  },
+                ],
+                "weeklyAvgSales": 10,
+              },
+              "size": 0,
+              "status": "Active",
+              "upcNbr": "000055559999",
+              "vendorPackQty": 0,
             }
           }
         />

@@ -262,7 +262,6 @@ export const CreatePickScreen = (props: CreatePickProps) => {
           upcNbr={item.upcNbr}
           price={item.price}
           status={item.status || ''}
-          showAdditionalItemDetails={false}
           countryCode={countryCode}
           showItemImage={false}
         />

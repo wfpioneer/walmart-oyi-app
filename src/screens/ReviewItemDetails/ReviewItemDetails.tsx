@@ -18,7 +18,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  createNewPick, getItemDetails, getItemDetailsV3, getItemPiHistory, getItemPiSalesHistory, updateOHQty
+  createNewPick, getItemDetailsV4, getItemPiHistory, getItemPiSalesHistory, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -47,7 +47,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  CREATE_NEW_PICK, GET_ITEM_DETAILS, GET_ITEM_DETAILS_V3, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
+  CREATE_NEW_PICK, GET_ITEM_DETAILS_V4, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
   UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -363,7 +363,8 @@ const onMoreOHChangeHistoryClick = (
 export const renderPickHistory = (
   props: HandleProps,
   pickHistoryList: PickHistory[],
-  result: AxiosResponse,
+  // TODO call new orch endpoint for picklistHistory https://jira.walmart.com/browse/INTLSAOPS-9247
+  result: AxiosResponse | undefined,
   itemNbr: number
 ) => {
   const pickHistorySource: TrackEventSource = {
@@ -560,7 +561,8 @@ export const renderReplenishmentHistory = (
 export const renderOHChangeHistory = (
   props: HandleProps,
   ohChangeHistory: OHChangeHistory[],
-  result: AxiosResponse,
+  // TODO call new orchestration endpoint for managerApprovalHistory https://jira.walmart.com/browse/INTLSAOPS-9245
+  result: AxiosResponse | undefined,
   itemNbr: number
 ) => {
   const ohChangeHistorySource: TrackEventSource = {
@@ -646,7 +648,7 @@ export const renderReserveLocQtys = (reserve?: Location[]) => {
       </View>
     );
   }
-  return <></>;
+  return <View />;
 };
 
 export const renderAddPicklistButton = (
@@ -654,10 +656,11 @@ export const renderAddPicklistButton = (
   itemDetails: ItemDetails,
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
-  const { reserve } = itemDetails.location;
+  // TODO use data from GetLocationsForItem endpoint https://jira.walmart.com/browse/INTLSAOPS-9251
+  const { location } = itemDetails;
   const { userConfigs } = props;
 
-  if (reserve && reserve.length >= 1) {
+  if (location && location.reserve && location.reserve.length >= 1) {
     return userConfigs.picking ? (
       <View style={styles.addToPicklistContainer}>
         <Button
@@ -670,10 +673,10 @@ export const renderAddPicklistButton = (
           onPress={() => { setCreatePickModalVisible(true); }}
         />
       </View>
-    ) : <></>;
+    ) : <View />;
   }
 
-  return <></>;
+  return <View />;
 };
 
 export const renderReserveAdjustmentButton = (
@@ -789,58 +792,6 @@ export const renderSalesGraphV3 = (
       )}
   </SFTCard>
 );
-
-export const renderSalesGraph = (
-  updatedSalesTS: string | undefined,
-  toggleSalesGraphView: any,
-  result: AxiosResponse | null,
-  itemDetails: ItemDetails,
-  isSalesMetricsGraphView: boolean
-): JSX.Element => {
-  // Checks orchestration response status for itemDetails only.
-
-  if ((itemDetails.code !== undefined && itemDetails.code !== MULTI_STATUS)
-    || (itemDetails.sales && itemDetails.sales.error === undefined)) {
-    return (
-      <SFTCard
-        title={strings('ITEM.SALES_METRICS')}
-        subTitle={updatedSalesTS}
-        bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
-        bottomRightBtnAction={[toggleSalesGraphView]}
-      >
-        <SalesMetrics
-          itemNbr={itemDetails.itemNbr}
-          itemSalesHistory={itemDetails.sales}
-          isGraphView={isSalesMetricsGraphView}
-        />
-      </SFTCard>
-    );
-  }
-  if ((result && result.status !== MULTI_STATUS) || itemDetails.sales?.error === undefined) {
-    return (
-      <SFTCard
-        title={strings('ITEM.SALES_METRICS')}
-        subTitle={updatedSalesTS}
-        bottomRightBtnTxt={[strings('ITEM.TOGGLE_GRAPH')]}
-        bottomRightBtnAction={[toggleSalesGraphView]}
-      >
-        <SalesMetrics
-          itemNbr={itemDetails.itemNbr}
-          itemSalesHistory={itemDetails.sales}
-          isGraphView={isSalesMetricsGraphView}
-        />
-      </SFTCard>
-    );
-  }
-  return (
-    <View>
-      <View style={styles.activityIndicator}>
-        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
-        <Text>{strings('ITEM.ERROR_SALES_HISTORY')}</Text>
-      </View>
-    </View>
-  );
-};
 
 const completeAction = () => {
   // TODO: reinstantiate when ios device support is needed
@@ -1021,32 +972,20 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
   const {
     scannedEvent, userId, route,
     dispatch, navigation, trackEventCall,
-    validateSessionCall, userConfigs
+    validateSessionCall
   } = props;
 
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
       if (scannedEvent.value) {
         // TODO revert V2 changes once BE orchestration is pushed to production
-        if (userConfigs.additionalItemDetails) {
-          dispatch({ type: GET_ITEM_DETAILS_V3.RESET });
-          dispatch({ type: GET_ITEM_PIHISTORY.RESET });
-          dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
-          const itemNbr = parseInt(scannedEvent.value, 10);
-          dispatch(
-            getItemDetailsV3(
-              {
-                id: itemNbr,
-                getMetadataHistory: userConfigs.additionalItemDetails
-              }
-            )
-          );
-          dispatch(getItemPiHistory(itemNbr));
-          dispatch(getItemPiSalesHistory(itemNbr));
-        } else {
-          dispatch({ type: GET_ITEM_DETAILS.RESET });
-          dispatch(getItemDetails({ id: parseInt(scannedEvent.value, 10) }));
-        }
+        dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+        dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+        dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+        const itemNbr = parseInt(scannedEvent.value, 10);
+        dispatch(getItemDetailsV4({ id: itemNbr }));
+        dispatch(getItemPiHistory(itemNbr));
+        dispatch(getItemPiSalesHistory(itemNbr));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -1081,7 +1020,6 @@ export const isError = (
   scannedEvent: { value: string | null; type: string | null; },
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  additionalItemDetails: boolean,
   message?: string
 ) => {
   if (error || message) {
@@ -1098,8 +1036,7 @@ export const isError = (
             style={styles.errorButton}
             onPress={() => {
               trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
-              return additionalItemDetails ? dispatch(getItemDetailsV3({ id: parseInt(scannedValue, 10) }))
-                : dispatch(getItemDetails({ id: parseInt(scannedValue, 10) }));
+              return dispatch(getItemDetailsV4({ id: parseInt(scannedValue, 10) }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -1152,7 +1089,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     exceptionType
   } = props;
 
-  const { additionalItemDetails } = userConfigs;
   useEffectHook(() => () => {
     dispatch(resetLocations());
   }, []);
@@ -1168,12 +1104,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     onValidateScannedEvent(props);
   }, [scannedEvent]);
 
-  const itemDetails: ItemDetails = additionalItemDetails
-    ? (result && result.data.itemDetails)
-    : (result && result.data); // || getMockItemDetails(scannedEvent.value);
+  const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
 
+  // TODO call new orchestration endpoint for managerApprovalHistory https://jira.walmart.com/browse/INTLSAOPS-9245
   const itemOhChangeHistory = (result && result.data.itemOhChangeHistory)
     ? result.data.itemOhChangeHistory.ohChangeHistory : [];
+  // TODO call new orch endpoint for picklistHistory https://jira.walmart.com/browse/INTLSAOPS-9247
   const picklistHistory = (result && result.data.picklistHistory) ? result.data.picklistHistory.picklists : [];
 
   const locationCount = getLocationCount(props);
@@ -1237,7 +1173,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       scannedEvent,
       dispatch,
       trackEventCall,
-      additionalItemDetails,
       message // Checks for an error message from ItemDetails orchestration
     );
   }
@@ -1279,17 +1214,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name).then(() => {
       trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
-      if (additionalItemDetails) {
-        dispatch({ type: GET_ITEM_DETAILS_V3.RESET });
-        dispatch({ type: GET_ITEM_PIHISTORY.RESET });
-        dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
-        dispatch(getItemDetailsV3({ id: itemDetails.itemNbr }));
-        dispatch(getItemPiHistory(itemDetails.itemNbr));
-        dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
-      } else {
-        dispatch({ type: GET_ITEM_DETAILS.RESET });
-        dispatch(getItemDetails({ id: itemDetails.itemNbr }));
-      }
+      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+      dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+      dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+      dispatch(getItemDetailsV4({ id: itemDetails.itemNbr }));
+      dispatch(getItemPiHistory(itemDetails.itemNbr));
+      dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
@@ -1352,7 +1282,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               price={itemDetails.price}
               exceptionType={getExceptionType(actionCompleted, itemDetails)}
               navigationForPrint={navigation}
-              showAdditionalItemDetails={additionalItemDetails}
               additionalItemDetails={{
                 color: itemDetails.color,
                 margin: itemDetails.margin,
@@ -1375,34 +1304,21 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
-            {additionalItemDetails && (
-              <>
-                <View style={styles.historyContainer}>
-                  {renderOHChangeHistory(props, itemOhChangeHistory, result, itemDetails.itemNbr)}
-                </View>
-                <View style={styles.historyContainer}>
-                  {renderReplenishmentCard(
-                    itemDetails,
-                    piHistResult,
-                    piHistError,
-                    isPiHistWaiting,
-                    trackEventCall,
-                    itemDetails.itemNbr,
-                    dispatch
-                  )}
-                </View>
-              </>
-            )}
-            {!additionalItemDetails && (
-            <SFTCard
-              title={strings('ITEM.REPLENISHMENT')}
-            >
-              <View style={styles.itemOnOrderView}>
-                <Text>{strings('ITEM.ON_ORDER')}</Text>
-                <Text>{itemDetails.replenishment.onOrder}</Text>
-              </View>
-            </SFTCard>
-            )}
+            <View style={styles.historyContainer}>
+              {/* TODO call new orch endpoint for OHChangeHistory https://jira.walmart.com/browse/INTLSAOPS-9245 */ }
+              {renderOHChangeHistory(props, itemOhChangeHistory, undefined, itemDetails.itemNbr)}
+            </View>
+            <View style={styles.historyContainer}>
+              {renderReplenishmentCard(
+                itemDetails,
+                piHistResult,
+                piHistError,
+                isPiHistWaiting,
+                trackEventCall,
+                itemDetails.itemNbr,
+                dispatch
+              )}
+            </View>
             <SFTCard
               iconName="map-marker-alt"
               title={`${strings('ITEM.LOCATION')}(${locationCount})`}
@@ -1411,19 +1327,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             >
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible, dispatch)}
             </SFTCard>
-            {additionalItemDetails && (
-              <View style={styles.historyContainer}>
-                {renderPickHistory(props, picklistHistory, result, itemDetails.itemNbr)}
-              </View>
-            )}
-            {!additionalItemDetails && (renderSalesGraph(
-              updatedSalesTS,
-              toggleSalesGraphView,
-              result,
-              itemDetails,
-              isSalesMetricsGraphView
-            ))}
-            {additionalItemDetails && (
+            <View style={styles.historyContainer}>
+              {/* TODO call new orch endpoint for picklistHistory https://jira.walmart.com/browse/INTLSAOPS-9247 */ }
+              {renderPickHistory(props, picklistHistory, undefined, itemDetails.itemNbr)}
+            </View>
+            {(
               renderSalesGraphV3(
                 updatedSalesTS,
                 toggleSalesGraphView,
@@ -1447,10 +1355,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const { isWaiting, error, result } = useTypedSelector(state => state.async.getItemDetails);
   const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
-  const getItemDetailsV3Api = useTypedSelector(state => state.async.getItemDetailsV3);
+  const getItemDetailsV4Api = useTypedSelector(state => state.async.getItemDetailsV4);
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const { userId, countryCode } = useTypedSelector(state => state.User);
@@ -1486,10 +1393,10 @@ const ReviewItemDetails = (): JSX.Element => {
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
-      isWaiting={userConfigs.additionalItemDetails ? getItemDetailsV3Api.isWaiting : isWaiting}
-      error={userConfigs.additionalItemDetails ? getItemDetailsV3Api.error : error}
-      result={userConfigs.additionalItemDetails ? getItemDetailsV3Api.result : result}
-      isPiHistWaiting={userConfigs.additionalItemDetails ? getItemPiHistoryApi.isWaiting : false}
+      isWaiting={getItemDetailsV4Api.isWaiting}
+      error={getItemDetailsV4Api.error}
+      result={getItemDetailsV4Api.result}
+      isPiHistWaiting={getItemPiHistoryApi.isWaiting}
       piHistError={getItemPiHistoryApi.error}
       piHistResult={getItemPiHistoryApi.result}
       isPiSalesHistWaiting={getItemPiSalesHistoryApi.isWaiting}

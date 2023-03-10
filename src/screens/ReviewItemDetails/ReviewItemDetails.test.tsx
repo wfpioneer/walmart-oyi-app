@@ -31,6 +31,7 @@ import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import store from '../../state/index';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { getItemDetailsV4, getItemPiHistory, getItemPiSalesHistory } from '../../state/actions/saga';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -212,31 +213,6 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('renders extra details & change/pick history for a single item when AdditionItemDetails Flag is true', () => {
-      const testProps: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: {
-            itemDetails: { ...itemDetail[123], ...mockAdditionalItemDetails },
-            itemOhChangeHistory: { code: 204 },
-            picklistHistory: { code: 204 }
-          },
-          status: 200
-        },
-        exceptionType: 'NSFL',
-        newOHQty: itemDetail[123].onHandsQty,
-        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
-        floorLocations: itemDetail[123].location.floor,
-        reserveLocations: itemDetail[123].location.reserve,
-        userConfigs: { ...mockConfig, additionalItemDetails: true }
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ReviewItemDetailsScreen {...testProps} />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
 
     it('renders the details for a single item with ohQtyModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
@@ -245,6 +221,14 @@ describe('ReviewItemDetailsScreen', () => {
           ...defaultResult,
           data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
+        },
+        piHistResult: {
+          ...defaultResult,
+          data: { ...itemDetail[123] }
+        },
+        piSalesHistResult: {
+          ...defaultResult,
+          data: { ...itemDetail[123] }
         },
         exceptionType: 'NSFL',
         newOHQty: itemDetail[123].onHandsQty,
@@ -267,6 +251,14 @@ describe('ReviewItemDetailsScreen', () => {
           data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
         },
+        piHistResult: {
+          ...defaultResult,
+          data: { ...itemDetail[123] }
+        },
+        piSalesHistResult: {
+          ...defaultResult,
+          data: { ...itemDetail[123] }
+        },
         exceptionType: 'NSFL',
         newOHQty: itemDetail[123].onHandsQty,
         pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
@@ -287,6 +279,14 @@ describe('ReviewItemDetailsScreen', () => {
           ...defaultResult,
           data: { ...itemDetail[123], ...mockAdditionalItemDetails },
           status: 200
+        },
+        piHistResult: {
+          ...defaultResult,
+          data: { ...itemDetail[123] }
+        },
+        piSalesHistResult: {
+          ...defaultResult,
+          data: { ...itemDetail[123] }
         },
         exceptionType: 'NSFL',
         newOHQty: itemDetail[123].onHandsQty,
@@ -953,15 +953,16 @@ describe('ReviewItemDetailsScreen', () => {
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });
     it('test onValidateScannedEvent', async () => {
-      const expectedGetItemDetailsAction = {
-        payload: {
-          id: 123
-        },
-        type: 'SAGA/GET_ITEM_DETAILS'
-      };
       await onValidateScannedEvent(mockItemDetailsScreenProps);
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS/RESET' });
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(2, expectedGetItemDetailsAction);
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS_V4/RESET' });
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(2, { type: 'API/GET_ITEM_PIHISTORY/RESET' });
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        { type: 'API/GET_ITEM_PISALESHISTORY/RESET' }
+      );
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(4, getItemDetailsV4({ id: 123 }));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(5, getItemPiHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(6, getItemPiSalesHistory(123));
     });
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -995,7 +996,7 @@ describe('ReviewItemDetailsScreen', () => {
         payload: {
           id: 1234567890098
         },
-        type: 'SAGA/GET_ITEM_DETAILS'
+        type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
       const { getByTestId, rerender, toJSON } = render(isError(
         mockError,
@@ -1005,7 +1006,6 @@ describe('ReviewItemDetailsScreen', () => {
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
         jest.fn(),
-        false
       ));
       expect(toJSON()).toMatchSnapshot();
       const retryButton = getByTestId('scanErrorRetry');
@@ -1019,7 +1019,6 @@ describe('ReviewItemDetailsScreen', () => {
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
         jest.fn(),
-        false
       ));
       expect(toJSON()).toMatchSnapshot();
       rerender(isError(
@@ -1030,7 +1029,6 @@ describe('ReviewItemDetailsScreen', () => {
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
         jest.fn(),
-        false
       ));
       expect(toJSON()).toMatchSnapshot();
     });
