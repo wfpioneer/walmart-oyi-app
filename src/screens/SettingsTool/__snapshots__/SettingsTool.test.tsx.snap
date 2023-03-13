@@ -523,11 +523,6 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
           },
           Object {
-            "configKey": "additionalItemDetails",
-            "fluffyKey": "additional item details",
-            "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
-          },
-          Object {
             "configKey": "auditWorklists",
             "fluffyKey": "audit worklists",
             "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
@@ -932,11 +927,6 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
           },
           Object {
-            "configKey": "additionalItemDetails",
-            "fluffyKey": "additional item details",
-            "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
-          },
-          Object {
             "configKey": "auditWorklists",
             "fluffyKey": "audit worklists",
             "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
@@ -1247,11 +1237,6 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
             "configKey": "palletWorklists",
             "fluffyKey": "pallet worklists",
             "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
-          },
-          Object {
-            "configKey": "additionalItemDetails",
-            "fluffyKey": "additional item details",
-            "name": "[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]",
           },
           Object {
             "configKey": "auditWorklists",

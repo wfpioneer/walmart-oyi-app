@@ -245,8 +245,7 @@ describe('Tests login screen functions', () => {
     const mockConfigResponse: ConfigResponse = {
       ...mockConfig,
       printingUpdate: true,
-      locMgmtEdit: mockConfig.locationManagementEdit,
-      addItemDetails: mockConfig.additionalItemDetails
+      locMgmtEdit: mockConfig.locationManagementEdit
     };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
