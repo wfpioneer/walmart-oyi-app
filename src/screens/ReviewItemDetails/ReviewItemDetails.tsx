@@ -710,7 +710,7 @@ export const renderLocationComponent = (
   const {
     floorLocations, reserveLocations, userConfigs, navigation
   } = props;
-  const { additionalItemDetails, reserveAdjustment } = userConfigs;
+  const { reserveAdjustment } = userConfigs;
   const hasFloorLocations = floorLocations && floorLocations.length >= 1;
   const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
   return (
@@ -721,10 +721,8 @@ export const renderLocationComponent = (
       </View>
       <View style={styles.locationDetailsContainer}>
         <Text>{strings('ITEM.RESERVE')}</Text>
-        {hasReserveLocations
-          && !additionalItemDetails && <Text>{reserveLocations[0].locationName}</Text> }
       </View>
-      {additionalItemDetails && renderReserveLocQtys(reserveLocations)}
+      {renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
         {(reserveAdjustment && hasReserveLocations) && renderReserveAdjustmentButton(itemDetails, navigation, dispatch)}
         {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
