@@ -50,4 +50,13 @@ export default class GetItemDetailsService {
       { timeout: TIMEOUT }
     );
   }
+
+  public static getItemPicklistHistory(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.orchestrationURL}/item/picklist/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
 }
