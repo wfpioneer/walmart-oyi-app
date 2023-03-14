@@ -31,7 +31,12 @@ import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import store from '../../state/index';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
-import { getItemDetailsV4, getItemPiHistory, getItemPiSalesHistory } from '../../state/actions/saga';
+import {
+  getItemDetailsV4,
+  getItemPiHistory,
+  getItemPiSalesHistory,
+  getItemPicklistHistory
+} from '../../state/actions/saga';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -117,6 +122,7 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   isPiSalesHistWaiting: false,
   piSalesHistError: null,
   piSalesHistResult: null,
+  picklistHistoryApi: defaultAsyncState,
   createNewPickApi: defaultAsyncState,
   updateOHQtyApi: defaultAsyncState,
   userId: 'testUser',
@@ -400,26 +406,6 @@ describe('ReviewItemDetailsScreen', () => {
         isWaiting: true,
         exceptionType: '',
         pendingOnHandsQty: 0
-      };
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ReviewItemDetailsScreen {...testProps} />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('renders the details for a item with multi status 207(error retreiving sales history)', () => {
-      const testProps: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...itemDetail[321], ...mockAdditionalItemDetails },
-          status: 207
-        },
-        exceptionType: 'NSFL',
-        newOHQty: itemDetail[321].onHandsQty,
-        pendingOnHandsQty: itemDetail[123].pendingOnHandsQty,
-        floorLocations: itemDetail[123].location.floor,
-        reserveLocations: itemDetail[123].location.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -960,9 +946,14 @@ describe('ReviewItemDetailsScreen', () => {
         3,
         { type: 'API/GET_ITEM_PISALESHISTORY/RESET' }
       );
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(4, getItemDetailsV4({ id: 123 }));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(5, getItemPiHistory(123));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(6, getItemPiSalesHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(
+        4,
+        { type: 'API/GET_ITEM_PICKLISTHISTORY/RESET' }
+      );
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(5, getItemDetailsV4({ id: 123 }));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(6, getItemPiHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(7, getItemPiSalesHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(8, getItemPicklistHistory(123));
     });
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -1153,43 +1144,42 @@ describe('ReviewItemDetailsScreen', () => {
     const mockApiResponse = {
       ...defaultResult,
       data: {
-        itemDetails: {
-          code: 200
-        },
-        itemOhChangeHistory: {
-          code: 200
-        },
-        picklistHistory: {
-          code: 200
-        }
+        code: 200
       }
     };
     it('Renders pick history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, 4)
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, false, 4)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders pick history with no data for pick msg', () => {
-      mockApiResponse.data.picklistHistory.code = 204;
+      mockApiResponse.data.code = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, [], mockApiResponse, 5)
+        renderPickHistory(mockHandleProps, [], mockApiResponse, false, 5)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
-      mockApiResponse.data.picklistHistory.code = 200;
+      mockApiResponse.data.code = 200;
     });
-    it('Renders pick history with error msg for result status 207', () => {
-      mockApiResponse.status = 207;
-      mockApiResponse.data.picklistHistory.code = 409;
+    it('Renders pick history card with Loading indicator', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, 6)
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, true, 6)
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders pick history card with Error Message', () => {
+      mockApiResponse.status = 409;
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        renderPickHistory(mockHandleProps, pickListMockHistory, mockApiResponse, false, 6)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockApiResponse.status = 200;
-      mockApiResponse.data.picklistHistory.code = 200;
+      mockApiResponse.data.code = 200;
     });
   });
   describe('Tests Rendering \'renderReserveLocQtys\'', () => {

@@ -18,7 +18,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  createNewPick, getItemDetailsV4, getItemPiHistory, getItemPiSalesHistory, updateOHQty
+  createNewPick, getItemDetailsV4, getItemPiHistory, getItemPiSalesHistory, getItemPicklistHistory, updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -47,7 +47,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  CREATE_NEW_PICK, GET_ITEM_DETAILS_V4, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
+  CREATE_NEW_PICK, GET_ITEM_DETAILS_V4, GET_ITEM_PICKLISTHISTORY, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
   UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -73,6 +73,7 @@ export interface ItemDetailsScreenProps {
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
   isPiHistWaiting: boolean; piHistError: AxiosError | null; piHistResult: AxiosResponse | null;
   isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
+  picklistHistoryApi: AsyncState;
   createNewPickApi: AsyncState;
   updateOHQtyApi: AsyncState;
   userId: string;
@@ -363,8 +364,8 @@ const onMoreOHChangeHistoryClick = (
 export const renderPickHistory = (
   props: HandleProps,
   pickHistoryList: PickHistory[],
-  // TODO call new orch endpoint for picklistHistory https://jira.walmart.com/browse/INTLSAOPS-9247
   result: AxiosResponse | undefined,
+  isWaiting: boolean,
   itemNbr: number
 ) => {
   const pickHistorySource: TrackEventSource = {
@@ -372,8 +373,24 @@ export const renderPickHistory = (
     action: 'pick_history_click',
     otherInfo: { itemNbr }
   };
-  if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
-    if (result.data.picklistHistory.code === SUCCESS_STATUS) {
+
+  if (isWaiting) {
+    return (
+      <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource} isOpened>
+        <View style={styles.bgWhite}>
+          <ActivityIndicator
+            animating={true}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="large"
+            style={styles.completeActivityIndicator}
+          />
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  if (result && (result.status === SUCCESS_STATUS)) {
+    if (result.data.code === SUCCESS_STATUS) {
       if (pickHistoryList && pickHistoryList.length) {
         const data = [...pickHistoryList].sort((a, b) => {
           const date1 = new Date(a.createTS);
@@ -381,7 +398,7 @@ export const renderPickHistory = (
           return date2 > date1 ? 1 : -1;
         });
         return (
-          <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
+          <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource} isOpened>
             {data.slice(0, 5).map(item => (
               <RenderItemHistoryCard
                 key={item.id}
@@ -407,16 +424,16 @@ export const renderPickHistory = (
         );
       }
       return (
-        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource} isOpened>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
           </View>
         </CollapsibleCard>
       );
     }
-    if (result.data.picklistHistory.code === NO_RESULTS_STATUS) {
+    if (result.data.code === NO_RESULTS_STATUS) {
       return (
-        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
+        <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource} isOpened>
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_PICK_HISTORY')}</Text>
           </View>
@@ -425,7 +442,7 @@ export const renderPickHistory = (
     }
   }
   return (
-    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource}>
+    <CollapsibleCard title={strings('ITEM.PICK_HISTORY')} source={pickHistorySource} isOpened>
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_PICK_HISTORY')}</Text>
@@ -980,10 +997,13 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
         dispatch({ type: GET_ITEM_PIHISTORY.RESET });
         dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+        dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
+
         const itemNbr = parseInt(scannedEvent.value, 10);
         dispatch(getItemDetailsV4({ id: itemNbr }));
         dispatch(getItemPiHistory(itemNbr));
         dispatch(getItemPiSalesHistory(itemNbr));
+        dispatch(getItemPicklistHistory(itemNbr));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -1063,6 +1083,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     isWaiting, error, result,
     isPiHistWaiting, piHistError, piHistResult,
     isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
+    picklistHistoryApi,
     createNewPickApi,
     updateOHQtyApi,
     userId, actionCompleted, pendingOnHandsQty,
@@ -1107,8 +1128,10 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   // TODO call new orchestration endpoint for managerApprovalHistory https://jira.walmart.com/browse/INTLSAOPS-9245
   const itemOhChangeHistory = (result && result.data.itemOhChangeHistory)
     ? result.data.itemOhChangeHistory.ohChangeHistory : [];
-  // TODO call new orch endpoint for picklistHistory https://jira.walmart.com/browse/INTLSAOPS-9247
-  const picklistHistory = (result && result.data.picklistHistory) ? result.data.picklistHistory.picklists : [];
+
+  const picklistHistory: PickHistory[] = (
+    picklistHistoryApi.result && picklistHistoryApi.result.data.picklists
+  ) ? picklistHistoryApi.result.data.picklists : [];
 
   const locationCount = getLocationCount(props);
   const updatedSalesTS = getUpdatedSales(itemDetails);
@@ -1215,9 +1238,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
       dispatch({ type: GET_ITEM_PIHISTORY.RESET });
       dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+      dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
       dispatch(getItemDetailsV4({ id: itemDetails.itemNbr }));
       dispatch(getItemPiHistory(itemDetails.itemNbr));
       dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
+      dispatch(getItemPicklistHistory(itemDetails.itemNbr));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
@@ -1327,7 +1352,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             </SFTCard>
             <View style={styles.historyContainer}>
               {/* TODO call new orch endpoint for picklistHistory https://jira.walmart.com/browse/INTLSAOPS-9247 */ }
-              {renderPickHistory(props, picklistHistory, undefined, itemDetails.itemNbr)}
+              {renderPickHistory(
+                props,
+                picklistHistory,
+                picklistHistoryApi.result,
+                picklistHistoryApi.isWaiting,
+                itemDetails.itemNbr
+              )}
             </View>
             {(
               renderSalesGraphV3(
@@ -1358,6 +1389,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const getItemDetailsV4Api = useTypedSelector(state => state.async.getItemDetailsV4);
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
+  const getItemPicklistHistoryApi = useTypedSelector(state => state.async.getItemPicklistHistory);
   const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
     exceptionType,
@@ -1400,6 +1432,7 @@ const ReviewItemDetails = (): JSX.Element => {
       isPiSalesHistWaiting={getItemPiSalesHistoryApi.isWaiting}
       piSalesHistError={getItemPiSalesHistoryApi.error}
       piSalesHistResult={getItemPiSalesHistoryApi.result}
+      picklistHistoryApi={getItemPicklistHistoryApi}
       createNewPickApi={createNewPickApi}
       updateOHQtyApi={updateOHQtyApi}
       userId={userId}
