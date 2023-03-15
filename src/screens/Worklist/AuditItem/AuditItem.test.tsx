@@ -903,8 +903,8 @@ describe('AuditItemScreen', () => {
       );
     });
 
-    it('Test disabledContinue functionality return true when any of the locaion is empty', () => {
-      const mockFloorLocations = mockItemDetails.location.floor;
+    it('Test disabledContinue functionality return true when floor location qty is negative', () => {
+      const mockFloorLocations = [{ ...mockItemDetails.location.floor, qty: -1 }];
       const mockReserveLocations = itemPallets.pallets;
 
       expect(
@@ -913,7 +913,7 @@ describe('AuditItemScreen', () => {
     });
 
     it(`Test disabledContinue functionality return true 
-      when all of the locaion qty is present and reserve pallet is not scanned but scan is required`, () => {
+      when all of the location qty is present and reserve pallet is not scanned but scan is required`, () => {
       const mockFloorLocations = [
         { ...mockItemDetails.location.floor[0], newQty: 10 }
       ];
@@ -935,7 +935,7 @@ describe('AuditItemScreen', () => {
     });
 
     it(`Test disabledContinue functionality return false 
-      when all of the locaion qty is present and reserve pallet is scanned and scan is required`, () => {
+      when all of the location qty is present and reserve pallet is scanned and scan is required`, () => {
       const mockFloorLocations = [
         { ...mockItemDetails.location.floor[0], newQty: 10 }
       ];
@@ -957,7 +957,7 @@ describe('AuditItemScreen', () => {
     });
 
     it(`Test disabledContinue functionality return false 
-      when all of the locaion qty is present and reserve pallet is not scanned but scan is not required`, () => {
+      when all of the location qty is present and reserve pallet is not scanned but scan is not required`, () => {
       const mockFloorLocations = [
         { ...mockItemDetails.location.floor[0], newQty: 10 }
       ];

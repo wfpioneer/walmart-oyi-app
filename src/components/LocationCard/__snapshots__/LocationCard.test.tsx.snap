@@ -152,7 +152,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
         <NumericSelector
           isValid={true}
           maxValue={9999}
-          minValue={1}
+          minValue={0}
           onDecreaseQty={[Function]}
           onEndEditing={[Function]}
           onIncreaseQty={[Function]}
@@ -234,7 +234,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
         <NumericSelector
           isValid={true}
           maxValue={9999}
-          minValue={1}
+          minValue={0}
           onDecreaseQty={[Function]}
           onEndEditing={[Function]}
           onIncreaseQty={[Function]}
