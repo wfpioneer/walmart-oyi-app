@@ -25,7 +25,7 @@ import ReviewItemDetails, {
   handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress,
   onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal,
   renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV3, renderScanForNoActionButton, updateOHQtyApiHook
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -1229,8 +1229,8 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  describe('Tests Rendering \'renderSalesGraphV3\'', () => {
-    it('Renders renderSalesGraphV3 card with sales history', () => {
+  describe('Tests Rendering \'renderSalesGraphV4\'', () => {
+    it('Renders renderSalesGraphV4 card with sales history', () => {
       const result = {
         ...defaultResult,
         data: {
@@ -1256,21 +1256,21 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderSalesGraphV3('', jest.fn(), false, result, null, false, jest.fn(), 123, jest.fn())
+        renderSalesGraphV4('', jest.fn(), false, result, null, false, jest.fn(), 123, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('Renders renderSalesGraphV3 card with error', () => {
+    it('Renders renderSalesGraphV4 card with error', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderSalesGraphV3('', jest.fn(), false, null, mockError, false, jest.fn(), 123, jest.fn())
+        renderSalesGraphV4('', jest.fn(), false, null, mockError, false, jest.fn(), 123, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('Renders renderSalesGraphV3 card with api waiting', () => {
+    it('Renders renderSalesGraphV4 card with api waiting', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderSalesGraphV3('', jest.fn(), false, null, null, true, jest.fn(), 123, jest.fn())
+        renderSalesGraphV4('', jest.fn(), false, null, null, true, jest.fn(), 123, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

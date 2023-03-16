@@ -956,7 +956,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders 
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders renderSalesGraphV3 card with api waiting 1`] = `
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders renderSalesGraphV4 card with api waiting 1`] = `
 <View
   style={
     Object {
@@ -1036,7 +1036,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders re
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders renderSalesGraphV3 card with error 1`] = `
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders renderSalesGraphV4 card with error 1`] = `
 <View
   style={
     Object {
@@ -1172,7 +1172,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders re
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV3' Renders renderSalesGraphV3 card with sales history 1`] = `
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders renderSalesGraphV4 card with sales history 1`] = `
 <View
   style={
     Object {

@@ -769,7 +769,7 @@ export const renderReplenishmentCard = (
   </View>
 );
 
-export const renderSalesGraphV3 = (
+export const renderSalesGraphV4 = (
   updatedSalesTS: string | undefined,
   toggleSalesGraphView: any,
   isSalesMetricsGraphView: boolean,
@@ -1351,7 +1351,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               {renderLocationComponent(props, itemDetails, setCreatePickModalVisible, dispatch)}
             </SFTCard>
             <View style={styles.historyContainer}>
-              {/* TODO call new orch endpoint for picklistHistory https://jira.walmart.com/browse/INTLSAOPS-9247 */ }
               {renderPickHistory(
                 props,
                 picklistHistory,
@@ -1361,7 +1360,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               )}
             </View>
             {(
-              renderSalesGraphV3(
+              renderSalesGraphV4(
                 updatedSalesTS,
                 toggleSalesGraphView,
                 isSalesMetricsGraphView,
