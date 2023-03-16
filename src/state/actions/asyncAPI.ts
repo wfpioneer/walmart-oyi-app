@@ -1,13 +1,16 @@
 import { makeAsyncActionCreators, makeAsyncActionTypes } from './generic/makeAsyncActions';
 
-export const GET_ITEM_DETAILS_V3 = makeAsyncActionTypes('API/GET_ITEM_DETAILS_V3');
-export const getItemDetailsV3 = makeAsyncActionCreators(GET_ITEM_DETAILS_V3);
+export const GET_ITEM_DETAILS_V4 = makeAsyncActionTypes('API/GET_ITEM_DETAILS_V4');
+export const getItemDetailsV4 = makeAsyncActionCreators(GET_ITEM_DETAILS_V4);
 
 export const GET_ITEM_PIHISTORY = makeAsyncActionTypes('API/GET_ITEM_PIHISTORY');
 export const getItemPiHistory = makeAsyncActionCreators(GET_ITEM_PIHISTORY);
 
 export const GET_ITEM_PISALESHISTORY = makeAsyncActionTypes('API/GET_ITEM_PISALESHISTORY');
 export const getItemPiSalesHistory = makeAsyncActionCreators(GET_ITEM_PISALESHISTORY);
+
+export const GET_ITEM_PICKLISTHISTORY = makeAsyncActionTypes('API/GET_ITEM_PICKLISTHISTORY');
+export const getItemPicklistHistory = makeAsyncActionCreators(GET_ITEM_PICKLISTHISTORY);
 
 export const HIT_GOOGLE = makeAsyncActionTypes('API/HIT_GOOGLE');
 export const hitGoogle = makeAsyncActionCreators(HIT_GOOGLE);

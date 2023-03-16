@@ -285,6 +285,48 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
     </View>
   </View>
+  <CollapsibleCard
+    icon=""
+    isOpened={false}
+    title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
+    titleStyle={Object {}}
+  >
+    <View
+      testID="additional-item-details"
+    >
+      <ItemDetailsList
+        indentAfterFirstRow={false}
+        rows={
+          Array [
+            Object {
+              "label": "[missing \\"en.ITEM.VENDOR_PACK\\" translation]",
+              "value": 33,
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.COLOR\\" translation]",
+              "value": "red",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.SIZE\\" translation]",
+              "value": 88,
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.PRICE_BEFORE_TAX\\" translation]",
+              "value": "$15.05",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.MARGIN\\" translation]",
+              "value": "14.00%",
+            },
+            Object {
+              "label": "[missing \\"en.ITEM.GROSS_PROFIT\\" translation]",
+              "value": "$2.50",
+            },
+          ]
+        }
+      />
+    </View>
+  </CollapsibleCard>
   <Text
     style={
       Object {

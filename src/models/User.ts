@@ -28,7 +28,6 @@ export interface Configurations {
   areas: area[];
   enableAreaFilter: boolean;
   palletWorklists: boolean;
-  additionalItemDetails: boolean;
   createPallet: boolean;
   auditWorklists: boolean;
   showRollOverAudit: boolean;

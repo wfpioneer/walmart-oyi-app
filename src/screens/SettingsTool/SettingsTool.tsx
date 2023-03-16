@@ -242,11 +242,6 @@ export const SettingsToolScreen = (props: SettingsToolProps): JSX.Element => {
       name: strings('EXCEPTION.MISSING_PALLETS')
     },
     {
-      fluffyKey: 'additional item details',
-      configKey: 'additionalItemDetails',
-      name: strings('ITEM.ADDITIONAL_ITEM_DETAILS')
-    },
-    {
       fluffyKey: 'audit worklists',
       configKey: 'auditWorklists',
       name: strings('WORKLIST.AUDIT_WORKLIST')
