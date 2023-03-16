@@ -33,12 +33,17 @@ import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
 
 const genericSagas = [
-  makeAsyncSaga(saga.GET_ITEM_DETAILS_V3, actions.getItemDetailsV3, GetItemDetailsService.getItemDetailsV3),
+  makeAsyncSaga(saga.GET_ITEM_DETAILS_V4, actions.getItemDetailsV4, GetItemDetailsService.getItemDetailsV4),
   makeAsyncSaga(saga.GET_ITEM_PIHISTORY, actions.getItemPiHistory, GetItemDetailsService.getItemPiHistory),
   makeAsyncSaga(
     saga.GET_ITEM_PISALESHISTORY,
     actions.getItemPiSalesHistory,
     GetItemDetailsService.getItemPiSalesHistory
+  ),
+  makeAsyncSaga(
+    saga.GET_ITEM_PICKLISTHISTORY,
+    actions.getItemPicklistHistory,
+    GetItemDetailsService.getItemPicklistHistory
   ),
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
