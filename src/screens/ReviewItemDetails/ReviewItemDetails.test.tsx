@@ -19,13 +19,14 @@ itemDetail, {
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  callBackbarcodeEmitter, createNewPickApiHook, getExceptionType,
-  getFloorItemDetails, getLocationCount, getPendingOnHandsQty, getReserveItemDetails,
-  getTopRightBtnTxt, getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit,
-  handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress,
-  onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal,
-  renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4, renderScanForNoActionButton, updateOHQtyApiHook
+  callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook,
+  getExceptionType, getFloorItemDetails, getLocationCount, getPendingOnHandsQty,
+  getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleCreateNewPick, handleLocationAction,
+  handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
+  onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
+  renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent,
+  renderOtherActionButton, renderPickHistory, renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4,
+  renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -1271,6 +1272,39 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         renderSalesGraphV4('', jest.fn(), false, null, null, true, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests rendering \'Complete & Other Action  \'Buttons', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    it('Renders otherActionbutton', () => {
+      renderer.render(
+        renderOtherActionButton()
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NSFL', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NSFL'
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, itemDetail[123])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NSFL with existing Location', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NSFL',
+        floorLocations: [...itemDetail[123].location?.floor || []]
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, itemDetail[123])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
