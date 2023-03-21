@@ -893,9 +893,11 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
         );
       }
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty >= 0)) {
-        <View style={styles.otherActionContainer}>
-          {renderOtherActionButton()}
-        </View>;
+        return (
+          <View style={styles.otherActionContainer}>
+            {renderOtherActionButton()}
+          </View>
+        );
       }
       return <View />;
     }

@@ -1312,7 +1312,8 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders completeButtonComponent NO', () => {
       const mockPropNSFL: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        exceptionType: 'NO'
+        exceptionType: 'NO',
+        userFeatures: ['on hands change']
       };
       renderer.render(
         completeButtonComponent(mockPropNSFL, itemDetail[123])
@@ -1321,6 +1322,18 @@ describe('ReviewItemDetailsScreen', () => {
     });
 
     it('Renders completeButtonComponent NO with negative on hands qty', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NO',
+        userFeatures: ['on hands change']
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, { ...itemDetail[123], onHandsQty: -5 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NO with \' on hands change\' disabled', () => {
       const mockPropNSFL: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO'

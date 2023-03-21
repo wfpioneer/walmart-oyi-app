@@ -1514,9 +1514,113 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 </Modal>
 `;
 
-exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO 1`] = `<View />`;
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "space-around",
+      "backgroundColor": "#ffffffff",
+      "borderTopColor": "#e0e0e0",
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <TouchableOpacity
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#0071e9",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.OTHER_ACTIONS" translation]
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
 
-exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO with negative on hands qty 1`] = `<View />`;
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO with ' on hands change' disabled 1`] = `<View />`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO with negative on hands qty 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignContent": "center",
+        "backgroundColor": "#ffffffff",
+        "elevation": 10,
+        "flexDirection": "row",
+        "height": 80,
+        "justifyContent": "space-evenly",
+      },
+      Object {
+        "height": 60,
+      },
+    ]
+  }
+>
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={40}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "alignSelf": "center",
+        "width": "45%",
+      }
+    }
+    title="[missing \\"en.ITEM.OTHER_ACTIONS\\" translation]"
+    titleColor="#0071e9"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={2}
+    width={-1}
+  />
+  <Button
+    backgroundColor="#0071e9"
+    disabled={false}
+    height={40}
+    onPress={[Function]}
+    radius={5}
+    style={
+      Object {
+        "alignSelf": "center",
+        "width": "45%",
+      }
+    }
+    title="[missing \\"en.APPROVAL.OH_CHANGE\\" translation]"
+    titleColor="#ffffffff"
+    titleFontSize={16}
+    titleFontWeight="normal"
+    type={1}
+    width={-1}
+  />
+</View>
+`;
 
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFL 1`] = `
 <View
