@@ -23,7 +23,7 @@ export interface LocationList {
     onEndEditing: () => void;
     onCalcPress: () => void;
     scanned?: boolean;
-    locationType: LocationType
+    locationType: LocationType;
 }
 
 interface LocationListCardProp {
@@ -36,17 +36,21 @@ interface LocationListCardProp {
   onRetry: () => void;
   scanRequired: boolean;
   showCalculator: boolean;
+  minQty: number;
+  maxQty: number;
 }
 
 const renderLocationCard = ({
-  item, locationType, scanRequired, index, showCalculator
+  item, locationType, scanRequired, index, showCalculator, minQty, maxQty
 }:
   {
     item: LocationList,
     locationType: LocationType,
     scanRequired: boolean,
     index: number,
-    showCalculator: boolean
+    showCalculator: boolean,
+    minQty: number,
+    maxQty: number
   }) => {
   const {
     locationName, quantity, palletId, increment, decrement, onDelete, onCalcPress, qtyChange, scanned
@@ -67,6 +71,8 @@ const renderLocationCard = ({
         scanned={scanned}
         showCalculator={showCalculator}
         showQtyChanged={item.quantity !== item.oldQuantity}
+        minQty={minQty}
+        maxQty={maxQty}
       />
     </View>
   );
@@ -95,7 +101,9 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
     error,
     onRetry,
     scanRequired,
-    showCalculator
+    showCalculator,
+    minQty,
+    maxQty
   } = props;
   const locationTitle = locationType === 'floor' ? strings('LOCATION.FLOOR') : strings('LOCATION.RESERVE');
 
@@ -166,10 +174,10 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
           <ActivityIndicator size={30} color={Platform.OS === 'android' ? COLOR.MAIN_THEME_COLOR : undefined} />
         </View>
       ) : (
-        <>
+        <View>
           {
             locationList.length ? locationList.map((item, index) => renderLocationCard({
-              item, locationType, scanRequired, index, showCalculator
+              item, locationType, scanRequired, index, showCalculator, minQty, maxQty
             }))
               : (
                 <View style={styles.nolocation}>
@@ -180,7 +188,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
                 </View>
               )
           }
-        </>
+        </View>
       )}
     </View>
   );

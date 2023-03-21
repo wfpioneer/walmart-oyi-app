@@ -941,7 +941,7 @@ export const disabledContinue = (
   reserveLocations: ItemPalletInfo[],
   scanRequired: boolean,
   itemDetailsLoading: boolean
-): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1)
+): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 0)
   || reserveLocations.some(
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
@@ -1009,6 +1009,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   );
 
   const hasNewQty = reserveLocations.some(loc => loc.quantity !== loc.newQty);
+  const MIN = 0;
+  const MAX = 9999;
 
   // Scanner listener
   useEffectHook(() => {
@@ -1399,6 +1401,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               onRetry={() => {}}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
+              minQty={MIN}
+              maxQty={MAX}
             />
           </View>
           <View style={styles.marginBottomStyle}>
@@ -1410,6 +1414,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               scanRequired={userConfig.scanRequired}
               onRetry={handleReserveLocsRetry}
               showCalculator={userConfig.showCalculator}
+              minQty={MIN}
+              maxQty={MAX}
             />
           </View>
           <View>
