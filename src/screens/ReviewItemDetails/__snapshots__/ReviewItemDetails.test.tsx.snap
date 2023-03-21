@@ -304,28 +304,30 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Ren
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#0071e9",
+      "backgroundColor": "#ffffffff",
       "borderColor": "#0071e9",
       "borderRadius": 4,
       "borderWidth": 1,
+      "flex": 1,
       "flexDirection": "row",
       "height": 40,
       "justifyContent": "center",
-      "marginHorizontal": 15,
+      "marginHorizontal": 10,
       "marginVertical": 10,
       "paddingVertical": 10,
     }
   }
 >
   <mockMaterialCommunityIcons
-    color="#ffffffff"
+    color="#0071e9"
     name="barcode-scan"
     size={20}
   />
   <Text
+    adjustsFontSizeToFit={true}
     style={
       Object {
-        "color": "#ffffffff",
+        "color": "#0071e9",
         "marginLeft": 10,
         "textAlign": "center",
       }
@@ -1510,6 +1512,185 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
     </View>
   </View>
 </Modal>
+`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFL 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "space-around",
+      "backgroundColor": "#ffffffff",
+      "borderTopColor": "#e0e0e0",
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#0071e9"
+      name="barcode-scan"
+      size={20}
+    />
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#0071e9",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="map-marker-plus"
+      size={20}
+    />
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#ffffffff",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFL with existing Location 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "space-around",
+      "backgroundColor": "#ffffffff",
+      "borderTopColor": "#e0e0e0",
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#0071e9"
+      name="barcode-scan"
+      size={20}
+    />
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#0071e9",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders otherActionbutton 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#0071e9",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "flex": 1,
+      "flexDirection": "row",
+      "height": 40,
+      "justifyContent": "center",
+      "marginHorizontal": 10,
+      "marginVertical": 10,
+      "paddingVertical": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#0071e9",
+        "marginLeft": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.ITEM.OTHER_ACTIONS" translation]
+  </Text>
+</TouchableOpacity>
 `;
 
 exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Added to Picklist Button ' with Picking enabled 1`] = `
@@ -2789,41 +2970,57 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
     </View>
   </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
+        "alignContent": "space-around",
+        "backgroundColor": "#ffffffff",
+        "borderTopColor": "#e0e0e0",
+        "borderTopWidth": 1,
         "flexDirection": "row",
-        "height": 40,
         "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
+        "width": "100%",
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
+    <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
+      <Text
+        adjustsFontSizeToFit={true}
+        style={
+          Object {
+            "color": "#0071e9",
+            "marginLeft": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -3519,41 +3716,57 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
     </View>
   </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
+        "alignContent": "space-around",
+        "backgroundColor": "#ffffffff",
+        "borderTopColor": "#e0e0e0",
+        "borderTopWidth": 1,
         "flexDirection": "row",
-        "height": 40,
         "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
+        "width": "100%",
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
+    <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
+      <Text
+        adjustsFontSizeToFit={true}
+        style={
+          Object {
+            "color": "#0071e9",
+            "marginLeft": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -4223,41 +4436,57 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
     </View>
   </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
+        "alignContent": "space-around",
+        "backgroundColor": "#ffffffff",
+        "borderTopColor": "#e0e0e0",
+        "borderTopWidth": 1,
         "flexDirection": "row",
-        "height": 40,
         "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
+        "width": "100%",
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
+    <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
+      <Text
+        adjustsFontSizeToFit={true}
+        style={
+          Object {
+            "color": "#0071e9",
+            "marginLeft": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -4927,41 +5156,57 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
     </View>
   </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
+        "alignContent": "space-around",
+        "backgroundColor": "#ffffffff",
+        "borderTopColor": "#e0e0e0",
+        "borderTopWidth": 1,
         "flexDirection": "row",
-        "height": 40,
         "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
+        "width": "100%",
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
+    <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
+      <Text
+        adjustsFontSizeToFit={true}
+        style={
+          Object {
+            "color": "#0071e9",
+            "marginLeft": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -5432,41 +5677,57 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
     </View>
   </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
+        "alignContent": "space-around",
+        "backgroundColor": "#ffffffff",
+        "borderTopColor": "#e0e0e0",
+        "borderTopWidth": 1,
         "flexDirection": "row",
-        "height": 40,
         "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
+        "width": "100%",
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
+    <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
+      <Text
+        adjustsFontSizeToFit={true}
+        style={
+          Object {
+            "color": "#0071e9",
+            "marginLeft": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -5937,41 +6198,57 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
     </View>
   </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
+        "alignContent": "space-around",
+        "backgroundColor": "#ffffffff",
+        "borderTopColor": "#e0e0e0",
+        "borderTopWidth": 1,
         "flexDirection": "row",
-        "height": 40,
         "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
+        "width": "100%",
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
+    <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
+      <Text
+        adjustsFontSizeToFit={true}
+        style={
+          Object {
+            "color": "#0071e9",
+            "marginLeft": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
 
@@ -6641,40 +6918,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
     </View>
   </ScrollView>
-  <TouchableOpacity
-    onPress={[Function]}
+  <View
     style={
       Object {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
+        "alignContent": "space-around",
+        "backgroundColor": "#ffffffff",
+        "borderTopColor": "#e0e0e0",
+        "borderTopWidth": 1,
         "flexDirection": "row",
-        "height": 40,
         "justifyContent": "center",
-        "marginHorizontal": 15,
-        "marginVertical": 10,
-        "paddingVertical": 10,
+        "width": "100%",
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="barcode-scan"
-      size={20}
-    />
-    <Text
+    <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
-          "color": "#ffffffff",
-          "marginLeft": 10,
-          "textAlign": "center",
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
         }
       }
     >
-      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-    </Text>
-  </TouchableOpacity>
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
+      <Text
+        adjustsFontSizeToFit={true}
+        style={
+          Object {
+            "color": "#0071e9",
+            "marginLeft": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+      </Text>
+    </TouchableOpacity>
+  </View>
 </View>
 `;
