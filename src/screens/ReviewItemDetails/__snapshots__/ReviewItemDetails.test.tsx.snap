@@ -357,27 +357,6 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders OH history with error msg for result status 207 1`] = `
-<View>
-  <CollapsibleHeaderCard
-    icon=""
-    isOpened={false}
-    title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-    titleStyle={Object {}}
-    toggleIsOpened={[Function]}
-    trackEventSource={
-      Object {
-        "action": "OH_change_history_click",
-        "otherInfo": Object {
-          "itemNbr": 3,
-        },
-        "screen": "Review_Item_Details",
-      }
-    }
-  />
-</View>
-`;
-
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders OH history with no data for pick msg 1`] = `
 <View>
   <CollapsibleHeaderCard
@@ -2597,6 +2576,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
             </Text>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e57373",
+                  "borderRadius": 4,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 10,
+                  "width": "95%",
+                }
+              }
+              testID="managerApprovalHistoryError"
+            >
+              <Text>
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </TouchableOpacity>
           </View>
         </CollapsibleCard>
       </View>
@@ -3327,6 +3325,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
             </Text>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e57373",
+                  "borderRadius": 4,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 10,
+                  "width": "95%",
+                }
+              }
+              testID="managerApprovalHistoryError"
+            >
+              <Text>
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </TouchableOpacity>
           </View>
         </CollapsibleCard>
       </View>
@@ -3832,6 +3849,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
             </Text>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e57373",
+                  "borderRadius": 4,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 10,
+                  "width": "95%",
+                }
+              }
+              testID="managerApprovalHistoryError"
+            >
+              <Text>
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </TouchableOpacity>
           </View>
         </CollapsibleCard>
       </View>
@@ -4536,6 +4572,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
             </Text>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e57373",
+                  "borderRadius": 4,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 10,
+                  "width": "95%",
+                }
+              }
+              testID="managerApprovalHistoryError"
+            >
+              <Text>
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </TouchableOpacity>
           </View>
         </CollapsibleCard>
       </View>
@@ -5240,6 +5295,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
             </Text>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e57373",
+                  "borderRadius": 4,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 10,
+                  "width": "95%",
+                }
+              }
+              testID="managerApprovalHistoryError"
+            >
+              <Text>
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </TouchableOpacity>
           </View>
         </CollapsibleCard>
       </View>
@@ -5745,6 +5819,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
             </Text>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e57373",
+                  "borderRadius": 4,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 10,
+                  "width": "95%",
+                }
+              }
+              testID="managerApprovalHistoryError"
+            >
+              <Text>
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </TouchableOpacity>
           </View>
         </CollapsibleCard>
       </View>
@@ -6250,6 +6343,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             <Text>
               [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
             </Text>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e57373",
+                  "borderRadius": 4,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "marginVertical": 10,
+                  "width": "95%",
+                }
+              }
+              testID="managerApprovalHistoryError"
+            >
+              <Text>
+                [missing "en.GENERICS.RETRY" translation]
+              </Text>
+            </TouchableOpacity>
           </View>
         </CollapsibleCard>
       </View>
