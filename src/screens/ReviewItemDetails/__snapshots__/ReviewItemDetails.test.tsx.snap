@@ -1514,6 +1514,10 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 </Modal>
 `;
 
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO 1`] = `<View />`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO with negative on hands qty 1`] = `<View />`;
+
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFL 1`] = `
 <View
   style={

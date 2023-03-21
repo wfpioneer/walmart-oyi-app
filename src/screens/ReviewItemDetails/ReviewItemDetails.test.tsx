@@ -1308,5 +1308,27 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('Renders completeButtonComponent NO', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NO'
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, itemDetail[123])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NO with negative on hands qty', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NO'
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, { ...itemDetail[123], onHandsQty: -5 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 });

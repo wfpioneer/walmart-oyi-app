@@ -61,6 +61,7 @@ import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { TrackEventSource } from '../../models/Generics.d';
 import { barcodeEmitter } from '../../utils/scannerUtils';
+import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
@@ -874,8 +875,30 @@ export const renderOtherActionButton = () => (
 );
 
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
-  const { actionCompleted, exceptionType, floorLocations } = props;
+  const {
+    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent
+  } = props;
   switch (exceptionType?.toUpperCase()) {
+    case 'NO': {
+      if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty < 0)) {
+        return (
+          <ButtonBottomTab
+            leftTitle={strings('ITEM.OTHER_ACTIONS')}
+            onLeftPress={() => undefined}
+            rightTitle={strings('APPROVAL.OH_CHANGE')}
+            onRightPress={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
+            height={40}
+            containerHeight={60}
+          />
+        );
+      }
+      if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty >= 0)) {
+        <View style={styles.otherActionContainer}>
+          {renderOtherActionButton()}
+        </View>;
+      }
+      return <View />;
+    }
     case 'NSFL': {
       if ((floorLocations && floorLocations.length === 0)) {
         return (
