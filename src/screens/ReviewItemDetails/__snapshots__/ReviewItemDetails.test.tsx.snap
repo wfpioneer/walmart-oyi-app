@@ -1728,6 +1728,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   }
 >
   <TouchableOpacity
+    onPress={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -1745,7 +1746,13 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
       }
     }
   >
+    <mockMaterialCommunityIcons
+      color="#0071e9"
+      name="barcode-scan"
+      size={20}
+    />
     <Text
+      adjustsFontSizeToFit={true}
       style={
         Object {
           "color": "#0071e9",
@@ -1754,7 +1761,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
         }
       }
     >
-      [missing "en.ITEM.OTHER_ACTIONS" translation]
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
     </Text>
   </TouchableOpacity>
 </View>
@@ -3085,6 +3092,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   >
     <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -3102,7 +3110,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
       <Text
+        adjustsFontSizeToFit={true}
         style={
           Object {
             "color": "#0071e9",
@@ -3111,7 +3125,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        [missing "en.ITEM.OTHER_ACTIONS" translation]
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
       </Text>
     </TouchableOpacity>
   </View>
@@ -3824,6 +3838,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   >
     <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -3841,7 +3856,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
       <Text
+        adjustsFontSizeToFit={true}
         style={
           Object {
             "color": "#0071e9",
@@ -3850,7 +3871,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        [missing "en.ITEM.OTHER_ACTIONS" translation]
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
       </Text>
     </TouchableOpacity>
   </View>
@@ -4537,6 +4558,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   >
     <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -4554,7 +4576,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
       <Text
+        adjustsFontSizeToFit={true}
         style={
           Object {
             "color": "#0071e9",
@@ -4563,7 +4591,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        [missing "en.ITEM.OTHER_ACTIONS" translation]
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
       </Text>
     </TouchableOpacity>
   </View>
@@ -5250,6 +5278,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   >
     <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -5267,7 +5296,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
       <Text
+        adjustsFontSizeToFit={true}
         style={
           Object {
             "color": "#0071e9",
@@ -5276,7 +5311,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        [missing "en.ITEM.OTHER_ACTIONS" translation]
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
       </Text>
     </TouchableOpacity>
   </View>
@@ -5764,6 +5799,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   >
     <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -5781,7 +5817,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
       <Text
+        adjustsFontSizeToFit={true}
         style={
           Object {
             "color": "#0071e9",
@@ -5790,7 +5832,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        [missing "en.ITEM.OTHER_ACTIONS" translation]
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
       </Text>
     </TouchableOpacity>
   </View>
@@ -6278,6 +6320,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   >
     <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -6295,7 +6338,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
       <Text
+        adjustsFontSizeToFit={true}
         style={
           Object {
             "color": "#0071e9",
@@ -6304,7 +6353,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        [missing "en.ITEM.OTHER_ACTIONS" translation]
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
       </Text>
     </TouchableOpacity>
   </View>
@@ -6991,6 +7040,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     }
   >
     <TouchableOpacity
+      onPress={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -7008,7 +7058,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#0071e9"
+        name="barcode-scan"
+        size={20}
+      />
       <Text
+        adjustsFontSizeToFit={true}
         style={
           Object {
             "color": "#0071e9",
@@ -7017,7 +7073,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        [missing "en.ITEM.OTHER_ACTIONS" translation]
+        [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
       </Text>
     </TouchableOpacity>
   </View>
