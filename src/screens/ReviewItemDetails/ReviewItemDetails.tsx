@@ -887,7 +887,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       }
       return (
         <View style={styles.otherActionContainer}>
-          {renderOtherActionButton()}
+          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
         </View>
       );
     }
