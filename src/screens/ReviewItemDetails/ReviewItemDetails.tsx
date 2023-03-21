@@ -18,7 +18,13 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
-  createNewPick, getItemDetailsV4, getItemPiHistory, getItemPiSalesHistory, getItemPicklistHistory, updateOHQty
+  createNewPick,
+  getItemDetailsV4,
+  getItemManagerApprovalHistory,
+  getItemPiHistory,
+  getItemPiSalesHistory,
+  getItemPicklistHistory,
+  updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -47,7 +53,12 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  CREATE_NEW_PICK, GET_ITEM_DETAILS_V4, GET_ITEM_PICKLISTHISTORY, GET_ITEM_PIHISTORY, GET_ITEM_PISALESHISTORY,
+  CREATE_NEW_PICK,
+  GET_ITEM_DETAILS_V4,
+  GET_ITEM_MANAGERAPPROVALHISTORY,
+  GET_ITEM_PICKLISTHISTORY,
+  GET_ITEM_PIHISTORY,
+  GET_ITEM_PISALESHISTORY,
   UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -73,6 +84,7 @@ export interface ItemDetailsScreenProps {
   isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
   isPiHistWaiting: boolean; piHistError: AxiosError | null; piHistResult: AxiosResponse | null;
   isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
+  managerApprovalHistoryApi: AsyncState;
   picklistHistoryApi: AsyncState;
   createNewPickApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -328,7 +340,6 @@ export const RenderItemHistoryCard = (
   </View>
 );
 
-const MULTI_STATUS = 207;
 const NO_RESULTS_STATUS = 204;
 const SUCCESS_STATUS = 200;
 
@@ -577,18 +588,19 @@ export const renderReplenishmentHistory = (
 
 export const renderOHChangeHistory = (
   props: HandleProps,
-  ohChangeHistory: OHChangeHistory[],
-  // TODO call new orchestration endpoint for managerApprovalHistory https://jira.walmart.com/browse/INTLSAOPS-9245
-  result: AxiosResponse | undefined,
-  itemNbr: number
-) => {
+  mahResult: AxiosResponse<OHChangeHistory[]>,
+  itemNbr: number,
+  dispatch: Dispatch,
+  trackEventCall: typeof trackEvent
+): JSX.Element => {
+  const ohChangeHistory = (mahResult && mahResult.data) ? mahResult.data : [];
   const ohChangeHistorySource: TrackEventSource = {
     screen: REVIEW_ITEM_DETAILS,
     action: 'OH_change_history_click',
     otherInfo: { itemNbr }
   };
-  if (result && (result.status === SUCCESS_STATUS || result.status === MULTI_STATUS)) {
-    if (result.data.itemOhChangeHistory.code === SUCCESS_STATUS) {
+  if (mahResult) {
+    if (mahResult.status === SUCCESS_STATUS) {
       if (ohChangeHistory && ohChangeHistory.length) {
         const data = [...ohChangeHistory].sort((a, b) => {
           const date1 = new Date(a.initiatedTimestamp);
@@ -629,7 +641,7 @@ export const renderOHChangeHistory = (
         </CollapsibleCard>
       );
     }
-    if (result.data.itemOhChangeHistory.code === NO_RESULTS_STATUS) {
+    if (mahResult.status === NO_RESULTS_STATUS) {
       return (
         <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
           <View style={styles.noDataContainer}>
@@ -644,6 +656,17 @@ export const renderOHChangeHistory = (
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
         <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
+        <TouchableOpacity
+          testID="managerApprovalHistoryError"
+          style={styles.errorButton}
+          onPress={() => {
+            trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_manager_aprv_hist_retry_click', itemNbr });
+            dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
+            dispatch(getItemManagerApprovalHistory(itemNbr));
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
       </View>
     </CollapsibleCard>
   );
@@ -869,7 +892,8 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
 
 // Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
 export const renderBarcodeErrorModal = (
-  isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
+  isVisible: boolean,
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => (
   <CustomModalComponent
     isVisible={isVisible}
@@ -998,12 +1022,14 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch({ type: GET_ITEM_PIHISTORY.RESET });
         dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
         dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
+        dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
 
         const itemNbr = parseInt(scannedEvent.value, 10);
         dispatch(getItemDetailsV4({ id: itemNbr }));
         dispatch(getItemPiHistory(itemNbr));
         dispatch(getItemPiSalesHistory(itemNbr));
         dispatch(getItemPicklistHistory(itemNbr));
+        dispatch(getItemManagerApprovalHistory(itemNbr));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   }
@@ -1083,6 +1109,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     isWaiting, error, result,
     isPiHistWaiting, piHistError, piHistResult,
     isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
+    managerApprovalHistoryApi,
     picklistHistoryApi,
     createNewPickApi,
     updateOHQtyApi,
@@ -1107,6 +1134,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     countryCode,
     exceptionType
   } = props;
+  const { result: mahResult } = managerApprovalHistoryApi;
 
   useEffectHook(() => () => {
     dispatch(resetLocations());
@@ -1124,10 +1152,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   }, [scannedEvent]);
 
   const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
-
-  // TODO call new orchestration endpoint for managerApprovalHistory https://jira.walmart.com/browse/INTLSAOPS-9245
-  const itemOhChangeHistory = (result && result.data.itemOhChangeHistory)
-    ? result.data.itemOhChangeHistory.ohChangeHistory : [];
 
   const picklistHistory: PickHistory[] = (
     picklistHistoryApi.result && picklistHistoryApi.result.data.picklists
@@ -1239,10 +1263,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       dispatch({ type: GET_ITEM_PIHISTORY.RESET });
       dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
       dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
+      dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
       dispatch(getItemDetailsV4({ id: itemDetails.itemNbr }));
       dispatch(getItemPiHistory(itemDetails.itemNbr));
       dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
       dispatch(getItemPicklistHistory(itemDetails.itemNbr));
+      dispatch(getItemManagerApprovalHistory(itemDetails.itemNbr));
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
   };
 
@@ -1328,8 +1354,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
             <View style={styles.historyContainer}>
-              {/* TODO call new orch endpoint for OHChangeHistory https://jira.walmart.com/browse/INTLSAOPS-9245 */ }
-              {renderOHChangeHistory(props, itemOhChangeHistory, undefined, itemDetails.itemNbr)}
+              {renderOHChangeHistory(props, mahResult, itemDetails.itemNbr, dispatch, trackEventCall)}
             </View>
             <View style={styles.historyContainer}>
               {renderReplenishmentCard(
@@ -1389,6 +1414,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const getItemPicklistHistoryApi = useTypedSelector(state => state.async.getItemPicklistHistory);
+  const getItemManagerApprovalHistoryApi = useTypedSelector(state => state.async.getItemManagerApprovalHistory);
   const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
     exceptionType,
@@ -1431,6 +1457,7 @@ const ReviewItemDetails = (): JSX.Element => {
       isPiSalesHistWaiting={getItemPiSalesHistoryApi.isWaiting}
       piSalesHistError={getItemPiSalesHistoryApi.error}
       piSalesHistResult={getItemPiSalesHistoryApi.result}
+      managerApprovalHistoryApi={getItemManagerApprovalHistoryApi}
       picklistHistoryApi={getItemPicklistHistoryApi}
       createNewPickApi={createNewPickApi}
       updateOHQtyApi={updateOHQtyApi}

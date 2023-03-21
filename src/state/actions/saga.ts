@@ -33,6 +33,7 @@ export const GET_ITEM_DETAILS_V4 = 'SAGA/GET_ITEM_DETAILS_V4';
 export const GET_ITEM_PIHISTORY = 'SAGA/GET_ITEM_PIHISTORY';
 export const GET_ITEM_PISALESHISTORY = 'SAGA/GET_ITEM_PISALESHISTORY';
 export const GET_ITEM_PICKLISTHISTORY = 'SAGA/GET_ITEM_PICKLISTHISTORY';
+export const GET_ITEM_MANAGER_APPROVAL_HISTORY = 'SAGA/GET_ITEM_MANAGER_APPROVAL_HISTORY';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
@@ -95,6 +96,9 @@ export const getItemDetailsV4 = (payload: GetItemDetailsPayload) => ({ type: GET
 export const getItemPiHistory = (payload: number) => ({ type: GET_ITEM_PIHISTORY, payload } as const);
 export const getItemPiSalesHistory = (payload: number) => ({ type: GET_ITEM_PISALESHISTORY, payload } as const);
 export const getItemPicklistHistory = (payload: number) => ({ type: GET_ITEM_PICKLISTHISTORY, payload } as const);
+export const getItemManagerApprovalHistory = (payload: number) => ({
+  type: GET_ITEM_MANAGER_APPROVAL_HISTORY, payload
+} as const);
 
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
 export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
@@ -278,6 +282,7 @@ export type SagaParams =
   & Pick<ReturnType<typeof getItemDetailsV4>, 'payload'>
   & Pick<ReturnType<typeof getItemPiHistory>, 'payload'>
   & Pick<ReturnType<typeof getItemPiSalesHistory>, 'payload'>
+  & Pick<ReturnType<typeof getItemManagerApprovalHistory>, 'payload'>
   & Pick<ReturnType<typeof getWorklist>, 'payload'>
   & Pick<ReturnType<typeof getWorklistAudits>, 'payload'>
   & Pick<ReturnType<typeof getPalletWorklist>, 'payload'>
