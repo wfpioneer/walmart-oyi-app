@@ -295,49 +295,6 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
 
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test onIsWaiting 2`] = `<View />`;
 
-exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Nothing for' Scan for No Action' button 1`] = `<View />`;
-
-exports[`ReviewItemDetailsScreen Tests Rendering 'Scan for No Action Button' Renders Scan for No Action Button if Platform is Android 1`] = `
-<TouchableOpacity
-  hostRef={null}
-  onPress={[Function]}
-  style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#ffffffff",
-      "borderColor": "#0071e9",
-      "borderRadius": 4,
-      "borderWidth": 1,
-      "flex": 1,
-      "flexDirection": "row",
-      "height": 40,
-      "justifyContent": "center",
-      "marginHorizontal": 10,
-      "marginVertical": 10,
-      "paddingVertical": 10,
-    }
-  }
->
-  <mockMaterialCommunityIcons
-    color="#0071e9"
-    name="barcode-scan"
-    size={20}
-  />
-  <Text
-    adjustsFontSizeToFit={true}
-    style={
-      Object {
-        "color": "#0071e9",
-        "marginLeft": 10,
-        "textAlign": "center",
-      }
-    }
-  >
-    [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-  </Text>
-</TouchableOpacity>
-`;
-
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders OH history flat list 1`] = `
 <View>
   <CollapsibleHeaderCard
@@ -1326,6 +1283,49 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering Other Action 'Scan for No Action Button' Renders Nothing for' Scan for No Action' button 1`] = `<View />`;
+
+exports[`ReviewItemDetailsScreen Tests Rendering Other Action 'Scan for No Action Button' Renders Scan for No Action Button if Platform is Android 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "borderColor": "#0071e9",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "flex": 1,
+      "flexDirection": "row",
+      "height": 40,
+      "justifyContent": "center",
+      "marginHorizontal": 10,
+      "marginVertical": 10,
+      "paddingVertical": 10,
+    }
+  }
+>
+  <mockMaterialCommunityIcons
+    color="#0071e9"
+    name="barcode-scan"
+    size={20}
+  />
+  <Text
+    adjustsFontSizeToFit={true}
+    style={
+      Object {
+        "color": "#0071e9",
+        "marginLeft": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+  </Text>
+</TouchableOpacity>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders the barcodeErrorModal isVisible set to False 1`] = `
 <Modal
   animationType="none"
@@ -1566,59 +1566,85 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO with negative on hands qty 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "alignContent": "center",
-        "backgroundColor": "#ffffffff",
-        "elevation": 10,
-        "flexDirection": "row",
-        "height": 80,
-        "justifyContent": "space-evenly",
-      },
-      Object {
-        "height": 60,
-      },
-    ]
+    Object {
+      "alignContent": "space-around",
+      "backgroundColor": "#ffffffff",
+      "borderTopColor": "#e0e0e0",
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "width": "100%",
+    }
   }
 >
-  <Button
-    backgroundColor="#0071e9"
-    disabled={false}
-    height={40}
+  <TouchableOpacity
     onPress={[Function]}
-    radius={5}
     style={
       Object {
-        "alignSelf": "center",
-        "width": "45%",
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
       }
     }
-    title="[missing \\"en.ITEM.OTHER_ACTIONS\\" translation]"
-    titleColor="#0071e9"
-    titleFontSize={16}
-    titleFontWeight="normal"
-    type={2}
-    width={-1}
-  />
-  <Button
-    backgroundColor="#0071e9"
-    disabled={false}
-    height={40}
+  >
+    <mockMaterialCommunityIcons
+      color="#0071e9"
+      name="barcode-scan"
+      size={20}
+    />
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#0071e9",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
     onPress={[Function]}
-    radius={5}
     style={
       Object {
-        "alignSelf": "center",
-        "width": "45%",
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
       }
     }
-    title="[missing \\"en.APPROVAL.OH_CHANGE\\" translation]"
-    titleColor="#ffffffff"
-    titleFontSize={16}
-    titleFontWeight="normal"
-    type={1}
-    width={-1}
-  />
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffffffff",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.APPROVAL.OH_CHANGE" translation]
+    </Text>
+  </TouchableOpacity>
 </View>
 `;
 

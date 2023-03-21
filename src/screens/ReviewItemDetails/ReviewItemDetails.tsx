@@ -61,7 +61,6 @@ import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { TrackEventSource } from '../../models/Generics.d';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
 
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
@@ -815,12 +814,23 @@ const completeAction = () => {
   // dispatch(navigation.goBack());
 };
 
-export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), itemNbr: number): JSX.Element => {
+export const renderOtherActionButton = (
+  props: (RenderProps & HandleProps),
+  itemNbr: number,
+  otherActionsEnabled: boolean
+): JSX.Element => {
   const {
     actionCompleted, validateSessionCall, trackEventCall,
     userId, navigation, route
   } = props;
 
+  if (otherActionsEnabled) {
+    return (
+      <TouchableOpacity style={styles.scanForNoActionButton} onPress={undefined}>
+        <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
+      </TouchableOpacity>
+    );
+  }
   if (actionCompleted) {
     return <View />;
   }
@@ -868,12 +878,6 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
   );
 };
 
-export const renderOtherActionButton = () => (
-  <TouchableOpacity style={styles.scanForNoActionButton} onPress={undefined}>
-    <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
-  </TouchableOpacity>
-);
-
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
   const {
     actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent
@@ -882,20 +886,21 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
     case 'NO': {
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty < 0)) {
         return (
-          <ButtonBottomTab
-            leftTitle={strings('ITEM.OTHER_ACTIONS')}
-            onLeftPress={() => undefined}
-            rightTitle={strings('APPROVAL.OH_CHANGE')}
-            onRightPress={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
-            height={40}
-            containerHeight={60}
-          />
+          <View style={styles.otherActionContainer}>
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+            <TouchableOpacity
+              style={styles.worklistCompleteButton}
+              onPress={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
+            >
+              <Text style={styles.buttonText}>{strings('APPROVAL.OH_CHANGE')}</Text>
+            </TouchableOpacity>
+          </View>
         );
       }
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty >= 0)) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderOtherActionButton()}
+            {renderOtherActionButton(props, itemDetails.itemNbr, true)}
           </View>
         );
       }
@@ -905,21 +910,21 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       if ((floorLocations && floorLocations.length === 0)) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
             {renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
           </View>
         );
       }
       return (
         <View style={styles.otherActionContainer}>
-          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+          {renderOtherActionButton(props, itemDetails.itemNbr, false)}
         </View>
       );
     }
     default:
       return (
         <View style={styles.otherActionContainer}>
-          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+          {renderOtherActionButton(props, itemDetails.itemNbr, false)}
         </View>
       );
   }
