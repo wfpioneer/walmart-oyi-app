@@ -880,7 +880,8 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
 
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
   const {
-    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent
+    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent, reserveLocations,
+    dispatch, navigation
   } = props;
   switch (exceptionType?.toUpperCase()) {
     case 'NO': {
@@ -921,6 +922,30 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
         </View>
       );
     }
+    case 'NSFQ': {
+      if (((userConfigs.reserveAdjustment && reserveLocations && reserveLocations.length >= 1))) {
+        return (
+          <View style={styles.otherActionContainer}>
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+            <TouchableOpacity
+              style={styles.worklistCompleteButton}
+              onPress={() => {
+                dispatch(resetScannedEvent());
+                dispatch(setItemDetails(itemDetails));
+                navigation.navigate('ReserveAdjustment');
+              }}
+            >
+              <Text style={styles.buttonText}>{strings('ITEM.CLEAN_RESERVE')}</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+      return (
+        <View style={styles.otherActionContainer}>
+          {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+        </View>
+      );
+    }
     default:
       return (
         <View style={styles.otherActionContainer}>
@@ -931,9 +956,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
 };
 
 // Renders scanned barcode error. TODO Temporary fix until Modal.tsx is refactored for more flexible usage
-export const renderBarcodeErrorModal = (
-  isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
-): JSX.Element => (
+export const renderBarcodeErrorModal = (isVisible: boolean, setIsVisible: React.Dispatch<React.SetStateAction<boolean>>): JSX.Element => (
   <CustomModalComponent
     isVisible={isVisible}
     modalType="Error"

@@ -153,7 +153,8 @@ export default {
     ERROR_PI_SALES_HISTORY: 'Hubo un error mostrando el historial de ventas. Por favor inténtalo de nuevo',
     DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo',
     RESERVE_CONFIRMATION: '¿Guardar Cambios de Pallet?',
-    OTHER_ACTIONS: 'Otras Acciones'
+    OTHER_ACTIONS: 'Otras Acciones',
+    CLEAN_RESERVE: 'Clean Up Reserve' // TODO SPANISH TRANSLATION
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
