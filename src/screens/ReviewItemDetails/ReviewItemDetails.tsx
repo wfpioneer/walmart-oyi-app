@@ -589,9 +589,11 @@ export const renderReplenishmentHistory = (
 export const renderOHChangeHistory = (
   props: HandleProps,
   mahResult: AxiosResponse<OHChangeHistory[]>,
+  mahError: AxiosError | null,
   itemNbr: number,
   dispatch: Dispatch,
-  trackEventCall: typeof trackEvent
+  trackEventCall: typeof trackEvent,
+  openCardForTest = false
 ): JSX.Element => {
   const ohChangeHistory = (mahResult && mahResult.data) ? mahResult.data : [];
   const ohChangeHistorySource: TrackEventSource = {
@@ -608,7 +610,11 @@ export const renderOHChangeHistory = (
           return date2 > date1 ? 1 : -1;
         });
         return (
-          <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
+          <CollapsibleCard
+            title={strings('ITEM.OH_CHANGE_HISTORY')}
+            source={ohChangeHistorySource}
+            isOpened={openCardForTest}
+          >
             {data.slice(0, 5).map(item => (
               <RenderItemHistoryCard
                 key={item.id}
@@ -634,7 +640,11 @@ export const renderOHChangeHistory = (
         );
       }
       return (
-        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
+        <CollapsibleCard
+          title={strings('ITEM.OH_CHANGE_HISTORY')}
+          source={ohChangeHistorySource}
+          isOpened={openCardForTest}
+        >
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
           </View>
@@ -643,7 +653,11 @@ export const renderOHChangeHistory = (
     }
     if (mahResult.status === NO_RESULTS_STATUS) {
       return (
-        <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
+        <CollapsibleCard
+          title={strings('ITEM.OH_CHANGE_HISTORY')}
+          source={ohChangeHistorySource}
+          isOpened={openCardForTest}
+        >
           <View style={styles.noDataContainer}>
             <Text testID="msg-no-pick-data">{strings('ITEM.NO_OH_CHANGE_HISTORY')}</Text>
           </View>
@@ -651,25 +665,32 @@ export const renderOHChangeHistory = (
       );
     }
   }
-  return (
-    <CollapsibleCard title={strings('ITEM.OH_CHANGE_HISTORY')} source={ohChangeHistorySource}>
-      <View style={styles.activityIndicator}>
-        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
-        <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
-        <TouchableOpacity
-          testID="managerApprovalHistoryError"
-          style={styles.errorButton}
-          onPress={() => {
-            trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_manager_aprv_hist_retry_click', itemNbr });
-            dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
-            dispatch(getItemManagerApprovalHistory(itemNbr));
-          }}
-        >
-          <Text>{strings('GENERICS.RETRY')}</Text>
-        </TouchableOpacity>
-      </View>
-    </CollapsibleCard>
-  );
+  if (mahError) {
+    return (
+      <CollapsibleCard
+        title={strings('ITEM.OH_CHANGE_HISTORY')}
+        source={ohChangeHistorySource}
+        isOpened={openCardForTest}
+      >
+        <View style={styles.activityIndicator}>
+          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_500} />
+          <Text>{strings('ITEM.ERROR_OH_CHANGE_HISTORY')}</Text>
+          <TouchableOpacity
+            testID="managerApprovalHistoryError"
+            style={styles.errorButton}
+            onPress={() => {
+              trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_manager_aprv_hist_retry_click', itemNbr });
+              dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
+              dispatch(getItemManagerApprovalHistory(itemNbr));
+            }}
+          >
+            <Text>{strings('GENERICS.RETRY')}</Text>
+          </TouchableOpacity>
+        </View>
+      </CollapsibleCard>
+    );
+  }
+  return <View />;
 };
 
 export const renderReserveLocQtys = (reserve?: Location[]) => {
@@ -1134,7 +1155,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     countryCode,
     exceptionType
   } = props;
-  const { result: mahResult } = managerApprovalHistoryApi;
+  const { result: mahResult, error: mahError } = managerApprovalHistoryApi;
 
   useEffectHook(() => () => {
     dispatch(resetLocations());
@@ -1354,7 +1375,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
             </SFTCard>
             <View style={styles.historyContainer}>
-              {renderOHChangeHistory(props, mahResult, itemDetails.itemNbr, dispatch, trackEventCall)}
+              {renderOHChangeHistory(props, mahResult, mahError, itemDetails.itemNbr, dispatch, trackEventCall)}
             </View>
             <View style={styles.historyContainer}>
               {renderReplenishmentCard(

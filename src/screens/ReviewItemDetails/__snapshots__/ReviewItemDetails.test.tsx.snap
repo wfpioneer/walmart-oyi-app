@@ -357,6 +357,125 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders OH history with error msg 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderBottomColor": "#eeeeee",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "marginRight": 0,
+          }
+        }
+      >
+        
+      </Text>
+      <Text
+        style={Object {}}
+      >
+        [missing "en.ITEM.OH_CHANGE_HISTORY" translation]
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flex": 0.1,
+          "opacity": 1,
+          "paddingLeft": 5,
+        }
+      }
+      testID="collapsible-card"
+    >
+      <Icon
+        color="#000000"
+        name="keyboard-arrow-up"
+        size={25}
+      />
+    </View>
+  </View>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <mockMaterialCommunityIcons
+        color="#f44336"
+        name="alert"
+        size={40}
+      />
+      <Text>
+        [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
+      </Text>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#e57373",
+            "borderRadius": 4,
+            "height": 40,
+            "justifyContent": "center",
+            "marginVertical": 10,
+            "opacity": 1,
+            "width": "95%",
+          }
+        }
+        testID="managerApprovalHistoryError"
+      >
+        <Text>
+          [missing "en.GENERICS.RETRY" translation]
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders OH history with no data for pick msg 1`] = `
 <View>
   <CollapsibleHeaderCard
@@ -2544,59 +2663,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "OH_change_history_click",
-              "otherInfo": Object {
-                "itemNbr": 1234567890,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <mockMaterialCommunityIcons
-              color="#f44336"
-              name="alert"
-              size={40}
-            />
-            <Text>
-              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
-            </Text>
-            <TouchableOpacity
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#e57373",
-                  "borderRadius": 4,
-                  "height": 40,
-                  "justifyContent": "center",
-                  "marginVertical": 10,
-                  "width": "95%",
-                }
-              }
-              testID="managerApprovalHistoryError"
-            >
-              <Text>
-                [missing "en.GENERICS.RETRY" translation]
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </CollapsibleCard>
+        <View />
       </View>
       <View
         style={
@@ -3293,59 +3360,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "OH_change_history_click",
-              "otherInfo": Object {
-                "itemNbr": 987654321,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <mockMaterialCommunityIcons
-              color="#f44336"
-              name="alert"
-              size={40}
-            />
-            <Text>
-              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
-            </Text>
-            <TouchableOpacity
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#e57373",
-                  "borderRadius": 4,
-                  "height": 40,
-                  "justifyContent": "center",
-                  "marginVertical": 10,
-                  "width": "95%",
-                }
-              }
-              testID="managerApprovalHistoryError"
-            >
-              <Text>
-                [missing "en.GENERICS.RETRY" translation]
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </CollapsibleCard>
+        <View />
       </View>
       <View
         style={
@@ -3817,59 +3832,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "OH_change_history_click",
-              "otherInfo": Object {
-                "itemNbr": 1234567890,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <mockMaterialCommunityIcons
-              color="#f44336"
-              name="alert"
-              size={40}
-            />
-            <Text>
-              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
-            </Text>
-            <TouchableOpacity
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#e57373",
-                  "borderRadius": 4,
-                  "height": 40,
-                  "justifyContent": "center",
-                  "marginVertical": 10,
-                  "width": "95%",
-                }
-              }
-              testID="managerApprovalHistoryError"
-            >
-              <Text>
-                [missing "en.GENERICS.RETRY" translation]
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </CollapsibleCard>
+        <View />
       </View>
       <View
         style={
@@ -4540,59 +4503,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "OH_change_history_click",
-              "otherInfo": Object {
-                "itemNbr": 1234567890,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <mockMaterialCommunityIcons
-              color="#f44336"
-              name="alert"
-              size={40}
-            />
-            <Text>
-              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
-            </Text>
-            <TouchableOpacity
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#e57373",
-                  "borderRadius": 4,
-                  "height": 40,
-                  "justifyContent": "center",
-                  "marginVertical": 10,
-                  "width": "95%",
-                }
-              }
-              testID="managerApprovalHistoryError"
-            >
-              <Text>
-                [missing "en.GENERICS.RETRY" translation]
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </CollapsibleCard>
+        <View />
       </View>
       <View
         style={
@@ -5263,59 +5174,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "OH_change_history_click",
-              "otherInfo": Object {
-                "itemNbr": 1234567890,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <mockMaterialCommunityIcons
-              color="#f44336"
-              name="alert"
-              size={40}
-            />
-            <Text>
-              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
-            </Text>
-            <TouchableOpacity
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#e57373",
-                  "borderRadius": 4,
-                  "height": 40,
-                  "justifyContent": "center",
-                  "marginVertical": 10,
-                  "width": "95%",
-                }
-              }
-              testID="managerApprovalHistoryError"
-            >
-              <Text>
-                [missing "en.GENERICS.RETRY" translation]
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </CollapsibleCard>
+        <View />
       </View>
       <View
         style={
@@ -5787,59 +5646,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "OH_change_history_click",
-              "otherInfo": Object {
-                "itemNbr": 1234567890,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <mockMaterialCommunityIcons
-              color="#f44336"
-              name="alert"
-              size={40}
-            />
-            <Text>
-              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
-            </Text>
-            <TouchableOpacity
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#e57373",
-                  "borderRadius": 4,
-                  "height": 40,
-                  "justifyContent": "center",
-                  "marginVertical": 10,
-                  "width": "95%",
-                }
-              }
-              testID="managerApprovalHistoryError"
-            >
-              <Text>
-                [missing "en.GENERICS.RETRY" translation]
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </CollapsibleCard>
+        <View />
       </View>
       <View
         style={
@@ -6311,59 +6118,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           }
         }
       >
-        <CollapsibleCard
-          icon=""
-          isOpened={false}
-          source={
-            Object {
-              "action": "OH_change_history_click",
-              "otherInfo": Object {
-                "itemNbr": 1234567890,
-              },
-              "screen": "Review_Item_Details",
-            }
-          }
-          title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-          titleStyle={Object {}}
-        >
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flex": 1,
-                "justifyContent": "center",
-              }
-            }
-          >
-            <mockMaterialCommunityIcons
-              color="#f44336"
-              name="alert"
-              size={40}
-            />
-            <Text>
-              [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
-            </Text>
-            <TouchableOpacity
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#e57373",
-                  "borderRadius": 4,
-                  "height": 40,
-                  "justifyContent": "center",
-                  "marginVertical": 10,
-                  "width": "95%",
-                }
-              }
-              testID="managerApprovalHistoryError"
-            >
-              <Text>
-                [missing "en.GENERICS.RETRY" translation]
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </CollapsibleCard>
+        <View />
       </View>
       <View
         style={

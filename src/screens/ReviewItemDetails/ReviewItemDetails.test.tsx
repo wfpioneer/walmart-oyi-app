@@ -66,6 +66,7 @@ jest.mock('@react-navigation/native', () => {
     })
   };
 });
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -1102,20 +1103,6 @@ describe('ReviewItemDetailsScreen', () => {
     });
   });
   describe('Tests Rendering \'renderOHChangeHistory\'', () => {
-    const mockApiResponse = {
-      ...defaultResult,
-      data: {
-        itemDetails: {
-          code: 200
-        },
-        itemOhChangeHistory: {
-          code: 200
-        },
-        picklistHistory: {
-          code: 200
-        }
-      }
-    };
     const mockMahResult: AxiosResponse<OHChangeHistory[]> = {
       config: {
         headers: new AxiosHeaders()
@@ -1125,6 +1112,7 @@ describe('ReviewItemDetailsScreen', () => {
       status: 200,
       statusText: 'ok'
     };
+    const mockMahError = new AxiosError('418 I am a teapot');
 
     const mockDispatch = jest.fn();
     const mockTrackEvent = jest.fn();
@@ -1135,7 +1123,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, mockMahResult, 1, mockDispatch, mockTrackEvent)
+        renderOHChangeHistory(mockHandleProps, mockMahResult, null, 1, mockDispatch, mockTrackEvent)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1143,21 +1131,27 @@ describe('ReviewItemDetailsScreen', () => {
       mockMahResult.status = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, mockMahResult, 2, mockDispatch, mockTrackEvent)
+        renderOHChangeHistory(mockHandleProps, mockMahResult, null, 2, mockDispatch, mockTrackEvent)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
       mockMahResult.status = 200;
     });
     it('Renders OH history with error msg', () => {
       mockMahResult.status = 409;
-      const { getByTestId, toJSON } = render(
-        renderOHChangeHistory(mockHandleProps, mockMahResult, 3, mockDispatch, mockTrackEvent)
-      );
+      const { getByTestId, toJSON } = render(renderOHChangeHistory(
+        mockHandleProps,
+        mockMahResult,
+        mockMahError,
+        3,
+        mockDispatch,
+        mockTrackEvent,
+        true
+      ));
+      expect(toJSON()).toMatchSnapshot();
       const mahRetryButton = getByTestId('managerApprovalHistoryError');
       fireEvent.press(mahRetryButton);
       expect(mockDispatch).toHaveBeenCalled();
       expect(mockTrackEvent).toHaveBeenCalled();
-      expect(toJSON()).toMatchSnapshot();
       mockMahResult.status = 200;
     });
   });
