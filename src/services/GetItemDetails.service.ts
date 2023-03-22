@@ -59,4 +59,13 @@ export default class GetItemDetailsService {
       { timeout: TIMEOUT }
     );
   }
+
+  public static getLocationsForItem(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.orchestrationURL}/location/item/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
 }

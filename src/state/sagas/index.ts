@@ -45,6 +45,11 @@ const genericSagas = [
     actions.getItemPicklistHistory,
     GetItemDetailsService.getItemPicklistHistory
   ),
+  makeAsyncSaga(
+    saga.GET_LOCATIONS_FOR_ITEM,
+    actions.getLocationsForItem,
+    GetItemDetailsService.getLocationsForItem
+  ),
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
