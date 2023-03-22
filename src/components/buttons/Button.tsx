@@ -19,7 +19,7 @@ type fontWeightType = 'normal' | 'bold' | '100' | '200' | '300' |
 
 type textAlignType = 'auto' | 'left' | 'right' | 'center' | 'justify' | undefined;
 
-interface ButtonPropsI {
+export interface ButtonPropsI {
   onPress?: () => void,
   title?: string,
   titleColor?: string,

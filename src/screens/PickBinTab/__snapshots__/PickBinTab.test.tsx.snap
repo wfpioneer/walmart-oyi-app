@@ -154,6 +154,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     renderItem={[Function]}
   />
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
@@ -296,6 +297,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     renderItem={[Function]}
   />
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={true}
     leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
@@ -1100,6 +1102,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     renderItem={[Function]}
   />
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={true}
     leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
@@ -1387,6 +1390,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     renderItem={[Function]}
   />
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={true}
     leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"

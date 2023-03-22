@@ -19,13 +19,14 @@ itemDetail, {
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  callBackbarcodeEmitter, createNewPickApiHook, getExceptionType,
-  getFloorItemDetails, getLocationCount, getPendingOnHandsQty, getReserveItemDetails,
-  getTopRightBtnTxt, getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit,
-  handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting, onValidateBackPress,
-  onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton, renderBarcodeErrorModal,
-  renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent, renderPickHistory,
-  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4, renderScanForNoActionButton, updateOHQtyApiHook
+  callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook,
+  getExceptionType, getFloorItemDetails, getLocationCount, getPendingOnHandsQty,
+  getReserveItemDetails, getTopRightBtnTxt, getUpdatedSales, handleCreateNewPick, handleLocationAction,
+  handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
+  onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
+  renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent,
+  renderOtherActionButton, renderPickHistory, renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4,
+  updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -418,11 +419,11 @@ describe('ReviewItemDetailsScreen', () => {
     });
   });
 
-  describe('Tests Rendering \'Scan for No Action Button\'', () => {
+  describe('Tests Rendering Other Action \'Scan for No Action Button\'', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderScanForNoActionButton({ ...mockHandleProps, actionCompleted: true }, itemDetail[123].itemNbr)
+        renderOtherActionButton({ ...mockHandleProps, actionCompleted: true }, itemDetail[123].itemNbr, false)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -435,9 +436,10 @@ describe('ReviewItemDetailsScreen', () => {
       });
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderScanForNoActionButton(
+        renderOtherActionButton(
           mockHandleProps,
-          itemDetail[123].itemNbr
+          itemDetail[123].itemNbr,
+          false
         )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -1286,6 +1288,75 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
         renderSalesGraphV4('', jest.fn(), false, null, null, true, jest.fn(), 123, jest.fn())
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+  });
+
+  describe('Tests rendering \'Complete & Other Action  \'Buttons', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    it('Renders otherActionbutton', () => {
+      const enableOtherAction = true;
+      renderer.render(
+        renderOtherActionButton(mockHandleProps, itemDetail[123].itemNbr, enableOtherAction)
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NSFL', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NSFL'
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, itemDetail[123])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NSFL with existing Location', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NSFL',
+        floorLocations: [...itemDetail[123].location?.floor || []]
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, itemDetail[123])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NO', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NO',
+        userFeatures: ['on hands change']
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, itemDetail[123])
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NO with negative on hands qty', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NO',
+        userFeatures: ['on hands change']
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, { ...itemDetail[123], onHandsQty: -5 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NO with \' on hands change\' disabled', () => {
+      const mockPropNSFL: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NO'
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFL, { ...itemDetail[123], onHandsQty: -5 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
