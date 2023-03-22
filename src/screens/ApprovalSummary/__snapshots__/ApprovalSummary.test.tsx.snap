@@ -87,6 +87,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
@@ -184,6 +185,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
@@ -281,6 +283,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
@@ -378,6 +381,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
@@ -475,6 +479,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
@@ -572,6 +577,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
@@ -726,6 +732,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
@@ -823,6 +830,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     />
   </View>
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"

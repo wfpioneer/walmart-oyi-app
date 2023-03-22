@@ -814,12 +814,23 @@ const completeAction = () => {
   // dispatch(navigation.goBack());
 };
 
-export const renderScanForNoActionButton = (props: (RenderProps & HandleProps), itemNbr: number): JSX.Element => {
+export const renderOtherActionButton = (
+  props: (RenderProps & HandleProps),
+  itemNbr: number,
+  otherActionsEnabled: boolean
+): JSX.Element => {
   const {
     actionCompleted, validateSessionCall, trackEventCall,
     userId, navigation, route
   } = props;
 
+  if (otherActionsEnabled) {
+    return (
+      <TouchableOpacity style={styles.scanForNoActionButton} onPress={undefined}>
+        <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
+      </TouchableOpacity>
+    );
+  }
   if (actionCompleted) {
     return <View />;
   }
@@ -867,34 +878,53 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
   );
 };
 
-export const renderOtherActionButton = () => (
-  <TouchableOpacity style={styles.scanForNoActionButton} onPress={undefined}>
-    <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
-  </TouchableOpacity>
-);
-
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
-  const { actionCompleted, exceptionType, floorLocations } = props;
+  const {
+    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent
+  } = props;
   switch (exceptionType?.toUpperCase()) {
+    case 'NO': {
+      if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty < 0)) {
+        return (
+          <View style={styles.otherActionContainer}>
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+            <TouchableOpacity
+              style={styles.worklistCompleteButton}
+              onPress={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
+            >
+              <Text style={styles.buttonText}>{strings('APPROVAL.OH_CHANGE')}</Text>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+      if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty >= 0)) {
+        return (
+          <View style={styles.otherActionContainer}>
+            {renderOtherActionButton(props, itemDetails.itemNbr, true)}
+          </View>
+        );
+      }
+      return <View />;
+    }
     case 'NSFL': {
       if ((floorLocations && floorLocations.length === 0)) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
             {renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
           </View>
         );
       }
       return (
         <View style={styles.otherActionContainer}>
-          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+          {renderOtherActionButton(props, itemDetails.itemNbr, false)}
         </View>
       );
     }
     default:
       return (
         <View style={styles.otherActionContainer}>
-          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
+          {renderOtherActionButton(props, itemDetails.itemNbr, false)}
         </View>
       );
   }

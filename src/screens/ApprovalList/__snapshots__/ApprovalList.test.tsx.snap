@@ -419,6 +419,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
     }
   />
   <ButtonBottomTab
+    containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
     leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
