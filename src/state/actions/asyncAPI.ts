@@ -12,6 +12,9 @@ export const getItemPiSalesHistory = makeAsyncActionCreators(GET_ITEM_PISALESHIS
 export const GET_ITEM_PICKLISTHISTORY = makeAsyncActionTypes('API/GET_ITEM_PICKLISTHISTORY');
 export const getItemPicklistHistory = makeAsyncActionCreators(GET_ITEM_PICKLISTHISTORY);
 
+export const GET_ITEM_MANAGERAPPROVALHISTORY = makeAsyncActionTypes('API/GET_ITEM_MANAGERAPPROVALHISTORY');
+export const getItemManagerApprovalHistory = makeAsyncActionCreators(GET_ITEM_MANAGERAPPROVALHISTORY);
+
 export const HIT_GOOGLE = makeAsyncActionTypes('API/HIT_GOOGLE');
 export const hitGoogle = makeAsyncActionCreators(HIT_GOOGLE);
 
