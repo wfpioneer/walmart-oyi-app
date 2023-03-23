@@ -9,7 +9,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosHeaders, AxiosResponse } from 'axios';
 import { object } from 'prop-types';
 import { strings } from '../../locales';
 import
@@ -38,6 +38,7 @@ import {
   getItemPiSalesHistory,
   getItemPicklistHistory
 } from '../../state/actions/saga';
+import { OHChangeHistory } from '../../models/ItemDetails';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -66,6 +67,7 @@ jest.mock('@react-navigation/native', () => {
     })
   };
 });
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -123,6 +125,7 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   isPiSalesHistWaiting: false,
   piSalesHistError: null,
   piSalesHistResult: null,
+  managerApprovalHistoryApi: defaultAsyncState,
   picklistHistoryApi: defaultAsyncState,
   createNewPickApi: defaultAsyncState,
   updateOHQtyApi: defaultAsyncState,
@@ -952,10 +955,12 @@ describe('ReviewItemDetailsScreen', () => {
         4,
         { type: 'API/GET_ITEM_PICKLISTHISTORY/RESET' }
       );
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(5, getItemDetailsV4({ id: 123 }));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(6, getItemPiHistory(123));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(7, getItemPiSalesHistory(123));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(8, getItemPicklistHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch)
+        .toHaveBeenNthCalledWith(5, { type: 'API/GET_ITEM_MANAGERAPPROVALHISTORY/RESET' });
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(6, getItemDetailsV4({ id: 123 }));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(7, getItemPiHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(8, getItemPiSalesHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(9, getItemPicklistHistory(123));
     });
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -1100,46 +1105,56 @@ describe('ReviewItemDetailsScreen', () => {
     });
   });
   describe('Tests Rendering \'renderOHChangeHistory\'', () => {
-    const mockApiResponse = {
-      ...defaultResult,
-      data: {
-        itemDetails: {
-          code: 200
-        },
-        itemOhChangeHistory: {
-          code: 200
-        },
-        picklistHistory: {
-          code: 200
-        }
-      }
+    const mockMahResult: AxiosResponse<OHChangeHistory[]> = {
+      config: {
+        headers: new AxiosHeaders()
+      },
+      data: mockOHChangeHistory,
+      headers: new AxiosHeaders(),
+      status: 200,
+      statusText: 'ok'
     };
+    const mockMahError = new AxiosError('418 I am a teapot');
+
+    const mockDispatch = jest.fn();
+    const mockTrackEvent = jest.fn();
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, mockOHChangeHistory, mockApiResponse, 1)
+        renderOHChangeHistory(mockHandleProps, mockMahResult, null, 1, mockDispatch, mockTrackEvent)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders OH history with no data for pick msg', () => {
-      mockApiResponse.data.itemOhChangeHistory.code = 204;
+      mockMahResult.status = 204;
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], mockApiResponse, 2)
+        renderOHChangeHistory(mockHandleProps, mockMahResult, null, 2, mockDispatch, mockTrackEvent)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
-      mockApiResponse.data.itemOhChangeHistory.code = 200;
+      mockMahResult.status = 200;
     });
-    it('Renders OH history with error msg for result status 207', () => {
-      mockApiResponse.status = 207;
-      mockApiResponse.data.itemOhChangeHistory.code = 409;
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        renderOHChangeHistory(mockHandleProps, [], mockApiResponse, 3)
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-      mockApiResponse.status = 200;
-      mockApiResponse.data.itemOhChangeHistory.code = 200;
+    it('Renders OH history with error msg', () => {
+      mockMahResult.status = 409;
+      const { getByTestId, toJSON } = render(renderOHChangeHistory(
+        mockHandleProps,
+        mockMahResult,
+        mockMahError,
+        3,
+        mockDispatch,
+        mockTrackEvent,
+        true
+      ));
+      expect(toJSON()).toMatchSnapshot();
+      const mahRetryButton = getByTestId('managerApprovalHistoryError');
+      fireEvent.press(mahRetryButton);
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockTrackEvent).toHaveBeenCalled();
+      mockMahResult.status = 200;
     });
   });
   describe('Tests Rendering \'renderPickHistory\'', () => {

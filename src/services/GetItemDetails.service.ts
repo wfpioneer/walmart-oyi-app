@@ -59,4 +59,13 @@ export default class GetItemDetailsService {
       { timeout: TIMEOUT }
     );
   }
+
+  public static getItemManagerApprovalHistory(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.orchestrationURL}/managerapproval/item/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
 }
