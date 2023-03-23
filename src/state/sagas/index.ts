@@ -50,6 +50,11 @@ const genericSagas = [
     actions.getLocationsForItem,
     GetItemDetailsService.getLocationsForItem
   ),
+  makeAsyncSaga(
+    saga.GET_ITEM_MANAGER_APPROVAL_HISTORY,
+    actions.getItemManagerApprovalHistory,
+    GetItemDetailsService.getItemManagerApprovalHistory
+  ),
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
@@ -102,11 +107,15 @@ const genericSagas = [
   makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),
   makeAsyncSaga(saga.CREATE_NEW_PICK, actions.createNewPick, PickingService.createNewPick),
   makeAsyncSaga(
-    saga.REPORT_MISSING_PALLET, actions.reportMissingPallet, ReportMissingPalletService.reportMissingPallet
+    saga.REPORT_MISSING_PALLET,
+    actions.reportMissingPallet,
+    ReportMissingPalletService.reportMissingPallet
   ),
   makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets),
   makeAsyncSaga(
-    saga.UPDATE_MULTI_PALLET_UPC_QTY, actions.updateMultiPalletUPCQty, PalletManagementService.updateMultiPalletUPCQty
+    saga.UPDATE_MULTI_PALLET_UPC_QTY,
+    actions.updateMultiPalletUPCQty,
+    PalletManagementService.updateMultiPalletUPCQty
   ),
   makeAsyncSaga(saga.SUBMIT_FEEDBACK_RATING, actions.submitFeedbackRating, FeedBackService.submitFeedbackRating),
   makeAsyncSaga(saga.GET_USER_CONFIG, actions.getUserConfig, UserConfigService.getUserConfig),
