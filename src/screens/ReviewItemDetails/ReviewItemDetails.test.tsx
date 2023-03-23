@@ -565,7 +565,7 @@ describe('ReviewItemDetailsScreen', () => {
         'Review_Item_Details',
         { action: 'api_get_item_location_retry_click', itemNbr: 1234567890 }
       );
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_LOCATIONS_FOR_ITEM/RESET'});
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_LOCATIONS_FOR_ITEM/RESET' });
       expect(mockDispatch).toHaveBeenNthCalledWith(2, getLocationsForItem(1234567890));
     });
   });

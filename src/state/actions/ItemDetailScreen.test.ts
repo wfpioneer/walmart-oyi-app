@@ -32,8 +32,8 @@ describe('ItemDetailScreen action creator tests', () => {
     const setupScreenResult = setupScreen(
       item.itemNbr,
       item.upcNbr,
-      item.location.floor || [],
-      item.location.reserve || [],
+      (item.location && item.location.floor) || [],
+      (item.location && item.location.reserve) || [],
       item.exceptionType,
       item.pendingOnHandsQty,
       true,
@@ -44,8 +44,8 @@ describe('ItemDetailScreen action creator tests', () => {
       payload: {
         itemNbr: item.itemNbr,
         upcNbr: item.upcNbr,
-        floorLocations: item.location.floor,
-        reserveLocations: item.location.reserve,
+        floorLocations: (item.location && item.location.floor),
+        reserveLocations: (item.location && item.location.reserve),
         exceptionType: item.exceptionType,
         pendingOHQty: item.pendingOnHandsQty,
         completed: true,
@@ -63,19 +63,19 @@ describe('ItemDetailScreen action creator tests', () => {
     expect(setActionResult).toStrictEqual({ type: ACTION_COMPLETED });
 
     const setFloorLocationsResult = setFloorLocations(
-      item.location.floor || []
+      (item.location && item.location.floor) || []
     );
     expect(setFloorLocationsResult).toStrictEqual({
       type: SET_FLOOR_LOCATIONS,
-      payload: item.location.floor
+      payload: (item.location && item.location.floor)
     });
 
     const setReserveLocationsResult = setReserveLocations(
-      item.location.reserve || []
+      (item.location && item.location.reserve) || []
     );
     expect(setReserveLocationsResult).toStrictEqual({
       type: SET_RESERVE_LOCATIONS,
-      payload: item.location.reserve
+      payload: (item.location && item.location.reserve)
     });
 
     const deleteLocationResults = deleteLocationFromExisting('reserve', 5);
@@ -106,7 +106,8 @@ describe('ItemDetailScreen action creator tests', () => {
       sectionName: '1',
       locationName: 'B1-1',
       type: 'Reserve',
-      typeNbr: 7
+      typeNbr: 7,
+      newQty: 0
     };
     const setSelectedLocationResults = setSelectedLocation(locationMock);
     expect(setSelectedLocationResults).toStrictEqual({

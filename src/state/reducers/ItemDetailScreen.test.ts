@@ -58,7 +58,8 @@ describe('ItemDetailScreen reducer tests', () => {
           locationName: 'A1-1',
           type: 'Reserve',
           typeNbr: 7,
-          qty: 10
+          qty: 10,
+          newQty: 0
         }
       ],
       selectedLocation: null,
@@ -67,7 +68,14 @@ describe('ItemDetailScreen reducer tests', () => {
 
     const item = getItemDetails[123];
     let testResults = ItemDetailScreen(testInitialState, setupScreen(
-      item.itemNbr, item.upcNbr, [], item.location.reserve || [], item.exceptionType, item.pendingOnHandsQty, true, true
+      item.itemNbr,
+      item.upcNbr,
+      [],
+      (item.location && item.location.reserve) || [],
+      item.exceptionType,
+      item.pendingOnHandsQty,
+      true,
+      true
     ));
     expect(testResults).toStrictEqual(screenSetupState);
 
@@ -93,7 +101,8 @@ describe('ItemDetailScreen reducer tests', () => {
       sectionName: '1',
       locationName: 'A1-1',
       type: 'Sales Floor',
-      typeNbr: 8
+      typeNbr: 8,
+      newQty: 0
     }];
     testMutatedState.floorLocations = floorLoc;
     testResults = ItemDetailScreen(testInitialState, setFloorLocations(floorLoc));
@@ -114,7 +123,8 @@ describe('ItemDetailScreen reducer tests', () => {
       sectionName: '1',
       locationName: 'B1-1',
       type: 'Reserve',
-      typeNbr: 7
+      typeNbr: 7,
+      newQty: 0
     }];
     testResults = ItemDetailScreen(testMutatedState, setReserveLocations(reserveLoc));
     testMutatedState.reserveLocations = reserveLoc;
@@ -139,7 +149,8 @@ describe('ItemDetailScreen reducer tests', () => {
       sectionName: '3',
       locationName: 'A2-3',
       type: 'DISPLAY',
-      typeNbr: 6
+      typeNbr: 6,
+      newQty: 0
     };
     testResults = ItemDetailScreen(testInitialState, setSelectedLocation(testMutatedState.selectedLocation));
     expect(testResults).toStrictEqual(testMutatedState);
