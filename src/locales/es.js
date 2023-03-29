@@ -154,7 +154,7 @@ export default {
     DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo',
     RESERVE_CONFIRMATION: '¿Guardar Cambios de Pallet?',
     OTHER_ACTIONS: 'Otras Acciones',
-    CLEAN_RESERVE: 'Clean Up Reserve' // TODO SPANISH TRANSLATION
+    CLEAN_RESERVE: 'Limpiar Bodega'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

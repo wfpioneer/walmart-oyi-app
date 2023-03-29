@@ -154,7 +154,7 @@ export default {
     DELETE_PALLET_FAILURE: '删除卡板失败，请重试',
     RESERVE_CONFIRMATION: '保存储位卡板库存变更',
     OTHER_ACTIONS: '其它操作',
-    CLEAN_RESERVE: 'Clean Up Reserve' // TODO MANDARIN TRANSLATIONS
+    CLEAN_RESERVE: '清除高货架信息'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
