@@ -92,8 +92,8 @@ export const getItemDetailsApiHook = (
           categoryDesc: itemDetails.categoryDesc,
           price: itemDetails.price
         }));
-        const floorLoc = itemDetails.location && itemDetails.location.floor;
-        const reserveLoc = itemDetails.location && itemDetails.location.reserve;
+        const floorLoc = itemDetails?.location?.floor;
+        const reserveLoc = itemDetails?.location?.reserve;
         dispatch(setPickCreateFloor(floorLoc || []));
         dispatch(setPickCreateReserve(reserveLoc || []));
         navigation.navigate('CreatePick');

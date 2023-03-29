@@ -212,7 +212,7 @@ export const addLocationHandler = (
   floorLocations: Location[],
   trackEventCall: (eventName: string, params?: any) => void
 ) => {
-  const reserveLoc = itemDetails?.location && itemDetails?.location.reserve;
+  const reserveLoc = itemDetails?.location?.reserve;
   dispatch(
     setupScreen(
       itemDetails ? itemDetails.itemNbr : 0,
@@ -360,7 +360,7 @@ export const getItemDetailsApiHook = (
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
         getFloorLocationsResult(
-          itemDetails.location && itemDetails?.location.floor,
+          itemDetails?.location?.floor,
           dispatch,
           existingFloorLocations
         );

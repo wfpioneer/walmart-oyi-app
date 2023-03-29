@@ -71,7 +71,7 @@ describe('ItemDetailScreen reducer tests', () => {
       item.itemNbr,
       item.upcNbr,
       [],
-      (item.location && item.location.reserve) || [],
+      item?.location?.reserve || [],
       item.exceptionType,
       item.pendingOnHandsQty,
       true,

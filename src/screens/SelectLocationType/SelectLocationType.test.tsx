@@ -376,7 +376,7 @@ describe('SelectLocationTypeScreen', () => {
     });
 
     it('Tests ValidateSessionCallResponse', () => {
-      const mockFloorLocations = (mockItemDetails[123].location && mockItemDetails[123].location.floor) || [];
+      const mockFloorLocations = (mockItemDetails[123]?.location?.floor) || [];
       // Different Location Name
       onValidateSessionCallResponse(
         'Falseloc4-4', mockSetError, mockFloorLocations, '123', mockDispatch, mockTrackEvent, null

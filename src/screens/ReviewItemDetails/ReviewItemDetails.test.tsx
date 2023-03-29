@@ -217,8 +217,8 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
-        floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-        reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve
+        floorLocations: mockItemDetail123?.location?.floor,
+        reserveLocations: mockItemDetail123?.location?.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -246,8 +246,8 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
-        floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-        reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve,
+        floorLocations: mockItemDetail123?.location?.floor,
+        reserveLocations: mockItemDetail123?.location?.reserve,
         ohQtyModalVisible: true
       };
       const renderer = ShallowRenderer.createRenderer();
@@ -275,8 +275,8 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
-        floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-        reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve,
+        floorLocations: mockItemDetail123?.location?.floor,
+        reserveLocations: mockItemDetail123?.location?.reserve,
         createPickModalVisible: true
       };
       const renderer = ShallowRenderer.createRenderer();
@@ -304,8 +304,8 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
-        floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-        reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve,
+        floorLocations: mockItemDetail123?.location?.floor,
+        reserveLocations: mockItemDetail123?.location?.reserve,
         errorModalVisible: true
       };
       const renderer = ShallowRenderer.createRenderer();
@@ -325,8 +325,8 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
-        floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-        reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve
+        floorLocations: mockItemDetail123?.location?.floor,
+        reserveLocations: mockItemDetail123?.location?.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -346,8 +346,8 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail456.onHandsQty,
         pendingOnHandsQty: mockItemDetail456.pendingOnHandsQty,
-        floorLocations: mockItemDetail456.location && mockItemDetail456.location.floor,
-        reserveLocations: mockItemDetail456.location && mockItemDetail456.location.reserve
+        floorLocations: mockItemDetail456?.location?.floor,
+        reserveLocations: mockItemDetail456?.location?.reserve
       };
       const renderer = ShallowRenderer.createRenderer();
       // Mock Item Number 456 has cloud Qty defined
@@ -367,8 +367,8 @@ describe('ReviewItemDetailsScreen', () => {
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
-        floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-        reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve,
+        floorLocations: mockItemDetail123?.location?.floor,
+        reserveLocations: mockItemDetail123?.location?.reserve,
         userFeatures: [onHandsChangeText]
       };
       const renderer = ShallowRenderer.createRenderer();
@@ -492,8 +492,8 @@ describe('ReviewItemDetailsScreen', () => {
         renderLocationComponent(
           {
             ...mockHandleProps,
-            floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-            reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve
+            floorLocations: mockItemDetail123?.location?.floor,
+            reserveLocations: mockItemDetail123?.location?.reserve
           },
           mockItemDetail123,
           jest.fn(),
@@ -508,7 +508,7 @@ describe('ReviewItemDetailsScreen', () => {
       renderer.render(
         renderLocationComponent({
           ...mockHandleProps,
-          floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
+          floorLocations: mockItemDetail123?.location?.floor,
           reserveLocations: []
         }, mockItemDetail123, jest.fn(), jest.fn(), defaultAsyncState)
       );
@@ -520,7 +520,7 @@ describe('ReviewItemDetailsScreen', () => {
         renderLocationComponent({
           ...mockHandleProps,
           floorLocations: [],
-          reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve
+          reserveLocations: mockItemDetail123?.location?.reserve
         }, mockItemDetail123, jest.fn(), jest.fn(), defaultAsyncState)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -759,8 +759,8 @@ describe('ReviewItemDetailsScreen', () => {
         },
         exceptionType: 'NSFL',
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
-        floorLocations: mockItemDetail123.location && mockItemDetail123.location.floor,
-        reserveLocations: mockItemDetail123.location && mockItemDetail123.location.reserve
+        floorLocations: mockItemDetail123?.location?.floor,
+        reserveLocations: mockItemDetail123?.location?.reserve
       };
       const mockItemDetails = itemDetail[321];
       const mockSetCreatePickModalVisible = jest.fn();
@@ -924,10 +924,10 @@ describe('ReviewItemDetailsScreen', () => {
     it('test getLocationCount', () => {
       let getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
       expect(getLocationCountResult).toStrictEqual(0);
-      mockItemDetailsScreenProps.floorLocations = mockItemDetail123.location && mockItemDetail123.location.floor;
+      mockItemDetailsScreenProps.floorLocations = mockItemDetail123?.location?.floor;
       getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
       expect(getLocationCountResult).toStrictEqual(4);
-      mockItemDetailsScreenProps.reserveLocations = mockItemDetail123.location && mockItemDetail123.location.reserve;
+      mockItemDetailsScreenProps.reserveLocations = mockItemDetail123?.location?.reserve;
       getLocationCountResult = getLocationCount(mockItemDetailsScreenProps);
       expect(getLocationCountResult).toStrictEqual(5);
       mockItemDetailsScreenProps.floorLocations = [];
@@ -1269,7 +1269,7 @@ describe('ReviewItemDetailsScreen', () => {
       const mockPropNSFL: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NSFL',
-        floorLocations: [...mockItemDetail123.location?.floor || []]
+        floorLocations: [...mockItemDetail123?.location?.floor || []]
       };
       renderer.render(
         completeButtonComponent(mockPropNSFL, mockItemDetail123)
