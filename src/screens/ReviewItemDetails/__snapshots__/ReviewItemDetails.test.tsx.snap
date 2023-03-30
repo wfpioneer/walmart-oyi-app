@@ -3651,6 +3651,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         iconName="pallet"
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
@@ -4143,6 +4144,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         iconName="pallet"
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
@@ -4830,6 +4832,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         iconName="pallet"
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
@@ -5517,6 +5520,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         iconName="pallet"
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
@@ -6005,6 +6009,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         iconName="pallet"
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
@@ -6493,6 +6498,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         iconName="pallet"
         title="[missing \\"en.ITEM.QUANTITY\\" translation]"
         topRightBtnAction={[Function]}
+        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
       >
         <ItemDetailsList
           indentAfterFirstRow={true}

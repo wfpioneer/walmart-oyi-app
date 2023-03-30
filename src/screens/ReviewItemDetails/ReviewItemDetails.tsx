@@ -146,9 +146,6 @@ export const getExceptionType = (actionCompleted: boolean, itemDetails: ItemDeta
 export const getTopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
   ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
 
-export const getPendingOnHandsQty = (userFeatures: string[], pendingOnHandsQty: number) => (pendingOnHandsQty === -999
-    && userFeatures.includes('on hands change'));
-
 export const handleUpdateQty = (
   props: HandleProps,
   itemDetails: ItemDetails,
@@ -933,7 +930,7 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
 
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
   const {
-    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent, pendingOnHandsQty
+    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent
   } = props;
   switch (exceptionType?.toUpperCase()) {
     case 'NO': {
@@ -941,15 +938,12 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
         return (
           <View style={styles.otherActionContainer}>
             {renderOtherActionButton(props, itemDetails.itemNbr, false)}
-            {getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
-            && (
             <TouchableOpacity
               style={styles.worklistCompleteButton}
               onPress={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               <Text style={styles.buttonText}>{strings('APPROVAL.OH_CHANGE')}</Text>
             </TouchableOpacity>
-            )}
           </View>
         );
       }
@@ -1434,8 +1428,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
-                ? strings('GENERICS.CHANGE') : undefined}
+              topRightBtnTxt={strings('GENERICS.CHANGE')}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}

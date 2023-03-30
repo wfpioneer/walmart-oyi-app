@@ -1042,16 +1042,6 @@ describe('ReviewItemDetailsScreen', () => {
       getTopRightBtnTxtResult = getTopRightBtnTxt(1);
       expect(getTopRightBtnTxtResult).toStrictEqual('[missing "en.GENERICS.SEE_ALL" translation]');
     });
-    it('test getPendingOnHandsQty', () => {
-      let getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], -999);
-      expect(getPendingOnHandsQtyResult).toStrictEqual(true);
-      getPendingOnHandsQtyResult = getPendingOnHandsQty([], -999);
-      expect(getPendingOnHandsQtyResult).toStrictEqual(false);
-      getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], 0);
-      expect(getPendingOnHandsQtyResult).toStrictEqual(false);
-      getPendingOnHandsQtyResult = getPendingOnHandsQty([onHandsChangeText], 100);
-      expect(getPendingOnHandsQtyResult).toStrictEqual(false);
-    });
     it('test updateOHQtyApiHook', () => {
       const apiResponse = {
         ...defaultAsyncState,
