@@ -215,9 +215,13 @@ export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTa
       </Tab.Screen>
       <Tab.Screen
         name={strings('WORKLIST.COMPLETED')}
-        listeners={{
-          focus: () => dispatch(setSelectedTab(Tabs.COMPLETED))
-        }}
+        listeners={listenerProps => ({
+          focus: () => dispatch(setSelectedTab(Tabs.COMPLETED)),
+          blur: () => {
+            dispatch(setSelectedTab(Tabs.TODO))
+            listenerProps.navigation.jumpTo(strings('WORKLIST.TODO'));
+          }
+        })}
       >
         {() => <CompletedPalletWorklist setPalletClicked={setPalletClicked} />}
       </Tab.Screen>
