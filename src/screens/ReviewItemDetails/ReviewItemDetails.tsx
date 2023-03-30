@@ -1428,7 +1428,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={strings('GENERICS.CHANGE')}
+              topRightBtnTxt={userFeatures.includes('on hands change') ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
