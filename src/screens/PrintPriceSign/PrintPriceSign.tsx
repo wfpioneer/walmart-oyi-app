@@ -235,9 +235,8 @@ export const handleAddPrintList = (
   exceptionType: string,
   selectedSection: LocationIdName,
   actionCompleted: boolean,
-  sectionsList: SectionItem[],
+  selectedAisle: LocationIdName,
   printingLocationLabels: string,
-  getFullSectionName: (value: string) => string,
   locationName: string,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
@@ -273,22 +272,16 @@ export const handleAddPrintList = (
       trackEvent('print_add_to_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addToPrintQueue(printQueueItem));
     } else if (printingLocationLabels === LocationName.AISLE) {
-      const printQueueItems: PrintQueueItem[] = [];
-      // Add Get Sections response to print queue
-      sectionsList.forEach(section => {
-        if (!aisleSectionExists(locationPrintQueue, section.sectionId)) {
-          const printQueueArrayItem: PrintQueueItem = {
-            itemName: getFullSectionName(section.sectionName),
-            locationId: section.sectionId,
-            paperSize: selectedSignType,
-            signQty,
-            itemType: PrintQueueItemType.SECTION
-          };
-          printQueueItems.push(printQueueArrayItem);
-        }
-      });
-      trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItems) });
-      dispatch(addMultipleToLocationPrintQueue(printQueueItems));
+      printQueueItem = {
+        itemName: locationName,
+        locationId: selectedAisle.id,
+        paperSize: selectedSignType,
+        signQty,
+        itemType: PrintQueueItemType.AISLE
+      };
+      trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
+      // dispatch(addMultipleToLocationPrintQueue(printQueueItems));
+      dispatch(addLocationPrintQueue(printQueueItem));
     } else {
       const { id } = selectedSection;
       printQueueItem = {
@@ -423,7 +416,7 @@ export const handlePrint = (
   route: RouteProp<any, string>,
   dispatch: Dispatch<any>,
   printingLocationLabels: string,
-  sectionsList: SectionItem[],
+  selectedAisle: LocationIdName,
   signQty: number,
   selectedPrinter: Printer | null,
   selectedSection: LocationIdName,
@@ -439,14 +432,10 @@ export const handlePrint = (
       if (printingLocationLabels) {
         const printLocList: PrintLocationList[] = [];
         if (printingLocationLabels === LocationName.AISLE) {
-          // Add Get Sections response to print list body
-          sectionsList.forEach(section => {
-            const printQueueArrayItem: PrintLocationList = {
-              locationId: section.sectionId,
-              qty: signQty,
-              printerMACAddress: selectedPrinter?.id || ''
-            };
-            printLocList.push(printQueueArrayItem);
+          printLocList.push({
+            locationId: selectedAisle.id,
+            qty: signQty,
+            printerMACAddress: selectedPrinter?.id || ''
           });
         } else {
           printLocList.push({
@@ -740,9 +729,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               exceptionType,
               selectedSection,
               actionCompleted,
-              sectionsList,
+              selectedAisle,
               printingLocationLabels,
-              getFullSectionName,
               getLocationName(),
               navigation,
               dispatch,
@@ -759,7 +747,7 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
               route,
               dispatch,
               printingLocationLabels,
-              sectionsList,
+              selectedAisle,
               signQty,
               selectedPrinter,
               selectedSection,
