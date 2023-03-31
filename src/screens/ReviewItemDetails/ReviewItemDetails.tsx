@@ -145,6 +145,12 @@ export interface HistoryCardPropsI {
 const validateExceptionType = (exceptionType?: string) => exceptionType === 'NO'
   || exceptionType === 'C' || exceptionType === 'NSFL';
 
+export const getExceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) => (!actionCompleted
+  ? itemDetails.exceptionType : undefined);
+
+export const getTopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
+  ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
+
 export const handleUpdateQty = (
   props: HandleProps,
   itemDetails: ItemDetails,
@@ -1234,15 +1240,6 @@ export const isError = (
   );
 };
 
-export const getExceptionType = (actionCompleted: boolean, itemDetails: ItemDetails) => (!actionCompleted
-  ? itemDetails.exceptionType : undefined);
-
-export const getTopRightBtnTxt = (locationCount: number) => (locationCount && locationCount >= 1
-  ? strings('GENERICS.SEE_ALL') : strings(GENERICS_ADD));
-
-export const getPendingOnHandsQty = (userFeatures: string[], pendingOnHandsQty: number) => (pendingOnHandsQty === -999
-  && userFeatures.includes('on hands change'));
-
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
     scannedEvent, isManualScanEnabled,
@@ -1494,8 +1491,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             <SFTCard
               title={strings('ITEM.QUANTITY')}
               iconName="pallet"
-              topRightBtnTxt={getPendingOnHandsQty(userFeatures, pendingOnHandsQty)
-                ? strings('GENERICS.CHANGE') : undefined}
+              topRightBtnTxt={userFeatures.includes('on hands change') ? strings('GENERICS.CHANGE') : undefined}
               topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
