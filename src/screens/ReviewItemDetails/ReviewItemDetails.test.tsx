@@ -1280,24 +1280,48 @@ describe('ReviewItemDetailsScreen', () => {
     });
 
     it('Renders completeButtonComponent NO with negative on hands qty', () => {
-      const mockPropNSFL: ItemDetailsScreenProps = {
+      const mockPropNO: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO',
         userFeatures: ['on hands change']
       };
       renderer.render(
-        completeButtonComponent(mockPropNSFL, { ...mockItemDetail123, onHandsQty: -5 })
+        completeButtonComponent(mockPropNO, { ...mockItemDetail123, onHandsQty: -5 })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
     it('Renders completeButtonComponent NO with \' on hands change\' disabled', () => {
-      const mockPropNSFL: ItemDetailsScreenProps = {
+      const mockPropNO: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO'
       };
       renderer.render(
-        completeButtonComponent(mockPropNSFL, { ...mockItemDetail123, onHandsQty: -5 })
+        completeButtonComponent(mockPropNO, { ...mockItemDetail123, onHandsQty: -5 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NSFQ', () => {
+      const mockPropNSFQ: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NSFQ'
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFQ, { ...mockItemDetail123 })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent NSFQ with reserveAdjustment & reserveLocations available', () => {
+      const mockPropNSFQ: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NSFQ',
+        reserveLocations: [...mockItemDetail123?.location?.reserve || []],
+        userConfigs: { ...mockConfig, reserveAdjustment: true }
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

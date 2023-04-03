@@ -989,7 +989,8 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
 
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
   const {
-    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent
+    actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent, reserveLocations,
+    dispatch, navigation
   } = props;
   switch (exceptionType?.toUpperCase()) {
     case 'NO': {
@@ -1021,6 +1022,30 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
           <View style={styles.otherActionContainer}>
             {renderOtherActionButton(props, itemDetails.itemNbr, false)}
             {renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
+          </View>
+        );
+      }
+      return (
+        <View style={styles.otherActionContainer}>
+          {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+        </View>
+      );
+    }
+    case 'NSFQ': {
+      if (((userConfigs.reserveAdjustment && reserveLocations && reserveLocations.length >= 1))) {
+        return (
+          <View style={styles.otherActionContainer}>
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+            <TouchableOpacity
+              style={styles.worklistCompleteButton}
+              onPress={() => {
+                dispatch(resetScannedEvent());
+                dispatch(setItemDetails(itemDetails));
+                navigation.navigate('ReserveAdjustment');
+              }}
+            >
+              <Text style={styles.buttonText}>{strings('ITEM.CLEAN_RESERVE')}</Text>
+            </TouchableOpacity>
           </View>
         );
       }
