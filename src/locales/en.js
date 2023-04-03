@@ -153,7 +153,8 @@ export default {
     ERROR_PI_SALES_HISTORY: 'There was an error pulling the sales history. Please try again.',
     DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again',
     RESERVE_CONFIRMATION: 'Save Reserve Pallet Changes?',
-    OTHER_ACTIONS: 'Other Actions'
+    OTHER_ACTIONS: 'Other Actions',
+    CLEAN_RESERVE: 'Clean Up Reserve'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
