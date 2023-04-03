@@ -63,7 +63,14 @@ export interface ItemDeliveryHistory {
   error?: string;
 }
 
-interface ItemDetails {
+export interface ItemLocation {
+  location: {
+    floor?: Location[];
+    reserve?: Location[];
+    count: number;
+  };
+}
+interface ItemDetails extends Partial<ItemLocation>{
   code: number;
   message?: string;
   itemName: string;
@@ -92,11 +99,6 @@ interface ItemDetails {
   margin: number;
   replenishment: {
     onOrder: number;
-  };
-  location: {
-    floor?: Location[];
-    reserve?: Location[];
-    count: number;
   };
   sales?: ItemSalesHistory;
   deliveryHistory?: ItemDeliveryHistory;
