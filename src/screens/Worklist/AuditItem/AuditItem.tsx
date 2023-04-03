@@ -24,7 +24,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosHeaders } from 'axios';
 import moment from 'moment';
 import { barcodeEmitter } from '../../../utils/scannerUtils';
 import { CustomModalComponent } from '../../Modal/Modal';
@@ -212,12 +212,13 @@ export const addLocationHandler = (
   floorLocations: Location[],
   trackEventCall: (eventName: string, params?: any) => void
 ) => {
+  const reserveLoc = itemDetails?.location?.reserve;
   dispatch(
     setupScreen(
       itemDetails ? itemDetails.itemNbr : 0,
       itemDetails ? itemDetails.upcNbr : '',
       floorLocations || [],
-      itemDetails?.location.reserve || [],
+      reserveLoc || [],
       null,
       -999,
       false,
@@ -358,7 +359,11 @@ export const getItemDetailsApiHook = (
       ) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
-        getFloorLocationsResult(itemDetails.location.floor, dispatch, existingFloorLocations);
+        getFloorLocationsResult(
+          itemDetails?.location?.floor,
+          dispatch,
+          existingFloorLocations
+        );
         setShowItemNotFoundMsg(false);
       } else if (getItemDetailsApi.result.status === 204) {
         setShowItemNotFoundMsg(true);
@@ -1180,7 +1185,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     } else {
       dispatch(
         deleteLocation({
-          headers: { itemNumber },
+          headers: new AxiosHeaders({ itemNumber }),
           upc: itemDetails?.upcNbr || '',
           sectionId: locToConfirm.locationName,
           locationTypeNbr: locToConfirm.locationTypeNbr
@@ -1315,7 +1320,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
           scannedValue: itemNumber.toString(),
-          headers: { worklistType: route.params?.worklistType ?? 'AU' }
+          headers: new AxiosHeaders({ worklistType: route.params?.worklistType ?? 'AU' })
         })
       );
     } else {

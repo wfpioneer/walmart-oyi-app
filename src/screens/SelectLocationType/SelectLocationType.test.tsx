@@ -376,7 +376,7 @@ describe('SelectLocationTypeScreen', () => {
     });
 
     it('Tests ValidateSessionCallResponse', () => {
-      const mockFloorLocations = mockItemDetails[123].location.floor || [];
+      const mockFloorLocations = (mockItemDetails[123]?.location?.floor) || [];
       // Different Location Name
       onValidateSessionCallResponse(
         'Falseloc4-4', mockSetError, mockFloorLocations, '123', mockDispatch, mockTrackEvent, null
@@ -399,8 +399,13 @@ describe('SelectLocationTypeScreen', () => {
       expect(mockDispatch).toBeCalledTimes(1);
 
       onValidateSessionCallResponse(
-        mockFloorLocations[0].locationName, mockSetError, mockFloorLocations,
-        '123', mockDispatch, mockTrackEvent, mockLocation
+        mockFloorLocations[0].locationName,
+        mockSetError,
+        mockFloorLocations,
+        '123',
+        mockDispatch,
+        mockTrackEvent,
+        mockLocation
       );
       expect(mockTrackEvent).toBeCalledTimes(1);
       expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });

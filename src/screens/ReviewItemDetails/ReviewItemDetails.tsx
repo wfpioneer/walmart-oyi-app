@@ -24,13 +24,14 @@ import {
   getItemPiHistory,
   getItemPiSalesHistory,
   getItemPicklistHistory,
+  getLocationsForItem,
   updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import SFTCard from '../../components/sftcard/SFTCard';
 import ItemDetails, {
-  ItemHistoryI, OHChangeHistory, PickHistory
+  ItemHistoryI, ItemLocation, OHChangeHistory, PickHistory
 } from '../../models/ItemDetails';
 import { CollapsibleCard } from '../../components/CollapsibleCard/CollapsibleCard';
 import COLOR from '../../themes/Color';
@@ -44,6 +45,8 @@ import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog
 import {
   resetLocations,
   setActionCompleted,
+  setFloorLocations,
+  setReserveLocations,
   setupScreen,
   updatePendingOHQty
 } from '../../state/actions/ItemDetailScreen';
@@ -59,6 +62,7 @@ import {
   GET_ITEM_PICKLISTHISTORY,
   GET_ITEM_PIHISTORY,
   GET_ITEM_PISALESHISTORY,
+  GET_LOCATIONS_FOR_ITEM,
   UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -88,6 +92,7 @@ export interface ItemDetailsScreenProps {
   picklistHistoryApi: AsyncState;
   createNewPickApi: AsyncState;
   updateOHQtyApi: AsyncState;
+  locationForItemsApi: AsyncState;
   userId: string;
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations: Location[] | undefined;
@@ -333,6 +338,22 @@ export const updateOHQtyApiHook = (
       }
       dispatch({ type: UPDATE_OH_QTY.RESET });
       setOhQtyModalVisible(false);
+    }
+  }
+};
+
+export const getLocationsForItemsApiHook = (
+  locationForItemsApi: AsyncState,
+  dispatch: Dispatch<any>,
+  isFocused: boolean,
+) => {
+  if (isFocused) {
+    if (!locationForItemsApi.isWaiting && locationForItemsApi.result) {
+      const response: ItemLocation = locationForItemsApi.result.data;
+      const { location } = response;
+      dispatch(setFloorLocations(location?.floor || []));
+      dispatch(setReserveLocations(location?.reserve || []));
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
     }
   }
 };
@@ -772,14 +793,52 @@ export const renderLocationComponent = (
   props: (RenderProps & HandleProps),
   itemDetails: ItemDetails,
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  locationForItemsApi: AsyncState
 ): JSX.Element => {
   const {
-    floorLocations, reserveLocations, userConfigs, navigation
+    floorLocations, reserveLocations, userConfigs, navigation, trackEventCall
   } = props;
   const { reserveAdjustment } = userConfigs;
+  const { itemNbr } = itemDetails;
   const hasFloorLocations = floorLocations && floorLocations.length >= 1;
   const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
+
+  if (locationForItemsApi.isWaiting) {
+    return (
+      <View style={styles.bgWhite}>
+        <ActivityIndicator
+          animating={true}
+          hidesWhenStopped
+          color={COLOR.MAIN_THEME_COLOR}
+          size="large"
+          style={styles.completeActivityIndicator}
+        />
+      </View>
+    );
+  }
+
+  if (!locationForItemsApi.isWaiting && locationForItemsApi.error) {
+    return (
+      <View style={styles.errorContainer}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>
+          {strings('LOCATION.LOCATION_API_ERROR')}
+        </Text>
+        <TouchableOpacity
+          testID="LocationForItemError"
+          style={styles.errorButton}
+          onPress={() => {
+            trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_get_item_location_retry_click', itemNbr });
+            dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+            dispatch(getLocationsForItem(itemNbr));
+          }}
+        >
+          <Text>{strings('GENERICS.RETRY')}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
   return (
     <View style={styles.locationContainer}>
       <View style={styles.locationDetailsContainer}>
@@ -1029,11 +1088,6 @@ export const renderBarcodeErrorModal = (
     </View>
   </CustomModalComponent>
 );
-export const getFloorItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.floor
-  ? itemDetails.location.floor : []);
-
-export const getReserveItemDetails = (itemDetails: ItemDetails) => (itemDetails.location && itemDetails.location.reserve
-  ? itemDetails.location.reserve : []);
 
 export const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails.exceptionType
   ? itemDetails.completed : true);
@@ -1043,8 +1097,8 @@ export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: Item
     dispatch(setupScreen(
       itemDetails.itemNbr,
       itemDetails.upcNbr,
-      getFloorItemDetails(itemDetails),
-      getReserveItemDetails(itemDetails),
+      [],
+      [],
       itemDetails.exceptionType,
       itemDetails.pendingOnHandsQty,
       isItemDetailsCompleted(itemDetails),
@@ -1137,6 +1191,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch({ type: GET_ITEM_PIHISTORY.RESET });
         dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
         dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
         dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
 
         const itemNbr = parseInt(scannedEvent.value, 10);
@@ -1144,6 +1199,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch(getItemPiHistory(itemNbr));
         dispatch(getItemPiSalesHistory(itemNbr));
         dispatch(getItemPicklistHistory(itemNbr));
+        dispatch(getLocationsForItem(itemNbr));
         dispatch(getItemManagerApprovalHistory(itemNbr));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
@@ -1238,7 +1294,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     useFocusEffectHook,
     floorLocations, userFeatures, userConfigs,
     countryCode,
-    exceptionType
+    exceptionType,
+    locationForItemsApi
   } = props;
   const { result: mahResult, error: mahError } = managerApprovalHistoryApi;
 
@@ -1271,6 +1328,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     onValidateItemDetails(dispatch, itemDetails);
     setNewOHQty(itemDetails?.onHandsQty || 0);
   }, [itemDetails]);
+
+  useEffectHook(() => getLocationsForItemsApiHook(
+    locationForItemsApi,
+    dispatch,
+    navigation.isFocused()
+  ), [locationForItemsApi]);
 
   // Barcode event listener effect
   useEffectHook(() => {
@@ -1478,7 +1541,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               topRightBtnTxt={getTopRightBtnTxt(locationCount)}
               topRightBtnAction={() => handleLocationAction(props, itemDetails)}
             >
-              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible, dispatch)}
+              {renderLocationComponent(props, itemDetails, setCreatePickModalVisible, dispatch, locationForItemsApi)}
             </SFTCard>
             <View style={styles.historyContainer}>
               {renderPickHistory(
@@ -1517,6 +1580,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const getItemPicklistHistoryApi = useTypedSelector(state => state.async.getItemPicklistHistory);
+  const getLocationForItemApi = useTypedSelector(state => state.async.getLocationsForItem);
   const getItemManagerApprovalHistoryApi = useTypedSelector(state => state.async.getItemManagerApprovalHistory);
   const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
@@ -1562,6 +1626,7 @@ const ReviewItemDetails = (): JSX.Element => {
       piSalesHistResult={getItemPiSalesHistoryApi.result}
       managerApprovalHistoryApi={getItemManagerApprovalHistoryApi}
       picklistHistoryApi={getItemPicklistHistoryApi}
+      locationForItemsApi={getLocationForItemApi}
       createNewPickApi={createNewPickApi}
       updateOHQtyApi={updateOHQtyApi}
       userId={userId}

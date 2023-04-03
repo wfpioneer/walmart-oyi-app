@@ -60,6 +60,15 @@ export default class GetItemDetailsService {
     );
   }
 
+  public static getLocationsForItem(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.orchestrationURL}/location/item/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
+
   public static getItemManagerApprovalHistory(itemNbr: number): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     return Request.get(
