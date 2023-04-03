@@ -58,11 +58,11 @@ import { AsyncState } from '../../models/AsyncState';
 import {
   CREATE_NEW_PICK,
   GET_ITEM_DETAILS_V4,
-  GET_LOCATIONS_FOR_ITEM,
   GET_ITEM_MANAGERAPPROVALHISTORY,
   GET_ITEM_PICKLISTHISTORY,
   GET_ITEM_PIHISTORY,
   GET_ITEM_PISALESHISTORY,
+  GET_LOCATIONS_FOR_ITEM,
   UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';

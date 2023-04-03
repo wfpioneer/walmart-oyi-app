@@ -20,7 +20,7 @@ itemDetail, {
 import ReviewItemDetails, {
   HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook,
-  getExceptionType, getLocationCount, getPendingOnHandsQty, getTopRightBtnTxt,
+  getExceptionType, getLocationCount, getTopRightBtnTxt,
   getUpdatedSales, handleCreateNewPick, handleLocationAction,
   handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
   onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
