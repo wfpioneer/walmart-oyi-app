@@ -32,8 +32,6 @@ describe('ItemDetailScreen action creator tests', () => {
     const setupScreenResult = setupScreen(
       item.itemNbr,
       item.upcNbr,
-      item?.location?.floor || [],
-      item?.location?.reserve || [],
       item.exceptionType,
       item.pendingOnHandsQty,
       true,
@@ -44,8 +42,6 @@ describe('ItemDetailScreen action creator tests', () => {
       payload: {
         itemNbr: item.itemNbr,
         upcNbr: item.upcNbr,
-        floorLocations: item?.location?.floor,
-        reserveLocations: item?.location?.reserve,
         exceptionType: item.exceptionType,
         pendingOHQty: item.pendingOnHandsQty,
         completed: true,
