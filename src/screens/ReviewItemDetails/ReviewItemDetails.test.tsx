@@ -817,10 +817,8 @@ describe('ReviewItemDetailsScreen', () => {
         payload: {
           completed: false,
           exceptionType: 'nsfl',
-          floorLocations: [],
           itemNbr: 1234567890,
           pendingOHQty: -999,
-          reserveLocations: [],
           salesFloor: true,
           upcNbr: '000055559999'
         },

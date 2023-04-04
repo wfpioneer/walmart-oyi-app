@@ -1110,8 +1110,6 @@ export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: Item
     dispatch(setupScreen(
       itemDetails.itemNbr,
       itemDetails.upcNbr,
-      [],
-      [],
       itemDetails.exceptionType,
       itemDetails.pendingOnHandsQty,
       isItemDetailsCompleted(itemDetails),
