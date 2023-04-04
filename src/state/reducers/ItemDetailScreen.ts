@@ -43,16 +43,9 @@ export const ItemDetailScreen = (
   switch (action.type) {
     case SETUP_SCREEN:
       return {
+        ...state,
         itemNbr: action.payload.itemNbr,
         upcNbr: action.payload.upcNbr,
-        floorLocations: action.payload.floorLocations.map((loc: LocationType) => ({
-          ...loc,
-          locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
-        })),
-        reserveLocations: action.payload.reserveLocations.map((loc: LocationType) => ({
-          ...loc,
-          locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
-        })),
         exceptionType: action.payload.exceptionType,
         pendingOnHandsQty: action.payload.pendingOHQty,
         actionCompleted: action.payload.completed,

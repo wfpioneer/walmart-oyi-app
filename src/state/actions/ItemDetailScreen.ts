@@ -15,8 +15,6 @@ export const SET_UPC = 'LOCATION/SET_UPC';
 export const setupScreen = (
   itemNbr: number,
   upcNbr: string,
-  floorLocations: Location[],
-  reserveLocations: Location[],
   exceptionType: string | null | undefined,
   pendingOHQty: number,
   completed: boolean,
@@ -26,8 +24,6 @@ export const setupScreen = (
   payload: {
     itemNbr,
     upcNbr,
-    floorLocations,
-    reserveLocations,
     exceptionType,
     pendingOHQty,
     completed,

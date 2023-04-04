@@ -47,21 +47,7 @@ describe('ItemDetailScreen reducer tests', () => {
       exceptionType: 'nsfl',
       actionCompleted: true,
       floorLocations: [],
-      reserveLocations: [
-        {
-          zoneId: 0,
-          aisleId: 1,
-          sectionId: 1,
-          zoneName: 'A',
-          aisleName: '1',
-          sectionName: '1',
-          locationName: 'A1-1',
-          type: 'Reserve',
-          typeNbr: 7,
-          qty: 10,
-          newQty: 0
-        }
-      ],
+      reserveLocations: [],
       selectedLocation: null,
       salesFloor: true
     };
@@ -70,8 +56,6 @@ describe('ItemDetailScreen reducer tests', () => {
     let testResults = ItemDetailScreen(testInitialState, setupScreen(
       item.itemNbr,
       item.upcNbr,
-      [],
-      item?.location?.reserve || [],
       item.exceptionType,
       item.pendingOnHandsQty,
       true,
