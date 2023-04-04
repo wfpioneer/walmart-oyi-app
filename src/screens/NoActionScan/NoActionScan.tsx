@@ -82,14 +82,14 @@ export const callBackbarcodeEmitter = (
           type: scan.type
         });
         if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
-            dispatch(
-              noAction({
-                upc: upcNbr,
-                itemNbr,
-                scannedValue: scan.value
-              })
-            );
-            dispatch(setManualScan(false));
+          dispatch(
+            noAction({
+              upc: upcNbr,
+              itemNbr,
+              scannedValue: scan.value
+            })
+          );
+          dispatch(setManualScan(false));
         } else {
           setErrorModalVisible(true);
         }

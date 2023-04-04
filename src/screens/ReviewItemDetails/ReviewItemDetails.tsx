@@ -935,7 +935,20 @@ export const renderOtherActionButton = (
 
   if (otherActionsEnabled) {
     return (
-      <TouchableOpacity style={styles.scanForNoActionButton} onPress={undefined}>
+      <TouchableOpacity
+        style={styles.scanForNoActionButton}
+        onPress={() => {
+          validateSessionCall(navigation, route.name).then(() => {
+            trackEventCall(
+              REVIEW_ITEM_DETAILS,
+              { action: 'other_action_click', itemNbr }
+            );
+            navigation.navigate('OtherAction');
+          }).catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
+        }}
+      >
         <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
       </TouchableOpacity>
     );

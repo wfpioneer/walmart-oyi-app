@@ -154,7 +154,13 @@ export default {
     DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo',
     RESERVE_CONFIRMATION: '¿Guardar Cambios de Pallet?',
     OTHER_ACTIONS: 'Otras Acciones',
-    CLEAN_RESERVE: 'Limpiar Bodega'
+    CLEAN_RESERVE: 'Limpiar Bodega',
+    CHOOSE_ACTION: 'Choose Action', // TODO SPANISH TRANSLATIONS
+    DESIRED_ACTION: 'Complete the item by taking a desired action from below:', // TODO SPANISH TRANSLATIONS
+    CHOOSE_RESERVE: 'Make changes to reserve pallet qty', // TODO SPANISH TRANSLATIONS
+    CHOOSE_TOTAL_OH: 'Make changes to total on-hands', // TODO SPANISH TRANSLATIONS
+    CHOOSE_PICKLIST: 'Create a pick to replenish sales floor qty', // TODO SPANISH TRANSLATIONS
+    NO_ACTION_NEEDED: 'The item is up to date no action is needed' // TODO SPANISH TRANSLATIONS
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -204,7 +210,7 @@ export default {
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
     INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
-    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
+    CHOOSE_PRICE_SIGN: 'Print new price sign for this item' // TODO SPANISH TRANSLATION
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -262,6 +268,7 @@ export default {
     DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
+    CHANGE_LOCATION: 'Change location of the item', // TODO SPANISH TRANSLATION
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Artículos',
     PALLETS: 'Pallets',

@@ -154,7 +154,13 @@ export default {
     DELETE_PALLET_FAILURE: '删除卡板失败，请重试',
     RESERVE_CONFIRMATION: '保存储位卡板库存变更',
     OTHER_ACTIONS: '其它操作',
-    CLEAN_RESERVE: '清除高货架信息'
+    CLEAN_RESERVE: '清除高货架信息',
+    CHOOSE_ACTION: 'Choose Action', // TODO MANDARIN TRANSLATIONS
+    DESIRED_ACTION: 'Complete the item by taking a desired action from below:', // TODO MANDARIN TRANSLATIONS
+    CHOOSE_RESERVE: 'Make changes to reserve pallet qty', // TODO MANDARIN TRANSLATIONS
+    CHOOSE_TOTAL_OH: 'Make changes to total on-hands', // TODO MANDARIN TRANSLATIONS
+    CHOOSE_PICKLIST: 'Create a pick to replenish sales floor qty', // TODO MANDARIN TRANSLATIONS
+    NO_ACTION_NEEDED: 'The item is up to date no action is needed' // TODO MANDARIN TRANSLATIONS
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
@@ -203,7 +209,8 @@ export default {
     Was_Medium: '原价-中',
     Was_Small: '原价-小',
     Was_XSmall: '原价-超小',
-    INVALID_SIZE: '由于标签尺寸无效，部份商品无法打印'
+    INVALID_SIZE: '由于标签尺寸无效，部份商品无法打印',
+    CHOOSE_PRICE_SIGN: 'Print new price sign for this item' // TODO MANDARIN TRANSLATIONS
   },
   PALLET: {
     PALLET_MANAGEMENT: '卡板管理',
@@ -261,6 +268,7 @@ export default {
     DELETE_LOCATION_API_SUCCESS: '位置 %{locationName} 删除成功',
     ADD_NEW_LOCATION: '新增位置',
     EDIT_LOCATION: '修改位置',
+    CHANGE_LOCATION: 'Change location of the item', // TODO MANDARIN TRANSLATIONS
     LOCATION_MANAGEMENT: '通道管理',
     ITEMS: '多个商品',
     PALLETS: '卡板例外',
