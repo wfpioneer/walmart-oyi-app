@@ -57,6 +57,9 @@ import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actio
 import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
+import { setFloorLocations, setReserveLocations, setupScreen } from '../../../state/actions/ItemDetailScreen';
+import ItemDetails from '../../../models/ItemDetails';
+import Location from '../../../models/Location';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -186,7 +189,7 @@ describe('AuditItemScreen', () => {
     name: 'Network Error',
     toJSON: () => object
   };
-  const mockItemDetails = getMockItemDetails('123');
+  const mockItemDetails: ItemDetails = getMockItemDetails('123');
 
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
@@ -335,9 +338,20 @@ describe('AuditItemScreen', () => {
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      addLocationHandler(mockItemDetails, mockDispatch, navigationProp, mockItemDetails.location.floor, mockTrackEventCall);
-      expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockNavigate).toBeCalledTimes(1);
+      const {
+        itemNbr, upcNbr, exceptionType, location
+      } = mockItemDetails;
+      addLocationHandler(
+        mockItemDetails,
+        mockDispatch,
+        navigationProp,
+        mockItemDetails?.location?.floor || [],
+        mockTrackEventCall
+      );
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, setupScreen(itemNbr, upcNbr, exceptionType, -999, false, false));
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, setFloorLocations(location?.floor || []));
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, setReserveLocations(location?.reserve || []));
+      expect(mockNavigate).toBeCalledWith('AddLocation');
       expect(mockTrackEventCall).toBeCalledWith(
         'Audit_Item',
         { action: 'add_new_floor_location_click', itemNumber: 1234567890 }
@@ -345,7 +359,7 @@ describe('AuditItemScreen', () => {
     });
 
     it('tests getFloorLocationsResult', () => {
-      const newResults = [...mockItemDetails.location.floor, [{
+      const newResults: Location[] = [...mockItemDetails?.location?.floor || [], {
         zoneId: 0,
         aisleId: 1,
         sectionId: 1,
@@ -354,9 +368,10 @@ describe('AuditItemScreen', () => {
         sectionName: '1',
         locationName: 'A1-1',
         type: 'Sales Floor',
-        typeNbr: 8
-      }]];
-      getFloorLocationsResult(newResults, mockDispatch, mockItemDetails.location.floor);
+        typeNbr: 8,
+        newQty: 0
+      }];
+      getFloorLocationsResult(newResults, mockDispatch, mockItemDetails?.location?.floor || []);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -367,7 +382,7 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowItemNotFoundMsg,
-        mockItemDetails.location
+        mockItemDetails?.location?.floor || []
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
@@ -393,7 +408,7 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowItemNotFoundMsg,
-        mockItemDetails.location
+        mockItemDetails?.location?.floor || []
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
@@ -406,7 +421,7 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowItemNotFoundMsg,
-        mockItemDetails.location
+        mockItemDetails?.location?.floor || []
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
@@ -633,7 +648,10 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
-      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', { action: 'delete_pallet_confirmation_click', palletId: 1234 });
+      expect(mockTrackEventCall).toBeCalledWith(
+        'Audit_Item',
+        { action: 'delete_pallet_confirmation_click', palletId: 1234 }
+      );
     });
 
     it('Tests deletePalletApiHook on 200 success for deleting location', () => {
@@ -702,7 +720,7 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests calculateTotalOHQty functionality', () => {
-      const mockFloorLocations = mockItemDetails.location.floor;
+      const mockFloorLocations = mockItemDetails?.location?.floor || [];
       const mockReserveLocations = itemPallets.pallets;
       const itemDetails = getMockItemDetails('123');
       const totalCountResult = calculateTotalOHQty(
@@ -904,7 +922,9 @@ describe('AuditItemScreen', () => {
     });
 
     it('Test disabledContinue functionality return true when floor location qty is negative', () => {
-      const mockFloorLocations = [{ ...mockItemDetails.location.floor, qty: -1 }];
+      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      mockFloorLocations[0].qty = -1;
+
       const mockReserveLocations = itemPallets.pallets;
 
       expect(
@@ -914,9 +934,8 @@ describe('AuditItemScreen', () => {
 
     it(`Test disabledContinue functionality return true 
       when all of the location qty is present and reserve pallet is not scanned but scan is required`, () => {
-      const mockFloorLocations = [
-        { ...mockItemDetails.location.floor[0], newQty: 10 }
-      ];
+      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      mockFloorLocations[0].qty = 10;
       const mockReserveLocations: ItemPalletInfo[] = [
         {
           palletId: 123,
@@ -936,9 +955,8 @@ describe('AuditItemScreen', () => {
 
     it(`Test disabledContinue functionality return false 
       when all of the location qty is present and reserve pallet is scanned and scan is required`, () => {
-      const mockFloorLocations = [
-        { ...mockItemDetails.location.floor[0], newQty: 10 }
-      ];
+      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      mockFloorLocations[0].qty = 10;
       const mockReserveLocations: ItemPalletInfo[] = [
         {
           palletId: 123,
@@ -958,9 +976,8 @@ describe('AuditItemScreen', () => {
 
     it(`Test disabledContinue functionality return false 
       when all of the location qty is present and reserve pallet is not scanned but scan is not required`, () => {
-      const mockFloorLocations = [
-        { ...mockItemDetails.location.floor[0], newQty: 10 }
-      ];
+      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      mockFloorLocations[0].qty = 10;
       const mockReserveLocations: ItemPalletInfo[] = [
         {
           palletId: 123,
@@ -1172,7 +1189,7 @@ describe('AuditItemScreen', () => {
       const multiPalletUPCRequestBody: UpdateMultiPalletUPCQtyRequest['PalletList'] = [{
         palletId: palletInfoList[0].palletId,
         expirationDate: '',
-        upcs: [{ upcNbr: mockItemDetails.upcNbr || 0, quantity: palletInfoList[0].newQty }]
+        upcs: [{ upcNbr: mockItemDetails.upcNbr || '0', quantity: palletInfoList[0].newQty }]
       }];
       const multiPalletListResult = getMultiPalletList(palletInfoList, mockItemDetails);
       expect(multiPalletListResult).toStrictEqual(multiPalletUPCRequestBody);

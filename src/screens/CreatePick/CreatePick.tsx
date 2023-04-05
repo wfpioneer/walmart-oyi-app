@@ -24,7 +24,7 @@ import styles from './CreatePick.style';
 import { UseStateType } from '../../models/Generics.d';
 import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { setupScreen } from '../../state/actions/ItemDetailScreen';
+import { setFloorLocations, setReserveLocations, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../models/AsyncState';
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -149,13 +149,13 @@ export const addLocationHandler = (
   dispatch(setupScreen(
     item ? item.itemNbr : 0,
     item ? item.upcNbr : '',
-    floorLocations,
-    reserveLocations,
     null,
     -999,
     false,
     false
   ));
+  dispatch(setFloorLocations(floorLocations));
+  dispatch(setReserveLocations(reserveLocations));
   navigation.navigate('AddLocation');
 };
 
