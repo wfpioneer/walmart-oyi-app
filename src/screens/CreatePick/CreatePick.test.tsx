@@ -16,6 +16,7 @@ import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import mockUser from '../../mockData/mockUser';
+import { setFloorLocations, setReserveLocations, setupScreen } from '../../state/actions/ItemDetailScreen';
 
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -229,8 +230,13 @@ describe('createPick function tests', () => {
     const mockNavigate = jest.fn();
     navigationProp.navigate = mockNavigate;
     addLocationHandler(mockItem, [], [], mockDispatch, navigationProp);
-    expect(mockDispatch).toBeCalledTimes(1);
-    expect(mockNavigate).toBeCalledTimes(1);
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      1,
+      setupScreen(mockItem.itemNbr, mockItem.upcNbr, null, -999, false, false)
+    );
+    expect(mockDispatch).toHaveBeenNthCalledWith(2, setFloorLocations([]));
+    expect(mockDispatch).toHaveBeenNthCalledWith(3, setReserveLocations([]));
+    expect(mockNavigate).toBeCalledWith('AddLocation');
   });
 
   it('getLocationsApiHook', () => {

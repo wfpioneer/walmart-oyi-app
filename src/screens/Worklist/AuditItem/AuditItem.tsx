@@ -296,7 +296,9 @@ export const calculatePalletIncreaseQty = (
 };
 
 export const getFloorLocationsResult = (
-  floorResultsData: Location[] | undefined, dispatch: Dispatch<any>, existingFloorLocations: Location[]
+  floorResultsData: Location[] | undefined,
+  dispatch: Dispatch<any>,
+  existingFloorLocations: Location[]
 ) => {
   let updatedFloorLocations: Location[] = [];
   if (floorResultsData && floorResultsData.length > 0) {
@@ -316,7 +318,8 @@ export const getFloorLocationsResult = (
 };
 
 export const getUpdatedReserveLocations = (
-  itemPallets: ItemPalletInfo[] | undefined, existingReserveLocations: ItemPalletInfo[]
+  itemPallets: ItemPalletInfo[] | undefined,
+  existingReserveLocations: ItemPalletInfo[]
 ) => {
   let updatedReserveLocations = [];
   if (itemPallets && itemPallets.length > 0) {
