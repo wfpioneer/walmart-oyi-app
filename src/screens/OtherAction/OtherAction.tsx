@@ -1,9 +1,7 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import React, { Dispatch } from 'react';
+import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
-import { useDispatch } from 'react-redux';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import { AsyncState } from '../../models/AsyncState';
 import ItemDetails from '../../models/ItemDetails';
@@ -13,24 +11,26 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { styles } from './OtherAction.style';
 import { strings } from '../../locales';
+import Button, { ButtonType } from '../../components/buttons/Button';
 
-interface OtherActuonProps {
+export interface OtherActionProps {
   exceptionType: string | null | undefined;
   getItemDetailsApi: AsyncState;
   countryCode: string;
   userConfigs: Configurations;
-  navigation: NavigationProp<any>;
   trackEventCall: typeof trackEvent;
-  dispatch: Dispatch<any>;
+  chosenActionState: [string, React.Dispatch<React.SetStateAction<string>>];
 }
 const OTHER_ACTIONS = 'other actions screen';
 
 export const renderChooseActionRadioButtons = (
-  item: any,
-  dispatch: Dispatch<any>,
-  trackEventCall: typeof trackEvent
+  item: { title: string; subText: string },
+  trackEventCall: typeof trackEvent,
+  chosenAction: string,
+  setChosenAction: React.Dispatch<React.SetStateAction<string>>
 ): JSX.Element => {
   const onItemPress = () => {
+    setChosenAction(item.title);
     trackEventCall(OTHER_ACTIONS, {
       action: 'worklist_update_filter_exceptions'
       // exception: JSON.stringify(item.value)
@@ -43,7 +43,7 @@ export const renderChooseActionRadioButtons = (
       onPress={onItemPress}
     >
       <View style={styles.selectionView}>
-        {item.selected ? (
+        {item.title === chosenAction ? (
           <MaterialCommunityIcons
             name="radiobox-marked"
             size={15}
@@ -57,9 +57,7 @@ export const renderChooseActionRadioButtons = (
           />
         )}
       </View>
-      <View
-        style={styles.completeActionRadioView}
-      >
+      <View style={styles.completeActionRadioView}>
         <Text style={styles.completeActionTitle} numberOfLines={2}>
           {item.title}
         </Text>
@@ -68,40 +66,45 @@ export const renderChooseActionRadioButtons = (
     </TouchableOpacity>
   );
 };
-export const OtherActionScreen = (props: OtherActuonProps) => {
+export const OtherActionScreen = (props: OtherActionProps) => {
   const {
     exceptionType,
     getItemDetailsApi,
     countryCode,
     userConfigs,
-    navigation,
     trackEventCall,
-    dispatch
+    chosenActionState
   } = props;
 
-  const itemDetails: ItemDetails =
-    getItemDetailsApi.result && getItemDetailsApi.result.data;
-  // TEMP
+  const [chosenAction, setChosenAction] = chosenActionState;
+
+  const itemDetails: ItemDetails = getItemDetailsApi.result && getItemDetailsApi.result.data;
+
+  // TODO Filter based on exceptionType when adding screen functionality.
   const wlCompleteButtons = [
     {
-      title: strings('APPROVAL.OH_CHANGE'),
-      subText: 'Make changes to the total on hands',
-      isSelected: false
-    },
-    {
-      title: strings('LOCATION.EDIT_LOCATION'),
-      subText: 'Edit location of the item',
-      isSelected: false
+      title: strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST'),
+      subText: strings('ITEM.CHOOSE_PICKLIST')
     },
     {
       title: strings('ITEM.CLEAN_RESERVE'),
-      subText: 'Make changes to the reserve pallet qty',
-      isSelected: false
+      subText: strings('ITEM.CHOOSE_RESERVE')
+    },
+    {
+      title: strings('LOCATION.EDIT_LOCATION'),
+      subText: strings('LOCATION.CHANGE_LOCATION')
+    },
+    {
+      title: strings('APPROVAL.OH_CHANGE'),
+      subText: strings('ITEM.CHOOSE_TOTAL_OH')
+    },
+    {
+      title: strings('PRINT.PRICE_SIGN'),
+      subText: strings('PRINT.CHOOSE_PRICE_SIGN')
     },
     {
       title: strings('ITEM.SCAN_FOR_NO_ACTION'),
-      subText: 'The item is up to date no action is needed',
-      isSelected: false
+      subText: strings('ITEM.NO_ACTION_NEEDED')
     }
   ];
 
@@ -114,7 +117,7 @@ export const OtherActionScreen = (props: OtherActuonProps) => {
           upcNbr={itemDetails.upcNbr}
           status={itemDetails.status || ''}
           category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
-          exceptionType={exceptionType}
+          exceptionType={exceptionType || undefined}
           additionalItemDetails={{
             color: itemDetails.color,
             margin: itemDetails.margin,
@@ -132,17 +135,31 @@ export const OtherActionScreen = (props: OtherActuonProps) => {
           worklistAuditType={itemDetails.worklistAuditType}
         />
       </View>
-      <Text
-        style={styles.desiredActionText}
-        numberOfLines={2}
-      >
-        Complete the item by taking a desired action from below:
+      <Text style={styles.desiredActionText} numberOfLines={2}>
+        {strings('ITEM.DESIRED_ACTION')}
       </Text>
       <FlatList
         data={wlCompleteButtons}
-        renderItem={({ item }) => renderChooseActionRadioButtons(item, dispatch, trackEventCall)}
+        renderItem={({ item }) => renderChooseActionRadioButtons(
+          item,
+          trackEventCall,
+          chosenAction,
+          setChosenAction
+        )}
         keyExtractor={item => item.title}
       />
+      {chosenAction !== '' && (
+        <View style={styles.buttonContainer}>
+          <Button
+            title={strings('GENERICS.CONTINUE')}
+            titleColor={COLOR.WHITE}
+            type={ButtonType.PRIMARY}
+            onPress={() => undefined}
+            width="50%"
+            style={styles.continueButton}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -150,20 +167,19 @@ export const OtherActionScreen = (props: OtherActuonProps) => {
 const OtherAction = () => {
   const { exceptionType } = useTypedSelector(state => state.ItemDetailScreen);
   const { countryCode, configs } = useTypedSelector(state => state.User);
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetailsV4
   );
+
+  const chosenActionState = useState('');
   return (
     <OtherActionScreen
       exceptionType={exceptionType}
       countryCode={countryCode}
       userConfigs={configs}
-      navigation={navigation}
       trackEventCall={trackEvent}
-      dispatch={dispatch}
       getItemDetailsApi={getItemDetailsApi}
+      chosenActionState={chosenActionState}
     />
   );
 };

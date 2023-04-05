@@ -50,5 +50,16 @@ export const styles = StyleSheet.create({
     width: '90%',
     marginVertical: 5,
     color: COLOR.GREY_500
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: COLOR.WHITE,
+    alignContent: 'center',
+    height: 70,
+    elevation: 50
+  },
+  continueButton: {
+    alignSelf: 'center'
   }
 });
