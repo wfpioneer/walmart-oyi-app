@@ -57,7 +57,7 @@ interface SelectLocationProps {
 }
 
 export const validateLocation = (loc: string): boolean => {
-  const locRegex = new RegExp(/^[\d]+$|[A-z][0-9]+-[0-9]+/);
+  const locRegex = /^[\d]+$|[A-z][0-9]+-[0-9]+/;
   return loc.length > 0 && locRegex.test(loc);
 };
 export const onValidateSessionCallResponse = (
@@ -268,7 +268,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     salesFloor,
     actionCompleted,
     exceptionType,
-    itemNbr, selectedLocation
+    itemNbr,
+    selectedLocation
   ),
   [addAPI]);
 

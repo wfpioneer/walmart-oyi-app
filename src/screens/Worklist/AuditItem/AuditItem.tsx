@@ -69,7 +69,11 @@ import LocationListCard, {
   LocationList
 } from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
-import { setupScreen } from '../../../state/actions/ItemDetailScreen';
+import {
+  setFloorLocations as setItemFloorLocations,
+  setReserveLocations as setItemReserveLocations,
+  setupScreen
+} from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import {
   clearAuditScreenData,
@@ -210,21 +214,27 @@ export const addLocationHandler = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   floorLocations: Location[],
-  trackEventCall: (eventName: string, params?: any) => void
+  trackEventCall: (eventName: string, params?: any) => void,
 ) => {
   const reserveLoc = itemDetails?.location?.reserve;
   dispatch(
     setupScreen(
       itemDetails ? itemDetails.itemNbr : 0,
       itemDetails ? itemDetails.upcNbr : '',
-      floorLocations || [],
-      reserveLoc || [],
-      null,
+      itemDetails?.exceptionType,
       -999,
       false,
       false
     )
   );
+
+  if (floorLocations.length > 0) {
+    dispatch(setItemFloorLocations(floorLocations));
+  }
+  if (reserveLoc) {
+    dispatch(setItemReserveLocations(reserveLoc));
+  }
+
   trackEventCall('Audit_Item', { action: 'add_new_floor_location_click', itemNumber: itemDetails?.itemNbr });
   navigation.navigate('AddLocation');
 };
@@ -286,7 +296,9 @@ export const calculatePalletIncreaseQty = (
 };
 
 export const getFloorLocationsResult = (
-  floorResultsData: Location[] | undefined, dispatch: Dispatch<any>, existingFloorLocations: Location[]
+  floorResultsData: Location[] | undefined,
+  dispatch: Dispatch<any>,
+  existingFloorLocations: Location[]
 ) => {
   let updatedFloorLocations: Location[] = [];
   if (floorResultsData && floorResultsData.length > 0) {
@@ -306,7 +318,8 @@ export const getFloorLocationsResult = (
 };
 
 export const getUpdatedReserveLocations = (
-  itemPallets: ItemPalletInfo[] | undefined, existingReserveLocations: ItemPalletInfo[]
+  itemPallets: ItemPalletInfo[] | undefined,
+  existingReserveLocations: ItemPalletInfo[]
 ) => {
   let updatedReserveLocations = [];
   if (itemPallets && itemPallets.length > 0) {
