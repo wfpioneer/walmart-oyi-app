@@ -49,7 +49,6 @@ export const ItemDetailScreen = (
         exceptionType: action.payload.exceptionType,
         pendingOnHandsQty: action.payload.pendingOHQty,
         actionCompleted: action.payload.completed,
-        selectedLocation: null,
         salesFloor: action.payload.salesFloor
       };
     case UPDATE_PENDING_OH_QTY:
