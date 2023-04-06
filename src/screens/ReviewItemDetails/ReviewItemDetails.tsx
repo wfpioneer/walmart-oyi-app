@@ -998,12 +998,14 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
         return (
           <View style={styles.otherActionContainer}>
             {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+            {!actionCompleted && (
             <TouchableOpacity
               style={styles.worklistCompleteButton}
               onPress={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
             >
               <Text style={styles.buttonText}>{strings('APPROVAL.OH_CHANGE')}</Text>
             </TouchableOpacity>
+            )}
           </View>
         );
       }
@@ -1036,16 +1038,18 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
         return (
           <View style={styles.otherActionContainer}>
             {renderOtherActionButton(props, itemDetails.itemNbr, false)}
-            <TouchableOpacity
-              style={styles.worklistCompleteButton}
-              onPress={() => {
-                dispatch(resetScannedEvent());
-                dispatch(setItemDetails(itemDetails));
-                navigation.navigate('ReserveAdjustment');
-              }}
-            >
-              <Text style={styles.buttonText}>{strings('ITEM.CLEAN_RESERVE')}</Text>
-            </TouchableOpacity>
+            {!actionCompleted && (
+              <TouchableOpacity
+                style={styles.worklistCompleteButton}
+                onPress={() => {
+                  dispatch(resetScannedEvent());
+                  dispatch(setItemDetails(itemDetails));
+                  navigation.navigate('ReserveAdjustment');
+                }}
+              >
+                <Text style={styles.buttonText}>{strings('ITEM.CLEAN_RESERVE')}</Text>
+              </TouchableOpacity>
+            )}
           </View>
         );
       }
