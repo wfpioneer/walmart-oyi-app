@@ -595,6 +595,10 @@ describe('PrintPriceSignScreen', () => {
         id: '111111111111'
       }
     ];
+    const mockSelectedAisle: LocationIdName = {
+      id: 2,
+      name: '1'
+    };
     const mockSelectedSection: LocationIdName = {
       id: 3,
       name: '1'
@@ -782,9 +786,6 @@ describe('PrintPriceSignScreen', () => {
     });
 
     it('Tests handleAddPrintList function', () => {
-      const mockGetFullSectionName = jest.fn(
-        sectionName => `${strings('LOCATION.SECTION')} TEST1-${sectionName}`
-      );
       const sectionLocName = `${strings('LOCATION.AISLE')} TEST1-2`;
       const mockItemDetailsExists: ItemDetails = {
         ...testItem,
@@ -799,9 +800,8 @@ describe('PrintPriceSignScreen', () => {
         'C',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         LocationName.SECTION,
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
@@ -824,9 +824,8 @@ describe('PrintPriceSignScreen', () => {
         'C',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         '',
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
@@ -849,9 +848,8 @@ describe('PrintPriceSignScreen', () => {
         'C',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         LocationName.AISLE,
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
@@ -874,9 +872,8 @@ describe('PrintPriceSignScreen', () => {
         'C',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         LocationName.SECTION,
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
@@ -910,7 +907,7 @@ describe('PrintPriceSignScreen', () => {
         routeProp,
         mockDispatch,
         '',
-        mockSections,
+        mockSelectedAisle,
         5,
         null,
         mockSelectedSection,

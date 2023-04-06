@@ -16,7 +16,6 @@ export interface ConfigResponse {
   areas: area[];
   enableAreaFilter: boolean;
   palletWorklists: boolean;
-  addItemDetails: boolean;
   createPallet: boolean;
   auditWorklists: boolean;
   showRollOverAudit: boolean;
@@ -28,6 +27,7 @@ export interface ConfigResponse {
   showItemImage: boolean;
   showFeedback: boolean;
   reserveAdjustment: boolean;
+  manualNoAction: boolean;
 }
 
 export default class ConfigService {

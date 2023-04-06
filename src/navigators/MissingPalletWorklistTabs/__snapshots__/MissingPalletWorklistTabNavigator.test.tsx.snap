@@ -26,11 +26,7 @@ exports[`MissingPalletWorklist Navigator Renders the Missing Pallet Worklist nav
     [Function]
   </Screen>
   <Screen
-    listeners={
-      Object {
-        "focus": [Function],
-      }
-    }
+    listeners={[Function]}
     name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
   >
     [Function]

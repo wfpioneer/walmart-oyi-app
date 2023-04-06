@@ -106,7 +106,8 @@ export default {
           locationName: 'A1-1',
           type: LOCATION_TYPES.RESERVE,
           typeNbr: 7,
-          qty: 10
+          qty: 10,
+          newQty: 0
         }
       ],
       count: 5

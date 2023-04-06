@@ -16,7 +16,6 @@ import {
 import {
   NavigationProp,
   RouteProp,
-  useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -25,7 +24,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosHeaders } from 'axios';
 import moment from 'moment';
 import { barcodeEmitter } from '../../../utils/scannerUtils';
 import { CustomModalComponent } from '../../Modal/Modal';
@@ -70,7 +69,11 @@ import LocationListCard, {
   LocationList
 } from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
-import { setupScreen } from '../../../state/actions/ItemDetailScreen';
+import {
+  setFloorLocations as setItemFloorLocations,
+  setReserveLocations as setItemReserveLocations,
+  setupScreen
+} from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import {
   clearAuditScreenData,
@@ -100,6 +103,7 @@ export interface AuditItemScreenProps {
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
   completeItemApi: AsyncState;
+  // eslint-disable-next-line react/no-unused-prop-types
   userId: string;
   floorLocations: Location[];
   reserveLocations: ItemPalletInfo[];
@@ -113,8 +117,6 @@ export interface AuditItemScreenProps {
     route?: string
   ) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  useFocusEffectHook: (effect: EffectCallback) => void;
-  userFeatures: string[];
   itemNumber: number;
   showItemNotFoundMsg: boolean;
   setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>;
@@ -212,20 +214,27 @@ export const addLocationHandler = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   floorLocations: Location[],
-  trackEventCall: (eventName: string, params?: any) => void
+  trackEventCall: (eventName: string, params?: any) => void,
 ) => {
+  const reserveLoc = itemDetails?.location?.reserve;
   dispatch(
     setupScreen(
       itemDetails ? itemDetails.itemNbr : 0,
       itemDetails ? itemDetails.upcNbr : '',
-      floorLocations || [],
-      itemDetails?.location.reserve || [],
-      null,
+      itemDetails?.exceptionType,
       -999,
       false,
       false
     )
   );
+
+  if (floorLocations.length > 0) {
+    dispatch(setItemFloorLocations(floorLocations));
+  }
+  if (reserveLoc) {
+    dispatch(setItemReserveLocations(reserveLoc));
+  }
+
   trackEventCall('Audit_Item', { action: 'add_new_floor_location_click', itemNumber: itemDetails?.itemNbr });
   navigation.navigate('AddLocation');
 };
@@ -287,7 +296,9 @@ export const calculatePalletIncreaseQty = (
 };
 
 export const getFloorLocationsResult = (
-  floorResultsData: Location[] | undefined, dispatch: Dispatch<any>, existingFloorLocations: Location[]
+  floorResultsData: Location[] | undefined,
+  dispatch: Dispatch<any>,
+  existingFloorLocations: Location[]
 ) => {
   let updatedFloorLocations: Location[] = [];
   if (floorResultsData && floorResultsData.length > 0) {
@@ -307,7 +318,8 @@ export const getFloorLocationsResult = (
 };
 
 export const getUpdatedReserveLocations = (
-  itemPallets: ItemPalletInfo[] | undefined, existingReserveLocations: ItemPalletInfo[]
+  itemPallets: ItemPalletInfo[] | undefined,
+  existingReserveLocations: ItemPalletInfo[]
 ) => {
   let updatedReserveLocations = [];
   if (itemPallets && itemPallets.length > 0) {
@@ -360,7 +372,11 @@ export const getItemDetailsApiHook = (
       ) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
-        getFloorLocationsResult(itemDetails.location.floor, dispatch, existingFloorLocations);
+        getFloorLocationsResult(
+          itemDetails?.location?.floor,
+          dispatch,
+          existingFloorLocations
+        );
         setShowItemNotFoundMsg(false);
       } else if (getItemDetailsApi.result.status === 204) {
         setShowItemNotFoundMsg(true);
@@ -552,10 +568,25 @@ export const renderpalletQtyUpdateModal = (
   );
 };
 
+export const getMultiPalletList = (reserveLocations: ItemPalletInfo[], itemDetails: ItemDetails | null) => {
+  const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
+    {
+      palletId: item.palletId,
+      expirationDate: '', // This is fine as it does not update the expiration date on the pallet
+      upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
+    }
+  ));
+
+  return newPalletList;
+};
+
 export const completeItemApiHook = (
   completeItemApi: AsyncState,
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null,
+  hasNewQty: boolean
 ) => {
   if (navigation.isFocused()) {
     if (!completeItemApi.isWaiting && completeItemApi.error) {
@@ -575,7 +606,12 @@ export const completeItemApiHook = (
         position: 'bottom'
       });
       dispatch({ type: NO_ACTION.RESET });
-      navigation.goBack();
+      // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
+      if (hasNewQty) {
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+      } else {
+        navigation.goBack();
+      }
     }
   }
 };
@@ -597,14 +633,7 @@ export const updateOHQtyApiHook = (
       });
       dispatch({ type: UPDATE_OH_QTY.RESET });
 
-      const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
-        {
-          palletId: item.palletId,
-          expirationDate: '', // This is fine as it does not update the expiration date on the pallet
-          upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
-        }
-      ));
-      dispatch(updateMultiPalletUPCQty({ PalletList: newPalletList }));
+      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
     }
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
       Toast.show({
@@ -622,7 +651,7 @@ export const updateMultiPalletUPCQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-
+  itemNbr: number
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
@@ -635,6 +664,7 @@ export const updateMultiPalletUPCQtyApiHook = (
 
       dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
       setShowOnHandsConfirmationModal(false);
+      dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
       navigation.goBack();
     }
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
@@ -740,11 +770,15 @@ export const renderDeleteLocationModal = (
             onPress={() => {
               deleteLocationConfirmed(locationType);
               if (locationType === 'reserve') {
-                trackEventCall('Audit_Item',
-                  { action: 'delete_pallet_confirmation_click', palletId });
+                trackEventCall(
+                  'Audit_Item',
+                  { action: 'delete_pallet_confirmation_click', palletId }
+                );
               } else {
-                trackEventCall('Audit_Item',
-                  { action: 'confirm_delete_location_click', locName: locationName });
+                trackEventCall(
+                  'Audit_Item',
+                  { action: 'confirm_delete_location_click', locName: locationName }
+                );
               }
             }}
           />
@@ -840,8 +874,10 @@ export const renderConfirmOnHandsModal = (
               titleColor={COLOR.MAIN_THEME_COLOR}
               testID="modal-cancel-button"
               onPress={() => {
-                trackEventCall('Audit_Item',
-                  { action: 'cancel_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr });
+                trackEventCall(
+                  'Audit_Item',
+                  { action: 'cancel_OH_qty_update', itemNumber: itemDetails?.itemNbr, upcNbr: itemDetails?.upcNbr }
+                );
                 setShowOnHandsConfirmationModal(false);
               }}
               type={2}
@@ -852,13 +888,15 @@ export const renderConfirmOnHandsModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={() => {
-                trackEventCall('Audit_Item',
+                trackEventCall(
+                  'Audit_Item',
                   {
                     action: 'complete_audit_item_click',
                     type: 'OH_qty_update',
                     itemNumber: itemDetails?.itemNbr,
                     upcNbr: itemDetails?.upcNbr
-                  });
+                  }
+                );
                 dispatch(
                   updateOHQty({
                     data: {
@@ -921,14 +959,17 @@ export const disabledContinue = (
   reserveLocations: ItemPalletInfo[],
   scanRequired: boolean,
   itemDetailsLoading: boolean
-): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 1)
+): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 0)
   || reserveLocations.some(
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
 
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
-  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(b.locationName,
-    undefined, { numeric: true });
+  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(
+    b.locationName,
+    undefined,
+    { numeric: true }
+  );
 
   return locations.sort(sortLocationNames);
 };
@@ -984,6 +1025,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reserveLocations,
     itemDetails
   );
+
+  const hasNewQty = reserveLocations.some(loc => loc.quantity !== loc.newQty);
+  const MIN = 0;
+  const MAX = 9999;
 
   // Scanner listener
   useEffectHook(() => {
@@ -1045,8 +1090,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Complete Item API
   useEffectHook(
-    () => completeItemApiHook(completeItemApi, dispatch, navigation),
-    [completeItemApi]
+    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, itemDetails, hasNewQty),
+    [completeItemApi, hasNewQty]
   );
 
   // Delete Location API
@@ -1065,8 +1110,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   // report missing pallet API
   useEffectHook(
     () => deletePalletApiHook(
-      deletePalletApi, dispatch, navigation,
-      setShowDeleteConfirmationModal, locToConfirm.palletId, itemNumber
+      deletePalletApi,
+      dispatch,
+      navigation,
+      setShowDeleteConfirmationModal,
+      locToConfirm.palletId,
+      itemNumber
     ),
     [deletePalletApi]
   );
@@ -1093,7 +1142,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateMultiPalletUPCQtyApi,
     dispatch,
     navigation,
-    setShowOnHandsConfirmationModal
+    setShowOnHandsConfirmationModal,
+    itemDetails?.itemNbr || 0
   ), [updateMultiPalletUPCQtyApi]);
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
@@ -1148,7 +1198,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     } else {
       dispatch(
         deleteLocation({
-          headers: { itemNumber },
+          headers: new AxiosHeaders({ itemNumber }),
           upc: itemDetails?.upcNbr || '',
           sectionId: locToConfirm.locationName,
           locationTypeNbr: locToConfirm.locationTypeNbr
@@ -1166,8 +1216,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('Audit_Item',
-        { action: 'delete_floor_location_click', location: JSON.stringify(loc), index: locIndex });
+      trackEventCall(
+        'Audit_Item',
+        { action: 'delete_floor_location_click', location: JSON.stringify(loc), index: locIndex }
+      );
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'floor',
@@ -1182,8 +1234,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   const handleDeleteReserveLocation = (loc: ItemPalletInfo, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
-      trackEventCall('Audit_Item',
-        { action: 'delete_pallet_click', location: JSON.stringify(loc), index: locIndex });
+      trackEventCall(
+        'Audit_Item',
+        { action: 'delete_pallet_click', location: JSON.stringify(loc), index: locIndex }
+      );
       setLocToConfirm({
         locationName: loc.locationName,
         locationArea: 'reserve',
@@ -1279,7 +1333,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
           scannedValue: itemNumber.toString(),
-          headers: { worklistType: route.params?.worklistType ?? 'AU' }
+          headers: new AxiosHeaders({ worklistType: route.params?.worklistType ?? 'AU' })
         })
       );
     } else {
@@ -1365,6 +1419,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               onRetry={() => {}}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
+              minQty={MIN}
+              maxQty={MAX}
             />
           </View>
           <View style={styles.marginBottomStyle}>
@@ -1376,6 +1432,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               scanRequired={userConfig.scanRequired}
               onRetry={handleReserveLocsRetry}
               showCalculator={userConfig.showCalculator}
+              minQty={MIN}
+              maxQty={MAX}
             />
           </View>
           <View>
@@ -1473,7 +1531,6 @@ const AuditItem = (): JSX.Element => {
       trackEventCall={trackEvent}
       validateSessionCall={validateSession}
       useEffectHook={useEffect}
-      useFocusEffectHook={useFocusEffect}
       userFeatures={userFeatures}
       userId={userId}
       itemNumber={itemNumber}

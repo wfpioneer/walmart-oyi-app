@@ -555,6 +555,9 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   const [location, setLocation] = locationListState;
   const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
 
+  const MIN = 0;
+  const MAX = 9999;
+
   const handleDeletePalletSuccess = (type: string) => {
     setShowDeleteConfirmationModal(false);
     // reset locToConfirm
@@ -691,21 +694,6 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     itemDetails?.itemNbr || 0
   ), [updateMultiPalletUPCQtyV2Api]);
 
-  const calculateTotalOHQty = () => {
-    const reserveLocationsCount = reserveLocations.reduce(
-      (acc: number, loc: ItemPalletInfo) => {
-        const qty = typeof loc.newQty === 'number' ? loc.newQty : loc.quantity;
-        return acc + (qty || 0);
-      },
-      0
-    );
-    const otherOHTotalCount = (itemDetails?.claimsOnHandQty || 0)
-      + (itemDetails?.inTransitCloudQty || 0)
-      + (itemDetails?.cloudQty || 0)
-      + (itemDetails?.consolidatedOnHandQty || 0);
-    return reserveLocationsCount + otherOHTotalCount;
-  };
-
   return (
     <View style={styles.container}>
       {renderDeleteLocationModal(
@@ -773,6 +761,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
           scanRequired={userConfig.scanRequired}
           onRetry={handleReserveLocsRetry}
           showCalculator={userConfig.showCalculator}
+          minQty={MIN}
+          maxQty={MAX}
         />
       </ScrollView>
       <ItemSeparator />

@@ -33,12 +33,27 @@ import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
 
 const genericSagas = [
-  makeAsyncSaga(saga.GET_ITEM_DETAILS_V3, actions.getItemDetailsV3, GetItemDetailsService.getItemDetailsV3),
+  makeAsyncSaga(saga.GET_ITEM_DETAILS_V4, actions.getItemDetailsV4, GetItemDetailsService.getItemDetailsV4),
   makeAsyncSaga(saga.GET_ITEM_PIHISTORY, actions.getItemPiHistory, GetItemDetailsService.getItemPiHistory),
   makeAsyncSaga(
     saga.GET_ITEM_PISALESHISTORY,
     actions.getItemPiSalesHistory,
     GetItemDetailsService.getItemPiSalesHistory
+  ),
+  makeAsyncSaga(
+    saga.GET_ITEM_PICKLISTHISTORY,
+    actions.getItemPicklistHistory,
+    GetItemDetailsService.getItemPicklistHistory
+  ),
+  makeAsyncSaga(
+    saga.GET_LOCATIONS_FOR_ITEM,
+    actions.getLocationsForItem,
+    GetItemDetailsService.getLocationsForItem
+  ),
+  makeAsyncSaga(
+    saga.GET_ITEM_MANAGER_APPROVAL_HISTORY,
+    actions.getItemManagerApprovalHistory,
+    GetItemDetailsService.getItemManagerApprovalHistory
   ),
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
@@ -92,11 +107,15 @@ const genericSagas = [
   makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),
   makeAsyncSaga(saga.CREATE_NEW_PICK, actions.createNewPick, PickingService.createNewPick),
   makeAsyncSaga(
-    saga.REPORT_MISSING_PALLET, actions.reportMissingPallet, ReportMissingPalletService.reportMissingPallet
+    saga.REPORT_MISSING_PALLET,
+    actions.reportMissingPallet,
+    ReportMissingPalletService.reportMissingPallet
   ),
   makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets),
   makeAsyncSaga(
-    saga.UPDATE_MULTI_PALLET_UPC_QTY, actions.updateMultiPalletUPCQty, PalletManagementService.updateMultiPalletUPCQty
+    saga.UPDATE_MULTI_PALLET_UPC_QTY,
+    actions.updateMultiPalletUPCQty,
+    PalletManagementService.updateMultiPalletUPCQty
   ),
   makeAsyncSaga(saga.SUBMIT_FEEDBACK_RATING, actions.submitFeedbackRating, FeedBackService.submitFeedbackRating),
   makeAsyncSaga(saga.GET_USER_CONFIG, actions.getUserConfig, UserConfigService.getUserConfig),

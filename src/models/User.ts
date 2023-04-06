@@ -28,7 +28,6 @@ export interface Configurations {
   areas: area[];
   enableAreaFilter: boolean;
   palletWorklists: boolean;
-  additionalItemDetails: boolean;
   createPallet: boolean;
   auditWorklists: boolean;
   showRollOverAudit: boolean;
@@ -40,6 +39,7 @@ export interface Configurations {
   showItemImage: boolean;
   showFeedback: boolean;
   reserveAdjustment: boolean;
+  manualNoAction: boolean;
 }
 
 export interface area {

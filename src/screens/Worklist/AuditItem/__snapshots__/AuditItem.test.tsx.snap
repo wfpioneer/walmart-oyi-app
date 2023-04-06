@@ -1395,20 +1395,22 @@ Array [
                 />
               </View>
             </View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "justifyContent": "center",
-                  "marginBottom": 2,
-                  "padding": 5,
+            <View>
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "justifyContent": "center",
+                    "marginBottom": 2,
+                    "padding": 5,
+                  }
                 }
-              }
-            >
-              <Text>
-                [missing "en.AUDITS.NO_LOCATION_AVAILABLE" translation]
-              </Text>
+              >
+                <Text>
+                  [missing "en.AUDITS.NO_LOCATION_AVAILABLE" translation]
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -1472,20 +1474,22 @@ Array [
                 </View>
               </View>
             </View>
-            <View
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#ffffffff",
-                  "justifyContent": "center",
-                  "marginBottom": 2,
-                  "padding": 5,
+            <View>
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#ffffffff",
+                    "justifyContent": "center",
+                    "marginBottom": 2,
+                    "padding": 5,
+                  }
                 }
-              }
-            >
-              <Text>
-                [missing "en.AUDITS.NO_PALLETS_FOUND_FOR_ITEM" translation]
-              </Text>
+              >
+                <Text>
+                  [missing "en.AUDITS.NO_PALLETS_FOUND_FOR_ITEM" translation]
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -2033,6 +2037,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           loading={true}
           locationList={Array []}
           locationType="floor"
+          maxQty={9999}
+          minQty={0}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -2050,6 +2056,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           loading={false}
           locationList={Array []}
           locationType="reserve"
+          maxQty={9999}
+          minQty={0}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -2481,6 +2489,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           loading={false}
           locationList={Array []}
           locationType="floor"
+          maxQty={9999}
+          minQty={0}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -2498,6 +2508,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           loading={false}
           locationList={Array []}
           locationType="reserve"
+          maxQty={9999}
+          minQty={0}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}

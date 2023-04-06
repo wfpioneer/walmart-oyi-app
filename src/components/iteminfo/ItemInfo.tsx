@@ -22,7 +22,6 @@ export type ItemInfoProps = {
   exceptionType?: string; // This is enumerated
   navigationForPrint?: NavigationProp<any>;
   additionalItemDetails?: AdditionalItemDetailsProps;
-  showAdditionalItemDetails: boolean;
   countryCode: string;
   showItemImage: boolean;
   worklistAuditType?: string;
@@ -82,7 +81,7 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
 const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
-    price, exceptionType, navigationForPrint: navigation, showAdditionalItemDetails, additionalItemDetails,
+    price, exceptionType, navigationForPrint: navigation, additionalItemDetails,
     countryCode, showItemImage, worklistAuditType
   } = props;
 
@@ -146,7 +145,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
           <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
         </View>
       </View>
-      {showAdditionalItemDetails && additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
+      {additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
       <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
       {navigation && (
         <Button

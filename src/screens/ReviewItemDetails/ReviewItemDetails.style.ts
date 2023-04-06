@@ -43,6 +43,20 @@ const styles = StyleSheet.create({
     paddingVertical: 14
   },
   scanForNoActionButton: {
+    backgroundColor: COLOR.WHITE,
+    borderRadius: 4,
+    borderColor: COLOR.MAIN_THEME_COLOR,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: 40,
+    paddingVertical: 10,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    flex: 1
+  },
+  worklistCompleteButton: {
     backgroundColor: COLOR.MAIN_THEME_COLOR,
     borderRadius: 4,
     borderColor: COLOR.MAIN_THEME_COLOR,
@@ -53,10 +67,16 @@ const styles = StyleSheet.create({
     height: 40,
     paddingVertical: 10,
     marginVertical: 10,
-    marginHorizontal: 15
+    marginHorizontal: 10,
+    flex: 1
   },
   buttonText: {
     color: COLOR.WHITE,
+    textAlign: 'center',
+    marginLeft: 10
+  },
+  buttonTextBlue: {
+    color: COLOR.MAIN_THEME_COLOR,
     textAlign: 'center',
     marginLeft: 10
   },
@@ -113,6 +133,15 @@ const styles = StyleSheet.create({
     alignContent: 'space-around',
     flexDirection: 'row',
     justifyContent: 'center'
+  },
+  otherActionContainer: {
+    width: '100%',
+    alignContent: 'space-around',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: COLOR.WHITE,
+    borderTopColor: COLOR.GREY_300,
+    borderTopWidth: 1
   },
   iconPosition: {
     alignSelf: 'center'

@@ -24,7 +24,9 @@ interface LocationCardProp {
     scannerEnabled: boolean;
     scanned?: boolean;
     showCalculator: boolean;
-    showQtyChanged: boolean
+    showQtyChanged: boolean;
+    minQty: number;
+    maxQty: number;
   }
 
 export const getContentStyle = (
@@ -56,12 +58,12 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
     scanned,
     onCalcPress,
     showCalculator,
-    showQtyChanged
+    showQtyChanged,
+    minQty,
+    maxQty
   } = props;
 
-  const MIN = locationType === 'floor' ? 1 : 0;
-  const MAX = 9999;
-  const isValidQty = validateQty(quantity, MIN, MAX);
+  const isValidQty = validateQty(quantity, minQty, maxQty);
   return (
     <View style={[styles.mainContainer, showQtyChanged && { backgroundColor: COLOR.YELLOW }]}>
       <View style={styles.container}>
@@ -88,8 +90,8 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
               onDecreaseQty={onQtyDecrement}
               onIncreaseQty={onQtyIncrement}
               onTextChange={onTextChange}
-              minValue={MIN}
-              maxValue={MAX}
+              minValue={minQty}
+              maxValue={maxQty}
               value={quantity}
               isValid={isValidQty}
               onEndEditing={onEndEditing}
@@ -116,7 +118,7 @@ const LocationCard = (props: LocationCardProp): JSX.Element => {
       </View>
       {!isValidQty && (
       <View>
-        <Text style={styles.errorText}>{strings('GENERICS.NUMBER_MIN_MAX', { minimum: MIN, maximum: MAX })}</Text>
+        <Text style={styles.errorText}>{strings('GENERICS.NUMBER_MIN_MAX', { minimum: minQty, maximum: maxQty })}</Text>
       </View>
       )}
     </View>

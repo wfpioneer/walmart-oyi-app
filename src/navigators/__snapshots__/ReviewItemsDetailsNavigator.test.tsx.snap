@@ -35,6 +35,21 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
   />
   <Screen
     component={[Function]}
+    name="NoActionScan"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
     name="LocationDetails"
     options={
       Object {

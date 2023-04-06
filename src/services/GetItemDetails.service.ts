@@ -22,14 +22,12 @@ export default class GetItemDetailsService {
       { timeout: TIMEOUT }
     );
   }
-
-  public static getItemDetailsV3(payload: GetItemDetailsPayload): Promise<AxiosResponse<unknown>> {
+  //temporarily switching item details to V3 as V4 is not yet ready, leaving name as this is a temp change
+  public static getItemDetailsV4(payload: GetItemDetailsPayload): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     const summaryParam = payload.getSummary ? `?summaryDetails=${payload.getSummary}` : '';
-    const excludeHistoryParam = payload.getExcludeHistory ? `?excludeHistory'=${payload.getExcludeHistory}` : '';
-    const metadataHistoryParam = payload.getMetadataHistory ? `?metadataHistory=${payload.getMetadataHistory}` : '';
     return Request.get(
-      `${urls.orchestrationURL}/v1/item/${payload.id}${summaryParam}${excludeHistoryParam}${metadataHistoryParam}`,
+      `${urls.itemDetailsURL}/v3/item/${payload.id}${summaryParam}`,
       undefined,
       { timeout: TIMEOUT }
     );
@@ -48,6 +46,33 @@ export default class GetItemDetailsService {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.itemDetailsURL}/item/pisaleshistory/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static getItemPicklistHistory(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.orchestrationURL}/picklist?itemNbr=${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static getLocationsForItem(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.orchestrationURL}/location/item/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static getItemManagerApprovalHistory(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.orchestrationURL}/managerapproval/item/${itemNbr}`,
       undefined,
       { timeout: TIMEOUT }
     );

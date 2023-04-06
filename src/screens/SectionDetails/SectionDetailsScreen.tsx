@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { AxiosHeaders } from 'axios';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
@@ -23,7 +24,7 @@ import { DELETE_LOCATION, GET_PALLET_DETAILS, GET_SECTION_DETAILS } from '../../
 import {
   hideItemPopup, selectAisle, selectSection, selectZone, setPalletIds
 } from '../../state/actions/Location';
-import { setSelectedLocation, setupScreen } from '../../state/actions/ItemDetailScreen';
+import { setFloorLocations, setSelectedLocation, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { showSnackBar } from '../../state/actions/SnackBar';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetEditCard from '../../components/BottomSheetEditCard/BottomSheetEditCard';
@@ -51,7 +52,7 @@ export const handleDeleteItem = (
   if (selectedItem) {
     dispatch(
       deleteLocation({
-        headers: { itemNbr: selectedItem.itemNbr },
+        headers: new AxiosHeaders({ itemNbr: selectedItem.itemNbr }),
         upc: selectedItem.upcNbr,
         sectionId: sectionId.toString(),
         locationTypeNbr: selectedItem.locationType
@@ -83,13 +84,13 @@ export const handleEditItem = (
   dispatch(setupScreen(
     selectedItem ? selectedItem.itemNbr : 0,
     selectedItem ? selectedItem.upcNbr : '',
-    [currentSection],
-    [],
     null,
     -999,
     false,
     false
   ));
+
+  dispatch(setFloorLocations([currentSection]));
   dispatch(setSelectedLocation(currentSection));
   dispatch(hideItemPopup());
   navigation.navigate('EditLocation');

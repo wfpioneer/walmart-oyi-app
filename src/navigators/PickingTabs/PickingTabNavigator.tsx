@@ -92,8 +92,10 @@ export const getItemDetailsApiHook = (
           categoryDesc: itemDetails.categoryDesc,
           price: itemDetails.price
         }));
-        dispatch(setPickCreateFloor(itemDetails.location.floor || []));
-        dispatch(setPickCreateReserve(itemDetails.location.reserve || []));
+        const floorLoc = itemDetails?.location?.floor;
+        const reserveLoc = itemDetails?.location?.reserve;
+        dispatch(setPickCreateFloor(floorLoc || []));
+        dispatch(setPickCreateReserve(reserveLoc || []));
         navigation.navigate('CreatePick');
       } else if (getItemDetailsApi.result.status === 204) {
         Toast.show({

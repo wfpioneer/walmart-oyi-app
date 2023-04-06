@@ -47,27 +47,19 @@ describe('ItemDetailScreen reducer tests', () => {
       exceptionType: 'nsfl',
       actionCompleted: true,
       floorLocations: [],
-      reserveLocations: [
-        {
-          zoneId: 0,
-          aisleId: 1,
-          sectionId: 1,
-          zoneName: 'A',
-          aisleName: '1',
-          sectionName: '1',
-          locationName: 'A1-1',
-          type: 'Reserve',
-          typeNbr: 7,
-          qty: 10
-        }
-      ],
+      reserveLocations: [],
       selectedLocation: null,
       salesFloor: true
     };
 
     const item = getItemDetails[123];
     let testResults = ItemDetailScreen(testInitialState, setupScreen(
-      item.itemNbr, item.upcNbr, [], item.location.reserve || [], item.exceptionType, item.pendingOnHandsQty, true, true
+      item.itemNbr,
+      item.upcNbr,
+      item.exceptionType,
+      item.pendingOnHandsQty,
+      true,
+      true
     ));
     expect(testResults).toStrictEqual(screenSetupState);
 
@@ -93,7 +85,8 @@ describe('ItemDetailScreen reducer tests', () => {
       sectionName: '1',
       locationName: 'A1-1',
       type: 'Sales Floor',
-      typeNbr: 8
+      typeNbr: 8,
+      newQty: 0
     }];
     testMutatedState.floorLocations = floorLoc;
     testResults = ItemDetailScreen(testInitialState, setFloorLocations(floorLoc));
@@ -114,7 +107,8 @@ describe('ItemDetailScreen reducer tests', () => {
       sectionName: '1',
       locationName: 'B1-1',
       type: 'Reserve',
-      typeNbr: 7
+      typeNbr: 7,
+      newQty: 0
     }];
     testResults = ItemDetailScreen(testMutatedState, setReserveLocations(reserveLoc));
     testMutatedState.reserveLocations = reserveLoc;
@@ -139,7 +133,8 @@ describe('ItemDetailScreen reducer tests', () => {
       sectionName: '3',
       locationName: 'A2-3',
       type: 'DISPLAY',
-      typeNbr: 6
+      typeNbr: 6,
+      newQty: 0
     };
     testResults = ItemDetailScreen(testInitialState, setSelectedLocation(testMutatedState.selectedLocation));
     expect(testResults).toStrictEqual(testMutatedState);

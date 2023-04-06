@@ -1080,6 +1080,8 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       loading={true}
       locationList={Array []}
       locationType="reserve"
+      maxQty={9999}
+      minQty={0}
       onRetry={[Function]}
       scanRequired={false}
       showCalculator={false}
@@ -1347,6 +1349,8 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       loading={false}
       locationList={Array []}
       locationType="reserve"
+      maxQty={9999}
+      minQty={0}
       onRetry={[Function]}
       scanRequired={false}
       showCalculator={false}

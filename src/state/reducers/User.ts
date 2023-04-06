@@ -33,7 +33,6 @@ export const initialState: User = {
     areas: [],
     enableAreaFilter: false,
     palletWorklists: false,
-    additionalItemDetails: false,
     createPallet: false,
     auditWorklists: false,
     showRollOverAudit: false,
@@ -44,7 +43,8 @@ export const initialState: User = {
     multiPick: false,
     showItemImage: false,
     showFeedback: false,
-    reserveAdjustment: false
+    reserveAdjustment: false,
+    manualNoAction: false
   }
 };
 
@@ -79,7 +79,6 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           areas: action.payload.areas || [],
           enableAreaFilter: action.payload.enableAreaFilter || false,
           palletWorklists: action.payload.palletWorklists || false,
-          additionalItemDetails: action.payload.addItemDetails || false,
           createPallet: action.payload.createPallet || false,
           auditWorklists: action.payload.auditWorklists || false,
           showRollOverAudit: action.payload.showRollOverAudit || false,
@@ -90,7 +89,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           multiPick: action.payload.multiPick || false,
           showItemImage: action.payload.showItemImage || false,
           showFeedback: action.payload.showFeedback || false,
-          reserveAdjustment: action.payload.reserveAdjustment || false
+          reserveAdjustment: action.payload.reserveAdjustment || false,
+          manualNoAction: action.payload.manualNoAction || false
         }
       };
     default:
