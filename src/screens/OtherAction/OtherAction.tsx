@@ -110,7 +110,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
 
   return (
     <View style={styles.safeAreaView}>
-      <View>
+      <View style={styles.itemContainer}>
         <ItemInfo
           itemName={itemDetails.itemName}
           itemNbr={itemDetails.itemNbr}
@@ -118,18 +118,6 @@ export const OtherActionScreen = (props: OtherActionProps) => {
           status={itemDetails.status || ''}
           category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
           exceptionType={exceptionType || undefined}
-          additionalItemDetails={{
-            color: itemDetails.color,
-            margin: itemDetails.margin,
-            vendorPackQty: itemDetails.vendorPackQty,
-            grossProfit: itemDetails.grossProfit,
-            size: itemDetails.size,
-            basePrice: itemDetails.basePrice,
-            source: {
-              screen: OTHER_ACTIONS,
-              action: 'additional_item_details_click'
-            }
-          }}
           countryCode={countryCode}
           showItemImage={userConfigs.showItemImage}
           worklistAuditType={itemDetails.worklistAuditType}

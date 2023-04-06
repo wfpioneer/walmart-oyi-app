@@ -25,11 +25,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     height: 50,
-    marginVertical: 5,
-    borderTopColor: COLOR.GREY_500,
-    borderBottomColor: COLOR.GREY_500,
-    borderTopWidth: 1,
-    borderBottomWidth: 1
+    marginVertical: 5
   },
   completeActionRadioView: {
     justifyContent: 'space-evenly',
@@ -61,5 +57,9 @@ export const styles = StyleSheet.create({
   },
   continueButton: {
     alignSelf: 'center'
+  },
+  itemContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: COLOR.GREY_300
   }
 });
