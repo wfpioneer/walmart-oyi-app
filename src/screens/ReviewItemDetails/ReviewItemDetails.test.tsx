@@ -427,7 +427,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOtherActionButton({ ...mockHandleProps, actionCompleted: true }, mockItemDetail123.itemNbr, false)
+        renderOtherActionButton({ ...mockHandleProps, actionCompleted: true }, mockItemDetail123.itemNbr, false, false)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -443,6 +443,7 @@ describe('ReviewItemDetailsScreen', () => {
         renderOtherActionButton(
           mockHandleProps,
           mockItemDetail123.itemNbr,
+          false,
           false
         )
       );
@@ -1237,7 +1238,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders otherActionbutton', () => {
       const enableOtherAction = true;
       renderer.render(
-        renderOtherActionButton(mockHandleProps, mockItemDetail123.itemNbr, enableOtherAction)
+        renderOtherActionButton(mockHandleProps, mockItemDetail123.itemNbr, enableOtherAction, true)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1266,13 +1267,13 @@ describe('ReviewItemDetailsScreen', () => {
     });
 
     it('Renders completeButtonComponent NO', () => {
-      const mockPropNSFL: ItemDetailsScreenProps = {
+      const mockPropNO: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO',
         userFeatures: ['on hands change']
       };
       renderer.render(
-        completeButtonComponent(mockPropNSFL, mockItemDetail123)
+        completeButtonComponent(mockPropNO, mockItemDetail123)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

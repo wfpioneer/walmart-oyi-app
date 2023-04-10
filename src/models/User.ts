@@ -40,6 +40,7 @@ export interface Configurations {
   showFeedback: boolean;
   reserveAdjustment: boolean;
   manualNoAction: boolean;
+  otherActions: boolean;
 }
 
 export interface area {
