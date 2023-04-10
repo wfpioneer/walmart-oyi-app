@@ -303,7 +303,6 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerTitleStyle: { fontSize: 18 }
         }}
       />
-
     </Stack.Navigator>
   );
 };

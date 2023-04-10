@@ -12,6 +12,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { styles } from './OtherAction.style';
 import { strings } from '../../locales';
 import Button, { ButtonType } from '../../components/buttons/Button';
+import { UseStateType } from '../../models/Generics.d';
 
 export interface OtherActionProps {
   exceptionType: string | null | undefined;
@@ -19,7 +20,7 @@ export interface OtherActionProps {
   countryCode: string;
   userConfigs: Configurations;
   trackEventCall: typeof trackEvent;
-  chosenActionState: [string, React.Dispatch<React.SetStateAction<string>>];
+  chosenActionState: UseStateType<string>;
 }
 const OTHER_ACTIONS = 'other actions screen';
 
