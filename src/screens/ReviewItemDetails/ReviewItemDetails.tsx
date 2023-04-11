@@ -923,37 +923,15 @@ const completeAction = () => {
   // dispatch(navigation.goBack());
 };
 
-export const renderOtherActionButton = (
+export const renderScanForNoActionButton = (
   props: (RenderProps & HandleProps),
-  itemNbr: number,
-  otherActionsEnabled: boolean,
-  otherActionsFlag: boolean
+  itemNbr: number
 ): JSX.Element => {
   const {
     actionCompleted, validateSessionCall, trackEventCall,
     userId, navigation, route
   } = props;
 
-  if (otherActionsFlag && otherActionsEnabled) {
-    return (
-      <TouchableOpacity
-        style={styles.scanForNoActionButton}
-        onPress={() => {
-          validateSessionCall(navigation, route.name).then(() => {
-            trackEventCall(
-              REVIEW_ITEM_DETAILS,
-              { action: 'other_action_click', itemNbr }
-            );
-            navigation.navigate('OtherAction');
-          }).catch(() => {
-            trackEventCall('session_timeout', { user: userId });
-          });
-        }}
-      >
-        <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
-      </TouchableOpacity>
-    );
-  }
   if (actionCompleted) {
     return <View />;
   }
@@ -988,6 +966,34 @@ export const renderOtherActionButton = (
   );
 };
 
+export const renderOtherActionButton = (
+  props: (RenderProps & HandleProps),
+  itemNbr: number
+): JSX.Element => {
+  const {
+    validateSessionCall, trackEventCall, userId, navigation, route
+  } = props;
+
+  return (
+    <TouchableOpacity
+      style={styles.scanForNoActionButton}
+      onPress={() => {
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall(
+            REVIEW_ITEM_DETAILS,
+            { action: 'other_action_click', itemNbr }
+          );
+          navigation.navigate('OtherAction');
+        }).catch(() => {
+          trackEventCall('session_timeout', { user: userId });
+        });
+      }}
+    >
+      <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
+    </TouchableOpacity>
+  );
+};
+
 const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
   if (actionCompleted) {
     return <View />;
@@ -1012,7 +1018,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty < 0)) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderOtherActionButton(props, itemDetails.itemNbr, false, otherActions)}
+            {renderScanForNoActionButton(props, itemDetails.itemNbr)}
             {!actionCompleted && (
             <TouchableOpacity
               style={styles.worklistCompleteButton}
@@ -1027,7 +1033,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty >= 0)) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderOtherActionButton(props, itemDetails.itemNbr, true, otherActions)}
+            { otherActions && renderOtherActionButton(props, itemDetails.itemNbr)}
           </View>
         );
       }
@@ -1037,14 +1043,14 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       if ((floorLocations && floorLocations.length === 0)) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderOtherActionButton(props, itemDetails.itemNbr, false, otherActions)}
+            {renderScanForNoActionButton(props, itemDetails.itemNbr)}
             {renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
           </View>
         );
       }
       return (
         <View style={styles.otherActionContainer}>
-          {renderOtherActionButton(props, itemDetails.itemNbr, false, otherActions)}
+          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
         </View>
       );
     }
@@ -1052,7 +1058,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       if (((reserveAdjustment && reserveLocations && reserveLocations.length >= 1))) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderOtherActionButton(props, itemDetails.itemNbr, false, otherActions)}
+            {renderScanForNoActionButton(props, itemDetails.itemNbr)}
             {!actionCompleted && (
               <TouchableOpacity
                 style={styles.worklistCompleteButton}
@@ -1070,14 +1076,14 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       }
       return (
         <View style={styles.otherActionContainer}>
-          {renderOtherActionButton(props, itemDetails.itemNbr, false, otherActions)}
+          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
         </View>
       );
     }
     default:
       return (
         <View style={styles.otherActionContainer}>
-          {renderOtherActionButton(props, itemDetails.itemNbr, false, otherActions)}
+          {renderScanForNoActionButton(props, itemDetails.itemNbr)}
         </View>
       );
   }

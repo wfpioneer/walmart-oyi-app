@@ -33,8 +33,8 @@ export const renderChooseActionRadioButtons = (
   const onItemPress = () => {
     setChosenAction(item.title);
     trackEventCall(OTHER_ACTIONS, {
-      action: 'worklist_update_filter_exceptions'
-      // exception: JSON.stringify(item.value)
+      action: 'worklist_update_filter_exceptions',
+      exception: item.title
     });
   };
   return (
