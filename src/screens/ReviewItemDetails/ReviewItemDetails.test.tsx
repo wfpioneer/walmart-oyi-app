@@ -26,7 +26,7 @@ import ReviewItemDetails, {
   onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
   renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent,
   renderOtherActionButton, renderPickHistory, renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4,
-  updateOHQtyApiHook
+  renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -427,7 +427,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOtherActionButton({ ...mockHandleProps, actionCompleted: true }, mockItemDetail123.itemNbr, false)
+        renderScanForNoActionButton({ ...mockHandleProps, actionCompleted: true }, mockItemDetail123.itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -440,10 +440,9 @@ describe('ReviewItemDetailsScreen', () => {
       });
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderOtherActionButton(
+        renderScanForNoActionButton(
           mockHandleProps,
           mockItemDetail123.itemNbr,
-          false
         )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -1235,9 +1234,8 @@ describe('ReviewItemDetailsScreen', () => {
   describe('Tests rendering \'Complete & Other Action  \'Buttons', () => {
     const renderer = ShallowRenderer.createRenderer();
     it('Renders otherActionbutton', () => {
-      const enableOtherAction = true;
       renderer.render(
-        renderOtherActionButton(mockHandleProps, mockItemDetail123.itemNbr, enableOtherAction)
+        renderOtherActionButton(mockHandleProps, mockItemDetail123.itemNbr)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1266,13 +1264,14 @@ describe('ReviewItemDetailsScreen', () => {
     });
 
     it('Renders completeButtonComponent NO', () => {
-      const mockPropNSFL: ItemDetailsScreenProps = {
+      const mockPropNO: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO',
-        userFeatures: ['on hands change']
+        userFeatures: ['on hands change'],
+        userConfigs: { ...mockConfig, otherActions: true }
       };
       renderer.render(
-        completeButtonComponent(mockPropNSFL, mockItemDetail123)
+        completeButtonComponent(mockPropNO, mockItemDetail123)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -1281,7 +1280,8 @@ describe('ReviewItemDetailsScreen', () => {
       const mockPropNO: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO',
-        userFeatures: ['on hands change']
+        userFeatures: ['on hands change'],
+        userConfigs: { ...mockConfig, otherActions: true }
       };
       renderer.render(
         completeButtonComponent(mockPropNO, { ...mockItemDetail123, onHandsQty: -5 })

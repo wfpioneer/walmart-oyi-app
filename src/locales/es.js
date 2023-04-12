@@ -154,7 +154,13 @@ export default {
     DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo',
     RESERVE_CONFIRMATION: '¿Guardar Cambios de Pallet?',
     OTHER_ACTIONS: 'Otras Acciones',
-    CLEAN_RESERVE: 'Limpiar Bodega'
+    CLEAN_RESERVE: 'Limpiar Bodega',
+    CHOOSE_ACTION: 'Elige la acción',
+    DESIRED_ACTION: 'Competa el artículo ejecutando alguna de las acciones debajo:',
+    CHOOSE_RESERVE: 'Realiza cambios a los pallets en bodega', // TODO SPANISH TRANSLATIONS
+    CHOOSE_TOTAL_OH: 'Realiza un cambio de existencia', // TODO SPANISH TRANSLATIONS
+    CHOOSE_PICKLIST: 'Crea un pick para reabastecer el piso', // TODO SPANISH TRANSLATIONS
+    NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada' // TODO SPANISH TRANSLATIONS
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -204,7 +210,7 @@ export default {
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
     INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
-    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
+    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo' // TODO SPANISH TRANSLATION
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -262,6 +268,7 @@ export default {
     DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
+    CHANGE_LOCATION: 'Actualiza la ubicación del artículo', // TODO SPANISH TRANSLATION
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Artículos',
     PALLETS: 'Pallets',

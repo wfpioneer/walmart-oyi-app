@@ -133,6 +133,19 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
       }
     }
   />
+  <Screen
+    component={[Function]}
+    name="OtherAction"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.ITEM.CHOOSE_ACTION\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
 </StackNavigator>
 `;
 

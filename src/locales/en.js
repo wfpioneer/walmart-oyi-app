@@ -154,7 +154,13 @@ export default {
     DELETE_PALLET_FAILURE: 'Delete pallet failed, please try again',
     RESERVE_CONFIRMATION: 'Save Reserve Pallet Changes?',
     OTHER_ACTIONS: 'Other Actions',
-    CLEAN_RESERVE: 'Clean Up Reserve'
+    CLEAN_RESERVE: 'Clean Up Reserve',
+    CHOOSE_ACTION: 'Choose Action',
+    DESIRED_ACTION: 'Complete the item by taking a desired action from below:',
+    CHOOSE_RESERVE: 'Make changes to reserve pallet qty',
+    CHOOSE_TOTAL_OH: 'Make changes to total on-hands',
+    CHOOSE_PICKLIST: 'Create a pick to replenish sales floor qty',
+    NO_ACTION_NEEDED: 'The item is up to date no action is needed'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -203,7 +209,8 @@ export default {
     Was_Medium: 'Was Price - Med',
     Was_Small: 'Was Price - Small',
     Was_XSmall: 'Was Price - X-Small',
-    INVALID_SIZE: 'Some items will not be printed due to invalid sign size'
+    INVALID_SIZE: 'Some items will not be printed due to invalid sign size',
+    CHOOSE_PRICE_SIGN: 'Print new price sign for this item'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Pallet Management',
@@ -262,6 +269,7 @@ export default {
     DELETE_LOCATION_API_SUCCESS: 'Location %{locationName} has been successfully deleted',
     ADD_NEW_LOCATION: 'Add New Location',
     EDIT_LOCATION: 'Edit Location',
+    CHANGE_LOCATION: 'Change location of the item',
     LOCATION_MANAGEMENT: 'Location Management',
     ITEMS: 'Items',
     PALLETS: 'Pallets',

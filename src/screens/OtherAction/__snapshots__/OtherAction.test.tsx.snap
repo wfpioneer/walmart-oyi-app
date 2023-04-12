@@ -1,0 +1,645 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OtherActionScreen Tests renders the OtherActionScreen 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#ffffffff",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#e0e0e0",
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffffff",
+          "padding": 8,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+          }
+        }
+      >
+        <View>
+          <Text
+            style={
+              Object {
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "marginVertical": 4,
+              }
+            }
+          >
+            Test Item That is Really, Really Long (and has parenthesis)
+          </Text>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "marginBottom": 4,
+                "marginTop": 4,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "fontSize": 12,
+                }
+              }
+            >
+              [missing "en.ITEM.ITEM" translation] 1234567890
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "fontSize": 12,
+                  "marginHorizontal": 8,
+                }
+              }
+            >
+              |
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "fontSize": 12,
+                }
+              }
+            >
+              [missing "en.ITEM.UPC" translation] 000055559999
+            </Text>
+          </View>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 12,
+                "marginBottom": 4,
+              }
+            }
+          >
+            [missing "en.ITEM.STATUS" translation]: Active
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontSize": 12,
+                "marginBottom": 4,
+              }
+            }
+          >
+            [missing "en.ITEM.CATEGORY" translation]: 93 - Meat PI
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <Text
+    numberOfLines={2}
+    style={
+      Object {
+        "alignSelf": "center",
+        "color": "#9e9e9e",
+        "marginVertical": 5,
+        "width": "90%",
+      }
+    }
+  >
+    [missing "en.ITEM.DESIRED_ACTION" translation]
+  </Text>
+  <RCTScrollView
+    collapsable={false}
+    data={
+      Array [
+        Object {
+          "subText": "[missing \\"en.ITEM.CHOOSE_PICKLIST\\" translation]",
+          "title": "[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]",
+        },
+        Object {
+          "subText": "[missing \\"en.ITEM.CHOOSE_RESERVE\\" translation]",
+          "title": "[missing \\"en.ITEM.CLEAN_RESERVE\\" translation]",
+        },
+        Object {
+          "subText": "[missing \\"en.LOCATION.CHANGE_LOCATION\\" translation]",
+          "title": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        },
+        Object {
+          "subText": "[missing \\"en.ITEM.CHOOSE_TOTAL_OH\\" translation]",
+          "title": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
+        },
+        Object {
+          "subText": "[missing \\"en.PRINT.CHOOSE_PRICE_SIGN\\" translation]",
+          "title": "[missing \\"en.PRINT.PRICE_SIGN\\" translation]",
+        },
+        Object {
+          "subText": "[missing \\"en.ITEM.NO_ACTION_NEEDED\\" translation]",
+          "title": "[missing \\"en.ITEM.SCAN_FOR_NO_ACTION\\" translation]",
+        },
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    handlerTag={1}
+    handlerType="NativeViewGestureHandler"
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "flex-start",
+              "marginVertical": 5,
+              "opacity": 1,
+            }
+          }
+          testID="radio exception button"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": "10%",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#0071e9"
+              name="radiobox-blank"
+              size={15}
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "flex-end",
+                "flex": 1,
+                "justifyContent": "space-evenly",
+              }
+            }
+          >
+            <Text
+              numberOfLines={2}
+              style={
+                Object {
+                  "fontSize": 16,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.GENERICS.ADD" translation][missing "en.ITEM.TO_PICKLIST" translation]
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#9e9e9e",
+                  "fontSize": 12,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.ITEM.CHOOSE_PICKLIST" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "flex-start",
+              "marginVertical": 5,
+              "opacity": 1,
+            }
+          }
+          testID="radio exception button"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": "10%",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#0071e9"
+              name="radiobox-blank"
+              size={15}
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "flex-end",
+                "flex": 1,
+                "justifyContent": "space-evenly",
+              }
+            }
+          >
+            <Text
+              numberOfLines={2}
+              style={
+                Object {
+                  "fontSize": 16,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.ITEM.CLEAN_RESERVE" translation]
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#9e9e9e",
+                  "fontSize": 12,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.ITEM.CHOOSE_RESERVE" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "flex-start",
+              "marginVertical": 5,
+              "opacity": 1,
+            }
+          }
+          testID="radio exception button"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": "10%",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#0071e9"
+              name="radiobox-blank"
+              size={15}
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "flex-end",
+                "flex": 1,
+                "justifyContent": "space-evenly",
+              }
+            }
+          >
+            <Text
+              numberOfLines={2}
+              style={
+                Object {
+                  "fontSize": 16,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.LOCATION.EDIT_LOCATION" translation]
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#9e9e9e",
+                  "fontSize": 12,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.LOCATION.CHANGE_LOCATION" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "flex-start",
+              "marginVertical": 5,
+              "opacity": 1,
+            }
+          }
+          testID="radio exception button"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": "10%",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#0071e9"
+              name="radiobox-blank"
+              size={15}
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "flex-end",
+                "flex": 1,
+                "justifyContent": "space-evenly",
+              }
+            }
+          >
+            <Text
+              numberOfLines={2}
+              style={
+                Object {
+                  "fontSize": 16,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.APPROVAL.OH_CHANGE" translation]
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#9e9e9e",
+                  "fontSize": 12,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.ITEM.CHOOSE_TOTAL_OH" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "flex-start",
+              "marginVertical": 5,
+              "opacity": 1,
+            }
+          }
+          testID="radio exception button"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": "10%",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#0071e9"
+              name="radiobox-blank"
+              size={15}
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "flex-end",
+                "flex": 1,
+                "justifyContent": "space-evenly",
+              }
+            }
+          >
+            <Text
+              numberOfLines={2}
+              style={
+                Object {
+                  "fontSize": 16,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.PRINT.PRICE_SIGN" translation]
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#9e9e9e",
+                  "fontSize": 12,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.PRINT.CHOOSE_PRICE_SIGN" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "flex-start",
+              "marginVertical": 5,
+              "opacity": 1,
+            }
+          }
+          testID="radio exception button"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+                "width": "10%",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#0071e9"
+              name="radiobox-blank"
+              size={15}
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignContent": "flex-end",
+                "flex": 1,
+                "justifyContent": "space-evenly",
+              }
+            }
+          >
+            <Text
+              numberOfLines={2}
+              style={
+                Object {
+                  "fontSize": 16,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+            </Text>
+            <Text
+              style={
+                Object {
+                  "color": "#9e9e9e",
+                  "fontSize": 12,
+                  "width": "90%",
+                }
+              }
+            >
+              [missing "en.ITEM.NO_ACTION_NEEDED" translation]
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
