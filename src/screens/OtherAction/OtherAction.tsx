@@ -22,6 +22,12 @@ export interface OtherActionProps {
   trackEventCall: typeof trackEvent;
   chosenActionState: UseStateType<string>;
 }
+
+type DesiredActionButton = {
+  title: string;
+  subText: string;
+}
+
 const OTHER_ACTIONS = 'other actions screen';
 
 export const renderChooseActionRadioButtons = (
@@ -67,6 +73,7 @@ export const renderChooseActionRadioButtons = (
     </TouchableOpacity>
   );
 };
+
 export const OtherActionScreen = (props: OtherActionProps) => {
   const {
     exceptionType,
@@ -81,8 +88,44 @@ export const OtherActionScreen = (props: OtherActionProps) => {
 
   const itemDetails: ItemDetails = getItemDetailsApi.result && getItemDetailsApi.result.data;
 
-  // TODO Filter based on exceptionType when adding screen functionality.
-  const wlCompleteButtons = [
+  const desiredActionButtonsMap: Map<string | null | undefined, DesiredActionButton[]> = new Map();
+  desiredActionButtonsMap.set('C', [
+    {
+      title: strings('LOCATION.EDIT_LOCATION'),
+      subText: strings('LOCATION.CHANGE_LOCATION')
+    },
+    {
+      title: strings('APPROVAL.OH_CHANGE'),
+      subText: strings('ITEM.CHOOSE_TOTAL_OH')
+    },
+    {
+      title: strings('ITEM.CLEAN_RESERVE'),
+      subText: strings('ITEM.CHOOSE_RESERVE')
+    },
+    {
+      title: strings('ITEM.SCAN_FOR_NO_ACTION'),
+      subText: strings('ITEM.NO_ACTION_NEEDED')
+    }
+  ]);
+  desiredActionButtonsMap.set('NS', [
+    {
+      title: strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST'),
+      subText: strings('ITEM.CHOOSE_PICKLIST')
+    },
+    {
+      title: strings('APPROVAL.OH_CHANGE'),
+      subText: strings('ITEM.CHOOSE_TOTAL_OH')
+    },
+    {
+      title: strings('PRINT.PRICE_SIGN'),
+      subText: strings('PRINT.CHOOSE_PRICE_SIGN')
+    },
+    {
+      title: strings('ITEM.SCAN_FOR_NO_ACTION'),
+      subText: strings('ITEM.NO_ACTION_NEEDED')
+    }
+  ]);
+  desiredActionButtonsMap.set('NP', [
     {
       title: strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST'),
       subText: strings('ITEM.CHOOSE_PICKLIST')
@@ -100,15 +143,10 @@ export const OtherActionScreen = (props: OtherActionProps) => {
       subText: strings('ITEM.CHOOSE_TOTAL_OH')
     },
     {
-      title: strings('PRINT.PRICE_SIGN'),
-      subText: strings('PRINT.CHOOSE_PRICE_SIGN')
-    },
-    {
       title: strings('ITEM.SCAN_FOR_NO_ACTION'),
       subText: strings('ITEM.NO_ACTION_NEEDED')
     }
-  ];
-
+  ]);
   return (
     <View style={styles.safeAreaView}>
       <View style={styles.itemContainer}>
@@ -128,8 +166,8 @@ export const OtherActionScreen = (props: OtherActionProps) => {
         {strings('ITEM.DESIRED_ACTION')}
       </Text>
       <FlatList
-        data={wlCompleteButtons}
-        renderItem={({ item }) => renderChooseActionRadioButtons(
+        data={desiredActionButtonsMap.get(exceptionType)}
+        renderItem={({ item }: {item: DesiredActionButton}) => renderChooseActionRadioButtons(
           item,
           trackEventCall,
           chosenAction,

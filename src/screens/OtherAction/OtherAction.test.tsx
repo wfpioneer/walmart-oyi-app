@@ -43,4 +43,20 @@ describe('OtherActionScreen Tests', () => {
     );
     expect(toJSON()).toMatchSnapshot();
   });
+  it('renders the OtherActionScreen with desired Action buttons', () => {
+    const mockSuccessItemDetails: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: getMockItemDetails('123')
+      }
+    };
+    const { toJSON } = render(
+      <OtherActionScreen
+        {...mockOtherActionProps}
+        getItemDetailsApi={mockSuccessItemDetails}
+        exceptionType="C"
+      />
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
 });
