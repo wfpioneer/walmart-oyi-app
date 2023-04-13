@@ -1,5 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`OtherActionScreen Tests Tests OtherAction Screen buttons Renders + Calls renderChooseActionRadioButtons 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "row",
+      "height": 50,
+      "justifyContent": "flex-start",
+      "marginVertical": 5,
+      "opacity": 1,
+    }
+  }
+  testID="radio action button"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "width": "10%",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#0071e9"
+      name="radiobox-marked"
+      size={15}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "flex-end",
+        "flex": 1,
+        "justifyContent": "space-evenly",
+      }
+    }
+  >
+    <Text
+      numberOfLines={2}
+      style={
+        Object {
+          "fontSize": 16,
+          "width": "90%",
+        }
+      }
+    >
+      Scan for No Action
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#9e9e9e",
+          "fontSize": 12,
+          "width": "90%",
+        }
+      }
+    >
+      No Action Required
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`OtherActionScreen Tests renders the OtherActionScreen 1`] = `
 <View
   style={
@@ -359,7 +434,7 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
               "opacity": 1,
             }
           }
-          testID="radio exception button"
+          testID="radio action button"
         >
           <View
             style={
@@ -436,7 +511,7 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
               "opacity": 1,
             }
           }
-          testID="radio exception button"
+          testID="radio action button"
         >
           <View
             style={
@@ -513,7 +588,7 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
               "opacity": 1,
             }
           }
-          testID="radio exception button"
+          testID="radio action button"
         >
           <View
             style={
@@ -590,7 +665,7 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
               "opacity": 1,
             }
           }
-          testID="radio exception button"
+          testID="radio action button"
         >
           <View
             style={

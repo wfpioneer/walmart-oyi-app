@@ -38,7 +38,7 @@ type DesiredActionButton = {
   subText: string;
 }
 
-const OTHER_ACTIONS = 'other actions screen';
+export const OTHER_ACTIONS = 'other actions screen';
 const EDIT_LOCATION = strings('LOCATION.EDIT_LOCATION');
 const CHANGE_LOCATION = strings('LOCATION.CHANGE_LOCATION');
 const OH_CHANGE = strings('APPROVAL.OH_CHANGE');
@@ -66,7 +66,7 @@ export const renderChooseActionRadioButtons = (
   };
   return (
     <TouchableOpacity
-      testID="radio exception button"
+      testID="radio action button"
       style={styles.completeActionCard}
       onPress={onItemPress}
     >
