@@ -6,6 +6,8 @@ import { strings } from '../../locales';
 import { getMockItemDetails } from '../../mockData';
 import mockUser from '../../mockData/mockUser';
 import { AsyncState } from '../../models/AsyncState';
+import ItemDetails from '../../models/ItemDetails';
+import { setPickCreateFloor, setPickCreateItem, setPickCreateReserve } from '../../state/actions/Picking';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import {
   OTHER_ACTIONS,
@@ -55,7 +57,9 @@ const mockOtherActionProps: OtherActionProps = {
   dispatch: jest.fn(),
   navigation: navigationProp,
   route: routeProp,
-  validateSessionCall: jest.fn(() => Promise.resolve())
+  validateSessionCall: jest.fn(() => Promise.resolve()),
+  floorLocations: [],
+  reserveLocations: []
 };
 
 describe('OtherActionScreen Tests', () => {
@@ -116,7 +120,7 @@ describe('OtherActionScreen Tests', () => {
 
     it('Calls \'continueAction\' flow', async () => {
       mockOtherActionProps.chosenActionState[0] = strings('ITEM.SCAN_FOR_NO_ACTION');
-      const mockItemDetails = getMockItemDetails('123');
+      const mockItemDetails: ItemDetails = getMockItemDetails('123');
       const { getByTestId, update } = render(
         <OtherActionScreen
           {...mockOtherActionProps}
@@ -209,6 +213,36 @@ describe('OtherActionScreen Tests', () => {
 
       // Add to PickList Flow
       mockOtherActionProps.chosenActionState[0] = strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST');
+      update(
+        <OtherActionScreen
+          {...mockOtherActionProps}
+          getItemDetailsApi={mockSuccessItemDetails}
+          floorLocations={mockItemDetails?.location?.floor || []}
+          reserveLocations={mockItemDetails?.location?.reserve || []}
+        />
+      );
+      fireEvent.press(continueButton);
+
+      expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
+      expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
+        OTHER_ACTIONS,
+        { action: 'add_to_picklist_click', itemNbr: mockItemDetails.itemNbr }
+      );
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setPickCreateItem({
+        itemName: mockItemDetails.itemName,
+        itemNbr: mockItemDetails.itemNbr,
+        upcNbr: mockItemDetails.upcNbr,
+        categoryNbr: mockItemDetails.categoryNbr,
+        categoryDesc: mockItemDetails.categoryDesc,
+        price: mockItemDetails.price
+      }));
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
+        setPickCreateFloor(mockItemDetails?.location?.floor || [])
+      );
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
+        setPickCreateReserve(mockItemDetails?.location?.reserve || [])
+      );
+      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('CreatePick');
     });
   });
 });

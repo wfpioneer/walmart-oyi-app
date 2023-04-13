@@ -20,6 +20,8 @@ import { UseStateType } from '../../models/Generics.d';
 import { validateSession } from '../../utils/sessionTimeout';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
+import { setPickCreateFloor, setPickCreateItem, setPickCreateReserve } from '../../state/actions/Picking';
+import Location from '../../models/Location';
 
 export interface OtherActionProps {
   exceptionType: string | null | undefined;
@@ -31,6 +33,8 @@ export interface OtherActionProps {
   route: RouteProp<any, string>;
   validateSessionCall: typeof validateSession;
   appUser: User;
+  floorLocations: Location[];
+  reserveLocations: Location[];
 }
 
 type DesiredActionButton = {
@@ -105,7 +109,9 @@ export const OtherActionScreen = (props: OtherActionProps) => {
     navigation,
     route,
     validateSessionCall,
-    appUser
+    appUser,
+    floorLocations,
+    reserveLocations
   } = props;
 
   const {
@@ -183,7 +189,21 @@ export const OtherActionScreen = (props: OtherActionProps) => {
         break;
       }
       case ADD_PICKLIST: {
-        // TODO ADD CREATE PICK DIALOG FLOW
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall(OTHER_ACTIONS, { action: 'add_to_picklist_click', itemNbr: itemDetails.itemNbr });
+          dispatch(setPickCreateItem({
+            itemName: itemDetails.itemName,
+            itemNbr: itemDetails.itemNbr,
+            upcNbr: itemDetails.upcNbr,
+            categoryNbr: itemDetails.categoryNbr,
+            categoryDesc: itemDetails.categoryDesc,
+            price: itemDetails.price
+          }));
+
+          dispatch(setPickCreateFloor(floorLocations));
+          dispatch(setPickCreateReserve(reserveLocations));
+          navigation.navigate('CreatePick');
+        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
       }
       case PRICE_SIGN: {
@@ -243,7 +263,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
 };
 
 const OtherAction = () => {
-  const { exceptionType } = useTypedSelector(state => state.ItemDetailScreen);
+  const { exceptionType, reserveLocations, floorLocations } = useTypedSelector(state => state.ItemDetailScreen);
   const user = useTypedSelector(state => state.User);
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetailsV4
@@ -263,6 +283,8 @@ const OtherAction = () => {
       appUser={user}
       route={route}
       validateSessionCall={validateSession}
+      reserveLocations={reserveLocations}
+      floorLocations={floorLocations}
     />
   );
 };
