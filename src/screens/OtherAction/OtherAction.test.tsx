@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { render } from '@testing-library/react-native';
 import React from 'react';
 import { getMockItemDetails } from '../../mockData';
-import { mockConfig } from '../../mockData/mockConfig';
+import mockUser from '../../mockData/mockUser';
 import { AsyncState } from '../../models/AsyncState';
 import { OtherActionProps, OtherActionScreen } from './OtherAction';
 
@@ -18,15 +19,38 @@ const defaultAsyncState: AsyncState = {
   result: null,
   value: null
 };
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getState: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn()
+};
+const routeProp: RouteProp<any, string> = {
+  key: 'test',
+  name: 'test'
+};
 
 const mockOtherActionProps: OtherActionProps = {
   chosenActionState: ['', jest.fn()],
-  countryCode: 'CN',
   exceptionType: null,
   getItemDetailsApi: defaultAsyncState,
   trackEventCall: jest.fn(),
-  userConfigs: mockConfig
+  appUser: mockUser,
+  dispatch: jest.fn(),
+  navigation: navigationProp,
+  route: routeProp,
+  validateSessionCall: jest.fn(() => Promise.resolve())
 };
+
 describe('OtherActionScreen Tests', () => {
   it('renders the OtherActionScreen', () => {
     const mockSuccessItemDetails: AsyncState = {
