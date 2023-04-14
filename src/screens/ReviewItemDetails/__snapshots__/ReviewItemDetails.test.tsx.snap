@@ -2031,7 +2031,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent No Sales 1`] = `
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent No Sales with 'Other Actions' 1`] = `
 <View
   style={
     Object {
@@ -2074,6 +2074,97 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
       }
     >
       [missing "en.ITEM.OTHER_ACTIONS" translation]
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="map-marker-plus"
+      size={20}
+    />
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#ffffffff",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.MISSING_PALLET_WORKLIST.ADD_LOCATION" translation]
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent No Sales with 'Scan for no action' 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "space-around",
+      "backgroundColor": "#ffffffff",
+      "borderTopColor": "#e0e0e0",
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#0071e9"
+      name="barcode-scan"
+      size={20}
+    />
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#0071e9",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
     </Text>
   </TouchableOpacity>
   <TouchableOpacity

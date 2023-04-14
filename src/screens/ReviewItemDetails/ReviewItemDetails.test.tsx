@@ -1323,11 +1323,22 @@ describe('ReviewItemDetailsScreen', () => {
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
-    it('Renders completeButtonComponent No Sales', () => {
+    it('Renders completeButtonComponent No Sales with \'Other Actions\'', () => {
       const mockPropNSFQ: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NS',
         userConfigs: { ...mockConfig, otherActions: true }
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent No Sales with \'Scan for no action\'', () => {
+      const mockPropNSFQ: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'NS'
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
