@@ -1240,11 +1240,22 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders completeButtonComponent Cancelled', () => {
+    it('Renders completeButtonComponent Cancelled with \'Other Actions\'', () => {
       const mockPropNSFQ: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'C',
         userConfigs: { ...mockConfig, otherActions: true }
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders completeButtonComponent Cancelled with \'Scan for no action\'', () => {
+      const mockPropNSFQ: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'C'
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
