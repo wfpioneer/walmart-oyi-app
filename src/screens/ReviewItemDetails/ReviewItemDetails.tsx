@@ -1007,6 +1007,38 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
   );
 };
 
+const renderPrintPriceSignButton = (
+  actionCompleted: boolean,
+  itemDetails: ItemDetails,
+  props: HandleProps,
+): JSX.Element => {
+  const {
+    navigation, route, validateSessionCall, userId, trackEventCall
+  } = props;
+  if (actionCompleted) {
+    return <View />;
+  }
+
+  return (
+    <TouchableOpacity
+      style={styles.worklistCompleteButton}
+      onPress={() => {
+        // will only be callable when button is available
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall(
+            REVIEW_ITEM_DETAILS,
+            { action: 'item_details_print_sign_button_click', itemNbr: itemDetails.itemNbr }
+          );
+          navigation?.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
+        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+      }}
+    >
+      <MaterialCommunityIcon name="map-marker-plus" size={20} color={COLOR.WHITE} />
+      <Text style={styles.buttonText} adjustsFontSizeToFit>{strings('PRINT.PRICE_SIGN')}</Text>
+    </TouchableOpacity>
+  );
+};
+
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
   const {
     actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent, reserveLocations,
@@ -1014,6 +1046,14 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
   } = props;
   const { otherActions, reserveAdjustment } = userConfigs;
   switch (exceptionType?.toUpperCase()) {
+    case 'C': {
+      return (
+        <View style={styles.otherActionContainer}>
+          { otherActions && renderOtherActionButton(props, itemDetails.itemNbr)}
+          {renderPrintPriceSignButton(actionCompleted, itemDetails, props)}
+        </View>
+      );
+    }
     case 'NO': {
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty < 0)) {
         return (

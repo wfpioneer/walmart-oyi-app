@@ -1240,6 +1240,18 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
+    it('Renders completeButtonComponent Cancelled', () => {
+      const mockPropNSFQ: ItemDetailsScreenProps = {
+        ...mockItemDetailsScreenProps,
+        exceptionType: 'C',
+        userConfigs: { ...mockConfig, otherActions: true }
+      };
+      renderer.render(
+        completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
     it('Renders completeButtonComponent NSFL', () => {
       const mockPropNSFL: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
