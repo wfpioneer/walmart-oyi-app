@@ -1033,7 +1033,6 @@ export const renderPrintPriceSignButton = (
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
       }}
     >
-      <MaterialCommunityIcon name="map-marker-plus" size={20} color={COLOR.WHITE} />
       <Text style={styles.buttonText} adjustsFontSizeToFit>{strings('PRINT.PRICE_SIGN')}</Text>
     </TouchableOpacity>
   );

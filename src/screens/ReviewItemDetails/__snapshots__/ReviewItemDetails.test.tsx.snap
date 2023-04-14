@@ -1680,11 +1680,6 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
       }
     }
   >
-    <mockMaterialCommunityIcons
-      color="#ffffffff"
-      name="map-marker-plus"
-      size={20}
-    />
     <Text
       adjustsFontSizeToFit={true}
       style={
