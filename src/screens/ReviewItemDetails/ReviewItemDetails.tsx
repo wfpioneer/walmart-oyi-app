@@ -994,7 +994,7 @@ export const renderOtherActionButton = (
   );
 };
 
-const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
+export const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
   if (actionCompleted) {
     return <View />;
   }
@@ -1007,7 +1007,7 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
   );
 };
 
-const renderPrintPriceSignButton = (
+export const renderPrintPriceSignButton = (
   actionCompleted: boolean,
   itemDetails: ItemDetails,
   props: HandleProps,
@@ -1029,7 +1029,7 @@ const renderPrintPriceSignButton = (
             REVIEW_ITEM_DETAILS,
             { action: 'item_details_print_sign_button_click', itemNbr: itemDetails.itemNbr }
           );
-          navigation?.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
+          navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
       }}
     >

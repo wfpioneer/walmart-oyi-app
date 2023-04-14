@@ -23,10 +23,10 @@ import ReviewItemDetails, {
   getExceptionType, getLocationCount, getTopRightBtnTxt,
   getUpdatedSales, handleCreateNewPick, handleLocationAction,
   handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
-  onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddPicklistButton,
-  renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory, renderOHQtyComponent,
-  renderOtherActionButton, renderPickHistory, renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4,
-  renderScanForNoActionButton, updateOHQtyApiHook
+  onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton,
+  renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory,
+  renderOHQtyComponent, renderOtherActionButton, renderPickHistory, renderPrintPriceSignButton, renderReplenishmentCard,
+  renderReserveLocQtys, renderSalesGraphV4, renderScanForNoActionButton, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -1334,6 +1334,37 @@ describe('ReviewItemDetailsScreen', () => {
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Calls renderAddLocationButton', () => {
+      const mockOnPress = jest.fn();
+      const { toJSON, getByText } = render(
+        renderAddLocationButton(false, mockOnPress)
+      );
+
+      const onPressBtn = getByText(strings('MISSING_PALLET_WORKLIST.ADD_LOCATION'));
+      fireEvent.press(onPressBtn);
+      expect(toJSON).toMatchSnapshot();
+      expect(mockOnPress).toHaveBeenCalled();
+    });
+
+    it('Calls renderPrintPriceSignButton', async () => {
+      const { toJSON, getByText } = render(
+        renderPrintPriceSignButton(false, mockItemDetail123, mockHandleProps)
+      );
+
+      const onPressBtn = getByText(strings('PRINT.PRICE_SIGN'));
+      fireEvent.press(onPressBtn);
+      expect(mockHandleProps.validateSessionCall).toHaveBeenCalled();
+      expect(await mockHandleProps.trackEventCall).toHaveBeenCalledWith(
+        'Review_Item_Details',
+        { action: 'item_details_print_sign_button_click', itemNbr: mockItemDetail123.itemNbr }
+      );
+      expect(await mockHandleProps.navigation.navigate).toHaveBeenCalledWith(
+        'PrintPriceSign',
+        { screen: 'PrintPriceSignScreen' }
+      );
+      expect(toJSON).toMatchSnapshot();
     });
   });
 });
