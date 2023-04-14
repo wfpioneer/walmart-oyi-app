@@ -1326,7 +1326,8 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders completeButtonComponent No Sales', () => {
       const mockPropNSFQ: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        exceptionType: 'NS'
+        exceptionType: 'NS',
+        userConfigs: { ...mockConfig, otherActions: true }
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })

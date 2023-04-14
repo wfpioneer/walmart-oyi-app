@@ -1083,7 +1083,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
     case 'NS': {
       return (
         <View style={styles.otherActionContainer}>
-          {renderOtherActionButton(props, itemDetails.itemNbr)}
+          { otherActions && renderOtherActionButton(props, itemDetails.itemNbr)}
           {renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
         </View>
       );
