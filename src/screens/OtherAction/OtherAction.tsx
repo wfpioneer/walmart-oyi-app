@@ -43,17 +43,6 @@ type DesiredActionButton = {
 }
 
 export const OTHER_ACTIONS = 'other actions screen';
-const EDIT_LOCATION = strings('LOCATION.EDIT_LOCATION');
-const CHANGE_LOCATION = strings('LOCATION.CHANGE_LOCATION');
-const OH_CHANGE = strings('APPROVAL.OH_CHANGE');
-const TOTAL_OH = strings('ITEM.CHOOSE_TOTAL_OH');
-const CLEAN_RESERVE = strings('ITEM.CLEAN_RESERVE');
-const CHOOSE_RESERVE = strings('ITEM.CHOOSE_RESERVE');
-const ADD_PICKLIST = strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST');
-const CHOOSE_PICKLIST = strings('ITEM.CHOOSE_PICKLIST');
-const SCAN_NO_ACTION = strings('ITEM.SCAN_FOR_NO_ACTION');
-const NO_ACTION_NEEDED = strings('ITEM.NO_ACTION_NEEDED');
-const PRICE_SIGN = strings('PRINT.PRICE_SIGN');
 
 export const renderChooseActionRadioButtons = (
   item: { title: string; subText: string },
@@ -113,6 +102,18 @@ export const OtherActionScreen = (props: OtherActionProps) => {
     floorLocations,
     reserveLocations
   } = props;
+
+  const EDIT_LOCATION = strings('LOCATION.EDIT_LOCATION');
+  const CHANGE_LOCATION = strings('LOCATION.CHANGE_LOCATION');
+  const OH_CHANGE = strings('APPROVAL.OH_CHANGE');
+  const TOTAL_OH = strings('ITEM.CHOOSE_TOTAL_OH');
+  const CLEAN_RESERVE = strings('ITEM.CLEAN_RESERVE');
+  const CHOOSE_RESERVE = strings('ITEM.CHOOSE_RESERVE');
+  const ADD_PICKLIST = strings('GENERICS.ADD') + strings('ITEM.TO_PICKLIST');
+  const CHOOSE_PICKLIST = strings('ITEM.CHOOSE_PICKLIST');
+  const SCAN_NO_ACTION = strings('ITEM.SCAN_FOR_NO_ACTION');
+  const NO_ACTION_NEEDED = strings('ITEM.NO_ACTION_NEEDED');
+  const PRICE_SIGN = strings('PRINT.PRICE_SIGN');
 
   const {
     countryCode, configs: userConfigs, features, userId
