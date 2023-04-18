@@ -1612,6 +1612,176 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 </Modal>
 `;
 
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Calls renderAddLocationButton 1`] = `[Function]`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Calls renderPrintPriceSignButton 1`] = `[Function]`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent Cancelled with 'Other Actions' 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "space-around",
+      "backgroundColor": "#ffffffff",
+      "borderTopColor": "#e0e0e0",
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#0071e9",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.OTHER_ACTIONS" translation]
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#ffffffff",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.PRINT.PRICE_SIGN" translation]
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent Cancelled with 'Scan for no action' 1`] = `
+<View
+  style={
+    Object {
+      "alignContent": "space-around",
+      "backgroundColor": "#ffffffff",
+      "borderTopColor": "#e0e0e0",
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#0071e9"
+      name="barcode-scan"
+      size={20}
+    />
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#0071e9",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0071e9",
+        "borderColor": "#0071e9",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "marginHorizontal": 10,
+        "marginVertical": 10,
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <Text
+      adjustsFontSizeToFit={true}
+      style={
+        Object {
+          "color": "#ffffffff",
+          "marginLeft": 10,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.PRINT.PRICE_SIGN" translation]
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO 1`] = `
 <View
   style={
