@@ -1121,6 +1121,16 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
         </View>
       );
     }
+    case 'NS': {
+      return (
+        <View style={styles.otherActionContainer}>
+          { otherActions
+            ? renderOtherActionButton(props, itemDetails.itemNbr)
+            : renderScanForNoActionButton(props, itemDetails.itemNbr)}
+          {renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
+        </View>
+      );
+    }
     default:
       return (
         <View style={styles.otherActionContainer}>
