@@ -58,33 +58,63 @@ export const renderChooseActionRadioButtons = (
     });
   };
   return (
-    <TouchableOpacity
-      testID="radio action button"
-      style={styles.completeActionCard}
-      onPress={onItemPress}
-    >
-      <View style={styles.selectionView}>
-        {item.title === chosenAction ? (
+    <>
+      <TouchableOpacity
+        testID="radio action button"
+        style={styles.completeActionCard}
+        onPress={onItemPress}
+        disabled={false}
+      >
+        <View style={styles.selectionView}>
+          {item.title === chosenAction ? (
+            <MaterialCommunityIcons
+              name="radiobox-marked"
+              size={15}
+              color={COLOR.MAIN_THEME_COLOR}
+            />
+          ) : (
+            <MaterialCommunityIcons
+              name="radiobox-blank"
+              size={15}
+              color={COLOR.MAIN_THEME_COLOR}
+            />
+          )}
+        </View>
+        <View style={styles.completeActionRadioView}>
+          <Text style={styles.completeActionTitle} numberOfLines={2}>
+            {item.title}
+          </Text>
+          <Text style={styles.completeActionSubText}>{item.subText}</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={{
+        backgroundColor: COLOR.RED_100,
+        height: 75,
+        flex: 1,
+        justifyContent: 'center',
+        marginHorizontal: 15
+      }}
+      >
+        <View style={{
+          width: '80%',
+          justifyContent: 'center',
+          flexDirection: 'row'
+        }}
+        >
           <MaterialCommunityIcons
-            name="radiobox-marked"
-            size={15}
-            color={COLOR.MAIN_THEME_COLOR}
+            name="alert-circle"
+            size={20}
+            color={COLOR.ORANGE}
+            style={{
+              paddingHorizontal: 5
+            }}
           />
-        ) : (
-          <MaterialCommunityIcons
-            name="radiobox-blank"
-            size={15}
-            color={COLOR.MAIN_THEME_COLOR}
-          />
-        )}
+          <Text>
+            {strings('ITEM.REPLENISH_RESERVE')}
+          </Text>
+        </View>
       </View>
-      <View style={styles.completeActionRadioView}>
-        <Text style={styles.completeActionTitle} numberOfLines={2}>
-          {item.title}
-        </Text>
-        <Text style={styles.completeActionSubText}>{item.subText}</Text>
-      </View>
-    </TouchableOpacity>
+    </>
   );
 };
 
