@@ -2,6 +2,11 @@
 
 exports[`OtherActionScreen Tests Tests OtherAction Screen buttons Renders + Calls renderChooseActionRadioButtons 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -52,10 +57,13 @@ exports[`OtherActionScreen Tests Tests OtherAction Screen buttons Renders + Call
     <Text
       numberOfLines={2}
       style={
-        Object {
-          "fontSize": 16,
-          "width": "90%",
-        }
+        Array [
+          Object {
+            "fontSize": 16,
+            "width": "90%",
+          },
+          false,
+        ]
       }
     >
       Scan for No Action
@@ -369,18 +377,23 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
     data={
       Array [
         Object {
+          "isDisabled": false,
           "subText": "[missing \\"en.LOCATION.CHANGE_LOCATION\\" translation]",
           "title": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
         },
         Object {
+          "isDisabled": false,
           "subText": "[missing \\"en.ITEM.CHOOSE_TOTAL_OH\\" translation]",
           "title": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
         },
         Object {
+          "disabledText": "[missing \\"en.PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR\\" translation]",
+          "isDisabled": true,
           "subText": "[missing \\"en.ITEM.CHOOSE_RESERVE\\" translation]",
           "title": "[missing \\"en.ITEM.CLEAN_RESERVE\\" translation]",
         },
         Object {
+          "isDisabled": false,
           "subText": "[missing \\"en.ITEM.NO_ACTION_NEEDED\\" translation]",
           "title": "[missing \\"en.ITEM.SCAN_FOR_NO_ACTION\\" translation]",
         },
@@ -413,6 +426,11 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
         style={null}
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -463,10 +481,13 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
             <Text
               numberOfLines={2}
               style={
-                Object {
-                  "fontSize": 16,
-                  "width": "90%",
-                }
+                Array [
+                  Object {
+                    "fontSize": 16,
+                    "width": "90%",
+                  },
+                  false,
+                ]
               }
             >
               [missing "en.LOCATION.EDIT_LOCATION" translation]
@@ -490,6 +511,11 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
         style={null}
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -540,10 +566,13 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
             <Text
               numberOfLines={2}
               style={
-                Object {
-                  "fontSize": 16,
-                  "width": "90%",
-                }
+                Array [
+                  Object {
+                    "fontSize": 16,
+                    "width": "90%",
+                  },
+                  false,
+                ]
               }
             >
               [missing "en.APPROVAL.OH_CHANGE" translation]
@@ -567,6 +596,11 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
         style={null}
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -600,7 +634,7 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
             }
           >
             <mockMaterialCommunityIcons
-              color="#0071e9"
+              color="#888888"
               name="radiobox-blank"
               size={15}
             />
@@ -617,10 +651,15 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
             <Text
               numberOfLines={2}
               style={
-                Object {
-                  "fontSize": 16,
-                  "width": "90%",
-                }
+                Array [
+                  Object {
+                    "fontSize": 16,
+                    "width": "90%",
+                  },
+                  Object {
+                    "color": "#9e9e9e",
+                  },
+                ]
               }
             >
               [missing "en.ITEM.CLEAN_RESERVE" translation]
@@ -638,12 +677,53 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
             </Text>
           </View>
         </View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "#ffcccc",
+              "elevation": 4,
+              "flex": 1,
+              "height": 40,
+              "justifyContent": "center",
+              "marginBottom": 5,
+              "marginHorizontal": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+              }
+            }
+          >
+            <mockMaterialCommunityIcons
+              color="#e74517"
+              name="alert-circle"
+              size={20}
+              style={
+                Object {
+                  "paddingHorizontal": 5,
+                }
+              }
+            />
+            <Text>
+              [missing "en.PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR" translation]
+            </Text>
+          </View>
+        </View>
       </View>
       <View
         onLayout={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            Object {
+              "disabled": false,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -694,10 +774,13 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
             <Text
               numberOfLines={2}
               style={
-                Object {
-                  "fontSize": 16,
-                  "width": "90%",
-                }
+                Array [
+                  Object {
+                    "fontSize": 16,
+                    "width": "90%",
+                  },
+                  false,
+                ]
               }
             >
               [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]

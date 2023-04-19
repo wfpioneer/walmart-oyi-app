@@ -3,7 +3,10 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
 import {
-  NavigationProp, RouteProp, useNavigation, useRoute
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
@@ -20,7 +23,11 @@ import { UseStateType } from '../../models/Generics.d';
 import { validateSession } from '../../utils/sessionTimeout';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
-import { setPickCreateFloor, setPickCreateItem, setPickCreateReserve } from '../../state/actions/Picking';
+import {
+  setPickCreateFloor,
+  setPickCreateItem,
+  setPickCreateReserve
+} from '../../state/actions/Picking';
 import Location from '../../models/Location';
 
 export interface OtherActionProps {
@@ -37,15 +44,17 @@ export interface OtherActionProps {
   reserveLocations: Location[];
 }
 
-type DesiredActionButton = {
+export type DesiredActionButton = {
   title: string;
   subText: string;
-}
+  isDisabled: boolean;
+  disabledText?: string;
+};
 
 export const OTHER_ACTIONS = 'other actions screen';
 
 export const renderChooseActionRadioButtons = (
-  item: { title: string; subText: string },
+  item: DesiredActionButton,
   trackEventCall: typeof trackEvent,
   chosenAction: string,
   setChosenAction: React.Dispatch<React.SetStateAction<string>>
@@ -63,7 +72,7 @@ export const renderChooseActionRadioButtons = (
         testID="radio action button"
         style={styles.completeActionCard}
         onPress={onItemPress}
-        disabled={false}
+        disabled={item.isDisabled}
       >
         <View style={styles.selectionView}>
           {item.title === chosenAction ? (
@@ -76,44 +85,30 @@ export const renderChooseActionRadioButtons = (
             <MaterialCommunityIcons
               name="radiobox-blank"
               size={15}
-              color={COLOR.MAIN_THEME_COLOR}
+              color={item.isDisabled ? COLOR.GRAY : COLOR.MAIN_THEME_COLOR}
             />
           )}
         </View>
         <View style={styles.completeActionRadioView}>
-          <Text style={styles.completeActionTitle} numberOfLines={2}>
+          <Text style={[styles.completeActionTitle, item.isDisabled && { color: COLOR.GREY_500 }]} numberOfLines={2}>
             {item.title}
           </Text>
           <Text style={styles.completeActionSubText}>{item.subText}</Text>
         </View>
       </TouchableOpacity>
-      <View style={{
-        backgroundColor: COLOR.RED_100,
-        height: 75,
-        flex: 1,
-        justifyContent: 'center',
-        marginHorizontal: 15
-      }}
-      >
-        <View style={{
-          width: '80%',
-          justifyContent: 'center',
-          flexDirection: 'row'
-        }}
-        >
+      {item.isDisabled && item.disabledText && (
+      <View style={styles.errorContainer}>
+        <View style={styles.errorMessageView}>
           <MaterialCommunityIcons
             name="alert-circle"
             size={20}
             color={COLOR.ORANGE}
-            style={{
-              paddingHorizontal: 5
-            }}
+            style={styles.icon}
           />
-          <Text>
-            {strings('ITEM.REPLENISH_RESERVE')}
-          </Text>
+          <Text>{item.disabledText}</Text>
         </View>
       </View>
+      )}
     </>
   );
 };
@@ -152,26 +147,54 @@ export const OtherActionScreen = (props: OtherActionProps) => {
 
   const itemDetails: ItemDetails = getItemDetailsApi.result && getItemDetailsApi.result.data;
 
+  const hasFloorLocations = floorLocations && floorLocations.length >= 1;
+  const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
+
   const desiredActionButtonsMap: Map<string | null | undefined, DesiredActionButton[]> = new Map();
 
   desiredActionButtonsMap.set('C', [
-    { title: EDIT_LOCATION, subText: CHANGE_LOCATION },
-    { title: OH_CHANGE, subText: TOTAL_OH },
-    { title: CLEAN_RESERVE, subText: CHOOSE_RESERVE },
-    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED }
+    { title: EDIT_LOCATION, subText: CHANGE_LOCATION, isDisabled: false },
+    { title: OH_CHANGE, subText: TOTAL_OH, isDisabled: false },
+    {
+      title: CLEAN_RESERVE,
+      subText: CHOOSE_RESERVE,
+      isDisabled: !hasReserveLocations,
+      disabledText: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR')
+    },
+    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED, isDisabled: itemDetails.completed }
   ]);
   desiredActionButtonsMap.set('NS', [
-    { title: ADD_PICKLIST, subText: CHOOSE_PICKLIST },
-    { title: OH_CHANGE, subText: TOTAL_OH },
-    { title: PRICE_SIGN, subText: strings('PRINT.CHOOSE_PRICE_SIGN') },
-    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED }
+    {
+      title: ADD_PICKLIST,
+      subText: CHOOSE_PICKLIST,
+      isDisabled: !hasReserveLocations,
+      disabledText: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR')
+    },
+    { title: OH_CHANGE, subText: TOTAL_OH, isDisabled: false },
+    {
+      title: PRICE_SIGN,
+      subText: strings('PRINT.CHOOSE_PRICE_SIGN'),
+      isDisabled: !hasFloorLocations,
+      disabledText: strings('ITEM.NO_FLOOR_LOCATION')
+    },
+    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED, isDisabled: itemDetails.completed }
   ]);
   desiredActionButtonsMap.set('NP', [
-    { title: ADD_PICKLIST, subText: CHOOSE_PICKLIST },
-    { title: CLEAN_RESERVE, subText: CHOOSE_RESERVE },
-    { title: EDIT_LOCATION, subText: CHANGE_LOCATION },
-    { title: OH_CHANGE, subText: TOTAL_OH },
-    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED }
+    {
+      title: ADD_PICKLIST,
+      subText: CHOOSE_PICKLIST,
+      isDisabled: !hasReserveLocations,
+      disabledText: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR')
+    },
+    {
+      title: CLEAN_RESERVE,
+      subText: CHOOSE_RESERVE,
+      isDisabled: !hasReserveLocations,
+      disabledText: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR')
+    },
+    { title: EDIT_LOCATION, subText: CHANGE_LOCATION, isDisabled: false },
+    { title: OH_CHANGE, subText: TOTAL_OH, isDisabled: false },
+    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED, isDisabled: itemDetails.completed }
   ]);
 
   const desiredActions = desiredActionButtonsMap.get(exceptionType);
@@ -183,65 +206,106 @@ export const OtherActionScreen = (props: OtherActionProps) => {
   const continueAction = () => {
     switch (chosenAction) {
       case SCAN_NO_ACTION: {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall(
-            OTHER_ACTIONS,
-            { action: 'scan_for_no_action_click', itemNbr: itemDetails.itemNbr }
-          );
-          navigation.navigate('NoActionScan');
-        }).catch(() => {
-          trackEventCall('session_timeout', { user: userId });
-        });
+        validateSessionCall(navigation, route.name)
+          .then(() => {
+            trackEventCall(OTHER_ACTIONS, {
+              action: 'scan_for_no_action_click',
+              itemNbr: itemDetails.itemNbr
+            });
+            navigation.navigate('NoActionScan');
+          })
+          .catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
         break;
       }
       case EDIT_LOCATION: {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall(OTHER_ACTIONS, { action: 'location_details_click', itemNbr: itemDetails.itemNbr });
-          navigation.navigate('LocationDetails');
-        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+        validateSessionCall(navigation, route.name)
+          .then(() => {
+            trackEventCall(OTHER_ACTIONS, {
+              action: 'location_details_click',
+              itemNbr: itemDetails.itemNbr
+            });
+            navigation.navigate('LocationDetails');
+          })
+          .catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
         break;
       }
       case OH_CHANGE: {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall(OTHER_ACTIONS, { action: 'update_OH_qty_click', itemNbr: itemDetails.itemNbr });
-          if (userConfigs.auditWorklists) {
-            dispatch(setAuditItemNumber(itemDetails.itemNbr));
-            navigation.navigate('AuditItem');
-          }
-        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+        validateSessionCall(navigation, route.name)
+          .then(() => {
+            trackEventCall(OTHER_ACTIONS, {
+              action: 'update_OH_qty_click',
+              itemNbr: itemDetails.itemNbr
+            });
+            if (userConfigs.auditWorklists) {
+              dispatch(setAuditItemNumber(itemDetails.itemNbr));
+              navigation.navigate('AuditItem');
+            }
+          })
+          .catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
         break;
       }
       case CLEAN_RESERVE: {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall(OTHER_ACTIONS, { action: 'reserve_adjustment_click', itemNbr: itemDetails.itemNbr });
-          dispatch(setItemDetails(itemDetails));
-          navigation.navigate('ReserveAdjustment');
-        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+        validateSessionCall(navigation, route.name)
+          .then(() => {
+            trackEventCall(OTHER_ACTIONS, {
+              action: 'reserve_adjustment_click',
+              itemNbr: itemDetails.itemNbr
+            });
+            dispatch(setItemDetails(itemDetails));
+            navigation.navigate('ReserveAdjustment');
+          })
+          .catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
         break;
       }
       case ADD_PICKLIST: {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall(OTHER_ACTIONS, { action: 'add_to_picklist_click', itemNbr: itemDetails.itemNbr });
-          dispatch(setPickCreateItem({
-            itemName: itemDetails.itemName,
-            itemNbr: itemDetails.itemNbr,
-            upcNbr: itemDetails.upcNbr,
-            categoryNbr: itemDetails.categoryNbr,
-            categoryDesc: itemDetails.categoryDesc,
-            price: itemDetails.price
-          }));
+        validateSessionCall(navigation, route.name)
+          .then(() => {
+            trackEventCall(OTHER_ACTIONS, {
+              action: 'add_to_picklist_click',
+              itemNbr: itemDetails.itemNbr
+            });
+            dispatch(
+              setPickCreateItem({
+                itemName: itemDetails.itemName,
+                itemNbr: itemDetails.itemNbr,
+                upcNbr: itemDetails.upcNbr,
+                categoryNbr: itemDetails.categoryNbr,
+                categoryDesc: itemDetails.categoryDesc,
+                price: itemDetails.price
+              })
+            );
 
-          dispatch(setPickCreateFloor(floorLocations));
-          dispatch(setPickCreateReserve(reserveLocations));
-          navigation.navigate('CreatePick');
-        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+            dispatch(setPickCreateFloor(floorLocations));
+            dispatch(setPickCreateReserve(reserveLocations));
+            navigation.navigate('CreatePick');
+          })
+          .catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
         break;
       }
       case PRICE_SIGN: {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall(OTHER_ACTIONS, { action: 'print_sign_button_click', itemNbr: itemDetails.itemNbr });
-          navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
-        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+        validateSessionCall(navigation, route.name)
+          .then(() => {
+            trackEventCall(OTHER_ACTIONS, {
+              action: 'print_sign_button_click',
+              itemNbr: itemDetails.itemNbr
+            });
+            navigation.navigate('PrintPriceSign', {
+              screen: 'PrintPriceSignScreen'
+            });
+          })
+          .catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
         break;
       }
       default:
@@ -268,7 +332,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
       </Text>
       <FlatList
         data={desiredActions}
-        renderItem={({ item }: {item: DesiredActionButton}) => renderChooseActionRadioButtons(
+        renderItem={({ item }: { item: DesiredActionButton }) => renderChooseActionRadioButtons(
           item,
           trackEventCall,
           chosenAction,
@@ -294,7 +358,9 @@ export const OtherActionScreen = (props: OtherActionProps) => {
 };
 
 const OtherAction = () => {
-  const { exceptionType, reserveLocations, floorLocations } = useTypedSelector(state => state.ItemDetailScreen);
+  const { exceptionType, reserveLocations, floorLocations } = useTypedSelector(
+    state => state.ItemDetailScreen
+  );
   const user = useTypedSelector(state => state.User);
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetailsV4

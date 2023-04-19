@@ -10,6 +10,7 @@ import ItemDetails from '../../models/ItemDetails';
 import { setPickCreateFloor, setPickCreateItem, setPickCreateReserve } from '../../state/actions/Picking';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import {
+  DesiredActionButton,
   OTHER_ACTIONS,
   OtherActionProps,
   OtherActionScreen,
@@ -97,7 +98,7 @@ describe('OtherActionScreen Tests', () => {
     it('Renders + Calls renderChooseActionRadioButtons', () => {
       const mockSetChosenAction = jest.fn();
       const title = 'Scan for No Action';
-      const mockActionItem = { title, subText: 'No Action Required' };
+      const mockActionItem: DesiredActionButton = { title, subText: 'No Action Required', isDisabled: false };
       const { getByTestId, toJSON } = render(
         renderChooseActionRadioButtons(
           mockActionItem,
