@@ -1062,6 +1062,13 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
           </View>
         );
       }
+      if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty >= 0)) {
+        return (
+          <View style={styles.otherActionContainer}>
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+          </View>
+        );
+      }
       return <View />;
     }
     case 'NSFL': {
