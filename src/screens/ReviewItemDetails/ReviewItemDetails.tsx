@@ -1012,7 +1012,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty >= 0)) {
         return (
           <View style={styles.otherActionContainer}>
-            {renderOtherActionButton(props, itemDetails.itemNbr, true)}
+            {renderOtherActionButton(props, itemDetails.itemNbr, false)}
           </View>
         );
       }
