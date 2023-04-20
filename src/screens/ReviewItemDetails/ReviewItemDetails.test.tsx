@@ -1244,8 +1244,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders completeButtonComponent Cancelled with \'Other Actions\'', () => {
       const mockPropNSFQ: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        exceptionType: 'C',
-        userConfigs: { ...mockConfig, otherActions: true }
+        exceptionType: 'C'
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
@@ -1280,8 +1279,7 @@ describe('ReviewItemDetailsScreen', () => {
       const mockPropNO: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO',
-        userFeatures: ['on hands change'],
-        userConfigs: { ...mockConfig, otherActions: true }
+        userFeatures: ['on hands change']
       };
       renderer.render(
         completeButtonComponent(mockPropNO, { ...mockItemDetail123, onHandsQty: -5 })
@@ -1326,8 +1324,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders completeButtonComponent No Sales with \'Other Actions\'', () => {
       const mockPropNSFQ: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        exceptionType: 'NS',
-        userConfigs: { ...mockConfig, otherActions: true }
+        exceptionType: 'NS'
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
