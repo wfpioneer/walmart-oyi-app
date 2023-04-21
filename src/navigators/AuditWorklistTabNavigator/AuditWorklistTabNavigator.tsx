@@ -95,14 +95,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
       <Tab.Screen name={strings('WORKLIST.TODO')}>
         {() => <TodoAuditWorklist onRefresh={getAuditWlItems} />}
       </Tab.Screen>
-      <Tab.Screen
-        name={strings('WORKLIST.COMPLETED')}
-        listeners={listenerProps => ({
-          blur: () => {
-            listenerProps.navigation.jumpTo(strings('WORKLIST.TODO'));
-          }
-        })}
-      >
+      <Tab.Screen name={strings('WORKLIST.COMPLETED')}>
         {() => <CompletedAuditWorklist onRefresh={getAuditWlItems} />}
       </Tab.Screen>
     </Tab.Navigator>
