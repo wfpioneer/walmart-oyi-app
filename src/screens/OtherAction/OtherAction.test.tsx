@@ -7,6 +7,8 @@ import { getMockItemDetails } from '../../mockData';
 import mockUser from '../../mockData/mockUser';
 import { AsyncState } from '../../models/AsyncState';
 import ItemDetails from '../../models/ItemDetails';
+import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
+import { resetScannedEvent } from '../../state/actions/Global';
 import { setPickCreateFloor, setPickCreateItem, setPickCreateReserve } from '../../state/actions/Picking';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import {
@@ -171,6 +173,7 @@ describe('OtherActionScreen Tests', () => {
         { action: 'reserve_adjustment_click', itemNbr: mockItemDetails.itemNbr }
       );
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setItemDetails(mockItemDetails));
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(resetScannedEvent());
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('ReserveAdjustment');
 
       // On Hands Change Flow
@@ -189,6 +192,8 @@ describe('OtherActionScreen Tests', () => {
         OTHER_ACTIONS,
         { action: 'update_OH_qty_click', itemNbr: mockItemDetails.itemNbr }
       );
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setAuditItemNumber(mockItemDetails.itemNbr));
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(resetScannedEvent());
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('AuditItem');
       mockOtherActionProps.appUser.configs.auditWorklists = false;
 
@@ -243,7 +248,7 @@ describe('OtherActionScreen Tests', () => {
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
         setPickCreateReserve(mockItemDetails?.location?.reserve || [])
       );
-      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('CreatePick');
+      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('Picking', { screen: 'CreatePick' });
     });
   });
 });

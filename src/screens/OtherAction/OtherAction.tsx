@@ -29,6 +29,7 @@ import {
   setPickCreateReserve
 } from '../../state/actions/Picking';
 import Location from '../../models/Location';
+import { resetScannedEvent } from '../../state/actions/Global';
 
 export interface OtherActionProps {
   exceptionType: string | null | undefined;
@@ -234,35 +235,23 @@ export const OtherActionScreen = (props: OtherActionProps) => {
         break;
       }
       case OH_CHANGE: {
-        validateSessionCall(navigation, route.name)
-          .then(() => {
-            trackEventCall(OTHER_ACTIONS, {
-              action: 'update_OH_qty_click',
-              itemNbr: itemDetails.itemNbr
-            });
-            if (userConfigs.auditWorklists) {
-              dispatch(setAuditItemNumber(itemDetails.itemNbr));
-              navigation.navigate('AuditItem');
-            }
-          })
-          .catch(() => {
-            trackEventCall('session_timeout', { user: userId });
-          });
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall(OTHER_ACTIONS, { action: 'update_OH_qty_click', itemNbr: itemDetails.itemNbr });
+          if (userConfigs.auditWorklists) {
+            dispatch(setAuditItemNumber(itemDetails.itemNbr));
+            dispatch(resetScannedEvent());
+            navigation.navigate('AuditItem');
+          }
+        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
       }
       case CLEAN_RESERVE: {
-        validateSessionCall(navigation, route.name)
-          .then(() => {
-            trackEventCall(OTHER_ACTIONS, {
-              action: 'reserve_adjustment_click',
-              itemNbr: itemDetails.itemNbr
-            });
-            dispatch(setItemDetails(itemDetails));
-            navigation.navigate('ReserveAdjustment');
-          })
-          .catch(() => {
-            trackEventCall('session_timeout', { user: userId });
-          });
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall(OTHER_ACTIONS, { action: 'reserve_adjustment_click', itemNbr: itemDetails.itemNbr });
+          dispatch(setItemDetails(itemDetails));
+          dispatch(resetScannedEvent());
+          navigation.navigate('ReserveAdjustment');
+        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
       }
       case ADD_PICKLIST: {
@@ -282,14 +271,10 @@ export const OtherActionScreen = (props: OtherActionProps) => {
                 price: itemDetails.price
               })
             );
-
             dispatch(setPickCreateFloor(floorLocations));
             dispatch(setPickCreateReserve(reserveLocations));
-            navigation.navigate('CreatePick');
-          })
-          .catch(() => {
-            trackEventCall('session_timeout', { user: userId });
-          });
+            navigation.navigate('Picking', { screen: 'CreatePick' });
+          }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
       }
       case PRICE_SIGN: {
