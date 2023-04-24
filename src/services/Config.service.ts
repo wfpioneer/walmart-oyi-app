@@ -28,7 +28,6 @@ export interface ConfigResponse {
   showFeedback: boolean;
   reserveAdjustment: boolean;
   manualNoAction: boolean;
-  otherActions: boolean;
 }
 
 export default class ConfigService {

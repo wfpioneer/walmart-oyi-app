@@ -26,7 +26,7 @@ import ReviewItemDetails, {
   onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton,
   renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory,
   renderOHQtyComponent, renderOtherActionButton, renderPickHistory, renderPrintPriceSignButton, renderReplenishmentCard,
-  renderReserveLocQtys, renderSalesGraphV4, renderScanForNoActionButton, updateOHQtyApiHook
+  renderReserveLocQtys, renderSalesGraphV4, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -427,7 +427,7 @@ describe('ReviewItemDetailsScreen', () => {
     it('Renders Nothing for\' Scan for No Action\' button', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderScanForNoActionButton({ ...mockHandleProps, actionCompleted: true }, mockItemDetail123.itemNbr)
+        renderOtherActionButton({ ...mockHandleProps, actionCompleted: true }, mockItemDetail123.itemNbr, false)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -440,9 +440,10 @@ describe('ReviewItemDetailsScreen', () => {
       });
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderScanForNoActionButton(
+        renderOtherActionButton(
           mockHandleProps,
           mockItemDetail123.itemNbr,
+          false
         )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -1235,24 +1236,12 @@ describe('ReviewItemDetailsScreen', () => {
     const renderer = ShallowRenderer.createRenderer();
     it('Renders otherActionbutton', () => {
       renderer.render(
-        renderOtherActionButton(mockHandleProps, mockItemDetail123.itemNbr)
+        renderOtherActionButton(mockHandleProps, mockItemDetail123.itemNbr, true)
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
     it('Renders completeButtonComponent Cancelled with \'Other Actions\'', () => {
-      const mockPropNSFQ: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
-        exceptionType: 'C',
-        userConfigs: { ...mockConfig, otherActions: true }
-      };
-      renderer.render(
-        completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders completeButtonComponent Cancelled with \'Scan for no action\'', () => {
       const mockPropNSFQ: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'C'
@@ -1286,25 +1275,11 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders completeButtonComponent NO', () => {
-      const mockPropNO: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
-        exceptionType: 'NO',
-        userFeatures: ['on hands change'],
-        userConfigs: { ...mockConfig, otherActions: true }
-      };
-      renderer.render(
-        completeButtonComponent(mockPropNO, mockItemDetail123)
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
     it('Renders completeButtonComponent NO with negative on hands qty', () => {
       const mockPropNO: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NO',
-        userFeatures: ['on hands change'],
-        userConfigs: { ...mockConfig, otherActions: true }
+        userFeatures: ['on hands change']
       };
       renderer.render(
         completeButtonComponent(mockPropNO, { ...mockItemDetail123, onHandsQty: -5 })
@@ -1347,18 +1322,6 @@ describe('ReviewItemDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('Renders completeButtonComponent No Sales with \'Other Actions\'', () => {
-      const mockPropNSFQ: ItemDetailsScreenProps = {
-        ...mockItemDetailsScreenProps,
-        exceptionType: 'NS',
-        userConfigs: { ...mockConfig, otherActions: true }
-      };
-      renderer.render(
-        completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders completeButtonComponent No Sales with \'Scan for no action\'', () => {
       const mockPropNSFQ: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         exceptionType: 'NS'

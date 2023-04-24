@@ -39,6 +39,5 @@ export const mockConfig: Configurations = {
   showItemImage: false,
   showFeedback: false,
   reserveAdjustment: false,
-  manualNoAction: false,
-  otherActions: false
+  manualNoAction: false
 };
