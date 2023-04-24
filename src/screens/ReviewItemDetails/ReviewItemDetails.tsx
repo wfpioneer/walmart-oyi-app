@@ -933,6 +933,10 @@ export const renderOtherActionButton = (
     userId, navigation, route
   } = props;
 
+  if (actionCompleted) {
+    return <View />;
+  }
+
   if (otherActionsEnabled) {
     return (
       <TouchableOpacity
@@ -952,9 +956,6 @@ export const renderOtherActionButton = (
         <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
       </TouchableOpacity>
     );
-  }
-  if (actionCompleted) {
-    return <View />;
   }
 
   if (Platform.OS === 'android') {

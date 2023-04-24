@@ -204,6 +204,10 @@ export const OtherActionScreen = (props: OtherActionProps) => {
     desiredActions?.filter(item => item.title !== OH_CHANGE);
   }
 
+  if (itemDetails.completed) {
+    desiredActions?.filter(item => item.title !== SCAN_NO_ACTION);
+  }
+
   const continueAction = () => {
     switch (chosenAction) {
       case SCAN_NO_ACTION: {
@@ -328,7 +332,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
       {chosenAction !== '' && (
         <View style={styles.buttonContainer}>
           <Button
-            title={strings('GENERICS.CONTINUE')}
+            title={chosenAction === SCAN_NO_ACTION ? SCAN_NO_ACTION : strings('GENERICS.CONTINUE')}
             titleColor={COLOR.WHITE}
             type={ButtonType.PRIMARY}
             onPress={continueAction}
