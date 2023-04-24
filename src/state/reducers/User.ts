@@ -44,8 +44,7 @@ export const initialState: User = {
     showItemImage: false,
     showFeedback: false,
     reserveAdjustment: false,
-    manualNoAction: false,
-    otherActions: false
+    manualNoAction: false
   }
 };
 
@@ -91,8 +90,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showItemImage: action.payload.showItemImage || false,
           showFeedback: action.payload.showFeedback || false,
           reserveAdjustment: action.payload.reserveAdjustment || false,
-          manualNoAction: action.payload.manualNoAction || false,
-          otherActions: action.payload.otherActions || false
+          manualNoAction: action.payload.manualNoAction || false
         }
       };
     default:
