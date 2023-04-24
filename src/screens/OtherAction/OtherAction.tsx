@@ -206,7 +206,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
 
           dispatch(setPickCreateFloor(floorLocations));
           dispatch(setPickCreateReserve(reserveLocations));
-          navigation.navigate('CreatePick');
+          navigation.navigate('Picking', { screen: 'CreatePick' });
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
       }

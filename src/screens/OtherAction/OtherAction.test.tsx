@@ -247,7 +247,7 @@ describe('OtherActionScreen Tests', () => {
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
         setPickCreateReserve(mockItemDetails?.location?.reserve || [])
       );
-      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('CreatePick');
+      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('Picking', { screen: 'CreatePick' });
     });
   });
 });
