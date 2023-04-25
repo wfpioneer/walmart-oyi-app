@@ -376,6 +376,7 @@ export default {
     CLEAR: '清除',
     TODO: '待完成',
     COMPLETED: '已完成',
+    PENDING: 'Pending', // todo mandarin translation
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
     AREA: '区域',
     ITEM_WORKLIST: '商品例外清单',

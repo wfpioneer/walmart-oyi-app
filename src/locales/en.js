@@ -374,6 +374,7 @@ export default {
     CLEAR: 'Clear',
     TODO: 'Todo',
     COMPLETED: 'Completed',
+    PENDING: 'Pending',
     WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.',
     AREA: 'Area',
     ITEM_WORKLIST: 'Item Work List',

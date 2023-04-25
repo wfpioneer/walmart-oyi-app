@@ -373,6 +373,7 @@ export default {
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
+    PENDING: 'Pendiente',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
     AREA: 'Área',
     ITEM_WORKLIST: 'Lista De Articulos',
