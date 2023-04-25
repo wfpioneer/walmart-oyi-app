@@ -21,33 +21,36 @@ import { PendingWorklist } from '../screens/Worklist/PendingWorklist';
 interface worklistNavigatorProps{
   dispatch:Dispatch<any>,
   navigation:NavigationProp<any>
-  menuOpen:boolean,
-  inProgress: boolean
+  menuOpen:boolean
 }
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-export const worklistTabs = (inProgress: boolean) => (
-  <Tab.Navigator
-    screenOptions={{
-      tabBarActiveTintColor: COLOR.WHITE,
-      tabBarIndicatorStyle: { backgroundColor: COLOR.WHITE },
-      tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
-    }}
-  >
-    <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
-    { inProgress && <Tab.Screen name={strings('WORKLIST.PENDING')} component={PendingWorklist} /> }
-    <Tab.Screen
-      name={strings('WORKLIST.COMPLETED')}
-      component={CompletedWorklist}
-      listeners={props => ({
-        blur: () => {
-          props.navigation.jumpTo(strings('WORKLIST.TODO'));
-        }
-      })}
-    />
-  </Tab.Navigator>
-);
+export const WorklistTabs = () => {
+  const { configs } = useTypedSelector(state => state.User);
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: COLOR.WHITE,
+        tabBarIndicatorStyle: { backgroundColor: COLOR.WHITE },
+        tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
+      }}
+    >
+      <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
+      { configs.inProgress && <Tab.Screen name={strings('WORKLIST.PENDING')} component={PendingWorklist} /> }
+      <Tab.Screen
+        name={strings('WORKLIST.COMPLETED')}
+        component={CompletedWorklist}
+        listeners={props => ({
+          blur: () => {
+            props.navigation.jumpTo(strings('WORKLIST.TODO'));
+          }
+        })}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
   if (menuOpen) {
@@ -68,7 +71,7 @@ export const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean):JS
 
 export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Element => {
   const {
-    dispatch, navigation, menuOpen, inProgress
+    dispatch, navigation, menuOpen
   } = props;
   useEffect(
     () => navigation.addListener('focus', () => {
@@ -109,7 +112,7 @@ export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Elemen
       >
         <Stack.Screen
           name="ITEMWORKLIST"
-          component={() => worklistTabs(inProgress)}
+          component={WorklistTabs}
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen),
             headerTitle: strings('WORKLIST.ITEM_WORKLIST'),
@@ -130,13 +133,11 @@ export const WorklistNavigator = ():JSX.Element => {
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
-  const { configs } = useTypedSelector(state => state.User);
   return (
     <WorklistNavigatorStack
       dispatch={dispatch}
       navigation={navigation}
       menuOpen={menuOpen}
-      inProgress={configs.inProgress}
     />
   );
 };

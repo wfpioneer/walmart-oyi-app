@@ -3,7 +3,9 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { Provider } from 'react-redux';
 import {
-  WorklistNavigatorStack, onFilterMenuPress, worklistTabs
+  WorklistNavigatorStack,
+  WorklistTabs,
+  onFilterMenuPress
 } from './WorklistNavigator';
 import store from '../state';
 
@@ -32,7 +34,6 @@ describe('worklist Navigator', () => {
         dispatch={jest.fn()}
         menuOpen={true}
         navigation={navigationProp}
-        inProgress={false}
       />
     );
 
@@ -47,24 +48,10 @@ describe('worklist Navigator', () => {
   });
   it('Renders the worklist Tabs', () => {
     const renderer = ShallowRenderer.createRenderer();
-
     renderer.render(
       <Provider store={store}>
         <NavigationContainer>
-          {worklistTabs(false)}
-        </NavigationContainer>
-      </Provider>
-    );
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
-  });
-
-  it('Renders the worklist Tabs with Pending tab enabled', () => {
-    const renderer = ShallowRenderer.createRenderer();
-
-    renderer.render(
-      <Provider store={store}>
-        <NavigationContainer>
-          {worklistTabs(true)}
+          <WorklistTabs />
         </NavigationContainer>
       </Provider>
     );
