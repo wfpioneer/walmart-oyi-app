@@ -160,7 +160,8 @@ export default {
     CHOOSE_RESERVE: 'Make changes to reserve pallet qty',
     CHOOSE_TOTAL_OH: 'Make changes to total on-hands',
     CHOOSE_PICKLIST: 'Create a pick to replenish sales floor qty',
-    NO_ACTION_NEEDED: 'The item is up to date no action is needed'
+    NO_ACTION_NEEDED: 'The item is up to date no action is needed',
+    REPLENISH_RESERVE: 'Please replenish the reserve, to add item to pick list.'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
