@@ -157,10 +157,11 @@ export default {
     CLEAN_RESERVE: 'Limpiar Bodega',
     CHOOSE_ACTION: 'Elige la acción',
     DESIRED_ACTION: 'Competa el artículo ejecutando alguna de las acciones debajo:',
-    CHOOSE_RESERVE: 'Realiza cambios a los pallets en bodega', // TODO SPANISH TRANSLATIONS
-    CHOOSE_TOTAL_OH: 'Realiza un cambio de existencia', // TODO SPANISH TRANSLATIONS
-    CHOOSE_PICKLIST: 'Crea un pick para reabastecer el piso', // TODO SPANISH TRANSLATIONS
-    NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada' // TODO SPANISH TRANSLATIONS
+    CHOOSE_RESERVE: 'Realiza cambios a los pallets en bodega',
+    CHOOSE_TOTAL_OH: 'Realiza un cambio de existencia',
+    CHOOSE_PICKLIST: 'Crea un pick para reabastecer el piso',
+    NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada',
+    REPLENISH_RESERVE: 'Por favor reabastece tu bodega para poder pickear el artículo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

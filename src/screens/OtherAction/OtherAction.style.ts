@@ -61,5 +61,25 @@ export const styles = StyleSheet.create({
   itemContainer: {
     borderBottomWidth: 1,
     borderBottomColor: COLOR.GREY_300
+  },
+  errorContainer: {
+    backgroundColor: COLOR.PALE_RED,
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 20,
+    elevation: 4,
+    marginBottom: 5
+  },
+  errorMessageView: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginVertical: 10
+
+  },
+  errorText: {
+    width: '80%'
+  },
+  icon: {
+    paddingHorizontal: 5
   }
 });

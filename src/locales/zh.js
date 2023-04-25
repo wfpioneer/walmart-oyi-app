@@ -160,7 +160,8 @@ export default {
     CHOOSE_RESERVE: '修改储位卡板库存数量',
     CHOOSE_TOTAL_OH: '修改总库存数量',
     CHOOSE_PICKLIST: '创建楼面补货清单',
-    NO_ACTION_NEEDED: 'T此商品已更新无需操作'
+    NO_ACTION_NEEDED: 'T此商品已更新无需操作',
+    REPLENISH_RESERVE: '请将卡板补到高货架，然后添加到补货清单'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
