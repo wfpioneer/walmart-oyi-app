@@ -327,7 +327,9 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
+
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -346,7 +348,9 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
+
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -365,7 +369,9 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
+
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -384,7 +390,9 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
+
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -403,7 +411,9 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
+
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -422,7 +432,8 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   }
 ];
 
@@ -437,7 +448,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.NO,
@@ -450,7 +462,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.NO,
@@ -463,7 +476,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.C,
@@ -476,7 +490,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.C,
@@ -489,7 +504,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 }];
 
 export const missingExceptionsWorklist: WorklistItemI[] = [
