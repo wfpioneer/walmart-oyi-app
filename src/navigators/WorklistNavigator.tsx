@@ -16,16 +16,18 @@ import { useTypedSelector } from '../state/reducers/RootReducer';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
 import { getWorklist } from '../state/actions/saga';
+import { PendingWorklist } from '../screens/Worklist/PendingWorklist';
 
 interface worklistNavigatorProps{
   dispatch:Dispatch<any>,
   navigation:NavigationProp<any>
-  menuOpen:boolean
+  menuOpen:boolean,
+  inProgress: boolean
 }
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-export const WorklistTabs = () => (
+export const worklistTabs = (inProgress: boolean) => (
   <Tab.Navigator
     screenOptions={{
       tabBarActiveTintColor: COLOR.WHITE,
@@ -34,6 +36,7 @@ export const WorklistTabs = () => (
     }}
   >
     <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
+    { inProgress && <Tab.Screen name={strings('WORKLIST.PENDING')} component={PendingWorklist} /> }
     <Tab.Screen
       name={strings('WORKLIST.COMPLETED')}
       component={CompletedWorklist}
@@ -65,7 +68,7 @@ export const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean):JS
 
 export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Element => {
   const {
-    dispatch, navigation, menuOpen
+    dispatch, navigation, menuOpen, inProgress
   } = props;
   useEffect(
     () => navigation.addListener('focus', () => {
@@ -106,7 +109,7 @@ export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Elemen
       >
         <Stack.Screen
           name="ITEMWORKLIST"
-          component={WorklistTabs}
+          component={() => worklistTabs(inProgress)}
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen),
             headerTitle: strings('WORKLIST.ITEM_WORKLIST'),
@@ -127,11 +130,13 @@ export const WorklistNavigator = ():JSX.Element => {
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
+  const { configs } = useTypedSelector(state => state.User);
   return (
     <WorklistNavigatorStack
       dispatch={dispatch}
       navigation={navigation}
       menuOpen={menuOpen}
+      inProgress={configs.inProgress}
     />
   );
 };

@@ -1,10 +1,11 @@
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationContainer, NavigationProp } from '@react-navigation/native';
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { Provider } from 'react-redux';
 import {
-  WorklistNavigatorStack, WorklistTabs, onFilterMenuPress
+  WorklistNavigatorStack, onFilterMenuPress, worklistTabs
 } from './WorklistNavigator';
+import store from '../state';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -31,6 +32,7 @@ describe('worklist Navigator', () => {
         dispatch={jest.fn()}
         menuOpen={true}
         navigation={navigationProp}
+        inProgress={false}
       />
     );
 
@@ -47,9 +49,25 @@ describe('worklist Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
 
     renderer.render(
-      <WorklistTabs />
+      <Provider store={store}>
+        <NavigationContainer>
+          {worklistTabs(false)}
+        </NavigationContainer>
+      </Provider>
     );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
 
+  it('Renders the worklist Tabs with Pending tab enabled', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(
+      <Provider store={store}>
+        <NavigationContainer>
+          {worklistTabs(true)}
+        </NavigationContainer>
+      </Provider>
+    );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });
