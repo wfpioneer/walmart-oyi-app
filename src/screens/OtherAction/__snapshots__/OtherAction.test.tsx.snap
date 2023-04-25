@@ -683,7 +683,6 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
               "backgroundColor": "#ffcccc",
               "elevation": 4,
               "flex": 1,
-              "height": 40,
               "justifyContent": "center",
               "marginBottom": 5,
               "marginHorizontal": 20,
@@ -695,6 +694,7 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
               Object {
                 "flexDirection": "row",
                 "justifyContent": "flex-start",
+                "marginVertical": 10,
               }
             }
           >
@@ -708,7 +708,13 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
                 }
               }
             />
-            <Text>
+            <Text
+              style={
+                Object {
+                  "width": "80%",
+                }
+              }
+            >
               [missing "en.PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR" translation]
             </Text>
           </View>

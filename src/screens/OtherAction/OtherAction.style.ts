@@ -64,7 +64,6 @@ export const styles = StyleSheet.create({
   },
   errorContainer: {
     backgroundColor: COLOR.PALE_RED,
-    height: 40,
     flex: 1,
     justifyContent: 'center',
     marginHorizontal: 20,
@@ -73,7 +72,12 @@ export const styles = StyleSheet.create({
   },
   errorMessageView: {
     justifyContent: 'flex-start',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginVertical: 10
+
+  },
+  errorText: {
+    width: '80%'
   },
   icon: {
     paddingHorizontal: 5

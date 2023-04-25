@@ -161,7 +161,7 @@ export default {
     CHOOSE_TOTAL_OH: 'Realiza un cambio de existencia',
     CHOOSE_PICKLIST: 'Crea un pick para reabastecer el piso',
     NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada',
-    REPLENISH_RESERVE: 'Please replenish the reserve, to add item to pick list.' // TODO SPANISH TRANSLATIONS
+    REPLENISH_RESERVE: 'Por favor reabastece tu bodega para poder pickear el artículo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',

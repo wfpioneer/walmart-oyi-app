@@ -161,7 +161,7 @@ export default {
     CHOOSE_TOTAL_OH: '修改总库存数量',
     CHOOSE_PICKLIST: '创建楼面补货清单',
     NO_ACTION_NEEDED: 'T此商品已更新无需操作',
-    REPLENISH_RESERVE: 'Please replenish the reserve, to add item to pick list.' // TODO MANDARIN TRANSLATION
+    REPLENISH_RESERVE: '请将卡板补到高货架，然后添加到补货清单'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',

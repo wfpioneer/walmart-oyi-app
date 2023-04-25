@@ -106,7 +106,7 @@ export const renderChooseActionRadioButtons = (
             color={COLOR.ORANGE}
             style={styles.icon}
           />
-          <Text>{item.disabledText}</Text>
+          <Text style={styles.errorText}>{item.disabledText}</Text>
         </View>
       </View>
       )}
@@ -169,7 +169,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
       title: ADD_PICKLIST,
       subText: CHOOSE_PICKLIST,
       isDisabled: !hasReserveLocations,
-      disabledText: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR')
+      disabledText: `${strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR')}. \n${strings('ITEM.REPLENISH_RESERVE')}`
     },
     { title: OH_CHANGE, subText: TOTAL_OH, isDisabled: false },
     {
