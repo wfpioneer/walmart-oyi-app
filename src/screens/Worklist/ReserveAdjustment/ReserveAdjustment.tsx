@@ -42,7 +42,7 @@ import {
   DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY_V2
 } from '../../../state/actions/asyncAPI';
 import {
-  deletePallet, deleteUpcs, getItemPallets, updateMultiPalletUPCQtyV2
+  deletePallet, deleteUpcs, getItemPallets, getItemPalletsV1, updateMultiPalletUPCQtyV2
 } from '../../../state/actions/saga';
 import {
   setReserveLocations, setScannedPalletId, updatePalletQty, updatePalletScannedStatus
@@ -68,6 +68,7 @@ export interface ReserveAdjustmentScreenProps {
     dispatch: Dispatch<any>;
     navigation: NavigationProp<any>;
     trackEventCall: (eventName: string, params?: any) => void;
+    getItemPalletsDispatch: ({itemNbr: number}) => void;
     validateSessionCall: (
       navigation: NavigationProp<any>,
       route?: string
@@ -784,12 +785,12 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
 };
 
 const ReserveAdjustment = (): JSX.Element => {
-  const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
+  const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
+  const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1) : useTypedSelector(state => state.async.getItemPallets);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
   const updateMultiPalletUPCQtyV2Api = useTypedSelector(state => state.async.updateMultiPalletUPCQtyV2);
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
-  const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
   const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);
   const showPalletQtyModalState = useState(false);
   const route = useRoute();
@@ -813,9 +814,11 @@ const ReserveAdjustment = (): JSX.Element => {
     locationType: 'floor',
     palletId: '-1'
   });
+  const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPallets : getItemPalletsV1;
   return (
     <ReserveAdjustmentScreen
       getItemPalletsApi={getItemPalletsApi}
+      getItemPalletsDispatch={getItemPalletsDispatch}
       route={route}
       dispatch={dispatch}
       navigation={navigation}
