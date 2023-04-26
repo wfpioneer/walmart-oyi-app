@@ -25,7 +25,7 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 
-describe('worklist Navigator', () => {
+describe('Worklist Navigator', () => {
   it('Renders the worklist Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
 

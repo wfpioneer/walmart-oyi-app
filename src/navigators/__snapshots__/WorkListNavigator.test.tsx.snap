@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`worklist Navigator Renders the worklist Navigator 1`] = `
+exports[`Worklist Navigator Renders the worklist Navigator 1`] = `
 <SideMenu
   animationFunction={[Function]}
   animationStyle={[Function]}
@@ -45,7 +45,7 @@ exports[`worklist Navigator Renders the worklist Navigator 1`] = `
 </SideMenu>
 `;
 
-exports[`worklist Navigator Renders the worklist Tabs 1`] = `
+exports[`Worklist Navigator Renders the worklist Tabs 1`] = `
 <Context.Provider
   value={
     Object {

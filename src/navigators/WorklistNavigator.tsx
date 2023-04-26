@@ -1,6 +1,6 @@
 import React, { Dispatch, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderBackButton } from '@react-navigation/elements';
+import { HeaderBackButton, HeaderBackButtonProps } from '@react-navigation/elements';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -42,11 +42,6 @@ export const WorklistTabs = () => {
       <Tab.Screen
         name={strings('WORKLIST.COMPLETED')}
         component={CompletedWorklist}
-        listeners={props => ({
-          blur: () => {
-            props.navigation.jumpTo(strings('WORKLIST.TODO'));
-          }
-        })}
       />
     </Tab.Navigator>
   );
@@ -85,6 +80,13 @@ export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Elemen
   };
 
   const menu = <FilterMenu screenName="Item_Worklist" />;
+  const worklistNavHeaderLeft = (prop: HeaderBackButtonProps) => (prop.canGoBack && (
+  <HeaderBackButton
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...prop}
+    onPress={navigateBack}
+  />
+  ));
   return (
     <SideMenu
       menu={menu}
@@ -116,13 +118,7 @@ export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Elemen
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen),
             headerTitle: strings('WORKLIST.ITEM_WORKLIST'),
-            headerLeft: props => props.canGoBack && (
-            <HeaderBackButton
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-              {...props}
-              onPress={navigateBack}
-            />
-            )
+            headerLeft: worklistNavHeaderLeft
           })}
         />
       </Stack.Navigator>
