@@ -830,7 +830,7 @@ describe('PrintPriceSignScreen', () => {
         navigationProp,
         mockDispatch
       );
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(trackEvent).toHaveBeenCalledWith(
         'print_add_to_print_queue',
         expect.any(Object)
@@ -845,7 +845,7 @@ describe('PrintPriceSignScreen', () => {
         'Small',
         testItem,
         1,
-        'C',
+        '',
         mockSelectedSection,
         false,
         mockSelectedAisle,
@@ -869,7 +869,7 @@ describe('PrintPriceSignScreen', () => {
         'Small',
         testItem,
         1,
-        'C',
+        '',
         mockSelectedSection,
         false,
         mockSelectedAisle,
