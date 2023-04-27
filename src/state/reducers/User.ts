@@ -92,7 +92,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showFeedback: action.payload.showFeedback || false,
           reserveAdjustment: action.payload.reserveAdjustment || false,
           manualNoAction: action.payload.manualNoAction || false,
-          inProgress: action.payload.inProgress
+          inProgress: action.payload.inProgress || false
         }
       };
     default:
