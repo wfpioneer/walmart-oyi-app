@@ -153,6 +153,13 @@ export interface AuditItemScreenProps {
   updateMultiPalletUPCQtyApi: AsyncState;
 }
 
+export const getItemQuantity = (itemQty: number, pendingQty: number) => {
+  if (pendingQty >= 0) {
+    return pendingQty;
+  }
+  return itemQty;
+};
+
 export const isError = (
   error: AxiosError | null,
   dispatch: Dispatch<any>,
@@ -801,7 +808,7 @@ export const renderConfirmOnHandsModal = (
   trackEventCall: (eventName: string, params?: any) => void,
   worklistType: string
 ) => {
-  const onHandsQty = itemDetails?.onHandsQty || 0;
+  const onHandsQty = getItemQuantity(itemDetails?.onHandsQty || 0, itemDetails?.pendingOnHandsQty || -999);
   const basePrice = itemDetails?.basePrice || 0;
   const changeQuantity = updatedQuantity - onHandsQty;
   const priceChange = basePrice * changeQuantity;
@@ -1325,9 +1332,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   };
 
   const handleContinueAction = () => {
-    const itemOHQty = itemDetails?.onHandsQty;
+    const itemOHQty = itemDetails?.onHandsQty || 0;
+    const pendingQty = itemDetails?.pendingOnHandsQty || -999;
     trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
-    if (itemOHQty === totalOHQty) {
+    if (getItemQuantity(itemOHQty, pendingQty) === totalOHQty) {
       dispatch(
         noAction({
           upc: itemDetails?.upcNbr || '',
@@ -1394,13 +1402,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         <ItemCard
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
-          onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
+          onHandQty={itemDetails ? getItemQuantity(itemDetails.onHandsQty, itemDetails.pendingOnHandsQty) : 0}
           onClick={() => {
             trackEventCall('Audit_Item', { action: 'item_card_click', itemNumber: itemDetails?.itemNbr });
           }}
           loading={getItemDetailsApi.isWaiting}
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
+          pendingOH={itemDetails ? itemDetails.pendingOnHandsQty >= 0 : false}
         />
       </View>
       <ScrollView

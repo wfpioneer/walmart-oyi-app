@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
   },
   otherOHDetails: {
     backgroundColor: COLOR.WHITE
+  },
+  itemQtyView: {
+    flexDirection: 'row'
   }
 });
 
