@@ -4,36 +4,36 @@ import { strings } from '../../locales';
 export class ExceptionList {
   private static readonly multitonMap = new Map();
 
-   private static instance: Map<string, string>
+  private static instance: Map<string, string>;
 
-   private constructor() {}
+  private constructor() {}
 
-   private static createInstance(): Map<string, string> {
-     return new Map([
-       ['NP', strings('EXCEPTION.NIL_PICK',)],
-       ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
-       ['NS', strings('EXCEPTION.NO_SALES')],
-       ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
-       ['C', strings('EXCEPTION.CANCELLED')],
-       ['NSFL', strings('EXCEPTION.NSFL')],
-       ['MP', strings('EXCEPTION.MISSING_PALLETS')],
-       ['AU', strings('EXCEPTION.AUDITS')],
-       ['RA', strings('EXCEPTION.ROLLOVER_AUDITS')],
-       ['NSFQ', strings('EXCEPTION.NEG_SALES_FLOOR_QTY')]
-     ]);
-   }
+  private static createInstance(): Map<string, string> {
+    return new Map([
+      ['NP', strings('EXCEPTION.NIL_PICK',)],
+      ['PO', strings('EXCEPTION.PRICE_OVERRIDE')],
+      ['NS', strings('EXCEPTION.NO_SALES')],
+      ['NO', strings('EXCEPTION.NEGATIVE_ON_HANDS')],
+      ['C', strings('EXCEPTION.CANCELLED')],
+      ['NSFL', strings('EXCEPTION.NSFL')],
+      ['MP', strings('EXCEPTION.MISSING_PALLETS')],
+      ['AU', strings('EXCEPTION.AUDITS')],
+      ['RA', strings('EXCEPTION.ROLLOVER_AUDITS')],
+      ['NSFQ', strings('EXCEPTION.NEG_SALES_FLOOR_QTY')]
+    ]);
+  }
 
-   public static getInstance(): Map<string, string> {
-     /* Creates a new map instance if the current language has not been used yet and translations are available
+  public static getInstance(): Map<string, string> {
+    /* Creates a new map instance if the current language has not been used yet and translations are available
       or if Jest tests are being Ran */
-     if ((!this.multitonMap.has(I18n.locale) && Object.keys(I18n.translations).length !== 0)
+    if ((!this.multitonMap.has(I18n.locale) && Object.keys(I18n.translations).length !== 0)
      || process.env.JEST_WORKER_ID) {
-       this.multitonMap.set(I18n.locale, this.createInstance());
-     }
+      this.multitonMap.set(I18n.locale, this.createInstance());
+    }
 
-     ExceptionList.instance = this.multitonMap.get(I18n.locale);
-     return ExceptionList.instance;
-   }
+    ExceptionList.instance = this.multitonMap.get(I18n.locale);
+    return ExceptionList.instance;
+  }
 }
 
 export const exceptionTypeToDisplayString = (exceptionType: string):
