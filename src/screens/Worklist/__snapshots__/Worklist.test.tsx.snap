@@ -275,6 +275,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
+          "worklistStatus": 3,
           "worklistType": "NSFL",
         },
         Object {
@@ -288,6 +289,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777555333",
+          "worklistStatus": 3,
           "worklistType": "NO",
         },
         Object {
@@ -301,6 +303,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "111122223333",
+          "worklistStatus": 3,
           "worklistType": "NO",
         },
         Object {
@@ -314,6 +317,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "444455556666",
+          "worklistStatus": 3,
           "worklistType": "C",
         },
         Object {
@@ -327,6 +331,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777788889999",
+          "worklistStatus": 3,
           "worklistType": "C",
         },
         Object {
@@ -340,6 +345,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "667788889999",
+          "worklistStatus": 3,
           "worklistType": "NS",
         },
       ]
@@ -645,6 +651,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777555333",
+          "worklistStatus": 1,
           "worklistType": "NO",
         },
       ]
@@ -754,6 +761,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
+          "worklistStatus": 1,
           "worklistType": "NSFL",
         },
       ]
@@ -834,6 +842,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
+          "worklistStatus": 1,
           "worklistType": "NSFL",
         },
         Object {
@@ -847,6 +856,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777555333",
+          "worklistStatus": 1,
           "worklistType": "NO",
         },
         Object {
@@ -860,6 +870,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "111122223333",
+          "worklistStatus": 1,
           "worklistType": "NO",
         },
         Object {
@@ -873,6 +884,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "444455556666",
+          "worklistStatus": 1,
           "worklistType": "C",
         },
         Object {
@@ -886,6 +898,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777788889999",
+          "worklistStatus": 1,
           "worklistType": "C",
         },
         Object {
@@ -899,6 +912,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "667788889999",
+          "worklistStatus": 1,
           "worklistType": "NS",
         },
       ]
@@ -979,6 +993,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
+          "worklistStatus": 1,
           "worklistType": "NSFL",
         },
         Object {
@@ -992,6 +1007,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777555333",
+          "worklistStatus": 1,
           "worklistType": "NO",
         },
         Object {
@@ -1005,6 +1021,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "111122223333",
+          "worklistStatus": 1,
           "worklistType": "NO",
         },
         Object {
@@ -1018,6 +1035,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "444455556666",
+          "worklistStatus": 1,
           "worklistType": "C",
         },
         Object {
@@ -1031,6 +1049,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777788889999",
+          "worklistStatus": 1,
           "worklistType": "C",
         },
         Object {
@@ -1044,6 +1063,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "667788889999",
+          "worklistStatus": 1,
           "worklistType": "NS",
         },
       ]
@@ -1125,6 +1145,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "444455556666",
+          "worklistStatus": 1,
           "worklistType": "C",
         },
         Object {
@@ -1144,6 +1165,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777788889999",
+          "worklistStatus": 1,
           "worklistType": "C",
         },
         Object {
@@ -1163,6 +1185,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "111122223333",
+          "worklistStatus": 1,
           "worklistType": "NO",
         },
         Object {
@@ -1182,6 +1205,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "000055559999",
+          "worklistStatus": 1,
           "worklistType": "NSFL",
         },
         Object {
@@ -1201,6 +1225,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "777555333",
+          "worklistStatus": 1,
           "worklistType": "NO",
         },
         Object {
@@ -1220,6 +1245,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "subCatgName": undefined,
           "subCatgNbr": 0,
           "upcNbr": "667788889999",
+          "worklistStatus": 1,
           "worklistType": "NS",
         },
       ]
