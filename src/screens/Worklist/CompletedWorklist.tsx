@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { WorklistItemI } from '../../models/WorklistItem';
+import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { getWorklist } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -35,7 +35,7 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
   let completedItems: WorklistItemI[] | undefined;
 
   if (result && result.data) {
-    completedItems = result.data.filter((item: WorklistItemI) => item.completed === true);
+    completedItems = result.data.filter((item: WorklistItemI) => item.worklistStatus === WorkListStatus.COMPLETED);
   }
 
   if (completedItems && !onHandsEnabled) {
