@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`worklist Navigator Renders the worklist Navigator 1`] = `
+exports[`Worklist Navigator Renders the worklist Navigator 1`] = `
 <SideMenu
   animationFunction={[Function]}
   animationStyle={[Function]}
@@ -45,27 +45,32 @@ exports[`worklist Navigator Renders the worklist Navigator 1`] = `
 </SideMenu>
 `;
 
-exports[`worklist Navigator Renders the worklist Tabs 1`] = `
-<MaterialTopTabNavigator
-  screenOptions={
+exports[`Worklist Navigator Renders the worklist Tabs 1`] = `
+<Context.Provider
+  value={
     Object {
-      "tabBarActiveTintColor": "#ffffffff",
-      "tabBarIndicatorStyle": Object {
-        "backgroundColor": "#ffffffff",
+      "getServerState": undefined,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
       },
-      "tabBarStyle": Object {
-        "backgroundColor": "#0071e9",
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
       },
     }
   }
 >
-  <Screen
-    component={[Function]}
-    name="[missing \\"en.WORKLIST.TODO\\" translation]"
-  />
-  <Screen
-    component={[Function]}
-    name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
-  />
-</MaterialTopTabNavigator>
+  <ForwardRef(NavigationContainerInner)>
+    <WorklistTabs />
+  </ForwardRef(NavigationContainerInner)>
+</Context.Provider>
 `;
