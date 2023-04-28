@@ -65,7 +65,6 @@ exports[`worklist Navigator Renders the worklist Tabs 1`] = `
   />
   <Screen
     component={[Function]}
-    listeners={[Function]}
     name="[missing \\"en.WORKLIST.COMPLETED\\" translation]"
   />
 </MaterialTopTabNavigator>
