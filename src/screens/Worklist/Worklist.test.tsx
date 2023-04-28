@@ -294,6 +294,7 @@ describe('WorklistScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const invalidFilter = { type: '', value: '' };
       renderer.render(
+        // @ts-expect-error this type error is necessary for testing
         renderFilterPills(invalidFilter, jest.fn(), [], [], exceptionList, [])
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
