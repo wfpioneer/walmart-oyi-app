@@ -5,14 +5,7 @@ export enum WorklistGoal {
   AUDITS = 'AUDITS'
 }
 
-// eslint-disable-next-line @typescript-eslint/no-shadow, no-shadow
-export enum WorklistGoalDuration {
-  DAILY = 'DAILY',
-  WEEKLY = 'WEEKLY'
-}
-
 export interface WorklistSummary {
-  worklistGoalDuration: WorklistGoalDuration,
   worklistGoal: WorklistGoal,
   worklistGoalPct: number,
   worklistEndGoalPct: number,
@@ -24,7 +17,9 @@ export interface WorklistSummary {
 export interface WorklistTypeDetails {
   worklistType: WorklistType,
   totalItems: number,
-  completedItems: number
+  completedItems: number,
+  inProgressItems: number,
+  todoItems: number
 }
 
 export type WorklistType = 'NSFL' | 'C' | 'NO' | 'NS' | 'NP' | 'PO' | 'MP' | 'AU' | 'RA' | 'NSFQ' | 'CATEGORY';
