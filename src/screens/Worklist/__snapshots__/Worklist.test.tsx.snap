@@ -191,6 +191,8 @@ exports[`WorklistScreen Tests rendering WorklistItem Renders a single worklist i
   exceptionType="C"
   itemDescription="WINE ITEM"
   itemNumber={456789123}
+  pendingApproval={false}
+  pendingPick={false}
   showItemImage={false}
   trackEventSource={
     Object {
