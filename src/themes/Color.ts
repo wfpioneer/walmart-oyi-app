@@ -56,6 +56,7 @@ export const COLOR = {
 
   GREY: '#c5c5c5',
   ORANGE: '#e74517',
+  PALE_ORANGE: '#ECDDC6',
   MID_GREY: '#eaeaea',
   LIGHT_GRAY: '#f6f6f6',
   PALE_GREEN: '#EAFCDA',

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { WorklistItemI } from '../../models/WorklistItem';
+import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { getWorklist } from '../../state/actions/saga';
@@ -35,7 +35,7 @@ export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   let todoData: WorklistItemI[] | undefined;
 
   if (result && result.data) {
-    todoData = result.data.filter((item: WorklistItemI) => item.completed === false);
+    todoData = result.data.filter((item: WorklistItemI) => item.worklistStatus === WorkListStatus.TODO);
   }
 
   if (todoData && !onHandsEnabled) {

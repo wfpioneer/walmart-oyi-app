@@ -4,7 +4,7 @@ import { Environment, getEnvironment } from '../utils/environment';
 export default class GetWorklistService {
   public static getWorklist(payload: {worklistType?: string[]}) {
     const urls: Environment = getEnvironment();
-    let filterUrl = `${urls.worklistURL}/worklist/items`;
+    let filterUrl = `${urls.worklistURL}/worklist/v1/items`;
     if (payload && payload.worklistType) {
       if (payload.worklistType.length > 0) {
         const filters = payload.worklistType.reduce((acc, current) => `${acc}&type=${current}`);
@@ -13,9 +13,7 @@ export default class GetWorklistService {
     }
     return Request.get(filterUrl, undefined);
   }
-}
 
-export class GetWorklistAuditService {
   public static getWorklistAudit(payload: {worklistType?: string[]}) {
     const urls: Environment = getEnvironment();
     let filterUrl = `${urls.worklistURL}/worklist/audits`;

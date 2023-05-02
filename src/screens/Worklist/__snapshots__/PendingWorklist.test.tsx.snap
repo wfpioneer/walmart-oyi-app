@@ -17,7 +17,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "000055559999",
-        "worklistStatus": 2,
+        "worklistStatus": "INPROGRESS",
         "worklistType": "NSFL",
       },
       Object {
@@ -31,7 +31,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777555333",
-        "worklistStatus": 2,
+        "worklistStatus": "INPROGRESS",
         "worklistType": "NO",
       },
       Object {
@@ -45,7 +45,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "111122223333",
-        "worklistStatus": 2,
+        "worklistStatus": "INPROGRESS",
         "worklistType": "NO",
       },
       Object {
@@ -59,7 +59,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "444455556666",
-        "worklistStatus": 2,
+        "worklistStatus": "INPROGRESS",
         "worklistType": "C",
       },
       Object {
@@ -73,7 +73,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777788889999",
-        "worklistStatus": 2,
+        "worklistStatus": "INPROGRESS",
         "worklistType": "C",
       },
       Object {
@@ -87,7 +87,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "667788889999",
-        "worklistStatus": 2,
+        "worklistStatus": "INPROGRESS",
         "worklistType": "NS",
       },
     ]

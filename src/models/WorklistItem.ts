@@ -2,9 +2,9 @@ import { WorklistType } from './WorklistSummary';
 
 // eslint-disable-next-line no-shadow
 export enum WorkListStatus {
-  TODO = 1,
-  INPROGRESS = 2,
-  COMPLETED = 3
+  TODO = 'TODO',
+  INPROGRESS = 'INPROGRESS',
+  COMPLETED = 'COMPLETED'
 }
 export interface WorklistItemI {
   worklistType: WorklistType;
