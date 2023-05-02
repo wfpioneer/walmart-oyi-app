@@ -46,6 +46,7 @@ export const UPDATE_OH_QTY = 'SAGA/UPDATE_OH_QTY';
 export const ADD_TO_PICKLIST = 'SAGA/ADD_TO_PICKLIST';
 export const ADD_LOCATION = 'SAGA/ADD_LOCATION';
 export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
+export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V@';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
@@ -130,6 +131,7 @@ export const updateOHQty = (payload: {
   worklistType?: string
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
+export const getWorklistSummaryV2 = () => ({ type: GET_WORKLIST_SUMMARY_V2 } as const);
 export const deleteLocation = (payload: {
   headers?: AxiosRequestHeaders;
   upc: string;

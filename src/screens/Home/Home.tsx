@@ -15,7 +15,7 @@ import ManualScanComponent from '../../components/manualscan/ManualScan';
 import WorklistCard from '../../components/worklistcard/WorklistCard';
 import GoalCircle from '../../components/goalcircle/GoalCircle';
 import { strings } from '../../locales';
-import { getWorklistSummary } from '../../state/actions/saga';
+import { getWorklistSummary, getWorklistSummaryV2 } from '../../state/actions/saga';
 import { UserConfigResponse } from '../../services/UserConfig.service';
 import COLOR from '../../themes/Color';
 import { setWorklistType, updateFilterExceptions } from '../../state/actions/Worklist';
@@ -34,6 +34,7 @@ const mapStateToProps = (state: RootState) => ({
   userConfig: state.User.configs,
   isManualScanEnabled: state.Global.isManualScanEnabled,
   worklistSummaryApiState: state.async.getWorklistSummary,
+  worklistSummaryV2ApiState: state.async.getWorklistSummaryV2,
   userConfigUpdateApiState: state.async.updateUserConfig,
   userFeatures: state.User.features
 });
@@ -42,6 +43,7 @@ const mapDispatchToProps = {
   setScannedEvent,
   setManualScan,
   getWorklistSummary,
+  getWorklistSummaryV2,
   updateFilterExceptions,
   setWorklistType,
   resetUserConfigUpdateApiState
@@ -57,8 +59,10 @@ export interface HomeScreenProps {
   setWorklistType: (worklistType: string) => void;
   isManualScanEnabled: boolean;
   worklistSummaryApiState: AsyncState;
+  worklistSummaryV2ApiState: AsyncState;
   userConfigUpdateApiState: AsyncState;
   getWorklistSummary: () => void;
+  getWorklistSummaryV2: () => void;
   navigation: NavigationProp<any>;
   updateFilterExceptions: (worklistTypes: string[]) => void;
   route: RouteProp<any, string>;
@@ -85,7 +89,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     // addListener returns a function to remove listener
     this.navigationRemoveListener = this.props.navigation.addListener('focus', () => {
       trackEvent('home_screen_focus');
-      this.props.getWorklistSummary();
+      if (this.props.userConfig.inProgress) {
+        this.props.getWorklistSummaryV2();
+      } else {
+        this.props.getWorklistSummary();
+      }
     });
 
     this.scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -169,7 +177,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
   };
 
   render(): ReactNode {
-    if (this.props.worklistSummaryApiState.isWaiting) {
+    const { worklistSummaryApiState, worklistSummaryV2ApiState } = this.props;
+    if (worklistSummaryApiState.isWaiting || worklistSummaryV2ApiState.isWaiting) {
       return (
         <View style={[styles.container, styles.safeAreaView]}>
           <ActivityIndicator color={COLOR.MAIN_THEME_COLOR} size={50} />
@@ -177,8 +186,10 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       );
     }
 
-    if (this.props.worklistSummaryApiState.error
-      || (this.props.worklistSummaryApiState.result && this.props.worklistSummaryApiState.result.status === 204)) {
+    if ((worklistSummaryApiState.error || worklistSummaryV2ApiState.error)
+      || (((worklistSummaryApiState.result && worklistSummaryApiState.result.status === 204)
+      || (worklistSummaryV2ApiState.result && worklistSummaryV2ApiState.result.status === 204)
+      ))) {
       return (
         <View style={styles.safeAreaView}>
           {this.props.isManualScanEnabled
@@ -190,7 +201,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
               style={styles.errorRetryButton}
               onPress={() => {
                 trackEvent('home_worklist_summary_retry_button_click');
-                this.props.getWorklistSummary();
+                if (this.props.userConfig.inProgress) {
+                  this.props.getWorklistSummaryV2();
+                } else {
+                  this.props.getWorklistSummary();
+                }
               }}
             >
               <Text>{strings('GENERICS.RETRY')}</Text>
@@ -200,11 +215,11 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       );
     }
 
-    if (!this.props.worklistSummaryApiState.result || this.props.worklistSummaryApiState.result.status === 204) {
+    if (!worklistSummaryApiState.result && !worklistSummaryV2ApiState.result) {
       return null;
     }
 
-    const { data }: { data: WorklistSummary[] } = this.props.worklistSummaryApiState.result;
+    const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
 
     const onGoalTitlePress = (index : number) => {
       this.setState({

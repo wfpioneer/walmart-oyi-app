@@ -68,6 +68,11 @@ const genericSagas = [
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
+  makeAsyncSaga(
+    saga.GET_WORKLIST_SUMMARY_V2,
+    actions.getWorklistSummaryV2,
+    WorklistSummaryService.getWorklistSummaryV2
+  ),
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
