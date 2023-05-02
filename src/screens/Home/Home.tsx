@@ -315,8 +315,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
         const completionPercentageValue = Number.isFinite(calculationValue) ? calculationValue : 0;
 
-        const progressValue = ((worklist.completedItems + worklist.inProgressItems) / worklist.totalItems) * 100;
-        const progressPercentageValue = Number.isFinite(progressValue) ? progressValue : 0;
+        const pendingCalcValue = ((worklist.completedItems + worklist.inProgressItems) / worklist.totalItems) * 100;
+        const pendingPercentageValue = Number.isFinite(pendingCalcValue) ? pendingCalcValue : 0;
+
         return (
           <WorklistCard
             key={worklist.worklistType}
@@ -326,7 +327,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             completionPercentage={completionPercentageValue}
             completionGoal={dataSummary.worklistEndGoalPct}
             onPress={onWorklistCardPress}
-            progressPercentage={progressPercentageValue}
+            pendingPercentage={pendingPercentageValue}
             inProgress={inProgressEnabled}
           />
         );
