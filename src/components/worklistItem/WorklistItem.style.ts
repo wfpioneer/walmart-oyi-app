@@ -32,5 +32,29 @@ export default StyleSheet.create({
   itemNumber: {
     fontSize: 12,
     color: COLOR.GREY_700
+  },
+  pendingBadges: {
+    flexDirection: 'row'
+  },
+  pendingPick: {
+    backgroundColor: COLOR.GREY_300,
+    marginRight: 10,
+    marginVertical: 5,
+    borderRadius: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    fontSize: 11,
+    borderWidth: 1,
+    borderColor: COLOR.GREY_200
+  },
+  pendingApproval: {
+    backgroundColor: COLOR.PALE_ORANGE,
+    marginVertical: 5,
+    borderRadius: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    fontSize: 11,
+    borderWidth: 1,
+    borderColor: COLOR.GREY_200
   }
 });

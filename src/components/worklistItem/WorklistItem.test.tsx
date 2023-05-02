@@ -48,6 +48,8 @@ describe('WorklistItem Component', () => {
         }}
         countryCode="MX"
         showItemImage={false}
+        pendingApproval={false}
+        pendingPick={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -69,6 +71,77 @@ describe('WorklistItem Component', () => {
         }}
         countryCode="MX"
         showItemImage={true}
+        pendingApproval={false}
+        pendingPick={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders an WorklistItem component with pending pick badge', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <WorklistItem
+        exceptionType="NP"
+        itemDescription="Test"
+        itemNumber={1234}
+        navigation={navigationProp}
+        dispatch={jest.fn}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
+        countryCode="MX"
+        showItemImage={true}
+        pendingApproval={false}
+        pendingPick={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders an WorklistItem component with pending approval badge', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <WorklistItem
+        exceptionType="NP"
+        itemDescription="Test"
+        itemNumber={1234}
+        navigation={navigationProp}
+        dispatch={jest.fn}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
+        countryCode="MX"
+        showItemImage={true}
+        pendingApproval={true}
+        pendingPick={false}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders an WorklistItem component with both pending badges', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <WorklistItem
+        exceptionType="NP"
+        itemDescription="Test"
+        itemNumber={1234}
+        navigation={navigationProp}
+        dispatch={jest.fn}
+        trackEventSource={{
+          screen: 'worklist_item',
+          action: 'worklist_item_click',
+          otherInfo: { upc: 1234, itemNbr: 1234, itemDescription: 'Test' }
+        }}
+        countryCode="MX"
+        showItemImage={true}
+        pendingApproval={true}
+        pendingPick={true}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -90,6 +163,8 @@ describe('WorklistItem Component', () => {
         }}
         countryCode="MX"
         showItemImage={true}
+        pendingApproval={false}
+        pendingPick={false}
       />
     );
     const btnCard = getByTestId('btnCard');

@@ -10,6 +10,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { exceptionTypeToDisplayString } from '../../screens/Worklist/FullExceptionList';
 import { TrackEventSource } from '../../models/Generics.d';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
+import { strings } from '../../locales';
 
 interface WorklistItemProps {
   exceptionType: string;
@@ -20,11 +21,15 @@ interface WorklistItemProps {
   trackEventSource: TrackEventSource;
   countryCode: string;
   showItemImage: boolean;
+  pendingApproval: boolean;
+  pendingPick: boolean;
 }
 
 export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   const {
-    navigation, dispatch, exceptionType, itemDescription, itemNumber, trackEventSource, countryCode, showItemImage
+    navigation, dispatch, exceptionType, itemDescription,
+    itemNumber, trackEventSource, countryCode, showItemImage,
+    pendingApproval, pendingPick
   } = props;
   const worklistItemOnPress = () => {
     trackEvent(trackEventSource.screen, {
@@ -54,6 +59,10 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
         <Text style={styles.itemNumber}>
           { itemNumber }
         </Text>
+        <View style={styles.pendingBadges}>
+          {pendingPick && <Text style={styles.pendingPick}>{strings('WORKLIST.PENDING_PICK')}</Text>}
+          {pendingApproval && <Text style={styles.pendingApproval}>{strings('WORKLIST.PENDING_APPROVAL')}</Text>}
+        </View>
       </View>
     </TouchableOpacity>
   );

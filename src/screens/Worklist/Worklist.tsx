@@ -72,6 +72,8 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       }}
       countryCode={countryCode}
       showItemImage={showItemImage}
+      pendingApproval={false}
+      pendingPick={false}
     />
   );
 };
