@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.TRACKER_RED,
     borderRadius: 10
   },
+  barFillInProgress: {
+    backgroundColor: COLOR.BRIGHT_YELLOW,
+    borderRadius: 10
+  },
   barFillNoItems: {
     backgroundColor: COLOR.GREY_300,
     borderRadius: 10

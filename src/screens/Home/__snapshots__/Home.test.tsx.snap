@@ -126,7 +126,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -134,7 +136,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -142,7 +146,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -150,7 +156,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
   </ScrollView>
   <Text
@@ -269,7 +277,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -277,7 +287,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -285,7 +297,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -293,7 +307,9 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
       completionPercentage={0}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
   </ScrollView>
   <Text
@@ -534,7 +550,9 @@ exports[`HomeScreen rendering renders pure version number if build environment i
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -542,7 +560,9 @@ exports[`HomeScreen rendering renders pure version number if build environment i
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -550,7 +570,9 @@ exports[`HomeScreen rendering renders pure version number if build environment i
       completionPercentage={0}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -558,7 +580,9 @@ exports[`HomeScreen rendering renders pure version number if build environment i
       completionPercentage={0}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
   </ScrollView>
   <Text
@@ -677,7 +701,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -685,7 +711,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -693,7 +721,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -701,7 +731,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
   </ScrollView>
   <Text
@@ -897,7 +929,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -905,7 +939,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -913,7 +949,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -921,7 +959,9 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
       completionPercentage={0}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
   </ScrollView>
   <Text
@@ -1040,7 +1080,9 @@ exports[`HomeScreen rendering renders with User config api with error 1`] = `
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -1048,7 +1090,9 @@ exports[`HomeScreen rendering renders with User config api with error 1`] = `
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -1056,7 +1100,9 @@ exports[`HomeScreen rendering renders with User config api with error 1`] = `
       completionPercentage={0}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -1064,7 +1110,9 @@ exports[`HomeScreen rendering renders with User config api with error 1`] = `
       completionPercentage={0}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
   </ScrollView>
   <Text
@@ -1197,7 +1245,9 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       completionPercentage={50}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={25}
@@ -1205,7 +1255,9 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       completionPercentage={50}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={7}
@@ -1213,7 +1265,9 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       completionPercentage={50}
       goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={12}
@@ -1221,7 +1275,9 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       completionPercentage={50}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={4}
@@ -1229,7 +1285,9 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       completionPercentage={50}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
   </ScrollView>
   <Text
@@ -1348,7 +1406,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={25}
@@ -1356,7 +1416,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={12}
@@ -1364,7 +1426,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={4}
@@ -1372,7 +1436,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
   </ScrollView>
   <Text
@@ -1491,7 +1557,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={100}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={100}
     />
     <WorklistCard
       complete={50}
@@ -1499,7 +1567,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={100}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={100}
     />
     <WorklistCard
       complete={24}
@@ -1507,7 +1577,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={100}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={100}
     />
     <WorklistCard
       complete={8}
@@ -1515,7 +1587,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={100}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={100}
     />
   </ScrollView>
   <Text
@@ -1634,7 +1708,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={0}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -1642,7 +1718,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={0}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -1650,7 +1728,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={0}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
     <WorklistCard
       complete={0}
@@ -1658,7 +1738,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={0}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={0}
     />
   </ScrollView>
   <Text
@@ -1784,7 +1866,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={25}
@@ -1792,7 +1876,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={12}
@@ -1800,7 +1886,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={4}
@@ -1808,7 +1896,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
   </ScrollView>
   <Text
@@ -1941,7 +2031,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={100}
       goalTitle="[missing \\"en.EXCEPTION.NSFL\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={25}
@@ -1949,7 +2041,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={7}
@@ -1957,7 +2051,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={14}
       goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={12}
@@ -1965,7 +2061,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={24}
       goalTitle="[missing \\"en.EXCEPTION.NO_SALES\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
     <WorklistCard
       complete={4}
@@ -1973,7 +2071,9 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={8}
       goalTitle="[missing \\"en.EXCEPTION.NEG_SALES_FLOOR_QTY\\" translation]"
+      inProgress={false}
       onPress={[Function]}
+      progressPercentage={50}
     />
   </ScrollView>
   <Text

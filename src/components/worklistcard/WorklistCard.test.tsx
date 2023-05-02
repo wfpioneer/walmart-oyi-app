@@ -19,6 +19,8 @@ describe('testing OHQtyUpdate component', () => {
           completionPercentage={90}
           completionGoal={100}
           onPress={mockHandleSubmit}
+          inProgress={false}
+          progressPercentage={0}
         />
       );
       expect(toJSON()).toMatchSnapshot();
@@ -32,6 +34,8 @@ describe('testing OHQtyUpdate component', () => {
           completionPercentage={90}
           completionGoal={100}
           onPress={mockHandleSubmit}
+          inProgress={false}
+          progressPercentage={0}
         />
       );
       expect(toJSON()).toMatchSnapshot();
@@ -45,6 +49,8 @@ describe('testing OHQtyUpdate component', () => {
           completionPercentage={90}
           completionGoal={100}
           onPress={mockHandleSubmit}
+          inProgress={false}
+          progressPercentage={0}
         />
       );
       const btnCard = getByTestId('btnCard');

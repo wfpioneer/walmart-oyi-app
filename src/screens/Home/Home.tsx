@@ -265,6 +265,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     const renderWorklistCards = () => dataSummary.worklistTypes
       .map(worklist => {
         const rollOverAuditWLEnabled = this.props.userConfig.showRollOverAudit;
+        const inProgressEnabled = this.props.userConfig.inProgress;
         // when show roll over complete is enabled than show only roll over when it is not completed
         // and do not show the audit worklist type
         // if completed or no roll over than show both audit worklist
@@ -313,6 +314,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
         const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
         const completionPercentageValue = Number.isFinite(calculationValue) ? calculationValue : 0;
+
+        const progressValue = ((worklist.completedItems + worklist.inProgressItems) / worklist.totalItems) * 100;
+        const progressPercentageValue = Number.isFinite(progressValue) ? progressValue : 0;
         return (
           <WorklistCard
             key={worklist.worklistType}
@@ -322,6 +326,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             completionPercentage={completionPercentageValue}
             completionGoal={dataSummary.worklistEndGoalPct}
             onPress={onWorklistCardPress}
+            progressPercentage={progressPercentageValue}
+            inProgress={inProgressEnabled}
           />
         );
       });
