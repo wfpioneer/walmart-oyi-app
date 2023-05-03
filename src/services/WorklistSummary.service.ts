@@ -10,4 +10,13 @@ export default class WorklistSummaryService {
       undefined
     );
   }
+
+  public static getWorklistSummaryV2() {
+    const urls: Environment = getEnvironment();
+
+    return Request.get(
+      `${urls.worklistURL}/worklist/v2/summary`,
+      undefined
+    );
+  }
 }

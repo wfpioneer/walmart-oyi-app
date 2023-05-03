@@ -15,16 +15,23 @@ export interface WorkListCardProps {
     completionPercentage: number;
     completionGoal: number;
     onPress: () => void;
+    inProgress: boolean;
+    pendingPercentage: number;
 }
 
 function WorklistCard(props: WorkListCardProps): JSX.Element {
   const {
-    complete, completionGoal, completionPercentage, goal, goalTitle, onPress
+    complete, completionGoal, completionPercentage, goal, goalTitle, onPress, pendingPercentage, inProgress
   } = props;
 
   const getBarFill = () => {
     if (goal === 0) {
       return styles.barFillNoItems;
+    }
+
+    // Renders completion percentage as green if inProgress flag is enabled
+    if (inProgress) {
+      return styles.barFillAtGoal;
     }
     return completionPercentage >= completionGoal ? styles.barFillAtGoal : styles.barFillNotAtGoal;
   };
@@ -37,6 +44,8 @@ function WorklistCard(props: WorkListCardProps): JSX.Element {
         </Text>
       </View>
       <View style={styles.progressBar}>
+        {inProgress
+        && <View style={[StyleSheet.absoluteFill, styles.barFillInProgress, { width: `${pendingPercentage}%` }]} /> }
         <View style={[StyleSheet.absoluteFill, getBarFill(), { width: `${completionPercentage}%` }]} />
       </View>
       <Text style={styles.counter}>

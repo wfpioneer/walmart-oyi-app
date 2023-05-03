@@ -45,6 +45,9 @@ export const addLocation = makeAsyncActionCreators(ADD_LOCATION);
 export const GET_WORKLIST_SUMMARY = makeAsyncActionTypes('API/GET_WORKLIST_SUMMARY');
 export const getWorklistSummary = makeAsyncActionCreators(GET_WORKLIST_SUMMARY);
 
+export const GET_WORKLIST_SUMMARY_V2 = makeAsyncActionTypes('API/GET_WORKLIST_SUMMARY_V2');
+export const getWorklistSummaryV2 = makeAsyncActionCreators(GET_WORKLIST_SUMMARY_V2);
+
 export const DELETE_LOCATION = makeAsyncActionTypes('API/DELETE_LOCATION');
 export const deleteLocation = makeAsyncActionCreators(DELETE_LOCATION);
 

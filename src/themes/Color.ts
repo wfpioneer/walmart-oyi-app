@@ -77,6 +77,7 @@ export const COLOR = {
   PALE_RED: '#ffcccc',
   PINK: '#d938ab',
   YELLOW: '#FFFFE0',
+  BRIGHT_YELLOW: '#FFF200',
   IGUANA_GREEN: '#69C779',
   // Navigation Colors
   NAVIGATION_DEFAULT_BACKGROUND: DefaultTheme.colors.background
