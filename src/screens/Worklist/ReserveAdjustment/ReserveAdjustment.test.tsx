@@ -589,7 +589,6 @@ describe('ReserveAdjustmentScreen', () => {
           mockDispatch,
           mockTrackEvent,
           mockExistingReserveLocations,
-          undefined,
           false
         )
       );
@@ -610,7 +609,6 @@ describe('ReserveAdjustmentScreen', () => {
           mockDispatch,
           mockTrackEvent,
           mockExistingReserveLocations,
-          undefined,
           false
         )
       );
@@ -618,7 +616,7 @@ describe('ReserveAdjustmentScreen', () => {
     });
 
     it('Tests renderConfirmOnHandsModal confirm button action', () => {
-      const { getByTestId, update } = render(
+      const { getByTestId } = render(
         renderConfirmOnHandsModal(
           defaultAsyncState,
           true,
@@ -627,39 +625,12 @@ describe('ReserveAdjustmentScreen', () => {
           mockDispatch,
           mockTrackEvent,
           mockExistingReserveLocations,
-          undefined,
           false
         )
       );
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockTrackEvent).toBeCalledWith(SCREEN_NAME, {
-        action: 'update_multi_pallet_qty', itemNumber: 1234567890, type: 'multi_OH_qty_update', upcNbr: '000055559999'
-      });
-
-      // Call updateMultiPalletQtyV2 with Pete flag enabled
-      const mockItemPalletResponse: GetItemPalletsResponse = {
-        itemNbr: mockItemDetails.itemNbr,
-        upcNbr: mockItemDetails.upcNbr,
-        category: mockItemDetails.categoryNbr,
-        pallets: mockExistingReserveLocations
-      }
-      update(
-        renderConfirmOnHandsModal(
-          defaultAsyncState,
-          true,
-          mockSetShowOnHandsConfirmModal,
-          mockItemDetails,
-          mockDispatch,
-          mockTrackEvent,
-          mockExistingReserveLocations,
-          mockItemPalletResponse,
-          true
-        )
-      );
-      fireEvent.press(modalConfirmButton);
-      expect(mockDispatch).toBeCalledTimes(2);
       expect(mockTrackEvent).toBeCalledWith(SCREEN_NAME, {
         action: 'update_multi_pallet_qty', itemNumber: 1234567890, type: 'multi_OH_qty_update', upcNbr: '000055559999'
       });
@@ -675,7 +646,6 @@ describe('ReserveAdjustmentScreen', () => {
           mockDispatch,
           mockTrackEvent,
           mockExistingReserveLocations,
-          undefined,
           false
         )
       );
