@@ -94,6 +94,7 @@ import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import { Pallet } from '../../../models/ItemPallets';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -321,13 +322,13 @@ export const getFloorLocationsResult = (
 };
 
 export const getUpdatedReserveLocations = (
-  itemPallets: ItemPalletInfo[] | undefined,
+  itemPallets: Pallet[] | undefined,
   existingReserveLocations: ItemPalletInfo[]
 ) => {
   let updatedReserveLocations = [];
   if (itemPallets && itemPallets.length > 0) {
     if (existingReserveLocations.length > 0) {
-      updatedReserveLocations = itemPallets.map((loc: ItemPalletInfo) => {
+      updatedReserveLocations = itemPallets.map((loc: Pallet) => {
         const alreadyExistedLocation = existingReserveLocations.find(
           existingLoc => existingLoc.palletId === loc.palletId
         );
@@ -335,7 +336,7 @@ export const getUpdatedReserveLocations = (
           ? { ...loc, newQty: alreadyExistedLocation.newQty } : { ...loc, newQty: loc.quantity || 0 };
       });
     } else {
-      updatedReserveLocations = itemPallets.map((loc: ItemPalletInfo) => ({ ...loc, newQty: loc.quantity || 0 }));
+      updatedReserveLocations = itemPallets.map((loc: Pallet) => ({ ...loc, newQty: loc.quantity || 0 }));
     }
     return updatedReserveLocations;
   }

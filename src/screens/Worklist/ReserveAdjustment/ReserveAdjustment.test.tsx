@@ -30,6 +30,8 @@ import { LocationList } from '../../../components/LocationListCard/LocationListC
 import { UPDATE_MULTI_PALLET_UPC_QTY_V2 } from '../../../state/actions/asyncAPI';
 import { UPDATE_PALLET_QTY } from '../../../state/actions/ReserveAdjustmentScreen';
 import { setScannedEvent } from '../../../state/actions/Global';
+import { GetItemPalletsResponse } from '../../../models/ItemPallets';
+import ItemDetails from '../../../models/ItemDetails';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -203,7 +205,7 @@ describe('ReserveAdjustmentScreen', () => {
     const mockDispatch = jest.fn();
     const mockSetGetItemPalletsError = jest.fn();
     const mockExistingReserveLocations: ItemPalletInfo[] = [];
-    const mockItemDetails = getMockItemDetails('123');
+    const mockItemDetails: ItemDetails = getMockItemDetails('123');
     const mockShowDeleteConfirmationModal = true;
     const mockSetShowDeleteConfirmationModal = jest.fn();
     const mockTrackEvent = jest.fn();
@@ -585,7 +587,9 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations
+          mockExistingReserveLocations,
+          undefined,
+          false
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -604,14 +608,16 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations
+          mockExistingReserveLocations,
+          undefined,
+          false
         )
       );
       expect(toJSON()).toMatchSnapshot();
     });
 
     it('Tests renderConfirmOnHandsModal confirm button action', () => {
-      const { getByTestId } = render(
+      const { getByTestId, update } = render(
         renderConfirmOnHandsModal(
           defaultAsyncState,
           true,
@@ -619,12 +625,40 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations
+          mockExistingReserveLocations,
+          undefined,
+          false
         )
       );
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockTrackEvent).toBeCalledWith(SCREEN_NAME, {
+        action: 'update_multi_pallet_qty', itemNumber: 1234567890, type: 'multi_OH_qty_update', upcNbr: '000055559999'
+      });
+
+      // Call updateMultiPalletQtyV2 with Pete flag enabled
+      const mockItemPalletResponse: GetItemPalletsResponse = {
+        itemNbr: mockItemDetails.itemNbr,
+        upcNbr: mockItemDetails.upcNbr,
+        category: mockItemDetails.categoryNbr,
+        pallets: mockExistingReserveLocations
+      }
+      update(
+        renderConfirmOnHandsModal(
+          defaultAsyncState,
+          true,
+          mockSetShowOnHandsConfirmModal,
+          mockItemDetails,
+          mockDispatch,
+          mockTrackEvent,
+          mockExistingReserveLocations,
+          mockItemPalletResponse,
+          true
+        )
+      );
+      fireEvent.press(modalConfirmButton);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(mockTrackEvent).toBeCalledWith(SCREEN_NAME, {
         action: 'update_multi_pallet_qty', itemNumber: 1234567890, type: 'multi_OH_qty_update', upcNbr: '000055559999'
       });
@@ -639,7 +673,9 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations
+          mockExistingReserveLocations,
+          undefined,
+          false
         )
       );
       const modalConfirmButton = getByTestId('modal-cancel-button');

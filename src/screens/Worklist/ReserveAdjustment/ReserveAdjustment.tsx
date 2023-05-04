@@ -56,6 +56,7 @@ import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate
 import { UseStateType } from '../../../models/Generics.d';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import { GetItemPalletsResponse } from '../../../models/ItemPallets';
 
 export const SCREEN_NAME = 'Reserve_Adjustment_Screen';
 
@@ -190,7 +191,7 @@ export const getItemPalletsApiHook = (
     // on api success
     if (getItemPalletsApi.result) {
       if (getItemPalletsApi.result.status === 200) {
-        const { data } = getItemPalletsApi.result;
+        const { data }: {data: GetItemPalletsResponse} = getItemPalletsApi.result;
         const updatedReserveLocations = getUpdatedReserveLocations(data.pallets, existingReserveLocations);
         dispatch(setReserveLocations(updatedReserveLocations));
       } else if (getItemPalletsApi.result.status === 204) {
@@ -378,7 +379,9 @@ export const renderConfirmOnHandsModal = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  reserveLocations: ItemPalletInfo[]
+  reserveLocations: ItemPalletInfo[],
+  itemPallet: GetItemPalletsResponse | undefined,
+  peteGetPallets: boolean
 ) => {
   const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
     {
@@ -442,7 +445,10 @@ export const renderConfirmOnHandsModal = (
                     upcNbr: itemDetails?.upcNbr
                   }
                 );
-                dispatch(updateMultiPalletUPCQtyV2({ itemNbr: itemDetails?.itemNbr, PalletList: newPalletList }));
+                dispatch(updateMultiPalletUPCQtyV2({
+                  itemNbr: peteGetPallets && itemPallet ? itemPallet.itemNbr : itemDetails?.itemNbr,
+                  PalletList: newPalletList
+                }));
               }}
               disabled={itemDetails === null}
             />
@@ -729,7 +735,9 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         itemDetails,
         dispatch,
         trackEventCall,
-        reserveLocations
+        reserveLocations,
+        getItemPalletsApi?.result?.data,
+        userConfig.peteGetPallets
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (

@@ -40,5 +40,6 @@ export const mockConfig: Configurations = {
   showFeedback: false,
   reserveAdjustment: false,
   manualNoAction: false,
-  inProgress: false
+  inProgress: false,
+  peteGetPallets: false
 };
