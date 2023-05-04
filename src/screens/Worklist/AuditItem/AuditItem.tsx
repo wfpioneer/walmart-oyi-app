@@ -58,6 +58,7 @@ import {
   deleteLocation,
   getItemDetails,
   getItemPallets,
+  getItemPalletsV1,
   getLocationDetails,
   noAction,
   updateMultiPalletUPCQty,
@@ -151,6 +152,7 @@ export interface AuditItemScreenProps {
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   updateMultiPalletUPCQtyApi: AsyncState;
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
 }
 
 export const isError = (
@@ -191,7 +193,8 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
     navigation,
     trackEventCall,
     validateSessionCall,
-    itemNumber
+    itemNumber,
+    getItemPalletsDispatch
   } = props;
 
   if (navigation.isFocused()) {
@@ -200,7 +203,7 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
         if (itemNumber > 0) {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: itemNumber }));
-          dispatch(getItemPallets({ itemNbr: itemNumber }));
+          dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
         }
       })
       .catch(() => {
@@ -439,7 +442,8 @@ export const deletePalletApiHook = (
   navigation: NavigationProp<any>,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   palletId: number,
-  itemNbr: number
+  itemNbr: number,
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
 ) => {
   if (navigation.isFocused()) {
     if (!deletePalletApi.isWaiting && deletePalletApi.result) {
@@ -451,7 +455,7 @@ export const deletePalletApiHook = (
           visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
-        dispatch(getItemPallets({ itemNbr }));
+        dispatch(getItemPalletsDispatch({ itemNbr }));
         dispatch({ type: CLEAR_PALLET.RESET });
       }
     } else if (!deletePalletApi.isWaiting && deletePalletApi.error) {
@@ -1012,7 +1016,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     showCalcModalState,
     locationListState,
     countryCode,
-    updateMultiPalletUPCQtyApi
+    updateMultiPalletUPCQtyApi,
+    getItemPalletsDispatch
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1115,7 +1120,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       navigation,
       setShowDeleteConfirmationModal,
       locToConfirm.palletId,
-      itemNumber
+      itemNumber,
+      getItemPalletsDispatch
     ),
     [deletePalletApi]
   );
@@ -1210,7 +1216,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const handleReserveLocsRetry = () => {
     validateSession(navigation, route.name).then(() => {
       dispatch({ type: GET_ITEM_PALLETS.RESET });
-      dispatch(getItemPallets({ itemNbr: itemNumber }));
+      dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
     }).catch(() => { });
   };
 
@@ -1476,25 +1482,27 @@ const AuditItem = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetails
   );
+  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const deletePalletApi = useTypedSelector(state => state.async.clearPallet);
-  const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
+  const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
+    : useTypedSelector(state => state.async.getItemPallets);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
-  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
+  const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
+  const {
+    itemDetails, floorLocations, reserveLocations, scannedPalletId
+  } = useTypedSelector(state => state.AuditItemScreen);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
+
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
-  const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
   const [getItemPalletsError, setGetItemPalletsError] = useState(false);
-  const {
-    itemDetails, floorLocations, reserveLocations, scannedPalletId
-  } = useTypedSelector(state => state.AuditItemScreen);
   const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
-  const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
   const showCalcModalState = useState(false);
@@ -1514,12 +1522,14 @@ const AuditItem = (): JSX.Element => {
   });
 
   const countryCode = useTypedSelector(state => state.User.countryCode);
+  const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <AuditItemScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
       getItemDetailsApi={getItemDetailsApi}
       getItemPalletsApi={getItemPalletsApi}
+      getItemPalletsDispatch={getItemPalletsDispatch}
       deleteFloorLocationApi={deleteFloorLocationApi}
       getLocationApi={getLocationApi}
       updateOHQtyApi={updateOHQtyApi}

@@ -178,7 +178,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   showCalcModalState: [false, jest.fn()],
   locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
   countryCode: 'CN',
-  updateMultiPalletUPCQtyApi: defaultAsyncState
+  updateMultiPalletUPCQtyApi: defaultAsyncState,
+  getItemPalletsDispatch: jest.fn()
 };
 
 describe('AuditItemScreen', () => {
@@ -655,8 +656,18 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests deletePalletApiHook on 200 success for deleting location', () => {
-      deletePalletApiHook(successApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234);
+      const mockGetItemPalletDispatch = jest.fn();
+      deletePalletApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        mockGetItemPalletDispatch
+      );
       expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockGetItemPalletDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
@@ -700,7 +711,15 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests deletePalletApiHook on failure', () => {
-      deletePalletApiHook(failureApi, mockDispatch, navigationProp, mockSetShowDeleteConfirmationModal, 1234, 1234);
+      deletePalletApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        jest.fn()
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));

@@ -68,7 +68,7 @@ export interface ReserveAdjustmentScreenProps {
     dispatch: Dispatch<any>;
     navigation: NavigationProp<any>;
     trackEventCall: (eventName: string, params?: any) => void;
-    getItemPalletsDispatch: ({itemNbr: number}) => void;
+    getItemPalletsDispatch: ({ itemNbr }: {itemNbr: number}) => void;
     validateSessionCall: (
       navigation: NavigationProp<any>,
       route?: string
@@ -273,8 +273,10 @@ export const renderDeleteLocationModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.TRACKER_RED}
               onPress={() => {
-                trackEventCall(SCREEN_NAME,
-                  { action: 'missing_pallet_confirmation_click', palletId: locToConfirm.palletId });
+                trackEventCall(
+                  SCREEN_NAME,
+                  { action: 'missing_pallet_confirmation_click', palletId: locToConfirm.palletId }
+                );
                 if (locToConfirm.mixedPallet && upcNbr) {
                   dispatch(deleteUpcs({
                     palletId: locToConfirm.palletId.toString(),
@@ -431,13 +433,15 @@ export const renderConfirmOnHandsModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={() => {
-                trackEventCall(SCREEN_NAME,
+                trackEventCall(
+                  SCREEN_NAME,
                   {
                     action: 'update_multi_pallet_qty',
                     type: 'multi_OH_qty_update',
                     itemNumber: itemDetails?.itemNbr,
                     upcNbr: itemDetails?.upcNbr
-                  });
+                  }
+                );
                 dispatch(updateMultiPalletUPCQtyV2({ itemNbr: itemDetails?.itemNbr, PalletList: newPalletList }));
               }}
               disabled={itemDetails === null}
@@ -548,7 +552,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     updateMultiPalletUPCQtyV2Api,
     locationListState,
     showCalcModalState,
-    showOnHandsConfirmState
+    showOnHandsConfirmState,
+    getItemPalletsDispatch
   } = props;
   const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = showPalletQtyModalState;
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = showDeleteConfirmationState;
@@ -581,7 +586,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
       if (itemDetails?.itemNbr) {
         dispatch({ type: GET_ITEM_PALLETS.RESET });
         setGetItemPalletsError(false);
-        dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
+        dispatch(getItemPalletsDispatch({ itemNbr: itemDetails.itemNbr }));
       }
     }).catch(() => {
       trackEventCall(SCREEN_NAME, { action: 'session_timeout', user: userId });
@@ -610,10 +615,11 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name)
       .then(() => {
-        trackEventCall(SCREEN_NAME,
+        trackEventCall(
+          SCREEN_NAME,
           { action: 'refresh_reserve_loc', itemNumber: itemDetails?.itemNbr });
         if (itemDetails?.itemNbr) {
-          dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
+          dispatch(getItemPalletsDispatch({ itemNbr: itemDetails.itemNbr }));
         }
       })
       .catch(() => {
@@ -658,7 +664,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     useCallbackHook(() => {
       validateSession(navigation, route.name).then(() => {
         if (itemDetails?.itemNbr) {
-          dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
+          dispatch(getItemPalletsDispatch({ itemNbr: itemDetails.itemNbr }));
         }
       });
     }, [navigation])
@@ -786,7 +792,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
 
 const ReserveAdjustment = (): JSX.Element => {
   const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
-  const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1) : useTypedSelector(state => state.async.getItemPallets);
+  const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
+    : useTypedSelector(state => state.async.getItemPallets);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
   const updateMultiPalletUPCQtyV2Api = useTypedSelector(state => state.async.updateMultiPalletUPCQtyV2);
@@ -814,7 +821,7 @@ const ReserveAdjustment = (): JSX.Element => {
     locationType: 'floor',
     palletId: '-1'
   });
-  const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPallets : getItemPalletsV1;
+  const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <ReserveAdjustmentScreen
       getItemPalletsApi={getItemPalletsApi}

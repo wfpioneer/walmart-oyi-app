@@ -152,7 +152,8 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
     jest.fn()
   ],
   updateMultiPalletUPCQtyV2Api: defaultAsyncState,
-  showOnHandsConfirmState: [false, jest.fn()]
+  showOnHandsConfirmState: [false, jest.fn()],
+  getItemPalletsDispatch: jest.fn()
 };
 
 describe('ReserveAdjustmentScreen', () => {
