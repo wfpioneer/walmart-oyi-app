@@ -11,7 +11,7 @@ export default class UpdateApprovalListService {
   ): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
 
-    return Request.put(
+    return Request.patch(
       `${urls.worklistURL}/managerapproval/items`,
       payload.approvalItems,
       {
