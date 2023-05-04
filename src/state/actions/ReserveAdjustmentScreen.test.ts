@@ -13,7 +13,7 @@ import {
   updatePalletScannedStatus
 } from './ReserveAdjustmentScreen';
 import { getMockItemDetails } from '../../mockData';
-import { itemPallets } from '../../mockData/getItemPallets';
+import { mockPalletLocations } from '../../mockData/getItemPallets';
 
 describe('ReserveAdjustmentScreen actions', () => {
   const mockItemDetails = getMockItemDetails('123');
@@ -26,11 +26,10 @@ describe('ReserveAdjustmentScreen actions', () => {
     });
   });
   it('handles setting reserve locations in ReserveAdjustmentScreen redux state', () => {
-    const mockReserveLocations = itemPallets.pallets;
-    const setReserveLocationsResult = setReserveLocations(mockReserveLocations);
+    const setReserveLocationsResult = setReserveLocations(mockPalletLocations);
     expect(setReserveLocationsResult).toStrictEqual({
       type: SET_RESERVE_LOCATIONS,
-      payload: mockReserveLocations
+      payload: mockPalletLocations
     });
   });
   it('handles clearing the ReserveAdjustmentScreen data', () => {

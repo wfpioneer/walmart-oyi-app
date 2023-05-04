@@ -25,7 +25,7 @@ import { getMockItemDetails } from '../../../mockData';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { strings } from '../../../locales';
-import { itemPallets } from '../../../mockData/getItemPallets';
+import { mockPalletLocations } from '../../../mockData/getItemPallets';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import { UPDATE_MULTI_PALLET_UPC_QTY_V2 } from '../../../state/actions/asyncAPI';
 import { UPDATE_PALLET_QTY } from '../../../state/actions/ReserveAdjustmentScreen';
@@ -191,7 +191,7 @@ describe('ReserveAdjustmentScreen', () => {
     const { toJSON } = render(
       renderpalletQtyUpdateModal(
         4988,
-        itemPallets.pallets,
+        mockPalletLocations,
         mockDispatch,
         mockShowPalletQtyModal,
         mocksetShowPalletQtyUpdateModal,
@@ -214,7 +214,7 @@ describe('ReserveAdjustmentScreen', () => {
 
     const mockScannedEvent = {
       type: 'TEST',
-      value: '4598'
+      value: '6775'
     };
     afterEach(() => {
       jest.clearAllMocks();
@@ -382,7 +382,7 @@ describe('ReserveAdjustmentScreen', () => {
       getScannedPalletEffect(
         navigationProp,
         mockScannedEvent,
-        itemPallets.pallets,
+        mockPalletLocations,
         mockDispatch,
         mocksetShowPalletQtyUpdateModal
       );
@@ -399,7 +399,8 @@ describe('ReserveAdjustmentScreen', () => {
           sectionId: 5578,
           locationName: 'D1-4',
           mixedPallet: false,
-          newQty: 16
+          newQty: 16,
+          upcNbr: '456789'
         }
       ];
       getScannedPalletEffect(

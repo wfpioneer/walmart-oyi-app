@@ -94,7 +94,7 @@ import { UseStateType } from '../../../models/Generics.d';
 import { approvalRequestSource } from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
-import { Pallet } from '../../../models/ItemPallets';
+import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -483,7 +483,7 @@ export const getItemPalletsApiHook = (
     // on api success
     if (!getItemPalletsApi.isWaiting && getItemPalletsApi.result) {
       if (getItemPalletsApi.result.status === 200) {
-        const { data } = getItemPalletsApi.result;
+        const { data }: {data: GetItemPalletsResponse} = getItemPalletsApi.result;
         const updatedReserveLocations = getUpdatedReserveLocations(data.pallets, existingReserveLocations);
         dispatch(setReserveLocations(updatedReserveLocations));
       }
