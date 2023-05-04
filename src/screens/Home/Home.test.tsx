@@ -58,8 +58,10 @@ const homeScreenProps: HomeScreenProps = {
   setWorklistType: jest.fn(),
   isManualScanEnabled: false,
   worklistSummaryApiState: { ...defaultAsyncState },
+  worklistSummaryV2ApiState: { ...defaultAsyncState },
   userConfigUpdateApiState: { ...defaultAsyncState },
   getWorklistSummary: jest.fn(),
+  getWorklistSummaryV2: jest.fn(),
   navigation: navigationProp,
   updateFilterExceptions: jest.fn(),
   route: routeProp,
@@ -178,7 +180,8 @@ describe('HomeScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('renders worklist summaries when worklistApiState.result.data has summaries, missing pallet and audits enabled',
+    it(
+      'renders worklist summaries when worklistApiState.result.data has summaries, missing pallet and audits enabled',
       () => {
         props = {
           ...homeScreenProps,
@@ -197,9 +200,11 @@ describe('HomeScreen', () => {
           {...props}
         />);
         expect(renderer.getRenderOutput()).toMatchSnapshot();
-      });
+      }
+    );
 
-    it('renders wl summaries when api data has summaries, mp and audits enabled with rollover flag true',
+    it(
+      'renders wl summaries when api data has summaries, mp and audits enabled with rollover flag true',
       () => {
         props = {
           ...homeScreenProps,
@@ -220,7 +225,8 @@ describe('HomeScreen', () => {
           {...props}
         />);
         expect(renderer.getRenderOutput()).toMatchSnapshot();
-      });
+      }
+    );
 
     it('renders worklist summaries when worklistApiState.result.data has summaries (items 100% complete)', () => {
       props = {

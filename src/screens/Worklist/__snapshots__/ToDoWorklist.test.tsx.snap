@@ -17,6 +17,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "000055559999",
+        "worklistStatus": "TODO",
         "worklistType": "NSFL",
       },
       Object {
@@ -30,6 +31,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777555333",
+        "worklistStatus": "TODO",
         "worklistType": "NO",
       },
       Object {
@@ -43,6 +45,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "111122223333",
+        "worklistStatus": "TODO",
         "worklistType": "NO",
       },
       Object {
@@ -56,6 +59,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "444455556666",
+        "worklistStatus": "TODO",
         "worklistType": "C",
       },
       Object {
@@ -69,6 +73,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777788889999",
+        "worklistStatus": "TODO",
         "worklistType": "C",
       },
       Object {
@@ -82,6 +87,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "667788889999",
+        "worklistStatus": "TODO",
         "worklistType": "NS",
       },
     ]
@@ -152,6 +158,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "000055559999",
+        "worklistStatus": "TODO",
         "worklistType": "NSFL",
       },
       Object {
@@ -165,6 +172,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777555333",
+        "worklistStatus": "TODO",
         "worklistType": "NO",
       },
       Object {
@@ -178,6 +186,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "111122223333",
+        "worklistStatus": "TODO",
         "worklistType": "NO",
       },
       Object {
@@ -191,6 +200,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "444455556666",
+        "worklistStatus": "TODO",
         "worklistType": "C",
       },
       Object {
@@ -204,6 +214,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777788889999",
+        "worklistStatus": "TODO",
         "worklistType": "C",
       },
       Object {
@@ -217,6 +228,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "667788889999",
+        "worklistStatus": "TODO",
         "worklistType": "NS",
       },
     ]

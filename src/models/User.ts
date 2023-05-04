@@ -41,6 +41,7 @@ export interface Configurations {
   reserveAdjustment: boolean;
   manualNoAction: boolean;
   peteGetPallets: boolean;
+  inProgress: boolean;
 }
 
 export interface area {

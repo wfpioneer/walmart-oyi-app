@@ -29,6 +29,7 @@ export interface ConfigResponse {
   reserveAdjustment: boolean;
   manualNoAction: boolean;
   peteGetPallets: boolean;
+  inProgress: boolean;
 }
 
 export default class ConfigService {

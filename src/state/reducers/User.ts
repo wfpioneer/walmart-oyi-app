@@ -45,7 +45,8 @@ export const initialState: User = {
     showFeedback: false,
     reserveAdjustment: false,
     manualNoAction: false,
-    peteGetPallets: false
+    peteGetPallets: false,
+    inProgress: false
   }
 };
 
@@ -92,7 +93,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           showFeedback: action.payload.showFeedback || false,
           reserveAdjustment: action.payload.reserveAdjustment || false,
           manualNoAction: action.payload.manualNoAction || false,
-          peteGetPallets: action.payload.peteGetPallets || false
+          peteGetPallets: action.payload.peteGetPallets || false,
+          inProgress: action.payload.inProgress || false
         }
       };
     default:

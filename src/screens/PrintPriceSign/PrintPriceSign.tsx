@@ -140,14 +140,17 @@ interface PriceSignProps {
 }
 
 export const getPrinter = (
-  selectedPrinter: Printer | null, selectedSignType: PrintPaperSize, countryCode: string
+  selectedPrinter: Printer | null,
+  selectedSignType: PrintPaperSize,
+  countryCode: string
 ): LaserPaperCn | PortablePaperCn | LaserPaperMx | PortablePaperMx | LaserPaperPrice => {
   const sizeObject = getPaperSizeBasedOnCountry(selectedPrinter?.type, countryCode);
   // @ts-expect-error selectSignType contains keys that do not exist for each enum
   return sizeObject[selectedSignType];
 };
 
-const isValid = (actionCompleted: boolean, exceptionType: string) => !actionCompleted && exceptionType === 'PO';
+const isValid = (actionCompleted: boolean, exceptionType: string) => !actionCompleted
+  && (exceptionType === 'PO' || exceptionType === 'C');
 
 export const isItemSizeExists = (
   printQueue: PrintQueueItem[],
