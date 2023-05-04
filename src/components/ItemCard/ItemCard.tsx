@@ -26,7 +26,7 @@ interface ItemCardProps {
   disabled?: boolean;
   showOHItems?: boolean;
   OHItemInfo?: OHItemInfoI;
-  pendingOH?: boolean;
+  pendingQty?: number | undefined;
 }
 
 interface OtherOnHandsItemsProps {
@@ -130,7 +130,7 @@ const OtherOnHandsItems = (props: OtherOnHandsItemsProps) => {
 
 const ItemCard = ({
   itemNumber, description, onClick, loading, onHandQty, disabled,
-  countryCode, showItemImage, showOHItems, OHItemInfo, pendingOH
+  countryCode, showItemImage, showOHItems, OHItemInfo, pendingQty
 }: ItemCardProps) => (
   <View style={styles.mainContainer}>
     <TouchableOpacity
@@ -165,7 +165,7 @@ const ItemCard = ({
         {onHandQty !== undefined && (
           <View style={styles.itemQtyView}>
             <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
-              {pendingOH && (<Text style={styles.itemNbr}>{` (${strings('ITEM.PENDING_MGR_APPROVAL')})`}</Text>)}
+              {pendingQty && pendingQty >= 0 && (<Text style={styles.itemNbr}>{` (${pendingQty})`}</Text>)}
           </View>
         )}
       </View>
@@ -179,7 +179,7 @@ ItemCard.defaultProps = {
   showOHItems: false,
   OHItemInfo: defaultOHItemValues,
   disabled: false,
-  pendingOH: false,
+  pendingQty: -999,
   onClick: () => {}
 };
 

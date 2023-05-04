@@ -1,47 +1,26 @@
-import React, {
-  EffectCallback,
-  RefObject,
-  createRef,
-  useEffect,
-  useState
-} from 'react';
-import {
-  ActivityIndicator,
-  EmitterSubscription,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-  useRoute
-} from '@react-navigation/native';
+import React, {createRef, EffectCallback, RefObject, useEffect, useState} from 'react';
+import {ActivityIndicator, EmitterSubscription, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {NavigationProp, RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
+import {useDispatch} from 'react-redux';
+import {Dispatch} from 'redux';
 import Toast from 'react-native-toast-message';
-import { AxiosError, AxiosHeaders } from 'axios';
+import {AxiosError, AxiosHeaders} from 'axios';
 import moment from 'moment';
-import { barcodeEmitter } from '../../../utils/scannerUtils';
-import { CustomModalComponent } from '../../Modal/Modal';
-import { useTypedSelector } from '../../../state/reducers/RootReducer';
-import { trackEvent } from '../../../utils/AppCenterTool';
-import { validateSession } from '../../../utils/sessionTimeout';
+import {barcodeEmitter} from '../../../utils/scannerUtils';
+import {CustomModalComponent} from '../../Modal/Modal';
+import {useTypedSelector} from '../../../state/reducers/RootReducer';
+import {trackEvent} from '../../../utils/AppCenterTool';
+import {validateSession} from '../../../utils/sessionTimeout';
 import Location from '../../../models/Location';
-import { Configurations } from '../../../models/User';
+import {Configurations} from '../../../models/User';
 import ItemDetails from '../../../models/ItemDetails';
 import styles from './AuditItem.style';
 import ManualScanComponent from '../../../components/manualscan/ManualScan';
-import { currencies, strings } from '../../../locales';
+import {currencies, strings} from '../../../locales';
 import COLOR from '../../../themes/Color';
-import {
-  resetScannedEvent,
-  setScannedEvent
-} from '../../../state/actions/Global';
+import {resetScannedEvent, setScannedEvent} from '../../../state/actions/Global';
 import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreenFooter';
 
 import {
@@ -60,21 +39,20 @@ import {
   getItemPallets,
   getLocationDetails,
   noAction,
+  updateApprovalList,
   updateMultiPalletUPCQty,
   updateOHQty
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
-import LocationListCard, {
-  LocationList
-} from '../../../components/LocationListCard/LocationListCard';
+import LocationListCard, {LocationList} from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 import {
   setFloorLocations as setItemFloorLocations,
   setReserveLocations as setItemReserveLocations,
   setupScreen
 } from '../../../state/actions/ItemDetailScreen';
-import { AsyncState } from '../../../models/AsyncState';
+import {AsyncState} from '../../../models/AsyncState';
 import {
   clearAuditScreenData,
   setFloorLocations,
@@ -85,14 +63,19 @@ import {
   updatePalletQty,
   updatePalletScannedStatus
 } from '../../../state/actions/AuditItemScreen';
-import { ItemPalletInfo } from '../../../models/AuditItem';
-import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import {ItemPalletInfo} from '../../../models/AuditItem';
+import {SNACKBAR_TIMEOUT} from '../../../utils/global';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
 import Button from '../../../components/buttons/Button';
-import { UseStateType } from '../../../models/Generics.d';
-import { approvalRequestSource } from '../../../models/ApprovalListItem';
+import {UseStateType} from '../../../models/Generics.d';
+import {
+  approvalAction,
+  ApprovalListItem,
+  approvalRequestSource,
+  approvalStatus
+} from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
-import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import {UpdateMultiPalletUPCQtyRequest} from '../../../services/PalletManagement.service';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -1334,14 +1317,39 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty || 0;
     const pendingQty = itemDetails?.pendingOnHandsQty || -999;
+    const approvalItem: ApprovalListItem = {
+      itemName: itemDetails?.itemName || '',
+      itemNbr: itemDetails?.itemNbr || 0,
+      upcNbr: parseInt(itemDetails?.upcNbr || '0', 10),
+      categoryNbr: itemDetails?.categoryNbr || 0,
+      categoryDescription: itemDetails?.categoryDesc || '',
+      subCategoryNbr: 0,
+      subCategoryDescription: '',
+      oldQuantity: itemOHQty,
+      newQuantity: itemOHQty,
+      dollarChange: 0,
+      initiatedUserId: '',
+      initiatedTimestamp: '',
+      approvalStatus: approvalStatus.Pending,
+      approvalRequestSource: approvalRequestSource.Audits
+    }
     trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
-    if (getItemQuantity(itemOHQty, pendingQty) === totalOHQty) {
+    if (itemOHQty === totalOHQty && pendingQty < 0) {
       dispatch(
         noAction({
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
           scannedValue: itemNumber.toString(),
           headers: new AxiosHeaders({ worklistType: route.params?.worklistType ?? 'AU' })
+        })
+      );
+    } else if (itemOHQty === totalOHQty && pendingQty >= 0) {
+      dispatch(
+        updateApprovalList({
+          approvalItems: [approvalItem],
+          headers: {
+            action: approvalAction.Cancel
+          }
         })
       );
     } else {
@@ -1402,14 +1410,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         <ItemCard
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
-          onHandQty={itemDetails ? getItemQuantity(itemDetails.onHandsQty, itemDetails.pendingOnHandsQty) : 0}
+          onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
+          pendingQty={itemDetails ? itemDetails.pendingOnHandsQty : -999}
           onClick={() => {
             trackEventCall('Audit_Item', { action: 'item_card_click', itemNumber: itemDetails?.itemNbr });
           }}
           loading={getItemDetailsApi.isWaiting}
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
-          pendingOH={itemDetails ? itemDetails.pendingOnHandsQty >= 0 : false}
         />
       </View>
       <ScrollView
