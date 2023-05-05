@@ -26,6 +26,7 @@ import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreen
 import {
   CLEAR_PALLET,
   DELETE_LOCATION,
+  GET_APPROVAL_LIST,
   GET_ITEM_DETAILS,
   GET_ITEM_PALLETS,
   NO_ACTION,
@@ -35,6 +36,7 @@ import {
 import {
   clearPallet,
   deleteLocation,
+  getApprovalList,
   getItemDetails,
   getItemPallets,
   getLocationDetails,
@@ -55,6 +57,7 @@ import {
 import {AsyncState} from '../../../models/AsyncState';
 import {
   clearAuditScreenData,
+  setApprovalItem,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
@@ -86,6 +89,7 @@ export interface AuditItemScreenProps {
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
   completeItemApi: AsyncState;
+  getItemApprovalApi: AsyncState;
   // eslint-disable-next-line react/no-unused-prop-types
   userId: string;
   floorLocations: Location[];
@@ -191,6 +195,7 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: itemNumber }));
           dispatch(getItemPallets({ itemNbr: itemNumber }));
+          dispatch(getApprovalList({ itemNbr: itemNumber, status: approvalStatus.Pending }));
         }
       })
       .catch(() => {
@@ -488,6 +493,34 @@ export const getItemPalletsApiHook = (
       } else {
         setGetItemPalletsError(true);
       }
+      dispatch({ type: GET_ITEM_PALLETS.RESET });
+    }
+  }
+};
+
+export const getItemApprovalApiHook = (
+  getItemApprovalApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  console.log('test');
+  if (navigation.isFocused()) {
+    console.log('test1');
+    // on api success
+    if (!getItemApprovalApi.isWaiting && getItemApprovalApi.result) {
+      if (getItemApprovalApi.result.status === 200) {
+        if (getItemApprovalApi.result.data) {
+          dispatch(setApprovalItem(getItemApprovalApi.result.data[0]));
+        }
+      }
+      if (getItemApprovalApi.result.status === 204) {
+
+      }
+      dispatch({ type: GET_APPROVAL_LIST.RESET });
+    }
+    // No pallets associated with the item
+    if (!getItemApprovalApi.isWaiting && getItemApprovalApi.error) {
+
       dispatch({ type: GET_ITEM_PALLETS.RESET });
     }
   }
@@ -972,6 +1005,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     getItemDetailsApi,
     deleteFloorLocationApi,
     updateOHQtyApi,
+    getItemApprovalApi,
     route,
     dispatch,
     navigation,
@@ -1096,6 +1130,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     ),
     [deleteFloorLocationApi]
   );
+
+  // get approval api
+  useEffectHook(() => getItemApprovalApiHook(getItemApprovalApi, dispatch, navigation));
 
   // report missing pallet API
   useEffectHook(
@@ -1332,7 +1369,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       initiatedTimestamp: '',
       approvalStatus: approvalStatus.Pending,
       approvalRequestSource: approvalRequestSource.Audits
-    }
+    };
     trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
     if (itemOHQty === totalOHQty && pendingQty < 0) {
       dispatch(
@@ -1499,6 +1536,7 @@ const AuditItem = (): JSX.Element => {
   const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
+  const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
   const route = useRoute();
   const dispatch = useDispatch();
@@ -1541,6 +1579,7 @@ const AuditItem = (): JSX.Element => {
       getLocationApi={getLocationApi}
       updateOHQtyApi={updateOHQtyApi}
       completeItemApi={completeItemApi}
+      getItemApprovalApi={getItemApprovalApi}
       route={route}
       dispatch={dispatch}
       navigation={navigation}

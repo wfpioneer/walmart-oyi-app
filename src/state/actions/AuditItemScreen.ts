@@ -1,6 +1,7 @@
 import { ItemPalletInfo } from '../../models/AuditItem';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
+import {ApprovalListItem} from "../../models/ApprovalListItem";
 
 export const SET_ITEM_DETAILS = 'AUDIT_ITEM_SCREEN/SET_ITEM_DETAILS';
 export const SET_FLOOR_LOCATIONS = 'AUDIT_ITEM_SCREEN/SET_FLOOR_LOCATIONS';
@@ -10,6 +11,7 @@ export const SET_SCANNED_PALLET_ID = 'AUDIT_ITEM_SCREEN/SET_SCANNED_PALLET_ID';
 export const UPDATE_PALLET_QTY = 'AUDIT_ITEM_SCREEN/UPDATE_PALLET_QTY';
 export const UPDATE_FLOOR_LOCATION_QTY = 'AUDIT_ITEM_SCREEN/UPDATE_FLOOR_LOCATION_QTY';
 export const UPDATE_SCANNED_PALLET_STATUS = 'AUDIT_ITEM_SCREEN/UPDATE_SCANNED_PALLET_STATUS';
+export const SET_APPROVAL_ITEM = 'AUDIT_ITEM_SCREEN/SET_APPROVAL_ITEM';
 
 export const setItemDetails = (items: ItemDetails) => ({
   type: SET_ITEM_DETAILS,
@@ -50,6 +52,11 @@ export const updatePalletScannedStatus = (palletId: number, scanned: boolean) =>
   payload: { palletId, scanned }
 } as const);
 
+export const setApprovalItem = (approvalItem: ApprovalListItem | null) => ({
+  type: SET_APPROVAL_ITEM,
+  payload: approvalItem
+}as const)
+
 export type Actions =
   | ReturnType<typeof setItemDetails>
   | ReturnType<typeof setFloorLocations>
@@ -59,3 +66,4 @@ export type Actions =
   | ReturnType<typeof updatePalletQty>
   | ReturnType<typeof updateFloorLocationQty>
   | ReturnType<typeof updatePalletScannedStatus>
+  | ReturnType<typeof setApprovalItem>
