@@ -379,14 +379,13 @@ export const renderConfirmOnHandsModal = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  reserveLocations: ItemPalletInfo[],
-  peteGetPallets: boolean
+  reserveLocations: ItemPalletInfo[]
 ) => {
   const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
       expirationDate: '', // This is fine as it does not update the expiration date on the pallet
-      upcs: [{ upcNbr: peteGetPallets ? item.upcNbr : itemDetails?.upcNbr || '0', quantity: item.newQty }]
+      upcs: [{ upcNbr: item.upcNbr, quantity: item.newQty }]
     }
   ));
 
@@ -734,8 +733,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         itemDetails,
         dispatch,
         trackEventCall,
-        reserveLocations,
-        userConfig.peteGetPallets
+        reserveLocations
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (

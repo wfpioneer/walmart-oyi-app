@@ -768,8 +768,7 @@ describe('AuditItemScreen', () => {
         successApi,
         mockDispatch,
         navigationProp,
-        mockReserveLocations,
-        mockItemDetails
+        mockReserveLocations
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -785,7 +784,7 @@ describe('AuditItemScreen', () => {
         PalletList: [{
           expirationDate: '',
           palletId: mockReserveLocations[0].palletId,
-          upcs: [{ upcNbr: mockItemDetails.upcNbr, quantity: mockReserveLocations[0].newQty }]
+          upcs: [{ upcNbr: mockReserveLocations[0].upcNbr, quantity: mockReserveLocations[0].newQty }]
         }]
       }));
     });
@@ -795,8 +794,7 @@ describe('AuditItemScreen', () => {
         failureApi,
         mockDispatch,
         navigationProp,
-        mockPalletLocations,
-        mockItemDetails
+        mockPalletLocations
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -1211,7 +1209,7 @@ describe('AuditItemScreen', () => {
           upcs: [{ upcNbr: mockPallet.upcNbr || '0', quantity: mockPallet.newQty }]
         }));
 
-      const multiPalletListResult = getMultiPalletList(mockPalletLocations, mockItemDetails);
+      const multiPalletListResult = getMultiPalletList(mockPalletLocations);
       expect(multiPalletListResult).toStrictEqual(multiPalletUPCRequestBody);
     });
   });

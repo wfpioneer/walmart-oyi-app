@@ -30,7 +30,6 @@ import { LocationList } from '../../../components/LocationListCard/LocationListC
 import { UPDATE_MULTI_PALLET_UPC_QTY_V2 } from '../../../state/actions/asyncAPI';
 import { UPDATE_PALLET_QTY } from '../../../state/actions/ReserveAdjustmentScreen';
 import { setScannedEvent } from '../../../state/actions/Global';
-import { GetItemPalletsResponse } from '../../../models/ItemPallets';
 import ItemDetails from '../../../models/ItemDetails';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
@@ -588,8 +587,7 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations,
-          false
+          mockExistingReserveLocations
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -608,8 +606,7 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations,
-          false
+          mockExistingReserveLocations
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -624,8 +621,7 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations,
-          false
+          mockExistingReserveLocations
         )
       );
       const modalConfirmButton = getByTestId('modal-confirm-button');
@@ -645,8 +641,7 @@ describe('ReserveAdjustmentScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEvent,
-          mockExistingReserveLocations,
-          false
+          mockExistingReserveLocations
         )
       );
       const modalConfirmButton = getByTestId('modal-cancel-button');

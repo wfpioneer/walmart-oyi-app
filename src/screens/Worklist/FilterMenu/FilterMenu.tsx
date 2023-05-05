@@ -30,6 +30,7 @@ import { WorklistState } from '../../../state/reducers/Worklist';
 import { WorklistGoal, WorklistSummary } from '../../../models/WorklistSummary';
 import { RenderCategoryCollapsibleCard } from '../../../components/CategoryCollapsibleCard/CategoryCollapsibleCard';
 import { MenuCard } from '../../../components/FilterMenuCard/FilterMenuCard';
+import { getWorklistSummaryV2 } from '../../../state/actions/asyncAPI';
 
 interface FilteredArea extends area {
   isSelected: boolean;
@@ -523,7 +524,7 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
   const appUser = useTypedSelector(state => state.User);
   const { areas, enableAreaFilter, showRollOverAudit } = appUser.configs;
   const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummary.result?.data);
-
+  const wlSummaryV2: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data) || [];
   const result = workListType === 'AUDIT' ? workListAuditApi.result : workListApi.result;
   const data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
   const categoryMap: FilteredCategory[] = getCategoryMap(
@@ -544,7 +545,7 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
       areas={areas}
       categoryMap={categoryMap}
       enableAreaFilter={enableAreaFilter}
-      wlSummary={wlSummary || []}
+      wlSummary={wlSummary || wlSummaryV2}
       selectedWorklistGoal={selectedWorklistGoal}
       showRollOverAudit={showRollOverAudit}
       screenName={screenName}

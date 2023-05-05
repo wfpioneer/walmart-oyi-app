@@ -573,12 +573,12 @@ export const renderpalletQtyUpdateModal = (
   );
 };
 
-export const getMultiPalletList = (reserveLocations: ItemPalletInfo[], itemDetails: ItemDetails | null) => {
+export const getMultiPalletList = (reserveLocations: ItemPalletInfo[]) => {
   const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
       expirationDate: '', // This is fine as it does not update the expiration date on the pallet
-      upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
+      upcs: [{ upcNbr: item.upcNbr || '0', quantity: item.newQty }]
     }
   ));
 
@@ -613,7 +613,7 @@ export const completeItemApiHook = (
       dispatch({ type: NO_ACTION.RESET });
       // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
       if (hasNewQty) {
-        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
       } else {
         navigation.goBack();
       }
@@ -626,7 +626,6 @@ export const updateOHQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
-  itemDetails: ItemDetails | null
 ) => {
   if (navigation.isFocused()) {
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
@@ -638,7 +637,7 @@ export const updateOHQtyApiHook = (
       });
       dispatch({ type: UPDATE_OH_QTY.RESET });
 
-      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
     }
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
       Toast.show({
@@ -1144,8 +1143,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateOHQtyApi,
     dispatch,
     navigation,
-    reserveLocations,
-    itemDetails
+    reserveLocations
   ), [updateOHQtyApi]);
 
   // Update Multiple Pallet's UPC Qty API
