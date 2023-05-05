@@ -970,11 +970,15 @@ export const disabledContinue = (
   );
 
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
-  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(
-    b.locationName,
-    undefined,
-    { numeric: true }
-  );
+  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => {
+    if (a.locationName > b.locationName) return 1;
+    if (a.locationName < b.locationName) return -1;
+
+    if (a.palletId > b.palletId) return 1;
+    if (a.palletId < b.palletId) return -1;
+
+    return 0;
+  };
 
   return locations.sort(sortLocationNames);
 };
