@@ -35,7 +35,6 @@ export interface AuditWorklistTabScreenProps {
     items: WorklistItemI[];
     navigation: NavigationProp<any>;
     dispatch: Dispatch<any>;
-    toDo: boolean;
     refreshing: boolean;
     error: AxiosError | null;
     filterExceptions: string[];
@@ -53,25 +52,29 @@ const onItemClick = (
   itemNumber: number,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
-  trackEventCall: typeof trackEvent,
-  worklistType: string
+  trackEventCall: typeof trackEvent
 ) => {
   dispatch(setAuditItemNumber(itemNumber));
   trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
-  navigation.navigate('AuditItem', { worklistType });
+  navigation.navigate('AuditItem');
 };
 
 const renderCategoryCard = (
-  category: string, items: WorklistItemI[], collapsed: boolean, navigation: NavigationProp<any>,
-  dispatch: Dispatch<any>, trackEventCall: typeof trackEvent,
-  showItemImage: boolean, countryCode: string
+  category: string,
+  items: WorklistItemI[],
+  collapsed: boolean,
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
+  showItemImage: boolean,
+  countryCode: string
 ) => (
   <CategoryCard
     category={category}
     listOfItems={items}
     collapsed={collapsed}
-    onItemCardClick={(itemNumber: number, worklistType: string) => {
-      onItemClick(itemNumber, navigation, dispatch, trackEventCall, worklistType);
+    onItemCardClick={(itemNumber: number) => {
+      onItemClick(itemNumber, navigation, dispatch, trackEventCall);
     }}
     showItemImage={showItemImage}
     countryCode={countryCode}
@@ -229,9 +232,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         <FlatList
           data={[...typedFilterExceptions, ...typedFilterAreaOrCategoryList]}
           horizontal
-          renderItem={({ item }) => renderFilterPills(
-            item, dispatch, filterCategories, filterExceptions, fullExceptionList, areas
-          )}
+          renderItem={({ item }) => renderFilterPills(item, dispatch, filterCategories, filterExceptions, fullExceptionList, areas)}
           style={styles.filterList}
           keyExtractor={item => item.value}
         />
@@ -242,8 +243,10 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         <CollapseAllBar
           collapsed={collapsed}
           onclick={() => {
-            trackEventCall('Audit_Worklist',
-              { action: `${collapsed ? 'expand' : 'collapse'}_audit_item_worklists_click` });
+            trackEventCall(
+              'Audit_Worklist',
+              { action: `${collapsed ? 'expand' : 'collapse'}_audit_item_worklists_click` }
+            );
             setCollapsed(!collapsed);
           }}
         />
@@ -251,8 +254,14 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
       <FlatList
         data={auditItemKeys}
         renderItem={({ item: key }) => renderCategoryCard(
-          key, itemsBasedOnCategory[key], collapsed, navigation, dispatch, trackEventCall,
-          showItemImage, countryCode
+          key,
+          itemsBasedOnCategory[key],
+          collapsed,
+          navigation,
+          dispatch,
+          trackEventCall,
+          showItemImage,
+          countryCode
         )}
         keyExtractor={item => `category-${item}`}
         onRefresh={() => {
@@ -284,7 +293,6 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       items={items}
       dispatch={dispatch}
       navigation={navigation}
-      toDo={toDo}
       refreshing={isWaiting}
       error={error}
       filterExceptions={filterExceptions}

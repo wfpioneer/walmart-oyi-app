@@ -613,6 +613,33 @@ describe('PrintPriceSignScreen', () => {
         'NSFL'
       );
       expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('PRINT.PRICE_SIGN_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+
+      const printSuccess204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 204
+        }
+      };
+      printSignApiHook(
+        printSuccess204,
+        navigationProp,
+        mockSetError,
+        mockDispatch,
+        true,
+        'NSFL'
+      );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
 
       printSignApiHook(
         printFailureApi,
@@ -999,13 +1026,21 @@ describe('PrintPriceSignScreen', () => {
     });
 
     it('Tests navListenerHook', () => {
-      navigationProp.addListener = jest.fn().mockImplementation((event, callBack) => {
-        callBack();
-      });
+      navigationProp.addListener = jest
+        .fn()
+        .mockImplementation((event, callBack) => {
+          callBack();
+        });
 
       navListenerHook(navigationProp, mockDispatch, LocationName.SECTION, true);
-      expect(navigationProp.addListener).toBeCalledWith('beforeRemove', expect.any(Function));
-      expect(navigationProp.addListener).toBeCalledWith('focus', expect.any(Function));
+      expect(navigationProp.addListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(navigationProp.addListener).toBeCalledWith(
+        'focus',
+        expect.any(Function)
+      );
       expect(mockDispatch).toBeCalledTimes(7);
     });
   });
