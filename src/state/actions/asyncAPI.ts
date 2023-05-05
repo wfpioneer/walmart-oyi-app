@@ -168,6 +168,9 @@ export const reportMissingPallet = makeAsyncActionCreators(REPORT_MISSING_PALLET
 export const GET_ITEM_PALLETS = makeAsyncActionTypes('API/GET_ITEM_PALLETS');
 export const getItemPallets = makeAsyncActionCreators(GET_ITEM_PALLETS);
 
+export const GET_ITEM_PALLETS_V1 = makeAsyncActionTypes('API/GET_ITEM_PALLETS');
+export const getItemPalletsV1 = makeAsyncActionCreators(GET_ITEM_PALLETS_V1);
+
 export const UPDATE_MULTI_PALLET_UPC_QTY = makeAsyncActionTypes('API/UPDATE_MULTI_PALLET_UPC_QTY');
 export const updateMultiPalletUPCQty = makeAsyncActionCreators(UPDATE_MULTI_PALLET_UPC_QTY);
 

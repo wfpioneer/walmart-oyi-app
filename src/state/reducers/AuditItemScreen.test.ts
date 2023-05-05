@@ -10,7 +10,7 @@ import {
 } from '../actions/AuditItemScreen';
 import { AuditItemScreen, AuditItemScreenState, initialState } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
-import { itemPallets } from '../../mockData/getItemPallets';
+import { mockPalletLocations } from '../../mockData/getItemPallets';
 
 describe('The Audit Item Screen Reducer', () => {
   // Intitial State
@@ -23,7 +23,7 @@ describe('The Audit Item Screen Reducer', () => {
   };
   const mockInitialReserveState: AuditItemScreenState = {
     ...initialState,
-    reserveLocations: itemPallets.pallets
+    reserveLocations: mockPalletLocations
   };
   it('handles setting the item details in AuditItemScreen redux state', () => {
     const testResults = AuditItemScreen(testInitialState, setItemDetails(mockItemDetails));
@@ -36,9 +36,8 @@ describe('The Audit Item Screen Reducer', () => {
     expect(testResults).toStrictEqual(changeState);
   });
   it('handles setting the floor locations in AuditItemScreen redux state', () => {
-    const mockReserveLocations = itemPallets.pallets;
-    const testResults = AuditItemScreen(testInitialState, setReserveLocations(mockReserveLocations));
-    const changeState = { ...testInitialState, reserveLocations: mockReserveLocations };
+    const testResults = AuditItemScreen(testInitialState, setReserveLocations(mockPalletLocations));
+    const changeState = { ...testInitialState, reserveLocations: mockPalletLocations };
     expect(testResults).toStrictEqual(changeState);
   });
   it('handles clearing the AuditItemScreen redux state while moving away from the screen', () => {
@@ -48,17 +47,13 @@ describe('The Audit Item Screen Reducer', () => {
   it('handles updating new qty for the pallet associated to the item', () => {
     const mockNewQty = 13;
     const mockPalletId = 4598;
+    const testLocations = mockPalletLocations;
     const testResults = AuditItemScreen(mockInitialReserveState, updatePalletQty(mockPalletId, mockNewQty));
+    testLocations[0].newQty = 13;
+
     const changeState = {
       ...initialState,
-      reserveLocations: [{
-        palletId: 4598,
-        quantity: 22,
-        newQty: 13,
-        sectionId: 5578,
-        locationName: 'D1-4',
-        mixedPallet: false
-      }]
+      reserveLocations: testLocations
     };
     expect(testResults).toStrictEqual(changeState);
   });
@@ -112,13 +107,16 @@ describe('The Audit Item Screen Reducer', () => {
 
   it('handles updating the reserve location with the scanned palletId', () => {
     const mockScanned = true;
+    const testLocations = mockPalletLocations;
     const testResults = AuditItemScreen(
       mockInitialReserveState,
-      updatePalletScannedStatus(itemPallets.pallets[0].palletId, mockScanned)
+      updatePalletScannedStatus(mockPalletLocations[0].palletId, mockScanned)
     );
+    testLocations[0].scanned = true;
+
     const changedState: AuditItemScreenState = {
       ...mockInitialReserveState,
-      reserveLocations: [{ ...itemPallets.pallets[0], scanned: true }]
+      reserveLocations: mockPalletLocations
     };
     expect(testResults).toStrictEqual(changedState);
   });

@@ -17,7 +17,7 @@ import {
   updatePalletScannedStatus
 } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
-import { itemPallets } from '../../mockData/getItemPallets';
+import { mockPalletLocations } from '../../mockData/getItemPallets';
 
 describe('Audit Item Screen actions', () => {
   const mockItemDetails = getMockItemDetails('123');
@@ -39,11 +39,10 @@ describe('Audit Item Screen actions', () => {
     });
   });
   it('handles setting reserve locations in AuditItemScreen redux state', () => {
-    const mockReserveLocations = itemPallets.pallets;
-    const setReserveLocationsResult = setReserveLocations(mockReserveLocations);
+    const setReserveLocationsResult = setReserveLocations(mockPalletLocations);
     expect(setReserveLocationsResult).toStrictEqual({
       type: SET_RESERVE_LOCATIONS,
-      payload: mockReserveLocations
+      payload: mockPalletLocations
     });
   });
   it('handles clearing the AuditItemScreen data', () => {

@@ -4,6 +4,7 @@ export interface Pallet {
     sectionId: number;
     locationName: string;
     mixedPallet: boolean;
+    upcNbr: string;
 }
 
 export interface GetItemPalletsResponse {

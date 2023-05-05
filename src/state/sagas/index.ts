@@ -117,6 +117,7 @@ const genericSagas = [
     ReportMissingPalletService.reportMissingPallet
   ),
   makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets),
+  makeAsyncSaga(saga.GET_ITEM_PALLETS_V1, actions.getItemPalletsV1, GetItemPalletsService.getItemPalletsV1),
   makeAsyncSaga(
     saga.UPDATE_MULTI_PALLET_UPC_QTY,
     actions.updateMultiPalletUPCQty,
