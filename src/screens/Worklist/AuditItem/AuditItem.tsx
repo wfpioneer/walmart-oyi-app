@@ -803,13 +803,17 @@ export const renderConfirmOnHandsModal = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  worklistType: string
+  worklistType: string | undefined
 ) => {
   const onHandsQty = itemDetails?.onHandsQty || 0;
   const basePrice = itemDetails?.basePrice || 0;
   const changeQuantity = updatedQuantity - onHandsQty;
   const priceChange = basePrice * changeQuantity;
   const priceLimit = Math.abs(priceChange) > 1000.0;
+
+  const requestSource = worklistType === 'AU' || worklistType === 'RA'
+    ? approvalRequestSource.Audits : approvalRequestSource.ItemDetails;
+
   return (
     <CustomModalComponent
       isVisible={showOnHandsConfirmationModal}
@@ -905,7 +909,7 @@ export const renderConfirmOnHandsModal = (
                   updateOHQty({
                     data: {
                       ...itemDetails,
-                      approvalRequestSource: approvalRequestSource.Audits,
+                      approvalRequestSource: requestSource,
                       categoryNbr: itemDetails?.categoryNbr,
                       dollarChange: priceChange,
                       initiatedTimestamp: moment().toISOString(),
@@ -1342,7 +1346,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
           scannedValue: itemNumber.toString(),
-          headers: new AxiosHeaders({ worklistType: route.params?.worklistType ?? 'AU' })
+          headers: new AxiosHeaders({
+            worklistType: (itemDetails?.exceptionType ?? itemDetails?.worklistAuditType) || ''
+          })
         })
       );
     } else {
@@ -1393,7 +1399,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         itemDetails,
         dispatch,
         trackEventCall,
-        route.params?.worklistType ?? 'AU'
+        itemDetails?.exceptionType ?? itemDetails?.worklistAuditType
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (

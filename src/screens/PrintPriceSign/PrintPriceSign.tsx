@@ -312,8 +312,24 @@ export const printSignApiHook = (
 ) => {
   // on api success
   if (!printAPI.isWaiting && printAPI.result) {
-    isValidDispatch(dispatch, actionCompleted, exceptionType);
-    navigation.goBack();
+    if (printAPI.result.status === 200) {
+      Toast.show({
+        type: 'success',
+        text1: strings('PRINT.PRICE_SIGN_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+      isValidDispatch(dispatch, actionCompleted, exceptionType);
+      navigation.goBack();
+    }
+    if (printAPI.result.status === 204) {
+      Toast.show({
+        type: 'error',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
   }
   // on api failure
   if (!printAPI.isWaiting && printAPI.error) {
