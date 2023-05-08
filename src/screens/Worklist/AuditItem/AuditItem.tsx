@@ -803,7 +803,7 @@ export const renderConfirmOnHandsModal = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  worklistType: string
+  worklistType: string | undefined
 ) => {
   const onHandsQty = itemDetails?.onHandsQty || 0;
   const basePrice = itemDetails?.basePrice || 0;
@@ -1346,7 +1346,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
           scannedValue: itemNumber.toString(),
-          headers: new AxiosHeaders({ worklistType: itemDetails?.exceptionType ?? '' })
+          headers: new AxiosHeaders({
+            worklistType: (itemDetails?.exceptionType ?? itemDetails?.worklistAuditType) || ''
+          })
         })
       );
     } else {
@@ -1397,7 +1399,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         itemDetails,
         dispatch,
         trackEventCall,
-        itemDetails?.exceptionType === 'RA' ? 'AU' : ''
+        itemDetails?.exceptionType ?? itemDetails?.worklistAuditType
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
