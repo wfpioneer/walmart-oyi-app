@@ -231,6 +231,7 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
     ITEMS_DETAILS_EXIST: 'El artículo escaneado ya existe en el pallet',
     ITEMS_DETAILS_ERROR: 'Error. No es posible encontrar el UPC',
+    ITEMS_NOT_FOUND: 'Item Not found', // TODO SPANISH TRANSLATION
     PALLET_UPC_NOT_FOUND: 'El pallet o un UPC no se encontraron',
     ADD_UPC_SUCCESS: 'Todos los artículos se agregaron satisfactoriamente al pallet',
     ADD_UPC_ERROR: 'Error agregando artículos al pallet',
