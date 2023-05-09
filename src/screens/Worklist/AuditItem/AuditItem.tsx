@@ -1,26 +1,32 @@
-import React, {createRef, EffectCallback, RefObject, useEffect, useState} from 'react';
-import {ActivityIndicator, EmitterSubscription, ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {NavigationProp, RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import React, {
+  EffectCallback, RefObject, createRef, useEffect, useState
+} from 'react';
+import {
+  ActivityIndicator, EmitterSubscription, ScrollView, Text, TouchableOpacity, View
+} from 'react-native';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {useDispatch} from 'react-redux';
-import {Dispatch} from 'redux';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
-import {AxiosError, AxiosHeaders} from 'axios';
+import { AxiosError, AxiosHeaders } from 'axios';
 import moment from 'moment';
-import {barcodeEmitter} from '../../../utils/scannerUtils';
-import {CustomModalComponent} from '../../Modal/Modal';
-import {useTypedSelector} from '../../../state/reducers/RootReducer';
-import {trackEvent} from '../../../utils/AppCenterTool';
-import {validateSession} from '../../../utils/sessionTimeout';
+import { barcodeEmitter } from '../../../utils/scannerUtils';
+import { CustomModalComponent } from '../../Modal/Modal';
+import { useTypedSelector } from '../../../state/reducers/RootReducer';
+import { trackEvent } from '../../../utils/AppCenterTool';
+import { validateSession } from '../../../utils/sessionTimeout';
 import Location from '../../../models/Location';
-import {Configurations} from '../../../models/User';
+import { Configurations } from '../../../models/User';
 import ItemDetails from '../../../models/ItemDetails';
 import styles from './AuditItem.style';
 import ManualScanComponent from '../../../components/manualscan/ManualScan';
-import {currencies, strings} from '../../../locales';
+import { currencies, strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
-import {resetScannedEvent, setScannedEvent} from '../../../state/actions/Global';
+import { resetScannedEvent, setScannedEvent } from '../../../state/actions/Global';
 import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreenFooter';
 
 import {
@@ -30,6 +36,7 @@ import {
   GET_ITEM_DETAILS,
   GET_ITEM_PALLETS,
   NO_ACTION,
+  UPDATE_APPROVAL_LIST,
   UPDATE_MULTI_PALLET_UPC_QTY,
   UPDATE_OH_QTY
 } from '../../../state/actions/asyncAPI';
@@ -47,14 +54,14 @@ import {
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
-import LocationListCard, {LocationList} from '../../../components/LocationListCard/LocationListCard';
+import LocationListCard, { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 import {
   setFloorLocations as setItemFloorLocations,
   setReserveLocations as setItemReserveLocations,
   setupScreen
 } from '../../../state/actions/ItemDetailScreen';
-import {AsyncState} from '../../../models/AsyncState';
+import { AsyncState } from '../../../models/AsyncState';
 import {
   clearAuditScreenData,
   setApprovalItem,
@@ -66,19 +73,19 @@ import {
   updatePalletQty,
   updatePalletScannedStatus
 } from '../../../state/actions/AuditItemScreen';
-import {ItemPalletInfo} from '../../../models/AuditItem';
-import {SNACKBAR_TIMEOUT} from '../../../utils/global';
+import { ItemPalletInfo } from '../../../models/AuditItem';
+import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
 import Button from '../../../components/buttons/Button';
-import {UseStateType} from '../../../models/Generics.d';
+import { UseStateType } from '../../../models/Generics.d';
 import {
-  approvalAction,
   ApprovalListItem,
+  approvalAction,
   approvalRequestSource,
   approvalStatus
 } from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
-import {UpdateMultiPalletUPCQtyRequest} from '../../../services/PalletManagement.service';
+import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -90,6 +97,7 @@ export interface AuditItemScreenProps {
   updateOHQtyApi: AsyncState;
   completeItemApi: AsyncState;
   getItemApprovalApi: AsyncState;
+  updateManagerApprovalApi: AsyncState;
   // eslint-disable-next-line react/no-unused-prop-types
   userId: string;
   floorLocations: Location[];
@@ -111,6 +119,7 @@ export interface AuditItemScreenProps {
   showPalletQtyUpdateModal: boolean;
   setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>;
   scannedPalletId: number;
+  approvalItem: ApprovalListItem | null;
   userConfig: Configurations;
   showDeleteConfirmationModal: boolean;
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -503,9 +512,7 @@ export const getItemApprovalApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
 ) => {
-  console.log('test');
   if (navigation.isFocused()) {
-    console.log('test1');
     // on api success
     if (!getItemApprovalApi.isWaiting && getItemApprovalApi.result) {
       if (getItemApprovalApi.result.status === 200) {
@@ -514,13 +521,13 @@ export const getItemApprovalApiHook = (
         }
       }
       if (getItemApprovalApi.result.status === 204) {
-
+        dispatch(setApprovalItem(null));
       }
       dispatch({ type: GET_APPROVAL_LIST.RESET });
     }
     // No pallets associated with the item
     if (!getItemApprovalApi.isWaiting && getItemApprovalApi.error) {
-
+      dispatch(setApprovalItem(null));
       dispatch({ type: GET_ITEM_PALLETS.RESET });
     }
   }
@@ -601,6 +608,42 @@ export const getMultiPalletList = (reserveLocations: ItemPalletInfo[], itemDetai
   ));
 
   return newPalletList;
+};
+
+export const updateManagerApprovalApiHook = (
+  updateManagerApprovalApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null,
+  hasNewQty: boolean
+) => {
+  if (navigation.isFocused()) {
+    if (!updateManagerApprovalApi.isWaiting && updateManagerApprovalApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
+    }
+    if (!updateManagerApprovalApi.isWaiting && updateManagerApprovalApi.result) {
+      Toast.show({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
+      // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
+      if (hasNewQty) {
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+      } else {
+        navigation.goBack();
+      }
+    }
+  }
 };
 
 export const completeItemApiHook = (
@@ -1006,6 +1049,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     deleteFloorLocationApi,
     updateOHQtyApi,
     getItemApprovalApi,
+    updateManagerApprovalApi,
     route,
     dispatch,
     navigation,
@@ -1023,6 +1067,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     setShowPalletQtyUpdateModal,
     showPalletQtyUpdateModal,
     scannedPalletId,
+    approvalItem,
     userConfig,
     completeItemApi,
     showDeleteConfirmationModal,
@@ -1118,6 +1163,17 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     [completeItemApi, hasNewQty]
   );
 
+  // update Manager Approval API
+  useEffectHook(
+    () => updateManagerApprovalApiHook(
+      updateManagerApprovalApi,
+      dispatch,
+      navigation,
+      reserveLocations,
+      itemDetails,
+      hasNewQty
+    ), [updateManagerApprovalApi, hasNewQty]);
+
   // Delete Location API
   useEffectHook(
     () => deleteFloorLocationApiHook(
@@ -1132,7 +1188,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   );
 
   // get approval api
-  useEffectHook(() => getItemApprovalApiHook(getItemApprovalApi, dispatch, navigation));
+  useEffectHook(() => getItemApprovalApiHook(getItemApprovalApi, dispatch, navigation), [getItemApprovalApi]);
 
   // report missing pallet API
   useEffectHook(
@@ -1354,22 +1410,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const handleContinueAction = () => {
     const itemOHQty = itemDetails?.onHandsQty || 0;
     const pendingQty = itemDetails?.pendingOnHandsQty || -999;
-    const approvalItem: ApprovalListItem = {
-      itemName: itemDetails?.itemName || '',
-      itemNbr: itemDetails?.itemNbr || 0,
-      upcNbr: parseInt(itemDetails?.upcNbr || '0', 10),
-      categoryNbr: itemDetails?.categoryNbr || 0,
-      categoryDescription: itemDetails?.categoryDesc || '',
-      subCategoryNbr: 0,
-      subCategoryDescription: '',
-      oldQuantity: itemOHQty,
-      newQuantity: itemOHQty,
-      dollarChange: 0,
-      initiatedUserId: '',
-      initiatedTimestamp: '',
-      approvalStatus: approvalStatus.Pending,
-      approvalRequestSource: approvalRequestSource.Audits
-    };
     trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
     if (itemOHQty === totalOHQty && pendingQty < 0) {
       dispatch(
@@ -1380,7 +1420,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           headers: new AxiosHeaders({ worklistType: route.params?.worklistType ?? 'AU' })
         })
       );
-    } else if (itemOHQty === totalOHQty && pendingQty >= 0) {
+    } else if (itemOHQty === totalOHQty && pendingQty >= 0 && approvalItem) {
+      approvalItem.resolvedTimestamp = moment().toISOString();
       dispatch(
         updateApprovalList({
           approvalItems: [approvalItem],
@@ -1394,7 +1435,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }
   };
 
-  if (completeItemApi.isWaiting) {
+  if (completeItemApi.isWaiting || updateManagerApprovalApi.isWaiting) {
     return (
       <ActivityIndicator
         animating={completeItemApi.isWaiting}
@@ -1537,6 +1578,7 @@ const AuditItem = (): JSX.Element => {
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
+  const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
   const route = useRoute();
   const dispatch = useDispatch();
@@ -1546,7 +1588,11 @@ const AuditItem = (): JSX.Element => {
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
   const [getItemPalletsError, setGetItemPalletsError] = useState(false);
   const {
-    itemDetails, floorLocations, reserveLocations, scannedPalletId
+    itemDetails,
+    floorLocations,
+    reserveLocations,
+    scannedPalletId,
+    approvalItem
   } = useTypedSelector(state => state.AuditItemScreen);
   const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
@@ -1580,6 +1626,7 @@ const AuditItem = (): JSX.Element => {
       updateOHQtyApi={updateOHQtyApi}
       completeItemApi={completeItemApi}
       getItemApprovalApi={getItemApprovalApi}
+      updateManagerApprovalApi={updateManagerApprovalApi}
       route={route}
       dispatch={dispatch}
       navigation={navigation}
@@ -1598,6 +1645,7 @@ const AuditItem = (): JSX.Element => {
       showPalletQtyUpdateModal={showPalletQtyUpdateModal}
       setShowPalletQtyUpdateModal={setShowPalletQtyUpdateModal}
       scannedPalletId={scannedPalletId}
+      approvalItem={approvalItem}
       userConfig={userConfig}
       showDeleteConfirmationModal={showDeleteConfirmationModal}
       setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
