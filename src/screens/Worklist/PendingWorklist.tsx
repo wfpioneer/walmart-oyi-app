@@ -5,7 +5,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { getWorklist } from '../../state/actions/saga';
+import { getWorklistV1 } from '../../state/actions/saga';
 import { area } from '../../models/User';
 
 interface TodoWorklistProps {
@@ -46,7 +46,7 @@ export const PendingWorklistScreen = (props: TodoWorklistProps): JSX.Element => 
     <Worklist
       data={pendingData}
       refreshing={isWaiting}
-      onRefresh={() => dispatch(getWorklist())}
+      onRefresh={() => dispatch(getWorklistV1())}
       error={error}
       dispatch={dispatch}
       filterCategories={filterCategories}

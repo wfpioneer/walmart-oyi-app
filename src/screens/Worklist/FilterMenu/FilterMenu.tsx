@@ -510,7 +510,12 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
 
 export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
   const dispatch = useDispatch();
-  const workListApi = useTypedSelector(state => state.async.getWorklist);
+  const appUser = useTypedSelector(state => state.User);
+  const {
+    areas, enableAreaFilter, showRollOverAudit, inProgress
+  } = appUser.configs;
+  const workListApi = inProgress ? useTypedSelector(state => state.async.getWorklistV1)
+    : useTypedSelector(state => state.async.getWorklist);
   const workListAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
   const { screenName } = props;
   const {
@@ -521,8 +526,6 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
     areaOpen,
     workListType
   } = useTypedSelector(state => state.Worklist) as WorklistState;
-  const appUser = useTypedSelector(state => state.User);
-  const { areas, enableAreaFilter, showRollOverAudit } = appUser.configs;
   const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummary.result?.data);
   const wlSummaryV2: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data) || [];
   const result = workListType === 'AUDIT' ? workListAuditApi.result : workListApi.result;
