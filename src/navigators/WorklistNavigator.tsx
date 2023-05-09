@@ -15,13 +15,15 @@ import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
-import { getWorklist } from '../state/actions/saga';
+import { getWorklist, getWorklistV1 } from '../state/actions/saga';
 import { PendingWorklist } from '../screens/Worklist/PendingWorklist';
+import { Configurations } from '../models/User';
 
 interface worklistNavigatorProps{
   dispatch:Dispatch<any>,
   navigation:NavigationProp<any>
-  menuOpen:boolean
+  menuOpen:boolean,
+  userConfig: Configurations
 }
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -66,11 +68,15 @@ export const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean):JS
 
 export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Element => {
   const {
-    dispatch, navigation, menuOpen
+    dispatch, navigation, menuOpen, userConfig
   } = props;
   useEffect(
     () => navigation.addListener('focus', () => {
-      dispatch(getWorklist());
+      if (userConfig.inProgress) {
+        dispatch(getWorklistV1());
+      } else {
+        dispatch(getWorklist());
+      }
     }),
     [navigation]
   );
@@ -129,11 +135,13 @@ export const WorklistNavigator = ():JSX.Element => {
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
+  const { configs } = useTypedSelector(state => state.User);
   return (
     <WorklistNavigatorStack
       dispatch={dispatch}
       navigation={navigation}
       menuOpen={menuOpen}
+      userConfig={configs}
     />
   );
 };
