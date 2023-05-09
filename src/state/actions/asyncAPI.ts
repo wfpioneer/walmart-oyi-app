@@ -27,6 +27,9 @@ export const getItemDetails = makeAsyncActionCreators(GET_ITEM_DETAILS);
 export const GET_WORKLIST = makeAsyncActionTypes('API/GET_WORKLIST');
 export const getWorklist = makeAsyncActionCreators(GET_WORKLIST);
 
+export const GET_WORKLIST_V1 = makeAsyncActionTypes('API/GET_WORKLIST_V1');
+export const getWorklistV1 = makeAsyncActionCreators(GET_WORKLIST_V1);
+
 export const GET_WORKLIST_AUDIT = makeAsyncActionTypes('API/GET_WORKLIST_AUDIT');
 export const getWorklistAudit = makeAsyncActionCreators(GET_WORKLIST_AUDIT);
 
