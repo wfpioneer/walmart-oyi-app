@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
-import { getWorklist } from '../../state/actions/saga';
+import { getWorklist, getWorklistV1 } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { Configurations, area } from '../../models/User';
 
@@ -36,8 +36,9 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
   let completedItems: WorklistItemI[] | undefined;
 
   if (result && result.data) {
-    completedItems = result.data.filter((item: WorklistItemI) => item.worklistStatus === WorkListStatus.COMPLETED
-    || (!userConfigs.inProgress && item.worklistStatus === WorkListStatus.INPROGRESS));
+    completedItems = result.data.filter((item: WorklistItemI) => item.completed === true
+    || (item.worklistStatus === WorkListStatus.COMPLETED
+    || (!userConfigs.inProgress && item.worklistStatus === WorkListStatus.INPROGRESS)));
   }
 
   if (completedItems && !onHandsEnabled) {
@@ -48,7 +49,8 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
     <Worklist
       data={completedItems}
       refreshing={isWaiting}
-      onRefresh={() => dispatch(getWorklist())}
+      // TODO We can remove inProgress Flag here once the V1 endpoint is in use in Prod
+      onRefresh={() => (userConfigs.inProgress ? dispatch(getWorklistV1()) : dispatch(getWorklist()))}
       error={error}
       dispatch={dispatch}
       filterCategories={filterCategories}
@@ -65,11 +67,13 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
 };
 
 export const CompletedWorklist = (): JSX.Element => {
-  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const { countryCode, features, configs } = useTypedSelector(state => state.User);
+  // TODO We can remove inProgress Flag here once the V1 endpoint is in use in Prod
+  const { isWaiting, result, error } = configs.inProgress ? useTypedSelector(state => state.async.getWorklistV1)
+    : useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
-  const { countryCode, features, configs } = useTypedSelector(state => state.User);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 

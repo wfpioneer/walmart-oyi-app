@@ -8,6 +8,7 @@ import {
   onFilterMenuPress
 } from './WorklistNavigator';
 import store from '../state';
+import { mockConfig } from '../mockData/mockConfig';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -34,6 +35,7 @@ describe('Worklist Navigator', () => {
         dispatch={jest.fn()}
         menuOpen={true}
         navigation={navigationProp}
+        userConfig={mockConfig}
       />
     );
 
