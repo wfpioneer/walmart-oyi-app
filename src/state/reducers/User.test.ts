@@ -32,7 +32,7 @@ describe('testing User reducer', () => {
     testChangedState = {
       ...initialState,
       configs: {
-        ...omit(mockConfig, ['locMgmtEdit', 'addtItemDetails']),
+        ...mockConfig,
         locationManagementEdit: false
       }
     };

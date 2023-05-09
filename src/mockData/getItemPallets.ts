@@ -1,6 +1,8 @@
 import { AsyncState } from '../models/AsyncState';
+import { ItemPalletInfo } from '../models/AuditItem';
+import { GetItemPalletsResponse } from '../models/ItemPallets';
 
-export const itemPallets = {
+export const itemPallets: GetItemPalletsResponse = {
   itemNbr: 987654321,
   upcNbr: '777555333',
   category: 99,
@@ -10,17 +12,18 @@ export const itemPallets = {
     sectionId: 5578,
     locationName: 'D1-4',
     mixedPallet: false,
-    newQty: 24
+    upcNbr: '777555333'
   }]
 };
 
-export const locations = [{
+export const mockPalletLocations: ItemPalletInfo[] = [{
   palletId: 6775,
   quantity: 1,
   sectionId: 3,
   locationName: 'A1-8',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 },
 {
   palletId: 6776,
@@ -28,7 +31,8 @@ export const locations = [{
   sectionId: 3,
   locationName: 'C1-2',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 },
 {
   palletId: 6777,
@@ -36,7 +40,8 @@ export const locations = [{
   sectionId: 3,
   locationName: 'B1-1',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 },
 {
   palletId: 6778,
@@ -44,16 +49,18 @@ export const locations = [{
   sectionId: 3,
   locationName: 'A1-1',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 }];
 
-export const sortedLocations = [{
+export const mockSortedLocations: ItemPalletInfo[] = [{
   palletId: 6778,
   quantity: 1,
   sectionId: 3,
   locationName: 'A1-1',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 },
 {
   palletId: 6775,
@@ -61,7 +68,8 @@ export const sortedLocations = [{
   sectionId: 3,
   locationName: 'A1-8',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 },
 {
   palletId: 6777,
@@ -69,7 +77,8 @@ export const sortedLocations = [{
   sectionId: 3,
   locationName: 'B1-1',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 },
 {
   palletId: 6776,
@@ -77,7 +86,8 @@ export const sortedLocations = [{
   sectionId: 3,
   locationName: 'C1-2',
   mixedPallet: true,
-  newQty: 1
+  newQty: 1,
+  upcNbr: '000055559999'
 }];
 
 export const mockGetItemPalletsAsyncState : AsyncState = {

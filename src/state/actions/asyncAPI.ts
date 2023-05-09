@@ -45,6 +45,9 @@ export const addLocation = makeAsyncActionCreators(ADD_LOCATION);
 export const GET_WORKLIST_SUMMARY = makeAsyncActionTypes('API/GET_WORKLIST_SUMMARY');
 export const getWorklistSummary = makeAsyncActionCreators(GET_WORKLIST_SUMMARY);
 
+export const GET_WORKLIST_SUMMARY_V2 = makeAsyncActionTypes('API/GET_WORKLIST_SUMMARY_V2');
+export const getWorklistSummaryV2 = makeAsyncActionCreators(GET_WORKLIST_SUMMARY_V2);
+
 export const DELETE_LOCATION = makeAsyncActionTypes('API/DELETE_LOCATION');
 export const deleteLocation = makeAsyncActionCreators(DELETE_LOCATION);
 
@@ -164,6 +167,9 @@ export const reportMissingPallet = makeAsyncActionCreators(REPORT_MISSING_PALLET
 
 export const GET_ITEM_PALLETS = makeAsyncActionTypes('API/GET_ITEM_PALLETS');
 export const getItemPallets = makeAsyncActionCreators(GET_ITEM_PALLETS);
+
+export const GET_ITEM_PALLETS_V1 = makeAsyncActionTypes('API/GET_ITEM_PALLETS');
+export const getItemPalletsV1 = makeAsyncActionCreators(GET_ITEM_PALLETS_V1);
 
 export const UPDATE_MULTI_PALLET_UPC_QTY = makeAsyncActionTypes('API/UPDATE_MULTI_PALLET_UPC_QTY');
 export const updateMultiPalletUPCQty = makeAsyncActionCreators(UPDATE_MULTI_PALLET_UPC_QTY);

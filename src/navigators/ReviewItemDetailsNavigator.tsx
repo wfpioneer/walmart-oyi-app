@@ -23,6 +23,7 @@ import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdjustment';
 import NoActionScan from '../screens/NoActionScan/NoActionScan';
+import OtherAction from '../screens/OtherAction/OtherAction';
 
 interface ReviewItemDetailsNavigatorProps {
   isManualScanEnabled: boolean;
@@ -291,6 +292,15 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
           headerRight: palletAdjustmentHeaderRight
+        }}
+      />
+      <Stack.Screen
+        name="OtherAction"
+        component={OtherAction}
+        options={{
+          headerTitle: strings('ITEM.CHOOSE_ACTION'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 }
         }}
       />
     </Stack.Navigator>

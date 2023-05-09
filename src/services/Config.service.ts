@@ -28,6 +28,8 @@ export interface ConfigResponse {
   showFeedback: boolean;
   reserveAdjustment: boolean;
   manualNoAction: boolean;
+  peteGetPallets: boolean;
+  inProgress: boolean;
 }
 
 export default class ConfigService {

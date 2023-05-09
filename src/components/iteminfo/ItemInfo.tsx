@@ -18,7 +18,7 @@ export type ItemInfoProps = {
   upcNbr: string;
   status: string;
   category: string;
-  price: number;
+  price?: number;
   exceptionType?: string; // This is enumerated
   navigationForPrint?: NavigationProp<any>;
   additionalItemDetails?: AdditionalItemDetailsProps;
@@ -146,7 +146,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
         </View>
       </View>
       {additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
-      <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
+      {price && <Text style={styles.priceText}>{`${currencies(price)}`}</Text>}
       {navigation && (
         <Button
           type={2}
@@ -163,7 +163,10 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
 
 ItemInfo.defaultProps = {
   exceptionType: null,
-  navigationForPrint: undefined
+  navigationForPrint: undefined,
+  price: undefined,
+  additionalItemDetails: undefined,
+  worklistAuditType: undefined
 };
 
 export default ItemInfo;

@@ -933,15 +933,29 @@ export const renderOtherActionButton = (
     userId, navigation, route
   } = props;
 
+  if (actionCompleted) {
+    return <View />;
+  }
+
   if (otherActionsEnabled) {
     return (
-      <TouchableOpacity style={styles.scanForNoActionButton} onPress={undefined}>
+      <TouchableOpacity
+        style={styles.scanForNoActionButton}
+        onPress={() => {
+          validateSessionCall(navigation, route.name).then(() => {
+            trackEventCall(
+              REVIEW_ITEM_DETAILS,
+              { action: 'other_action_click', itemNbr }
+            );
+            navigation.navigate('OtherAction');
+          }).catch(() => {
+            trackEventCall('session_timeout', { user: userId });
+          });
+        }}
+      >
         <Text style={styles.buttonTextBlue}>{strings('ITEM.OTHER_ACTIONS')}</Text>
       </TouchableOpacity>
     );
-  }
-  if (actionCompleted) {
-    return <View />;
   }
 
   if (Platform.OS === 'android') {
@@ -974,7 +988,7 @@ export const renderOtherActionButton = (
   );
 };
 
-const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
+export const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void): JSX.Element => {
   if (actionCompleted) {
     return <View />;
   }
@@ -987,12 +1001,52 @@ const renderAddLocationButton = (actionCompleted: boolean, onPress: () => void):
   );
 };
 
+export const renderPrintPriceSignButton = (
+  actionCompleted: boolean,
+  itemDetails: ItemDetails,
+  props: HandleProps,
+): JSX.Element => {
+  const {
+    navigation, route, validateSessionCall, userId, trackEventCall
+  } = props;
+  if (actionCompleted) {
+    return <View />;
+  }
+
+  return (
+    <TouchableOpacity
+      style={styles.worklistCompleteButton}
+      onPress={() => {
+        // will only be callable when button is available
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall(
+            REVIEW_ITEM_DETAILS,
+            { action: 'item_details_print_sign_button_click', itemNbr: itemDetails.itemNbr }
+          );
+          navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
+        }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
+      }}
+    >
+      <Text style={styles.buttonText} adjustsFontSizeToFit>{strings('PRINT.PRICE_SIGN')}</Text>
+    </TouchableOpacity>
+  );
+};
+
 export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetails: ItemDetails): JSX.Element => {
   const {
     actionCompleted, exceptionType, floorLocations, userFeatures, userConfigs, scannedEvent, reserveLocations,
     dispatch, navigation
   } = props;
+  const { reserveAdjustment } = userConfigs;
   switch (exceptionType?.toUpperCase()) {
+    case 'C': {
+      return (
+        <View style={styles.otherActionContainer}>
+          {renderOtherActionButton(props, itemDetails.itemNbr, true)}
+          {renderPrintPriceSignButton(actionCompleted, itemDetails, props)}
+        </View>
+      );
+    }
     case 'NO': {
       if ((userFeatures.includes('on hands change') && itemDetails.onHandsQty < 0)) {
         return (
@@ -1034,7 +1088,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       );
     }
     case 'NSFQ': {
-      if (((userConfigs.reserveAdjustment && reserveLocations && reserveLocations.length >= 1))) {
+      if (((reserveAdjustment && reserveLocations && reserveLocations.length >= 1))) {
         return (
           <View style={styles.otherActionContainer}>
             {renderOtherActionButton(props, itemDetails.itemNbr, false)}
@@ -1056,6 +1110,14 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       return (
         <View style={styles.otherActionContainer}>
           {renderOtherActionButton(props, itemDetails.itemNbr, false)}
+        </View>
+      );
+    }
+    case 'NS': {
+      return (
+        <View style={styles.otherActionContainer}>
+          {renderOtherActionButton(props, itemDetails.itemNbr, true)}
+          {renderAddLocationButton(actionCompleted, () => handleLocationAction(props, itemDetails))}
         </View>
       );
     }

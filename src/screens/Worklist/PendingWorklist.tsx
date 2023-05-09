@@ -25,26 +25,26 @@ interface TodoWorklistProps {
   onHandsEnabled: boolean;
 }
 
-export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
+export const PendingWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
     countryCode, showItemImage, onHandsEnabled
   } = props;
 
-  let todoData: WorklistItemI[] | undefined;
+  let pendingData: WorklistItemI[] | undefined;
 
   if (result && result.data) {
-    todoData = result.data.filter((item: WorklistItemI) => item.worklistStatus === WorkListStatus.TODO);
+    pendingData = result.data.filter((item: WorklistItemI) => item.worklistStatus === WorkListStatus.INPROGRESS);
   }
 
-  if (todoData && !onHandsEnabled) {
-    todoData = todoData.filter(item => item.worklistType !== 'NO');
+  if (pendingData && !onHandsEnabled) {
+    pendingData = pendingData.filter(item => item.worklistType !== 'NO');
   }
 
   return (
     <Worklist
-      data={todoData}
+      data={pendingData}
       refreshing={isWaiting}
       onRefresh={() => dispatch(getWorklist())}
       error={error}
@@ -62,7 +62,7 @@ export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   );
 };
 
-export const TodoWorklist = (): JSX.Element => {
+export const PendingWorklist = (): JSX.Element => {
   const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
@@ -73,7 +73,7 @@ export const TodoWorklist = (): JSX.Element => {
 
   const onHandsEnabled = features.includes('on hands change');
   return (
-    <TodoWorklistScreen
+    <PendingWorklistScreen
       isWaiting={isWaiting}
       result={result}
       error={error}

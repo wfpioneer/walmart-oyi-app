@@ -56,6 +56,7 @@ export const COLOR = {
 
   GREY: '#c5c5c5',
   ORANGE: '#e74517',
+  PALE_ORANGE: '#ECDDC6',
   MID_GREY: '#eaeaea',
   LIGHT_GRAY: '#f6f6f6',
   PALE_GREEN: '#EAFCDA',
@@ -72,9 +73,11 @@ export const COLOR = {
   GAINSBORO: '#d8d8d8',
   MIDNIGHT: '#323a4e',
   PALE_BLUE: '#dbecff',
-  PALE_GRAY: '#edededcc',
+  PALE_GRAY: '#ededed',
+  PALE_RED: '#ffcccc',
   PINK: '#d938ab',
   YELLOW: '#FFFFE0',
+  BRIGHT_YELLOW: '#FFF200',
   IGUANA_GREEN: '#69C779',
   // Navigation Colors
   NAVIGATION_DEFAULT_BACKGROUND: DefaultTheme.colors.background

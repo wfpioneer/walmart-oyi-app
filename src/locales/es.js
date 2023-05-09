@@ -154,7 +154,14 @@ export default {
     DELETE_PALLET_FAILURE: 'El borrado de pallet falló, por favor inténtalo de nuevo',
     RESERVE_CONFIRMATION: '¿Guardar Cambios de Pallet?',
     OTHER_ACTIONS: 'Otras Acciones',
-    CLEAN_RESERVE: 'Limpiar Bodega'
+    CLEAN_RESERVE: 'Limpiar Bodega',
+    CHOOSE_ACTION: 'Elige la acción',
+    DESIRED_ACTION: 'Competa el artículo ejecutando alguna de las acciones debajo:',
+    CHOOSE_RESERVE: 'Realiza cambios a los pallets en bodega',
+    CHOOSE_TOTAL_OH: 'Realiza un cambio de existencia',
+    CHOOSE_PICKLIST: 'Crea un pick para reabastecer el piso',
+    NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada',
+    REPLENISH_RESERVE: 'Por favor reabastece tu bodega para poder pickear el artículo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -204,7 +211,7 @@ export default {
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
     INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
-    RESERVE_ADJUSTMENT: 'Ajuste de Bodega'
+    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo' // TODO SPANISH TRANSLATION
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -224,6 +231,7 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
     ITEMS_DETAILS_EXIST: 'El artículo escaneado ya existe en el pallet',
     ITEMS_DETAILS_ERROR: 'Error. No es posible encontrar el UPC',
+    ITEMS_NOT_FOUND: 'Item Not found', // TODO SPANISH TRANSLATION
     PALLET_UPC_NOT_FOUND: 'El pallet o un UPC no se encontraron',
     ADD_UPC_SUCCESS: 'Todos los artículos se agregaron satisfactoriamente al pallet',
     ADD_UPC_ERROR: 'Error agregando artículos al pallet',
@@ -262,6 +270,7 @@ export default {
     DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
+    CHANGE_LOCATION: 'Actualiza la ubicación del artículo', // TODO SPANISH TRANSLATION
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Artículos',
     PALLETS: 'Pallets',
@@ -365,6 +374,9 @@ export default {
     CLEAR: 'Limpiar',
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
+    PENDING: 'Pendiente',
+    PENDING_APPROVAL: 'Pendiente de Aprobación',
+    PENDING_PICK: 'Pickeo Pendiente',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
     AREA: 'Área',
     ITEM_WORKLIST: 'Lista De Articulos',

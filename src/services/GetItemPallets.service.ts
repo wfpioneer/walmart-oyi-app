@@ -15,4 +15,16 @@ export default class GetItemPalletsService {
       { timeout: TIMEOUT }
     );
   }
+
+  public static getItemPalletsV1(payload: {itemNbr: number}):
+      Promise<AxiosResponse<Array<GetItemPalletsResponse>>> {
+    const urls: Environment = getEnvironment();
+    const TIMEOUT = 30000;
+
+    return Request.get(
+      `${urls.locationUrl}/v1/location/item/${payload.itemNbr}/pallets`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
 }

@@ -5,7 +5,7 @@ import * as saga from '../actions/saga';
 import * as actions from '../actions/asyncAPI';
 import HitGoogleService from '../../services/HitGoogle.service';
 import GetItemDetailsService from '../../services/GetItemDetails.service';
-import GetWorklistService, { GetWorklistAuditService } from '../../services/GetWorklist.service';
+import GetWorklistService from '../../services/GetWorklist.service';
 import GetPalletWorklistService from '../../services/GetPalletWorklist.service';
 import EditLocationService from '../../services/EditLocation.service';
 import UpdateOHQtyService from '../../services/UpdateOHQty.service';
@@ -58,7 +58,7 @@ const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_ITEM_DETAILS, actions.getItemDetails, GetItemDetailsService.getItemDetails),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
-  makeAsyncSaga(saga.GET_WORKLIST_AUDIT, actions.getWorklistAudit, GetWorklistAuditService.getWorklistAudit),
+  makeAsyncSaga(saga.GET_WORKLIST_AUDIT, actions.getWorklistAudit, GetWorklistService.getWorklistAudit),
   makeAsyncSaga(
     saga.GET_PALLET_WORKLIST,
     actions.getPalletWorklist,
@@ -68,6 +68,11 @@ const genericSagas = [
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
+  makeAsyncSaga(
+    saga.GET_WORKLIST_SUMMARY_V2,
+    actions.getWorklistSummaryV2,
+    WorklistSummaryService.getWorklistSummaryV2
+  ),
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
@@ -112,6 +117,7 @@ const genericSagas = [
     ReportMissingPalletService.reportMissingPallet
   ),
   makeAsyncSaga(saga.GET_ITEM_PALLETS, actions.getItemPallets, GetItemPalletsService.getItemPallets),
+  makeAsyncSaga(saga.GET_ITEM_PALLETS_V1, actions.getItemPalletsV1, GetItemPalletsService.getItemPalletsV1),
   makeAsyncSaga(
     saga.UPDATE_MULTI_PALLET_UPC_QTY,
     actions.updateMultiPalletUPCQty,
