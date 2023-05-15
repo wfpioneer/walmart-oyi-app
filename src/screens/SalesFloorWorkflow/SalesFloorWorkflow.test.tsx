@@ -154,6 +154,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
 
@@ -189,6 +190,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
 
@@ -227,6 +229,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -273,6 +276,7 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
 
@@ -321,6 +325,7 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
 
@@ -369,6 +374,7 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
 
@@ -417,6 +423,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
 
@@ -483,6 +490,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
       />
     );
 
