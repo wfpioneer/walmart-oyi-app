@@ -22,6 +22,14 @@
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
         android:screenOrientation="portrait">
+<!--        <intent-filter android:label="@string/oauth_intent">-->
+<!--          <action android:name="android.intent.action.VIEW" />-->
+<!--          <category android:name="android.intent.category.DEFAULT" />-->
+<!--          <category android:name="android.intent.category.BROWSABLE" />-->
+<!--          &lt;!&ndash; Accepts URIs that begin with "example://gizmos” &ndash;&gt;-->
+<!--          <data android:scheme="com.samsclub.intl.oyi"-->
+<!--            android:host="oauth" />-->
+<!--        </intent-filter>-->
       </activity>
         <activity
             android:name=".SplashActivity"

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
+import { authorize } from 'react-native-app-auth';
 import Config from 'react-native-config';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
@@ -134,20 +135,31 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
   );
 };
 
-export const signInUser = (dispatch: Dispatch<any>): void => {
-  if (Config.ENVIRONMENT !== 'prod') {
-    // For use with Fluffy in non-prod
-    WMSSO.setEnv('STG');
-  }
-  WMSSO.getUser().then((user: WMSSOUser) => {
-    setLanguage(getSystemLanguage());
-    setUserId(user.userId);
-    dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
-    trackEvent('user_sign_in');
-    if (user.siteId && user.countryCode !== 'US') {
-      dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
-    }
-  });
+export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
+  const config = {
+    issuer: 'https://pfedcert.wal-mart.com',
+    clientId: 'intl_sams_oyi_stg',
+    redirectUrl: 'com.samsclub.intl.oyi://oauth',
+    scopes: []
+  };
+
+  const result = await authorize(config);
+  console.log(result);
+
+  return Promise.resolve();
+  // if (Config.ENVIRONMENT !== 'prod') {
+  //   // For use with Fluffy in non-prod
+  //   WMSSO.setEnv('STG');
+  // }
+  // WMSSO.getUser().then((user: WMSSOUser) => {
+  //   setLanguage(getSystemLanguage());
+  //   setUserId(user.userId);
+  //   dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
+  //   trackEvent('user_sign_in');
+  //   if (user.siteId && user.countryCode !== 'US') {
+  //     dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
+  //   }
+  // });
 };
 
 export const signOutUser = (dispatch: Dispatch<any>): void => {

@@ -144,6 +144,9 @@ android {
         versionCode 266
         versionName "4.8.10"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
+        manifestPlaceholders = [
+                appAuthRedirectScheme: 'com.samsclub.intl.oyi'
+        ]
     }
     splits {
         abi {
