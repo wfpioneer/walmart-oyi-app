@@ -40,8 +40,6 @@ import {
   savePrinter
 } from '../../utils/asyncStorageUtils';
 import {
-  clearLocationPrintQueue,
-  resetPrintQueue,
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
