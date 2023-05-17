@@ -123,7 +123,7 @@ export const getPalletConfigHook = (
   }
   // on api error
   if (getPalletConfigApi.error) {
-    const backupPerishableCategories = backupCategories.split(',').map(Number);
+    const backupPerishableCategories = backupCategories.split('-').map(Number);
     dispatch(setPerishableCategories(backupPerishableCategories));
     dispatch({ type: GET_PALLET_CONFIG.RESET });
     setConfigComplete(true);
@@ -162,7 +162,13 @@ export const PalletManagementScreen = (
 
   // Scanner listener
   useEffectHook(() => {
-    dispatch(getPalletConfig());
+    if (!userConfig.overridePalletPerishables) {
+      dispatch(getPalletConfig());
+    } else {
+      const backupPerishableCategories = userConfig.backupCategories.split('-').map(Number);
+      dispatch(setPerishableCategories(backupPerishableCategories));
+      setConfigComplete(true);
+    }
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
       if (navigation.isFocused()) {
         validateSession(navigation, route.name).then(() => {
