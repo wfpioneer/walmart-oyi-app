@@ -123,6 +123,8 @@ export interface AuditItemScreenProps {
   userConfig: Configurations;
   showDeleteConfirmationModal: boolean;
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showCancelApprovalModal: boolean;
+  setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>;
   locToConfirm: {
     locationName: string;
     locationArea: string;
@@ -618,6 +620,7 @@ export const updateManagerApprovalApiHook = (
   itemDetails: ItemDetails | null,
   hasNewQty: boolean
 ) => {
+  const itemNbr = itemDetails?.itemNbr || 0;
   if (navigation.isFocused()) {
     if (!updateManagerApprovalApi.isWaiting && updateManagerApprovalApi.error) {
       Toast.show({
@@ -640,6 +643,7 @@ export const updateManagerApprovalApiHook = (
       if (hasNewQty) {
         dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
       } else {
+        dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
         navigation.goBack();
       }
     }
@@ -779,6 +783,82 @@ const qtyStyleChange = (
   }
   return styles.negativeChange;
 };
+
+export const renderCancelApprovalModal = (
+  cancelManagerApprovalApi: AsyncState,
+  showCancelApprovalModel: boolean,
+  setShowCancelApprovalModel: React.Dispatch<React.SetStateAction<boolean>>,
+  trackEventCall: (eventName: string, params?: any) => void,
+  approvalItem: ApprovalListItem | null,
+  updateApproval: (approval: ApprovalListItem) => void
+) => (
+  <CustomModalComponent
+    onClose={() => setShowCancelApprovalModel(false)}
+    modalType="Popup"
+    isVisible={showCancelApprovalModel}
+    minHeight={100}
+  >
+    {cancelManagerApprovalApi.isWaiting ? (
+      <ActivityIndicator
+        animating={cancelManagerApprovalApi.isWaiting || cancelManagerApprovalApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    ) : (
+      <>
+        <Text style={styles.message}>
+          {approvalItem
+            ? strings('ITEM.CANCEL_APPROVAL')
+            : strings('ITEM.UNABLE_TO_CANCEL_APPROVAL')}
+        </Text>
+        {approvalItem ? (
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              testID="modal-cancel-button"
+              onPress={() => {
+                setShowCancelApprovalModel(false);
+                trackEventCall('Audit_Item', { action: 'cancel_updateManagerApproval' });
+              }}
+            />
+            <Button
+              style={styles.button}
+              title={cancelManagerApprovalApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              testID="modal-confirm-button"
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={() => {
+                if (approvalItem) {
+                  updateApproval(approvalItem);
+                  trackEventCall(
+                    'Audit_Item',
+                    { action: 'update_manager_approval_click', itemNbr: approvalItem.itemNbr }
+                  );
+                }
+              }}
+            />
+          </View>
+        ) : (
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              testID="modal-cancel-button"
+              onPress={() => {
+                setShowCancelApprovalModel(false);
+                trackEventCall('Audit_Item', { action: 'cancel_updateManagerApproval' });
+              }}
+            />
+          </View>
+        )}
+      </>
+    )}
+  </CustomModalComponent>
+);
 
 export const renderDeleteLocationModal = (
   deleteFloorLocationApi: AsyncState,
@@ -1072,6 +1152,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     completeItemApi,
     showDeleteConfirmationModal,
     setShowDeleteConfirmationModal,
+    showCancelApprovalModal,
+    setShowCancelApprovalModal,
     locToConfirm,
     setLocToConfirm,
     deletePalletApi,
@@ -1164,15 +1246,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   );
 
   // update Manager Approval API
-  useEffectHook(
-    () => updateManagerApprovalApiHook(
-      updateManagerApprovalApi,
-      dispatch,
-      navigation,
-      reserveLocations,
-      itemDetails,
-      hasNewQty
-    ), [updateManagerApprovalApi, hasNewQty]);
+  useEffectHook(() => updateManagerApprovalApiHook(
+    updateManagerApprovalApi,
+    dispatch,
+    navigation,
+    reserveLocations,
+    itemDetails,
+    hasNewQty
+  ), [updateManagerApprovalApi, hasNewQty]);
 
   // Delete Location API
   useEffectHook(
@@ -1288,6 +1369,18 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         }),
       );
     }
+  };
+
+  const updateApproval = (itemApprovalData: ApprovalListItem) => {
+    itemApprovalData.resolvedTimestamp = moment().toISOString();
+    dispatch(
+      updateApprovalList({
+        approvalItems: [itemApprovalData],
+        headers: {
+          action: approvalAction.Cancel
+        }
+      })
+    );
   };
 
   const handleReserveLocsRetry = () => {
@@ -1421,21 +1514,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         })
       );
     } else if (itemOHQty === totalOHQty && pendingQty >= 0 && approvalItem) {
-      approvalItem.resolvedTimestamp = moment().toISOString();
-      dispatch(
-        updateApprovalList({
-          approvalItems: [approvalItem],
-          headers: {
-            action: approvalAction.Cancel
-          }
-        })
-      );
+      setShowCancelApprovalModal(true);
     } else {
       setShowOnHandsConfirmationModal(true);
     }
   };
 
-  if (completeItemApi.isWaiting || updateManagerApprovalApi.isWaiting) {
+  if (completeItemApi.isWaiting) {
     return (
       <ActivityIndicator
         animating={completeItemApi.isWaiting}
@@ -1457,6 +1542,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         setShowPalletQtyUpdateModal,
         userConfig.showCalculator,
         itemDetails?.vendorPackQty
+      )}
+      {renderCancelApprovalModal(
+        updateManagerApprovalApi,
+        showCancelApprovalModal,
+        setShowCancelApprovalModal,
+        trackEventCall,
+        approvalItem,
+        updateApproval
       )}
       {renderDeleteLocationModal(
         deleteFloorLocationApi,
@@ -1599,6 +1692,7 @@ const AuditItem = (): JSX.Element => {
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
   const showCalcModalState = useState(false);
+  const [showCancelApprovalModal, setShowCancelApprovalModel] = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
     locationArea: '',
@@ -1649,6 +1743,8 @@ const AuditItem = (): JSX.Element => {
       userConfig={userConfig}
       showDeleteConfirmationModal={showDeleteConfirmationModal}
       setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
+      showCancelApprovalModal={showCancelApprovalModal}
+      setShowCancelApprovalModal={setShowCancelApprovalModel}
       locToConfirm={locToConfirm}
       setLocToConfirm={setLocToConfirm}
       deletePalletApi={deletePalletApi}

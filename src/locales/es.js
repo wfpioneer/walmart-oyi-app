@@ -161,7 +161,9 @@ export default {
     CHOOSE_TOTAL_OH: 'Realiza un cambio de existencia',
     CHOOSE_PICKLIST: 'Crea un pick para reabastecer el piso',
     NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada',
-    REPLENISH_RESERVE: 'Por favor reabastece tu bodega para poder pickear el artículo'
+    REPLENISH_RESERVE: 'Por favor reabastece tu bodega para poder pickear el artículo',
+    CANCEL_APPROVAL: 'This action will cancel the currently pending action. Would you Like to continue?',
+    UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
