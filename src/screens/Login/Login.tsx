@@ -6,16 +6,14 @@ import { useDispatch } from 'react-redux';
 import {
   NativeModules, Platform, Text, View
 } from 'react-native';
-// @ts-expect-error // react-native-wmsso has no type definition it would seem
-import WMSSO from 'react-native-wmsso';
-import { authorize } from 'react-native-app-auth';
+import { authorize, AuthorizeResult, logout } from 'react-native-app-auth';
 import Config from 'react-native-config';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
 import {
-  assignFluffyFeatures, loginUser, logoutUser, setConfigs
+  assignFluffyFeatures, loginUser, logoutUser, setConfigs, setUserTokens
 } from '../../state/actions/User';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 import {
@@ -136,17 +134,50 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
 };
 
 export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
-  const config = {
-    issuer: 'https://pfedcert.wal-mart.com',
-    clientId: 'intl_sams_oyi_stg',
-    redirectUrl: 'com.samsclub.intl.oyi://oauth',
-    scopes: []
-  };
+  try {
+    dispatch(showActivityModal());
+    const config = {
+      issuer: 'https://pfedcert.wal-mart.com',
+      clientId: 'intl_sams_oyi_stg',
+      redirectUrl: 'com.samsclub.intl.oyi://oauth',
+      scopes: ['openid full']
+    };
 
-  const result = await authorize(config);
-  console.log(result);
+    const userTokens: AuthorizeResult = await authorize(config);
+    dispatch(setUserTokens(userTokens));
+    const userInfoResponse = await fetch('https://pfedcert.wal-mart.com/idp/userinfo.openid', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userTokens.accessToken}`
+      }
+    });
+    const userInfo = await userInfoResponse.json();
 
-  return Promise.resolve();
+    dispatch(hideActivityModal());
+    console.log(userTokens);
+    console.log(JSON.stringify(userInfo));
+
+    setLanguage(getSystemLanguage());
+    setUserId(userInfo.userPrincipalName);
+    dispatch(loginUser({
+      ...userInfo,
+      siteId: userInfo['wm-BusinessUnitCategory'] === 'HO' ? 0 : userInfo['wm-BusinessUnitNumber']
+    }));
+    trackEvent('user_sign_in');
+    if (userInfo['wm-BusinessUnitCategory'] !== 'HO' && userInfo.c !== 'US') {
+      dispatch(getFluffyFeatures({
+        ...userInfo,
+        siteId: userInfo['wm-BusinessUnitNumber']
+      }));
+    }
+
+    return Promise.resolve();
+  } catch (e: any) {
+    dispatch(hideActivityModal());
+    return Promise.reject(e);
+  }
   // if (Config.ENVIRONMENT !== 'prod') {
   //   // For use with Fluffy in non-prod
   //   WMSSO.setEnv('STG');
@@ -162,16 +193,21 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
   // });
 };
 
-export const signOutUser = (dispatch: Dispatch<any>): void => {
+export const signOutUser = async (dispatch: Dispatch<any>): Promise<void> => {
   dispatch(showActivityModal());
   trackEvent('user_sign_out', { lastPage: 'Login' });
-  WMSSO.signOutUser().then(() => {
-    dispatch(logoutUser());
-    if (Platform.OS === 'android') {
-      dispatch(hideActivityModal());
-    }
-    signInUser(dispatch);
-  });
+  const config = {
+    issuer: 'https://pfedcert.wal-mart.com'
+  };
+  await logout(config);
+
+  // WMSSO.signOutUser().then(() => {
+  //   dispatch(logoutUser());
+  //   if (Platform.OS === 'android') {
+  //     dispatch(hideActivityModal());
+  //   }
+  //   signInUser(dispatch);
+  // });
 };
 
 export const userConfigsApiHook = (

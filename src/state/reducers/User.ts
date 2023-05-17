@@ -4,7 +4,8 @@ import {
   Actions,
   SET_CONFIGS,
   USER_LOGIN,
-  USER_LOGOUT
+  USER_LOGOUT,
+  SET_USER_TOKENS
 } from '../actions/User';
 
 export const initialState: User = {
@@ -47,13 +48,31 @@ export const initialState: User = {
     manualNoAction: false,
     peteGetPallets: false,
     inProgress: false
+  },
+  userTokens: {
+    accessToken: '',
+    accessTokenExpirationDate: '',
+    authorizationCode: '',
+    authorizeAdditionalParameters: undefined,
+    idToken: '',
+    refreshToken: '',
+    scopes: [],
+    tokenAdditionalParameters: undefined,
+    tokenType: ''
   }
 };
 
+// eslint-disable-next-line default-param-last
 export const UserReducer = (state = initialState, action: Actions): User => {
   switch (action.type) {
+    case SET_USER_TOKENS:
+      return {
+        ...state,
+        userTokens: action.payload
+      };
     case USER_LOGIN:
       return {
+        ...state,
         ...action.payload,
         features: [],
         configs: initialState.configs

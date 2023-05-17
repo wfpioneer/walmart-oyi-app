@@ -1,4 +1,6 @@
 /* eslint semi: 0 */
+import { AuthorizeResult } from 'react-native-app-auth';
+
 export default interface User {
   userId: string;
   token: string;
@@ -12,7 +14,8 @@ export default interface User {
     mailId: string;
   };
   features: string[],
-  configs: Configurations
+  configs: Configurations;
+  userTokens: AuthorizeResult;
 }
 
 export interface Configurations {
