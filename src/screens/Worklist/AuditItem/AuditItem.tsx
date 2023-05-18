@@ -1,11 +1,23 @@
 import React, {
-  EffectCallback, RefObject, createRef, useEffect, useState
+  EffectCallback,
+  RefObject,
+  createRef,
+  useEffect,
+  useState
 } from 'react';
 import {
-  ActivityIndicator, EmitterSubscription, ScrollView, Text, TouchableOpacity, View
+  ActivityIndicator,
+  EmitterSubscription,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import {
-  NavigationProp, RouteProp, useNavigation, useRoute
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute
 } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -26,7 +38,10 @@ import styles from './AuditItem.style';
 import ManualScanComponent from '../../../components/manualscan/ManualScan';
 import { currencies, strings } from '../../../locales';
 import COLOR from '../../../themes/Color';
-import { resetScannedEvent, setScannedEvent } from '../../../state/actions/Global';
+import {
+  resetScannedEvent,
+  setScannedEvent
+} from '../../../state/actions/Global';
 import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreenFooter';
 
 import {
@@ -55,7 +70,9 @@ import {
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
-import LocationListCard, { LocationList } from '../../../components/LocationListCard/LocationListCard';
+import LocationListCard, {
+  LocationList
+} from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 import {
   setFloorLocations as setItemFloorLocations,
@@ -646,7 +663,7 @@ export const updateManagerApprovalApiHook = (
       dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
       // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
       if (hasNewQty) {
-        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
       } else {
         dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
         navigation.goBack();
@@ -1687,13 +1704,13 @@ const AuditItem = (): JSX.Element => {
     : useTypedSelector(state => state.async.getItemPallets);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
-  const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
-  const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const {
-    itemDetails, floorLocations, reserveLocations, scannedPalletId, approvalItem
+    approvalItem, itemDetails, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
+  const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
+  const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();

@@ -1,4 +1,4 @@
-import {ItemPalletInfo} from '../../models/AuditItem';
+import { ItemPalletInfo } from '../../models/AuditItem';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 import {
@@ -13,7 +13,7 @@ import {
   UPDATE_PALLET_QTY,
   UPDATE_SCANNED_PALLET_STATUS
 } from '../actions/AuditItemScreen';
-import {ApprovalListItem} from '../../models/ApprovalListItem';
+import { ApprovalListItem } from '../../models/ApprovalListItem';
 
 export interface AuditItemScreenState {
   itemDetails: ItemDetails | null,

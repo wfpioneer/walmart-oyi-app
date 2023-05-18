@@ -1,7 +1,7 @@
 import { ItemPalletInfo } from '../../models/AuditItem';
 import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
-import {ApprovalListItem} from "../../models/ApprovalListItem";
+import { ApprovalListItem } from '../../models/ApprovalListItem';
 
 export const SET_ITEM_DETAILS = 'AUDIT_ITEM_SCREEN/SET_ITEM_DETAILS';
 export const SET_FLOOR_LOCATIONS = 'AUDIT_ITEM_SCREEN/SET_FLOOR_LOCATIONS';

@@ -60,6 +60,13 @@ const styles = StyleSheet.create({
   },
   itemQtyView: {
     flexDirection: 'row'
+  },
+  itemQtyContainer: {
+    flexDirection: 'column'
+  },
+  infoIcon: {
+    paddingTop: 2,
+    paddingRight: 6
   }
 });
 
