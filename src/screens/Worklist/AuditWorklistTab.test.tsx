@@ -19,7 +19,7 @@ jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 
 const mockError: AxiosError = {
-  config: {},
+  config: undefined,
   isAxiosError: true,
   message: '500 Network Error',
   name: 'Network Error',
@@ -35,7 +35,6 @@ describe('AuditWorklistTab', () => {
       renderer.render(
         <AuditWorklistTabScreen
           items={mockToDoAuditWorklist}
-          toDo
           navigation={navigationProp}
           dispatch={mockDispatch}
           collapsedState={[false, jest.fn()]}
@@ -59,7 +58,6 @@ describe('AuditWorklistTab', () => {
       renderer.render(
         <AuditWorklistTabScreen
           items={mockCompletedAuditWorklist}
-          toDo={false}
           navigation={navigationProp}
           dispatch={mockDispatch}
           collapsedState={[false, jest.fn()]}
@@ -83,7 +81,6 @@ describe('AuditWorklistTab', () => {
       renderer.render(
         <AuditWorklistTabScreen
           items={mockCompletedAuditWorklist}
-          toDo={false}
           navigation={navigationProp}
           dispatch={mockDispatch}
           collapsedState={[false, jest.fn()]}
@@ -108,7 +105,6 @@ describe('AuditWorklistTab', () => {
       renderer.render(
         <AuditWorklistTabScreen
           items={mockCompletedAuditWorklist}
-          toDo={false}
           navigation={navigationProp}
           dispatch={mockDispatch}
           collapsedState={[false, jest.fn()]}
@@ -133,7 +129,6 @@ describe('AuditWorklistTab', () => {
       const { toJSON, getByTestId } = render(
         <AuditWorklistTabScreen
           items={mockToDoAuditWorklist}
-          toDo
           navigation={navigationProp}
           dispatch={mockDispatch}
           collapsedState={[false, jest.fn()]}
@@ -157,7 +152,6 @@ describe('AuditWorklistTab', () => {
       const { toJSON, getByTestId } = render(
         <AuditWorklistTabScreen
           items={mockToDoAuditWorklist}
-          toDo
           navigation={navigationProp}
           dispatch={mockDispatch}
           collapsedState={[true, jest.fn()]}

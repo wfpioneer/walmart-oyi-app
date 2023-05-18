@@ -79,7 +79,6 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -94,7 +93,6 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -109,7 +107,6 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.NS,
@@ -124,7 +121,6 @@ export const mockWorkListToDo: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   }
 ];
 export const mockWorkListPending: WorklistItemI[] = [
@@ -140,7 +136,8 @@ export const mockWorkListPending: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: false,
-    worklistStatus: WorkListStatus.INPROGRESS
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'ADD_TO_PICKLIST'
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -154,7 +151,8 @@ export const mockWorkListPending: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: false,
-    worklistStatus: WorkListStatus.INPROGRESS
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -168,8 +166,8 @@ export const mockWorkListPending: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: false,
-    worklistStatus: WorkListStatus.INPROGRESS
-
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -183,8 +181,8 @@ export const mockWorkListPending: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: false,
-    worklistStatus: WorkListStatus.INPROGRESS
-
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -198,8 +196,8 @@ export const mockWorkListPending: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: false,
-    worklistStatus: WorkListStatus.INPROGRESS
-
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'ADD_TO_PICKLIST'
   },
   {
     worklistType: WORKLISTTYPE.NS,
@@ -213,8 +211,8 @@ export const mockWorkListPending: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: false,
-    worklistStatus: WorkListStatus.INPROGRESS
-
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'ADD_TO_PICKLIST'
   }
 ];
 export const mockWorkListComplete: WorklistItemI[] = [
@@ -230,7 +228,8 @@ export const mockWorkListComplete: WorklistItemI[] = [
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true,
-    worklistStatus: WorkListStatus.COMPLETED
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'ADD_TO_PICKLIST'
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -244,8 +243,8 @@ export const mockWorkListComplete: WorklistItemI[] = [
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true,
-    worklistStatus: WorkListStatus.COMPLETED
-
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -259,8 +258,8 @@ export const mockWorkListComplete: WorklistItemI[] = [
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true,
-    worklistStatus: WorkListStatus.COMPLETED
-
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -274,8 +273,8 @@ export const mockWorkListComplete: WorklistItemI[] = [
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true,
-    worklistStatus: WorkListStatus.COMPLETED
-
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -289,8 +288,8 @@ export const mockWorkListComplete: WorklistItemI[] = [
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
     completed: true,
-    worklistStatus: WorkListStatus.COMPLETED
-
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'ADD_TO_PICKLIST'
   },
   {
     worklistType: WORKLISTTYPE.NS,
@@ -304,8 +303,8 @@ export const mockWorkListComplete: WorklistItemI[] = [
     completedTs: undefined,
     completedUserId: undefined,
     completed: true,
-    worklistStatus: WorkListStatus.COMPLETED
-
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'ADD_TO_PICKLIST'
   }
 ];
 
@@ -329,7 +328,6 @@ export const mockCategoryList: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -350,7 +348,6 @@ export const mockCategoryList: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -371,7 +368,6 @@ export const mockCategoryList: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -392,7 +388,6 @@ export const mockCategoryList: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -413,7 +408,6 @@ export const mockCategoryList: WorklistItemI[] = [
     completedUserId: undefined,
     completed: false,
     worklistStatus: WorkListStatus.TODO
-
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -437,7 +431,7 @@ export const mockCategoryList: WorklistItemI[] = [
   }
 ];
 
-export const missingCategoryNbrList = [{
+export const missingCategoryNbrList: WorklistItemI[] = [{
   worklistType: WORKLISTTYPE.NSFL,
   itemName: ITEM_NAME.TEST_ITEM,
   itemNbr: 1234567890,
@@ -811,7 +805,7 @@ export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
   }
 ];
 
-export const mockToDoAuditWorklist = [{
+export const mockToDoAuditWorklist: WorklistItemI[] = [{
   worklistType: WORKLISTTYPE.AU,
   itemName: ITEM_NAME.TEST_ITEM,
   itemNbr: 1234567890,
@@ -864,7 +858,7 @@ export const mockToDoAuditWorklist = [{
   completed: false
 }];
 
-export const mockCompletedAuditWorklist = [{
+export const mockCompletedAuditWorklist: WorklistItemI[] = [{
   worklistType: WORKLISTTYPE.AU,
   itemName: ITEM_NAME.TEST_ITEM,
   itemNbr: 1234567890,
