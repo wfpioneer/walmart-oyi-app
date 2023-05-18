@@ -640,7 +640,8 @@ export const updateManagerApprovalApiHook = (
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
   itemDetails: ItemDetails | null,
-  hasNewQty: boolean
+  hasNewQty: boolean,
+  setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const itemNbr = itemDetails?.itemNbr || 0;
   if (navigation.isFocused()) {
@@ -665,6 +666,7 @@ export const updateManagerApprovalApiHook = (
       if (hasNewQty) {
         dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
       } else {
+        setShowCancelApprovalModal(false);
         dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
         navigation.goBack();
       }
@@ -1282,7 +1284,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     navigation,
     reserveLocations,
     itemDetails,
-    hasNewQty
+    hasNewQty,
+    setShowCancelApprovalModal
   ), [updateManagerApprovalApi, hasNewQty]);
 
   // Delete Location API

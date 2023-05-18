@@ -1399,7 +1399,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         mockItemDetails,
-        false
+        false,
+        jest.fn()
       );
       expect(mockDispatch).toBeCalledTimes(2);
     });
@@ -1411,7 +1412,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         mockItemDetails,
-        true
+        true,
+        jest.fn()
       );
       expect(mockDispatch).toBeCalledTimes(2);
     });
@@ -1423,7 +1425,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         mockItemDetails,
-        false
+        false,
+        jest.fn()
       );
       expect(mockDispatch).toBeCalledTimes(1);
     });
