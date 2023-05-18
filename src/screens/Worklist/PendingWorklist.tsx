@@ -5,8 +5,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import { Worklist } from './Worklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { getWorklist, getWorklistV1 } from '../../state/actions/saga';
-import { Configurations, area } from '../../models/User';
+import { getWorklistV1 } from '../../state/actions/saga';
+import { area } from '../../models/User';
 
 interface TodoWorklistProps {
   isWaiting: boolean;
@@ -23,33 +23,30 @@ interface TodoWorklistProps {
   countryCode: string;
   showItemImage: boolean;
   onHandsEnabled: boolean;
-  userConfigs: Configurations;
 }
 
-export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
+export const PendingWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
-    countryCode, showItemImage, onHandsEnabled, userConfigs
+    countryCode, showItemImage, onHandsEnabled
   } = props;
 
-  let todoData: WorklistItemI[] | undefined;
+  let pendingData: WorklistItemI[] | undefined;
 
   if (result && result.data) {
-    todoData = result.data.filter((item: WorklistItemI) => item.completed === false
-    || item.worklistStatus === WorkListStatus.TODO);
+    pendingData = result.data.filter((item: WorklistItemI) => item.worklistStatus === WorkListStatus.INPROGRESS);
   }
 
-  if (todoData && !onHandsEnabled) {
-    todoData = todoData.filter(item => item.worklistType !== 'NO');
+  if (pendingData && !onHandsEnabled) {
+    pendingData = pendingData.filter(item => item.worklistType !== 'NO');
   }
 
   return (
     <Worklist
-      data={todoData}
+      data={pendingData}
       refreshing={isWaiting}
-      // TODO We can remove inProgress Flag here once the V1 endpoint is in use in Prod
-      onRefresh={() => (userConfigs.inProgress ? dispatch(getWorklistV1()) : dispatch(getWorklist()))}
+      onRefresh={() => dispatch(getWorklistV1())}
       error={error}
       dispatch={dispatch}
       filterCategories={filterCategories}
@@ -65,20 +62,18 @@ export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   );
 };
 
-export const TodoWorklist = (): JSX.Element => {
-  const { countryCode, features, configs } = useTypedSelector(state => state.User);
-  // TODO We can remove inProgress Flag here once the V1 endpoint is in use in Prod
-  const { isWaiting, result, error } = configs.inProgress ? useTypedSelector(state => state.async.getWorklistV1)
-    : useTypedSelector(state => state.async.getWorklist);
+export const PendingWorklist = (): JSX.Element => {
+  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
+  const { countryCode, features } = useTypedSelector(state => state.User);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const onHandsEnabled = features.includes('on hands change');
   return (
-    <TodoWorklistScreen
+    <PendingWorklistScreen
       isWaiting={isWaiting}
       result={result}
       error={error}
@@ -93,7 +88,6 @@ export const TodoWorklist = (): JSX.Element => {
       countryCode={countryCode}
       showItemImage={showItemImage}
       onHandsEnabled={onHandsEnabled}
-      userConfigs={configs}
     />
   );
 };

@@ -70,6 +70,7 @@ interface SFWorklfowProps {
   completePalletState: UseStateType<boolean>;
   updateItemsState: UseStateType<boolean>;
   deleteItemsState: UseStateType<boolean>;
+  overridePalletPerishables: boolean;
 }
 
 export const activityIndicatorEffect = (
@@ -226,7 +227,7 @@ export const palletConfigApiEffect = (
     }
     // on api error
     if (getPalletConfigApi.error) {
-      const backupPerishableCategories = backupCategories.split(',').map(Number);
+      const backupPerishableCategories = backupCategories.split('-').map(Number);
       dispatch(setPerishableCategories(backupPerishableCategories));
       dispatch({ type: GET_PALLET_CONFIG.RESET });
       setConfigComplete(true);
@@ -360,7 +361,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     showExpiryPromptState, perishableCategories, backupCategories,
     configCompleteState, showActivity, updatePalletItemsApi,
     deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
-    updateItemsState, deleteItemsState
+    updateItemsState, deleteItemsState, overridePalletPerishables
   } = props;
 
   const [expirationDate, setExpiration] = expirationState;
@@ -379,7 +380,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     if (perishableCategories.length) {
       dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId], isAllItems: true }));
     } else {
-      dispatch(getPalletConfig());
+      if (!overridePalletPerishables) {
+        dispatch(getPalletConfig());
+      } else {
+        const backupPerishableCategories = backupCategories.split('-').map(Number);
+        dispatch(setPerishableCategories(backupPerishableCategories));
+        setConfigComplete(true);
+      }
     }
   }), []);
 
@@ -686,6 +693,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         pickStatus={selectedPicks[0].status}
         canDelete={false}
         dispatch={dispatch}
+        showCheckbox={false}
       />
       <View style={styles.updateQuantityTextView}>
         <Text style={styles.updateQuantityText}>
@@ -725,7 +733,7 @@ const SalesFloorWorkflow = () => {
   const updatePalletItemsApi = useTypedSelector(state => state.async.updatePalletItemQty);
   const deletePalletItemsApi = useTypedSelector(state => state.async.deleteUpcs);
   const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
-  const { backupCategories } = useTypedSelector(state => state.User.configs);
+  const { backupCategories, overridePalletPerishables } = useTypedSelector(state => state.User.configs);
   const { showActivity } = useTypedSelector(state => state.modal);
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
@@ -784,6 +792,7 @@ const SalesFloorWorkflow = () => {
           perishableItemsState={perishableItemsState}
           perishableCategories={perishableCategories}
           backupCategories={backupCategories}
+          overridePalletPerishables={overridePalletPerishables}
           showExpiryPromptState={showExpiryPromptState}
           configCompleteState={configCompleteState}
           showActivity={showActivity}

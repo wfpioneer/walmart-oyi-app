@@ -17,6 +17,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "000055559999",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NSFL",
       },
       Object {
@@ -30,6 +31,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777555333",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NO",
       },
       Object {
@@ -43,6 +45,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "111122223333",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NO",
       },
       Object {
@@ -56,6 +59,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "444455556666",
+        "worklistStatus": "COMPLETED",
         "worklistType": "C",
       },
       Object {
@@ -69,6 +73,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777788889999",
+        "worklistStatus": "COMPLETED",
         "worklistType": "C",
       },
       Object {
@@ -82,6 +87,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "667788889999",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NS",
       },
     ]
@@ -152,6 +158,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "000055559999",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NSFL",
       },
       Object {
@@ -165,6 +172,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777555333",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NO",
       },
       Object {
@@ -178,6 +186,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "111122223333",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NO",
       },
       Object {
@@ -191,6 +200,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "444455556666",
+        "worklistStatus": "COMPLETED",
         "worklistType": "C",
       },
       Object {
@@ -204,6 +214,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777788889999",
+        "worklistStatus": "COMPLETED",
         "worklistType": "C",
       },
       Object {
@@ -217,6 +228,301 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "667788889999",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NS",
+      },
+    ]
+  }
+  dispatch={[MockFunction]}
+  enableAreaFilter={false}
+  error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={false}
+  showItemImage={false}
+  updateGroupToggle={[MockFunction]}
+/>
+`;
+
+exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only complete worklist items for inProgress & complete items if 'inprogress' is enabled 1`] = `
+<Worklist
+  areas={Array []}
+  countryCode="MX"
+  data={
+    Array [
+      Object {
+        "catgName": "FOODSERVICE",
+        "catgNbr": 93,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
+        "itemNbr": 1234567890,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "000055559999",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NSFL",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 99,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "ELECTRONIC ITEM",
+        "itemNbr": 987654321,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777555333",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "FRESH BAKERY",
+        "catgNbr": 88,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "BAKERY ITEM",
+        "itemNbr": 123789456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "111122223333",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "WINE",
+        "catgNbr": 19,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "WINE ITEM",
+        "itemNbr": 456789123,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "444455556666",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "PHARMACY RX",
+        "catgNbr": 87,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "PHARMACY ITEM",
+        "itemNbr": 789123456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777788889999",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 199,
+        "completed": true,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM 1",
+        "itemNbr": 789123457,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "667788889999",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NS",
+      },
+    ]
+  }
+  dispatch={[MockFunction]}
+  enableAreaFilter={false}
+  error={null}
+  filterCategories={Array []}
+  filterExceptions={Array []}
+  groupToggle={false}
+  onRefresh={[Function]}
+  refreshing={false}
+  showItemImage={false}
+  updateGroupToggle={[MockFunction]}
+/>
+`;
+
+exports[`CompletedWorklistScreen Tests rendering Worklist data Renders worklist items for both inProgress & complete items 1`] = `
+<Worklist
+  areas={Array []}
+  countryCode="MX"
+  data={
+    Array [
+      Object {
+        "catgName": "FOODSERVICE",
+        "catgNbr": 93,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
+        "itemNbr": 1234567890,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "000055559999",
+        "worklistStatus": "INPROGRESS",
+        "worklistType": "NSFL",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 99,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "ELECTRONIC ITEM",
+        "itemNbr": 987654321,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777555333",
+        "worklistStatus": "INPROGRESS",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "FRESH BAKERY",
+        "catgNbr": 88,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "BAKERY ITEM",
+        "itemNbr": 123789456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "111122223333",
+        "worklistStatus": "INPROGRESS",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "WINE",
+        "catgNbr": 19,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "WINE ITEM",
+        "itemNbr": 456789123,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "444455556666",
+        "worklistStatus": "INPROGRESS",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "PHARMACY RX",
+        "catgNbr": 87,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM",
+        "itemNbr": 789123456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777788889999",
+        "worklistStatus": "INPROGRESS",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 199,
+        "completed": false,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM 1",
+        "itemNbr": 789123457,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "667788889999",
+        "worklistStatus": "INPROGRESS",
+        "worklistType": "NS",
+      },
+      Object {
+        "catgName": "FOODSERVICE",
+        "catgNbr": 93,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "Nature Valley Sweet And Salty Nuts Granola Bars",
+        "itemNbr": 1234567890,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "000055559999",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NSFL",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 99,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "ELECTRONIC ITEM",
+        "itemNbr": 987654321,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777555333",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "FRESH BAKERY",
+        "catgNbr": 88,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "BAKERY ITEM",
+        "itemNbr": 123789456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "111122223333",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "NO",
+      },
+      Object {
+        "catgName": "WINE",
+        "catgNbr": 19,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "WINE ITEM",
+        "itemNbr": 456789123,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "444455556666",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "PHARMACY RX",
+        "catgNbr": 87,
+        "completed": true,
+        "completedTs": "2020-07-15T08:02:17-05:00",
+        "completedUserId": "SVCintlsamsops",
+        "itemName": "PHARMACY ITEM",
+        "itemNbr": 789123456,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "777788889999",
+        "worklistStatus": "COMPLETED",
+        "worklistType": "C",
+      },
+      Object {
+        "catgName": "ELECTRONICS",
+        "catgNbr": 199,
+        "completed": true,
+        "completedTs": undefined,
+        "completedUserId": undefined,
+        "itemName": "PHARMACY ITEM 1",
+        "itemNbr": 789123457,
+        "subCatgName": undefined,
+        "subCatgNbr": 0,
+        "upcNbr": "667788889999",
+        "worklistStatus": "COMPLETED",
         "worklistType": "NS",
       },
     ]

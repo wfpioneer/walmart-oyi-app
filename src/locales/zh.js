@@ -233,6 +233,7 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: '扫描的商品已经在此卡板',
     ITEMS_DETAILS_ERROR: '报错:无法找到此商品UPC信息',
+    ITEMS_NOT_FOUND: 'Item Not found', // TODO MANDARIN TRANSLATION
     PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
     ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
     ADD_UPC_ERROR: '添加商品到卡板时出错',
@@ -378,6 +379,9 @@ export default {
     CLEAR: '清除',
     TODO: '待完成',
     COMPLETED: '已完成',
+    PENDING: '待办的',
+    PENDING_APPROVAL: '待审批',
+    PENDING_PICK: '待补货',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
     AREA: '区域',
     ITEM_WORKLIST: '商品例外清单',

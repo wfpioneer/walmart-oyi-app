@@ -40,6 +40,9 @@ export interface Configurations {
   showFeedback: boolean;
   reserveAdjustment: boolean;
   manualNoAction: boolean;
+  peteGetPallets: boolean;
+  inProgress: boolean;
+  overridePalletPerishables: boolean;
 }
 
 export interface area {

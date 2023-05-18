@@ -46,6 +46,7 @@ import {
   getApprovalList,
   getItemDetails,
   getItemPallets,
+  getItemPalletsV1,
   getLocationDetails,
   noAction,
   updateApprovalList,
@@ -86,6 +87,7 @@ import {
 } from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -149,6 +151,7 @@ export interface AuditItemScreenProps {
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   updateMultiPalletUPCQtyApi: AsyncState;
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
 }
 
 export const getItemQuantity = (itemQty: number, pendingQty: number) => {
@@ -196,7 +199,8 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
     navigation,
     trackEventCall,
     validateSessionCall,
-    itemNumber
+    itemNumber,
+    getItemPalletsDispatch
   } = props;
 
   if (navigation.isFocused()) {
@@ -205,8 +209,8 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
         if (itemNumber > 0) {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: itemNumber }));
-          dispatch(getItemPallets({ itemNbr: itemNumber }));
           dispatch(getApprovalList({ itemNbr: itemNumber, status: approvalStatus.Pending }));
+          dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
         }
       })
       .catch(() => {
@@ -324,13 +328,13 @@ export const getFloorLocationsResult = (
 };
 
 export const getUpdatedReserveLocations = (
-  itemPallets: ItemPalletInfo[] | undefined,
+  itemPallets: Pallet[] | undefined,
   existingReserveLocations: ItemPalletInfo[]
 ) => {
   let updatedReserveLocations = [];
   if (itemPallets && itemPallets.length > 0) {
     if (existingReserveLocations.length > 0) {
-      updatedReserveLocations = itemPallets.map((loc: ItemPalletInfo) => {
+      updatedReserveLocations = itemPallets.map((loc: Pallet) => {
         const alreadyExistedLocation = existingReserveLocations.find(
           existingLoc => existingLoc.palletId === loc.palletId
         );
@@ -338,7 +342,7 @@ export const getUpdatedReserveLocations = (
           ? { ...loc, newQty: alreadyExistedLocation.newQty } : { ...loc, newQty: loc.quantity || 0 };
       });
     } else {
-      updatedReserveLocations = itemPallets.map((loc: ItemPalletInfo) => ({ ...loc, newQty: loc.quantity || 0 }));
+      updatedReserveLocations = itemPallets.map((loc: Pallet) => ({ ...loc, newQty: loc.quantity || 0 }));
     }
     return updatedReserveLocations;
   }
@@ -445,7 +449,8 @@ export const deletePalletApiHook = (
   navigation: NavigationProp<any>,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   palletId: number,
-  itemNbr: number
+  itemNbr: number,
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
 ) => {
   if (navigation.isFocused()) {
     if (!deletePalletApi.isWaiting && deletePalletApi.result) {
@@ -457,7 +462,7 @@ export const deletePalletApiHook = (
           visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
-        dispatch(getItemPallets({ itemNbr }));
+        dispatch(getItemPalletsDispatch({ itemNbr }));
         dispatch({ type: CLEAR_PALLET.RESET });
       }
     } else if (!deletePalletApi.isWaiting && deletePalletApi.error) {
@@ -484,7 +489,7 @@ export const getItemPalletsApiHook = (
     // on api success
     if (!getItemPalletsApi.isWaiting && getItemPalletsApi.result) {
       if (getItemPalletsApi.result.status === 200) {
-        const { data } = getItemPalletsApi.result;
+        const { data }: {data: GetItemPalletsResponse} = getItemPalletsApi.result;
         const updatedReserveLocations = getUpdatedReserveLocations(data.pallets, existingReserveLocations);
         dispatch(setReserveLocations(updatedReserveLocations));
       }
@@ -600,12 +605,12 @@ export const renderpalletQtyUpdateModal = (
   );
 };
 
-export const getMultiPalletList = (reserveLocations: ItemPalletInfo[], itemDetails: ItemDetails | null) => {
+export const getMultiPalletList = (reserveLocations: ItemPalletInfo[]) => {
   const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
       expirationDate: '', // This is fine as it does not update the expiration date on the pallet
-      upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
+      upcs: [{ upcNbr: item.upcNbr || '0', quantity: item.newQty }]
     }
   ));
 
@@ -678,7 +683,7 @@ export const completeItemApiHook = (
       dispatch({ type: NO_ACTION.RESET });
       // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
       if (hasNewQty) {
-        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
       } else {
         navigation.goBack();
       }
@@ -691,7 +696,6 @@ export const updateOHQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
-  itemDetails: ItemDetails | null
 ) => {
   if (navigation.isFocused()) {
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
@@ -703,7 +707,7 @@ export const updateOHQtyApiHook = (
       });
       dispatch({ type: UPDATE_OH_QTY.RESET });
 
-      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations, itemDetails) }));
+      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
     }
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
       Toast.show({
@@ -945,13 +949,17 @@ export const renderConfirmOnHandsModal = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  worklistType: string
+  worklistType: string | undefined
 ) => {
   const onHandsQty = getItemQuantity(itemDetails?.onHandsQty || 0, itemDetails?.pendingOnHandsQty || -999);
   const basePrice = itemDetails?.basePrice || 0;
   const changeQuantity = updatedQuantity - onHandsQty;
   const priceChange = basePrice * changeQuantity;
   const priceLimit = Math.abs(priceChange) > 1000.0;
+
+  const requestSource = worklistType === 'AU' || worklistType === 'RA'
+    ? approvalRequestSource.Audits : approvalRequestSource.ItemDetails;
+
   return (
     <CustomModalComponent
       isVisible={showOnHandsConfirmationModal}
@@ -1047,7 +1055,7 @@ export const renderConfirmOnHandsModal = (
                   updateOHQty({
                     data: {
                       ...itemDetails,
-                      approvalRequestSource: approvalRequestSource.Audits,
+                      approvalRequestSource: requestSource,
                       categoryNbr: itemDetails?.categoryNbr,
                       dollarChange: priceChange,
                       initiatedTimestamp: moment().toISOString(),
@@ -1111,11 +1119,15 @@ export const disabledContinue = (
   );
 
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
-  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => a.locationName.localeCompare(
-    b.locationName,
-    undefined,
-    { numeric: true }
-  );
+  const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => {
+    if (a.locationName > b.locationName) return 1;
+    if (a.locationName < b.locationName) return -1;
+
+    if (a.palletId > b.palletId) return 1;
+    if (a.palletId < b.palletId) return -1;
+
+    return 0;
+  };
 
   return locations.sort(sortLocationNames);
 };
@@ -1163,7 +1175,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     showCalcModalState,
     locationListState,
     countryCode,
-    updateMultiPalletUPCQtyApi
+    updateMultiPalletUPCQtyApi,
+    getItemPalletsDispatch
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1279,7 +1292,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       navigation,
       setShowDeleteConfirmationModal,
       locToConfirm.palletId,
-      itemNumber
+      itemNumber,
+      getItemPalletsDispatch
     ),
     [deletePalletApi]
   );
@@ -1297,8 +1311,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateOHQtyApi,
     dispatch,
     navigation,
-    reserveLocations,
-    itemDetails
+    reserveLocations
   ), [updateOHQtyApi]);
 
   // Update Multiple Pallet's UPC Qty API
@@ -1386,7 +1399,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const handleReserveLocsRetry = () => {
     validateSession(navigation, route.name).then(() => {
       dispatch({ type: GET_ITEM_PALLETS.RESET });
-      dispatch(getItemPallets({ itemNbr: itemNumber }));
+      dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
     }).catch(() => { });
   };
 
@@ -1510,7 +1523,9 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
           scannedValue: itemNumber.toString(),
-          headers: new AxiosHeaders({ worklistType: route.params?.worklistType ?? 'AU' })
+          headers: new AxiosHeaders({
+            worklistType: (itemDetails?.exceptionType ?? itemDetails?.worklistAuditType) || ''
+          })
         })
       );
     } else if (itemOHQty === totalOHQty && pendingQty >= 0 && approvalItem) {
@@ -1571,7 +1586,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         itemDetails,
         dispatch,
         trackEventCall,
-        route.params?.worklistType ?? 'AU'
+        itemDetails?.exceptionType ?? itemDetails?.worklistAuditType
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
@@ -1664,31 +1679,28 @@ const AuditItem = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetails
   );
+  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
   const getLocationApi = useTypedSelector(state => state.async.getLocation);
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const deletePalletApi = useTypedSelector(state => state.async.clearPallet);
-  const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
+  const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
+    : useTypedSelector(state => state.async.getItemPallets);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
-  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
+  const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
+  const {
+    itemDetails, floorLocations, reserveLocations, scannedPalletId, approvalItem
+  } = useTypedSelector(state => state.AuditItemScreen);
+  const completeItemApi = useTypedSelector(state => state.async.noAction);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const scrollViewRef: RefObject<ScrollView> = createRef();
-  const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const [showItemNotFoundMsg, setShowItemNotFoundMsg] = useState(false);
   const [getItemPalletsError, setGetItemPalletsError] = useState(false);
-  const {
-    itemDetails,
-    floorLocations,
-    reserveLocations,
-    scannedPalletId,
-    approvalItem
-  } = useTypedSelector(state => state.AuditItemScreen);
   const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = useState(false);
-  const completeItemApi = useTypedSelector(state => state.async.noAction);
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
   const showCalcModalState = useState(false);
@@ -1709,12 +1721,14 @@ const AuditItem = (): JSX.Element => {
   });
 
   const countryCode = useTypedSelector(state => state.User.countryCode);
+  const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <AuditItemScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
       getItemDetailsApi={getItemDetailsApi}
       getItemPalletsApi={getItemPalletsApi}
+      getItemPalletsDispatch={getItemPalletsDispatch}
       deleteFloorLocationApi={deleteFloorLocationApi}
       getLocationApi={getLocationApi}
       updateOHQtyApi={updateOHQtyApi}

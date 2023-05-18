@@ -5,5 +5,6 @@ export interface ItemPalletInfo {
   locationName: string,
   mixedPallet: boolean,
   newQty: number,
+  upcNbr: string,
   scanned?: boolean
 }

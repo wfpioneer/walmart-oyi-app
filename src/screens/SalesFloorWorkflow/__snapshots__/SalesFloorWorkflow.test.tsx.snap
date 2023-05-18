@@ -125,6 +125,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
     palletLocation="ABAR1-2"
     pickListItems={Array []}
     pickStatus="ready to work"
+    showCheckbox={false}
   />
   <View
     style={
@@ -356,6 +357,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
     palletLocation="ABAR1-2"
     pickListItems={Array []}
     pickStatus="ready to work"
+    showCheckbox={false}
   />
   <View
     style={
@@ -610,6 +612,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
     palletLocation="ABAR1-2"
     pickListItems={Array []}
     pickStatus="ready to work"
+    showCheckbox={false}
   />
   <View
     style={
@@ -824,6 +827,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
     palletLocation="ABAR1-2"
     pickListItems={Array []}
     pickStatus="ready to work"
+    showCheckbox={false}
   />
   <View
     style={

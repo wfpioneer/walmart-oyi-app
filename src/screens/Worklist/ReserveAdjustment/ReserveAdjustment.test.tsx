@@ -25,11 +25,12 @@ import { getMockItemDetails } from '../../../mockData';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { strings } from '../../../locales';
-import { itemPallets } from '../../../mockData/getItemPallets';
+import { mockPalletLocations } from '../../../mockData/getItemPallets';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import { UPDATE_MULTI_PALLET_UPC_QTY_V2 } from '../../../state/actions/asyncAPI';
 import { UPDATE_PALLET_QTY } from '../../../state/actions/ReserveAdjustmentScreen';
 import { setScannedEvent } from '../../../state/actions/Global';
+import ItemDetails from '../../../models/ItemDetails';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -152,7 +153,8 @@ const mockReserveAdjustmentScreenProps: ReserveAdjustmentScreenProps = {
     jest.fn()
   ],
   updateMultiPalletUPCQtyV2Api: defaultAsyncState,
-  showOnHandsConfirmState: [false, jest.fn()]
+  showOnHandsConfirmState: [false, jest.fn()],
+  getItemPalletsDispatch: jest.fn()
 };
 
 describe('ReserveAdjustmentScreen', () => {
@@ -188,7 +190,7 @@ describe('ReserveAdjustmentScreen', () => {
     const { toJSON } = render(
       renderpalletQtyUpdateModal(
         4988,
-        itemPallets.pallets,
+        mockPalletLocations,
         mockDispatch,
         mockShowPalletQtyModal,
         mocksetShowPalletQtyUpdateModal,
@@ -202,7 +204,7 @@ describe('ReserveAdjustmentScreen', () => {
     const mockDispatch = jest.fn();
     const mockSetGetItemPalletsError = jest.fn();
     const mockExistingReserveLocations: ItemPalletInfo[] = [];
-    const mockItemDetails = getMockItemDetails('123');
+    const mockItemDetails: ItemDetails = getMockItemDetails('123');
     const mockShowDeleteConfirmationModal = true;
     const mockSetShowDeleteConfirmationModal = jest.fn();
     const mockTrackEvent = jest.fn();
@@ -211,7 +213,7 @@ describe('ReserveAdjustmentScreen', () => {
 
     const mockScannedEvent = {
       type: 'TEST',
-      value: '4598'
+      value: '6775'
     };
     afterEach(() => {
       jest.clearAllMocks();
@@ -379,7 +381,7 @@ describe('ReserveAdjustmentScreen', () => {
       getScannedPalletEffect(
         navigationProp,
         mockScannedEvent,
-        itemPallets.pallets,
+        mockPalletLocations,
         mockDispatch,
         mocksetShowPalletQtyUpdateModal
       );
@@ -396,7 +398,8 @@ describe('ReserveAdjustmentScreen', () => {
           sectionId: 5578,
           locationName: 'D1-4',
           mixedPallet: false,
-          newQty: 16
+          newQty: 16,
+          upcNbr: '456789'
         }
       ];
       getScannedPalletEffect(

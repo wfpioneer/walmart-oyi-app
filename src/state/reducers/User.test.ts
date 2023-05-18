@@ -27,12 +27,13 @@ describe('testing User reducer', () => {
 
     const testConfig: ConfigResponse = {
       ...mockConfig,
-      locMgmtEdit: false
+      locMgmtEdit: false,
+      overridePltPerish: false
     };
     testChangedState = {
       ...initialState,
       configs: {
-        ...omit(mockConfig, ['locMgmtEdit', 'addtItemDetails']),
+        ...mockConfig,
         locationManagementEdit: false
       }
     };

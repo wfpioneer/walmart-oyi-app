@@ -19,6 +19,8 @@ describe('testing OHQtyUpdate component', () => {
           completionPercentage={90}
           completionGoal={100}
           onPress={mockHandleSubmit}
+          inProgress={false}
+          pendingPercentage={0}
         />
       );
       expect(toJSON()).toMatchSnapshot();
@@ -32,10 +34,29 @@ describe('testing OHQtyUpdate component', () => {
           completionPercentage={90}
           completionGoal={100}
           onPress={mockHandleSubmit}
+          inProgress={false}
+          pendingPercentage={0}
         />
       );
       expect(toJSON()).toMatchSnapshot();
     });
+
+    it('render component with inProgress Bar enabled', () => {
+      const { toJSON } = render(
+        <WorklistCard
+          goalTitle="Test"
+          goal={100}
+          complete={75}
+          completionPercentage={75}
+          completionGoal={100}
+          onPress={mockHandleSubmit}
+          inProgress={false}
+          pendingPercentage={25}
+        />
+      );
+      expect(toJSON()).toMatchSnapshot();
+    });
+
     it('should call mock func on card click', () => {
       const { getByTestId } = render(
         <WorklistCard
@@ -45,6 +66,8 @@ describe('testing OHQtyUpdate component', () => {
           completionPercentage={90}
           completionGoal={100}
           onPress={mockHandleSubmit}
+          inProgress={false}
+          pendingPercentage={0}
         />
       );
       const btnCard = getByTestId('btnCard');

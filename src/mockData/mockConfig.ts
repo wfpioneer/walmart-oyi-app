@@ -39,5 +39,8 @@ export const mockConfig: Configurations = {
   showItemImage: false,
   showFeedback: false,
   reserveAdjustment: false,
-  manualNoAction: false
+  manualNoAction: false,
+  inProgress: false,
+  peteGetPallets: false,
+  overridePalletPerishables: false
 };
