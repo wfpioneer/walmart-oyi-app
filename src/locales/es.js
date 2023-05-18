@@ -162,10 +162,8 @@ export default {
     CHOOSE_PICKLIST: 'Crea un pick para reabastecer el piso',
     NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada',
     REPLENISH_RESERVE: 'Por favor reabastece tu bodega para poder pickear el artículo',
-    // still need to get translation from market
-    CANCEL_APPROVAL: 'This action will cancel the currently pending action. Would you Like to continue?',
-    // still need to get translation from market
-    UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval'
+    CANCEL_APPROVAL: 'Esta acción cancelará la acción pendiente actual, ¿Quieres continuar?',
+    UNABLE_TO_CANCEL_APPROVAL: 'Incapaz de cancelar la aprobación en este momento, por favor ve con gerencia para que rechace este artículo'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
