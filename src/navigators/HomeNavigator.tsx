@@ -94,6 +94,10 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
     }
   };
 
+  const logoutUser = async () => {
+
+  };
+
   ActionSheet.showActionSheetWithOptions({
     options,
     // toggle cancel option index based on feedback config
@@ -141,13 +145,13 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
       case 1:
         props.showActivityModal();
         trackEvent('user_sign_out', { lastPage: 'Home' });
-        WMSSO.signOutUser().then(() => {
-          props.navigation.replace('Login');
-          props.logoutUser();
-          if (Platform.OS === 'android') {
-            props.hideActivityModal();
-          }
-        });
+        // WMSSO.signOutUser().then(() => {
+        //   props.navigation.replace('Login');
+        //   props.logoutUser();
+        //   if (Platform.OS === 'android') {
+        //     props.hideActivityModal();
+        //   }
+        // });
         break;
       case 2:
         if (showFeedback) {

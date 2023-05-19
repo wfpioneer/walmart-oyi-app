@@ -304,23 +304,21 @@ export const LoginScreen = (props: LoginScreenProps) => {
     useEffectHook
   } = props;
 
+  const signInUserInit = () => {
+    signInUser(dispatch).then(() => {
+    }).catch((e: Error) => {
+      console.warn(e.message);
+    });
+  }
+
   useEffectHook(() => {
-    signInUser(dispatch);
-    // this following snippet is mostly for iOS, as
-    // I need it to automatically call signInUser when we go back to the login screen
-    if (Platform.OS === 'ios') {
-      navigation.addListener('focus', () => {
-        signInUser(dispatch);
-      });
-    }
+    signInUserInit();
+
     navigation.addListener('blur', () => {
       dispatch(resetClubConfigApiState());
     });
 
     return () => {
-      if (Platform.OS === 'ios') {
-        navigation.removeListener('focus', () => {});
-      }
       navigation.removeListener('blur', () => {});
     };
   }, [navigation]);
@@ -380,7 +378,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}
-          onPress={() => signInUser(dispatch)}
+          onPress={() => signInUserInit()}
         />
       </View>
       <Text style={styles.versionDisplay}>
