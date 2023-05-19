@@ -162,10 +162,8 @@ export default {
     CHOOSE_PICKLIST: '创建楼面补货清单',
     NO_ACTION_NEEDED: 'T此商品已更新无需操作',
     REPLENISH_RESERVE: '请将卡板补到高货架，然后添加到补货清单',
-    // still need to get translation from market
-    CANCEL_APPROVAL: 'This action will cancel the currently pending action. Would you Like to continue?',
-    // still need to get translation from market
-    UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval'
+    CANCEL_APPROVAL: '这个动作将取消当前等待动作，需要继续吗？',
+    UNABLE_TO_CANCEL_APPROVAL: '无法取消审批，请联系副总进行审批或者拒绝'
   },
   PRINT: {
     MAIN_TITLE: '打印价签',
