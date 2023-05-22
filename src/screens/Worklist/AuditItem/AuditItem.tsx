@@ -53,7 +53,8 @@ import {
   NO_ACTION,
   UPDATE_APPROVAL_LIST,
   UPDATE_MULTI_PALLET_UPC_QTY,
-  UPDATE_OH_QTY
+  UPDATE_OH_QTY,
+  UPDATE_OH_QTY_V1
 } from '../../../state/actions/asyncAPI';
 import {
   clearPallet,
@@ -66,7 +67,8 @@ import {
   noAction,
   updateApprovalList,
   updateMultiPalletUPCQty,
-  updateOHQty
+  updateOHQty,
+  updateOHQtyV1
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
@@ -725,6 +727,7 @@ export const updateOHQtyApiHook = (
         visibilityTime: SNACKBAR_TIMEOUT
       });
       dispatch({ type: UPDATE_OH_QTY.RESET });
+      dispatch({ type: UPDATE_OH_QTY_V1.RESET });
 
       dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
     }
@@ -968,7 +971,8 @@ export const renderConfirmOnHandsModal = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  worklistType: string | undefined
+  worklistType: string | undefined,
+  inProgress: boolean
 ) => {
   const onHandsQty = getItemQuantity(itemDetails?.onHandsQty || 0, itemDetails?.pendingOnHandsQty || -999);
   const basePrice = itemDetails?.basePrice || 0;
@@ -1070,23 +1074,43 @@ export const renderConfirmOnHandsModal = (
                     upcNbr: itemDetails?.upcNbr
                   }
                 );
-                dispatch(
-                  updateOHQty({
-                    data: {
-                      ...itemDetails,
-                      approvalRequestSource: requestSource,
-                      categoryNbr: itemDetails?.categoryNbr,
-                      dollarChange: priceChange,
-                      initiatedTimestamp: moment().toISOString(),
-                      itemName: itemDetails?.itemName,
-                      itemNbr: itemDetails?.itemNbr,
-                      newQuantity: updatedQuantity,
-                      oldQuantity: onHandsQty,
-                      upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
-                    },
-                    worklistType
-                  })
-                );
+                if (inProgress) {
+                  dispatch(
+                    updateOHQtyV1({
+                      data: {
+                        ...itemDetails,
+                        approvalRequestSource: requestSource,
+                        categoryNbr: itemDetails?.categoryNbr,
+                        dollarChange: priceChange,
+                        initiatedTimestamp: moment().toISOString(),
+                        itemName: itemDetails?.itemName,
+                        itemNbr: itemDetails?.itemNbr,
+                        newQuantity: updatedQuantity,
+                        oldQuantity: onHandsQty,
+                        upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
+                      },
+                      worklistType
+                    })
+                  );
+                } else {
+                  dispatch(
+                    updateOHQty({
+                      data: {
+                        ...itemDetails,
+                        approvalRequestSource: requestSource,
+                        categoryNbr: itemDetails?.categoryNbr,
+                        dollarChange: priceChange,
+                        initiatedTimestamp: moment().toISOString(),
+                        itemName: itemDetails?.itemName,
+                        itemNbr: itemDetails?.itemNbr,
+                        newQuantity: updatedQuantity,
+                        oldQuantity: onHandsQty,
+                        upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
+                      },
+                      worklistType
+                    })
+                  );
+                }
               }}
               disabled={itemDetails === null}
             />
@@ -1606,7 +1630,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         itemDetails,
         dispatch,
         trackEventCall,
-        itemDetails?.exceptionType ?? itemDetails?.worklistAuditType
+        itemDetails?.exceptionType ?? itemDetails?.worklistAuditType,
+        userConfig.inProgress
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
@@ -1705,7 +1730,8 @@ const AuditItem = (): JSX.Element => {
   const deletePalletApi = useTypedSelector(state => state.async.clearPallet);
   const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
     : useTypedSelector(state => state.async.getItemPallets);
-  const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
+  const updateOHQtyApi = userConfig.inProgress ? useTypedSelector(state => state.async.updateOHQtyV1)
+    : useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const {

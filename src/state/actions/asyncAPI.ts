@@ -39,6 +39,9 @@ export const getPalletWorklist = makeAsyncActionCreators(GET_PALLET_WORKLIST);
 export const UPDATE_OH_QTY = makeAsyncActionTypes('API/UPDATE_OH_QTY');
 export const updateOHQty = makeAsyncActionCreators(UPDATE_OH_QTY);
 
+export const UPDATE_OH_QTY_V1 = makeAsyncActionTypes('API/UPDATE_OH_QTY_V1');
+export const updateOHQtyV1 = makeAsyncActionCreators(UPDATE_OH_QTY_V1);
+
 export const EDIT_LOCATION = makeAsyncActionTypes('API/EDIT_LOCATION');
 export const editLocation = makeAsyncActionCreators(EDIT_LOCATION);
 

@@ -68,6 +68,7 @@ const genericSagas = [
   makeAsyncSaga(saga.EDIT_LOCATION, actions.editLocation, EditLocationService.editLocation),
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
+  makeAsyncSaga(saga.UPDATE_OH_QTY_V1, actions.updateOHQtyV1, UpdateOHQtyService.updateOHQtyV1),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
   makeAsyncSaga(
     saga.GET_WORKLIST_SUMMARY_V2,

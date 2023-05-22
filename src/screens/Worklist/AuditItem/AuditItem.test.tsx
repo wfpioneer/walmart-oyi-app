@@ -57,7 +57,7 @@ import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { mockPalletLocations, mockSortedLocations } from '../../../mockData/getItemPallets';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
-import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
+import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY, UPDATE_OH_QTY_V1 } from '../../../state/actions/asyncAPI';
 import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
@@ -843,8 +843,9 @@ describe('AuditItemScreen', () => {
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_OH_QTY.RESET });
+      expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_OH_QTY_V1.RESET });
       expect(mockDispatch).toHaveBeenCalledWith(updateMultiPalletUPCQty({
         PalletList: [{
           expirationDate: '',
@@ -928,7 +929,8 @@ describe('AuditItemScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEventCall,
-          'AU'
+          'AU',
+          false
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -953,7 +955,8 @@ describe('AuditItemScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEventCall,
-          'AU'
+          'AU',
+          false
         )
       );
       expect(toJSON()).toMatchSnapshot();
@@ -970,7 +973,8 @@ describe('AuditItemScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEventCall,
-          'AU'
+          'AU',
+          false
         )
       );
       const modalConfirmButton = getByTestId('modal-confirm-button');
@@ -992,7 +996,8 @@ describe('AuditItemScreen', () => {
           mockItemDetails,
           mockDispatch,
           mockTrackEventCall,
-          'AU'
+          'AU',
+          false
         )
       );
       const modalConfirmButton = getByTestId('modal-cancel-button');
