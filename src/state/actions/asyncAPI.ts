@@ -156,6 +156,9 @@ export const getPalletConfig = makeAsyncActionCreators(GET_PALLET_CONFIG);
 export const UPDATE_PICKLIST_STATUS = makeAsyncActionTypes('API/UPDATE_PICKLIST_STATUS');
 export const updatePicklistStatus = makeAsyncActionCreators(UPDATE_PICKLIST_STATUS);
 
+export const UPDATE_PICKLIST_STATUS_V1 = makeAsyncActionTypes('API/UPDATE_PICKLIST_STATUS_V1');
+export const updatePicklistStatusV1 = makeAsyncActionCreators(UPDATE_PICKLIST_STATUS_V1);
+
 export const GET_PICKLISTS = makeAsyncActionTypes('API/GET_PICKLISTS');
 export const getPicklists = makeAsyncActionCreators(GET_PICKLISTS);
 

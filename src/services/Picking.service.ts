@@ -28,13 +28,33 @@ export default class PickingService {
       locationId: number;
       locationName: string;
       itemQty?: number;
-      palletId: number
+      palletId: number;
     }[];
   }) {
     const urls: Environment = getEnvironment();
     const { picklistItems, headers } = payload;
     return Request.patch(
       `${urls.locationUrl}/picklist/update`,
+      { picklistItems },
+      { headers }
+    );
+  }
+
+  public static updatePickListStatusV1(payload: {
+    headers: { action: PickAction };
+    picklistItems: {
+      picklistId: number;
+      locationId: number;
+      locationName: string;
+      itemQty?: number;
+      palletId: number;
+    }[];
+    palletId: number;
+  }) {
+    const urls: Environment = getEnvironment();
+    const { picklistItems, headers, palletId } = payload;
+    return Request.patch(
+      `${urls.orchestrationURL}/picklist/v1/${palletId}/update`,
       { picklistItems },
       { headers }
     );
