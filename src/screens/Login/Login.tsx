@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, {
   Dispatch, EffectCallback, useEffect
@@ -9,6 +10,14 @@ import {
 // @ts-expect-error // react-native-wmsso has no type definition it would seem
 import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import WMSingleSignOn, {
+  SSOEnv,
+  SSOPingFedEventData,
+  SSOPingFedEvents,
+  SSOUser,
+  ssoEventEmitter
+} from 'react-native-ssmp-sso';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
@@ -45,6 +54,7 @@ import {
   setPriceLabelPrinter,
   setPrinterList
 } from '../../state/actions/Print';
+import { mockConfig } from '../../mockData/mockConfig';
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
@@ -135,17 +145,28 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
 export const signInUser = (dispatch: Dispatch<any>): void => {
   if (Config.ENVIRONMENT !== 'prod') {
     // For use with Fluffy in non-prod
-    WMSSO.setEnv('STG');
+    // WMSSO.setEnv('STG');
+    WMSingleSignOn.setEnv(SSOEnv.CERT);
   }
-  WMSSO.getUser().then((user: WMSSOUser) => {
-    setLanguage(getSystemLanguage());
-    setUserId(user.userId);
-    dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
-    trackEvent('user_sign_in');
-    if (user.siteId && user.countryCode !== 'US') {
-      dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
-    }
-  });
+
+  WMSingleSignOn.signIn('MainActivity').then(() => {
+    console.log('Sign In Triggered');
+  })
+    .catch(err => {
+      this.setState({ isLoading: false });
+      console.log(`Sign In Error: ${err}`);
+    });
+
+  // WMSSO.getUser().then((user: WMSSOUser) => {
+  //   console.log('WMSSO: ', user);
+  //   setLanguage(getSystemLanguage());
+  //   setUserId(user.userId);
+  //   dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
+  //   trackEvent('user_sign_in');
+  //   if (user.siteId && user.countryCode !== 'US') {
+  //     dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
+  //   }
+  // });
 };
 
 export const signOutUser = (dispatch: Dispatch<any>): void => {
@@ -255,6 +276,65 @@ export const LoginScreen = (props: LoginScreenProps) => {
   } = props;
 
   useEffectHook(() => {
+    WMSingleSignOn.setRedirectUri('com.walmart.intl.oyi://SSOLogin');
+
+    const eventTypes = SSOPingFedEvents.types;
+    console.log('Ping events name ', SSOPingFedEvents.name);
+
+    ssoEventEmitter.addListener(SSOPingFedEvents.name, (event: SSOPingFedEventData) => {
+      console.log('in event emitter: ', event.action);
+      switch (event.action) {
+        case eventTypes.authSuccess:
+          WMSingleSignOn.getFreshAccessToken().then(token => console.log(token));
+
+          // eslint-disable-next-line no-shadow
+          WMSingleSignOn.getUser().then((user: SSOUser) => {
+            console.log('PingFed: ', user);
+
+            setLanguage(getSystemLanguage());
+            setUserId(user.userId);
+            dispatch(loginUser({
+              ...user,
+              siteId: Number(user.siteId ?? '0'),
+              token: '',
+              additional: {
+                displayName: user.displayName ?? '',
+                clockCheckResult: '',
+                loginId: '',
+                mailId: user.emailId ?? ''
+              },
+              features: [],
+              configs: mockConfig
+            }));
+            trackEvent('user_sign_in');
+            if (user.siteId && user.countryCode !== 'US') {
+              dispatch(getFluffyFeatures({ ...user, siteId: Number(user.siteId) }));
+            }
+          }).catch(reason => {
+            console.error('Failure Reason: ', reason);
+          });
+          console.log('received auth success; user is', event);
+          break;
+        case eventTypes.error:
+          console.log('received error event; error is', event.error);
+          break;
+        case eventTypes.signedOut:
+          console.log('user signed out');
+          break;
+        case eventTypes.clockStatusChange:
+          console.log('clock status changed', event.clockStatus);
+          break;
+        default: console.log('Weird Behavior');
+      }
+    });
+
+    return () => {
+      ssoEventEmitter.removeAllListeners(SSOPingFedEvents.name);
+    };
+  }, [ssoEventEmitter]);
+
+  useEffectHook(() => {
+    console.log('Enter useEffect');
     signInUser(dispatch);
     // this following snippet is mostly for iOS, as
     // I need it to automatically call signInUser when we go back to the login screen
