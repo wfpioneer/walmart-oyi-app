@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
 // @ts-expect-error wmsso exists as an imported dependency
 import WMSSO from 'react-native-wmsso';
+import { logout } from 'react-native-app-auth';
 import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';

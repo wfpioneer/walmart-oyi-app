@@ -4,9 +4,9 @@ import React, {
 } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  NativeModules, Platform, Text, View
+  NativeModules, Platform, Text, TextInput, View
 } from 'react-native';
-import { authorize, AuthorizeResult, logout } from 'react-native-app-auth';
+import { AuthorizeResult, authorize, logout } from 'react-native-app-auth';
 import Config from 'react-native-config';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
@@ -49,11 +49,6 @@ import {
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
-
-// This type uses all fields from the User type except it makes siteId optional
-// It is necessary to provide an accurate type to the User object returned
-// from WMSSO.getUser (since its siteId is optional and CN users can log in without one)
-type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
@@ -98,11 +93,11 @@ const getSystemLanguage = (): string => {
   return 'en';
 };
 
-const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
+const userIsSignedIn = (user: User): boolean => user.sAMAccountName !== '' && user.userTokens.accessToken !== '';
 const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => void, onSubmitCN: () => void}) => {
   const { onSignOut, onSubmitCN, onSubmitMX } = props;
   return (
-    <>
+    <View style={styles.modalContainer}>
       <View style={styles.closeContainer}>
         <IconButton
           icon={ModalCloseIcon}
@@ -114,22 +109,24 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
       <Text style={styles.titleText}>
         Please select a country to sign into
       </Text>
-      <View style={styles.buttonRow}>
-        <Button
-          title="MX"
-          onPress={() => onSubmitMX()}
-          type={ButtonType.SOLID_WHITE}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          style={styles.affirmButton}
-        />
-        <Button
-          title="CN"
-          onPress={() => onSubmitCN()}
-          type={ButtonType.PRIMARY}
-          style={styles.affirmButton}
-        />
+      <View style={styles.buttonContainer}>
+        <View style={styles.buttonRow}>
+          <Button
+            title="MX"
+            onPress={() => onSubmitMX()}
+            type={ButtonType.SOLID_WHITE}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            style={styles.affirmButton}
+          />
+          <Button
+            title="CN"
+            onPress={() => onSubmitCN()}
+            type={ButtonType.PRIMARY}
+            style={styles.affirmButton}
+          />
+        </View>
       </View>
-    </>
+    </View>
   );
 };
 
@@ -155,16 +152,13 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     });
     const userInfo = await userInfoResponse.json();
 
+    userInfo.siteId = parseInt(userInfo['wm-BusinessUnitNumber'], 10);
+
     dispatch(hideActivityModal());
-    console.log(userTokens);
-    console.log(JSON.stringify(userInfo));
 
     setLanguage(getSystemLanguage());
     setUserId(userInfo.userPrincipalName);
-    dispatch(loginUser({
-      ...userInfo,
-      siteId: userInfo['wm-BusinessUnitCategory'] === 'HO' ? 0 : userInfo['wm-BusinessUnitNumber']
-    }));
+    dispatch(loginUser(userInfo));
     trackEvent('user_sign_in');
     if (userInfo['wm-BusinessUnitCategory'] !== 'HO' && userInfo.c !== 'US') {
       dispatch(getFluffyFeatures({
@@ -309,7 +303,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
     }).catch((e: Error) => {
       console.warn(e.message);
     });
-  }
+  };
 
   useEffectHook(() => {
     signInUserInit();
@@ -335,13 +329,13 @@ export const LoginScreen = (props: LoginScreenProps) => {
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={!user.siteId && userIsSignedIn(user)}
+        isVisible={user['wm-BusinessUnitCategory'] === 'HO' && user.c !== 'US' && userIsSignedIn(user)}
         onClose={() => signOutUser(dispatch)}
         modalType="Form"
       >
         <EnterClubNbrForm
           onSubmit={clubNbr => {
-            const updatedUser = { ...user, siteId: clubNbr };
+            const updatedUser = { ...user, 'wm-BusinessUnitNumber': clubNbr.toString(), siteId: clubNbr };
             dispatch(loginUser(updatedUser));
             trackEvent('user_sign_in');
             if (user.countryCode !== 'US') {
@@ -353,8 +347,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
       </CustomModalComponent>
       <CustomModalComponent
         isVisible={
-          user.siteId !== 0
-          && user.countryCode === 'US'
+          user.c === 'US'
           && userIsSignedIn(user)
         }
         onClose={() => signOutUser(dispatch)}
@@ -363,14 +356,18 @@ export const LoginScreen = (props: LoginScreenProps) => {
         <SelectCountryCodeModal
           onSignOut={() => signOutUser(dispatch)}
           onSubmitCN={() => {
-            const updatedUser = { ...user, countryCode: 'CN' };
+            const updatedUser = { ...user, c: 'CN' };
             dispatch(loginUser(updatedUser));
-            dispatch(getFluffyFeatures(updatedUser));
+            if (updatedUser['wm-BusinessUnitCategory'] !== 'HO') {
+              dispatch(getFluffyFeatures(updatedUser));
+            }
           }}
           onSubmitMX={() => {
-            const updatedUser = { ...user, countryCode: 'MX' };
+            const updatedUser = { ...user, c: 'MX' };
             dispatch(loginUser(updatedUser));
-            dispatch(getFluffyFeatures(updatedUser));
+            if (updatedUser['wm-BusinessUnitCategory'] !== 'HO') {
+              dispatch(getFluffyFeatures(updatedUser));
+            }
           }}
         />
       </CustomModalComponent>

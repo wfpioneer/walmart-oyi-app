@@ -74,7 +74,7 @@ export const getConsumerId = () => {
 };
 
 export const getEnvironment = (): Environment => {
-  const countryCode = store.getState().User.countryCode.toLowerCase();
+  const countryCode = store.getState().User.c.toLowerCase();
 
   const environments: Environments = {
     dev: {
