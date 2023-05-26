@@ -13,10 +13,4 @@ public class SplashActivity extends Activity {
         startActivity(intent);
         finish();
     }
-
-    @Override
-    public void onNewIntent(Intent intent) {
-      super.onNewIntent(intent);
-      setIntent(intent);
-    }
 }
