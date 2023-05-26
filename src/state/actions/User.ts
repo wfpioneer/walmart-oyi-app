@@ -6,7 +6,7 @@ export const USER_LOGOUT = 'USER/LOGOUT';
 export const ASSIGN_FLUFFY_FEATURES = 'USER/ASSIGN_FLUFFY_FEATURES';
 export const SET_CONFIGS = 'USER/SET_CONFIGS';
 
-export const loginUser = (userPayload: User) => ({
+export const loginUser = (userPayload:Omit< User, 'configs'>) => ({
   type: USER_LOGIN,
   payload: userPayload
 } as const);

@@ -22,8 +22,12 @@
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
         android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
       </activity>
-        <activity
+        <!-- <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"
             android:label="@string/app_name">
@@ -31,7 +35,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity> -->
+        <!-- <activity>
+            <intent-filter>
+              <action android:name="android.intent.action.VIEW"/>
+              <category android:name="android.intent.category.DEFAULT"/>
+              <category android:name="android.intent.category.BROWSABLE"/>
+              <data android:scheme="com.walmart.intl.oyi" android:host="SSOLogin" />
+              <data android:sheme="https" android:host="pfedcert.wal-mart.com"/>
+            </intent-filter>
+        </activity> -->
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
 

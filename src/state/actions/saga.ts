@@ -155,7 +155,7 @@ export const getLocationDetails = (payload: {
   headers?: AxiosRequestHeaders;
   itemNbr: number;
 }) => ({ type: GET_LOCATION_DETAILS, payload } as const);
-export const getFluffyFeatures = (payload: User) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
+export const getFluffyFeatures = (payload: Omit<User, 'configs' >) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
   itemNbr?: number;
   status?: approvalStatus;

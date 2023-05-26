@@ -7,8 +7,6 @@ import { useDispatch } from 'react-redux';
 import {
   NativeModules, Platform, Text, View
 } from 'react-native';
-// @ts-expect-error // react-native-wmsso has no type definition it would seem
-import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import WMSingleSignOn, {
@@ -54,7 +52,6 @@ import {
   setPriceLabelPrinter,
   setPrinterList
 } from '../../state/actions/Print';
-import { mockConfig } from '../../mockData/mockConfig';
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
@@ -145,40 +142,31 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
 export const signInUser = (dispatch: Dispatch<any>): void => {
   if (Config.ENVIRONMENT !== 'prod') {
     // For use with Fluffy in non-prod
-    // WMSSO.setEnv('STG');
     WMSingleSignOn.setEnv(SSOEnv.CERT);
   }
 
   WMSingleSignOn.signIn('MainActivity').then(() => {
     console.log('Sign In Triggered');
-  })
-    .catch(err => {
-      this.setState({ isLoading: false });
-      console.log(`Sign In Error: ${err}`);
-    });
-
-  // WMSSO.getUser().then((user: WMSSOUser) => {
-  //   console.log('WMSSO: ', user);
-  //   setLanguage(getSystemLanguage());
-  //   setUserId(user.userId);
-  //   dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
-  //   trackEvent('user_sign_in');
-  //   if (user.siteId && user.countryCode !== 'US') {
-  //     dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
-  //   }
-  // });
+  });
 };
 
 export const signOutUser = (dispatch: Dispatch<any>): void => {
   dispatch(showActivityModal());
   trackEvent('user_sign_out', { lastPage: 'Login' });
-  WMSSO.signOutUser().then(() => {
+  WMSingleSignOn.signOut('MainActivity', true).then(() => {
     dispatch(logoutUser());
     if (Platform.OS === 'android') {
       dispatch(hideActivityModal());
     }
-    signInUser(dispatch);
   });
+
+  // WMSSO.signOutUser().then(() => {
+  //   dispatch(logoutUser());
+  //   if (Platform.OS === 'android') {
+  //     dispatch(hideActivityModal());
+  //   }
+  //   signInUser(dispatch);
+  // });
 };
 
 export const userConfigsApiHook = (
@@ -285,7 +273,12 @@ export const LoginScreen = (props: LoginScreenProps) => {
       console.log('in event emitter: ', event.action);
       switch (event.action) {
         case eventTypes.authSuccess:
-          WMSingleSignOn.getFreshAccessToken().then(token => console.log(token));
+          // eslint-disable-next-line no-case-declarations
+          let userToken = '';
+          WMSingleSignOn.getFreshAccessToken().then(token => {
+            console.log(token);
+            userToken = token;
+          });
 
           // eslint-disable-next-line no-shadow
           WMSingleSignOn.getUser().then((user: SSOUser) => {
@@ -296,19 +289,29 @@ export const LoginScreen = (props: LoginScreenProps) => {
             dispatch(loginUser({
               ...user,
               siteId: Number(user.siteId ?? '0'),
-              token: '',
+              token: userToken,
               additional: {
                 displayName: user.displayName ?? '',
                 clockCheckResult: '',
                 loginId: '',
                 mailId: user.emailId ?? ''
               },
-              features: [],
-              configs: mockConfig
+              features: []
             }));
             trackEvent('user_sign_in');
             if (user.siteId && user.countryCode !== 'US') {
-              dispatch(getFluffyFeatures({ ...user, siteId: Number(user.siteId) }));
+              dispatch(getFluffyFeatures({
+                ...user,
+                siteId: Number(user.siteId ?? 0),
+                token: userToken,
+                additional: {
+                  displayName: user.displayName ?? '',
+                  clockCheckResult: '',
+                  loginId: '',
+                  mailId: user.emailId ?? ''
+                },
+                features: []
+              }));
             }
           }).catch(reason => {
             console.error('Failure Reason: ', reason);
