@@ -1,24 +1,45 @@
 import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { SSOUser, WmPingFedSSO } from 'react-native-ssmp-sso';
 import {
-  LoginScreen, resetFluffyFeaturesApiState, signInUser, signOutUser, userConfigsApiHook
+  LoginScreen,
+  onLoginSuccess,
+  resetFluffyFeaturesApiState,
+  signInUser,
+  signOutUser,
+  userConfigsApiHook
 } from './Login';
 import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import mockUser from '../../mockData/mockUser';
-import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import {
+  hideActivityModal,
+  showActivityModal
+} from '../../state/actions/Modal';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { sessionEnd } from '../../utils/sessionTimeout';
-import { assignFluffyFeatures, setConfigs } from '../../state/actions/User';
-import { getClubConfig } from '../../state/actions/saga';
+import {
+  assignFluffyFeatures,
+  loginUser,
+  logoutUser,
+  setConfigs
+} from '../../state/actions/User';
+import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
-  trackEvent: jest.fn()
+  trackEvent: jest.fn(),
+  setUserId: jest.fn()
 }));
+
+jest.mock('../../locales', () => ({
+  ...jest.requireActual('../../locales'),
+  setLanguage: jest.fn()
+}));
+
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
@@ -31,13 +52,22 @@ jest.mock('react-native-config', () => {
   };
 });
 
-jest.mock('react-native-wmsso', () => {
-  const wmsso = jest.requireActual('react-native-wmsso');
+jest.mock('react-native/Libraries/Utilities/Platform', () => {
+  const Platform = jest.requireActual(
+    'react-native/Libraries/Utilities/Platform.android.js'
+  );
+  Platform.OS = 'android';
+  return Platform;
+});
+
+jest.mock('react-native-ssmp-sso', () => {
+  const wmsso = jest.requireActual('react-native-ssmp-sso');
   return {
     ...wmsso,
     setEnv: jest.fn(),
     getUser: jest.fn(() => Promise.resolve()),
-    signOutUser: jest.fn(() => Promise.resolve())
+    signOut: jest.fn(() => Promise.resolve()),
+    getFreshAccessToken: jest.fn(() => Promise.resolve())
   };
 });
 const navigationProp: NavigationProp<any> = {
@@ -215,23 +245,55 @@ describe('Tests login screen functions', () => {
   };
   const mockGetPrinterDetailsFromAsyncStorage = jest.fn(() => Promise.resolve());
   // IAN doesn't know how to test this, because the promise function of `WMSSO.getUser()` doesn't have the props object
-  const mockWMSSO = jest.requireMock('react-native-wmsso');
+  const mockWMSSO: WmPingFedSSO = jest.requireMock('react-native-ssmp-sso');
   // const mockConfigENV = jest.requireMock('react-native-config');
   it('calls signInUser', async () => {
     signInUser(mockDispatch);
 
+    expect(mockWMSSO.getFreshAccessToken).toHaveBeenCalled();
     expect(mockWMSSO.getUser).toHaveBeenCalled();
-    expect(mockWMSSO.setEnv).toHaveBeenCalledWith('STG');
+    expect(mockWMSSO.setEnv).toHaveBeenCalledWith('CERT');
   });
 
-  it('calls signOutUser', () => {
+  it('calls signOutUser', async () => {
     const mockAppCenter = jest.requireMock('../../utils/AppCenterTool');
-    signOutUser(mockDispatch);
+    await signOutUser(mockDispatch);
 
-    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(mockDispatch).toHaveBeenCalledWith(showActivityModal());
-    expect(mockAppCenter.trackEvent).toHaveBeenCalledWith('user_sign_out', { lastPage: 'Login' });
-    expect(mockWMSSO.signOutUser).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
+    expect(mockDispatch).toHaveBeenCalledWith(logoutUser());
+    expect(mockAppCenter.trackEvent).toHaveBeenCalledWith('user_sign_out', {
+      lastPage: 'Login'
+    });
+    expect(mockWMSSO.signOut).toHaveBeenCalled();
+  });
+
+  it('calls onLoginSuccess', () => {
+    const mockAppCenter = jest.requireMock('../../utils/AppCenterTool');
+    const mockLocales = jest.requireMock('../../locales');
+    const mockSSOUser: SSOUser = {
+      ...testUser,
+      siteId: '0',
+      employeeType: '',
+      win: '',
+      fullTimePartTime: '',
+      division: '',
+      clockStatus: '',
+      accessToken: ''
+    };
+    const mockDispatchUser: any = {
+      ...mockSSOUser,
+      siteId: 0
+    };
+    onLoginSuccess(mockSSOUser, testUser.token, mockDispatch);
+    expect(mockLocales.setLanguage).toHaveBeenCalled();
+    expect(mockAppCenter.setUserId).toHaveBeenCalledWith(mockSSOUser.userId);
+    expect(mockAppCenter.trackEvent).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalledWith(loginUser(mockDispatchUser));
+    expect(mockDispatch).toHaveBeenCalledWith(
+      getFluffyFeatures(mockDispatchUser)
+    );
   });
 
   it('Tests userConfigsApiHook on Success', () => {
@@ -269,7 +331,7 @@ describe('Tests login screen functions', () => {
       navigationProp
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(8);
+    expect(mockDispatch).toHaveBeenCalledTimes(7);
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
     expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());

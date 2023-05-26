@@ -140,7 +140,7 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
       case 1:
         props.showActivityModal();
         trackEvent('user_sign_out', { lastPage: 'Home' });
-        WMSingleSignOn.signOut('MainActivity', true).then(() => {
+        WMSingleSignOn.signOut('MainActivity', false).then(() => {
           props.navigation.replace('Login');
           props.logoutUser();
           if (Platform.OS === 'android') {
