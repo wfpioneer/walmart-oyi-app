@@ -37,7 +37,8 @@ import {
   getItemPiHistory,
   getItemPiSalesHistory,
   getItemPicklistHistory,
-  getLocationsForItem
+  getLocationsForItem,
+  getLocationsForItemV1
 } from '../../state/actions/saga';
 import { OHChangeHistory } from '../../models/ItemDetails';
 
@@ -888,6 +889,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompleteNSFLResults);
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });
+
     it('test onValidateScannedEvent', async () => {
       await onValidateScannedEvent(mockItemDetailsScreenProps);
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS_V4/RESET' });
@@ -900,17 +902,31 @@ describe('ReviewItemDetailsScreen', () => {
         4,
         { type: 'API/GET_ITEM_PICKLISTHISTORY/RESET' }
       );
+      expect(mockItemDetailsScreenProps.dispatch)
+        .toHaveBeenNthCalledWith(5, { type: 'API/GET_ITEM_MANAGERAPPROVALHISTORY/RESET' });
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(6, getItemDetailsV4({ id: 123 }));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(7, getItemPiHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(8, getItemPiSalesHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(9, getItemPicklistHistory(123));
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(
-        5,
+        10,
         { type: 'API/GET_LOCATIONS_FOR_ITEM/RESET' }
       );
-      expect(mockItemDetailsScreenProps.dispatch)
-        .toHaveBeenNthCalledWith(6, { type: 'API/GET_ITEM_MANAGERAPPROVALHISTORY/RESET' });
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(7, getItemDetailsV4({ id: 123 }));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(8, getItemPiHistory(123));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(9, getItemPiSalesHistory(123));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(10, getItemPicklistHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(11, getLocationsForItem(123));
+
+      jest.clearAllMocks();
+      await onValidateScannedEvent({
+        ...mockItemDetailsScreenProps,
+        userConfigs: { ...mockConfig, peteGetLocations: true }
+      });
+
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(
+        10,
+        { type: 'API/GET_LOCATIONS_FOR_ITEM_V1/RESET' }
+      );
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(11, getLocationsForItemV1(123));
     });
+
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<View>{onIsWaiting(true)}</View>);

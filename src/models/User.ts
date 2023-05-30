@@ -43,6 +43,7 @@ export interface Configurations {
   peteGetPallets: boolean;
   inProgress: boolean;
   overridePalletPerishables: boolean;
+  peteGetLocations: boolean;
 }
 
 export interface area {

@@ -25,6 +25,7 @@ import {
   getItemPiSalesHistory,
   getItemPicklistHistory,
   getLocationsForItem,
+  getLocationsForItemV1,
   updateOHQty
 } from '../../state/actions/saga';
 import styles from './ReviewItemDetails.style';
@@ -63,6 +64,7 @@ import {
   GET_ITEM_PIHISTORY,
   GET_ITEM_PISALESHISTORY,
   GET_LOCATIONS_FOR_ITEM,
+  GET_LOCATIONS_FOR_ITEM_V1,
   UPDATE_OH_QTY
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
@@ -799,7 +801,7 @@ export const renderLocationComponent = (
   const {
     floorLocations, reserveLocations, userConfigs, navigation, trackEventCall
   } = props;
-  const { reserveAdjustment } = userConfigs;
+  const { reserveAdjustment, peteGetLocations } = userConfigs;
   const { itemNbr } = itemDetails;
   const hasFloorLocations = floorLocations && floorLocations.length >= 1;
   const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
@@ -830,8 +832,13 @@ export const renderLocationComponent = (
           style={styles.errorButton}
           onPress={() => {
             trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_get_item_location_retry_click', itemNbr });
-            dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
-            dispatch(getLocationsForItem(itemNbr));
+            if (peteGetLocations) {
+              dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+              dispatch(getLocationsForItemV1(itemNbr));
+            } else {
+              dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+              dispatch(getLocationsForItem(itemNbr));
+            }
           }}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
@@ -1244,7 +1251,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
   const {
     scannedEvent, userId, route,
     dispatch, navigation, trackEventCall,
-    validateSessionCall
+    validateSessionCall, userConfigs
   } = props;
 
   if (navigation.isFocused()) {
@@ -1255,7 +1262,6 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch({ type: GET_ITEM_PIHISTORY.RESET });
         dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
         dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
-        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
         dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
 
         const itemNbr = parseInt(scannedEvent.value, 10);
@@ -1263,7 +1269,14 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
         dispatch(getItemPiHistory(itemNbr));
         dispatch(getItemPiSalesHistory(itemNbr));
         dispatch(getItemPicklistHistory(itemNbr));
-        dispatch(getLocationsForItem(itemNbr));
+
+        if (userConfigs.peteGetLocations) {
+          dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+          dispatch(getLocationsForItemV1(itemNbr));
+        } else {
+          dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+          dispatch(getLocationsForItem(itemNbr));
+        }
         dispatch(getItemManagerApprovalHistory(itemNbr));
       }
     }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
@@ -1644,9 +1657,11 @@ const ReviewItemDetails = (): JSX.Element => {
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const getItemPicklistHistoryApi = useTypedSelector(state => state.async.getItemPicklistHistory);
-  const getLocationForItemApi = useTypedSelector(state => state.async.getLocationsForItem);
+  const { userId, countryCode, configs: userConfigs } = useTypedSelector(state => state.User);
+  const getLocationForItemApi = userConfigs.peteGetLocations
+    ? useTypedSelector(state => state.async.getLocationsForItemV1)
+    : useTypedSelector(state => state.async.getLocationsForItem);
   const getItemManagerApprovalHistoryApi = useTypedSelector(state => state.async.getItemManagerApprovalHistory);
-  const { userId, countryCode } = useTypedSelector(state => state.User);
   const {
     exceptionType,
     actionCompleted,
@@ -1655,7 +1670,6 @@ const ReviewItemDetails = (): JSX.Element => {
     reserveLocations
   } = useTypedSelector(state => state.ItemDetailScreen);
   const userFeatures = useTypedSelector(state => state.User.features);
-  const userConfigs = useTypedSelector(state => state.User.configs);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
