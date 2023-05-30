@@ -8,6 +8,7 @@ export const asyncReducer = combineReducers({
   getItemPiSalesHistory: makeAsyncReducer(asyncActions.GET_ITEM_PISALESHISTORY),
   getItemPicklistHistory: makeAsyncReducer(asyncActions.GET_ITEM_PICKLISTHISTORY),
   getLocationsForItem: makeAsyncReducer(asyncActions.GET_LOCATIONS_FOR_ITEM),
+  getLocationsForItemV1: makeAsyncReducer(asyncActions.GET_LOCATIONS_FOR_ITEM_V1),
   getItemManagerApprovalHistory: makeAsyncReducer(asyncActions.GET_ITEM_MANAGERAPPROVALHISTORY),
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
   getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS),

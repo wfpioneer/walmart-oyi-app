@@ -22,7 +22,8 @@ export default class GetItemDetailsService {
       { timeout: TIMEOUT }
     );
   }
-  //temporarily switching item details to V3 as V4 is not yet ready, leaving name as this is a temp change
+
+  // temporarily switching item details to V3 as V4 is not yet ready, leaving name as this is a temp change
   public static getItemDetailsV4(payload: GetItemDetailsPayload): Promise<AxiosResponse<unknown>> {
     const urls: Environment = getEnvironment();
     const summaryParam = payload.getSummary ? `?summaryDetails=${payload.getSummary}` : '';
@@ -64,6 +65,15 @@ export default class GetItemDetailsService {
     const urls: Environment = getEnvironment();
     return Request.get(
       `${urls.orchestrationURL}/location/item/${itemNbr}`,
+      undefined,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static getLocationsForItemV1(itemNbr: number): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    return Request.get(
+      `${urls.locationUrl}/v1/location/item/${itemNbr}`,
       undefined,
       { timeout: TIMEOUT }
     );

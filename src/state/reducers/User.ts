@@ -47,7 +47,8 @@ export const initialState: User = {
     manualNoAction: false,
     peteGetPallets: false,
     inProgress: false,
-    overridePalletPerishables: false
+    overridePalletPerishables: false,
+    peteGetLocations: false
   }
 };
 
@@ -96,7 +97,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           manualNoAction: action.payload.manualNoAction || false,
           peteGetPallets: action.payload.peteGetPallets || false,
           inProgress: action.payload.inProgress || false,
-          overridePalletPerishables: action.payload.overridePltPerish || false
+          overridePalletPerishables: action.payload.overridePltPerish || false,
+          peteGetLocations: action.payload.peteGetLocations || false
         }
       };
     default:

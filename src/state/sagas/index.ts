@@ -51,6 +51,11 @@ const genericSagas = [
     GetItemDetailsService.getLocationsForItem
   ),
   makeAsyncSaga(
+    saga.GET_LOCATIONS_FOR_ITEM_V1,
+    actions.getLocationsForItemV1,
+    GetItemDetailsService.getLocationsForItemV1
+  ),
+  makeAsyncSaga(
     saga.GET_ITEM_MANAGER_APPROVAL_HISTORY,
     actions.getItemManagerApprovalHistory,
     GetItemDetailsService.getItemManagerApprovalHistory

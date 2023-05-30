@@ -15,6 +15,9 @@ export const getItemPicklistHistory = makeAsyncActionCreators(GET_ITEM_PICKLISTH
 export const GET_LOCATIONS_FOR_ITEM = makeAsyncActionTypes('API/GET_LOCATIONS_FOR_ITEM');
 export const getLocationsForItem = makeAsyncActionCreators(GET_LOCATIONS_FOR_ITEM);
 
+export const GET_LOCATIONS_FOR_ITEM_V1 = makeAsyncActionTypes('API/GET_LOCATIONS_FOR_ITEM_V1');
+export const getLocationsForItemV1 = makeAsyncActionCreators(GET_LOCATIONS_FOR_ITEM_V1);
+
 export const GET_ITEM_MANAGERAPPROVALHISTORY = makeAsyncActionTypes('API/GET_ITEM_MANAGERAPPROVALHISTORY');
 export const getItemManagerApprovalHistory = makeAsyncActionCreators(GET_ITEM_MANAGERAPPROVALHISTORY);
 
