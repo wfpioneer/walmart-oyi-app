@@ -15,6 +15,7 @@ import WMSingleSignOn, {
   SSOUser,
   ssoEventEmitter
 } from 'react-native-ssmp-sso';
+import Toast from 'react-native-toast-message';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
@@ -51,6 +52,7 @@ import {
   setPriceLabelPrinter,
   setPrinterList
 } from '../../state/actions/Print';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
@@ -167,12 +169,8 @@ export const onLoginSuccess = (user: SSOUser, userToken: string, dispatch: Dispa
   }
 };
 export const signInUser = (dispatch: Dispatch<any>): void => {
-  if (Config.ENVIRONMENT !== 'prod') {
-    // For use with Fluffy in non-prod
-    WMSingleSignOn.setEnv(SSOEnv.CERT);
-  } else {
-    WMSingleSignOn.setEnv(SSOEnv.PROD);
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  Config.ENVIRONMENT !== 'prod' ? WMSingleSignOn.setEnv(SSOEnv.CERT) : WMSingleSignOn.setEnv(SSOEnv.PROD);
   let userToken = '';
   WMSingleSignOn.getFreshAccessToken().then(token => {
     userToken = token;
@@ -180,7 +178,7 @@ export const signInUser = (dispatch: Dispatch<any>): void => {
 
   WMSingleSignOn.getUser().then((user: SSOUser) => {
     onLoginSuccess(user, userToken, dispatch);
-  }).catch(reason => {
+  }).catch(() => {
     WMSingleSignOn.signIn('MainActivity');
   });
 };
@@ -297,18 +295,17 @@ export const LoginScreen = (props: LoginScreenProps) => {
       switch (event.action) {
         case eventTypes.authSuccess:
           signInUser(dispatch);
-          console.log('received auth success; user is', event);
           break;
         case eventTypes.error:
-          console.log('received error event; error is', event.error);
+          Toast.show({
+            type: 'error',
+            position: 'bottom',
+            text1: event.error.errorDescription,
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
           break;
-        case eventTypes.signedOut:
-          console.log('user signed out');
+        default:
           break;
-        case eventTypes.clockStatusChange:
-          console.log('clock status changed', event.clockStatus);
-          break;
-        default: console.log('Weird Behavior');
       }
     });
 
