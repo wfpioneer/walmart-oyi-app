@@ -31,6 +31,7 @@ export interface ConfigResponse {
   peteGetPallets: boolean;
   inProgress: boolean;
   overridePltPerish: boolean;
+  peteGetLocations: boolean;
 }
 
 export default class ConfigService {
