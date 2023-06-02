@@ -46,6 +46,7 @@ interface CreatePickProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   getLocationApi: AsyncState;
+  getLocationV1Api: AsyncState;
   createPickApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   countryCode: string;
@@ -80,6 +81,44 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
     }
     // API waiting
     if (isWaiting) {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
+export const getLocationsV1ApiHook = (
+  locationForItemsV1Api: AsyncState,
+  dispatch: Dispatch<any>,
+  isFocused: boolean,
+) => {
+  if (isFocused) {
+    if (!locationForItemsV1Api.isWaiting && locationForItemsV1Api.result) {
+      const response = locationForItemsV1Api.result.data;
+      const { salesFloorLocation, reserveLocation } = response;
+      dispatch(setFloorLocations(salesFloorLocation || []));
+      dispatch(setReserveLocations(reserveLocation || []));
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      dispatch(hideActivityModal());
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.LOCATIONS_UPDATED'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    // API failure
+    if (!locationForItemsV1Api.isWaiting && locationForItemsV1Api.error) {
+      dispatch(hideActivityModal());
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.LOCATIONS_FAILED_UPDATE'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    // API waiting
+    if (locationForItemsV1Api.isWaiting) {
       dispatch(showActivityModal());
     }
   }
@@ -162,8 +201,8 @@ export const addLocationHandler = (
 export const CreatePickScreen = (props: CreatePickProps) => {
   const {
     item, floorLocations, reserveLocations, selectedSectionState, createPickApi,
-    palletNumberState, dispatch, navigation, getLocationApi, useEffectHook,
-    selectedTab, countryCode
+    palletNumberState, dispatch, navigation, getLocationApi, getLocationV1Api,
+    useEffectHook, selectedTab, countryCode
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
@@ -172,6 +211,10 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   useEffectHook(
     () => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()),
     [getLocationApi]
+  );
+  useEffectHook(
+    () => getLocationsV1ApiHook(getLocationV1Api, dispatch, navigation.isFocused()),
+    [getLocationV1Api]
   );
   useEffectHook(
     () => createPickApiHook(createPickApi, dispatch, navigation),
@@ -328,6 +371,7 @@ const CreatePick = () => {
     selectedTab
   } = useTypedSelector(state => state.Picking);
   const getLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
+  const getLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
   const createPickApi = useTypedSelector(state => state.async.createNewPick);
   const { countryCode } = useTypedSelector(state => state.User);
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
@@ -346,6 +390,7 @@ const CreatePick = () => {
       dispatch={dispatch}
       navigation={navigation}
       getLocationApi={getLocationsApi}
+      getLocationV1Api={getLocationsV1Api}
       createPickApi={createPickApi}
       useEffectHook={useEffect}
       countryCode={countryCode}

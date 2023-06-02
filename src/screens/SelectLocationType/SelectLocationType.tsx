@@ -16,6 +16,7 @@ import {
   addLocation,
   editLocation,
   getLocationsForItem,
+  getLocationsForItemV1,
   getSectionDetails
 } from '../../state/actions/saga';
 import { clearSelectedLocation, setActionCompleted } from '../../state/actions/ItemDetailScreen';
@@ -54,6 +55,7 @@ interface SelectLocationProps {
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
   selectedLocation: Location | null;
   salesFloor: boolean;
+  peteGetLocations: boolean;
 }
 
 export const validateLocation = (loc: string): boolean => {
@@ -169,6 +171,7 @@ export const AddLocationApiHook = (
   exceptionType: string | null | undefined,
   itemNbr: number,
   selectedLocation: Location | null,
+  peteGetLocations: boolean
 ) => {
   // on api submission
   if (addAPI.isWaiting) {
@@ -182,9 +185,17 @@ export const AddLocationApiHook = (
   if (isApiSuccess(addAPI)) {
     if (salesFloor) {
       isNotActionCompleted(actionCompleted, dispatch, exceptionType);
-      dispatch(getLocationDetails({ itemNbr }));
+      if (peteGetLocations) {
+        dispatch(getLocationsForItemV1(itemNbr));
+      } else {
+        dispatch(getLocationsForItem(itemNbr));
+      }
     } else if (!salesFloor && !selectedLocation) {
-      dispatch(getLocationDetails({ itemNbr }));
+      if (peteGetLocations) {
+        dispatch(getLocationsForItemV1(itemNbr));
+      } else {
+        dispatch(getLocationsForItem(itemNbr));
+      }
     }
     navigation.goBack();
   }
@@ -197,7 +208,8 @@ export const EditLocationApiHook = (
   navigation: NavigationProp<any>,
   salesFloor: boolean,
   itemNbr: number,
-  selectedLocation: Location | null
+  selectedLocation: Location | null,
+  peteGetLocations: boolean
 ) => {
   // on api submission
   if (editAPI.isWaiting) {
@@ -210,7 +222,11 @@ export const EditLocationApiHook = (
   // on api success
   if (isApiSuccess(editAPI)) {
     if (salesFloor) {
-      dispatch(getLocationDetails({ itemNbr }));
+      if (peteGetLocations) {
+        dispatch(getLocationsForItemV1(itemNbr));
+      } else {
+        dispatch(getLocationsForItem(itemNbr));
+      }
     } else {
       dispatch(getSectionDetails({ sectionId: selectedLocation ? selectedLocation.sectionId.toString() : '' }));
     }
@@ -233,7 +249,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   const {
     inputLocation, setInputLocation, loc, setLoc, actionCompleted, floorLocations, upcNbr,
     scanType, setScanType, error, setError, addAPI, editAPI, selectedLocation,
-    itemNbr, salesFloor, trackEventCall, exceptionType,
+    itemNbr, salesFloor, trackEventCall, exceptionType, peteGetLocations,
     navigation, dispatch, useEffectHook, validateSessionCall
   } = props;
   let scannedSubscription: EmitterSubscription;
@@ -269,7 +285,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     actionCompleted,
     exceptionType,
     itemNbr,
-    selectedLocation
+    selectedLocation,
+    peteGetLocations
   ),
   [addAPI]);
 
@@ -281,7 +298,8 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     navigation,
     salesFloor,
     itemNbr,
-    selectedLocation
+    selectedLocation,
+    peteGetLocations
   ), [editAPI]);
 
   const modelOnSubmit = (value: string) => {
@@ -377,6 +395,7 @@ const SelectLocationType = (): JSX.Element => {
     selectedLocation,
     salesFloor
   } = useTypedSelector(state => state.ItemDetailScreen);
+  const { peteGetLocations } = useTypedSelector(state => state.User.configs);
   const [loc, setLoc] = useState(selectedLocation ? selectedLocation.locationName : '');
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -405,6 +424,7 @@ const SelectLocationType = (): JSX.Element => {
       validateSessionCall={validateSession}
       selectedLocation={selectedLocation}
       salesFloor={salesFloor}
+      peteGetLocations={peteGetLocations}
     />
   );
 };

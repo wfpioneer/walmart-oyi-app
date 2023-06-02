@@ -50,6 +50,7 @@ interface LocationDetailsProps {
     locationTypeNbr: number;
   }>>;
   locationsApi: AsyncState;
+  locationsV1Api: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
 const getLocationsApiHook = (locationsApi: AsyncState, dispatch: Dispatch<any>) => {
@@ -63,6 +64,15 @@ const getLocationsApiHook = (locationsApi: AsyncState, dispatch: Dispatch<any>) 
     }
   }
 };
+
+const getLocationsV1ApiHook = (locationsV1Api: AsyncState, dispatch: Dispatch<any>) => {
+  if (locationsV1Api.result && locationsV1Api.result.data) {
+    const { salesFloorLocation, reserveLocation } = locationsV1Api.result.data;
+    dispatch(setFloorLocations(salesFloorLocation || []));
+    dispatch(setReserveLocations(reserveLocation || []));
+  }
+}
+
 export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element => {
   const {
     delAPI,
@@ -74,6 +84,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     upcNbr,
     locToConfirm,
     locationsApi,
+    locationsV1Api,
     navigation,
     route,
     setDisplayConfirmation,
@@ -86,6 +97,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     // Resets location api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
       dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
       dispatch({ type: DELETE_LOCATION.RESET });
     });
   }, []);
@@ -108,6 +120,13 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
       getLocationsApiHook(locationsApi, dispatch);
     }
   }, [locationsApi]);
+
+  // Get locations v1 api
+  useEffectHook(() => {
+    if (!locationsV1Api.isWaiting && locationsV1Api.result) {
+      getLocationsV1ApiHook(locationsV1Api, dispatch);
+    }
+  }, [locationsV1Api]);
 
   const handleEditLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
@@ -258,6 +277,7 @@ const LocationDetails = (): JSX.Element => {
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
   const locations = useTypedSelector(state => state.async.getLocationsForItem);
+  const locationsV1 = useTypedSelector(state => state.async.getLocationsForItemV1);
   const sortNames = (a: Location, b: Location) => a.locationName.localeCompare(b.locationName, undefined, {
     numeric: true
   });
@@ -275,6 +295,7 @@ const LocationDetails = (): JSX.Element => {
       upcNbr={upcNbr}
       locToConfirm={locToConfirm}
       locationsApi={locations}
+      locationsV1Api={locationsV1}
       navigation={navigation}
       route={route}
       setDisplayConfirmation={setDisplayConfirmation}
