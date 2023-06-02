@@ -62,7 +62,7 @@ import {
   getItemDetails,
   getItemPallets,
   getItemPalletsV1,
-  getLocationDetails,
+  getLocationsForItem,
   noAction,
   updateApprovalList,
   updateMultiPalletUPCQty,
@@ -110,7 +110,7 @@ export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
   isManualScanEnabled: boolean;
   getItemDetailsApi: AsyncState;
-  getLocationApi: AsyncState;
+  getItemLocationsApi: AsyncState;
   getItemPalletsApi: AsyncState;
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -322,7 +322,7 @@ export const calculatePalletIncreaseQty = (
   }
 };
 
-export const getFloorLocationsResult = (
+export const getUpdatedFloorLocations = (
   floorResultsData: Location[] | undefined,
   dispatch: Dispatch<any>,
   existingFloorLocations: Location[]
@@ -366,18 +366,19 @@ export const getUpdatedReserveLocations = (
   return [];
 };
 
-export const getLocationsApiHook = (
-  getLocationApi: AsyncState,
+export const getItemLocationsApiHook = (
+  getItemLocationsApi: AsyncState,
   itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[]
 ) => {
   if (navigation.isFocused()) {
-    if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
-      const locDetails = getLocationApi.result.data;
+    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result && getItemLocationsApi.value === itemNumber) {
+      const locDetails = getItemLocationsApi.result.data;
       if (locDetails && locDetails.location) {
-        getFloorLocationsResult(locDetails.location.floor, dispatch, existingFloorLocations);
+        getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations);
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       }
     }
   }
@@ -1155,7 +1156,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent,
     isManualScanEnabled,
-    getLocationApi,
+    getItemLocationsApi,
     getItemDetailsApi,
     deleteFloorLocationApi,
     updateOHQtyApi,
@@ -1253,10 +1254,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     // TO DO
   }, [scannedEvent]);
 
-  // Get Location Details API
+  // Get Item Location API
   useEffectHook(
-    () => getLocationsApiHook(getLocationApi, itemNumber, dispatch, navigation, floorLocations),
-    [getLocationApi]
+    () => getItemLocationsApiHook(getItemLocationsApi, itemNumber, dispatch, navigation, floorLocations),
+    [getItemLocationsApi, floorLocations]
+  );
   );
 
   // Get Item Details UPC api
@@ -1345,20 +1347,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
-    return isError(
-      getItemDetailsApi.error,
-      dispatch,
-      trackEventCall,
-      itemNumber,
-      message
-    );
-  }
-
-  if (
-    !getItemDetailsApi.isWaiting
-    && (getItemDetailsApi.error || (itemDetails && itemDetails.message))
-  ) {
-    const message = itemDetails && itemDetails.message ? itemDetails.message : undefined;
     return isError(
       getItemDetailsApi.error,
       dispatch,
@@ -1637,8 +1625,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
-              loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
-              error={!!(getItemDetailsApi.error || getLocationApi.error)}
+              loading={getItemDetailsApi.isWaiting || getItemLocationsApi.isWaiting}
+              error={!!(getItemDetailsApi.error || getItemLocationsApi.error)}
               onRetry={() => {}}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
@@ -1699,12 +1687,17 @@ const AuditItem = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetails
   );
-  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
-  const getLocationApi = useTypedSelector(state => state.async.getLocation);
+  const {
+    userId,
+    features: userFeatures,
+    configs: userConfig,
+    countryCode
+  } = useTypedSelector(state => state.User);
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const deletePalletApi = useTypedSelector(state => state.async.clearPallet);
   const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
     : useTypedSelector(state => state.async.getItemPallets);
+  const getItemLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
@@ -1740,7 +1733,6 @@ const AuditItem = (): JSX.Element => {
     palletId: '-1'
   });
 
-  const countryCode = useTypedSelector(state => state.User.countryCode);
   const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <AuditItemScreen
@@ -1750,7 +1742,7 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsApi={getItemPalletsApi}
       getItemPalletsDispatch={getItemPalletsDispatch}
       deleteFloorLocationApi={deleteFloorLocationApi}
-      getLocationApi={getLocationApi}
+      getItemLocationsApi={getItemLocationsApi}
       updateOHQtyApi={updateOHQtyApi}
       completeItemApi={completeItemApi}
       getItemApprovalApi={getItemApprovalApi}

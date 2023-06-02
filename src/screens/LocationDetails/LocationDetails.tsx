@@ -22,13 +22,14 @@ import { deleteLocation } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
-import { DELETE_LOCATION, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
+import { DELETE_LOCATION, GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
+import { Dispatch } from 'redux';
 
 interface LocationDetailsProps {
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
-  dispatch: any;
+  dispatch: Dispatch<any>;
   floorLocations: Location[];
   reserveLocations: Location[];
   itemNbr: number;
@@ -48,13 +49,10 @@ interface LocationDetailsProps {
     locationIndex: number;
     locationTypeNbr: number;
   }>>;
-  locationsApi: AsyncState
+  locationsApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
-const getlocationsApiResult = (props: LocationDetailsProps, locationsApi: AsyncState) => {
-  const {
-    dispatch
-  } = props;
+const getLocationsApiHook = (locationsApi: AsyncState, dispatch: Dispatch<any>) => {
   const locDetails = (locationsApi.result && locationsApi.result.data);
   if (locDetails.location) {
     if (locDetails.location.floor) {
@@ -87,7 +85,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   useEffectHook(() => {
     // Resets location api response data when navigating off-screen
     navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       dispatch({ type: DELETE_LOCATION.RESET });
     });
   }, []);
@@ -107,7 +105,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
     // brace style ignored to allow comments to remain.
     // on api success
     if (!locationsApi.isWaiting && locationsApi.result) {
-      getlocationsApiResult(props, locationsApi);
+      getLocationsApiHook(locationsApi, dispatch);
     }
   }, [locationsApi]);
 
@@ -135,6 +133,7 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
   const deleteConfirmed = () => {
     dispatch(
       deleteLocation({
+        // @ts-expect-error missing properties will be added in Request.ts
         headers: { itemNbr },
         upc: upcNbr,
         sectionId: locToConfirm.locationName,
@@ -258,7 +257,7 @@ const LocationDetails = (): JSX.Element => {
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '', locationArea: '', locationIndex: -1, locationTypeNbr: -1
   });
-  const locations = useTypedSelector(state => state.async.getLocation);
+  const locations = useTypedSelector(state => state.async.getLocationsForItem);
   const sortNames = (a: Location, b: Location) => a.locationName.localeCompare(b.locationName, undefined, {
     numeric: true
   });

@@ -30,7 +30,7 @@ import AuditItem, {
   deleteFloorLocationApiHook,
   deletePalletApiHook,
   disabledContinue,
-  getFloorLocationsResult,
+  getUpdatedFloorLocations,
   getItemApprovalApiHook,
   getItemDetailsApiHook,
   getItemPalletsApiHook,
@@ -57,7 +57,7 @@ import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { mockPalletLocations, mockSortedLocations } from '../../../mockData/getItemPallets';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
-import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
+import { GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1, UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
 import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
@@ -162,7 +162,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
   getItemDetailsApi: defaultAsyncState,
-  getLocationApi: defaultAsyncState,
+  getItemLocationsApi: defaultAsyncState,
   itemDetails: null,
   userId: 'testUser',
   route: routeProp,

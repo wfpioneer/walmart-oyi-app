@@ -15,7 +15,7 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   addLocation,
   editLocation,
-  getLocationDetails,
+  getLocationsForItem,
   getSectionDetails
 } from '../../state/actions/saga';
 import { clearSelectedLocation, setActionCompleted } from '../../state/actions/ItemDetailScreen';

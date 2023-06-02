@@ -28,7 +28,7 @@ import { setFloorLocations, setReserveLocations, setupScreen } from '../../state
 import { AsyncState } from '../../models/AsyncState';
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { CREATE_NEW_PICK, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
+import { CREATE_NEW_PICK, GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1 } from '../../state/actions/asyncAPI';
 import { createNewPick } from '../../state/actions/saga';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
@@ -59,7 +59,7 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
       dispatch(setPickCreateFloor(result.data.location.floor || []));
       dispatch(setPickCreateReserve(result.data.location.reserve || []));
       dispatch(hideActivityModal());
-      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       Toast.show({
         type: 'success',
         text1: strings('PICKING.LOCATIONS_UPDATED'),
@@ -70,7 +70,7 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
     // API failure
     if (!isWaiting && error) {
       dispatch(hideActivityModal());
-      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       Toast.show({
         type: 'error',
         text1: strings('PICKING.LOCATIONS_FAILED_UPDATE'),
@@ -327,7 +327,7 @@ const CreatePick = () => {
     pickCreateReserveLocations: reserveLocations,
     selectedTab
   } = useTypedSelector(state => state.Picking);
-  const getLocationsApi = useTypedSelector(state => state.async.getLocation);
+  const getLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
   const createPickApi = useTypedSelector(state => state.async.createNewPick);
   const { countryCode } = useTypedSelector(state => state.User);
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
