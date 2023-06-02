@@ -76,7 +76,7 @@ class Request {
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
           if (request.url.includes(envUrls.atmtUrl)) {
-            interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.token;
+            interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.userTokens.accessToken;
           }
         }
         return interceptRequest;
@@ -228,7 +228,7 @@ class Request {
 export async function mockAxiosResponse<T>(
   payload: T,
   options?: Omit<AxiosResponse, 'data'>,
-): Promise<AxiosResponse<T>> {
+): Promise<Awaited<{ headers: object; request: object; data: T; statusText: string; config: object; status: number }>> {
   const config = {
     ...{
       config: {},

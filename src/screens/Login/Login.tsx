@@ -4,10 +4,9 @@ import React, {
 } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  NativeModules, Platform, Text, TextInput, View
+  NativeModules, Text, View
 } from 'react-native';
 import { AuthorizeResult, authorize, logout } from 'react-native-app-auth';
-import Config from 'react-native-config';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
@@ -39,8 +38,6 @@ import {
   savePrinter
 } from '../../utils/asyncStorageUtils';
 import {
-  clearLocationPrintQueue,
-  resetPrintQueue,
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
@@ -152,8 +149,6 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     });
     const userInfo = await userInfoResponse.json();
 
-    userInfo.siteId = parseInt(userInfo['wm-BusinessUnitNumber'], 10);
-
     dispatch(hideActivityModal());
 
     setLanguage(getSystemLanguage());
@@ -163,7 +158,7 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     if (userInfo['wm-BusinessUnitCategory'] !== 'HO' && userInfo.c !== 'US') {
       dispatch(getFluffyFeatures({
         ...userInfo,
-        siteId: userInfo['wm-BusinessUnitNumber']
+        siteId: parseInt(userInfo['wm-BusinessUnitNumber'], 10)
       }));
     }
 
@@ -172,36 +167,27 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     dispatch(hideActivityModal());
     return Promise.reject(e);
   }
-  // if (Config.ENVIRONMENT !== 'prod') {
-  //   // For use with Fluffy in non-prod
-  //   WMSSO.setEnv('STG');
-  // }
-  // WMSSO.getUser().then((user: WMSSOUser) => {
-  //   setLanguage(getSystemLanguage());
-  //   setUserId(user.userId);
-  //   dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
-  //   trackEvent('user_sign_in');
-  //   if (user.siteId && user.countryCode !== 'US') {
-  //     dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
-  //   }
-  // });
 };
 
-export const signOutUser = async (dispatch: Dispatch<any>): Promise<void> => {
+export const signOutUser = async (dispatch: Dispatch<any>, user: User): Promise<void> => {
   dispatch(showActivityModal());
   trackEvent('user_sign_out', { lastPage: 'Login' });
   const config = {
     issuer: 'https://pfedcert.wal-mart.com'
   };
-  await logout(config);
-
-  // WMSSO.signOutUser().then(() => {
-  //   dispatch(logoutUser());
-  //   if (Platform.OS === 'android') {
-  //     dispatch(hideActivityModal());
-  //   }
-  //   signInUser(dispatch);
-  // });
+  try {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    await logout(config, {
+      idToken: user.userTokens.idToken,
+      postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
+    });
+    dispatch(hideActivityModal());
+    dispatch(logoutUser());
+  } catch {
+    dispatch(hideActivityModal());
+    dispatch(logoutUser());
+  }
 };
 
 export const userConfigsApiHook = (
@@ -329,8 +315,8 @@ export const LoginScreen = (props: LoginScreenProps) => {
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={user['wm-BusinessUnitCategory'] === 'HO' && user.c !== 'US' && userIsSignedIn(user)}
-        onClose={() => signOutUser(dispatch)}
+        isVisible={user['wm-BusinessUnitCategory'] === 'HO' && !user.siteId && user.c !== 'US' && userIsSignedIn(user)}
+        onClose={() => null}
         modalType="Form"
       >
         <EnterClubNbrForm
@@ -342,7 +328,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
               dispatch(getFluffyFeatures(updatedUser));
             }
           }}
-          onSignOut={() => signOutUser(dispatch)}
+          onSignOut={() => signOutUser(dispatch, user)}
         />
       </CustomModalComponent>
       <CustomModalComponent
@@ -350,11 +336,11 @@ export const LoginScreen = (props: LoginScreenProps) => {
           user.c === 'US'
           && userIsSignedIn(user)
         }
-        onClose={() => signOutUser(dispatch)}
+        onClose={() => signOutUser(dispatch, user)}
         modalType="Form"
       >
         <SelectCountryCodeModal
-          onSignOut={() => signOutUser(dispatch)}
+          onSignOut={() => signOutUser(dispatch, user)}
           onSubmitCN={() => {
             const updatedUser = { ...user, c: 'CN' };
             dispatch(loginUser(updatedUser));

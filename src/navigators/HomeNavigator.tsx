@@ -6,9 +6,7 @@ import {
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
-// @ts-expect-error wmsso exists as an imported dependency
-import WMSSO from 'react-native-wmsso';
-import { logout } from 'react-native-app-auth';
+import { AuthorizeResult, logout } from 'react-native-app-auth';
 import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
@@ -43,14 +41,16 @@ interface HomeNavigatorComponentProps {
   updatePrinterByID: (payload: any) => void;
   priceLabelPrinter: Printer;
   setPriceLabelPrinter: (payload: Printer) => void;
-  userConfig: Configurations
+  userConfig: Configurations;
+  userTokens: AuthorizeResult;
 }
 
 const mapStateToProps = (state: any) => ({
   isManualScanEnabled: state.Global.isManualScanEnabled,
   clubNbr: state.User.siteId,
   priceLabelPrinter: state.Print.priceLabelPrinter,
-  userConfig: state.User.configs
+  userConfig: state.User.configs,
+  userTokens: state.User.userTokens
 });
 
 const mapDispatchToProps = {
@@ -95,75 +95,96 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
     }
   };
 
-  const logoutUser = async () => {
-
+  const logoutPFUser = async () => {
+    const config = {
+      issuer: 'https://pfedcert.wal-mart.com'
+    };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const result = await logout(config, {
+      idToken: props.userTokens.idToken,
+      postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
+    });
+    return result;
   };
 
-  ActionSheet.showActionSheetWithOptions({
-    options,
-    // toggle cancel option index based on feedback config
-    cancelButtonIndex: showFeedback ? 3 : 2
-  },
-  // eslint-disable-next-line consistent-return
-  buttonIndex => {
-    const languageOptions = [
-      'English',
-      'Español',
-      '汉语',
-      strings('GENERICS.CANCEL')
-    ];
-    switch (buttonIndex) {
-      case 0:
-        ActionSheet.showActionSheetWithOptions(
-          {
-            options: languageOptions,
-            // toggle cancel option index based on feedback config
-            cancelButtonIndex: showFeedback ? 3 : 2
-          },
-          selectedLanguageIndex => {
-            switch (selectedLanguageIndex) {
-              case 0:
-                setLanguage('en');
-                updateDefaultPrinter();
-                trackEvent('change_language', { language: 'en' });
-                return navigation.dispatch(StackActions.replace('Tabs'));
-              case 1:
-                setLanguage('es');
-                updateDefaultPrinter();
-                trackEvent('change_language', { language: 'es' });
-                return navigation.dispatch(StackActions.replace('Tabs'));
-              case 2:
-                setLanguage('zh');
-                updateDefaultPrinter();
-                trackEvent('change_language', { language: 'zh' });
-                return navigation.dispatch(StackActions.replace('Tabs'));
-              default:
-                return null;
+  ActionSheet.showActionSheetWithOptions(
+    {
+      options,
+      // toggle cancel option index based on feedback config
+      cancelButtonIndex: showFeedback ? 3 : 2
+    },
+    // eslint-disable-next-line consistent-return
+    buttonIndex => {
+      const languageOptions = [
+        'English',
+        'Español',
+        '汉语',
+        strings('GENERICS.CANCEL')
+      ];
+      switch (buttonIndex) {
+        case 0:
+          ActionSheet.showActionSheetWithOptions(
+            {
+              options: languageOptions,
+              // toggle cancel option index based on feedback config
+              cancelButtonIndex: showFeedback ? 3 : 2
+            },
+            selectedLanguageIndex => {
+              switch (selectedLanguageIndex) {
+                case 0:
+                  setLanguage('en');
+                  updateDefaultPrinter();
+                  trackEvent('change_language', { language: 'en' });
+                  return navigation.dispatch(StackActions.replace('Tabs'));
+                case 1:
+                  setLanguage('es');
+                  updateDefaultPrinter();
+                  trackEvent('change_language', { language: 'es' });
+                  return navigation.dispatch(StackActions.replace('Tabs'));
+                case 2:
+                  setLanguage('zh');
+                  updateDefaultPrinter();
+                  trackEvent('change_language', { language: 'zh' });
+                  return navigation.dispatch(StackActions.replace('Tabs'));
+                default:
+                  return null;
+              }
             }
+          );
+          break;
+        case 1:
+          props.showActivityModal();
+          trackEvent('user_sign_out', { lastPage: 'Home' });
+          logoutPFUser()
+            .then(() => {
+              props.navigation.replace('Login');
+              props.logoutUser();
+              if (Platform.OS === 'android') {
+                props.hideActivityModal();
+              }
+            })
+            .catch(() => {
+              // we do the exact same thing. Pingfed actually won't redirect you back,
+              // so the promise will likely be rejected
+              props.navigation.replace('Login');
+              props.logoutUser();
+              if (Platform.OS === 'android') {
+                props.hideActivityModal();
+              }
+            });
+          break;
+        case 2:
+          if (showFeedback) {
+            props.navigation.navigate('FeedbackScreen');
+            trackEvent('feedback_screen', { lastPage: 'Home' });
           }
-        );
-        break;
-      case 1:
-        props.showActivityModal();
-        trackEvent('user_sign_out', { lastPage: 'Home' });
-        // WMSSO.signOutUser().then(() => {
-        //   props.navigation.replace('Login');
-        //   props.logoutUser();
-        //   if (Platform.OS === 'android') {
-        //     props.hideActivityModal();
-        //   }
-        // });
-        break;
-      case 2:
-        if (showFeedback) {
-          props.navigation.navigate('FeedbackScreen');
-          trackEvent('feedback_screen', { lastPage: 'Home' });
-        }
-        break;
-      default:
-        return null;
+          break;
+        default:
+          return null;
+      }
     }
-  });
+  );
 };
 
 export const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: (bool: boolean) => void) => (
