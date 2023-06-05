@@ -53,7 +53,7 @@ interface LocationDetailsProps {
   locationsV1Api: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
 }
-const getLocationsApiHook = (locationsApi: AsyncState, dispatch: Dispatch<any>) => {
+export const getLocationsApiHook = (locationsApi: AsyncState, dispatch: Dispatch<any>) => {
   const locDetails = (locationsApi.result && locationsApi.result.data);
   if (locDetails.location) {
     if (locDetails.location.floor) {
@@ -65,7 +65,7 @@ const getLocationsApiHook = (locationsApi: AsyncState, dispatch: Dispatch<any>) 
   }
 };
 
-const getLocationsV1ApiHook = (locationsV1Api: AsyncState, dispatch: Dispatch<any>) => {
+export const getLocationsV1ApiHook = (locationsV1Api: AsyncState, dispatch: Dispatch<any>) => {
   if (locationsV1Api.result && locationsV1Api.result.data) {
     const { salesFloorLocation, reserveLocation } = locationsV1Api.result.data;
     dispatch(setFloorLocations(salesFloorLocation || []));

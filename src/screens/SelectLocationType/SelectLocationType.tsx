@@ -161,7 +161,7 @@ const isError = (error: { error: boolean; message: string }) => (
     : null
 );
 
-export const AddLocationApiHook = (
+export const addLocationApiHook = (
   addAPI: AsyncState,
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>,
   dispatch: Dispatch<any>,
@@ -201,7 +201,7 @@ export const AddLocationApiHook = (
   }
 };
 
-export const EditLocationApiHook = (
+export const editLocationApiHook = (
   editAPI: AsyncState,
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>,
   dispatch: Dispatch<any>,
@@ -276,7 +276,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   }, []);
 
   // Add Location API
-  useEffectHook(() => AddLocationApiHook(
+  useEffectHook(() => addLocationApiHook(
     addAPI,
     setError,
     dispatch,
@@ -291,7 +291,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   [addAPI]);
 
   // Edit Location API
-  useEffectHook(() => EditLocationApiHook(
+  useEffectHook(() => editLocationApiHook(
     editAPI,
     setError,
     dispatch,

@@ -1,12 +1,13 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp, Route } from '@react-navigation/native';
-import { LocationDetailsScreen } from './LocationDetails';
+import { LocationDetailsScreen, getLocationsApiHook, getLocationsV1ApiHook } from './LocationDetails';
 import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 
 let navigationProp: NavigationProp<any>;
 let routeProp: Route<any>;
+const mockDispatch = jest.fn();
 describe('LocationDetailsScreen', () => {
   const defaultAsyncState = {
     isWaiting: false,
@@ -34,7 +35,8 @@ describe('LocationDetailsScreen', () => {
     sectionName: '2',
     locationName: 'A1-2',
     type: 'Sales Floor',
-    typeNbr: 8
+    typeNbr: 8,
+    newQty: 0
   },
   {
     zoneId: 0,
@@ -45,7 +47,8 @@ describe('LocationDetailsScreen', () => {
     sectionName: '2',
     locationName: 'A1-3',
     type: 'End Cap',
-    typeNbr: 12
+    typeNbr: 12,
+    newQty: 0
   }];
   const reserveLoc: Location[] = [{
     zoneId: 0,
@@ -56,7 +59,8 @@ describe('LocationDetailsScreen', () => {
     sectionName: '1',
     locationName: 'A1-1',
     type: 'Reserve',
-    typeNbr: 7
+    typeNbr: 7,
+    newQty: 0
   }];
 
   describe('Tests for rendering an item\'s Locations:', () => {
@@ -71,9 +75,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={reserveLoc}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -95,9 +99,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={reserveLoc}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -119,9 +123,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={[]}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -144,9 +148,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={[]}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -176,9 +180,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={[]}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -206,9 +210,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={[]}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -236,9 +240,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={[]}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={locationConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -261,9 +265,9 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={[]}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={defaultAsyncState}
+          locationsV1Api={defaultAsyncState}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -291,9 +295,39 @@ describe('LocationDetailsScreen', () => {
           reserveLocations={[]}
           itemNbr={defaultItemNbr}
           upcNbr={defaultUpcNbr}
-          exceptionType={defaultExceptionType}
           locToConfirm={defaultLocConfirm}
           locationsApi={getLocationIsWaiting}
+          locationsV1Api={defaultAsyncState}
+          navigation={navigationProp}
+          route={routeProp}
+          setDisplayConfirmation={jest.fn()}
+          setLocToConfirm={jest.fn()}
+          useEffectHook={jest.fn()}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders Loader when waiting for a response from getLocationV1', () => {
+      const getLocationIsWaiting = {
+        isWaiting: true,
+        error: null,
+        result: null,
+        value: null
+      };
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <LocationDetailsScreen
+          delAPI={defaultAsyncState}
+          dispatch={jest.fn()}
+          displayConfirmation={false}
+          floorLocations={[]}
+          reserveLocations={[]}
+          itemNbr={defaultItemNbr}
+          upcNbr={defaultUpcNbr}
+          locToConfirm={defaultLocConfirm}
+          locationsApi={defaultAsyncState}
+          locationsV1Api={getLocationIsWaiting}
           navigation={navigationProp}
           route={routeProp}
           setDisplayConfirmation={jest.fn()}
@@ -304,4 +338,46 @@ describe('LocationDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
+  
+  describe('external function tests', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('Tests get item locations api hook success with correct item number', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            location: {
+              floor: [],
+              reserve: []
+            }
+          }
+        }
+      };
+
+      getLocationsApiHook(successApi, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_FLOOR_LOCATIONS' }));
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_RESERVE_LOCATIONS' }));
+    });
+
+    it('Tests get item locations v1 api hook success with correct item number', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            salesFloorLocation: [],
+            reserveLocation: []
+          }
+        }
+      };
+      
+      getLocationsV1ApiHook(successApi, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_FLOOR_LOCATIONS' }));
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_RESERVE_LOCATIONS' }));
+    });
+  })
 });

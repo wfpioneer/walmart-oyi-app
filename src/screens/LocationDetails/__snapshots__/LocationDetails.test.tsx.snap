@@ -325,6 +325,161 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
 />
 `;
 
+exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader when waiting for a response from getLocationV1 1`] = `
+<React.Fragment>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.LOCATION.DELETE_CONFIRMATION" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <ScrollView>
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.FLOOR" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+    <View
+      style={
+        Object {
+          "alignContent": "center",
+          "backgroundColor": "#e0e0e0",
+          "height": 70,
+          "justifyContent": "center",
+          "padding": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.LOCATION.RESERVE" translation] (0)
+      </Text>
+    </View>
+    <React.Fragment />
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+        }
+      }
+    >
+      <FAB
+        buttonColor="#0071e9"
+        iconTextColor="#FFFFFF"
+        iconTextComponent={
+          <mockConstructor
+            color="#ffffffff"
+            name="plus"
+            size={40}
+          />
+        }
+        onClickAction={[Function]}
+        snackOffset={0}
+        style={Object {}}
+        visible={true}
+      />
+    </View>
+  </View>
+</React.Fragment>
+`;
+
 exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader when waiting for a response to Delete a Location 1`] = `
 <React.Fragment>
   <CustomModalComponent
