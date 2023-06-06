@@ -135,5 +135,7 @@ export const getBuildEnvironment = (): string => {
   if (Config.ENVIRONMENT === 'prod') {
     return '';
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return `-${Config.ENVIRONMENT.toUpperCase()}`;
 };

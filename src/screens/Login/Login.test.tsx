@@ -1,6 +1,8 @@
 import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
+import { authorize } from 'react-native-app-auth';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { setUserId } from '../../utils/AppCenterTool';
 import {
   LoginScreen, resetFluffyFeaturesApiState, signInUser, signOutUser, userConfigsApiHook
 } from './Login';
@@ -11,13 +13,14 @@ import mockUser from '../../mockData/mockUser';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { sessionEnd } from '../../utils/sessionTimeout';
-import { assignFluffyFeatures, setConfigs } from '../../state/actions/User';
+import { assignFluffyFeatures, setConfigs, setUserTokens } from '../../state/actions/User';
 import { getClubConfig } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
-  trackEvent: jest.fn()
+  trackEvent: jest.fn(),
+  setUserId: jest.fn()
 }));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 jest.mock('../../../package.json', () => ({
@@ -31,13 +34,21 @@ jest.mock('react-native-config', () => {
   };
 });
 
-jest.mock('react-native-wmsso', () => {
-  const wmsso = jest.requireActual('react-native-wmsso');
+jest.mock('react-native-app-auth', () => {
+  const appAuthActual = jest.requireActual('react-native-app-auth');
   return {
-    ...wmsso,
-    setEnv: jest.fn(),
-    getUser: jest.fn(() => Promise.resolve()),
-    signOutUser: jest.fn(() => Promise.resolve())
+    ...appAuthActual,
+    authorize: jest.fn(() => Promise.resolve({
+      accessToken: 'dummyAccessToken',
+      refreshToken: 'dummyRefreshToken',
+      idToken: 'dummyIdToken',
+      accessTokenExpirationDate: '1970-01-01',
+      tokenType: 'Bearer',
+      scopes: [],
+      authorizationCode: 'dummyAuthCode'
+    })),
+    refresh: jest.fn(() => Promise.resolve()),
+    logout: jest.fn(() => Promise.resolve())
   };
 });
 const navigationProp: NavigationProp<any> = {
@@ -56,18 +67,100 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 const testUser: User = {
-  additional: {
-    clockCheckResult: '',
-    displayName: '',
-    loginId: '',
-    mailId: ''
-  },
+  'bu-division': '',
+  c: '',
+  cn: '',
+  co: '',
+  codePage: '',
+  company: '',
   countryCode: '',
+  ctscSecurityAnswers: '',
+  department: '',
+  departmentNumber: '',
+  description: '',
+  displayName: '',
+  displayNamePrintable: '',
+  distinguishedName: '',
+  division: '',
   domain: '',
-  siteId: 1,
-  token: 'aFakeToken',
-  userId: 'aFakeUserId',
+  employeeID: '',
+  employeeNumber: '',
+  employeeType: '',
+  extensionAttribute1: '',
+  extensionAttribute2: '',
+  extensionAttribute9: '',
+  extensionAttribute10: '',
+  extensionAttribute11: '',
+  facsimileTelephoneNumber: '',
+  givenName: '',
+  initials: '',
+  l: '',
+  mail: '',
+  manager: '',
+  memberOf: [],
+  name: '',
+  postalCode: '',
+  preferredLanguage: '',
+  sAMAccountName: 'aFakeUserId',
+  sn: '',
+  st: '',
+  siteId: 0,
+  streetAddress: '',
+  sub: '',
+  targetAddress: '',
+  telephoneNumber: '',
+  title: '',
+  userPrincipalName: '',
+  'wm-AccountStatus': '',
+  'wm-AlignDistrict': '',
+  'wm-AlignDivision': '',
+  'wm-AlignRegion': '',
+  'wm-AlignSubDivision': '',
+  'wm-BusinessUnitCategory': '',
+  'wm-BusinessUnitNumber': '',
+  'wm-BusinessUnitSubType': '',
+  'wm-BusinessUnitType': '',
+  'wm-ChargeBusinessUnitNumber': '',
+  'wm-ChargeCountryCode': '',
+  'wm-ChargeDivisionNumber': '',
+  'wm-ChargeState': '',
+  'wm-DistrictNumber': '',
+  'wm-EmployeeNumber': '',
+  'wm-EmploymentStatus': '',
+  'wm-FriendlyJobcodes': '',
+  'wm-FullTimePartTimeCode': '',
+  'wm-FullTimePartTimeEffDate': '',
+  'wm-HireDate': '',
+  'wm-IdentificationNumber': '',
+  'wm-JobCode': '',
+  'wm-JobCodeEffectiveDate': '',
+  'wm-ManagerEffectiveDate': '',
+  'wm-ManagerEpplID': '',
+  'wm-PositionCode': '',
+  'wm-RegionNumber': '',
+  'wm-ReportToPositionCode': '',
+  'wm-RespBaseDivNbr': '',
+  'wm-RespCountrCode': '',
+  'wm-RespLevelCode': '',
+  'wm-RespLevelId': '',
+  'wm-StoreMgrRespCode': '',
+  'wm-SubDivisionId': '',
+  'wm-SystemJobcodes': '',
+  'wm-Type': '',
+  'wm-WorkShift': '',
+  'wm-division': '',
   features: [],
+  userTokens: {
+    accessToken: '',
+    accessTokenExpirationDate: '',
+    authorizationCode: '',
+    authorizeAdditionalParameters: undefined,
+    idToken: '',
+    refreshToken: '',
+    scopes: [],
+    tokenAdditionalParameters: undefined,
+    tokenType: ''
+  },
   configs: mockConfig
 };
 
@@ -97,12 +190,26 @@ describe('LoginScreen', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('renders the EnterClubNbr modal when a user logs in without a club number', () => {
+  it('renders the EnterClubNbr modal when a MX HO user logs in', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <LoginScreen
         navigation={navigationProp}
-        user={{ ...testUser, siteId: 0 }}
+        user={{
+          ...testUser,
+          'wm-BusinessUnitCategory': 'HO',
+          c: 'MX',
+          sAMAccountName: 'blah',
+          userTokens: {
+            accessToken: 'blah',
+            accessTokenExpirationDate: '1970-01-01',
+            refreshToken: 'blah',
+            tokenType: 'test',
+            idToken: 'dummy',
+            authorizationCode: 'test',
+            scopes: []
+          }
+        }}
         getFluffyApiState={{
           isWaiting: false,
           value: null,
@@ -127,7 +234,21 @@ describe('LoginScreen', () => {
     renderer.render(
       <LoginScreen
         navigation={navigationProp}
-        user={{ ...testUser, countryCode: 'US' }}
+        user={{
+          ...testUser,
+          'wm-BusinessUnitCategory': 'HO',
+          c: 'US',
+          sAMAccountName: 'blah',
+          userTokens: {
+            accessToken: 'blah',
+            accessTokenExpirationDate: '1970-01-01',
+            refreshToken: 'blah',
+            tokenType: 'test',
+            idToken: 'dummy',
+            authorizationCode: 'test',
+            scopes: []
+          }
+        }}
         getFluffyApiState={{
           isWaiting: false,
           error: '',
@@ -207,6 +328,17 @@ describe('Tests login screen functions', () => {
     jest.clearAllMocks();
   });
   const mockDispatch = jest.fn();
+  // eslint-disable-next-line no-global-assign,@typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line no-global-assign
+  fetch = jest.fn(() => Promise.resolve({
+    json: () => Promise.resolve({
+      userPrincipalName: 'Dummy User',
+      'wm-BusinessUnitCategory': 'HO',
+      c: 'US',
+      'wm-BusinessUnitNumber': '9999'
+    })
+  }));
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
@@ -214,24 +346,40 @@ describe('Tests login screen functions', () => {
     result: null
   };
   const mockGetPrinterDetailsFromAsyncStorage = jest.fn(() => Promise.resolve());
-  // IAN doesn't know how to test this, because the promise function of `WMSSO.getUser()` doesn't have the props object
-  const mockWMSSO = jest.requireMock('react-native-wmsso');
-  // const mockConfigENV = jest.requireMock('react-native-config');
   it('calls signInUser', async () => {
-    signInUser(mockDispatch);
+    await signInUser(mockDispatch);
 
-    expect(mockWMSSO.getUser).toHaveBeenCalled();
-    expect(mockWMSSO.setEnv).toHaveBeenCalledWith('STG');
+    const expectedConfig = {
+      issuer: 'https://pfedcert.wal-mart.com',
+      clientId: 'intl_sams_oyi_stg',
+      redirectUrl: 'com.samsclub.intl.oyi://oauth',
+      scopes: ['openid full']
+    };
+
+    expect(authorize).toHaveBeenCalledWith(expectedConfig);
+    // expect(mockDispatch).toHaveBeenCalledTimes(4);
+    expect(mockDispatch).toHaveBeenCalledWith(showActivityModal());
+    expect(mockDispatch).toHaveBeenCalledWith(setUserTokens({
+      accessToken: 'dummyAccessToken',
+      refreshToken: 'dummyRefreshToken',
+      idToken: 'dummyIdToken',
+      accessTokenExpirationDate: '1970-01-01',
+      tokenType: 'Bearer',
+      scopes: [],
+      authorizationCode: 'dummyAuthCode'
+    }));
+    expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
+    expect(setUserId).toHaveBeenCalledWith('Dummy User');
   });
 
   it('calls signOutUser', () => {
     const mockAppCenter = jest.requireMock('../../utils/AppCenterTool');
-    signOutUser(mockDispatch);
+    signOutUser(mockDispatch, testUser);
 
     expect(mockDispatch).toHaveBeenCalledTimes(1);
     expect(mockDispatch).toHaveBeenCalledWith(showActivityModal());
     expect(mockAppCenter.trackEvent).toHaveBeenCalledWith('user_sign_out', { lastPage: 'Login' });
-    expect(mockWMSSO.signOutUser).toHaveBeenCalled();
+    // expect(mockWMSSO.signOutUser).toHaveBeenCalled();
   });
 
   it('Tests userConfigsApiHook on Success', () => {
@@ -269,7 +417,7 @@ describe('Tests login screen functions', () => {
       navigationProp
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(8);
+    expect(mockDispatch).toHaveBeenCalledTimes(9);
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
     expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());

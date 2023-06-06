@@ -1,4 +1,4 @@
-import User, { Configurations } from '../../models/User';
+import User from '../../models/User';
 import {
   ASSIGN_FLUFFY_FEATURES,
   Actions,
@@ -44,6 +44,7 @@ export const initialState: User = {
   postalCode: '',
   preferredLanguage: '',
   sAMAccountName: '',
+  siteId: 0,
   sn: '',
   st: '',
   streetAddress: '',
