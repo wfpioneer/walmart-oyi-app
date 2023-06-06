@@ -53,7 +53,6 @@ export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V@';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
-export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
 export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
@@ -159,10 +158,6 @@ export const printSign = (payload: {
   headers?: AxiosRequestHeaders;
   printList: PrintItemList[];
 }) => ({ type: PRINT_SIGN, payload } as const);
-export const getLocationDetails = (payload: {
-  headers?: AxiosRequestHeaders;
-  itemNbr: number;
-}) => ({ type: GET_LOCATION_DETAILS, payload } as const);
 export const getFluffyFeatures = (payload: User) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
   itemNbr?: number;
@@ -328,7 +323,6 @@ export type SagaParams =
     & Pick<ReturnType<typeof deleteLocation>, 'payload'>
     & Pick<ReturnType<typeof noAction>, 'payload'>
     & Pick<ReturnType<typeof printSign>, 'payload'>
-    & Pick<ReturnType<typeof getLocationDetails>, 'payload'>
     & Pick<ReturnType<typeof getFluffyFeatures>, 'payload'>
     & Pick<ReturnType<typeof getApprovalList>, 'payload'>
     & Pick<ReturnType<typeof updateApprovalList>, 'payload'>

@@ -66,9 +66,6 @@ export const noAction = makeAsyncActionCreators(NO_ACTION);
 export const PRINT_SIGN = makeAsyncActionTypes('API/PRINT_SIGN');
 export const printSign = makeAsyncActionCreators(PRINT_SIGN);
 
-export const GET_LOCATION_DETAILS = makeAsyncActionTypes('API/GET_LOCATION_DETAILS');
-export const getLocationDetails = makeAsyncActionCreators(GET_LOCATION_DETAILS);
-
 export const GET_FLUFFY_ROLES = makeAsyncActionTypes('API/GET_FLUFFY_ROLES');
 export const getFluffyRoles = makeAsyncActionCreators(GET_FLUFFY_ROLES);
 

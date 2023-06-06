@@ -14,7 +14,7 @@ import {
   UPDATE_PENDING_OH_QTY,
   clearSelectedLocation,
   deleteLocationFromExisting,
-  getLocationDetails,
+  getLocationsForItem,
   resetLocations,
   setActionCompleted,
   setFloorLocations,
@@ -86,8 +86,8 @@ describe('ItemDetailScreen action creator tests', () => {
     const resetLocationResults = resetLocations();
     expect(resetLocationResults).toStrictEqual({ type: RESET_LOCATIONS });
 
-    const getLocationDetailsResults = getLocationDetails(123456);
-    expect(getLocationDetailsResults).toStrictEqual({
+    const getLocationsForItemResults = getLocationsForItem(123456);
+    expect(getLocationsForItemResults).toStrictEqual({
       type: GET_LOCATION_DETAILS,
       payload: {
         itemNbr: 123456

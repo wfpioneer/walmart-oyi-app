@@ -62,7 +62,7 @@ export const resetLocations = () => ({
   type: RESET_LOCATIONS
 } as const);
 
-export const getLocationDetails = (itemNbr: number) => ({
+export const getLocationsForItem = (itemNbr: number) => ({
   type: GET_LOCATION_DETAILS,
   payload: {
     itemNbr
@@ -95,7 +95,7 @@ export type Actions =
   | ReturnType<typeof setReserveLocations>
   | ReturnType<typeof deleteLocationFromExisting>
   | ReturnType<typeof resetLocations>
-  | ReturnType<typeof getLocationDetails>
+  | ReturnType<typeof getLocationsForItem>
   | ReturnType<typeof setSelectedLocation>
   | ReturnType<typeof clearSelectedLocation>
   | ReturnType<typeof setUPC>
