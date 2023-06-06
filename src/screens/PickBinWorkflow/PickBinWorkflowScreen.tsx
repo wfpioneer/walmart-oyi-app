@@ -21,9 +21,10 @@ import styles from './PickBinWorkflow.style';
 import { AsyncState } from '../../models/AsyncState';
 import {
   UPDATE_PALLET_NOT_FOUND,
-  UPDATE_PICKLIST_STATUS
+  UPDATE_PICKLIST_STATUS,
+  UPDATE_PICKLIST_STATUS_V1
 } from '../../state/actions/asyncAPI';
-import { updatePalletNotFound, updatePicklistStatus } from '../../state/actions/saga';
+import { updatePalletNotFound, updatePicklistStatus, updatePicklistStatusV1 } from '../../state/actions/saga';
 import { addPallet, clearPallets } from '../../state/actions/Binning';
 import { showPickingMenu, updatePicks } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -33,6 +34,7 @@ import { setPrintingPalletLabel } from '../../state/actions/Print';
 import { setupPallet } from '../../state/actions/PalletManagement';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { Configurations } from '../../models/User';
 
 interface PBWorkflowProps {
   userFeatures: string[];
@@ -48,6 +50,7 @@ interface PBWorkflowProps {
   showContinueActionDialog: boolean;
   setShowContinueActionDialog: React.Dispatch<React.SetStateAction<boolean>>;
   trackEventCall: typeof trackEvent;
+  userConfigs: Configurations;
 }
 
 interface ContinueActionDialogProps {
@@ -57,10 +60,12 @@ interface ContinueActionDialogProps {
   items: PickListItem[];
   setSelectedPicklistAction: React.Dispatch<React.SetStateAction<PickAction|null>>;
   trackEventCall: typeof trackEvent;
+  userConfigs: Configurations;
 }
 
 const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+  dispatch({ type: UPDATE_PICKLIST_STATUS_V1.RESET });
 };
 
 export const updatePicklistStatusApiHook = (
@@ -183,7 +188,8 @@ export const updatePicklistItemsStatus = (
   items: PickListItem[],
   action: PickAction,
   dispatch: Dispatch<any>,
-  trackEventCall: typeof trackEvent
+  trackEventCall: typeof trackEvent,
+  isInProgress: boolean
 ) => {
   const picklistItems = items.map(item => ({
     picklistId: item.id,
@@ -196,23 +202,38 @@ export const updatePicklistItemsStatus = (
     pickAction: action,
     picklistItems: JSON.stringify(picklistItems)
   });
-  dispatch(updatePicklistStatus({
-    headers: {
-      action
-    },
-    picklistItems
-  }));
+  if (isInProgress) {
+    dispatch(updatePicklistStatusV1({
+      headers: {
+        action
+      },
+      picklistItems
+    }));
+  } else {
+    dispatch(updatePicklistStatus({
+      headers: {
+        action
+      },
+      picklistItems
+    }));
+  }
 };
 
 export const ContinueActionDialog = (props: ContinueActionDialogProps) => {
   const {
-    showContinueActionDialog, setShowContinueActionDialog, dispatch, items, setSelectedPicklistAction, trackEventCall
+    showContinueActionDialog,
+    setShowContinueActionDialog,
+    dispatch,
+    items,
+    setSelectedPicklistAction,
+    trackEventCall,
+    userConfigs
   } = props;
   // Continue Action handler
   const handleContinueAction = (action: PickAction) => {
     setShowContinueActionDialog(false);
     setSelectedPicklistAction(action);
-    updatePicklistItemsStatus(items, action, dispatch, trackEventCall);
+    updatePicklistItemsStatus(items, action, dispatch, trackEventCall, userConfigs.inProgress);
   };
 
   const handlePalletNotFound = () => {
@@ -283,7 +304,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
   const {
     userFeatures, userId, pickingState, updatePicklistStatusApi, useEffectHook, dispatch, navigation,
     selectedPicklistAction, setSelectedPicklistAction, showContinueActionDialog,
-    setShowContinueActionDialog, updatePalletNotFoundApi, trackEventCall
+    setShowContinueActionDialog, updatePalletNotFoundApi, trackEventCall, userConfigs
   } = props;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
@@ -309,14 +330,14 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
     const action = status === PickStatus.READY_TO_PICK ? PickAction.ACCEPT_PICK : PickAction.ACCEPT_BIN;
     setSelectedPicklistAction(action);
     trackEventCall('PickBinWorkflow_Screen', { action: 'accept_selected_picklist_click' });
-    updatePicklistItemsStatus(items, action, dispatch, trackEventCall);
+    updatePicklistItemsStatus(items, action, dispatch, trackEventCall, userConfigs.inProgress);
   };
 
   const handleRelease = (items: PickListItem[]) => {
     const action = PickAction.RELEASE;
     trackEventCall('PickBinWorkflow_Screen', { action: 'release_selected_picks_click' });
     setSelectedPicklistAction(action);
-    updatePicklistItemsStatus(items, action, dispatch, trackEventCall);
+    updatePicklistItemsStatus(items, action, dispatch, trackEventCall, userConfigs.inProgress);
   };
 
   const handleBin = (items: PickListItem[]) => {
@@ -406,6 +427,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
         items={selectedPicks}
         setSelectedPicklistAction={setSelectedPicklistAction}
         trackEventCall={trackEventCall}
+        userConfigs={userConfigs}
       />
       {selectedPicks.length > 0 ? (
         <>
@@ -429,10 +451,10 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
 };
 
 const PickBinWorkflow = () => {
-  const userFeatures = useTypedSelector(state => state.User.features);
-  const userId = useTypedSelector(state => state.User.userId);
+  const { features: userFeatures, userId, configs: userConfigs } = useTypedSelector(state => state.User);
   const picking = useTypedSelector(state => state.Picking);
-  const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
+  const updatePicklistStatusApi = userConfigs.inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
+    : useTypedSelector(state => state.async.updatePicklistStatus);
   const updatePalletNotFoundApi = useTypedSelector(state => state.async.updatePalletNotFound);
   const [selectedPicklistAction, setSelectedPicklistAction] = useState<PickAction|null>(null);
   const [showContinueActionDialog, setShowContinueActionDialog] = useState<boolean>(false);
@@ -493,6 +515,7 @@ const PickBinWorkflow = () => {
           showContinueActionDialog={showContinueActionDialog}
           setShowContinueActionDialog={setShowContinueActionDialog}
           trackEventCall={trackEvent}
+          userConfigs={userConfigs}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

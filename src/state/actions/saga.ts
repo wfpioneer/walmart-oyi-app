@@ -262,7 +262,6 @@ export const updatePicklistStatusV1 = (payload: {
     itemQty?: number;
     palletId: string
   }[];
-  palletId: number
 }) => ({
   type: UPDATE_PICKLIST_STATUS_V1,
   payload
