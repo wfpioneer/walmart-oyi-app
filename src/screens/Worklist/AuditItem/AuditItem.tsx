@@ -50,6 +50,8 @@ import {
   GET_APPROVAL_LIST,
   GET_ITEM_DETAILS,
   GET_ITEM_PALLETS,
+  GET_LOCATIONS_FOR_ITEM,
+  GET_LOCATIONS_FOR_ITEM_V1,
   NO_ACTION,
   UPDATE_APPROVAL_LIST,
   UPDATE_MULTI_PALLET_UPC_QTY,
@@ -62,7 +64,8 @@ import {
   getItemDetails,
   getItemPallets,
   getItemPalletsV1,
-  getLocationDetails,
+  getLocationsForItem,
+  getLocationsForItemV1,
   noAction,
   updateApprovalList,
   updateMultiPalletUPCQty,
@@ -110,7 +113,8 @@ export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
   isManualScanEnabled: boolean;
   getItemDetailsApi: AsyncState;
-  getLocationApi: AsyncState;
+  getItemLocationsApi: AsyncState;
+  getItemLocationsV1Api: AsyncState;
   getItemPalletsApi: AsyncState;
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -208,7 +212,7 @@ export const isError = (
   return <View />;
 };
 
-export const onValidateItemNumber = (props: AuditItemScreenProps) => {
+export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocations: boolean) => {
   const {
     userId,
     route,
@@ -228,6 +232,10 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
           dispatch(getItemDetails({ id: itemNumber }));
           dispatch(getApprovalList({ itemNbr: itemNumber, status: approvalStatus.Pending }));
           dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
+          if (peteGetLocations) {
+            dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+            dispatch(getLocationsForItemV1(itemNumber));
+          }
         }
       })
       .catch(() => {
@@ -322,7 +330,7 @@ export const calculatePalletIncreaseQty = (
   }
 };
 
-export const getFloorLocationsResult = (
+export const getUpdatedFloorLocations = (
   floorResultsData: Location[] | undefined,
   dispatch: Dispatch<any>,
   existingFloorLocations: Location[]
@@ -366,19 +374,36 @@ export const getUpdatedReserveLocations = (
   return [];
 };
 
-export const getLocationsApiHook = (
-  getLocationApi: AsyncState,
+export const getItemLocationsApiHook = (
+  getItemLocationsApi: AsyncState,
   itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[]
 ) => {
   if (navigation.isFocused()) {
-    if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
-      const locDetails = getLocationApi.result.data;
+    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result && getItemLocationsApi.value === itemNumber) {
+      const locDetails = getItemLocationsApi.result.data;
       if (locDetails && locDetails.location) {
-        getFloorLocationsResult(locDetails.location.floor, dispatch, existingFloorLocations);
+        getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations);
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       }
+    }
+  }
+};
+
+export const getItemLocationsV1ApiHook = (
+  getItemLocationsV1Api: AsyncState,
+  itemNumber: number,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  existingFloorLocations: Location[],
+) => {
+  if (navigation.isFocused()) {
+    if (!getItemLocationsV1Api.isWaiting && getItemLocationsV1Api.result && getItemLocationsV1Api.value === itemNumber) {
+      const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
+      getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations);
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
     }
   }
 };
@@ -399,11 +424,7 @@ export const getItemDetailsApiHook = (
       ) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
-        getFloorLocationsResult(
-          itemDetails?.location?.floor,
-          dispatch,
-          existingFloorLocations
-        );
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
         setShowItemNotFoundMsg(false);
       } else if (getItemDetailsApi.result.status === 204) {
         setShowItemNotFoundMsg(true);
@@ -427,7 +448,8 @@ export const deleteFloorLocationApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  locationName: string
+  locationName: string,
+  peteGetLocations: boolean
 ) => {
   if (navigation.isFocused()) {
     if (!deleteFloorLocationApi.isWaiting && deleteFloorLocationApi.result) {
@@ -441,7 +463,11 @@ export const deleteFloorLocationApiHook = (
           visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
-        dispatch(getLocationDetails({ itemNbr }));
+        if (peteGetLocations) {
+          dispatch(getLocationsForItemV1(itemNbr));
+        } else {
+          dispatch(getLocationsForItem(itemNbr));
+        }
         dispatch({ type: DELETE_LOCATION.RESET });
       }
     } else if (
@@ -1155,7 +1181,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent,
     isManualScanEnabled,
-    getLocationApi,
+    getItemLocationsApi,
+    getItemLocationsV1Api,
     getItemDetailsApi,
     deleteFloorLocationApi,
     updateOHQtyApi,
@@ -1245,7 +1272,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // call get Item details
   useEffectHook(() => {
-    onValidateItemNumber(props);
+    onValidateItemNumber(props, userConfig.peteGetLocations);
   }, [itemNumber]);
 
   // Scanned Item Event Listener
@@ -1253,10 +1280,16 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     // TO DO
   }, [scannedEvent]);
 
-  // Get Location Details API
+  // Get Item Location API
   useEffectHook(
-    () => getLocationsApiHook(getLocationApi, itemNumber, dispatch, navigation, floorLocations),
-    [getLocationApi]
+    () => getItemLocationsApiHook(getItemLocationsApi, itemNumber, dispatch, navigation, floorLocations),
+    [getItemLocationsApi, floorLocations]
+  );
+
+  // Get Item Locations V1 API
+  useEffectHook(
+    () => getItemLocationsV1ApiHook(getItemLocationsV1Api, itemNumber, dispatch, navigation, floorLocations),
+    [getItemLocationsV1Api, floorLocations]
   );
 
   // Get Item Details UPC api
@@ -1296,7 +1329,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       dispatch,
       navigation,
       setShowDeleteConfirmationModal,
-      locToConfirm.locationName
+      locToConfirm.locationName,
+      userConfig.peteGetLocations
     ),
     [deleteFloorLocationApi]
   );
@@ -1345,20 +1379,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
-    return isError(
-      getItemDetailsApi.error,
-      dispatch,
-      trackEventCall,
-      itemNumber,
-      message
-    );
-  }
-
-  if (
-    !getItemDetailsApi.isWaiting
-    && (getItemDetailsApi.error || (itemDetails && itemDetails.message))
-  ) {
-    const message = itemDetails && itemDetails.message ? itemDetails.message : undefined;
     return isError(
       getItemDetailsApi.error,
       dispatch,
@@ -1624,6 +1644,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           loading={getItemDetailsApi.isWaiting}
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
+          disabled={true}
         />
       </View>
       <ScrollView
@@ -1637,8 +1658,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
-              loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
-              error={!!(getItemDetailsApi.error || getLocationApi.error)}
+              loading={getItemDetailsApi.isWaiting || getItemLocationsApi.isWaiting}
+              error={!!(getItemDetailsApi.error || getItemLocationsApi.error)}
               onRetry={() => {}}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
@@ -1699,12 +1720,18 @@ const AuditItem = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetails
   );
-  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
-  const getLocationApi = useTypedSelector(state => state.async.getLocation);
+  const {
+    userId,
+    features: userFeatures,
+    configs: userConfig,
+    countryCode
+  } = useTypedSelector(state => state.User);
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const deletePalletApi = useTypedSelector(state => state.async.clearPallet);
   const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
     : useTypedSelector(state => state.async.getItemPallets);
+  const getItemLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
+  const getItemLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
@@ -1740,7 +1767,6 @@ const AuditItem = (): JSX.Element => {
     palletId: '-1'
   });
 
-  const countryCode = useTypedSelector(state => state.User.countryCode);
   const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <AuditItemScreen
@@ -1750,7 +1776,8 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsApi={getItemPalletsApi}
       getItemPalletsDispatch={getItemPalletsDispatch}
       deleteFloorLocationApi={deleteFloorLocationApi}
-      getLocationApi={getLocationApi}
+      getItemLocationsApi={getItemLocationsApi}
+      getItemLocationsV1Api={getItemLocationsV1Api}
       updateOHQtyApi={updateOHQtyApi}
       completeItemApi={completeItemApi}
       getItemApprovalApi={getItemApprovalApi}

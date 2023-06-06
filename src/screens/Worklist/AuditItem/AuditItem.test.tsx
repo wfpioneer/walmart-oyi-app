@@ -30,7 +30,7 @@ import AuditItem, {
   deleteFloorLocationApiHook,
   deletePalletApiHook,
   disabledContinue,
-  getFloorLocationsResult,
+  getUpdatedFloorLocations,
   getItemApprovalApiHook,
   getItemDetailsApiHook,
   getItemPalletsApiHook,
@@ -48,7 +48,9 @@ import AuditItem, {
   sortReserveLocations,
   updateManagerApprovalApiHook,
   updateMultiPalletUPCQtyApiHook,
-  updateOHQtyApiHook
+  updateOHQtyApiHook,
+  getItemLocationsApiHook,
+  getItemLocationsV1ApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
 import { getMockItemDetails } from '../../../mockData';
@@ -57,7 +59,7 @@ import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { mockPalletLocations, mockSortedLocations } from '../../../mockData/getItemPallets';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
-import { UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
+import { GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1, UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY } from '../../../state/actions/asyncAPI';
 import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
@@ -162,7 +164,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
   getItemDetailsApi: defaultAsyncState,
-  getLocationApi: defaultAsyncState,
+  getItemLocationsApi: defaultAsyncState,
+  getItemLocationsV1Api: defaultAsyncState,
   itemDetails: null,
   userId: 'testUser',
   route: routeProp,
@@ -363,6 +366,7 @@ describe('AuditItemScreen', () => {
       ...defaultAsyncState,
       error: 'Internal Server Error'
     };
+
     it('test onValidateItemNumber', async () => {
       const expectedGetItemDetailsAction = {
         payload: {
@@ -373,7 +377,27 @@ describe('AuditItemScreen', () => {
       await onValidateItemNumber({
         ...mockAuditItemScreenProps,
         itemNumber: 123
+      }, false);
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
+        type: 'API/GET_ITEM_DETAILS/RESET'
       });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        2,
+        expectedGetItemDetailsAction
+      );
+    });
+
+    it('test onValidateItemNumber with get pete locations', async () => {
+      const expectedGetItemDetailsAction = {
+        payload: {
+          id: 123
+        },
+        type: 'SAGA/GET_ITEM_DETAILS'
+      };
+      await onValidateItemNumber({
+        ...mockAuditItemScreenProps,
+        itemNumber: 123
+      }, true);
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
         type: 'API/GET_ITEM_DETAILS/RESET'
       });
@@ -437,7 +461,7 @@ describe('AuditItemScreen', () => {
         typeNbr: 8,
         newQty: 0
       }];
-      getFloorLocationsResult(newResults, mockDispatch, mockItemDetails?.location?.floor || []);
+      getUpdatedFloorLocations(newResults, mockDispatch, mockItemDetails?.location?.floor || []);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -491,6 +515,37 @@ describe('AuditItemScreen', () => {
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
+
+    it('Tests get item locations api hook success with correct item number', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            location: {
+              floor: []
+            }
+          }
+        }
+      }
+      getItemLocationsApiHook(successApi, 1, mockDispatch, navigationProp, []);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+    });
+
+    it('Tests get item locations v1 api hook success with correct item number', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            salesFloorLocation: []
+          }
+        }
+      }
+      getItemLocationsV1ApiHook(successApi, 1, mockDispatch, navigationProp, []);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+    });
+
     it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
       const mocksetShowPalletQtyUpdateModal = jest.fn();
       getScannedPalletEffect(
@@ -632,7 +687,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowDeleteConfirmationModal,
-        'A1-1'
+        'A1-1',
+        false
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
@@ -649,7 +705,44 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowDeleteConfirmationModal,
-        'A1-1'
+        'A1-1',
+        false
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({ type: 'error' })
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests deleteFloorLocationApiHook on 200 success for deleting location with get pete locations', () => {
+      deleteFloorLocationApiHook(
+        successApi,
+        mockItemNumber,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        'A1-1',
+        true
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({ type: 'success' })
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests deleteFloorLocationApiHook on failure with get pete locations', () => {
+      deleteFloorLocationApiHook(
+        failureApi,
+        mockItemNumber,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        'A1-1',
+        true
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);

@@ -15,7 +15,8 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   addLocation,
   editLocation,
-  getLocationDetails,
+  getLocationsForItem,
+  getLocationsForItemV1,
   getSectionDetails
 } from '../../state/actions/saga';
 import { clearSelectedLocation, setActionCompleted } from '../../state/actions/ItemDetailScreen';
@@ -54,6 +55,7 @@ interface SelectLocationProps {
   validateSessionCall: (navigation: any, route?: string) => Promise<void>;
   selectedLocation: Location | null;
   salesFloor: boolean;
+  peteGetLocations: boolean;
 }
 
 export const validateLocation = (loc: string): boolean => {
@@ -159,7 +161,7 @@ const isError = (error: { error: boolean; message: string }) => (
     : null
 );
 
-export const AddLocationApiHook = (
+export const addLocationApiHook = (
   addAPI: AsyncState,
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>,
   dispatch: Dispatch<any>,
@@ -169,6 +171,7 @@ export const AddLocationApiHook = (
   exceptionType: string | null | undefined,
   itemNbr: number,
   selectedLocation: Location | null,
+  peteGetLocations: boolean
 ) => {
   // on api submission
   if (addAPI.isWaiting) {
@@ -182,22 +185,31 @@ export const AddLocationApiHook = (
   if (isApiSuccess(addAPI)) {
     if (salesFloor) {
       isNotActionCompleted(actionCompleted, dispatch, exceptionType);
-      dispatch(getLocationDetails({ itemNbr }));
+      if (peteGetLocations) {
+        dispatch(getLocationsForItemV1(itemNbr));
+      } else {
+        dispatch(getLocationsForItem(itemNbr));
+      }
     } else if (!salesFloor && !selectedLocation) {
-      dispatch(getLocationDetails({ itemNbr }));
+      if (peteGetLocations) {
+        dispatch(getLocationsForItemV1(itemNbr));
+      } else {
+        dispatch(getLocationsForItem(itemNbr));
+      }
     }
     navigation.goBack();
   }
 };
 
-export const EditLocationApiHook = (
+export const editLocationApiHook = (
   editAPI: AsyncState,
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string; }>>,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   salesFloor: boolean,
   itemNbr: number,
-  selectedLocation: Location | null
+  selectedLocation: Location | null,
+  peteGetLocations: boolean
 ) => {
   // on api submission
   if (editAPI.isWaiting) {
@@ -210,7 +222,11 @@ export const EditLocationApiHook = (
   // on api success
   if (isApiSuccess(editAPI)) {
     if (salesFloor) {
-      dispatch(getLocationDetails({ itemNbr }));
+      if (peteGetLocations) {
+        dispatch(getLocationsForItemV1(itemNbr));
+      } else {
+        dispatch(getLocationsForItem(itemNbr));
+      }
     } else {
       dispatch(getSectionDetails({ sectionId: selectedLocation ? selectedLocation.sectionId.toString() : '' }));
     }
@@ -233,7 +249,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   const {
     inputLocation, setInputLocation, loc, setLoc, actionCompleted, floorLocations, upcNbr,
     scanType, setScanType, error, setError, addAPI, editAPI, selectedLocation,
-    itemNbr, salesFloor, trackEventCall, exceptionType,
+    itemNbr, salesFloor, trackEventCall, exceptionType, peteGetLocations,
     navigation, dispatch, useEffectHook, validateSessionCall
   } = props;
   let scannedSubscription: EmitterSubscription;
@@ -260,7 +276,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
   }, []);
 
   // Add Location API
-  useEffectHook(() => AddLocationApiHook(
+  useEffectHook(() => addLocationApiHook(
     addAPI,
     setError,
     dispatch,
@@ -269,19 +285,21 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
     actionCompleted,
     exceptionType,
     itemNbr,
-    selectedLocation
+    selectedLocation,
+    peteGetLocations
   ),
   [addAPI]);
 
   // Edit Location API
-  useEffectHook(() => EditLocationApiHook(
+  useEffectHook(() => editLocationApiHook(
     editAPI,
     setError,
     dispatch,
     navigation,
     salesFloor,
     itemNbr,
-    selectedLocation
+    selectedLocation,
+    peteGetLocations
   ), [editAPI]);
 
   const modelOnSubmit = (value: string) => {
@@ -377,6 +395,7 @@ const SelectLocationType = (): JSX.Element => {
     selectedLocation,
     salesFloor
   } = useTypedSelector(state => state.ItemDetailScreen);
+  const { peteGetLocations } = useTypedSelector(state => state.User.configs);
   const [loc, setLoc] = useState(selectedLocation ? selectedLocation.locationName : '');
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -405,6 +424,7 @@ const SelectLocationType = (): JSX.Element => {
       validateSessionCall={validateSession}
       selectedLocation={selectedLocation}
       salesFloor={salesFloor}
+      peteGetLocations={peteGetLocations}
     />
   );
 };
