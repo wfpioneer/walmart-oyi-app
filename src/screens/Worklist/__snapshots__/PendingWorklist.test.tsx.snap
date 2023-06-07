@@ -7,6 +7,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
   data={
     Array [
       Object {
+        "actionTaken": "ADD_TO_PICKLIST",
         "catgName": "FOODSERVICE",
         "catgNbr": 93,
         "completed": false,
@@ -17,10 +18,11 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "000055559999",
-        "worklistStatus": "INPROGRESS",
+        "worklistStatus": "IN_PROGRESS",
         "worklistType": "NSFL",
       },
       Object {
+        "actionTaken": "QTY_UPDATE",
         "catgName": "ELECTRONICS",
         "catgNbr": 99,
         "completed": false,
@@ -31,10 +33,11 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777555333",
-        "worklistStatus": "INPROGRESS",
+        "worklistStatus": "IN_PROGRESS",
         "worklistType": "NO",
       },
       Object {
+        "actionTaken": "QTY_UPDATE",
         "catgName": "FRESH BAKERY",
         "catgNbr": 88,
         "completed": false,
@@ -45,10 +48,11 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "111122223333",
-        "worklistStatus": "INPROGRESS",
+        "worklistStatus": "IN_PROGRESS",
         "worklistType": "NO",
       },
       Object {
+        "actionTaken": "QTY_UPDATE",
         "catgName": "WINE",
         "catgNbr": 19,
         "completed": false,
@@ -59,10 +63,11 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "444455556666",
-        "worklistStatus": "INPROGRESS",
+        "worklistStatus": "IN_PROGRESS",
         "worklistType": "C",
       },
       Object {
+        "actionTaken": "ADD_TO_PICKLIST",
         "catgName": "PHARMACY RX",
         "catgNbr": 87,
         "completed": false,
@@ -73,10 +78,11 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "777788889999",
-        "worklistStatus": "INPROGRESS",
+        "worklistStatus": "IN_PROGRESS",
         "worklistType": "C",
       },
       Object {
+        "actionTaken": "ADD_TO_PICKLIST",
         "catgName": "ELECTRONICS",
         "catgNbr": 199,
         "completed": false,
@@ -87,7 +93,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
         "subCatgName": undefined,
         "subCatgNbr": 0,
         "upcNbr": "667788889999",
-        "worklistStatus": "INPROGRESS",
+        "worklistStatus": "IN_PROGRESS",
         "worklistType": "NS",
       },
     ]

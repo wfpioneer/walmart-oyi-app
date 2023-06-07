@@ -267,6 +267,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistType": "CATEGORY",
         },
         Object {
+          "actionTaken": "ADD_TO_PICKLIST",
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": true,
@@ -281,6 +282,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistType": "NSFL",
         },
         Object {
+          "actionTaken": "QTY_UPDATE",
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": true,
@@ -295,6 +297,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistType": "NO",
         },
         Object {
+          "actionTaken": "QTY_UPDATE",
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": true,
@@ -309,6 +312,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistType": "NO",
         },
         Object {
+          "actionTaken": "QTY_UPDATE",
           "catgName": "WINE",
           "catgNbr": 19,
           "completed": true,
@@ -323,6 +327,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistType": "C",
         },
         Object {
+          "actionTaken": "ADD_TO_PICKLIST",
           "catgName": "PHARMACY RX",
           "catgNbr": 87,
           "completed": true,
@@ -337,6 +342,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistType": "C",
         },
         Object {
+          "actionTaken": "ADD_TO_PICKLIST",
           "catgName": "ELECTRONICS",
           "catgNbr": 199,
           "completed": true,

@@ -39,5 +39,6 @@ export enum approvalRequestSource {
 export enum approvalAction {
   'Approve' = 'Aprv',
   'Reject' = 'Rejc',
-  'Expired' = 'Exp'
+  'Expired' = 'Exp',
+  'Cancel' = 'Cancelled'
 }

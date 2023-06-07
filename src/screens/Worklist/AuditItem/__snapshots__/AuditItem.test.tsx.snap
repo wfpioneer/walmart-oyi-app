@@ -341,6 +341,200 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
 </Modal>
 `;
 
+exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderCancelApprovalModal with isWaiting false 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": 100,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.CANCEL_APPROVAL" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-cancel-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.CANCEL" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "flex": 1,
+                "paddingHorizontal": 10,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#D6512D",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="modal-confirm-button"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.OK" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderConfirmOnHandsModal should render loader 1`] = `
 <Modal
   animationType="none"
@@ -373,6 +567,60 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
           },
           Object {
             "minHeight": 150,
+          },
+        ]
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#0071e9"
+        hidesWhenStopped={true}
+        size="large"
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+      />
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderConfirmOnHandsModal with isWaiting true 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": 100,
           },
         ]
       }
@@ -1179,6 +1427,13 @@ Array [
     transparent={true}
     visible={false}
   />,
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <View
     style={
       Object {
@@ -1197,7 +1452,7 @@ Array [
       <View
         accessibilityState={
           Object {
-            "disabled": false,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -1267,19 +1522,33 @@ Array [
               
             </Text>
           </View>
-          <View>
-            <Text
+          <View
+            style={
+              Object {
+                "flexDirection": "column",
+              }
+            }
+          >
+            <View
               style={
                 Object {
-                  "color": "#616161",
-                  "flexShrink": 1,
-                  "flexWrap": "wrap",
-                  "fontSize": 12,
+                  "flexDirection": "row",
                 }
               }
             >
-              [missing "en.ITEM.ON_HANDS" translation] 0
-            </Text>
+              <Text
+                style={
+                  Object {
+                    "color": "#616161",
+                    "flexShrink": 1,
+                    "flexWrap": "wrap",
+                    "fontSize": 12,
+                  }
+                }
+              >
+                [missing "en.ITEM.ON_HANDS" translation] 0
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -1722,6 +1991,79 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     animationType="none"
     isVisible={false}
     minHeight={100}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.CANCEL_APPROVAL" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
     modalType="Error"
     onClose={[Function]}
   >
@@ -1998,11 +2340,12 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       }
       countryCode="CN"
       description=""
-      disabled={false}
+      disabled={true}
       itemNumber={0}
       loading={true}
       onClick={[Function]}
       onHandQty={0}
+      pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
     />
@@ -2146,6 +2489,480 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Scanne
 </View>
 `;
 
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen with positive pending qty and showing cancel approval dialog 1`] = `
+<React.Fragment>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <PalletQtyUpdate
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      palletId={4928}
+      qty={0}
+      showCalculator={false}
+    />
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    minHeight={100}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.CANCEL_APPROVAL" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <mockMaterialCommunityIcons
+        color="#e74517"
+        name="alert"
+        size={40}
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.AUDITS.CONFIRM_AUDIT" translation]
+      </Text>
+      <Text>
+        [missing "en.AUDITS.LARGE_CURRENCY_CHANGE" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          35
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#33691E",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          <mockMaterialCommunityIcons
+            name="arrow-up-bold"
+            size={16}
+          />
+          $10,502.10
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#33691E",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          7
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "marginBottom": 5,
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.AUDITS.UPDATED_QTY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          42
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CalculatorModal
+    disableAcceptButton={[Function]}
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButton={true}
+    visible={false}
+  />
+  <View
+    style={
+      Object {
+        "marginBottom": 8,
+      }
+    }
+  >
+    <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
+      countryCode="CN"
+      description="Wine Item"
+      disabled={true}
+      itemNumber={987654321}
+      loading={false}
+      onClick={[Function]}
+      onHandQty={42}
+      pendingQty={35}
+      showItemImage={false}
+      showOHItems={false}
+    />
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    nestedScrollEnabled={true}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          add={[Function]}
+          error={false}
+          loading={false}
+          locationList={Array []}
+          locationType="floor"
+          maxQty={9999}
+          minQty={0}
+          onRetry={[Function]}
+          scanRequired={false}
+          showCalculator={false}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          error={false}
+          loading={false}
+          locationList={Array []}
+          locationType="reserve"
+          maxQty={9999}
+          minQty={0}
+          onRetry={[Function]}
+          scanRequired={false}
+          showCalculator={false}
+        />
+      </View>
+      <View>
+        <OtherOHItemCard
+          claimsOH={0}
+          collapsed={false}
+          consolidatorOH={0}
+          countryCode="CN"
+          flyCloudInTransitOH={0}
+          flyCloudOH={42}
+          loading={false}
+        />
+      </View>
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={false}
+      onContinueClick={[Function]}
+      totalCount={42}
+    />
+  </View>
+</React.Fragment>
+`;
+
 exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the details for a single item with non-null status 1`] = `
 <React.Fragment>
   <CustomModalComponent
@@ -2161,6 +2978,79 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       qty={0}
       showCalculator={false}
     />
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.CANCEL_APPROVAL" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
   </CustomModalComponent>
   <CustomModalComponent
     animationType="none"
@@ -2450,11 +3340,12 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       }
       countryCode="CN"
       description="Test Item That is Really, Really Long (and has parenthesis)"
-      disabled={false}
+      disabled={true}
       itemNumber={1234567890}
       loading={false}
       onClick={[Function]}
       onHandQty={42}
+      pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
     />
@@ -2541,6 +3432,480 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       disabledContinue={false}
       onContinueClick={[Function]}
       totalCount={15}
+    />
+  </View>
+</React.Fragment>
+`;
+
+exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the details for a single item with non-null status and positive pending qty 1`] = `
+<React.Fragment>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <PalletQtyUpdate
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      palletId={4928}
+      qty={0}
+      showCalculator={false}
+    />
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.CANCEL_APPROVAL" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <mockMaterialCommunityIcons
+        color="#e74517"
+        name="alert"
+        size={40}
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.AUDITS.CONFIRM_AUDIT" translation]
+      </Text>
+      <Text>
+        [missing "en.AUDITS.LARGE_CURRENCY_CHANGE" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          35
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#33691E",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          <mockMaterialCommunityIcons
+            name="arrow-up-bold"
+            size={16}
+          />
+          $10,502.10
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#33691E",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          7
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "marginBottom": 5,
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.AUDITS.UPDATED_QTY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          42
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CalculatorModal
+    disableAcceptButton={[Function]}
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButton={true}
+    visible={false}
+  />
+  <View
+    style={
+      Object {
+        "marginBottom": 8,
+      }
+    }
+  >
+    <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
+      countryCode="CN"
+      description="Wine Item"
+      disabled={true}
+      itemNumber={987654321}
+      loading={false}
+      onClick={[Function]}
+      onHandQty={42}
+      pendingQty={35}
+      showItemImage={false}
+      showOHItems={false}
+    />
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    nestedScrollEnabled={true}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          add={[Function]}
+          error={false}
+          loading={false}
+          locationList={Array []}
+          locationType="floor"
+          maxQty={9999}
+          minQty={0}
+          onRetry={[Function]}
+          scanRequired={false}
+          showCalculator={false}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          error={false}
+          loading={false}
+          locationList={Array []}
+          locationType="reserve"
+          maxQty={9999}
+          minQty={0}
+          onRetry={[Function]}
+          scanRequired={false}
+          showCalculator={false}
+        />
+      </View>
+      <View>
+        <OtherOHItemCard
+          claimsOH={0}
+          collapsed={false}
+          consolidatorOH={0}
+          countryCode="CN"
+          flyCloudInTransitOH={0}
+          flyCloudOH={42}
+          loading={false}
+        />
+      </View>
+    </View>
+  </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={false}
+      onContinueClick={[Function]}
+      totalCount={42}
     />
   </View>
 </React.Fragment>

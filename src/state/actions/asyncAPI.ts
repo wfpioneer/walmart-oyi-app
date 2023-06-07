@@ -15,6 +15,9 @@ export const getItemPicklistHistory = makeAsyncActionCreators(GET_ITEM_PICKLISTH
 export const GET_LOCATIONS_FOR_ITEM = makeAsyncActionTypes('API/GET_LOCATIONS_FOR_ITEM');
 export const getLocationsForItem = makeAsyncActionCreators(GET_LOCATIONS_FOR_ITEM);
 
+export const GET_LOCATIONS_FOR_ITEM_V1 = makeAsyncActionTypes('API/GET_LOCATIONS_FOR_ITEM_V1');
+export const getLocationsForItemV1 = makeAsyncActionCreators(GET_LOCATIONS_FOR_ITEM_V1);
+
 export const GET_ITEM_MANAGERAPPROVALHISTORY = makeAsyncActionTypes('API/GET_ITEM_MANAGERAPPROVALHISTORY');
 export const getItemManagerApprovalHistory = makeAsyncActionCreators(GET_ITEM_MANAGERAPPROVALHISTORY);
 
@@ -59,9 +62,6 @@ export const noAction = makeAsyncActionCreators(NO_ACTION);
 
 export const PRINT_SIGN = makeAsyncActionTypes('API/PRINT_SIGN');
 export const printSign = makeAsyncActionCreators(PRINT_SIGN);
-
-export const GET_LOCATION_DETAILS = makeAsyncActionTypes('API/GET_LOCATION_DETAILS');
-export const getLocationDetails = makeAsyncActionCreators(GET_LOCATION_DETAILS);
 
 export const GET_FLUFFY_ROLES = makeAsyncActionTypes('API/GET_FLUFFY_ROLES');
 export const getFluffyRoles = makeAsyncActionCreators(GET_FLUFFY_ROLES);

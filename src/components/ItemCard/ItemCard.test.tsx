@@ -23,6 +23,28 @@ describe('SortBar Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
+  it('Test renders default ItemCard when loading is false and there is a positive pendingQty', () => {
+    const mockOnClick = jest.fn();
+    const { toJSON, getByTestId } = render(ItemCard({
+      itemNumber: 1234,
+      description: 'test item',
+      onClick: mockOnClick,
+      onHandQty: 12,
+      loading: false,
+      countryCode: 'MX',
+      showItemImage: false,
+      pendingQty: 10
+    }));
+
+    const itemCardBtn = getByTestId('itemCard');
+    const itemDetails = getByTestId('item-details');
+
+    fireEvent.press(itemCardBtn);
+    expect(mockOnClick).toHaveBeenCalled();
+    expect(itemDetails).toBeDefined();
+    expect(toJSON()).toMatchSnapshot();
+  });
+
   it('Test renders default ItemCard when loading is true', () => {
     const mockOnClick = jest.fn();
     const { toJSON, getByTestId } = render(ItemCard({

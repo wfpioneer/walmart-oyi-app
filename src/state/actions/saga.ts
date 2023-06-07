@@ -34,6 +34,7 @@ export const GET_ITEM_PIHISTORY = 'SAGA/GET_ITEM_PIHISTORY';
 export const GET_ITEM_PISALESHISTORY = 'SAGA/GET_ITEM_PISALESHISTORY';
 export const GET_ITEM_PICKLISTHISTORY = 'SAGA/GET_ITEM_PICKLISTHISTORY';
 export const GET_LOCATIONS_FOR_ITEM = 'SAGA/GET_LOCATIONS_FOR_ITEM';
+export const GET_LOCATIONS_FOR_ITEM_V1 = 'SAGA/GET_LOCATIONS_FOR_ITEM_V1';
 export const GET_ITEM_MANAGER_APPROVAL_HISTORY = 'SAGA/GET_ITEM_MANAGER_APPROVAL_HISTORY';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
@@ -51,7 +52,6 @@ export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V@';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
-export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
 export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
@@ -101,6 +101,7 @@ export const getItemPiHistory = (payload: number) => ({ type: GET_ITEM_PIHISTORY
 export const getItemPiSalesHistory = (payload: number) => ({ type: GET_ITEM_PISALESHISTORY, payload } as const);
 export const getItemPicklistHistory = (payload: number) => ({ type: GET_ITEM_PICKLISTHISTORY, payload } as const);
 export const getLocationsForItem = (payload: number) => ({ type: GET_LOCATIONS_FOR_ITEM, payload } as const);
+export const getLocationsForItemV1 = (payload: number) => ({ type: GET_LOCATIONS_FOR_ITEM_V1, payload } as const);
 export const getItemManagerApprovalHistory = (payload: number) => ({
   type: GET_ITEM_MANAGER_APPROVAL_HISTORY, payload
 } as const);
@@ -151,10 +152,6 @@ export const printSign = (payload: {
   headers?: AxiosRequestHeaders;
   printList: PrintItemList[];
 }) => ({ type: PRINT_SIGN, payload } as const);
-export const getLocationDetails = (payload: {
-  headers?: AxiosRequestHeaders;
-  itemNbr: number;
-}) => ({ type: GET_LOCATION_DETAILS, payload } as const);
 export const getFluffyFeatures = (payload: Omit<User, 'configs' >) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
   itemNbr?: number;
@@ -294,6 +291,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getItemPiSalesHistory>, 'payload'>
     & Pick<ReturnType<typeof getItemPicklistHistory>, 'payload'>
     & Pick<ReturnType<typeof getLocationsForItem>, 'payload'>
+    & Pick<ReturnType<typeof getLocationsForItemV1>, 'payload'>
     & Pick<ReturnType<typeof getItemManagerApprovalHistory>, 'payload'>
     & Pick<ReturnType<typeof getWorklist>, 'payload'>
     & Pick<ReturnType<typeof getWorklistV1>, 'payload'>
@@ -305,7 +303,6 @@ export type SagaParams =
     & Pick<ReturnType<typeof deleteLocation>, 'payload'>
     & Pick<ReturnType<typeof noAction>, 'payload'>
     & Pick<ReturnType<typeof printSign>, 'payload'>
-    & Pick<ReturnType<typeof getLocationDetails>, 'payload'>
     & Pick<ReturnType<typeof getFluffyFeatures>, 'payload'>
     & Pick<ReturnType<typeof getApprovalList>, 'payload'>
     & Pick<ReturnType<typeof updateApprovalList>, 'payload'>

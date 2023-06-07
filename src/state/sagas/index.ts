@@ -14,7 +14,6 @@ import WorklistSummaryService from '../../services/WorklistSummary.service';
 import DeleteLocationService from '../../services/DeleteLocation.service';
 import NoActionService from '../../services/NoAction.service';
 import PrintService from '../../services/Print.service';
-import GetLocationDetailsService from '../../services/GetLocationDetails.service';
 import GetFluffyRolesService from '../../services/GetFluffyRoles.service';
 import GetApprovalListService from '../../services/GetApprovalList.service';
 import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
@@ -51,6 +50,11 @@ const genericSagas = [
     GetItemDetailsService.getLocationsForItem
   ),
   makeAsyncSaga(
+    saga.GET_LOCATIONS_FOR_ITEM_V1,
+    actions.getLocationsForItemV1,
+    GetItemDetailsService.getLocationsForItemV1
+  ),
+  makeAsyncSaga(
     saga.GET_ITEM_MANAGER_APPROVAL_HISTORY,
     actions.getItemManagerApprovalHistory,
     GetItemDetailsService.getItemManagerApprovalHistory
@@ -77,7 +81,6 @@ const genericSagas = [
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
-  makeAsyncSaga(saga.GET_LOCATION_DETAILS, actions.getLocationDetails, GetLocationDetailsService.getLocation),
   makeAsyncSaga(saga.GET_FLUFFY_FEATURES, actions.getFluffyRoles, GetFluffyRolesService.getFluffyRoles),
   makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList),
   makeAsyncSaga(saga.UPDATE_APPROVAL_LIST, actions.updateApprovalList, UpdateApprovalListService.updateApprovalList),

@@ -2,10 +2,13 @@ import React from 'react';
 import {
   ActivityIndicator, Platform, Text, TouchableOpacity, View
 } from 'react-native';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from './ItemCard.style';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
+
+const INFO_ICON_SIZE = 12;
 
 interface OHItemInfoI {
   claimsOH: number,
@@ -26,6 +29,7 @@ interface ItemCardProps {
   disabled?: boolean;
   showOHItems?: boolean;
   OHItemInfo?: OHItemInfoI;
+  pendingQty?: number | undefined;
 }
 
 interface OtherOnHandsItemsProps {
@@ -129,7 +133,7 @@ const OtherOnHandsItems = (props: OtherOnHandsItemsProps) => {
 
 const ItemCard = ({
   itemNumber, description, onClick, loading, onHandQty, disabled,
-  countryCode, showItemImage, showOHItems, OHItemInfo
+  countryCode, showItemImage, showOHItems, OHItemInfo, pendingQty
 }: ItemCardProps) => (
   <View style={styles.mainContainer}>
     <TouchableOpacity
@@ -162,8 +166,22 @@ const ItemCard = ({
           <Text style={styles.itemDesc}>{description}</Text>
         </View>
         {onHandQty !== undefined && (
-          <View>
-            <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
+          <View style={styles.itemQtyContainer}>
+            <View style={styles.itemQtyView}>
+              <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
+              {pendingQty && pendingQty >= 0 && (<Text style={styles.itemNbr}>{` (${pendingQty})`}</Text>)}
+            </View>
+            {pendingQty && pendingQty >= 0 && (
+              <View style={styles.itemQtyView}>
+                <FontAwesome5Icon
+                  name="info-circle"
+                  size={INFO_ICON_SIZE}
+                  color={COLOR.ORANGE}
+                  style={styles.infoIcon}
+                />
+                <Text style={styles.itemNbr}>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
+              </View>
+            )}
           </View>
         )}
       </View>
@@ -177,6 +195,7 @@ ItemCard.defaultProps = {
   showOHItems: false,
   OHItemInfo: defaultOHItemValues,
   disabled: false,
+  pendingQty: -999,
   onClick: () => {}
 };
 

@@ -9,7 +9,8 @@ import {
   MOVE_TO_FRONT,
   addLocationHandler,
   createPickApiHook,
-  getLocationsApiHook
+  getLocationsApiHook,
+  getLocationsV1ApiHook
 } from './CreatePick';
 import { AsyncState } from '../../models/AsyncState';
 import { PickCreateItem, Tabs } from '../../models/Picking.d';
@@ -135,6 +136,7 @@ describe('Create Pick screen render tests', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
+        getLocationV1Api={defaultAsyncState}
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
@@ -161,6 +163,7 @@ describe('Create Pick screen render tests', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
+        getLocationV1Api={defaultAsyncState}
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
@@ -187,6 +190,7 @@ describe('Create Pick screen render tests', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
+        getLocationV1Api={defaultAsyncState}
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
@@ -213,6 +217,7 @@ describe('Create Pick screen render tests', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         getLocationApi={defaultAsyncState}
+        getLocationV1Api={defaultAsyncState}
         useEffectHook={jest.fn()}
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
@@ -277,6 +282,47 @@ describe('createPick function tests', () => {
       isWaiting: true
     };
     getLocationsApiHook(waitingAsyncState, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(1);
+    // @ts-expect-error need ts ignore here as ts tries to say mockReset is not a method from mocking function
+    Toast.show.mockReset();
+  });
+
+  it('getLocationsV1ApiHook', () => {
+    const mockDispatch = jest.fn();
+
+    // success
+    const successAsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: {
+          floor: mockLocations,
+          reserve: mockReserveLocations
+        }
+      }
+    };
+    getLocationsV1ApiHook(successAsyncState, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(4);
+    expect(Toast.show).toBeCalledTimes(1);
+
+    // failure
+    mockDispatch.mockReset();
+    // @ts-expect-error need ts ignore here as ts tries to say mockReset is not a method from mocking function
+    Toast.show.mockReset();
+    const failureAsyncState = {
+      ...defaultAsyncState,
+      error: 'test'
+    };
+    getLocationsV1ApiHook(failureAsyncState, mockDispatch, true);
+    expect(mockDispatch).toBeCalledTimes(2);
+    expect(Toast.show).toBeCalledTimes(1);
+
+    // waiting
+    mockDispatch.mockReset();
+    const waitingAsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    getLocationsV1ApiHook(waitingAsyncState, mockDispatch, true);
     expect(mockDispatch).toBeCalledTimes(1);
   });
 

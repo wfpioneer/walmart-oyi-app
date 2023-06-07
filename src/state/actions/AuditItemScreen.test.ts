@@ -1,5 +1,6 @@
 import {
   CLEAR_AUDIT_SCREEN_DATA,
+  SET_APPROVAL_ITEM,
   SET_FLOOR_LOCATIONS,
   SET_ITEM_DETAILS,
   SET_RESERVE_LOCATIONS,
@@ -8,6 +9,7 @@ import {
   UPDATE_PALLET_QTY,
   UPDATE_SCANNED_PALLET_STATUS,
   clearAuditScreenData,
+  setApprovalItem,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
@@ -18,6 +20,27 @@ import {
 } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
 import { mockPalletLocations } from '../../mockData/getItemPallets';
+import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../models/ApprovalListItem';
+
+const mockApprovalItem: ApprovalListItem = {
+  imageUrl: undefined,
+  itemName: 'Nature Valley Crunchy Cereal Bars ',
+  itemNbr: 123,
+  upcNbr: 40000000123,
+  categoryNbr: 1,
+  categoryDescription: 'SNACKS',
+  subCategoryNbr: 1,
+  subCategoryDescription: '',
+  newQuantity: 20,
+  oldQuantity: 5,
+  dollarChange: 150.50,
+  initiatedUserId: 'Associate Employee',
+  initiatedTimestamp: '2021-03-27T00:00:00.000Z',
+  approvalStatus: approvalStatus.Pending,
+  approvalRequestSource: approvalRequestSource.ItemDetails,
+  isChecked: false,
+  daysLeft: 3
+};
 
 describe('Audit Item Screen actions', () => {
   const mockItemDetails = getMockItemDetails('123');
@@ -82,6 +105,14 @@ describe('Audit Item Screen actions', () => {
     expect(updatePalletScannedStatusResult).toStrictEqual({
       type: UPDATE_SCANNED_PALLET_STATUS,
       payload: { palletId: mockPalletId, scanned: mockScanned }
+    });
+  });
+
+  it('test setApproval', () => {
+    const setApprovalItemResult = setApprovalItem(mockApprovalItem);
+    expect(setApprovalItemResult).toStrictEqual({
+      type: SET_APPROVAL_ITEM,
+      payload: mockApprovalItem
     });
   });
 });
