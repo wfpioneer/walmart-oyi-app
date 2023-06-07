@@ -152,7 +152,7 @@ export const printSign = (payload: {
   headers?: AxiosRequestHeaders;
   printList: PrintItemList[];
 }) => ({ type: PRINT_SIGN, payload } as const);
-export const getFluffyFeatures = (payload: User) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
+export const getFluffyFeatures = (payload: Omit<User, 'configs' >) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
   itemNbr?: number;
   status?: approvalStatus;
