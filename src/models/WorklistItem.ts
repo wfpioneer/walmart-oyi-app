@@ -6,6 +6,8 @@ export enum WorkListStatus {
   INPROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED'
 }
+export type ActionTaken = 'QTY_UPDATE' | 'ADD_TO_PICKLIST';
+
 export interface WorklistItemI {
   worklistType: WorklistType;
   itemName?: string;
@@ -23,5 +25,5 @@ export interface WorklistItemI {
   imageURLKey?: string;
   imageBlobKey?: string;
   worklistStatus?: WorkListStatus;
-  actionTaken?: 'QTY_UPDATE' | 'ADD_TO_PICKLIST';
+  actionTaken?: ActionTaken;
 }
