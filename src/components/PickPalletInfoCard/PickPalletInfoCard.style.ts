@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.PALE_BLUE,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexWrap: 'wrap'
   },
   palletInfoSelection: {
     flexDirection: 'row',

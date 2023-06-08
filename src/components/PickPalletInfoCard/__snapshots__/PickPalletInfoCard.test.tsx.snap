@@ -19,6 +19,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -74,6 +75,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -129,6 +131,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -184,6 +187,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -239,6 +243,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -294,6 +299,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -349,6 +355,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -404,6 +411,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -459,6 +467,7 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
           "padding": 10,
         }
@@ -514,6 +523,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
         }
       }
@@ -578,6 +588,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
+          "flexWrap": "wrap",
           "justifyContent": "space-between",
         }
       }
