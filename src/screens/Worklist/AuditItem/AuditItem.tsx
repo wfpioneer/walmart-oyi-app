@@ -169,6 +169,7 @@ export interface AuditItemScreenProps {
   getItemPalletsError: boolean;
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
   showCalcModalState: UseStateType<boolean>;
+  modalIsWaitingState: UseStateType<boolean>;
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   updateMultiPalletUPCQtyApi: AsyncState;
@@ -400,7 +401,10 @@ export const getItemLocationsV1ApiHook = (
   existingFloorLocations: Location[],
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsV1Api.isWaiting && getItemLocationsV1Api.result && getItemLocationsV1Api.value === itemNumber) {
+    if (!getItemLocationsV1Api.isWaiting
+      && getItemLocationsV1Api.result
+      && getItemLocationsV1Api.value === itemNumber
+    ) {
       const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
       getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations);
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
@@ -412,8 +416,7 @@ export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>,
-  existingFloorLocations: Location[]
+  setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     // on api success
@@ -705,7 +708,6 @@ export const completeItemApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
-  itemDetails: ItemDetails | null,
   hasNewQty: boolean
 ) => {
   if (navigation.isFocused()) {
@@ -741,6 +743,7 @@ export const updateOHQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
+  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
@@ -755,6 +758,7 @@ export const updateOHQtyApiHook = (
       dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
     }
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
+      setModalIsWaiting(false);
       Toast.show({
         type: 'error',
         position: 'bottom',
@@ -770,10 +774,12 @@ export const updateMultiPalletUPCQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  itemNbr: number
+  itemNbr: number,
+  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
+      setModalIsWaiting(false);
       Toast.show({
         type: 'success',
         position: 'bottom',
@@ -787,6 +793,7 @@ export const updateMultiPalletUPCQtyApiHook = (
       navigation.goBack();
     }
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
+      setModalIsWaiting(false);
       Toast.show({
         type: 'error',
         position: 'bottom',
@@ -849,7 +856,7 @@ export const renderCancelApprovalModal = (
   >
     {cancelManagerApprovalApi.isWaiting ? (
       <ActivityIndicator
-        animating={cancelManagerApprovalApi.isWaiting || cancelManagerApprovalApi.isWaiting}
+        animating={cancelManagerApprovalApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -984,8 +991,7 @@ export const renderDeleteLocationModal = (
 );
 
 export const renderConfirmOnHandsModal = (
-  updateOHQtyApi: AsyncState,
-  updateMultiPalletUPCQtyApi: AsyncState,
+  modalIsWaiting: boolean,
   showOnHandsConfirmationModal: boolean,
   setShowOnHandsConfirmationModal: React.Dispatch<
     React.SetStateAction<boolean>
@@ -1012,9 +1018,9 @@ export const renderConfirmOnHandsModal = (
       modalType="Popup"
       minHeight={150}
     >
-      {updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting ? (
+      {modalIsWaiting ? (
         <ActivityIndicator
-          animating={updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting}
+          animating={modalIsWaiting}
           hidesWhenStopped
           color={COLOR.MAIN_THEME_COLOR}
           size="large"
@@ -1222,13 +1228,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     locationListState,
     countryCode,
     updateMultiPalletUPCQtyApi,
-    getItemPalletsDispatch
+    getItemPalletsDispatch,
+    modalIsWaitingState
   } = props;
   let scannedSubscription: EmitterSubscription;
 
   const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
   const [showCalcModal, setShowCalcModal] = showCalcModalState;
   const [location, setLocation] = locationListState;
+  const [modalIsWaiting, setModalIsWaiting] = modalIsWaitingState;
 
   const totalOHQty = calculateTotalOHQty(
     floorLocations,
@@ -1294,7 +1302,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Item Details UPC api
   useEffectHook(
-    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg, floorLocations),
+    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg),
     [getItemDetailsApi]
   );
 
@@ -1306,7 +1314,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Complete Item API
   useEffectHook(
-    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, itemDetails, hasNewQty),
+    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, hasNewQty),
     [completeItemApi, hasNewQty]
   );
 
@@ -1365,7 +1373,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateOHQtyApi,
     dispatch,
     navigation,
-    reserveLocations
+    reserveLocations,
+    setModalIsWaiting
   ), [updateOHQtyApi]);
 
   // Update Multiple Pallet's UPC Qty API
@@ -1374,8 +1383,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     dispatch,
     navigation,
     setShowOnHandsConfirmationModal,
-    itemDetails?.itemNbr || 0
+    itemDetails?.itemNbr || 0,
+    setModalIsWaiting
   ), [updateMultiPalletUPCQtyApi]);
+
+  if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
+    setModalIsWaiting(true);
+  }
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
@@ -1618,8 +1632,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         trackEventCall
       )}
       {renderConfirmOnHandsModal(
-        updateOHQtyApi,
-        updateMultiPalletUPCQtyApi,
+        modalIsWaiting,
         showOnHandsConfirmationModal,
         setShowOnHandsConfirmationModal,
         totalOHQty,
@@ -1752,6 +1765,7 @@ const AuditItem = (): JSX.Element => {
   const showOnHandsConfirmState = useState(false);
   const showCalcModalState = useState(false);
   const [showCancelApprovalModal, setShowCancelApprovalModel] = useState(false);
+  const modalIsWaitingState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
     locationArea: '',
@@ -1813,6 +1827,7 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
       showCalcModalState={showCalcModalState}
+      modalIsWaitingState={modalIsWaitingState}
       // @ts-expect-error typechecking error with location type
       locationListState={locationListState}
       countryCode={countryCode}
