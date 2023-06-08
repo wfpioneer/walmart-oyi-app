@@ -48,7 +48,8 @@ class Request {
 
         if (request.url.includes(envUrls.fluffyURL)) {
           interceptRequest.headers[WM_SVC_NAME] = svcName.fluffyName;
-          interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.token;
+          interceptRequest.headers.authorization = `Bearer ${store.getState().User.token}`;
+          interceptRequest.headers.PING_TOKEN_IDP = 'yes';
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.version'] = '1.0.0';
           interceptRequest.headers['wm_svc.env'] = Config.ENVIRONMENT === 'prod' ? 'prod' : 'stg';
