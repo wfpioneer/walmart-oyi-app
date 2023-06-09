@@ -214,7 +214,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
   countryCode: 'CN',
   updateMultiPalletUPCQtyApi: defaultAsyncState,
-  getItemPalletsDispatch: jest.fn()
+  getItemPalletsDispatch: jest.fn(),
+  modalIsWaitingState: [false, jest.fn()]
 };
 
 describe('AuditItemScreen', () => {
@@ -474,7 +475,6 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowItemNotFoundMsg,
-        mockItemDetails?.location?.floor || []
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
@@ -500,7 +500,6 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowItemNotFoundMsg,
-        mockItemDetails?.location?.floor || []
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
@@ -513,13 +512,12 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockSetShowItemNotFoundMsg,
-        mockItemDetails?.location?.floor || []
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
 
     it('Tests get item locations api hook success with correct item number', () => {
-      const locSuccessApi: AsyncState = {
+      const locationSuccessApi: AsyncState = {
         ...defaultAsyncState,
         value: 1,
         result: {
@@ -529,13 +527,13 @@ describe('AuditItemScreen', () => {
             }
           }
         }
-      };
-      getItemLocationsApiHook(locSuccessApi, 1, mockDispatch, navigationProp, []);
+      }
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
     });
 
     it('Tests get item locations v1 api hook success with correct item number', () => {
-      const locSuccessApi: AsyncState = {
+      const locationSuccessApi: AsyncState = {
         ...defaultAsyncState,
         value: 1,
         result: {
@@ -543,8 +541,8 @@ describe('AuditItemScreen', () => {
             salesFloorLocation: []
           }
         }
-      };
-      getItemLocationsV1ApiHook(locSuccessApi, 1, mockDispatch, navigationProp, []);
+      }
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
     });
 
@@ -840,7 +838,6 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        mockItemDetails,
         false
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -859,7 +856,6 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        mockItemDetails,
         true
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -888,7 +884,7 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
-      completeItemApiHook(failureApi, mockDispatch, navigationProp, mockPalletLocations, mockItemDetails, false);
+      completeItemApiHook(failureApi, mockDispatch, navigationProp, mockPalletLocations, false);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
@@ -928,7 +924,8 @@ describe('AuditItemScreen', () => {
         successApi,
         mockDispatch,
         navigationProp,
-        mockReserveLocations
+        mockReserveLocations,
+        jest.fn()
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -951,13 +948,16 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests updateOHQtyApiHook on failure', () => {
+      const mockSetModalWaiting = jest.fn();
       updateOHQtyApiHook(
         failureApi,
         mockDispatch,
         navigationProp,
-        mockPalletLocations
+        mockPalletLocations,
+        mockSetModalWaiting
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(false)
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -969,14 +969,18 @@ describe('AuditItemScreen', () => {
 
     it('Tests updateMultiPalletUPCQtyApiHook on success', () => {
       const setShowOnHands = jest.fn();
+      const mockSetModalWaiting = jest.fn();
       updateMultiPalletUPCQtyApiHook(
         successApi,
         mockDispatch,
         navigationProp,
         setShowOnHands,
-        mockItemDetails.itemNbr
+        mockItemDetails.itemNbr,
+        mockSetModalWaiting
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
+
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'success',
@@ -996,14 +1000,17 @@ describe('AuditItemScreen', () => {
 
     it('Tests updateMultiPalletUPCQtyApiHook on failure', () => {
       const setShowOnHands = jest.fn();
+      const mockSetModalWaiting = jest.fn();
       updateMultiPalletUPCQtyApiHook(
         failureApi,
         mockDispatch,
         navigationProp,
         setShowOnHands,
-        mockItemDetails.itemNbr
+        mockItemDetails.itemNbr,
+        mockSetModalWaiting
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -1016,8 +1023,7 @@ describe('AuditItemScreen', () => {
     it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
       const { toJSON } = render(
         renderConfirmOnHandsModal(
-          defaultAsyncState,
-          defaultAsyncState,
+          false,
           true,
           mockSetShowOnHandsConfirmModal,
           50,
@@ -1032,18 +1038,9 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderConfirmOnHandsModal should render loader', () => {
-      const mockUpdateOHQtyLoading: AsyncState = {
-        ...defaultAsyncState,
-        isWaiting: true
-      };
-      const mockUpdateMultiPalletUPCQtyLoading: AsyncState = {
-        ...defaultAsyncState,
-        isWaiting: true
-      };
       const { toJSON } = render(
         renderConfirmOnHandsModal(
-          mockUpdateOHQtyLoading,
-          mockUpdateMultiPalletUPCQtyLoading,
+          true,
           true,
           mockSetShowOnHandsConfirmModal,
           50,
@@ -1060,8 +1057,7 @@ describe('AuditItemScreen', () => {
     it('Tests renderConfirmOnHandsModal confirm button action', () => {
       const { getByTestId } = render(
         renderConfirmOnHandsModal(
-          defaultAsyncState,
-          defaultAsyncState,
+          false,
           true,
           mockSetShowOnHandsConfirmModal,
           50,
@@ -1083,8 +1079,7 @@ describe('AuditItemScreen', () => {
     it('Tests renderConfirmOnHandsModal cancel button action', () => {
       const { getByTestId } = render(
         renderConfirmOnHandsModal(
-          defaultAsyncState,
-          defaultAsyncState,
+          false,
           true,
           mockSetShowOnHandsConfirmModal,
           50,
