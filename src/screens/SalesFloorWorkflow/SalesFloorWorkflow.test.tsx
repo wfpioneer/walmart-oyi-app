@@ -198,7 +198,6 @@ describe('Sales floor workflow tests', () => {
         updateItemsState={mockUpdateItemsState}
         overridePalletPerishables={false}
         inProgress={false}
-
       />
     );
 
@@ -239,7 +238,6 @@ describe('Sales floor workflow tests', () => {
         updateItemsState={mockUpdateItemsState}
         overridePalletPerishables={false}
         inProgress={false}
-
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -288,7 +286,6 @@ describe('Sales floor workflow tests', () => {
         updateItemsState={mockUpdateItemsState}
         overridePalletPerishables={false}
         inProgress={false}
-
       />
     );
 
@@ -339,7 +336,6 @@ describe('Sales floor workflow tests', () => {
         updateItemsState={mockUpdateItemsState}
         overridePalletPerishables={false}
         inProgress={false}
-
       />
     );
 
@@ -390,7 +386,6 @@ describe('Sales floor workflow tests', () => {
         updateItemsState={mockUpdateItemsState}
         overridePalletPerishables={false}
         inProgress={false}
-
       />
     );
 
@@ -441,7 +436,6 @@ describe('Sales floor workflow tests', () => {
         updateItemsState={mockUpdateItemsState}
         overridePalletPerishables={false}
         inProgress={false}
-
       />
     );
 
@@ -510,7 +504,6 @@ describe('Sales floor workflow tests', () => {
         updateItemsState={mockUpdateItemsState}
         overridePalletPerishables={false}
         inProgress={false}
-
       />
     );
 
