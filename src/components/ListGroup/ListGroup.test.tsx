@@ -57,15 +57,17 @@ describe('ListGroup', () => {
         }
       ];
       renderer.render(
-        <ListGroup
-          groupItems={true}
-          pickListItems={newMockPickLists}
-          title="ABAR-2"
-          currentTab={Tabs.PICK}
-          dispatch={jest.fn()}
-          multiBinEnabled={false}
-          multiPickEnabled={false}
-        />
+        <Provider store={store}>
+          <ListGroup
+            groupItems={true}
+            pickListItems={newMockPickLists}
+            title="ABAR-2"
+            currentTab={Tabs.PICK}
+            dispatch={jest.fn()}
+            multiBinEnabled={false}
+            multiPickEnabled={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -94,15 +96,17 @@ describe('ListGroup', () => {
         }
       ];
       renderer.render(
-        <ListGroup
-          groupItems={true}
-          pickListItems={newMockPickLists}
-          title="ABAR-2"
-          currentTab={Tabs.PICK}
-          dispatch={jest.fn()}
-          multiBinEnabled={true}
-          multiPickEnabled={false}
-        />
+        <Provider store={store}>
+          <ListGroup
+            groupItems={true}
+            pickListItems={newMockPickLists}
+            title="ABAR-2"
+            currentTab={Tabs.PICK}
+            dispatch={jest.fn()}
+            multiBinEnabled={true}
+            multiPickEnabled={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

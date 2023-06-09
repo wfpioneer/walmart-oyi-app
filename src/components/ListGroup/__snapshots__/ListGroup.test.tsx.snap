@@ -178,12 +178,73 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 `;
 
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems and multiBinEnabled as true 1`] = `
-<View>
-  <CollapsibleCard
+<Context.Provider
+  value={
+    Object {
+      "getServerState": undefined,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ListGroup
+    currentTab="Pick"
     dispatch={[MockFunction]}
-    isOpened={true}
-    pickListWithStatusReady={
+    groupItems={true}
+    multiBinEnabled={true}
+    multiPickEnabled={false}
+    pickListItems={
       Array [
+        Object {
+          "assignedAssociate": "Associate 1",
+          "category": 71,
+          "createTs": "2022-04-02T12:55:31.9633333Z",
+          "createdBy": "Associate 1",
+          "id": 418,
+          "itemDesc": "Teapot",
+          "itemNbr": 734,
+          "moveToFront": true,
+          "palletId": "4321",
+          "palletLocationId": 1672,
+          "palletLocationName": "C1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 1673,
+          "salesFloorLocationName": "C1-3",
+          "status": "accepted pick",
+          "upcNbr": "000041800003",
+        },
+        Object {
+          "assignedAssociate": "Associate 1",
+          "category": 71,
+          "createTs": "2022-02-09T12:55:31.9633333Z",
+          "createdBy": "Manager 1",
+          "id": 3,
+          "itemDesc": "Swiffer",
+          "itemNbr": 845,
+          "moveToFront": true,
+          "palletId": "5432",
+          "palletLocationId": 2345,
+          "palletLocationName": "BREW1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 2345,
+          "salesFloorLocationName": "BREW1-2",
+          "status": "accepted pick",
+          "upcNbr": "000052900004",
+        },
         Object {
           "assignedAssociate": "",
           "category": 46,
@@ -204,24 +265,9 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
         },
       ]
     }
-    showCheckbox={true}
     title="ABAR-2"
-    toggleIsOpened={[Function]}
   />
-  <View>
-    <FlatList
-      data={
-        Array [
-          "5432",
-          "4321",
-        ]
-      }
-      keyExtractor={[Function]}
-      renderItem={[Function]}
-      scrollEnabled={false}
-    />
-  </View>
-</View>
+</Context.Provider>
 `;
 
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems and multiPickEnabled as true 1`] = `
@@ -393,27 +439,94 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
 `;
 
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as true 1`] = `
-<View>
-  <CollapsibleCard
+<Context.Provider
+  value={
+    Object {
+      "getServerState": undefined,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ListGroup
+    currentTab="Pick"
     dispatch={[MockFunction]}
-    isOpened={true}
-    pickListWithStatusReady={Array []}
-    showCheckbox={false}
+    groupItems={true}
+    multiBinEnabled={false}
+    multiPickEnabled={false}
+    pickListItems={
+      Array [
+        Object {
+          "assignedAssociate": "Associate 1",
+          "category": 71,
+          "createTs": "2022-04-02T12:55:31.9633333Z",
+          "createdBy": "Associate 1",
+          "id": 418,
+          "itemDesc": "Teapot",
+          "itemNbr": 734,
+          "moveToFront": true,
+          "palletId": "4321",
+          "palletLocationId": 1672,
+          "palletLocationName": "C1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 1673,
+          "salesFloorLocationName": "C1-3",
+          "status": "accepted pick",
+          "upcNbr": "000041800003",
+        },
+        Object {
+          "assignedAssociate": "Associate 1",
+          "category": 71,
+          "createTs": "2022-02-09T12:55:31.9633333Z",
+          "createdBy": "Manager 1",
+          "id": 3,
+          "itemDesc": "Swiffer",
+          "itemNbr": 845,
+          "moveToFront": true,
+          "palletId": "5432",
+          "palletLocationId": 2345,
+          "palletLocationName": "BREW1-2",
+          "quickPick": false,
+          "salesFloorLocationId": 2345,
+          "salesFloorLocationName": "BREW1-2",
+          "status": "accepted pick",
+          "upcNbr": "000052900004",
+        },
+        Object {
+          "assignedAssociate": "Associate 2",
+          "category": 46,
+          "createTs": "2022-04-03T12:55:31.9633333Z",
+          "createdBy": "Associate 2",
+          "id": 4,
+          "itemDesc": "Candy",
+          "itemNbr": 7344,
+          "moveToFront": true,
+          "palletId": "4321",
+          "palletLocationId": 1672,
+          "palletLocationName": "C1-2-1",
+          "quickPick": false,
+          "salesFloorLocationId": 1673,
+          "salesFloorLocationName": "C1-3",
+          "status": "accepted pick",
+          "upcNbr": "000041800004",
+        },
+      ]
+    }
     title="ABAR-2"
-    toggleIsOpened={[Function]}
   />
-  <View>
-    <FlatList
-      data={
-        Array [
-          "5432",
-          "4321",
-        ]
-      }
-      keyExtractor={[Function]}
-      renderItem={[Function]}
-      scrollEnabled={false}
-    />
-  </View>
-</View>
+</Context.Provider>
 `;
