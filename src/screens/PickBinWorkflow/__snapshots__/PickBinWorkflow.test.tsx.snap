@@ -212,6 +212,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="45"
@@ -400,6 +401,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="43"
@@ -549,6 +551,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="43"
@@ -718,6 +721,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="44"
@@ -906,6 +910,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="40"
@@ -1055,6 +1060,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="40"
@@ -1242,6 +1248,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="42"
@@ -1429,6 +1436,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
     <PickPalletInfoCard
       canDelete={false}
       dispatch={[Function]}
+      inProgress={false}
       isSelected={false}
       onPress={[Function]}
       palletId="41"

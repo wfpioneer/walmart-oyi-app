@@ -760,14 +760,12 @@ export const renderReserveLocQtys = (reserve?: Location[]) => {
 
 export const renderAddPicklistButton = (
   props: (RenderProps & HandleProps),
-  itemDetails: ItemDetails,
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
   // TODO use data from GetLocationsForItem endpoint https://jira.walmart.com/browse/INTLSAOPS-9251
-  const { location } = itemDetails;
-  const { userConfigs } = props;
+  const { userConfigs, reserveLocations } = props;
 
-  if (location && location.reserve && location.reserve.length >= 1) {
+  if (reserveLocations && reserveLocations.length >= 1) {
     return userConfigs.picking ? (
       <View style={styles.addToPicklistContainer}>
         <Button
@@ -877,7 +875,7 @@ export const renderLocationComponent = (
       {renderReserveLocQtys(reserveLocations)}
       <View style={styles.renderPickListContainer}>
         {(reserveAdjustment && hasReserveLocations) && renderReserveAdjustmentButton(itemDetails, navigation, dispatch)}
-        {renderAddPicklistButton(props, itemDetails, setCreatePickModalVisible)}
+        {renderAddPicklistButton(props, setCreatePickModalVisible)}
       </View>
     </View>
   );

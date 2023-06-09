@@ -17,6 +17,7 @@ import styles from './ListGroup.style';
 import COLOR from '../../themes/Color';
 import { selectPicks, updateMultiPickSelection } from '../../state/actions/Picking';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { useTypedSelector } from '../../state/reducers/RootReducer';
 
 interface ListGroupProps {
   title: string;
@@ -149,7 +150,8 @@ const renderPickPalletInfoList = (
   currentTab: Tabs,
   dispatch: Dispatch<any>,
   multiBinEnabled: boolean | undefined,
-  multiPickEnabled: boolean | undefined
+  multiPickEnabled: boolean | undefined,
+  inProgress: boolean
 ) => {
   const item = items[0];
   const showCheckBox = (multiBinEnabled && item.status === PickStatus.READY_TO_BIN)
@@ -169,6 +171,7 @@ const renderPickPalletInfoList = (
       dispatch={dispatch}
       isSelected={item.isSelected}
       showCheckbox={!!showCheckBox}
+      inProgress={inProgress}
     />
   );
 };
@@ -179,7 +182,8 @@ const renderGroupItems = (
   currentTab: Tabs,
   dispatch: Dispatch<any>,
   multiBinEnabled: boolean | undefined,
-  multiPickEnabled: boolean | undefined
+  multiPickEnabled: boolean | undefined,
+  inProgress: boolean
 ) => {
   const groupedItemList = getGroupItemsBasedOnPallet(items);
   const sortedPalletIdsBasedonLocation = uniq(
@@ -194,7 +198,8 @@ const renderGroupItems = (
         currentTab,
         dispatch,
         multiBinEnabled,
-        multiPickEnabled
+        multiPickEnabled,
+        inProgress
       )}
       scrollEnabled={false}
       keyExtractor={(item, index) => `ListGroup-${item}-${index}`}
@@ -208,15 +213,14 @@ const renderItems = (
   currentTab: Tabs,
   dispatch: Dispatch<any>,
   multiBinEnabled: boolean | undefined,
-  multiPickEnabled: boolean | undefined
+  multiPickEnabled: boolean | undefined,
+  inProgress: boolean
 ) => {
   const pickListItems = sortPickListByCreatedDate(items);
   return (
     <FlatList
       data={pickListItems}
-      renderItem={({ item }) => renderPickPalletInfoList(
-        [item], navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled
-      )}
+      renderItem={({ item }) => renderPickPalletInfoList([item], navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled, inProgress)}
       scrollEnabled={false}
       keyExtractor={(item, index) => `ListGroup-${item}-${index}`}
     />
@@ -231,6 +235,7 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
   const [listGroupOpen, toggleListGroup] = useState(true);
   const navigation = useNavigation();
   const pickListWithStatusReady = getItemsByStatusEnabled(multiBinEnabled, multiPickEnabled, pickListItems);
+  const { inProgress } = useTypedSelector(state => state.User.configs);
   const showCheckbox = !!groupItems
   && currentTab === Tabs.PICK
   && !!pickListWithStatusReady?.length;
@@ -248,8 +253,8 @@ const ListGroup = (props: ListGroupProps): JSX.Element => {
       {listGroupOpen && (
         <View>
           {groupItems
-            ? renderGroupItems(pickListItems, navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled)
-            : renderItems(pickListItems, navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled)}
+            ? renderGroupItems(pickListItems, navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled, inProgress)
+            : renderItems(pickListItems, navigation, currentTab, dispatch, multiBinEnabled, multiPickEnabled, inProgress)}
         </View>
       )}
     </View>

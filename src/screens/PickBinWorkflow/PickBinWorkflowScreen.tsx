@@ -78,7 +78,7 @@ export const updatePicklistStatusApiHook = (
 ) => {
   // on api success
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
-    && updatePicklistStatusApi.result.status === 200) {
+    && (updatePicklistStatusApi.result.status === 200 || updatePicklistStatusApi.result.status === 204)) {
     if (selectedPicklistAction === PickAction.ACCEPT_PICK || selectedPicklistAction === PickAction.ACCEPT_BIN) {
       const updatedStatus = selectedPicklistAction === PickAction.ACCEPT_PICK
         ? PickStatus.ACCEPTED_PICK : PickStatus.ACCEPTED_BIN;
@@ -189,7 +189,7 @@ export const updatePicklistItemsStatus = (
   action: PickAction,
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent,
-  isInProgress: boolean
+  inProgress: boolean
 ) => {
   const picklistItems = items.map(item => ({
     picklistId: item.id,
@@ -202,7 +202,7 @@ export const updatePicklistItemsStatus = (
     pickAction: action,
     picklistItems: JSON.stringify(picklistItems)
   });
-  if (isInProgress) {
+  if (inProgress) {
     dispatch(updatePicklistStatusV1({
       headers: {
         action
@@ -440,6 +440,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
             canDelete={false}
             dispatch={dispatch}
             showCheckbox={false}
+            inProgress={userConfigs.inProgress}
           />
           <View style={styles.actionButtonsView}>
             {actionButtonsView()}

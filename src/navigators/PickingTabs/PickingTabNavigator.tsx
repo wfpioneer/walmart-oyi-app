@@ -180,7 +180,7 @@ export const updatePicklistStatusApiHook = (
   if (screenIsFocused) {
     // on api success
     if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
-    && updatePicklistStatusApi.result.status === 200) {
+    && (updatePicklistStatusApi.result.status === 200 || updatePicklistStatusApi.result.status === 204)) {
       dispatch(hideActivityModal());
       Toast.show({
         type: 'success',

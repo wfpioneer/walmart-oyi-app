@@ -115,7 +115,7 @@ export const updatePicklistStatusApiEffect = (
 ) => {
   // on api success
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result) {
-    if (updatePicklistStatusApi.result.status === 200) {
+    if ((updatePicklistStatusApi.result.status === 200 || updatePicklistStatusApi.result.status === 204)) {
       const updatedItems = items.map(item => ({
         ...item,
         status: PickStatus.COMPLETE
@@ -713,6 +713,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         canDelete={false}
         dispatch={dispatch}
         showCheckbox={false}
+        inProgress={inProgress}
       />
       <View style={styles.updateQuantityTextView}>
         <Text style={styles.updateQuantityText}>

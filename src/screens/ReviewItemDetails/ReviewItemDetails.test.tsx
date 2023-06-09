@@ -611,10 +611,11 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pickingEnabledProps = mockHandleProps;
       pickingEnabledProps.userConfigs = { ...mockConfig, picking: true };
+      pickingEnabledProps.reserveLocations = mockItemDetail123?.location?.reserve;
       renderer.render(
         renderAddPicklistButton({
           ...pickingEnabledProps
-        }, mockItemDetail123, jest.fn())
+        }, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
