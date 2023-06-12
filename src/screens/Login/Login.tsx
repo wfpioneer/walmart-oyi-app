@@ -153,7 +153,7 @@ export const onLoginSuccess = (user: SSOUser, userToken: string, dispatch: Dispa
     features: []
   }));
   trackEvent('user_sign_in');
-  if (user.siteId && user.countryCode !== 'US') {
+  if (siteId && user.countryCode !== 'US') {
     dispatch(getFluffyFeatures({
       ...user,
       siteId,
@@ -296,14 +296,17 @@ export const LoginScreen = (props: LoginScreenProps) => {
         case eventTypes.authSuccess:
           signInUser(dispatch);
           break;
-        case eventTypes.error:
+        case eventTypes.error: {
+          const errorException = event.error.replace('AuthorizationException: ', '');
+          const pingError = JSON.parse(errorException);
           Toast.show({
             type: 'error',
             position: 'bottom',
-            text1: event.error.errorDescription,
+            text1: pingError.errorDescription,
             visibilityTime: SNACKBAR_TIMEOUT
           });
           break;
+        }
         default:
           break;
       }
@@ -347,7 +350,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={!user.siteId && userIsSignedIn(user)}
+        isVisible={user.siteId === 0 && userIsSignedIn(user)}
         onClose={() => signOutUser(dispatch)}
         modalType="Form"
       >
@@ -356,7 +359,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
             const updatedUser = { ...user, siteId: clubNbr };
             dispatch(loginUser(updatedUser));
             trackEvent('user_sign_in');
-            if (user.countryCode !== 'US') {
+            if (user.countryCode !== 'US' && user.countryCode !== 'NOT_FOUND') {
               dispatch(getFluffyFeatures(updatedUser));
             }
           }}
@@ -366,7 +369,8 @@ export const LoginScreen = (props: LoginScreenProps) => {
       <CustomModalComponent
         isVisible={
           user.siteId !== 0
-          && user.countryCode === 'US'
+          && (user.countryCode === 'US'
+          || user.countryCode === 'NOT_FOUND')
           && userIsSignedIn(user)
         }
         onClose={() => signOutUser(dispatch)}

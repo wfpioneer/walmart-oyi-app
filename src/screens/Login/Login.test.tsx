@@ -307,7 +307,8 @@ describe('Tests login screen functions', () => {
     const mockConfigResponse: ConfigResponse = {
       ...mockConfig,
       printingUpdate: true,
-      locMgmtEdit: mockConfig.locationManagementEdit
+      locMgmtEdit: mockConfig.locationManagementEdit,
+      overridePltPerish: false
     };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
