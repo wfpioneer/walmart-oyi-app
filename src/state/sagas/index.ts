@@ -72,6 +72,7 @@ const genericSagas = [
   makeAsyncSaga(saga.EDIT_LOCATION, actions.editLocation, EditLocationService.editLocation),
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
+  makeAsyncSaga(saga.UPDATE_OH_QTY_V1, actions.updateOHQtyV1, UpdateOHQtyService.updateOHQtyV1),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
   makeAsyncSaga(
     saga.GET_WORKLIST_SUMMARY_V2,
@@ -112,6 +113,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PALLET_CONFIG, actions.getPalletConfig, PalletManagementService.getPalletConfig),
   makeAsyncSaga(saga.POST_CREATE_PALLET, actions.postCreatePallet, CreatePalletService.createPallet),
   makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS, actions.updatePicklistStatus, PickingService.updatePickListStatus),
+  makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS_V1, actions.updatePicklistStatusV1, PickingService.updatePickListStatusV1),
   makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService),
   makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),
   makeAsyncSaga(saga.CREATE_NEW_PICK, actions.createNewPick, PickingService.createNewPick),

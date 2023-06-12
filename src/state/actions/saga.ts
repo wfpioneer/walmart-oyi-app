@@ -45,6 +45,7 @@ export const GET_WORKLIST_AUDIT = 'SAGA/GET_WORKLIST_AUDIT';
 export const GET_PALLET_WORKLIST = 'SAGA/GET_PALLET_WORKLIST';
 export const EDIT_LOCATION = 'SAGA/EDIT_LOCATION';
 export const UPDATE_OH_QTY = 'SAGA/UPDATE_OH_QTY';
+export const UPDATE_OH_QTY_V1 = 'SAGA/UPDATE_OH_QTY_V1';
 export const ADD_TO_PICKLIST = 'SAGA/ADD_TO_PICKLIST';
 export const ADD_LOCATION = 'SAGA/ADD_LOCATION';
 export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
@@ -82,6 +83,7 @@ export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 export const POST_BIN_PALLETS = 'SAGA/POST_BIN_PALLETS';
 export const GET_PALLET_CONFIG = 'SAGA/GET_PALLET_CONFIG';
 export const UPDATE_PICKLIST_STATUS = 'SAGA/UPDATE_PICKLIST_STATUS';
+export const UPDATE_PICKLIST_STATUS_V1 = 'SAGA/UPDATE_PICKLIST_STATUS_V1';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
@@ -134,6 +136,10 @@ export const updateOHQty = (payload: {
   data: Partial<ApprovalListItem>,
   worklistType?: string
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
+export const updateOHQtyV1 = (payload: {
+  data: Partial<ApprovalListItem>,
+  worklistType?: string
+}) => ({ type: UPDATE_OH_QTY_V1, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const getWorklistSummaryV2 = () => ({ type: GET_WORKLIST_SUMMARY_V2 } as const);
 export const deleteLocation = (payload: {
@@ -242,6 +248,19 @@ export const updatePicklistStatus = (payload: {
   type: UPDATE_PICKLIST_STATUS,
   payload
 } as const);
+export const updatePicklistStatusV1 = (payload: {
+  headers: { action: PickAction};
+  picklistItems: {
+    picklistId: number;
+    locationId: number;
+    locationName: string;
+    itemQty?: number;
+    palletId: string
+  }[];
+}) => ({
+  type: UPDATE_PICKLIST_STATUS_V1,
+  payload
+} as const);
 export const getPicklists = () => ({
   type: GET_PICKLISTS
 } as const);
@@ -300,6 +319,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof editLocation>, 'payload'>
     & Pick<ReturnType<typeof addLocation>, 'payload'>
     & Pick<ReturnType<typeof updateOHQty>, 'payload'>
+    & Pick<ReturnType<typeof updateOHQtyV1>, 'payload'>
     & Pick<ReturnType<typeof deleteLocation>, 'payload'>
     & Pick<ReturnType<typeof noAction>, 'payload'>
     & Pick<ReturnType<typeof printSign>, 'payload'>
@@ -329,6 +349,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getPalletDetails>, 'payload'>
     & Pick<ReturnType<typeof binPallets>, 'payload'>
     & Pick<ReturnType<typeof updatePicklistStatus>, 'payload'>
+    & Pick<ReturnType<typeof updatePicklistStatusV1>, 'payload'>
     & Pick<ReturnType<typeof updatePalletNotFound>, 'payload'>
     & Pick<ReturnType<typeof createNewPick>, 'payload'>
     & Pick<ReturnType<typeof postCreatePallet>, 'payload'>
