@@ -78,6 +78,7 @@ import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { TrackEventSource } from '../../models/Generics.d';
 import { barcodeEmitter } from '../../utils/scannerUtils';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
@@ -1062,6 +1063,9 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
     dispatch, navigation
   } = props;
   const { reserveAdjustment } = userConfigs;
+  if (itemDetails.worklistStatus === WorkListStatus.INPROGRESS) {
+    return <View />;
+  }
   switch (exceptionType?.toUpperCase()) {
     case 'C': {
       return (

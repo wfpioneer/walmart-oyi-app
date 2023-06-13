@@ -42,6 +42,7 @@ import {
 } from '../../state/actions/saga';
 import { OHChangeHistory } from '../../models/ItemDetails';
 import { setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -1420,6 +1421,15 @@ describe('ReviewItemDetailsScreen', () => {
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders completeButtonComponent with no buttons if WL item is IN_PROGRESS', () => {
+      renderer.render(
+        completeButtonComponent(
+          mockItemDetailsScreenProps,
+          { ...itemDetail[123], worklistStatus: WorkListStatus.INPROGRESS }
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
