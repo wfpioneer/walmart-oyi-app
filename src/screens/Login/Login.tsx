@@ -295,6 +295,12 @@ export const LoginScreen = (props: LoginScreenProps) => {
       switch (event.action) {
         case eventTypes.authSuccess:
           signInUser(dispatch);
+          Toast.show({
+            type: 'success',
+            position: 'bottom',
+            text1: `${strings('GENERICS.SIGN_IN')} ${strings('GENERICS.UPDATED')}`,
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
           break;
         case eventTypes.error: {
           const errorException = event.error.replace('AuthorizationException: ', '');
