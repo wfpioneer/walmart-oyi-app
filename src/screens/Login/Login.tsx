@@ -6,9 +6,16 @@ import { useDispatch } from 'react-redux';
 import {
   NativeModules, Platform, Text, View
 } from 'react-native';
-// @ts-expect-error // react-native-wmsso has no type definition it would seem
-import WMSSO from 'react-native-wmsso';
 import Config from 'react-native-config';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import WMSingleSignOn, {
+  SSOEnv,
+  SSOPingFedEventData,
+  SSOPingFedEvents,
+  SSOUser,
+  ssoEventEmitter
+} from 'react-native-ssmp-sso';
+import Toast from 'react-native-toast-message';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
@@ -40,21 +47,15 @@ import {
   savePrinter
 } from '../../utils/asyncStorageUtils';
 import {
-  clearLocationPrintQueue,
-  resetPrintQueue,
   setLocationLabelPrinter,
   setPalletLabelPrinter,
   setPriceLabelPrinter,
   setPrinterList
 } from '../../state/actions/Print';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
-
-// This type uses all fields from the User type except it makes siteId optional
-// It is necessary to provide an accurate type to the User object returned
-// from WMSSO.getUser (since its siteId is optional and CN users can log in without one)
-type WMSSOUser = Pick<Partial<User>, 'siteId'> & Omit<User, 'siteId'>;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
@@ -134,31 +135,62 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
   );
 };
 
-export const signInUser = (dispatch: Dispatch<any>): void => {
-  if (Config.ENVIRONMENT !== 'prod') {
-    // For use with Fluffy in non-prod
-    WMSSO.setEnv('STG');
+export const onLoginSuccess = (user: SSOUser, userToken: string, dispatch: Dispatch<any>) => {
+  const siteId = user.siteId && user.siteId !== 'NOT_FOUND' ? Number(user.siteId) : 0;
+
+  setLanguage(getSystemLanguage());
+  setUserId(user.userId);
+  dispatch(loginUser({
+    ...user,
+    siteId,
+    token: userToken,
+    additional: {
+      displayName: user.displayName ?? '',
+      clockCheckResult: '',
+      loginId: '',
+      mailId: user.emailId ?? ''
+    },
+    features: []
+  }));
+  trackEvent('user_sign_in');
+  if (siteId && user.countryCode !== 'US') {
+    dispatch(getFluffyFeatures({
+      ...user,
+      siteId,
+      token: userToken,
+      additional: {
+        displayName: user.displayName ?? '',
+        clockCheckResult: '',
+        loginId: '',
+        mailId: user.emailId ?? ''
+      },
+      features: []
+    }));
   }
-  WMSSO.getUser().then((user: WMSSOUser) => {
-    setLanguage(getSystemLanguage());
-    setUserId(user.userId);
-    dispatch(loginUser({ ...user, siteId: user.siteId ?? 0 }));
-    trackEvent('user_sign_in');
-    if (user.siteId && user.countryCode !== 'US') {
-      dispatch(getFluffyFeatures({ ...user, siteId: user.siteId }));
-    }
+};
+export const signInUser = (dispatch: Dispatch<any>): void => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  Config.ENVIRONMENT !== 'prod' ? WMSingleSignOn.setEnv(SSOEnv.CERT) : WMSingleSignOn.setEnv(SSOEnv.PROD);
+  let userToken = '';
+  WMSingleSignOn.getFreshAccessToken().then(token => {
+    userToken = token;
+  });
+
+  WMSingleSignOn.getUser().then((user: SSOUser) => {
+    onLoginSuccess(user, userToken, dispatch);
+  }).catch(() => {
+    WMSingleSignOn.signIn('MainActivity');
   });
 };
 
 export const signOutUser = (dispatch: Dispatch<any>): void => {
   dispatch(showActivityModal());
   trackEvent('user_sign_out', { lastPage: 'Login' });
-  WMSSO.signOutUser().then(() => {
+  WMSingleSignOn.signOut('MainActivity', true).then(() => {
     dispatch(logoutUser());
     if (Platform.OS === 'android') {
       dispatch(hideActivityModal());
     }
-    signInUser(dispatch);
   });
 };
 
@@ -257,6 +289,41 @@ export const LoginScreen = (props: LoginScreenProps) => {
   } = props;
 
   useEffectHook(() => {
+    WMSingleSignOn.setRedirectUri('com.walmart.intl.oyi://SSOLogin');
+    const eventTypes = SSOPingFedEvents.types;
+    ssoEventEmitter.addListener(SSOPingFedEvents.name, (event: SSOPingFedEventData) => {
+      switch (event.action) {
+        case eventTypes.authSuccess:
+          signInUser(dispatch);
+          Toast.show({
+            type: 'success',
+            position: 'bottom',
+            text1: `${strings('GENERICS.SIGN_IN')} ${strings('GENERICS.UPDATED')}`,
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+          break;
+        case eventTypes.error: {
+          const errorException = event.error.replace('AuthorizationException: ', '');
+          const pingError = JSON.parse(errorException);
+          Toast.show({
+            type: 'error',
+            position: 'bottom',
+            text1: pingError.error || pingError.errorDescription,
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+          break;
+        }
+        default:
+          break;
+      }
+    });
+
+    return () => {
+      ssoEventEmitter.removeAllListeners(SSOPingFedEvents.name);
+    };
+  }, [ssoEventEmitter]);
+
+  useEffectHook(() => {
     signInUser(dispatch);
     // this following snippet is mostly for iOS, as
     // I need it to automatically call signInUser when we go back to the login screen
@@ -289,7 +356,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={!user.siteId && userIsSignedIn(user)}
+        isVisible={user.siteId === 0 && userIsSignedIn(user)}
         onClose={() => signOutUser(dispatch)}
         modalType="Form"
       >
@@ -298,7 +365,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
             const updatedUser = { ...user, siteId: clubNbr };
             dispatch(loginUser(updatedUser));
             trackEvent('user_sign_in');
-            if (user.countryCode !== 'US') {
+            if (user.countryCode !== 'US' && user.countryCode !== 'NOT_FOUND') {
               dispatch(getFluffyFeatures(updatedUser));
             }
           }}
@@ -308,7 +375,8 @@ export const LoginScreen = (props: LoginScreenProps) => {
       <CustomModalComponent
         isVisible={
           user.siteId !== 0
-          && user.countryCode === 'US'
+          && (user.countryCode === 'US'
+          || user.countryCode === 'NOT_FOUND')
           && userIsSignedIn(user)
         }
         onClose={() => signOutUser(dispatch)}

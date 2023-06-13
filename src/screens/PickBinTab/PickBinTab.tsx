@@ -17,7 +17,7 @@ import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { resetMultiPickBinSelection } from '../../state/actions/Picking';
 import { ButtonBottomTab } from '../../components/buttonTabCard/ButtonTabCard';
-import { updatePicklistStatus } from '../../state/actions/saga';
+import { updatePicklistStatus, updatePicklistStatusV1 } from '../../state/actions/saga';
 
 interface PickBinTabProps {
   pickBinList: PickListItem[];
@@ -39,8 +39,10 @@ interface PickBinTabScreenProps {
 
 const ASSIGNED_TO_ME = 'assignedToMe';
 
-const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletLocation ? palletLocation.substring(0,
-  palletLocation.indexOf('-')).replace(/[\d.]+$/, '') : '');
+const getZoneFromPalletLocation = (palletLocation: string|undefined) => (palletLocation ? palletLocation.substring(
+  0,
+  palletLocation.indexOf('-')
+).replace(/[\d.]+$/, '') : '');
 
 export const renderMultipickConfirmationDialog = (
   selectedItems: PickListItem[],
@@ -48,7 +50,8 @@ export const renderMultipickConfirmationDialog = (
   setShowMultiPickConfirmationDialog: React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>,
   multiBinEnabled: boolean,
-  multiPickEnabled: boolean
+  multiPickEnabled: boolean,
+  inProgress: boolean
 ) => {
   const uniqueSelectedItems = selectedItems.filter((value, index, self) => index === self.findIndex(t => (
     t.palletId === value.palletId && t.palletLocationName === value.palletLocationName
@@ -108,7 +111,11 @@ export const renderMultipickConfirmationDialog = (
             testID="acceptButton"
             title={strings('PICKING.ACCEPT')}
             onPress={() => {
-              dispatch(updatePicklistStatus(updatePicklistRequestPayload));
+              if (inProgress) {
+                dispatch(updatePicklistStatusV1(updatePicklistRequestPayload));
+              } else {
+                dispatch(updatePicklistStatus(updatePicklistRequestPayload));
+              }
               setShowMultiPickConfirmationDialog(false);
             }}
             type={ButtonType.PRIMARY}
@@ -126,8 +133,10 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
     setShowMultiPickConfirmationDialog, showMultiPickConfirmationDialog
   } = props;
   const [assignedToMe, otherPickList] = partition(pickBinList, pick => pick.assignedAssociate === user.userId);
-  const groupedPickListByZone = groupBy(otherPickList,
-    (item: PickListItem) => getZoneFromPalletLocation(item.palletLocationName));
+  const groupedPickListByZone = groupBy(
+    otherPickList,
+    (item: PickListItem) => getZoneFromPalletLocation(item.palletLocationName)
+  );
   const sortedZones = Object.keys(groupedPickListByZone).sort((a, b) => (a > b ? 1 : -1));
   const allGroupKeys = [ASSIGNED_TO_ME, ...sortedZones];
   const selectedItems = pickBinList.filter(item => item.isSelected);
@@ -137,8 +146,13 @@ export const PickBinTabScreen = (props: PickBinTabScreenProps) => {
       {/* placeholder for ManualScan need to implement functionality later */}
       {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
       {renderMultipickConfirmationDialog(
-        selectedItems, showMultiPickConfirmationDialog, setShowMultiPickConfirmationDialog, dispatch,
-        multiBinEnabled, multiPickEnabled
+        selectedItems,
+        showMultiPickConfirmationDialog,
+        setShowMultiPickConfirmationDialog,
+        dispatch,
+        multiBinEnabled,
+        multiPickEnabled,
+        user.configs.inProgress
       )}
       <FlatList
         data={allGroupKeys}

@@ -338,7 +338,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     const mockMultiPickEnabled = true;
     // on update success
     updatePicklistStatusApiHook(updateSuccessApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
-    expect(mockDispatch).toBeCalledTimes(4);
+    expect(mockDispatch).toBeCalledTimes(5);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'success',
       text1: strings('PICKING.UPDATE_PICKLIST_STATUS_SUCCESS'),

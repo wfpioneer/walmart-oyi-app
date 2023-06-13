@@ -35,6 +35,7 @@ import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
 import { PickingState } from '../../state/reducers/Picking';
 import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScreen';
+import { Configurations } from '../../models/User';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -49,7 +50,8 @@ interface AssignLocationProps {
   updatePicklistStatusApi: AsyncState;
   deletePicks: boolean;
   setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>;
-  trackEventCall: typeof trackEvent
+  trackEventCall: typeof trackEvent;
+  userConfigs: Configurations;
 }
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -120,7 +122,8 @@ export const binPalletsApiEffect = (
   dispatch: Dispatch<any>,
   route: RouteProp<any, string>,
   selectedPicks: PickListItem[],
-  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>
+  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>,
+  inProgress: boolean
 ) => {
   if (navigation.isFocused()) {
     if (!binPalletsApi.isWaiting) {
@@ -226,7 +229,7 @@ export const binPalletsApiEffect = (
           } else if (errorResponse.message.includes('PALLET_NOT_FOUND')) {
             if (route.params?.source === 'picking') {
               setDeletePicks(true);
-              updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch, trackEvent);
+              updatePicklistItemsStatus(selectedPicks, PickAction.DELETE, dispatch, trackEvent, inProgress);
             } else {
               Toast.show({
                 position: 'bottom',
@@ -265,7 +268,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState,
     navigation, dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi, deletePicks, setDeletePicks,
-    trackEventCall
+    trackEventCall, userConfigs
   } = props;
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
 
@@ -326,7 +329,8 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     dispatch,
     route,
     selectedPicks,
-    setDeletePicks
+    setDeletePicks,
+    userConfigs.inProgress
   ), [binPalletsApi]);
 
   useEffectHook(() => (
@@ -388,6 +392,7 @@ function AssignLocation(): JSX.Element {
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const palletsToBin = useTypedSelector(state => state.Binning.pallets);
   const scannedEvent = useTypedSelector(state => state.Global.scannedEvent);
+  const userConfigs = useTypedSelector(state => state.User.configs);
   const binPalletsApi = useTypedSelector(state => state.async.binPallets);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
   const [deletePicks, setDeletePicks] = useState(false);
@@ -407,6 +412,7 @@ function AssignLocation(): JSX.Element {
       deletePicks={deletePicks}
       setDeletePicks={setDeletePicks}
       trackEventCall={trackEvent}
+      userConfigs={userConfigs}
     />
   );
 }

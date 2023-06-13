@@ -34,6 +34,7 @@ export const GET_ITEM_PIHISTORY = 'SAGA/GET_ITEM_PIHISTORY';
 export const GET_ITEM_PISALESHISTORY = 'SAGA/GET_ITEM_PISALESHISTORY';
 export const GET_ITEM_PICKLISTHISTORY = 'SAGA/GET_ITEM_PICKLISTHISTORY';
 export const GET_LOCATIONS_FOR_ITEM = 'SAGA/GET_LOCATIONS_FOR_ITEM';
+export const GET_LOCATIONS_FOR_ITEM_V1 = 'SAGA/GET_LOCATIONS_FOR_ITEM_V1';
 export const GET_ITEM_MANAGER_APPROVAL_HISTORY = 'SAGA/GET_ITEM_MANAGER_APPROVAL_HISTORY';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
@@ -44,6 +45,7 @@ export const GET_WORKLIST_AUDIT = 'SAGA/GET_WORKLIST_AUDIT';
 export const GET_PALLET_WORKLIST = 'SAGA/GET_PALLET_WORKLIST';
 export const EDIT_LOCATION = 'SAGA/EDIT_LOCATION';
 export const UPDATE_OH_QTY = 'SAGA/UPDATE_OH_QTY';
+export const UPDATE_OH_QTY_V1 = 'SAGA/UPDATE_OH_QTY_V1';
 export const ADD_TO_PICKLIST = 'SAGA/ADD_TO_PICKLIST';
 export const ADD_LOCATION = 'SAGA/ADD_LOCATION';
 export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
@@ -51,7 +53,6 @@ export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V@';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
-export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
 export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
@@ -82,6 +83,7 @@ export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 export const POST_BIN_PALLETS = 'SAGA/POST_BIN_PALLETS';
 export const GET_PALLET_CONFIG = 'SAGA/GET_PALLET_CONFIG';
 export const UPDATE_PICKLIST_STATUS = 'SAGA/UPDATE_PICKLIST_STATUS';
+export const UPDATE_PICKLIST_STATUS_V1 = 'SAGA/UPDATE_PICKLIST_STATUS_V1';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
@@ -101,6 +103,7 @@ export const getItemPiHistory = (payload: number) => ({ type: GET_ITEM_PIHISTORY
 export const getItemPiSalesHistory = (payload: number) => ({ type: GET_ITEM_PISALESHISTORY, payload } as const);
 export const getItemPicklistHistory = (payload: number) => ({ type: GET_ITEM_PICKLISTHISTORY, payload } as const);
 export const getLocationsForItem = (payload: number) => ({ type: GET_LOCATIONS_FOR_ITEM, payload } as const);
+export const getLocationsForItemV1 = (payload: number) => ({ type: GET_LOCATIONS_FOR_ITEM_V1, payload } as const);
 export const getItemManagerApprovalHistory = (payload: number) => ({
   type: GET_ITEM_MANAGER_APPROVAL_HISTORY, payload
 } as const);
@@ -133,6 +136,10 @@ export const updateOHQty = (payload: {
   data: Partial<ApprovalListItem>,
   worklistType?: string
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
+export const updateOHQtyV1 = (payload: {
+  data: Partial<ApprovalListItem>,
+  worklistType?: string
+}) => ({ type: UPDATE_OH_QTY_V1, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
 export const getWorklistSummaryV2 = () => ({ type: GET_WORKLIST_SUMMARY_V2 } as const);
 export const deleteLocation = (payload: {
@@ -151,11 +158,7 @@ export const printSign = (payload: {
   headers?: AxiosRequestHeaders;
   printList: PrintItemList[];
 }) => ({ type: PRINT_SIGN, payload } as const);
-export const getLocationDetails = (payload: {
-  headers?: AxiosRequestHeaders;
-  itemNbr: number;
-}) => ({ type: GET_LOCATION_DETAILS, payload } as const);
-export const getFluffyFeatures = (payload: User) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
+export const getFluffyFeatures = (payload: Omit<User, 'configs' >) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
   itemNbr?: number;
   status?: approvalStatus;
@@ -245,6 +248,19 @@ export const updatePicklistStatus = (payload: {
   type: UPDATE_PICKLIST_STATUS,
   payload
 } as const);
+export const updatePicklistStatusV1 = (payload: {
+  headers: { action: PickAction};
+  picklistItems: {
+    picklistId: number;
+    locationId: number;
+    locationName: string;
+    itemQty?: number;
+    palletId: string
+  }[];
+}) => ({
+  type: UPDATE_PICKLIST_STATUS_V1,
+  payload
+} as const);
 export const getPicklists = () => ({
   type: GET_PICKLISTS
 } as const);
@@ -294,6 +310,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getItemPiSalesHistory>, 'payload'>
     & Pick<ReturnType<typeof getItemPicklistHistory>, 'payload'>
     & Pick<ReturnType<typeof getLocationsForItem>, 'payload'>
+    & Pick<ReturnType<typeof getLocationsForItemV1>, 'payload'>
     & Pick<ReturnType<typeof getItemManagerApprovalHistory>, 'payload'>
     & Pick<ReturnType<typeof getWorklist>, 'payload'>
     & Pick<ReturnType<typeof getWorklistV1>, 'payload'>
@@ -302,10 +319,10 @@ export type SagaParams =
     & Pick<ReturnType<typeof editLocation>, 'payload'>
     & Pick<ReturnType<typeof addLocation>, 'payload'>
     & Pick<ReturnType<typeof updateOHQty>, 'payload'>
+    & Pick<ReturnType<typeof updateOHQtyV1>, 'payload'>
     & Pick<ReturnType<typeof deleteLocation>, 'payload'>
     & Pick<ReturnType<typeof noAction>, 'payload'>
     & Pick<ReturnType<typeof printSign>, 'payload'>
-    & Pick<ReturnType<typeof getLocationDetails>, 'payload'>
     & Pick<ReturnType<typeof getFluffyFeatures>, 'payload'>
     & Pick<ReturnType<typeof getApprovalList>, 'payload'>
     & Pick<ReturnType<typeof updateApprovalList>, 'payload'>
@@ -332,6 +349,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getPalletDetails>, 'payload'>
     & Pick<ReturnType<typeof binPallets>, 'payload'>
     & Pick<ReturnType<typeof updatePicklistStatus>, 'payload'>
+    & Pick<ReturnType<typeof updatePicklistStatusV1>, 'payload'>
     & Pick<ReturnType<typeof updatePalletNotFound>, 'payload'>
     & Pick<ReturnType<typeof createNewPick>, 'payload'>
     & Pick<ReturnType<typeof postCreatePallet>, 'payload'>

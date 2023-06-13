@@ -3,9 +3,11 @@ import { WorklistType } from './WorklistSummary';
 // eslint-disable-next-line no-shadow
 export enum WorkListStatus {
   TODO = 'TODO',
-  INPROGRESS = 'INPROGRESS',
+  INPROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED'
 }
+export type ActionTaken = 'QTY_UPDATE' | 'ADD_TO_PICKLIST';
+
 export interface WorklistItemI {
   worklistType: WorklistType;
   itemName?: string;
@@ -23,4 +25,5 @@ export interface WorklistItemI {
   imageURLKey?: string;
   imageBlobKey?: string;
   worklistStatus?: WorkListStatus;
+  actionTaken?: ActionTaken;
 }

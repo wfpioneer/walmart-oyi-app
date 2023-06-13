@@ -1055,6 +1055,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       loading={false}
       onClick={[Function]}
       onHandQty={42}
+      pendingQty={-999}
       showItemImage={false}
       showOHItems={true}
     />
@@ -1324,6 +1325,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       loading={false}
       onClick={[Function]}
       onHandQty={42}
+      pendingQty={-999}
       showItemImage={false}
       showOHItems={true}
     />

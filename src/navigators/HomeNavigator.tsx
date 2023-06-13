@@ -6,11 +6,10 @@ import {
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
-// @ts-expect-error wmsso exists as an imported dependency
-import WMSSO from 'react-native-wmsso';
 import { StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
+import WMSingleSignOn from 'react-native-ssmp-sso';
 import { Configurations } from '../models/User';
 import Home from '../screens/Home/Home';
 import Feedback from '../screens/Feedback/Feedback';
@@ -141,7 +140,7 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
       case 1:
         props.showActivityModal();
         trackEvent('user_sign_out', { lastPage: 'Home' });
-        WMSSO.signOutUser().then(() => {
+        WMSingleSignOn.signOut('MainActivity', false).then(() => {
           props.navigation.replace('Login');
           props.logoutUser();
           if (Platform.OS === 'android') {

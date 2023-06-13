@@ -20,7 +20,7 @@ itemDetail, {
 import ReviewItemDetails, {
   HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
   callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook,
-  getExceptionType, getLocationCount, getTopRightBtnTxt,
+  getExceptionType, getLocationCount, getLocationsForItemsApiHook, getLocationsForItemsV1ApiHook, getTopRightBtnTxt,
   getUpdatedSales, handleCreateNewPick, handleLocationAction,
   handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
   onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton,
@@ -37,9 +37,12 @@ import {
   getItemPiHistory,
   getItemPiSalesHistory,
   getItemPicklistHistory,
-  getLocationsForItem
+  getLocationsForItem,
+  getLocationsForItemV1
 } from '../../state/actions/saga';
 import { OHChangeHistory } from '../../models/ItemDetails';
+import { setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -163,7 +166,8 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   useFocusEffectHook: jest.fn(),
   userFeatures: [],
   userConfigs: mockConfig,
-  countryCode: 'MX'
+  countryCode: 'MX',
+  locationForItemsV1Api: defaultAsyncState
 };
 
 describe('ReviewItemDetailsScreen', () => {
@@ -498,6 +502,7 @@ describe('ReviewItemDetailsScreen', () => {
           mockItemDetail123,
           jest.fn(),
           jest.fn(),
+          defaultAsyncState,
           defaultAsyncState
         )
       );
@@ -506,22 +511,36 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Floor\' location Name with no Reserve location', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderLocationComponent({
-          ...mockHandleProps,
-          floorLocations: mockItemDetail123?.location?.floor,
-          reserveLocations: []
-        }, mockItemDetail123, jest.fn(), jest.fn(), defaultAsyncState)
+        renderLocationComponent(
+          {
+            ...mockHandleProps,
+            floorLocations: mockItemDetail123?.location?.floor,
+            reserveLocations: []
+          },
+          mockItemDetail123,
+          jest.fn(),
+          jest.fn(),
+          defaultAsyncState,
+          defaultAsyncState
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
     it('renders \'Reserve\' location Name with no Floor location', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderLocationComponent({
-          ...mockHandleProps,
-          floorLocations: [],
-          reserveLocations: mockItemDetail123?.location?.reserve
-        }, mockItemDetail123, jest.fn(), jest.fn(), defaultAsyncState)
+        renderLocationComponent(
+          {
+            ...mockHandleProps,
+            floorLocations: [],
+            reserveLocations: mockItemDetail123?.location?.reserve
+          },
+          mockItemDetail123,
+          jest.fn(),
+          jest.fn(),
+          defaultAsyncState,
+          defaultAsyncState
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -532,11 +551,18 @@ describe('ReviewItemDetailsScreen', () => {
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        renderLocationComponent({
-          ...mockHandleProps,
-          floorLocations: [],
-          reserveLocations: []
-        }, mockItemDetail123, jest.fn(), jest.fn(), isLoadingApi)
+        renderLocationComponent(
+          {
+            ...mockHandleProps,
+            floorLocations: [],
+            reserveLocations: []
+          },
+          mockItemDetail123,
+          jest.fn(),
+          jest.fn(),
+          isLoadingApi,
+          isLoadingApi
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -552,12 +578,19 @@ describe('ReviewItemDetailsScreen', () => {
       const mockTrackEventCall = jest.fn();
       const mockDispatch = jest.fn();
       const { getByTestId, toJSON } = render(
-        renderLocationComponent({
-          ...mockHandleProps,
-          floorLocations: [],
-          reserveLocations: [],
-          trackEventCall: mockTrackEventCall
-        }, mockItemDetail123, jest.fn(), mockDispatch, isErrorApi)
+        renderLocationComponent(
+          {
+            ...mockHandleProps,
+            floorLocations: [],
+            reserveLocations: [],
+            trackEventCall: mockTrackEventCall
+          },
+          mockItemDetail123,
+          jest.fn(),
+          mockDispatch,
+          isErrorApi,
+          isErrorApi
+        )
       );
       expect(toJSON()).toMatchSnapshot();
 
@@ -579,10 +612,11 @@ describe('ReviewItemDetailsScreen', () => {
       const renderer = ShallowRenderer.createRenderer();
       const pickingEnabledProps = mockHandleProps;
       pickingEnabledProps.userConfigs = { ...mockConfig, picking: true };
+      pickingEnabledProps.reserveLocations = mockItemDetail123?.location?.reserve;
       renderer.render(
         renderAddPicklistButton({
           ...pickingEnabledProps
-        }, mockItemDetail123, jest.fn())
+        }, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -888,6 +922,7 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockDispatch).toHaveBeenCalledWith(expectedActionNotCompleteNSFLResults);
       mockItemDetailsScreenProps.dispatch = jest.fn();
     });
+
     it('test onValidateScannedEvent', async () => {
       await onValidateScannedEvent(mockItemDetailsScreenProps);
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(1, { type: 'API/GET_ITEM_DETAILS_V4/RESET' });
@@ -900,17 +935,31 @@ describe('ReviewItemDetailsScreen', () => {
         4,
         { type: 'API/GET_ITEM_PICKLISTHISTORY/RESET' }
       );
+      expect(mockItemDetailsScreenProps.dispatch)
+        .toHaveBeenNthCalledWith(5, { type: 'API/GET_ITEM_MANAGERAPPROVALHISTORY/RESET' });
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(6, getItemDetailsV4({ id: 123 }));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(7, getItemPiHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(8, getItemPiSalesHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(9, getItemPicklistHistory(123));
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(
-        5,
+        10,
         { type: 'API/GET_LOCATIONS_FOR_ITEM/RESET' }
       );
-      expect(mockItemDetailsScreenProps.dispatch)
-        .toHaveBeenNthCalledWith(6, { type: 'API/GET_ITEM_MANAGERAPPROVALHISTORY/RESET' });
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(7, getItemDetailsV4({ id: 123 }));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(8, getItemPiHistory(123));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(9, getItemPiSalesHistory(123));
-      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(10, getItemPicklistHistory(123));
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(11, getLocationsForItem(123));
+
+      jest.clearAllMocks();
+      await onValidateScannedEvent({
+        ...mockItemDetailsScreenProps,
+        userConfigs: { ...mockConfig, peteGetLocations: true }
+      });
+
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(
+        10,
+        { type: 'API/GET_LOCATIONS_FOR_ITEM_V1/RESET' }
+      );
+      expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(11, getLocationsForItemV1(123));
     });
+
     it('test onIsWaiting', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<View>{onIsWaiting(true)}</View>);
@@ -1041,6 +1090,50 @@ describe('ReviewItemDetailsScreen', () => {
       };
       handleOHQtySubmit(mockItemDetail123, 10, mockDispatch);
       expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
+    });
+
+    it('test getLocationsForItemsApiHook', () => {
+      const mockFloor = mockItemDetail123.location?.floor;
+      const mockReserve = mockItemDetail123.location?.reserve;
+
+      const locationForItemResponse: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: false,
+        result: {
+          data: {
+            location: {
+              floor: mockFloor,
+              reserve: mockReserve
+            }
+          }
+        }
+      };
+      getLocationsForItemsApiHook(locationForItemResponse, mockDispatch, true);
+
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, setFloorLocations(mockFloor || []));
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, setReserveLocations(mockReserve || []));
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: 'API/GET_LOCATIONS_FOR_ITEM/RESET' });
+    });
+
+    it('test getLocationsForItemsV1ApiHook (Pete)', () => {
+      const mockFloor = mockItemDetail123.location?.floor;
+      const mockReserve = mockItemDetail123.location?.reserve;
+
+      const locationForItemResponse: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: false,
+        result: {
+          data: {
+            salesFloorLocation: mockFloor,
+            reserveLocation: mockReserve
+          }
+        }
+      };
+      getLocationsForItemsV1ApiHook(locationForItemResponse, mockDispatch, true);
+
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, setFloorLocations(mockFloor || []));
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, setReserveLocations(mockReserve || []));
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: 'API/GET_LOCATIONS_FOR_ITEM_V1/RESET' });
     });
   });
   describe('Tests Rendering \'renderOHChangeHistory\'', () => {
@@ -1328,6 +1421,15 @@ describe('ReviewItemDetailsScreen', () => {
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders completeButtonComponent with no buttons if WL item is IN_PROGRESS', () => {
+      renderer.render(
+        completeButtonComponent(
+          mockItemDetailsScreenProps,
+          { ...itemDetail[123], worklistStatus: WorkListStatus.INPROGRESS }
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

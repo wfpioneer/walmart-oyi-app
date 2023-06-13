@@ -16,4 +16,17 @@ export default class UpdateOHQtyService {
       { headers: worklistType ? { worklistType } : undefined }
     );
   }
+
+  public static updateOHQtyV1(payload: {
+    data: ApprovalListItem;
+    worklistType?: string;
+  }): Promise<AxiosResponse<unknown>> {
+    const urls: Environment = getEnvironment();
+    const { data, worklistType } = payload;
+    return Request.post(
+      `${urls.orchestrationURL}/managerapproval/v1/items`,
+      data,
+      { headers: worklistType ? { worklistType } : undefined }
+    );
+  }
 }

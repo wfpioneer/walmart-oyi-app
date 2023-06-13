@@ -47,22 +47,31 @@ import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreen
 import {
   CLEAR_PALLET,
   DELETE_LOCATION,
+  GET_APPROVAL_LIST,
   GET_ITEM_DETAILS,
   GET_ITEM_PALLETS,
+  GET_LOCATIONS_FOR_ITEM,
+  GET_LOCATIONS_FOR_ITEM_V1,
   NO_ACTION,
+  UPDATE_APPROVAL_LIST,
   UPDATE_MULTI_PALLET_UPC_QTY,
-  UPDATE_OH_QTY
+  UPDATE_OH_QTY,
+  UPDATE_OH_QTY_V1
 } from '../../../state/actions/asyncAPI';
 import {
   clearPallet,
   deleteLocation,
+  getApprovalList,
   getItemDetails,
   getItemPallets,
   getItemPalletsV1,
-  getLocationDetails,
+  getLocationsForItem,
+  getLocationsForItemV1,
   noAction,
+  updateApprovalList,
   updateMultiPalletUPCQty,
-  updateOHQty
+  updateOHQty,
+  updateOHQtyV1
 } from '../../../state/actions/saga';
 
 import ItemCard from '../../../components/ItemCard/ItemCard';
@@ -78,6 +87,7 @@ import {
 import { AsyncState } from '../../../models/AsyncState';
 import {
   clearAuditScreenData,
+  setApprovalItem,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
@@ -91,7 +101,12 @@ import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
 import Button from '../../../components/buttons/Button';
 import { UseStateType } from '../../../models/Generics.d';
-import { approvalRequestSource } from '../../../models/ApprovalListItem';
+import {
+  ApprovalListItem,
+  approvalAction,
+  approvalRequestSource,
+  approvalStatus
+} from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
@@ -100,11 +115,14 @@ export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
   isManualScanEnabled: boolean;
   getItemDetailsApi: AsyncState;
-  getLocationApi: AsyncState;
+  getItemLocationsApi: AsyncState;
+  getItemLocationsV1Api: AsyncState;
   getItemPalletsApi: AsyncState;
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
   completeItemApi: AsyncState;
+  getItemApprovalApi: AsyncState;
+  updateManagerApprovalApi: AsyncState;
   // eslint-disable-next-line react/no-unused-prop-types
   userId: string;
   floorLocations: Location[];
@@ -126,9 +144,12 @@ export interface AuditItemScreenProps {
   showPalletQtyUpdateModal: boolean;
   setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>;
   scannedPalletId: number;
+  approvalItem: ApprovalListItem | null;
   userConfig: Configurations;
   showDeleteConfirmationModal: boolean;
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showCancelApprovalModal: boolean;
+  setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>;
   locToConfirm: {
     locationName: string;
     locationArea: string;
@@ -150,11 +171,19 @@ export interface AuditItemScreenProps {
   getItemPalletsError: boolean;
   setGetItemPalletsError: React.Dispatch<React.SetStateAction<boolean>>;
   showCalcModalState: UseStateType<boolean>;
+  modalIsWaitingState: UseStateType<boolean>;
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   updateMultiPalletUPCQtyApi: AsyncState;
   getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
 }
+
+export const getItemQuantity = (itemQty: number, pendingQty: number) => {
+  if (pendingQty >= 0) {
+    return pendingQty;
+  }
+  return itemQty;
+};
 
 export const isError = (
   error: AxiosError | null,
@@ -186,7 +215,7 @@ export const isError = (
   return <View />;
 };
 
-export const onValidateItemNumber = (props: AuditItemScreenProps) => {
+export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocations: boolean) => {
   const {
     userId,
     route,
@@ -204,7 +233,12 @@ export const onValidateItemNumber = (props: AuditItemScreenProps) => {
         if (itemNumber > 0) {
           dispatch({ type: GET_ITEM_DETAILS.RESET });
           dispatch(getItemDetails({ id: itemNumber }));
+          dispatch(getApprovalList({ itemNbr: itemNumber, status: approvalStatus.Pending }));
           dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
+          if (peteGetLocations) {
+            dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+            dispatch(getLocationsForItemV1(itemNumber));
+          }
         }
       })
       .catch(() => {
@@ -299,7 +333,7 @@ export const calculatePalletIncreaseQty = (
   }
 };
 
-export const getFloorLocationsResult = (
+export const getUpdatedFloorLocations = (
   floorResultsData: Location[] | undefined,
   dispatch: Dispatch<any>,
   existingFloorLocations: Location[]
@@ -343,19 +377,39 @@ export const getUpdatedReserveLocations = (
   return [];
 };
 
-export const getLocationsApiHook = (
-  getLocationApi: AsyncState,
+export const getItemLocationsApiHook = (
+  getItemLocationsApi: AsyncState,
   itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[]
 ) => {
   if (navigation.isFocused()) {
-    if (!getLocationApi.isWaiting && getLocationApi.result && getLocationApi.value?.itemNbr === itemNumber) {
-      const locDetails = getLocationApi.result.data;
+    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result && getItemLocationsApi.value === itemNumber) {
+      const locDetails = getItemLocationsApi.result.data;
       if (locDetails && locDetails.location) {
-        getFloorLocationsResult(locDetails.location.floor, dispatch, existingFloorLocations);
+        getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations);
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       }
+    }
+  }
+};
+
+export const getItemLocationsV1ApiHook = (
+  getItemLocationsV1Api: AsyncState,
+  itemNumber: number,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  existingFloorLocations: Location[],
+) => {
+  if (navigation.isFocused()) {
+    if (!getItemLocationsV1Api.isWaiting
+      && getItemLocationsV1Api.result
+      && getItemLocationsV1Api.value === itemNumber
+    ) {
+      const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
+      getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations);
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
     }
   }
 };
@@ -364,8 +418,7 @@ export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>,
-  existingFloorLocations: Location[]
+  setShowItemNotFoundMsg: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     // on api success
@@ -376,11 +429,7 @@ export const getItemDetailsApiHook = (
       ) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
-        getFloorLocationsResult(
-          itemDetails?.location?.floor,
-          dispatch,
-          existingFloorLocations
-        );
+        dispatch({ type: GET_ITEM_DETAILS.RESET });
         setShowItemNotFoundMsg(false);
       } else if (getItemDetailsApi.result.status === 204) {
         setShowItemNotFoundMsg(true);
@@ -404,7 +453,8 @@ export const deleteFloorLocationApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  locationName: string
+  locationName: string,
+  peteGetLocations: boolean
 ) => {
   if (navigation.isFocused()) {
     if (!deleteFloorLocationApi.isWaiting && deleteFloorLocationApi.result) {
@@ -418,7 +468,11 @@ export const deleteFloorLocationApiHook = (
           visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
-        dispatch(getLocationDetails({ itemNbr }));
+        if (peteGetLocations) {
+          dispatch(getLocationsForItemV1(itemNbr));
+        } else {
+          dispatch(getLocationsForItem(itemNbr));
+        }
         dispatch({ type: DELETE_LOCATION.RESET });
       }
     } else if (
@@ -508,6 +562,32 @@ export const getItemPalletsApiHook = (
   }
 };
 
+export const getItemApprovalApiHook = (
+  getItemApprovalApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  if (navigation.isFocused()) {
+    // on api success
+    if (!getItemApprovalApi.isWaiting && getItemApprovalApi.result) {
+      if (getItemApprovalApi.result.status === 200) {
+        if (getItemApprovalApi.result.data) {
+          dispatch(setApprovalItem(getItemApprovalApi.result.data[0]));
+        }
+      }
+      if (getItemApprovalApi.result.status === 204) {
+        dispatch(setApprovalItem(null));
+      }
+      dispatch({ type: GET_APPROVAL_LIST.RESET });
+    }
+    // No pallets associated with the item
+    if (!getItemApprovalApi.isWaiting && getItemApprovalApi.error) {
+      dispatch(setApprovalItem(null));
+      dispatch({ type: GET_ITEM_PALLETS.RESET });
+    }
+  }
+};
+
 export const getScannedPalletEffect = (
   navigation: NavigationProp<any>,
   scannedEvent: { type: string | null; value: string | null },
@@ -585,12 +665,51 @@ export const getMultiPalletList = (reserveLocations: ItemPalletInfo[]) => {
   return newPalletList;
 };
 
+export const updateManagerApprovalApiHook = (
+  updateManagerApprovalApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  reserveLocations: ItemPalletInfo[],
+  itemDetails: ItemDetails | null,
+  hasNewQty: boolean,
+  setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  const itemNbr = itemDetails?.itemNbr || 0;
+  if (navigation.isFocused()) {
+    if (!updateManagerApprovalApi.isWaiting && updateManagerApprovalApi.error) {
+      Toast.show({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
+    }
+    if (!updateManagerApprovalApi.isWaiting && updateManagerApprovalApi.result) {
+      Toast.show({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: UPDATE_APPROVAL_LIST.RESET });
+      // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
+      if (hasNewQty) {
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
+      } else {
+        setShowCancelApprovalModal(false);
+        dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
+        navigation.goBack();
+      }
+    }
+  }
+};
+
 export const completeItemApiHook = (
   completeItemApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
-  itemDetails: ItemDetails | null,
   hasNewQty: boolean
 ) => {
   if (navigation.isFocused()) {
@@ -626,6 +745,7 @@ export const updateOHQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
+  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.result) {
@@ -636,10 +756,12 @@ export const updateOHQtyApiHook = (
         visibilityTime: SNACKBAR_TIMEOUT
       });
       dispatch({ type: UPDATE_OH_QTY.RESET });
+      dispatch({ type: UPDATE_OH_QTY_V1.RESET });
 
       dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
     }
     if (!updateOHQtyApi.isWaiting && updateOHQtyApi.error) {
+      setModalIsWaiting(false);
       Toast.show({
         type: 'error',
         position: 'bottom',
@@ -655,10 +777,12 @@ export const updateMultiPalletUPCQtyApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  itemNbr: number
+  itemNbr: number,
+  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
+      setModalIsWaiting(false);
       Toast.show({
         type: 'success',
         position: 'bottom',
@@ -672,6 +796,7 @@ export const updateMultiPalletUPCQtyApiHook = (
       navigation.goBack();
     }
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
+      setModalIsWaiting(false);
       Toast.show({
         type: 'error',
         position: 'bottom',
@@ -717,6 +842,82 @@ const qtyStyleChange = (
   }
   return styles.negativeChange;
 };
+
+export const renderCancelApprovalModal = (
+  cancelManagerApprovalApi: AsyncState,
+  showCancelApprovalModel: boolean,
+  setShowCancelApprovalModel: React.Dispatch<React.SetStateAction<boolean>>,
+  trackEventCall: (eventName: string, params?: any) => void,
+  approvalItem: ApprovalListItem | null,
+  updateApproval: (approval: ApprovalListItem) => void
+) => (
+  <CustomModalComponent
+    onClose={() => setShowCancelApprovalModel(false)}
+    modalType="Popup"
+    isVisible={showCancelApprovalModel}
+    minHeight={100}
+  >
+    {cancelManagerApprovalApi.isWaiting ? (
+      <ActivityIndicator
+        animating={cancelManagerApprovalApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    ) : (
+      <>
+        <Text style={styles.message}>
+          {approvalItem
+            ? strings('ITEM.CANCEL_APPROVAL')
+            : strings('ITEM.UNABLE_TO_CANCEL_APPROVAL')}
+        </Text>
+        {approvalItem ? (
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              testID="modal-cancel-button"
+              onPress={() => {
+                setShowCancelApprovalModel(false);
+                trackEventCall('Audit_Item', { action: 'cancel_updateManagerApproval' });
+              }}
+            />
+            <Button
+              style={styles.button}
+              title={cancelManagerApprovalApi.error ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
+              testID="modal-confirm-button"
+              backgroundColor={COLOR.TRACKER_RED}
+              onPress={() => {
+                if (approvalItem) {
+                  updateApproval(approvalItem);
+                  trackEventCall(
+                    'Audit_Item',
+                    { action: 'update_manager_approval_click', itemNbr: approvalItem.itemNbr }
+                  );
+                }
+              }}
+            />
+          </View>
+        ) : (
+          <View style={styles.buttonContainer}>
+            <Button
+              style={styles.button}
+              title={strings('GENERICS.CANCEL')}
+              backgroundColor={COLOR.MAIN_THEME_COLOR}
+              testID="modal-cancel-button"
+              onPress={() => {
+                setShowCancelApprovalModel(false);
+                trackEventCall('Audit_Item', { action: 'cancel_updateManagerApproval' });
+              }}
+            />
+          </View>
+        )}
+      </>
+    )}
+  </CustomModalComponent>
+);
 
 export const renderDeleteLocationModal = (
   deleteFloorLocationApi: AsyncState,
@@ -793,8 +994,7 @@ export const renderDeleteLocationModal = (
 );
 
 export const renderConfirmOnHandsModal = (
-  updateOHQtyApi: AsyncState,
-  updateMultiPalletUPCQtyApi: AsyncState,
+  modalIsWaiting: boolean,
   showOnHandsConfirmationModal: boolean,
   setShowOnHandsConfirmationModal: React.Dispatch<
     React.SetStateAction<boolean>
@@ -803,9 +1003,10 @@ export const renderConfirmOnHandsModal = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
-  worklistType: string | undefined
+  worklistType: string | undefined,
+  inProgress: boolean
 ) => {
-  const onHandsQty = itemDetails?.onHandsQty || 0;
+  const onHandsQty = getItemQuantity(itemDetails?.onHandsQty || 0, itemDetails?.pendingOnHandsQty || -999);
   const basePrice = itemDetails?.basePrice || 0;
   const changeQuantity = updatedQuantity - onHandsQty;
   const priceChange = basePrice * changeQuantity;
@@ -821,9 +1022,9 @@ export const renderConfirmOnHandsModal = (
       modalType="Popup"
       minHeight={150}
     >
-      {updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting ? (
+      {modalIsWaiting ? (
         <ActivityIndicator
-          animating={updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting}
+          animating={modalIsWaiting}
           hidesWhenStopped
           color={COLOR.MAIN_THEME_COLOR}
           size="large"
@@ -905,23 +1106,43 @@ export const renderConfirmOnHandsModal = (
                     upcNbr: itemDetails?.upcNbr
                   }
                 );
-                dispatch(
-                  updateOHQty({
-                    data: {
-                      ...itemDetails,
-                      approvalRequestSource: requestSource,
-                      categoryNbr: itemDetails?.categoryNbr,
-                      dollarChange: priceChange,
-                      initiatedTimestamp: moment().toISOString(),
-                      itemName: itemDetails?.itemName,
-                      itemNbr: itemDetails?.itemNbr,
-                      newQuantity: updatedQuantity,
-                      oldQuantity: onHandsQty,
-                      upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
-                    },
-                    worklistType
-                  })
-                );
+                if (inProgress) {
+                  dispatch(
+                    updateOHQtyV1({
+                      data: {
+                        ...itemDetails,
+                        approvalRequestSource: requestSource,
+                        categoryNbr: itemDetails?.categoryNbr,
+                        dollarChange: priceChange,
+                        initiatedTimestamp: moment().toISOString(),
+                        itemName: itemDetails?.itemName,
+                        itemNbr: itemDetails?.itemNbr,
+                        newQuantity: updatedQuantity,
+                        oldQuantity: onHandsQty,
+                        upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
+                      },
+                      worklistType
+                    })
+                  );
+                } else {
+                  dispatch(
+                    updateOHQty({
+                      data: {
+                        ...itemDetails,
+                        approvalRequestSource: requestSource,
+                        categoryNbr: itemDetails?.categoryNbr,
+                        dollarChange: priceChange,
+                        initiatedTimestamp: moment().toISOString(),
+                        itemName: itemDetails?.itemName,
+                        itemNbr: itemDetails?.itemNbr,
+                        newQuantity: updatedQuantity,
+                        oldQuantity: onHandsQty,
+                        upcNbr: parseInt(itemDetails?.upcNbr || '0', 10)
+                      },
+                      worklistType
+                    })
+                  );
+                }
               }}
               disabled={itemDetails === null}
             />
@@ -990,10 +1211,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent,
     isManualScanEnabled,
-    getLocationApi,
+    getItemLocationsApi,
+    getItemLocationsV1Api,
     getItemDetailsApi,
     deleteFloorLocationApi,
     updateOHQtyApi,
+    getItemApprovalApi,
+    updateManagerApprovalApi,
     route,
     dispatch,
     navigation,
@@ -1011,10 +1235,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     setShowPalletQtyUpdateModal,
     showPalletQtyUpdateModal,
     scannedPalletId,
+    approvalItem,
     userConfig,
     completeItemApi,
     showDeleteConfirmationModal,
     setShowDeleteConfirmationModal,
+    showCancelApprovalModal,
+    setShowCancelApprovalModal,
     locToConfirm,
     setLocToConfirm,
     deletePalletApi,
@@ -1025,13 +1252,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     locationListState,
     countryCode,
     updateMultiPalletUPCQtyApi,
-    getItemPalletsDispatch
+    getItemPalletsDispatch,
+    modalIsWaitingState
   } = props;
   let scannedSubscription: EmitterSubscription;
 
   const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
   const [showCalcModal, setShowCalcModal] = showCalcModalState;
   const [location, setLocation] = locationListState;
+  const [modalIsWaiting, setModalIsWaiting] = modalIsWaitingState;
 
   const totalOHQty = calculateTotalOHQty(
     floorLocations,
@@ -1075,7 +1304,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // call get Item details
   useEffectHook(() => {
-    onValidateItemNumber(props);
+    onValidateItemNumber(props, userConfig.peteGetLocations);
   }, [itemNumber]);
 
   // Scanned Item Event Listener
@@ -1083,15 +1312,21 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     // TO DO
   }, [scannedEvent]);
 
-  // Get Location Details API
+  // Get Item Location API
   useEffectHook(
-    () => getLocationsApiHook(getLocationApi, itemNumber, dispatch, navigation, floorLocations),
-    [getLocationApi]
+    () => getItemLocationsApiHook(getItemLocationsApi, itemNumber, dispatch, navigation, floorLocations),
+    [getItemLocationsApi, floorLocations]
+  );
+
+  // Get Item Locations V1 API
+  useEffectHook(
+    () => getItemLocationsV1ApiHook(getItemLocationsV1Api, itemNumber, dispatch, navigation, floorLocations),
+    [getItemLocationsV1Api, floorLocations]
   );
 
   // Get Item Details UPC api
   useEffectHook(
-    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg, floorLocations),
+    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, setShowItemNotFoundMsg),
     [getItemDetailsApi]
   );
 
@@ -1103,9 +1338,20 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Complete Item API
   useEffectHook(
-    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, itemDetails, hasNewQty),
+    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, hasNewQty),
     [completeItemApi, hasNewQty]
   );
+
+  // update Manager Approval API
+  useEffectHook(() => updateManagerApprovalApiHook(
+    updateManagerApprovalApi,
+    dispatch,
+    navigation,
+    reserveLocations,
+    itemDetails,
+    hasNewQty,
+    setShowCancelApprovalModal
+  ), [updateManagerApprovalApi, hasNewQty]);
 
   // Delete Location API
   useEffectHook(
@@ -1115,10 +1361,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       dispatch,
       navigation,
       setShowDeleteConfirmationModal,
-      locToConfirm.locationName
+      locToConfirm.locationName,
+      userConfig.peteGetLocations
     ),
     [deleteFloorLocationApi]
   );
+
+  // get approval api
+  useEffectHook(() => getItemApprovalApiHook(getItemApprovalApi, dispatch, navigation), [getItemApprovalApi]);
 
   // report missing pallet API
   useEffectHook(
@@ -1147,7 +1397,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateOHQtyApi,
     dispatch,
     navigation,
-    reserveLocations
+    reserveLocations,
+    setModalIsWaiting
   ), [updateOHQtyApi]);
 
   // Update Multiple Pallet's UPC Qty API
@@ -1156,25 +1407,16 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     dispatch,
     navigation,
     setShowOnHandsConfirmationModal,
-    itemDetails?.itemNbr || 0
+    itemDetails?.itemNbr || 0,
+    setModalIsWaiting
   ), [updateMultiPalletUPCQtyApi]);
+
+  if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
+    setModalIsWaiting(true);
+  }
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
-    return isError(
-      getItemDetailsApi.error,
-      dispatch,
-      trackEventCall,
-      itemNumber,
-      message
-    );
-  }
-
-  if (
-    !getItemDetailsApi.isWaiting
-    && (getItemDetailsApi.error || (itemDetails && itemDetails.message))
-  ) {
-    const message = itemDetails && itemDetails.message ? itemDetails.message : undefined;
     return isError(
       getItemDetailsApi.error,
       dispatch,
@@ -1218,6 +1460,18 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         }),
       );
     }
+  };
+
+  const updateApproval = (itemApprovalData: ApprovalListItem) => {
+    itemApprovalData.resolvedTimestamp = moment().toISOString();
+    dispatch(
+      updateApprovalList({
+        approvalItems: [itemApprovalData],
+        headers: {
+          action: approvalAction.Cancel
+        }
+      })
+    );
   };
 
   const handleReserveLocsRetry = () => {
@@ -1338,9 +1592,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   };
 
   const handleContinueAction = () => {
-    const itemOHQty = itemDetails?.onHandsQty;
+    const itemOHQty = itemDetails?.onHandsQty || 0;
+    const pendingQty = itemDetails?.pendingOnHandsQty || -999;
     trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
-    if (itemOHQty === totalOHQty) {
+    if (itemOHQty === totalOHQty && pendingQty < 0) {
       dispatch(
         noAction({
           upc: itemDetails?.upcNbr || '',
@@ -1351,6 +1606,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           })
         })
       );
+    } else if (itemOHQty === totalOHQty && pendingQty >= 0 && approvalItem) {
+      setShowCancelApprovalModal(true);
     } else {
       setShowOnHandsConfirmationModal(true);
     }
@@ -1379,6 +1636,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         userConfig.showCalculator,
         itemDetails?.vendorPackQty
       )}
+      {renderCancelApprovalModal(
+        updateManagerApprovalApi,
+        showCancelApprovalModal,
+        setShowCancelApprovalModal,
+        trackEventCall,
+        approvalItem,
+        updateApproval
+      )}
       {renderDeleteLocationModal(
         deleteFloorLocationApi,
         deletePalletApi,
@@ -1391,15 +1656,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         trackEventCall
       )}
       {renderConfirmOnHandsModal(
-        updateOHQtyApi,
-        updateMultiPalletUPCQtyApi,
+        modalIsWaiting,
         showOnHandsConfirmationModal,
         setShowOnHandsConfirmationModal,
         totalOHQty,
         itemDetails,
         dispatch,
         trackEventCall,
-        itemDetails?.exceptionType ?? itemDetails?.worklistAuditType
+        itemDetails?.exceptionType ?? itemDetails?.worklistAuditType,
+        userConfig.inProgress
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
       {isManualScanEnabled && (
@@ -1410,12 +1675,14 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           itemNumber={itemDetails ? itemDetails.itemNbr : 0}
           description={itemDetails ? itemDetails.itemName : ''}
           onHandQty={itemDetails ? itemDetails.onHandsQty : 0}
+          pendingQty={itemDetails ? itemDetails.pendingOnHandsQty : -999}
           onClick={() => {
             trackEventCall('Audit_Item', { action: 'item_card_click', itemNumber: itemDetails?.itemNbr });
           }}
           loading={getItemDetailsApi.isWaiting}
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
+          disabled={true}
         />
       </View>
       <ScrollView
@@ -1429,8 +1696,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
-              loading={getItemDetailsApi.isWaiting || getLocationApi.isWaiting}
-              error={!!(getItemDetailsApi.error || getLocationApi.error)}
+              loading={getItemDetailsApi.isWaiting || getItemLocationsApi.isWaiting}
+              error={!!(getItemDetailsApi.error || getItemLocationsApi.error)}
               onRetry={() => {}}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
@@ -1491,20 +1758,28 @@ const AuditItem = (): JSX.Element => {
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetails
   );
-  const { userId, features: userFeatures, configs: userConfig } = useTypedSelector(state => state.User);
-  const getLocationApi = useTypedSelector(state => state.async.getLocation);
+  const {
+    userId,
+    features: userFeatures,
+    configs: userConfig,
+    countryCode
+  } = useTypedSelector(state => state.User);
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const deletePalletApi = useTypedSelector(state => state.async.clearPallet);
   const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
     : useTypedSelector(state => state.async.getItemPallets);
-  const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
+  const updateOHQtyApi = userConfig.inProgress ? useTypedSelector(state => state.async.updateOHQtyV1)
+    : useTypedSelector(state => state.async.updateOHQty);
+  const getItemLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
+  const getItemLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const {
-    itemDetails, floorLocations, reserveLocations, scannedPalletId
+    approvalItem, itemDetails, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
-
+  const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
+  const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -1515,6 +1790,8 @@ const AuditItem = (): JSX.Element => {
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
   const showOnHandsConfirmState = useState(false);
   const showCalcModalState = useState(false);
+  const [showCancelApprovalModal, setShowCancelApprovalModel] = useState(false);
+  const modalIsWaitingState = useState(false);
   const [locToConfirm, setLocToConfirm] = useState({
     locationName: '',
     locationArea: '',
@@ -1530,7 +1807,6 @@ const AuditItem = (): JSX.Element => {
     palletId: '-1'
   });
 
-  const countryCode = useTypedSelector(state => state.User.countryCode);
   const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <AuditItemScreen
@@ -1540,9 +1816,12 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsApi={getItemPalletsApi}
       getItemPalletsDispatch={getItemPalletsDispatch}
       deleteFloorLocationApi={deleteFloorLocationApi}
-      getLocationApi={getLocationApi}
+      getItemLocationsApi={getItemLocationsApi}
+      getItemLocationsV1Api={getItemLocationsV1Api}
       updateOHQtyApi={updateOHQtyApi}
       completeItemApi={completeItemApi}
+      getItemApprovalApi={getItemApprovalApi}
+      updateManagerApprovalApi={updateManagerApprovalApi}
       route={route}
       dispatch={dispatch}
       navigation={navigation}
@@ -1561,9 +1840,12 @@ const AuditItem = (): JSX.Element => {
       showPalletQtyUpdateModal={showPalletQtyUpdateModal}
       setShowPalletQtyUpdateModal={setShowPalletQtyUpdateModal}
       scannedPalletId={scannedPalletId}
+      approvalItem={approvalItem}
       userConfig={userConfig}
       showDeleteConfirmationModal={showDeleteConfirmationModal}
       setShowDeleteConfirmationModal={setShowDeleteConfirmationModal}
+      showCancelApprovalModal={showCancelApprovalModal}
+      setShowCancelApprovalModal={setShowCancelApprovalModel}
       locToConfirm={locToConfirm}
       setLocToConfirm={setLocToConfirm}
       deletePalletApi={deletePalletApi}
@@ -1571,6 +1853,7 @@ const AuditItem = (): JSX.Element => {
       getItemPalletsError={getItemPalletsError}
       setGetItemPalletsError={setGetItemPalletsError}
       showCalcModalState={showCalcModalState}
+      modalIsWaitingState={modalIsWaitingState}
       // @ts-expect-error typechecking error with location type
       locationListState={locationListState}
       countryCode={countryCode}

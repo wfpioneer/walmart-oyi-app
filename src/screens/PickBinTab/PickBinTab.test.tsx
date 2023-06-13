@@ -253,7 +253,8 @@ describe('PickBinTabScreen', () => {
         mockSetShowMultiPickConfirmationDialog,
         mockDispatch,
         mockMultiBin,
-        mockMultiPick
+        mockMultiPick,
+        false
       ));
       expect(toJSON()).toMatchSnapshot();
     });
@@ -266,20 +267,22 @@ describe('PickBinTabScreen', () => {
         mockSetShowMultiPickConfirmationDialog,
         mockDispatch,
         mockMultiBin,
-        mockMultiPick
+        mockMultiPick,
+        false
       ));
       expect(toJSON()).toMatchSnapshot();
     });
     it('tests renderMultipickConfirmationDialog actions', () => {
       const mockMultiBin = true;
       const mockMultiPick = false;
-      const { getByTestId } = render(renderMultipickConfirmationDialog(
+      const { getByTestId, update } = render(renderMultipickConfirmationDialog(
         updatedPickList,
         mockShowMultiPickConfirmationDialog,
         mockSetShowMultiPickConfirmationDialog,
         mockDispatch,
         mockMultiBin,
-        mockMultiPick
+        mockMultiPick,
+        false
       ));
       const cancelButton = getByTestId('cancelButton');
       const acceptButton = getByTestId('acceptButton');
@@ -287,6 +290,20 @@ describe('PickBinTabScreen', () => {
       expect(mockSetShowMultiPickConfirmationDialog).toHaveBeenCalledWith(false);
       fireEvent.press(acceptButton);
       expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'SAGA/UPDATE_PICKLIST_STATUS' }));
+      expect(mockSetShowMultiPickConfirmationDialog).toHaveBeenCalledWith(false);
+
+      update(renderMultipickConfirmationDialog(
+        updatedPickList,
+        mockShowMultiPickConfirmationDialog,
+        mockSetShowMultiPickConfirmationDialog,
+        mockDispatch,
+        mockMultiBin,
+        mockMultiPick,
+        true
+      ));
+
+      fireEvent.press(acceptButton);
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'SAGA/UPDATE_PICKLIST_STATUS_V1' }));
       expect(mockSetShowMultiPickConfirmationDialog).toHaveBeenCalledWith(false);
     });
   });

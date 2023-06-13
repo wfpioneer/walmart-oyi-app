@@ -63,7 +63,7 @@ export const PendingWorklistScreen = (props: TodoWorklistProps): JSX.Element => 
 };
 
 export const PendingWorklist = (): JSX.Element => {
-  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklist);
+  const { isWaiting, result, error } = useTypedSelector(state => state.async.getWorklistV1);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);

@@ -3,14 +3,21 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp } from '@react-navigation/native';
 import {
-  HomeNavigatorComponent, renderCamButton, renderHomeHeader, renderHomeMenuButton,
-  renderHomeScanButton, showSignOutMenu
+  HomeNavigatorComponent,
+  renderCamButton,
+  renderHomeHeader,
+  renderHomeMenuButton,
+  renderHomeScanButton,
+  showSignOutMenu
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
 import { mockConfig } from '../mockData/mockConfig';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
-jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
+jest.mock(
+  'react-native-vector-icons/MaterialCommunityIcons',
+  () => 'mockMaterialCommunityIcons'
+);
 jest.mock('../utils/AppCenterTool', () => ({
   ...jest.requireActual('../utils/AppCenterTool'),
   initialize: jest.fn(),
@@ -98,24 +105,23 @@ describe('Home Navigator', () => {
 
   it('Renders the cameraButton header icon', () => {
     const renderer = ShallowRenderer.createRenderer();
-    renderer.render(
-      renderCamButton()
-    );
+    renderer.render(renderCamButton());
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
   it('Renders the home header when isManualScanEnabled is true', () => {
     const renderer = ShallowRenderer.createRenderer();
-    renderer.render(
-      renderHomeHeader(componentProps, navigationProp)
-    );
+    renderer.render(renderHomeHeader(componentProps, navigationProp));
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
   it('Renders the home header when isManualScanEnabled is false', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      renderHomeHeader({ ...componentProps, isManualScanEnabled: false }, navigationProp)
+      renderHomeHeader(
+        { ...componentProps, isManualScanEnabled: false },
+        navigationProp
+      )
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -165,14 +171,12 @@ describe('Home Navigator', () => {
   });
   it('Render showSignoutMenu', () => {
     const actionSheetmock = jest.requireMock('react-native-action-sheet');
-    componentProps.userConfig={...mockConfig, showFeedback: true};
+    componentProps.userConfig = { ...mockConfig, showFeedback: true };
     showSignOutMenu(componentProps, navigationProp);
     expect(actionSheetmock.showActionSheetWithOptions).toBeCalled();
   });
   it('Click action to open camera', () => {
-    const { getByTestId, toJSON } = render(
-      renderCamButton()
-    );
+    const { getByTestId, toJSON } = render(renderCamButton());
     const btn = getByTestId('camerabtn');
     fireEvent.press(btn);
 
