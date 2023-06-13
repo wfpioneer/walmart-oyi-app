@@ -302,7 +302,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
           Toast.show({
             type: 'error',
             position: 'bottom',
-            text1: pingError.errorDescription,
+            text1: pingError.error || pingError.errorDescription,
             visibilityTime: SNACKBAR_TIMEOUT
           });
           break;
