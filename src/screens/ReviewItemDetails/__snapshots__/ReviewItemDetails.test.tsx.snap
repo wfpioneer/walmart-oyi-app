@@ -2152,6 +2152,8 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 </View>
 `;
 
+exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent with no buttons if WL item is IN_PROGRESS 1`] = `<View />`;
+
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders otherActionbutton 1`] = `
 <TouchableOpacity
   hostRef={null}

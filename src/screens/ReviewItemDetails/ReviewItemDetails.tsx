@@ -19,6 +19,7 @@ import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
   createNewPick,
+  createNewPickV1,
   getItemDetailsV4,
   getItemManagerApprovalHistory,
   getItemPiHistory,
@@ -78,6 +79,7 @@ import { setItemHistory } from '../../state/actions/ItemHistory';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { TrackEventSource } from '../../models/Generics.d';
 import { barcodeEmitter } from '../../utils/scannerUtils';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 const GENERICS_ADD = 'GENERICS.ADD';
 const GENERICS_ENTER_UPC = 'GENERICS.ENTER_UPC_ITEM_NBR';
@@ -1062,6 +1064,9 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
     dispatch, navigation
   } = props;
   const { reserveAdjustment } = userConfigs;
+  if (itemDetails.worklistStatus === WorkListStatus.INPROGRESS) {
+    return <View />;
+  }
   switch (exceptionType?.toUpperCase()) {
     case 'C': {
       return (
@@ -1223,7 +1228,7 @@ export const handleCreateNewPick = (
   setCreatePickModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const {
-    numberOfPallets, isQuickPick, selectedSection, dispatch, floorLocations
+    numberOfPallets, isQuickPick, selectedSection, dispatch, floorLocations, userConfigs
   } = props;
   const {
     itemNbr, upcNbr, categoryNbr, itemName
@@ -1241,7 +1246,11 @@ export const handleCreateNewPick = (
     quickPick: isQuickPick
   };
   setCreatePickModalVisible(false);
-  dispatch(createNewPick(createPickPayload));
+  if (userConfigs.inProgress) {
+    dispatch(createNewPickV1(createPickPayload));
+  } else {
+    dispatch(createNewPick(createPickPayload));
+  }
 };
 
 export const onValidateBackPress = (props: ItemDetailsScreenProps, itemNbr: number) => {
@@ -1682,16 +1691,19 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
 const ReviewItemDetails = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const createNewPickApi = useTypedSelector(state => state.async.createNewPick);
   const updateOHQtyApi = useTypedSelector(state => state.async.updateOHQty);
   const getItemDetailsV4Api = useTypedSelector(state => state.async.getItemDetailsV4);
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const getItemPicklistHistoryApi = useTypedSelector(state => state.async.getItemPicklistHistory);
-  const { userId, countryCode, configs: userConfigs } = useTypedSelector(state => state.User);
+  const {
+    userId, countryCode, configs: userConfigs, features: userFeatures
+  } = useTypedSelector(state => state.User);
   const getLocationForItemApi = useTypedSelector(state => state.async.getLocationsForItem);
   const getLocationForItemV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
   const getItemManagerApprovalHistoryApi = useTypedSelector(state => state.async.getItemManagerApprovalHistory);
+  const createNewPickApi = userConfigs.inProgress ? useTypedSelector(state => state.async.createNewPickV1)
+    : useTypedSelector(state => state.async.createNewPick);
   const {
     exceptionType,
     actionCompleted,
@@ -1699,7 +1711,6 @@ const ReviewItemDetails = (): JSX.Element => {
     floorLocations,
     reserveLocations
   } = useTypedSelector(state => state.ItemDetailScreen);
-  const userFeatures = useTypedSelector(state => state.User.features);
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();

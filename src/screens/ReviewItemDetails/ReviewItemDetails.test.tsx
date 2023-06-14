@@ -42,6 +42,7 @@ import {
 } from '../../state/actions/saga';
 import { OHChangeHistory } from '../../models/ItemDetails';
 import { setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -813,6 +814,23 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'SAGA/CREATE_NEW_PICK'
       });
+
+      mockProps.userConfigs.inProgress = true;
+      handleCreateNewPick(mockProps, mockItemDetails, mockSetCreatePickModalVisible);
+      expect(mockProps.dispatch).toHaveBeenCalledWith({
+        payload: {
+          category: 93,
+          itemDesc: 'Test Item That is Really, Really Long (and has parenthesis)',
+          itemNbr: 1234567890,
+          moveToFront: false,
+          numberOfPallets: 1,
+          quickPick: false,
+          salesFloorLocationId: undefined,
+          salesFloorLocationName: '',
+          upcNbr: '000055559999'
+        },
+        type: 'SAGA/CREATE_NEW_PICK_V1'
+      });
     });
     it('test handleUpdateQty', async () => {
       await handleUpdateQty(
@@ -1420,6 +1438,15 @@ describe('ReviewItemDetailsScreen', () => {
       };
       renderer.render(
         completeButtonComponent(mockPropNSFQ, { ...itemDetail[123] })
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+    it('Renders completeButtonComponent with no buttons if WL item is IN_PROGRESS', () => {
+      renderer.render(
+        completeButtonComponent(
+          mockItemDetailsScreenProps,
+          { ...itemDetail[123], worklistStatus: WorkListStatus.INPROGRESS }
+        )
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

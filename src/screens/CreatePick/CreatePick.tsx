@@ -29,8 +29,9 @@ import { AsyncState } from '../../models/AsyncState';
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { CREATE_NEW_PICK, GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1 } from '../../state/actions/asyncAPI';
-import { createNewPick } from '../../state/actions/saga';
+import { createNewPick, createNewPickV1 } from '../../state/actions/saga';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { Configurations } from '../../models/User';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
@@ -50,6 +51,7 @@ interface CreatePickProps {
   createPickApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   countryCode: string;
+  userConfigs: Configurations;
 }
 
 export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
@@ -202,7 +204,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   const {
     item, floorLocations, reserveLocations, selectedSectionState, createPickApi,
     palletNumberState, dispatch, navigation, getLocationApi, getLocationV1Api,
-    useEffectHook, selectedTab, countryCode
+    useEffectHook, selectedTab, countryCode, userConfigs
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
@@ -282,17 +284,31 @@ export const CreatePickScreen = (props: CreatePickProps) => {
 
   const onSubmit = () => {
     const locationDetails = floorLocations?.find(loc => loc.locationName === selectedSection);
-    dispatch(createNewPick({
-      category: item.categoryNbr,
-      itemDesc: item.itemName,
-      itemNbr: item.itemNbr,
-      quickPick: selectedTab === Tabs.QUICKPICK,
-      salesFloorLocationName: selectedSection,
-      upcNbr: item.upcNbr,
-      moveToFront: selectedSection === MOVE_TO_FRONT,
-      numberOfPallets: palletNumber,
-      salesFloorLocationId: locationDetails?.sectionId
-    }));
+    if (userConfigs.inProgress) {
+      dispatch(createNewPickV1({
+        category: item.categoryNbr,
+        itemDesc: item.itemName,
+        itemNbr: item.itemNbr,
+        quickPick: selectedTab === Tabs.QUICKPICK,
+        salesFloorLocationName: selectedSection,
+        upcNbr: item.upcNbr,
+        moveToFront: selectedSection === MOVE_TO_FRONT,
+        numberOfPallets: palletNumber,
+        salesFloorLocationId: locationDetails?.sectionId
+      }));
+    } else {
+      dispatch(createNewPick({
+        category: item.categoryNbr,
+        itemDesc: item.itemName,
+        itemNbr: item.itemNbr,
+        quickPick: selectedTab === Tabs.QUICKPICK,
+        salesFloorLocationName: selectedSection,
+        upcNbr: item.upcNbr,
+        moveToFront: selectedSection === MOVE_TO_FRONT,
+        numberOfPallets: palletNumber,
+        salesFloorLocationId: locationDetails?.sectionId
+      }));
+    }
   };
 
   return (
@@ -372,8 +388,9 @@ const CreatePick = () => {
   } = useTypedSelector(state => state.Picking);
   const getLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
   const getLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
-  const createPickApi = useTypedSelector(state => state.async.createNewPick);
-  const { countryCode } = useTypedSelector(state => state.User);
+  const { countryCode, configs } = useTypedSelector(state => state.User);
+  const createPickApi = configs.inProgress ? useTypedSelector(state => state.async.createNewPickV1)
+    : useTypedSelector(state => state.async.createNewPick);
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
   const palletNumberState = useState(1);
   const dispatch = useDispatch();
@@ -394,6 +411,7 @@ const CreatePick = () => {
       createPickApi={createPickApi}
       useEffectHook={useEffect}
       countryCode={countryCode}
+      userConfigs={configs}
     />
   );
 };

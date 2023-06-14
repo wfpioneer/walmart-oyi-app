@@ -274,7 +274,7 @@ describe('Tests login screen functions', () => {
     const mockLocales = jest.requireMock('../../locales');
     const mockSSOUser: SSOUser = {
       ...testUser,
-      siteId: '0',
+      siteId: '1',
       employeeType: '',
       win: '',
       fullTimePartTime: '',
@@ -284,7 +284,7 @@ describe('Tests login screen functions', () => {
     };
     const mockDispatchUser: any = {
       ...mockSSOUser,
-      siteId: 0
+      siteId: 1
     };
     onLoginSuccess(mockSSOUser, testUser.token, mockDispatch);
     expect(mockLocales.setLanguage).toHaveBeenCalled();
@@ -307,7 +307,8 @@ describe('Tests login screen functions', () => {
     const mockConfigResponse: ConfigResponse = {
       ...mockConfig,
       printingUpdate: true,
-      locMgmtEdit: mockConfig.locationManagementEdit
+      locMgmtEdit: mockConfig.locationManagementEdit,
+      overridePltPerish: false
     };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
