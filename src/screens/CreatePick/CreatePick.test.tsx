@@ -17,7 +17,12 @@ import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import mockUser from '../../mockData/mockUser';
-import { setFloorLocations, setReserveLocations, setupScreen } from '../../state/actions/ItemDetailScreen';
+import {
+  setFloorLocations,
+  setReserveLocations,
+  setupScreen
+} from '../../state/actions/ItemDetailScreen';
+import { mockConfig } from '../../mockData/mockConfig';
 
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
@@ -111,10 +116,7 @@ describe('Create Pick screen render tests', () => {
     '',
     mockSetSelectedSection
   ];
-  const palletNumberState: UseStateType<number> = [
-    1,
-    mockSetPalletNumber
-  ];
+  const palletNumberState: UseStateType<number> = [1, mockSetPalletNumber];
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -123,7 +125,9 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen with item with floor locations', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
+    const defaultSelectedSectionState: UseStateType<string> = [
+      ...selectedSectionState
+    ];
     defaultSelectedSectionState[0] = mockLocations[0].locationName;
 
     renderer.render(
@@ -141,6 +145,7 @@ describe('Create Pick screen render tests', () => {
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
+        userConfigs={mockConfig}
       />
     );
 
@@ -150,7 +155,9 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen without floor locations', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
+    const defaultSelectedSectionState: UseStateType<string> = [
+      ...selectedSectionState
+    ];
     defaultSelectedSectionState[0] = mockLocations[0].locationName;
 
     renderer.render(
@@ -168,6 +175,7 @@ describe('Create Pick screen render tests', () => {
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
+        userConfigs={mockConfig}
       />
     );
 
@@ -177,7 +185,9 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen with no reserve location', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const defaultSelectedSectionState: UseStateType<string> = [...selectedSectionState];
+    const defaultSelectedSectionState: UseStateType<string> = [
+      ...selectedSectionState
+    ];
     defaultSelectedSectionState[0] = mockLocations[0].locationName;
 
     renderer.render(
@@ -195,6 +205,7 @@ describe('Create Pick screen render tests', () => {
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
+        userConfigs={mockConfig}
       />
     );
 
@@ -204,7 +215,9 @@ describe('Create Pick screen render tests', () => {
   it('renders the screen when items are move to front', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    const moveToFrontSectionState: UseStateType<string> = [...selectedSectionState];
+    const moveToFrontSectionState: UseStateType<string> = [
+      ...selectedSectionState
+    ];
     moveToFrontSectionState[0] = MOVE_TO_FRONT;
 
     renderer.render(
@@ -222,6 +235,7 @@ describe('Create Pick screen render tests', () => {
         createPickApi={defaultAsyncState}
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
+        userConfigs={mockConfig}
       />
     );
 
@@ -410,7 +424,11 @@ describe('createPick function tests', () => {
     mockDispatch.mockReset();
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
-    createPickApiHook(failure409AsyncStateWithoutReservePallet, mockDispatch, navigationProp);
+    createPickApiHook(
+      failure409AsyncStateWithoutReservePallet,
+      mockDispatch,
+      navigationProp
+    );
     expect(mockDispatch).toHaveBeenCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',

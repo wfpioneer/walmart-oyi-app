@@ -814,6 +814,23 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'SAGA/CREATE_NEW_PICK'
       });
+
+      mockProps.userConfigs.inProgress = true;
+      handleCreateNewPick(mockProps, mockItemDetails, mockSetCreatePickModalVisible);
+      expect(mockProps.dispatch).toHaveBeenCalledWith({
+        payload: {
+          category: 93,
+          itemDesc: 'Test Item That is Really, Really Long (and has parenthesis)',
+          itemNbr: 1234567890,
+          moveToFront: false,
+          numberOfPallets: 1,
+          quickPick: false,
+          salesFloorLocationId: undefined,
+          salesFloorLocationName: '',
+          upcNbr: '000055559999'
+        },
+        type: 'SAGA/CREATE_NEW_PICK_V1'
+      });
     });
     it('test handleUpdateQty', async () => {
       await handleUpdateQty(

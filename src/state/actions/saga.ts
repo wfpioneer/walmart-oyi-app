@@ -87,6 +87,7 @@ export const UPDATE_PICKLIST_STATUS_V1 = 'SAGA/UPDATE_PICKLIST_STATUS_V1';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
+export const CREATE_NEW_PICK_V1 = 'SAGA/CREATE_NEW_PICK_V1';
 export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
 export const REPORT_MISSING_PALLET = 'SAGA/REPORT_MISSING_PALLET';
 export const GET_ITEM_PALLETS = 'SAGA/GET_ITEM_PALLETS';
@@ -273,6 +274,10 @@ export const updatePalletNotFound = (payload: {
 } as const);
 export const createNewPick = (payload: CreatePickRequest) => ({
   type: CREATE_NEW_PICK,
+  payload
+} as const);
+export const createNewPickV1 = (payload: CreatePickRequest) => ({
+  type: CREATE_NEW_PICK_V1,
   payload
 } as const);
 export const postCreatePallet = (payload: CreatePallet) => ({ type: POST_CREATE_PALLET, payload } as const);

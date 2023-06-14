@@ -117,6 +117,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService),
   makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),
   makeAsyncSaga(saga.CREATE_NEW_PICK, actions.createNewPick, PickingService.createNewPick),
+  makeAsyncSaga(saga.CREATE_NEW_PICK_V1, actions.createNewPickV1, PickingService.createNewPickV1),
   makeAsyncSaga(
     saga.REPORT_MISSING_PALLET,
     actions.reportMissingPallet,
