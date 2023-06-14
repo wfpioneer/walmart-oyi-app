@@ -1,72 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BinningScreen Tests rendering binningItemCard component should match snapshot 1`] = `
-<TouchableOpacity
-  onPress={[Function]}
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-      }
-    }
-  >
-    <View
-      style={
-        Object {
-          "flex": 4,
-          "flexDirection": "column",
-          "margin": 10,
-        }
-      }
-    >
-      <View
-        style={
-          Object {
-            "marginBottom": 5,
-          }
-        }
-      >
-        <Text>
-          [missing "en.PALLET.PALLET_ID" translation]: 123456
-        </Text>
-      </View>
-      <View>
-        <Text>
-          [missing "en.BINNING.FIRST_ITEM" translation]: itemDesc
-        </Text>
-      </View>
-    </View>
-    <View>
-      <TouchableOpacity
-        onPress={[Function]}
-        style={
-          Object {
-            "flex": 1,
-            "margin": 10,
-            "paddingBottom": 5,
-            "paddingLeft": 5,
-            "paddingTop": 5,
-          }
-        }
-      >
-        <View>
-          <mockConstructor
-            color="#545F7A"
-            name="trash-can"
-            size={40}
-          />
-        </View>
-      </TouchableOpacity>
-    </View>
-  </View>
-</TouchableOpacity>
-`;
-
 exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with Selected Pallets 1`] = `
 <KeyboardAvoidingView
   behavior="height"
@@ -86,92 +19,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       }
     }
   >
-    <CustomModalComponent
-      animationType="none"
-      isVisible={false}
-      modalType="Popup"
-      onClose={[Function]}
-    >
-      <React.Fragment>
-        <View>
-          <Text
-            style={
-              Object {
-                "color": "#f44336",
-                "fontSize": 18,
-                "paddingBottom": 5,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_LABEL" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 16,
-                "padding": 15,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_DESCRIPTION" translation]
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "alignContent": "center",
-              "elevation": 10,
-              "flexDirection": "row",
-              "height": 80,
-              "justifyContent": "space-evenly",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-            titleColor="#0071e9"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={2}
-            width={-1}
-          />
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.OK\\" translation]"
-            titleColor="#ffffffff"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={1}
-            width={-1}
-          />
-        </View>
-      </React.Fragment>
-    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
@@ -190,95 +37,43 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       </Text>
       <ItemSeparator />
     </View>
-    <ForwardRef
-      ItemSeparatorComponent={[Function]}
-      ListEmptyComponent={
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+          }
+        }
+      >
+        <Memo(Pressable)
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </Memo(Pressable)>
         <View
           style={
             Object {
-              "alignItems": "center",
+              "paddingTop": 30,
             }
           }
         >
-          <Memo(Pressable)
-            onPress={[Function]}
-          >
-            <mockConstructor
-              color="#000000"
-              name="barcode-scan"
-              size={100}
-            />
-          </Memo(Pressable)>
-          <View
-            style={
-              Object {
-                "paddingTop": 30,
-              }
-            }
-          >
-            <Text>
-              [missing "en.BINNING.SCAN_PALLET" translation]
-            </Text>
-          </View>
+          <Text>
+            [missing "en.BINNING.SCAN_PALLET" translation]
+          </Text>
         </View>
-      }
-      contentContainerStyle={false}
-      data={
-        Array [
-          Object {
-            "expirationDate": "10/3/2022",
-            "id": "123456",
-            "items": Array [
-              Object {
-                "itemDesc": "itemDesc",
-                "itemNbr": 351231,
-                "price": 123,
-                "quantity": 2,
-                "upcNbr": "12343534",
-              },
-            ],
-          },
-          Object {
-            "expirationDate": "10/3/2022",
-            "id": "345345",
-            "items": Array [
-              Object {
-                "itemDesc": "itemDesc",
-                "itemNbr": 351231,
-                "price": 123,
-                "quantity": 2,
-                "upcNbr": "345345",
-              },
-            ],
-          },
-        ]
-      }
-      keyExtractor={[Function]}
-      removeClippedSubviews={false}
-      renderItem={[Function]}
-    />
-    <React.Fragment>
-      <ItemSeparator />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "marginHorizontal": 15,
-            "marginVertical": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.NEXT\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </React.Fragment>
+      </View>
+    </View>
   </View>
 </KeyboardAvoidingView>
 `;
@@ -302,92 +97,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       }
     }
   >
-    <CustomModalComponent
-      animationType="none"
-      isVisible={false}
-      modalType="Popup"
-      onClose={[Function]}
-    >
-      <React.Fragment>
-        <View>
-          <Text
-            style={
-              Object {
-                "color": "#f44336",
-                "fontSize": 18,
-                "paddingBottom": 5,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_LABEL" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 16,
-                "padding": 15,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_DESCRIPTION" translation]
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "alignContent": "center",
-              "elevation": 10,
-              "flexDirection": "row",
-              "height": 80,
-              "justifyContent": "space-evenly",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-            titleColor="#0071e9"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={2}
-            width={-1}
-          />
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.OK\\" translation]"
-            titleColor="#ffffffff"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={1}
-            width={-1}
-          />
-        </View>
-      </React.Fragment>
-    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
@@ -406,311 +115,43 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       </Text>
       <ItemSeparator />
     </View>
-    <ForwardRef
-      ItemSeparatorComponent={[Function]}
-      ListEmptyComponent={
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-            }
-          }
-        >
-          <Memo(Pressable)
-            onPress={[Function]}
-          >
-            <mockConstructor
-              color="#000000"
-              name="barcode-scan"
-              size={100}
-            />
-          </Memo(Pressable)>
-          <View
-            style={
-              Object {
-                "paddingTop": 30,
-              }
-            }
-          >
-            <Text>
-              [missing "en.BINNING.SCAN_PALLET" translation]
-            </Text>
-          </View>
-        </View>
-      }
-      contentContainerStyle={false}
-      data={
-        Array [
-          Object {
-            "expirationDate": "10/3/2022",
-            "id": "123456",
-            "items": Array [
-              Object {
-                "itemDesc": "itemDesc",
-                "itemNbr": 351231,
-                "price": 123,
-                "quantity": 2,
-                "upcNbr": "12343534",
-              },
-            ],
-          },
-          Object {
-            "expirationDate": "10/3/2022",
-            "id": "345345",
-            "items": Array [
-              Object {
-                "itemDesc": "itemDesc",
-                "itemNbr": 351231,
-                "price": 123,
-                "quantity": 2,
-                "upcNbr": "345345",
-              },
-            ],
-          },
-        ]
-      }
-      keyExtractor={[Function]}
-      removeClippedSubviews={false}
-      renderItem={[Function]}
-    />
-    <React.Fragment>
-      <ItemSeparator />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "marginHorizontal": 15,
-            "marginVertical": 10,
-          }
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
         }
-        title="[missing \\"en.GENERICS.NEXT\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </React.Fragment>
-  </View>
-</KeyboardAvoidingView>
-`;
-
-exports[`BinningScreen Tests rendering the BinningScreen component Test renders the BinningScreen with warning Modal 1`] = `
-<KeyboardAvoidingView
-  behavior="height"
-  keyboardVerticalOffset={110}
-  onStartShouldSetResponder={[Function]}
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    style={
-      Object {
-        "flex": 1,
-        "flexDirection": "column",
       }
-    }
-  >
-    <CustomModalComponent
-      animationType="none"
-      isVisible={true}
-      modalType="Popup"
-      onClose={[Function]}
     >
-      <React.Fragment>
-        <View>
-          <Text
-            style={
-              Object {
-                "color": "#f44336",
-                "fontSize": 18,
-                "paddingBottom": 5,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_LABEL" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 16,
-                "padding": 15,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_DESCRIPTION" translation]
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "alignContent": "center",
-              "elevation": 10,
-              "flexDirection": "row",
-              "height": 80,
-              "justifyContent": "space-evenly",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-            titleColor="#0071e9"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={2}
-            width={-1}
-          />
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.OK\\" translation]"
-            titleColor="#ffffffff"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={1}
-            width={-1}
-          />
-        </View>
-      </React.Fragment>
-    </CustomModalComponent>
-    <ManualScanComponent
-      keyboardType="numeric"
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
-    />
-    <View>
-      <Text
+      <View
         style={
           Object {
-            "fontSize": 16,
-            "margin": 15,
-            "textAlign": "center",
+            "alignItems": "center",
           }
         }
       >
-        [missing "en.BINNING.SCAN_PALLET_BIN" translation]
-      </Text>
-      <ItemSeparator />
-    </View>
-    <ForwardRef
-      ItemSeparatorComponent={[Function]}
-      ListEmptyComponent={
+        <Memo(Pressable)
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </Memo(Pressable)>
         <View
           style={
             Object {
-              "alignItems": "center",
+              "paddingTop": 30,
             }
           }
         >
-          <Memo(Pressable)
-            onPress={[Function]}
-          >
-            <mockConstructor
-              color="#000000"
-              name="barcode-scan"
-              size={100}
-            />
-          </Memo(Pressable)>
-          <View
-            style={
-              Object {
-                "paddingTop": 30,
-              }
-            }
-          >
-            <Text>
-              [missing "en.BINNING.SCAN_PALLET" translation]
-            </Text>
-          </View>
+          <Text>
+            [missing "en.BINNING.SCAN_PALLET" translation]
+          </Text>
         </View>
-      }
-      contentContainerStyle={false}
-      data={
-        Array [
-          Object {
-            "expirationDate": "10/3/2022",
-            "id": "123456",
-            "items": Array [
-              Object {
-                "itemDesc": "itemDesc",
-                "itemNbr": 351231,
-                "price": 123,
-                "quantity": 2,
-                "upcNbr": "12343534",
-              },
-            ],
-          },
-          Object {
-            "expirationDate": "10/3/2022",
-            "id": "345345",
-            "items": Array [
-              Object {
-                "itemDesc": "itemDesc",
-                "itemNbr": 351231,
-                "price": 123,
-                "quantity": 2,
-                "upcNbr": "345345",
-              },
-            ],
-          },
-        ]
-      }
-      keyExtractor={[Function]}
-      removeClippedSubviews={false}
-      renderItem={[Function]}
-    />
-    <React.Fragment>
-      <ItemSeparator />
-      <Button
-        backgroundColor="#0071e9"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          Object {
-            "marginHorizontal": 15,
-            "marginVertical": 10,
-          }
-        }
-        title="[missing \\"en.GENERICS.NEXT\\" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </React.Fragment>
+      </View>
+    </View>
   </View>
 </KeyboardAvoidingView>
 `;
@@ -734,139 +175,47 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       }
     }
   >
-    <CustomModalComponent
-      animationType="none"
-      isVisible={false}
-      modalType="Popup"
-      onClose={[Function]}
-    >
-      <React.Fragment>
-        <View>
-          <Text
-            style={
-              Object {
-                "color": "#f44336",
-                "fontSize": 18,
-                "paddingBottom": 5,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_LABEL" translation]
-          </Text>
-          <Text
-            style={
-              Object {
-                "fontSize": 16,
-                "padding": 15,
-                "textAlign": "center",
-              }
-            }
-          >
-            [missing "en.BINNING.WARNING_DESCRIPTION" translation]
-          </Text>
-        </View>
-        <View
-          style={
-            Object {
-              "alignContent": "center",
-              "elevation": 10,
-              "flexDirection": "row",
-              "height": 80,
-              "justifyContent": "space-evenly",
-            }
-          }
-        >
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
-            titleColor="#0071e9"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={2}
-            width={-1}
-          />
-          <Button
-            backgroundColor="#0071e9"
-            disabled={false}
-            height={45}
-            onPress={[Function]}
-            radius={5}
-            style={
-              Object {
-                "alignSelf": "center",
-                "margin": 10,
-                "width": "40%",
-              }
-            }
-            title="[missing \\"en.GENERICS.OK\\" translation]"
-            titleColor="#ffffffff"
-            titleFontSize={16}
-            titleFontWeight="normal"
-            type={1}
-            width={-1}
-          />
-        </View>
-      </React.Fragment>
-    </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
       placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
     />
-    <ForwardRef
-      ItemSeparatorComponent={[Function]}
-      ListEmptyComponent={
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-            }
-          }
-        >
-          <Memo(Pressable)
-            onPress={[Function]}
-          >
-            <mockConstructor
-              color="#000000"
-              name="barcode-scan"
-              size={100}
-            />
-          </Memo(Pressable)>
-          <View
-            style={
-              Object {
-                "paddingTop": 30,
-              }
-            }
-          >
-            <Text>
-              [missing "en.BINNING.SCAN_PALLET" translation]
-            </Text>
-          </View>
-        </View>
-      }
-      contentContainerStyle={
+    <View
+      style={
         Object {
           "flex": 1,
           "justifyContent": "center",
         }
       }
-      data={Array []}
-      keyExtractor={[Function]}
-      removeClippedSubviews={false}
-      renderItem={[Function]}
-    />
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+          }
+        }
+      >
+        <Memo(Pressable)
+          onPress={[Function]}
+        >
+          <mockConstructor
+            color="#000000"
+            name="barcode-scan"
+            size={100}
+          />
+        </Memo(Pressable)>
+        <View
+          style={
+            Object {
+              "paddingTop": 30,
+            }
+          }
+        >
+          <Text>
+            [missing "en.BINNING.SCAN_PALLET" translation]
+          </Text>
+        </View>
+      </View>
+    </View>
   </View>
 </KeyboardAvoidingView>
 `;

@@ -2,10 +2,9 @@ import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
-  BinningScreen, binningItemCard
+  BinningScreen
 } from './Binning';
 import { AsyncState } from '../../models/AsyncState';
-import { BinningPallet } from '../../models/Binning';
 import { mockPallets } from '../../mockData/binning';
 
 jest.mock('../../state/actions/Modal', () => ({
@@ -58,12 +57,6 @@ describe('BinningScreen', () => {
           getPalletDetailsApi={defaultAsyncState}
           scannedEvent={defaultScannedEvent}
           isMounted={{ current: false }}
-          palletClicked={false}
-          setPalletClicked={jest.fn}
-          useFocusEffectHook={jest.fn}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn}
-          useCallbackHook={jest.fn}
           trackEventCall={jest.fn()}
         />
       );
@@ -83,12 +76,6 @@ describe('BinningScreen', () => {
           getPalletDetailsApi={defaultAsyncState}
           scannedEvent={defaultScannedEvent}
           isMounted={{ current: false }}
-          palletClicked={false}
-          setPalletClicked={jest.fn}
-          useFocusEffectHook={jest.fn}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn}
-          useCallbackHook={jest.fn}
           trackEventCall={jest.fn()}
         />
       );
@@ -126,51 +113,8 @@ describe('BinningScreen', () => {
           getPalletDetailsApi={sucessAsyncState}
           scannedEvent={defaultScannedEvent}
           isMounted={{ current: false }}
-          palletClicked={false}
-          setPalletClicked={jest.fn}
-          useFocusEffectHook={jest.fn}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn}
-          useCallbackHook={jest.fn}
           trackEventCall={jest.fn()}
         />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('Test renders the BinningScreen with warning Modal', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <BinningScreen
-          scannedPallets={mockPallets}
-          navigation={navigationProp}
-          dispatch={jest.fn}
-          isManualScanEnabled={true}
-          useEffectHook={jest.fn}
-          route={routeProp}
-          getPalletDetailsApi={defaultAsyncState}
-          scannedEvent={defaultScannedEvent}
-          isMounted={{ current: false }}
-          palletClicked={false}
-          setPalletClicked={jest.fn}
-          useFocusEffectHook={jest.fn}
-          displayWarningModal={true}
-          setDisplayWarningModal={jest.fn}
-          useCallbackHook={jest.fn}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-  });
-
-  describe('Tests rendering binningItemCard component', () => {
-    const renderer = ShallowRenderer.createRenderer();
-    it('should match snapshot', () => {
-      const item: BinningPallet = mockPallets[0];
-      const mockDispatch = jest.fn();
-      const mockSetPalletClicked = jest.fn();
-      renderer.render(
-        binningItemCard({ item }, mockDispatch, mockSetPalletClicked, jest.fn())
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
