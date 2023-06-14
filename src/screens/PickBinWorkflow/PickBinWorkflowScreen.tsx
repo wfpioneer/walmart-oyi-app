@@ -358,12 +358,7 @@ export const PickBinWorkflowScreen = (props: PBWorkflowProps) => {
       { action: 'bin_selected_picklist_click', palletDetails: JSON.stringify(palletDetails) }
     );
     dispatch(addPallet(palletDetails));
-    navigation.navigate('Binning', {
-      screen: 'AssignLocation',
-      params: {
-        source: 'picking'
-      }
-    });
+    navigation.navigate('Binning', { screen: 'AssignLocation' });
   };
 
   const actionButtonsView = () => {

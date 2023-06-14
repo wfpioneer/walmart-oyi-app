@@ -1,16 +1,23 @@
 import React, {
-  DependencyList, EffectCallback, MutableRefObject, useCallback, useEffect, useRef, useState
+  MutableRefObject, useEffect, useRef
 } from 'react';
 import {
-  BackHandler, EmitterSubscription, Keyboard, KeyboardAvoidingView, Pressable, Text, View
+  EmitterSubscription,
+  Keyboard,
+  KeyboardAvoidingView,
+  Pressable,
+  Text,
+  View
 } from 'react-native';
 import { head } from 'lodash';
-import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
 import {
-  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute
 } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
@@ -20,7 +27,6 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import styles from './Binning.style';
-import Button, { ButtonType } from '../../components/buttons/Button';
 import ManualScan from '../../components/manualscan/ManualScan';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import {
@@ -32,12 +38,8 @@ import {
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { BinningPallet } from '../../models/Binning';
-import { addPallet, clearPallets, deletePallet } from '../../state/actions/Binning';
+import { addPallet } from '../../state/actions/Binning';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
-import { setupPallet } from '../../state/actions/PalletManagement';
-import { Pallet } from '../../models/PalletManagementTypes';
-import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
-import { CustomModalComponent } from '../Modal/Modal';
 
 const SCREEN_NAME = 'Binning_Screen';
 export interface BinningScreenProps {
@@ -46,52 +48,12 @@ export interface BinningScreenProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   isManualScanEnabled: boolean;
-  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
+  useEffectHook: typeof useEffect;
   getPalletDetailsApi: AsyncState;
   scannedEvent: { value: any; type: string | null};
   isMounted: MutableRefObject<boolean>;
-  palletClicked: boolean;
-  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
-  useFocusEffectHook: (effect: EffectCallback) => void;
-  displayWarningModal: boolean;
-  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>;
-  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
   trackEventCall: typeof trackEvent
 }
-
-export const navigateToPalletManagement = (
-  palletId: string,
-  dispatch: Dispatch<any>,
-  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  setPalletClicked(true);
-  dispatch(getPalletDetails({ palletIds: [palletId], isAllItems: true }));
-};
-
-export const binningItemCard = (
-  { item }: { item: BinningPallet },
-  dispatch: Dispatch<any>,
-  setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>,
-  trackEventCall: (eventName: string, params?: any) => void
-) => {
-  const firstItem = head(item.items);
-  return (
-    <BinningItemCard
-      palletId={item.id}
-      itemDesc={firstItem ? firstItem.itemDesc : ''}
-      lastLocation={item.lastLocation}
-      canDelete
-      onDelete={() => {
-        trackEventCall(SCREEN_NAME, {
-          action: 'deleting_pallet_from_bin_list',
-          palletId: item.id
-        });
-        dispatch(deletePallet(item.id));
-      }}
-      onClick={() => { navigateToPalletManagement(item.id, dispatch, setPalletClicked); }}
-    />
-  );
-};
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -99,20 +61,20 @@ const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: GET_PALLET_DETAILS.RESET });
 };
 
-const onValidateHardwareBackPress = (props: BinningScreenProps) => {
-  const { setDisplayWarningModal, scannedPallets } = props;
-  if (scannedPallets.length > 0) {
-    setDisplayWarningModal(true);
-    return true;
-  }
-  return false;
+const navigateAssignLocationScreen = (
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any>
+) => {
+  dispatch(resetScannedEvent());
+  navigation.navigate('AssignLocation', route.params);
 };
 
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
-    scannedPallets, isManualScanEnabled, dispatch, navigation, route, useEffectHook,
-    getPalletDetailsApi, scannedEvent, isMounted, palletClicked, setPalletClicked, useFocusEffectHook,
-    displayWarningModal, setDisplayWarningModal, useCallbackHook, trackEventCall
+    scannedPallets, isManualScanEnabled, dispatch, navigation,
+    route, useEffectHook, getPalletDetailsApi, scannedEvent,
+    isMounted, trackEventCall
   } = props;
 
   const palletExistForBinnning = scannedPallets.length > 0;
@@ -166,43 +128,12 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           pallets
         } = getPalletDetailsApi.result.data;
         const newPallet = head(pallets) as BinningPallet;
-        if (palletClicked) {
-          setPalletClicked(false);
-          const palletItems = newPallet.items.map(item => ({
-            ...item,
-            quantity: item.quantity || 0,
-            price: item.price || 0,
-            newQuantity: item.quantity || 0,
-            deleted: false,
-            added: false
-          }));
-          const pmPallet: Pallet = {
-            palletInfo: {
-              id: newPallet.id,
-              expirationDate: newPallet.expirationDate,
-              createDate: newPallet.createDate
-            },
-            items: palletItems
-          };
-          dispatch(setupPallet(pmPallet));
-          trackEventCall(SCREEN_NAME, {
-            action: 'navigation_to_pallet_management_from_binning',
-            palletId: newPallet.id
-          });
-          navigation.navigate('ManagePallet');
-        } else {
-          trackEventCall(SCREEN_NAME, {
-            action: 'Added_pallet_to_bin_list',
-            palletId: newPallet.id
-          });
-          dispatch(addPallet(newPallet));
-          Toast.show({
-            type: 'success',
-            text1: strings('LOCATION.PALLET_ADDED'),
-            visibilityTime: 3000,
-            position: 'bottom'
-          });
-        }
+        trackEventCall(SCREEN_NAME, {
+          action: 'Added_pallet_to_bin_list',
+          palletId: newPallet.id
+        });
+        navigateAssignLocationScreen(dispatch, navigation, route);
+        dispatch(addPallet(newPallet));
       } else if (getPalletDetailsApi.result.status === 204) {
         Toast.show({
           type: 'error',
@@ -232,78 +163,10 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     }
   }, [getPalletDetailsApi]);
 
-  // validation on app back press
-  useEffectHook(() => {
-    const navigationListener = navigation.addListener('beforeRemove', e => {
-      if (scannedPallets.length > 0) {
-        setDisplayWarningModal(true);
-        e.preventDefault();
-      }
-    });
-    return navigationListener;
-  }, [navigation, scannedPallets]);
-
-  useEffectHook(() => {
-    if (displayWarningModal && !palletExistForBinnning) {
-      setDisplayWarningModal(false);
-      navigation.goBack();
-    }
-  }, [palletExistForBinnning]);
-
-  // validation on Hardware backPress
-  useFocusEffectHook(
-    useCallbackHook(() => {
-      const onHardwareBackPress = () => onValidateHardwareBackPress(props);
-      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
-      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
-    }, [])
-  );
-
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
     return false;
   };
-
-  const navigateAssignLocationScreen = () => {
-    dispatch(resetScannedEvent());
-    navigation.navigate('AssignLocation', route.params);
-  };
-
-  const backConfirmed = () => {
-    setDisplayWarningModal(false);
-    dispatch(clearPallets());
-    navigation.goBack();
-  };
-
-  const renderWarningModal = () => (
-    <CustomModalComponent
-      isVisible={displayWarningModal}
-      onClose={() => setDisplayWarningModal(false)}
-      modalType="Popup"
-    >
-      <>
-        <View>
-          <Text style={styles.labelHeader}>{strings('BINNING.WARNING_LABEL')}</Text>
-          <Text style={styles.message}>{strings('BINNING.WARNING_DESCRIPTION')}</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.CANCEL')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            type={ButtonType.SOLID_WHITE}
-            onPress={() => setDisplayWarningModal(false)}
-          />
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.OK')}
-            type={ButtonType.PRIMARY}
-            onPress={backConfirmed}
-          />
-        </View>
-      </>
-    </CustomModalComponent>
-  );
 
   return (
     <KeyboardAvoidingView
@@ -313,7 +176,6 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       onStartShouldSetResponder={handleUnhandledTouches}
     >
       <View style={styles.container}>
-        {renderWarningModal()}
         {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
         {palletExistForBinnning
           && (
@@ -322,49 +184,22 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             <ItemSeparator />
           </View>
           )}
-        <FlatList
-          data={scannedPallets}
-          removeClippedSubviews={false}
-          contentContainerStyle={!palletExistForBinnning && styles.emptyFlatListContainer}
-          ItemSeparatorComponent={ItemSeparator}
-          renderItem={item => binningItemCard(item, dispatch, setPalletClicked, trackEventCall)}
-          keyExtractor={(item: any) => item.id.toString()}
-          ListEmptyComponent={(
-            <View style={styles.scanContainer}>
-              <Pressable onPress={() => {
-                if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
-                  return openCamera();
-                }
-                return null;
-              }}
-              >
-                <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-              </Pressable>
-              <View style={styles.scanText}>
-                <Text>{strings('BINNING.SCAN_PALLET')}</Text>
-              </View>
+        <View style={styles.emptyFlatListContainer}>
+          <View style={styles.scanContainer}>
+            <Pressable onPress={() => {
+              if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+                return openCamera();
+              }
+              return null;
+            }}
+            >
+              <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
+            </Pressable>
+            <View style={styles.scanText}>
+              <Text>{strings('BINNING.SCAN_PALLET')}</Text>
             </View>
-        )}
-        />
-        {palletExistForBinnning
-          && (
-          <>
-            <ItemSeparator />
-            <Button
-              title={strings('GENERICS.NEXT')}
-              type={ButtonType.PRIMARY}
-              style={styles.buttonWrapper}
-              onPress={() => {
-                trackEventCall(SCREEN_NAME, {
-                  action: 'Added_pallets_for_assigning_location',
-                  palletIds: scannedPallets.map(pallet => pallet.id).join(','),
-                  otherInfo: 'navigating_to_assign_location'
-                });
-                navigateAssignLocationScreen();
-              }}
-            />
-          </>
-          )}
+          </View>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
@@ -372,14 +207,12 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
 const Binning = (): JSX.Element => {
   const scannedPallets = useTypedSelector(state => state.Binning.pallets);
-  const [displayWarningModal, setDisplayWarningModal] = useState(false);
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const isMounted = useRef(false);
-  const [palletCLicked, setPalletClicked] = useState(false);
 
   return (
     <BinningScreen
@@ -392,12 +225,6 @@ const Binning = (): JSX.Element => {
       getPalletDetailsApi={getPalletDetailsApi}
       scannedEvent={scannedEvent}
       isMounted={isMounted}
-      palletClicked={palletCLicked}
-      setPalletClicked={setPalletClicked}
-      useFocusEffectHook={useFocusEffect}
-      displayWarningModal={displayWarningModal}
-      setDisplayWarningModal={setDisplayWarningModal}
-      useCallbackHook={useCallback}
       trackEventCall={trackEvent}
     />
   );

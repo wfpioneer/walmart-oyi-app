@@ -23,6 +23,30 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.GREY_300,
     height: 1,
     width: '100%'
+  },
+  // Warning Modal styles
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignContent: 'center',
+    height: 80,
+    elevation: 10
+  },
+  buttonAlign: {
+    alignSelf: 'center',
+    width: '40%',
+    margin: 10
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 16,
+    padding: 15
+  },
+  labelHeader: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: COLOR.RED_500,
+    paddingBottom: 5
   }
 });
 
