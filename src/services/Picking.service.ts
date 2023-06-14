@@ -75,6 +75,16 @@ export default class PickingService {
     const urls: Environment = getEnvironment();
     const TIMEOUT = 30000;
     return Request.post(
+      `${urls.orchestrationURL}/picklist`,
+      payload,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static createNewPickV1(payload: CreatePickRequest) {
+    const urls: Environment = getEnvironment();
+    const TIMEOUT = 30000;
+    return Request.post(
       `${urls.orchestrationURL}/v1/picklist`,
       payload,
       { timeout: TIMEOUT }
