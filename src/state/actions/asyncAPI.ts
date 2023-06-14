@@ -168,6 +168,9 @@ export const updatePalletNotFound = makeAsyncActionCreators(UPDATE_PALLET_NOT_FO
 export const CREATE_NEW_PICK = makeAsyncActionTypes('API/CREATE_NEW_PICK');
 export const createNewPick = makeAsyncActionCreators(CREATE_NEW_PICK);
 
+export const CREATE_NEW_PICK_V1 = makeAsyncActionTypes('API/CREATE_NEW_PICK_V1');
+export const createNewPickV1 = makeAsyncActionCreators(CREATE_NEW_PICK_V1);
+
 export const POST_CREATE_PALLET = makeAsyncActionTypes('API/POST_CREATE_PALLET');
 export const postCreatePallet = makeAsyncActionCreators(POST_CREATE_PALLET);
 
