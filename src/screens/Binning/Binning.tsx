@@ -1,7 +1,8 @@
 import React, {
-  MutableRefObject, useEffect, useRef
+  MutableRefObject, useCallback, useEffect, useRef, useState
 } from 'react';
 import {
+  BackHandler,
   EmitterSubscription,
   Keyboard,
   KeyboardAvoidingView,
@@ -16,6 +17,7 @@ import Toast from 'react-native-toast-message';
 import {
   NavigationProp,
   RouteProp,
+  useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -38,8 +40,11 @@ import {
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { BinningPallet } from '../../models/Binning';
-import { addPallet } from '../../state/actions/Binning';
+import { addPallet, clearPallets } from '../../state/actions/Binning';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
+import { UseStateType } from '../../models/Generics.d';
+import { CustomModalComponent } from '../Modal/Modal';
+import Button, { ButtonType } from '../../components/buttons/Button';
 
 const SCREEN_NAME = 'Binning_Screen';
 export interface BinningScreenProps {
@@ -49,11 +54,25 @@ export interface BinningScreenProps {
   navigation: NavigationProp<any>;
   isManualScanEnabled: boolean;
   useEffectHook: typeof useEffect;
+  useFocusEffectHook: typeof useFocusEffect;
+  useCallbackHook: typeof useCallback;
   getPalletDetailsApi: AsyncState;
   scannedEvent: { value: any; type: string | null};
   isMounted: MutableRefObject<boolean>;
-  trackEventCall: typeof trackEvent
+  trackEventCall: typeof trackEvent;
+  displayWarningModalState: UseStateType<boolean>;
 }
+
+const onValidateHardwareBackPress = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  scannedPallets: BinningPallet[]
+) => {
+  if (scannedPallets.length > 0) {
+    setDisplayWarningModal(true);
+    return true;
+  }
+  return false;
+};
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -72,10 +91,11 @@ const navigateAssignLocationScreen = (
 
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
-    scannedPallets, isManualScanEnabled, dispatch, navigation,
-    route, useEffectHook, getPalletDetailsApi, scannedEvent,
-    isMounted, trackEventCall
+    scannedPallets, isManualScanEnabled, dispatch, navigation, route,
+    useEffectHook, useFocusEffectHook, useCallbackHook, getPalletDetailsApi, scannedEvent,
+    isMounted, trackEventCall, displayWarningModalState
   } = props;
+  const [displayWarningModal, setDisplayWarningModal] = displayWarningModalState;
 
   const palletExistForBinnning = scannedPallets.length > 0;
 
@@ -92,6 +112,33 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       scannedSubscription.remove();
     };
   }, []);
+
+  // validation on app back press
+  useEffectHook(() => {
+    const navigationListener = navigation.addListener('beforeRemove', e => {
+      if (scannedPallets.length > 0) {
+        setDisplayWarningModal(true);
+        e.preventDefault();
+      }
+    });
+    return navigationListener;
+  }, [navigation, scannedPallets]);
+
+  useEffectHook(() => {
+    if (displayWarningModal && !palletExistForBinnning) {
+      setDisplayWarningModal(false);
+      navigation.goBack();
+    }
+  }, [palletExistForBinnning, displayWarningModal]);
+
+  // validation on Hardware backPress
+  useFocusEffectHook(
+    useCallbackHook(() => {
+      const onHardwareBackPress = () => onValidateHardwareBackPress(setDisplayWarningModal, scannedPallets);
+      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+    }, [])
+  );
 
   useEffectHook(() => {
     if (isMounted.current) {
@@ -129,7 +176,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         } = getPalletDetailsApi.result.data;
         const newPallet = head(pallets) as BinningPallet;
         trackEventCall(SCREEN_NAME, {
-          action: 'Added_pallet_to_bin_list',
+          action: 'added_pallet_to_bin_list',
           palletId: newPallet.id
         });
         navigateAssignLocationScreen(dispatch, navigation, route);
@@ -168,6 +215,42 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     return false;
   };
 
+  const backConfirmed = () => {
+    setDisplayWarningModal(false);
+    dispatch(clearPallets());
+    navigation.goBack();
+  };
+
+  const renderWarningModal = () => (
+    <CustomModalComponent
+      isVisible={displayWarningModal}
+      onClose={() => setDisplayWarningModal(false)}
+      modalType="Popup"
+    >
+      <>
+        <View>
+          <Text style={styles.labelHeader}>{strings('BINNING.WARNING_LABEL')}</Text>
+          <Text style={styles.message}>{strings('BINNING.WARNING_DESCRIPTION')}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.buttonAlign}
+            title={strings('GENERICS.CANCEL')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={ButtonType.SOLID_WHITE}
+            onPress={() => setDisplayWarningModal(false)}
+          />
+          <Button
+            style={styles.buttonAlign}
+            title={strings('GENERICS.OK')}
+            type={ButtonType.PRIMARY}
+            onPress={backConfirmed}
+          />
+        </View>
+      </>
+    </CustomModalComponent>
+  );
+
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -175,6 +258,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       keyboardVerticalOffset={110}
       onStartShouldSetResponder={handleUnhandledTouches}
     >
+      {renderWarningModal()}
       <View style={styles.container}>
         {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
         {palletExistForBinnning
@@ -207,12 +291,13 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
 const Binning = (): JSX.Element => {
   const scannedPallets = useTypedSelector(state => state.Binning.pallets);
+  const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
-  const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const isMounted = useRef(false);
+  const displayWarningModalState = useState(false);
 
   return (
     <BinningScreen
@@ -221,11 +306,14 @@ const Binning = (): JSX.Element => {
       route={route}
       navigation={navigation}
       useEffectHook={useEffect}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
       isManualScanEnabled={isManualScanEnabled}
       getPalletDetailsApi={getPalletDetailsApi}
       scannedEvent={scannedEvent}
       isMounted={isMounted}
       trackEventCall={trackEvent}
+      displayWarningModalState={displayWarningModalState}
     />
   );
 };
