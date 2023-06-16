@@ -5,6 +5,7 @@ exports[`Add card render tests renders the bottom sheet add card, not visible 1`
 exports[`Add card render tests renders the bottom sheet add card, visible, manager option 1`] = `
 <BottomSheetBaseCard
   image=""
+  materialIconName=""
   onPress={[Function]}
   text="hello"
 />
@@ -13,6 +14,7 @@ exports[`Add card render tests renders the bottom sheet add card, visible, manag
 exports[`Add card render tests renders the bottom sheet add card, visible, non manager option 1`] = `
 <BottomSheetBaseCard
   image=""
+  materialIconName=""
   onPress={[Function]}
   text="hello"
 />
