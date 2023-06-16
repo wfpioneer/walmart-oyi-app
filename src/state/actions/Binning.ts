@@ -5,6 +5,8 @@ export const DELETE_PALLET = 'BINNING/DELETE_PALLET';
 export const CLEAR_PALLETS = 'BINNING/CLEAR_PALLETS';
 export const SET_BIN_LOCATION = 'BINNING/SET_BIN_LOCATION';
 export const CLEAR_BIN_LOCATION = 'BINNING/CLEAR_BIN_LOCATION';
+export const TOGGLE_MULTI_BIN = 'BINNING/TOGGLE_MULTIPLE';
+export const TOGGLE_BIN_MENU = 'BINNING/TOGGLE_MENU';
 
 export const addPallet = (pallet: BinningPallet) => ({
   type: ADD_PALLET,
@@ -29,9 +31,25 @@ export const clearBinLocation = () => ({
   type: CLEAR_BIN_LOCATION
 } as const);
 
+/**
+ *
+ * @param enabled optional so that if left out will be an actual toggle
+ */
+export const toggleMultiBin = (enabled?: boolean) => ({
+  type: TOGGLE_MULTI_BIN,
+  payload: enabled
+} as const);
+
+export const toggleBinMenu = (enabled?: boolean) => ({
+  type: TOGGLE_BIN_MENU,
+  payload: enabled
+} as const);
+
 export type Actions =
   | ReturnType<typeof addPallet>
   | ReturnType<typeof deletePallet>
   | ReturnType<typeof clearPallets>
   | ReturnType<typeof setBinLocation>
   | ReturnType<typeof clearBinLocation>
+  | ReturnType<typeof toggleMultiBin>
+  | ReturnType<typeof toggleBinMenu>

@@ -1,9 +1,10 @@
 import React, {
-  MutableRefObject, useCallback, useEffect, useRef, useState
+  MutableRefObject, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   BackHandler,
   EmitterSubscription,
+  FlatList,
   Keyboard,
   KeyboardAvoidingView,
   Pressable,
@@ -23,6 +24,7 @@ import {
 } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
+import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -40,11 +42,20 @@ import {
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { BinningPallet } from '../../models/Binning';
-import { addPallet, clearPallets } from '../../state/actions/Binning';
+import {
+  addPallet,
+  clearPallets,
+  toggleBinMenu,
+  toggleMultiBin
+} from '../../state/actions/Binning';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import { UseStateType } from '../../models/Generics.d';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
+import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
+import { Pallet } from '../../models/PalletManagementTypes';
+import { setupPallet } from '../../state/actions/PalletManagement';
+import BottomSheetMultiBinCard from '../../components/BottomSheetMultiBinCard/BottomSheetMultiBinCard';
 
 const SCREEN_NAME = 'Binning_Screen';
 export interface BinningScreenProps {
@@ -60,6 +71,7 @@ export interface BinningScreenProps {
   scannedEvent: { value: any; type: string | null};
   isMounted: MutableRefObject<boolean>;
   trackEventCall: typeof trackEvent;
+  enableMultiPalletBin: boolean;
   displayWarningModalState: UseStateType<boolean>;
 }
 
@@ -75,6 +87,53 @@ const onValidateHardwareBackPress = (
 };
 
 const ItemSeparator = () => <View style={styles.separator} />;
+
+export const onBinningItemPress = (
+  pallet: BinningPallet,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  trackEventCall: typeof trackEvent
+) => {
+  const palletItems = pallet.items.map(item => ({
+    ...item,
+    quantity: item.quantity || 0,
+    price: item.price || 0,
+    newQuantity: item.quantity || 0,
+    deleted: false,
+    added: false
+  }));
+  const pmPallet: Pallet = {
+    palletInfo: {
+      id: pallet.id,
+      expirationDate: pallet.expirationDate,
+      createDate: pallet.createDate
+    },
+    items: palletItems
+  };
+  dispatch(setupPallet(pmPallet));
+  trackEventCall('BINNING_SCREEN', {
+    action: 'navigation_to_pallet_management_from_binning',
+    palletId: pallet.id
+  });
+  navigation.navigate('ManagePallet');
+};
+
+const binningItemCard = (
+  { item }: { item: BinningPallet },
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  trackEventCall: typeof trackEvent
+) => {
+  const firstItem = head(item.items);
+  return (
+    <BinningItemCard
+      palletId={item.id}
+      itemDesc={firstItem ? firstItem.itemDesc : ''}
+      lastLocation={item.lastLocation}
+      onClick={() => onBinningItemPress(item, dispatch, navigation, trackEventCall)}
+    />
+  );
+};
 
 const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: GET_PALLET_DETAILS.RESET });
@@ -93,7 +152,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
     scannedPallets, isManualScanEnabled, dispatch, navigation, route,
     useEffectHook, useFocusEffectHook, useCallbackHook, getPalletDetailsApi, scannedEvent,
-    isMounted, trackEventCall, displayWarningModalState
+    isMounted, trackEventCall, enableMultiPalletBin, displayWarningModalState
   } = props;
   const [displayWarningModal, setDisplayWarningModal] = displayWarningModalState;
 
@@ -179,8 +238,10 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           action: 'added_pallet_to_bin_list',
           palletId: newPallet.id
         });
-        navigateAssignLocationScreen(dispatch, navigation, route);
         dispatch(addPallet(newPallet));
+        if (!enableMultiPalletBin) {
+          navigateAssignLocationScreen(dispatch, navigation, route);
+        }
       } else if (getPalletDetailsApi.result.status === 204) {
         Toast.show({
           type: 'error',
@@ -208,7 +269,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     if (getPalletDetailsApi.isWaiting) {
       dispatch(showActivityModal());
     }
-  }, [getPalletDetailsApi]);
+  }, [getPalletDetailsApi, enableMultiPalletBin]);
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
@@ -269,28 +330,77 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           </View>
           )}
         <View style={styles.emptyFlatListContainer}>
-          <View style={styles.scanContainer}>
-            <Pressable onPress={() => {
-              if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
-                return openCamera();
-              }
-              return null;
-            }}
-            >
-              <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
-            </Pressable>
-            <View style={styles.scanText}>
-              <Text>{strings('BINNING.SCAN_PALLET')}</Text>
+          {!enableMultiPalletBin && (
+            <View style={styles.scanContainer}>
+              <Pressable onPress={() => {
+                if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+                  return openCamera();
+                }
+                return null;
+              }}
+              >
+                <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
+              </Pressable>
+              <View style={styles.scanText}>
+                <Text>{strings('BINNING.SCAN_PALLET')}</Text>
+              </View>
             </View>
-          </View>
+          )}
+          {enableMultiPalletBin && (
+          <FlatList
+            data={scannedPallets}
+            removeClippedSubviews={false}
+            contentContainerStyle={!palletExistForBinnning && styles.emptyFlatListContainer}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={item => binningItemCard(item, dispatch, navigation, trackEventCall)}
+            keyExtractor={(item: any, index) => `${item.id.toString()}-${index}`}
+            ListEmptyComponent={(
+              <View style={styles.scanContainer}>
+                <Pressable onPress={() => {
+                  if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
+                    return openCamera();
+                  }
+                  return null;
+                }}
+                >
+                  <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
+                </Pressable>
+                <View style={styles.scanText}>
+                  <Text>{strings('BINNING.SCAN_PALLET')}</Text>
+                </View>
+              </View>
+          )}
+          />
+          )}
         </View>
+        {enableMultiPalletBin && palletExistForBinnning
+          && (
+          <>
+            <ItemSeparator />
+            <Button
+              title={strings('GENERICS.NEXT')}
+              type={ButtonType.PRIMARY}
+              style={styles.buttonWrapper}
+              onPress={() => {
+                trackEventCall(SCREEN_NAME, {
+                  action: 'Added_pallets_for_assigning_location',
+                  palletIds: scannedPallets.map(pallet => pallet.id).join(','),
+                  otherInfo: 'navigating_to_assign_location'
+                });
+                navigateAssignLocationScreen(dispatch, navigation, route);
+              }}
+            />
+          </>
+          )}
       </View>
     </KeyboardAvoidingView>
   );
 };
 
 const Binning = (): JSX.Element => {
-  const scannedPallets = useTypedSelector(state => state.Binning.pallets);
+  const {
+    pallets: scannedPallets, enableMultiplePalletBin, showBinningMenu
+  } = useTypedSelector(state => state.Binning);
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const dispatch = useDispatch();
@@ -299,22 +409,69 @@ const Binning = (): JSX.Element => {
   const isMounted = useRef(false);
   const displayWarningModalState = useState(false);
 
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['20%'], []);
+
+  useEffect(() => {
+    if (navigation.isFocused() && bottomSheetModalRef.current) {
+      if (showBinningMenu) {
+        bottomSheetModalRef.current.present();
+      } else {
+        bottomSheetModalRef.current.dismiss();
+      }
+    }
+  }, [showBinningMenu]);
+
+  const renderBackdrop = useCallback(
+    // eslint-disable-next-line no-shadow
+    props => (
+      <BottomSheetBackdrop
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  );
+
   return (
-    <BinningScreen
-      scannedPallets={scannedPallets}
-      dispatch={dispatch}
-      route={route}
-      navigation={navigation}
-      useEffectHook={useEffect}
-      useCallbackHook={useCallback}
-      useFocusEffectHook={useFocusEffect}
-      isManualScanEnabled={isManualScanEnabled}
-      getPalletDetailsApi={getPalletDetailsApi}
-      scannedEvent={scannedEvent}
-      isMounted={isMounted}
-      trackEventCall={trackEvent}
-      displayWarningModalState={displayWarningModalState}
-    />
+    <BottomSheetModalProvider>
+      <BinningScreen
+        scannedPallets={scannedPallets}
+        dispatch={dispatch}
+        route={route}
+        navigation={navigation}
+        useEffectHook={useEffect}
+        useCallbackHook={useCallback}
+        useFocusEffectHook={useFocusEffect}
+        isManualScanEnabled={isManualScanEnabled}
+        getPalletDetailsApi={getPalletDetailsApi}
+        scannedEvent={scannedEvent}
+        isMounted={isMounted}
+        trackEventCall={trackEvent}
+        enableMultiPalletBin={enableMultiplePalletBin}
+        displayWarningModalState={displayWarningModalState}
+      />
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        snapPoints={snapPoints}
+        index={0}
+        onDismiss={() => {
+          trackEvent(SCREEN_NAME, { action: 'hide_binning_bottom_sheet_modal' });
+          dispatch(toggleBinMenu(false));
+        }}
+        style={styles.bottomSheetModal}
+        backdropComponent={renderBackdrop}
+      >
+        <BottomSheetMultiBinCard
+          enableMultiBin={enableMultiplePalletBin}
+          onPress={() => dispatch(toggleMultiBin())}
+          text={strings('BINNING.MULTIPLE_BIN_ENABLED')}
+        />
+      </BottomSheetModal>
+    </BottomSheetModalProvider>
   );
 };
 

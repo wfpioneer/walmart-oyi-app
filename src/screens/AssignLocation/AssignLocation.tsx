@@ -59,21 +59,22 @@ interface AssignLocationProps {
   binPalletsApi: AsyncState;
   pickingState: PickingState;
   updatePicklistStatusApi: AsyncState;
-  deletePicks: boolean;
-  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>;
   trackEventCall: typeof trackEvent;
   userConfigs: Configurations;
+  deletePicksState: UseStateType<boolean>;
   displayWarningModalState: UseStateType<boolean>;
   useFocusEffectHook: typeof useFocusEffect;
   useCallbackHook: typeof useCallback;
+  enableMultiPalletBin: boolean;
 }
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const onValidateHardwareBackPress = (
   setDisplayWarningModal: UseStateType<boolean>[1],
-  scannedPallets: BinningPallet[]
+  scannedPallets: BinningPallet[],
+  enableMultiPalletBin: boolean
 ) => {
-  if (scannedPallets.length > 0) {
+  if (!enableMultiPalletBin && scannedPallets.length > 0) {
     setDisplayWarningModal(true);
     return true;
   }
@@ -114,7 +115,8 @@ const binningItemCard = (
   { item }: { item: BinningPallet },
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  trackEventCall: typeof trackEvent
+  trackEventCall: typeof trackEvent,
+  enableMultiPalletBin: boolean
 ) => {
   const firstItem = head(item.items);
   return (
@@ -122,7 +124,7 @@ const binningItemCard = (
       palletId={item.id}
       itemDesc={firstItem ? firstItem.itemDesc : ''}
       lastLocation={item.lastLocation}
-      onClick={() => onBinningItemPress(item, dispatch, navigation, trackEventCall)}
+      onClick={() => !enableMultiPalletBin && onBinningItemPress(item, dispatch, navigation, trackEventCall)}
     />
   );
 };
@@ -326,13 +328,14 @@ export const binPalletsApiEffect = (
 
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
-    palletsToBin, isManualScanEnabled, useEffectHook, pickingState,
-    navigation, dispatch, route, scannedEvent, binPalletsApi,
-    updatePicklistStatusApi, deletePicks, setDeletePicks, trackEventCall,
-    userConfigs, displayWarningModalState, useCallbackHook, useFocusEffectHook
+    palletsToBin, isManualScanEnabled, useEffectHook, pickingState, navigation,
+    dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi,
+    deletePicksState, trackEventCall, userConfigs, displayWarningModalState,
+    useCallbackHook, useFocusEffectHook, enableMultiPalletBin
   } = props;
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const [displayWarningModal, setDisplayWarningModal] = displayWarningModalState;
+  const [deletePicks, setDeletePicks] = deletePicksState;
   const palletExistForBinnning = !!palletsToBin.length;
 
   useEffectHook(() => {
@@ -378,13 +381,13 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
-      if (palletsToBin.length > 0) {
+      if (!enableMultiPalletBin && palletsToBin.length > 0) {
         setDisplayWarningModal(true);
         e.preventDefault();
       }
     });
     return navigationListener;
-  }, [navigation, palletsToBin]);
+  }, [navigation, palletsToBin, enableMultiPalletBin]);
 
   useEffectHook(() => {
     if (displayWarningModal && !palletExistForBinnning) {
@@ -396,7 +399,11 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   // validation on Hardware backPress
   useFocusEffectHook(
     useCallbackHook(() => {
-      const onHardwareBackPress = () => onValidateHardwareBackPress(setDisplayWarningModal, palletsToBin);
+      const onHardwareBackPress = () => onValidateHardwareBackPress(
+        setDisplayWarningModal,
+        palletsToBin,
+        enableMultiPalletBin
+      );
       BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
       return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
     }, [])
@@ -493,7 +500,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
       )}
       <FlatList
         data={palletsToBin}
-        renderItem={item => binningItemCard(item, dispatch, navigation, trackEventCall)}
+        renderItem={item => binningItemCard(item, dispatch, navigation, trackEventCall, enableMultiPalletBin)}
         removeClippedSubviews={false}
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item, index) => `${item.id}-${index}`}
@@ -509,33 +516,33 @@ function AssignLocation(): JSX.Element {
   const dispatch = useDispatch();
   const pickingState = useTypedSelector(state => state.Picking);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const palletsToBin = useTypedSelector(state => state.Binning.pallets);
+  const { pallets: palletsToBin, enableMultiplePalletBin } = useTypedSelector(state => state.Binning);
   const scannedEvent = useTypedSelector(state => state.Global.scannedEvent);
   const userConfigs = useTypedSelector(state => state.User.configs);
   const binPalletsApi = useTypedSelector(state => state.async.binPallets);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
-  const [deletePicks, setDeletePicks] = useState(false);
+  const deletePicksState = useState(false);
   const displayWarningModalState = useState(false);
 
   return (
     <AssignLocationScreen
       palletsToBin={palletsToBin}
       isManualScanEnabled={isManualScanEnabled}
-      useEffectHook={useEffect}
       dispatch={dispatch}
       navigation={navigation}
       route={route}
+      useEffectHook={useEffect}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
       scannedEvent={scannedEvent}
       binPalletsApi={binPalletsApi}
       pickingState={pickingState}
       updatePicklistStatusApi={updatePicklistStatusApi}
-      deletePicks={deletePicks}
-      setDeletePicks={setDeletePicks}
       trackEventCall={trackEvent}
       userConfigs={userConfigs}
+      deletePicksState={deletePicksState}
       displayWarningModalState={displayWarningModalState}
-      useCallbackHook={useCallback}
-      useFocusEffectHook={useFocusEffect}
+      enableMultiPalletBin={enableMultiplePalletBin}
     />
   );
 }

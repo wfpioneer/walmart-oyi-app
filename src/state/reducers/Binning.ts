@@ -4,7 +4,9 @@ import {
   CLEAR_BIN_LOCATION,
   CLEAR_PALLETS,
   DELETE_PALLET,
-  SET_BIN_LOCATION
+  SET_BIN_LOCATION,
+  TOGGLE_BIN_MENU,
+  TOGGLE_MULTI_BIN
 } from '../actions/Binning';
 
 import { BinningPallet } from '../../models/Binning';
@@ -12,14 +14,19 @@ import { BinningPallet } from '../../models/Binning';
 export interface StateType {
   pallets: BinningPallet[];
   binLocation: number | string | null;
+  enableMultiplePalletBin: boolean;
+  showBinningMenu: boolean;
 }
 
 const initialState: StateType = {
   pallets: [],
-  binLocation: null
+  binLocation: null,
+  enableMultiplePalletBin: false,
+  showBinningMenu: false
 };
 
-export const Binning = (state = initialState, action: Actions) => {
+// eslint-disable-next-line default-param-last
+export const Binning = (state = initialState, action: Actions): StateType => {
   switch (action.type) {
     case ADD_PALLET:
       return {
@@ -45,6 +52,16 @@ export const Binning = (state = initialState, action: Actions) => {
       return {
         ...state,
         binLocation: null
+      };
+    case TOGGLE_MULTI_BIN:
+      return {
+        ...state,
+        enableMultiplePalletBin: action.payload === undefined ? !state.enableMultiplePalletBin : action.payload
+      };
+    case TOGGLE_BIN_MENU:
+      return {
+        ...state,
+        showBinningMenu: action.payload === undefined ? !state.showBinningMenu : action.payload
       };
     default:
       return state;
