@@ -6,6 +6,7 @@ import {
 } from './Binning';
 import { AsyncState } from '../../models/AsyncState';
 import { mockPallets } from '../../mockData/binning';
+import { UseStateType } from '../../models/Generics.d';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -42,6 +43,8 @@ const navigationProp: NavigationProp<any> = {
 
 let routeProp: RouteProp<any, string>;
 
+const mockUseStateBool: UseStateType<boolean> = [false, jest.fn()];
+
 describe('BinningScreen', () => {
   describe('Tests rendering the BinningScreen component', () => {
     it('Test renders the default BinningScreen ', () => {
@@ -58,6 +61,10 @@ describe('BinningScreen', () => {
           scannedEvent={defaultScannedEvent}
           isMounted={{ current: false }}
           trackEventCall={jest.fn()}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={false}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -77,6 +84,10 @@ describe('BinningScreen', () => {
           scannedEvent={defaultScannedEvent}
           isMounted={{ current: false }}
           trackEventCall={jest.fn()}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={false}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -114,8 +125,61 @@ describe('BinningScreen', () => {
           scannedEvent={defaultScannedEvent}
           isMounted={{ current: false }}
           trackEventCall={jest.fn()}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={false}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
         />
       );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders the binning screen in multiple bin mode', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <BinningScreen
+          scannedPallets={[]}
+          navigation={navigationProp}
+          dispatch={jest.fn}
+          isManualScanEnabled={true}
+          useEffectHook={jest.fn}
+          route={routeProp}
+          getPalletDetailsApi={defaultAsyncState}
+          scannedEvent={defaultScannedEvent}
+          isMounted={{ current: false }}
+          trackEventCall={jest.fn()}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={true}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+        />
+      );
+
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('renders the binning screen with unsaved warning modal', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      mockUseStateBool.splice(0, 1, true);
+      renderer.render(
+        <BinningScreen
+          scannedPallets={[]}
+          navigation={navigationProp}
+          dispatch={jest.fn}
+          isManualScanEnabled={true}
+          useEffectHook={jest.fn}
+          route={routeProp}
+          getPalletDetailsApi={defaultAsyncState}
+          scannedEvent={defaultScannedEvent}
+          isMounted={{ current: false }}
+          trackEventCall={jest.fn()}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={true}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+        />
+      );
+
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });

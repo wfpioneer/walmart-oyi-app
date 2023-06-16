@@ -81,15 +81,15 @@ describe('Assign Location screen render tests', () => {
       route={routeProp}
       scannedEvent={defaultScannedEvent}
       useEffectHook={jest.fn()}
-      setDeletePicks={jest.fn()}
-      deletePicks={false}
+      useCallbackHook={jest.fn()}
+      useFocusEffectHook={jest.fn()}
       pickingState={mockPickingState}
       updatePicklistStatusApi={defaultAsyncState}
       trackEventCall={jest.fn()}
       userConfigs={mockConfig}
+      deletePicksState={mockUseStateBool}
       displayWarningModalState={mockUseStateBool}
-      useCallbackHook={jest.fn()}
-      useFocusEffectHook={jest.fn()}
+      enableMultiPalletBin={false}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -107,15 +107,15 @@ describe('Assign Location screen render tests', () => {
       route={routeProp}
       scannedEvent={defaultScannedEvent}
       useEffectHook={jest.fn()}
-      setDeletePicks={jest.fn()}
-      deletePicks={false}
       pickingState={mockPickingState}
       updatePicklistStatusApi={defaultAsyncState}
       trackEventCall={jest.fn()}
       userConfigs={mockConfig}
+      deletePicksState={mockUseStateBool}
       displayWarningModalState={mockUseStateBool}
       useCallbackHook={jest.fn()}
       useFocusEffectHook={jest.fn()}
+      enableMultiPalletBin={false}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -134,15 +134,15 @@ describe('Assign Location screen render tests', () => {
       route={routeProp}
       scannedEvent={defaultScannedEvent}
       useEffectHook={jest.fn()}
-      setDeletePicks={jest.fn()}
-      deletePicks={false}
       pickingState={mockPickingState}
       updatePicklistStatusApi={defaultAsyncState}
       trackEventCall={jest.fn()}
       userConfigs={mockConfig}
+      deletePicksState={mockUseStateBool}
       displayWarningModalState={mockUseStateBool}
       useCallbackHook={jest.fn()}
       useFocusEffectHook={jest.fn()}
+      enableMultiPalletBin={false}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -162,15 +162,15 @@ describe('Assign Location screen render tests', () => {
       route={routeProp}
       scannedEvent={defaultScannedEvent}
       useEffectHook={jest.fn()}
-      setDeletePicks={jest.fn()}
-      deletePicks={false}
       pickingState={mockPickingState}
       updatePicklistStatusApi={defaultAsyncState}
       trackEventCall={jest.fn()}
       userConfigs={mockConfig}
+      deletePicksState={mockUseStateBool}
       displayWarningModalState={mockUseStateBool}
       useCallbackHook={jest.fn()}
       useFocusEffectHook={jest.fn()}
+      enableMultiPalletBin={false}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();

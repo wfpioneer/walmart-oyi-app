@@ -11,6 +11,92 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -89,6 +175,92 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -167,6 +339,92 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -215,6 +473,336 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           </Text>
         </View>
       </View>
+    </View>
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`BinningScreen Tests rendering the BinningScreen component renders the binning screen in multiple bin mode 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "column",
+      }
+    }
+  >
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+    />
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <FlatList
+        ItemSeparatorComponent={[Function]}
+        ListEmptyComponent={
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
+          >
+            <Memo(Pressable)
+              onPress={[Function]}
+            >
+              <mockConstructor
+                color="#000000"
+                name="barcode-scan"
+                size={100}
+              />
+            </Memo(Pressable)>
+            <View
+              style={
+                Object {
+                  "paddingTop": 30,
+                }
+              }
+            >
+              <Text>
+                [missing "en.BINNING.SCAN_PALLET" translation]
+              </Text>
+            </View>
+          </View>
+        }
+        contentContainerStyle={
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+        data={Array []}
+        keyExtractor={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+      />
+    </View>
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`BinningScreen Tests rendering the BinningScreen component renders the binning screen with unsaved warning modal 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "column",
+      }
+    }
+  >
+    <ManualScanComponent
+      keyboardType="numeric"
+      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+    />
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <FlatList
+        ItemSeparatorComponent={[Function]}
+        ListEmptyComponent={
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
+          >
+            <Memo(Pressable)
+              onPress={[Function]}
+            >
+              <mockConstructor
+                color="#000000"
+                name="barcode-scan"
+                size={100}
+              />
+            </Memo(Pressable)>
+            <View
+              style={
+                Object {
+                  "paddingTop": 30,
+                }
+              }
+            >
+              <Text>
+                [missing "en.BINNING.SCAN_PALLET" translation]
+              </Text>
+            </View>
+          </View>
+        }
+        contentContainerStyle={
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          }
+        }
+        data={Array []}
+        keyExtractor={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+      />
     </View>
   </View>
 </KeyboardAvoidingView>
