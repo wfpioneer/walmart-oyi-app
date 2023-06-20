@@ -14,6 +14,7 @@ import { Configurations } from '../models/User';
 import Home from '../screens/Home/Home';
 import Feedback from '../screens/Feedback/Feedback';
 import COLOR from '../themes/Color';
+import { getEnvironment } from '../utils/environment';
 import styles from './HomeNavigator.style';
 import { setLanguage, strings } from '../locales';
 import { logoutUser } from '../state/actions/User';
@@ -96,16 +97,16 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
   };
 
   const logoutPFUser = async () => {
+    const urls = getEnvironment();
     const config = {
-      issuer: 'https://pfedcert.wal-mart.com'
+      issuer: urls.pingFedURL
     };
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const result = await logout(config, {
+    return logout(config, {
       idToken: props.userTokens.idToken,
       postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
     });
-    return result;
   };
 
   ActionSheet.showActionSheetWithOptions(

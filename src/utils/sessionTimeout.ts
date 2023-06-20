@@ -4,15 +4,15 @@ import { AuthorizeResult, refresh } from 'react-native-app-auth';
 import { logoutUser, setUserTokens } from '../state/actions/User';
 import store from '../state';
 import { trackEvent } from './AppCenterTool';
-import { clearEndTime } from '../state/actions/SessionTimeout';
+import { getEnvironment, getPingFedClientId } from './environment';
 
-const sessionLength = 2;
 export const sessionEnd = (): number => moment(store.getState().User.userTokens.accessTokenExpirationDate).unix();
 
 const attemptRefresh = async () => {
+  const urls = getEnvironment();
   const refreshConfig = {
-    issuer: 'https://pfedcert.wal-mart.com',
-    clientId: 'intl_sams_oyi_stg',
+    issuer: urls.pingFedURL,
+    clientId: getPingFedClientId(),
     redirectUrl: 'com.samsclub.intl.oyi://oauth',
     scopes: ['openid full']
   };
@@ -34,18 +34,18 @@ const attemptRefresh = async () => {
 
 export async function validateSession(navigation: NavigationProp<any>, route?: string): Promise<void> {
   try {
-    const endTime = store.getState().SessionTimeout;
-
     const {
       accessToken
     } = store.getState().User.userTokens;
 
-    const introspectionResponse = await fetch('https://pfedcert.wal-mart.com/as/introspect.oauth2', {
+    const urls = getEnvironment();
+
+    const introspectionResponse = await fetch(`${urls.pingFedURL}/as/introspect.oauth2`, {
       method: 'POST',
       body: new URLSearchParams({
         token: accessToken,
         token_type_hint: 'access_token',
-        client_id: 'intl_sams_oyi_stg'
+        client_id: getPingFedClientId()
       }).toString(),
       headers: {
         Accept: 'application/json',

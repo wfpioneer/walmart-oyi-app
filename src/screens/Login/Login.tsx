@@ -26,7 +26,9 @@ import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
-import { getBuildEnvironment } from '../../utils/environment';
+import {
+  Environment, getBuildEnvironment, getEnvironment, getPingFedClientId
+} from '../../utils/environment';
 import COLOR from '../../themes/Color';
 import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
 import { AsyncState } from '../../models/AsyncState';
@@ -130,16 +132,17 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
 export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
   try {
     dispatch(showActivityModal());
+    const urls : Environment = getEnvironment();
     const config = {
-      issuer: 'https://pfedcert.wal-mart.com',
-      clientId: 'intl_sams_oyi_stg',
+      issuer: urls.pingFedURL,
+      clientId: getPingFedClientId(),
       redirectUrl: 'com.samsclub.intl.oyi://oauth',
       scopes: ['openid full']
     };
 
     const userTokens: AuthorizeResult = await authorize(config);
     dispatch(setUserTokens(userTokens));
-    const userInfoResponse = await fetch('https://pfedcert.wal-mart.com/idp/userinfo.openid', {
+    const userInfoResponse = await fetch(`${urls.pingFedURL}/idp/userinfo.openid`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -153,6 +156,9 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
 
     setLanguage(getSystemLanguage());
     setUserId(userInfo.userPrincipalName);
+    if (parseInt(userInfo['wm-BusinessUnitNumber'], 10)) {
+      userInfo.siteId = parseInt(userInfo['wm-BusinessUnitNumber'], 10);
+    }
     dispatch(loginUser(userInfo));
     trackEvent('user_sign_in');
     if (userInfo['wm-BusinessUnitCategory'] !== 'HO' && userInfo.c !== 'US') {
@@ -171,9 +177,10 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
 
 export const signOutUser = async (dispatch: Dispatch<any>, user: User): Promise<void> => {
   dispatch(showActivityModal());
+  const urls = getEnvironment();
   trackEvent('user_sign_out', { lastPage: 'Login' });
   const config = {
-    issuer: 'https://pfedcert.wal-mart.com'
+    issuer: urls.pingFedURL
   };
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
