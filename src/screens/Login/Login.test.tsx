@@ -1,8 +1,10 @@
 import { NavigationContainer, NavigationContext, NavigationProp } from '@react-navigation/native';
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { authorize } from 'react-native-app-auth';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
+import { Provider } from 'react-redux';
 import { setUserId } from '../../utils/AppCenterTool';
 import Login, {
   LoginScreen,
@@ -11,7 +13,6 @@ import Login, {
   getPrinterDetailsFromAsyncStorage,
   onSubmitClubNbr,
   onSubmitCountryCode,
-  resetClubConfigApiState,
   resetFluffyFeaturesApiState,
   signInUser,
   signOutUser,
@@ -28,7 +29,6 @@ import { sessionEnd } from '../../utils/sessionTimeout';
 import { assignFluffyFeatures, setConfigs, setUserTokens } from '../../state/actions/User';
 import { getClubConfig } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
-import { Provider } from 'react-redux';
 import store from '../../state';
 
 jest.mock('../../utils/AppCenterTool', () => ({

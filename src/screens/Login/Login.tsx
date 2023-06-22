@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import {
   NativeModules, Text, View
 } from 'react-native';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { AuthorizeResult, authorize, logout } from 'react-native-app-auth';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
