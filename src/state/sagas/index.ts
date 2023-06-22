@@ -14,7 +14,6 @@ import WorklistSummaryService from '../../services/WorklistSummary.service';
 import DeleteLocationService from '../../services/DeleteLocation.service';
 import NoActionService from '../../services/NoAction.service';
 import PrintService from '../../services/Print.service';
-import GetLocationDetailsService from '../../services/GetLocationDetails.service';
 import GetFluffyRolesService from '../../services/GetFluffyRoles.service';
 import GetApprovalListService from '../../services/GetApprovalList.service';
 import UpdateApprovalListService from '../../services/UpdateApprovalList.service';
@@ -51,6 +50,11 @@ const genericSagas = [
     GetItemDetailsService.getLocationsForItem
   ),
   makeAsyncSaga(
+    saga.GET_LOCATIONS_FOR_ITEM_V1,
+    actions.getLocationsForItemV1,
+    GetItemDetailsService.getLocationsForItemV1
+  ),
+  makeAsyncSaga(
     saga.GET_ITEM_MANAGER_APPROVAL_HISTORY,
     actions.getItemManagerApprovalHistory,
     GetItemDetailsService.getItemManagerApprovalHistory
@@ -68,6 +72,7 @@ const genericSagas = [
   makeAsyncSaga(saga.EDIT_LOCATION, actions.editLocation, EditLocationService.editLocation),
   makeAsyncSaga(saga.ADD_LOCATION, actions.addLocation, AddLocationService.addLocation),
   makeAsyncSaga(saga.UPDATE_OH_QTY, actions.updateOHQty, UpdateOHQtyService.updateOHQty),
+  makeAsyncSaga(saga.UPDATE_OH_QTY_V1, actions.updateOHQtyV1, UpdateOHQtyService.updateOHQtyV1),
   makeAsyncSaga(saga.GET_WORKLIST_SUMMARY, actions.getWorklistSummary, WorklistSummaryService.getWorklistSummary),
   makeAsyncSaga(
     saga.GET_WORKLIST_SUMMARY_V2,
@@ -77,7 +82,6 @@ const genericSagas = [
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
-  makeAsyncSaga(saga.GET_LOCATION_DETAILS, actions.getLocationDetails, GetLocationDetailsService.getLocation),
   makeAsyncSaga(saga.GET_FLUFFY_FEATURES, actions.getFluffyRoles, GetFluffyRolesService.getFluffyRoles),
   makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList),
   makeAsyncSaga(saga.UPDATE_APPROVAL_LIST, actions.updateApprovalList, UpdateApprovalListService.updateApprovalList),
@@ -109,9 +113,11 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_PALLET_CONFIG, actions.getPalletConfig, PalletManagementService.getPalletConfig),
   makeAsyncSaga(saga.POST_CREATE_PALLET, actions.postCreatePallet, CreatePalletService.createPallet),
   makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS, actions.updatePicklistStatus, PickingService.updatePickListStatus),
+  makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS_V1, actions.updatePicklistStatusV1, PickingService.updatePickListStatusV1),
   makeAsyncSaga(saga.GET_PICKLISTS, actions.getPicklists, PickingService.getPickListService),
   makeAsyncSaga(saga.UPDATE_PALLET_NOT_FOUND, actions.updatePalletNotFound, PickingService.updatePalletNotFound),
   makeAsyncSaga(saga.CREATE_NEW_PICK, actions.createNewPick, PickingService.createNewPick),
+  makeAsyncSaga(saga.CREATE_NEW_PICK_V1, actions.createNewPickV1, PickingService.createNewPickV1),
   makeAsyncSaga(
     saga.REPORT_MISSING_PALLET,
     actions.reportMissingPallet,

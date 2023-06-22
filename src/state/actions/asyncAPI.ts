@@ -15,6 +15,9 @@ export const getItemPicklistHistory = makeAsyncActionCreators(GET_ITEM_PICKLISTH
 export const GET_LOCATIONS_FOR_ITEM = makeAsyncActionTypes('API/GET_LOCATIONS_FOR_ITEM');
 export const getLocationsForItem = makeAsyncActionCreators(GET_LOCATIONS_FOR_ITEM);
 
+export const GET_LOCATIONS_FOR_ITEM_V1 = makeAsyncActionTypes('API/GET_LOCATIONS_FOR_ITEM_V1');
+export const getLocationsForItemV1 = makeAsyncActionCreators(GET_LOCATIONS_FOR_ITEM_V1);
+
 export const GET_ITEM_MANAGERAPPROVALHISTORY = makeAsyncActionTypes('API/GET_ITEM_MANAGERAPPROVALHISTORY');
 export const getItemManagerApprovalHistory = makeAsyncActionCreators(GET_ITEM_MANAGERAPPROVALHISTORY);
 
@@ -39,6 +42,9 @@ export const getPalletWorklist = makeAsyncActionCreators(GET_PALLET_WORKLIST);
 export const UPDATE_OH_QTY = makeAsyncActionTypes('API/UPDATE_OH_QTY');
 export const updateOHQty = makeAsyncActionCreators(UPDATE_OH_QTY);
 
+export const UPDATE_OH_QTY_V1 = makeAsyncActionTypes('API/UPDATE_OH_QTY_V1');
+export const updateOHQtyV1 = makeAsyncActionCreators(UPDATE_OH_QTY_V1);
+
 export const EDIT_LOCATION = makeAsyncActionTypes('API/EDIT_LOCATION');
 export const editLocation = makeAsyncActionCreators(EDIT_LOCATION);
 
@@ -59,9 +65,6 @@ export const noAction = makeAsyncActionCreators(NO_ACTION);
 
 export const PRINT_SIGN = makeAsyncActionTypes('API/PRINT_SIGN');
 export const printSign = makeAsyncActionCreators(PRINT_SIGN);
-
-export const GET_LOCATION_DETAILS = makeAsyncActionTypes('API/GET_LOCATION_DETAILS');
-export const getLocationDetails = makeAsyncActionCreators(GET_LOCATION_DETAILS);
 
 export const GET_FLUFFY_ROLES = makeAsyncActionTypes('API/GET_FLUFFY_ROLES');
 export const getFluffyRoles = makeAsyncActionCreators(GET_FLUFFY_ROLES);
@@ -153,6 +156,9 @@ export const getPalletConfig = makeAsyncActionCreators(GET_PALLET_CONFIG);
 export const UPDATE_PICKLIST_STATUS = makeAsyncActionTypes('API/UPDATE_PICKLIST_STATUS');
 export const updatePicklistStatus = makeAsyncActionCreators(UPDATE_PICKLIST_STATUS);
 
+export const UPDATE_PICKLIST_STATUS_V1 = makeAsyncActionTypes('API/UPDATE_PICKLIST_STATUS_V1');
+export const updatePicklistStatusV1 = makeAsyncActionCreators(UPDATE_PICKLIST_STATUS_V1);
+
 export const GET_PICKLISTS = makeAsyncActionTypes('API/GET_PICKLISTS');
 export const getPicklists = makeAsyncActionCreators(GET_PICKLISTS);
 
@@ -161,6 +167,9 @@ export const updatePalletNotFound = makeAsyncActionCreators(UPDATE_PALLET_NOT_FO
 
 export const CREATE_NEW_PICK = makeAsyncActionTypes('API/CREATE_NEW_PICK');
 export const createNewPick = makeAsyncActionCreators(CREATE_NEW_PICK);
+
+export const CREATE_NEW_PICK_V1 = makeAsyncActionTypes('API/CREATE_NEW_PICK_V1');
+export const createNewPickV1 = makeAsyncActionCreators(CREATE_NEW_PICK_V1);
 
 export const POST_CREATE_PALLET = makeAsyncActionTypes('API/POST_CREATE_PALLET');
 export const postCreatePallet = makeAsyncActionCreators(POST_CREATE_PALLET);

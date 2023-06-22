@@ -57,6 +57,16 @@ const styles = StyleSheet.create({
   },
   otherOHDetails: {
     backgroundColor: COLOR.WHITE
+  },
+  itemQtyView: {
+    flexDirection: 'row'
+  },
+  itemQtyContainer: {
+    flexDirection: 'column'
+  },
+  infoIcon: {
+    paddingTop: 2,
+    paddingRight: 6
   }
 });
 

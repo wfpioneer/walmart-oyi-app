@@ -2,7 +2,6 @@ import { AuthorizeResult } from 'react-native-app-auth';
 import { ConfigResponse } from '../../services/Config.service';
 import User from '../../models/User';
 
-
 export const SET_USER_TOKENS = 'USER/SET_USER_TOKENS';
 export const USER_LOGIN = 'USER/LOGIN';
 export const USER_LOGOUT = 'USER/LOGOUT';

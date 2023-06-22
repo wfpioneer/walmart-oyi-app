@@ -8,8 +8,8 @@
         android:name=".MainApplication"
         tools:replace="networkSecurityConfig"
         android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher_round"
         android:allowBackup="true"
         android:theme="@style/AppTheme"
         android:exported="true"
@@ -22,23 +22,19 @@
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize"
         android:screenOrientation="portrait">
-<!--        <intent-filter android:label="@string/oauth_intent">-->
-<!--          <action android:name="android.intent.action.VIEW" />-->
-<!--          <category android:name="android.intent.category.DEFAULT" />-->
-<!--          <category android:name="android.intent.category.BROWSABLE" />-->
-<!--          &lt;!&ndash; Accepts URIs that begin with "example://gizmos” &ndash;&gt;-->
-<!--          <data android:scheme="com.samsclub.intl.oyi"-->
-<!--            android:host="oauth" />-->
-<!--        </intent-filter>-->
-      </activity>
-        <activity
-            android:name=".SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+      </activity>
+       <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            tools:node="remove" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:label="@string/app_name">
         </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>

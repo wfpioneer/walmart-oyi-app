@@ -27,7 +27,7 @@ import { Pallet, PalletItem, PalletItemDetails } from '../../models/PalletManage
 import { UseStateType } from '../../models/Generics.d';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  deleteUpcs, getPalletConfig, getPalletDetails, updatePalletItemQty, updatePicklistStatus
+  deleteUpcs, getPalletConfig, getPalletDetails, updatePalletItemQty, updatePicklistStatus, updatePicklistStatusV1
 } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
 import {
@@ -35,7 +35,8 @@ import {
   GET_PALLET_CONFIG,
   GET_PALLET_DETAILS,
   UPDATE_PALLET_ITEM_QTY,
-  UPDATE_PICKLIST_STATUS
+  UPDATE_PICKLIST_STATUS,
+  UPDATE_PICKLIST_STATUS_V1
 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
 import { setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
@@ -70,6 +71,8 @@ interface SFWorklfowProps {
   completePalletState: UseStateType<boolean>;
   updateItemsState: UseStateType<boolean>;
   deleteItemsState: UseStateType<boolean>;
+  overridePalletPerishables: boolean;
+  inProgress: boolean;
 }
 
 export const activityIndicatorEffect = (
@@ -101,6 +104,7 @@ export const activityIndicatorEffect = (
 
 const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+  dispatch({ type: UPDATE_PICKLIST_STATUS_V1.RESET });
 };
 
 export const updatePicklistStatusApiEffect = (
@@ -111,7 +115,7 @@ export const updatePicklistStatusApiEffect = (
 ) => {
   // on api success
   if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result) {
-    if (updatePicklistStatusApi.result.status === 200) {
+    if ((updatePicklistStatusApi.result.status === 200 || updatePicklistStatusApi.result.status === 204)) {
       const updatedItems = items.map(item => ({
         ...item,
         status: PickStatus.COMPLETE
@@ -226,7 +230,7 @@ export const palletConfigApiEffect = (
     }
     // on api error
     if (getPalletConfigApi.error) {
-      const backupPerishableCategories = backupCategories.split(',').map(Number);
+      const backupPerishableCategories = backupCategories.split('-').map(Number);
       dispatch(setPerishableCategories(backupPerishableCategories));
       dispatch({ type: GET_PALLET_CONFIG.RESET });
       setConfigComplete(true);
@@ -241,7 +245,8 @@ export const binApisEffect = (
   isDeleteItemsState: UseStateType<boolean>,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
-  selectedPicks: PickListItem[]
+  selectedPicks: PickListItem[],
+  inProgress: boolean
 ) => {
   if (
     navigation.isFocused()
@@ -260,10 +265,17 @@ export const binApisEffect = (
         palletId: pick.palletId
       }));
 
-      dispatch(updatePicklistStatus({
-        headers: { action: PickAction.READY_TO_BIN },
-        picklistItems: selectedPickItems
-      }));
+      if (inProgress) {
+        dispatch(updatePicklistStatusV1({
+          headers: { action: PickAction.READY_TO_BIN },
+          picklistItems: selectedPickItems
+        }));
+      } else {
+        dispatch(updatePicklistStatus({
+          headers: { action: PickAction.READY_TO_BIN },
+          picklistItems: selectedPickItems
+        }));
+      }
       dispatch({ type: UPDATE_PALLET_ITEM_QTY.RESET });
       dispatch({ type: DELETE_UPCS.RESET });
       setIsUpdateItems(false);
@@ -360,7 +372,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     showExpiryPromptState, perishableCategories, backupCategories,
     configCompleteState, showActivity, updatePalletItemsApi,
     deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
-    updateItemsState, deleteItemsState
+    updateItemsState, deleteItemsState, overridePalletPerishables, inProgress
   } = props;
 
   const [expirationDate, setExpiration] = expirationState;
@@ -378,8 +390,12 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   useEffectHook(() => navigation.addListener('focus', () => {
     if (perishableCategories.length) {
       dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId], isAllItems: true }));
-    } else {
+    } else if (!overridePalletPerishables) {
       dispatch(getPalletConfig());
+    } else {
+      const backupPerishableCategories = backupCategories.split('-').map(Number);
+      dispatch(setPerishableCategories(backupPerishableCategories));
+      setConfigComplete(true);
     }
   }), []);
 
@@ -437,7 +453,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     deleteItemsState,
     navigation,
     dispatch,
-    selectedPicks
+    selectedPicks,
+    inProgress
   ), [updatePalletItemsApi, deletePalletItemsApi, isUpdateItems, isDeleteItems]);
 
   const handleBin = (newExpirationDate?: string) => {
@@ -498,12 +515,21 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
       palletId: pick.palletId
     }));
     // dispatch picks to complete
-    dispatch(
-      updatePicklistStatus({
-        headers: { action: PickAction.COMPLETE },
-        picklistItems: selectedPickItems
-      })
-    );
+    if (inProgress) {
+      dispatch(
+        updatePicklistStatusV1({
+          headers: { action: PickAction.COMPLETE },
+          picklistItems: selectedPickItems
+        })
+      );
+    } else {
+      dispatch(
+        updatePicklistStatus({
+          headers: { action: PickAction.COMPLETE },
+          picklistItems: selectedPickItems
+        })
+      );
+    }
   };
 
   const getCurrentQuantity = (item: PickListItem) => (typeof item.newQuantityLeft === 'number'
@@ -686,6 +712,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         pickStatus={selectedPicks[0].status}
         canDelete={false}
         dispatch={dispatch}
+        showCheckbox={false}
+        inProgress={inProgress}
       />
       <View style={styles.updateQuantityTextView}>
         <Text style={styles.updateQuantityText}>
@@ -719,13 +747,14 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
 const SalesFloorWorkflow = () => {
   const pickingState = useTypedSelector(state => state.Picking);
-  const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
+  const { backupCategories, overridePalletPerishables, inProgress } = useTypedSelector(state => state.User.configs);
+  const updatePicklistStatusApi = inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
+    : useTypedSelector(state => state.async.updatePicklistStatus);
   const palletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const palletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const updatePalletItemsApi = useTypedSelector(state => state.async.updatePalletItemQty);
   const deletePalletItemsApi = useTypedSelector(state => state.async.deleteUpcs);
   const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
-  const { backupCategories } = useTypedSelector(state => state.User.configs);
   const { showActivity } = useTypedSelector(state => state.modal);
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
@@ -784,6 +813,7 @@ const SalesFloorWorkflow = () => {
           perishableItemsState={perishableItemsState}
           perishableCategories={perishableCategories}
           backupCategories={backupCategories}
+          overridePalletPerishables={overridePalletPerishables}
           showExpiryPromptState={showExpiryPromptState}
           configCompleteState={configCompleteState}
           showActivity={showActivity}
@@ -792,6 +822,7 @@ const SalesFloorWorkflow = () => {
           completePalletState={completePalletState}
           updateItemsState={updateItemsState}
           deleteItemsState={deleteItemsState}
+          inProgress={inProgress}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

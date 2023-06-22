@@ -10,8 +10,14 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import com.walmart.ssmp.platform.core.PlatformCore;
+import com.walmart.ssmp.platform.core.di.CoreComponent;
+import com.walmart.ssmp.platform.core.helpers.PlatformCoreProvider;
+import dagger.android.AndroidInjector;
+import androidx.work.Configuration;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application implements ReactApplication, PlatformCoreProvider {
+  private PlatformCore platformCore = null;
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -44,7 +50,42 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+
+    initialize();
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+  }
+
+  // Add the following method
+  @Override
+  public AndroidInjector < Object > androidInjector() {
+    initialize();
+    return platformCore.androidInjector();
+  }
+
+  // Add the following method
+  @Override
+  public Configuration getWorkManagerConfiguration() {
+    initialize();
+    return platformCore.workManagerConfiguration();
+  }
+
+  // Add the following method
+  @Override
+  public CoreComponent coreComponent() {
+    initialize();
+    return platformCore.coreComponent();
+  }
+
+  // Add the following method
+  private void initialize() {
+    if (platformCore == null) {
+      synchronized(this) {
+        if (platformCore == null) {
+          platformCore = new PlatformCore();
+          platformCore.initialize(this);
+        }
+      }
+    }
   }
 
   /**

@@ -1,9 +1,11 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { Provider } from 'react-redux';
 import ListGroup, { CollapsibleCard } from './ListGroup';
 import { mockPickLists } from '../../mockData/mockPickList';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
+import store from '../../state';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('@react-navigation/native', () => ({
@@ -16,15 +18,17 @@ describe('ListGroup', () => {
     it('Test renders the ListGroup component with groupItems prop as false', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <ListGroup
-          groupItems={false}
-          pickListItems={mockPickLists}
-          title="ABAR-2"
-          currentTab={Tabs.PICK}
-          dispatch={jest.fn()}
-          multiBinEnabled={false}
-          multiPickEnabled={false}
-        />
+        <Provider store={store}>
+          <ListGroup
+            groupItems={false}
+            pickListItems={mockPickLists}
+            title="ABAR-2"
+            currentTab={Tabs.PICK}
+            dispatch={jest.fn()}
+            multiBinEnabled={false}
+            multiPickEnabled={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -53,15 +57,17 @@ describe('ListGroup', () => {
         }
       ];
       renderer.render(
-        <ListGroup
-          groupItems={true}
-          pickListItems={newMockPickLists}
-          title="ABAR-2"
-          currentTab={Tabs.PICK}
-          dispatch={jest.fn()}
-          multiBinEnabled={false}
-          multiPickEnabled={false}
-        />
+        <Provider store={store}>
+          <ListGroup
+            groupItems={true}
+            pickListItems={newMockPickLists}
+            title="ABAR-2"
+            currentTab={Tabs.PICK}
+            dispatch={jest.fn()}
+            multiBinEnabled={false}
+            multiPickEnabled={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -90,15 +96,17 @@ describe('ListGroup', () => {
         }
       ];
       renderer.render(
-        <ListGroup
-          groupItems={true}
-          pickListItems={newMockPickLists}
-          title="ABAR-2"
-          currentTab={Tabs.PICK}
-          dispatch={jest.fn()}
-          multiBinEnabled={true}
-          multiPickEnabled={false}
-        />
+        <Provider store={store}>
+          <ListGroup
+            groupItems={true}
+            pickListItems={newMockPickLists}
+            title="ABAR-2"
+            currentTab={Tabs.PICK}
+            dispatch={jest.fn()}
+            multiBinEnabled={true}
+            multiPickEnabled={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -127,15 +135,17 @@ describe('ListGroup', () => {
         }
       ];
       renderer.render(
-        <ListGroup
-          groupItems={true}
-          pickListItems={newMockPickLists}
-          title="ABAR-2"
-          currentTab={Tabs.PICK}
-          dispatch={jest.fn()}
-          multiBinEnabled={false}
-          multiPickEnabled={true}
-        />
+        <Provider store={store}>
+          <ListGroup
+            groupItems={true}
+            pickListItems={newMockPickLists}
+            title="ABAR-2"
+            currentTab={Tabs.PICK}
+            dispatch={jest.fn()}
+            multiBinEnabled={false}
+            multiPickEnabled={true}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });

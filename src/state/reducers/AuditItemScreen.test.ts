@@ -1,5 +1,6 @@
 import {
   clearAuditScreenData,
+  setApprovalItem,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
@@ -11,6 +12,7 @@ import {
 import { AuditItemScreen, AuditItemScreenState, initialState } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
 import { mockPalletLocations } from '../../mockData/getItemPallets';
+import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../models/ApprovalListItem';
 
 describe('The Audit Item Screen Reducer', () => {
   // Intitial State
@@ -118,6 +120,35 @@ describe('The Audit Item Screen Reducer', () => {
       ...mockInitialReserveState,
       reserveLocations: mockPalletLocations
     };
+    expect(testResults).toStrictEqual(changedState);
+  });
+
+  it('set approval item', () => {
+    const mockApprovalItem: ApprovalListItem = {
+      imageUrl: undefined,
+      itemName: 'Nature Valley Crunchy Cereal Bars ',
+      itemNbr: 123,
+      upcNbr: 40000000123,
+      categoryNbr: 1,
+      categoryDescription: 'SNACKS',
+      subCategoryNbr: 1,
+      subCategoryDescription: '',
+      newQuantity: 20,
+      oldQuantity: 5,
+      dollarChange: 150.50,
+      initiatedUserId: 'Associate Employee',
+      initiatedTimestamp: '2021-03-27T00:00:00.000Z',
+      approvalStatus: approvalStatus.Pending,
+      approvalRequestSource: approvalRequestSource.ItemDetails,
+      isChecked: false,
+      daysLeft: 3
+    };
+
+    const changedState = {
+      ...testInitialState,
+      approvalItem: mockApprovalItem
+    };
+    const testResults = AuditItemScreen(testInitialState, setApprovalItem(mockApprovalItem));
     expect(testResults).toStrictEqual(changedState);
   });
 });

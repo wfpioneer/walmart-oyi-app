@@ -272,7 +272,89 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
           test item
         </Text>
       </View>
-      <View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.ITEM.ON_HANDS" translation] 12
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`SortBar Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
+<View
+  style={
+    Object {
+      "marginTop": 2,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "opacity": 1,
+        "padding": 5,
+        "paddingLeft": 10,
+        "width": "100%",
+      }
+    }
+    testID="itemCard"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "flexShrink": 1,
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+      testID="item-details"
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
         <Text
           style={
             Object {
@@ -283,8 +365,108 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
             }
           }
         >
-          [missing "en.ITEM.ON_HANDS" translation] 12
+          [missing "en.GENERICS.ITEM" translation] 1234
         </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 14,
+              "marginVertical": 2,
+            }
+          }
+        >
+          test item
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.ITEM.ON_HANDS" translation] 12
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+             (10)
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            allowFontScaling={false}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#e74517",
+                  "fontSize": 12,
+                },
+                Object {
+                  "paddingRight": 6,
+                  "paddingTop": 2,
+                },
+                Object {
+                  "fontFamily": "FontAwesome5Free-Solid",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {
+                  "fontWeight": "900",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
+          </Text>
+        </View>
       </View>
     </View>
   </View>

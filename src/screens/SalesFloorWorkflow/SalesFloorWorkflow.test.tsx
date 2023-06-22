@@ -2,7 +2,12 @@ import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { DELETE_UPCS, UPDATE_PALLET_ITEM_QTY, UPDATE_PICKLIST_STATUS } from '../../state/actions/saga';
+import {
+  DELETE_UPCS,
+  UPDATE_PALLET_ITEM_QTY,
+  UPDATE_PICKLIST_STATUS,
+  UPDATE_PICKLIST_STATUS_V1
+} from '../../state/actions/saga';
 import { strings } from '../../locales';
 import { mockItem } from '../../mockData/mockPickList';
 import { AsyncState } from '../../models/AsyncState';
@@ -154,6 +159,8 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
 
@@ -189,6 +196,8 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
 
@@ -227,6 +236,8 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -273,6 +284,8 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
 
@@ -321,6 +334,8 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
 
@@ -369,6 +384,8 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
 
@@ -417,6 +434,8 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
 
@@ -483,6 +502,8 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
+        overridePalletPerishables={false}
+        inProgress={false}
       />
     );
 
@@ -550,9 +571,14 @@ describe('Sales floor workflow tests', () => {
       ];
       const perishableCategories: number[] = [72];
       palletDetailsApiEffect(
-        navigationProp, successApi, selectedPicks,
-        mockDispatch, mockSetExpiration, mockSetPerishables,
-        mockSetIsReadytoComplete, perishableCategories
+        navigationProp,
+        successApi,
+        selectedPicks,
+        mockDispatch,
+        mockSetExpiration,
+        mockSetPerishables,
+        mockSetIsReadytoComplete,
+        perishableCategories,
       );
       expect(mockSetPerishables).toBeCalledTimes(1);
       expect(mockSetPerishables).toBeCalledWith([2]);
@@ -578,9 +604,14 @@ describe('Sales floor workflow tests', () => {
       ];
       const perishableCategories: number[] = [72];
       palletDetailsApiEffect(
-        navigationProp, failureAPI, selectedPicks,
-        mockDispatch, mockSetExpiration, mockSetPerishables,
-        mockSetIsReadytoComplete, perishableCategories
+        navigationProp,
+        failureAPI,
+        selectedPicks,
+        mockDispatch,
+        mockSetExpiration,
+        mockSetPerishables,
+        mockSetIsReadytoComplete,
+        perishableCategories
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -645,7 +676,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsCalledState,
         navigationProp,
         mockDispatch,
-        mockSelectedItems
+        mockSelectedItems,
+        false
       );
       expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PICKLIST_STATUS }));
@@ -660,7 +692,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsCalledState,
         navigationProp,
         mockDispatch,
-        mockSelectedItems
+        mockSelectedItems,
+        false
       );
       expect(mockDispatch).not.toBeCalled();
       expect(Toast.show).toBeCalledTimes(1);
@@ -675,11 +708,37 @@ describe('Sales floor workflow tests', () => {
         deleteItemsCalledState,
         navigationProp,
         mockDispatch,
-        mockSelectedItems
+        mockSelectedItems,
+        false
       );
       expect(mockDispatch).not.toBeCalled();
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ text1: strings('PALLET.SAVE_PALLET_FAILURE') }));
+    });
+
+    it('tests the bin apis effect with inProgress flag enabled', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {},
+        value: {}
+      };
+      const updateItemsCalledState: UseStateType<boolean> = [true, mockSetIsUpdateItems];
+      const deleteItemsCalledState: UseStateType<boolean> = [true, mockSetIsDeleteItems];
+
+      // success
+      binApisEffect(
+        successApi,
+        successApi,
+        updateItemsCalledState,
+        deleteItemsCalledState,
+        navigationProp,
+        mockDispatch,
+        mockSelectedItems,
+        true
+      );
+      expect(mockDispatch).toBeCalledTimes(3);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PICKLIST_STATUS_V1 }));
+      expect(Toast.show).not.toBeCalled();
     });
 
     it('tests the activity indicator hook', () => {
@@ -975,7 +1034,7 @@ describe('Sales floor workflow tests', () => {
       };
       updatePicklistStatusApiEffect(successApi, mockSelectedItems, mockDispatch, navigationProp);
       expect(navigationProp.goBack).toHaveBeenCalled();
-      expect(mockDispatch).toBeCalledTimes(3);
+      expect(mockDispatch).toBeCalledTimes(4);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistSuccess);
     });
@@ -993,7 +1052,7 @@ describe('Sales floor workflow tests', () => {
         position: 'bottom'
       };
       updatePicklistStatusApiEffect(failureApi, mockSelectedItems, mockDispatch, navigationProp);
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
     });
@@ -1017,7 +1076,7 @@ describe('Sales floor workflow tests', () => {
         position: 'bottom'
       };
       updatePicklistStatusApiEffect(failureApi, mockSelectedItems, mockDispatch, navigationProp);
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
     });
