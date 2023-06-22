@@ -133,13 +133,17 @@ flows:
   sonar:
     - call: sonar-fetch-remote-fix-ref
     - group("Publish Sonar"):
-        - (name [sonar]) sonar-scanner
-          -Dproject.settings=sonar-project.properties
-          -Dsonar.pullrequest.github.repository=IntlSamsTech/oyi-app
-          -Dsonar.pullrequest.key=${GITHUB_PR_NUMBER}
-          -Dsonar.pullrequest.branch=${GITHUB_PR_SOURCE_BRANCH}
-          -Dsonar.pullrequest.base=${GITHUB_PR_TARGET_BRANCH}
-          -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}
+        - if: '%{ (GITHUB_PR_SOURCE_BRANCH ?: '') != '' }'
+          then: (name [sonar]) sonar-scanner
+            -Dproject.settings=sonar-project.properties
+            -Dsonar.pullrequest.github.repository=IntlSamsTech/oyi-app
+            -Dsonar.pullrequest.key=${GITHUB_PR_NUMBER}
+            -Dsonar.pullrequest.branch=${GITHUB_PR_SOURCE_BRANCH}
+            -Dsonar.pullrequest.base=${GITHUB_PR_TARGET_BRANCH}
+            -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}
+          else: (name [sonar]) sonar-scanner 
+            -Dproject.settings=sonar-project.properties 
+            -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}
         - hygieia.publishSonar
   sonar-fetch-remote-fix-ref:
     shell: |
