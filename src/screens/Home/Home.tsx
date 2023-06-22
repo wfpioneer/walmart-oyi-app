@@ -23,10 +23,20 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
-import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
+import { WorklistGoal, WorklistSummary, WorklistType } from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
+
+interface WorklistGoalMove {
+  worklistType: WorklistType;
+  destinationGoal: WorklistGoal;
+}
+
+interface NativeWorklist {
+  worklistType: WorklistType;
+  nativeGoal: WorklistGoal
+}
 
 export const resetUserConfigUpdateApiState = () => ({ type: UPDATE_USER_CONFIG.RESET });
 const mapStateToProps = (state: RootState) => ({
@@ -176,6 +186,83 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     return null;
   };
 
+  /**
+   * This is a method to move certain worklist summaries from one goal to another.
+   * The purpose for this is to allow for the BE to keep its organization while presenting
+   * the information in a state more useable by the in store associates
+   *
+   * @param givenGoals The goals that are provided by the BE service
+   * @param moves This is how we signify that a worklist summary should go in a different goal
+   * @returns the newly reorganized goals that will be displayed
+   */
+  // eslint-disable-next-line react/no-unused-class-component-methods
+  reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGoalMove[]): WorklistSummary[] => {
+    const itemsGoal: WorklistSummary = {
+      totalCompletedItems: 0,
+      totalItems: 0,
+      worklistEndGoalPct: 0,
+      worklistGoal: WorklistGoal.ITEMS,
+      worklistGoalPct: 0,
+      worklistTypes: []
+    };
+    const palletsGoal: WorklistSummary = {
+      totalCompletedItems: 0,
+      totalItems: 0,
+      worklistEndGoalPct: 0,
+      worklistGoal: WorklistGoal.PALLETS,
+      worklistGoalPct: 0,
+      worklistTypes: []
+    };
+    const auditsGoal: WorklistSummary = {
+      totalCompletedItems: 0,
+      totalItems: 0,
+      worklistEndGoalPct: 0,
+      worklistGoal: WorklistGoal.AUDITS,
+      worklistGoalPct: 0,
+      worklistTypes: []
+    };
+    const newGoals: WorklistSummary[] = [itemsGoal, palletsGoal, auditsGoal];
+
+    const auditsIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.AUDITS);
+    const palletIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.PALLETS);
+    const itemsIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.ITEMS);
+    givenGoals.forEach((goal, index) => {
+      goal.worklistTypes.forEach(worklist => {
+        const moveToDo = moves.find(move => move.worklistType === worklist.worklistType);
+
+        let editIndex = -1;
+        if (moveToDo) {
+          switch (moveToDo.destinationGoal) {
+            case WorklistGoal.AUDITS:
+              editIndex = auditsIndex;
+              break;
+            case WorklistGoal.ITEMS:
+              editIndex = itemsIndex;
+              break;
+            case WorklistGoal.PALLETS:
+              editIndex = palletIndex;
+              break;
+            default:
+          }
+        } else {
+          editIndex = index;
+        }
+
+        newGoals[editIndex].worklistTypes.push(worklist);
+        newGoals[editIndex].totalItems += worklist.totalItems;
+        newGoals[editIndex].totalCompletedItems += worklist.completedItems;
+      });
+
+      newGoals[index].worklistEndGoalPct = goal.worklistEndGoalPct;
+    });
+
+    newGoals.forEach(goal => {
+      goal.worklistGoalPct = Math.round((goal.totalCompletedItems / goal.totalItems) * 100);
+    });
+
+    return newGoals;
+  };
+
   render(): ReactNode {
     const { worklistSummaryApiState, worklistSummaryV2ApiState } = this.props;
     if (worklistSummaryApiState.isWaiting || worklistSummaryV2ApiState.isWaiting) {
@@ -221,6 +308,24 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
 
+    const reorganizedGoals = this.reorganizeGoals(data, [
+      {
+        worklistType: 'NSFQ',
+        destinationGoal: WorklistGoal.PALLETS
+      }
+    ]);
+
+    const nativeWorklists: NativeWorklist[] = [];
+
+    data.forEach(worklist => {
+      worklist.worklistTypes.forEach(worklistType => {
+        nativeWorklists.push({
+          worklistType: worklistType.worklistType,
+          nativeGoal: worklist.worklistGoal
+        });
+      });
+    });
+
     const onGoalTitlePress = (index : number) => {
       this.setState({
         activeGoal: index
@@ -240,7 +345,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       }
     };
 
-    const renderGoalCircles = () => data.map((goal, index) => {
+    const renderGoalCircles = () => reorganizedGoals.map((goal, index) => {
       const goalTitle = getWorklistGoalTitle(goal.worklistGoal);
       const palletWorklistsEnabled = this.props.userConfig.palletWorklists;
       const auditsWorklistsEnabled = this.props.userConfig.auditWorklists
@@ -268,16 +373,16 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       );
     });
 
-    const dataSummary = data[this.state.activeGoal];
+    const goalSummary = reorganizedGoals[this.state.activeGoal];
     const isRollOverComplete = () => {
-      const rollOverSummary = dataSummary.worklistTypes.find(wlType => wlType.worklistType === 'RA');
+      const rollOverSummary = goalSummary.worklistTypes.find(wlType => wlType.worklistType === 'RA');
       if (rollOverSummary) {
         return rollOverSummary.totalItems === 0 || rollOverSummary.completedItems === rollOverSummary.totalItems;
       }
       return true;
     };
 
-    const renderWorklistCards = () => dataSummary.worklistTypes
+    const renderWorklistCards = () => goalSummary.worklistTypes
       .map(worklist => {
         const rollOverAuditWLEnabled = this.props.userConfig.showRollOverAudit;
         const inProgressEnabled = this.props.userConfig.inProgress;
@@ -294,8 +399,9 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const worklistType = worklist.worklistType === 'MP'
           ? strings('EXCEPTION.MISSING_PALLETS')
           : exceptionTypeToDisplayString(worklist?.worklistType.toUpperCase() ?? '');
-        const isPalletWorklist = dataSummary.worklistGoal === WorklistGoal.PALLETS;
-        const isAuditWorklist = dataSummary.worklistGoal === WorklistGoal.AUDITS;
+        const nativeWorklist = nativeWorklists.find(nativeWl => nativeWl.worklistType === worklist.worklistType);
+        const isPalletWorklist = nativeWorklist?.nativeGoal === WorklistGoal.PALLETS;
+        const isAuditWorklist = nativeWorklist?.nativeGoal === WorklistGoal.AUDITS;
 
         const onWorklistCardPress = () => {
           trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
@@ -340,7 +446,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             goal={worklist.totalItems}
             complete={worklist.completedItems}
             completionPercentage={completionPercentageValue}
-            completionGoal={dataSummary.worklistEndGoalPct}
+            completionGoal={goalSummary.worklistEndGoalPct}
             onPress={onWorklistCardPress}
             pendingPercentage={pendingPercentageValue}
             inProgress={inProgressEnabled}
