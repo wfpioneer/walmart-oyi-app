@@ -59,7 +59,7 @@ const pkg = require('../../../package.json');
 const CN_ASSOCIATE_ROLES = ['on hands change'];
 
 // This method merges our hard-coded Associate roles with our fluffy response
-const addCNAssociateRoleOverrides = (
+export const addCNAssociateRoleOverrides = (
   fluffyRoles: string[]
 ): string[] => Array.from(new Set([...fluffyRoles, ...CN_ASSOCIATE_ROLES]));
 
@@ -73,7 +73,7 @@ export interface LoginScreenProps {
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
-const getSystemLanguage = (): string => {
+export const getSystemLanguage = (): string => {
   let sysLang = '';
   if (NativeModules.I18nManager) {
     sysLang = NativeModules.I18nManager.localeIdentifier;
@@ -93,12 +93,19 @@ const getSystemLanguage = (): string => {
 };
 
 const userIsSignedIn = (user: User): boolean => user.sAMAccountName !== '' && user.userTokens.accessToken !== '';
-const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => void, onSubmitCN: () => void}) => {
+export const SelectCountryCodeModal = (
+  props: {
+    onSignOut: () => void,
+    onSubmitMX:() => void,
+    onSubmitCN: () => void
+  }
+) => {
   const { onSignOut, onSubmitCN, onSubmitMX } = props;
   return (
     <View style={styles.modalContainer}>
       <View style={styles.closeContainer}>
         <IconButton
+          testID="closeButton"
           icon={ModalCloseIcon}
           type={IconButtonType.NO_BORDER}
           onPress={() => onSignOut()}
@@ -111,6 +118,7 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
       <View style={styles.buttonContainer}>
         <View style={styles.buttonRow}>
           <Button
+            testID="mxButton"
             title="MX"
             onPress={() => onSubmitMX()}
             type={ButtonType.SOLID_WHITE}
@@ -118,6 +126,7 @@ const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => 
             style={styles.affirmButton}
           />
           <Button
+            testID="cnButton"
             title="CN"
             onPress={() => onSubmitCN()}
             type={ButtonType.PRIMARY}
@@ -203,7 +212,8 @@ export const userConfigsApiHook = (
   user: User,
   dispatch: Dispatch<any>,
   getPrinterDetailsFromAsyncStorage: (dispatchAction: Dispatch<any>) => Promise<void>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  env: string
 ) => {
   if (getFluffyApiState.isWaiting || getClubConfigApiState.isWaiting) {
     dispatch(showActivityModal());
@@ -222,6 +232,17 @@ export const userConfigsApiHook = (
     dispatch(updateUserConfig());
   } else if (getFluffyApiState.error) {
     // TODO Display toast/popup letting user know roles could not be retrieved
+    // TODO remove mocked response once app is onboarded to dev fluffy in service registry
+    const mockFluffyResponse = [
+      'manager approval',
+      'location management',
+      'on hands change',
+      'location management edit',
+      'location printing'
+    ];
+    if (env === '-DEV') {
+      dispatch(assignFluffyFeatures(mockFluffyResponse));
+    }
     dispatch(getClubConfig());
     dispatch(resetFluffyFeaturesApiState());
     dispatch(updateUserConfig());
@@ -281,6 +302,23 @@ export const getPrinterDetailsFromAsyncStorage = async (dispatch: Dispatch<any>)
   dispatch(setLocationLabelPrinter(locationLabelPrinter));
 };
 
+export const onSubmitClubNbr = (clubNbr: number, dispatch: Dispatch<any>, user: User) => {
+  const updatedUser = { ...user, 'wm-BusinessUnitNumber': clubNbr.toString(), siteId: clubNbr };
+  dispatch(loginUser(updatedUser));
+  trackEvent('user_sign_in');
+  if (user.c !== 'US') {
+    dispatch(getFluffyFeatures(updatedUser));
+  }
+};
+
+export const onSubmitCountryCode = (countryCode: string, dispatch: Dispatch<any>, user: User) => {
+  const updatedUser = { ...user, c: countryCode, countryCode };
+  dispatch(loginUser(updatedUser));
+  if (updatedUser['wm-BusinessUnitCategory'] !== 'HO') {
+    dispatch(getFluffyFeatures(updatedUser));
+  }
+};
+
 export const LoginScreen = (props: LoginScreenProps) => {
   const {
     user,
@@ -316,25 +354,19 @@ export const LoginScreen = (props: LoginScreenProps) => {
     user,
     dispatch,
     getPrinterDetailsFromAsyncStorage,
-    navigation
+    navigation,
+    getBuildEnvironment()
   ), [getFluffyApiState, getClubConfigApiState]);
 
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={user['wm-BusinessUnitCategory'] === 'HO' && !user.siteId && user.c !== 'US' && userIsSignedIn(user)}
+        isVisible={user['wm-BusinessUnitCategory'] === 'HO' && user.c !== 'US' && userIsSignedIn(user)}
         onClose={() => null}
         modalType="Form"
       >
         <EnterClubNbrForm
-          onSubmit={clubNbr => {
-            const updatedUser = { ...user, 'wm-BusinessUnitNumber': clubNbr.toString(), siteId: clubNbr };
-            dispatch(loginUser(updatedUser));
-            trackEvent('user_sign_in');
-            if (user.countryCode !== 'US') {
-              dispatch(getFluffyFeatures(updatedUser));
-            }
-          }}
+          onSubmit={clubNbr => onSubmitClubNbr(clubNbr, dispatch, user)}
           onSignOut={() => signOutUser(dispatch, user)}
         />
       </CustomModalComponent>
@@ -348,20 +380,8 @@ export const LoginScreen = (props: LoginScreenProps) => {
       >
         <SelectCountryCodeModal
           onSignOut={() => signOutUser(dispatch, user)}
-          onSubmitCN={() => {
-            const updatedUser = { ...user, c: 'CN' };
-            dispatch(loginUser(updatedUser));
-            if (updatedUser['wm-BusinessUnitCategory'] !== 'HO') {
-              dispatch(getFluffyFeatures(updatedUser));
-            }
-          }}
-          onSubmitMX={() => {
-            const updatedUser = { ...user, c: 'MX' };
-            dispatch(loginUser(updatedUser));
-            if (updatedUser['wm-BusinessUnitCategory'] !== 'HO') {
-              dispatch(getFluffyFeatures(updatedUser));
-            }
-          }}
+          onSubmitCN={() => onSubmitCountryCode('CN', dispatch, user)}
+          onSubmitMX={() => onSubmitCountryCode('MX', dispatch, user)}
         />
       </CustomModalComponent>
       <View style={styles.buttonContainer}>

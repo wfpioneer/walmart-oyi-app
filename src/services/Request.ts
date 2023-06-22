@@ -49,6 +49,7 @@ class Request {
         if (request.url.includes(envUrls.fluffyURL)) {
           interceptRequest.headers[WM_SVC_NAME] = svcName.fluffyName;
           interceptRequest.headers.Authorization = `Bearer ${store.getState().User.userTokens.accessToken}`;
+          interceptRequest.headers.PING_TOKEN_IDP = 'yes';
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.version'] = '1.0.0';
           interceptRequest.headers.PING_TOKEN_IDP = 'yes';

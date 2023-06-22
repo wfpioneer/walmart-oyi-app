@@ -1,26 +1,48 @@
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationContainer, NavigationContext, NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import { authorize } from 'react-native-app-auth';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { fireEvent, render } from '@testing-library/react-native';
 import { setUserId } from '../../utils/AppCenterTool';
-import {
-  LoginScreen, resetFluffyFeaturesApiState, signInUser, signOutUser, userConfigsApiHook
+import Login, {
+  LoginScreen,
+  SelectCountryCodeModal,
+  addCNAssociateRoleOverrides,
+  getPrinterDetailsFromAsyncStorage,
+  onSubmitClubNbr,
+  onSubmitCountryCode,
+  resetClubConfigApiState,
+  resetFluffyFeaturesApiState,
+  signInUser,
+  signOutUser,
+  userConfigsApiHook
 } from './Login';
 import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import mockUser from '../../mockData/mockUser';
+import { mockLoginPrinterList } from '../../mockData/mockPrinterList';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { assignFluffyFeatures, setConfigs, setUserTokens } from '../../state/actions/User';
 import { getClubConfig } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
+import { Provider } from 'react-redux';
+import store from '../../state';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
   trackEvent: jest.fn(),
   setUserId: jest.fn()
+}));
+jest.mock('../../utils/asyncStorageUtils', () => ({
+  ...jest.requireActual('../../utils/asyncStorageUtils'),
+  getLocationLabelPrinter: jest.fn(() => Promise.resolve(mockLoginPrinterList[1])),
+  getPalletLabelPrinter: jest.fn(() => Promise.resolve(mockLoginPrinterList[1])),
+  getPriceLabelPrinter: jest.fn(() => Promise.resolve(mockLoginPrinterList[0])),
+  getPrinterList: jest.fn(() => Promise.resolve(mockLoginPrinterList)),
+  savePrinter: jest.fn(() => Promise.resolve(true))
 }));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 jest.mock('../../../package.json', () => ({
@@ -33,6 +55,7 @@ jest.mock('react-native-config', () => {
     ENVIRONMENT: 'DEV'
   };
 });
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 
 jest.mock('react-native-app-auth', () => {
   const appAuthActual = jest.requireActual('react-native-app-auth');
@@ -188,6 +211,26 @@ describe('LoginScreen', () => {
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('render screen with redux', () => {
+    const actualNav = jest.requireActual('@react-navigation/native');
+    const navContextValue = {
+      ...actualNav.navigation,
+      isFocused: () => false,
+      addListener: jest.fn(() => jest.fn())
+    };
+    const component = (
+      <Provider store={store}>
+        <NavigationContainer>
+          <NavigationContext.Provider value={navContextValue}>
+            <Login />
+          </NavigationContext.Provider>
+        </NavigationContainer>
+      </Provider>
+    );
+    const { toJSON } = render(component);
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('renders the EnterClubNbr modal when a MX HO user logs in', () => {
@@ -414,7 +457,8 @@ describe('Tests login screen functions', () => {
       mockUser,
       mockDispatch,
       mockGetPrinterDetailsFromAsyncStorage,
-      navigationProp
+      navigationProp,
+      '-STAGE'
     );
 
     expect(mockDispatch).toHaveBeenCalledTimes(9);
@@ -446,7 +490,8 @@ describe('Tests login screen functions', () => {
       mockUser,
       mockDispatch,
       mockGetPrinterDetailsFromAsyncStorage,
-      navigationProp
+      navigationProp,
+      'STAGE'
     );
 
     expect(mockDispatch).toHaveBeenCalledTimes(1);
@@ -468,7 +513,8 @@ describe('Tests login screen functions', () => {
       mockUser,
       mockDispatch,
       mockGetPrinterDetailsFromAsyncStorage,
-      navigationProp
+      navigationProp,
+      '-STAGE'
     );
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
     expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
@@ -477,5 +523,81 @@ describe('Tests login screen functions', () => {
       index: 0,
       routes: [{ name: 'Tabs' }]
     });
+  });
+
+  it('test getPrinterDetailsFromAsyncStorage', async () => {
+    await getPrinterDetailsFromAsyncStorage(mockDispatch);
+    expect(mockDispatch).toHaveBeenCalledTimes(4);
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      1,
+      {
+        payload: mockLoginPrinterList,
+        type: 'PRINT/SET_PRINTER_LIST'
+      }
+    );
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      2,
+      {
+        payload: mockLoginPrinterList[0],
+        type: 'PRINT/SET_PRICE_LABEL_PRINTER'
+      }
+    );
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      3,
+      {
+        payload: mockLoginPrinterList[1],
+        type: 'PRINT/SET_PALLET_LABEL_PRINTER'
+      }
+    );
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      4,
+      {
+        payload: mockLoginPrinterList[1],
+        type: 'PRINT/SET_LOCATION_LABEL_PRINTER'
+      }
+    );
+  });
+
+  it('SelectCountryCodeModal', () => {
+    const mockOnSignOut = jest.fn();
+    const mockOnSubmitMX = jest.fn();
+    const mockOnSubmitCN = jest.fn();
+    const { getByTestId, toJSON } = render(
+      SelectCountryCodeModal({ onSignOut: mockOnSignOut, onSubmitMX: mockOnSubmitMX, onSubmitCN: mockOnSubmitCN })
+    );
+    expect(toJSON()).toMatchSnapshot();
+    const closeButton = getByTestId('closeButton');
+    const mxButton = getByTestId('mxButton');
+    const cnButton = getByTestId('cnButton');
+    fireEvent.press(closeButton);
+    fireEvent.press(mxButton);
+    fireEvent.press(cnButton);
+    expect(mockOnSignOut).toHaveBeenCalled();
+    expect(mockOnSubmitMX).toHaveBeenCalled();
+    expect(mockOnSubmitCN).toHaveBeenCalled();
+  });
+
+  it('test onSubmitClubNbr', () => {
+    const cnTestUser = { ...testUser, c: 'CN', countryCode: 'CN' };
+    onSubmitClubNbr(1, mockDispatch, cnTestUser);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    mockDispatch.mockReset();
+    const usTestUser = { ...testUser, c: 'US', countryCode: 'US' };
+    onSubmitClubNbr(1, mockDispatch, usTestUser);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+  });
+  it('test onSubmitCountryClub', () => {
+    const updatedTestUser = { ...testUser, 'wm-BusinessUnitCategory': 'HO' };
+    onSubmitCountryCode('CN', mockDispatch, updatedTestUser);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    mockDispatch.mockReset();
+    updatedTestUser['wm-BusinessUnitCategory'] = '';
+    onSubmitCountryCode('CN', mockDispatch, updatedTestUser);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+  });
+
+  it('test addCNAssociateRoleOverrides', () => {
+    const testResults = addCNAssociateRoleOverrides(['test feature']);
+    expect(testResults).toEqual(['test feature', 'on hands change']);
   });
 });
