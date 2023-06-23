@@ -35,36 +35,40 @@ const attemptRefresh = async () => {
 export async function validateSession(navigation: NavigationProp<any>, route?: string): Promise<void> {
   try {
     const {
-      accessToken
+      accessToken, accessTokenExpirationDate
     } = store.getState().User.userTokens;
 
-    const urls = getEnvironment();
+    if (moment(accessTokenExpirationDate).isBefore()) {
+      return Promise.resolve();
+    } else {
+      const urls = getEnvironment();
 
-    const introspectionResponse = await fetch(`${urls.pingFedURL}/as/introspect.oauth2`, {
-      method: 'POST',
-      body: new URLSearchParams({
-        token: accessToken,
-        token_type_hint: 'access_token',
-        client_id: getPingFedClientId()
-      }).toString(),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Bearer ${accessToken}`
+      const introspectionResponse = await fetch(`${urls.pingFedURL}/as/introspect.oauth2`, {
+        method: 'POST',
+        body: new URLSearchParams({
+          token: accessToken,
+          token_type_hint: 'access_token',
+          client_id: getPingFedClientId()
+        }).toString(),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+
+      const introspectionResponseJson = await introspectionResponse.json();
+
+      introspectionResponseJson.active = false;
+
+      if (introspectionResponseJson.active) {
+        return Promise.resolve();
       }
-    });
 
-    const introspectionResponseJson = await introspectionResponse.json();
+      await attemptRefresh();
 
-    introspectionResponseJson.active = false;
-
-    if (introspectionResponseJson.active) {
       return Promise.resolve();
     }
-
-    await attemptRefresh();
-
-    return Promise.resolve();
   } catch (error) {
     trackEvent('user_session_timed_out', { lastPage: route });
     store.dispatch(logoutUser());
@@ -75,18 +79,3 @@ export async function validateSession(navigation: NavigationProp<any>, route?: s
     return Promise.reject(error);
   }
 }
-
-//   if (moment().isSameOrAfter(moment.unix(endTime))) {
-//     trackEvent('user_session_timed_out', { lastPage: route });
-//     store.dispatch(clearEndTime());
-//     WMSSO.signOutUser().then(() => {
-//       store.dispatch(logoutUser());
-//       // Replace the current screen with the LoginScreen
-//       navigation.dispatch(
-//         StackActions.replace('Login')
-//       );
-//     });
-//     return reject();
-//   }
-//   return resolve();
-// });
