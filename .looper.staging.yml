@@ -133,7 +133,7 @@ flows:
         - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> app/src/main/assets/appcenter-config.json'
     - group("gradle build"):
 #        - gradle clean
-#        - var (buildTask): "echo \"${task:-build}\""
+        - var (buildTask): "echo \"${task:-build}\""
 #        - var (buildArgs): "echo \"${args:--x lint}\""
 #        - call: "gradlew(task = ${buildTask}, args = ${buildArgs})"
   sonar:
