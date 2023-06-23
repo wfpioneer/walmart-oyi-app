@@ -107,18 +107,18 @@ envs:
 
 tools:
   jdk: 8
-#  android:
-#    - tools
-#    - platform-tools
-#    - platforms;android-29
-#    - build-tools;29.0.3
-#    - extras;android;m2repository
-#    - ndk;21.3.6528147
-#  gradle: 6.7.1
+  android:
+    - tools
+    - platform-tools
+    - platforms;android-29
+    - build-tools;29.0.3
+    - extras;android;m2repository
+    - ndk;21.3.6528147
+  gradle: 6.7.1
   maven: 3.8.2
-  nodejs: 14.17.5
-  npm: 7.20.6
-  sonarscanner: 4.6.2.2472
+  nodejs: 16.20.0
+  npm: 8.19.4
+  sonarscanner: 4.8.0.2856
 
 flows:
   gradlew-wrapper:
@@ -126,30 +126,31 @@ flows:
       - 'echo "Building src/constant/Secrets.json using looper-encrypted secrets"'
       - 'echo "{ \"CN_IMAGE_AUTH_CLIENT_ID\": \"$CN_IMAGE_AUTH_CLIENT_ID\", \"CN_IMAGE_AUTH_SECRET\": \"$CN_IMAGE_AUTH_SECRET\" }" >> ../src/constant/Secrets.json'
     - group("npm install"):
-        - npm ci
+        - npm ci --legacy-peer-deps
         - TZ='America/Chicago' npm run test:coverage
     - group ("appcenter commands"):
         - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
         - 'echo "{  \"app_secret\": \"$APPCENTER_SECRET_STAGE\" }" >> app/src/main/assets/appcenter-config.json'
     - group("gradle build"):
-#        - gradle clean
+        - gradle clean
         - var (buildTask): "echo \"${task:-build}\""
-#        - var (buildArgs): "echo \"${args:--x lint}\""
-#        - call: "gradlew(task = ${buildTask}, args = ${buildArgs})"
+        - var (buildArgs): "echo \"${args:--x lint}\""
+        - call: "gradlew(task = ${buildTask}, args = ${buildArgs})"
   sonar:
-    - call: sonar-fetch-remote-fix-ref
     - group("Publish Sonar"):
         - echo "${GITHUB_PR_NUMBER}"
         - if: "${GITHUB_PR_NUMBER}"
-          then: (name [sonar]) sonar-scanner
-            -Dproject.settings=sonar-project.properties
-            -Dsonar.pullrequest.github.repository=IntlSamsTech/oyi-app
-            -Dsonar.pullrequest.key=${GITHUB_PR_NUMBER}
-            -Dsonar.pullrequest.branch=${GITHUB_PR_SOURCE_BRANCH}
-            -Dsonar.pullrequest.base=${GITHUB_PR_TARGET_BRANCH}
+          then:
+            - call: sonar-fetch-remote-fix-ref
+            - (name [sonar]) sonar-scanner
+              -Dproject.settings=sonar-project.properties
+              -Dsonar.pullrequest.github.repository=IntlSamsTech/oyi-app
+              -Dsonar.pullrequest.key=${GITHUB_PR_NUMBER}
+              -Dsonar.pullrequest.branch=${GITHUB_PR_SOURCE_BRANCH}
+              -Dsonar.pullrequest.base=${GITHUB_PR_TARGET_BRANCH}
           else: (name [sonar]) sonar-scanner 
             -Dproject.settings=sonar-project.properties 
-            -Dsonar.branch.name=${GITHUB_PR_SOURCE_BRANCH:-${GITHUB_BRANCH_NAME}}
+            -Dsonar.branch.name=${GITHUB_BRANCH_NAME}
         - hygieia.publishSonar
   sonar-fetch-remote-fix-ref:
     shell: |
