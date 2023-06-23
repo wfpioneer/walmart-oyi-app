@@ -139,8 +139,8 @@ flows:
   sonar:
     - call: sonar-fetch-remote-fix-ref
     - group("Publish Sonar"):
-        - if: |
-            %{ (GITHUB_PR_SOURCE_BRANCH ?: '') != '' }
+        - echo: $GITHUB_PR_NUMBER
+        - if: '${GITHUB_PR_NUMBER}'
           then: (name [sonar]) sonar-scanner
             -Dproject.settings=sonar-project.properties
             -Dsonar.pullrequest.github.repository=IntlSamsTech/oyi-app
