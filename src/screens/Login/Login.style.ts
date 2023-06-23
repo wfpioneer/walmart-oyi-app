@@ -14,6 +14,11 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  modalContainer: {
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   signInButton: {
     height: 40,
     width: '85%'
