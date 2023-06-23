@@ -139,7 +139,7 @@ flows:
   sonar:
     - call: sonar-fetch-remote-fix-ref
     - group("Publish Sonar"):
-        - echo: $GITHUB_PR_NUMBER
+        - echo: '${GITHUB_PR_NUMBER}'
         - if: '${GITHUB_PR_NUMBER}'
           then: (name [sonar]) sonar-scanner
             -Dproject.settings=sonar-project.properties
