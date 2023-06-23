@@ -252,6 +252,9 @@ describe('Test Location Details Screen', () => {
         expect.objectContaining({ type: 'ITEM_DETAILS_SCREEN/SETUP' })
       );
       expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: 'LOCATION/SET_FLOOR_LOCATIONS' })
+      );
+      expect(mockDispatch).toBeCalledWith(
         expect.objectContaining({ type: 'LOCATION/SET_SELECTED_LOCATION' })
       );
       expect(mockDispatch).lastCalledWith({ type: 'LOCATION/HIDE_ITEM_POPUP' });

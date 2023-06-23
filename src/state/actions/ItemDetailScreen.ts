@@ -15,8 +15,6 @@ export const SET_UPC = 'LOCATION/SET_UPC';
 export const setupScreen = (
   itemNbr: number,
   upcNbr: string,
-  floorLocations: Location[],
-  reserveLocations: Location[],
   exceptionType: string | null | undefined,
   pendingOHQty: number,
   completed: boolean,
@@ -26,8 +24,6 @@ export const setupScreen = (
   payload: {
     itemNbr,
     upcNbr,
-    floorLocations,
-    reserveLocations,
     exceptionType,
     pendingOHQty,
     completed,
@@ -66,7 +62,7 @@ export const resetLocations = () => ({
   type: RESET_LOCATIONS
 } as const);
 
-export const getLocationDetails = (itemNbr: number) => ({
+export const getLocationsForItem = (itemNbr: number) => ({
   type: GET_LOCATION_DETAILS,
   payload: {
     itemNbr
@@ -99,7 +95,7 @@ export type Actions =
   | ReturnType<typeof setReserveLocations>
   | ReturnType<typeof deleteLocationFromExisting>
   | ReturnType<typeof resetLocations>
-  | ReturnType<typeof getLocationDetails>
+  | ReturnType<typeof getLocationsForItem>
   | ReturnType<typeof setSelectedLocation>
   | ReturnType<typeof clearSelectedLocation>
   | ReturnType<typeof setUPC>

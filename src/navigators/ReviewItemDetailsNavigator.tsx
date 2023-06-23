@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderBackButton } from '@react-navigation/elements';
+import { HeaderBackButton, HeaderBackButtonProps, HeaderTitle } from '@react-navigation/elements';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -17,45 +17,52 @@ import SelectLocationType from '../screens/SelectLocationType/SelectLocationType
 import { showInfoModal } from '../state/actions/Modal';
 import { openCamera } from '../utils/scannerUtils';
 import { trackEvent } from '../utils/AppCenterTool';
-import { GET_ITEM_DETAILS, GET_ITEM_DETAILS_V3 } from '../state/actions/asyncAPI';
+import { GET_ITEM_DETAILS_V4 } from '../state/actions/asyncAPI';
 import ItemHistory from '../screens/ItemHistory/ItemHistory';
 import { clearItemHistory } from '../state/actions/ItemHistory';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdjustment';
+import NoActionScan from '../screens/NoActionScan/NoActionScan';
+import OtherAction from '../screens/OtherAction/OtherAction';
 
 interface ReviewItemDetailsNavigatorProps {
-  isManualScanEnabled:boolean;
-  calcOpen:boolean;
+  isManualScanEnabled: boolean;
+  calcOpen: boolean;
   exceptionType: string | null | undefined;
-  actionCompleted:boolean;
-  showCalculator:boolean;
-  title:string;
-  dispatch:Dispatch<any>;
-  navigation:NavigationProp<any>;
+  actionCompleted: boolean;
+  showCalculator: boolean;
+  title: string;
+  dispatch: Dispatch<any>;
+  navigation: NavigationProp<any>;
+  manualNoAction: boolean;
 }
 const Stack = createStackNavigator();
 
-export const renderScanButton = (dispatch: Dispatch<any>,
-  isManualScanEnabled: boolean): JSX.Element => (
-    <TouchableOpacity testID="barcode-scan" onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
-      <View style={styles.iconBtn}>
-        <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
-      </View>
-    </TouchableOpacity>
+export const renderScanButton = (
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean
+): JSX.Element => (
+  <TouchableOpacity testID="barcode-scan" onPress={() => { dispatch(setManualScan(!isManualScanEnabled)); }}>
+    <View style={styles.iconBtn}>
+      <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
 );
 
-export const renderCalcButton = (dispatch: Dispatch<any>,
-  calcOpen:boolean): JSX.Element => (
-    <TouchableOpacity
-      onPress={() => {
-        dispatch(setCalcOpen(!calcOpen));
-      }}
-      testID="calc-button"
-    >
-      <View style={styles.iconBtn}>
-        <MaterialCommunityIcon name="calculator" size={20} color={COLOR.WHITE} />
-      </View>
-    </TouchableOpacity>
+export const renderCalcButton = (
+  dispatch: Dispatch<any>,
+  calcOpen: boolean
+): JSX.Element => (
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(setCalcOpen(!calcOpen));
+    }}
+    testID="calc-button"
+  >
+    <View style={styles.iconBtn}>
+      <MaterialCommunityIcon name="calculator" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
 );
 export const renderCamButton = () => (
   <TouchableOpacity testID="open-camera" onPress={() => { openCamera(); }}>
@@ -83,8 +90,12 @@ export const renderPrintQueueButton = (navigation: NavigationProp<any>): JSX.Ele
   </TouchableOpacity>
 );
 
-export const navigateBack = (dispatch: Dispatch<any>,
-  actionCompleted:boolean, exceptionType: string | null | undefined, navigation:NavigationProp<any>) => {
+export const navigateBack = (
+  dispatch: Dispatch<any>,
+  actionCompleted: boolean,
+  exceptionType: string | null | undefined,
+  navigation: NavigationProp<any>
+) => {
   if (!actionCompleted) {
     if (exceptionType === 'po') {
       return dispatch(showInfoModal(strings('ITEM.NO_SIGN_PRINTED'), strings('ITEM.NO_SIGN_PRINTED_DETAILS')));
@@ -111,8 +122,79 @@ export const renderCloseButton = (dispatch: Dispatch<any>, navigation:Navigation
 
 export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigatorProps): JSX.Element => {
   const {
-    isManualScanEnabled, calcOpen, exceptionType, actionCompleted, showCalculator, title, dispatch, navigation
+    isManualScanEnabled,
+    calcOpen,
+    exceptionType,
+    actionCompleted,
+    showCalculator,
+    title,
+    dispatch,
+    navigation,
+    manualNoAction
   } = props;
+
+  const itemDetailsHeader = () => (
+    // @ts-expect-error HeaderTitle can accept the same props as <Text/>
+    <HeaderTitle
+      style={{ color: COLOR.WHITE }}
+      lineBreakMode="tail"
+      numberOfLines={2}
+    >
+      {strings('ITEM.TITLE')}
+    </HeaderTitle>
+  );
+
+  const itemDetailsHeaderLeft = (prop: HeaderBackButtonProps) => (
+    // Shouldn't need to do this, but not showing on its own for some reason
+    // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
+    <HeaderBackButton
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...prop}
+      onPress={() => navigateBack(
+        dispatch,
+        actionCompleted,
+        exceptionType,
+        navigation
+      )}
+    />
+  );
+
+  const itemDetailsHeaderRight = () => (
+    <View style={styles.headerContainer}>
+      {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage'
+        ? renderCamButton()
+        : null}
+      {renderScanButton(dispatch, isManualScanEnabled)}
+      {renderPrintQueueButton(navigation)}
+    </View>
+  );
+
+  const locationHeaderRight = () => (
+    <View style={styles.headerContainer}>
+      {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage'
+        ? renderCamButton()
+        : null}
+    </View>
+  );
+
+  const itemHistoryHeaderRight = () => (
+    <View>{renderCloseButton(dispatch, navigation)}</View>
+  );
+
+  const palletAdjustmentHeaderRight = () => (
+    <View style={styles.headerContainer}>
+      {showCalculator && renderCalcButton(dispatch, calcOpen)}
+      {renderPrintQueueButton(navigation)}
+      {renderScanButton(dispatch, isManualScanEnabled)}
+    </View>
+  );
+
+  const noActionScanHeaderRight = () => (
+    <View style={styles.headerContainer}>
+      {manualNoAction && renderScanButton(dispatch, isManualScanEnabled)}
+    </View>
+  );
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -125,32 +207,28 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         name="ReviewItemDetailsHome"
         component={ReviewItemDetails}
         options={{
-          headerTitle: strings('ITEM.TITLE'),
+          headerTitle: itemDetailsHeader,
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
-          headerLeft: prop => (
-            // Shouldn't need to do this, but not showing on its own for some reason
-            // See https://reactnavigation.org/docs/nesting-navigators/#each-navigator-keeps-its-own-navigation-history
-            <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...prop}
-              onPress={() => navigateBack(dispatch, actionCompleted, exceptionType, navigation)}
-            />
-          ),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
-              {renderScanButton(dispatch, isManualScanEnabled)}
-              {renderPrintQueueButton(navigation)}
-            </View>
-          )
+          headerLeft: prop => itemDetailsHeaderLeft(prop),
+          headerRight: itemDetailsHeaderRight
         }}
         listeners={{
           beforeRemove: () => {
-            dispatch({ type: GET_ITEM_DETAILS.RESET });
-            dispatch({ type: GET_ITEM_DETAILS_V3.RESET });
+            dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
           }
+        }}
+      />
+      <Stack.Screen
+        name="NoActionScan"
+        component={NoActionScan}
+        options={{
+          headerTitle: strings('LOCATION.SCAN_ITEM'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 },
+          headerBackTitleVisible: false,
+          headerRight: noActionScanHeaderRight
         }}
       />
       <Stack.Screen
@@ -171,11 +249,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
-            </View>
-          )
+          headerRight: locationHeaderRight
         }}
       />
       <Stack.Screen
@@ -186,11 +260,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
-            </View>
-          )
+          headerRight: locationHeaderRight
         }}
       />
       <Stack.Screen
@@ -202,11 +272,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
           headerLeft: () => null,
-          headerRight: () => (
-            <View>
-              {renderCloseButton(dispatch, navigation)}
-            </View>
-          )
+          headerRight: itemHistoryHeaderRight
         }}
       />
       <Stack.Screen
@@ -214,13 +280,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         component={AuditItem}
         options={{
           headerTitle: strings('AUDITS.AUDIT_ITEM'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {showCalculator && renderCalcButton(dispatch, calcOpen)}
-              {renderPrintQueueButton(navigation)}
-              {renderScanButton(dispatch, isManualScanEnabled)}
-            </View>
-          )
+          headerRight: palletAdjustmentHeaderRight
         }}
       />
       <Stack.Screen
@@ -231,22 +291,31 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerTitleAlign: 'left',
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {showCalculator && renderCalcButton(dispatch, calcOpen)}
-              {renderPrintQueueButton(navigation)}
-              {renderScanButton(dispatch, isManualScanEnabled)}
-            </View>
-          )
+          headerRight: palletAdjustmentHeaderRight
+        }}
+      />
+      <Stack.Screen
+        name="OtherAction"
+        component={OtherAction}
+        options={{
+          headerTitle: strings('ITEM.CHOOSE_ACTION'),
+          headerTitleAlign: 'left',
+          headerTitleStyle: { fontSize: 18 }
         }}
       />
     </Stack.Navigator>
   );
 };
-const ReviewItemDetailsNavigator = ():JSX.Element => {
-  const { isManualScanEnabled, calcOpen } = useTypedSelector(state => state.Global);
-  const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
-  const { showCalculator } = useTypedSelector(state => state.User.configs);
+const ReviewItemDetailsNavigator = (): JSX.Element => {
+  const { isManualScanEnabled, calcOpen } = useTypedSelector(
+    state => state.Global
+  );
+  const { exceptionType, actionCompleted } = useTypedSelector(
+    state => state.ItemDetailScreen
+  );
+  const { showCalculator, manualNoAction } = useTypedSelector(
+    state => state.User.configs
+  );
   const { title } = useTypedSelector(state => state.ItemHistory);
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
@@ -260,7 +329,7 @@ const ReviewItemDetailsNavigator = ():JSX.Element => {
       title={title}
       dispatch={dispatch}
       navigation={navigation}
-
+      manualNoAction={manualNoAction}
     />
   );
 };

@@ -24,13 +24,14 @@ import styles from './CreatePick.style';
 import { UseStateType } from '../../models/Generics.d';
 import { PickCreateItem, Tabs } from '../../models/Picking.d';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { setupScreen } from '../../state/actions/ItemDetailScreen';
+import { setFloorLocations, setReserveLocations, setupScreen } from '../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../models/AsyncState';
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { CREATE_NEW_PICK, GET_LOCATION_DETAILS } from '../../state/actions/asyncAPI';
-import { createNewPick } from '../../state/actions/saga';
+import { CREATE_NEW_PICK, GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1 } from '../../state/actions/asyncAPI';
+import { createNewPick, createNewPickV1 } from '../../state/actions/saga';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { Configurations } from '../../models/User';
 
 export const MOVE_TO_FRONT = 'moveToFront';
 export const PALLET_MIN = 1;
@@ -46,9 +47,11 @@ interface CreatePickProps {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   getLocationApi: AsyncState;
+  getLocationV1Api: AsyncState;
   createPickApi: AsyncState;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   countryCode: string;
+  userConfigs: Configurations;
 }
 
 export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
@@ -59,7 +62,7 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
       dispatch(setPickCreateFloor(result.data.location.floor || []));
       dispatch(setPickCreateReserve(result.data.location.reserve || []));
       dispatch(hideActivityModal());
-      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       Toast.show({
         type: 'success',
         text1: strings('PICKING.LOCATIONS_UPDATED'),
@@ -70,7 +73,7 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
     // API failure
     if (!isWaiting && error) {
       dispatch(hideActivityModal());
-      dispatch({ type: GET_LOCATION_DETAILS.RESET });
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       Toast.show({
         type: 'error',
         text1: strings('PICKING.LOCATIONS_FAILED_UPDATE'),
@@ -80,6 +83,44 @@ export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispat
     }
     // API waiting
     if (isWaiting) {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
+export const getLocationsV1ApiHook = (
+  locationForItemsV1Api: AsyncState,
+  dispatch: Dispatch<any>,
+  isFocused: boolean,
+) => {
+  if (isFocused) {
+    if (!locationForItemsV1Api.isWaiting && locationForItemsV1Api.result) {
+      const response = locationForItemsV1Api.result.data;
+      const { salesFloorLocation, reserveLocation } = response;
+      dispatch(setFloorLocations(salesFloorLocation || []));
+      dispatch(setReserveLocations(reserveLocation || []));
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      dispatch(hideActivityModal());
+      Toast.show({
+        type: 'success',
+        text1: strings('PICKING.LOCATIONS_UPDATED'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    // API failure
+    if (!locationForItemsV1Api.isWaiting && locationForItemsV1Api.error) {
+      dispatch(hideActivityModal());
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      Toast.show({
+        type: 'error',
+        text1: strings('PICKING.LOCATIONS_FAILED_UPDATE'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+    }
+    // API waiting
+    if (locationForItemsV1Api.isWaiting) {
       dispatch(showActivityModal());
     }
   }
@@ -149,21 +190,21 @@ export const addLocationHandler = (
   dispatch(setupScreen(
     item ? item.itemNbr : 0,
     item ? item.upcNbr : '',
-    floorLocations,
-    reserveLocations,
     null,
     -999,
     false,
     false
   ));
+  dispatch(setFloorLocations(floorLocations));
+  dispatch(setReserveLocations(reserveLocations));
   navigation.navigate('AddLocation');
 };
 
 export const CreatePickScreen = (props: CreatePickProps) => {
   const {
     item, floorLocations, reserveLocations, selectedSectionState, createPickApi,
-    palletNumberState, dispatch, navigation, getLocationApi, useEffectHook,
-    selectedTab, countryCode
+    palletNumberState, dispatch, navigation, getLocationApi, getLocationV1Api,
+    useEffectHook, selectedTab, countryCode, userConfigs
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
@@ -172,6 +213,10 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   useEffectHook(
     () => getLocationsApiHook(getLocationApi, dispatch, navigation.isFocused()),
     [getLocationApi]
+  );
+  useEffectHook(
+    () => getLocationsV1ApiHook(getLocationV1Api, dispatch, navigation.isFocused()),
+    [getLocationV1Api]
   );
   useEffectHook(
     () => createPickApiHook(createPickApi, dispatch, navigation),
@@ -239,17 +284,31 @@ export const CreatePickScreen = (props: CreatePickProps) => {
 
   const onSubmit = () => {
     const locationDetails = floorLocations?.find(loc => loc.locationName === selectedSection);
-    dispatch(createNewPick({
-      category: item.categoryNbr,
-      itemDesc: item.itemName,
-      itemNbr: item.itemNbr,
-      quickPick: selectedTab === Tabs.QUICKPICK,
-      salesFloorLocationName: selectedSection,
-      upcNbr: item.upcNbr,
-      moveToFront: selectedSection === MOVE_TO_FRONT,
-      numberOfPallets: palletNumber,
-      salesFloorLocationId: locationDetails?.sectionId
-    }));
+    if (userConfigs.inProgress) {
+      dispatch(createNewPickV1({
+        category: item.categoryNbr,
+        itemDesc: item.itemName,
+        itemNbr: item.itemNbr,
+        quickPick: selectedTab === Tabs.QUICKPICK,
+        salesFloorLocationName: selectedSection,
+        upcNbr: item.upcNbr,
+        moveToFront: selectedSection === MOVE_TO_FRONT,
+        numberOfPallets: palletNumber,
+        salesFloorLocationId: locationDetails?.sectionId
+      }));
+    } else {
+      dispatch(createNewPick({
+        category: item.categoryNbr,
+        itemDesc: item.itemName,
+        itemNbr: item.itemNbr,
+        quickPick: selectedTab === Tabs.QUICKPICK,
+        salesFloorLocationName: selectedSection,
+        upcNbr: item.upcNbr,
+        moveToFront: selectedSection === MOVE_TO_FRONT,
+        numberOfPallets: palletNumber,
+        salesFloorLocationId: locationDetails?.sectionId
+      }));
+    }
   };
 
   return (
@@ -262,7 +321,6 @@ export const CreatePickScreen = (props: CreatePickProps) => {
           upcNbr={item.upcNbr}
           price={item.price}
           status={item.status || ''}
-          showAdditionalItemDetails={false}
           countryCode={countryCode}
           showItemImage={false}
         />
@@ -328,9 +386,11 @@ const CreatePick = () => {
     pickCreateReserveLocations: reserveLocations,
     selectedTab
   } = useTypedSelector(state => state.Picking);
-  const getLocationsApi = useTypedSelector(state => state.async.getLocation);
-  const createPickApi = useTypedSelector(state => state.async.createNewPick);
-  const { countryCode } = useTypedSelector(state => state.User);
+  const getLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
+  const getLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
+  const { countryCode, configs } = useTypedSelector(state => state.User);
+  const createPickApi = configs.inProgress ? useTypedSelector(state => state.async.createNewPickV1)
+    : useTypedSelector(state => state.async.createNewPick);
   const selectedSectionState = useState(floorLocations && floorLocations.length ? floorLocations[0].locationName : '');
   const palletNumberState = useState(1);
   const dispatch = useDispatch();
@@ -347,9 +407,11 @@ const CreatePick = () => {
       dispatch={dispatch}
       navigation={navigation}
       getLocationApi={getLocationsApi}
+      getLocationV1Api={getLocationsV1Api}
       createPickApi={createPickApi}
       useEffectHook={useEffect}
       countryCode={countryCode}
+      userConfigs={configs}
     />
   );
 };

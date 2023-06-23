@@ -4,23 +4,28 @@ import LocationListCard, { LocationList } from './LocationListCard';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
-const mockLocationList: LocationList[] = [{
-  sectionId: 1502,
-  locationName: 'A1-1',
-  quantity: 22,
-  oldQuantity: 11,
-  palletId: 4928,
-  increment: jest.fn,
-  decrement: jest.fn,
-  onDelete: jest.fn,
-  qtyChange: jest.fn,
-  onEndEditing: jest.fn,
-  onCalcPress: jest.fn,
-  scanned: false,
-  locationType: 'floor'
-}];
+const mockLocationList: LocationList[] = [
+  {
+    sectionId: 1502,
+    locationName: 'A1-1',
+    quantity: 22,
+    oldQuantity: 11,
+    palletId: 4928,
+    increment: jest.fn,
+    decrement: jest.fn,
+    onDelete: jest.fn,
+    qtyChange: jest.fn,
+    onEndEditing: jest.fn,
+    onCalcPress: jest.fn,
+    scanned: false,
+    locationType: 'floor'
+  }
+];
 
 describe('Tests LocationListCard Component', () => {
+  const MIN = 0;
+  const MAX = 9999;
+
   it('should tests redering LocationListCard with location list', async () => {
     const { toJSON } = render(
       <LocationListCard
@@ -31,6 +36,8 @@ describe('Tests LocationListCard Component', () => {
         onRetry={jest.fn}
         scanRequired={false}
         showCalculator={false}
+        minQty={MIN}
+        maxQty={MAX}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -45,6 +52,8 @@ describe('Tests LocationListCard Component', () => {
         onRetry={jest.fn}
         scanRequired={false}
         showCalculator={true}
+        minQty={MIN}
+        maxQty={MAX}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -59,6 +68,8 @@ describe('Tests LocationListCard Component', () => {
         onRetry={jest.fn}
         scanRequired={false}
         showCalculator={false}
+        minQty={MIN}
+        maxQty={MAX}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -73,6 +84,8 @@ describe('Tests LocationListCard Component', () => {
         onRetry={jest.fn}
         scanRequired={false}
         showCalculator={false}
+        minQty={MIN}
+        maxQty={MAX}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -89,6 +102,8 @@ describe('Tests LocationListCard Component', () => {
         onRetry={jest.fn}
         scanRequired={false}
         showCalculator={false}
+        minQty={MIN}
+        maxQty={MAX}
       />
     );
     const addLocationButton = getByTestId('add-location');
@@ -107,6 +122,8 @@ describe('Tests LocationListCard Component', () => {
         onRetry={mockRetryCallbackFn}
         scanRequired={false}
         showCalculator={false}
+        minQty={MIN}
+        maxQty={MAX}
       />
     );
     const retryButton = getByTestId('retry-button');

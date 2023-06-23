@@ -3,14 +3,19 @@
 exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
 <View
   style={
-    Object {
-      "alignContent": "center",
-      "backgroundColor": "#ffffffff",
-      "elevation": 10,
-      "flexDirection": "row",
-      "height": 80,
-      "justifyContent": "space-evenly",
-    }
+    Array [
+      Object {
+        "alignContent": "center",
+        "backgroundColor": "#ffffffff",
+        "elevation": 10,
+        "flexDirection": "row",
+        "height": 80,
+        "justifyContent": "space-evenly",
+      },
+      Object {
+        "height": 80,
+      },
+    ]
   }
 >
   <Button

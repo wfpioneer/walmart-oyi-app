@@ -25,7 +25,22 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
         "headerBackTitleVisible": false,
         "headerLeft": [Function],
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.ITEM.TITLE\\" translation]",
+        "headerTitle": [Function],
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="NoActionScan"
+    options={
+      Object {
+        "headerBackTitleVisible": false,
+        "headerRight": [Function],
+        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
         "headerTitleAlign": "left",
         "headerTitleStyle": Object {
           "fontSize": 18,
@@ -111,6 +126,19 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
         "headerBackTitleVisible": false,
         "headerRight": [Function],
         "headerTitle": "[missing \\"en.ITEM.RESERVE_ADJUSTMENT\\" translation]",
+        "headerTitleAlign": "left",
+        "headerTitleStyle": Object {
+          "fontSize": 18,
+        },
+      }
+    }
+  />
+  <Screen
+    component={[Function]}
+    name="OtherAction"
+    options={
+      Object {
+        "headerTitle": "[missing \\"en.ITEM.CHOOSE_ACTION\\" translation]",
         "headerTitleAlign": "left",
         "headerTitleStyle": Object {
           "fontSize": 18,

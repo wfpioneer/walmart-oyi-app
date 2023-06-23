@@ -35,14 +35,14 @@ import ItemDetails from '../../../models/ItemDetails';
 import { AsyncState } from '../../../models/AsyncState';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import ItemCard from '../../../components/ItemCard/ItemCard';
-import { currencies, strings } from '../../../locales';
+import { strings } from '../../../locales';
 import Button, { ButtonType } from '../../../components/buttons/Button';
 import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/AuditItem';
 import {
   DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY_V2
 } from '../../../state/actions/asyncAPI';
 import {
-  deletePallet, deleteUpcs, getItemPallets, updateMultiPalletUPCQtyV2
+  deletePallet, deleteUpcs, getItemPallets, getItemPalletsV1, updateMultiPalletUPCQtyV2
 } from '../../../state/actions/saga';
 import {
   setReserveLocations, setScannedPalletId, updatePalletQty, updatePalletScannedStatus
@@ -56,6 +56,7 @@ import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate
 import { UseStateType } from '../../../models/Generics.d';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import { GetItemPalletsResponse } from '../../../models/ItemPallets';
 
 export const SCREEN_NAME = 'Reserve_Adjustment_Screen';
 
@@ -68,6 +69,7 @@ export interface ReserveAdjustmentScreenProps {
     dispatch: Dispatch<any>;
     navigation: NavigationProp<any>;
     trackEventCall: (eventName: string, params?: any) => void;
+    getItemPalletsDispatch: ({ itemNbr }: {itemNbr: number}) => void;
     validateSessionCall: (
       navigation: NavigationProp<any>,
       route?: string
@@ -189,7 +191,7 @@ export const getItemPalletsApiHook = (
     // on api success
     if (getItemPalletsApi.result) {
       if (getItemPalletsApi.result.status === 200) {
-        const { data } = getItemPalletsApi.result;
+        const { data }: {data: GetItemPalletsResponse} = getItemPalletsApi.result;
         const updatedReserveLocations = getUpdatedReserveLocations(data.pallets, existingReserveLocations);
         dispatch(setReserveLocations(updatedReserveLocations));
       } else if (getItemPalletsApi.result.status === 204) {
@@ -272,8 +274,10 @@ export const renderDeleteLocationModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.TRACKER_RED}
               onPress={() => {
-                trackEventCall(SCREEN_NAME,
-                  { action: 'missing_pallet_confirmation_click', palletId: locToConfirm.palletId });
+                trackEventCall(
+                  SCREEN_NAME,
+                  { action: 'missing_pallet_confirmation_click', palletId: locToConfirm.palletId }
+                );
                 if (locToConfirm.mixedPallet && upcNbr) {
                   dispatch(deleteUpcs({
                     palletId: locToConfirm.palletId.toString(),
@@ -372,22 +376,16 @@ export const renderConfirmOnHandsModal = (
   setShowOnHandsConfirmationModal: React.Dispatch<
     React.SetStateAction<boolean>
   >,
-  updatedQuantity: number,
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   trackEventCall: (eventName: string, params?: any) => void,
   reserveLocations: ItemPalletInfo[]
 ) => {
-  const onHandsQty = itemDetails?.onHandsQty || 0;
-  const basePrice = itemDetails?.basePrice || 0;
-  const changeQuantity = updatedQuantity - onHandsQty;
-  const priceChange = basePrice * changeQuantity;
-  const priceLimit = Math.abs(priceChange) > 1000.0;
   const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
       expirationDate: '', // This is fine as it does not update the expiration date on the pallet
-      upcs: [{ upcNbr: itemDetails?.upcNbr || '0', quantity: item.newQty }]
+      upcs: [{ upcNbr: item.upcNbr, quantity: item.newQty }]
     }
   ));
 
@@ -408,50 +406,14 @@ export const renderConfirmOnHandsModal = (
         />
       ) : (
         <>
-          {priceLimit && (
-            <MaterialCommunityIcon
-              name="alert"
-              size={40}
-              color={COLOR.ORANGE}
-            />
-          )}
+          <MaterialCommunityIcon
+            name="information"
+            size={40}
+            color={COLOR.DISABLED_BLUE}
+          />
           <Text style={styles.confirmText}>
-            {strings('ITEM.SAVE_MODAL')}
+            {strings('ITEM.RESERVE_CONFIRMATION')}
           </Text>
-          {priceLimit && (
-            <Text>{strings('AUDITS.LARGE_CURRENCY_CHANGE')}</Text>
-          )}
-          <View style={styles.modalQuantityRow}>
-            <Text style={styles.rowQuantityTitle}>
-              {strings('APPROVAL.CURRENT_QUANTITY')}
-            </Text>
-            <Text style={styles.rowQuantity}>{onHandsQty}</Text>
-          </View>
-          <View style={styles.modalQuantityRow}>
-            <Text style={styles.rowQuantityTitle}>
-              {strings('GENERICS.CHANGE')}
-            </Text>
-            <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>
-              <MaterialCommunityIcon
-                name={
-                  updatedQuantity > onHandsQty
-                    ? 'arrow-up-bold'
-                    : 'arrow-down-bold'
-                }
-                size={16}
-              />
-              {currencies(priceChange)}
-            </Text>
-            <Text style={qtyStyleChange(onHandsQty, updatedQuantity)}>
-              {changeQuantity}
-            </Text>
-          </View>
-          <View style={styles.updatedQtyRow}>
-            <Text style={styles.rowQuantityTitle}>
-              {strings('AUDITS.UPDATED_QTY')}
-            </Text>
-            <Text style={styles.rowQuantity}>{updatedQuantity}</Text>
-          </View>
           <View style={styles.buttonContainer}>
             <Button
               style={styles.button}
@@ -472,14 +434,19 @@ export const renderConfirmOnHandsModal = (
               testID="modal-confirm-button"
               backgroundColor={COLOR.MAIN_THEME_COLOR}
               onPress={() => {
-                trackEventCall(SCREEN_NAME,
+                trackEventCall(
+                  SCREEN_NAME,
                   {
                     action: 'update_multi_pallet_qty',
                     type: 'multi_OH_qty_update',
                     itemNumber: itemDetails?.itemNbr,
                     upcNbr: itemDetails?.upcNbr
-                  });
-                dispatch(updateMultiPalletUPCQtyV2({ itemNbr: itemDetails?.itemNbr, PalletList: newPalletList }));
+                  }
+                );
+                dispatch(updateMultiPalletUPCQtyV2({
+                  itemNbr: itemDetails?.itemNbr,
+                  PalletList: newPalletList
+                }));
               }}
               disabled={itemDetails === null}
             />
@@ -589,13 +556,17 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     updateMultiPalletUPCQtyV2Api,
     locationListState,
     showCalcModalState,
-    showOnHandsConfirmState
+    showOnHandsConfirmState,
+    getItemPalletsDispatch
   } = props;
   const [showPalletQtyUpdateModal, setShowPalletQtyUpdateModal] = showPalletQtyModalState;
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = showDeleteConfirmationState;
   const [showCalcModal, setShowCalcModal] = showCalcModalState;
   const [location, setLocation] = locationListState;
   const [showOnHandsConfirmationModal, setShowOnHandsConfirmationModal] = showOnHandsConfirmState;
+
+  const MIN = 0;
+  const MAX = 9999;
 
   const handleDeletePalletSuccess = (type: string) => {
     setShowDeleteConfirmationModal(false);
@@ -619,7 +590,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
       if (itemDetails?.itemNbr) {
         dispatch({ type: GET_ITEM_PALLETS.RESET });
         setGetItemPalletsError(false);
-        dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
+        dispatch(getItemPalletsDispatch({ itemNbr: itemDetails.itemNbr }));
       }
     }).catch(() => {
       trackEventCall(SCREEN_NAME, { action: 'session_timeout', user: userId });
@@ -648,10 +619,11 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   const handleRefresh = () => {
     validateSessionCall(navigation, route.name)
       .then(() => {
-        trackEventCall(SCREEN_NAME,
+        trackEventCall(
+          SCREEN_NAME,
           { action: 'refresh_reserve_loc', itemNumber: itemDetails?.itemNbr });
         if (itemDetails?.itemNbr) {
-          dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
+          dispatch(getItemPalletsDispatch({ itemNbr: itemDetails.itemNbr }));
         }
       })
       .catch(() => {
@@ -696,7 +668,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     useCallbackHook(() => {
       validateSession(navigation, route.name).then(() => {
         if (itemDetails?.itemNbr) {
-          dispatch(getItemPallets({ itemNbr: itemDetails.itemNbr }));
+          dispatch(getItemPalletsDispatch({ itemNbr: itemDetails.itemNbr }));
         }
       });
     }, [navigation])
@@ -733,21 +705,6 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     itemDetails?.itemNbr || 0
   ), [updateMultiPalletUPCQtyV2Api]);
 
-  const calculateTotalOHQty = () => {
-    const reserveLocationsCount = reserveLocations.reduce(
-      (acc: number, loc: ItemPalletInfo) => {
-        const qty = typeof loc.newQty === 'number' ? loc.newQty : loc.quantity;
-        return acc + (qty || 0);
-      },
-      0
-    );
-    const otherOHTotalCount = (itemDetails?.claimsOnHandQty || 0)
-      + (itemDetails?.inTransitCloudQty || 0)
-      + (itemDetails?.cloudQty || 0)
-      + (itemDetails?.consolidatedOnHandQty || 0);
-    return reserveLocationsCount + otherOHTotalCount;
-  };
-
   return (
     <View style={styles.container}>
       {renderDeleteLocationModal(
@@ -773,7 +730,6 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
         updateMultiPalletUPCQtyV2Api,
         showOnHandsConfirmationModal,
         setShowOnHandsConfirmationModal,
-        calculateTotalOHQty(),
         itemDetails,
         dispatch,
         trackEventCall,
@@ -816,6 +772,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
           scanRequired={userConfig.scanRequired}
           onRetry={handleReserveLocsRetry}
           showCalculator={userConfig.showCalculator}
+          minQty={MIN}
+          maxQty={MAX}
         />
       </ScrollView>
       <ItemSeparator />
@@ -837,12 +795,13 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
 };
 
 const ReserveAdjustment = (): JSX.Element => {
-  const getItemPalletsApi = useTypedSelector(state => state.async.getItemPallets);
+  const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
+  const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
+    : useTypedSelector(state => state.async.getItemPallets);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
   const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
   const updateMultiPalletUPCQtyV2Api = useTypedSelector(state => state.async.updateMultiPalletUPCQtyV2);
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
-  const { countryCode, userId, configs: userConfig } = useTypedSelector(state => state.User);
   const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);
   const showPalletQtyModalState = useState(false);
   const route = useRoute();
@@ -866,9 +825,11 @@ const ReserveAdjustment = (): JSX.Element => {
     locationType: 'floor',
     palletId: '-1'
   });
+  const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <ReserveAdjustmentScreen
       getItemPalletsApi={getItemPalletsApi}
+      getItemPalletsDispatch={getItemPalletsDispatch}
       route={route}
       dispatch={dispatch}
       navigation={navigation}

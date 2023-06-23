@@ -1,10 +1,14 @@
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationContainer, NavigationProp } from '@react-navigation/native';
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { Provider } from 'react-redux';
 import {
-  WorklistNavigatorStack, WorklistTabs, onFilterMenuPress
+  WorklistNavigatorStack,
+  WorklistTabs,
+  onFilterMenuPress
 } from './WorklistNavigator';
+import store from '../state';
+import { mockConfig } from '../mockData/mockConfig';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -22,7 +26,7 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 
-describe('worklist Navigator', () => {
+describe('Worklist Navigator', () => {
   it('Renders the worklist Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
 
@@ -31,6 +35,7 @@ describe('worklist Navigator', () => {
         dispatch={jest.fn()}
         menuOpen={true}
         navigation={navigationProp}
+        userConfig={mockConfig}
       />
     );
 
@@ -45,11 +50,13 @@ describe('worklist Navigator', () => {
   });
   it('Renders the worklist Tabs', () => {
     const renderer = ShallowRenderer.createRenderer();
-
     renderer.render(
-      <WorklistTabs />
+      <Provider store={store}>
+        <NavigationContainer>
+          <WorklistTabs />
+        </NavigationContainer>
+      </Provider>
     );
-
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 });

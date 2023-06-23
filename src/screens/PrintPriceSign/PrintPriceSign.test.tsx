@@ -595,6 +595,10 @@ describe('PrintPriceSignScreen', () => {
         id: '111111111111'
       }
     ];
+    const mockSelectedAisle: LocationIdName = {
+      id: 2,
+      name: '1'
+    };
     const mockSelectedSection: LocationIdName = {
       id: 3,
       name: '1'
@@ -609,6 +613,33 @@ describe('PrintPriceSignScreen', () => {
         'NSFL'
       );
       expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('PRINT.PRICE_SIGN_SUCCESS'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
+
+      const printSuccess204: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 204
+        }
+      };
+      printSignApiHook(
+        printSuccess204,
+        navigationProp,
+        mockSetError,
+        mockDispatch,
+        true,
+        'NSFL'
+      );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('PALLET.ITEMS_NOT_FOUND'),
+        visibilityTime: 4000,
+        position: 'bottom'
+      });
 
       printSignApiHook(
         printFailureApi,
@@ -782,9 +813,6 @@ describe('PrintPriceSignScreen', () => {
     });
 
     it('Tests handleAddPrintList function', () => {
-      const mockGetFullSectionName = jest.fn(
-        sectionName => `${strings('LOCATION.SECTION')} TEST1-${sectionName}`
-      );
       const sectionLocName = `${strings('LOCATION.AISLE')} TEST1-2`;
       const mockItemDetailsExists: ItemDetails = {
         ...testItem,
@@ -799,9 +827,8 @@ describe('PrintPriceSignScreen', () => {
         'C',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         LocationName.SECTION,
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
@@ -824,14 +851,13 @@ describe('PrintPriceSignScreen', () => {
         'C',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         '',
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
       );
-      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
       expect(trackEvent).toHaveBeenCalledWith(
         'print_add_to_print_queue',
         expect.any(Object)
@@ -846,12 +872,11 @@ describe('PrintPriceSignScreen', () => {
         'Small',
         testItem,
         1,
-        'C',
+        '',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         LocationName.AISLE,
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
@@ -871,12 +896,11 @@ describe('PrintPriceSignScreen', () => {
         'Small',
         testItem,
         1,
-        'C',
+        '',
         mockSelectedSection,
         false,
-        mockSections,
+        mockSelectedAisle,
         LocationName.SECTION,
-        mockGetFullSectionName,
         sectionLocName,
         navigationProp,
         mockDispatch
@@ -910,7 +934,7 @@ describe('PrintPriceSignScreen', () => {
         routeProp,
         mockDispatch,
         '',
-        mockSections,
+        mockSelectedAisle,
         5,
         null,
         mockSelectedSection,
@@ -1002,13 +1026,21 @@ describe('PrintPriceSignScreen', () => {
     });
 
     it('Tests navListenerHook', () => {
-      navigationProp.addListener = jest.fn().mockImplementation((event, callBack) => {
-        callBack();
-      });
+      navigationProp.addListener = jest
+        .fn()
+        .mockImplementation((event, callBack) => {
+          callBack();
+        });
 
       navListenerHook(navigationProp, mockDispatch, LocationName.SECTION, true);
-      expect(navigationProp.addListener).toBeCalledWith('beforeRemove', expect.any(Function));
-      expect(navigationProp.addListener).toBeCalledWith('focus', expect.any(Function));
+      expect(navigationProp.addListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(navigationProp.addListener).toBeCalledWith(
+        'focus',
+        expect.any(Function)
+      );
       expect(mockDispatch).toBeCalledTimes(7);
     });
   });

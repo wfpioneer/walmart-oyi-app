@@ -30,6 +30,7 @@ import { WorklistState } from '../../../state/reducers/Worklist';
 import { WorklistGoal, WorklistSummary } from '../../../models/WorklistSummary';
 import { RenderCategoryCollapsibleCard } from '../../../components/CategoryCollapsibleCard/CategoryCollapsibleCard';
 import { MenuCard } from '../../../components/FilterMenuCard/FilterMenuCard';
+import { getWorklistSummaryV2 } from '../../../state/actions/asyncAPI';
 
 interface FilteredArea extends area {
   isSelected: boolean;
@@ -319,15 +320,19 @@ export const RenderExceptionTypeCard = (props: {
   isAudits: boolean,
   disableAuditWL: boolean;
   screenName: string;
+  disableOnHandsWL: boolean
 }): JSX.Element => {
   const {
-    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits, disableAuditWL, screenName
+    exceptionOpen, filterExceptions, dispatch, wlSummary, isAudits, disableAuditWL, screenName, disableOnHandsWL
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   const exceptionMap: FilterListItem[] = [];
 
   wlSummary?.worklistTypes.forEach(worklist => {
     if (disableAuditWL && worklist.worklistType === 'AU') {
+      return;
+    }
+    if (disableOnHandsWL && worklist.worklistType === 'NO') {
       return;
     }
     const exceptionType = fullExceptionList.get(worklist.worklistType);
@@ -429,6 +434,7 @@ interface FilterMenuProps {
   selectedWorklistGoal: WorklistGoal;
   showRollOverAudit: boolean;
   screenName: string;
+  userFeatures: string[];
 }
 
 export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
@@ -445,10 +451,12 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
     wlSummary,
     selectedWorklistGoal,
     showRollOverAudit,
-    screenName
+    screenName,
+    userFeatures
   } = props;
   const worklistIndex = wlSummary.findIndex(item => item.worklistGoal === selectedWorklistGoal);
   const disableAuditWL = showRollOverAudit && !isRollOverComplete(wlSummary[worklistIndex]);
+  const disableOnHandsWL = !userFeatures.includes('on hands change');
 
   return (
     <View style={styles.menuContainer}>
@@ -494,6 +502,7 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
         isAudits={selectedWorklistGoal === WorklistGoal.AUDITS}
         disableAuditWL={disableAuditWL}
         screenName={screenName}
+        disableOnHandsWL={disableOnHandsWL}
       />
     </View>
   );
@@ -501,7 +510,12 @@ export const FilterMenuComponent = (props: FilterMenuProps): JSX.Element => {
 
 export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
   const dispatch = useDispatch();
-  const workListApi = useTypedSelector(state => state.async.getWorklist);
+  const appUser = useTypedSelector(state => state.User);
+  const {
+    areas, enableAreaFilter, showRollOverAudit, inProgress
+  } = appUser.configs;
+  const workListApi = inProgress ? useTypedSelector(state => state.async.getWorklistV1)
+    : useTypedSelector(state => state.async.getWorklist);
   const workListAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
   const { screenName } = props;
   const {
@@ -512,7 +526,8 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
     areaOpen,
     workListType
   } = useTypedSelector(state => state.Worklist) as WorklistState;
-  const { areas, enableAreaFilter, showRollOverAudit } = useTypedSelector(state => state.User.configs);
+  const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummary.result?.data);
+  const wlSummaryV2: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data) || [];
   const result = workListType === 'AUDIT' ? workListAuditApi.result : workListApi.result;
   const data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
   const categoryMap: FilteredCategory[] = getCategoryMap(
@@ -520,7 +535,6 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
     filterCategories
   );
   const route = useRoute();
-  const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummary.result?.data);
   const selectedWorklistGoal = route.name.includes('Audit') ? WorklistGoal.AUDITS : WorklistGoal.ITEMS;
 
   return (
@@ -534,10 +548,11 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
       areas={areas}
       categoryMap={categoryMap}
       enableAreaFilter={enableAreaFilter}
-      wlSummary={wlSummary || []}
+      wlSummary={wlSummary || wlSummaryV2}
       selectedWorklistGoal={selectedWorklistGoal}
       showRollOverAudit={showRollOverAudit}
       screenName={screenName}
+      userFeatures={appUser.features}
     />
   );
 };

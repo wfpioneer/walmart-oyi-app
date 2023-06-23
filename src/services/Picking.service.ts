@@ -28,13 +28,32 @@ export default class PickingService {
       locationId: number;
       locationName: string;
       itemQty?: number;
-      palletId: number
+      palletId: number;
     }[];
   }) {
     const urls: Environment = getEnvironment();
     const { picklistItems, headers } = payload;
     return Request.patch(
       `${urls.locationUrl}/picklist/update`,
+      { picklistItems },
+      { headers }
+    );
+  }
+
+  public static updatePickListStatusV1(payload: {
+    headers: { action: PickAction };
+    picklistItems: {
+      picklistId: number;
+      locationId: number;
+      locationName: string;
+      itemQty?: number;
+      palletId: number;
+    }[];
+  }) {
+    const urls: Environment = getEnvironment();
+    const { picklistItems, headers } = payload;
+    return Request.patch(
+      `${urls.orchestrationURL}/picklists`,
       { picklistItems },
       { headers }
     );
@@ -54,10 +73,21 @@ export default class PickingService {
 
   public static createNewPick(payload: CreatePickRequest) {
     const urls: Environment = getEnvironment();
-
+    const TIMEOUT = 30000;
     return Request.post(
       `${urls.orchestrationURL}/picklist`,
-      payload
+      payload,
+      { timeout: TIMEOUT }
+    );
+  }
+
+  public static createNewPickV1(payload: CreatePickRequest) {
+    const urls: Environment = getEnvironment();
+    const TIMEOUT = 30000;
+    return Request.post(
+      `${urls.orchestrationURL}/v1/picklist`,
+      payload,
+      { timeout: TIMEOUT }
     );
   }
 }

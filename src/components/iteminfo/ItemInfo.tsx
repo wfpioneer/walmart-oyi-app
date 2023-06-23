@@ -18,13 +18,13 @@ export type ItemInfoProps = {
   upcNbr: string;
   status: string;
   category: string;
-  price: number;
+  price?: number;
   exceptionType?: string; // This is enumerated
   navigationForPrint?: NavigationProp<any>;
   additionalItemDetails?: AdditionalItemDetailsProps;
-  showAdditionalItemDetails: boolean;
   countryCode: string;
   showItemImage: boolean;
+  worklistAuditType?: string;
 };
 
 export type AdditionalItemDetailsProps = {
@@ -81,8 +81,8 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
 const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
-    price, exceptionType, navigationForPrint: navigation, showAdditionalItemDetails, additionalItemDetails,
-    countryCode, showItemImage
+    price, exceptionType, navigationForPrint: navigation, additionalItemDetails,
+    countryCode, showItemImage, worklistAuditType
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -134,6 +134,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
         )}
         <View>
           {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
+          {worklistAuditType && <Text style={styles.auditFlagText}>{strings('AUDITS.AUDITS')}</Text>}
           <Text style={styles.itemNameText}>{itemName}</Text>
           <View style={styles.nbrContainer}>
             <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
@@ -144,8 +145,8 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
           <Text style={styles.catgText}>{`${strings('ITEM.CATEGORY')}: ${category}`}</Text>
         </View>
       </View>
-      {showAdditionalItemDetails && additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
-      <Text style={styles.priceText}>{`${currencies(price)}`}</Text>
+      {additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
+      {price && <Text style={styles.priceText}>{`${currencies(price)}`}</Text>}
       {navigation && (
         <Button
           type={2}
@@ -162,7 +163,10 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
 
 ItemInfo.defaultProps = {
   exceptionType: null,
-  navigationForPrint: undefined
+  navigationForPrint: undefined,
+  price: undefined,
+  additionalItemDetails: undefined,
+  worklistAuditType: undefined
 };
 
 export default ItemInfo;

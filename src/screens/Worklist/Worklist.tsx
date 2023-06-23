@@ -8,7 +8,7 @@ import { NavigationProp } from '@react-navigation/native';
 import { WorklistItem } from '../../components/worklistItem/WorklistItem';
 import COLOR from '../../themes/Color';
 import styles from './Worklist.style';
-import { WorklistItemI } from '../../models/WorklistItem';
+import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import WorklistHeader from '../../components/WorklistHeader/WorklistHeader';
 import { strings } from '../../locales';
 import { ExceptionList } from './FullExceptionList';
@@ -55,8 +55,11 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
     );
   }
   const {
-    worklistType, itemName, itemNbr, upcNbr
+    worklistType, itemName, itemNbr, upcNbr, actionTaken, worklistStatus
   } = item;
+
+  const pendApproval = actionTaken === 'QTY_UPDATE' && worklistStatus === WorkListStatus.INPROGRESS;
+  const pendPick = actionTaken === 'ADD_TO_PICKLIST' && worklistStatus === WorkListStatus.INPROGRESS;
 
   return (
     <WorklistItem
@@ -72,6 +75,8 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       }}
       countryCode={countryCode}
       showItemImage={showItemImage}
+      pendingApproval={pendApproval}
+      pendingPick={pendPick}
     />
   );
 };

@@ -1,8 +1,9 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
-import { mockWorkListComplete, mockWorkListToDo } from '../../mockData/mockWorkList';
+import { mockWorkListComplete, mockWorkListPending, mockWorkListToDo } from '../../mockData/mockWorkList';
 import { CompletedWorklistScreen } from './CompletedWorklist';
+import { mockConfig } from '../../mockData/mockConfig';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -29,6 +30,8 @@ describe('CompletedWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -53,6 +56,8 @@ describe('CompletedWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -77,10 +82,66 @@ describe('CompletedWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+    it('Renders worklist items for both inProgress & complete items', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const mixedWorklistResult = {
+        data: [...mockWorkListPending, ...mockWorkListComplete]
+      };
+      renderer.render(
+        <CompletedWorklistScreen
+          isWaiting={false}
+          result={mixedWorklistResult}
+          error={null}
+          dispatch={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders only complete worklist items for inProgress & complete items if \'inprogress\' is enabled', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      const mixedWorklistResult = {
+        data: [...mockWorkListPending, ...mockWorkListComplete]
+      };
+      renderer.render(
+        <CompletedWorklistScreen
+          isWaiting={false}
+          result={mixedWorklistResult}
+          error={null}
+          dispatch={jest.fn()}
+          filterCategories={[]}
+          filterExceptions={[]}
+          groupToggle={false}
+          updateGroupToggle={jest.fn()}
+          navigation={navigationProp}
+          areas={[]}
+          enableAreaFilter={false}
+          countryCode="MX"
+          showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={{ ...mockConfig, inProgress: true }}
+        />
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
     it('Renders no worklist items when there are none', () => {
       const renderer = ShallowRenderer.createRenderer();
       const emptyWorklistResult = {
@@ -101,6 +162,8 @@ describe('CompletedWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -125,6 +188,8 @@ describe('CompletedWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -147,6 +212,8 @@ describe('CompletedWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

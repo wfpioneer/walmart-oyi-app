@@ -1,7 +1,6 @@
-// @ts-ignore
-import WMSSO from 'react-native-wmsso';
 import moment from 'moment';
 import { NavigationProp, StackActions } from '@react-navigation/native';
+import WMSingleSignOn from 'react-native-ssmp-sso';
 import { logoutUser } from '../state/actions/User';
 import store from '../state';
 import { trackEvent } from './AppCenterTool';
@@ -21,15 +20,17 @@ export function validateSession(navigation: NavigationProp<any>, route?: string)
     if (moment().isSameOrAfter(moment.unix(endTime))) {
       trackEvent('user_session_timed_out', { lastPage: route });
       store.dispatch(clearEndTime());
-      WMSSO.signOutUser().then(() => {
+
+      WMSingleSignOn.signOut('MainActivity', false).then(() => {
         store.dispatch(logoutUser());
         // Replace the current screen with the LoginScreen
         navigation.dispatch(
           StackActions.replace('Login')
         );
       });
-      return reject();
+
+      reject();
     }
-    return resolve();
+    resolve();
   });
 }

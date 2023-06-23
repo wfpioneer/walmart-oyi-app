@@ -44,7 +44,12 @@ import {
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { GET_ITEM_DETAILS, GET_PICKLISTS, UPDATE_PICKLIST_STATUS } from '../../state/actions/asyncAPI';
+import {
+  GET_ITEM_DETAILS,
+  GET_PICKLISTS,
+  UPDATE_PICKLIST_STATUS,
+  UPDATE_PICKLIST_STATUS_V1
+} from '../../state/actions/asyncAPI';
 import ItemDetails from '../../models/ItemDetails';
 import styles from './PickingTabNavigator.style';
 import COLOR from '../../themes/Color';
@@ -92,8 +97,10 @@ export const getItemDetailsApiHook = (
           categoryDesc: itemDetails.categoryDesc,
           price: itemDetails.price
         }));
-        dispatch(setPickCreateFloor(itemDetails.location.floor || []));
-        dispatch(setPickCreateReserve(itemDetails.location.reserve || []));
+        const floorLoc = itemDetails?.location?.floor;
+        const reserveLoc = itemDetails?.location?.reserve;
+        dispatch(setPickCreateFloor(floorLoc || []));
+        dispatch(setPickCreateReserve(reserveLoc || []));
         navigation.navigate('CreatePick');
       } else if (getItemDetailsApi.result.status === 204) {
         Toast.show({
@@ -173,7 +180,7 @@ export const updatePicklistStatusApiHook = (
   if (screenIsFocused) {
     // on api success
     if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
-    && updatePicklistStatusApi.result.status === 200) {
+    && (updatePicklistStatusApi.result.status === 200 || updatePicklistStatusApi.result.status === 204)) {
       dispatch(hideActivityModal());
       Toast.show({
         type: 'success',
@@ -185,6 +192,7 @@ export const updatePicklistStatusApiHook = (
         dispatch(resetMultiPickBinSelection());
       }
       dispatch({ type: UPDATE_PICKLIST_STATUS.RESET });
+      dispatch({ type: UPDATE_PICKLIST_STATUS_V1.RESET });
       dispatch(getPicklists());
     }
     // on api error
@@ -283,9 +291,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   );
 
   useEffectHook(
-    () => updatePicklistStatusApiHook(
-      updatePicklistStatusApi, dispatch, navigation.isFocused(), multiBinEnabled, multiPickEnabled
-    ),
+    () => updatePicklistStatusApiHook(updatePicklistStatusApi, dispatch, navigation.isFocused(), multiBinEnabled, multiPickEnabled),
     [updatePicklistStatusApi]
   );
 
@@ -425,15 +431,16 @@ export const BottomSheetCard = (props: BottomSheetCardProps): JSX.Element => {
 export const PickingTabs = (): JSX.Element => {
   const dispatch = useDispatch();
   const { multiBinEnabled, multiPickEnabled, pickList } = useTypedSelector(state => state.Picking);
+  const { multiBin, multiPick, inProgress } = useTypedSelector(state => state.User.configs);
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
   const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
-  const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
+  const updatePicklistStatusApi = inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
+    : useTypedSelector(state => state.async.updatePicklistStatus);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
   const navigation = useNavigation();
   const route = useRoute();
-  const { multiBin, multiPick } = useTypedSelector(state => state.User.configs);
   const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
 
   const renderBackdrop = useCallback(

@@ -1,5 +1,6 @@
 import {
   clearAuditScreenData,
+  setApprovalItem,
   setFloorLocations,
   setItemDetails,
   setReserveLocations,
@@ -10,7 +11,8 @@ import {
 } from '../actions/AuditItemScreen';
 import { AuditItemScreen, AuditItemScreenState, initialState } from './AuditItemScreen';
 import { getMockItemDetails } from '../../mockData';
-import { itemPallets } from '../../mockData/getItemPallets';
+import { mockPalletLocations } from '../../mockData/getItemPallets';
+import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../models/ApprovalListItem';
 
 describe('The Audit Item Screen Reducer', () => {
   // Intitial State
@@ -23,7 +25,7 @@ describe('The Audit Item Screen Reducer', () => {
   };
   const mockInitialReserveState: AuditItemScreenState = {
     ...initialState,
-    reserveLocations: itemPallets.pallets
+    reserveLocations: mockPalletLocations
   };
   it('handles setting the item details in AuditItemScreen redux state', () => {
     const testResults = AuditItemScreen(testInitialState, setItemDetails(mockItemDetails));
@@ -36,9 +38,8 @@ describe('The Audit Item Screen Reducer', () => {
     expect(testResults).toStrictEqual(changeState);
   });
   it('handles setting the floor locations in AuditItemScreen redux state', () => {
-    const mockReserveLocations = itemPallets.pallets;
-    const testResults = AuditItemScreen(testInitialState, setReserveLocations(mockReserveLocations));
-    const changeState = { ...testInitialState, reserveLocations: mockReserveLocations };
+    const testResults = AuditItemScreen(testInitialState, setReserveLocations(mockPalletLocations));
+    const changeState = { ...testInitialState, reserveLocations: mockPalletLocations };
     expect(testResults).toStrictEqual(changeState);
   });
   it('handles clearing the AuditItemScreen redux state while moving away from the screen', () => {
@@ -48,17 +49,13 @@ describe('The Audit Item Screen Reducer', () => {
   it('handles updating new qty for the pallet associated to the item', () => {
     const mockNewQty = 13;
     const mockPalletId = 4598;
+    const testLocations = mockPalletLocations;
     const testResults = AuditItemScreen(mockInitialReserveState, updatePalletQty(mockPalletId, mockNewQty));
+    testLocations[0].newQty = 13;
+
     const changeState = {
       ...initialState,
-      reserveLocations: [{
-        palletId: 4598,
-        quantity: 22,
-        newQty: 13,
-        sectionId: 5578,
-        locationName: 'D1-4',
-        mixedPallet: false
-      }]
+      reserveLocations: testLocations
     };
     expect(testResults).toStrictEqual(changeState);
   });
@@ -112,14 +109,46 @@ describe('The Audit Item Screen Reducer', () => {
 
   it('handles updating the reserve location with the scanned palletId', () => {
     const mockScanned = true;
+    const testLocations = mockPalletLocations;
     const testResults = AuditItemScreen(
       mockInitialReserveState,
-      updatePalletScannedStatus(itemPallets.pallets[0].palletId, mockScanned)
+      updatePalletScannedStatus(mockPalletLocations[0].palletId, mockScanned)
     );
+    testLocations[0].scanned = true;
+
     const changedState: AuditItemScreenState = {
       ...mockInitialReserveState,
-      reserveLocations: [{ ...itemPallets.pallets[0], scanned: true }]
+      reserveLocations: mockPalletLocations
     };
+    expect(testResults).toStrictEqual(changedState);
+  });
+
+  it('set approval item', () => {
+    const mockApprovalItem: ApprovalListItem = {
+      imageUrl: undefined,
+      itemName: 'Nature Valley Crunchy Cereal Bars ',
+      itemNbr: 123,
+      upcNbr: 40000000123,
+      categoryNbr: 1,
+      categoryDescription: 'SNACKS',
+      subCategoryNbr: 1,
+      subCategoryDescription: '',
+      newQuantity: 20,
+      oldQuantity: 5,
+      dollarChange: 150.50,
+      initiatedUserId: 'Associate Employee',
+      initiatedTimestamp: '2021-03-27T00:00:00.000Z',
+      approvalStatus: approvalStatus.Pending,
+      approvalRequestSource: approvalRequestSource.ItemDetails,
+      isChecked: false,
+      daysLeft: 3
+    };
+
+    const changedState = {
+      ...testInitialState,
+      approvalItem: mockApprovalItem
+    };
+    const testResults = AuditItemScreen(testInitialState, setApprovalItem(mockApprovalItem));
     expect(testResults).toStrictEqual(changedState);
   });
 });

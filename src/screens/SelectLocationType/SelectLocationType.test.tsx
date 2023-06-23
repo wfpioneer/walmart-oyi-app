@@ -4,8 +4,8 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { strings } from '../../locales';
 import {
-  AddLocationApiHook,
-  EditLocationApiHook,
+  addLocationApiHook,
+  editLocationApiHook,
   SelectLocationTypeScreen,
   isNotActionCompleted,
   onBarcodeEmitterResponse,
@@ -96,6 +96,7 @@ describe('SelectLocationTypeScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           selectedLocation={null}
           salesFloor={true}
+          peteGetLocations={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -128,6 +129,7 @@ describe('SelectLocationTypeScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           selectedLocation={null}
           salesFloor={true}
+          peteGetLocations={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -160,6 +162,7 @@ describe('SelectLocationTypeScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           selectedLocation={null}
           salesFloor={true}
+          peteGetLocations={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -200,6 +203,7 @@ describe('SelectLocationTypeScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           selectedLocation={null}
           salesFloor={true}
+          peteGetLocations={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -232,6 +236,7 @@ describe('SelectLocationTypeScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           selectedLocation={selectedLocation}
           salesFloor={true}
+          peteGetLocations={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -267,6 +272,7 @@ describe('SelectLocationTypeScreen', () => {
           validateSessionCall={jest.fn(() => Promise.resolve())}
           selectedLocation={null}
           salesFloor={true}
+          peteGetLocations={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -307,7 +313,7 @@ describe('SelectLocationTypeScreen', () => {
       zoneName: 'Test',
       newQty: 0
     };
-    it('Test AddLocationApiHook', () => {
+    it('Tests AddLocationApiHook', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
@@ -324,20 +330,55 @@ describe('SelectLocationTypeScreen', () => {
         isWaiting: true
       };
 
-      AddLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, mockLocation);
+      addLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, mockLocation, false);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
 
       mockDispatch.mockReset();
-      AddLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, true, 'NSFL', 123, null);
+      addLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, true, 'NSFL', 123, null, false);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
 
-      AddLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, mockLocation);
+      addLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, mockLocation, false);
       expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
 
       mockSetError.mockReset();
-      AddLocationApiHook(isWaitingApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, null);
+      addLocationApiHook(isWaitingApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, null, false);
+      expect(mockSetError).toHaveBeenCalledWith({ error: false, message: '' });
+    });
+
+    it('Tests AddLocationV1ApiHook', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: ''
+        }
+      };
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Server Error'
+      };
+      const isWaitingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+
+      addLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, mockLocation, true);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'SAGA/GET_LOCATIONS_FOR_ITEM_V1' }));
+      expect(navigationProp.goBack).toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+      addLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, true, 'NSFL', 123, null, true);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+
+      addLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, mockLocation, true);
+      expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.ADD_LOCATION_API_ERROR') });
+
+      mockSetError.mockReset();
+      addLocationApiHook(isWaitingApi, mockSetError, mockDispatch, navigationProp, true, true, 'NSFL', 123, null, true);
       expect(mockSetError).toHaveBeenCalledWith({ error: false, message: '' });
     });
 
@@ -358,25 +399,60 @@ describe('SelectLocationTypeScreen', () => {
         isWaiting: true
       };
 
-      EditLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation);
+      editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, false);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
 
       mockDispatch.mockReset();
-      EditLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, 123, mockLocation);
+      editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, 123, mockLocation, false);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
 
-      EditLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation);
+      editLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, false);
       expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
 
       mockSetError.mockReset();
-      EditLocationApiHook(isWaitingApi, mockSetError, mockDispatch, navigationProp, true, 123, null);
+      editLocationApiHook(isWaitingApi, mockSetError, mockDispatch, navigationProp, true, 123, null, false);
+      expect(mockSetError).toHaveBeenCalledWith({ error: false, message: '' });
+    });
+
+    it('Test EditLocationV1ApiHook', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: ''
+        }
+      };
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'Server Error'
+      };
+      const isWaitingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+
+      editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, true);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'SAGA/GET_LOCATIONS_FOR_ITEM_V1' }));
+      expect(navigationProp.goBack).toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+      editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, 123, mockLocation, true);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+
+      editLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, true);
+      expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
+
+      mockSetError.mockReset();
+      editLocationApiHook(isWaitingApi, mockSetError, mockDispatch, navigationProp, true, 123, null, true);
       expect(mockSetError).toHaveBeenCalledWith({ error: false, message: '' });
     });
 
     it('Tests ValidateSessionCallResponse', () => {
-      const mockFloorLocations = mockItemDetails[123].location.floor || [];
+      const mockFloorLocations = (mockItemDetails[123]?.location?.floor) || [];
       // Different Location Name
       onValidateSessionCallResponse(
         'Falseloc4-4', mockSetError, mockFloorLocations, '123', mockDispatch, mockTrackEvent, null
@@ -399,8 +475,13 @@ describe('SelectLocationTypeScreen', () => {
       expect(mockDispatch).toBeCalledTimes(1);
 
       onValidateSessionCallResponse(
-        mockFloorLocations[0].locationName, mockSetError, mockFloorLocations,
-        '123', mockDispatch, mockTrackEvent, mockLocation
+        mockFloorLocations[0].locationName,
+        mockSetError,
+        mockFloorLocations,
+        '123',
+        mockDispatch,
+        mockTrackEvent,
+        mockLocation
       );
       expect(mockTrackEvent).toBeCalledTimes(1);
       expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.EDIT_DUPLICATE_ERROR') });
@@ -461,6 +542,7 @@ describe('SelectLocationTypeScreen', () => {
           validateSessionCall={mockValidateSession}
           selectedLocation={null}
           salesFloor={true}
+          peteGetLocations={false}
         />
       );
       const submitButton = getByTestId('submit');

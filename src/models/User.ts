@@ -1,4 +1,3 @@
-/* eslint semi: 0 */
 export default interface User {
   userId: string;
   token: string;
@@ -11,7 +10,7 @@ export default interface User {
     loginId: string;
     mailId: string;
   };
-  features: string[],
+  features: string[];
   configs: Configurations
 }
 
@@ -28,7 +27,6 @@ export interface Configurations {
   areas: area[];
   enableAreaFilter: boolean;
   palletWorklists: boolean;
-  additionalItemDetails: boolean;
   createPallet: boolean;
   auditWorklists: boolean;
   showRollOverAudit: boolean;
@@ -40,6 +38,11 @@ export interface Configurations {
   showItemImage: boolean;
   showFeedback: boolean;
   reserveAdjustment: boolean;
+  manualNoAction: boolean;
+  peteGetPallets: boolean;
+  inProgress: boolean;
+  overridePalletPerishables: boolean;
+  peteGetLocations: boolean;
 }
 
 export interface area {

@@ -1,6 +1,6 @@
 import React, { Dispatch, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderBackButton } from '@react-navigation/elements';
+import { HeaderBackButton, HeaderBackButtonProps } from '@react-navigation/elements';
 import { Animated, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -15,31 +15,39 @@ import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import { strings } from '../locales';
-import { getWorklist } from '../state/actions/saga';
+import { getWorklist, getWorklistV1 } from '../state/actions/saga';
+import { PendingWorklist } from '../screens/Worklist/PendingWorklist';
+import { Configurations } from '../models/User';
 
 interface worklistNavigatorProps{
   dispatch:Dispatch<any>,
   navigation:NavigationProp<any>
-  menuOpen:boolean
+  menuOpen:boolean,
+  userConfig: Configurations
 }
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
-export const WorklistTabs = () => (
-  <Tab.Navigator
-    screenOptions={{
-      tabBarActiveTintColor: COLOR.WHITE,
-      tabBarIndicatorStyle: { backgroundColor: COLOR.WHITE },
-      tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
-    }}
-  >
-    <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
-    <Tab.Screen
-      name={strings('WORKLIST.COMPLETED')}
-      component={CompletedWorklist}
-    />
-  </Tab.Navigator>
-);
+export const WorklistTabs = () => {
+  const { configs } = useTypedSelector(state => state.User);
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: COLOR.WHITE,
+        tabBarIndicatorStyle: { backgroundColor: COLOR.WHITE },
+        tabBarStyle: { backgroundColor: COLOR.MAIN_THEME_COLOR }
+      }}
+    >
+      <Tab.Screen name={strings('WORKLIST.TODO')} component={TodoWorklist} />
+      { configs.inProgress && <Tab.Screen name={strings('WORKLIST.PENDING')} component={PendingWorklist} /> }
+      <Tab.Screen
+        name={strings('WORKLIST.COMPLETED')}
+        component={CompletedWorklist}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
   if (menuOpen) {
@@ -60,11 +68,15 @@ export const renderHeaderRight = (dispatch: Dispatch<any>, menuOpen: boolean):JS
 
 export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Element => {
   const {
-    dispatch, navigation, menuOpen
+    dispatch, navigation, menuOpen, userConfig
   } = props;
   useEffect(
     () => navigation.addListener('focus', () => {
-      dispatch(getWorklist());
+      if (userConfig.inProgress) {
+        dispatch(getWorklistV1());
+      } else {
+        dispatch(getWorklist());
+      }
     }),
     [navigation]
   );
@@ -74,6 +86,13 @@ export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Elemen
   };
 
   const menu = <FilterMenu screenName="Item_Worklist" />;
+  const worklistNavHeaderLeft = (prop: HeaderBackButtonProps) => (prop.canGoBack && (
+  <HeaderBackButton
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...prop}
+    onPress={navigateBack}
+  />
+  ));
   return (
     <SideMenu
       menu={menu}
@@ -105,13 +124,7 @@ export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Elemen
           options={() => ({
             headerRight: () => renderHeaderRight(dispatch, menuOpen),
             headerTitle: strings('WORKLIST.ITEM_WORKLIST'),
-            headerLeft: props => props.canGoBack && (
-            <HeaderBackButton
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-              {...props}
-              onPress={navigateBack}
-            />
-            )
+            headerLeft: worklistNavHeaderLeft
           })}
         />
       </Stack.Navigator>
@@ -122,12 +135,13 @@ export const WorklistNavigator = ():JSX.Element => {
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
   const { menuOpen } = useTypedSelector(state => state.Worklist);
+  const { configs } = useTypedSelector(state => state.User);
   return (
     <WorklistNavigatorStack
       dispatch={dispatch}
       navigation={navigation}
       menuOpen={menuOpen}
+      userConfig={configs}
     />
   );
 };
-

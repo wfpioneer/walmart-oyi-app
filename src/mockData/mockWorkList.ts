@@ -1,4 +1,4 @@
-import { WorklistItemI } from '../models/WorklistItem';
+import { WorkListStatus, WorklistItemI } from '../models/WorklistItem';
 import { MissingPalletWorklistItemI } from '../models/PalletWorklist';
 import { FilteredCategory } from '../models/FilterListItem';
 import { approvalRequestSource } from '../models/ApprovalListItem';
@@ -49,7 +49,8 @@ export const mockWorkListToDo: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -62,7 +63,8 @@ export const mockWorkListToDo: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -75,7 +77,8 @@ export const mockWorkListToDo: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -88,7 +91,8 @@ export const mockWorkListToDo: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -101,7 +105,8 @@ export const mockWorkListToDo: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.NS,
@@ -114,7 +119,100 @@ export const mockWorkListToDo: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
+  }
+];
+export const mockWorkListPending: WorklistItemI[] = [
+  {
+    worklistType: WORKLISTTYPE.NSFL,
+    itemName: ITEM_NAME.TEST_ITEM,
+    itemNbr: 1234567890,
+    upcNbr: '000055559999',
+    catgNbr: 93,
+    catgName: CATEGORY_NAME.FOODSERVICE,
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false,
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'ADD_TO_PICKLIST'
+  },
+  {
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.ELECTRONIC_ITEM,
+    itemNbr: 987654321,
+    upcNbr: '777555333',
+    catgNbr: 99,
+    catgName: CATEGORY_NAME.ELECTRONICS,
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false,
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'QTY_UPDATE'
+  },
+  {
+    worklistType: WORKLISTTYPE.NO,
+    itemName: ITEM_NAME.BAKERY_ITEM,
+    itemNbr: 123789456,
+    upcNbr: '111122223333',
+    catgNbr: 88,
+    catgName: CATEGORY_NAME.FRESH_BAKERY,
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false,
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'QTY_UPDATE'
+  },
+  {
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.WINE_ITEM,
+    itemNbr: 456789123,
+    upcNbr: '444455556666',
+    catgNbr: 19,
+    catgName: CATEGORY_NAME.WINE,
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false,
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'QTY_UPDATE'
+  },
+  {
+    worklistType: WORKLISTTYPE.C,
+    itemName: ITEM_NAME.PHARMACY_ITEM,
+    itemNbr: 789123456,
+    upcNbr: '777788889999',
+    catgNbr: 87,
+    catgName: CATEGORY_NAME.PHARMACY_RX,
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false,
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'ADD_TO_PICKLIST'
+  },
+  {
+    worklistType: WORKLISTTYPE.NS,
+    itemName: ITEM_NAME.PHARMACY_ITEM_1,
+    itemNbr: 789123457,
+    upcNbr: '667788889999',
+    catgNbr: 199,
+    catgName: CATEGORY_NAME.ELECTRONICS,
+    subCatgNbr: 0,
+    subCatgName: undefined,
+    completedTs: undefined,
+    completedUserId: undefined,
+    completed: false,
+    worklistStatus: WorkListStatus.INPROGRESS,
+    actionTaken: 'ADD_TO_PICKLIST'
   }
 ];
 export const mockWorkListComplete: WorklistItemI[] = [
@@ -129,7 +227,9 @@ export const mockWorkListComplete: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
-    completed: true
+    completed: true,
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'ADD_TO_PICKLIST'
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -142,7 +242,9 @@ export const mockWorkListComplete: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
-    completed: true
+    completed: true,
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.NO,
@@ -155,7 +257,9 @@ export const mockWorkListComplete: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
-    completed: true
+    completed: true,
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -168,7 +272,9 @@ export const mockWorkListComplete: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
-    completed: true
+    completed: true,
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'QTY_UPDATE'
   },
   {
     worklistType: WORKLISTTYPE.C,
@@ -181,7 +287,9 @@ export const mockWorkListComplete: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: COMPLETED_TS,
     completedUserId: 'SVCintlsamsops',
-    completed: true
+    completed: true,
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'ADD_TO_PICKLIST'
   },
   {
     worklistType: WORKLISTTYPE.NS,
@@ -194,7 +302,9 @@ export const mockWorkListComplete: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: true
+    completed: true,
+    worklistStatus: WorkListStatus.COMPLETED,
+    actionTaken: 'ADD_TO_PICKLIST'
   }
 ];
 
@@ -216,7 +326,8 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -235,7 +346,8 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -254,7 +366,8 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -273,7 +386,8 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -292,7 +406,8 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   },
   {
     worklistType: WORKLISTTYPE.CATEGORY,
@@ -311,11 +426,12 @@ export const mockCategoryList: WorklistItemI[] = [
     subCatgName: undefined,
     completedTs: undefined,
     completedUserId: undefined,
-    completed: false
+    completed: false,
+    worklistStatus: WorkListStatus.TODO
   }
 ];
 
-export const missingCategoryNbrList = [{
+export const missingCategoryNbrList: WorklistItemI[] = [{
   worklistType: WORKLISTTYPE.NSFL,
   itemName: ITEM_NAME.TEST_ITEM,
   itemNbr: 1234567890,
@@ -326,7 +442,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.NO,
@@ -339,7 +456,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.NO,
@@ -352,7 +470,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.C,
@@ -365,7 +484,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 },
 {
   worklistType: WORKLISTTYPE.C,
@@ -378,7 +498,8 @@ export const missingCategoryNbrList = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false
+  completed: false,
+  worklistStatus: WorkListStatus.TODO
 }];
 
 export const missingExceptionsWorklist: WorklistItemI[] = [
@@ -684,7 +805,7 @@ export const mockMissingPalletWorklist: MissingPalletWorklistItemI[] = [
   }
 ];
 
-export const mockToDoAuditWorklist = [{
+export const mockToDoAuditWorklist: WorklistItemI[] = [{
   worklistType: WORKLISTTYPE.AU,
   itemName: ITEM_NAME.TEST_ITEM,
   itemNbr: 1234567890,
@@ -737,7 +858,7 @@ export const mockToDoAuditWorklist = [{
   completed: false
 }];
 
-export const mockCompletedAuditWorklist = [{
+export const mockCompletedAuditWorklist: WorklistItemI[] = [{
   worklistType: WORKLISTTYPE.AU,
   itemName: ITEM_NAME.TEST_ITEM,
   itemNbr: 1234567890,

@@ -3,7 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { PickListItem, PickStatus } from '../../models/Picking.d';
 import User from '../../models/User';
 import { QuickPickTabScreen } from './QuickPickTab';
-import { mockAreas } from '../../mockData/mockConfig';
+import { mockAreas, mockConfig } from '../../mockData/mockConfig';
 
 const mockUser: User = {
   userId: 'vn50pz4',
@@ -14,6 +14,7 @@ const mockUser: User = {
     mailId: 'vn50pz4@homeoffice.wal-mart.com'
   },
   configs: {
+    ...mockConfig,
     backupCategories: '',
     binning: true,
     locationManagement: true,
@@ -26,7 +27,6 @@ const mockUser: User = {
     areas: mockAreas,
     enableAreaFilter: false,
     palletWorklists: false,
-    additionalItemDetails: false,
     showOpenAuditLink: false,
     scanRequired: false,
     showRollOverAudit: false,

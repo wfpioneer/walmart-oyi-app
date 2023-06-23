@@ -24,7 +24,6 @@ exports[`Create Pick screen render tests renders the screen when items are move 
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
-      showAdditionalItemDetails={false}
       showItemImage={false}
       status=""
       upcNbr="8675309"
@@ -221,7 +220,6 @@ exports[`Create Pick screen render tests renders the screen with item with floor
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
-      showAdditionalItemDetails={false}
       showItemImage={false}
       status=""
       upcNbr="8675309"
@@ -420,7 +418,6 @@ exports[`Create Pick screen render tests renders the screen with no reserve loca
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
-      showAdditionalItemDetails={false}
       showItemImage={false}
       status=""
       upcNbr="8675309"
@@ -617,7 +614,6 @@ exports[`Create Pick screen render tests renders the screen without floor locati
       itemName="treacle tart"
       itemNbr={2}
       price={4.92}
-      showAdditionalItemDetails={false}
       showItemImage={false}
       status=""
       upcNbr="8675309"

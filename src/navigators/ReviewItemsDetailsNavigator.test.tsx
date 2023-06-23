@@ -56,6 +56,7 @@ describe('ReviewItemsDetailsNavigation', () => {
         title=""
         dispatch={jest.fn()}
         navigation={navigationProp}
+        manualNoAction={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();

@@ -3,6 +3,7 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { NavigationProp } from '@react-navigation/native';
 import { TodoWorklistScreen } from './TodoWorklist';
 import { mockWorkListComplete, mockWorkListToDo } from '../../mockData/mockWorkList';
+import { mockConfig } from '../../mockData/mockConfig';
 
 jest.mock('../../utils/AppCenterTool', () => jest.requireActual('../../utils/__mocks__/AppCenterTool'));
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
@@ -29,6 +30,8 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -53,6 +56,8 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -77,6 +82,8 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -101,6 +108,8 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -125,6 +134,8 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -147,6 +158,8 @@ describe('ToDoWorklistScreen', () => {
           enableAreaFilter={false}
           countryCode="MX"
           showItemImage={false}
+          onHandsEnabled={true}
+          userConfigs={mockConfig}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();

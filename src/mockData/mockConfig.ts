@@ -28,7 +28,6 @@ export const mockConfig: Configurations = {
   areas: mockAreas,
   enableAreaFilter: false,
   palletWorklists: false,
-  additionalItemDetails: false,
   createPallet: false,
   auditWorklists: false,
   showRollOverAudit: false,
@@ -39,5 +38,10 @@ export const mockConfig: Configurations = {
   multiPick: false,
   showItemImage: false,
   showFeedback: false,
-  reserveAdjustment: false
+  reserveAdjustment: false,
+  manualNoAction: false,
+  inProgress: false,
+  peteGetPallets: false,
+  overridePalletPerishables: false,
+  peteGetLocations: false
 };

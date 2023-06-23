@@ -14,7 +14,7 @@ import {
   UPDATE_PENDING_OH_QTY,
   clearSelectedLocation,
   deleteLocationFromExisting,
-  getLocationDetails,
+  getLocationsForItem,
   resetLocations,
   setActionCompleted,
   setFloorLocations,
@@ -32,8 +32,6 @@ describe('ItemDetailScreen action creator tests', () => {
     const setupScreenResult = setupScreen(
       item.itemNbr,
       item.upcNbr,
-      item.location.floor || [],
-      item.location.reserve || [],
       item.exceptionType,
       item.pendingOnHandsQty,
       true,
@@ -44,8 +42,6 @@ describe('ItemDetailScreen action creator tests', () => {
       payload: {
         itemNbr: item.itemNbr,
         upcNbr: item.upcNbr,
-        floorLocations: item.location.floor,
-        reserveLocations: item.location.reserve,
         exceptionType: item.exceptionType,
         pendingOHQty: item.pendingOnHandsQty,
         completed: true,
@@ -63,19 +59,19 @@ describe('ItemDetailScreen action creator tests', () => {
     expect(setActionResult).toStrictEqual({ type: ACTION_COMPLETED });
 
     const setFloorLocationsResult = setFloorLocations(
-      item.location.floor || []
+      item?.location?.floor || []
     );
     expect(setFloorLocationsResult).toStrictEqual({
       type: SET_FLOOR_LOCATIONS,
-      payload: item.location.floor
+      payload: item?.location?.floor
     });
 
     const setReserveLocationsResult = setReserveLocations(
-      item.location.reserve || []
+      item?.location?.reserve || []
     );
     expect(setReserveLocationsResult).toStrictEqual({
       type: SET_RESERVE_LOCATIONS,
-      payload: item.location.reserve
+      payload: item?.location?.reserve
     });
 
     const deleteLocationResults = deleteLocationFromExisting('reserve', 5);
@@ -90,8 +86,8 @@ describe('ItemDetailScreen action creator tests', () => {
     const resetLocationResults = resetLocations();
     expect(resetLocationResults).toStrictEqual({ type: RESET_LOCATIONS });
 
-    const getLocationDetailsResults = getLocationDetails(123456);
-    expect(getLocationDetailsResults).toStrictEqual({
+    const getLocationsForItemResults = getLocationsForItem(123456);
+    expect(getLocationsForItemResults).toStrictEqual({
       type: GET_LOCATION_DETAILS,
       payload: {
         itemNbr: 123456
@@ -106,7 +102,8 @@ describe('ItemDetailScreen action creator tests', () => {
       sectionName: '1',
       locationName: 'B1-1',
       type: 'Reserve',
-      typeNbr: 7
+      typeNbr: 7,
+      newQty: 0
     };
     const setSelectedLocationResults = setSelectedLocation(locationMock);
     expect(setSelectedLocationResults).toStrictEqual({

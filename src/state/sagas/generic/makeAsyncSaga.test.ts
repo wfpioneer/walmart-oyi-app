@@ -3,7 +3,7 @@ import {
   cloneableGenerator
 } from '@redux-saga/testing-utils';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosHeaders, AxiosResponse } from 'axios';
 import { makeAsyncSaga } from './makeAsyncSaga';
 import {
   makeAsyncActionCreators,
@@ -80,7 +80,9 @@ describe('Testing MakeAsyncSaga', () => {
         rootWorkerError = rootWorker.clone();
       });
       const mockError: AxiosError = {
-        config: {},
+        config: {
+          headers: new AxiosHeaders()
+        },
         isAxiosError: true,
         message: '500 Network Error',
         name: 'Network Error',

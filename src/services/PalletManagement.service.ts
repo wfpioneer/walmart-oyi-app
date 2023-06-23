@@ -68,11 +68,17 @@ export default class PalletManagementService {
     const urls: Environment = getEnvironment();
     const allItems = payload.isAllItems || false;
     const summaryDetails = payload.isSummary || false;
-    return Request.get(`${urls.locationUrl}/pallet`, {
-      palletIds: payload.palletIds.join(),
-      allItems,
-      summaryDetails
-    });
+    const TIMEOUT = 30000;
+
+    return Request.get(
+      `${urls.locationUrl}/pallet`,
+      {
+        palletIds: payload.palletIds.join(),
+        allItems,
+        summaryDetails
+      },
+      { timeout: TIMEOUT }
+    );
   }
 
   public static postBinPallets(payload: PostBinPalletsRequest): Promise<

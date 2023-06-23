@@ -5,7 +5,7 @@ import {
 import { Checkbox } from 'react-native-paper';
 import { strings } from '../../locales';
 import { PickAction, PickListItem, PickStatus } from '../../models/Picking.d';
-import { updatePicklistStatus } from '../../state/actions/saga';
+import { updatePicklistStatus, updatePicklistStatusV1 } from '../../state/actions/saga';
 import { updateMultiPickSelection } from '../../state/actions/Picking';
 import PickItemInfo from '../PickItemInfoCard/PickItemInfoCard';
 import styles from './PickPalletInfoCard.style';
@@ -21,6 +21,7 @@ interface PickPalletInfoProps {
   canDelete: boolean;
   isSelected?: boolean;
   showCheckbox: boolean;
+  inProgress: boolean;
 }
 
 const toggleMultiPickSelection = (
@@ -33,7 +34,16 @@ const toggleMultiPickSelection = (
 
 const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const {
-    onPress, palletId, pickListItems, pickStatus, palletLocation, dispatch, canDelete, isSelected, showCheckbox
+    onPress,
+    palletId,
+    pickListItems,
+    pickStatus,
+    palletLocation,
+    dispatch,
+    canDelete,
+    isSelected,
+    showCheckbox,
+    inProgress
   } = props;
 
   const palletsItems = pickListItems.filter(item => item.palletId === palletId);
@@ -42,15 +52,29 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
     <PickItemInfo
       pickListItem={item}
       canDelete={canDelete && pickStatus === PickStatus.READY_TO_PICK}
-      onDeletePressed={() => dispatch(updatePicklistStatus({
-        headers: { action: PickAction.DELETE },
-        picklistItems: [{
-          picklistId: item.id,
-          locationId: item.palletLocationId,
-          locationName: item.palletLocationName,
-          palletId: item.palletId
-        }]
-      }))}
+      onDeletePressed={() => {
+        if (inProgress) {
+          dispatch(updatePicklistStatusV1({
+            headers: { action: PickAction.DELETE },
+            picklistItems: [{
+              picklistId: item.id,
+              locationId: item.palletLocationId,
+              locationName: item.palletLocationName,
+              palletId: item.palletId
+            }]
+          }));
+        } else {
+          dispatch(updatePicklistStatus({
+            headers: { action: PickAction.DELETE },
+            picklistItems: [{
+              picklistId: item.id,
+              locationId: item.palletLocationId,
+              locationName: item.palletLocationName,
+              palletId: item.palletId
+            }]
+          }));
+        }
+      }}
     />
   );
 

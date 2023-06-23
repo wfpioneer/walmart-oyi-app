@@ -28,25 +28,31 @@ import { CreatePickRequest } from '../../services/Picking.service';
 import { CreatePallet } from '../../models/PalletManagementTypes';
 import { submitFeedbackRequest } from '../../services/Feedback.service';
 
-export const GET_ITEM_DETAILS_V3 = 'SAGA/GET_ITEM_DETAILS_V3';
+export const GET_ITEM_DETAILS_V4 = 'SAGA/GET_ITEM_DETAILS_V4';
 
 export const GET_ITEM_PIHISTORY = 'SAGA/GET_ITEM_PIHISTORY';
 export const GET_ITEM_PISALESHISTORY = 'SAGA/GET_ITEM_PISALESHISTORY';
+export const GET_ITEM_PICKLISTHISTORY = 'SAGA/GET_ITEM_PICKLISTHISTORY';
+export const GET_LOCATIONS_FOR_ITEM = 'SAGA/GET_LOCATIONS_FOR_ITEM';
+export const GET_LOCATIONS_FOR_ITEM_V1 = 'SAGA/GET_LOCATIONS_FOR_ITEM_V1';
+export const GET_ITEM_MANAGER_APPROVAL_HISTORY = 'SAGA/GET_ITEM_MANAGER_APPROVAL_HISTORY';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
 export const GET_WORKLIST = 'SAGA/GET_WORKLIST';
+export const GET_WORKLIST_V1 = 'SAGA/GET_WORKLIST_V1';
 export const GET_WORKLIST_AUDIT = 'SAGA/GET_WORKLIST_AUDIT';
 export const GET_PALLET_WORKLIST = 'SAGA/GET_PALLET_WORKLIST';
 export const EDIT_LOCATION = 'SAGA/EDIT_LOCATION';
 export const UPDATE_OH_QTY = 'SAGA/UPDATE_OH_QTY';
+export const UPDATE_OH_QTY_V1 = 'SAGA/UPDATE_OH_QTY_V1';
 export const ADD_TO_PICKLIST = 'SAGA/ADD_TO_PICKLIST';
 export const ADD_LOCATION = 'SAGA/ADD_LOCATION';
 export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
+export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V@';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
-export const GET_LOCATION_DETAILS = 'SAGA/GET_LOCATION_DETAILS';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
 export const UPDATE_APPROVAL_LIST = 'SAGA/UPDATE_APPROVAL_LIST';
@@ -77,26 +83,36 @@ export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 export const POST_BIN_PALLETS = 'SAGA/POST_BIN_PALLETS';
 export const GET_PALLET_CONFIG = 'SAGA/GET_PALLET_CONFIG';
 export const UPDATE_PICKLIST_STATUS = 'SAGA/UPDATE_PICKLIST_STATUS';
+export const UPDATE_PICKLIST_STATUS_V1 = 'SAGA/UPDATE_PICKLIST_STATUS_V1';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
 export const UPDATE_PALLET_NOT_FOUND = 'SAGA/UPDATE_PALLET_NOT_FOUND';
 export const CREATE_NEW_PICK = 'SAGA/CREATE_NEW_PICK';
+export const CREATE_NEW_PICK_V1 = 'SAGA/CREATE_NEW_PICK_V1';
 export const POST_CREATE_PALLET = 'SAGA/POST_CREATE_PALLET';
 export const REPORT_MISSING_PALLET = 'SAGA/REPORT_MISSING_PALLET';
 export const GET_ITEM_PALLETS = 'SAGA/GET_ITEM_PALLETS';
+export const GET_ITEM_PALLETS_V1 = 'SAGA/GET_ITEM_PALLETS_V1';
 export const UPDATE_MULTI_PALLET_UPC_QTY = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY';
 export const SUBMIT_FEEDBACK_RATING = 'SAGA/SUBMIT_FEEDBACK_RATING';
 export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
 export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY_V2';
 
-export const getItemDetailsV3 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V3, payload } as const);
+export const getItemDetailsV4 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V4, payload } as const);
 
 export const getItemPiHistory = (payload: number) => ({ type: GET_ITEM_PIHISTORY, payload } as const);
 export const getItemPiSalesHistory = (payload: number) => ({ type: GET_ITEM_PISALESHISTORY, payload } as const);
+export const getItemPicklistHistory = (payload: number) => ({ type: GET_ITEM_PICKLISTHISTORY, payload } as const);
+export const getLocationsForItem = (payload: number) => ({ type: GET_LOCATIONS_FOR_ITEM, payload } as const);
+export const getLocationsForItemV1 = (payload: number) => ({ type: GET_LOCATIONS_FOR_ITEM_V1, payload } as const);
+export const getItemManagerApprovalHistory = (payload: number) => ({
+  type: GET_ITEM_MANAGER_APPROVAL_HISTORY, payload
+} as const);
 
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
 export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
 export const getWorklist = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST, payload } as const);
+export const getWorklistV1 = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST_V1, payload } as const);
 export const getWorklistAudits = (payload?: { worklistType?: string[] }) => (
   { type: GET_WORKLIST_AUDIT, payload } as const
 );
@@ -121,7 +137,12 @@ export const updateOHQty = (payload: {
   data: Partial<ApprovalListItem>,
   worklistType?: string
 }) => ({ type: UPDATE_OH_QTY, payload } as const);
+export const updateOHQtyV1 = (payload: {
+  data: Partial<ApprovalListItem>,
+  worklistType?: string
+}) => ({ type: UPDATE_OH_QTY_V1, payload } as const);
 export const getWorklistSummary = () => ({ type: GET_WORKLIST_SUMMARY } as const);
+export const getWorklistSummaryV2 = () => ({ type: GET_WORKLIST_SUMMARY_V2 } as const);
 export const deleteLocation = (payload: {
   headers?: AxiosRequestHeaders;
   upc: string;
@@ -138,11 +159,7 @@ export const printSign = (payload: {
   headers?: AxiosRequestHeaders;
   printList: PrintItemList[];
 }) => ({ type: PRINT_SIGN, payload } as const);
-export const getLocationDetails = (payload: {
-  headers?: AxiosRequestHeaders;
-  itemNbr: number;
-}) => ({ type: GET_LOCATION_DETAILS, payload } as const);
-export const getFluffyFeatures = (payload: User) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
+export const getFluffyFeatures = (payload: Omit<User, 'configs' >) => ({ type: GET_FLUFFY_FEATURES, payload } as const);
 export const getApprovalList = (payload: {
   itemNbr?: number;
   status?: approvalStatus;
@@ -232,6 +249,19 @@ export const updatePicklistStatus = (payload: {
   type: UPDATE_PICKLIST_STATUS,
   payload
 } as const);
+export const updatePicklistStatusV1 = (payload: {
+  headers: { action: PickAction};
+  picklistItems: {
+    picklistId: number;
+    locationId: number;
+    locationName: string;
+    itemQty?: number;
+    palletId: string
+  }[];
+}) => ({
+  type: UPDATE_PICKLIST_STATUS_V1,
+  payload
+} as const);
 export const getPicklists = () => ({
   type: GET_PICKLISTS
 } as const);
@@ -246,6 +276,10 @@ export const createNewPick = (payload: CreatePickRequest) => ({
   type: CREATE_NEW_PICK,
   payload
 } as const);
+export const createNewPickV1 = (payload: CreatePickRequest) => ({
+  type: CREATE_NEW_PICK_V1,
+  payload
+} as const);
 export const postCreatePallet = (payload: CreatePallet) => ({ type: POST_CREATE_PALLET, payload } as const);
 export const reportMissingPallet = (payload: {
     palletId: number;
@@ -255,6 +289,9 @@ export const reportMissingPallet = (payload: {
 export const getItemPallets = (payload: {
   itemNbr: number;
 }) => ({ type: GET_ITEM_PALLETS, payload } as const);
+export const getItemPalletsV1 = (payload: {
+  itemNbr: number;
+}) => ({ type: GET_ITEM_PALLETS_V1, payload } as const);
 export const updateMultiPalletUPCQty = (payload: UpdateMultiPalletUPCQtyRequest) => ({
   type: UPDATE_MULTI_PALLET_UPC_QTY,
   payload
@@ -272,51 +309,58 @@ export const updateMultiPalletUPCQtyV2 = (payload: UpdateMultiPalletUPCQtyReques
 
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
-  & Pick<ReturnType<typeof getItemDetails>, 'payload'>
-  & Pick<ReturnType<typeof getItemDetailsV3>, 'payload'>
-  & Pick<ReturnType<typeof getItemPiHistory>, 'payload'>
-  & Pick<ReturnType<typeof getItemPiSalesHistory>, 'payload'>
-  & Pick<ReturnType<typeof getWorklist>, 'payload'>
-  & Pick<ReturnType<typeof getWorklistAudits>, 'payload'>
-  & Pick<ReturnType<typeof getPalletWorklist>, 'payload'>
-  & Pick<ReturnType<typeof editLocation>, 'payload'>
-  & Pick<ReturnType<typeof addLocation>, 'payload'>
-  & Pick<ReturnType<typeof updateOHQty>, 'payload'>
-  & Pick<ReturnType<typeof deleteLocation>, 'payload'>
-  & Pick<ReturnType<typeof noAction>, 'payload'>
-  & Pick<ReturnType<typeof printSign>, 'payload'>
-  & Pick<ReturnType<typeof getLocationDetails>, 'payload'>
-  & Pick<ReturnType<typeof getFluffyFeatures>, 'payload'>
-  & Pick<ReturnType<typeof getApprovalList>, 'payload'>
-  & Pick<ReturnType<typeof updateApprovalList>, 'payload'>
-  & Pick<ReturnType<typeof getAisle>, 'payload'>
-  & Pick<ReturnType<typeof getSections>, 'payload'>
-  & Pick<ReturnType<typeof getSectionDetails>, 'payload'>
-  & Pick<ReturnType<typeof printLocationLabel>, 'payload'>
-  & Pick<ReturnType<typeof addPallet>, 'payload'>
-  & Pick<ReturnType<typeof deletePallet>, 'payload'>
-  & Pick<ReturnType<typeof createSections>, 'payload'>
-  & Pick<ReturnType<typeof deleteZone>, 'payload'>
-  & Pick<ReturnType<typeof postCreateAisles>, 'payload'>
-  & Pick<ReturnType<typeof postCreateZone>, 'payload'>
-  & Pick<ReturnType<typeof clearLocation>, 'payload'>
-  & Pick<ReturnType<typeof deleteAisle>, 'payload'>
-  & Pick<ReturnType<typeof removeSection>, 'payload'>
-  & Pick<ReturnType<typeof getItemDetailsUPC>, 'payload'>
-  & Pick<ReturnType<typeof addPalletUPCs>, 'payload'>
-  & Pick<ReturnType<typeof updatePalletItemQty>, 'payload'>
-  & Pick<ReturnType<typeof deleteUpcs>, 'payload'>
-  & Pick<ReturnType<typeof combinePallets>, 'payload'>
-  & Pick<ReturnType<typeof printPalletLabel>, 'payload'>
-  & Pick<ReturnType<typeof clearPallet>, 'payload'>
-  & Pick<ReturnType<typeof getPalletDetails>, 'payload'>
-  & Pick<ReturnType<typeof binPallets>, 'payload'>
-  & Pick<ReturnType<typeof updatePicklistStatus>, 'payload'>
-  & Pick<ReturnType<typeof updatePalletNotFound>, 'payload'>
-  & Pick<ReturnType<typeof createNewPick>, 'payload'>
-  & Pick<ReturnType<typeof postCreatePallet>, 'payload'>
-  & Pick<ReturnType<typeof reportMissingPallet>, 'payload'>
-  & Pick<ReturnType<typeof getItemPallets>, 'payload'>
-  & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>
-  & Pick<ReturnType<typeof submitFeedbackRating>, 'payload'>
-  & Pick<ReturnType<typeof updateMultiPalletUPCQtyV2>, 'payload'>;
+    & Pick<ReturnType<typeof getItemDetails>, 'payload'>
+    & Pick<ReturnType<typeof getItemDetailsV4>, 'payload'>
+    & Pick<ReturnType<typeof getItemPiHistory>, 'payload'>
+    & Pick<ReturnType<typeof getItemPiSalesHistory>, 'payload'>
+    & Pick<ReturnType<typeof getItemPicklistHistory>, 'payload'>
+    & Pick<ReturnType<typeof getLocationsForItem>, 'payload'>
+    & Pick<ReturnType<typeof getLocationsForItemV1>, 'payload'>
+    & Pick<ReturnType<typeof getItemManagerApprovalHistory>, 'payload'>
+    & Pick<ReturnType<typeof getWorklist>, 'payload'>
+    & Pick<ReturnType<typeof getWorklistV1>, 'payload'>
+    & Pick<ReturnType<typeof getWorklistAudits>, 'payload'>
+    & Pick<ReturnType<typeof getPalletWorklist>, 'payload'>
+    & Pick<ReturnType<typeof editLocation>, 'payload'>
+    & Pick<ReturnType<typeof addLocation>, 'payload'>
+    & Pick<ReturnType<typeof updateOHQty>, 'payload'>
+    & Pick<ReturnType<typeof updateOHQtyV1>, 'payload'>
+    & Pick<ReturnType<typeof deleteLocation>, 'payload'>
+    & Pick<ReturnType<typeof noAction>, 'payload'>
+    & Pick<ReturnType<typeof printSign>, 'payload'>
+    & Pick<ReturnType<typeof getFluffyFeatures>, 'payload'>
+    & Pick<ReturnType<typeof getApprovalList>, 'payload'>
+    & Pick<ReturnType<typeof updateApprovalList>, 'payload'>
+    & Pick<ReturnType<typeof getAisle>, 'payload'>
+    & Pick<ReturnType<typeof getSections>, 'payload'>
+    & Pick<ReturnType<typeof getSectionDetails>, 'payload'>
+    & Pick<ReturnType<typeof printLocationLabel>, 'payload'>
+    & Pick<ReturnType<typeof addPallet>, 'payload'>
+    & Pick<ReturnType<typeof deletePallet>, 'payload'>
+    & Pick<ReturnType<typeof createSections>, 'payload'>
+    & Pick<ReturnType<typeof deleteZone>, 'payload'>
+    & Pick<ReturnType<typeof postCreateAisles>, 'payload'>
+    & Pick<ReturnType<typeof postCreateZone>, 'payload'>
+    & Pick<ReturnType<typeof clearLocation>, 'payload'>
+    & Pick<ReturnType<typeof deleteAisle>, 'payload'>
+    & Pick<ReturnType<typeof removeSection>, 'payload'>
+    & Pick<ReturnType<typeof getItemDetailsUPC>, 'payload'>
+    & Pick<ReturnType<typeof addPalletUPCs>, 'payload'>
+    & Pick<ReturnType<typeof updatePalletItemQty>, 'payload'>
+    & Pick<ReturnType<typeof deleteUpcs>, 'payload'>
+    & Pick<ReturnType<typeof combinePallets>, 'payload'>
+    & Pick<ReturnType<typeof printPalletLabel>, 'payload'>
+    & Pick<ReturnType<typeof clearPallet>, 'payload'>
+    & Pick<ReturnType<typeof getPalletDetails>, 'payload'>
+    & Pick<ReturnType<typeof binPallets>, 'payload'>
+    & Pick<ReturnType<typeof updatePicklistStatus>, 'payload'>
+    & Pick<ReturnType<typeof updatePicklistStatusV1>, 'payload'>
+    & Pick<ReturnType<typeof updatePalletNotFound>, 'payload'>
+    & Pick<ReturnType<typeof createNewPick>, 'payload'>
+    & Pick<ReturnType<typeof postCreatePallet>, 'payload'>
+    & Pick<ReturnType<typeof reportMissingPallet>, 'payload'>
+    & Pick<ReturnType<typeof getItemPallets>, 'payload'>
+    & Pick<ReturnType<typeof getItemPalletsV1>, 'payload'>
+    & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>
+    & Pick<ReturnType<typeof submitFeedbackRating>, 'payload'>
+    & Pick<ReturnType<typeof updateMultiPalletUPCQtyV2>, 'payload'>;

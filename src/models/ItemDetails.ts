@@ -1,5 +1,6 @@
 import Location from './Location';
 import { approvalRequestSource, approvalStatus } from './ApprovalListItem';
+import { ActionTaken, WorkListStatus } from './WorklistItem';
 
 export interface OHChangeHistory {
   id : number;
@@ -63,7 +64,14 @@ export interface ItemDeliveryHistory {
   error?: string;
 }
 
-interface ItemDetails {
+export interface ItemLocation {
+  location: {
+    floor?: Location[];
+    reserve?: Location[];
+    count: number;
+  };
+}
+interface ItemDetails extends Partial<ItemLocation>{
   code: number;
   message?: string;
   itemName: string;
@@ -93,13 +101,12 @@ interface ItemDetails {
   replenishment: {
     onOrder: number;
   };
-  location: {
-    floor?: Location[];
-    reserve?: Location[];
-    count: number;
-  };
   sales?: ItemSalesHistory;
   deliveryHistory?: ItemDeliveryHistory;
+  auditCompleted: boolean;
+  worklistAuditType: string;
+  worklistStatus?: WorkListStatus;
+  actionTaken?: ActionTaken;
 }
 export interface ItemOHChangeHistory {
   code: number;

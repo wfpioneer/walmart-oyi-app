@@ -141,8 +141,8 @@ android {
         applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 261
-        versionName "4.8.5"
+        versionCode 269
+        versionName "4.9.1"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
     }
     splits {
@@ -173,6 +173,9 @@ android {
             tasks.whenTaskAdded { task ->
                 if(task.name.matches(/^assemble.*Debug/) || task.name.matches(/^package.*Debug$/)) {
                     task.finalizedBy 'signDebugAPK'
+                }
+                if (task.name.matches(/^assemble.*DebugAndroidTest/) || task.name.matches(/^package.*DebugAndroidTest$/)){
+                    task.finalizedBy 'signTestAPK'
                 }
             }
         }
@@ -227,9 +230,10 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation "com.walmart.ssae.sms.sso:wmsso:2.6.0"
+    // implementation "com.walmart.ssae.sms.sso:wmsso:2.6.0"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.walmart.ssmp:platform-core:1.0.3'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
