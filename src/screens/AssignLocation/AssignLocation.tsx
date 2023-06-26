@@ -69,7 +69,7 @@ interface AssignLocationProps {
 }
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const onValidateHardwareBackPress = (
+export const onValidateHardwareBackPress = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   scannedPallets: BinningPallet[],
   enableMultiPalletBin: boolean
@@ -111,7 +111,7 @@ export const onBinningItemPress = (
   navigation.navigate('ManagePallet');
 };
 
-const binningItemCard = (
+export const binningItemCard = (
   { item }: { item: BinningPallet },
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
@@ -326,6 +326,16 @@ export const binPalletsApiEffect = (
   }
 };
 
+export const backConfirmed = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  setDisplayWarningModal(false);
+  dispatch(clearPallets());
+  navigation.goBack();
+};
+
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState, navigation,
@@ -453,12 +463,6 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     </View>
   );
 
-  const backConfirmed = () => {
-    setDisplayWarningModal(false);
-    dispatch(clearPallets());
-    navigation.goBack();
-  };
-
   const renderWarningModal = () => (
     <CustomModalComponent
       isVisible={displayWarningModal}
@@ -482,7 +486,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
             style={styles.buttonAlign}
             title={strings('GENERICS.OK')}
             type={ButtonType.PRIMARY}
-            onPress={backConfirmed}
+            onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
           />
         </View>
       </>

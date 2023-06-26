@@ -10,9 +10,12 @@ import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import {
   AssignLocationScreen,
+  backConfirmed,
   binPalletsApiEffect,
+  binningItemCard,
   getFailedPallets,
   onBinningItemPress,
+  onValidateHardwareBackPress,
   updatePicklistStatusApiHook
 } from './AssignLocation';
 import { CLEAR_PALLETS, DELETE_PALLET } from '../../state/actions/Binning';
@@ -57,6 +60,7 @@ const navigationProp: NavigationProp<any> = {
 };
 
 const mockDispatch = jest.fn();
+const mockTrackEvent = jest.fn();
 
 jest.mock('../../utils/AppCenterTool.ts', () => ({
   ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
@@ -172,6 +176,14 @@ describe('Assign Location screen render tests', () => {
       useFocusEffectHook={jest.fn()}
       enableMultiPalletBin={false}
     />);
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the binning item card', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(binningItemCard({ item: mockPallets[1] }, mockDispatch, navigationProp, mockTrackEvent, false));
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -540,7 +552,6 @@ describe('Assign Location externalized function tests', () => {
 
   it('tests the button press function on a binning item', () => {
     const testBinItem = head(mockPallets);
-    const mockTrackEvent = jest.fn();
 
     const expectedPallet: Pallet = {
       palletInfo: {
@@ -568,5 +579,35 @@ describe('Assign Location externalized function tests', () => {
       }));
       expect(mockNavigate).toHaveBeenCalledWith('ManagePallet');
     }
+  });
+
+  it('tests the hardware back press validator', () => {
+    const mockSetState = jest.fn();
+
+    // single bin, no pallets
+    onValidateHardwareBackPress(mockSetState, [], false);
+    expect(mockSetState).not.toHaveBeenCalled();
+
+    // single bin, pallets
+    onValidateHardwareBackPress(mockSetState, mockPallets, false);
+    expect(mockSetState).toHaveBeenCalled();
+    mockSetState.mockClear();
+
+    // multi bin, no pallets
+    onValidateHardwareBackPress(mockSetState, [], true);
+    expect(mockSetState).not.toHaveBeenCalled();
+
+    // multi bin, pallets
+    onValidateHardwareBackPress(mockSetState, mockPallets, true);
+    expect(mockSetState).not.toHaveBeenCalled();
+  });
+
+  it('tests backConfirmed', () => {
+    const mockSetState = jest.fn();
+
+    backConfirmed(mockSetState, mockDispatch, navigationProp);
+    expect(mockSetState).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalled();
+    expect(mockGoBack).toHaveBeenCalled();
   });
 });

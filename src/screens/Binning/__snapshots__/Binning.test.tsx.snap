@@ -478,6 +478,51 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
 </KeyboardAvoidingView>
 `;
 
+exports[`BinningScreen Tests rendering the BinningScreen component renders the binning item card 1`] = `
+<TouchableOpacity
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 4,
+          "flexDirection": "column",
+          "margin": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 123456
+        </Text>
+      </View>
+      <View>
+        <Text>
+          [missing "en.BINNING.FIRST_ITEM" translation]: itemDesc
+        </Text>
+      </View>
+    </View>
+  </View>
+</TouchableOpacity>
+`;
+
 exports[`BinningScreen Tests rendering the BinningScreen component renders the binning screen in multiple bin mode 1`] = `
 <KeyboardAvoidingView
   behavior="height"

@@ -447,6 +447,51 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
 </View>
 `;
 
+exports[`Assign Location screen render tests renders the binning item card 1`] = `
+<TouchableOpacity
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 4,
+          "flexDirection": "column",
+          "margin": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 345345
+        </Text>
+      </View>
+      <View>
+        <Text>
+          [missing "en.BINNING.FIRST_ITEM" translation]: itemDesc
+        </Text>
+      </View>
+    </View>
+  </View>
+</TouchableOpacity>
+`;
+
 exports[`Assign Location screen render tests renders the screen with the unsaved warning modal showing 1`] = `
 <View
   style={

@@ -75,7 +75,7 @@ export interface BinningScreenProps {
   displayWarningModalState: UseStateType<boolean>;
 }
 
-const onValidateHardwareBackPress = (
+export const onValidateHardwareBackPress = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   scannedPallets: BinningPallet[]
 ) => {
@@ -118,7 +118,7 @@ export const onBinningItemPress = (
   navigation.navigate('ManagePallet');
 };
 
-const binningItemCard = (
+export const binningItemCard = (
   { item }: { item: BinningPallet },
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
@@ -135,11 +135,11 @@ const binningItemCard = (
   );
 };
 
-const resetApis = (dispatch: Dispatch<any>) => {
+export const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: GET_PALLET_DETAILS.RESET });
 };
 
-const navigateAssignLocationScreen = (
+export const navigateAssignLocationScreen = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   route: RouteProp<any>
