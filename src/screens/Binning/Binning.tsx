@@ -25,6 +25,8 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+// eslint-disable-next-line import/no-unresolved
+import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -49,7 +51,7 @@ import {
   toggleMultiBin
 } from '../../state/actions/Binning';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
-import { UseStateType } from '../../models/Generics.d';
+import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
@@ -148,6 +150,44 @@ export const navigateAssignLocationScreen = (
   navigation.navigate('AssignLocation', route.params);
 };
 
+export const navigationRemoveListenerHook = (
+  e: BeforeRemoveEvent,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  enableMultiPalletBin: boolean,
+  palletsToBin: BinningPallet[]
+) => {
+  if (!enableMultiPalletBin && palletsToBin.length > 0) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  }
+};
+
+export const backConfirmedHook = (
+  displayWarningModal: boolean,
+  palletExistForBinnning: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  navigation: NavigationProp<any>
+) => {
+  if (displayWarningModal && !palletExistForBinnning) {
+    setDisplayWarningModal(false);
+    navigation.goBack();
+  }
+};
+
+export const bottomModalPresentationHook = (
+  navigation: NavigationProp<any>,
+  bottomSheetModalRef: React.RefObject<BottomSheetModalMethods>,
+  showBinningMenu: boolean
+) => {
+  if (navigation.isFocused() && bottomSheetModalRef.current) {
+    if (showBinningMenu) {
+      bottomSheetModalRef.current.present();
+    } else {
+      bottomSheetModalRef.current.dismiss();
+    }
+  }
+};
+
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
     scannedPallets, isManualScanEnabled, dispatch, navigation, route,
@@ -175,19 +215,13 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
-      if (scannedPallets.length > 0) {
-        setDisplayWarningModal(true);
-        e.preventDefault();
-      }
+      navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, scannedPallets);
     });
     return navigationListener;
   }, [navigation, scannedPallets]);
 
   useEffectHook(() => {
-    if (displayWarningModal && !palletExistForBinnning) {
-      setDisplayWarningModal(false);
-      navigation.goBack();
-    }
+    backConfirmedHook(displayWarningModal, palletExistForBinnning, setDisplayWarningModal, navigation);
   }, [palletExistForBinnning, displayWarningModal]);
 
   // validation on Hardware backPress
@@ -414,13 +448,7 @@ const Binning = (): JSX.Element => {
   const snapPoints = useMemo(() => ['20%'], []);
 
   useEffect(() => {
-    if (navigation.isFocused() && bottomSheetModalRef.current) {
-      if (showBinningMenu) {
-        bottomSheetModalRef.current.present();
-      } else {
-        bottomSheetModalRef.current.dismiss();
-      }
-    }
+    bottomModalPresentationHook(navigation, bottomSheetModalRef, showBinningMenu);
   }, [showBinningMenu]);
 
   const renderBackdrop = useCallback(

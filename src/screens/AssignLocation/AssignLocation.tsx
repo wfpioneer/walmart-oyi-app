@@ -46,7 +46,7 @@ import { Pallet } from '../../models/PalletManagementTypes';
 import { setupPallet } from '../../state/actions/PalletManagement';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
-import { UseStateType } from '../../models/Generics.d';
+import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -326,6 +326,30 @@ export const binPalletsApiEffect = (
   }
 };
 
+export const navigationRemoveListenerHook = (
+  e: BeforeRemoveEvent,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  enableMultiPalletBin: boolean,
+  palletsToBin: BinningPallet[]
+) => {
+  if (!enableMultiPalletBin && palletsToBin.length > 0) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  }
+};
+
+export const backConfirmedHook = (
+  displayWarningModal: boolean,
+  palletExistForBinnning: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  navigation: NavigationProp<any>
+) => {
+  if (displayWarningModal && !palletExistForBinnning) {
+    setDisplayWarningModal(false);
+    navigation.goBack();
+  }
+};
+
 export const backConfirmed = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   dispatch: Dispatch<any>,
@@ -391,19 +415,13 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
-      if (!enableMultiPalletBin && palletsToBin.length > 0) {
-        setDisplayWarningModal(true);
-        e.preventDefault();
-      }
+      navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, palletsToBin);
     });
     return navigationListener;
   }, [navigation, palletsToBin, enableMultiPalletBin]);
 
   useEffectHook(() => {
-    if (displayWarningModal && !palletExistForBinnning) {
-      setDisplayWarningModal(false);
-      navigation.goBack();
-    }
+    backConfirmedHook(displayWarningModal, palletExistForBinnning, setDisplayWarningModal, navigation);
   }, [palletExistForBinnning, displayWarningModal]);
 
   // validation on Hardware backPress
