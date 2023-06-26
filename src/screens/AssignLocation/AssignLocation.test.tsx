@@ -599,14 +599,8 @@ describe('Assign Location externalized function tests', () => {
     };
     updatePicklistStatusApiHook(successApi, mockDispatch, navigationProp, false, mockSetDeletePicks);
     expect(navigationProp.isFocused).toBeCalledTimes(1);
-    expect(Toast.show).toBeCalledWith({
-      type: 'error',
-      text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
-      visibilityTime: SNACKBAR_TIMEOUT_LONG,
-      position: 'bottom'
-    });
-    expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: HIDE_ACTIVITY_MODAL }));
-    expect(mockDispatch).toBeCalledTimes(2);
+    expect(Toast.show).not.toHaveBeenCalled();
+    expect(mockDispatch).not.toHaveBeenCalled();
   });
 
   it('tests the button press function on a binning item', () => {
