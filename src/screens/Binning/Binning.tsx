@@ -51,7 +51,7 @@ import {
   toggleMultiBin
 } from '../../state/actions/Binning';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
-import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
+import { BeforeRemoveEvent, ScannedEvent, UseStateType } from '../../models/Generics.d';
 import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
@@ -240,6 +240,53 @@ export const bottomModalPresentationHook = (
   }
 };
 
+export const callPalletDetailsHook = (
+  scannedPallets: BinningPallet[],
+  scannedEvent: ScannedEvent,
+  trackEventCall: typeof trackEvent,
+  dispatch: Dispatch<any>
+) => {
+  const alreadyScannedPallet = scannedPallets.find(item => item.id === scannedEvent.value);
+  if (alreadyScannedPallet) {
+    Toast.show({
+      type: 'info',
+      text1: strings('PALLET.PALLET_EXISTS'),
+      visibilityTime: 3000,
+      position: 'bottom'
+    });
+  } else if (scannedEvent.value) {
+    trackEventCall(SCREEN_NAME, {
+      action: 'pallet_scanned',
+      barcode: scannedEvent.value,
+      type: scannedEvent.type ?? ''
+    });
+    dispatch(getPalletDetails({ palletIds: [scannedEvent.value] }));
+  }
+};
+
+export const scannedEventHook = (
+  isMounted: React.MutableRefObject<boolean>,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any>,
+  scannedPallets: BinningPallet[],
+  scannedEvent: { value: any; type: string | null },
+  trackEventCall: typeof trackEvent,
+  dispatch: Dispatch<any>
+) => {
+  if (isMounted.current) {
+    if (navigation.isFocused()) {
+      validateSession(navigation, route.name).then(() => callPalletDetailsHook(
+        scannedPallets,
+        scannedEvent,
+        trackEventCall,
+        dispatch
+      ));
+    }
+  } else {
+    isMounted.current = true;
+  }
+};
+
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
     scannedPallets, isManualScanEnabled, dispatch, navigation, route,
@@ -282,32 +329,15 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     }, [])
   );
 
-  useEffectHook(() => {
-    if (isMounted.current) {
-      if (navigation.isFocused()) {
-        validateSession(navigation, route.name).then(() => {
-          const alreadyScannedPallet = scannedPallets.find(item => item.id === scannedEvent.value);
-          if (alreadyScannedPallet) {
-            Toast.show({
-              type: 'info',
-              text1: strings('PALLET.PALLET_EXISTS'),
-              visibilityTime: 3000,
-              position: 'bottom'
-            });
-          } else if (scannedEvent.value) {
-            trackEventCall(SCREEN_NAME, {
-              action: 'pallet_scanned',
-              barcode: scannedEvent.value,
-              type: scannedEvent.type ?? ''
-            });
-            dispatch(getPalletDetails({ palletIds: [scannedEvent.value] }));
-          }
-        });
-      }
-    } else {
-      isMounted.current = true;
-    }
-  }, [scannedEvent]);
+  useEffectHook(() => scannedEventHook(
+    isMounted,
+    navigation,
+    route,
+    scannedPallets,
+    scannedEvent,
+    trackEventCall,
+    dispatch
+  ), [scannedEvent]);
 
   useEffectHook(() => getPalletDetailsApiHook(
     getPalletDetailsApi,

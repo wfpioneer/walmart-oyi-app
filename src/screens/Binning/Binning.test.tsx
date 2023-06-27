@@ -11,16 +11,18 @@ import {
   backConfirmedHook,
   binningItemCard,
   bottomModalPresentationHook,
+  callPalletDetailsHook,
   getPalletDetailsApiHook,
   navigateAssignLocationScreen,
   navigationRemoveListenerHook,
   onBinningItemPress,
   onValidateHardwareBackPress,
-  resetApis
+  resetApis,
+  scannedEventHook
 } from './Binning';
 import { AsyncState } from '../../models/AsyncState';
 import { mockPallets } from '../../mockData/binning';
-import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
+import { BeforeRemoveEvent, ScannedEvent, UseStateType } from '../../models/Generics.d';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 
@@ -348,80 +350,69 @@ describe('BinningScreen', () => {
 
   describe('externalized function tests', () => {
     const mockDispatch = jest.fn();
-    it('tests the hardware back press validation', () => {
-      const mockSetState = jest.fn();
 
-      // pallets on screen
-      let returned = onValidateHardwareBackPress(mockSetState, mockPallets);
-      expect(mockSetState).toHaveBeenCalled();
-      expect(returned).toBe(true);
-      mockSetState.mockClear();
-
-      // no pallets on screen
-      returned = onValidateHardwareBackPress(mockSetState, []);
-      expect(mockSetState).not.toHaveBeenCalled();
-      expect(returned).toBe(false);
-    });
-
-    it('tests the binning item press', () => {
-      onBinningItemPress(mockPallets[0], mockDispatch, navigationProp, mockTrackEvent);
-
-      const expectedPallet: Pallet = {
-        palletInfo: {
-          id: '123456',
-          expirationDate: '10/3/2022'
-        },
-        items: [{
-          itemDesc: 'itemDesc',
-          price: 123,
-          upcNbr: '12343534',
-          itemNbr: 351231,
-          quantity: 2,
-          newQuantity: 2,
-          deleted: false,
-          added: false
-        }]
+    it('tests the scanned event listener hook', () => {
+      const mockBooleanRef: React.MutableRefObject<boolean> = {
+        current: false
+      };
+      const mockScannedEvent: ScannedEvent = {
+        value: null,
+        type: null
       };
 
-      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ payload: expectedPallet }));
-      expect(mockTrackEvent).toHaveBeenCalledWith(
-        'BINNING_SCREEN',
-        expect.objectContaining({ action: 'navigation_to_pallet_management_from_binning' })
+      scannedEventHook(mockBooleanRef, navigationProp, routeProp, [], mockScannedEvent, jest.fn(), mockDispatch);
+      expect(mockBooleanRef.current).toBe(true);
+
+      // screen not in focus
+      scannedEventHook(
+        mockBooleanRef,
+        unfocusedNavigationProp,
+        routeProp,
+        [],
+        mockScannedEvent,
+        mockTrackEvent,
+        mockDispatch
       );
-      expect(mockNavigate).toHaveBeenCalled();
+      expect(mockBooleanRef.current).toBe(true);
     });
 
-    it('tests the button press on a binning item when blank items', () => {
-      const testBinItem = head(mockPallets);
-
-      const expectedPallet: Pallet = {
-        palletInfo: {
-          id: '123456',
-          expirationDate: '10/3/2022'
-        },
-        items: [{
-          itemDesc: 'itemDesc',
-          price: 0,
-          upcNbr: '12343534',
-          itemNbr: 351231,
-          quantity: 0,
-          newQuantity: 0,
-          deleted: false,
-          added: false
-        }]
+    it('tests the call pallet details hook', () => {
+      const mockScannedEvent: ScannedEvent = {
+        value: null,
+        type: null
       };
 
-      if (testBinItem) {
-        testBinItem.items[0].price = undefined;
-        testBinItem.items[0].quantity = undefined;
-        onBinningItemPress(testBinItem, mockDispatch, navigationProp, mockTrackEvent);
+      // no scanned event
+      callPalletDetailsHook([], mockScannedEvent, mockTrackEvent, mockDispatch);
+      expect(Toast.show).not.toHaveBeenCalled();
+      expect(mockTrackEvent).not.toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
 
-        expect(mockDispatch).toHaveBeenCalledWith({ type: SETUP_PALLET, payload: expectedPallet });
-        expect(mockTrackEvent).toHaveBeenCalledWith('BINNING_SCREEN', expect.objectContaining({
-          action: 'navigation_to_pallet_management_from_binning'
-        }));
-        expect(mockNavigate).toHaveBeenCalledWith('ManagePallet');
-      }
+      // scanned event, new scan
+      mockScannedEvent.value = '1234';
+      callPalletDetailsHook([], mockScannedEvent, mockTrackEvent, mockDispatch);
+      expect(Toast.show).not.toHaveBeenCalled();
+      expect(mockTrackEvent).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+
+      mockTrackEvent.mockClear();
+      mockDispatch.mockClear();
+
+      // scanned event, already scanned
+      mockScannedEvent.value = '123456';
+      callPalletDetailsHook(mockPallets, mockScannedEvent, mockTrackEvent, mockDispatch);
+      expect(Toast.show).toHaveBeenCalledTimes(1);
+      expect(mockTrackEvent).not.toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      jest.clearAllMocks();
+
+      // scanned event different than pallets on screen
+      mockScannedEvent.value = '1234567';
+      callPalletDetailsHook(mockPallets, mockScannedEvent, mockTrackEvent, mockDispatch);
+      expect(Toast.show).not.toHaveBeenCalled();
+      expect(mockTrackEvent).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
     });
 
     it('tests getting the pallet details api hook success single bin', () => {
@@ -509,6 +500,67 @@ describe('BinningScreen', () => {
       expect(Toast.show).toHaveBeenCalledTimes(0);
     });
 
+    it('tests the binning item press', () => {
+      onBinningItemPress(mockPallets[0], mockDispatch, navigationProp, mockTrackEvent);
+
+      const expectedPallet: Pallet = {
+        palletInfo: {
+          id: '123456',
+          expirationDate: '10/3/2022'
+        },
+        items: [{
+          itemDesc: 'itemDesc',
+          price: 123,
+          upcNbr: '12343534',
+          itemNbr: 351231,
+          quantity: 2,
+          newQuantity: 2,
+          deleted: false,
+          added: false
+        }]
+      };
+
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ payload: expectedPallet }));
+      expect(mockTrackEvent).toHaveBeenCalledWith(
+        'BINNING_SCREEN',
+        expect.objectContaining({ action: 'navigation_to_pallet_management_from_binning' })
+      );
+      expect(mockNavigate).toHaveBeenCalled();
+    });
+
+    it('tests the button press on a binning item when blank items', () => {
+      const testBinItem = head(mockPallets);
+
+      const expectedPallet: Pallet = {
+        palletInfo: {
+          id: '123456',
+          expirationDate: '10/3/2022'
+        },
+        items: [{
+          itemDesc: 'itemDesc',
+          price: 0,
+          upcNbr: '12343534',
+          itemNbr: 351231,
+          quantity: 0,
+          newQuantity: 0,
+          deleted: false,
+          added: false
+        }]
+      };
+
+      if (testBinItem) {
+        testBinItem.items[0].price = undefined;
+        testBinItem.items[0].quantity = undefined;
+        onBinningItemPress(testBinItem, mockDispatch, navigationProp, mockTrackEvent);
+
+        expect(mockDispatch).toHaveBeenCalledWith({ type: SETUP_PALLET, payload: expectedPallet });
+        expect(mockTrackEvent).toHaveBeenCalledWith('BINNING_SCREEN', expect.objectContaining({
+          action: 'navigation_to_pallet_management_from_binning'
+        }));
+        expect(mockNavigate).toHaveBeenCalledWith('ManagePallet');
+      }
+    });
+
     it('tests resetting the apis', () => {
       resetApis(mockDispatch);
       expect(mockDispatch).toHaveBeenCalled();
@@ -546,6 +598,21 @@ describe('BinningScreen', () => {
       navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, false, mockPallets);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockPreventDefault).toHaveBeenCalled();
+    });
+
+    it('tests the hardware back press validation', () => {
+      const mockSetState = jest.fn();
+
+      // pallets on screen
+      let returned = onValidateHardwareBackPress(mockSetState, mockPallets);
+      expect(mockSetState).toHaveBeenCalled();
+      expect(returned).toBe(true);
+      mockSetState.mockClear();
+
+      // no pallets on screen
+      returned = onValidateHardwareBackPress(mockSetState, []);
+      expect(mockSetState).not.toHaveBeenCalled();
+      expect(returned).toBe(false);
     });
 
     it('tests the back confirmed hook that does a navigate back', () => {

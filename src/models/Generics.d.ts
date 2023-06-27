@@ -22,3 +22,8 @@ export type BeforeRemoveEvent = EventArg<'beforeRemove', true, {
       target?: string | undefined;
   }>;
 }>;
+
+export type ScannedEvent = {
+  value: any;
+  type: string | null;
+};
