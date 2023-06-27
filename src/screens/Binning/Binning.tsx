@@ -170,12 +170,14 @@ export const renderWarningModal = (
           titleColor={COLOR.MAIN_THEME_COLOR}
           type={ButtonType.SOLID_WHITE}
           onPress={() => setDisplayWarningModal(false)}
+          testID="cancelBack"
         />
         <Button
           style={styles.buttonAlign}
           title={strings('GENERICS.OK')}
           type={ButtonType.PRIMARY}
           onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
+          testID="confirmBack"
         />
       </View>
     </>

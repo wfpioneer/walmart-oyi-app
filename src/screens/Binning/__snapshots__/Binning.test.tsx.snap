@@ -67,6 +67,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -87,6 +88,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -233,6 +235,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -253,6 +256,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -399,6 +403,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -419,6 +424,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -596,6 +602,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -616,6 +623,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -763,6 +771,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -783,6 +792,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -991,6 +1001,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -1011,6 +1022,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
