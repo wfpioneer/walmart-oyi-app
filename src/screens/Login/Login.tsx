@@ -49,6 +49,8 @@ import {
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
+const DOMAIN = 'wm-BusinessUnitCategory';
+const CLUB_NBR = 'wm-BusinessUnitNumber';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
@@ -166,15 +168,19 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
 
     setLanguage(getSystemLanguage());
     setUserId(userInfo.userPrincipalName);
-    if (parseInt(userInfo['wm-BusinessUnitNumber'], 10)) {
-      userInfo.siteId = parseInt(userInfo['wm-BusinessUnitNumber'], 10);
+    if (userInfo[DOMAIN] === 'NOT_FOUND' && userInfo[CLUB_NBR] === 'NOT_FOUND') {
+      userInfo[DOMAIN] = 'HO';
+    }
+
+    if (parseInt(userInfo[CLUB_NBR], 10)) {
+      userInfo.siteId = parseInt(userInfo[CLUB_NBR], 10);
     }
     dispatch(loginUser(userInfo));
     trackEvent('user_sign_in');
-    if (userInfo['wm-BusinessUnitCategory'] !== 'HO' && userInfo.c !== 'US') {
+    if (userInfo[DOMAIN] !== 'HO' && userInfo.c !== 'US') {
       dispatch(getFluffyFeatures({
         ...userInfo,
-        siteId: parseInt(userInfo['wm-BusinessUnitNumber'], 10)
+        siteId: parseInt(userInfo[CLUB_NBR], 10)
       }));
     }
 
@@ -315,7 +321,7 @@ export const onSubmitClubNbr = (clubNbr: number, dispatch: Dispatch<any>, user: 
 export const onSubmitCountryCode = (countryCode: string, dispatch: Dispatch<any>, user: User) => {
   const updatedUser = { ...user, c: countryCode, countryCode };
   dispatch(loginUser(updatedUser));
-  if (updatedUser['wm-BusinessUnitCategory'] !== 'HO') {
+  if (updatedUser[DOMAIN] !== 'HO') {
     dispatch(getFluffyFeatures(updatedUser));
   }
 };
@@ -362,7 +368,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={user['wm-BusinessUnitCategory'] === 'HO' && user.c !== 'US' && userIsSignedIn(user)}
+        isVisible={user[DOMAIN] === 'HO' && user.c !== 'US' && userIsSignedIn(user)}
         onClose={() => null}
         modalType="Form"
       >
