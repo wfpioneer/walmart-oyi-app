@@ -390,8 +390,15 @@ describe('Tests login screen functions', () => {
   };
   const mockGetPrinterDetailsFromAsyncStorage = jest.fn(() => Promise.resolve());
   it('calls signInUser', async () => {
-    testUser['wm-BusinessUnitCategory'] = 'NOT_FOUND';
-    testUser['wm-BusinessUnitNumber'] = 'NOT_FOUND';
+    // @ts-expect-error mocking fetch implementation
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve({
+        userPrincipalName: 'Dummy User',
+        'wm-BusinessUnitCategory': 'NOT_FOUND',
+        c: 'US',
+        'wm-BusinessUnitNumber': 'NOT_FOUND'
+      })
+    }));
     await signInUser(mockDispatch);
 
     const expectedConfig = {
@@ -415,9 +422,7 @@ describe('Tests login screen functions', () => {
     }));
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
     expect(setUserId).toHaveBeenCalledWith('Dummy User');
-    expect(testUser['wm-BusinessUnitCategory']).toStrictEqual('HO');
-    testUser['wm-BusinessUnitCategory'] = '';
-    testUser['wm-BusinessUnitNumber'] = '';
+    expect(fetch).toHaveBeenCalledTimes(1);
   });
 
   it('calls signOutUser', () => {
