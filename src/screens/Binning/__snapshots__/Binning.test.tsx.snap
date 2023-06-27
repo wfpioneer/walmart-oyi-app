@@ -139,9 +139,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         }
       >
         <Memo(Pressable)
+          disabled={false}
           onPress={[Function]}
+          testID="camScan"
         >
-          <mockConstructor
+          <Icon
             color="#000000"
             name="barcode-scan"
             size={100}
@@ -303,9 +305,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         }
       >
         <Memo(Pressable)
+          disabled={false}
           onPress={[Function]}
+          testID="camScan"
         >
-          <mockConstructor
+          <Icon
             color="#000000"
             name="barcode-scan"
             size={100}
@@ -453,9 +457,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         }
       >
         <Memo(Pressable)
+          disabled={false}
           onPress={[Function]}
+          testID="camScan"
         >
-          <mockConstructor
+          <Icon
             color="#000000"
             name="barcode-scan"
             size={100}
@@ -651,9 +657,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             }
           >
             <Memo(Pressable)
+              disabled={false}
               onPress={[Function]}
+              testID="flatlistCamScan"
             >
-              <mockConstructor
+              <Icon
                 color="#000000"
                 name="barcode-scan"
                 size={100}
@@ -830,9 +838,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             }
           >
             <Memo(Pressable)
+              disabled={false}
               onPress={[Function]}
+              testID="flatlistCamScan"
             >
-              <mockConstructor
+              <Icon
                 color="#000000"
                 name="barcode-scan"
                 size={100}
@@ -901,6 +911,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             "marginVertical": 10,
           }
         }
+        testID="nextButton"
         title="[missing \\"en.GENERICS.NEXT\\" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
@@ -1041,9 +1052,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             }
           >
             <Memo(Pressable)
+              disabled={false}
               onPress={[Function]}
+              testID="flatlistCamScan"
             >
-              <mockConstructor
+              <Icon
                 color="#000000"
                 name="barcode-scan"
                 size={100}

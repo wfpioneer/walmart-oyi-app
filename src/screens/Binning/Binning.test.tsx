@@ -4,11 +4,14 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { head } from 'lodash';
 // eslint-disable-next-line import/no-unresolved
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import { fireEvent, render } from '@testing-library/react-native';
+import Toast from 'react-native-toast-message';
 import {
   BinningScreen,
   backConfirmedHook,
   binningItemCard,
   bottomModalPresentationHook,
+  getPalletDetailsApiHook,
   navigateAssignLocationScreen,
   navigationRemoveListenerHook,
   onBinningItemPress,
@@ -21,9 +24,16 @@ import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
+
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
+}));
+
+const mockOpenCamera = jest.fn();
+jest.mock('../../utils/scannerUtils', () => ({
+  openCamera: () => mockOpenCamera()
 }));
 
 const defaultAsyncState: AsyncState = {
@@ -37,6 +47,7 @@ const defaultScannedEvent = {
   value: 1,
   type: 'manual'
 };
+
 const mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
 const navigationProp: NavigationProp<any> = {
@@ -79,9 +90,14 @@ const routeProp: RouteProp<any, string> = {
   params: { tree: 'hekki' }
 };
 
+const mockTrackEvent = jest.fn();
+
 const mockUseStateBool: UseStateType<boolean> = [false, jest.fn()];
 
 describe('BinningScreen', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   describe('Tests rendering the BinningScreen component', () => {
     it('Test renders the default BinningScreen ', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -89,9 +105,9 @@ describe('BinningScreen', () => {
         <BinningScreen
           scannedPallets={[]}
           navigation={navigationProp}
-          dispatch={jest.fn}
+          dispatch={jest.fn()}
           isManualScanEnabled={true}
-          useEffectHook={jest.fn}
+          useEffectHook={jest.fn()}
           route={routeProp}
           getPalletDetailsApi={defaultAsyncState}
           scannedEvent={defaultScannedEvent}
@@ -112,9 +128,9 @@ describe('BinningScreen', () => {
         <BinningScreen
           scannedPallets={mockPallets}
           navigation={navigationProp}
-          dispatch={jest.fn}
+          dispatch={jest.fn()}
           isManualScanEnabled={true}
-          useEffectHook={jest.fn}
+          useEffectHook={jest.fn()}
           route={routeProp}
           getPalletDetailsApi={defaultAsyncState}
           scannedEvent={defaultScannedEvent}
@@ -153,9 +169,9 @@ describe('BinningScreen', () => {
         <BinningScreen
           scannedPallets={mockPallets}
           navigation={navigationProp}
-          dispatch={jest.fn}
+          dispatch={jest.fn()}
           isManualScanEnabled={true}
-          useEffectHook={jest.fn}
+          useEffectHook={jest.fn()}
           route={routeProp}
           getPalletDetailsApi={sucessAsyncState}
           scannedEvent={defaultScannedEvent}
@@ -176,9 +192,9 @@ describe('BinningScreen', () => {
         <BinningScreen
           scannedPallets={[]}
           navigation={navigationProp}
-          dispatch={jest.fn}
+          dispatch={jest.fn()}
           isManualScanEnabled={true}
-          useEffectHook={jest.fn}
+          useEffectHook={jest.fn()}
           route={routeProp}
           getPalletDetailsApi={defaultAsyncState}
           scannedEvent={defaultScannedEvent}
@@ -200,9 +216,9 @@ describe('BinningScreen', () => {
         <BinningScreen
           scannedPallets={mockPallets}
           navigation={navigationProp}
-          dispatch={jest.fn}
+          dispatch={jest.fn()}
           isManualScanEnabled={true}
-          useEffectHook={jest.fn}
+          useEffectHook={jest.fn()}
           route={routeProp}
           getPalletDetailsApi={defaultAsyncState}
           scannedEvent={defaultScannedEvent}
@@ -225,9 +241,9 @@ describe('BinningScreen', () => {
         <BinningScreen
           scannedPallets={[]}
           navigation={navigationProp}
-          dispatch={jest.fn}
+          dispatch={jest.fn()}
           isManualScanEnabled={true}
-          useEffectHook={jest.fn}
+          useEffectHook={jest.fn()}
           route={routeProp}
           getPalletDetailsApi={defaultAsyncState}
           scannedEvent={defaultScannedEvent}
@@ -243,6 +259,84 @@ describe('BinningScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
+    it('renders the screen and presses the open camera button in single bin mode', () => {
+      const { getByTestId } = render(
+        <BinningScreen
+          scannedPallets={[]}
+          navigation={navigationProp}
+          dispatch={jest.fn()}
+          isManualScanEnabled={false}
+          useEffectHook={jest.fn()}
+          route={routeProp}
+          getPalletDetailsApi={defaultAsyncState}
+          scannedEvent={defaultScannedEvent}
+          isMounted={{ current: false }}
+          trackEventCall={jest.fn()}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={false}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+        />
+      );
+
+      const camButton = getByTestId('camScan');
+      fireEvent.press(camButton);
+
+      expect(mockOpenCamera).toHaveBeenCalled();
+    });
+
+    it('renders the screen and presses the open camera button in multi bin mode', () => {
+      const { getByTestId } = render(
+        <BinningScreen
+          scannedPallets={[]}
+          navigation={navigationProp}
+          dispatch={jest.fn()}
+          isManualScanEnabled={false}
+          useEffectHook={jest.fn()}
+          route={routeProp}
+          getPalletDetailsApi={defaultAsyncState}
+          scannedEvent={defaultScannedEvent}
+          isMounted={{ current: false }}
+          trackEventCall={jest.fn()}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={true}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+        />
+      );
+
+      const camButton = getByTestId('flatlistCamScan');
+      fireEvent.press(camButton);
+
+      expect(mockOpenCamera).toHaveBeenCalled();
+    });
+
+    it('renders the screen and presses the next button when binning multiple', () => {
+      const { getByTestId } = render(
+        <BinningScreen
+          scannedPallets={mockPallets}
+          navigation={navigationProp}
+          dispatch={jest.fn()}
+          isManualScanEnabled={false}
+          useEffectHook={jest.fn()}
+          route={routeProp}
+          getPalletDetailsApi={defaultAsyncState}
+          scannedEvent={defaultScannedEvent}
+          isMounted={{ current: false }}
+          trackEventCall={mockTrackEvent}
+          displayWarningModalState={mockUseStateBool}
+          enableMultiPalletBin={true}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+        />
+      );
+
+      const nextButton = getByTestId('nextButton');
+      fireEvent.press(nextButton);
+
+      expect(mockTrackEvent).toHaveBeenCalled();
+    });
+
     it('renders the binning item card', () => {
       const renderer = ShallowRenderer.createRenderer();
 
@@ -254,7 +348,6 @@ describe('BinningScreen', () => {
 
   describe('externalized function tests', () => {
     const mockDispatch = jest.fn();
-    const mockTrackEvent = jest.fn();
     it('tests the hardware back press validation', () => {
       const mockSetState = jest.fn();
 
@@ -329,6 +422,91 @@ describe('BinningScreen', () => {
         }));
         expect(mockNavigate).toHaveBeenCalledWith('ManagePallet');
       }
+    });
+
+    it('tests getting the pallet details api hook success single bin', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {
+            pallets: mockPallets
+          },
+          status: 200
+        }
+      };
+
+      getPalletDetailsApiHook(successApi, mockTrackEvent, mockDispatch, false, navigationProp, routeProp);
+
+      expect(mockTrackEvent).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(4);
+      expect(mockNavigate).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledTimes(0);
+    });
+
+    it('tests getting the pallet details api hook success multi bin', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {
+            pallets: mockPallets
+          },
+          status: 200
+        }
+      };
+
+      getPalletDetailsApiHook(successApi, mockTrackEvent, mockDispatch, true, navigationProp, routeProp);
+
+      expect(mockTrackEvent).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(3);
+      expect(mockNavigate).toBeCalledTimes(0);
+      expect(Toast.show).toHaveBeenCalledTimes(0);
+    });
+
+    it('tests getting the pallet details api hook 204', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {},
+          status: 204
+        }
+      };
+
+      getPalletDetailsApiHook(successApi, mockTrackEvent, mockDispatch, false, navigationProp, routeProp);
+
+      expect(mockTrackEvent).toBeCalledTimes(0);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockNavigate).toBeCalledTimes(0);
+      expect(Toast.show).toBeCalledTimes(1);
+    });
+
+    it('tests getting the pallet details api hook error', () => {
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: {
+          message: 'something bad happened'
+        }
+      };
+
+      getPalletDetailsApiHook(failureApi, mockTrackEvent, mockDispatch, false, navigationProp, routeProp);
+
+      expect(mockTrackEvent).toBeCalledTimes(0);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockNavigate).toBeCalledTimes(0);
+      expect(Toast.show).toHaveBeenCalledTimes(1);
+    });
+
+    it('tests getting the pallet details api hook waiting', () => {
+      const waitingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+
+      getPalletDetailsApiHook(waitingApi, mockTrackEvent, mockDispatch, false, navigationProp, routeProp);
+
+      expect(mockTrackEvent).toBeCalledTimes(0);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockNavigate).toBeCalledTimes(0);
+      expect(Toast.show).toHaveBeenCalledTimes(0);
     });
 
     it('tests resetting the apis', () => {

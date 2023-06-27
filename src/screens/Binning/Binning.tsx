@@ -150,6 +150,58 @@ export const navigateAssignLocationScreen = (
   navigation.navigate('AssignLocation', route.params);
 };
 
+export const getPalletDetailsApiHook = (
+  getPalletDetailsApi: AsyncState,
+  trackEventCall: typeof trackEvent,
+  dispatch: Dispatch<any>,
+  enableMultiPalletBin: boolean,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any>
+) => {
+  // on api success
+  if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
+    if (getPalletDetailsApi.result.status === 200) {
+      const {
+        pallets
+      } = getPalletDetailsApi.result.data;
+      const newPallet = head(pallets) as BinningPallet;
+      trackEventCall(SCREEN_NAME, {
+        action: 'added_pallet_to_bin_list',
+        palletId: newPallet.id
+      });
+      dispatch(addPallet(newPallet));
+      if (!enableMultiPalletBin) {
+        navigateAssignLocationScreen(dispatch, navigation, route);
+      }
+    } else if (getPalletDetailsApi.result.status === 204) {
+      Toast.show({
+        type: 'error',
+        text1: strings('LOCATION.PALLET_NOT_FOUND'),
+        visibilityTime: 3000,
+        position: 'bottom'
+      });
+    }
+    dispatch(hideActivityModal());
+    resetApis(dispatch);
+  }
+  // on api error
+  if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
+    dispatch(hideActivityModal());
+    Toast.show({
+      type: 'error',
+      text1: strings('LOCATION.ADD_PALLET_ERROR'),
+      text2: strings('GENERICS.TRY_AGAIN'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+    resetApis(dispatch);
+  }
+  // on api request
+  if (getPalletDetailsApi.isWaiting) {
+    dispatch(showActivityModal());
+  }
+};
+
 export const navigationRemoveListenerHook = (
   e: BeforeRemoveEvent,
   setDisplayWarningModal: UseStateType<boolean>[1],
@@ -213,12 +265,9 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   }, []);
 
   // validation on app back press
-  useEffectHook(() => {
-    const navigationListener = navigation.addListener('beforeRemove', e => {
-      navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, scannedPallets);
-    });
-    return navigationListener;
-  }, [navigation, scannedPallets]);
+  useEffectHook(() => navigation.addListener('beforeRemove', e => {
+    navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, scannedPallets);
+  }), [navigation, scannedPallets]);
 
   useEffectHook(() => {
     backConfirmedHook(displayWarningModal, palletExistForBinnning, setDisplayWarningModal, navigation);
@@ -260,50 +309,14 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     }
   }, [scannedEvent]);
 
-  useEffectHook(() => {
-    // on api success
-    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
-      if (getPalletDetailsApi.result.status === 200) {
-        const {
-          pallets
-        } = getPalletDetailsApi.result.data;
-        const newPallet = head(pallets) as BinningPallet;
-        trackEventCall(SCREEN_NAME, {
-          action: 'added_pallet_to_bin_list',
-          palletId: newPallet.id
-        });
-        dispatch(addPallet(newPallet));
-        if (!enableMultiPalletBin) {
-          navigateAssignLocationScreen(dispatch, navigation, route);
-        }
-      } else if (getPalletDetailsApi.result.status === 204) {
-        Toast.show({
-          type: 'error',
-          text1: strings('LOCATION.PALLET_NOT_FOUND'),
-          visibilityTime: 3000,
-          position: 'bottom'
-        });
-      }
-      dispatch(hideActivityModal());
-      resetApis(dispatch);
-    }
-    // on api error
-    if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.error) {
-      dispatch(hideActivityModal());
-      Toast.show({
-        type: 'error',
-        text1: strings('LOCATION.ADD_PALLET_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
-      resetApis(dispatch);
-    }
-    // on api request
-    if (getPalletDetailsApi.isWaiting) {
-      dispatch(showActivityModal());
-    }
-  }, [getPalletDetailsApi, enableMultiPalletBin]);
+  useEffectHook(() => getPalletDetailsApiHook(
+    getPalletDetailsApi,
+    trackEventCall,
+    dispatch,
+    enableMultiPalletBin,
+    navigation,
+    route
+  ), [getPalletDetailsApi, enableMultiPalletBin]);
 
   const handleUnhandledTouches = () => {
     Keyboard.dismiss();
@@ -366,12 +379,10 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         <View style={styles.emptyFlatListContainer}>
           {!enableMultiPalletBin && (
             <View style={styles.scanContainer}>
-              <Pressable onPress={() => {
-                if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
-                  return openCamera();
-                }
-                return null;
-              }}
+              <Pressable
+                onPress={() => openCamera()}
+                disabled={Config.ENVIRONMENT === 'prod'}
+                testID="camScan"
               >
                 <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
               </Pressable>
@@ -390,12 +401,10 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             keyExtractor={(item: any, index) => `${item.id.toString()}-${index}`}
             ListEmptyComponent={(
               <View style={styles.scanContainer}>
-                <Pressable onPress={() => {
-                  if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
-                    return openCamera();
-                  }
-                  return null;
-                }}
+                <Pressable
+                  onPress={() => openCamera()}
+                  disabled={Config.ENVIRONMENT === 'prod'}
+                  testID="flatlistCamScan"
                 >
                   <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
                 </Pressable>
@@ -417,12 +426,13 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               style={styles.buttonWrapper}
               onPress={() => {
                 trackEventCall(SCREEN_NAME, {
-                  action: 'Added_pallets_for_assigning_location',
+                  action: 'added_pallets_for_assigning_location',
                   palletIds: scannedPallets.map(pallet => pallet.id).join(','),
                   otherInfo: 'navigating_to_assign_location'
                 });
                 navigateAssignLocationScreen(dispatch, navigation, route);
               }}
+              testID="nextButton"
             />
           </>
           )}
