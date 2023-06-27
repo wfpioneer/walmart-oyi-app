@@ -166,6 +166,10 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
 
     setLanguage(getSystemLanguage());
     setUserId(userInfo.userPrincipalName);
+    if (userInfo['wm-BusinessUnitCategory'] === 'NOT_FOUND') {
+      userInfo['wm-BusinessUnitCategory'] = 'HO';
+    }
+
     if (parseInt(userInfo['wm-BusinessUnitNumber'], 10)) {
       userInfo.siteId = parseInt(userInfo['wm-BusinessUnitNumber'], 10);
     }
