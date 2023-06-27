@@ -30,9 +30,8 @@ export const renderScanButton = (
   isRightMost: boolean
 ): JSX.Element => (
   <TouchableOpacity
-    onPress={() => {
-      dispatch(setManualScan(!isManualScanEnabled));
-    }}
+    onPress={() => dispatch(setManualScan(!isManualScanEnabled))}
+    testID="scanButton"
   >
     <View style={isRightMost ? styles.rightButton : styles.leftButton}>
       <MaterialCommunityIcon
@@ -45,10 +44,12 @@ export const renderScanButton = (
 );
 
 export const renderKebabButton = (dispatch: Dispatch<any>, trackEventCall: typeof trackEvent) => (
-  <TouchableOpacity onPress={() => {
-    dispatch(toggleBinMenu());
-    trackEventCall('binning_menu_button_click');
-  }}
+  <TouchableOpacity
+    onPress={() => {
+      dispatch(toggleBinMenu());
+      trackEventCall('binning_menu_button_click');
+    }}
+    testID="kebabButton"
   >
     <View style={styles.rightButton}>
       <MaterialCommunityIcon
