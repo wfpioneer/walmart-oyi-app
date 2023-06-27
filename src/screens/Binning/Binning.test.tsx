@@ -25,6 +25,7 @@ import { mockPallets } from '../../mockData/binning';
 import { BeforeRemoveEvent, ScannedEvent, UseStateType } from '../../models/Generics.d';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
+import { validateSession } from '../../utils/sessionTimeout';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -36,6 +37,11 @@ jest.mock('../../state/actions/Modal', () => ({
 const mockOpenCamera = jest.fn();
 jest.mock('../../utils/scannerUtils', () => ({
   openCamera: () => mockOpenCamera()
+}));
+
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/sessTimeout'),
+  validateSession: jest.fn().mockImplementation(() => Promise.resolve())
 }));
 
 const defaultAsyncState: AsyncState = {
@@ -362,6 +368,7 @@ describe('BinningScreen', () => {
 
       scannedEventHook(mockBooleanRef, navigationProp, routeProp, [], mockScannedEvent, jest.fn(), mockDispatch);
       expect(mockBooleanRef.current).toBe(true);
+      expect(validateSession).not.toHaveBeenCalled();
 
       // screen not in focus
       scannedEventHook(
@@ -374,6 +381,19 @@ describe('BinningScreen', () => {
         mockDispatch
       );
       expect(mockBooleanRef.current).toBe(true);
+      expect(validateSession).not.toHaveBeenCalled();
+
+      // screen in focus
+      scannedEventHook(
+        mockBooleanRef,
+        navigationProp,
+        routeProp,
+        [],
+        mockScannedEvent,
+        mockTrackEvent,
+        mockDispatch
+      );
+      expect(validateSession).toHaveBeenCalled();
     });
 
     it('tests the call pallet details hook', () => {
@@ -468,6 +488,23 @@ describe('BinningScreen', () => {
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockNavigate).toBeCalledTimes(0);
       expect(Toast.show).toBeCalledTimes(1);
+    });
+
+    it('tests getting the pallet details api hook unlikely 207', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {},
+          status: 207
+        }
+      };
+
+      getPalletDetailsApiHook(successApi, mockTrackEvent, mockDispatch, false, navigationProp, routeProp);
+
+      expect(mockTrackEvent).toBeCalledTimes(0);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockNavigate).toBeCalledTimes(0);
+      expect(Toast.show).toBeCalledTimes(0);
     });
 
     it('tests getting the pallet details api hook error', () => {

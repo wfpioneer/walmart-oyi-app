@@ -316,9 +316,12 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, scannedPallets);
   }), [navigation, scannedPallets]);
 
-  useEffectHook(() => {
-    backConfirmedHook(displayWarningModal, palletExistForBinnning, setDisplayWarningModal, navigation);
-  }, [palletExistForBinnning, displayWarningModal]);
+  useEffectHook(() => backConfirmedHook(
+    displayWarningModal,
+    palletExistForBinnning,
+    setDisplayWarningModal,
+    navigation
+  ), [palletExistForBinnning, displayWarningModal]);
 
   // validation on Hardware backPress
   useFocusEffectHook(

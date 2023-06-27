@@ -420,9 +420,12 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     return navigationListener;
   }, [navigation, palletsToBin, enableMultiPalletBin]);
 
-  useEffectHook(() => {
-    backConfirmedHook(displayWarningModal, palletExistForBinnning, setDisplayWarningModal, navigation);
-  }, [palletExistForBinnning, displayWarningModal]);
+  useEffectHook(() => backConfirmedHook(
+    displayWarningModal,
+    palletExistForBinnning,
+    setDisplayWarningModal,
+    navigation
+  ), [palletExistForBinnning, displayWarningModal]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
@@ -499,12 +502,14 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
             titleColor={COLOR.MAIN_THEME_COLOR}
             type={ButtonType.SOLID_WHITE}
             onPress={() => setDisplayWarningModal(false)}
+            testID="cancelBack"
           />
           <Button
             style={styles.buttonAlign}
             title={strings('GENERICS.OK')}
             type={ButtonType.PRIMARY}
             onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
+            testID="confirmBack"
           />
         </View>
       </>

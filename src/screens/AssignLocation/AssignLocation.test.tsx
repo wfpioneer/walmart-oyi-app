@@ -3,6 +3,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import Toast from 'react-native-toast-message';
 import { head } from 'lodash';
+import { fireEvent, render } from '@testing-library/react-native';
 import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
 import { HIDE_ACTIVITY_MODAL, SHOW_ACTIVITY_MODAL } from '../../state/actions/Modal';
 import { AsyncState } from '../../models/AsyncState';
@@ -28,6 +29,8 @@ import { mockConfig } from '../../mockData/mockConfig';
 import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 import { Pallet } from '../../models/PalletManagementTypes';
+
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
 const defaultAsyncState: AsyncState = {
   error: null,
@@ -87,7 +90,8 @@ jest.mock('../../utils/AppCenterTool.ts', () => ({
   trackEvent: jest.fn()
 }));
 
-const mockUseStateBool: UseStateType<boolean> = [false, jest.fn()];
+const mockSetStateBool = jest.fn();
+const mockUseStateBool: UseStateType<boolean> = [false, mockSetStateBool];
 
 describe('Assign Location screen render tests', () => {
   const routeProp: RouteProp<any, string> = { key: '', name: 'AssignLocation' };
@@ -175,7 +179,7 @@ describe('Assign Location screen render tests', () => {
   it('renders the screen with the unsaved warning modal showing', () => {
     const renderer = ShallowRenderer.createRenderer();
     const testPallets: BinningPallet[] = [];
-    mockUseStateBool.splice(0, 1, true);
+    const mockDisplayWarningModalState: UseStateType<boolean> = [true, mockSetStateBool];
 
     renderer.render(<AssignLocationScreen
       palletsToBin={testPallets}
@@ -191,13 +195,51 @@ describe('Assign Location screen render tests', () => {
       trackEventCall={jest.fn()}
       userConfigs={mockConfig}
       deletePicksState={mockUseStateBool}
-      displayWarningModalState={mockUseStateBool}
+      displayWarningModalState={mockDisplayWarningModalState}
       useCallbackHook={jest.fn()}
       useFocusEffectHook={jest.fn()}
       enableMultiPalletBin={false}
     />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('tests pressing the warning modal buttons', () => {
+    const mockDisplayWarningModalState: UseStateType<boolean> = [true, mockSetStateBool];
+    const { getByTestId } = render(<AssignLocationScreen
+      palletsToBin={[]}
+      isManualScanEnabled={false}
+      binPalletsApi={defaultAsyncState}
+      dispatch={mockDispatch}
+      navigation={navigationProp}
+      route={routeProp}
+      scannedEvent={defaultScannedEvent}
+      useEffectHook={jest.fn()}
+      pickingState={mockPickingState}
+      updatePicklistStatusApi={defaultAsyncState}
+      trackEventCall={jest.fn()}
+      userConfigs={mockConfig}
+      deletePicksState={mockUseStateBool}
+      displayWarningModalState={mockDisplayWarningModalState}
+      useCallbackHook={jest.fn()}
+      useFocusEffectHook={jest.fn()}
+      enableMultiPalletBin={false}
+    />);
+
+    const cancelButton = getByTestId('cancelBack');
+    const confirmButton = getByTestId('confirmBack');
+
+    fireEvent.press(cancelButton);
+    expect(mockSetStateBool).toHaveBeenCalledWith(false);
+    expect(mockDispatch).not.toHaveBeenCalled();
+    expect(mockGoBack).not.toHaveBeenCalled();
+
+    jest.clearAllMocks();
+
+    fireEvent.press(confirmButton);
+    expect(mockSetStateBool).toHaveBeenCalledWith(false);
+    expect(mockDispatch).toHaveBeenCalled();
+    expect(mockGoBack).toHaveBeenCalled();
   });
 
   it('renders the binning item card', () => {

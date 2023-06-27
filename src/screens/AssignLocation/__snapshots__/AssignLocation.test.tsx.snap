@@ -66,6 +66,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -86,6 +87,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -148,7 +150,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
     <Memo(Pressable)
       onPress={[Function]}
     >
-      <mockConstructor
+      <Icon
         color="#0071e9"
         name="barcode-scan"
         size={70}
@@ -233,6 +235,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -253,6 +256,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -290,7 +294,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
     <Memo(Pressable)
       onPress={[Function]}
     >
-      <mockConstructor
+      <Icon
         color="#0071e9"
         name="barcode-scan"
         size={70}
@@ -375,6 +379,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -395,6 +400,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -428,7 +434,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
     <Memo(Pressable)
       onPress={[Function]}
     >
-      <mockConstructor
+      <Icon
         color="#0071e9"
         name="barcode-scan"
         size={70}
@@ -558,6 +564,7 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
               "width": "40%",
             }
           }
+          testID="cancelBack"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -578,6 +585,7 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
               "width": "40%",
             }
           }
+          testID="confirmBack"
           title="[missing \\"en.GENERICS.OK\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
@@ -615,7 +623,7 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
     <Memo(Pressable)
       onPress={[Function]}
     >
-      <mockConstructor
+      <Icon
         color="#0071e9"
         name="barcode-scan"
         size={70}
