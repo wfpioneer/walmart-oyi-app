@@ -167,6 +167,7 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     dispatch(hideActivityModal());
 
     setLanguage(getSystemLanguage());
+    userInfo.userId = userInfo.sAMAccountName;
     setUserId(userInfo.userPrincipalName);
     if (userInfo[DOMAIN] === 'NOT_FOUND' && userInfo[CLUB_NBR] === 'NOT_FOUND') {
       userInfo[DOMAIN] = 'HO';
