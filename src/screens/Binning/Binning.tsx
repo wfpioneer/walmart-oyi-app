@@ -88,6 +88,16 @@ export const onValidateHardwareBackPress = (
   return false;
 };
 
+export const backConfirmed = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  setDisplayWarningModal(false);
+  dispatch(clearPallets());
+  navigation.goBack();
+};
+
 const ItemSeparator = () => <View style={styles.separator} />;
 
 export const onBinningItemPress = (
@@ -136,6 +146,41 @@ export const binningItemCard = (
     />
   );
 };
+
+export const renderWarningModal = (
+  displayWarningModal: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => (
+  <CustomModalComponent
+    isVisible={displayWarningModal}
+    onClose={() => setDisplayWarningModal(false)}
+    modalType="Popup"
+  >
+    <>
+      <View>
+        <Text style={styles.labelHeader}>{strings('BINNING.WARNING_LABEL')}</Text>
+        <Text style={styles.message}>{strings('BINNING.WARNING_DESCRIPTION')}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.CANCEL')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          type={ButtonType.SOLID_WHITE}
+          onPress={() => setDisplayWarningModal(false)}
+        />
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.OK')}
+          type={ButtonType.PRIMARY}
+          onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
+        />
+      </View>
+    </>
+  </CustomModalComponent>
+);
 
 export const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: GET_PALLET_DETAILS.RESET });
@@ -356,42 +401,6 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
     return false;
   };
 
-  const backConfirmed = () => {
-    setDisplayWarningModal(false);
-    dispatch(clearPallets());
-    navigation.goBack();
-  };
-
-  const renderWarningModal = () => (
-    <CustomModalComponent
-      isVisible={displayWarningModal}
-      onClose={() => setDisplayWarningModal(false)}
-      modalType="Popup"
-    >
-      <>
-        <View>
-          <Text style={styles.labelHeader}>{strings('BINNING.WARNING_LABEL')}</Text>
-          <Text style={styles.message}>{strings('BINNING.WARNING_DESCRIPTION')}</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.CANCEL')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            type={ButtonType.SOLID_WHITE}
-            onPress={() => setDisplayWarningModal(false)}
-          />
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.OK')}
-            type={ButtonType.PRIMARY}
-            onPress={backConfirmed}
-          />
-        </View>
-      </>
-    </CustomModalComponent>
-  );
-
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -399,7 +408,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       keyboardVerticalOffset={110}
       onStartShouldSetResponder={handleUnhandledTouches}
     >
-      {renderWarningModal()}
+      {renderWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
       <View style={styles.container}>
         {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
         {palletExistForBinnning

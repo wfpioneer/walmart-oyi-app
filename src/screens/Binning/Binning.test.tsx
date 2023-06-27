@@ -8,6 +8,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
 import {
   BinningScreen,
+  backConfirmed,
   backConfirmedHook,
   binningItemCard,
   bottomModalPresentationHook,
@@ -698,6 +699,15 @@ describe('BinningScreen', () => {
       bottomModalPresentationHook(navigationProp, bottomSheetMockRef, false);
       expect(mockDismiss).toHaveBeenCalled();
       expect(mockPresent).not.toHaveBeenCalled();
+    });
+
+    it('tests backConfirmed', () => {
+      const mockSetState = jest.fn();
+
+      backConfirmed(mockSetState, mockDispatch, navigationProp);
+      expect(mockSetState).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockGoBack).toHaveBeenCalled();
     });
   });
 });

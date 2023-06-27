@@ -44,9 +44,13 @@ import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScr
 import { Configurations } from '../../models/User';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { setupPallet } from '../../state/actions/PalletManagement';
-import { CustomModalComponent } from '../Modal/Modal';
-import Button, { ButtonType } from '../../components/buttons/Button';
-import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
+import { UseStateType } from '../../models/Generics.d';
+import {
+  backConfirmedHook,
+  navigationRemoveListenerHook,
+  onBinningItemPress,
+  renderWarningModal
+} from '../Binning/Binning';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -79,36 +83,6 @@ export const onValidateHardwareBackPress = (
     return true;
   }
   return false;
-};
-
-export const onBinningItemPress = (
-  pallet: BinningPallet,
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>,
-  trackEventCall: typeof trackEvent
-) => {
-  const palletItems = pallet.items.map(item => ({
-    ...item,
-    quantity: item.quantity || 0,
-    price: item.price || 0,
-    newQuantity: item.quantity || 0,
-    deleted: false,
-    added: false
-  }));
-  const pmPallet: Pallet = {
-    palletInfo: {
-      id: pallet.id,
-      expirationDate: pallet.expirationDate,
-      createDate: pallet.createDate
-    },
-    items: palletItems
-  };
-  dispatch(setupPallet(pmPallet));
-  trackEventCall('BINNING_SCREEN', {
-    action: 'navigation_to_pallet_management_from_binning',
-    palletId: pallet.id
-  });
-  navigation.navigate('ManagePallet');
 };
 
 export const binningItemCard = (
@@ -326,40 +300,6 @@ export const binPalletsApiEffect = (
   }
 };
 
-export const navigationRemoveListenerHook = (
-  e: BeforeRemoveEvent,
-  setDisplayWarningModal: UseStateType<boolean>[1],
-  enableMultiPalletBin: boolean,
-  palletsToBin: BinningPallet[]
-) => {
-  if (!enableMultiPalletBin && palletsToBin.length > 0) {
-    setDisplayWarningModal(true);
-    e.preventDefault();
-  }
-};
-
-export const backConfirmedHook = (
-  displayWarningModal: boolean,
-  palletExistForBinnning: boolean,
-  setDisplayWarningModal: UseStateType<boolean>[1],
-  navigation: NavigationProp<any>
-) => {
-  if (displayWarningModal && !palletExistForBinnning) {
-    setDisplayWarningModal(false);
-    navigation.goBack();
-  }
-};
-
-export const backConfirmed = (
-  setDisplayWarningModal: UseStateType<boolean>[1],
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
-) => {
-  setDisplayWarningModal(false);
-  dispatch(clearPallets());
-  navigation.goBack();
-};
-
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState, navigation,
@@ -484,41 +424,9 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     </View>
   );
 
-  const renderWarningModal = () => (
-    <CustomModalComponent
-      isVisible={displayWarningModal}
-      onClose={() => setDisplayWarningModal(false)}
-      modalType="Popup"
-    >
-      <>
-        <View>
-          <Text style={styles.labelHeader}>{strings('BINNING.WARNING_LABEL')}</Text>
-          <Text style={styles.message}>{strings('BINNING.WARNING_DESCRIPTION')}</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.CANCEL')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            type={ButtonType.SOLID_WHITE}
-            onPress={() => setDisplayWarningModal(false)}
-            testID="cancelBack"
-          />
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.OK')}
-            type={ButtonType.PRIMARY}
-            onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
-            testID="confirmBack"
-          />
-        </View>
-      </>
-    </CustomModalComponent>
-  );
-
   return (
     <View style={styles.container}>
-      {renderWarningModal()}
+      {renderWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
       {isManualScanEnabled && (
         <ManualScanComponent
           placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}

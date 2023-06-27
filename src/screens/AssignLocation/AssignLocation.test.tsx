@@ -2,7 +2,6 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import Toast from 'react-native-toast-message';
-import { head } from 'lodash';
 import { fireEvent, render } from '@testing-library/react-native';
 import { PostBinPalletsMultistatusResponse } from '../../services/PalletManagement.service';
 import { HIDE_ACTIVITY_MODAL, SHOW_ACTIVITY_MODAL } from '../../state/actions/Modal';
@@ -11,13 +10,9 @@ import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import {
   AssignLocationScreen,
-  backConfirmed,
-  backConfirmedHook,
   binPalletsApiEffect,
   binningItemCard,
   getFailedPallets,
-  navigationRemoveListenerHook,
-  onBinningItemPress,
   onValidateHardwareBackPress,
   updatePicklistStatusApiHook
 } from './AssignLocation';
@@ -26,9 +21,7 @@ import { BinningPallet } from '../../models/Binning';
 import { mockPallets } from '../../mockData/binning';
 import { mockPickingState } from '../../mockData/mockPickingState';
 import { mockConfig } from '../../mockData/mockConfig';
-import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
-import { SETUP_PALLET } from '../../state/actions/PalletManagement';
-import { Pallet } from '../../models/PalletManagementTypes';
+import { UseStateType } from '../../models/Generics.d';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -645,70 +638,6 @@ describe('Assign Location externalized function tests', () => {
     expect(mockDispatch).not.toHaveBeenCalled();
   });
 
-  it('tests the button press function on a binning item', () => {
-    const testBinItem = head(mockPallets);
-
-    const expectedPallet: Pallet = {
-      palletInfo: {
-        id: '123456',
-        expirationDate: '10/3/2022'
-      },
-      items: [{
-        itemDesc: 'itemDesc',
-        price: 123,
-        upcNbr: '12343534',
-        itemNbr: 351231,
-        quantity: 2,
-        newQuantity: 2,
-        deleted: false,
-        added: false
-      }]
-    };
-
-    if (testBinItem) {
-      onBinningItemPress(testBinItem, mockDispatch, navigationProp, mockTrackEvent);
-
-      expect(mockDispatch).toHaveBeenCalledWith({ type: SETUP_PALLET, payload: expectedPallet });
-      expect(mockTrackEvent).toHaveBeenCalledWith('BINNING_SCREEN', expect.objectContaining({
-        action: 'navigation_to_pallet_management_from_binning'
-      }));
-      expect(mockNavigate).toHaveBeenCalledWith('ManagePallet');
-    }
-  });
-
-  it('tests the button press on a binning item when blank items', () => {
-    const testBinItem = head(mockPallets);
-
-    const expectedPallet: Pallet = {
-      palletInfo: {
-        id: '123456',
-        expirationDate: '10/3/2022'
-      },
-      items: [{
-        itemDesc: 'itemDesc',
-        price: 0,
-        upcNbr: '12343534',
-        itemNbr: 351231,
-        quantity: 0,
-        newQuantity: 0,
-        deleted: false,
-        added: false
-      }]
-    };
-
-    if (testBinItem) {
-      testBinItem.items[0].price = undefined;
-      testBinItem.items[0].quantity = undefined;
-      onBinningItemPress(testBinItem, mockDispatch, navigationProp, mockTrackEvent);
-
-      expect(mockDispatch).toHaveBeenCalledWith({ type: SETUP_PALLET, payload: expectedPallet });
-      expect(mockTrackEvent).toHaveBeenCalledWith('BINNING_SCREEN', expect.objectContaining({
-        action: 'navigation_to_pallet_management_from_binning'
-      }));
-      expect(mockNavigate).toHaveBeenCalledWith('ManagePallet');
-    }
-  });
-
   it('tests the hardware back press validator', () => {
     const mockSetState = jest.fn();
 
@@ -728,56 +657,5 @@ describe('Assign Location externalized function tests', () => {
     // multi bin, pallets
     onValidateHardwareBackPress(mockSetState, mockPallets, true);
     expect(mockSetState).not.toHaveBeenCalled();
-  });
-
-  it('tests the remove listener hook', () => {
-    const mockPreventDefault = jest.fn();
-    const beforeRemoveEvent: BeforeRemoveEvent = {
-      data: {
-        action: {
-          type: 'salkdf'
-        }
-      },
-      defaultPrevented: false,
-      preventDefault: mockPreventDefault,
-      type: 'beforeRemove'
-    };
-    const mockSetDisplayWarningModal = jest.fn();
-
-    navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, true, []);
-    expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
-    expect(mockPreventDefault).not.toHaveBeenCalled();
-
-    navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, false, []);
-    expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
-    expect(mockPreventDefault).not.toHaveBeenCalled();
-
-    navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, false, mockPallets);
-    expect(mockSetDisplayWarningModal).toHaveBeenCalled();
-    expect(mockPreventDefault).toHaveBeenCalled();
-  });
-
-  it('tests the back confirmed hook that does a navigate back', () => {
-    const mockSetState = jest.fn();
-    backConfirmedHook(false, true, mockSetState, navigationProp);
-    expect(mockSetState).not.toHaveBeenCalled();
-    expect(mockGoBack).not.toHaveBeenCalled();
-
-    backConfirmedHook(false, false, mockSetState, navigationProp);
-    expect(mockSetState).not.toHaveBeenCalled();
-    expect(mockGoBack).not.toHaveBeenCalled();
-
-    backConfirmedHook(true, false, mockSetState, navigationProp);
-    expect(mockSetState).toHaveBeenCalled();
-    expect(mockGoBack).toHaveBeenCalled();
-  });
-
-  it('tests backConfirmed', () => {
-    const mockSetState = jest.fn();
-
-    backConfirmed(mockSetState, mockDispatch, navigationProp);
-    expect(mockSetState).toHaveBeenCalled();
-    expect(mockDispatch).toHaveBeenCalled();
-    expect(mockGoBack).toHaveBeenCalled();
   });
 });
