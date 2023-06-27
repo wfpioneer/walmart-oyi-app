@@ -27,7 +27,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { assignFluffyFeatures, setConfigs, setUserTokens } from '../../state/actions/User';
-import { getClubConfig } from '../../state/actions/saga';
+import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
 import store from '../../state';
 
@@ -390,6 +390,8 @@ describe('Tests login screen functions', () => {
   };
   const mockGetPrinterDetailsFromAsyncStorage = jest.fn(() => Promise.resolve());
   it('calls signInUser', async () => {
+    testUser['wm-BusinessUnitCategory'] = 'NOT_FOUND';
+    testUser['wm-BusinessUnitNumber'] = 'NOT_FOUND';
     await signInUser(mockDispatch);
 
     const expectedConfig = {
@@ -413,6 +415,9 @@ describe('Tests login screen functions', () => {
     }));
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
     expect(setUserId).toHaveBeenCalledWith('Dummy User');
+    expect(testUser['wm-BusinessUnitCategory']).toStrictEqual('HO');
+    testUser['wm-BusinessUnitCategory'] = '';
+    testUser['wm-BusinessUnitNumber'] = '';
   });
 
   it('calls signOutUser', () => {
@@ -436,7 +441,8 @@ describe('Tests login screen functions', () => {
     const mockConfigResponse: ConfigResponse = {
       ...mockConfig,
       printingUpdate: true,
-      locMgmtEdit: mockConfig.locationManagementEdit
+      locMgmtEdit: mockConfig.locationManagementEdit,
+      overridePltPerish: false
     };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
