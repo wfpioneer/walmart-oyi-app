@@ -365,7 +365,7 @@ exports[`LoginScreen renders the EnterClubNbr modal when a MX HO user logs in 1`
 >
   <CustomModalComponent
     animationType="none"
-    isVisible={true}
+    isVisible={false}
     modalType="Form"
     onClose={[Function]}
   >
