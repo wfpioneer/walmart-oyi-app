@@ -91,6 +91,7 @@ const navigationProp: NavigationProp<any> = {
 };
 const testUser: User = {
   'bu-division': '',
+  userId: 'testUser',
   c: '',
   cn: '',
   co: '',
@@ -598,12 +599,12 @@ describe('Tests login screen functions', () => {
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
   it('test onSubmitCountryClub', () => {
-    const updatedTestUser = { ...testUser, 'wm-BusinessUnitCategory': 'HO' };
-    onSubmitCountryCode('CN', mockDispatch, updatedTestUser);
+    const updatedTestUser = { ...testUser, 'wm-BusinessUnitType': 'HO' };
+    onSubmitCountryCode('CN', mockDispatch, updatedTestUser as User);
     expect(mockDispatch).toHaveBeenCalledTimes(1);
     mockDispatch.mockReset();
-    updatedTestUser['wm-BusinessUnitCategory'] = '';
-    onSubmitCountryCode('CN', mockDispatch, updatedTestUser);
+    updatedTestUser['wm-BusinessUnitType'] = '';
+    onSubmitCountryCode('CN', mockDispatch, updatedTestUser as User);
     expect(mockDispatch).toHaveBeenCalledTimes(2);
   });
 

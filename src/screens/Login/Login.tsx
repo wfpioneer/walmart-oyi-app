@@ -49,7 +49,7 @@ import {
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
-const DOMAIN = 'wm-BusinessUnitCategory';
+const DOMAIN = 'wm-BusinessUnitType';
 const CLUB_NBR = 'wm-BusinessUnitNumber';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -167,6 +167,7 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     dispatch(hideActivityModal());
 
     setLanguage(getSystemLanguage());
+    userInfo.userId = userInfo.sAMAccountName;
     setUserId(userInfo.userPrincipalName);
     if (userInfo[DOMAIN] === 'NOT_FOUND' && userInfo[CLUB_NBR] === 'NOT_FOUND') {
       userInfo[DOMAIN] = 'HO';

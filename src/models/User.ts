@@ -1,7 +1,9 @@
 /* eslint semi: 0 */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { AuthorizeResult } from 'react-native-app-auth';
 
 export default interface User {
+  userId: string;
   'bu-division': string;
   c: string;
   cn: string;
@@ -85,7 +87,7 @@ export default interface User {
   'wm-Type': string;
   'wm-WorkShift': string;
   'wm-division': string;
-  features: string[],
+  features: string[];
   userTokens: AuthorizeResult;
 }
 
