@@ -2,6 +2,7 @@ import Config from 'react-native-config';
 import store from '../state';
 
 export interface Environment {
+  pingFedURL: string;
   orchestrationURL: string;
   itemDetailsURL: string;
   worklistURL: string;
@@ -54,6 +55,19 @@ export const getWmSvcEnv = (): svcEnv => {
   }
 };
 
+export const getPingFedClientId = () => {
+  switch (Config.ENVIRONMENT) {
+    case 'dev':
+      return 'intl_sams_oyi_dev';
+    case 'stage':
+      return 'intl_sams_oyi_stg';
+    case 'prod':
+      return 'intl_sams_oyi_prod';
+    default:
+      return 'intl_sams_oyi_prod';
+  }
+};
+
 export const getConsumerId = () => {
   const consumerId = {
     dev: '3b87ba30-529e-4cf7-983f-c3873edc6304',
@@ -74,10 +88,11 @@ export const getConsumerId = () => {
 };
 
 export const getEnvironment = (): Environment => {
-  const countryCode = store.getState().User.countryCode.toLowerCase();
+  const countryCode = store.getState().User.c.toLowerCase();
 
   const environments: Environments = {
     dev: {
+      pingFedURL: 'https://pfeddev.wal-mart.com',
       orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.dev.walmart.com`,
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.dev.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.dev.walmart.com`,
@@ -91,6 +106,7 @@ export const getEnvironment = (): Environment => {
       atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
     },
     stage: {
+      pingFedURL: 'https://pfedcert.wal-mart.com',
       orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.stg.walmart.com`,
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.stg.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.stg.walmart.com`,
@@ -104,6 +120,7 @@ export const getEnvironment = (): Environment => {
       atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
     },
     prod: {
+      pingFedURL: 'https://pfedprod.wal-mart.com',
       orchestrationURL: `https://intl-oyi-orchestration-api.${countryCode}.prod.walmart.com`,
       itemDetailsURL: `https://intl-oyi-item-details-api.${countryCode}.prod.walmart.com`,
       worklistURL: `https://intl-oyi-worklist-api.${countryCode}.prod.walmart.com`,
@@ -135,5 +152,7 @@ export const getBuildEnvironment = (): string => {
   if (Config.ENVIRONMENT === 'prod') {
     return '';
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return `-${Config.ENVIRONMENT.toUpperCase()}`;
 };

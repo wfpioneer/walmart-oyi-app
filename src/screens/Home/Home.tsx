@@ -40,7 +40,7 @@ interface NativeWorklist {
 
 export const resetUserConfigUpdateApiState = () => ({ type: UPDATE_USER_CONFIG.RESET });
 const mapStateToProps = (state: RootState) => ({
-  userName: state.User.additional.displayName,
+  userName: state.User.displayName,
   userConfig: state.User.configs,
   isManualScanEnabled: state.Global.isManualScanEnabled,
   worklistSummaryApiState: state.async.getWorklistSummary,
