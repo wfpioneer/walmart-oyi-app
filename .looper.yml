@@ -155,5 +155,4 @@ flows:
       then
         git fetch --no-tags origin ${GITHUB_PR_TARGET_BRANCH}:refs/remotes/origin/${GITHUB_PR_TARGET_BRANCH}
         git checkout -b remotes/origin/pr/${GITHUB_PR_NUMBER}
-        git branch -D ${GITHUB_PR_TARGET_BRANCH}
       fi
