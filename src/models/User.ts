@@ -1,4 +1,5 @@
 /* eslint semi: 0 */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { AuthorizeResult } from 'react-native-app-auth';
 
 export default interface User {
