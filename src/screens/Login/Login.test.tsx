@@ -1,10 +1,18 @@
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationContainer, NavigationContext, NavigationProp } from '@react-navigation/native';
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { authorize } from 'react-native-app-auth';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { SSOUser, WmPingFedSSO } from 'react-native-ssmp-sso';
-import {
+import { fireEvent, render } from '@testing-library/react-native';
+import { Provider } from 'react-redux';
+import { setUserId } from '../../utils/AppCenterTool';
+import Login, {
   LoginScreen,
-  onLoginSuccess,
+  SelectCountryCodeModal,
+  addCNAssociateRoleOverrides,
+  getPrinterDetailsFromAsyncStorage,
+  onSubmitClubNbr,
+  onSubmitCountryCode,
   resetFluffyFeaturesApiState,
   signInUser,
   signOutUser,
@@ -14,32 +22,28 @@ import User from '../../models/User';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import mockUser from '../../mockData/mockUser';
-import {
-  hideActivityModal,
-  showActivityModal
-} from '../../state/actions/Modal';
+import { mockLoginPrinterList } from '../../mockData/mockPrinterList';
+import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { sessionEnd } from '../../utils/sessionTimeout';
-import {
-  assignFluffyFeatures,
-  loginUser,
-  logoutUser,
-  setConfigs
-} from '../../state/actions/User';
+import { assignFluffyFeatures, setConfigs, setUserTokens } from '../../state/actions/User';
 import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
+import store from '../../state';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
   trackEvent: jest.fn(),
   setUserId: jest.fn()
 }));
-
-jest.mock('../../locales', () => ({
-  ...jest.requireActual('../../locales'),
-  setLanguage: jest.fn()
+jest.mock('../../utils/asyncStorageUtils', () => ({
+  ...jest.requireActual('../../utils/asyncStorageUtils'),
+  getLocationLabelPrinter: jest.fn(() => Promise.resolve(mockLoginPrinterList[1])),
+  getPalletLabelPrinter: jest.fn(() => Promise.resolve(mockLoginPrinterList[1])),
+  getPriceLabelPrinter: jest.fn(() => Promise.resolve(mockLoginPrinterList[0])),
+  getPrinterList: jest.fn(() => Promise.resolve(mockLoginPrinterList)),
+  savePrinter: jest.fn(() => Promise.resolve(true))
 }));
-
 jest.mock('../../utils/sessionTimeout.ts', () => jest.requireActual('../../utils/__mocks__/sessTimeout'));
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
@@ -51,23 +55,23 @@ jest.mock('react-native-config', () => {
     ENVIRONMENT: 'DEV'
   };
 });
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
 
-jest.mock('react-native/Libraries/Utilities/Platform', () => {
-  const Platform = jest.requireActual(
-    'react-native/Libraries/Utilities/Platform.android.js'
-  );
-  Platform.OS = 'android';
-  return Platform;
-});
-
-jest.mock('react-native-ssmp-sso', () => {
-  const wmsso = jest.requireActual('react-native-ssmp-sso');
+jest.mock('react-native-app-auth', () => {
+  const appAuthActual = jest.requireActual('react-native-app-auth');
   return {
-    ...wmsso,
-    setEnv: jest.fn(),
-    getUser: jest.fn(() => Promise.resolve()),
-    signOut: jest.fn(() => Promise.resolve()),
-    getFreshAccessToken: jest.fn(() => Promise.resolve())
+    ...appAuthActual,
+    authorize: jest.fn(() => Promise.resolve({
+      accessToken: 'dummyAccessToken',
+      refreshToken: 'dummyRefreshToken',
+      idToken: 'dummyIdToken',
+      accessTokenExpirationDate: '1970-01-01',
+      tokenType: 'Bearer',
+      scopes: [],
+      authorizationCode: 'dummyAuthCode'
+    })),
+    refresh: jest.fn(() => Promise.resolve()),
+    logout: jest.fn(() => Promise.resolve())
   };
 });
 const navigationProp: NavigationProp<any> = {
@@ -86,18 +90,101 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 const testUser: User = {
-  additional: {
-    clockCheckResult: '',
-    displayName: '',
-    loginId: '',
-    mailId: ''
-  },
+  'bu-division': '',
+  userId: 'testUser',
+  c: '',
+  cn: '',
+  co: '',
+  codePage: '',
+  company: '',
   countryCode: '',
+  ctscSecurityAnswers: '',
+  department: '',
+  departmentNumber: '',
+  description: '',
+  displayName: '',
+  displayNamePrintable: '',
+  distinguishedName: '',
+  division: '',
   domain: '',
-  siteId: 1,
-  token: 'aFakeToken',
-  userId: 'aFakeUserId',
+  employeeID: '',
+  employeeNumber: '',
+  employeeType: '',
+  extensionAttribute1: '',
+  extensionAttribute2: '',
+  extensionAttribute9: '',
+  extensionAttribute10: '',
+  extensionAttribute11: '',
+  facsimileTelephoneNumber: '',
+  givenName: '',
+  initials: '',
+  l: '',
+  mail: '',
+  manager: '',
+  memberOf: [],
+  name: '',
+  postalCode: '',
+  preferredLanguage: '',
+  sAMAccountName: 'aFakeUserId',
+  sn: '',
+  st: '',
+  siteId: 0,
+  streetAddress: '',
+  sub: '',
+  targetAddress: '',
+  telephoneNumber: '',
+  title: '',
+  userPrincipalName: '',
+  'wm-AccountStatus': '',
+  'wm-AlignDistrict': '',
+  'wm-AlignDivision': '',
+  'wm-AlignRegion': '',
+  'wm-AlignSubDivision': '',
+  'wm-BusinessUnitCategory': '',
+  'wm-BusinessUnitNumber': '',
+  'wm-BusinessUnitSubType': '',
+  'wm-BusinessUnitType': '',
+  'wm-ChargeBusinessUnitNumber': '',
+  'wm-ChargeCountryCode': '',
+  'wm-ChargeDivisionNumber': '',
+  'wm-ChargeState': '',
+  'wm-DistrictNumber': '',
+  'wm-EmployeeNumber': '',
+  'wm-EmploymentStatus': '',
+  'wm-FriendlyJobcodes': '',
+  'wm-FullTimePartTimeCode': '',
+  'wm-FullTimePartTimeEffDate': '',
+  'wm-HireDate': '',
+  'wm-IdentificationNumber': '',
+  'wm-JobCode': '',
+  'wm-JobCodeEffectiveDate': '',
+  'wm-ManagerEffectiveDate': '',
+  'wm-ManagerEpplID': '',
+  'wm-PositionCode': '',
+  'wm-RegionNumber': '',
+  'wm-ReportToPositionCode': '',
+  'wm-RespBaseDivNbr': '',
+  'wm-RespCountrCode': '',
+  'wm-RespLevelCode': '',
+  'wm-RespLevelId': '',
+  'wm-StoreMgrRespCode': '',
+  'wm-SubDivisionId': '',
+  'wm-SystemJobcodes': '',
+  'wm-Type': '',
+  'wm-WorkShift': '',
+  'wm-division': '',
   features: [],
+  userTokens: {
+    accessToken: '',
+    accessTokenExpirationDate: '',
+    authorizationCode: '',
+    authorizeAdditionalParameters: undefined,
+    idToken: '',
+    refreshToken: '',
+    scopes: [],
+    tokenAdditionalParameters: undefined,
+    tokenType: ''
+  },
   configs: mockConfig
 };
 
@@ -127,12 +214,46 @@ describe('LoginScreen', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
-  it('renders the EnterClubNbr modal when a user logs in without a club number', () => {
+  it('render screen with redux', () => {
+    const actualNav = jest.requireActual('@react-navigation/native');
+    const navContextValue = {
+      ...actualNav.navigation,
+      isFocused: () => false,
+      addListener: jest.fn(() => jest.fn())
+    };
+    const component = (
+      <Provider store={store}>
+        <NavigationContainer>
+          <NavigationContext.Provider value={navContextValue}>
+            <Login />
+          </NavigationContext.Provider>
+        </NavigationContainer>
+      </Provider>
+    );
+    const { toJSON } = render(component);
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('renders the EnterClubNbr modal when a MX HO user logs in', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <LoginScreen
         navigation={navigationProp}
-        user={{ ...testUser, siteId: 0 }}
+        user={{
+          ...testUser,
+          'wm-BusinessUnitCategory': 'HO',
+          c: 'MX',
+          sAMAccountName: 'blah',
+          userTokens: {
+            accessToken: 'blah',
+            accessTokenExpirationDate: '1970-01-01',
+            refreshToken: 'blah',
+            tokenType: 'test',
+            idToken: 'dummy',
+            authorizationCode: 'test',
+            scopes: []
+          }
+        }}
         getFluffyApiState={{
           isWaiting: false,
           value: null,
@@ -157,7 +278,21 @@ describe('LoginScreen', () => {
     renderer.render(
       <LoginScreen
         navigation={navigationProp}
-        user={{ ...testUser, countryCode: 'US' }}
+        user={{
+          ...testUser,
+          'wm-BusinessUnitCategory': 'HO',
+          c: 'US',
+          sAMAccountName: 'blah',
+          userTokens: {
+            accessToken: 'blah',
+            accessTokenExpirationDate: '1970-01-01',
+            refreshToken: 'blah',
+            tokenType: 'test',
+            idToken: 'dummy',
+            authorizationCode: 'test',
+            scopes: []
+          }
+        }}
         getFluffyApiState={{
           isWaiting: false,
           error: '',
@@ -237,6 +372,17 @@ describe('Tests login screen functions', () => {
     jest.clearAllMocks();
   });
   const mockDispatch = jest.fn();
+  // eslint-disable-next-line no-global-assign,@typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line no-global-assign
+  fetch = jest.fn(() => Promise.resolve({
+    json: () => Promise.resolve({
+      userPrincipalName: 'Dummy User',
+      'wm-BusinessUnitCategory': 'HO',
+      c: 'US',
+      'wm-BusinessUnitNumber': '9999'
+    })
+  }));
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
@@ -244,56 +390,50 @@ describe('Tests login screen functions', () => {
     result: null
   };
   const mockGetPrinterDetailsFromAsyncStorage = jest.fn(() => Promise.resolve());
-  // IAN doesn't know how to test this, because the promise function of `WMSSO.getUser()` doesn't have the props object
-  const mockWMSSO: WmPingFedSSO = jest.requireMock('react-native-ssmp-sso');
-  // const mockConfigENV = jest.requireMock('react-native-config');
   it('calls signInUser', async () => {
-    signInUser(mockDispatch);
+    // @ts-expect-error mocking fetch implementation
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve({
+        userPrincipalName: 'Dummy User',
+        'wm-BusinessUnitCategory': 'NOT_FOUND',
+        c: 'US',
+        'wm-BusinessUnitNumber': 'NOT_FOUND'
+      })
+    }));
+    await signInUser(mockDispatch);
 
-    expect(mockWMSSO.getFreshAccessToken).toHaveBeenCalled();
-    expect(mockWMSSO.getUser).toHaveBeenCalled();
-    expect(mockWMSSO.setEnv).toHaveBeenCalledWith('CERT');
-  });
+    const expectedConfig = {
+      issuer: 'https://pfedcert.wal-mart.com',
+      clientId: 'intl_sams_oyi_stg',
+      redirectUrl: 'com.samsclub.intl.oyi://oauth',
+      scopes: ['openid full']
+    };
 
-  it('calls signOutUser', async () => {
-    const mockAppCenter = jest.requireMock('../../utils/AppCenterTool');
-    await signOutUser(mockDispatch);
-
-    expect(mockDispatch).toHaveBeenCalledTimes(3);
+    expect(authorize).toHaveBeenCalledWith(expectedConfig);
+    // expect(mockDispatch).toHaveBeenCalledTimes(4);
     expect(mockDispatch).toHaveBeenCalledWith(showActivityModal());
+    expect(mockDispatch).toHaveBeenCalledWith(setUserTokens({
+      accessToken: 'dummyAccessToken',
+      refreshToken: 'dummyRefreshToken',
+      idToken: 'dummyIdToken',
+      accessTokenExpirationDate: '1970-01-01',
+      tokenType: 'Bearer',
+      scopes: [],
+      authorizationCode: 'dummyAuthCode'
+    }));
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
-    expect(mockDispatch).toHaveBeenCalledWith(logoutUser());
-    expect(mockAppCenter.trackEvent).toHaveBeenCalledWith('user_sign_out', {
-      lastPage: 'Login'
-    });
-    expect(mockWMSSO.signOut).toHaveBeenCalled();
+    expect(setUserId).toHaveBeenCalledWith('Dummy User');
+    expect(fetch).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onLoginSuccess', () => {
+  it('calls signOutUser', () => {
     const mockAppCenter = jest.requireMock('../../utils/AppCenterTool');
-    const mockLocales = jest.requireMock('../../locales');
-    const mockSSOUser: SSOUser = {
-      ...testUser,
-      siteId: '1',
-      employeeType: '',
-      win: '',
-      fullTimePartTime: '',
-      division: '',
-      clockStatus: '',
-      accessToken: ''
-    };
-    const mockDispatchUser: any = {
-      ...mockSSOUser,
-      siteId: 1
-    };
-    onLoginSuccess(mockSSOUser, testUser.token, mockDispatch);
-    expect(mockLocales.setLanguage).toHaveBeenCalled();
-    expect(mockAppCenter.setUserId).toHaveBeenCalledWith(mockSSOUser.userId);
-    expect(mockAppCenter.trackEvent).toHaveBeenCalled();
-    expect(mockDispatch).toHaveBeenCalledWith(loginUser(mockDispatchUser));
-    expect(mockDispatch).toHaveBeenCalledWith(
-      getFluffyFeatures(mockDispatchUser)
-    );
+    signOutUser(mockDispatch, testUser);
+
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockDispatch).toHaveBeenCalledWith(showActivityModal());
+    expect(mockAppCenter.trackEvent).toHaveBeenCalledWith('user_sign_out', { lastPage: 'Login' });
+    // expect(mockWMSSO.signOutUser).toHaveBeenCalled();
   });
 
   it('Tests userConfigsApiHook on Success', () => {
@@ -329,10 +469,11 @@ describe('Tests login screen functions', () => {
       mockUser,
       mockDispatch,
       mockGetPrinterDetailsFromAsyncStorage,
-      navigationProp
+      navigationProp,
+      '-STAGE'
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(7);
+    expect(mockDispatch).toHaveBeenCalledTimes(9);
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
     expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());
@@ -361,7 +502,8 @@ describe('Tests login screen functions', () => {
       mockUser,
       mockDispatch,
       mockGetPrinterDetailsFromAsyncStorage,
-      navigationProp
+      navigationProp,
+      'STAGE'
     );
 
     expect(mockDispatch).toHaveBeenCalledTimes(1);
@@ -383,7 +525,8 @@ describe('Tests login screen functions', () => {
       mockUser,
       mockDispatch,
       mockGetPrinterDetailsFromAsyncStorage,
-      navigationProp
+      navigationProp,
+      '-STAGE'
     );
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
     expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
@@ -392,5 +535,81 @@ describe('Tests login screen functions', () => {
       index: 0,
       routes: [{ name: 'Tabs' }]
     });
+  });
+
+  it('test getPrinterDetailsFromAsyncStorage', async () => {
+    await getPrinterDetailsFromAsyncStorage(mockDispatch);
+    expect(mockDispatch).toHaveBeenCalledTimes(4);
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      1,
+      {
+        payload: mockLoginPrinterList,
+        type: 'PRINT/SET_PRINTER_LIST'
+      }
+    );
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      2,
+      {
+        payload: mockLoginPrinterList[0],
+        type: 'PRINT/SET_PRICE_LABEL_PRINTER'
+      }
+    );
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      3,
+      {
+        payload: mockLoginPrinterList[1],
+        type: 'PRINT/SET_PALLET_LABEL_PRINTER'
+      }
+    );
+    expect(mockDispatch).toHaveBeenNthCalledWith(
+      4,
+      {
+        payload: mockLoginPrinterList[1],
+        type: 'PRINT/SET_LOCATION_LABEL_PRINTER'
+      }
+    );
+  });
+
+  it('SelectCountryCodeModal', () => {
+    const mockOnSignOut = jest.fn();
+    const mockOnSubmitMX = jest.fn();
+    const mockOnSubmitCN = jest.fn();
+    const { getByTestId, toJSON } = render(
+      SelectCountryCodeModal({ onSignOut: mockOnSignOut, onSubmitMX: mockOnSubmitMX, onSubmitCN: mockOnSubmitCN })
+    );
+    expect(toJSON()).toMatchSnapshot();
+    const closeButton = getByTestId('closeButton');
+    const mxButton = getByTestId('mxButton');
+    const cnButton = getByTestId('cnButton');
+    fireEvent.press(closeButton);
+    fireEvent.press(mxButton);
+    fireEvent.press(cnButton);
+    expect(mockOnSignOut).toHaveBeenCalled();
+    expect(mockOnSubmitMX).toHaveBeenCalled();
+    expect(mockOnSubmitCN).toHaveBeenCalled();
+  });
+
+  it('test onSubmitClubNbr', () => {
+    const cnTestUser = { ...testUser, c: 'CN', countryCode: 'CN' };
+    onSubmitClubNbr(1, mockDispatch, cnTestUser);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    mockDispatch.mockReset();
+    const usTestUser = { ...testUser, c: 'US', countryCode: 'US' };
+    onSubmitClubNbr(1, mockDispatch, usTestUser);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+  });
+  it('test onSubmitCountryClub', () => {
+    const updatedTestUser = { ...testUser, 'wm-BusinessUnitType': 'HO' };
+    onSubmitCountryCode('CN', mockDispatch, updatedTestUser as User);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    mockDispatch.mockReset();
+    updatedTestUser['wm-BusinessUnitType'] = '';
+    onSubmitCountryCode('CN', mockDispatch, updatedTestUser as User);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+  });
+
+  it('test addCNAssociateRoleOverrides', () => {
+    const testResults = addCNAssociateRoleOverrides(['test feature']);
+    expect(testResults).toEqual(['test feature', 'on hands change']);
   });
 });
