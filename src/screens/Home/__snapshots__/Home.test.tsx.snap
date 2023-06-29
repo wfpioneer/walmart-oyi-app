@@ -1174,7 +1174,7 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       <GoalCircle
         active={false}
         completionGoal={100}
-        completionPercentage={44}
+        completionPercentage={46}
         goalTitle="[missing \\"en.EXCEPTION.AUDITS\\" translation]"
         onPress={[Function]}
       />
@@ -1195,16 +1195,6 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       completionPercentage={50}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
-      inProgress={false}
-      onPress={[Function]}
-      pendingPercentage={50}
-    />
-    <WorklistCard
-      complete={7}
-      completionGoal={100}
-      completionPercentage={50}
-      goal={14}
-      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       inProgress={false}
       onPress={[Function]}
       pendingPercentage={50}
@@ -1910,7 +1900,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       <GoalCircle
         active={false}
         completionGoal={100}
-        completionPercentage={44}
+        completionPercentage={46}
         goalTitle="[missing \\"en.EXCEPTION.AUDITS\\" translation]"
         onPress={[Function]}
       />
@@ -1931,16 +1921,6 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       completionPercentage={50}
       goal={50}
       goalTitle="[missing \\"en.EXCEPTION.CANCELLED\\" translation]"
-      inProgress={false}
-      onPress={[Function]}
-      pendingPercentage={50}
-    />
-    <WorklistCard
-      complete={7}
-      completionGoal={100}
-      completionPercentage={50}
-      goal={14}
-      goalTitle="[missing \\"en.EXCEPTION.NEGATIVE_ON_HANDS\\" translation]"
       inProgress={false}
       onPress={[Function]}
       pendingPercentage={50}

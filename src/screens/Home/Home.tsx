@@ -312,6 +312,10 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       {
         worklistType: 'NSFQ',
         destinationGoal: WorklistGoal.PALLETS
+      },
+      {
+        worklistType: 'NO',
+        destinationGoal: WorklistGoal.AUDITS
       }
     ]);
 
