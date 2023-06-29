@@ -28,7 +28,7 @@ import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
 
-interface WorklistGoalMove {
+export interface WorklistGoalMove {
   worklistType: WorklistType;
   destinationGoal: WorklistGoal;
 }
@@ -85,6 +85,83 @@ interface HomeScreenState {
   activeGoal: number;
   errorModalVisible: boolean;
 }
+
+/**
+ * This is a method to move certain worklist summaries from one goal to another.
+ * The purpose for this is to allow for the BE to keep its organization while presenting
+ * the information in a state more useable by the in store associates
+ *
+ * @param givenGoals The goals that are provided by the BE service
+ * @param moves This is how we signify that a worklist summary should go in a different goal
+ * @returns the newly reorganized goals that will be displayed
+ */
+// eslint-disable-next-line react/no-unused-class-component-methods
+export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGoalMove[]): WorklistSummary[] => {
+  const itemsGoal: WorklistSummary = {
+    totalCompletedItems: 0,
+    totalItems: 0,
+    worklistEndGoalPct: 0,
+    worklistGoal: WorklistGoal.ITEMS,
+    worklistGoalPct: 0,
+    worklistTypes: []
+  };
+  const palletsGoal: WorklistSummary = {
+    totalCompletedItems: 0,
+    totalItems: 0,
+    worklistEndGoalPct: 0,
+    worklistGoal: WorklistGoal.PALLETS,
+    worklistGoalPct: 0,
+    worklistTypes: []
+  };
+  const auditsGoal: WorklistSummary = {
+    totalCompletedItems: 0,
+    totalItems: 0,
+    worklistEndGoalPct: 0,
+    worklistGoal: WorklistGoal.AUDITS,
+    worklistGoalPct: 0,
+    worklistTypes: []
+  };
+  const newGoals: WorklistSummary[] = [itemsGoal, palletsGoal, auditsGoal];
+
+  const auditsIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.AUDITS);
+  const palletIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.PALLETS);
+  const itemsIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.ITEMS);
+  givenGoals.forEach((goal, index) => {
+    goal.worklistTypes.forEach(worklist => {
+      const moveToDo = moves.find(move => move.worklistType === worklist.worklistType);
+
+      let editIndex = -1;
+      if (moveToDo) {
+        switch (moveToDo.destinationGoal) {
+          case WorklistGoal.AUDITS:
+            editIndex = auditsIndex;
+            break;
+          case WorklistGoal.ITEMS:
+            editIndex = itemsIndex;
+            break;
+          case WorklistGoal.PALLETS:
+            editIndex = palletIndex;
+            break;
+          default:
+        }
+      } else {
+        editIndex = index;
+      }
+
+      newGoals[editIndex].worklistTypes.push(worklist);
+      newGoals[editIndex].totalItems += worklist.totalItems;
+      newGoals[editIndex].totalCompletedItems += worklist.completedItems;
+    });
+
+    newGoals[index].worklistEndGoalPct = goal.worklistEndGoalPct;
+  });
+
+  newGoals.forEach(goal => {
+    goal.worklistGoalPct = Math.round((goal.totalCompletedItems / goal.totalItems) * 100);
+  });
+
+  return newGoals;
+};
 
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
@@ -186,83 +263,6 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     return null;
   };
 
-  /**
-   * This is a method to move certain worklist summaries from one goal to another.
-   * The purpose for this is to allow for the BE to keep its organization while presenting
-   * the information in a state more useable by the in store associates
-   *
-   * @param givenGoals The goals that are provided by the BE service
-   * @param moves This is how we signify that a worklist summary should go in a different goal
-   * @returns the newly reorganized goals that will be displayed
-   */
-  // eslint-disable-next-line react/no-unused-class-component-methods
-  reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGoalMove[]): WorklistSummary[] => {
-    const itemsGoal: WorklistSummary = {
-      totalCompletedItems: 0,
-      totalItems: 0,
-      worklistEndGoalPct: 0,
-      worklistGoal: WorklistGoal.ITEMS,
-      worklistGoalPct: 0,
-      worklistTypes: []
-    };
-    const palletsGoal: WorklistSummary = {
-      totalCompletedItems: 0,
-      totalItems: 0,
-      worklistEndGoalPct: 0,
-      worklistGoal: WorklistGoal.PALLETS,
-      worklistGoalPct: 0,
-      worklistTypes: []
-    };
-    const auditsGoal: WorklistSummary = {
-      totalCompletedItems: 0,
-      totalItems: 0,
-      worklistEndGoalPct: 0,
-      worklistGoal: WorklistGoal.AUDITS,
-      worklistGoalPct: 0,
-      worklistTypes: []
-    };
-    const newGoals: WorklistSummary[] = [itemsGoal, palletsGoal, auditsGoal];
-
-    const auditsIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.AUDITS);
-    const palletIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.PALLETS);
-    const itemsIndex = newGoals.findIndex(g => g.worklistGoal === WorklistGoal.ITEMS);
-    givenGoals.forEach((goal, index) => {
-      goal.worklistTypes.forEach(worklist => {
-        const moveToDo = moves.find(move => move.worklistType === worklist.worklistType);
-
-        let editIndex = -1;
-        if (moveToDo) {
-          switch (moveToDo.destinationGoal) {
-            case WorklistGoal.AUDITS:
-              editIndex = auditsIndex;
-              break;
-            case WorklistGoal.ITEMS:
-              editIndex = itemsIndex;
-              break;
-            case WorklistGoal.PALLETS:
-              editIndex = palletIndex;
-              break;
-            default:
-          }
-        } else {
-          editIndex = index;
-        }
-
-        newGoals[editIndex].worklistTypes.push(worklist);
-        newGoals[editIndex].totalItems += worklist.totalItems;
-        newGoals[editIndex].totalCompletedItems += worklist.completedItems;
-      });
-
-      newGoals[index].worklistEndGoalPct = goal.worklistEndGoalPct;
-    });
-
-    newGoals.forEach(goal => {
-      goal.worklistGoalPct = Math.round((goal.totalCompletedItems / goal.totalItems) * 100);
-    });
-
-    return newGoals;
-  };
-
   render(): ReactNode {
     const { worklistSummaryApiState, worklistSummaryV2ApiState } = this.props;
     if (worklistSummaryApiState.isWaiting || worklistSummaryV2ApiState.isWaiting) {
@@ -308,7 +308,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
 
     const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
 
-    const reorganizedGoals = this.reorganizeGoals(data, [
+    const reorganizedGoals = reorganizeGoals(data, [
       {
         worklistType: 'NSFQ',
         destinationGoal: WorklistGoal.PALLETS
