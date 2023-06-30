@@ -77,7 +77,7 @@ class Request {
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
           if (request.url.includes(envUrls.atmtUrl)) {
-            interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.userTokens.accessToken;
+            interceptRequest.headers.Authorization = store.getState().User.userTokens.accessToken;
           }
         }
         return interceptRequest;
