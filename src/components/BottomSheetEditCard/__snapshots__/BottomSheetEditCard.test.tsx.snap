@@ -3,6 +3,7 @@
 exports[`Edit item render tests renders the bottom sheet edit item, visible 1`] = `
 <BottomSheetBaseCard
   image=""
+  materialIconName=""
   onPress={[Function]}
   text="Edit an item"
 />

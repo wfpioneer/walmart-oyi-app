@@ -5,6 +5,7 @@ exports[`Clear aisle render tests renders the bottom sheet Clear aisle, non visi
 exports[`Clear aisle render tests renders the bottom sheet remove card, visible, manager option 1`] = `
 <BottomSheetBaseCard
   image=""
+  materialIconName=""
   onPress={[Function]}
   text="Clear aisle"
 />

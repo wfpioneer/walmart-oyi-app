@@ -99,6 +99,7 @@ export interface ItemDetailsScreenProps {
   locationForItemsApi: AsyncState;
   locationForItemsV1Api: AsyncState;
   userId: string;
+  // eslint-disable-next-line react/no-unused-prop-types
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations: Location[] | undefined;
   // eslint-disable-next-line react/no-unused-prop-types
@@ -1397,7 +1398,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     useFocusEffectHook,
     floorLocations, userFeatures, userConfigs,
     countryCode,
-    exceptionType,
     locationForItemsApi,
     locationForItemsV1Api
   } = props;
