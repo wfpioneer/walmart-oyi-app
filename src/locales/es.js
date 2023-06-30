@@ -524,7 +524,8 @@ export default {
     LAST_LOC: 'Última ubicación en bodega',
     FIRST_ITEM: 'Primer articulo',
     EMPTY_PALLET: 'Pallet vacía',
-    PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo'
+    PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo',
+    MULTIPLE_BIN_ENABLED: 'Habilitar multiple ingreso a bodega'
   },
   SETTINGS: {
     TITLE: 'Ajustes',

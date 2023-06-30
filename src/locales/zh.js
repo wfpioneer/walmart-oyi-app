@@ -529,7 +529,8 @@ export default {
     LAST_LOC: '上一次高货架储位',
     FIRST_ITEM: '第一个item',
     EMPTY_PALLET: '空卡板',
-    PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态'
+    PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态',
+    MULTIPLE_BIN_ENABLED: '开启批量上架'
   },
   SETTINGS: {
     TITLE: '设置',

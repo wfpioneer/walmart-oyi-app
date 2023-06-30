@@ -8,6 +8,7 @@ import {
 import { useDispatch } from 'react-redux';
 import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Dispatch } from 'redux';
 import Button from '../../components/buttons/Button';
 import styles from './LocationDetails.style';
 import LocationDetailsCard from '../../components/locationdetailscard/LocationDetailsCard';
@@ -24,7 +25,6 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
 import { DELETE_LOCATION, GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
-import { Dispatch } from 'redux';
 
 interface LocationDetailsProps {
   navigation: NavigationProp<any>;
