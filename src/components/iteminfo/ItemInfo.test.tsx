@@ -34,7 +34,8 @@ describe('ItemInfo Component', () => {
     grossProfit: 2.5,
     vendorPackQty: 33,
     basePrice: 15.05,
-    margin: 14
+    margin: 14,
+    viewProfitMargin: true
   };
   const mockItem: ItemInfoProps = {
     itemName: 'Test item',
@@ -45,7 +46,6 @@ describe('ItemInfo Component', () => {
     price: 14,
     exceptionType: 'NSFL',
     additionalItemDetails: mockAdditionalItemDetails,
-    showAdditionalItemDetails: false,
     countryCode: 'MX',
     showItemImage: false
   };
@@ -63,7 +63,6 @@ describe('ItemInfo Component', () => {
           price={mockItem.price}
           exceptionType={mockItem.exceptionType}
           navigationForPrint={navigationProp}
-          showAdditionalItemDetails={false}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
@@ -84,7 +83,6 @@ describe('ItemInfo Component', () => {
         price={mockItem.price}
         exceptionType={mockItem.exceptionType}
         navigationForPrint={navigationProp}
-        showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
         showItemImage={mockItem.showItemImage}
@@ -105,7 +103,6 @@ describe('ItemInfo Component', () => {
         price={mockItem.price}
         exceptionType={mockItem.exceptionType}
         navigationForPrint={mockNavigationProp}
-        showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
         showItemImage={mockItem.showItemImage}
@@ -126,7 +123,6 @@ describe('ItemInfo Component', () => {
           price={mockItem.price}
           exceptionType={mockItem.exceptionType}
           navigationForPrint={navigationProp}
-          showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
@@ -152,7 +148,6 @@ describe('ItemInfo Component', () => {
           price={mockItem.price}
           exceptionType={mockItem.exceptionType}
           navigationForPrint={navigationProp}
-          showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
