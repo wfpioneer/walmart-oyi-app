@@ -34,10 +34,13 @@ export type AdditionalItemDetailsProps = {
   vendorPackQty: number,
   basePrice: number,
   margin: number,
-  source?: TrackEventSource
+  source?: TrackEventSource,
+  viewProfitMargin: boolean
 }
 
-export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalItemDetailsProps): JSX.Element => {
+export const renderAdditionalItemDetails = (
+  additionalItemDetails: AdditionalItemDetailsProps,
+): JSX.Element => {
   const {
     color,
     margin,
@@ -45,7 +48,8 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
     grossProfit,
     size,
     basePrice,
-    source
+    source,
+    viewProfitMargin
   } = additionalItemDetails;
 
   const qtyRows: ItemDetailsListRow[] = [
@@ -56,18 +60,21 @@ export const renderAdditionalItemDetails = (additionalItemDetails: AdditionalIte
       label: strings('ITEM.PRICE_BEFORE_TAX'),
       value:
     `$${typeof basePrice === 'number' ? basePrice.toFixed(2) : '0.00'}`
-    },
-    {
+    }
+  ];
+
+  if (viewProfitMargin) {
+    qtyRows.push({
       label: strings('ITEM.MARGIN'),
       value:
     `${typeof margin === 'number' ? margin.toFixed(2) : '0.00'}%`
-    },
-    {
+    });
+    qtyRows.push({
       label: strings('ITEM.GROSS_PROFIT'),
       value:
     `$${typeof grossProfit === 'number' ? grossProfit.toFixed(2) : '0.00'}`
-    }
-  ];
+    });
+  }
 
   return (
     <CollapsibleCard title={strings('ITEM.ADDITIONAL_ITEM_DETAILS')} source={source}>
