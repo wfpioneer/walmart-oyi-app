@@ -50,24 +50,6 @@ jest.mock('../utils/scannerUtils', () => ({
   openCamera: jest.fn()
 }));
 
-jest.mock('react-native-app-auth', () => {
-  const appAuthActual = jest.requireActual('react-native-app-auth');
-  return {
-    ...appAuthActual,
-    authorize: jest.fn(() => Promise.resolve({
-      accessToken: 'dummyAccessToken',
-      refreshToken: 'dummyRefreshToken',
-      idToken: 'dummyIdToken',
-      accessTokenExpirationDate: '1970-01-01',
-      tokenType: 'Bearer',
-      scopes: [],
-      authorizationCode: 'dummyAuthCode'
-    })),
-    refresh: jest.fn(() => Promise.resolve()),
-    logout: jest.fn(() => Promise.resolve())
-  };
-});
-
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
@@ -106,16 +88,7 @@ describe('Home Navigator', () => {
     setPriceLabelPrinter: jest.fn(),
     resetPrintQueue: jest.fn(),
     clearLocationPrintQueue: jest.fn(),
-    userConfig: mockConfig,
-    userTokens: {
-      accessToken: 'dummyAccessToken',
-      refreshToken: 'dummyRefreshToken',
-      idToken: 'dummyIdToken',
-      accessTokenExpirationDate: '1970-01-01',
-      tokenType: 'Bearer',
-      scopes: [],
-      authorizationCode: 'dummyAuthCode'
-    }
+    userConfig: mockConfig
   };
 
   it('Renders the Home navigator component', () => {

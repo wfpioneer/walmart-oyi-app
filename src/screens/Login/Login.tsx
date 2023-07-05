@@ -4,16 +4,24 @@ import React, {
 } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  NativeModules, Text, View
+  NativeModules, Platform, Text, View
 } from 'react-native';
+import Config from 'react-native-config';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { AuthorizeResult, authorize, logout } from 'react-native-app-auth';
+import WMSingleSignOn, {
+  SSOEnv,
+  SSOPingFedEventData,
+  SSOPingFedEvents,
+  SSOUser,
+  ssoEventEmitter
+} from 'react-native-ssmp-sso';
+import Toast from 'react-native-toast-message';
 import { Printer, PrinterType } from '../../models/Printer';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import EnterClubNbrForm from '../../components/EnterClubNbrForm/EnterClubNbrForm';
 import styles from './Login.style';
 import {
-  assignFluffyFeatures, loginUser, logoutUser, setConfigs, setUserTokens
+  assignFluffyFeatures, loginUser, logoutUser, setConfigs
 } from '../../state/actions/User';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 import {
@@ -27,9 +35,7 @@ import { sessionEnd } from '../../utils/sessionTimeout';
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { CustomModalComponent, ModalCloseIcon } from '../Modal/Modal';
-import {
-  Environment, getBuildEnvironment, getEnvironment, getPingFedClientId
-} from '../../utils/environment';
+import { getBuildEnvironment } from '../../utils/environment';
 import COLOR from '../../themes/Color';
 import IconButton, { IconButtonType } from '../../components/buttons/IconButton';
 import { AsyncState } from '../../models/AsyncState';
@@ -46,11 +52,10 @@ import {
   setPriceLabelPrinter,
   setPrinterList
 } from '../../state/actions/Print';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 export const resetClubConfigApiState = () => ({ type: GET_CLUB_CONFIG.RESET });
 export const resetFluffyFeaturesApiState = () => ({ type: GET_FLUFFY_ROLES.RESET });
-const DOMAIN = 'wm-BusinessUnitType';
-const CLUB_NBR = 'wm-BusinessUnitNumber';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../../package.json');
@@ -62,7 +67,7 @@ const pkg = require('../../../package.json');
 const CN_ASSOCIATE_ROLES = ['on hands change'];
 
 // This method merges our hard-coded Associate roles with our fluffy response
-export const addCNAssociateRoleOverrides = (
+const addCNAssociateRoleOverrides = (
   fluffyRoles: string[]
 ): string[] => Array.from(new Set([...fluffyRoles, ...CN_ASSOCIATE_ROLES]));
 
@@ -76,7 +81,7 @@ export interface LoginScreenProps {
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
 }
 
-export const getSystemLanguage = (): string => {
+const getSystemLanguage = (): string => {
   let sysLang = '';
   if (NativeModules.I18nManager) {
     sysLang = NativeModules.I18nManager.localeIdentifier;
@@ -95,20 +100,13 @@ export const getSystemLanguage = (): string => {
   return 'en';
 };
 
-const userIsSignedIn = (user: User): boolean => user.sAMAccountName !== '' && user.userTokens.accessToken !== '';
-export const SelectCountryCodeModal = (
-  props: {
-    onSignOut: () => void,
-    onSubmitMX:() => void,
-    onSubmitCN: () => void
-  }
-) => {
+const userIsSignedIn = (user: User): boolean => user.userId !== '' && user.token !== '';
+const SelectCountryCodeModal = (props: {onSignOut: () => void, onSubmitMX:() => void, onSubmitCN: () => void}) => {
   const { onSignOut, onSubmitCN, onSubmitMX } = props;
   return (
-    <View style={styles.modalContainer}>
+    <>
       <View style={styles.closeContainer}>
         <IconButton
-          testID="closeButton"
           icon={ModalCloseIcon}
           type={IconButtonType.NO_BORDER}
           onPress={() => onSignOut()}
@@ -118,100 +116,82 @@ export const SelectCountryCodeModal = (
       <Text style={styles.titleText}>
         Please select a country to sign into
       </Text>
-      <View style={styles.buttonContainer}>
-        <View style={styles.buttonRow}>
-          <Button
-            testID="mxButton"
-            title="MX"
-            onPress={() => onSubmitMX()}
-            type={ButtonType.SOLID_WHITE}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            style={styles.affirmButton}
-          />
-          <Button
-            testID="cnButton"
-            title="CN"
-            onPress={() => onSubmitCN()}
-            type={ButtonType.PRIMARY}
-            style={styles.affirmButton}
-          />
-        </View>
+      <View style={styles.buttonRow}>
+        <Button
+          title="MX"
+          onPress={() => onSubmitMX()}
+          type={ButtonType.SOLID_WHITE}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          style={styles.affirmButton}
+        />
+        <Button
+          title="CN"
+          onPress={() => onSubmitCN()}
+          type={ButtonType.PRIMARY}
+          style={styles.affirmButton}
+        />
       </View>
-    </View>
+    </>
   );
 };
 
-export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
-  try {
-    dispatch(showActivityModal());
-    const urls : Environment = getEnvironment();
-    const config = {
-      issuer: urls.pingFedURL,
-      clientId: getPingFedClientId(),
-      redirectUrl: 'com.samsclub.intl.oyi://oauth',
-      scopes: ['openid full']
-    };
+export const onLoginSuccess = (user: SSOUser, userToken: string, dispatch: Dispatch<any>) => {
+  const siteId = user.siteId && user.siteId !== 'NOT_FOUND' ? Number(user.siteId) : 0;
 
-    const userTokens: AuthorizeResult = await authorize(config);
-    dispatch(setUserTokens(userTokens));
-    const userInfoResponse = await fetch(`${urls.pingFedURL}/idp/userinfo.openid`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userTokens.accessToken}`
-      }
-    });
-    const userInfo = await userInfoResponse.json();
-
-    dispatch(hideActivityModal());
-
-    setLanguage(getSystemLanguage());
-    userInfo.userId = userInfo.sAMAccountName;
-    setUserId(userInfo.userPrincipalName);
-    if (userInfo[DOMAIN] === 'NOT_FOUND' && userInfo[CLUB_NBR] === 'NOT_FOUND') {
-      userInfo[DOMAIN] = 'HO';
-    }
-
-    if (parseInt(userInfo[CLUB_NBR], 10)) {
-      userInfo.siteId = parseInt(userInfo[CLUB_NBR], 10);
-    }
-    dispatch(loginUser(userInfo));
-    trackEvent('user_sign_in');
-    if (userInfo[DOMAIN] !== 'HO' && userInfo.c !== 'US') {
-      dispatch(getFluffyFeatures({
-        ...userInfo,
-        siteId: parseInt(userInfo[CLUB_NBR], 10)
-      }));
-    }
-
-    return Promise.resolve();
-  } catch (e: any) {
-    dispatch(hideActivityModal());
-    return Promise.reject(e);
+  setLanguage(getSystemLanguage());
+  setUserId(user.userId);
+  dispatch(loginUser({
+    ...user,
+    siteId,
+    token: userToken,
+    additional: {
+      displayName: user.displayName ?? '',
+      clockCheckResult: '',
+      loginId: '',
+      mailId: user.emailId ?? ''
+    },
+    features: []
+  }));
+  trackEvent('user_sign_in');
+  if (siteId && user.countryCode !== 'US') {
+    dispatch(getFluffyFeatures({
+      ...user,
+      siteId,
+      token: userToken,
+      additional: {
+        displayName: user.displayName ?? '',
+        clockCheckResult: '',
+        loginId: '',
+        mailId: user.emailId ?? ''
+      },
+      features: []
+    }));
   }
 };
+export const signInUser = (dispatch: Dispatch<any>): void => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  Config.ENVIRONMENT !== 'prod' ? WMSingleSignOn.setEnv(SSOEnv.CERT) : WMSingleSignOn.setEnv(SSOEnv.PROD);
+  let userToken = '';
+  WMSingleSignOn.getFreshAccessToken().then(token => {
+    userToken = token;
+  });
 
-export const signOutUser = async (dispatch: Dispatch<any>, user: User): Promise<void> => {
+  WMSingleSignOn.getUser().then((user: SSOUser) => {
+    onLoginSuccess(user, userToken, dispatch);
+  }).catch(() => {
+    WMSingleSignOn.signIn('MainActivity');
+  });
+};
+
+export const signOutUser = (dispatch: Dispatch<any>): void => {
   dispatch(showActivityModal());
-  const urls = getEnvironment();
   trackEvent('user_sign_out', { lastPage: 'Login' });
-  const config = {
-    issuer: urls.pingFedURL
-  };
-  try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    await logout(config, {
-      idToken: user.userTokens.idToken,
-      postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
-    });
-    dispatch(hideActivityModal());
+  WMSingleSignOn.signOut('MainActivity', true).then(() => {
     dispatch(logoutUser());
-  } catch {
-    dispatch(hideActivityModal());
-    dispatch(logoutUser());
-  }
+    if (Platform.OS === 'android') {
+      dispatch(hideActivityModal());
+    }
+  });
 };
 
 export const userConfigsApiHook = (
@@ -220,8 +200,7 @@ export const userConfigsApiHook = (
   user: User,
   dispatch: Dispatch<any>,
   getPrinterDetailsFromAsyncStorage: (dispatchAction: Dispatch<any>) => Promise<void>,
-  navigation: NavigationProp<any>,
-  env: string
+  navigation: NavigationProp<any>
 ) => {
   if (getFluffyApiState.isWaiting || getClubConfigApiState.isWaiting) {
     dispatch(showActivityModal());
@@ -240,17 +219,6 @@ export const userConfigsApiHook = (
     dispatch(updateUserConfig());
   } else if (getFluffyApiState.error) {
     // TODO Display toast/popup letting user know roles could not be retrieved
-    // TODO remove mocked response once app is onboarded to dev fluffy in service registry
-    const mockFluffyResponse = [
-      'manager approval',
-      'location management',
-      'on hands change',
-      'location management edit',
-      'location printing'
-    ];
-    if (env === '-DEV') {
-      dispatch(assignFluffyFeatures(mockFluffyResponse));
-    }
     dispatch(getClubConfig());
     dispatch(resetFluffyFeaturesApiState());
     dispatch(updateUserConfig());
@@ -310,23 +278,6 @@ export const getPrinterDetailsFromAsyncStorage = async (dispatch: Dispatch<any>)
   dispatch(setLocationLabelPrinter(locationLabelPrinter));
 };
 
-export const onSubmitClubNbr = (clubNbr: number, dispatch: Dispatch<any>, user: User) => {
-  const updatedUser = { ...user, 'wm-BusinessUnitNumber': clubNbr.toString(), siteId: clubNbr };
-  dispatch(loginUser(updatedUser));
-  trackEvent('user_sign_in');
-  if (user.c !== 'US') {
-    dispatch(getFluffyFeatures(updatedUser));
-  }
-};
-
-export const onSubmitCountryCode = (countryCode: string, dispatch: Dispatch<any>, user: User) => {
-  const updatedUser = { ...user, c: countryCode, countryCode };
-  dispatch(loginUser(updatedUser));
-  if (updatedUser[DOMAIN] !== 'HO') {
-    dispatch(getFluffyFeatures(updatedUser));
-  }
-};
-
 export const LoginScreen = (props: LoginScreenProps) => {
   const {
     user,
@@ -337,21 +288,58 @@ export const LoginScreen = (props: LoginScreenProps) => {
     useEffectHook
   } = props;
 
-  const signInUserInit = () => {
-    signInUser(dispatch).then(() => {
-    }).catch((e: Error) => {
-      console.warn(e.message);
+  useEffectHook(() => {
+    WMSingleSignOn.setRedirectUri('com.walmart.intl.oyi://SSOLogin');
+    const eventTypes = SSOPingFedEvents.types;
+    ssoEventEmitter.addListener(SSOPingFedEvents.name, (event: SSOPingFedEventData) => {
+      switch (event.action) {
+        case eventTypes.authSuccess:
+          signInUser(dispatch);
+          Toast.show({
+            type: 'success',
+            position: 'bottom',
+            text1: `${strings('GENERICS.SIGN_IN')} ${strings('GENERICS.UPDATED')}`,
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+          break;
+        case eventTypes.error: {
+          const errorException = event.error.replace('AuthorizationException: ', '');
+          const pingError = JSON.parse(errorException);
+          Toast.show({
+            type: 'error',
+            position: 'bottom',
+            text1: pingError.error || pingError.errorDescription,
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+          break;
+        }
+        default:
+          break;
+      }
     });
-  };
+
+    return () => {
+      ssoEventEmitter.removeAllListeners(SSOPingFedEvents.name);
+    };
+  }, [ssoEventEmitter]);
 
   useEffectHook(() => {
-    signInUserInit();
-
+    signInUser(dispatch);
+    // this following snippet is mostly for iOS, as
+    // I need it to automatically call signInUser when we go back to the login screen
+    if (Platform.OS === 'ios') {
+      navigation.addListener('focus', () => {
+        signInUser(dispatch);
+      });
+    }
     navigation.addListener('blur', () => {
       dispatch(resetClubConfigApiState());
     });
 
     return () => {
+      if (Platform.OS === 'ios') {
+        navigation.removeListener('focus', () => {});
+      }
       navigation.removeListener('blur', () => {});
     };
   }, [navigation]);
@@ -362,41 +350,57 @@ export const LoginScreen = (props: LoginScreenProps) => {
     user,
     dispatch,
     getPrinterDetailsFromAsyncStorage,
-    navigation,
-    getBuildEnvironment()
+    navigation
   ), [getFluffyApiState, getClubConfigApiState]);
 
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={user[DOMAIN] === 'HO' && user.c !== 'US' && userIsSignedIn(user)}
-        onClose={() => null}
+        isVisible={user.siteId === 0 && userIsSignedIn(user)}
+        onClose={() => signOutUser(dispatch)}
         modalType="Form"
       >
         <EnterClubNbrForm
-          onSubmit={clubNbr => onSubmitClubNbr(clubNbr, dispatch, user)}
-          onSignOut={() => signOutUser(dispatch, user)}
+          onSubmit={clubNbr => {
+            const updatedUser = { ...user, siteId: clubNbr };
+            dispatch(loginUser(updatedUser));
+            trackEvent('user_sign_in');
+            if (user.countryCode !== 'US' && user.countryCode !== 'NOT_FOUND') {
+              dispatch(getFluffyFeatures(updatedUser));
+            }
+          }}
+          onSignOut={() => signOutUser(dispatch)}
         />
       </CustomModalComponent>
       <CustomModalComponent
         isVisible={
-          user.c === 'US'
+          user.siteId !== 0
+          && (user.countryCode === 'US'
+          || user.countryCode === 'NOT_FOUND')
           && userIsSignedIn(user)
         }
-        onClose={() => signOutUser(dispatch, user)}
+        onClose={() => signOutUser(dispatch)}
         modalType="Form"
       >
         <SelectCountryCodeModal
-          onSignOut={() => signOutUser(dispatch, user)}
-          onSubmitCN={() => onSubmitCountryCode('CN', dispatch, user)}
-          onSubmitMX={() => onSubmitCountryCode('MX', dispatch, user)}
+          onSignOut={() => signOutUser(dispatch)}
+          onSubmitCN={() => {
+            const updatedUser = { ...user, countryCode: 'CN' };
+            dispatch(loginUser(updatedUser));
+            dispatch(getFluffyFeatures(updatedUser));
+          }}
+          onSubmitMX={() => {
+            const updatedUser = { ...user, countryCode: 'MX' };
+            dispatch(loginUser(updatedUser));
+            dispatch(getFluffyFeatures(updatedUser));
+          }}
         />
       </CustomModalComponent>
       <View style={styles.buttonContainer}>
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}
-          onPress={() => signInUserInit()}
+          onPress={() => signInUser(dispatch)}
         />
       </View>
       <Text style={styles.versionDisplay}>

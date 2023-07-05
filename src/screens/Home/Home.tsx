@@ -30,7 +30,7 @@ import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
 
 export const resetUserConfigUpdateApiState = () => ({ type: UPDATE_USER_CONFIG.RESET });
 const mapStateToProps = (state: RootState) => ({
-  userName: state.User.displayName,
+  userName: state.User.additional.displayName,
   userConfig: state.User.configs,
   isManualScanEnabled: state.Global.isManualScanEnabled,
   worklistSummaryApiState: state.async.getWorklistSummary,
