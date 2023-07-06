@@ -84,6 +84,28 @@ export const renderAdditionalItemDetails = (
     </CollapsibleCard>
   );
 };
+export const getExceptionTranslation = (exceptionType: string | undefined) => {
+  if (exceptionType) {
+    switch (exceptionType.toUpperCase()) {
+      case 'NO':
+        return strings('EXCEPTION.NEGATIVE_ON_HANDS');
+      case 'NSFL':
+        return strings('EXCEPTION.NSFL');
+      case 'NP':
+        return strings('EXCEPTION.NIL_PICK');
+      case 'NS':
+        return strings('EXCEPTION.NO_SALES');
+      case 'C':
+        return strings('EXCEPTION.CANCELLED');
+      case 'PO':
+        return strings('EXCEPTION.PO');
+      case 'NSFQ':
+        return strings('EXCEPTION.NEG_SALES_FLOOR_QTY');
+      default:
+    }
+  }
+  return strings('EXCEPTION.UNKNOWN');
+};
 
 const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
@@ -98,34 +120,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
     navigation?.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
   };
 
-  let exceptionString = strings('EXCEPTION.UNKNOWN');
-  if (exceptionType) {
-    switch (exceptionType.toUpperCase()) {
-      case 'NO':
-        exceptionString = strings('EXCEPTION.NEGATIVE_ON_HANDS');
-        break;
-      case 'NSFL':
-        exceptionString = strings('EXCEPTION.NSFL');
-        break;
-      case 'NP':
-        exceptionString = strings('EXCEPTION.NIL_PICK');
-        break;
-      case 'NS':
-        exceptionString = strings('EXCEPTION.NO_SALES');
-        break;
-      case 'C':
-        exceptionString = strings('EXCEPTION.CANCELLED');
-        break;
-      case 'PO':
-        exceptionString = strings('EXCEPTION.PO');
-        break;
-      case 'NSFQ':
-        exceptionString = strings('EXCEPTION.NEG_SALES_FLOOR_QTY');
-        break;
-      default:
-        break;
-    }
-  }
+  const exceptionString = getExceptionTranslation(exceptionType);
 
   return (
     <View style={styles.mainContainer}>
