@@ -181,7 +181,7 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     if (parseInt(userInfo[CLUB_NBR], 10)) {
       userInfo.siteId = parseInt(userInfo[CLUB_NBR], 10);
     }
-    dispatch(loginUser(userInfo));
+    dispatch(loginUser({ ...userInfo, countryCode: userInfo.c }));
     trackEvent('user_sign_in');
     if (userInfo[DOMAIN] !== 'HO' && userInfo.c !== 'US') {
       dispatch(getFluffyFeatures({

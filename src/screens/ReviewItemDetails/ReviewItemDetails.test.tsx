@@ -167,7 +167,8 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   userFeatures: [],
   userConfigs: mockConfig,
   countryCode: 'MX',
-  locationForItemsV1Api: defaultAsyncState
+  locationForItemsV1Api: defaultAsyncState,
+  userDomain: 'HO'
 };
 
 describe('ReviewItemDetailsScreen', () => {
