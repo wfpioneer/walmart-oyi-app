@@ -10,6 +10,94 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <FlatList
     ItemSeparatorComponent={[Function]}
     data={
@@ -62,7 +150,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
     <Memo(Pressable)
       onPress={[Function]}
     >
-      <mockConstructor
+      <Icon
         color="#0071e9"
         name="barcode-scan"
         size={70}
@@ -91,6 +179,94 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <ManualScanComponent
     keyboardType="default"
     placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
@@ -118,7 +294,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
     <Memo(Pressable)
       onPress={[Function]}
     >
-      <mockConstructor
+      <Icon
         color="#0071e9"
         name="barcode-scan"
         size={70}
@@ -147,6 +323,94 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
     }
   }
 >
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <FlatList
     ItemSeparatorComponent={[Function]}
     data={Array []}
@@ -170,7 +434,196 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
     <Memo(Pressable)
       onPress={[Function]}
     >
-      <mockConstructor
+      <Icon
+        color="#0071e9"
+        name="barcode-scan"
+        size={70}
+      />
+    </Memo(Pressable)>
+    <Text
+      style={
+        Object {
+          "fontSize": 20,
+        }
+      }
+    >
+      [missing "en.BINNING.SCAN_LOCATION_PLURAL" translation]
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Assign Location screen render tests renders the binning item card 1`] = `
+<TouchableOpacity
+  onPress={[Function]}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#ffffffff",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 4,
+          "flexDirection": "column",
+          "margin": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }
+      >
+        <Text>
+          [missing "en.PALLET.PALLET_ID" translation]: 345345
+        </Text>
+      </View>
+      <View>
+        <Text>
+          [missing "en.BINNING.FIRST_ITEM" translation]: itemDesc
+        </Text>
+      </View>
+    </View>
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`Assign Location screen render tests renders the screen with the unsaved warning modal showing 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.BINNING.WARNING_DESCRIPTION" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <ManualScanComponent
+    keyboardType="default"
+    placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+  />
+  <FlatList
+    ItemSeparatorComponent={[Function]}
+    data={Array []}
+    keyExtractor={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderTopColor": "#888888",
+        "borderTopWidth": 1,
+        "flexDirection": "column",
+        "margin": 10,
+        "padding": 5,
+        "width": "95%",
+      }
+    }
+  >
+    <Memo(Pressable)
+      onPress={[Function]}
+    >
+      <Icon
         color="#0071e9"
         name="barcode-scan"
         size={70}

@@ -1,10 +1,16 @@
-import React, { EffectCallback, useEffect, useState } from 'react';
+import React, {
+  EffectCallback,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
 import {
+  BackHandler,
   FlatList, Pressable, Text, View
 } from 'react-native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
-  NavigationProp, RouteProp, useNavigation, useRoute
+  NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
@@ -36,6 +42,15 @@ import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
 import { PickingState } from '../../state/reducers/Picking';
 import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScreen';
 import { Configurations } from '../../models/User';
+import { Pallet } from '../../models/PalletManagementTypes';
+import { setupPallet } from '../../state/actions/PalletManagement';
+import { UseStateType } from '../../models/Generics.d';
+import {
+  backConfirmedHook,
+  navigationRemoveListenerHook,
+  onBinningItemPress,
+  renderWarningModal
+} from '../Binning/Binning';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -48,15 +63,34 @@ interface AssignLocationProps {
   binPalletsApi: AsyncState;
   pickingState: PickingState;
   updatePicklistStatusApi: AsyncState;
-  deletePicks: boolean;
-  setDeletePicks: React.Dispatch<React.SetStateAction<boolean>>;
   trackEventCall: typeof trackEvent;
   userConfigs: Configurations;
+  deletePicksState: UseStateType<boolean>;
+  displayWarningModalState: UseStateType<boolean>;
+  useFocusEffectHook: typeof useFocusEffect;
+  useCallbackHook: typeof useCallback;
+  enableMultiPalletBin: boolean;
 }
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const binningItemCardReadOnly = (
+export const onValidateHardwareBackPress = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  scannedPallets: BinningPallet[],
+  enableMultiPalletBin: boolean
+) => {
+  if (!enableMultiPalletBin && scannedPallets.length > 0) {
+    setDisplayWarningModal(true);
+    return true;
+  }
+  return false;
+};
+
+export const binningItemCard = (
   { item }: { item: BinningPallet },
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  trackEventCall: typeof trackEvent,
+  enableMultiPalletBin: boolean
 ) => {
   const firstItem = head(item.items);
   return (
@@ -64,6 +98,7 @@ export const binningItemCardReadOnly = (
       palletId={item.id}
       itemDesc={firstItem ? firstItem.itemDesc : ''}
       lastLocation={item.lastLocation}
+      onClick={() => !enableMultiPalletBin && onBinningItemPress(item, dispatch, navigation, trackEventCall)}
     />
   );
 };
@@ -142,7 +177,8 @@ export const binPalletsApiEffect = (
                 acc[1].push(item);
               }
               return acc;
-            }, [[], []]
+            },
+            [[], []]
           );
           if (completedPicks.length > 0 && locationUpdatedPicks.length === 0) {
             if (completedPicks.length === 1) {
@@ -266,11 +302,15 @@ export const binPalletsApiEffect = (
 
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
-    palletsToBin, isManualScanEnabled, useEffectHook, pickingState,
-    navigation, dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi, deletePicks, setDeletePicks,
-    trackEventCall, userConfigs
+    palletsToBin, isManualScanEnabled, useEffectHook, pickingState, navigation,
+    dispatch, route, scannedEvent, binPalletsApi, updatePicklistStatusApi,
+    deletePicksState, trackEventCall, userConfigs, displayWarningModalState,
+    useCallbackHook, useFocusEffectHook, enableMultiPalletBin
   } = props;
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
+  const [displayWarningModal, setDisplayWarningModal] = displayWarningModalState;
+  const [deletePicks, setDeletePicks] = deletePicksState;
+  const palletExistForBinnning = !!palletsToBin.length;
 
   useEffectHook(() => {
     if (navigation.isFocused() && scannedEvent.value) {
@@ -312,6 +352,34 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     };
   }, []);
 
+  // validation on app back press
+  useEffectHook(() => {
+    const navigationListener = navigation.addListener('beforeRemove', e => {
+      navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, palletsToBin);
+    });
+    return navigationListener;
+  }, [navigation, palletsToBin, enableMultiPalletBin]);
+
+  useEffectHook(() => backConfirmedHook(
+    displayWarningModal,
+    palletExistForBinnning,
+    setDisplayWarningModal,
+    navigation
+  ), [palletExistForBinnning, displayWarningModal]);
+
+  // validation on Hardware backPress
+  useFocusEffectHook(
+    useCallbackHook(() => {
+      const onHardwareBackPress = () => onValidateHardwareBackPress(
+        setDisplayWarningModal,
+        palletsToBin,
+        enableMultiPalletBin
+      );
+      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+    }, [])
+  );
+
   useEffectHook(
     () => updatePicklistStatusApiHook(
       updatePicklistStatusApi,
@@ -332,14 +400,6 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
     setDeletePicks,
     userConfigs.inProgress
   ), [binPalletsApi]);
-
-  useEffectHook(() => (
-    navigation.addListener('beforeRemove', () => {
-      if (route.params && route.params.source && route.params.source === 'picking') {
-        dispatch(clearPallets());
-      }
-    })
-  ), [navigation]);
 
   const scanTextView = () => (
     <View style={styles.scanView}>
@@ -366,6 +426,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
 
   return (
     <View style={styles.container}>
+      {renderWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
       {isManualScanEnabled && (
         <ManualScanComponent
           placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
@@ -374,7 +435,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
       )}
       <FlatList
         data={palletsToBin}
-        renderItem={item => binningItemCardReadOnly(item)}
+        renderItem={item => binningItemCard(item, dispatch, navigation, trackEventCall, enableMultiPalletBin)}
         removeClippedSubviews={false}
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item, index) => `${item.id}-${index}`}
@@ -390,29 +451,33 @@ function AssignLocation(): JSX.Element {
   const dispatch = useDispatch();
   const pickingState = useTypedSelector(state => state.Picking);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const palletsToBin = useTypedSelector(state => state.Binning.pallets);
+  const { pallets: palletsToBin, enableMultiplePalletBin } = useTypedSelector(state => state.Binning);
   const scannedEvent = useTypedSelector(state => state.Global.scannedEvent);
   const userConfigs = useTypedSelector(state => state.User.configs);
   const binPalletsApi = useTypedSelector(state => state.async.binPallets);
   const updatePicklistStatusApi = useTypedSelector(state => state.async.updatePicklistStatus);
-  const [deletePicks, setDeletePicks] = useState(false);
+  const deletePicksState = useState(false);
+  const displayWarningModalState = useState(false);
 
   return (
     <AssignLocationScreen
       palletsToBin={palletsToBin}
       isManualScanEnabled={isManualScanEnabled}
-      useEffectHook={useEffect}
       dispatch={dispatch}
       navigation={navigation}
       route={route}
+      useEffectHook={useEffect}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
       scannedEvent={scannedEvent}
       binPalletsApi={binPalletsApi}
       pickingState={pickingState}
       updatePicklistStatusApi={updatePicklistStatusApi}
-      deletePicks={deletePicks}
-      setDeletePicks={setDeletePicks}
       trackEventCall={trackEvent}
       userConfigs={userConfigs}
+      deletePicksState={deletePicksState}
+      displayWarningModalState={displayWarningModalState}
+      enableMultiPalletBin={enableMultiplePalletBin}
     />
   );
 }

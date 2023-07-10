@@ -269,22 +269,21 @@ export const mockItemNPalletNAuditWorklistSummary: WorklistSummary[] = [
     totalItems: 151,
     worklistEndGoalPct: 100,
     worklistGoal: WorklistGoal.PALLETS,
-
     worklistGoalPct: 1,
     worklistTypes: [{
       worklistType: 'MP',
       totalItems: 151,
-      completedItems: 0,
+      completedItems: 1,
       inProgressItems: 0,
       todoItems: 151
     }]
   },
   {
-    totalCompletedItems: 80,
-    totalItems: 151,
+    totalCompletedItems: 11,
+    totalItems: 25,
     worklistEndGoalPct: 100,
     worklistGoal: WorklistGoal.AUDITS,
-    worklistGoalPct: 60,
+    worklistGoalPct: 44,
     worklistTypes: [
       {
         worklistType: 'AU',

@@ -1,3 +1,4 @@
+import { EventArg } from '@react-navigation/native';
 import { EffectCallback } from 'react';
 
 export type UseStateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
@@ -11,4 +12,18 @@ export type TrackEventSource = {
   screen: string;
   action: string;
   otherInfo?: any;
+};
+
+export type BeforeRemoveEvent = EventArg<'beforeRemove', true, {
+  action: Readonly<{
+      type: string;
+      payload?: object | undefined;
+      source?: string | undefined;
+      target?: string | undefined;
+  }>;
+}>;
+
+export type ScannedEvent = {
+  value: any;
+  type: string | null;
 };

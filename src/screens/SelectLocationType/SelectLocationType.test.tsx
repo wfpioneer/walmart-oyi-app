@@ -4,9 +4,9 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { strings } from '../../locales';
 import {
+  SelectLocationTypeScreen,
   addLocationApiHook,
   editLocationApiHook,
-  SelectLocationTypeScreen,
   isNotActionCompleted,
   onBarcodeEmitterResponse,
   onValidateSessionCallResponse,

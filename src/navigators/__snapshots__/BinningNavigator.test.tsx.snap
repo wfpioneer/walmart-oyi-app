@@ -61,10 +61,36 @@ exports[`Binning Navigator Renders the Binning navigator component 1`] = `
 </StackNavigator>
 `;
 
-exports[`Binning Navigator Renders the scanButton header icon for Binning Screen 1`] = `
+exports[`Binning Navigator Renders the scanButton header icon for Binning Screen when not rightmost button 1`] = `
 <TouchableOpacity
   hostRef={null}
   onPress={[Function]}
+  testID="scanButton"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingLeft": 15,
+      }
+    }
+  >
+    <Icon
+      color="#ffffffff"
+      name="barcode-scan"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
+`;
+
+exports[`Binning Navigator Renders the scanButton header icon for Binning Screen when rightmost button 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+  testID="scanButton"
 >
   <View
     style={
@@ -76,7 +102,7 @@ exports[`Binning Navigator Renders the scanButton header icon for Binning Screen
       }
     }
   >
-    <mockConstructor
+    <Icon
       color="#ffffffff"
       name="barcode-scan"
       size={20}
