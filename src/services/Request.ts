@@ -48,16 +48,17 @@ class Request {
 
         if (request.url.includes(envUrls.fluffyURL)) {
           interceptRequest.headers[WM_SVC_NAME] = svcName.fluffyName;
-          interceptRequest.headers.authorization = `Bearer ${store.getState().User.token}`;
+          interceptRequest.headers.Authorization = `Bearer ${store.getState().User.userTokens.accessToken}`;
           interceptRequest.headers.PING_TOKEN_IDP = 'yes';
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.version'] = '1.0.0';
+          interceptRequest.headers.PING_TOKEN_IDP = 'yes';
           interceptRequest.headers['wm_svc.env'] = Config.ENVIRONMENT === 'prod' ? 'prod' : 'stg';
         } else {
           // For use with all of the OYI APIs
           interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
-          interceptRequest.headers.userId = store.getState().User.userId;
-          interceptRequest.headers.countryCode = store.getState().User.countryCode;
+          interceptRequest.headers.userId = store.getState().User.sAMAccountName;
+          interceptRequest.headers.countryCode = store.getState().User.c;
           interceptRequest.headers.clubNbr = store.getState().User.siteId;
 
           if (request.url.includes(envUrls.worklistURL)) {
@@ -76,7 +77,7 @@ class Request {
           interceptRequest.headers['wm_consumer.id'] = getConsumerId();
           interceptRequest.headers['wm_svc.env'] = getWmSvcEnv();
           if (request.url.includes(envUrls.atmtUrl)) {
-            interceptRequest.headers['wm_sec.auth_token'] = store.getState().User.token;
+            interceptRequest.headers.Authorization = store.getState().User.userTokens.accessToken;
           }
         }
         return interceptRequest;
@@ -228,7 +229,7 @@ class Request {
 export async function mockAxiosResponse<T>(
   payload: T,
   options?: Omit<AxiosResponse, 'data'>,
-): Promise<AxiosResponse<T>> {
+): Promise<Awaited<{ headers: object; request: object; data: T; statusText: string; config: object; status: number }>> {
   const config = {
     ...{
       config: {},
