@@ -9,6 +9,7 @@ interface Location {
   type: string;
   typeNbr: number;
   qty?: number;
+  quantity?: number;
   newQty: number;
 }
 
