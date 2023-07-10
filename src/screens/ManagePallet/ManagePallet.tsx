@@ -32,7 +32,7 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, postCreatePallet, updatePalletItemQty
+  addPalletUPCs, clearPallet, deleteUpcs, getItemDetailsV4, postCreatePallet, updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -57,7 +57,7 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS_V4, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -675,7 +675,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         setDisplayWarningModal(true);
         e.preventDefault();
       } else {
-        dispatch({ type: GET_ITEM_DETAILS.RESET });
+        dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
       }
     });
     return navigationListener;
@@ -709,7 +709,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             barcode: scan.value,
             type: scan.type
           });
-          dispatch(getItemDetails({ id: scan.value, getSummary: false }));
+          dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
         });
       }
     });
@@ -834,7 +834,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const backConfirmed = () => {
     setDisplayWarningModal(false);
     setConfirmBackNavigate(true);
-    dispatch({ type: GET_ITEM_DETAILS.RESET });
+    dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
   };
 
   const renderWarningModal = () => (
@@ -984,7 +984,7 @@ const ManagePallet = (): JSX.Element => {
   const navigation: NavigationProp<any> = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
-  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
+  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetailsV4);
   const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);

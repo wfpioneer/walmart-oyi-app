@@ -13,7 +13,6 @@ import {
   PrintPalletList
 } from '../../models/Printer';
 import { CreateZoneRequest } from '../reducers/Location';
-import { PalletItem } from '../../models/PalletItem';
 import {
   CombinePalletsRequest,
   GetPalletDetailsRequest,
@@ -25,7 +24,7 @@ import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 import User from '../../models/User';
 import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
-import { CreatePallet } from '../../models/PalletManagementTypes';
+import { CreatePallet, PalletItem } from '../../models/PalletManagementTypes';
 import { submitFeedbackRequest } from '../../services/Feedback.service';
 
 export const GET_ITEM_DETAILS_V4 = 'SAGA/GET_ITEM_DETAILS_V4';
