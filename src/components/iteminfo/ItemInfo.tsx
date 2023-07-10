@@ -121,7 +121,6 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   };
 
   const exceptionString = getExceptionTranslation(exceptionType);
-
   return (
     <View style={styles.mainContainer}>
       <View style={styles.imageContainer}>
@@ -148,7 +147,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
         </View>
       </View>
       {additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
-      {price && <Text style={styles.priceText}>{`${currencies(price)}`}</Text>}
+      {price && price !== 0 ? <Text style={styles.priceText}>{`${currencies(price)}`}</Text> : null}
       {navigation && (
         <Button
           type={2}
