@@ -48,7 +48,7 @@ import {
   CLEAR_PALLET,
   DELETE_LOCATION,
   GET_APPROVAL_LIST,
-  GET_ITEM_DETAILS,
+  GET_ITEM_DETAILS_V4,
   GET_ITEM_PALLETS,
   GET_LOCATIONS_FOR_ITEM,
   GET_LOCATIONS_FOR_ITEM_V1,
@@ -62,7 +62,7 @@ import {
   clearPallet,
   deleteLocation,
   getApprovalList,
-  getItemDetails,
+  getItemDetailsV4,
   getItemPallets,
   getItemPalletsV1,
   getLocationsForItem,
@@ -203,7 +203,7 @@ export const isError = (
             style={styles.errorButton}
             onPress={() => {
               trackEventCall('item_details_api_retry', { itemNumber });
-              return dispatch(getItemDetails({ id: itemNumber }));
+              return dispatch(getItemDetailsV4({ id: itemNumber }));
             }}
           >
             <Text>{strings('GENERICS.RETRY')}</Text>
@@ -231,8 +231,8 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
     validateSessionCall(navigation, route.name)
       .then(() => {
         if (itemNumber > 0) {
-          dispatch({ type: GET_ITEM_DETAILS.RESET });
-          dispatch(getItemDetails({ id: itemNumber }));
+          dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+          dispatch(getItemDetailsV4({ id: itemNumber }));
           dispatch(getApprovalList({ itemNbr: itemNumber, status: approvalStatus.Pending }));
           dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
           if (peteGetLocations) {
@@ -429,7 +429,7 @@ export const getItemDetailsApiHook = (
       ) {
         const itemDetails: ItemDetails = getItemDetailsApi.result.data;
         dispatch(setItemDetails(itemDetails));
-        dispatch({ type: GET_ITEM_DETAILS.RESET });
+        dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
         setShowItemNotFoundMsg(false);
       } else if (getItemDetailsApi.result.status === 204) {
         setShowItemNotFoundMsg(true);
@@ -1756,7 +1756,7 @@ const AuditItem = (): JSX.Element => {
     state => state.Global
   );
   const getItemDetailsApi = useTypedSelector(
-    state => state.async.getItemDetails
+    state => state.async.getItemDetailsV4
   );
   const {
     userId,
