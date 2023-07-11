@@ -655,6 +655,25 @@ export const postCreatePalletApiHook = (
   }
 };
 
+export const onBarcodeEmitterResponse = (
+  scan: any,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent
+) => {
+  if (navigation.isFocused()) {
+    validateSession(navigation, route.name).then(() => {
+      trackEventCall(SCREEN_NAME, {
+        action: 'Items_Details_scanned',
+        barcode: scan.value,
+        type: scan.type
+      });
+      dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
+    });
+  }
+};
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
@@ -702,16 +721,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused()) {
-        validateSession(navigation, route.name).then(() => {
-          trackEventCall(SCREEN_NAME, {
-            action: 'Items_Details_scanned',
-            barcode: scan.value,
-            type: scan.type
-          });
-          dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
-        });
-      }
+      onBarcodeEmitterResponse(scan, navigation, route, dispatch, trackEventCall);
     });
     return () => {
       scannedSubscription.remove();

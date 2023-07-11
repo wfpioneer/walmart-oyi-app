@@ -218,6 +218,34 @@ export const updatePicklistStatusApiHook = (
   }
 };
 
+export const onBarcodeEmitterResponse = (
+  scan: any,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  dispatch: Dispatch<any>,
+  selectedTab: Tabs
+) => {
+  if (navigation.isFocused() && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)
+    && scan.value
+  ) {
+    validateSession(navigation, route.name).then(() => {
+      trackEvent('Items_Details_scanned', {
+        barcode: scan.value,
+        type: scan.type
+      });
+      dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
+      dispatch(resetScannedEvent());
+    });
+  }
+};
+
+export const onBackPress = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
+  if (multiBinEnabled || multiPickEnabled) {
+    dispatch(resetMultiPickBinSelection());
+    return true;
+  }
+  return false;
+};
 export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Element => {
   const {
     picklist,
@@ -254,20 +282,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (
-        navigation.isFocused()
-        && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)
-        && scan.value
-      ) {
-        validateSession(navigation, route.name).then(() => {
-          trackEvent('Items_Details_scanned', {
-            barcode: scan.value,
-            type: scan.type
-          });
-          dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
-          dispatch(resetScannedEvent());
-        });
-      }
+      onBarcodeEmitterResponse(scan, navigation, route, dispatch, selectedTab);
     });
     return () => {
       scannedSubscription.remove();
@@ -308,18 +323,13 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
   // Cancel multi Pick/Bin when pressing back from the device hardware
   useFocusEffectHook(() => {
-    const onBackPress = () => {
-      if (multiBinEnabled || multiPickEnabled) {
-        dispatch(resetMultiPickBinSelection());
-        return true;
-      }
-      return false;
-    };
+    BackHandler.addEventListener('hardwareBackPress', () => onBackPress(multiBinEnabled, multiPickEnabled, dispatch));
 
-    BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
-    return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    return () => BackHandler.removeEventListener('hardwareBackPress',
+      () => onBackPress(multiBinEnabled, multiPickEnabled, dispatch)
+    );
   });
+
   useEffectHook(() => {
     if (bottomSheetModalRef.current) {
       if (pickingMenu) {

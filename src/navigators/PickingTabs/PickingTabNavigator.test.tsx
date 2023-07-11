@@ -6,7 +6,13 @@ import {
   BottomSheetModal
 } from '@gorhom/bottom-sheet';
 import {
-  BottomSheetCard, PickingTabNavigator, getItemDetailsApiHook, getPicklistApiHook, updatePicklistStatusApiHook
+  BottomSheetCard,
+  PickingTabNavigator,
+  getItemDetailsApiHook,
+  getPicklistApiHook,
+  onBackPress,
+  onBarcodeEmitterResponse,
+  updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
@@ -16,11 +22,22 @@ import getItemDetails from '../../mockData/getItemDetails';
 import { Tabs } from '../../models/Picking.d';
 import { GET_ITEM_DETAILS_V4 } from '../../state/actions/asyncAPI';
 import { getLocationsForItem, getLocationsForItemV1 } from '../../state/actions/saga';
-import { setPickCreateItem } from '../../state/actions/Picking';
+import { resetMultiPickBinSelection, setPickCreateItem } from '../../state/actions/Picking';
+import { validateSession } from '../../utils/sessionTimeout';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
+}));
+
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/sessTimeout'),
+  validateSession: jest.fn(() => Promise.resolve())
+}));
+
+jest.mock('../../utils/AppCenterTool.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
+  trackEvent: jest.fn()
 }));
 
 const defaultAsyncState: AsyncState = {
@@ -44,7 +61,11 @@ const navigationProp: NavigationProp<any> = {
   getParent: jest.fn(),
   getState: jest.fn()
 };
-let routeProp: RouteProp<any, string>;
+
+const routeProp: RouteProp<any, string> = {
+  name: 'Test Route',
+  key: ''
+};
 let bottomSheetModalRef: React.RefObject<BottomSheetModal>;
 
 describe('Picking Tab Navigator', () => {
@@ -409,5 +430,19 @@ describe('Manage PickingNavigator externalized function tests', () => {
     mockDispatch.mockReset();
     updatePicklistStatusApiHook(updateIsLoadingApi, mockDispatch, true, mockMultiBinEnabled, mockMultiPickEnabled);
     expect(mockDispatch).toBeCalledTimes(1);
+  });
+
+  it('Tests onBarcodeEmitterResponse', () => {
+    const mockScan = { value: '123', type: 'UPC-A' };
+    onBarcodeEmitterResponse(mockScan, navigationProp, routeProp, mockDispatch, Tabs.PICK);
+    expect(validateSession).toHaveBeenCalled();
+  });
+
+  it('Tests onBackPress event listener', () => {
+    const backPressTrueResponse = onBackPress(true, true, mockDispatch);
+    expect(mockDispatch).toHaveBeenCalledWith(resetMultiPickBinSelection());
+    expect(backPressTrueResponse).toStrictEqual(true);
+    const backPressFalseResponse = onBackPress(false, false, mockDispatch);
+    expect(backPressFalseResponse).toStrictEqual(false);
   });
 });

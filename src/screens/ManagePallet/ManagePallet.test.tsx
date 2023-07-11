@@ -16,6 +16,7 @@ import {
   isAddedItemPerishable,
   isExpiryDateChanged,
   isQuantityChanged,
+  onBarcodeEmitterResponse,
   postCreatePalletApiHook,
   removeExpirationDate,
   updatePalletApisHook
@@ -30,6 +31,7 @@ import { updatePalletExpirationDate } from '../../state/actions/PalletManagement
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
+import { validateSession } from '../../utils/sessionTimeout';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -37,9 +39,15 @@ jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
 }));
+
 jest.mock('../../state/actions/PalletManagement', () => ({
   ...jest.requireActual('../../state/actions/PalletManagement'),
   updatePalletExpirationDate: jest.fn()
+}));
+
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/sessTimeout'),
+  validateSession: jest.fn(() => Promise.resolve())
 }));
 
 describe('ManagePalletScreen', () => {
@@ -112,7 +120,10 @@ describe('ManagePalletScreen', () => {
     getState: jest.fn()
   };
   const mockCountryCode = 'MX';
-  let routeProp: RouteProp<any, string>;
+  const routeProp: RouteProp<any, string> = {
+    key: 'Test',
+    name: ''
+  };
   describe('Tests rendering the PalletManagement Screen', () => {
     it('Renders the PalletManagement default ', () => {
       const renderer = ShallowRenderer.createRenderer();
@@ -517,13 +528,23 @@ describe('ManagePalletScreen', () => {
           added: true
         }
       ];
-      handleAddItems(palletInfo.id, mockAddPallet, mockDispatch, mockTrackEventCall);
+      handleAddItems(
+        palletInfo.id,
+        mockAddPallet,
+        mockDispatch,
+        mockTrackEventCall
+      );
       expect(mockDispatch).toHaveBeenCalled();
-      expect(mockTrackEventCall).toHaveBeenCalled()
+      expect(mockTrackEventCall).toHaveBeenCalled();
     });
 
     it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
-      handleAddItems(palletInfo.id, mockItems, mockDispatch, mockTrackEventCall);
+      handleAddItems(
+        palletInfo.id,
+        mockItems,
+        mockDispatch,
+        mockTrackEventCall
+      );
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockTrackEventCall).not.toHaveBeenCalled();
     });
@@ -881,76 +902,90 @@ describe('ManagePalletScreen', () => {
       getItemDetailsApiHook(isLoadingApi, mockItems, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
     });
-  });
 
-  it('Tests isAddedItemPerishable', () => {
-    const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
-    const isAddedFalse = isAddedItemPerishable(mockItems, mockPerishableCatg);
-    expect(isAddedFalse).toBe(false);
+    it('Tests isAddedItemPerishable', () => {
+      const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
+      const isAddedFalse = isAddedItemPerishable(mockItems, mockPerishableCatg);
+      expect(isAddedFalse).toBe(false);
 
-    const mockAddedItems: PalletItem[] = [
-      {
-        itemNbr: 1234,
-        upcNbr: '1234567890',
-        itemDesc: 'test',
-        quantity: 3,
-        newQuantity: 3,
-        price: 10.0,
-        categoryNbr: 8,
-        categoryDesc: 'test cat',
-        deleted: false,
-        added: true
-      },
-      {
-        itemNbr: 1234,
-        upcNbr: '12345678901',
-        itemDesc: 'test',
-        quantity: 3,
-        newQuantity: 4,
-        price: 10.0,
-        categoryNbr: 54,
-        categoryDesc: 'test cat',
-        deleted: false,
-        added: true
-      }
-    ];
-    const isAddedTrue = isAddedItemPerishable(
-      mockAddedItems,
-      mockPerishableCatg
-    );
-    expect(isAddedTrue).toBe(true);
-  });
-  it('Tests removeExpirationDate function', () => {
-    const mockPerishableCategories = [1, 10, 11];
-    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(
-      false
-    );
-    const newItems: PalletItem[] = [
-      {
-        itemNbr: 1234,
-        upcNbr: '1234567890',
-        itemDesc: 'test',
-        quantity: 3,
-        newQuantity: 3,
-        price: 10.0,
-        categoryDesc: 'test cat',
-        deleted: true,
-        added: false,
-        categoryNbr: 1
-      },
-      {
-        itemNbr: 4221,
-        upcNbr: '765432123456',
-        itemDesc: 'food',
-        quantity: 2,
-        newQuantity: 1,
-        price: 3.49,
-        categoryDesc: 'deli',
-        deleted: false,
-        added: false,
-        categoryNbr: 8
-      }
-    ];
-    expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(true);
+      const mockAddedItems: PalletItem[] = [
+        {
+          itemNbr: 1234,
+          upcNbr: '1234567890',
+          itemDesc: 'test',
+          quantity: 3,
+          newQuantity: 3,
+          price: 10.0,
+          categoryNbr: 8,
+          categoryDesc: 'test cat',
+          deleted: false,
+          added: true
+        },
+        {
+          itemNbr: 1234,
+          upcNbr: '12345678901',
+          itemDesc: 'test',
+          quantity: 3,
+          newQuantity: 4,
+          price: 10.0,
+          categoryNbr: 54,
+          categoryDesc: 'test cat',
+          deleted: false,
+          added: true
+        }
+      ];
+      const isAddedTrue = isAddedItemPerishable(
+        mockAddedItems,
+        mockPerishableCatg
+      );
+      expect(isAddedTrue).toBe(true);
+    });
+    it('Tests removeExpirationDate function', () => {
+      const mockPerishableCategories = [1, 10, 11];
+      expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(
+        false
+      );
+      const newItems: PalletItem[] = [
+        {
+          itemNbr: 1234,
+          upcNbr: '1234567890',
+          itemDesc: 'test',
+          quantity: 3,
+          newQuantity: 3,
+          price: 10.0,
+          categoryDesc: 'test cat',
+          deleted: true,
+          added: false,
+          categoryNbr: 1
+        },
+        {
+          itemNbr: 4221,
+          upcNbr: '765432123456',
+          itemDesc: 'food',
+          quantity: 2,
+          newQuantity: 1,
+          price: 3.49,
+          categoryDesc: 'deli',
+          deleted: false,
+          added: false,
+          categoryNbr: 8
+        }
+      ];
+      expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(
+        true
+      );
+    });
+
+    it('Tests onBarcodeEmitterResponse', () => {
+      const mockScan = { value: '123', type: 'UPC-A' };
+      onBarcodeEmitterResponse(
+        mockScan,
+        navigationProp,
+        routeProp,
+        mockDispatch,
+        mockTrackEventCall
+      );
+      expect(validateSession).toHaveBeenCalled();
+    });
   });
 });
