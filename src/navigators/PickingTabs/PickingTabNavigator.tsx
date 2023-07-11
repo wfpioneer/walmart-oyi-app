@@ -28,14 +28,14 @@ import SalesFloorTab from '../../screens/SalesFloorTab/SalesFloorTabScreen';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getItemDetails, getPicklists } from '../../state/actions/saga';
+import {
+  getItemDetailsV4, getLocationsForItem, getLocationsForItemV1, getPicklists
+} from '../../state/actions/saga';
 import {
   initializePicklist,
   resetMultiPickBinSelection,
   resetPickList,
-  setPickCreateFloor,
   setPickCreateItem,
-  setPickCreateReserve,
   setSelectedTab,
   showPickingMenu,
   toggleMultiBin,
@@ -45,7 +45,7 @@ import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import {
-  GET_ITEM_DETAILS,
+  GET_ITEM_DETAILS_V4,
   GET_PICKLISTS,
   UPDATE_PICKLIST_STATUS,
   UPDATE_PICKLIST_STATUS_V1
@@ -72,6 +72,7 @@ interface PickingTabNavigatorProps {
   multiPickEnabled: boolean;
   bottomSheetModalRef: React.RefObject<BottomSheetModal>;
   pickingMenu: boolean;
+  peteGetLocations: boolean;
 }
 
 interface BottomSheetCardProps {
@@ -82,7 +83,8 @@ interface BottomSheetCardProps {
 export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  peteGetLocations: boolean
 ) => {
   if (navigation.isFocused()) {
     // on api success
@@ -97,10 +99,12 @@ export const getItemDetailsApiHook = (
           categoryDesc: itemDetails.categoryDesc,
           price: itemDetails.price
         }));
-        const floorLoc = itemDetails?.location?.floor;
-        const reserveLoc = itemDetails?.location?.reserve;
-        dispatch(setPickCreateFloor(floorLoc || []));
-        dispatch(setPickCreateReserve(reserveLoc || []));
+
+        if (peteGetLocations) {
+          dispatch(getLocationsForItemV1(itemDetails.itemNbr));
+        } else {
+          dispatch(getLocationsForItem(itemDetails.itemNbr));
+        }
         navigation.navigate('CreatePick');
       } else if (getItemDetailsApi.result.status === 204) {
         Toast.show({
@@ -110,13 +114,13 @@ export const getItemDetailsApiHook = (
           position: 'bottom'
         });
       }
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
       dispatch(hideActivityModal());
+      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
     }
     // on api error
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
       dispatch(hideActivityModal());
-      dispatch({ type: GET_ITEM_DETAILS.RESET });
+      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
       Toast.show({
         type: 'error',
         text1: strings('ITEM.API_ERROR'),
@@ -230,7 +234,8 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     multiBinEnabled,
     multiPickEnabled,
     bottomSheetModalRef,
-    pickingMenu
+    pickingMenu,
+    peteGetLocations
   } = props;
 
   let scannedSubscription: EmitterSubscription;
@@ -259,7 +264,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
             barcode: scan.value,
             type: scan.type
           });
-          dispatch(getItemDetails({ id: scan.value, getSummary: false }));
+          dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
           dispatch(resetScannedEvent());
         });
       }
@@ -280,7 +285,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
   // Get Item Details UPC api
   useEffectHook(
-    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation),
+    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, peteGetLocations),
     [getItemDetailsApi]
   );
 
@@ -291,7 +296,13 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   );
 
   useEffectHook(
-    () => updatePicklistStatusApiHook(updatePicklistStatusApi, dispatch, navigation.isFocused(), multiBinEnabled, multiPickEnabled),
+    () => updatePicklistStatusApiHook(
+      updatePicklistStatusApi,
+      dispatch,
+      navigation.isFocused(),
+      multiBinEnabled,
+      multiPickEnabled
+    ),
     [updatePicklistStatusApi]
   );
 
@@ -433,12 +444,13 @@ export const PickingTabs = (): JSX.Element => {
   const { multiBinEnabled, multiPickEnabled, pickList } = useTypedSelector(state => state.Picking);
   const { multiBin, multiPick, inProgress } = useTypedSelector(state => state.User.configs);
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
-  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
+  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetailsV4);
   const updatePicklistStatusApi = inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
     : useTypedSelector(state => state.async.updatePicklistStatus);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
+  const { peteGetLocations } = useTypedSelector(state => state.User.configs);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const navigation = useNavigation();
   const route = useRoute();
   const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
@@ -473,6 +485,7 @@ export const PickingTabs = (): JSX.Element => {
         pickingMenu={pickingMenu}
         multiBinEnabled={multiBinEnabled}
         multiPickEnabled={multiPickEnabled}
+        peteGetLocations={peteGetLocations}
       />
       <BottomSheetModal
         ref={bottomSheetModalRef}

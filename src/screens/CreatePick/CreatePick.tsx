@@ -97,8 +97,8 @@ export const getLocationsV1ApiHook = (
     if (!locationForItemsV1Api.isWaiting && locationForItemsV1Api.result) {
       const response = locationForItemsV1Api.result.data;
       const { salesFloorLocation, reserveLocation } = response;
-      dispatch(setFloorLocations(salesFloorLocation || []));
-      dispatch(setReserveLocations(reserveLocation || []));
+      dispatch(setPickCreateFloor(salesFloorLocation || []));
+      dispatch(setPickCreateReserve(reserveLocation || []));
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
       dispatch(hideActivityModal());
       Toast.show({

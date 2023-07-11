@@ -14,6 +14,9 @@ import { AsyncState } from '../../models/AsyncState';
 import { mockPickLists } from '../../mockData/mockPickList';
 import getItemDetails from '../../mockData/getItemDetails';
 import { Tabs } from '../../models/Picking.d';
+import { GET_ITEM_DETAILS_V4 } from '../../state/actions/asyncAPI';
+import { getLocationsForItem, getLocationsForItemV1 } from '../../state/actions/saga';
+import { setPickCreateItem } from '../../state/actions/Picking';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -64,6 +67,7 @@ describe('Picking Tab Navigator', () => {
         multiPickEnabled={false}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={false}
+        peteGetLocations={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -88,6 +92,7 @@ describe('Picking Tab Navigator', () => {
         multiPickEnabled={true}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={false}
+        peteGetLocations={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -112,6 +117,7 @@ describe('Picking Tab Navigator', () => {
         multiPickEnabled={false}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={false}
+        peteGetLocations={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -135,6 +141,7 @@ describe('Picking Tab Navigator', () => {
         multiPickEnabled={true}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={false}
+        peteGetLocations={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -158,6 +165,7 @@ describe('Picking Tab Navigator', () => {
         multiPickEnabled={false}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={false}
+        peteGetLocations={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -181,6 +189,7 @@ describe('Picking Tab Navigator', () => {
         multiPickEnabled={false}
         bottomSheetModalRef={bottomSheetModalRef}
         pickingMenu={true}
+        peteGetLocations={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -214,9 +223,45 @@ describe('Manage PickingNavigator externalized function tests', () => {
         status: 200
       }
     };
-    getItemDetailsApiHook(successApi, mockDispatch, navigationProp);
+    const mockItemDetails = getItemDetails[456];
+    getItemDetailsApiHook(successApi, mockDispatch, navigationProp, false);
+    expect(mockDispatch).toHaveBeenNthCalledWith(1, setPickCreateItem({
+      itemName: mockItemDetails.itemName,
+      itemNbr: mockItemDetails.itemNbr,
+      upcNbr: mockItemDetails.upcNbr,
+      categoryNbr: mockItemDetails.categoryNbr,
+      categoryDesc: mockItemDetails.categoryDesc,
+      price: mockItemDetails.price
+    }));
+    expect(mockDispatch).toHaveBeenNthCalledWith(2, getLocationsForItem(mockItemDetails.itemNbr));
     expect(navigationProp.navigate).toHaveBeenCalled();
-    expect(hideActivityModal).toBeCalledTimes(1);
+    expect(mockDispatch).toHaveBeenNthCalledWith(3, hideActivityModal());
+    expect(mockDispatch).toHaveBeenNthCalledWith(4, { type: GET_ITEM_DETAILS_V4.RESET });
+  });
+
+  it('Tests getItemDetailsApiHook on 200 success for a new item with Pete Flag enabled', () => {
+    const successApi: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: getItemDetails[456],
+        status: 200
+      }
+    };
+    const mockItemDetails = getItemDetails[456];
+    getItemDetailsApiHook(successApi, mockDispatch, navigationProp, true);
+    expect(mockDispatch).toHaveBeenNthCalledWith(1, setPickCreateItem({
+      itemName: mockItemDetails.itemName,
+      itemNbr: mockItemDetails.itemNbr,
+      upcNbr: mockItemDetails.upcNbr,
+      categoryNbr: mockItemDetails.categoryNbr,
+      categoryDesc: mockItemDetails.categoryDesc,
+      price: mockItemDetails.price
+    }));
+
+    expect(mockDispatch).toHaveBeenNthCalledWith(2, getLocationsForItemV1(mockItemDetails.itemNbr));
+    expect(navigationProp.navigate).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenNthCalledWith(3, hideActivityModal());
+    expect(mockDispatch).toHaveBeenNthCalledWith(4, { type: GET_ITEM_DETAILS_V4.RESET });
   });
 
   it('Tests getItemDetailsApiHook on 204 success for a new item', () => {
@@ -233,7 +278,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
       visibilityTime: 4000,
       position: 'bottom'
     };
-    getItemDetailsApiHook(successApi204, mockDispatch, navigationProp);
+    getItemDetailsApiHook(successApi204, mockDispatch, navigationProp, false);
     expect(mockDispatch).toBeCalledTimes(2);
     expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
     expect(hideActivityModal).toBeCalledTimes(1);
@@ -251,7 +296,8 @@ describe('Manage PickingNavigator externalized function tests', () => {
       visibilityTime: 4000,
       position: 'bottom'
     };
-    getItemDetailsApiHook(failureApi, mockDispatch, navigationProp);
+    getItemDetailsApiHook(failureApi, mockDispatch, navigationProp, false);
+    expect(mockDispatch).toBeCalledTimes(2);
     expect(mockDispatch).toBeCalledTimes(2);
     expect(hideActivityModal).toBeCalledTimes(1);
     expect(Toast.show).toHaveBeenCalledWith(toastGetItemError);
@@ -262,7 +308,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
       ...defaultAsyncState,
       isWaiting: true
     };
-    getItemDetailsApiHook(isLoadingApi, mockDispatch, navigationProp);
+    getItemDetailsApiHook(isLoadingApi, mockDispatch, navigationProp, false);
     expect(mockDispatch).toBeCalledTimes(1);
     expect(showActivityModal).toBeCalledTimes(1);
   });
