@@ -525,7 +525,8 @@ export default {
     LAST_LOC: 'Last Bin Loc',
     FIRST_ITEM: 'First Item',
     EMPTY_PALLET: 'Empty Pallet',
-    PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick'
+    PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick',
+    MULTIPLE_BIN_ENABLED: 'Multiple Bin Enabled'
   },
   SETTINGS: {
     TITLE: 'Settings',

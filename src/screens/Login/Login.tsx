@@ -95,6 +95,11 @@ export const getSystemLanguage = (): string => {
   return 'en';
 };
 
+const extractUserId = (fullUserId: string) => {
+  const userArray = fullUserId.split('.');
+  return userArray[0];
+};
+
 const userIsSignedIn = (user: User): boolean => user.sAMAccountName !== '' && user.userTokens.accessToken !== '';
 export const SelectCountryCodeModal = (
   props: {
@@ -167,7 +172,7 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     dispatch(hideActivityModal());
 
     setLanguage(getSystemLanguage());
-    userInfo.userId = userInfo.sAMAccountName;
+    userInfo.userId = extractUserId(userInfo.sAMAccountName || '');
     setUserId(userInfo.userPrincipalName);
     if (userInfo[DOMAIN] === 'NOT_FOUND' && userInfo[CLUB_NBR] === 'NOT_FOUND') {
       userInfo[DOMAIN] = 'HO';
@@ -176,7 +181,7 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     if (parseInt(userInfo[CLUB_NBR], 10)) {
       userInfo.siteId = parseInt(userInfo[CLUB_NBR], 10);
     }
-    dispatch(loginUser(userInfo));
+    dispatch(loginUser({ ...userInfo, countryCode: userInfo.c }));
     trackEvent('user_sign_in');
     if (userInfo[DOMAIN] !== 'HO' && userInfo.c !== 'US') {
       dispatch(getFluffyFeatures({

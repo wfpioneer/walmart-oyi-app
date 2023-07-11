@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Base card render tests renders the bottom sheet base card 1`] = `
+exports[`Base card render tests renders the bottom sheet base card with image 1`] = `
 <Memo(BottomSheetView)
   style={
     Object {
@@ -43,6 +43,7 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
           }
         }
       />
+      
     </Memo(BottomSheetView)>
     <Memo(BottomSheetView)
       style={
@@ -60,6 +61,63 @@ exports[`Base card render tests renders the bottom sheet base card 1`] = `
         }
       >
         hello
+      </Text>
+    </Memo(BottomSheetView)>
+  </TouchableOpacity>
+</Memo(BottomSheetView)>
+`;
+
+exports[`Base card render tests renders the bottom sheet base card with material community icon 1`] = `
+<Memo(BottomSheetView)
+  style={
+    Object {
+      "flexDirection": "row",
+      "height": 75,
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    style={
+      Object {
+        "borderColor": "#eeeeee",
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "width": 750,
+      }
+    }
+  >
+    <Memo(BottomSheetView)
+      style={
+        Object {
+          "alignItems": "center",
+          "height": 75,
+          "justifyContent": "center",
+          "width": 75,
+        }
+      }
+    >
+      <mockConstructor
+        name="pine-tree-fire"
+        size={40}
+      />
+    </Memo(BottomSheetView)>
+    <Memo(BottomSheetView)
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        Heyo
       </Text>
     </Memo(BottomSheetView)>
   </TouchableOpacity>

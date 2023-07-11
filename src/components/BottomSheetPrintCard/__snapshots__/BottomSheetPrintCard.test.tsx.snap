@@ -5,6 +5,7 @@ exports[`Print card render tests renders the bottom sheet print card, not visibl
 exports[`Print card render tests renders the bottom sheet print card, visible, manager and non manager option 1`] = `
 <BottomSheetBaseCard
   image=""
+  materialIconName=""
   onPress={[Function]}
   text="print card"
 />

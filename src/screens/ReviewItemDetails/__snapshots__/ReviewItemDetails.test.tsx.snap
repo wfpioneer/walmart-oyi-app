@@ -3200,6 +3200,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "screen": "Review_Item_Details",
             },
             "vendorPackQty": 33,
+            "viewProfitMargin": true,
           }
         }
         category="93 - Meat PI"
@@ -3910,6 +3911,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "screen": "Review_Item_Details",
             },
             "vendorPackQty": 33,
+            "viewProfitMargin": true,
           }
         }
         category="99 - Store Use"
@@ -4402,6 +4404,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "screen": "Review_Item_Details",
             },
             "vendorPackQty": 33,
+            "viewProfitMargin": true,
           }
         }
         category="93 - Meat PI"
@@ -5090,6 +5093,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "screen": "Review_Item_Details",
             },
             "vendorPackQty": 33,
+            "viewProfitMargin": true,
           }
         }
         category="93 - Meat PI"
@@ -5778,6 +5782,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "screen": "Review_Item_Details",
             },
             "vendorPackQty": 33,
+            "viewProfitMargin": true,
           }
         }
         category="93 - Meat PI"
@@ -6266,6 +6271,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "screen": "Review_Item_Details",
             },
             "vendorPackQty": 33,
+            "viewProfitMargin": true,
           }
         }
         category="93 - Meat PI"
@@ -6754,6 +6760,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "screen": "Review_Item_Details",
             },
             "vendorPackQty": 33,
+            "viewProfitMargin": true,
           }
         }
         category="93 - Meat PI"

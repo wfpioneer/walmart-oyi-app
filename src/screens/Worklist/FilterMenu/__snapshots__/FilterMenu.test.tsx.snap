@@ -125,7 +125,7 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
           "worklistGoalPct": 1,
           "worklistTypes": Array [
             Object {
-              "completedItems": 0,
+              "completedItems": 1,
               "inProgressItems": 0,
               "todoItems": 151,
               "totalItems": 151,
@@ -134,11 +134,11 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
           ],
         },
         Object {
-          "totalCompletedItems": 80,
-          "totalItems": 151,
+          "totalCompletedItems": 11,
+          "totalItems": 25,
           "worklistEndGoalPct": 100,
           "worklistGoal": "AUDITS",
-          "worklistGoalPct": 60,
+          "worklistGoalPct": 44,
           "worklistTypes": Array [
             Object {
               "completedItems": 6,
@@ -287,7 +287,7 @@ exports[`FilterMenu Component ShallowRender FilterMenu with Audits WL Goal 1`] =
           "worklistGoalPct": 1,
           "worklistTypes": Array [
             Object {
-              "completedItems": 0,
+              "completedItems": 1,
               "inProgressItems": 0,
               "todoItems": 151,
               "totalItems": 151,
@@ -296,11 +296,11 @@ exports[`FilterMenu Component ShallowRender FilterMenu with Audits WL Goal 1`] =
           ],
         },
         Object {
-          "totalCompletedItems": 80,
-          "totalItems": 151,
+          "totalCompletedItems": 11,
+          "totalItems": 25,
           "worklistEndGoalPct": 100,
           "worklistGoal": "AUDITS",
-          "worklistGoalPct": 60,
+          "worklistGoalPct": 44,
           "worklistTypes": Array [
             Object {
               "completedItems": 6,

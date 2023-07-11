@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Multi bin card render tests renders the bottom sheet card with multi bin active 1`] = `
+<BottomSheetBaseCard
+  materialIconName="checkbox-multiple-outline"
+  onPress={[MockFunction]}
+  text="hekki"
+/>
+`;
+
+exports[`Multi bin card render tests renders the bottom sheet card with multi bin inactive 1`] = `
+<BottomSheetBaseCard
+  materialIconName="checkbox-blank-outline"
+  onPress={[MockFunction]}
+  text="hekki"
+/>
+`;

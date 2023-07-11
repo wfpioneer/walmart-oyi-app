@@ -1,8 +1,11 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { fireEvent, render } from '@testing-library/react-native';
 import {
-  BinningNavigatorStack, renderScanButton, resetManualScan
+  BinningNavigatorStack, renderKebabButton, renderScanButton, resetManualScan
 } from './BinningNavigator';
+
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
 describe('Binning Navigator', () => {
   it('Renders the Binning navigator component', () => {
@@ -16,13 +19,44 @@ describe('Binning Navigator', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-  it('Renders the scanButton header icon for Binning Screen', () => {
+
+  it('Renders the scanButton header icon for Binning Screen when rightmost button', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
-      renderScanButton(jest.fn(), false)
+      renderScanButton(jest.fn(), false, true)
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('Renders the scanButton header icon for Binning Screen when not rightmost button', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      renderScanButton(jest.fn(), false, false)
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('presses the scanButton', () => {
+    const mockDispatch = jest.fn();
+    const { getByTestId } = render(renderScanButton(mockDispatch, true, false));
+
+    const scanButton = getByTestId('scanButton');
+    fireEvent.press(scanButton);
+    expect(mockDispatch).toHaveBeenCalled();
+  });
+
+  it('renders the kebab button and presses it for the binning screen', () => {
+    const mockDispatch = jest.fn();
+    const mockTrackEvent = jest.fn();
+
+    const { getByTestId } = render(renderKebabButton(mockDispatch, mockTrackEvent));
+
+    const kebabButton = getByTestId('kebabButton');
+    fireEvent.press(kebabButton);
+    expect(mockDispatch).toHaveBeenCalled();
+    expect(mockTrackEvent).toHaveBeenCalled();
+  });
+
   it('Expects dispatch to be called if isManualScanEnabled is true for "resetManualScan()"', () => {
     const mockDispatch = jest.fn();
     const manualScanEnabled = true;

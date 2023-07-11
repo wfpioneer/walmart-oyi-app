@@ -99,6 +99,7 @@ export interface ItemDetailsScreenProps {
   locationForItemsApi: AsyncState;
   locationForItemsV1Api: AsyncState;
   userId: string;
+  // eslint-disable-next-line react/no-unused-prop-types
   exceptionType: string | null | undefined; actionCompleted: boolean; pendingOnHandsQty: number;
   floorLocations: Location[] | undefined;
   // eslint-disable-next-line react/no-unused-prop-types
@@ -122,6 +123,7 @@ export interface ItemDetailsScreenProps {
   userFeatures: string[];
   userConfigs: Configurations;
   countryCode: string;
+  userDomain: string;
 }
 
 export interface HandleProps {
@@ -1397,9 +1399,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     useFocusEffectHook,
     floorLocations, userFeatures, userConfigs,
     countryCode,
-    exceptionType,
     locationForItemsApi,
-    locationForItemsV1Api
+    locationForItemsV1Api,
+    userDomain
   } = props;
   const { result: mahResult, error: mahError } = managerApprovalHistoryApi;
 
@@ -1426,6 +1428,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   const locationCount = getLocationCount(props);
   const updatedSalesTS = getUpdatedSales(itemDetails);
+
+  const viewProfitMargin = (userDomain === 'HO' || countryCode !== 'CN')
+  || (countryCode === 'CN' && userFeatures.includes('manager approval'));
 
   // Set Item Details
   useEffectHook(() => {
@@ -1617,7 +1622,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
                 grossProfit: itemDetails.grossProfit,
                 size: itemDetails.size,
                 basePrice: itemDetails.basePrice,
-                source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' }
+                source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' },
+                viewProfitMargin
               }}
               countryCode={countryCode}
               showItemImage={userConfigs.showItemImage}
@@ -1697,7 +1703,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const getItemPicklistHistoryApi = useTypedSelector(state => state.async.getItemPicklistHistory);
   const {
-    userId, countryCode, configs: userConfigs, features: userFeatures
+    userId, countryCode, configs: userConfigs, features: userFeatures, 'wm-BusinessUnitType': domain
   } = useTypedSelector(state => state.User);
   const getLocationForItemApi = useTypedSelector(state => state.async.getLocationsForItem);
   const getLocationForItemV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
@@ -1782,6 +1788,7 @@ const ReviewItemDetails = (): JSX.Element => {
       userFeatures={userFeatures}
       userConfigs={userConfigs}
       countryCode={countryCode}
+      userDomain={domain}
     />
   );
 };

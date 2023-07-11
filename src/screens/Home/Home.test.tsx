@@ -11,7 +11,10 @@ import {
   mockZeroCompleteWorklistSummaries
 } from '../../mockData/mockWorklistSummary';
 import { AsyncState } from '../../models/AsyncState';
-import { HomeScreen, HomeScreenProps } from './Home';
+import {
+  HomeScreen, HomeScreenProps, WorklistGoalMove, reorganizeGoals
+} from './Home';
+import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
@@ -446,6 +449,194 @@ describe('HomeScreen', () => {
 
       // @ts-expect-error a typescript error is expected here due to navigationRemoveListener being private and readonly
       expect(homeScreen.scannedSubscription.remove).toHaveBeenCalled();
+    });
+  });
+
+  describe('externalized function tests', () => {
+    it('tests the reorganizeGoals function', () => {
+      const nsfqToPalletsMove: WorklistGoalMove = {
+        worklistType: 'NSFQ',
+        destinationGoal: WorklistGoal.PALLETS
+      };
+      const nohToAuditsMove: WorklistGoalMove = {
+        worklistType: 'NO',
+        destinationGoal: WorklistGoal.AUDITS
+      };
+      const raToItemsMove: WorklistGoalMove = {
+        worklistType: 'RA',
+        destinationGoal: WorklistGoal.ITEMS
+      };
+
+      const expectedNsfqReorganized: WorklistSummary[] = [{
+        worklistGoal: WorklistGoal.ITEMS,
+        totalCompletedItems: 94,
+        totalItems: 188,
+        worklistEndGoalPct: 100,
+        worklistGoalPct: 50,
+        worklistTypes: [{
+          worklistType: 'NSFL', totalItems: 100, completedItems: 50, inProgressItems: 0, todoItems: 50
+        }, {
+          worklistType: 'C', totalItems: 50, completedItems: 25, inProgressItems: 0, todoItems: 25
+        }, {
+          worklistType: 'NO', totalItems: 14, completedItems: 7, inProgressItems: 0, todoItems: 7
+        }, {
+          worklistType: 'NS', totalItems: 24, completedItems: 12, inProgressItems: 0, todoItems: 12
+        }]
+      }, {
+        worklistGoal: WorklistGoal.PALLETS,
+        totalCompletedItems: 5,
+        totalItems: 159,
+        worklistEndGoalPct: 100,
+        worklistGoalPct: 3,
+        worklistTypes: [{
+          worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
+        }, {
+          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+        }]
+      }, {
+        worklistGoal: WorklistGoal.AUDITS,
+        totalCompletedItems: 11,
+        totalItems: 25,
+        worklistEndGoalPct: 100,
+        worklistGoalPct: 44,
+        worklistTypes: [{
+          worklistType: 'AU', totalItems: 20, completedItems: 6, inProgressItems: 0, todoItems: 14
+        }, {
+          worklistType: 'RA', totalItems: 5, completedItems: 5, inProgressItems: 0, todoItems: 0
+        }]
+      }];
+
+      const expectedNohReorganized: WorklistSummary[] = [{
+        worklistGoal: WorklistGoal.ITEMS,
+        totalCompletedItems: 91,
+        totalItems: 182,
+        worklistGoalPct: 50,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'NSFL', totalItems: 100, completedItems: 50, inProgressItems: 0, todoItems: 50
+        }, {
+          worklistType: 'C', totalItems: 50, completedItems: 25, inProgressItems: 0, todoItems: 25
+        }, {
+          worklistType: 'NS', totalItems: 24, completedItems: 12, inProgressItems: 0, todoItems: 12
+        }, {
+          worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
+        }]
+      }, {
+        worklistGoal: WorklistGoal.PALLETS,
+        totalCompletedItems: 1,
+        totalItems: 151,
+        worklistEndGoalPct: 100,
+        worklistGoalPct: 1,
+        worklistTypes: [{
+          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+        }]
+      }, {
+        worklistGoal: WorklistGoal.AUDITS,
+        totalCompletedItems: 18,
+        totalItems: 39,
+        worklistEndGoalPct: 100,
+        worklistGoalPct: 46,
+        worklistTypes: [{
+          worklistType: 'NO', totalItems: 14, completedItems: 7, inProgressItems: 0, todoItems: 7
+        }, {
+          worklistType: 'AU', totalItems: 20, completedItems: 6, inProgressItems: 0, todoItems: 14
+        }, {
+          worklistType: 'RA', totalItems: 5, completedItems: 5, inProgressItems: 0, todoItems: 0
+        }]
+      }];
+
+      const expectedRaReorganized: WorklistSummary[] = [{
+        worklistGoal: WorklistGoal.ITEMS,
+        totalCompletedItems: 103,
+        totalItems: 201,
+        worklistGoalPct: 51,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'NSFL', totalItems: 100, completedItems: 50, inProgressItems: 0, todoItems: 50
+        }, {
+          worklistType: 'C', totalItems: 50, completedItems: 25, inProgressItems: 0, todoItems: 25
+        }, {
+          worklistType: 'NO', totalItems: 14, completedItems: 7, inProgressItems: 0, todoItems: 7
+        }, {
+          worklistType: 'NS', totalItems: 24, completedItems: 12, inProgressItems: 0, todoItems: 12
+        }, {
+          worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
+        }, {
+          worklistType: 'RA', totalItems: 5, completedItems: 5, inProgressItems: 0, todoItems: 0
+        }]
+      }, {
+        worklistGoal: WorklistGoal.PALLETS,
+        totalCompletedItems: 1,
+        totalItems: 151,
+        worklistGoalPct: 1,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+        }]
+      }, {
+        worklistGoal: WorklistGoal.AUDITS,
+        totalCompletedItems: 6,
+        totalItems: 20,
+        worklistGoalPct: 30,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'AU', totalItems: 20, completedItems: 6, inProgressItems: 0, todoItems: 14
+        }]
+      }];
+
+      const expectedMultiReorganized: WorklistSummary[] = [{
+        worklistGoal: WorklistGoal.ITEMS,
+        totalCompletedItems: 87,
+        totalItems: 174,
+        worklistGoalPct: 50,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'NSFL', totalItems: 100, completedItems: 50, inProgressItems: 0, todoItems: 50
+        }, {
+          worklistType: 'C', totalItems: 50, completedItems: 25, inProgressItems: 0, todoItems: 25
+        }, {
+          worklistType: 'NS', totalItems: 24, completedItems: 12, inProgressItems: 0, todoItems: 12
+        }]
+      }, {
+        worklistGoal: WorklistGoal.PALLETS,
+        totalCompletedItems: 5,
+        totalItems: 159,
+        worklistGoalPct: 3,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
+        }, {
+          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+        }]
+      }, {
+        worklistGoal: WorklistGoal.AUDITS,
+        totalCompletedItems: 18,
+        totalItems: 39,
+        worklistGoalPct: 46,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'NO', totalItems: 14, completedItems: 7, inProgressItems: 0, todoItems: 7
+        }, {
+          worklistType: 'AU', totalItems: 20, completedItems: 6, inProgressItems: 0, todoItems: 14
+        }, {
+          worklistType: 'RA', totalItems: 5, completedItems: 5, inProgressItems: 0, todoItems: 0
+        }]
+      }];
+
+      const nsfqToPalletsGoal = reorganizeGoals(mockItemNPalletNAuditWorklistSummary, [nsfqToPalletsMove]);
+      expect(nsfqToPalletsGoal).toStrictEqual(expectedNsfqReorganized);
+
+      const nohToAuditsGoal = reorganizeGoals(mockItemNPalletNAuditWorklistSummary, [nohToAuditsMove]);
+      expect(nohToAuditsGoal).toStrictEqual(expectedNohReorganized);
+
+      const raToItemsGoal = reorganizeGoals(mockItemNPalletNAuditWorklistSummary, [raToItemsMove]);
+      expect(raToItemsGoal).toStrictEqual(expectedRaReorganized);
+
+      const multiGoalMoves = reorganizeGoals(
+        mockItemNPalletNAuditWorklistSummary,
+        [nsfqToPalletsMove, nohToAuditsMove]
+      );
+      expect(multiGoalMoves).toStrictEqual(expectedMultiReorganized);
     });
   });
 });
