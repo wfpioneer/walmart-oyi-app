@@ -21,7 +21,7 @@ import COLOR from '../themes/Color';
 import styles from './AuditWorklistNavigator.style';
 import AuditWorklistTabs from './AuditWorklistTabNavigator/AuditWorklistTabNavigator';
 import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
-import { GET_ITEM_DETAILS } from '../state/actions/asyncAPI';
+import { GET_ITEM_DETAILS_V4 } from '../state/actions/asyncAPI';
 
 const Stack = createStackNavigator();
 
@@ -195,7 +195,7 @@ export const AuditWorklistNavigatorStack = (
           }}
           listeners={{
             beforeRemove: () => {
-              dispatch({ type: GET_ITEM_DETAILS.RESET });
+              dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
             }
           }}
         />
