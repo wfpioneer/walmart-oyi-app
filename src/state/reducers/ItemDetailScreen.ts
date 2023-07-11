@@ -74,6 +74,7 @@ export const ItemDetailScreen = (
         ...state,
         reserveLocations: action.payload.map((loc: LocationType) => ({
           ...loc,
+          qty: loc.qty ? loc.qty : loc.quantity,
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
         }))
       };

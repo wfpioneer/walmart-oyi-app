@@ -2,7 +2,8 @@ import { NavigationProp } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import ItemInfo, { AdditionalItemDetailsProps, ItemInfoProps } from './ItemInfo';
+import ItemInfo, { AdditionalItemDetailsProps, ItemInfoProps, getExceptionTranslation } from './ItemInfo';
+import { strings } from '../../locales';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 
@@ -34,7 +35,8 @@ describe('ItemInfo Component', () => {
     grossProfit: 2.5,
     vendorPackQty: 33,
     basePrice: 15.05,
-    margin: 14
+    margin: 14,
+    viewProfitMargin: true
   };
   const mockItem: ItemInfoProps = {
     itemName: 'Test item',
@@ -45,7 +47,6 @@ describe('ItemInfo Component', () => {
     price: 14,
     exceptionType: 'NSFL',
     additionalItemDetails: mockAdditionalItemDetails,
-    showAdditionalItemDetails: false,
     countryCode: 'MX',
     showItemImage: false
   };
@@ -63,7 +64,6 @@ describe('ItemInfo Component', () => {
           price={mockItem.price}
           exceptionType={mockItem.exceptionType}
           navigationForPrint={navigationProp}
-          showAdditionalItemDetails={false}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
@@ -84,7 +84,6 @@ describe('ItemInfo Component', () => {
         price={mockItem.price}
         exceptionType={mockItem.exceptionType}
         navigationForPrint={navigationProp}
-        showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
         showItemImage={mockItem.showItemImage}
@@ -105,7 +104,6 @@ describe('ItemInfo Component', () => {
         price={mockItem.price}
         exceptionType={mockItem.exceptionType}
         navigationForPrint={mockNavigationProp}
-        showAdditionalItemDetails={true}
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
         showItemImage={mockItem.showItemImage}
@@ -126,7 +124,6 @@ describe('ItemInfo Component', () => {
           price={mockItem.price}
           exceptionType={mockItem.exceptionType}
           navigationForPrint={navigationProp}
-          showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
@@ -152,7 +149,6 @@ describe('ItemInfo Component', () => {
           price={mockItem.price}
           exceptionType={mockItem.exceptionType}
           navigationForPrint={navigationProp}
-          showAdditionalItemDetails={true}
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
@@ -162,6 +158,28 @@ describe('ItemInfo Component', () => {
       fireEvent.press(printPriceSignButton);
       expect(navigationProp.navigate).toHaveBeenCalledTimes(1);
       expect(navigationProp.navigate).toHaveBeenCalledWith('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
+    });
+  });
+
+  describe('ItemInfo function tests', () => {
+    it('tests getExceptionTranslation function', () => {
+      const noTranslation = getExceptionTranslation('NO');
+      const nsflTranslation = getExceptionTranslation('NSFL');
+      const npTranslation = getExceptionTranslation('NP');
+      const nsTranslation = getExceptionTranslation('NS');
+      const cTranslation = getExceptionTranslation('C');
+      const poTranslation = getExceptionTranslation('PO');
+      const nsfqTranslation = getExceptionTranslation('NSFQ');
+      const unknownTranslation = getExceptionTranslation(undefined);
+
+      expect(noTranslation).toStrictEqual(strings('EXCEPTION.NEGATIVE_ON_HANDS'));
+      expect(nsflTranslation).toStrictEqual(strings('EXCEPTION.NSFL'));
+      expect(npTranslation).toStrictEqual(strings('EXCEPTION.NIL_PICK'));
+      expect(nsTranslation).toStrictEqual(strings('EXCEPTION.NO_SALES'));
+      expect(cTranslation).toStrictEqual(strings('EXCEPTION.CANCELLED'));
+      expect(poTranslation).toStrictEqual(strings('EXCEPTION.PO'));
+      expect(nsfqTranslation).toStrictEqual(strings('EXCEPTION.NEG_SALES_FLOOR_QTY'));
+      expect(unknownTranslation).toStrictEqual(strings('EXCEPTION.UNKNOWN'));
     });
   });
 });
