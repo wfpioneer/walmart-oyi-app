@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ManagePalletScreen Tests rendering Api responses Renders screen with newly added if get items details response sent sucesss 1`] = `
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests rendering Api responses Renders screen with newly added if get items details response sent sucesss 1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -362,6 +362,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
           "paddingBottom": 20,
         }
       }
+      testID="Enable Save Button"
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -373,7 +374,7 @@ exports[`ManagePalletScreen Tests rendering Api responses Renders screen with ne
 </KeyboardAvoidingView>
 `;
 
-exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the DatePicker Dialog when the isPickerShow is true  1`] = `
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests rendering the ManagePalletScreen Renders the DatePicker Dialog when the isPickerShow is true  1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -735,6 +736,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "paddingBottom": 20,
         }
       }
+      testID="Enable Save Button"
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -746,7 +748,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
 </KeyboardAvoidingView>
 `;
 
-exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the PalletManagement default  1`] = `
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests rendering the ManagePalletScreen Renders the PalletManagement default  1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -1108,6 +1110,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "paddingBottom": 20,
         }
       }
+      testID="Enable Save Button"
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -1119,7 +1122,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
 </KeyboardAvoidingView>
 `;
 
-exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the PalletManagement with Clear Pallet Confirmation Modal  1`] = `
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests rendering the ManagePalletScreen Renders the PalletManagement with Clear Pallet Confirmation Modal  1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -1481,6 +1484,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "paddingBottom": 20,
         }
       }
+      testID="Enable Save Button"
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -1492,7 +1496,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
 </KeyboardAvoidingView>
 `;
 
-exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the PalletManagement with warning modal  1`] = `
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests rendering the ManagePalletScreen Renders the PalletManagement with warning modal  1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -1854,6 +1858,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "paddingBottom": 20,
         }
       }
+      testID="Enable Save Button"
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -1865,7 +1870,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
 </KeyboardAvoidingView>
 `;
 
-exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the expiration date required text if pallet has no date with perishableItems 1`] = `
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests rendering the ManagePalletScreen Renders the expiration date required text if pallet has no date with perishableItems 1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -2227,6 +2232,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "paddingBottom": 20,
         }
       }
+      testID="Enable Save Button"
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
@@ -2238,7 +2244,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
 </KeyboardAvoidingView>
 `;
 
-exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders the palletManagement when expiration date got modified 1`] = `
+exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests rendering the ManagePalletScreen Renders the palletManagement when expiration date got modified 1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -2600,6 +2606,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Renders 
           "paddingBottom": 20,
         }
       }
+      testID="Enable Save Button"
       title="[missing \\"en.GENERICS.SAVE\\" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}

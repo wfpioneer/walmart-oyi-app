@@ -120,7 +120,7 @@ export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
   palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate?.trim()
 );
 
-const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
+export const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
   const isItemsModified = items.some((item: PalletItem) => isQuantityChanged(item)
     || item.deleted || item.added);
   return isItemsModified || isExpiryDateChanged(palletInfo);
@@ -177,12 +177,12 @@ export const removeExpirationDate = (items: PalletItem[], perishableCategories: 
   return deletedPerishableItem && !perishableExistsInPallet;
 };
 
-const isPerishableItemDeleted = (items: PalletItem[], perishableCategories: number[]): boolean => {
+export const isPerishableItemDeleted = (items: PalletItem[], perishableCategories: number[]): boolean => {
   const deletedItems = items.filter(item => item.deleted);
   return isPerishableItemExist(deletedItems, perishableCategories);
 };
 
-const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
+export const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
   // Remove item from redux if this item was being added to pallet
   if (item.added) {
     dispatch(removeItem(item.itemNbr.toString()));
@@ -191,7 +191,7 @@ const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
   }
 };
 
-const undoDelete = (dispatch: Dispatch<any>) => {
+export const undoDelete = (dispatch: Dispatch<any>) => {
   dispatch(resetItems());
 };
 
@@ -200,7 +200,7 @@ export const isAddedItemPerishable = (items: PalletItem[], perishableCategories:
   return isPerishableItemExist(addedItems, perishableCategories);
 };
 
-const itemCard = (
+export const itemCard = (
   { item }: { item: PalletItem },
   dispatch: Dispatch<any>,
   userConfigs: Configurations,
@@ -566,7 +566,7 @@ export const getItemDetailsApiHook = (
   }
 };
 
-const onValidateHardwareBackPress = (
+export const onValidateHardwareBackPress = (
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
   dataUnsaved: boolean
 ) => {
@@ -674,6 +674,15 @@ export const onBarcodeEmitterResponse = (
   }
 };
 
+export const onHardwareBackPress = (
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  items: PalletItem[],
+  palletInfo: PalletInfo
+) => onValidateHardwareBackPress(
+  setDisplayWarningModal,
+  enableSave(items, palletInfo)
+);
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
@@ -703,12 +712,14 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   // validation on Hardware backPress
   useFocusEffectHook(
     useCallbackHook(() => {
-      const onHardwareBackPress = () => onValidateHardwareBackPress(
-        setDisplayWarningModal,
-        enableSave(items, palletInfo)
+      BackHandler.addEventListener(
+        'hardwareBackPress',
+        () => onHardwareBackPress(setDisplayWarningModal, items, palletInfo)
       );
-      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
-      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => BackHandler.removeEventListener(
+        'hardwareBackPress',
+        () => onHardwareBackPress(setDisplayWarningModal, items, palletInfo)
+      );
     }, [items])
   );
 
@@ -979,6 +990,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
             disabled={isAddedPerishable && !(newExpirationDate || expirationDate)}
+            testID="Enable Save Button"
           />
         </View>
       ) : null}
