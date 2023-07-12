@@ -532,63 +532,48 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
+  const getInitialQuantity = (item: PickListItem) => (item.quantityLeft || 0);
+
   const getCurrentQuantity = (item: PickListItem) => (typeof item.newQuantityLeft === 'number'
     ? item.newQuantityLeft
-    : item.quantityLeft || 0);
+    : getInitialQuantity(item));
 
   const handleIncrement = (item: PickListItem) => {
     const currentQuantity = getCurrentQuantity(item);
+    const initialQty = getInitialQuantity(item);
     if (item.quantityLeft && currentQuantity < MAX) {
-      dispatch(updatePicks([{ ...item, newQuantityLeft: currentQuantity + 1 }]));
+      const newQty = currentQuantity + 1;
+      dispatch(updatePicks([{ ...item, newQuantityLeft: newQty, itemQty: initialQty - newQty }]));
     } else if (!item.quantityLeft) {
-      dispatch(updatePicks([{ ...item, quantityLeft: 1 }]));
+      dispatch(updatePicks([{ ...item, quantityLeft: 1, itemQty: initialQty - 1 }]));
     }
   };
 
   const handleDecrement = (item: PickListItem) => {
     const currentQuantity = getCurrentQuantity(item);
     if (item.quantityLeft && currentQuantity > 0) {
-      dispatch(updatePicks([{ ...item, newQuantityLeft: currentQuantity - 1 }]));
+      dispatch(updatePicks([{
+        ...item,
+        newQuantityLeft: currentQuantity - 1,
+        itemQty: getInitialQuantity(item) - (currentQuantity - 1)
+      }]));
     }
   };
 
   const handleTextChange = (text: string, item: PickListItem) => {
     const newQuantity = Number.parseInt(text, 10);
     if (text === '' || (newQuantity < MAX && newQuantity >= 0)) {
-      dispatch(updatePicks([{ ...item, newQuantityLeft: newQuantity }]));
+      dispatch(updatePicks([{
+        ...item,
+        newQuantityLeft: newQuantity,
+        itemQty: getInitialQuantity(item) - newQuantity
+      }]));
     }
   };
 
   const onEndEditing = (item: PickListItem) => {
     if (typeof (item.newQuantityLeft) !== 'number' || Number.isNaN(item.newQuantityLeft)) {
-      dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft }]));
-    }
-  };
-
-  const increaseStockQty = (item: PickListItem) => {
-    if (item.itemQty && item.itemQty < MAX) {
-      dispatch(updatePicks([{ ...item, itemQty: item.itemQty + 1 }]));
-    } else if (!item.itemQty) {
-      dispatch(updatePicks([{ ...item, itemQty: 1 }]));
-    }
-  };
-
-  const decreaseStockQty = (item: PickListItem) => {
-    if (item.itemQty && item.itemQty > 0) {
-      dispatch(updatePicks([{ ...item, itemQty: item.itemQty - 1 }]));
-    }
-  };
-
-  const onEndStockQtyEdit = (item: PickListItem) => {
-    if (typeof (item.itemQty) !== 'number' || Number.isNaN(item.itemQty)) {
-      dispatch(updatePicks([{ ...item, itemQty: item.itemQty }]));
-    }
-  };
-
-  const onStockQtyTextChange = (text: string, item: PickListItem) => {
-    const newItemQty = Number.parseInt(text, 10);
-    if (text === '' || (newItemQty < MAX && newItemQty >= 0)) {
-      dispatch(updatePicks([{ ...item, itemQty: newItemQty }]));
+      dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft, itemQty: 0 }]));
     }
   };
 
@@ -637,11 +622,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         salesFloorLocation={item.salesFloorLocationName}
         upcNbr={item.upcNbr}
         onEndEditing={() => onEndEditing(item)}
-        stockedQty={item.itemQty || 0}
-        incrementStockQty={() => increaseStockQty(item)}
-        decrementStockQty={() => decreaseStockQty(item)}
-        onStockQtyTextChange={(text: string) => onStockQtyTextChange(text, item)}
-        onStockEndEditing={() => onEndStockQtyEdit(item)}
       />
     );
   };
