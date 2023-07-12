@@ -96,6 +96,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Cancel Back Button"
             title="[missing \\"en.GENERICS.CANCEL\\" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
@@ -116,6 +117,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Confirm Back Button"
             title="[missing \\"en.GENERICS.OK\\" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
@@ -470,6 +472,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Cancel Back Button"
             title="[missing \\"en.GENERICS.CANCEL\\" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
@@ -490,6 +493,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Confirm Back Button"
             title="[missing \\"en.GENERICS.OK\\" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
@@ -844,6 +848,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Cancel Back Button"
             title="[missing \\"en.GENERICS.CANCEL\\" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
@@ -864,6 +869,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Confirm Back Button"
             title="[missing \\"en.GENERICS.OK\\" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
@@ -1218,6 +1224,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Cancel Back Button"
             title="[missing \\"en.GENERICS.CANCEL\\" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
@@ -1238,6 +1245,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Confirm Back Button"
             title="[missing \\"en.GENERICS.OK\\" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
@@ -1592,6 +1600,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Cancel Back Button"
             title="[missing \\"en.GENERICS.CANCEL\\" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
@@ -1612,6 +1621,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Confirm Back Button"
             title="[missing \\"en.GENERICS.OK\\" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
@@ -1966,6 +1976,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Cancel Back Button"
             title="[missing \\"en.GENERICS.CANCEL\\" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
@@ -1986,6 +1997,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Confirm Back Button"
             title="[missing \\"en.GENERICS.OK\\" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
@@ -2340,6 +2352,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Cancel Back Button"
             title="[missing \\"en.GENERICS.CANCEL\\" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
@@ -2360,6 +2373,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
                 "width": "40%",
               }
             }
+            testID="Confirm Back Button"
             title="[missing \\"en.GENERICS.OK\\" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}

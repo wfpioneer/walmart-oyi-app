@@ -5,13 +5,14 @@ import Toast from 'react-native-toast-message';
 import {
   BottomSheetModal
 } from '@gorhom/bottom-sheet';
+import { BackHandlerStatic, NativeEventEmitter } from 'react-native';
 import {
   BottomSheetCard,
   PickingTabNavigator,
+  backHandlerEventHook,
+  barcodeEmitterHook,
   getItemDetailsApiHook,
   getPicklistApiHook,
-  onBackPress,
-  onBarcodeEmitterResponse,
   updatePicklistStatusApiHook
 } from './PickingTabNavigator';
 import { strings } from '../../locales';
@@ -433,16 +434,53 @@ describe('Manage PickingNavigator externalized function tests', () => {
   });
 
   it('Tests onBarcodeEmitterResponse', () => {
-    const mockScan = { value: '123', type: 'UPC-A' };
-    onBarcodeEmitterResponse(mockScan, navigationProp, routeProp, mockDispatch, Tabs.PICK);
+    const barCodeEmitterProp: NativeEventEmitter = {
+      addListener: jest.fn(),
+      removeAllListeners: jest.fn(),
+      removeSubscription: jest.fn(),
+      listenerCount: jest.fn(),
+      emit: jest.fn(),
+      removeListener: jest.fn()
+    };
+    barCodeEmitterProp.addListener = jest
+      .fn()
+      .mockImplementation((event, callBack) => {
+        callBack({ value: 'test', type: 'UPC-A' });
+      });
+    barcodeEmitterHook(
+      barCodeEmitterProp,
+      navigationProp,
+      routeProp,
+      mockDispatch,
+      Tabs.PICK
+    );
+    expect(barCodeEmitterProp.addListener).toBeCalledWith(
+      'scanned',
+      expect.any(Function)
+    );
+    expect(navigationProp.isFocused).toHaveBeenCalled();
     expect(validateSession).toHaveBeenCalled();
   });
 
   it('Tests onBackPress event listener', () => {
-    const backPressTrueResponse = onBackPress(true, true, mockDispatch);
+    const backHandlerProp: BackHandlerStatic = {
+      exitApp: jest.fn(),
+      addEventListener: jest.fn().mockImplementation(
+        (event, callBack: () => boolean | null | undefined) => {
+          callBack();
+        }
+      ),
+      removeEventListener: jest.fn().mockImplementation((event, callBack) => {
+        callBack();
+      })
+    };
+    backHandlerEventHook(backHandlerProp, true, true, mockDispatch);
+    expect(backHandlerProp.addEventListener).toBeCalledWith(
+      'hardwareBackPress',
+      expect.any(Function)
+    );
     expect(mockDispatch).toHaveBeenCalledWith(resetMultiPickBinSelection());
-    expect(backPressTrueResponse).toStrictEqual(true);
-    const backPressFalseResponse = onBackPress(false, false, mockDispatch);
-    expect(backPressFalseResponse).toStrictEqual(false);
+    backHandlerEventHook(backHandlerProp, false, false, mockDispatch);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
 });

@@ -3,10 +3,12 @@ import React, {
 } from 'react';
 import {
   BackHandler,
+  BackHandlerStatic,
   EmitterSubscription,
   FlatList,
   Keyboard,
   KeyboardAvoidingView,
+  NativeEventEmitter,
   Pressable,
   Text,
   TouchableOpacity,
@@ -655,32 +657,108 @@ export const postCreatePalletApiHook = (
   }
 };
 
-export const onBarcodeEmitterResponse = (
-  scan: any,
+export const barcodeEmitterHook = (
+  barcodeEventEmitter: NativeEventEmitter,
   navigation: NavigationProp<any>,
   route: RouteProp<any, string>,
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent
 ) => {
-  if (navigation.isFocused()) {
-    validateSession(navigation, route.name).then(() => {
-      trackEventCall(SCREEN_NAME, {
-        action: 'Items_Details_scanned',
-        barcode: scan.value,
-        type: scan.type
+  const scannedSubscription = barcodeEventEmitter.addListener('scanned', scan => {
+    if (navigation.isFocused()) {
+      validateSession(navigation, route.name).then(() => {
+        trackEventCall(SCREEN_NAME, {
+          action: 'Items_Details_scanned',
+          barcode: scan.value,
+          type: scan.type
+        });
+        dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
       });
-      dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
-    });
-  }
+    }
+  });
+  return () => {
+    scannedSubscription.remove();
+  };
 };
 
-export const onHardwareBackPress = (
+export const backHandlerEventHook = (
+  BackHandlerEmitter: BackHandlerStatic,
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
   items: PalletItem[],
   palletInfo: PalletInfo
-) => onValidateHardwareBackPress(
-  setDisplayWarningModal,
-  enableSave(items, palletInfo)
+) => {
+  const onHardwareBackPress = () => onValidateHardwareBackPress(
+    setDisplayWarningModal,
+    enableSave(items, palletInfo)
+  );
+  BackHandlerEmitter.addEventListener('hardwareBackPress', onHardwareBackPress);
+  return () => BackHandlerEmitter.removeEventListener('hardwareBackPress', onHardwareBackPress);
+};
+
+export const navListenerHook = (
+  navigation: NavigationProp<any>,
+  confirmBackNavigate: boolean,
+  items: PalletItem[],
+  palletInfo: PalletInfo,
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
+) => {
+  const navigationListener = navigation.addListener('beforeRemove', e => {
+    if (!confirmBackNavigate && enableSave(items, palletInfo)) {
+      setDisplayWarningModal(true);
+      e.preventDefault();
+    } else {
+      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+    }
+  });
+  return navigationListener;
+};
+
+const backConfirmed = (
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+) => {
+  setDisplayWarningModal(false);
+  setConfirmBackNavigate(true);
+  dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+};
+
+export const renderWarningModal = (
+  displayWarningModal: boolean,
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+) => (
+  <CustomModalComponent
+    isVisible={displayWarningModal}
+    onClose={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
+    modalType="Popup"
+  >
+    <>
+      <View>
+        <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
+        <Text style={styles.message}>{strings('PALLET.UNSAVED_WARNING_MSG')}</Text>
+      </View>
+      <View style={styles.buttonWarningContainer}>
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.CANCEL')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          type={ButtonType.SOLID_WHITE}
+          onPress={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
+          testID="Cancel Back Button"
+        />
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.OK')}
+          type={ButtonType.PRIMARY}
+          onPress={() => backConfirmed(setDisplayWarningModal, setConfirmBackNavigate, dispatch)}
+          testID="Confirm Back Button"
+        />
+      </View>
+    </>
+  </CustomModalComponent>
 );
 
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
@@ -694,32 +772,16 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     createPallet, postCreatePalletApi, countryCode, userConfigs, trackEventCall
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
-  let scannedSubscription: EmitterSubscription;
 
   // validation on app back press
   useEffectHook(() => {
-    const navigationListener = navigation.addListener('beforeRemove', e => {
-      if (!confirmBackNavigate && enableSave(items, palletInfo)) {
-        setDisplayWarningModal(true);
-        e.preventDefault();
-      } else {
-        dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-      }
-    });
-    return navigationListener;
+    navListenerHook(navigation, confirmBackNavigate, items, palletInfo, setDisplayWarningModal, dispatch);
   }, [navigation, items, confirmBackNavigate]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
     useCallbackHook(() => {
-      BackHandler.addEventListener(
-        'hardwareBackPress',
-        () => onHardwareBackPress(setDisplayWarningModal, items, palletInfo)
-      );
-      return () => BackHandler.removeEventListener(
-        'hardwareBackPress',
-        () => onHardwareBackPress(setDisplayWarningModal, items, palletInfo)
-      );
+      backHandlerEventHook(BackHandler, setDisplayWarningModal, items, palletInfo);
     }, [items])
   );
 
@@ -731,12 +793,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   }, [confirmBackNavigate]);
 
   useEffectHook(() => {
-    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      onBarcodeEmitterResponse(scan, navigation, route, dispatch, trackEventCall);
-    });
-    return () => {
-      scannedSubscription.remove();
-    };
+    barcodeEmitterHook(barcodeEmitter, navigation, route, dispatch, trackEventCall);
   }, []);
 
   // Orchestrated API Calls
@@ -852,42 +909,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
   const isAddedPerishable = isAddedItemPerishable(items, perishableCategories);
 
-  const backConfirmed = () => {
-    setDisplayWarningModal(false);
-    setConfirmBackNavigate(true);
-    dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-  };
-
-  const renderWarningModal = () => (
-    <CustomModalComponent
-      isVisible={displayWarningModal}
-      onClose={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
-      modalType="Popup"
-    >
-      <>
-        <View>
-          <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
-          <Text style={styles.message}>{strings('PALLET.UNSAVED_WARNING_MSG')}</Text>
-        </View>
-        <View style={styles.buttonWarningContainer}>
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.CANCEL')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            type={ButtonType.SOLID_WHITE}
-            onPress={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
-          />
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.OK')}
-            type={ButtonType.PRIMARY}
-            onPress={backConfirmed}
-          />
-        </View>
-      </>
-    </CustomModalComponent>
-  );
-
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -908,7 +929,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         confirmText={strings('GENERICS.YES')}
       />
       <View style={styles.bodyContainer}>
-        {renderWarningModal()}
+        {renderWarningModal(displayWarningModal, setDisplayWarningModal, setConfirmBackNavigate, dispatch)}
         {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.headerContainer}>
           {!createPallet && (

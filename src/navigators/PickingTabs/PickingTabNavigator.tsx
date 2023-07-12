@@ -8,7 +8,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Toast from 'react-native-toast-message';
 import { trackEvent } from 'appcenter-analytics';
 import {
-  BackHandler, EmitterSubscription, Text, TouchableOpacity
+  BackHandler, BackHandlerStatic, NativeEventEmitter, Text, TouchableOpacity
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import {
@@ -218,34 +218,50 @@ export const updatePicklistStatusApiHook = (
   }
 };
 
-export const onBarcodeEmitterResponse = (
-  scan: any,
+export const barcodeEmitterHook = (
+  barcodeEventEmitter: NativeEventEmitter,
   navigation: NavigationProp<any>,
   route: RouteProp<any, string>,
   dispatch: Dispatch<any>,
   selectedTab: Tabs
 ) => {
-  if (navigation.isFocused() && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)
+  const scannedSubscription = barcodeEventEmitter.addListener('scanned', scan => {
+    if (navigation.isFocused() && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)
     && scan.value
-  ) {
-    validateSession(navigation, route.name).then(() => {
-      trackEvent('Items_Details_scanned', {
-        barcode: scan.value,
-        type: scan.type
+    ) {
+      validateSession(navigation, route.name).then(() => {
+        trackEvent('Items_Details_scanned', {
+          barcode: scan.value,
+          type: scan.type
+        });
+        dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
+        dispatch(resetScannedEvent());
       });
-      dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
-      dispatch(resetScannedEvent());
-    });
-  }
+    }
+  });
+  return () => {
+    scannedSubscription.remove();
+  };
 };
 
-export const onBackPress = (multiBinEnabled: boolean, multiPickEnabled: boolean, dispatch: Dispatch<any>) => {
-  if (multiBinEnabled || multiPickEnabled) {
-    dispatch(resetMultiPickBinSelection());
-    return true;
-  }
-  return false;
+export const backHandlerEventHook = (
+  BackHandlerEmitter: BackHandlerStatic,
+  multiBinEnabled: boolean,
+  multiPickEnabled: boolean,
+  dispatch: Dispatch<any>
+) => {
+  const onBackPress = () => {
+    if (multiBinEnabled || multiPickEnabled) {
+      dispatch(resetMultiPickBinSelection());
+      return true;
+    }
+    return false;
+  };
+  BackHandlerEmitter.addEventListener('hardwareBackPress', onBackPress);
+
+  return () => BackHandlerEmitter.removeEventListener('hardwareBackPress', onBackPress);
 };
+
 export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Element => {
   const {
     picklist,
@@ -266,7 +282,6 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     peteGetLocations
   } = props;
 
-  let scannedSubscription: EmitterSubscription;
   const quickPickList = picklist.filter(item => item.quickPick);
   const pickBinList = picklist.filter(
     item => !item.quickPick
@@ -281,12 +296,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
   // Scanner listener
   useEffectHook(() => {
-    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      onBarcodeEmitterResponse(scan, navigation, route, dispatch, selectedTab);
-    });
-    return () => {
-      scannedSubscription.remove();
-    };
+    barcodeEmitterHook(barcodeEmitter, navigation, route, dispatch, selectedTab);
   }, []);
 
   // Get Picklist Api call
@@ -323,11 +333,7 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
   // Cancel multi Pick/Bin when pressing back from the device hardware
   useFocusEffectHook(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => onBackPress(multiBinEnabled, multiPickEnabled, dispatch));
-
-    return () => BackHandler.removeEventListener('hardwareBackPress',
-      () => onBackPress(multiBinEnabled, multiPickEnabled, dispatch)
-    );
+    backHandlerEventHook(BackHandler, multiBinEnabled, multiPickEnabled, dispatch);
   });
 
   useEffectHook(() => {

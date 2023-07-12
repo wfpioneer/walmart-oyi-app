@@ -1,11 +1,18 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp, RouteProp } from '@react-navigation/native';
+import {
+  EventListenerCallback,
+  NavigationProp,
+  RouteProp
+} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
+import { BackHandlerStatic, NativeEventEmitter } from 'react-native';
 import {
   ManagePalletScreen,
+  backHandlerEventHook,
+  barcodeEmitterHook,
   clearPalletApiHook,
   deleteItemDetail,
   enableSave,
@@ -22,12 +29,12 @@ import {
   isPerishableItemDeleted,
   isQuantityChanged,
   itemCard,
-  onBarcodeEmitterResponse,
+  navListenerHook,
   onEndEditing,
-  onHardwareBackPress,
   onValidateHardwareBackPress,
   postCreatePalletApiHook,
   removeExpirationDate,
+  renderWarningModal,
   undoDelete,
   updatePalletApisHook
 } from './ManagePallet';
@@ -49,6 +56,8 @@ import getItemDetails from '../../mockData/getItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { validateSession } from '../../utils/sessionTimeout';
 import store from '../../state';
+import { GET_ITEM_DETAILS_V4 } from '../../state/actions/asyncAPI';
+import { BeforeRemoveEvent } from '../../models/Generics.d';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
 
@@ -138,6 +147,16 @@ describe('ManagePalletScreen', () => {
     getParent: jest.fn(),
     getState: jest.fn()
   };
+
+  const barCodeEmitterProp: NativeEventEmitter = {
+    addListener: jest.fn(),
+    removeAllListeners: jest.fn(),
+    removeSubscription: jest.fn(),
+    listenerCount: jest.fn(),
+    emit: jest.fn(),
+    removeListener: jest.fn()
+  };
+
   const mockCountryCode = 'MX';
   const routeProp: RouteProp<any, string> = {
     key: 'Test',
@@ -147,7 +166,7 @@ describe('ManagePalletScreen', () => {
     describe('Tests rendering Api responses', () => {
       it('Renders screen with newly added if get items details response sent sucesss', () => {
         const renderer = ShallowRenderer.createRenderer();
-        const sucessAsyncState: AsyncState = {
+        const successAsyncState: AsyncState = {
           isWaiting: false,
           value: null,
           error: null,
@@ -167,7 +186,7 @@ describe('ManagePalletScreen', () => {
             navigation={navigationProp}
             route={routeProp}
             dispatch={jest.fn()}
-            getItemDetailsApi={sucessAsyncState}
+            getItemDetailsApi={successAsyncState}
             addPalletUpcApi={defaultAsyncState}
             updateItemQtyAPI={defaultAsyncState}
             deleteUpcsApi={defaultAsyncState}
@@ -197,8 +216,7 @@ describe('ManagePalletScreen', () => {
       it('Tests Save Button onSubmit function ', () => {
         const mockDispatch = jest.fn();
         const mockTrackEventCall = jest.fn();
-        jest.clearAllMocks();
-        const sucessAsyncState: AsyncState = {
+        const successAsyncState: AsyncState = {
           isWaiting: false,
           value: null,
           error: null,
@@ -219,7 +237,7 @@ describe('ManagePalletScreen', () => {
               navigation={navigationProp}
               route={routeProp}
               dispatch={mockDispatch}
-              getItemDetailsApi={sucessAsyncState}
+              getItemDetailsApi={successAsyncState}
               addPalletUpcApi={defaultAsyncState}
               updateItemQtyAPI={defaultAsyncState}
               deleteUpcsApi={defaultAsyncState}
@@ -260,7 +278,7 @@ describe('ManagePalletScreen', () => {
               navigation={navigationProp}
               route={routeProp}
               dispatch={mockDispatch}
-              getItemDetailsApi={sucessAsyncState}
+              getItemDetailsApi={successAsyncState}
               addPalletUpcApi={defaultAsyncState}
               updateItemQtyAPI={defaultAsyncState}
               deleteUpcsApi={defaultAsyncState}
@@ -288,6 +306,35 @@ describe('ManagePalletScreen', () => {
         fireEvent.press(onSubmitButton);
         expect(mockTrackEventCall).toHaveBeenCalled();
         expect(mockDispatch).toHaveBeenCalled();
+      });
+
+      it('Tests Confirm/Cancel Back Button onSubmit function in renderWarningModal', () => {
+        const mockDispatch = jest.fn();
+        const mockSetConfirmBackNavigate = jest.fn();
+        const mockSetDisplayWarning = jest.fn();
+        const { getByTestId } = render(
+          <Provider store={store}>
+            {renderWarningModal(
+              true,
+              mockSetDisplayWarning,
+              mockSetConfirmBackNavigate,
+              mockDispatch
+            )}
+          </Provider>
+        );
+        const onCancelButton = getByTestId('Cancel Back Button');
+        const onConfirmButton = getByTestId('Confirm Back Button');
+
+        fireEvent.press(onCancelButton);
+        expect(mockSetDisplayWarning).toHaveBeenCalledWith(false);
+        expect(mockSetConfirmBackNavigate).toHaveBeenCalledWith(false);
+
+        fireEvent.press(onConfirmButton);
+        expect(mockSetDisplayWarning).toHaveBeenCalledWith(false);
+        expect(mockSetConfirmBackNavigate).toHaveBeenCalledWith(true);
+        expect(mockDispatch).toHaveBeenCalledWith({
+          type: GET_ITEM_DETAILS_V4.RESET
+        });
       });
     });
 
@@ -1143,15 +1190,24 @@ describe('ManagePalletScreen', () => {
       );
     });
 
-    it('Tests onBarcodeEmitterResponse function', () => {
-      const mockScan = { value: '123', type: 'UPC-A' };
-      onBarcodeEmitterResponse(
-        mockScan,
+    it('Tests barcodeEmitterHook function', () => {
+      barCodeEmitterProp.addListener = jest
+        .fn()
+        .mockImplementation((event, callBack) => {
+          callBack();
+        });
+      barcodeEmitterHook(
+        barCodeEmitterProp,
         navigationProp,
         routeProp,
         mockDispatch,
         mockTrackEventCall
       );
+      expect(barCodeEmitterProp.addListener).toBeCalledWith(
+        'scanned',
+        expect.any(Function)
+      );
+      expect(navigationProp.isFocused).toHaveBeenCalled();
       expect(validateSession).toHaveBeenCalled();
     });
 
@@ -1224,11 +1280,84 @@ describe('ManagePalletScreen', () => {
       ).toStrictEqual(false);
     });
 
-    it('Tests onHardwareBackPress function', () => {
+    it('Tests backHandlerEventHook function', () => {
+      const backHandlerProp: BackHandlerStatic = {
+        exitApp: jest.fn(),
+        addEventListener: jest.fn().mockImplementation(
+          (event, callBack: () => boolean | null | undefined) => {
+            callBack();
+          }
+        ),
+        removeEventListener: jest.fn().mockImplementation((event, callBack) => {
+          callBack();
+        })
+      };
       const mockSetWarnDisplay = jest.fn();
-      onHardwareBackPress(mockSetWarnDisplay, mockItems, mockPalletInfo);
+      backHandlerEventHook(
+        backHandlerProp,
+        mockSetWarnDisplay,
+        mockItems,
+        mockPalletInfo
+      );
+      expect(backHandlerProp.addEventListener).toBeCalledWith(
+        'hardwareBackPress',
+        expect.any(Function)
+      );
       expect(mockSetWarnDisplay).toHaveBeenCalled();
       expect(enableSave(mockItems, mockPalletInfo)).toStrictEqual(true);
+    });
+
+    it('Tests navListenerHook function', () => {
+      type EventMapBase = Record<
+        string,
+        { data?: any; canPreventDefault?: boolean }
+      >;
+
+      navigationProp.addListener = jest
+        .fn()
+        .mockImplementation(
+          (
+            event,
+            callBack: EventListenerCallback<EventMapBase, keyof EventMapBase>
+          ) => {
+            const eventObj: BeforeRemoveEvent = {
+              data: {
+                action: {
+                  type: ''
+                }
+              },
+              defaultPrevented: false,
+              preventDefault: jest.fn(),
+              type: 'beforeRemove'
+            };
+            callBack(eventObj);
+          }
+        );
+      const mockSetWarnDisplay = jest.fn();
+
+      navListenerHook(
+        navigationProp,
+        false,
+        mockItems,
+        mockPalletInfo,
+        mockSetWarnDisplay,
+        mockDispatch
+      );
+      expect(navigationProp.addListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(mockSetWarnDisplay).toHaveBeenCalledWith(true);
+
+      navListenerHook(
+        navigationProp,
+        true,
+        mockItems,
+        mockPalletInfo,
+        mockSetWarnDisplay,
+        mockDispatch
+      );
+      expect(mockDispatch).toHaveBeenCalled();
     });
   });
 });
