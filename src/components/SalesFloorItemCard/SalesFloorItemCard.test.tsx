@@ -21,11 +21,6 @@ describe('Sales floor item card render tests', () => {
         quantity={4}
         salesFloorLocation="ABAR1-1"
         upcNbr="1234567890"
-        decrementStockQty={jest.fn()}
-        incrementStockQty={jest.fn()}
-        onStockEndEditing={jest.fn()}
-        onStockQtyTextChange={jest.fn()}
-        stockedQty={0}
       />
     );
 
@@ -50,11 +45,6 @@ describe('Sales floor item card render tests', () => {
         quantity={0}
         salesFloorLocation="ABAR1-1"
         upcNbr="1234567890"
-        decrementStockQty={jest.fn()}
-        incrementStockQty={jest.fn()}
-        onStockEndEditing={jest.fn()}
-        onStockQtyTextChange={jest.fn()}
-        stockedQty={5}
       />
     );
 
