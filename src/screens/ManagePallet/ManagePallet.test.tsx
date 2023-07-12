@@ -1190,13 +1190,16 @@ describe('ManagePalletScreen', () => {
       );
     });
 
-    it('Tests barcodeEmitterHook function', () => {
+    it('Tests barcodeEmitterHook function', async () => {
       barCodeEmitterProp.addListener = jest
         .fn()
         .mockImplementation((event, callBack) => {
-          callBack();
+          callBack({ value: 'test', type: 'UPC-A' });
+          return {
+            remove: jest.fn()
+          };
         });
-      barcodeEmitterHook(
+      await barcodeEmitterHook(
         barCodeEmitterProp,
         navigationProp,
         routeProp,
@@ -1209,6 +1212,8 @@ describe('ManagePalletScreen', () => {
       );
       expect(navigationProp.isFocused).toHaveBeenCalled();
       expect(validateSession).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockTrackEventCall).toHaveBeenCalled();
     });
 
     it('Tests onEndEditing function', () => {
