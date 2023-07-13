@@ -63,11 +63,31 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 
+const barCodeEmitterProp: NativeEventEmitter = {
+  addListener: jest.fn(),
+  removeAllListeners: jest.fn(),
+  removeSubscription: jest.fn(),
+  listenerCount: jest.fn(),
+  emit: jest.fn(),
+  removeListener: jest.fn()
+};
+
 const routeProp: RouteProp<any, string> = {
   name: 'Test Route',
   key: ''
 };
-let bottomSheetModalRef: React.RefObject<BottomSheetModal>;
+const bottomSheetModalRef: React.RefObject<BottomSheetModal> = {
+  current: {
+    present: jest.fn(),
+    dismiss: jest.fn(),
+    close: jest.fn(),
+    collapse: jest.fn(),
+    expand: jest.fn(),
+    forceClose: jest.fn(),
+    snapToIndex: jest.fn(),
+    snapToPosition: jest.fn()
+  }
+};
 
 describe('Picking Tab Navigator', () => {
   it('Renders the Pick TabNavigator', () => {
@@ -216,6 +236,62 @@ describe('Picking Tab Navigator', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
+
+  it('Tests the Pick TabNavigator useEffectHooks', () => {
+    const mockUseEffectHook = jest.fn().mockImplementation((callback, deps) => {
+      callback();
+    });
+    const mockUseCallbackHook = jest.fn().mockImplementation((callback, deps) => {
+      callback();
+    });
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={mockUseEffectHook}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={mockUseCallbackHook}
+        useFocusEffectHook={jest.fn()}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={true}
+        peteGetLocations={false}
+      />
+    );
+    expect(mockUseEffectHook).toHaveBeenCalled();
+    expect(mockUseCallbackHook).toHaveBeenCalled();
+    expect(bottomSheetModalRef.current?.present).toHaveBeenCalled();
+
+    // Picking Menu false calls Bottom Sheet Modal Dismiss
+    renderer.render(
+      <PickingTabNavigator
+        picklist={mockPickLists}
+        navigation={navigationProp}
+        route={routeProp}
+        useEffectHook={mockUseEffectHook}
+        getItemDetailsApi={defaultAsyncState}
+        getPicklistsApi={defaultAsyncState}
+        updatePicklistStatusApi={defaultAsyncState}
+        dispatch={jest.fn()}
+        selectedTab={Tabs.PICK}
+        useCallbackHook={mockUseCallbackHook}
+        useFocusEffectHook={jest.fn()}
+        multiBinEnabled={false}
+        multiPickEnabled={false}
+        bottomSheetModalRef={bottomSheetModalRef}
+        pickingMenu={false}
+        peteGetLocations={false}
+      />
+    );
+    expect(bottomSheetModalRef.current?.dismiss).toHaveBeenCalled();
+  });
 });
 
 describe('BottomSheet card', () => {
@@ -235,6 +311,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
   const mockDispatch = jest.fn();
   afterEach(() => {
     jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
@@ -433,21 +510,16 @@ describe('Manage PickingNavigator externalized function tests', () => {
     expect(mockDispatch).toBeCalledTimes(1);
   });
 
-  it('Tests onBarcodeEmitterResponse', () => {
-    const barCodeEmitterProp: NativeEventEmitter = {
-      addListener: jest.fn(),
-      removeAllListeners: jest.fn(),
-      removeSubscription: jest.fn(),
-      listenerCount: jest.fn(),
-      emit: jest.fn(),
-      removeListener: jest.fn()
-    };
+  it('Tests barcodeEmitterHook function', async () => {
     barCodeEmitterProp.addListener = jest
       .fn()
       .mockImplementation((event, callBack) => {
         callBack({ value: 'test', type: 'UPC-A' });
+        return {
+          remove: jest.fn()
+        };
       });
-    barcodeEmitterHook(
+    await barcodeEmitterHook(
       barCodeEmitterProp,
       navigationProp,
       routeProp,

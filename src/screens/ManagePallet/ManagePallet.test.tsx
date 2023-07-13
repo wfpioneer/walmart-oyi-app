@@ -216,6 +216,12 @@ describe('ManagePalletScreen', () => {
       it('Tests Save Button onSubmit function ', () => {
         const mockDispatch = jest.fn();
         const mockTrackEventCall = jest.fn();
+        const mockUseEffectHook = jest.fn().mockImplementation((callback, deps) => {
+          callback();
+        });
+        const mockUseCallbackHook = jest.fn().mockImplementation((callback, deps) => {
+          callback();
+        });
         const successAsyncState: AsyncState = {
           isWaiting: false,
           value: null,
@@ -230,7 +236,7 @@ describe('ManagePalletScreen', () => {
         const { getByTestId, update } = render(
           <Provider store={store}>
             <ManagePalletScreen
-              useEffectHook={jest.fn}
+              useEffectHook={mockUseEffectHook}
               isManualScanEnabled={true}
               palletInfo={mockPalletInfo}
               items={mockItems}
@@ -251,8 +257,8 @@ describe('ManagePalletScreen', () => {
               displayWarningModal={false}
               setDisplayWarningModal={jest.fn()}
               useFocusEffectHook={jest.fn()}
-              useCallbackHook={jest.fn()}
-              confirmBackNavigate={false}
+              useCallbackHook={mockUseCallbackHook}
+              confirmBackNavigate={true}
               setConfirmBackNavigate={jest.fn()}
               createPallet={false}
               postCreatePalletApi={defaultAsyncState}
@@ -267,11 +273,13 @@ describe('ManagePalletScreen', () => {
         fireEvent.press(onSubmitButton);
 
         expect(mockDispatch).toHaveBeenCalled();
-
+        expect(mockUseEffectHook).toHaveBeenCalled();
+        expect(mockUseCallbackHook).toHaveBeenCalled();
+        expect(navigationProp.goBack).toHaveBeenCalled();
         update(
           <Provider store={store}>
             <ManagePalletScreen
-              useEffectHook={jest.fn}
+              useEffectHook={mockUseEffectHook}
               isManualScanEnabled={true}
               palletInfo={mockPalletInfo}
               items={mockItems}
@@ -292,7 +300,7 @@ describe('ManagePalletScreen', () => {
               displayWarningModal={false}
               setDisplayWarningModal={jest.fn()}
               useFocusEffectHook={jest.fn()}
-              useCallbackHook={jest.fn()}
+              useCallbackHook={mockUseCallbackHook}
               confirmBackNavigate={false}
               setConfirmBackNavigate={jest.fn()}
               createPallet={true}

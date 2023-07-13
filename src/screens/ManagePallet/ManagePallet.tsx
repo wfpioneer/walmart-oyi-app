@@ -4,7 +4,6 @@ import React, {
 import {
   BackHandler,
   BackHandlerStatic,
-  EmitterSubscription,
   FlatList,
   Keyboard,
   KeyboardAvoidingView,
