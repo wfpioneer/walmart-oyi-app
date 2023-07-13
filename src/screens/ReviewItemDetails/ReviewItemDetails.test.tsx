@@ -22,7 +22,7 @@ import ReviewItemDetails, {
   callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook,
   getExceptionType, getLocationCount, getLocationsForItemsApiHook, getLocationsForItemsV1ApiHook, getTopRightBtnTxt,
   getUpdatedSales, handleCreateNewPick, handleLocationAction,
-  handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
+  handleOHQtyClose, handleOHQtySubmit, handleRefresh, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
   onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton,
   renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory,
   renderOHQtyComponent, renderOtherActionButton, renderPickHistory, renderPrintPriceSignButton, renderReplenishmentCard,
@@ -34,6 +34,7 @@ import store from '../../state/index';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import {
   getItemDetailsV4,
+  getItemManagerApprovalHistory,
   getItemPiHistory,
   getItemPiSalesHistory,
   getItemPicklistHistory,
@@ -41,8 +42,17 @@ import {
   getLocationsForItemV1
 } from '../../state/actions/saga';
 import { OHChangeHistory } from '../../models/ItemDetails';
-import { setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
+import { setActionCompleted, setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
 import { WorkListStatus } from '../../models/WorklistItem';
+import {
+  GET_ITEM_DETAILS_V4,
+  GET_ITEM_MANAGERAPPROVALHISTORY,
+  GET_ITEM_PICKLISTHISTORY,
+  GET_ITEM_PIHISTORY,
+  GET_ITEM_PISALESHISTORY,
+  GET_LOCATIONS_FOR_ITEM,
+  GET_LOCATIONS_FOR_ITEM_V1
+} from '../../state/actions/asyncAPI';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -190,7 +200,9 @@ describe('ReviewItemDetailsScreen', () => {
   };
   const onHandsChangeText = 'on hands change';
   const mockItemDetail123 = itemDetail[123];
-
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
     const navContextValue = {
@@ -645,9 +657,6 @@ describe('ReviewItemDetailsScreen', () => {
     const mockSetSelectedSection = jest.fn();
     const mockSetIsQuickPick = jest.fn();
     const mockSetNumberOfPallets = jest.fn();
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
     const HIDE_ACTIVITY = 'MODAL/HIDE_ACTIVITY';
     const RESET_CREATE_PICK = 'API/CREATE_NEW_PICK/RESET';
     const SHOW_INFO_MODAL = 'MODAL/SHOW_INFO_MODAL';
@@ -876,8 +885,10 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'ITEM_DETAILS_SCREEN/SETUP'
       };
+      mockItemDetail123.worklistStatus = WorkListStatus.COMPLETED;
       onValidateItemDetails(mockDispatch, mockItemDetail123);
-      expect(mockDispatch).toHaveBeenCalledWith(expectedResults);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedResults);
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, setActionCompleted());
     });
 
     it('testing callBackbarcodeEmitter', async () => {
@@ -1168,10 +1179,6 @@ describe('ReviewItemDetailsScreen', () => {
 
     const mockDispatch = jest.fn();
     const mockTrackEvent = jest.fn();
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -1481,6 +1488,110 @@ describe('ReviewItemDetailsScreen', () => {
         { screen: 'PrintPriceSignScreen' }
       );
       expect(toJSON).toMatchSnapshot();
+    });
+
+    it('Tests handleRefresh Function', async () => {
+      const mockItemNbr = mockItemDetail123.itemNbr;
+      await handleRefresh(
+        mockHandleProps.validateSessionCall,
+        navigationProp,
+        routeProp,
+        mockItemDetail123,
+        mockHandleProps.trackEventCall,
+        mockHandleProps.dispatch,
+        'Test User',
+        true
+      );
+      expect(mockHandleProps.validateSessionCall).toHaveBeenCalled();
+      expect(mockHandleProps.trackEventCall).toHaveBeenNthCalledWith(
+        1,
+        'Review_Item_Details',
+        { action: 'refresh', itemNbr: mockItemDetail123.itemNbr }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        1,
+        { type: GET_ITEM_DETAILS_V4.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        2,
+        { type: GET_ITEM_PIHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        { type: GET_ITEM_PISALESHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        4,
+        { type: GET_ITEM_PICKLISTHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        6,
+        getItemDetailsV4({ id: mockItemNbr })
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        7,
+        getItemPiHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        8,
+        getItemPiSalesHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        9,
+        getItemPicklistHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        10,
+        getItemManagerApprovalHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        11,
+        { type: GET_LOCATIONS_FOR_ITEM_V1.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        12,
+        getLocationsForItemV1(mockItemNbr)
+      );
+
+      // If PeteGetLocations is false
+      jest.clearAllMocks();
+      await handleRefresh(
+        mockHandleProps.validateSessionCall,
+        navigationProp,
+        routeProp,
+        mockItemDetail123,
+        mockHandleProps.trackEventCall,
+        mockHandleProps.dispatch,
+        'Test User',
+        false
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        11,
+        { type: GET_LOCATIONS_FOR_ITEM.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        12,
+        getLocationsForItem(mockItemNbr)
+      );
+
+      // TrackEventCall in the Catch Statement can't be tested but the line pass in Test Coverage
+      const mockValidateSessionReject = jest.fn(() => Promise.reject(
+        new Error('Session Timed Out')
+      ));
+      await handleRefresh(
+        mockValidateSessionReject,
+        navigationProp,
+        routeProp,
+        mockItemDetail123,
+        mockHandleProps.trackEventCall,
+        mockHandleProps.dispatch,
+        'Test User',
+        true
+      );
     });
   });
 });
