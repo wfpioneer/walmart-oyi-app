@@ -13,7 +13,6 @@ import {
   PrintPalletList
 } from '../../models/Printer';
 import { CreateZoneRequest } from '../reducers/Location';
-import { PalletItem } from '../../models/PalletItem';
 import {
   CombinePalletsRequest,
   GetPalletDetailsRequest,
@@ -25,7 +24,7 @@ import { GetItemDetailsPayload } from '../../services/GetItemDetails.service';
 import User from '../../models/User';
 import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
-import { CreatePallet } from '../../models/PalletManagementTypes';
+import { CreatePallet, PalletItem } from '../../models/PalletManagementTypes';
 import { submitFeedbackRequest } from '../../services/Feedback.service';
 
 export const GET_ITEM_DETAILS_V4 = 'SAGA/GET_ITEM_DETAILS_V4';
@@ -38,7 +37,6 @@ export const GET_LOCATIONS_FOR_ITEM_V1 = 'SAGA/GET_LOCATIONS_FOR_ITEM_V1';
 export const GET_ITEM_MANAGER_APPROVAL_HISTORY = 'SAGA/GET_ITEM_MANAGER_APPROVAL_HISTORY';
 
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
-export const GET_ITEM_DETAILS = 'SAGA/GET_ITEM_DETAILS';
 export const GET_WORKLIST = 'SAGA/GET_WORKLIST';
 export const GET_WORKLIST_V1 = 'SAGA/GET_WORKLIST_V1';
 export const GET_WORKLIST_AUDIT = 'SAGA/GET_WORKLIST_AUDIT';
@@ -110,7 +108,6 @@ export const getItemManagerApprovalHistory = (payload: number) => ({
 } as const);
 
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
-export const getItemDetails = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS, payload } as const);
 export const getWorklist = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST, payload } as const);
 export const getWorklistV1 = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST_V1, payload } as const);
 export const getWorklistAudits = (payload?: { worklistType?: string[] }) => (
@@ -309,7 +306,6 @@ export const updateMultiPalletUPCQtyV2 = (payload: UpdateMultiPalletUPCQtyReques
 
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
-    & Pick<ReturnType<typeof getItemDetails>, 'payload'>
     & Pick<ReturnType<typeof getItemDetailsV4>, 'payload'>
     & Pick<ReturnType<typeof getItemPiHistory>, 'payload'>
     & Pick<ReturnType<typeof getItemPiSalesHistory>, 'payload'>
