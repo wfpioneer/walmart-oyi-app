@@ -24,6 +24,12 @@ import {
   activityIndicatorEffect,
   binApisEffect,
   binServiceCall,
+  getCurrentQuantity,
+  getInitialQuantity,
+  handleDecrement,
+  handleIncrement,
+  handleTextChange,
+  onEndEditing,
   palletConfigApiEffect,
   palletDetailsApiEffect,
   shouldDelete,
@@ -33,6 +39,7 @@ import {
   updatePicklistStatusApiEffect
 } from './SalesFloorWorkflow';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { UPDATE_PICKS } from '../../state/actions/Picking';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -1089,6 +1096,129 @@ describe('Sales floor workflow tests', () => {
       updatePicklistStatusApiEffect(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
+    });
+
+    const mockQuantifiedItem: PickListItem = {
+      ...basePickItem,
+      quantityLeft: 5,
+      newQuantityLeft: 3,
+      itemQty: 2
+    };
+
+    it('tests getting the quantities of an item', () => {
+      const actualInitialQuantity = getInitialQuantity(mockQuantifiedItem);
+      const actualCurrentQuantity = getCurrentQuantity(mockQuantifiedItem);
+
+      expect(actualInitialQuantity).toBe(5);
+      expect(actualCurrentQuantity).toBe(3);
+    });
+
+    it('tests the increment function', () => {
+      // unquantified item
+      handleIncrement(basePickItem, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: UPDATE_PICKS,
+        payload: [expect.objectContaining({
+          quantityLeft: 1
+        })]
+      });
+
+      mockDispatch.mockReset();
+
+      // quantity left, not max
+      handleIncrement(mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: UPDATE_PICKS,
+        payload: [expect.objectContaining({
+          newQuantityLeft: 4,
+          itemQty: 1
+        })]
+      });
+
+      mockDispatch.mockReset();
+
+      // quantity left, max
+      mockQuantifiedItem.newQuantityLeft = 999;
+      handleIncrement(mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+
+    it('tests the decrement function', () => {
+      // unquantified item
+      handleDecrement(basePickItem, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      // quantified item
+      mockQuantifiedItem.newQuantityLeft = 3;
+      handleDecrement(mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: UPDATE_PICKS,
+        payload: [expect.objectContaining({
+          newQuantityLeft: 2,
+          itemQty: 3
+        })]
+      });
+
+      mockDispatch.mockReset();
+
+      // zero quantity
+      mockQuantifiedItem.newQuantityLeft = 0;
+      handleDecrement(mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+
+    it('tests the text editing', () => {
+      // NaN
+      handleTextChange('hello', mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      // Empty text
+      handleTextChange('', mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: UPDATE_PICKS,
+        payload: [expect.objectContaining({
+          newQuantityLeft: NaN
+        })]
+      });
+
+      mockDispatch.mockReset();
+
+      // Out of bound min
+      handleTextChange('-1', mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      // Out of bounds max
+      handleTextChange('1000', mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      // Good input
+      handleTextChange('3', mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: UPDATE_PICKS,
+        payload: [expect.objectContaining({
+          newQuantityLeft: 3,
+          itemQty: 2
+        })]
+      });
+    });
+
+    it('tests the onEditing function to ensure values are allowable', () => {
+      // is numeric
+      onEndEditing(mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      // is NaN
+      mockQuantifiedItem.newQuantityLeft = NaN;
+      onEndEditing(mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+
+      // is non-umeric
+      // @ts-expect-error forced type mismatch
+      mockQuantifiedItem.newQuantityLeft = 'hello';
+      onEndEditing(mockQuantifiedItem, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalled();
     });
   });
 });

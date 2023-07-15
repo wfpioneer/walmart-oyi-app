@@ -365,6 +365,51 @@ export const binServiceCall = (
   }
 };
 
+export const getInitialQuantity = (item: PickListItem) => (item.quantityLeft || 0);
+
+export const getCurrentQuantity = (item: PickListItem) => (typeof item.newQuantityLeft === 'number'
+  ? item.newQuantityLeft
+  : getInitialQuantity(item));
+
+export const handleIncrement = (item: PickListItem, dispatch: Dispatch<any>) => {
+  const currentQuantity = getCurrentQuantity(item);
+  const initialQty = getInitialQuantity(item);
+  if (item.quantityLeft && currentQuantity < MAX) {
+    const newQty = currentQuantity + 1;
+    dispatch(updatePicks([{ ...item, newQuantityLeft: newQty, itemQty: initialQty - newQty }]));
+  } else if (!item.quantityLeft) {
+    dispatch(updatePicks([{ ...item, quantityLeft: 1 }]));
+  }
+};
+
+export const handleDecrement = (item: PickListItem, dispatch: Dispatch<any>) => {
+  const currentQuantity = getCurrentQuantity(item);
+  if (item.quantityLeft && currentQuantity > 0) {
+    dispatch(updatePicks([{
+      ...item,
+      newQuantityLeft: currentQuantity - 1,
+      itemQty: getInitialQuantity(item) - (currentQuantity - 1)
+    }]));
+  }
+};
+
+export const handleTextChange = (text: string, item: PickListItem, dispatch: Dispatch<any>) => {
+  const newQuantity = Number.parseInt(text, 10);
+  if (text === '' || (newQuantity < MAX && newQuantity >= 0)) {
+    dispatch(updatePicks([{
+      ...item,
+      newQuantityLeft: newQuantity,
+      itemQty: getInitialQuantity(item) - newQuantity
+    }]));
+  }
+};
+
+export const onEndEditing = (item: PickListItem, dispatch: Dispatch<any>) => {
+  if (typeof (item.newQuantityLeft) !== 'number' || Number.isNaN(item.newQuantityLeft)) {
+    dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft, itemQty: 0 }]));
+  }
+};
+
 export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const {
     pickingState, palletDetailsApi, palletConfigApi, dispatch,
@@ -532,51 +577,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
-  const getInitialQuantity = (item: PickListItem) => (item.quantityLeft || 0);
-
-  const getCurrentQuantity = (item: PickListItem) => (typeof item.newQuantityLeft === 'number'
-    ? item.newQuantityLeft
-    : getInitialQuantity(item));
-
-  const handleIncrement = (item: PickListItem) => {
-    const currentQuantity = getCurrentQuantity(item);
-    const initialQty = getInitialQuantity(item);
-    if (item.quantityLeft && currentQuantity < MAX) {
-      const newQty = currentQuantity + 1;
-      dispatch(updatePicks([{ ...item, newQuantityLeft: newQty, itemQty: initialQty - newQty }]));
-    } else if (!item.quantityLeft) {
-      dispatch(updatePicks([{ ...item, quantityLeft: 1, itemQty: initialQty - 1 }]));
-    }
-  };
-
-  const handleDecrement = (item: PickListItem) => {
-    const currentQuantity = getCurrentQuantity(item);
-    if (item.quantityLeft && currentQuantity > 0) {
-      dispatch(updatePicks([{
-        ...item,
-        newQuantityLeft: currentQuantity - 1,
-        itemQty: getInitialQuantity(item) - (currentQuantity - 1)
-      }]));
-    }
-  };
-
-  const handleTextChange = (text: string, item: PickListItem) => {
-    const newQuantity = Number.parseInt(text, 10);
-    if (text === '' || (newQuantity < MAX && newQuantity >= 0)) {
-      dispatch(updatePicks([{
-        ...item,
-        newQuantityLeft: newQuantity,
-        itemQty: getInitialQuantity(item) - newQuantity
-      }]));
-    }
-  };
-
-  const onEndEditing = (item: PickListItem) => {
-    if (typeof (item.newQuantityLeft) !== 'number' || Number.isNaN(item.newQuantityLeft)) {
-      dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft, itemQty: 0 }]));
-    }
-  };
-
   if (palletDetailsApi.isWaiting || palletConfigApi.isWaiting) {
     return (
       <ActivityIndicator
@@ -612,16 +612,16 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         category={item.category}
         createdBy={item.createdBy}
         createdTS={item.createTs}
-        decrementQty={() => handleDecrement(item)}
-        incrementQty={() => handleIncrement(item)}
+        decrementQty={() => handleDecrement(item, dispatch)}
+        incrementQty={() => handleIncrement(item, dispatch)}
         itemDesc={item.itemDesc}
         itemNbr={item.itemNbr}
-        onQtyTextChange={(text: string) => handleTextChange(text, item)}
+        onQtyTextChange={(text: string) => handleTextChange(text, item, dispatch)}
         // will need to get initial quantity from pallet details
         quantity={currentQuantity}
         salesFloorLocation={item.salesFloorLocationName}
         upcNbr={item.upcNbr}
-        onEndEditing={() => onEndEditing(item)}
+        onEndEditing={() => onEndEditing(item, dispatch)}
       />
     );
   };
