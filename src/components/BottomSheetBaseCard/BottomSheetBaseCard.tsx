@@ -20,15 +20,15 @@ const BottomSheetBaseCard = (props: BaseCardProps): JSX.Element => {
     <BottomSheetView style={styles.container}>
       <TouchableOpacity style={styles.touchableOpacity} onPress={onPress}>
         <BottomSheetView style={styles.imageView}>
-          {!materialIconName && (
+          {!materialIconName ? (
             <Image
               style={styles.image}
               source={image || require('../../assets/images/placeholder.png')}
             />
-          )}
-          {materialIconName && (
+          ) : null}
+          {materialIconName ? (
             <MaterialCommunityIcon size={40} name={materialIconName} />
-          )}
+          ) : null}
         </BottomSheetView>
         <BottomSheetView style={styles.textView}>
           <Text style={styles.text}>{text}</Text>
