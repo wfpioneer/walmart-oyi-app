@@ -11,7 +11,6 @@ export const asyncReducer = combineReducers({
   getLocationsForItemV1: makeAsyncReducer(asyncActions.GET_LOCATIONS_FOR_ITEM_V1),
   getItemManagerApprovalHistory: makeAsyncReducer(asyncActions.GET_ITEM_MANAGERAPPROVALHISTORY),
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
-  getItemDetails: makeAsyncReducer(asyncActions.GET_ITEM_DETAILS),
   getWorklist: makeAsyncReducer(asyncActions.GET_WORKLIST),
   getWorklistV1: makeAsyncReducer(asyncActions.GET_WORKLIST_V1),
   getWorklistAudits: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT),
