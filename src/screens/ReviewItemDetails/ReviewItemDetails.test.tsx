@@ -650,6 +650,7 @@ describe('ReviewItemDetailsScreen', () => {
     });
     const HIDE_ACTIVITY = 'MODAL/HIDE_ACTIVITY';
     const RESET_CREATE_PICK = 'API/CREATE_NEW_PICK/RESET';
+    const RESET_CREATE_PICK_V1 = 'API/CREATE_NEW_PICK_V1/RESET';
     const SHOW_INFO_MODAL = 'MODAL/SHOW_INFO_MODAL';
 
     it('Tests createNewPickApiHook on 200 success', () => {
@@ -678,7 +679,8 @@ describe('ReviewItemDetailsScreen', () => {
       expect(mockSetIsQuickPick).toHaveBeenCalledWith(false);
       expect(mockSetNumberOfPallets).toHaveBeenCalledWith(1);
       expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: RESET_CREATE_PICK_V1 });
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: HIDE_ACTIVITY });
     });
     it('Tests createNewPickApiHook on 409 failure when there are no reserve pallets available', () => {
       const failureApi: AsyncState = {
@@ -707,9 +709,10 @@ describe('ReviewItemDetailsScreen', () => {
         mockSetIsQuickPick,
         mockSetNumberOfPallets
       );
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: RESET_CREATE_PICK_V1 });
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
     it('Tests createNewPickApiHook on 409 failure', () => {
@@ -739,9 +742,10 @@ describe('ReviewItemDetailsScreen', () => {
         mockSetIsQuickPick,
         mockSetNumberOfPallets
       );
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: RESET_CREATE_PICK_V1 });
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickList409Error);
     });
     it('Tests createNewPickApiHook on failure', () => {
@@ -764,9 +768,10 @@ describe('ReviewItemDetailsScreen', () => {
         mockSetIsQuickPick,
         mockSetNumberOfPallets
       );
-      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: RESET_CREATE_PICK });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: HIDE_ACTIVITY });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: RESET_CREATE_PICK_V1 });
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: HIDE_ACTIVITY });
       expect(Toast.show).toHaveBeenCalledWith(toastPickListError);
     });
     it('Tests createNewPickApiHook isWaiting', () => {
