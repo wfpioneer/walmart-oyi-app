@@ -18,8 +18,7 @@ import {
   UPDATE_PALLET,
   UPDATE_PALLET_EXPIRATION_DATE
 } from '../actions/PalletManagement';
-import { CombinePallet, PalletInfo } from '../../models/PalletManagementTypes';
-import { PalletItem } from '../../models/PalletItem';
+import { CombinePallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
 
 interface PalletManagementState {
   managePalletMenu: boolean;

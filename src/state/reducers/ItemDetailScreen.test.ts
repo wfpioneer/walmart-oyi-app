@@ -108,7 +108,8 @@ describe('ItemDetailScreen reducer tests', () => {
       locationName: 'B1-1',
       type: 'Reserve',
       typeNbr: 7,
-      newQty: 0
+      newQty: 0,
+      qty: undefined
     }];
     testResults = ItemDetailScreen(testMutatedState, setReserveLocations(reserveLoc));
     testMutatedState.reserveLocations = reserveLoc;

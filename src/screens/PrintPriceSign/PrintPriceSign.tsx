@@ -788,7 +788,6 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
 const PrintPriceSign = (): JSX.Element => {
   const { scannedEvent } = useTypedSelector(state => state.Global);
   const { exceptionType, actionCompleted } = useTypedSelector(state => state.ItemDetailScreen);
-  const { result: itemResult } = useTypedSelector(state => state.async.getItemDetails);
   const { result: itemResultV4 } = useTypedSelector(state => state.async.getItemDetailsV4);
   const printAPI = useTypedSelector(state => state.async.printSign);
   const { result: sectionsResult } = useTypedSelector(state => state.async.getSections);
@@ -823,7 +822,7 @@ const PrintPriceSign = (): JSX.Element => {
       scannedEvent={scannedEvent}
       exceptionType={exceptionType ?? ''}
       actionCompleted={actionCompleted}
-      itemResult={itemResult ?? itemResultV4}
+      itemResult={itemResultV4}
       printAPI={printAPI}
       printLabelAPI={printLabelAPI}
       printPalletAPI={printPalletAPI}
