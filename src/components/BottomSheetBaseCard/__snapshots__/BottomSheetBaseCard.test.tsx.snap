@@ -43,7 +43,6 @@ exports[`Base card render tests renders the bottom sheet base card with image 1`
           }
         }
       />
-      
     </Memo(BottomSheetView)>
     <Memo(BottomSheetView)
       style={
