@@ -43,6 +43,7 @@ import { setPerishableCategories, setupPallet } from '../../state/actions/Pallet
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
+import { Configurations } from '../../models/User';
 
 // eslint-disable-next-line no-shadow
 export enum ExpiryPromptShow {
@@ -64,15 +65,13 @@ interface SFWorklfowProps {
   expirationState: UseStateType<string>;
   perishableItemsState: UseStateType<Array<number>>;
   perishableCategories: number[];
-  backupCategories: string;
   showExpiryPromptState: UseStateType<ExpiryPromptShow>;
   configCompleteState: UseStateType<boolean>;
   showActivity: boolean;
   completePalletState: UseStateType<boolean>;
   updateItemsState: UseStateType<boolean>;
   deleteItemsState: UseStateType<boolean>;
-  overridePalletPerishables: boolean;
-  inProgress: boolean;
+  configs: Configurations;
 }
 
 export const activityIndicatorEffect = (
@@ -371,42 +370,63 @@ export const getCurrentQuantity = (item: PickListItem) => (typeof item.newQuanti
   ? item.newQuantityLeft
   : getInitialQuantity(item));
 
-export const handleIncrement = (item: PickListItem, dispatch: Dispatch<any>) => {
+export const handleIncrement = (
+  item: PickListItem,
+  dispatch: Dispatch<any>,
+  showQuantityStocked: boolean
+) => {
   const currentQuantity = getCurrentQuantity(item);
   const initialQty = getInitialQuantity(item);
   if (item.quantityLeft && currentQuantity < MAX) {
     const newQty = currentQuantity + 1;
-    dispatch(updatePicks([{ ...item, newQuantityLeft: newQty, itemQty: initialQty - newQty }]));
+    dispatch(updatePicks(!showQuantityStocked
+      ? [{ ...item, newQuantityLeft: newQty, itemQty: initialQty - newQty }]
+      : [{ ...item, newQuantityLeft: newQty }]));
   } else if (!item.quantityLeft) {
     dispatch(updatePicks([{ ...item, quantityLeft: 1 }]));
   }
 };
 
-export const handleDecrement = (item: PickListItem, dispatch: Dispatch<any>) => {
+export const handleDecrement = (
+  item: PickListItem,
+  dispatch: Dispatch<any>,
+  showQuantityStocked: boolean
+) => {
   const currentQuantity = getCurrentQuantity(item);
   if (item.quantityLeft && currentQuantity > 0) {
-    dispatch(updatePicks([{
+    dispatch(updatePicks(!showQuantityStocked ? [{
       ...item,
       newQuantityLeft: currentQuantity - 1,
       itemQty: getInitialQuantity(item) - (currentQuantity - 1)
-    }]));
+    }] : [{ ...item, newQuantityLeft: currentQuantity - 1 }]));
   }
 };
 
-export const handleTextChange = (text: string, item: PickListItem, dispatch: Dispatch<any>) => {
+export const handleTextChange = (
+  text: string,
+  item: PickListItem,
+  dispatch: Dispatch<any>,
+  showQuantityStocked: boolean
+) => {
   const newQuantity = Number.parseInt(text, 10);
   if (text === '' || (newQuantity < MAX && newQuantity >= 0)) {
-    dispatch(updatePicks([{
+    dispatch(updatePicks(!showQuantityStocked ? [{
       ...item,
       newQuantityLeft: newQuantity,
       itemQty: getInitialQuantity(item) - newQuantity
-    }]));
+    }] : [{ ...item, newQuantityLeft: newQuantity }]));
   }
 };
 
-export const onEndEditing = (item: PickListItem, dispatch: Dispatch<any>) => {
+export const onEndEditing = (
+  item: PickListItem,
+  dispatch: Dispatch<any>,
+  showQuantityStocked: boolean
+) => {
   if (typeof (item.newQuantityLeft) !== 'number' || Number.isNaN(item.newQuantityLeft)) {
-    dispatch(updatePicks([{ ...item, newQuantityLeft: item.quantityLeft, itemQty: 0 }]));
+    dispatch(updatePicks(!showQuantityStocked
+      ? [{ ...item, newQuantityLeft: item.quantityLeft, itemQty: 0 }]
+      : [{ ...item, newQuantityLeft: item.quantityLeft }]));
   }
 };
 
@@ -414,11 +434,18 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const {
     pickingState, palletDetailsApi, palletConfigApi, dispatch,
     navigation, useEffectHook, expirationState, perishableItemsState,
-    showExpiryPromptState, perishableCategories, backupCategories,
+    showExpiryPromptState, perishableCategories, configs,
     configCompleteState, showActivity, updatePalletItemsApi,
     deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
-    updateItemsState, deleteItemsState, overridePalletPerishables, inProgress
+    updateItemsState, deleteItemsState
   } = props;
+
+  const {
+    backupCategories,
+    overridePalletPerishables,
+    inProgress,
+    showQuantityStocked
+  } = configs;
 
   const [expirationDate, setExpiration] = expirationState;
   const [perishableItems, setPerishableItems] = perishableItemsState;
@@ -577,6 +604,33 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
+  const increaseStockQty = (item: PickListItem) => {
+    if (item.itemQty && item.itemQty < MAX) {
+      dispatch(updatePicks([{ ...item, itemQty: item.itemQty + 1 }]));
+    } else if (!item.itemQty) {
+      dispatch(updatePicks([{ ...item, itemQty: 1 }]));
+    }
+  };
+
+  const decreaseStockQty = (item: PickListItem) => {
+    if (item.itemQty && item.itemQty > 0) {
+      dispatch(updatePicks([{ ...item, itemQty: item.itemQty - 1 }]));
+    }
+  };
+
+  const onEndStockQtyEdit = (item: PickListItem) => {
+    if (typeof (item.itemQty) !== 'number' || Number.isNaN(item.itemQty)) {
+      dispatch(updatePicks([{ ...item, itemQty: item.itemQty }]));
+    }
+  };
+
+  const onStockQtyTextChange = (text: string, item: PickListItem) => {
+    const newItemQty = Number.parseInt(text, 10);
+    if (text === '' || (newItemQty < MAX && newItemQty >= 0)) {
+      dispatch(updatePicks([{ ...item, itemQty: newItemQty }]));
+    }
+  };
+
   if (palletDetailsApi.isWaiting || palletConfigApi.isWaiting) {
     return (
       <ActivityIndicator
@@ -612,16 +666,21 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
         category={item.category}
         createdBy={item.createdBy}
         createdTS={item.createTs}
-        decrementQty={() => handleDecrement(item, dispatch)}
-        incrementQty={() => handleIncrement(item, dispatch)}
+        decrementQty={() => handleDecrement(item, dispatch, showQuantityStocked)}
+        incrementQty={() => handleIncrement(item, dispatch, showQuantityStocked)}
         itemDesc={item.itemDesc}
         itemNbr={item.itemNbr}
-        onQtyTextChange={(text: string) => handleTextChange(text, item, dispatch)}
+        onQtyTextChange={(text: string) => handleTextChange(text, item, dispatch, showQuantityStocked)}
         // will need to get initial quantity from pallet details
         quantity={currentQuantity}
         salesFloorLocation={item.salesFloorLocationName}
         upcNbr={item.upcNbr}
-        onEndEditing={() => onEndEditing(item, dispatch)}
+        onEndEditing={() => onEndEditing(item, dispatch, showQuantityStocked)}
+        stockedQty={showQuantityStocked ? item.itemQty || 0 : undefined}
+        incrementStockQty={() => increaseStockQty(item)}
+        decrementStockQty={() => decreaseStockQty(item)}
+        onStockQtyTextChange={(text: string) => onStockQtyTextChange(text, item)}
+        onStockEndEditing={() => onEndStockQtyEdit(item)}
       />
     );
   };
@@ -727,8 +786,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
 
 const SalesFloorWorkflow = () => {
   const pickingState = useTypedSelector(state => state.Picking);
-  const { backupCategories, overridePalletPerishables, inProgress } = useTypedSelector(state => state.User.configs);
-  const updatePicklistStatusApi = inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
+  const { configs } = useTypedSelector(state => state.User);
+  const updatePicklistStatusApi = configs.inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
     : useTypedSelector(state => state.async.updatePicklistStatus);
   const palletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
   const palletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
@@ -792,8 +851,6 @@ const SalesFloorWorkflow = () => {
           expirationState={expirationState}
           perishableItemsState={perishableItemsState}
           perishableCategories={perishableCategories}
-          backupCategories={backupCategories}
-          overridePalletPerishables={overridePalletPerishables}
           showExpiryPromptState={showExpiryPromptState}
           configCompleteState={configCompleteState}
           showActivity={showActivity}
@@ -802,7 +859,7 @@ const SalesFloorWorkflow = () => {
           completePalletState={completePalletState}
           updateItemsState={updateItemsState}
           deleteItemsState={deleteItemsState}
-          inProgress={inProgress}
+          configs={configs}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

@@ -40,6 +40,7 @@ import {
 } from './SalesFloorWorkflow';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { UPDATE_PICKS } from '../../state/actions/Picking';
+import { mockConfig } from '../../mockData/mockConfig';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -156,7 +157,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
@@ -166,8 +166,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
 
@@ -193,7 +192,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
@@ -203,8 +201,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
 
@@ -233,7 +230,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
@@ -243,8 +239,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -280,7 +275,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
@@ -291,8 +285,7 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
 
@@ -330,7 +323,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={waitingAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
@@ -341,8 +333,7 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
 
@@ -380,7 +371,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={showExpiryDialogState}
@@ -391,8 +381,7 @@ describe('Sales floor workflow tests', () => {
         updatePicklistStatusApi={defaultAsyncState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
 
@@ -431,7 +420,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={showExpiryCalendarState}
@@ -441,8 +429,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
 
@@ -499,7 +486,6 @@ describe('Sales floor workflow tests', () => {
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
         perishableCategories={[]}
-        backupCategories=""
         palletConfigApi={defaultAsyncState}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
@@ -509,8 +495,7 @@ describe('Sales floor workflow tests', () => {
         completePalletState={mockCompletePalletState}
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
-        overridePalletPerishables={false}
-        inProgress={false}
+        configs={mockConfig}
       />
     );
 
@@ -1115,7 +1100,7 @@ describe('Sales floor workflow tests', () => {
 
     it('tests the increment function', () => {
       // unquantified item
-      handleIncrement(basePickItem, mockDispatch);
+      handleIncrement(basePickItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
         payload: [expect.objectContaining({
@@ -1126,7 +1111,7 @@ describe('Sales floor workflow tests', () => {
       mockDispatch.mockReset();
 
       // quantity left, not max
-      handleIncrement(mockQuantifiedItem, mockDispatch);
+      handleIncrement(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
         payload: [expect.objectContaining({
@@ -1139,18 +1124,25 @@ describe('Sales floor workflow tests', () => {
 
       // quantity left, max
       mockQuantifiedItem.newQuantityLeft = 999;
-      handleIncrement(mockQuantifiedItem, mockDispatch);
+      handleIncrement(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).not.toHaveBeenCalled();
+
+      // show quantity stocked true
+      mockQuantifiedItem.newQuantityLeft = 3;
+      handleIncrement(mockQuantifiedItem, mockDispatch, true);
+      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
+        payload: [expect.objectContaining({ itemQty: 1 })]
+      }));
     });
 
     it('tests the decrement function', () => {
       // unquantified item
-      handleDecrement(basePickItem, mockDispatch);
+      handleDecrement(basePickItem, mockDispatch, false);
       expect(mockDispatch).not.toHaveBeenCalled();
 
       // quantified item
       mockQuantifiedItem.newQuantityLeft = 3;
-      handleDecrement(mockQuantifiedItem, mockDispatch);
+      handleDecrement(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
         payload: [expect.objectContaining({
@@ -1163,17 +1155,26 @@ describe('Sales floor workflow tests', () => {
 
       // zero quantity
       mockQuantifiedItem.newQuantityLeft = 0;
-      handleDecrement(mockQuantifiedItem, mockDispatch);
+      handleDecrement(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).not.toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+
+      // show quantity stocked true
+      mockQuantifiedItem.newQuantityLeft = 3;
+      handleDecrement(mockQuantifiedItem, mockDispatch, true);
+      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
+        payload: [expect.objectContaining({ itemQty: 3 })]
+      }));
     });
 
     it('tests the text editing', () => {
       // NaN
-      handleTextChange('hello', mockQuantifiedItem, mockDispatch);
+      handleTextChange('hello', mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).not.toHaveBeenCalled();
 
       // Empty text
-      handleTextChange('', mockQuantifiedItem, mockDispatch);
+      handleTextChange('', mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
         payload: [expect.objectContaining({
@@ -1184,15 +1185,15 @@ describe('Sales floor workflow tests', () => {
       mockDispatch.mockReset();
 
       // Out of bound min
-      handleTextChange('-1', mockQuantifiedItem, mockDispatch);
+      handleTextChange('-1', mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).not.toHaveBeenCalled();
 
       // Out of bounds max
-      handleTextChange('1000', mockQuantifiedItem, mockDispatch);
+      handleTextChange('1000', mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).not.toHaveBeenCalled();
 
       // Good input
-      handleTextChange('3', mockQuantifiedItem, mockDispatch);
+      handleTextChange('3', mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
         payload: [expect.objectContaining({
@@ -1200,25 +1201,46 @@ describe('Sales floor workflow tests', () => {
           itemQty: 2
         })]
       });
+
+      mockDispatch.mockReset();
+
+      // show quantity stocked true
+      handleTextChange('2', mockQuantifiedItem, mockDispatch, true);
+      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
+        payload: [expect.objectContaining({
+          itemQty: 3
+        })]
+      }));
     });
 
     it('tests the onEditing function to ensure values are allowable', () => {
       // is numeric
-      onEndEditing(mockQuantifiedItem, mockDispatch);
+      onEndEditing(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).not.toHaveBeenCalled();
 
       // is NaN
       mockQuantifiedItem.newQuantityLeft = NaN;
-      onEndEditing(mockQuantifiedItem, mockDispatch);
+      onEndEditing(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalled();
 
       mockDispatch.mockReset();
 
-      // is non-umeric
+      // is non-numeric
       // @ts-expect-error forced type mismatch
       mockQuantifiedItem.newQuantityLeft = 'hello';
-      onEndEditing(mockQuantifiedItem, mockDispatch);
+      onEndEditing(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+
+      // show quantity stocked true
+      mockQuantifiedItem.newQuantityLeft = 3;
+      onEndEditing(mockQuantifiedItem, mockDispatch, true);
+      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
+        payload: [expect.objectContaining({
+          itemQty: 0
+        })]
+      }));
     });
   });
 });
