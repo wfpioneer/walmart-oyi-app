@@ -557,7 +557,8 @@ export default {
     NO_PALLETS_FOUND_FOR_ITEM: 'No hay pallets encontrados para este artículo',
     NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor',
     ITEMS: 'Artículos',
-    CUSTOM_ITEMS: 'Artículos'
+    CUSTOM_ITEMS: 'Artículos',
+    IN_PROGRESS: 'En Progreso'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',
