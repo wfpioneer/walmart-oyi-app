@@ -11,6 +11,7 @@ import CollapsibleCard from '../CollapsibleCard/CollapsibleCard';
 import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
 import { TrackEventSource } from '../../models/Generics.d';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 export type ItemInfoProps = {
   itemName: string;
@@ -25,6 +26,7 @@ export type ItemInfoProps = {
   countryCode: string;
   showItemImage: boolean;
   worklistAuditType?: string;
+  worklistStatus?: WorkListStatus;
 };
 
 export type AdditionalItemDetailsProps = {
@@ -111,7 +113,7 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
     price, exceptionType, navigationForPrint: navigation, additionalItemDetails,
-    countryCode, showItemImage, worklistAuditType
+    countryCode, showItemImage, worklistAuditType, worklistStatus
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -135,7 +137,22 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
         )}
         <View>
           {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
-          {worklistAuditType && <Text style={styles.auditFlagText}>{strings('AUDITS.AUDITS')}</Text>}
+          <View style={styles.auditFlagView}>
+            {worklistAuditType && (
+            // TODO make container flex row
+            <Text style={styles.auditFlagText}>
+              {strings('AUDITS.AUDITS')}
+              {' '}
+            </Text>
+            )}
+            {(worklistStatus === WorkListStatus.AUDITSTARTED || worklistStatus === WorkListStatus.INPROGRESS) && (
+            <Text style={styles.auditFlagText}>
+              -
+              {' '}
+              { strings('AUDITS.IN_PROGRESS')}
+            </Text>
+            )}
+          </View>
           <Text style={styles.itemNameText}>{itemName}</Text>
           <View style={styles.nbrContainer}>
             <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
@@ -167,7 +184,8 @@ ItemInfo.defaultProps = {
   navigationForPrint: undefined,
   price: undefined,
   additionalItemDetails: undefined,
-  worklistAuditType: undefined
+  worklistAuditType: undefined,
+  worklistStatus: undefined
 };
 
 export default ItemInfo;
