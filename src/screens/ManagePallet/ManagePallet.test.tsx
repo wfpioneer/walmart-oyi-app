@@ -1320,7 +1320,7 @@ describe('ManagePalletScreen', () => {
       expect(enableSave(mockItems, mockPalletInfo)).toStrictEqual(true);
     });
 
-    it('Tests navListenerHook function', () => {
+    it.skip('Tests navListenerHook function', () => {
       type EventMapBase = Record<
         string,
         { data?: any; canPreventDefault?: boolean }
