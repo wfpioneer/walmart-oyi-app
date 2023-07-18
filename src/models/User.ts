@@ -120,6 +120,7 @@ export interface Configurations {
   inProgress: boolean;
   overridePalletPerishables: boolean;
   peteGetLocations: boolean;
+  showQuantityStocked: boolean;
 }
 
 export interface area {

@@ -120,7 +120,8 @@ export const initialState: User = {
     peteGetPallets: false,
     inProgress: false,
     overridePalletPerishables: false,
-    peteGetLocations: false
+    peteGetLocations: false,
+    showQuantityStocked: false
   },
   userTokens: {
     accessToken: '',
@@ -132,7 +133,8 @@ export const initialState: User = {
     scopes: [],
     tokenAdditionalParameters: undefined,
     tokenType: ''
-  }
+  },
+  userId: ''
 };
 
 // eslint-disable-next-line default-param-last
@@ -188,7 +190,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           peteGetPallets: action.payload.peteGetPallets || false,
           inProgress: action.payload.inProgress || false,
           overridePalletPerishables: action.payload.overridePltPerish || false,
-          peteGetLocations: action.payload.peteGetLocations || false
+          peteGetLocations: action.payload.peteGetLocations || false,
+          showQuantityStocked: action.payload.showQtyStocked || false
         }
       };
     default:

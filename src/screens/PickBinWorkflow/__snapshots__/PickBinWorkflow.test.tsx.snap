@@ -204,6 +204,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
@@ -393,6 +394,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
@@ -543,6 +545,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
@@ -713,6 +716,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
@@ -902,6 +906,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
@@ -1052,6 +1057,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
@@ -1240,6 +1246,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
@@ -1428,6 +1435,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
         "showFeedback": false,
         "showItemImage": false,
         "showOpenAuditLink": false,
+        "showQuantityStocked": false,
         "showRollOverAudit": false,
       }
     }
