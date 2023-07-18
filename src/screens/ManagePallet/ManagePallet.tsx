@@ -1,5 +1,12 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect, useMemo, useRef, useState
+  DependencyList,
+  Dispatch,
+  EffectCallback,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 import {
   BackHandler,
@@ -33,7 +40,12 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetailsV4, postCreatePallet, updatePalletItemQty
+  addPalletUPCs,
+  clearPallet,
+  deleteUpcs,
+  getItemDetailsV4,
+  postCreatePallet,
+  updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -58,7 +70,12 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS_V4, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS,
+  CLEAR_PALLET,
+  DELETE_UPCS,
+  GET_ITEM_DETAILS_V4,
+  POST_CREATE_PALLET,
+  UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -701,17 +718,14 @@ export const navListenerHook = (
   palletInfo: PalletInfo,
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
   dispatch: Dispatch<any>,
-) => {
-  const navigationListener = navigation.addListener('beforeRemove', e => {
-    if (!confirmBackNavigate && enableSave(items, palletInfo)) {
-      setDisplayWarningModal(true);
-      e.preventDefault();
-    } else {
-      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-    }
-  });
-  return navigationListener;
-};
+) => navigation.addListener('beforeRemove', e => {
+  if (!confirmBackNavigate && enableSave(items, palletInfo)) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  } else {
+    dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+  }
+});
 
 const backConfirmed = (
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
@@ -727,7 +741,7 @@ export const renderWarningModal = (
   displayWarningModal: boolean,
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
   setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
 ) => (
   <CustomModalComponent
     isVisible={displayWarningModal}
@@ -774,7 +788,16 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
   // validation on app back press
   useEffectHook(() => {
-    navListenerHook(navigation, confirmBackNavigate, items, palletInfo, setDisplayWarningModal, dispatch);
+    const navigationListener = navigation.addListener('beforeRemove', e => {
+      if (!confirmBackNavigate && enableSave(items, palletInfo)) {
+        setDisplayWarningModal(true);
+        e.preventDefault();
+      } else {
+        dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+      }
+    });
+    return navigationListener;
+    // navListenerHook(navigation, confirmBackNavigate, items, palletInfo, setDisplayWarningModal, dispatch);
   }, [navigation, items, confirmBackNavigate]);
 
   // validation on Hardware backPress
