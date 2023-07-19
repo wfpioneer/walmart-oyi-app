@@ -3,14 +3,10 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
 import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-  useRoute
+  NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
-import { AsyncState } from '../../models/AsyncState';
 import ItemDetails from '../../models/ItemDetails';
 import User from '../../models/User';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -23,17 +19,14 @@ import { UseStateType } from '../../models/Generics.d';
 import { validateSession } from '../../utils/sessionTimeout';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
-import {
-  setPickCreateFloor,
-  setPickCreateItem,
-  setPickCreateReserve
-} from '../../state/actions/Picking';
+import { setPickCreateFloor, setPickCreateItem, setPickCreateReserve } from '../../state/actions/Picking';
 import Location from '../../models/Location';
 import { resetScannedEvent } from '../../state/actions/Global';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 export interface OtherActionProps {
   exceptionType: string | null | undefined;
-  getItemDetailsApi: AsyncState;
+  itemDetails: ItemDetails;
   trackEventCall: typeof trackEvent;
   chosenActionState: UseStateType<string>;
   dispatch: Dispatch<any>;
@@ -117,7 +110,6 @@ export const renderChooseActionRadioButtons = (
 export const OtherActionScreen = (props: OtherActionProps) => {
   const {
     exceptionType,
-    getItemDetailsApi,
     trackEventCall,
     chosenActionState,
     dispatch,
@@ -126,7 +118,8 @@ export const OtherActionScreen = (props: OtherActionProps) => {
     validateSessionCall,
     appUser,
     floorLocations,
-    reserveLocations
+    reserveLocations,
+    itemDetails
   } = props;
 
   const EDIT_LOCATION = strings('LOCATION.EDIT_LOCATION');
@@ -146,8 +139,6 @@ export const OtherActionScreen = (props: OtherActionProps) => {
   } = appUser;
   const [chosenAction, setChosenAction] = chosenActionState;
 
-  const itemDetails: ItemDetails = getItemDetailsApi.result && getItemDetailsApi.result.data;
-
   const hasFloorLocations = floorLocations && floorLocations.length >= 1;
   const hasReserveLocations = reserveLocations && reserveLocations.length >= 1;
 
@@ -162,7 +153,11 @@ export const OtherActionScreen = (props: OtherActionProps) => {
       isDisabled: !hasReserveLocations,
       disabledText: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR')
     },
-    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED, isDisabled: itemDetails.completed }
+    {
+      title: SCAN_NO_ACTION,
+      subText: NO_ACTION_NEEDED,
+      isDisabled: itemDetails.worklistStatus === WorkListStatus.COMPLETED
+    }
   ]);
   desiredActionButtonsMap.set('NS', [
     {
@@ -178,7 +173,11 @@ export const OtherActionScreen = (props: OtherActionProps) => {
       isDisabled: !hasFloorLocations,
       disabledText: strings('ITEM.NO_FLOOR_LOCATION')
     },
-    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED, isDisabled: itemDetails.completed }
+    {
+      title: SCAN_NO_ACTION,
+      subText: NO_ACTION_NEEDED,
+      isDisabled: itemDetails.worklistStatus === WorkListStatus.COMPLETED
+    }
   ]);
   desiredActionButtonsMap.set('NP', [
     {
@@ -195,7 +194,11 @@ export const OtherActionScreen = (props: OtherActionProps) => {
     },
     { title: EDIT_LOCATION, subText: CHANGE_LOCATION, isDisabled: false },
     { title: OH_CHANGE, subText: TOTAL_OH, isDisabled: false },
-    { title: SCAN_NO_ACTION, subText: NO_ACTION_NEEDED, isDisabled: itemDetails.completed }
+    {
+      title: SCAN_NO_ACTION,
+      subText: NO_ACTION_NEEDED,
+      isDisabled: itemDetails.worklistStatus === WorkListStatus.COMPLETED
+    }
   ]);
 
   const desiredActions = desiredActionButtonsMap.get(exceptionType);
@@ -204,7 +207,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
     desiredActions?.filter(item => item.title !== OH_CHANGE);
   }
 
-  if (itemDetails.completed) {
+  if (itemDetails.worklistStatus === WorkListStatus.COMPLETED) {
     desiredActions?.filter(item => item.title !== SCAN_NO_ACTION);
   }
 
@@ -351,18 +354,44 @@ const OtherAction = () => {
     state => state.ItemDetailScreen
   );
   const user = useTypedSelector(state => state.User);
-  const getItemDetailsApi = useTypedSelector(
-    state => state.async.getItemDetailsV4
-  );
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
   const chosenActionState = useState('');
+  const defultItemDetails: ItemDetails = {
+    code: 200,
+    itemName: '',
+    itemNbr: 0,
+    upcNbr: '',
+    status: 'Active',
+    categoryNbr: 0,
+    categoryDesc: '',
+    price: 0,
+    basePrice: 0,
+    completed: false,
+    onHandsQty: 0,
+    pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 0,
+    claimsOnHandQty: 0,
+    backroomQty: 0,
+    cloudQty: undefined,
+    replenishment: {
+      onOrder: 0
+    },
+    color: '',
+    grossProfit: 0,
+    margin: 0,
+    size: 0,
+    vendorPackQty: 0,
+    auditCompleted: false,
+    worklistAuditType: ''
+  };
+  const itemDetails = useTypedSelector(state => state.ReserveAdjustmentScreen.itemDetails) || defultItemDetails;
   return (
     <OtherActionScreen
       exceptionType={exceptionType}
       trackEventCall={trackEvent}
-      getItemDetailsApi={getItemDetailsApi}
+      itemDetails={itemDetails}
       chosenActionState={chosenActionState}
       dispatch={dispatch}
       navigation={navigation}

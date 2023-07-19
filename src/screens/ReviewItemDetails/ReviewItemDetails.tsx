@@ -1194,6 +1194,7 @@ export const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails
 
 export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails) => {
   if (itemDetails) {
+    dispatch(setItemDetails(itemDetails));
     dispatch(setupScreen(
       itemDetails.itemNbr,
       itemDetails.upcNbr,
