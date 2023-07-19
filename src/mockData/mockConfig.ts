@@ -43,5 +43,6 @@ export const mockConfig: Configurations = {
   inProgress: false,
   peteGetPallets: false,
   overridePalletPerishables: false,
-  peteGetLocations: false
+  peteGetLocations: false,
+  showQuantityStocked: false
 };

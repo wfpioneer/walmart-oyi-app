@@ -25,10 +25,9 @@ const BottomSheetBaseCard = (props: BaseCardProps): JSX.Element => {
               style={styles.image}
               source={image || require('../../assets/images/placeholder.png')}
             />
-          ) : null}
-          {materialIconName ? (
+          ) : (
             <MaterialCommunityIcon size={40} name={materialIconName} />
-          ) : null}
+          )}
         </BottomSheetView>
         <BottomSheetView style={styles.textView}>
           <Text style={styles.text}>{text}</Text>
