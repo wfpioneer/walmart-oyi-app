@@ -139,7 +139,6 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
           {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
           <View style={styles.auditFlagView}>
             {worklistAuditType && (
-            // TODO make container flex row
             <Text style={styles.auditFlagText}>
               {strings('AUDITS.AUDITS')}
               {' '}
