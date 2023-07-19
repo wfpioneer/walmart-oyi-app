@@ -96,7 +96,8 @@ const mockUser: User = {
     scopes: [],
     tokenAdditionalParameters: undefined,
     tokenType: ''
-  }
+  },
+  userId: ''
 };
 
 export default mockUser;

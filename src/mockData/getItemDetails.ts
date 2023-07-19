@@ -2,6 +2,7 @@
 import ItemDetails, { OHChangeHistory } from '../models/ItemDetails';
 import { approvalRequestSource, approvalStatus } from '../models/ApprovalListItem';
 import Location from '../models/Location';
+import { WorkListStatus } from '../models/WorklistItem';
 /* eslint-disable quote-props */
 
 enum LOCATION_TYPES {
@@ -607,6 +608,173 @@ export default {
         }
       ]
     }
+  } as ItemDetails,
+  '654': {
+    code: 200,
+    itemName: 'Test Item That is Really, Really Long (and has parenthesis)',
+    itemNbr: 1234567890,
+    upcNbr: '000055559999',
+    status: 'Active',
+    categoryNbr: 93,
+    categoryDesc: 'Meat PI',
+    price: 2000.94,
+    basePrice: 1500.30,
+    exceptionType: 'nsfl',
+    imageUrlKey: undefined,
+    imageBlobKey: undefined,
+    completed: false,
+    onHandsQty: 42,
+    pendingOnHandsQty: -999,
+    consolidatedOnHandQty: 10,
+    claimsOnHandQty: 5,
+    backroomQty: 6,
+    cloudQty: undefined,
+    replenishment: {
+      onOrder: 48
+    },
+    location: {
+      floor: [
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: LOCATION_TYPES.SALES_FLOOR,
+          typeNbr: 8
+        },
+        {
+          zoneId: 0,
+          aisleId: 0,
+          sectionId: 2,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '2',
+          locationName: 'A1-2',
+          type: LOCATION_TYPES.END_CAP,
+          typeNbr: 12
+        },
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 3,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '3',
+          locationName: 'A1-3',
+          type: LOCATION_TYPES.POD,
+          typeNbr: 13
+        },
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 4,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '4',
+          locationName: 'A1-4',
+          type: LOCATION_TYPES.DISPLAY,
+          typeNbr: 11
+        }
+      ],
+      reserve: [
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: LOCATION_TYPES.RESERVE,
+          typeNbr: 7,
+          qty: 10,
+          newQty: 0
+        }
+      ],
+      count: 5
+    },
+    sales: {
+      lastUpdateTs: SALES_LAST_UPDATE_TS,
+      dailyAvgSales: 15,
+      daily: [
+        {
+          day: SALES_DAYS.DAY1,
+          value: 100
+        },
+        {
+          day: SALES_DAYS.DAY2,
+          value: 0
+        },
+        {
+          day: SALES_DAYS.DAY3,
+          value: 10
+        },
+        {
+          day: SALES_DAYS.DAY4,
+          value: 10
+        },
+        {
+          day: SALES_DAYS.DAY5,
+          value: 42
+        },
+        {
+          day: SALES_DAYS.DAY6,
+          value: 5
+        },
+        {
+          day: SALES_DAYS.DAY7,
+          value: 1
+        }
+      ],
+      weeklyAvgSales: 10,
+      weekly: [
+        {
+          week: 51,
+          value: 39
+        },
+        {
+          week: 52,
+          value: 26
+        },
+        {
+          week: 53,
+          value: 45
+        },
+        {
+          week: 54,
+          value: 34
+        },
+        {
+          week: 55,
+          value: 34
+        }
+      ]
+    },
+    deliveryHistory: {
+      deliveries: [
+        {
+          date: '2022-06-23',
+          qty: 23
+        },
+        {
+          date: '2022-07-25',
+          qty: 44
+        },
+        {
+          date: '2022-07-26',
+          qty: 23
+        }
+      ]
+    },
+    color: 'blue',
+    grossProfit: 0,
+    margin: 0,
+    size: 0,
+    vendorPackQty: 0,
+    worklistStatus: WorkListStatus.INPROGRESS
   } as ItemDetails
 };
 

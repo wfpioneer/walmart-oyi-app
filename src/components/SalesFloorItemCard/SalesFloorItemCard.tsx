@@ -21,7 +21,7 @@ interface SFItemCardProps {
   decrementQty: () => void;
   onQtyTextChange: (text: string) => void;
   onEndEditing(): void;
-  stockedQty: number;
+  stockedQty?: number;
   incrementStockQty: () => void;
   decrementStockQty: () => void;
   onStockQtyTextChange: (text: string) => void;
@@ -39,7 +39,7 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
   } = props;
 
   const isValid = () => quantity >= 0 && quantity <= MAX;
-  const isStockedValid = () => stockedQty >= 0 && quantity <= MAX;
+  const isStockedValid = () => typeof stockedQty === 'number' && stockedQty >= 0 && quantity <= MAX;
 
   return (
     <View style={styles.container}>
@@ -86,21 +86,27 @@ const SalesFloorItemCard = (props: SFItemCardProps) => {
           onEndEditing={onEndEditing}
         />
       </View>
-      <View style={styles.quantityContainer}>
-        <Text>{strings('PICKING.QUANTITY_STOCKED')}</Text>
-        <NumericSelector
-          isValid={isStockedValid()}
-          maxValue={MAX}
-          minValue={0}
-          onDecreaseQty={decrementStockQty}
-          onIncreaseQty={incrementStockQty}
-          onTextChange={(text: string) => onStockQtyTextChange(text)}
-          value={stockedQty}
-          onEndEditing={onStockEndEditing}
-        />
-      </View>
+      {stockedQty !== undefined ? (
+        <View style={styles.quantityContainer}>
+          <Text>{strings('PICKING.QUANTITY_STOCKED')}</Text>
+          <NumericSelector
+            isValid={isStockedValid()}
+            maxValue={MAX}
+            minValue={0}
+            onDecreaseQty={decrementStockQty}
+            onIncreaseQty={incrementStockQty}
+            onTextChange={(text: string) => onStockQtyTextChange(text)}
+            value={stockedQty}
+            onEndEditing={onStockEndEditing}
+          />
+        </View>
+      ) : null}
     </View>
   );
+};
+
+SalesFloorItemCard.defaultProps = {
+  stockedQty: undefined
 };
 
 export default SalesFloorItemCard;
