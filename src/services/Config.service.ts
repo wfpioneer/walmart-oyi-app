@@ -32,6 +32,7 @@ export interface ConfigResponse {
   inProgress: boolean;
   overridePltPerish: boolean;
   peteGetLocations: boolean;
+  showQtyStocked: boolean;
 }
 
 export default class ConfigService {

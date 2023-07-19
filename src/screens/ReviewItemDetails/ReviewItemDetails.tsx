@@ -59,6 +59,7 @@ import Location from '../../models/Location';
 import { AsyncState } from '../../models/AsyncState';
 import {
   CREATE_NEW_PICK,
+  CREATE_NEW_PICK_V1,
   GET_ITEM_DETAILS_V4,
   GET_ITEM_MANAGERAPPROVALHISTORY,
   GET_ITEM_PICKLISTHISTORY,
@@ -290,6 +291,7 @@ export const createNewPickApiHook = (
       setNumberOfPallets(1);
       // Reset the create new pick API
       dispatch({ type: CREATE_NEW_PICK.RESET });
+      dispatch({ type: CREATE_NEW_PICK_V1.RESET });
       dispatch(hideActivityModal());
     }
     // create new pick api error
@@ -320,6 +322,7 @@ export const createNewPickApiHook = (
         });
       }
       dispatch({ type: CREATE_NEW_PICK.RESET });
+      dispatch({ type: CREATE_NEW_PICK_V1.RESET });
       dispatch(hideActivityModal());
     }
   }
@@ -1191,6 +1194,7 @@ export const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails
 
 export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails) => {
   if (itemDetails) {
+    dispatch(setItemDetails(itemDetails));
     dispatch(setupScreen(
       itemDetails.itemNbr,
       itemDetails.upcNbr,

@@ -385,7 +385,7 @@ describe('createPick function tests', () => {
 
     // API Success
     createPickApiHook(successAsyncState, mockDispatch, navigationProp);
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(navigationProp.isFocused).toHaveBeenCalled();
     expect(navigationProp.goBack).toHaveBeenCalled();
     expect(Toast.show).toHaveBeenCalledWith({
@@ -400,7 +400,7 @@ describe('createPick function tests', () => {
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
     createPickApiHook(failureAsyncState, mockDispatch, navigationProp);
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
       text1: strings('PICKING.CREATE_NEW_PICK_FAILURE'),
@@ -412,7 +412,7 @@ describe('createPick function tests', () => {
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
     createPickApiHook(failure409AsyncState, mockDispatch, navigationProp);
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
       text1: strings('PICKING.PICK_REQUEST_CRITERIA_ALREADY_MET'),
@@ -429,7 +429,7 @@ describe('createPick function tests', () => {
       mockDispatch,
       navigationProp
     );
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
       text1: strings('PICKING.NO_RESERVE_PALLET_AVAILABLE_ERROR'),

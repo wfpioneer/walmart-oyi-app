@@ -28,7 +28,12 @@ import { setFloorLocations, setReserveLocations, setupScreen } from '../../state
 import { AsyncState } from '../../models/AsyncState';
 import { setPickCreateFloor, setPickCreateReserve } from '../../state/actions/Picking';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
-import { CREATE_NEW_PICK, GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1 } from '../../state/actions/asyncAPI';
+import {
+  CREATE_NEW_PICK,
+  CREATE_NEW_PICK_V1,
+  GET_LOCATIONS_FOR_ITEM,
+  GET_LOCATIONS_FOR_ITEM_V1
+} from '../../state/actions/asyncAPI';
 import { createNewPick, createNewPickV1 } from '../../state/actions/saga';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { Configurations } from '../../models/User';
@@ -97,8 +102,8 @@ export const getLocationsV1ApiHook = (
     if (!locationForItemsV1Api.isWaiting && locationForItemsV1Api.result) {
       const response = locationForItemsV1Api.result.data;
       const { salesFloorLocation, reserveLocation } = response;
-      dispatch(setFloorLocations(salesFloorLocation || []));
-      dispatch(setReserveLocations(reserveLocation || []));
+      dispatch(setPickCreateFloor(salesFloorLocation || []));
+      dispatch(setPickCreateReserve(reserveLocation || []));
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
       dispatch(hideActivityModal());
       Toast.show({
@@ -137,6 +142,7 @@ export const createPickApiHook = (
     if (!isWaiting && result) {
       dispatch(hideActivityModal());
       dispatch({ type: CREATE_NEW_PICK.RESET });
+      dispatch({ type: CREATE_NEW_PICK_V1.RESET });
       navigation.goBack();
       Toast.show({
         type: 'success',
@@ -172,6 +178,7 @@ export const createPickApiHook = (
         });
       }
       dispatch({ type: CREATE_NEW_PICK.RESET });
+      dispatch({ type: CREATE_NEW_PICK_V1.RESET });
     }
     // API waiting
     if (isWaiting) {

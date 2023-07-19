@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
-import { PalletItem } from '../models/PalletItem';
+import { PalletItem } from '../models/PalletManagementTypes';
 
 export default class AddPalletService {
   public static addPallet(payload: {

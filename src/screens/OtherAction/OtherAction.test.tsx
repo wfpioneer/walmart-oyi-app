@@ -3,10 +3,8 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { strings } from '../../locales';
-import { getMockItemDetails } from '../../mockData';
+import mockItemDetails from '../../mockData/getItemDetails';
 import mockUser from '../../mockData/mockUser';
-import { AsyncState } from '../../models/AsyncState';
-import ItemDetails from '../../models/ItemDetails';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { setPickCreateFloor, setPickCreateItem, setPickCreateReserve } from '../../state/actions/Picking';
@@ -25,12 +23,6 @@ jest.mock(
 );
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 
-const defaultAsyncState: AsyncState = {
-  error: null,
-  isWaiting: false,
-  result: null,
-  value: null
-};
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
@@ -54,7 +46,7 @@ const routeProp: RouteProp<any, string> = {
 const mockOtherActionProps: OtherActionProps = {
   chosenActionState: ['', jest.fn()],
   exceptionType: null,
-  getItemDetailsApi: defaultAsyncState,
+  itemDetails: mockItemDetails[654],
   trackEventCall: jest.fn(),
   appUser: mockUser,
   dispatch: jest.fn(),
@@ -66,17 +58,10 @@ const mockOtherActionProps: OtherActionProps = {
 };
 
 describe('OtherActionScreen Tests', () => {
-  const mockSuccessItemDetails: AsyncState = {
-    ...defaultAsyncState,
-    result: {
-      data: getMockItemDetails('123')
-    }
-  };
   it('renders the OtherActionScreen', () => {
     const { toJSON } = render(
       <OtherActionScreen
         {...mockOtherActionProps}
-        getItemDetailsApi={mockSuccessItemDetails}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -85,7 +70,6 @@ describe('OtherActionScreen Tests', () => {
     const { toJSON } = render(
       <OtherActionScreen
         {...mockOtherActionProps}
-        getItemDetailsApi={mockSuccessItemDetails}
         exceptionType="C"
       />
     );
@@ -123,11 +107,9 @@ describe('OtherActionScreen Tests', () => {
 
     it('Calls \'continueAction\' flow', async () => {
       mockOtherActionProps.chosenActionState[0] = strings('ITEM.SCAN_FOR_NO_ACTION');
-      const mockItemDetails: ItemDetails = getMockItemDetails('123');
       const { getByTestId, update } = render(
         <OtherActionScreen
           {...mockOtherActionProps}
-          getItemDetailsApi={mockSuccessItemDetails}
         />
       );
       const continueButton = getByTestId('chosen action button');
@@ -136,7 +118,7 @@ describe('OtherActionScreen Tests', () => {
       expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
       expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
         OTHER_ACTIONS,
-        { action: 'scan_for_no_action_click', itemNbr: mockItemDetails.itemNbr }
+        { action: 'scan_for_no_action_click', itemNbr: mockItemDetails[654].itemNbr }
       );
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('NoActionScan');
 
@@ -145,7 +127,6 @@ describe('OtherActionScreen Tests', () => {
       update(
         <OtherActionScreen
           {...mockOtherActionProps}
-          getItemDetailsApi={mockSuccessItemDetails}
         />
       );
       fireEvent.press(continueButton);
@@ -153,7 +134,7 @@ describe('OtherActionScreen Tests', () => {
       expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
       expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
         OTHER_ACTIONS,
-        { action: 'location_details_click', itemNbr: mockItemDetails.itemNbr }
+        { action: 'location_details_click', itemNbr: mockItemDetails[654].itemNbr }
       );
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('LocationDetails');
 
@@ -162,7 +143,6 @@ describe('OtherActionScreen Tests', () => {
       update(
         <OtherActionScreen
           {...mockOtherActionProps}
-          getItemDetailsApi={mockSuccessItemDetails}
         />
       );
       fireEvent.press(continueButton);
@@ -170,9 +150,9 @@ describe('OtherActionScreen Tests', () => {
       expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
       expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
         OTHER_ACTIONS,
-        { action: 'reserve_adjustment_click', itemNbr: mockItemDetails.itemNbr }
+        { action: 'reserve_adjustment_click', itemNbr: mockItemDetails[654].itemNbr }
       );
-      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setItemDetails(mockItemDetails));
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setItemDetails(mockItemDetails[654]));
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(resetScannedEvent());
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('ReserveAdjustment');
 
@@ -181,7 +161,6 @@ describe('OtherActionScreen Tests', () => {
       update(
         <OtherActionScreen
           {...mockOtherActionProps}
-          getItemDetailsApi={mockSuccessItemDetails}
         />
       );
       fireEvent.press(continueButton);
@@ -190,9 +169,9 @@ describe('OtherActionScreen Tests', () => {
       expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
       expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
         OTHER_ACTIONS,
-        { action: 'update_OH_qty_click', itemNbr: mockItemDetails.itemNbr }
+        { action: 'update_OH_qty_click', itemNbr: mockItemDetails[654].itemNbr }
       );
-      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setAuditItemNumber(mockItemDetails.itemNbr));
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setAuditItemNumber(mockItemDetails[654].itemNbr));
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(resetScannedEvent());
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('AuditItem');
       mockOtherActionProps.appUser.configs.auditWorklists = false;
@@ -202,7 +181,6 @@ describe('OtherActionScreen Tests', () => {
       update(
         <OtherActionScreen
           {...mockOtherActionProps}
-          getItemDetailsApi={mockSuccessItemDetails}
         />
       );
       fireEvent.press(continueButton);
@@ -210,7 +188,7 @@ describe('OtherActionScreen Tests', () => {
       expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
       expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
         OTHER_ACTIONS,
-        { action: 'print_sign_button_click', itemNbr: mockItemDetails.itemNbr }
+        { action: 'print_sign_button_click', itemNbr: mockItemDetails[654].itemNbr }
       );
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith(
         'PrintPriceSign',
@@ -222,9 +200,8 @@ describe('OtherActionScreen Tests', () => {
       update(
         <OtherActionScreen
           {...mockOtherActionProps}
-          getItemDetailsApi={mockSuccessItemDetails}
-          floorLocations={mockItemDetails?.location?.floor || []}
-          reserveLocations={mockItemDetails?.location?.reserve || []}
+          floorLocations={mockItemDetails[654]?.location?.floor || []}
+          reserveLocations={mockItemDetails[654]?.location?.reserve || []}
         />
       );
       fireEvent.press(continueButton);
@@ -232,21 +209,21 @@ describe('OtherActionScreen Tests', () => {
       expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
       expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
         OTHER_ACTIONS,
-        { action: 'add_to_picklist_click', itemNbr: mockItemDetails.itemNbr }
+        { action: 'add_to_picklist_click', itemNbr: mockItemDetails[654].itemNbr }
       );
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setPickCreateItem({
-        itemName: mockItemDetails.itemName,
-        itemNbr: mockItemDetails.itemNbr,
-        upcNbr: mockItemDetails.upcNbr,
-        categoryNbr: mockItemDetails.categoryNbr,
-        categoryDesc: mockItemDetails.categoryDesc,
-        price: mockItemDetails.price
+        itemName: mockItemDetails[654].itemName,
+        itemNbr: mockItemDetails[654].itemNbr,
+        upcNbr: mockItemDetails[654].upcNbr,
+        categoryNbr: mockItemDetails[654].categoryNbr,
+        categoryDesc: mockItemDetails[654].categoryDesc,
+        price: mockItemDetails[654].price
       }));
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
-        setPickCreateFloor(mockItemDetails?.location?.floor || [])
+        setPickCreateFloor(mockItemDetails[654]?.location?.floor || [])
       );
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
-        setPickCreateReserve(mockItemDetails?.location?.reserve || [])
+        setPickCreateReserve(mockItemDetails[654]?.location?.reserve || [])
       );
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('Picking', { screen: 'CreatePick' });
     });

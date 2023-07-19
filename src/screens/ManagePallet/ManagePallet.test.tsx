@@ -1,10 +1,21 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp, RouteProp } from '@react-navigation/native';
+import {
+  EventListenerCallback,
+  NavigationProp,
+  RouteProp
+} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import { fireEvent, render } from '@testing-library/react-native';
+import { Provider } from 'react-redux';
+import { BackHandlerStatic, NativeEventEmitter } from 'react-native';
 import {
   ManagePalletScreen,
+  backHandlerEventHook,
+  barcodeEmitterHook,
   clearPalletApiHook,
+  deleteItemDetail,
+  enableSave,
   getItemDetailsApiHook,
   getNumberOfDeleted,
   getPalletDetailsApiHook,
@@ -15,9 +26,16 @@ import {
   handleUpdateItems,
   isAddedItemPerishable,
   isExpiryDateChanged,
+  isPerishableItemDeleted,
   isQuantityChanged,
+  itemCard,
+  navListenerHook,
+  onEndEditing,
+  onValidateHardwareBackPress,
   postCreatePalletApiHook,
   removeExpirationDate,
+  renderWarningModal,
+  undoDelete,
   updatePalletApisHook
 } from './ManagePallet';
 import { PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
@@ -26,20 +44,38 @@ import {
   hideActivityModal,
   showActivityModal
 } from '../../state/actions/Modal';
-import { updatePalletExpirationDate } from '../../state/actions/PalletManagement';
+import {
+  deleteItem,
+  removeItem,
+  resetItems,
+  setPalletItemNewQuantity,
+  updatePalletExpirationDate
+} from '../../state/actions/PalletManagement';
 import { strings } from '../../locales';
 import getItemDetails from '../../mockData/getItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
+import { validateSession } from '../../utils/sessionTimeout';
+import store from '../../state';
+import { GET_ITEM_DETAILS_V4 } from '../../state/actions/asyncAPI';
+import { BeforeRemoveEvent } from '../../models/Generics.d';
 
 const TRY_AGAIN_TEXT = 'GENERICS.TRY_AGAIN';
+
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
 }));
+
 jest.mock('../../state/actions/PalletManagement', () => ({
   ...jest.requireActual('../../state/actions/PalletManagement'),
   updatePalletExpirationDate: jest.fn()
+}));
+
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/sessTimeout'),
+  validateSession: jest.fn(() => Promise.resolve())
 }));
 
 describe('ManagePalletScreen', () => {
@@ -111,302 +147,451 @@ describe('ManagePalletScreen', () => {
     getParent: jest.fn(),
     getState: jest.fn()
   };
+
+  const barCodeEmitterProp: NativeEventEmitter = {
+    addListener: jest.fn(),
+    removeAllListeners: jest.fn(),
+    removeSubscription: jest.fn(),
+    listenerCount: jest.fn(),
+    emit: jest.fn(),
+    removeListener: jest.fn()
+  };
+
   const mockCountryCode = 'MX';
-  let routeProp: RouteProp<any, string>;
+  const routeProp: RouteProp<any, string> = {
+    key: 'Test',
+    name: ''
+  };
   describe('Tests rendering the PalletManagement Screen', () => {
-    it('Renders the PalletManagement default ', () => {
-      const renderer = ShallowRenderer.createRenderer();
+    describe('Tests rendering Api responses', () => {
+      it('Renders screen with newly added if get items details response sent sucesss', () => {
+        const renderer = ShallowRenderer.createRenderer();
+        const successAsyncState: AsyncState = {
+          isWaiting: false,
+          value: null,
+          error: null,
+          result: {
+            upcNbr: '123',
+            itemNbr: '323',
+            price: 12,
+            itemDesc: 'ItemDesc'
+          }
+        };
+        renderer.render(
+          <ManagePalletScreen
+            useEffectHook={jest.fn}
+            isManualScanEnabled={true}
+            palletInfo={mockPalletInfo}
+            items={mockItems}
+            navigation={navigationProp}
+            route={routeProp}
+            dispatch={jest.fn()}
+            getItemDetailsApi={successAsyncState}
+            addPalletUpcApi={defaultAsyncState}
+            updateItemQtyAPI={defaultAsyncState}
+            deleteUpcsApi={defaultAsyncState}
+            getPalletDetailsApi={defaultAsyncState}
+            clearPalletApi={defaultAsyncState}
+            displayClearConfirmation={false}
+            setDisplayClearConfirmation={jest.fn()}
+            isPickerShow={false}
+            setIsPickerShow={jest.fn()}
+            perishableCategories={[]}
+            displayWarningModal={false}
+            setDisplayWarningModal={jest.fn()}
+            useFocusEffectHook={jest.fn()}
+            useCallbackHook={jest.fn()}
+            confirmBackNavigate={false}
+            setConfirmBackNavigate={jest.fn()}
+            createPallet={false}
+            postCreatePalletApi={defaultAsyncState}
+            userConfigs={mockConfig}
+            countryCode={mockCountryCode}
+            trackEventCall={jest.fn()}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
 
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletInfo}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsApi={defaultAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
-          clearPalletApi={defaultAsyncState}
-          displayClearConfirmation={false}
-          setDisplayClearConfirmation={jest.fn()}
-          isPickerShow={false}
-          setIsPickerShow={jest.fn()}
-          perishableCategories={[]}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          useCallbackHook={jest.fn()}
-          confirmBackNavigate={false}
-          setConfirmBackNavigate={jest.fn()}
-          createPallet={false}
-          postCreatePalletApi={defaultAsyncState}
-          userConfigs={mockConfig}
-          countryCode={mockCountryCode}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-    it('Renders the PalletManagement with warning modal ', () => {
-      const renderer = ShallowRenderer.createRenderer();
+      it('Tests Save Button onSubmit function ', () => {
+        const mockDispatch = jest.fn();
+        const mockTrackEventCall = jest.fn();
+        const mockUseEffectHook = jest.fn().mockImplementation((callback, deps) => {
+          callback();
+        });
+        const mockUseCallbackHook = jest.fn().mockImplementation((callback, deps) => {
+          callback();
+        });
+        const successAsyncState: AsyncState = {
+          isWaiting: false,
+          value: null,
+          error: null,
+          result: {
+            upcNbr: '123',
+            itemNbr: '323',
+            price: 12,
+            itemDesc: 'ItemDesc'
+          }
+        };
+        const { getByTestId, update } = render(
+          <Provider store={store}>
+            <ManagePalletScreen
+              useEffectHook={mockUseEffectHook}
+              isManualScanEnabled={true}
+              palletInfo={mockPalletInfo}
+              items={mockItems}
+              navigation={navigationProp}
+              route={routeProp}
+              dispatch={mockDispatch}
+              getItemDetailsApi={successAsyncState}
+              addPalletUpcApi={defaultAsyncState}
+              updateItemQtyAPI={defaultAsyncState}
+              deleteUpcsApi={defaultAsyncState}
+              getPalletDetailsApi={defaultAsyncState}
+              clearPalletApi={defaultAsyncState}
+              displayClearConfirmation={false}
+              setDisplayClearConfirmation={jest.fn()}
+              isPickerShow={false}
+              setIsPickerShow={jest.fn()}
+              perishableCategories={[]}
+              displayWarningModal={false}
+              setDisplayWarningModal={jest.fn()}
+              useFocusEffectHook={jest.fn()}
+              useCallbackHook={mockUseCallbackHook}
+              confirmBackNavigate={true}
+              setConfirmBackNavigate={jest.fn()}
+              createPallet={false}
+              postCreatePalletApi={defaultAsyncState}
+              userConfigs={mockConfig}
+              countryCode={mockCountryCode}
+              trackEventCall={mockTrackEventCall}
+            />
+          </Provider>
+        );
+        const onSubmitButton = getByTestId('Enable Save Button');
 
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletInfo}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsApi={defaultAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
-          clearPalletApi={defaultAsyncState}
-          displayClearConfirmation={false}
-          setDisplayClearConfirmation={jest.fn()}
-          isPickerShow={false}
-          setIsPickerShow={jest.fn()}
-          perishableCategories={[]}
-          displayWarningModal={true}
-          setDisplayWarningModal={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          useCallbackHook={jest.fn()}
-          confirmBackNavigate={false}
-          setConfirmBackNavigate={jest.fn()}
-          createPallet={false}
-          postCreatePalletApi={defaultAsyncState}
-          userConfigs={mockConfig}
-          countryCode={mockCountryCode}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
+        fireEvent.press(onSubmitButton);
 
-    it('Renders the PalletManagement with Clear Pallet Confirmation Modal ', () => {
-      const renderer = ShallowRenderer.createRenderer();
+        expect(mockDispatch).toHaveBeenCalled();
+        expect(mockUseEffectHook).toHaveBeenCalled();
+        expect(mockUseCallbackHook).toHaveBeenCalled();
+        expect(navigationProp.goBack).toHaveBeenCalled();
+        update(
+          <Provider store={store}>
+            <ManagePalletScreen
+              useEffectHook={mockUseEffectHook}
+              isManualScanEnabled={true}
+              palletInfo={mockPalletInfo}
+              items={mockItems}
+              navigation={navigationProp}
+              route={routeProp}
+              dispatch={mockDispatch}
+              getItemDetailsApi={successAsyncState}
+              addPalletUpcApi={defaultAsyncState}
+              updateItemQtyAPI={defaultAsyncState}
+              deleteUpcsApi={defaultAsyncState}
+              getPalletDetailsApi={defaultAsyncState}
+              clearPalletApi={defaultAsyncState}
+              displayClearConfirmation={false}
+              setDisplayClearConfirmation={jest.fn()}
+              isPickerShow={false}
+              setIsPickerShow={jest.fn()}
+              perishableCategories={[]}
+              displayWarningModal={false}
+              setDisplayWarningModal={jest.fn()}
+              useFocusEffectHook={jest.fn()}
+              useCallbackHook={mockUseCallbackHook}
+              confirmBackNavigate={false}
+              setConfirmBackNavigate={jest.fn()}
+              createPallet={true}
+              postCreatePalletApi={defaultAsyncState}
+              userConfigs={mockConfig}
+              countryCode={mockCountryCode}
+              trackEventCall={mockTrackEventCall}
+            />
+          </Provider>
+        );
+        fireEvent.press(onSubmitButton);
+        expect(mockTrackEventCall).toHaveBeenCalled();
+        expect(mockDispatch).toHaveBeenCalled();
+      });
 
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletInfo}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsApi={defaultAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
-          clearPalletApi={defaultAsyncState}
-          displayClearConfirmation={true}
-          setDisplayClearConfirmation={jest.fn()}
-          isPickerShow={false}
-          setIsPickerShow={jest.fn()}
-          perishableCategories={[]}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          useCallbackHook={jest.fn()}
-          confirmBackNavigate={false}
-          setConfirmBackNavigate={jest.fn()}
-          createPallet={false}
-          postCreatePalletApi={defaultAsyncState}
-          userConfigs={mockConfig}
-          countryCode={mockCountryCode}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
+      it('Tests Confirm/Cancel Back Button onSubmit function in renderWarningModal', () => {
+        const mockDispatch = jest.fn();
+        const mockSetConfirmBackNavigate = jest.fn();
+        const mockSetDisplayWarning = jest.fn();
+        const { getByTestId } = render(
+          <Provider store={store}>
+            {renderWarningModal(
+              true,
+              mockSetDisplayWarning,
+              mockSetConfirmBackNavigate,
+              mockDispatch
+            )}
+          </Provider>
+        );
+        const onCancelButton = getByTestId('Cancel Back Button');
+        const onConfirmButton = getByTestId('Confirm Back Button');
 
-    it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
-      const mockDate = new Date(1647369000000);
-      jest
-        .spyOn(global, 'Date')
-        .mockImplementation(() => mockDate as unknown as string);
+        fireEvent.press(onCancelButton);
+        expect(mockSetDisplayWarning).toHaveBeenCalledWith(false);
+        expect(mockSetConfirmBackNavigate).toHaveBeenCalledWith(false);
 
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletInfo}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsApi={defaultAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
-          clearPalletApi={defaultAsyncState}
-          displayClearConfirmation={true}
-          setDisplayClearConfirmation={jest.fn()}
-          isPickerShow={true}
-          setIsPickerShow={jest.fn()}
-          perishableCategories={[]}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          useCallbackHook={jest.fn()}
-          confirmBackNavigate={false}
-          setConfirmBackNavigate={jest.fn()}
-          createPallet={false}
-          postCreatePalletApi={defaultAsyncState}
-          userConfigs={mockConfig}
-          countryCode={mockCountryCode}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-
-    it('Renders the palletManagement when expiration date got modified', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletInfo}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsApi={defaultAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
-          clearPalletApi={defaultAsyncState}
-          displayClearConfirmation={true}
-          setDisplayClearConfirmation={jest.fn()}
-          isPickerShow={false}
-          setIsPickerShow={jest.fn()}
-          perishableCategories={[]}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          useCallbackHook={jest.fn()}
-          confirmBackNavigate={false}
-          setConfirmBackNavigate={jest.fn()}
-          createPallet={false}
-          postCreatePalletApi={defaultAsyncState}
-          userConfigs={mockConfig}
-          countryCode={mockCountryCode}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
+        fireEvent.press(onConfirmButton);
+        expect(mockSetDisplayWarning).toHaveBeenCalledWith(false);
+        expect(mockSetConfirmBackNavigate).toHaveBeenCalledWith(true);
+        expect(mockDispatch).toHaveBeenCalledWith({
+          type: GET_ITEM_DETAILS_V4.RESET
+        });
+      });
     });
 
-    it('Renders the expiration date required text if pallet has no date with perishableItems', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const mockPalletNoDate: PalletInfo = {
-        id: '2',
-        createDate: '03/31/2022'
-      };
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletNoDate}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsApi={defaultAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
-          clearPalletApi={defaultAsyncState}
-          displayClearConfirmation={true}
-          setDisplayClearConfirmation={jest.fn()}
-          isPickerShow={false}
-          setIsPickerShow={jest.fn()}
-          perishableCategories={[]}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          useCallbackHook={jest.fn()}
-          confirmBackNavigate={false}
-          setConfirmBackNavigate={jest.fn()}
-          createPallet={false}
-          postCreatePalletApi={defaultAsyncState}
-          userConfigs={mockConfig}
-          countryCode={mockCountryCode}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
-    });
-  });
-  describe('Tests rendering Api responses', () => {
-    it('Renders screen with newly added if get items details response sent sucesss', () => {
-      const renderer = ShallowRenderer.createRenderer();
-      const sucessAsyncState: AsyncState = {
-        isWaiting: false,
-        value: null,
-        error: null,
-        result: {
-          upcNbr: '123',
-          itemNbr: '323',
-          price: 12,
-          itemDesc: 'ItemDesc'
-        }
-      };
-      renderer.render(
-        <ManagePalletScreen
-          useEffectHook={jest.fn}
-          isManualScanEnabled={true}
-          palletInfo={mockPalletInfo}
-          items={mockItems}
-          navigation={navigationProp}
-          route={routeProp}
-          dispatch={jest.fn()}
-          getItemDetailsApi={sucessAsyncState}
-          addPalletUpcApi={defaultAsyncState}
-          updateItemQtyAPI={defaultAsyncState}
-          deleteUpcsApi={defaultAsyncState}
-          getPalletDetailsApi={defaultAsyncState}
-          clearPalletApi={defaultAsyncState}
-          displayClearConfirmation={false}
-          setDisplayClearConfirmation={jest.fn()}
-          isPickerShow={false}
-          setIsPickerShow={jest.fn()}
-          perishableCategories={[]}
-          displayWarningModal={false}
-          setDisplayWarningModal={jest.fn()}
-          useFocusEffectHook={jest.fn()}
-          useCallbackHook={jest.fn()}
-          confirmBackNavigate={false}
-          setConfirmBackNavigate={jest.fn()}
-          createPallet={false}
-          postCreatePalletApi={defaultAsyncState}
-          userConfigs={mockConfig}
-          countryCode={mockCountryCode}
-          trackEventCall={jest.fn()}
-        />
-      );
-      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    describe('Tests rendering the ManagePalletScreen', () => {
+      it('Renders the PalletManagement default ', () => {
+        const renderer = ShallowRenderer.createRenderer();
+
+        renderer.render(
+          <ManagePalletScreen
+            useEffectHook={jest.fn}
+            isManualScanEnabled={true}
+            palletInfo={mockPalletInfo}
+            items={mockItems}
+            navigation={navigationProp}
+            route={routeProp}
+            dispatch={jest.fn()}
+            getItemDetailsApi={defaultAsyncState}
+            addPalletUpcApi={defaultAsyncState}
+            updateItemQtyAPI={defaultAsyncState}
+            deleteUpcsApi={defaultAsyncState}
+            getPalletDetailsApi={defaultAsyncState}
+            clearPalletApi={defaultAsyncState}
+            displayClearConfirmation={false}
+            setDisplayClearConfirmation={jest.fn()}
+            isPickerShow={false}
+            setIsPickerShow={jest.fn()}
+            perishableCategories={[]}
+            displayWarningModal={false}
+            setDisplayWarningModal={jest.fn()}
+            useFocusEffectHook={jest.fn()}
+            useCallbackHook={jest.fn()}
+            confirmBackNavigate={false}
+            setConfirmBackNavigate={jest.fn()}
+            createPallet={false}
+            postCreatePalletApi={defaultAsyncState}
+            userConfigs={mockConfig}
+            countryCode={mockCountryCode}
+            trackEventCall={jest.fn()}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
+      it('Renders the PalletManagement with warning modal ', () => {
+        const renderer = ShallowRenderer.createRenderer();
+
+        renderer.render(
+          <ManagePalletScreen
+            useEffectHook={jest.fn}
+            isManualScanEnabled={true}
+            palletInfo={mockPalletInfo}
+            items={mockItems}
+            navigation={navigationProp}
+            route={routeProp}
+            dispatch={jest.fn()}
+            getItemDetailsApi={defaultAsyncState}
+            addPalletUpcApi={defaultAsyncState}
+            updateItemQtyAPI={defaultAsyncState}
+            deleteUpcsApi={defaultAsyncState}
+            getPalletDetailsApi={defaultAsyncState}
+            clearPalletApi={defaultAsyncState}
+            displayClearConfirmation={false}
+            setDisplayClearConfirmation={jest.fn()}
+            isPickerShow={false}
+            setIsPickerShow={jest.fn()}
+            perishableCategories={[]}
+            displayWarningModal={true}
+            setDisplayWarningModal={jest.fn()}
+            useFocusEffectHook={jest.fn()}
+            useCallbackHook={jest.fn()}
+            confirmBackNavigate={false}
+            setConfirmBackNavigate={jest.fn()}
+            createPallet={false}
+            postCreatePalletApi={defaultAsyncState}
+            userConfigs={mockConfig}
+            countryCode={mockCountryCode}
+            trackEventCall={jest.fn()}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
+
+      it('Renders the PalletManagement with Clear Pallet Confirmation Modal ', () => {
+        const renderer = ShallowRenderer.createRenderer();
+
+        renderer.render(
+          <ManagePalletScreen
+            useEffectHook={jest.fn}
+            isManualScanEnabled={true}
+            palletInfo={mockPalletInfo}
+            items={mockItems}
+            navigation={navigationProp}
+            route={routeProp}
+            dispatch={jest.fn()}
+            getItemDetailsApi={defaultAsyncState}
+            addPalletUpcApi={defaultAsyncState}
+            updateItemQtyAPI={defaultAsyncState}
+            deleteUpcsApi={defaultAsyncState}
+            getPalletDetailsApi={defaultAsyncState}
+            clearPalletApi={defaultAsyncState}
+            displayClearConfirmation={true}
+            setDisplayClearConfirmation={jest.fn()}
+            isPickerShow={false}
+            setIsPickerShow={jest.fn()}
+            perishableCategories={[]}
+            displayWarningModal={false}
+            setDisplayWarningModal={jest.fn()}
+            useFocusEffectHook={jest.fn()}
+            useCallbackHook={jest.fn()}
+            confirmBackNavigate={false}
+            setConfirmBackNavigate={jest.fn()}
+            createPallet={false}
+            postCreatePalletApi={defaultAsyncState}
+            userConfigs={mockConfig}
+            countryCode={mockCountryCode}
+            trackEventCall={jest.fn()}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
+
+      it('Renders the DatePicker Dialog when the isPickerShow is true ', () => {
+        const mockDate = new Date(1647369000000);
+        jest
+          .spyOn(global, 'Date')
+          .mockImplementation(() => mockDate as unknown as string);
+
+        const renderer = ShallowRenderer.createRenderer();
+        renderer.render(
+          <ManagePalletScreen
+            useEffectHook={jest.fn}
+            isManualScanEnabled={true}
+            palletInfo={mockPalletInfo}
+            items={mockItems}
+            navigation={navigationProp}
+            route={routeProp}
+            dispatch={jest.fn()}
+            getItemDetailsApi={defaultAsyncState}
+            addPalletUpcApi={defaultAsyncState}
+            updateItemQtyAPI={defaultAsyncState}
+            deleteUpcsApi={defaultAsyncState}
+            getPalletDetailsApi={defaultAsyncState}
+            clearPalletApi={defaultAsyncState}
+            displayClearConfirmation={true}
+            setDisplayClearConfirmation={jest.fn()}
+            isPickerShow={true}
+            setIsPickerShow={jest.fn()}
+            perishableCategories={[]}
+            displayWarningModal={false}
+            setDisplayWarningModal={jest.fn()}
+            useFocusEffectHook={jest.fn()}
+            useCallbackHook={jest.fn()}
+            confirmBackNavigate={false}
+            setConfirmBackNavigate={jest.fn()}
+            createPallet={false}
+            postCreatePalletApi={defaultAsyncState}
+            userConfigs={mockConfig}
+            countryCode={mockCountryCode}
+            trackEventCall={jest.fn()}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
+
+      it('Renders the palletManagement when expiration date got modified', () => {
+        const renderer = ShallowRenderer.createRenderer();
+        renderer.render(
+          <ManagePalletScreen
+            useEffectHook={jest.fn}
+            isManualScanEnabled={true}
+            palletInfo={mockPalletInfo}
+            items={mockItems}
+            navigation={navigationProp}
+            route={routeProp}
+            dispatch={jest.fn()}
+            getItemDetailsApi={defaultAsyncState}
+            addPalletUpcApi={defaultAsyncState}
+            updateItemQtyAPI={defaultAsyncState}
+            deleteUpcsApi={defaultAsyncState}
+            getPalletDetailsApi={defaultAsyncState}
+            clearPalletApi={defaultAsyncState}
+            displayClearConfirmation={true}
+            setDisplayClearConfirmation={jest.fn()}
+            isPickerShow={false}
+            setIsPickerShow={jest.fn()}
+            perishableCategories={[]}
+            displayWarningModal={false}
+            setDisplayWarningModal={jest.fn()}
+            useFocusEffectHook={jest.fn()}
+            useCallbackHook={jest.fn()}
+            confirmBackNavigate={false}
+            setConfirmBackNavigate={jest.fn()}
+            createPallet={false}
+            postCreatePalletApi={defaultAsyncState}
+            userConfigs={mockConfig}
+            countryCode={mockCountryCode}
+            trackEventCall={jest.fn()}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
+
+      it('Renders the expiration date required text if pallet has no date with perishableItems', () => {
+        const renderer = ShallowRenderer.createRenderer();
+        const mockPalletNoDate: PalletInfo = {
+          id: '2',
+          createDate: '03/31/2022'
+        };
+        renderer.render(
+          <ManagePalletScreen
+            useEffectHook={jest.fn}
+            isManualScanEnabled={true}
+            palletInfo={mockPalletNoDate}
+            items={mockItems}
+            navigation={navigationProp}
+            route={routeProp}
+            dispatch={jest.fn()}
+            getItemDetailsApi={defaultAsyncState}
+            addPalletUpcApi={defaultAsyncState}
+            updateItemQtyAPI={defaultAsyncState}
+            deleteUpcsApi={defaultAsyncState}
+            getPalletDetailsApi={defaultAsyncState}
+            clearPalletApi={defaultAsyncState}
+            displayClearConfirmation={true}
+            setDisplayClearConfirmation={jest.fn()}
+            isPickerShow={false}
+            setIsPickerShow={jest.fn()}
+            perishableCategories={[]}
+            displayWarningModal={false}
+            setDisplayWarningModal={jest.fn()}
+            useFocusEffectHook={jest.fn()}
+            useCallbackHook={jest.fn()}
+            confirmBackNavigate={false}
+            setConfirmBackNavigate={jest.fn()}
+            createPallet={false}
+            postCreatePalletApi={defaultAsyncState}
+            userConfigs={mockConfig}
+            countryCode={mockCountryCode}
+            trackEventCall={jest.fn()}
+          />
+        );
+        expect(renderer.getRenderOutput()).toMatchSnapshot();
+      });
     });
   });
 
   describe('Manage pallet externalized function tests', () => {
     const mockDispatch = jest.fn();
     const mockTrackEventCall = jest.fn();
+    const mockPalletItem = mockItems[0];
     const palletInfo: PalletInfo = {
       id: '3'
     };
@@ -517,13 +702,23 @@ describe('ManagePalletScreen', () => {
           added: true
         }
       ];
-      handleAddItems(palletInfo.id, mockAddPallet, mockDispatch, mockTrackEventCall);
+      handleAddItems(
+        palletInfo.id,
+        mockAddPallet,
+        mockDispatch,
+        mockTrackEventCall
+      );
       expect(mockDispatch).toHaveBeenCalled();
-      expect(mockTrackEventCall).toHaveBeenCalled()
+      expect(mockTrackEventCall).toHaveBeenCalled();
     });
 
     it('Does not call dispatch if the "added" flag is false for all palletItems', () => {
-      handleAddItems(palletInfo.id, mockItems, mockDispatch, mockTrackEventCall);
+      handleAddItems(
+        palletInfo.id,
+        mockItems,
+        mockDispatch,
+        mockTrackEventCall
+      );
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockTrackEventCall).not.toHaveBeenCalled();
     });
@@ -552,6 +747,20 @@ describe('ManagePalletScreen', () => {
       expect(Toast.show).toBeCalledTimes(0);
     });
 
+    it('Tests getPalletDetailsApiHook on success 204 ', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 204,
+          data: {}
+        }
+      };
+
+      getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+    });
+
     it('Tests getPalletDetailsApiHook on fail', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
@@ -559,6 +768,15 @@ describe('ManagePalletScreen', () => {
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
+    });
+
+    it('Tests getPalletDetailsApiHook on api loading', () => {
+      const apiIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      getPalletDetailsApiHook(apiIsWaiting, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(1);
     });
 
     it('Tests updatePalletApisHook isLoading', () => {
@@ -583,6 +801,7 @@ describe('ManagePalletScreen', () => {
         text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
         position: 'bottom'
       };
+      mockItems[0].added = true;
       updatePalletApisHook(
         onSuccessApi,
         onSuccessApi,
@@ -597,6 +816,8 @@ describe('ManagePalletScreen', () => {
       expect(Toast.show).toHaveBeenCalledWith(
         expect.objectContaining(successToastProps)
       );
+      // Reset to default
+      mockItems[0].added = false;
     });
     it('Tests updatePalletApisHook with Partial successful and error responses', () => {
       const partialToastProps = {
@@ -750,6 +971,7 @@ describe('ManagePalletScreen', () => {
         mockSetNavigateConfirmation
       );
 
+      expect(navigationProp.isFocused).toHaveBeenCalled();
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
       expect(mockSetNavigateConfirmation).toHaveBeenCalledWith(true);
@@ -778,10 +1000,31 @@ describe('ManagePalletScreen', () => {
         mockSetDisplayConfirmation,
         mockSetNavigateConfirmation
       );
-
+      expect(navigationProp.isFocused).toHaveBeenCalled();
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetDisplayConfirmation).toHaveBeenCalledWith(false);
       expect(Toast.show).toHaveBeenCalledWith(failedToast);
+    });
+
+    it('Test clearPalletApi hook on api is loading', () => {
+      const clearPalletApiIsWaiting: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      // mock navigate go back
+      const mockSetDisplayConfirmation = jest.fn();
+      const mockSetNavigateConfirmation = jest.fn();
+      clearPalletApiHook(
+        clearPalletApiIsWaiting,
+        palletInfo.id,
+        navigationProp,
+        mockDispatch,
+        mockSetDisplayConfirmation,
+        mockSetNavigateConfirmation
+      );
+
+      expect(navigationProp.isFocused).toHaveBeenCalled();
+      expect(mockDispatch).toBeCalledTimes(1);
     });
 
     it('tests isExpiryDateChanged', () => {
@@ -881,76 +1124,253 @@ describe('ManagePalletScreen', () => {
       getItemDetailsApiHook(isLoadingApi, mockItems, mockDispatch);
       expect(mockDispatch).toBeCalledTimes(1);
     });
-  });
 
-  it('Tests isAddedItemPerishable', () => {
-    const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
-    const isAddedFalse = isAddedItemPerishable(mockItems, mockPerishableCatg);
-    expect(isAddedFalse).toBe(false);
+    it('Tests isAddedItemPerishable', () => {
+      const mockPerishableCatg: number[] = [1, 8, 54, 72, 93];
+      const isAddedFalse = isAddedItemPerishable(mockItems, mockPerishableCatg);
+      expect(isAddedFalse).toBe(false);
 
-    const mockAddedItems: PalletItem[] = [
-      {
-        itemNbr: 1234,
-        upcNbr: '1234567890',
-        itemDesc: 'test',
-        quantity: 3,
-        newQuantity: 3,
-        price: 10.0,
-        categoryNbr: 8,
-        categoryDesc: 'test cat',
-        deleted: false,
-        added: true
-      },
-      {
-        itemNbr: 1234,
-        upcNbr: '12345678901',
-        itemDesc: 'test',
-        quantity: 3,
-        newQuantity: 4,
-        price: 10.0,
-        categoryNbr: 54,
-        categoryDesc: 'test cat',
-        deleted: false,
-        added: true
-      }
-    ];
-    const isAddedTrue = isAddedItemPerishable(
-      mockAddedItems,
-      mockPerishableCatg
-    );
-    expect(isAddedTrue).toBe(true);
-  });
-  it('Tests removeExpirationDate function', () => {
-    const mockPerishableCategories = [1, 10, 11];
-    expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(
-      false
-    );
-    const newItems: PalletItem[] = [
-      {
-        itemNbr: 1234,
-        upcNbr: '1234567890',
-        itemDesc: 'test',
-        quantity: 3,
-        newQuantity: 3,
-        price: 10.0,
-        categoryDesc: 'test cat',
-        deleted: true,
-        added: false,
-        categoryNbr: 1
-      },
-      {
-        itemNbr: 4221,
-        upcNbr: '765432123456',
-        itemDesc: 'food',
-        quantity: 2,
-        newQuantity: 1,
-        price: 3.49,
-        categoryDesc: 'deli',
-        deleted: false,
-        added: false,
-        categoryNbr: 8
-      }
-    ];
-    expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(true);
+      const mockAddedItems: PalletItem[] = [
+        {
+          itemNbr: 1234,
+          upcNbr: '1234567890',
+          itemDesc: 'test',
+          quantity: 3,
+          newQuantity: 3,
+          price: 10.0,
+          categoryNbr: 8,
+          categoryDesc: 'test cat',
+          deleted: false,
+          added: true
+        },
+        {
+          itemNbr: 1234,
+          upcNbr: '12345678901',
+          itemDesc: 'test',
+          quantity: 3,
+          newQuantity: 4,
+          price: 10.0,
+          categoryNbr: 54,
+          categoryDesc: 'test cat',
+          deleted: false,
+          added: true
+        }
+      ];
+      const isAddedTrue = isAddedItemPerishable(
+        mockAddedItems,
+        mockPerishableCatg
+      );
+      expect(isAddedTrue).toBe(true);
+    });
+    it('Tests removeExpirationDate function', () => {
+      const mockPerishableCategories = [1, 10, 11];
+      expect(removeExpirationDate(mockItems, mockPerishableCategories)).toBe(
+        false
+      );
+      const newItems: PalletItem[] = [
+        {
+          itemNbr: 1234,
+          upcNbr: '1234567890',
+          itemDesc: 'test',
+          quantity: 3,
+          newQuantity: 3,
+          price: 10.0,
+          categoryDesc: 'test cat',
+          deleted: true,
+          added: false,
+          categoryNbr: 1
+        },
+        {
+          itemNbr: 4221,
+          upcNbr: '765432123456',
+          itemDesc: 'food',
+          quantity: 2,
+          newQuantity: 1,
+          price: 3.49,
+          categoryDesc: 'deli',
+          deleted: false,
+          added: false,
+          categoryNbr: 8
+        }
+      ];
+      expect(removeExpirationDate(newItems, mockPerishableCategories)).toBe(
+        true
+      );
+    });
+
+    it('Tests barcodeEmitterHook function', async () => {
+      barCodeEmitterProp.addListener = jest
+        .fn()
+        .mockImplementation((event, callBack) => {
+          callBack({ value: 'test', type: 'UPC-A' });
+          return {
+            remove: jest.fn()
+          };
+        });
+      await barcodeEmitterHook(
+        barCodeEmitterProp,
+        navigationProp,
+        routeProp,
+        mockDispatch,
+        mockTrackEventCall
+      );
+      expect(barCodeEmitterProp.addListener).toBeCalledWith(
+        'scanned',
+        expect.any(Function)
+      );
+      expect(navigationProp.isFocused).toHaveBeenCalled();
+      expect(validateSession).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockTrackEventCall).toHaveBeenCalled();
+    });
+
+    it('Tests onEndEditing function', () => {
+      // @ts-expect-error test requires newQuanity to not be a number
+      mockPalletItem.newQuantity = undefined;
+      onEndEditing(mockPalletItem, mockDispatch);
+      expect(
+        mockDispatch(
+          setPalletItemNewQuantity(
+            mockPalletItem.itemNbr.toString(),
+            mockPalletItem.quantity
+          )
+        )
+      );
+      mockPalletItem.newQuantity = 3;
+    });
+
+    it('Tests isPerishableItemDeleted function', () => {
+      const isPerishableResponse = isPerishableItemDeleted(mockItems, []);
+      expect(isPerishableResponse).toStrictEqual(false);
+    });
+
+    it('Tests deleteItemDetail function', () => {
+      mockPalletItem.added = true;
+      deleteItemDetail(mockPalletItem, mockDispatch);
+      expect(mockDispatch(removeItem(mockPalletItem.itemNbr.toString())));
+
+      mockPalletItem.added = false;
+      deleteItemDetail(mockPalletItem, mockDispatch);
+      expect(mockDispatch(deleteItem(mockPalletItem.itemNbr.toString())));
+    });
+
+    it('Tests undoDelete function', () => {
+      undoDelete(mockDispatch);
+      expect(mockDispatch).toHaveBeenCalledWith(resetItems());
+    });
+
+    it('Tests FlatList ItemCard render function', () => {
+      const itemCardRender = itemCard(
+        { item: { ...mockPalletItem, deleted: false } },
+        mockDispatch,
+        mockConfig,
+        'MX',
+        mockTrackEventCall
+      );
+      expect(itemCardRender).not.toBeNull();
+
+      mockPalletItem.deleted = true;
+      const itemCardRendesNull = itemCard(
+        { item: mockPalletItem },
+        mockDispatch,
+        mockConfig,
+        'MX',
+        mockTrackEventCall
+      );
+      expect(itemCardRendesNull).toBeNull();
+      // set mock pallet back to default
+      mockPalletItem.deleted = false;
+    });
+
+    it('Tests onValidateHardwareBackPress function', () => {
+      const mockSetWarnDisplay = jest.fn();
+      expect(
+        onValidateHardwareBackPress(mockSetWarnDisplay, true)
+      ).toStrictEqual(true);
+      expect(mockSetWarnDisplay).toHaveBeenCalled();
+      expect(
+        onValidateHardwareBackPress(mockSetWarnDisplay, false)
+      ).toStrictEqual(false);
+    });
+
+    it('Tests backHandlerEventHook function', () => {
+      const backHandlerProp: BackHandlerStatic = {
+        exitApp: jest.fn(),
+        addEventListener: jest.fn().mockImplementation(
+          (event, callBack: () => boolean | null | undefined) => {
+            callBack();
+          }
+        ),
+        removeEventListener: jest.fn().mockImplementation((event, callBack) => {
+          callBack();
+        })
+      };
+      const mockSetWarnDisplay = jest.fn();
+      backHandlerEventHook(
+        backHandlerProp,
+        mockSetWarnDisplay,
+        mockItems,
+        mockPalletInfo
+      );
+      expect(backHandlerProp.addEventListener).toBeCalledWith(
+        'hardwareBackPress',
+        expect.any(Function)
+      );
+      expect(mockSetWarnDisplay).toHaveBeenCalled();
+      expect(enableSave(mockItems, mockPalletInfo)).toStrictEqual(true);
+    });
+
+    it.skip('Tests navListenerHook function', () => {
+      type EventMapBase = Record<
+        string,
+        { data?: any; canPreventDefault?: boolean }
+      >;
+
+      navigationProp.addListener = jest
+        .fn()
+        .mockImplementation(
+          (
+            event,
+            callBack: EventListenerCallback<EventMapBase, keyof EventMapBase>
+          ) => {
+            const eventObj: BeforeRemoveEvent = {
+              data: {
+                action: {
+                  type: ''
+                }
+              },
+              defaultPrevented: false,
+              preventDefault: jest.fn(),
+              type: 'beforeRemove'
+            };
+            callBack(eventObj);
+          }
+        );
+      const mockSetWarnDisplay = jest.fn();
+
+      navListenerHook(
+        navigationProp,
+        false,
+        mockItems,
+        mockPalletInfo,
+        mockSetWarnDisplay,
+        mockDispatch
+      );
+      expect(navigationProp.addListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(mockSetWarnDisplay).toHaveBeenCalledWith(true);
+
+      navListenerHook(
+        navigationProp,
+        true,
+        mockItems,
+        mockPalletInfo,
+        mockSetWarnDisplay,
+        mockDispatch
+      );
+      expect(mockDispatch).toHaveBeenCalled();
+    });
   });
 });

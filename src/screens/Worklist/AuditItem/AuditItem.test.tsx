@@ -375,14 +375,14 @@ describe('AuditItemScreen', () => {
         payload: {
           id: 123
         },
-        type: 'SAGA/GET_ITEM_DETAILS'
+        type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
       await onValidateItemNumber({
         ...mockAuditItemScreenProps,
         itemNumber: 123
       }, false);
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
-        type: 'API/GET_ITEM_DETAILS/RESET'
+        type: 'API/GET_ITEM_DETAILS_V4/RESET'
       });
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         2,
@@ -395,14 +395,14 @@ describe('AuditItemScreen', () => {
         payload: {
           id: 123
         },
-        type: 'SAGA/GET_ITEM_DETAILS'
+        type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
       await onValidateItemNumber({
         ...mockAuditItemScreenProps,
         itemNumber: 123
       }, true);
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
-        type: 'API/GET_ITEM_DETAILS/RESET'
+        type: 'API/GET_ITEM_DETAILS_V4/RESET'
       });
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         2,
@@ -415,7 +415,7 @@ describe('AuditItemScreen', () => {
         payload: {
           id: 980056535
         },
-        type: 'SAGA/GET_ITEM_DETAILS'
+        type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
       const { getByTestId, rerender, toJSON } = render(
         isError(mockError, mockDispatch, jest.fn, 980056535)

@@ -1,12 +1,20 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect, useMemo, useRef, useState
+  DependencyList,
+  Dispatch,
+  EffectCallback,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 import {
   BackHandler,
-  EmitterSubscription,
+  BackHandlerStatic,
   FlatList,
   Keyboard,
   KeyboardAvoidingView,
+  NativeEventEmitter,
   Pressable,
   Text,
   TouchableOpacity,
@@ -32,7 +40,12 @@ import ManualScan from '../../components/manualscan/ManualScan';
 import PalletExpiration from '../../components/PalletExpiration/PalletExpiration';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import {
-  addPalletUPCs, clearPallet, deleteUpcs, getItemDetails, postCreatePallet, updatePalletItemQty
+  addPalletUPCs,
+  clearPallet,
+  deleteUpcs,
+  getItemDetailsV4,
+  postCreatePallet,
+  updatePalletItemQty
 } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
@@ -57,7 +70,12 @@ import {
 } from '../../state/actions/PalletManagement';
 import PalletItemCard from '../../components/PalletItemCard/PalletItemCard';
 import {
-  ADD_PALLET_UPCS, CLEAR_PALLET, DELETE_UPCS, GET_ITEM_DETAILS, POST_CREATE_PALLET, UPDATE_PALLET_ITEM_QTY
+  ADD_PALLET_UPCS,
+  CLEAR_PALLET,
+  DELETE_UPCS,
+  GET_ITEM_DETAILS_V4,
+  POST_CREATE_PALLET,
+  UPDATE_PALLET_ITEM_QTY
 } from '../../state/actions/asyncAPI';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
@@ -120,7 +138,7 @@ export const isExpiryDateChanged = (palletInfo: PalletInfo): boolean => !!(
   palletInfo.newExpirationDate && palletInfo.newExpirationDate !== palletInfo.expirationDate?.trim()
 );
 
-const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
+export const enableSave = (items: PalletItem[], palletInfo: PalletInfo): boolean => {
   const isItemsModified = items.some((item: PalletItem) => isQuantityChanged(item)
     || item.deleted || item.added);
   return isItemsModified || isExpiryDateChanged(palletInfo);
@@ -177,12 +195,12 @@ export const removeExpirationDate = (items: PalletItem[], perishableCategories: 
   return deletedPerishableItem && !perishableExistsInPallet;
 };
 
-const isPerishableItemDeleted = (items: PalletItem[], perishableCategories: number[]): boolean => {
+export const isPerishableItemDeleted = (items: PalletItem[], perishableCategories: number[]): boolean => {
   const deletedItems = items.filter(item => item.deleted);
   return isPerishableItemExist(deletedItems, perishableCategories);
 };
 
-const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
+export const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
   // Remove item from redux if this item was being added to pallet
   if (item.added) {
     dispatch(removeItem(item.itemNbr.toString()));
@@ -191,7 +209,7 @@ const deleteItemDetail = (item: PalletItem, dispatch: Dispatch<any>) => {
   }
 };
 
-const undoDelete = (dispatch: Dispatch<any>) => {
+export const undoDelete = (dispatch: Dispatch<any>) => {
   dispatch(resetItems());
 };
 
@@ -200,7 +218,7 @@ export const isAddedItemPerishable = (items: PalletItem[], perishableCategories:
   return isPerishableItemExist(addedItems, perishableCategories);
 };
 
-const itemCard = (
+export const itemCard = (
   { item }: { item: PalletItem },
   dispatch: Dispatch<any>,
   userConfigs: Configurations,
@@ -566,7 +584,7 @@ export const getItemDetailsApiHook = (
   }
 };
 
-const onValidateHardwareBackPress = (
+export const onValidateHardwareBackPress = (
   setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
   dataUnsaved: boolean
 ) => {
@@ -655,6 +673,107 @@ export const postCreatePalletApiHook = (
   }
 };
 
+export const barcodeEmitterHook = (
+  barcodeEventEmitter: NativeEventEmitter,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent
+) => {
+  const scannedSubscription = barcodeEventEmitter.addListener('scanned', scan => {
+    if (navigation.isFocused()) {
+      validateSession(navigation, route.name).then(() => {
+        trackEventCall(SCREEN_NAME, {
+          action: 'Items_Details_scanned',
+          barcode: scan.value,
+          type: scan.type
+        });
+        dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
+      });
+    }
+  });
+  return () => {
+    scannedSubscription.remove();
+  };
+};
+
+export const backHandlerEventHook = (
+  BackHandlerEmitter: BackHandlerStatic,
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  items: PalletItem[],
+  palletInfo: PalletInfo
+) => {
+  const onHardwareBackPress = () => onValidateHardwareBackPress(
+    setDisplayWarningModal,
+    enableSave(items, palletInfo)
+  );
+  BackHandlerEmitter.addEventListener('hardwareBackPress', onHardwareBackPress);
+  return () => BackHandlerEmitter.removeEventListener('hardwareBackPress', onHardwareBackPress);
+};
+
+export const navListenerHook = (
+  navigation: NavigationProp<any>,
+  confirmBackNavigate: boolean,
+  items: PalletItem[],
+  palletInfo: PalletInfo,
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
+) => navigation.addListener('beforeRemove', e => {
+  if (!confirmBackNavigate && enableSave(items, palletInfo)) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  } else {
+    dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+  }
+});
+
+const backConfirmed = (
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+) => {
+  setDisplayWarningModal(false);
+  setConfirmBackNavigate(true);
+  dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+};
+
+export const renderWarningModal = (
+  displayWarningModal: boolean,
+  setDisplayWarningModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setConfirmBackNavigate: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
+) => (
+  <CustomModalComponent
+    isVisible={displayWarningModal}
+    onClose={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
+    modalType="Popup"
+  >
+    <>
+      <View>
+        <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
+        <Text style={styles.message}>{strings('PALLET.UNSAVED_WARNING_MSG')}</Text>
+      </View>
+      <View style={styles.buttonWarningContainer}>
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.CANCEL')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          type={ButtonType.SOLID_WHITE}
+          onPress={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
+          testID="Cancel Back Button"
+        />
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.OK')}
+          type={ButtonType.PRIMARY}
+          onPress={() => backConfirmed(setDisplayWarningModal, setConfirmBackNavigate, dispatch)}
+          testID="Confirm Back Button"
+        />
+      </View>
+    </>
+  </CustomModalComponent>
+);
+
 export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const {
     useEffectHook, isManualScanEnabled, palletInfo, items, navigation,
@@ -666,7 +785,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     createPallet, postCreatePalletApi, countryCode, userConfigs, trackEventCall
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
-  let scannedSubscription: EmitterSubscription;
 
   // validation on app back press
   useEffectHook(() => {
@@ -675,21 +793,17 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         setDisplayWarningModal(true);
         e.preventDefault();
       } else {
-        dispatch({ type: GET_ITEM_DETAILS.RESET });
+        dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
       }
     });
     return navigationListener;
+    // navListenerHook(navigation, confirmBackNavigate, items, palletInfo, setDisplayWarningModal, dispatch);
   }, [navigation, items, confirmBackNavigate]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
     useCallbackHook(() => {
-      const onHardwareBackPress = () => onValidateHardwareBackPress(
-        setDisplayWarningModal,
-        enableSave(items, palletInfo)
-      );
-      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
-      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+      backHandlerEventHook(BackHandler, setDisplayWarningModal, items, palletInfo);
     }, [items])
   );
 
@@ -701,21 +815,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   }, [confirmBackNavigate]);
 
   useEffectHook(() => {
-    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused()) {
-        validateSession(navigation, route.name).then(() => {
-          trackEventCall(SCREEN_NAME, {
-            action: 'Items_Details_scanned',
-            barcode: scan.value,
-            type: scan.type
-          });
-          dispatch(getItemDetails({ id: scan.value, getSummary: false }));
-        });
-      }
-    });
-    return () => {
-      scannedSubscription.remove();
-    };
+    barcodeEmitterHook(barcodeEmitter, navigation, route, dispatch, trackEventCall);
   }, []);
 
   // Orchestrated API Calls
@@ -831,42 +931,6 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
   const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
   const isAddedPerishable = isAddedItemPerishable(items, perishableCategories);
 
-  const backConfirmed = () => {
-    setDisplayWarningModal(false);
-    setConfirmBackNavigate(true);
-    dispatch({ type: GET_ITEM_DETAILS.RESET });
-  };
-
-  const renderWarningModal = () => (
-    <CustomModalComponent
-      isVisible={displayWarningModal}
-      onClose={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
-      modalType="Popup"
-    >
-      <>
-        <View>
-          <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
-          <Text style={styles.message}>{strings('PALLET.UNSAVED_WARNING_MSG')}</Text>
-        </View>
-        <View style={styles.buttonWarningContainer}>
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.CANCEL')}
-            titleColor={COLOR.MAIN_THEME_COLOR}
-            type={ButtonType.SOLID_WHITE}
-            onPress={() => { setDisplayWarningModal(false); setConfirmBackNavigate(false); }}
-          />
-          <Button
-            style={styles.buttonAlign}
-            title={strings('GENERICS.OK')}
-            type={ButtonType.PRIMARY}
-            onPress={backConfirmed}
-          />
-        </View>
-      </>
-    </CustomModalComponent>
-  );
-
   return (
     <KeyboardAvoidingView
       style={styles.safeAreaView}
@@ -887,7 +951,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
         confirmText={strings('GENERICS.YES')}
       />
       <View style={styles.bodyContainer}>
-        {renderWarningModal()}
+        {renderWarningModal(displayWarningModal, setDisplayWarningModal, setConfirmBackNavigate, dispatch)}
         {isManualScanEnabled && <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />}
         <View style={styles.headerContainer}>
           {!createPallet && (
@@ -969,6 +1033,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
             backgroundColor={COLOR.GREEN}
             onPress={() => submit()}
             disabled={isAddedPerishable && !(newExpirationDate || expirationDate)}
+            testID="Enable Save Button"
           />
         </View>
       ) : null}
@@ -984,7 +1049,7 @@ const ManagePallet = (): JSX.Element => {
   const navigation: NavigationProp<any> = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
-  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetails);
+  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetailsV4);
   const addPalletUpcApi = useTypedSelector(state => state.async.addPalletUPCs);
   const updateItemQtyAPI = useTypedSelector(state => state.async.updatePalletItemQty);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
