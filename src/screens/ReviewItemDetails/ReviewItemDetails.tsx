@@ -1203,6 +1203,10 @@ export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: Item
       isItemDetailsCompleted(itemDetails),
       true
     ));
+
+    if (itemDetails.worklistStatus === WorkListStatus.COMPLETED) {
+      dispatch(setActionCompleted());
+    }
   }
 };
 
@@ -1372,6 +1376,38 @@ export const isError = (
   return (
     <View />
   );
+};
+
+export const handleRefresh = (
+  validateSessionCall: typeof validateSession,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any>,
+  itemDetails: ItemDetails,
+  trackEventCall: typeof trackEvent,
+  dispatch: Dispatch<any>,
+  userId: string,
+  peteGetLocations: boolean
+) => {
+  validateSessionCall(navigation, route.name).then(() => {
+    trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
+    dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+    dispatch({ type: GET_ITEM_PIHISTORY.RESET });
+    dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
+    dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
+    dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
+    dispatch(getItemDetailsV4({ id: itemDetails.itemNbr }));
+    dispatch(getItemPiHistory(itemDetails.itemNbr));
+    dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
+    dispatch(getItemPicklistHistory(itemDetails.itemNbr));
+    dispatch(getItemManagerApprovalHistory(itemDetails.itemNbr));
+    if (peteGetLocations) {
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      dispatch(getLocationsForItemV1(itemDetails.itemNbr));
+    } else {
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      dispatch(getLocationsForItem(itemDetails.itemNbr));
+    }
+  }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
 };
 
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
@@ -1544,22 +1580,6 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
-  const handleRefresh = () => {
-    validateSessionCall(navigation, route.name).then(() => {
-      trackEventCall(REVIEW_ITEM_DETAILS, { action: 'refresh', itemNbr: itemDetails.itemNbr });
-      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-      dispatch({ type: GET_ITEM_PIHISTORY.RESET });
-      dispatch({ type: GET_ITEM_PISALESHISTORY.RESET });
-      dispatch({ type: GET_ITEM_PICKLISTHISTORY.RESET });
-      dispatch({ type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET });
-      dispatch(getItemDetailsV4({ id: itemDetails.itemNbr }));
-      dispatch(getItemPiHistory(itemDetails.itemNbr));
-      dispatch(getItemPiSalesHistory(itemDetails.itemNbr));
-      dispatch(getItemPicklistHistory(itemDetails.itemNbr));
-      dispatch(getItemManagerApprovalHistory(itemDetails.itemNbr));
-    }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
-  };
-
   return (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
@@ -1604,7 +1624,21 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.container}
-        refreshControl={<RefreshControl refreshing={false} onRefresh={handleRefresh} />}
+        refreshControl={(
+          <RefreshControl
+            refreshing={false}
+            onRefresh={() => handleRefresh(
+              validateSessionCall,
+              navigation,
+              route,
+              itemDetails,
+              trackEventCall,
+              dispatch,
+              userId,
+              userConfigs.peteGetLocations
+            )}
+          />
+)}
       >
         {onIsWaiting(isWaiting)}
         {!isWaiting && itemDetails
