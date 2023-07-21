@@ -201,14 +201,14 @@ export const OtherActionScreen = (props: OtherActionProps) => {
     }
   ]);
 
-  const desiredActions = desiredActionButtonsMap.get(exceptionType);
+  let desiredActions = desiredActionButtonsMap.get(exceptionType);
 
   if (!features.includes('on hands change')) {
-    desiredActions?.filter(item => item.title !== OH_CHANGE);
+    desiredActions = desiredActions?.filter(item => item.title !== OH_CHANGE);
   }
 
   if (itemDetails.worklistStatus === WorkListStatus.COMPLETED) {
-    desiredActions?.filter(item => item.title !== SCAN_NO_ACTION);
+    desiredActions = desiredActions?.filter(item => item.title !== SCAN_NO_ACTION);
   }
 
   const continueAction = () => {

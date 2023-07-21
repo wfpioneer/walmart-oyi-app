@@ -53,6 +53,7 @@ import {
   GET_LOCATIONS_FOR_ITEM,
   GET_LOCATIONS_FOR_ITEM_V1
 } from '../../state/actions/asyncAPI';
+import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -892,8 +893,9 @@ describe('ReviewItemDetailsScreen', () => {
       };
       mockItemDetail123.worklistStatus = WorkListStatus.COMPLETED;
       onValidateItemDetails(mockDispatch, mockItemDetail123);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, expectedResults);
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, setActionCompleted());
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, setItemDetails(mockItemDetail123));
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, expectedResults);
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, setActionCompleted());
     });
 
     it('testing callBackbarcodeEmitter', async () => {
