@@ -16,6 +16,7 @@ import {
   OtherActionScreen,
   renderChooseActionRadioButtons
 } from './OtherAction';
+import User from '../../models/User';
 
 jest.mock(
   'react-native-vector-icons/MaterialCommunityIcons',
@@ -67,9 +68,11 @@ describe('OtherActionScreen Tests', () => {
     expect(toJSON()).toMatchSnapshot();
   });
   it('renders the OtherActionScreen with desired Action buttons', () => {
+    const mockOHUser: User = { ...mockUser, features: ['on hands change'] };
     const { toJSON } = render(
       <OtherActionScreen
         {...mockOtherActionProps}
+        appUser={mockOHUser}
         exceptionType="C"
       />
     );
