@@ -562,7 +562,8 @@ export default {
     NO_PALLETS_FOUND_FOR_ITEM: '未找到此item卡板信息',
     NEGATIVE_VALIDATION: '无效结果，位置数量不可小于0',
     ITEMS: '个库存',
-    CUSTOM_ITEMS: '个 item'
+    CUSTOM_ITEMS: '个 item',
+    IN_PROGRESS: '正在进行中'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',

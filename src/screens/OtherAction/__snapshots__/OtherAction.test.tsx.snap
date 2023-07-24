@@ -117,6 +117,13 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen 1`] = `
         }
       >
         <View>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          />
           <Text
             style={
               Object {
@@ -281,6 +288,13 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
           >
             [missing "en.EXCEPTION.CANCELLED" translation]
           </Text>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          />
           <Text
             style={
               Object {
