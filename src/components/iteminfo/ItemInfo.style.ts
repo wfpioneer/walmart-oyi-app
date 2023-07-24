@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
   },
   printPriceBtn: {
     marginVertical: 10
+  },
+  auditFlagView: {
+    flexDirection: 'row'
   }
 });
 

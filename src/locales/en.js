@@ -558,7 +558,8 @@ export default {
     NO_PALLETS_FOUND_FOR_ITEM: 'No Pallets found for the item',
     NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
     ITEMS: 'Items',
-    CUSTOM_ITEMS: 'Items'
+    CUSTOM_ITEMS: 'Items',
+    IN_PROGRESS: 'In Progress'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',
