@@ -278,5 +278,9 @@ describe('Tests rendering Filter `Pills`', () => {
     // In progress based items, completed tab
     result = getItemsForTab(mockCombinationAuditsWorklist, 2, progressiveConfig);
     expect(result.length).toBe(1);
+
+    // In progress based items, bad completion level
+    result = getItemsForTab(mockCombinationAuditsWorklist, 6543, progressiveConfig);
+    expect(result.length).toBe(0);
   });
 });
