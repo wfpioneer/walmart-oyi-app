@@ -34,7 +34,6 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
     }
   }, [collapsed]);
 
-  // placeholder render item
   const renderItem = ({ item }: { item: WorklistItemI }) => {
     const {
       itemName, itemNbr, worklistType
@@ -52,6 +51,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             loading={false}
             showItemImage={showItemImage}
             countryCode={countryCode}
+            status={item.worklistStatus}
           />
         </View>
       </TouchableOpacity>
