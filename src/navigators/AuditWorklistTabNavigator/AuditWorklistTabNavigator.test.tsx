@@ -12,7 +12,7 @@ const routeProp: RouteProp<any, string> = {
 };
 
 describe('AuditWorklistTab Navigator', () => {
-  it('Renders the Audit WorkList Tab Navigator component', () => {
+  it('Renders the Audit WorkList Tab Navigator component without in progress tab', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <Provider store={store}>
@@ -25,6 +25,28 @@ describe('AuditWorklistTab Navigator', () => {
           useFocusEffectHook={jest.fn()}
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
+          enableAuditsInProgress={false}
+        />
+      </Provider>
+    );
+
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('renders the Audit worklist tab navigator component with in progress tab', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Provider store={store}>
+        <AuditWorklistTabNavigator
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          validateSessionCall={jest.fn()}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          enableAuditsInProgress={true}
         />
       </Provider>
     );

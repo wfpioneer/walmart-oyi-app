@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SortBar Component Test renders ItemCard with images 1`] = `
+exports[`ItemCard Component Test renders ItemCard with images 1`] = `
 <View
   style={
     Object {
@@ -113,7 +113,7 @@ exports[`SortBar Component Test renders ItemCard with images 1`] = `
 </View>
 `;
 
-exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = `
+exports[`ItemCard Component Test renders ItemCard without onHands quantity 1`] = `
 <View
   style={
     Object {
@@ -195,7 +195,7 @@ exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = 
 </View>
 `;
 
-exports[`SortBar Component Test renders default ItemCard when loading is false 1`] = `
+exports[`ItemCard Component Test renders default ItemCard when loading is false 1`] = `
 <View
   style={
     Object {
@@ -305,7 +305,7 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
 </View>
 `;
 
-exports[`SortBar Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
+exports[`ItemCard Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
 <View
   style={
     Object {
@@ -473,7 +473,7 @@ exports[`SortBar Component Test renders default ItemCard when loading is false a
 </View>
 `;
 
-exports[`SortBar Component Test renders default ItemCard when loading is true 1`] = `
+exports[`ItemCard Component Test renders default ItemCard when loading is true 1`] = `
 <View
   style={
     Object {
@@ -521,6 +521,106 @@ exports[`SortBar Component Test renders default ItemCard when loading is true 1`
       <ActivityIndicator
         size={30}
       />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`ItemCard Component tests rendering item card with worklist status 1`] = `
+<View
+  style={
+    Object {
+      "marginTop": 2,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "opacity": 1,
+        "padding": 5,
+        "paddingLeft": 10,
+        "width": "100%",
+      }
+    }
+    testID="itemCard"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "flexShrink": 1,
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+      testID="item-details"
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.GENERICS.ITEM" translation] 1234
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 14,
+              "marginVertical": 2,
+            }
+          }
+        >
+          test item
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#AAF0F2",
+            "borderColor": "#eeeeee",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "fontSize": 11,
+            "marginVertical": 5,
+            "paddingHorizontal": 8,
+            "paddingVertical": 5,
+          }
+        }
+      >
+        <Text>
+          [missing "en.AUDITS.AUDITS" translation] - [missing "en.AUDITS.IN_PROGRESS" translation]
+        </Text>
+      </View>
     </View>
   </View>
 </View>
