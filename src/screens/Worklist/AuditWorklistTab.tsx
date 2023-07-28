@@ -67,7 +67,8 @@ const renderCategoryCard = (
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent,
   showItemImage: boolean,
-  countryCode: string
+  countryCode: string,
+  enableAuditsInProgress: boolean
 ) => (
   <CategoryCard
     category={category}
@@ -78,6 +79,7 @@ const renderCategoryCard = (
     }}
     showItemImage={showItemImage}
     countryCode={countryCode}
+    enableAuditsInProgress={enableAuditsInProgress}
   />
 );
 
@@ -292,7 +294,8 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           dispatch,
           trackEventCall,
           showItemImage,
-          countryCode
+          countryCode,
+          config.enableAuditsInProgress
         )}
         keyExtractor={item => `category-${item}`}
         onRefresh={() => {

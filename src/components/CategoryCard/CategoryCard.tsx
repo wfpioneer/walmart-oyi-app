@@ -16,11 +16,13 @@ export type CategoryCardProps = {
   onItemCardClick: (itemNumber: number, worklistType: string) => void;
   showItemImage: boolean;
   countryCode: string;
+  enableAuditsInProgress: boolean;
 };
 
 const CategoryCard = (props: CategoryCardProps): JSX.Element => {
   const {
-    listOfItems, category, collapsed, onItemCardClick, showItemImage, countryCode
+    listOfItems, category, collapsed, onItemCardClick, showItemImage,
+    countryCode, enableAuditsInProgress
   } = props;
 
   const [open, setOpen] = useState(true);
@@ -51,7 +53,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             loading={false}
             showItemImage={showItemImage}
             countryCode={countryCode}
-            status={item.worklistStatus}
+            status={enableAuditsInProgress ? item.worklistStatus : undefined}
           />
         </View>
       </TouchableOpacity>
