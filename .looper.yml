@@ -82,6 +82,10 @@ envs:
       TARGET_REPO: "releases"
       REPO_GROUP_ID: "IntlSamsTech"
 
+      #Slack related vars
+      # Optional - Slack channel for notifications
+      SLACK_CHANNEL: 'intl_sams_oyi_ops_alerts'
+
       # Application Portfolio Management
       APM_ID: 'APM0007047'
 
