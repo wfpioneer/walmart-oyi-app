@@ -82,6 +82,10 @@ envs:
       TARGET_REPO: "snapshots"
       REPO_GROUP_ID: "IntlSamsTech"
 
+      #Slack related vars
+      # Optional - Slack channel for notifications
+      SLACK_CHANNEL: 'intl_sams_oyi_ops_alerts'
+
       #BetaCrash vars
       #      betaCrashDetails:
       #        LOOPER_API_TOKEN: <PROVIDE_A_VALID_API_OKEN>
