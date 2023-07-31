@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-android/androidTemplate-1.3.0
+inherit: job:///Mobile/templates-android/androidTemplate-2.0.0
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
@@ -74,14 +74,13 @@ envs:
       # Optional - weather the build will be zip aligned. Defaults to false
       ZIPALIGN_REQUIRED: false
 
-      #Proximity related vars
-      RELEASES_REPO: 'pangaea_releases'
-      # Optional - Promity repo for snapshots & PRs, default is pangaea_snapshots
-      SNAPSHOTS_REPO: 'pangaea_snapshots'
-      # Define what type of repo you want to use (releases/snapshots)
-      PROXIMITY_REPO: 'snapshots'
-      # artifact group id
-      NEXUS_GROUP_ID: 'IntlSamsTech'
+      # Artifactory related vars
+      DEFAULT_CURRENT_VERSION: "4.9.6"
+      DEFAULT_VERSION_CODE: 276
+      ALLOW_ARTIFACTORY: true
+      GIT_ORG: "intlsamstech"
+      TARGET_REPO: "snapshots"
+      REPO_GROUP_ID: "IntlSamsTech"
 
       #BetaCrash vars
       #      betaCrashDetails:
