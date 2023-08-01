@@ -1534,6 +1534,7 @@ Array [
                 Object {
                   "flexDirection": "row",
                   "justifyContent": "space-between",
+                  "paddingRight": 5,
                   "width": "100%",
                 }
               }
@@ -1560,67 +1561,7 @@ Array [
                   }
                 }
               >
-                 (-999)
-              </Text>
-              <Text
-                style={
-                  Object {
-                    "color": "#616161",
-                    "flexShrink": 1,
-                    "flexWrap": "wrap",
-                    "fontSize": 12,
-                  }
-                }
-              >
                 [missing "en.AUDITS.CURRENT_TOTAL" translation] 0
-              </Text>
-            </View>
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "width": "100%",
-                }
-              }
-            >
-              <Text
-                allowFontScaling={false}
-                selectable={false}
-                style={
-                  Array [
-                    Object {
-                      "color": "#e74517",
-                      "fontSize": 12,
-                    },
-                    Object {
-                      "paddingRight": 6,
-                      "paddingTop": 2,
-                    },
-                    Object {
-                      "fontFamily": "FontAwesome5Free-Solid",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    Object {
-                      "fontWeight": "900",
-                    },
-                  ]
-                }
-              >
-                
-              </Text>
-              <Text
-                style={
-                  Object {
-                    "color": "#616161",
-                    "flexShrink": 1,
-                    "flexWrap": "wrap",
-                    "fontSize": 12,
-                  }
-                }
-              >
-                [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
               </Text>
             </View>
           </View>
