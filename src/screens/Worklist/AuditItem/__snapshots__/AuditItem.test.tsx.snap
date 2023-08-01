@@ -1533,6 +1533,8 @@ Array [
               style={
                 Object {
                   "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "width": "100%",
                 }
               }
             >
@@ -1547,6 +1549,78 @@ Array [
                 }
               >
                 [missing "en.ITEM.ON_HANDS" translation] 0
+              </Text>
+              <Text
+                style={
+                  Object {
+                    "color": "#616161",
+                    "flexShrink": 1,
+                    "flexWrap": "wrap",
+                    "fontSize": 12,
+                  }
+                }
+              >
+                 (-999)
+              </Text>
+              <Text
+                style={
+                  Object {
+                    "color": "#616161",
+                    "flexShrink": 1,
+                    "flexWrap": "wrap",
+                    "fontSize": 12,
+                  }
+                }
+              >
+                [missing "en.AUDITS.CURRENT_TOTAL" translation] 0
+              </Text>
+            </View>
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "width": "100%",
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#e74517",
+                      "fontSize": 12,
+                    },
+                    Object {
+                      "paddingRight": 6,
+                      "paddingTop": 2,
+                    },
+                    Object {
+                      "fontFamily": "FontAwesome5Free-Solid",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {
+                      "fontWeight": "900",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  Object {
+                    "color": "#616161",
+                    "flexShrink": 1,
+                    "flexWrap": "wrap",
+                    "fontSize": 12,
+                  }
+                }
+              >
+                [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
               </Text>
             </View>
           </View>
@@ -1877,25 +1951,6 @@ Array [
         }
       }
     >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flex": 1,
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-              "fontWeight": "500",
-            }
-          }
-        >
-          0 [missing "en.AUDITS.ITEMS" translation]
-        </Text>
-      </View>
       <View
         style={
           Object {
@@ -2348,6 +2403,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
+      totalQty={0}
     />
   </View>
   <ScrollView
@@ -2431,7 +2487,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     <AuditScreenFooter
       disabledContinue={true}
       onContinueClick={[Function]}
-      totalCount={0}
     />
   </View>
 </React.Fragment>
@@ -2874,6 +2929,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       pendingQty={35}
       showItemImage={false}
       showOHItems={false}
+      totalQty={42}
     />
   </View>
   <ScrollView
@@ -2957,7 +3013,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
     <AuditScreenFooter
       disabledContinue={false}
       onContinueClick={[Function]}
-      totalCount={42}
     />
   </View>
 </React.Fragment>
@@ -3348,6 +3403,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
+      totalQty={15}
     />
   </View>
   <ScrollView
@@ -3431,7 +3487,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <AuditScreenFooter
       disabledContinue={false}
       onContinueClick={[Function]}
-      totalCount={15}
     />
   </View>
 </React.Fragment>
@@ -3822,6 +3877,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       pendingQty={35}
       showItemImage={false}
       showOHItems={false}
+      totalQty={42}
     />
   </View>
   <ScrollView
@@ -3905,7 +3961,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <AuditScreenFooter
       disabledContinue={false}
       onContinueClick={[Function]}
-      totalCount={42}
     />
   </View>
 </React.Fragment>

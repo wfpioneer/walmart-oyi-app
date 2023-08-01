@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SortBar Component Test renders ItemCard with images 1`] = `
+exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
 <View
   style={
     Object {
@@ -113,7 +113,7 @@ exports[`SortBar Component Test renders ItemCard with images 1`] = `
 </View>
 `;
 
-exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = `
+exports[`Audits ItemCard Component Test renders ItemCard without onHands quantity 1`] = `
 <View
   style={
     Object {
@@ -195,7 +195,7 @@ exports[`SortBar Component Test renders ItemCard without onHands quantity 1`] = 
 </View>
 `;
 
-exports[`SortBar Component Test renders default ItemCard when loading is false 1`] = `
+exports[`Audits ItemCard Component Test renders default ItemCard when loading is false 1`] = `
 <View
   style={
     Object {
@@ -283,6 +283,8 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
           style={
             Object {
               "flexDirection": "row",
+              "justifyContent": "space-between",
+              "width": "100%",
             }
           }
         >
@@ -298,6 +300,18 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
           >
             [missing "en.ITEM.ON_HANDS" translation] 12
           </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+          </Text>
         </View>
       </View>
     </View>
@@ -305,7 +319,7 @@ exports[`SortBar Component Test renders default ItemCard when loading is false 1
 </View>
 `;
 
-exports[`SortBar Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
+exports[`Audits ItemCard Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
 <View
   style={
     Object {
@@ -393,6 +407,8 @@ exports[`SortBar Component Test renders default ItemCard when loading is false a
           style={
             Object {
               "flexDirection": "row",
+              "justifyContent": "space-between",
+              "width": "100%",
             }
           }
         >
@@ -420,11 +436,25 @@ exports[`SortBar Component Test renders default ItemCard when loading is false a
           >
              (10)
           </Text>
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+          </Text>
         </View>
         <View
           style={
             Object {
               "flexDirection": "row",
+              "justifyContent": "space-between",
+              "width": "100%",
             }
           }
         >
@@ -473,7 +503,7 @@ exports[`SortBar Component Test renders default ItemCard when loading is false a
 </View>
 `;
 
-exports[`SortBar Component Test renders default ItemCard when loading is true 1`] = `
+exports[`Audits ItemCard Component Test renders default ItemCard when loading is true 1`] = `
 <View
   style={
     Object {
@@ -521,6 +551,118 @@ exports[`SortBar Component Test renders default ItemCard when loading is true 1`
       <ActivityIndicator
         size={30}
       />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Audits ItemCard Component renders the item card without total quantity 1`] = `
+<View
+  style={
+    Object {
+      "marginTop": 2,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#ffffffff",
+        "flexDirection": "row",
+        "opacity": 1,
+        "padding": 5,
+        "paddingLeft": 10,
+        "width": "100%",
+      }
+    }
+    testID="itemCard"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "flexShrink": 1,
+          "justifyContent": "space-around",
+          "padding": 5,
+        }
+      }
+      testID="item-details"
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.GENERICS.ITEM" translation] 12344
+        </Text>
+      </View>
+      <View>
+        <Text
+          style={
+            Object {
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 14,
+              "marginVertical": 2,
+            }
+          }
+        >
+          testing item
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.ITEM.ON_HANDS" translation] 345
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
