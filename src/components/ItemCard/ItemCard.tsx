@@ -170,12 +170,12 @@ const ItemCard = ({
           <View style={styles.itemQtyContainer}>
             <View style={styles.itemQtyView}>
               <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
-              {typeof pendingQty === 'number' ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
+              {(pendingQty && pendingQty >= 0) ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
               {totalQty !== undefined ? (
                 <Text style={styles.itemNbr}>{`${strings('AUDITS.CURRENT_TOTAL')} ${totalQty}`}</Text>
               ) : null}
             </View>
-            {typeof pendingQty === 'number' ? (
+            {(pendingQty && pendingQty >= 0) ? (
               <View style={styles.itemQtyView}>
                 <FontAwesome5Icon
                   name="info-circle"

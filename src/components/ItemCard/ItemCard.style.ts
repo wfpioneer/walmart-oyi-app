@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   itemQtyView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
+    paddingRight: 5
   },
   itemQtyContainer: {
     flexDirection: 'column'

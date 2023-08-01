@@ -284,6 +284,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
+              "paddingRight": 5,
               "width": "100%",
             }
           }
@@ -408,6 +409,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
+              "paddingRight": 5,
               "width": "100%",
             }
           }
@@ -454,6 +456,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
+              "paddingRight": 5,
               "width": "100%",
             }
           }
@@ -645,6 +648,7 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
             Object {
               "flexDirection": "row",
               "justifyContent": "space-between",
+              "paddingRight": 5,
               "width": "100%",
             }
           }
