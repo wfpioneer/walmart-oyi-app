@@ -171,9 +171,6 @@ const ItemCard = ({
             <View style={styles.itemQtyView}>
               <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
               {(pendingQty && pendingQty >= 0) ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
-              {totalQty !== undefined ? (
-                <Text style={styles.itemNbr}>{`${strings('AUDITS.CURRENT_TOTAL')} ${totalQty}`}</Text>
-              ) : null}
             </View>
             {(pendingQty && pendingQty >= 0) ? (
               <View style={styles.itemQtyView}>
@@ -186,6 +183,11 @@ const ItemCard = ({
                 <Text style={styles.itemNbr}>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
               </View>
             ) : null}
+          </View>
+        ) : null}
+        {totalQty !== undefined ? (
+          <View style={styles.itemQtyContainer}>
+            <Text style={styles.itemNbr}>{`${strings('AUDITS.CURRENT_TOTAL')} ${totalQty}`}</Text>
           </View>
         ) : null}
       </View>

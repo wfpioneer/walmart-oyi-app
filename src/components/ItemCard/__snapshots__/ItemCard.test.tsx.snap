@@ -108,6 +108,26 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
           test item
         </Text>
       </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -188,6 +208,26 @@ exports[`Audits ItemCard Component Test renders ItemCard without onHands quantit
           }
         >
           test item
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
         </Text>
       </View>
     </View>
@@ -301,19 +341,27 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           >
             [missing "en.ITEM.ON_HANDS" translation] 12
           </Text>
-          <Text
-            style={
-              Object {
-                "color": "#616161",
-                "flexShrink": 1,
-                "flexWrap": "wrap",
-                "fontSize": 12,
-              }
-            }
-          >
-            [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
-          </Text>
         </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+        </Text>
       </View>
     </View>
   </View>
@@ -438,18 +486,6 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           >
              (10)
           </Text>
-          <Text
-            style={
-              Object {
-                "color": "#616161",
-                "flexShrink": 1,
-                "flexWrap": "wrap",
-                "fontSize": 12,
-              }
-            }
-          >
-            [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
-          </Text>
         </View>
         <View
           style={
@@ -500,6 +536,26 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
             [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
           </Text>
         </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+        </Text>
       </View>
     </View>
   </View>

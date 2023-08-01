@@ -1551,19 +1551,27 @@ Array [
               >
                 [missing "en.ITEM.ON_HANDS" translation] 0
               </Text>
-              <Text
-                style={
-                  Object {
-                    "color": "#616161",
-                    "flexShrink": 1,
-                    "flexWrap": "wrap",
-                    "fontSize": 12,
-                  }
-                }
-              >
-                [missing "en.AUDITS.CURRENT_TOTAL" translation] 0
-              </Text>
             </View>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "column",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "flexShrink": 1,
+                  "flexWrap": "wrap",
+                  "fontSize": 12,
+                }
+              }
+            >
+              [missing "en.AUDITS.CURRENT_TOTAL" translation] 0
+            </Text>
           </View>
         </View>
       </View>
