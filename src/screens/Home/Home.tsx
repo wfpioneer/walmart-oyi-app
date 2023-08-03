@@ -27,6 +27,7 @@ import { WorklistGoal, WorklistSummary, WorklistType } from '../../models/Workli
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
+import { getFiniteFixedPercent } from '../../utils/global';
 
 export interface WorklistGoalMove {
   worklistType: WorklistType;
@@ -130,6 +131,17 @@ export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGo
     goal.worklistTypes.forEach(worklist => {
       const moveToDo = moves.find(move => move.worklistType === worklist.worklistType);
 
+      // somehow we got bad data, this is here to correct any
+      if (worklist.completedItems > worklist.totalItems) {
+        let correction = worklist.totalItems;
+        if (worklist.todoItems > 0) {
+          correction -= worklist.todoItems;
+        }
+        worklist.completedItems = correction;
+      } else if (worklist.completedItems < 0) {
+        worklist.completedItems = 0;
+      }
+
       let editIndex = -1;
       if (moveToDo) {
         switch (moveToDo.destinationGoal) {
@@ -157,7 +169,7 @@ export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGo
   });
 
   newGoals.forEach(goal => {
-    goal.worklistGoalPct = Math.round((goal.totalCompletedItems / goal.totalItems) * 100);
+    goal.worklistGoalPct = getFiniteFixedPercent(goal.totalCompletedItems, goal.totalItems);
   });
 
   return newGoals;
@@ -317,6 +329,33 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         destinationGoal: WorklistGoal.AUDITS
       });
     }
+
+    data.forEach(goal => {
+      goal.worklistTypes.forEach(worklist => {
+        switch (worklist.worklistType) {
+          case 'NO':
+            worklist.completedItems = 0;
+            worklist.inProgressItems = 0;
+            worklist.todoItems = 0;
+            worklist.totalItems = 0;
+            break;
+          case 'AU':
+            worklist.completedItems = 80;
+            worklist.inProgressItems = 0;
+            worklist.todoItems = 0;
+            worklist.totalItems = 80;
+            break;
+          case 'RA':
+            worklist.completedItems = -3;
+            worklist.inProgressItems = 0;
+            worklist.todoItems = 0;
+            worklist.totalItems = 0;
+            break;
+          default:
+        }
+      });
+    });
+
     const reorganizedGoals = reorganizeGoals(data, worklistToMove);
 
     const nativeWorklists: NativeWorklist[] = [];
@@ -437,22 +476,19 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           }).catch(() => {});
         };
 
-        const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
-        const completionPercentageValue = Number.isFinite(calculationValue) ? calculationValue : 0;
-
-        const pendingCalcValue = ((worklist.completedItems + worklist.inProgressItems) / worklist.totalItems) * 100;
-        const pendingPercentageValue = Number.isFinite(pendingCalcValue) ? pendingCalcValue : 0;
-
         return (
           <WorklistCard
             key={worklist.worklistType}
             goalTitle={worklistType}
             goal={worklist.totalItems}
             complete={worklist.completedItems}
-            completionPercentage={completionPercentageValue}
+            completionPercentage={getFiniteFixedPercent(worklist.completedItems, worklist.totalItems)}
             completionGoal={goalSummary.worklistEndGoalPct}
             onPress={onWorklistCardPress}
-            pendingPercentage={pendingPercentageValue}
+            pendingPercentage={getFiniteFixedPercent(
+              worklist.completedItems + worklist.inProgressItems,
+              worklist.totalItems
+            )}
             inProgress={inProgressEnabled}
           />
         );
