@@ -338,7 +338,7 @@ describe('LocationDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-  
+
   describe('external function tests', () => {
     afterEach(() => {
       jest.clearAllMocks();
@@ -374,7 +374,7 @@ describe('LocationDetailsScreen', () => {
           }
         }
       };
-      
+
       getLocationsV1ApiHook(successApi, mockDispatch);
       expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_FLOOR_LOCATIONS' }));
       expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_RESERVE_LOCATIONS' }));
