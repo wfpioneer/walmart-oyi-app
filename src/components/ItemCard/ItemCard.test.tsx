@@ -126,7 +126,8 @@ describe('Audits ItemCard Component', () => {
       loading: false,
       countryCode: 'MX',
       showItemImage: false,
-      status: WorkListStatus.AUDITSTARTED
+      status: WorkListStatus.AUDITSTARTED,
+      totalQty: 0
     }));
 
     expect(toJSON()).toMatchSnapshot();
