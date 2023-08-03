@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator component 1`] = `
+exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator component without in progress tab 1`] = `
 <Context.Provider
   value={
     Object {
@@ -26,6 +26,49 @@ exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator com
 >
   <AuditWorklistTabNavigator
     dispatch={[MockFunction]}
+    enableAuditsInProgress={false}
+    route={
+      Object {
+        "key": "",
+        "name": "AuditWorklistTabs",
+      }
+    }
+    trackEventCall={[MockFunction]}
+    useCallbackHook={[MockFunction]}
+    useEffectHook={[MockFunction]}
+    useFocusEffectHook={[MockFunction]}
+    validateSessionCall={[MockFunction]}
+  />
+</Context.Provider>
+`;
+
+exports[`AuditWorklistTab Navigator renders the Audit worklist tab navigator component with in progress tab 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "getServerState": undefined,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <AuditWorklistTabNavigator
+    dispatch={[MockFunction]}
+    enableAuditsInProgress={true}
     route={
       Object {
         "key": "",
