@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import ItemCard from './ItemCard';
 
-describe('SortBar Component', () => {
+describe('Audits ItemCard Component', () => {
   it('Test renders default ItemCard when loading is false', () => {
     const mockOnClick = jest.fn();
     const { toJSON, getByTestId } = render(ItemCard({
@@ -11,7 +11,8 @@ describe('SortBar Component', () => {
       onHandQty: 12,
       loading: false,
       countryCode: 'MX',
-      showItemImage: false
+      showItemImage: false,
+      totalQty: 20
     }));
 
     const itemCardBtn = getByTestId('itemCard');
@@ -33,7 +34,8 @@ describe('SortBar Component', () => {
       loading: false,
       countryCode: 'MX',
       showItemImage: false,
-      pendingQty: 10
+      pendingQty: 10,
+      totalQty: 20
     }));
 
     const itemCardBtn = getByTestId('itemCard');
@@ -54,7 +56,8 @@ describe('SortBar Component', () => {
       onHandQty: 12,
       loading: true,
       countryCode: 'MX',
-      showItemImage: false
+      showItemImage: false,
+      totalQty: 20
     }));
 
     const itemCardBtn = getByTestId('itemCard');
@@ -74,7 +77,23 @@ describe('SortBar Component', () => {
       onHandQty: undefined,
       loading: false,
       countryCode: 'MX',
-      showItemImage: false
+      showItemImage: false,
+      totalQty: 20
+    }));
+
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('renders the item card without total quantity', () => {
+    const { toJSON } = render(ItemCard({
+      itemNumber: 12344,
+      description: 'testing item',
+      onClick: jest.fn(),
+      onHandQty: 345,
+      loading: false,
+      countryCode: 'MX',
+      showItemImage: false,
+      totalQty: undefined
     }));
 
     expect(toJSON()).toMatchSnapshot();
@@ -88,7 +107,8 @@ describe('SortBar Component', () => {
       onHandQty: undefined,
       loading: false,
       countryCode: 'MX',
-      showItemImage: true
+      showItemImage: true,
+      totalQty: 20
     }));
 
     expect(toJSON()).toMatchSnapshot();

@@ -59,7 +59,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE
   },
   itemQtyView: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingRight: 5
   },
   itemQtyContainer: {
     flexDirection: 'column'

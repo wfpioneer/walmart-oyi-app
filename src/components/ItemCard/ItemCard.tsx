@@ -30,6 +30,7 @@ interface ItemCardProps {
   showOHItems?: boolean;
   OHItemInfo?: OHItemInfoI;
   pendingQty?: number | undefined;
+  totalQty: number | undefined;
 }
 
 interface OtherOnHandsItemsProps {
@@ -133,7 +134,7 @@ const OtherOnHandsItems = (props: OtherOnHandsItemsProps) => {
 
 const ItemCard = ({
   itemNumber, description, onClick, loading, onHandQty, disabled,
-  countryCode, showItemImage, showOHItems, OHItemInfo, pendingQty
+  countryCode, showItemImage, showOHItems, OHItemInfo, pendingQty, totalQty
 }: ItemCardProps) => (
   <View style={styles.mainContainer}>
     <TouchableOpacity
@@ -165,13 +166,13 @@ const ItemCard = ({
         <View>
           <Text style={styles.itemDesc}>{description}</Text>
         </View>
-        {onHandQty !== undefined && (
+        {onHandQty !== undefined ? (
           <View style={styles.itemQtyContainer}>
             <View style={styles.itemQtyView}>
               <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
-              {pendingQty && pendingQty >= 0 && (<Text style={styles.itemNbr}>{` (${pendingQty})`}</Text>)}
+              {(pendingQty && pendingQty >= 0) ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
             </View>
-            {pendingQty && pendingQty >= 0 && (
+            {(pendingQty && pendingQty >= 0) ? (
               <View style={styles.itemQtyView}>
                 <FontAwesome5Icon
                   name="info-circle"
@@ -181,9 +182,14 @@ const ItemCard = ({
                 />
                 <Text style={styles.itemNbr}>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
               </View>
-            )}
+            ) : null}
           </View>
-        )}
+        ) : null}
+        {totalQty !== undefined ? (
+          <View style={styles.itemQtyContainer}>
+            <Text style={styles.itemNbr}>{`${strings('AUDITS.CURRENT_TOTAL')} ${totalQty}`}</Text>
+          </View>
+        ) : null}
       </View>
       )}
     </TouchableOpacity>

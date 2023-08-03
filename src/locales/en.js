@@ -559,7 +559,8 @@ export default {
     NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
     ITEMS: 'Items',
     CUSTOM_ITEMS: 'Items',
-    IN_PROGRESS: 'In Progress'
+    IN_PROGRESS: 'In Progress',
+    CURRENT_TOTAL: 'Current Total'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',
