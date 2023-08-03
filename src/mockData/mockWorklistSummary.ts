@@ -302,3 +302,87 @@ export const mockItemNPalletNAuditWorklistSummary: WorklistSummary[] = [
     ]
   }
 ];
+
+export const badDataCombinedWorklistSummary: WorklistSummary[] = [
+  {
+    worklistGoal: WorklistGoal.ITEMS,
+    worklistGoalPct: 50,
+    worklistEndGoalPct: 100,
+    worklistTypes: [
+      {
+        worklistType: 'NSFL',
+        totalItems: 100,
+        completedItems: 50,
+        inProgressItems: 0,
+        todoItems: 50
+      },
+      {
+        worklistType: 'C',
+        totalItems: 50,
+        completedItems: 25,
+        inProgressItems: 0,
+        todoItems: 25
+      },
+      {
+        worklistType: 'NO',
+        totalItems: 14,
+        completedItems: 16,
+        inProgressItems: 0,
+        todoItems: 7
+      },
+      {
+        worklistType: 'NS',
+        totalItems: 24,
+        completedItems: 36,
+        inProgressItems: 0,
+        todoItems: 0
+      },
+      {
+        worklistType: 'NSFQ',
+        totalItems: 8,
+        completedItems: 4,
+        inProgressItems: 0,
+        todoItems: 4
+      }
+    ],
+    totalItems: 196,
+    totalCompletedItems: 98
+  },
+  {
+    totalCompletedItems: 1,
+    totalItems: 151,
+    worklistEndGoalPct: 100,
+    worklistGoal: WorklistGoal.PALLETS,
+    worklistGoalPct: 1,
+    worklistTypes: [{
+      worklistType: 'MP',
+      totalItems: 151,
+      completedItems: 1,
+      inProgressItems: 0,
+      todoItems: 151
+    }]
+  },
+  {
+    totalCompletedItems: 11,
+    totalItems: 25,
+    worklistEndGoalPct: 100,
+    worklistGoal: WorklistGoal.AUDITS,
+    worklistGoalPct: 44,
+    worklistTypes: [
+      {
+        worklistType: 'AU',
+        totalItems: 20,
+        completedItems: 6,
+        inProgressItems: 0,
+        todoItems: 14
+      },
+      {
+        worklistType: 'RA',
+        totalItems: 0,
+        completedItems: -5,
+        inProgressItems: 0,
+        todoItems: 0
+      }
+    ]
+  }
+];
