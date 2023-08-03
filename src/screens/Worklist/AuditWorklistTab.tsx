@@ -9,7 +9,7 @@ import {
 import { AxiosError } from 'axios';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { WorklistItemI } from '../../models/WorklistItem';
+import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
@@ -27,7 +27,7 @@ import { UseStateType } from '../../models/Generics.d';
 const ROLLOVER_AUDITS = 'RA';
 
 export interface AuditWorklistTabProps {
-    toDo: boolean;
+    completionLevel: number;
     onRefresh: () => void;
 }
 
@@ -67,7 +67,8 @@ const renderCategoryCard = (
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent,
   showItemImage: boolean,
-  countryCode: string
+  countryCode: string,
+  enableAuditsInProgress: boolean
 ) => (
   <CategoryCard
     category={category}
@@ -78,6 +79,7 @@ const renderCategoryCard = (
     }}
     showItemImage={showItemImage}
     countryCode={countryCode}
+    enableAuditsInProgress={enableAuditsInProgress}
   />
 );
 
@@ -123,6 +125,30 @@ export const renderFilterPills = (
   }
 
   return <View />;
+};
+
+export const getItemsForTab = (
+  auditWorklistItems: WorklistItemI[],
+  completionLevel: number,
+  configs: Configurations
+) => {
+  if (configs.enableAuditsInProgress) {
+    switch (completionLevel) {
+      case 0:
+        return auditWorklistItems.filter(item => item.worklistStatus === WorkListStatus.TODO);
+      case 1:
+        return auditWorklistItems.filter(item => (
+          item.worklistStatus === WorkListStatus.AUDITSTARTED || item.worklistStatus === WorkListStatus.INPROGRESS
+        ));
+      case 2:
+        return auditWorklistItems.filter(item => item.worklistStatus === WorkListStatus.COMPLETED);
+      default:
+        return [];
+    }
+  } else {
+    const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
+    return completionLevel === 2 ? completedItems : toDoItems;
+  }
 };
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
@@ -232,7 +258,14 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         <FlatList
           data={[...typedFilterExceptions, ...typedFilterAreaOrCategoryList]}
           horizontal
-          renderItem={({ item }) => renderFilterPills(item, dispatch, filterCategories, filterExceptions, fullExceptionList, areas)}
+          renderItem={({ item }) => renderFilterPills(
+            item,
+            dispatch,
+            filterCategories,
+            filterExceptions,
+            fullExceptionList,
+            areas
+          )}
           style={styles.filterList}
           keyExtractor={item => item.value}
         />
@@ -261,7 +294,8 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           dispatch,
           trackEventCall,
           showItemImage,
-          countryCode
+          countryCode,
+          config.enableAuditsInProgress
         )}
         keyExtractor={item => `category-${item}`}
         onRefresh={() => {
@@ -276,14 +310,13 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 };
 
 const AuditWorklistTab = (props: AuditWorklistTabProps) => {
-  const { toDo, onRefresh } = props;
+  const { completionLevel, onRefresh } = props;
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
-  const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
-  const items = toDo ? toDoItems : completedItems;
   const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
   const { configs } = useTypedSelector(state => state.User);
+  const items = getItemsForTab(auditWorklistItems, completionLevel, configs);
   const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const collapsedState = useState(false);

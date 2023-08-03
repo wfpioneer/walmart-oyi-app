@@ -12,7 +12,7 @@ export interface TodoAuditWorklistProps {
 export const TodoAuditWorklistScreen = (props: TodoAuditWorklistScreenProps) => {
   const { onRefresh } = props;
   return (
-    <AuditWorklistTab toDo onRefresh={onRefresh} />
+    <AuditWorklistTab completionLevel={0} onRefresh={onRefresh} />
   );
 };
 

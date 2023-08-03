@@ -10,6 +10,7 @@ import {
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import CompletedAuditWorklist from '../../screens/Worklist/AuditWorklist/CompletedAuditWorklist';
+import InProgressAuditWorklist from '../../screens/Worklist/AuditWorklist/InProgressAuditWorklist';
 import TodoAuditWorklist from '../../screens/Worklist/AuditWorklist/TodoAuditWorklist';
 import { getWorklistAudits } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
@@ -29,6 +30,7 @@ interface AuditWorklistTabNavigatorProps {
   validateSessionCall: (navigation: NavigationProp<any>, routeName: any) => any;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   trackEventCall: typeof trackEvent;
+  enableAuditsInProgress: boolean;
 }
 
 const Tab = createMaterialTopTabNavigator();
@@ -56,7 +58,7 @@ const isRollOverComplete = (wlSummary: WorklistSummary) => {
 export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps) => {
   const {
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
-    useEffectHook, trackEventCall
+    useEffectHook, trackEventCall, enableAuditsInProgress
   } = props;
   const getWorklistAuditApi: AsyncState = useTypedSelector(state => state.async.getWorklistAudits);
   const { showRollOverAudit, inProgress } = useTypedSelector(state => state.User.configs);
@@ -97,6 +99,11 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
       <Tab.Screen name={strings('WORKLIST.TODO')}>
         {() => <TodoAuditWorklist onRefresh={getAuditWlItems} />}
       </Tab.Screen>
+      {enableAuditsInProgress ? (
+        <Tab.Screen name={strings('AUDITS.IN_PROGRESS')}>
+          {() => <InProgressAuditWorklist onRefresh={getAuditWlItems} />}
+        </Tab.Screen>
+      ) : null}
       <Tab.Screen name={strings('WORKLIST.COMPLETED')}>
         {() => <CompletedAuditWorklist onRefresh={getAuditWlItems} />}
       </Tab.Screen>
@@ -107,6 +114,7 @@ const AuditWorklistTabs = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
+  const { enableAuditsInProgress } = useTypedSelector(state => state.User.configs);
   return (
     <AuditWorklistTabNavigator
       dispatch={dispatch}
@@ -117,6 +125,7 @@ const AuditWorklistTabs = () => {
       useFocusEffectHook={useFocusEffect}
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
+      enableAuditsInProgress={enableAuditsInProgress}
     />
   );
 };

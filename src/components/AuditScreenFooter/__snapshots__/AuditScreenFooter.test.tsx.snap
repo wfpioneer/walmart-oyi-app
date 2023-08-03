@@ -18,25 +18,6 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
   <View
     style={
       Object {
-        "alignItems": "center",
-        "flex": 1,
-      }
-    }
-  >
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "fontWeight": "500",
-        }
-      }
-    >
-      20 [missing "en.AUDITS.ITEMS" translation]
-    </Text>
-  </View>
-  <View
-    style={
-      Object {
         "flex": 1,
       }
     }
@@ -122,25 +103,6 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
     }
   }
 >
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flex": 1,
-      }
-    }
-  >
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "fontWeight": "500",
-        }
-      }
-    >
-      20 [missing "en.AUDITS.ITEMS" translation]
-    </Text>
-  </View>
   <View
     style={
       Object {

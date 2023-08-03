@@ -563,7 +563,8 @@ export default {
     NEGATIVE_VALIDATION: '无效结果，位置数量不可小于0',
     ITEMS: '个库存',
     CUSTOM_ITEMS: '个 item',
-    IN_PROGRESS: '正在进行中'
+    IN_PROGRESS: '正在进行中',
+    CURRENT_TOTAL: '当前总数'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',

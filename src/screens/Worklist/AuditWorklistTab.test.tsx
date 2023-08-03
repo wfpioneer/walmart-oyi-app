@@ -5,10 +5,11 @@ import { NavigationProp } from '@react-navigation/native';
 import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import {
+  mockCombinationAuditsWorklist,
   mockCompletedAuditWorklist, mockToDoAuditWorklist
 } from '../../mockData/mockWorkList';
 import {
-  AuditWorklistTabScreen, renderFilterPills
+  AuditWorklistTabScreen, getItemsForTab, renderFilterPills
 } from './AuditWorklistTab';
 import { ExceptionList } from './FullExceptionList';
 import { FilterType } from '../../models/FilterListItem';
@@ -242,5 +243,44 @@ describe('Tests rendering Filter `Pills`', () => {
       renderFilterPills(invalidFilter, jest.fn(), [], [], exceptionList, [])
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('tests getting the items for its tab', () => {
+    const completionConfig: Configurations = {
+      ...mockConfig,
+      enableAuditsInProgress: false
+    };
+    // Completion based items, todo tab
+    let result = getItemsForTab(mockCombinationAuditsWorklist, 0, completionConfig);
+    expect(result.length).toBe(3);
+
+    // Completion based items, in progress tab (unused)
+    result = getItemsForTab(mockCombinationAuditsWorklist, 1, completionConfig);
+    expect(result.length).toBe(3);
+
+    // Completion based items, completed tab
+    result = getItemsForTab(mockCombinationAuditsWorklist, 2, completionConfig);
+    expect(result.length).toBe(1);
+
+    const progressiveConfig: Configurations = {
+      ...mockConfig,
+      enableAuditsInProgress: true
+    };
+
+    // In progress based items, todo tab
+    result = getItemsForTab(mockCombinationAuditsWorklist, 0, progressiveConfig);
+    expect(result.length).toBe(1);
+
+    // In progress based items, in progress tab
+    result = getItemsForTab(mockCombinationAuditsWorklist, 1, progressiveConfig);
+    expect(result.length).toBe(2);
+
+    // In progress based items, completed tab
+    result = getItemsForTab(mockCombinationAuditsWorklist, 2, progressiveConfig);
+    expect(result.length).toBe(1);
+
+    // In progress based items, bad completion level
+    result = getItemsForTab(mockCombinationAuditsWorklist, 6543, progressiveConfig);
+    expect(result.length).toBe(0);
   });
 });
