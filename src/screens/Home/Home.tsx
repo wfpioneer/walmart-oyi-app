@@ -330,32 +330,6 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       });
     }
 
-    data.forEach(goal => {
-      goal.worklistTypes.forEach(worklist => {
-        switch (worklist.worklistType) {
-          case 'NO':
-            worklist.completedItems = 0;
-            worklist.inProgressItems = 0;
-            worklist.todoItems = 0;
-            worklist.totalItems = 0;
-            break;
-          case 'AU':
-            worklist.completedItems = 80;
-            worklist.inProgressItems = 0;
-            worklist.todoItems = 0;
-            worklist.totalItems = 80;
-            break;
-          case 'RA':
-            worklist.completedItems = -3;
-            worklist.inProgressItems = 0;
-            worklist.todoItems = 0;
-            worklist.totalItems = 0;
-            break;
-          default:
-        }
-      });
-    });
-
     const reorganizedGoals = reorganizeGoals(data, worklistToMove);
 
     const nativeWorklists: NativeWorklist[] = [];
