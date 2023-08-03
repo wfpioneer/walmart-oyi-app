@@ -49,9 +49,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -2656,9 +2654,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -4394,9 +4390,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -7001,9 +6995,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: ca
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -8739,9 +8731,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: da
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -10477,9 +10467,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: in
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -10495,9 +10483,7 @@ exports[`Test Calculator component presses buttons to make invalid equations: in
           }
         }
         testID="calc-text"
-      >
-        
-      </TextInput>
+      />
     </View>
   </View>
   <View
@@ -11346,9 +11332,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -12215,9 +12199,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -13084,9 +13066,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -13953,9 +13933,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -14822,9 +14800,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -15691,9 +15667,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -16560,9 +16534,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -17429,9 +17401,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -18298,9 +18268,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -19167,9 +19135,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -21774,9 +21740,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -21792,9 +21756,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
         testID="calc-text"
-      >
-        
-      </TextInput>
+      />
     </View>
   </View>
   <View
@@ -22643,9 +22605,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -22661,9 +22621,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
         testID="calc-text"
-      >
-        
-      </TextInput>
+      />
     </View>
   </View>
   <View
@@ -23530,9 +23488,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
         testID="calc-text"
-      >
-        
-      </TextInput>
+      />
     </View>
   </View>
   <View
@@ -24399,9 +24355,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
         testID="calc-text"
-      >
-        
-      </TextInput>
+      />
     </View>
   </View>
   <View
@@ -25268,9 +25222,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
           }
         }
         testID="calc-text"
-      >
-        
-      </TextInput>
+      />
     </View>
   </View>
   <View
@@ -26119,9 +26071,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -30464,9 +30414,7 @@ exports[`Test Calculator component renders and presses all the buttons into equa
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>
@@ -33727,9 +33675,7 @@ exports[`Test Calculator component renders the calculator modal component with t
             }
           }
           testID="calc-paper-tape"
-        >
-          
-        </Text>
+        />
       </View>
     </RCTScrollView>
     <View>

@@ -1518,9 +1518,7 @@ Array [
                   "marginVertical": 2,
                 }
               }
-            >
-              
-            </Text>
+            />
           </View>
           <View
             style={
@@ -1817,9 +1815,7 @@ Array [
                         "marginRight": 0,
                       }
                     }
-                  >
-                    
-                  </Text>
+                  />
                   <Text
                     style={
                       Object {

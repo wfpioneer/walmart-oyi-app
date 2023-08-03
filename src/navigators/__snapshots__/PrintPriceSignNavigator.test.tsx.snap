@@ -5,6 +5,8 @@ exports[`PrintPriceSignNavigator render tests render with print title as Main 1`
   value={
     Object {
       "getServerState": undefined,
+      "noopCheck": "once",
+      "stabilityCheck": "once",
       "store": Object {
         "@@observable": [Function],
         "dispatch": [Function],

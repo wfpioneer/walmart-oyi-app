@@ -31,9 +31,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
             "marginRight": 0,
           }
         }
-      >
-        
-      </Text>
+      />
       <Text
         style={Object {}}
       >
@@ -101,9 +99,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
             "marginRight": 0,
           }
         }
-      >
-        
-      </Text>
+      />
       <Text
         style={Object {}}
       >

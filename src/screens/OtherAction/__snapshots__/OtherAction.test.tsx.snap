@@ -237,6 +237,16 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen 1`] = `
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
+    waitFor={
+      Array [
+        Object {
+          "current": null,
+        },
+        Object {
+          "current": null,
+        },
+      ]
+    }
   >
     <View />
   </RCTScrollView>
@@ -433,6 +443,16 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
     scrollEventThrottle={50}
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
+    waitFor={
+      Array [
+        Object {
+          "current": null,
+        },
+        Object {
+          "current": null,
+        },
+      ]
+    }
   >
     <View>
       <View

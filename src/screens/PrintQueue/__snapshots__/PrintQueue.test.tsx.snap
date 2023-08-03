@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Modal should be visible 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -217,7 +217,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintQueueScreen Test rendering items in printQueue Renders Empty Print list for Zero Items in queue 1`] = `
@@ -371,7 +371,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
 `;
 
 exports[`PrintQueueScreen Test rendering items in printQueue Renders the print queue with 10 items in it 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -1658,11 +1658,11 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print service error  1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -1905,11 +1905,11 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader waiting for printApi response  1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -2118,5 +2118,5 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
       }
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;

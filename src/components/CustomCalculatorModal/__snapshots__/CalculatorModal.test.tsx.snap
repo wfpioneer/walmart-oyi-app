@@ -111,9 +111,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
                   }
                 }
                 testID="calc-paper-tape"
-              >
-                
-              </Text>
+              />
             </View>
           </RCTScrollView>
           <View>
@@ -129,9 +127,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
                 }
               }
               testID="calc-text"
-            >
-              
-            </TextInput>
+            />
           </View>
         </View>
         <View

@@ -32,9 +32,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
               "marginRight": 0,
             }
           }
-        >
-          
-        </Text>
+        />
         <Text
           style={
             Object {
@@ -109,9 +107,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
               "marginRight": 0,
             }
           }
-        >
-          
-        </Text>
+        />
         <Text
           style={
             Object {
@@ -203,9 +199,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
               "marginRight": 0,
             }
           }
-        >
-          
-        </Text>
+        />
         <Text
           style={
             Object {

@@ -5,6 +5,8 @@ exports[`Calculator Modal render tests does not show when calcOpen is set to fal
   value={
     Object {
       "getServerState": undefined,
+      "noopCheck": "once",
+      "stabilityCheck": "once",
       "store": Object {
         "@@observable": [Function],
         "dispatch": [Function],
@@ -33,6 +35,8 @@ exports[`Calculator Modal render tests show when calcOpen is set to true 1`] = `
   value={
     Object {
       "getServerState": undefined,
+      "noopCheck": "once",
+      "stabilityCheck": "once",
       "store": Object {
         "@@observable": [Function],
         "dispatch": [Function],

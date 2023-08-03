@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Create Pick screen render tests renders the screen when items are move to front 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -193,11 +193,11 @@ exports[`Create Pick screen render tests renders the screen when items are move 
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Create Pick screen render tests renders the screen with item with floor locations 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -391,11 +391,11 @@ exports[`Create Pick screen render tests renders the screen with item with floor
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Create Pick screen render tests renders the screen with no reserve location 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -587,11 +587,11 @@ exports[`Create Pick screen render tests renders the screen with no reserve loca
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Create Pick screen render tests renders the screen without floor locations 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -781,5 +781,5 @@ exports[`Create Pick screen render tests renders the screen without floor locati
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;

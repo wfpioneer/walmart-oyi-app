@@ -5,6 +5,8 @@ exports[`FloorItemRow Component Renders a FloorItem 1`] = `
   value={
     Object {
       "getServerState": undefined,
+      "noopCheck": "once",
+      "stabilityCheck": "once",
       "store": Object {
         "@@observable": [Function],
         "dispatch": [Function],
@@ -45,6 +47,8 @@ exports[`FloorItemRow Component Renders a FloorItem with a long name 1`] = `
   value={
     Object {
       "getServerState": undefined,
+      "noopCheck": "once",
+      "stabilityCheck": "once",
       "store": Object {
         "@@observable": [Function],
         "dispatch": [Function],

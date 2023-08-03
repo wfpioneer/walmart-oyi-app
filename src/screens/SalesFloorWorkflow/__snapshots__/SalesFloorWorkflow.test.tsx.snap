@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Sales floor workflow tests renders the screen with additional items warning label 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -230,11 +230,11 @@ exports[`Sales floor workflow tests renders the screen with additional items war
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Sales floor workflow tests renders the screen with one item on pallet 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -438,7 +438,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Sales floor workflow tests renders the screen with several items on the pallet 1`] = `
@@ -490,7 +490,7 @@ exports[`Sales floor workflow tests shows the activity indicator when waiting fo
 `;
 
 exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -694,11 +694,11 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Sales floor workflow tests shows the expiration date modal date picker 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -910,7 +910,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Sales floor workflow tests shows the retry button when get pallet details errors 1`] = `

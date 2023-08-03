@@ -440,7 +440,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Label Service response   1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -859,11 +859,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       }
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Pallet Label Service response   1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -935,11 +935,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       }
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Sign Service response   1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -1358,11 +1358,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       }
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders OH Update Error for invalid amount of copies  1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -1818,11 +1818,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Print Service Api Error 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -2294,11 +2294,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle labels 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -2513,11 +2513,11 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing the pallets 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -2596,11 +2596,11 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section labels 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "flex": 1,
@@ -2815,5 +2815,5 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;

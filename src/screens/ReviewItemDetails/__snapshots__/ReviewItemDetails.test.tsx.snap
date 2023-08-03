@@ -347,9 +347,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
             "marginRight": 0,
           }
         }
-      >
-        
-      </Text>
+      />
       <Text
         style={Object {}}
       >

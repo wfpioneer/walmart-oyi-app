@@ -25,7 +25,7 @@ exports[`HomeScreen rendering renders ActivityIndicator when worklistSummaryApiS
 exports[`HomeScreen rendering renders ManualScanComponent when enabled 1`] = `null`;
 
 exports[`HomeScreen rendering renders build environment next to version # if ENV is dev 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -162,11 +162,11 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0-DEV
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders build environment next to version # if ENV is stage 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -303,7 +303,7 @@ exports[`HomeScreen rendering renders build environment next to version # if ENV
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0-STAGE
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders error View when worklistSummaryApiState.error is not null 1`] = `
@@ -429,7 +429,7 @@ exports[`HomeScreen rendering renders null when worklistApiState.result.status i
 exports[`HomeScreen rendering renders null when worklistSummaryApiState.result is null 1`] = `null`;
 
 exports[`HomeScreen rendering renders pure version number if build environment is production 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -566,11 +566,11 @@ exports[`HomeScreen rendering renders pure version number if build environment i
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders with User config api status 200 and login count 1 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -707,11 +707,11 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0-STAGE
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders with User config api status 200 and login count 10, that will render feedback modal 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -925,11 +925,11 @@ exports[`HomeScreen rendering renders with User config api status 200 and login 
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0-STAGE
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders with User config api with error 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -1066,11 +1066,11 @@ exports[`HomeScreen rendering renders with User config api with error 1`] = `
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0-STAGE
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders wl summaries when api data has summaries, mp and audits enabled with rollover flag true 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -1221,11 +1221,11 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries (items 50% complete) 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -1362,11 +1362,11 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries (items 100% complete) 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -1503,11 +1503,11 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries (zero items complete) 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -1644,11 +1644,11 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries and missing pallet enabled 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -1792,11 +1792,11 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`HomeScreen rendering renders worklist summaries when worklistApiState.result.data has summaries, missing pallet and audits enabled 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
     Object {
       "backgroundColor": "#ffffffff",
@@ -1947,5 +1947,5 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
   >
     [missing "en.GENERICS.VERSION" translation] 1.1.0- DEV
   </Text>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
