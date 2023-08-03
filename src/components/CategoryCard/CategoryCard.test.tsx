@@ -15,6 +15,7 @@ describe('Tests CategoryCard Component', () => {
         onItemCardClick={jest.fn()}
         countryCode="MX"
         showItemImage={false}
+        enableAuditsInProgress={false}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -28,6 +29,7 @@ describe('Tests CategoryCard Component', () => {
         onItemCardClick={jest.fn()}
         countryCode="MX"
         showItemImage={true}
+        enableAuditsInProgress={false}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -41,6 +43,7 @@ describe('Tests CategoryCard Component', () => {
         onItemCardClick={jest.fn()}
         countryCode="MX"
         showItemImage={false}
+        enableAuditsInProgress={false}
       />
     );
     expect(toJSON()).toMatchSnapshot();
@@ -54,8 +57,25 @@ describe('Tests CategoryCard Component', () => {
         onItemCardClick={jest.fn()}
         countryCode="MX"
         showItemImage={false}
+        enableAuditsInProgress={false}
       />
     );
     expect(findByText(`43 - ${CATEGORY_NAME.FOODSERVICE}`)).toBeTruthy();
+  });
+
+  it('tests sending the status of an item when audits in progress is enabled', () => {
+    const { toJSON } = render(
+      <CategoryCard
+        listOfItems={mockToDoAuditWorklist}
+        collapsed={false}
+        category={`43 - ${CATEGORY_NAME.FOODSERVICE}`}
+        onItemCardClick={jest.fn()}
+        countryCode="MX"
+        showItemImage={false}
+        enableAuditsInProgress={true}
+      />
+    );
+
+    expect(toJSON()).toMatchSnapshot();
   });
 });

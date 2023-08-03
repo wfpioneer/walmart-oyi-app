@@ -59,7 +59,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE
   },
   itemQtyView: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingRight: 5
   },
   itemQtyContainer: {
     flexDirection: 'column'
@@ -67,6 +70,27 @@ const styles = StyleSheet.create({
   infoIcon: {
     paddingTop: 2,
     paddingRight: 6
+  },
+  pendingApproval: {
+    backgroundColor: COLOR.GREY_300,
+    marginRight: 10,
+    marginVertical: 5,
+    borderRadius: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    fontSize: 11,
+    borderWidth: 1,
+    borderColor: COLOR.GREY_200
+  },
+  inProgress: {
+    backgroundColor: COLOR.MEDIUM_AQUA_BLUE,
+    marginVertical: 5,
+    borderRadius: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    fontSize: 11,
+    borderWidth: 1,
+    borderColor: COLOR.GREY_200
   }
 });
 

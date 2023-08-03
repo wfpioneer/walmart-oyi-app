@@ -1,22 +1,16 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Button, { ButtonType } from '../buttons/Button';
 import styles from './AuditScreenFooter.style';
 import { strings } from '../../locales';
 
 interface AuditScreenFooterProps {
-  totalCount: number;
   onContinueClick: () => void;
   disabledContinue: boolean;
 }
 
-const AuditScreenFooter = ({ totalCount, onContinueClick, disabledContinue }: AuditScreenFooterProps) => (
+const AuditScreenFooter = ({ onContinueClick, disabledContinue }: AuditScreenFooterProps) => (
   <View style={styles.container}>
-    <View style={styles.totalCntVw}>
-      <Text style={styles.totalCnt}>
-        {`${totalCount} ${strings('AUDITS.ITEMS')}`}
-      </Text>
-    </View>
     <View style={styles.continueBtn}>
       <Button
         testID="btnContinue"

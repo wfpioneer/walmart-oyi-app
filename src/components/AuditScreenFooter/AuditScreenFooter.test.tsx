@@ -5,7 +5,7 @@ describe('AuditScreenFooter Component', () => {
   it('Test renders AuditScreenFooter Screen with continue enabled', () => {
     const mockContinue = jest.fn();
     const { toJSON, getByTestId } = render(AuditScreenFooter({
-      totalCount: 20, onContinueClick: mockContinue, disabledContinue: false
+      onContinueClick: mockContinue, disabledContinue: false
     }));
 
     const btnContinue = getByTestId('btnContinue');
@@ -17,7 +17,7 @@ describe('AuditScreenFooter Component', () => {
   it('Test renders AuditScreenFooter Screen with continue disabled', () => {
     const mockContinue = jest.fn();
     const { toJSON } = render(AuditScreenFooter({
-      totalCount: 20, onContinueClick: mockContinue, disabledContinue: true
+      onContinueClick: mockContinue, disabledContinue: true
     }));
     expect(toJSON()).toMatchSnapshot();
   });

@@ -1533,6 +1533,9 @@ Array [
               style={
                 Object {
                   "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingRight": 5,
+                  "width": "100%",
                 }
               }
             >
@@ -1549,6 +1552,26 @@ Array [
                 [missing "en.ITEM.ON_HANDS" translation] 0
               </Text>
             </View>
+          </View>
+          <View
+            style={
+              Object {
+                "flexDirection": "column",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#616161",
+                  "flexShrink": 1,
+                  "flexWrap": "wrap",
+                  "fontSize": 12,
+                }
+              }
+            >
+              [missing "en.AUDITS.CURRENT_TOTAL" translation] 0
+            </Text>
           </View>
         </View>
       </View>
@@ -1877,25 +1900,6 @@ Array [
         }
       }
     >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flex": 1,
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "fontSize": 16,
-              "fontWeight": "500",
-            }
-          }
-        >
-          0 [missing "en.AUDITS.ITEMS" translation]
-        </Text>
-      </View>
       <View
         style={
           Object {
@@ -2348,6 +2352,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
+      totalQty={0}
     />
   </View>
   <ScrollView
@@ -2431,7 +2436,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     <AuditScreenFooter
       disabledContinue={true}
       onContinueClick={[Function]}
-      totalCount={0}
     />
   </View>
 </React.Fragment>
@@ -2874,6 +2878,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       pendingQty={35}
       showItemImage={false}
       showOHItems={false}
+      totalQty={42}
     />
   </View>
   <ScrollView
@@ -2957,7 +2962,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
     <AuditScreenFooter
       disabledContinue={false}
       onContinueClick={[Function]}
-      totalCount={42}
     />
   </View>
 </React.Fragment>
@@ -3348,6 +3352,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
+      totalQty={15}
     />
   </View>
   <ScrollView
@@ -3431,7 +3436,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <AuditScreenFooter
       disabledContinue={false}
       onContinueClick={[Function]}
-      totalCount={15}
     />
   </View>
 </React.Fragment>
@@ -3822,6 +3826,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       pendingQty={35}
       showItemImage={false}
       showOHItems={false}
+      totalQty={42}
     />
   </View>
   <ScrollView
@@ -3905,7 +3910,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <AuditScreenFooter
       disabledContinue={false}
       onContinueClick={[Function]}
-      totalCount={42}
     />
   </View>
 </React.Fragment>

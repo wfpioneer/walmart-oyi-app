@@ -7,6 +7,7 @@ import styles from './ItemCard.style';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 const INFO_ICON_SIZE = 12;
 
@@ -30,6 +31,8 @@ interface ItemCardProps {
   showOHItems?: boolean;
   OHItemInfo?: OHItemInfoI;
   pendingQty?: number | undefined;
+  status?: WorkListStatus;
+  totalQty: number | undefined;
 }
 
 interface OtherOnHandsItemsProps {
@@ -43,6 +46,28 @@ const defaultOHItemValues = {
   flyCloudInTransitOH: 0,
   flyCloudOH: 0,
   salesFloorOH: 0
+};
+
+export const getAuditsBadgeText = (status: WorkListStatus): string => {
+  switch (status) {
+    case WorkListStatus.AUDITSTARTED:
+      return `${strings('AUDITS.AUDITS')} - ${strings('AUDITS.IN_PROGRESS')}`;
+    case WorkListStatus.INPROGRESS:
+      return strings('ITEM.PENDING_MGR_APPROVAL');
+    default:
+      return '';
+  }
+};
+
+export const getAuditsBadgeStyle = (status: WorkListStatus) => {
+  switch (status) {
+    case WorkListStatus.AUDITSTARTED:
+      return styles.inProgress;
+    case WorkListStatus.INPROGRESS:
+      return styles.pendingApproval;
+    default:
+      return {};
+  }
 };
 
 const getContainerStyle = (isLoading: boolean, showItemImage: boolean) => {
@@ -132,8 +157,8 @@ const OtherOnHandsItems = (props: OtherOnHandsItemsProps) => {
 };
 
 const ItemCard = ({
-  itemNumber, description, onClick, loading, onHandQty, disabled,
-  countryCode, showItemImage, showOHItems, OHItemInfo, pendingQty
+  itemNumber, description, onClick, loading, onHandQty, disabled, countryCode,
+  showItemImage, showOHItems, OHItemInfo, pendingQty, totalQty, status
 }: ItemCardProps) => (
   <View style={styles.mainContainer}>
     <TouchableOpacity
@@ -165,13 +190,18 @@ const ItemCard = ({
         <View>
           <Text style={styles.itemDesc}>{description}</Text>
         </View>
-        {onHandQty !== undefined && (
+        {(status && getAuditsBadgeText(status)) ? (
+          <View style={getAuditsBadgeStyle(status)}>
+            <Text>{getAuditsBadgeText(status)}</Text>
+          </View>
+        ) : null}
+        {onHandQty !== undefined ? (
           <View style={styles.itemQtyContainer}>
             <View style={styles.itemQtyView}>
               <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
-              {pendingQty && pendingQty >= 0 && (<Text style={styles.itemNbr}>{` (${pendingQty})`}</Text>)}
+              {(pendingQty && pendingQty >= 0) ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
             </View>
-            {pendingQty && pendingQty >= 0 && (
+            {(pendingQty && pendingQty >= 0) ? (
               <View style={styles.itemQtyView}>
                 <FontAwesome5Icon
                   name="info-circle"
@@ -181,9 +211,14 @@ const ItemCard = ({
                 />
                 <Text style={styles.itemNbr}>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
               </View>
-            )}
+            ) : null}
           </View>
-        )}
+        ) : null}
+        {totalQty !== undefined ? (
+          <View style={styles.itemQtyContainer}>
+            <Text style={styles.itemNbr}>{`${strings('AUDITS.CURRENT_TOTAL')} ${totalQty}`}</Text>
+          </View>
+        ) : null}
       </View>
       )}
     </TouchableOpacity>
@@ -196,7 +231,8 @@ ItemCard.defaultProps = {
   OHItemInfo: defaultOHItemValues,
   disabled: false,
   pendingQty: -999,
-  onClick: () => {}
+  onClick: () => {},
+  status: undefined
 };
 
 OtherOnHandsItems.defaultProps = {
