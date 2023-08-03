@@ -307,17 +307,17 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     }
 
     const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
-
-    const reorganizedGoals = reorganizeGoals(data, [
-      {
-        worklistType: 'NSFQ',
-        destinationGoal: WorklistGoal.PALLETS
-      },
-      {
+    const worklistToMove: WorklistGoalMove[] = [{
+      worklistType: 'NSFQ',
+      destinationGoal: WorklistGoal.PALLETS
+    }];
+    if (this.props.userConfig.auditWorklists) {
+      worklistToMove.push({
         worklistType: 'NO',
         destinationGoal: WorklistGoal.AUDITS
-      }
-    ]);
+      });
+    }
+    const reorganizedGoals = reorganizeGoals(data, worklistToMove);
 
     const nativeWorklists: NativeWorklist[] = [];
 

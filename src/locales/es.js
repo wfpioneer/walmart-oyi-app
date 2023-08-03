@@ -558,7 +558,8 @@ export default {
     NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor',
     ITEMS: 'Artículos',
     CUSTOM_ITEMS: 'Artículos',
-    IN_PROGRESS: 'En Progreso'
+    IN_PROGRESS: 'En Progreso',
+    CURRENT_TOTAL: 'Total Actual'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ItemCard Component Test renders ItemCard with images 1`] = `
+exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
 <View
   style={
     Object {
@@ -108,12 +108,32 @@ exports[`ItemCard Component Test renders ItemCard with images 1`] = `
           test item
         </Text>
       </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+        </Text>
+      </View>
     </View>
   </View>
 </View>
 `;
 
-exports[`ItemCard Component Test renders ItemCard without onHands quantity 1`] = `
+exports[`Audits ItemCard Component Test renders ItemCard without onHands quantity 1`] = `
 <View
   style={
     Object {
@@ -190,12 +210,32 @@ exports[`ItemCard Component Test renders ItemCard without onHands quantity 1`] =
           test item
         </Text>
       </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+        </Text>
+      </View>
     </View>
   </View>
 </View>
 `;
 
-exports[`ItemCard Component Test renders default ItemCard when loading is false 1`] = `
+exports[`Audits ItemCard Component Test renders default ItemCard when loading is false 1`] = `
 <View
   style={
     Object {
@@ -283,6 +323,9 @@ exports[`ItemCard Component Test renders default ItemCard when loading is false 
           style={
             Object {
               "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingRight": 5,
+              "width": "100%",
             }
           }
         >
@@ -300,12 +343,32 @@ exports[`ItemCard Component Test renders default ItemCard when loading is false 
           </Text>
         </View>
       </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+        </Text>
+      </View>
     </View>
   </View>
 </View>
 `;
 
-exports[`ItemCard Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
+exports[`Audits ItemCard Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
 <View
   style={
     Object {
@@ -393,6 +456,9 @@ exports[`ItemCard Component Test renders default ItemCard when loading is false 
           style={
             Object {
               "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingRight": 5,
+              "width": "100%",
             }
           }
         >
@@ -425,6 +491,9 @@ exports[`ItemCard Component Test renders default ItemCard when loading is false 
           style={
             Object {
               "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingRight": 5,
+              "width": "100%",
             }
           }
         >
@@ -468,12 +537,32 @@ exports[`ItemCard Component Test renders default ItemCard when loading is false 
           </Text>
         </View>
       </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#616161",
+              "flexShrink": 1,
+              "flexWrap": "wrap",
+              "fontSize": 12,
+            }
+          }
+        >
+          [missing "en.AUDITS.CURRENT_TOTAL" translation] 20
+        </Text>
+      </View>
     </View>
   </View>
 </View>
 `;
 
-exports[`ItemCard Component Test renders default ItemCard when loading is true 1`] = `
+exports[`Audits ItemCard Component Test renders default ItemCard when loading is true 1`] = `
 <View
   style={
     Object {
@@ -526,7 +615,7 @@ exports[`ItemCard Component Test renders default ItemCard when loading is true 1
 </View>
 `;
 
-exports[`ItemCard Component tests rendering item card with worklist status 1`] = `
+exports[`Audits ItemCard Component renders the item card without total quantity 1`] = `
 <View
   style={
     Object {
@@ -586,7 +675,7 @@ exports[`ItemCard Component tests rendering item card with worklist status 1`] =
             }
           }
         >
-          [missing "en.GENERICS.ITEM" translation] 1234
+          [missing "en.GENERICS.ITEM" translation] 12344
         </Text>
       </View>
       <View>
@@ -600,26 +689,39 @@ exports[`ItemCard Component tests rendering item card with worklist status 1`] =
             }
           }
         >
-          test item
+          testing item
         </Text>
       </View>
       <View
         style={
           Object {
-            "backgroundColor": "#AAF0F2",
-            "borderColor": "#eeeeee",
-            "borderRadius": 4,
-            "borderWidth": 1,
-            "fontSize": 11,
-            "marginVertical": 5,
-            "paddingHorizontal": 8,
-            "paddingVertical": 5,
+            "flexDirection": "column",
           }
         }
       >
-        <Text>
-          [missing "en.AUDITS.AUDITS" translation] - [missing "en.AUDITS.IN_PROGRESS" translation]
-        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "paddingRight": 5,
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "flexShrink": 1,
+                "flexWrap": "wrap",
+                "fontSize": 12,
+              }
+            }
+          >
+            [missing "en.ITEM.ON_HANDS" translation] 345
+          </Text>
+        </View>
       </View>
     </View>
   </View>

@@ -1683,6 +1683,11 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
           disabled={true}
+          totalQty={calculateTotalOHQty(
+            floorLocations,
+            reserveLocations,
+            itemDetails
+          )}
         />
       </View>
       <ScrollView
@@ -1733,11 +1738,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       </ScrollView>
       <View style={styles.footer}>
         <AuditScreenFooter
-          totalCount={calculateTotalOHQty(
-            floorLocations,
-            reserveLocations,
-            itemDetails
-          )}
           onContinueClick={handleContinueAction}
           disabledContinue={disabledContinue(
             floorLocations,
