@@ -113,14 +113,14 @@ tools:
   android:
     - tools
     - platform-tools
-    - platforms;android-29
-    - build-tools;29.0.3
+    - platforms;android-33
+    - build-tools;33.0.0
     - extras;android;m2repository
-    - ndk;21.3.6528147
-  gradle: 6.7.1
+    - ndk;23.1.7779620
+  gradle: 7.2.1
   maven: 3.8.2
-  nodejs: 16.20.0
-  npm: 8.19.4
+  nodejs: 18.17.0
+  npm: 9.6.7
   sonarscanner: 4.8.0.2856
 
 flows:
