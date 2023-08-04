@@ -488,7 +488,7 @@ describe('HomeScreen', () => {
         totalCompletedItems: 5,
         totalItems: 159,
         worklistEndGoalPct: 100,
-        worklistGoalPct: 3,
+        worklistGoalPct: 3.14,
         worklistTypes: [{
           worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
         }, {
@@ -527,7 +527,7 @@ describe('HomeScreen', () => {
         totalCompletedItems: 1,
         totalItems: 151,
         worklistEndGoalPct: 100,
-        worklistGoalPct: 1,
+        worklistGoalPct: 0.66,
         worklistTypes: [{
           worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
         }]
@@ -536,7 +536,7 @@ describe('HomeScreen', () => {
         totalCompletedItems: 18,
         totalItems: 39,
         worklistEndGoalPct: 100,
-        worklistGoalPct: 46,
+        worklistGoalPct: 46.15,
         worklistTypes: [{
           worklistType: 'NO', totalItems: 14, completedItems: 7, inProgressItems: 0, todoItems: 7
         }, {
@@ -550,7 +550,7 @@ describe('HomeScreen', () => {
         worklistGoal: WorklistGoal.ITEMS,
         totalCompletedItems: 103,
         totalItems: 201,
-        worklistGoalPct: 51,
+        worklistGoalPct: 51.24,
         worklistEndGoalPct: 100,
         worklistTypes: [{
           worklistType: 'NSFL', totalItems: 100, completedItems: 50, inProgressItems: 0, todoItems: 50
@@ -569,7 +569,7 @@ describe('HomeScreen', () => {
         worklistGoal: WorklistGoal.PALLETS,
         totalCompletedItems: 1,
         totalItems: 151,
-        worklistGoalPct: 1,
+        worklistGoalPct: 0.66,
         worklistEndGoalPct: 100,
         worklistTypes: [{
           worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
@@ -602,7 +602,7 @@ describe('HomeScreen', () => {
         worklistGoal: WorklistGoal.PALLETS,
         totalCompletedItems: 5,
         totalItems: 159,
-        worklistGoalPct: 3,
+        worklistGoalPct: 3.14,
         worklistEndGoalPct: 100,
         worklistTypes: [{
           worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
@@ -613,7 +613,7 @@ describe('HomeScreen', () => {
         worklistGoal: WorklistGoal.AUDITS,
         totalCompletedItems: 18,
         totalItems: 39,
-        worklistGoalPct: 46,
+        worklistGoalPct: 46.15,
         worklistEndGoalPct: 100,
         worklistTypes: [{
           worklistType: 'NO', totalItems: 14, completedItems: 7, inProgressItems: 0, todoItems: 7

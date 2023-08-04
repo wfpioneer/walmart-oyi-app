@@ -25,7 +25,7 @@ describe('test global utilities function', () => {
   });
 
   it('tests getting a percentage', () => {
-    const piPercent = 31.4;
+    const piPercent = 31.43;
 
     const actual = getFiniteFixedPercent(11, 35);
 
