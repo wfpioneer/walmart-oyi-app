@@ -18,7 +18,10 @@ buildscript {
         }
     }
     repositories {
-        maven { url " [https://repository.walmart.com/repository/gradle_distros] " }
+        maven { url "https://repository.walmart.com/content/groups/public" }
+        maven {
+            url 'https://repository.walmart.com/content/repositories/pangaea_snapshots'
+        }
         maven {
             url 'https://repository.walmart.com/content/repositories/pangaea_releases'
         }
@@ -59,7 +62,6 @@ allprojects {
             url("$rootDir/../node_modules/jsc-android/dist")
         }
 
-        maven { url " [https://repository.walmart.com/repository/gradle_distros] " }
         maven {
             url "https://repository.walmart.com/content/repositories/dl_google/dl/android/maven2"
         }
@@ -92,7 +94,9 @@ allprojects {
 
     buildscript {
         repositories {
-            maven { url " [https://repository.walmart.com/repository/gradle_distros] " }
+            maven { 
+              url "https://repository.walmart.com/content/groups/public" 
+            }
             maven {
                 url 'https://repository.walmart.com/content/repositories/pangaea_snapshots'
             }
