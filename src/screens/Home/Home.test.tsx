@@ -485,14 +485,14 @@ describe('HomeScreen', () => {
         }]
       }, {
         worklistGoal: WorklistGoal.PALLETS,
-        totalCompletedItems: 5,
+        totalCompletedItems: 4,
         totalItems: 159,
         worklistEndGoalPct: 100,
-        worklistGoalPct: 3.14,
+        worklistGoalPct: 2.52,
         worklistTypes: [{
           worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
         }, {
-          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+          worklistType: 'MP', totalItems: 151, completedItems: 0, inProgressItems: 0, todoItems: 151
         }]
       }, {
         worklistGoal: WorklistGoal.AUDITS,
