@@ -67,7 +67,8 @@ export const asyncReducer = combineReducers({
   submitFeedbackRating: makeAsyncReducer(asyncActions.SUBMIT_FEEDBACK_RATING),
   getUserConfig: makeAsyncReducer(asyncActions.GET_USER_CONFIG),
   updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG),
-  updateMultiPalletUPCQtyV2: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY_V2)
+  updateMultiPalletUPCQtyV2: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY_V2),
+  saveAuditsProgress: makeAsyncReducer(asyncActions.SAVE_AUDITS_PROGRESS)
 });
 
 export default asyncReducer;
