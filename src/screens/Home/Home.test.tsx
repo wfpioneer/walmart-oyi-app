@@ -524,12 +524,12 @@ describe('HomeScreen', () => {
         }]
       }, {
         worklistGoal: WorklistGoal.PALLETS,
-        totalCompletedItems: 1,
+        totalCompletedItems: 0,
         totalItems: 151,
         worklistEndGoalPct: 100,
-        worklistGoalPct: 0.66,
+        worklistGoalPct: 0,
         worklistTypes: [{
-          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+          worklistType: 'MP', totalItems: 151, completedItems: 0, inProgressItems: 0, todoItems: 151
         }]
       }, {
         worklistGoal: WorklistGoal.AUDITS,
@@ -567,12 +567,12 @@ describe('HomeScreen', () => {
         }]
       }, {
         worklistGoal: WorklistGoal.PALLETS,
-        totalCompletedItems: 1,
+        totalCompletedItems: 0,
         totalItems: 151,
-        worklistGoalPct: 0.66,
+        worklistGoalPct: 0,
         worklistEndGoalPct: 100,
         worklistTypes: [{
-          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+          worklistType: 'MP', totalItems: 151, completedItems: 0, inProgressItems: 0, todoItems: 151
         }]
       }, {
         worklistGoal: WorklistGoal.AUDITS,
