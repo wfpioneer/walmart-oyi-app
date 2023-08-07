@@ -88,6 +88,31 @@ interface HomeScreenState {
 }
 
 /**
+ * If bad data appears, such as the summed total of the todo, in progress, and completed items
+ * is greater than the given total or the completed items are negative, this will correct that
+ * bad data
+ * @param givenGoals the goals that are returned from the service
+ */
+export const fixSumOfItemsMoreThanTotal = (givenGoals: WorklistSummary[]) => {
+  // somehow we got bad data, this is here to correct any
+  givenGoals.forEach(goal => goal.worklistTypes.forEach(worklist => {
+    if (worklist.completedItems + worklist.inProgressItems + worklist.todoItems > worklist.totalItems) {
+      let correction = worklist.totalItems;
+      if (worklist.todoItems > 0) {
+        correction -= worklist.todoItems;
+      }
+      if (worklist.inProgressItems > 0) {
+        correction -= worklist.inProgressItems;
+      }
+      worklist.completedItems = correction;
+    } else if (worklist.completedItems < 0) {
+      worklist.completedItems = 0;
+    }
+  }));
+  return givenGoals;
+};
+
+/**
  * This is a method to move certain worklist summaries from one goal to another.
  * The purpose for this is to allow for the BE to keep its organization while presenting
  * the information in a state more useable by the in store associates
@@ -130,17 +155,6 @@ export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGo
   givenGoals.forEach((goal, index) => {
     goal.worklistTypes.forEach(worklist => {
       const moveToDo = moves.find(move => move.worklistType === worklist.worklistType);
-
-      // somehow we got bad data, this is here to correct any
-      if (worklist.completedItems > worklist.totalItems) {
-        let correction = worklist.totalItems;
-        if (worklist.todoItems > 0) {
-          correction -= worklist.todoItems;
-        }
-        worklist.completedItems = correction;
-      } else if (worklist.completedItems < 0) {
-        worklist.completedItems = 0;
-      }
 
       let editIndex = -1;
       if (moveToDo) {
@@ -319,6 +333,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     }
 
     const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
+    const badDataLess = fixSumOfItemsMoreThanTotal(data);
     const worklistToMove: WorklistGoalMove[] = [{
       worklistType: 'NSFQ',
       destinationGoal: WorklistGoal.PALLETS
@@ -330,7 +345,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
       });
     }
 
-    const reorganizedGoals = reorganizeGoals(data, worklistToMove);
+    const reorganizedGoals = reorganizeGoals(badDataLess, worklistToMove);
 
     const nativeWorklists: NativeWorklist[] = [];
 

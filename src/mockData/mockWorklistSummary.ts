@@ -320,15 +320,8 @@ export const badDataCombinedWorklistSummary: WorklistSummary[] = [
         worklistType: 'C',
         totalItems: 50,
         completedItems: 25,
-        inProgressItems: 0,
-        todoItems: 25
-      },
-      {
-        worklistType: 'NO',
-        totalItems: 14,
-        completedItems: 16,
-        inProgressItems: 0,
-        todoItems: 7
+        inProgressItems: 26,
+        todoItems: 0
       },
       {
         worklistType: 'NS',
@@ -343,6 +336,13 @@ export const badDataCombinedWorklistSummary: WorklistSummary[] = [
         completedItems: 4,
         inProgressItems: 0,
         todoItems: 4
+      },
+      {
+        worklistType: 'NO',
+        totalItems: 14,
+        completedItems: 13,
+        inProgressItems: 0,
+        todoItems: 7
       }
     ],
     totalItems: 196,
@@ -359,15 +359,15 @@ export const badDataCombinedWorklistSummary: WorklistSummary[] = [
       totalItems: 151,
       completedItems: 1,
       inProgressItems: 0,
-      todoItems: 151
+      todoItems: 124
     }]
   },
   {
-    totalCompletedItems: 11,
-    totalItems: 25,
+    totalCompletedItems: 6,
+    totalItems: 20,
     worklistEndGoalPct: 100,
     worklistGoal: WorklistGoal.AUDITS,
-    worklistGoalPct: 44,
+    worklistGoalPct: 30,
     worklistTypes: [
       {
         worklistType: 'AU',
