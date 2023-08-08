@@ -139,6 +139,11 @@ const genericSagas = [
     PalletManagementService.updateMultiPalletUPCQtyV2
   ),
   makeAsyncSaga(
+    saga.GET_AUDIT_LOCATIONS,
+    actions.getAuditLocations,
+    SaveAuditsProgressService.getAuditLocations
+  ),
+  makeAsyncSaga(
     saga.SAVE_AUDITS_PROGRESS,
     actions.saveAuditsProgress,
     SaveAuditsProgressService.saveAuditLocations
