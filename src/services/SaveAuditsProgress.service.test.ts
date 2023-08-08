@@ -8,6 +8,7 @@ describe('SaveAuditProgress Service Tests', () => {
     jest.restoreAllMocks();
   });
 
+  // TODO refactor test Spike story for Mock Service Worker
   it('calls getAuditLocations', async () => {
     const getAudLoc = SaveAuditsProgressService.getAuditLocations;
     mockAxiosResponse(undefined);
@@ -21,5 +22,10 @@ describe('SaveAuditProgress Service Tests', () => {
       `${urls.orchestrationURL}/worklist/audits/${123}?timelimit=5`
     );
     expect(getAudLocResponse).toStrictEqual(mockResponse);
+
+    getAudLoc({ itemNbr: 456 });
+    expect(getRequestSpy).toHaveBeenCalledWith(
+      `${urls.orchestrationURL}/worklist/audits/${456}`
+    );
   });
 });
