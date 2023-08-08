@@ -30,6 +30,7 @@ import ReportMissingPalletService from '../../services/ReportMissingPallet.servi
 import GetItemPalletsService from '../../services/GetItemPallets.service';
 import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
+import SaveAuditsProgressService from '../../services/SaveAuditsProgress.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V4, actions.getItemDetailsV4, GetItemDetailsService.getItemDetailsV4),
@@ -136,6 +137,11 @@ const genericSagas = [
     saga.UPDATE_MULTI_PALLET_UPC_QTY_V2,
     actions.updateMultiPalletUPCQtyV2,
     PalletManagementService.updateMultiPalletUPCQtyV2
+  ),
+  makeAsyncSaga(
+    saga.GET_AUDIT_LOCATIONS,
+    actions.getAuditLocations,
+    SaveAuditsProgressService.getAuditLocations
   )
 ];
 
