@@ -197,3 +197,6 @@ export const updateMultiPalletUPCQtyV2 = makeAsyncActionCreators(UPDATE_MULTI_PA
 
 export const GET_AUDIT_LOCATIONS = makeAsyncActionTypes('API/GET_AUDIT_LOCATIONS');
 export const getAuditLocations = makeAsyncActionCreators(GET_AUDIT_LOCATIONS);
+
+export const SAVE_AUDITS_PROGRESS = makeAsyncActionTypes('API/SAVE_AUDITS_PROGRESS');
+export const saveAuditsProgress = makeAsyncActionCreators(SAVE_AUDITS_PROGRESS);

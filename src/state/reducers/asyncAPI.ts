@@ -68,7 +68,8 @@ export const asyncReducer = combineReducers({
   getUserConfig: makeAsyncReducer(asyncActions.GET_USER_CONFIG),
   updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG),
   updateMultiPalletUPCQtyV2: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY_V2),
-  getAuditLocations: makeAsyncReducer(asyncActions.GET_AUDIT_LOCATIONS)
+  getAuditLocations: makeAsyncReducer(asyncActions.GET_AUDIT_LOCATIONS),
+  saveAuditsProgress: makeAsyncReducer(asyncActions.SAVE_AUDITS_PROGRESS)
 });
 
 export default asyncReducer;

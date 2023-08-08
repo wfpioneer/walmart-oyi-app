@@ -26,6 +26,7 @@ import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { CreatePallet, PalletItem } from '../../models/PalletManagementTypes';
 import { submitFeedbackRequest } from '../../services/Feedback.service';
+import { SaveLocation } from '../../services/SaveAuditsProgress.service';
 
 export const GET_ITEM_DETAILS_V4 = 'SAGA/GET_ITEM_DETAILS_V4';
 
@@ -96,6 +97,8 @@ export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
 export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY_V2';
 export const GET_AUDIT_LOCATIONS = 'SAGA/GET_AUDIT_LOCATIONS';
+
+export const SAVE_AUDITS_PROGRESS = 'SAGA/SAVE_AUDITS_PROGRESS';
 
 export const getItemDetailsV4 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V4, payload } as const);
 
@@ -310,6 +313,14 @@ export const getAuditLocations = (payload: {itemNbr: number, hours?: number}) =>
   payload
 } as const);
 
+export const saveAuditLocations = (itemNbr: number, locations: SaveLocation[]) => ({
+  type: SAVE_AUDITS_PROGRESS,
+  payload: {
+    itemNbr,
+    locations
+  }
+} as const);
+
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
     & Pick<ReturnType<typeof getItemDetailsV4>, 'payload'>
@@ -366,4 +377,5 @@ export type SagaParams =
     & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>
     & Pick<ReturnType<typeof submitFeedbackRating>, 'payload'>
     & Pick<ReturnType<typeof updateMultiPalletUPCQtyV2>, 'payload'>
-    & Pick<ReturnType<typeof getAuditLocations>, 'payload'>;
+    & Pick<ReturnType<typeof getAuditLocations>, 'payload'>
+    & Pick<ReturnType<typeof saveAuditLocations>, 'payload'>;
