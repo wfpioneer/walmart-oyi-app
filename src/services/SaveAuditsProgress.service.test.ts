@@ -9,6 +9,15 @@ describe('SaveAuditProgress Service Tests', () => {
   });
 
   // TODO refactor test Spike story for Mock Service Worker
+  it('ensures that the put - save function calls correctly', () => {
+    const saveLocations = SaveAuditsProgressService.saveAuditLocations;
+    const putRequestSpy = jest.spyOn(Request, 'put');
+
+    saveLocations({ itemNbr: 2, locations: [{ name: 'ABAR1-1', qty: 535 }] });
+
+    expect(putRequestSpy).toHaveBeenCalled();
+  });
+
   it('calls getAuditLocations', async () => {
     const getAudLoc = SaveAuditsProgressService.getAuditLocations;
     mockAxiosResponse(undefined);
