@@ -11,7 +11,6 @@ import {
   backConfirmed,
   backConfirmedHook,
   binningItemCard,
-  bottomModalPresentationHook,
   callPalletDetailsHook,
   getPalletDetailsApiHook,
   navigateAssignLocationScreen,
@@ -666,39 +665,6 @@ describe('BinningScreen', () => {
       backConfirmedHook(true, false, mockSetState, navigationProp);
       expect(mockSetState).toHaveBeenCalled();
       expect(mockGoBack).toHaveBeenCalled();
-    });
-
-    it('tests the bottom sheet modal presention methods', () => {
-      const mockDismiss = jest.fn();
-      const mockPresent = jest.fn();
-      const bottomSheetMockRef: React.RefObject<BottomSheetModalMethods> = {
-        current: {
-          close: jest.fn(),
-          collapse: jest.fn(),
-          dismiss: mockDismiss,
-          expand: jest.fn(),
-          forceClose: jest.fn(),
-          present: mockPresent,
-          snapToIndex: jest.fn(),
-          snapToPosition: jest.fn()
-        }
-      };
-
-      // screen hidden
-      bottomModalPresentationHook(unfocusedNavigationProp, bottomSheetMockRef, false);
-      expect(mockDismiss).not.toHaveBeenCalled();
-      expect(mockPresent).not.toHaveBeenCalled();
-
-      // screen shown, modal opening
-      bottomModalPresentationHook(navigationProp, bottomSheetMockRef, true);
-      expect(mockDismiss).not.toHaveBeenCalled();
-      expect(mockPresent).toHaveBeenCalled();
-      mockPresent.mockClear();
-
-      // screen shown, modal closing
-      bottomModalPresentationHook(navigationProp, bottomSheetMockRef, false);
-      expect(mockDismiss).toHaveBeenCalled();
-      expect(mockPresent).not.toHaveBeenCalled();
     });
 
     it('tests backConfirmed', () => {

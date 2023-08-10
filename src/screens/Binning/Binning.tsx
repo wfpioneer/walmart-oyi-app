@@ -48,7 +48,6 @@ import { BinningPallet } from '../../models/Binning';
 import {
   addPallet,
   clearPallets,
-  toggleBinMenu,
   toggleMultiBin
 } from '../../state/actions/Binning';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
@@ -58,7 +57,6 @@ import Button, { ButtonType } from '../../components/buttons/Button';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { setupPallet } from '../../state/actions/PalletManagement';
-import BottomSheetMultiBinCard from '../../components/BottomSheetMultiBinCard/BottomSheetMultiBinCard';
 
 const SCREEN_NAME = 'Binning_Screen';
 export interface BinningScreenProps {
@@ -274,20 +272,6 @@ export const backConfirmedHook = (
   }
 };
 
-export const bottomModalPresentationHook = (
-  navigation: NavigationProp<any>,
-  bottomSheetModalRef: React.RefObject<BottomSheetModalMethods>,
-  showBinningMenu: boolean
-) => {
-  if (navigation.isFocused() && bottomSheetModalRef.current) {
-    if (showBinningMenu) {
-      bottomSheetModalRef.current.present();
-    } else {
-      bottomSheetModalRef.current.dismiss();
-    }
-  }
-};
-
 export const callPalletDetailsHook = (
   scannedPallets: BinningPallet[],
   scannedEvent: ScannedEvent,
@@ -431,6 +415,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             value={enableMultiPalletBin}
             onChange={() => {
               dispatch(toggleMultiBin());
+              trackEventCall('toggle_multi_bin_pallets');
               return undefined;
             }}
           />
@@ -502,7 +487,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
 const Binning = (): JSX.Element => {
   const {
-    pallets: scannedPallets, enableMultiplePalletBin, showBinningMenu
+    pallets: scannedPallets, enableMultiplePalletBin
   } = useTypedSelector(state => state.Binning);
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(state => state.Global);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
@@ -512,63 +497,23 @@ const Binning = (): JSX.Element => {
   const isMounted = useRef(false);
   const displayWarningModalState = useState(false);
 
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const snapPoints = useMemo(() => ['20%'], []);
-
-  useEffect(() => {
-    bottomModalPresentationHook(navigation, bottomSheetModalRef, showBinningMenu);
-  }, [showBinningMenu]);
-
-  const renderBackdrop = useCallback(
-    // eslint-disable-next-line no-shadow
-    props => (
-      <BottomSheetBackdrop
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-      />
-    ),
-    []
-  );
-
   return (
-    <BottomSheetModalProvider>
-      <BinningScreen
-        scannedPallets={scannedPallets}
-        dispatch={dispatch}
-        route={route}
-        navigation={navigation}
-        useEffectHook={useEffect}
-        useCallbackHook={useCallback}
-        useFocusEffectHook={useFocusEffect}
-        isManualScanEnabled={isManualScanEnabled}
-        getPalletDetailsApi={getPalletDetailsApi}
-        scannedEvent={scannedEvent}
-        isMounted={isMounted}
-        trackEventCall={trackEvent}
-        enableMultiPalletBin={enableMultiplePalletBin}
-        displayWarningModalState={displayWarningModalState}
-      />
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        snapPoints={snapPoints}
-        index={0}
-        onDismiss={() => {
-          trackEvent(SCREEN_NAME, { action: 'hide_binning_bottom_sheet_modal' });
-          dispatch(toggleBinMenu(false));
-        }}
-        style={styles.bottomSheetModal}
-        backdropComponent={renderBackdrop}
-      >
-        <BottomSheetMultiBinCard
-          enableMultiBin={enableMultiplePalletBin}
-          onPress={() => dispatch(toggleMultiBin())}
-          text={strings('BINNING.MULTIPLE_BIN_ENABLED')}
-        />
-      </BottomSheetModal>
-    </BottomSheetModalProvider>
+    <BinningScreen
+      scannedPallets={scannedPallets}
+      dispatch={dispatch}
+      route={route}
+      navigation={navigation}
+      useEffectHook={useEffect}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
+      isManualScanEnabled={isManualScanEnabled}
+      getPalletDetailsApi={getPalletDetailsApi}
+      scannedEvent={scannedEvent}
+      isMounted={isMounted}
+      trackEventCall={trackEvent}
+      enableMultiPalletBin={enableMultiplePalletBin}
+      displayWarningModalState={displayWarningModalState}
+    />
   );
 };
 

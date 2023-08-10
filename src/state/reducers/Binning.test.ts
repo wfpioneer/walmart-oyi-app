@@ -5,7 +5,6 @@ import {
   clearPallets,
   deletePallet,
   setBinLocation,
-  toggleBinMenu,
   toggleMultiBin
 } from '../actions/Binning';
 import { BinningPallet } from '../../models/Binning';
@@ -27,15 +26,13 @@ describe('testing binning reducer', () => {
     const testInitialState: StateType = {
       pallets: [],
       binLocation: null,
-      enableMultiplePalletBin: false,
-      showBinningMenu: false
+      enableMultiplePalletBin: false
     };
 
     const testChangedState: StateType = {
       pallets: [],
       binLocation: null,
-      enableMultiplePalletBin: false,
-      showBinningMenu: false
+      enableMultiplePalletBin: false
     };
 
     testChangedState.pallets = [testPallet];
@@ -74,18 +71,6 @@ describe('testing binning reducer', () => {
     // test setting multi bin
     testInitialState.enableMultiplePalletBin = true;
     testResults = Binning(testInitialState, toggleMultiBin(true));
-    expect(testResults).toStrictEqual(testChangedState);
-
-    // test toggling bin menu
-    testInitialState.enableMultiplePalletBin = false;
-    testChangedState.enableMultiplePalletBin = false;
-    testChangedState.showBinningMenu = true;
-    testResults = Binning(testInitialState, toggleBinMenu());
-    expect(testResults).toStrictEqual(testChangedState);
-
-    // test setting bin menu
-    testInitialState.showBinningMenu = true;
-    testResults = Binning(testInitialState, toggleBinMenu(true));
     expect(testResults).toStrictEqual(testChangedState);
   });
 });
