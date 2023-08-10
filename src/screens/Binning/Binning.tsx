@@ -8,6 +8,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Pressable,
+  Switch,
   Text,
   View
 } from 'react-native';
@@ -420,6 +421,20 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             <ItemSeparator />
           </View>
           )}
+        <View style={styles.binSwitchView}>
+          <Text style={styles.binText}>
+            {enableMultiPalletBin ? strings('BINNING.MULTIPLE_BIN_ENABLED') : strings('BINNING.SINGLE_BIN_ENABLED')}
+          </Text>
+          <Switch
+            trackColor={{ false: COLOR.MAIN_THEME_COLOR, true: COLOR.GREEN }}
+            thumbColor={enableMultiPalletBin ? '#f5dd4b' : '#f4f3f4'}
+            value={enableMultiPalletBin}
+            onChange={() => {
+              dispatch(toggleMultiBin());
+              return undefined;
+            }}
+          />
+        </View>
         <View style={styles.emptyFlatListContainer}>
           {!enableMultiPalletBin && (
             <View style={styles.scanContainer}>

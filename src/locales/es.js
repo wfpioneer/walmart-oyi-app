@@ -525,7 +525,8 @@ export default {
     FIRST_ITEM: 'Primer articulo',
     EMPTY_PALLET: 'Pallet vacía',
     PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo',
-    MULTIPLE_BIN_ENABLED: 'Habilitar multiple ingreso a bodega'
+    MULTIPLE_BIN_ENABLED: 'Habilitar Múltiple Ingreso a Bodega',
+    SINGLE_BIN_ENABLED: 'Habilitar Solo Ingreso a Bodega' // TODO DOUBLE CHECK SPANISH TRANSLATION WITH CONFLUENCE
   },
   SETTINGS: {
     TITLE: 'Ajustes',

@@ -128,6 +128,42 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     <View
       style={
         Object {
+          "borderColor": "#9e9e9e",
+          "borderWidth": 1,
+          "flex": 0.25,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "margin": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.BINNING.SINGLE_BIN_ENABLED" translation]
+      </Text>
+      <ForwardRef(Switch)
+        onChange={[Function]}
+        thumbColor="#f4f3f4"
+        trackColor={
+          Object {
+            "false": "#0071e9",
+            "true": "#33691E",
+          }
+        }
+        value={false}
+      />
+    </View>
+    <View
+      style={
+        Object {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -296,6 +332,42 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     <View
       style={
         Object {
+          "borderColor": "#9e9e9e",
+          "borderWidth": 1,
+          "flex": 0.25,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "margin": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.BINNING.SINGLE_BIN_ENABLED" translation]
+      </Text>
+      <ForwardRef(Switch)
+        onChange={[Function]}
+        thumbColor="#f4f3f4"
+        trackColor={
+          Object {
+            "false": "#0071e9",
+            "true": "#33691E",
+          }
+        }
+        value={false}
+      />
+    </View>
+    <View
+      style={
+        Object {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -447,6 +519,42 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       keyboardType="numeric"
       placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
     />
+    <View
+      style={
+        Object {
+          "borderColor": "#9e9e9e",
+          "borderWidth": 1,
+          "flex": 0.25,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "margin": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.BINNING.SINGLE_BIN_ENABLED" translation]
+      </Text>
+      <ForwardRef(Switch)
+        onChange={[Function]}
+        thumbColor="#f4f3f4"
+        trackColor={
+          Object {
+            "false": "#0071e9",
+            "true": "#33691E",
+          }
+        }
+        value={false}
+      />
+    </View>
     <View
       style={
         Object {
@@ -649,6 +757,42 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     <View
       style={
         Object {
+          "borderColor": "#9e9e9e",
+          "borderWidth": 1,
+          "flex": 0.25,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "margin": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+      </Text>
+      <ForwardRef(Switch)
+        onChange={[Function]}
+        thumbColor="#f5dd4b"
+        trackColor={
+          Object {
+            "false": "#0071e9",
+            "true": "#33691E",
+          }
+        }
+        value={true}
+      />
+    </View>
+    <View
+      style={
+        Object {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -828,6 +972,42 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         [missing "en.BINNING.SCAN_PALLET_BIN" translation]
       </Text>
       <ItemSeparator />
+    </View>
+    <View
+      style={
+        Object {
+          "borderColor": "#9e9e9e",
+          "borderWidth": 1,
+          "flex": 0.25,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "margin": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+      </Text>
+      <ForwardRef(Switch)
+        onChange={[Function]}
+        thumbColor="#f5dd4b"
+        trackColor={
+          Object {
+            "false": "#0071e9",
+            "true": "#33691E",
+          }
+        }
+        value={true}
+      />
     </View>
     <View
       style={
@@ -1045,6 +1225,42 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
       keyboardType="numeric"
       placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
     />
+    <View
+      style={
+        Object {
+          "borderColor": "#9e9e9e",
+          "borderWidth": 1,
+          "flex": 0.25,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 16,
+            "fontWeight": "bold",
+            "margin": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+      </Text>
+      <ForwardRef(Switch)
+        onChange={[Function]}
+        thumbColor="#f5dd4b"
+        trackColor={
+          Object {
+            "false": "#0071e9",
+            "true": "#33691E",
+          }
+        }
+        value={true}
+      />
+    </View>
     <View
       style={
         Object {

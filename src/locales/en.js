@@ -526,7 +526,8 @@ export default {
     FIRST_ITEM: 'First Item',
     EMPTY_PALLET: 'Empty Pallet',
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick',
-    MULTIPLE_BIN_ENABLED: 'Multiple Bin Enabled'
+    MULTIPLE_BIN_ENABLED: 'Multiple Bin Enabled',
+    SINGLE_BIN_ENABLED: 'Single Bin Enabled'
   },
   SETTINGS: {
     TITLE: 'Settings',
