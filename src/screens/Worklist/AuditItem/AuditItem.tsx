@@ -68,6 +68,7 @@ import {
   getLocationsForItem,
   getLocationsForItemV1,
   noAction,
+  saveAuditLocations,
   updateApprovalList,
   updateMultiPalletUPCQty,
   updateOHQty,
@@ -108,8 +109,9 @@ import {
   approvalStatus
 } from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
-import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import { UpdateMultiPalletsPallet } from '../../../services/PalletManagement.service';
 import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
+import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -654,7 +656,7 @@ export const renderpalletQtyUpdateModal = (
 };
 
 export const getMultiPalletList = (reserveLocations: ItemPalletInfo[]) => {
-  const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
+  const newPalletList: UpdateMultiPalletsPallet[] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
       expirationDate: '', // This is fine as it does not update the expiration date on the pallet
@@ -766,6 +768,35 @@ export const updateOHQtyApiHook = (
         type: 'error',
         position: 'bottom',
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+    }
+  }
+};
+
+export const saveAuditsProgressApiHook = (
+  saveAuditsProgressApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  reserveLocations: ItemPalletInfo[],
+  setModalIsWaiting: UseStateType<boolean>[1]
+) => {
+  if (navigation.isFocused() && !saveAuditsProgressApi.isWaiting) {
+    if (saveAuditsProgressApi.result) {
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('AUDITS.LOCATIONS_SAVED')
+      });
+      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
+    }
+    if (saveAuditsProgressApi.error) {
+      setModalIsWaiting(false);
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('AUDITS.LOCATION_SAVE_FAIL'),
+        text2: strings('GENERICS.TRY_AGAIN'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
     }
@@ -1183,6 +1214,7 @@ export const renderCalculatorModal = (
     />
   );
 };
+
 export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
@@ -1192,6 +1224,32 @@ export const disabledContinue = (
   || reserveLocations.some(
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
+
+export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] => {
+  const saveableLocations: SaveLocation[] = [];
+  floorLocations.forEach(location => {
+    if (typeof location.newQty === 'number' && typeof location.qty === 'number' && location.newQty !== location.qty) {
+      saveableLocations.push({ name: location.locationName, qty: location.newQty });
+    }
+  });
+
+  return saveableLocations;
+};
+
+export const getPalletsToSave = (reserveLocations: ItemPalletInfo[]): UpdateMultiPalletsPallet[] => {
+  const saveablePallets: UpdateMultiPalletsPallet[] = [];
+  reserveLocations.forEach(location => {
+    if (location.newQty !== location.quantity) {
+      saveablePallets.push({
+        expirationDate: '',
+        palletId: location.palletId,
+        upcs: [{ upcNbr: location.upcNbr || '0', quantity: location.newQty }]
+      });
+    }
+  });
+
+  return saveablePallets;
+};
 
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
   const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => {
@@ -1745,6 +1803,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             userConfig.scanRequired,
             getItemDetailsApi.isWaiting
           )}
+          onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
+          showSaveButton={userConfig.enableAuditSave}
         />
       </View>
     </>
