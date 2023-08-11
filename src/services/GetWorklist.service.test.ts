@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import GetWorklistService from './GetWorklist.service';
-import Request from './Request';
+import Request, { mockAxiosResponse } from './Request';
 import { getEnvironment } from '../utils/environment';
 
 describe('Get Worklist Service Tests', () => {
@@ -13,6 +13,7 @@ describe('Get Worklist Service Tests', () => {
     const urls = getEnvironment();
     const baseUrl = `${urls.worklistURL}/worklist/v1/audits`;
     const getAuditWorklistV1 = GetWorklistService.getWorklistAuditV1;
+    mockAxiosResponse(undefined);
     const mockResponse = { data: [], status: 200, statusText: 'ok' } as AxiosResponse;
     const getSpy = jest.spyOn(Request, 'get');
     getSpy.mockResolvedValue(mockResponse);
