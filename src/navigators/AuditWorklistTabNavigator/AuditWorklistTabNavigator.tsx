@@ -55,14 +55,26 @@ const isRollOverComplete = (wlSummary: WorklistSummary) => {
   return true;
 };
 
+export const getWorklistAuditApiToUse = (
+  enableAuditsInProgress: boolean,
+  getWorklistAuditsApi: AsyncState,
+  getWorklistAuditsV1Api: AsyncState
+): AsyncState => (enableAuditsInProgress
+  ? getWorklistAuditsV1Api
+  : getWorklistAuditsApi);
+
 export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps) => {
   const {
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
     useEffectHook, trackEventCall, enableAuditsInProgress
   } = props;
-  const getWorklistAuditApi: AsyncState = enableAuditsInProgress
-    ? useTypedSelector(state => state.async.getWorklistAuditsV1)
-    : useTypedSelector(state => state.async.getWorklistAudits);
+  const getWorklistAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
+  const getWorklistAuditV1Api = useTypedSelector(state => state.async.getWorklistAuditsV1);
+  const getAuditWorklistApi = getWorklistAuditApiToUse(
+    enableAuditsInProgress,
+    getWorklistAuditApi,
+    getWorklistAuditV1Api
+  );
   const { showRollOverAudit, inProgress } = useTypedSelector(state => state.User.configs);
   const wlSummary: WorklistSummary[] = inProgress
     ? useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data)
@@ -90,7 +102,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     }, [navigation])
   );
 
-  useEffectHook(() => getWorklistAuditApiHook(getWorklistAuditApi, dispatch, navigation), [getWorklistAuditApi]);
+  useEffectHook(() => getWorklistAuditApiHook(getAuditWorklistApi, dispatch, navigation), [getAuditWorklistApi]);
 
   return (
     <Tab.Navigator
