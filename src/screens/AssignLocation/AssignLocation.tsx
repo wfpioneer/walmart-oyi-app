@@ -300,6 +300,16 @@ export const binPalletsApiEffect = (
   }
 };
 
+export const backConfirmed = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  setDisplayWarningModal(false);
+  dispatch(clearPallets());
+  navigation.goBack();
+};
+
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState, navigation,
@@ -355,7 +365,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
-      navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, palletsToBin);
+      navigationRemoveListenerHook(e, setDisplayWarningModal, palletsToBin);
     });
     return navigationListener;
   }, [navigation, palletsToBin, enableMultiPalletBin]);
@@ -426,7 +436,11 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
 
   return (
     <View style={styles.container}>
-      {renderWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
+      {renderWarningModal(
+        displayWarningModal,
+        setDisplayWarningModal,
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation)
+      )}
       {isManualScanEnabled && (
         <ManualScanComponent
           placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}

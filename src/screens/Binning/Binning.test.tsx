@@ -624,15 +624,15 @@ describe('BinningScreen', () => {
       };
       const mockSetDisplayWarningModal = jest.fn();
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, true, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, []);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, false, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, []);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, false, mockPallets);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, mockPallets);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockPreventDefault).toHaveBeenCalled();
     });
@@ -670,7 +670,7 @@ describe('BinningScreen', () => {
     it('tests backConfirmed', () => {
       const mockSetState = jest.fn();
 
-      backConfirmed(mockSetState, mockDispatch, navigationProp);
+      backConfirmed(mockSetState, mockDispatch, navigationProp, false);
       expect(mockSetState).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalled();
       expect(mockGoBack).toHaveBeenCalled();

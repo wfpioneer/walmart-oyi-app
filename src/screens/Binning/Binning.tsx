@@ -90,11 +90,14 @@ export const onValidateHardwareBackPress = (
 export const backConfirmed = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  enableMultiPalletBin: boolean,
 ) => {
   setDisplayWarningModal(false);
   dispatch(clearPallets());
-  navigation.goBack();
+  if (!enableMultiPalletBin) {
+    navigation.goBack();
+  }
 };
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -149,8 +152,7 @@ export const binningItemCard = (
 export const renderWarningModal = (
   displayWarningModal: boolean,
   setDisplayWarningModal: UseStateType<boolean>[1],
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  backConfirm: () => void
 ) => (
   <CustomModalComponent
     isVisible={displayWarningModal}
@@ -175,7 +177,7 @@ export const renderWarningModal = (
           style={styles.buttonAlign}
           title={strings('GENERICS.OK')}
           type={ButtonType.PRIMARY}
-          onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
+          onPress={backConfirm}
           testID="confirmBack"
         />
       </View>
@@ -251,10 +253,9 @@ export const getPalletDetailsApiHook = (
 export const navigationRemoveListenerHook = (
   e: BeforeRemoveEvent,
   setDisplayWarningModal: UseStateType<boolean>[1],
-  enableMultiPalletBin: boolean,
   palletsToBin: BinningPallet[]
 ) => {
-  if (!enableMultiPalletBin && palletsToBin.length > 0) {
+  if (palletsToBin.length > 0) {
     setDisplayWarningModal(true);
     e.preventDefault();
   }
@@ -262,11 +263,11 @@ export const navigationRemoveListenerHook = (
 
 export const backConfirmedHook = (
   displayWarningModal: boolean,
-  palletExistForBinnning: boolean,
+  palletExistForBinning: boolean,
   setDisplayWarningModal: UseStateType<boolean>[1],
   navigation: NavigationProp<any>
 ) => {
-  if (displayWarningModal && !palletExistForBinnning) {
+  if (displayWarningModal && !palletExistForBinning) {
     setDisplayWarningModal(false);
     navigation.goBack();
   }
@@ -327,7 +328,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   } = props;
   const [displayWarningModal, setDisplayWarningModal] = displayWarningModalState;
 
-  const palletExistForBinnning = scannedPallets.length > 0;
+  const palletExistForBinning = scannedPallets.length > 0;
 
   let scannedSubscription: EmitterSubscription;
 
@@ -345,15 +346,15 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
   // validation on app back press
   useEffectHook(() => navigation.addListener('beforeRemove', e => {
-    navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, scannedPallets);
+    navigationRemoveListenerHook(e, setDisplayWarningModal, scannedPallets);
   }), [navigation, scannedPallets]);
 
   useEffectHook(() => backConfirmedHook(
     displayWarningModal,
-    palletExistForBinnning,
+    palletExistForBinning,
     setDisplayWarningModal,
     navigation
-  ), [palletExistForBinnning, displayWarningModal]);
+  ), [palletExistForBinning, displayWarningModal]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
@@ -395,16 +396,20 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       keyboardVerticalOffset={110}
       onStartShouldSetResponder={handleUnhandledTouches}
     >
-      {renderWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
+      {renderWarningModal(
+        displayWarningModal,
+        setDisplayWarningModal,
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation, enableMultiPalletBin))}
       <View style={styles.container}>
         {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
-        {palletExistForBinnning
+        {palletExistForBinning
           && (
           <View>
             <Text style={styles.helperText}>{strings('BINNING.SCAN_PALLET_BIN')}</Text>
             <ItemSeparator />
           </View>
           )}
+        {!palletExistForBinning && (
         <View style={styles.binSwitchView}>
           <Text style={styles.binText}>
             {enableMultiPalletBin ? strings('BINNING.MULTIPLE_BIN_ENABLED') : strings('BINNING.SINGLE_BIN_ENABLED')}
@@ -420,6 +425,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
             }}
           />
         </View>
+        ) }
         <View style={styles.emptyFlatListContainer}>
           {!enableMultiPalletBin && (
             <View style={styles.scanContainer}>
@@ -439,7 +445,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           <FlatList
             data={scannedPallets}
             removeClippedSubviews={false}
-            contentContainerStyle={!palletExistForBinnning && styles.emptyFlatListContainer}
+            contentContainerStyle={!palletExistForBinning && styles.emptyFlatListContainer}
             ItemSeparatorComponent={ItemSeparator}
             renderItem={item => binningItemCard(item, dispatch, navigation, trackEventCall)}
             keyExtractor={(item: any, index) => `${item.id.toString()}-${index}`}
@@ -460,7 +466,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
           />
           )}
         </View>
-        {enableMultiPalletBin && palletExistForBinnning
+        {enableMultiPalletBin && palletExistForBinning
           && (
           <>
             <ItemSeparator />
