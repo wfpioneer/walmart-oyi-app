@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
-import GetWorklistService from './GetWorklist.service';
-import Request, { mockAxiosResponse } from './Request';
 import { getEnvironment } from '../utils/environment';
+import Request, { mockAxiosResponse } from './Request';
+import GetWorklistService from './GetWorklist.service';
 
 describe('Get Worklist Service Tests', () => {
   afterEach(() => {
@@ -20,14 +20,14 @@ describe('Get Worklist Service Tests', () => {
 
     let getWorklistResponse = await getAuditWorklistV1({ worklistType: ['AU', 'RA'] });
     expect(getWorklistResponse).toStrictEqual(mockResponse);
-    expect(getRequestSpy).toHaveBeenCalledWith(`${baseUrl}?type=AU&type=RA`);
+    expect(getRequestSpy).toHaveBeenCalledWith(`${baseUrl}?type=AU&type=RA`, undefined);
     getRequestSpy.mockClear();
 
     getWorklistResponse = await getAuditWorklistV1({ worklistType: [] });
-    expect(getRequestSpy).toHaveBeenCalledWith(baseUrl);
+    expect(getRequestSpy).toHaveBeenCalledWith(baseUrl, undefined);
     getRequestSpy.mockClear();
 
     getWorklistResponse = await getAuditWorklistV1({});
-    expect(getRequestSpy).toHaveBeenCalledWith(baseUrl);
+    expect(getRequestSpy).toHaveBeenCalledWith(baseUrl, undefined);
   });
 });
