@@ -680,7 +680,7 @@ describe('HomeScreen', () => {
         }]
       }];
 
-      const fixedData = fixSumOfItemsMoreThanTotal(badDataCombinedWorklistSummary);
+      const fixedData = fixSumOfItemsMoreThanTotal(badDataCombinedWorklistSummary, jest.fn());
       expect(fixedData).toStrictEqual(expectedMultiReorganized);
     });
   });

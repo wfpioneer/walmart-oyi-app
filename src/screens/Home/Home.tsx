@@ -93,10 +93,12 @@ interface HomeScreenState {
  * bad data
  * @param givenGoals the goals that are returned from the service
  */
-export const fixSumOfItemsMoreThanTotal = (givenGoals: WorklistSummary[]) => {
+export const fixSumOfItemsMoreThanTotal = (givenGoals: WorklistSummary[], trackEventCall: typeof trackEvent) => {
   // somehow we got bad data, this is here to correct any
   givenGoals.forEach(goal => goal.worklistTypes.forEach(worklist => {
+    let isError = false;
     if (worklist.completedItems + worklist.inProgressItems + worklist.todoItems > worklist.totalItems) {
+      isError = true;
       let correction = worklist.totalItems;
       if (worklist.todoItems > 0) {
         correction -= worklist.todoItems;
@@ -106,7 +108,14 @@ export const fixSumOfItemsMoreThanTotal = (givenGoals: WorklistSummary[]) => {
       }
       worklist.completedItems = correction;
     } else if (worklist.completedItems < 0) {
+      isError = true;
       worklist.completedItems = 0;
+    }
+    if (isError) {
+      trackEventCall('HOME_SCREEN', {
+        action: 'worklist_summary_bad_data',
+        worklistSummary: JSON.stringify(worklist)
+      });
     }
   }));
   return givenGoals;
@@ -333,7 +342,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     }
 
     const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
-    const badDataLess = fixSumOfItemsMoreThanTotal(data);
+
+    const badDataLess = fixSumOfItemsMoreThanTotal(data, trackEvent);
     const worklistToMove: WorklistGoalMove[] = [{
       worklistType: 'NSFQ',
       destinationGoal: WorklistGoal.PALLETS
