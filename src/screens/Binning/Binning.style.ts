@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     borderWidth: 1,
-    borderColor: COLOR.GREY_500
+    borderColor: COLOR.GREY_500,
+    backgroundColor: COLOR.WHITE
   },
   binText: {
     fontSize: 16,

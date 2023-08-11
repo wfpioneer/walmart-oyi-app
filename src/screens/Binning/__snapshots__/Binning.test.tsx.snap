@@ -450,6 +450,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     <View
       style={
         Object {
+          "backgroundColor": "#ffffffff",
           "borderColor": "#9e9e9e",
           "borderWidth": 1,
           "flex": 0.25,
@@ -685,6 +686,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     <View
       style={
         Object {
+          "backgroundColor": "#ffffffff",
           "borderColor": "#9e9e9e",
           "borderWidth": 1,
           "flex": 0.25,
@@ -1120,6 +1122,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     <View
       style={
         Object {
+          "backgroundColor": "#ffffffff",
           "borderColor": "#9e9e9e",
           "borderWidth": 1,
           "flex": 0.25,
