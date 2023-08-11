@@ -12,7 +12,7 @@ import COLOR from '../../themes/Color';
 import CompletedAuditWorklist from '../../screens/Worklist/AuditWorklist/CompletedAuditWorklist';
 import InProgressAuditWorklist from '../../screens/Worklist/AuditWorklist/InProgressAuditWorklist';
 import TodoAuditWorklist from '../../screens/Worklist/AuditWorklist/TodoAuditWorklist';
-import { getWorklistAudits } from '../../state/actions/saga';
+import { getWorklistAudits, getWorklistAuditsV1 } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
@@ -60,7 +60,9 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
     useEffectHook, trackEventCall, enableAuditsInProgress
   } = props;
-  const getWorklistAuditApi: AsyncState = useTypedSelector(state => state.async.getWorklistAudits);
+  const getWorklistAuditApi: AsyncState = enableAuditsInProgress
+    ? useTypedSelector(state => state.async.getWorklistAuditsV1)
+    : useTypedSelector(state => state.async.getWorklistAudits);
   const { showRollOverAudit, inProgress } = useTypedSelector(state => state.User.configs);
   const wlSummary: WorklistSummary[] = inProgress
     ? useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data)
@@ -76,7 +78,9 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
         auditWlType.push('AU');
       }
       trackEventCall('Audit_Worklist', { action: 'get_worklist_api_retry' });
-      dispatch(getWorklistAudits({ worklistType: auditWlType }));
+      dispatch(enableAuditsInProgress
+        ? getWorklistAuditsV1({ worklistType: auditWlType })
+        : getWorklistAudits({ worklistType: auditWlType }));
     });
   };
   // Get Audit worklist items call
