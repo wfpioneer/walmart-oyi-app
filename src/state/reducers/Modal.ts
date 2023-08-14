@@ -11,7 +11,7 @@ export interface ModalState {
   showActivity: boolean;
   content: { title: string; text: string } | null;
 }
-const initialState: ModalState = {
+export const initialState: ModalState = {
   showModal: false,
   showActivity: false,
   content: null
