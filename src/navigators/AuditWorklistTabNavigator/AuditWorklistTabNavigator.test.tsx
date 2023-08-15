@@ -6,9 +6,9 @@ import {
 } from '@react-navigation/native';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { render } from '@testing-library/react-native';
+import { cleanup, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react-native';
 import { createStore } from 'redux';
-import { AuditWorklistTabNavigator, getWorklistAuditApiToUse } from './AuditWorklistTabNavigator';
+import AuditWorklistTabs, { AuditWorklistTabNavigator, getWorklistAuditApiToUse } from './AuditWorklistTabNavigator';
 import { AsyncState } from '../../models/AsyncState';
 import { mockItemNPalletNAuditWorklistSummary } from '../../mockData/mockWorklistSummary';
 import RootReducer, { RootState } from '../../state/reducers/RootReducer';
@@ -62,6 +62,8 @@ const routeProp: RouteProp<any, string> = {
   name: 'AuditWorklistTabs'
 };
 
+jest.mock('../../services/Request');
+
 const mockDispatch = jest.fn();
 
 describe('AuditWorklistTab Navigator', () => {
@@ -80,22 +82,31 @@ describe('AuditWorklistTab Navigator', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+  afterEach(cleanup);
   const actualNav = jest.requireActual('@react-navigation/native');
   const navContextValue = {
-    ...actualNav.navigation,
-    isFocused: () => false,
+    ...actualNav.NavigationContext,
+    isFocused: () => true,
     addListener: jest.fn(() => jest.fn())
   };
-  it('Renders the Audit WorkList Tab Navigator component without in progress tab', () => {
+  const mockValidateSession = jest
+    .fn()
+    .mockResolvedValue(true);
+  jest.useFakeTimers();
+  it('Renders the Audit WorkList Tab Navigator component without in progress tab', async () => {
     const tabNavigatorComponent = (
       <Provider store={mockStore}>
-        <NavigationContainer>
-          <NavigationContext.Provider value={navContextValue}>
+        <NavigationContainer
+          initialState={{
+            routes: []
+          }}
+        >
+          <NavigationContext.Provider value={navigationProp}>
             <AuditWorklistTabNavigator
               dispatch={mockDispatch}
               navigation={navigationProp}
               route={routeProp}
-              validateSessionCall={jest.fn()}
+              validateSessionCall={mockValidateSession}
               useCallbackHook={jest.fn()}
               useFocusEffectHook={jest.fn()}
               useEffectHook={jest.fn()}
@@ -106,12 +117,18 @@ describe('AuditWorklistTab Navigator', () => {
         </NavigationContainer>
       </Provider>
     );
-    const { toJSON } = render(tabNavigatorComponent);
+    const { toJSON, update } = render(tabNavigatorComponent);
+    // expect(toJSON()).toMatchSnapshot();
+    // update(tabNavigatorComponent);
+
+    await waitFor(() => expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({
+      type: GET_WORKLIST_AUDIT
+    })), { interval: 125, timeout: 2000 });
 
     expect(toJSON()).toMatchSnapshot();
-    expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({
+    /* expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({
       type: GET_WORKLIST_AUDIT
-    }));
+    })); */
   });
 
   it('renders the Audit worklist tab navigator component with in progress tab', () => {
@@ -182,6 +199,30 @@ describe('AuditWorklistTab Navigator', () => {
       type: GET_WORKLIST_AUDIT_V1,
       payload: { worklistType: ['RA'] }
     });
+  });
+
+  it('renders the whole audit worklist tabs', async () => {
+    jest.mock('../../utils/sessionTimeout', () => ({
+      ...jest.requireActual('../../utils/sessionTimeout'),
+      validateSession: jest
+        .fn()
+        .mockResolvedValue(true)
+    }));
+    const { toJSON } = render(
+      <Provider store={mockStore}>
+        <NavigationContainer>
+          <NavigationContext.Provider value={navigationProp}>
+            <AuditWorklistTabs />
+          </NavigationContext.Provider>
+        </NavigationContainer>
+      </Provider>
+    );
+
+    await waitFor(() => expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({
+      type: GET_WORKLIST_AUDIT
+    })), { interval: 125, timeout: 2000 });
+
+    expect(toJSON()).toMatchSnapshot();
   });
 
   describe('externalized functions', () => {
