@@ -672,7 +672,8 @@ export const updateManagerApprovalApiHook = (
   reserveLocations: ItemPalletInfo[],
   itemDetails: ItemDetails | null,
   hasNewQty: boolean,
-  setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>
+  setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>,
+  route: RouteProp<any, string>
 ) => {
   const itemNbr = itemDetails?.itemNbr || 0;
   if (navigation.isFocused()) {
@@ -699,7 +700,11 @@ export const updateManagerApprovalApiHook = (
       } else {
         setShowCancelApprovalModal(false);
         dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
-        navigation.goBack();
+        if (route.params && route.params.source === 'OtherAction') {
+          navigation.navigate('ReviewItemDetailsHome');
+        } else {
+          navigation.goBack();
+        }
       }
     }
   }
@@ -710,7 +715,8 @@ export const completeItemApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   reserveLocations: ItemPalletInfo[],
-  hasNewQty: boolean
+  hasNewQty: boolean,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     if (!completeItemApi.isWaiting && completeItemApi.error) {
@@ -733,6 +739,8 @@ export const completeItemApiHook = (
       // Calls update Multi Pallet Qty Endpoint if Pallet Quantities were changed but Total On Hands is the same
       if (hasNewQty) {
         dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
+      } else if (route.params && route.params.source === 'OtherAction') {
+        navigation.navigate('ReviewItemDetailsHome');
       } else {
         navigation.goBack();
       }
@@ -778,7 +786,8 @@ export const updateMultiPalletUPCQtyApiHook = (
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   itemNbr: number,
-  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
+  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
@@ -793,7 +802,11 @@ export const updateMultiPalletUPCQtyApiHook = (
       dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
       setShowOnHandsConfirmationModal(false);
       dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
-      navigation.goBack();
+      if (route.params && route.params.source === 'OtherAction') {
+        navigation.navigate('ReviewItemDetailsHome');
+      } else {
+        navigation.goBack();
+      }
     }
     if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
       setModalIsWaiting(false);
@@ -1338,7 +1351,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Complete Item API
   useEffectHook(
-    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, hasNewQty),
+    () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, hasNewQty, route),
     [completeItemApi, hasNewQty]
   );
 
@@ -1350,7 +1363,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reserveLocations,
     itemDetails,
     hasNewQty,
-    setShowCancelApprovalModal
+    setShowCancelApprovalModal,
+    route
   ), [updateManagerApprovalApi, hasNewQty]);
 
   // Delete Location API
@@ -1408,7 +1422,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     navigation,
     setShowOnHandsConfirmationModal,
     itemDetails?.itemNbr || 0,
-    setModalIsWaiting
+    setModalIsWaiting,
+    route
   ), [updateMultiPalletUPCQtyApi]);
 
   if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {

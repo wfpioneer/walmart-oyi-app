@@ -54,6 +54,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             showItemImage={showItemImage}
             countryCode={countryCode}
             status={enableAuditsInProgress ? item.worklistStatus : undefined}
+            totalQty={undefined}
           />
         </View>
       </TouchableOpacity>
