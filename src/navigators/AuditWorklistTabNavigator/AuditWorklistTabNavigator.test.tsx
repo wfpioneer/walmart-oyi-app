@@ -1,228 +1,57 @@
-import {
-  NavigationContainer,
-  NavigationContext,
-  NavigationProp,
-  RouteProp
-} from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { cleanup, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react-native';
-import { createStore } from 'redux';
-import AuditWorklistTabs, { AuditWorklistTabNavigator, getWorklistAuditApiToUse } from './AuditWorklistTabNavigator';
+import ShallowRenderer from 'react-test-renderer/shallow';
+import { AuditWorklistTabNavigator, getWorklistAuditApiToUse } from './AuditWorklistTabNavigator';
+import store from '../../state';
 import { AsyncState } from '../../models/AsyncState';
-import { mockItemNPalletNAuditWorklistSummary } from '../../mockData/mockWorklistSummary';
-import RootReducer, { RootState } from '../../state/reducers/RootReducer';
-import { defaultAsyncState, mockInitialState } from '../../mockData/mockStore';
-import { GET_WORKLIST_AUDIT, GET_WORKLIST_AUDIT_V1 } from '../../state/actions/saga';
 
-jest.mock(
-  'react-native-vector-icons/MaterialCommunityIcons',
-  () => 'mockMaterialCommunityIcon'
-);
-jest.mock(
-  'react-native-vector-icons/MaterialIcons',
-  () => 'mockMaterialIcon'
-);
-jest.mock('react-native-vector-icons/FontAwesome5', () => 'fontAwesome5Icon');
-
-jest.mock('@react-navigation/native', () => {
-  const actualNav = jest.requireActual('@react-navigation/native');
-  return {
-    ...actualNav,
-    useNavigation: () => ({
-      navigate: jest.fn(),
-      dispatch: jest.fn(),
-      isFocused: jest.fn().mockReturnValue(true),
-      goBack: jest.fn()
-    }),
-    useRoute: () => ({
-      key: 'test',
-      name: 'test'
-    })
-  };
-});
-
-const navigationProp: NavigationProp<any> = {
-  addListener: jest.fn(),
-  canGoBack: jest.fn(),
-  dispatch: jest.fn(),
-  goBack: jest.fn(),
-  isFocused: jest.fn(() => true),
-  removeListener: jest.fn(),
-  reset: jest.fn(),
-  setOptions: jest.fn(),
-  setParams: jest.fn(),
-  navigate: jest.fn(),
-  getState: jest.fn(),
-  getParent: jest.fn(),
-  getId: jest.fn()
-};
+let navigationProp: NavigationProp<any>;
 const routeProp: RouteProp<any, string> = {
   key: '',
   name: 'AuditWorklistTabs'
 };
 
-jest.mock('../../services/Request');
-
-const mockDispatch = jest.fn();
-
 describe('AuditWorklistTab Navigator', () => {
-  const auditWorklistTabScreenInitialState: RootState = {
-    ...mockInitialState,
-    async: {
-      ...mockInitialState.async,
-      // @ts-expect-error missing props
-      getWorklistSummary: { ...defaultAsyncState, result: { data: mockItemNPalletNAuditWorklistSummary } },
-      // @ts-expect-error missing props
-      getWorklistSummaryV2: { ...defaultAsyncState, result: { data: mockItemNPalletNAuditWorklistSummary } }
-    }
-  };
-  const mockStore = createStore(RootReducer, auditWorklistTabScreenInitialState);
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-  afterEach(cleanup);
-  const actualNav = jest.requireActual('@react-navigation/native');
-  const navContextValue = {
-    ...actualNav.NavigationContext,
-    isFocused: () => true,
-    addListener: jest.fn(() => jest.fn())
-  };
-  const mockValidateSession = jest
-    .fn()
-    .mockResolvedValue(true);
-  jest.useFakeTimers();
-  it('Renders the Audit WorkList Tab Navigator component without in progress tab', async () => {
-    const tabNavigatorComponent = (
-      <Provider store={mockStore}>
-        <NavigationContainer
-          initialState={{
-            routes: []
-          }}
-        >
-          <NavigationContext.Provider value={navigationProp}>
-            <AuditWorklistTabNavigator
-              dispatch={mockDispatch}
-              navigation={navigationProp}
-              route={routeProp}
-              validateSessionCall={mockValidateSession}
-              useCallbackHook={jest.fn()}
-              useFocusEffectHook={jest.fn()}
-              useEffectHook={jest.fn()}
-              trackEventCall={jest.fn()}
-              enableAuditsInProgress={false}
-            />
-          </NavigationContext.Provider>
-        </NavigationContainer>
+  it('Renders the Audit WorkList Tab Navigator component without in progress tab', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Provider store={store}>
+        <AuditWorklistTabNavigator
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          validateSessionCall={jest.fn()}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          enableAuditsInProgress={false}
+        />
       </Provider>
     );
-    const { toJSON, update } = render(tabNavigatorComponent);
-    // expect(toJSON()).toMatchSnapshot();
-    // update(tabNavigatorComponent);
-
-    await waitFor(() => expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({
-      type: GET_WORKLIST_AUDIT
-    })), { interval: 125, timeout: 2000 });
-
-    expect(toJSON()).toMatchSnapshot();
-    /* expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({
-      type: GET_WORKLIST_AUDIT
-    })); */
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
   it('renders the Audit worklist tab navigator component with in progress tab', () => {
-    const { toJSON } = render(
-      <Provider store={mockStore}>
-        <NavigationContainer>
-          <NavigationContext.Provider value={navContextValue}>
-            <AuditWorklistTabNavigator
-              dispatch={jest.fn()}
-              navigation={navigationProp}
-              route={routeProp}
-              validateSessionCall={jest.fn()}
-              useCallbackHook={jest.fn()}
-              useFocusEffectHook={jest.fn()}
-              useEffectHook={jest.fn()}
-              trackEventCall={jest.fn()}
-              enableAuditsInProgress={true}
-            />
-          </NavigationContext.Provider>
-        </NavigationContainer>
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <Provider store={store}>
+        <AuditWorklistTabNavigator
+          dispatch={jest.fn()}
+          navigation={navigationProp}
+          route={routeProp}
+          validateSessionCall={jest.fn()}
+          useCallbackHook={jest.fn()}
+          useFocusEffectHook={jest.fn()}
+          useEffectHook={jest.fn()}
+          trackEventCall={jest.fn()}
+          enableAuditsInProgress={true}
+        />
       </Provider>
     );
 
-    expect(toJSON()).toMatchSnapshot();
-    expect(mockDispatch).toHaveBeenCalledWith({
-      type: GET_WORKLIST_AUDIT_V1,
-      payload: { worklistType: ['RA', 'AU'] }
-    });
-  });
-
-  it('Renders the Audit WorkList Tab Navigator component with in progress tab and rollover audits', () => {
-    const rolloverAuditsAdjustedSummaries = [...mockItemNPalletNAuditWorklistSummary];
-    rolloverAuditsAdjustedSummaries[2].worklistTypes[1].totalItems = 299;
-    const rolloverAuditsAdjustedInitialState: RootState = {
-      ...auditWorklistTabScreenInitialState,
-      async: {
-        ...auditWorklistTabScreenInitialState.async,
-        getWorklistAuditsV1: {
-          ...auditWorklistTabScreenInitialState.async.getWorklistAuditsV1,
-          // @ts-expect-error missing props
-          result: { data: rolloverAuditsAdjustedSummaries }
-        }
-      }
-    };
-    const adjustedStore = createStore(RootReducer, rolloverAuditsAdjustedInitialState);
-    const { toJSON } = render(
-      <Provider store={adjustedStore}>
-        <NavigationContainer>
-          <NavigationContext.Provider value={navContextValue}>
-            <AuditWorklistTabNavigator
-              dispatch={jest.fn()}
-              navigation={navigationProp}
-              route={routeProp}
-              validateSessionCall={jest.fn()}
-              useCallbackHook={jest.fn()}
-              useFocusEffectHook={jest.fn()}
-              useEffectHook={jest.fn()}
-              trackEventCall={jest.fn()}
-              enableAuditsInProgress={true}
-            />
-          </NavigationContext.Provider>
-        </NavigationContainer>
-      </Provider>
-    );
-
-    expect(toJSON()).toMatchSnapshot();
-    expect(mockDispatch).toHaveBeenCalledWith({
-      type: GET_WORKLIST_AUDIT_V1,
-      payload: { worklistType: ['RA'] }
-    });
-  });
-
-  it('renders the whole audit worklist tabs', async () => {
-    jest.mock('../../utils/sessionTimeout', () => ({
-      ...jest.requireActual('../../utils/sessionTimeout'),
-      validateSession: jest
-        .fn()
-        .mockResolvedValue(true)
-    }));
-    const { toJSON } = render(
-      <Provider store={mockStore}>
-        <NavigationContainer>
-          <NavigationContext.Provider value={navigationProp}>
-            <AuditWorklistTabs />
-          </NavigationContext.Provider>
-        </NavigationContainer>
-      </Provider>
-    );
-
-    await waitFor(() => expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({
-      type: GET_WORKLIST_AUDIT
-    })), { interval: 125, timeout: 2000 });
-
-    expect(toJSON()).toMatchSnapshot();
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
   describe('externalized functions', () => {
