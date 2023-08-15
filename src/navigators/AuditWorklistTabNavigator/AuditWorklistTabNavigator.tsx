@@ -75,8 +75,8 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     getWorklistAuditApi,
     getWorklistAuditV1Api
   );
-  const { showRollOverAudit, inProgress } = useTypedSelector(state => state.User.configs);
-  const wlSummary: WorklistSummary[] = inProgress
+  const { showRollOverAudit } = useTypedSelector(state => state.User.configs);
+  const wlSummary: WorklistSummary[] = enableAuditsInProgress
     ? useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data)
     : useTypedSelector(state => state.async.getWorklistSummary.result?.data);
   const selectedWorklistGoal = WorklistGoal.AUDITS;
