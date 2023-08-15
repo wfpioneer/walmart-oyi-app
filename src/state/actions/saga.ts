@@ -41,6 +41,7 @@ export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_WORKLIST = 'SAGA/GET_WORKLIST';
 export const GET_WORKLIST_V1 = 'SAGA/GET_WORKLIST_V1';
 export const GET_WORKLIST_AUDIT = 'SAGA/GET_WORKLIST_AUDIT';
+export const GET_WORKLIST_AUDIT_V1 = 'SAGA/GET_WORKLIST_AUDIT_V1';
 export const GET_PALLET_WORKLIST = 'SAGA/GET_PALLET_WORKLIST';
 export const EDIT_LOCATION = 'SAGA/EDIT_LOCATION';
 export const UPDATE_OH_QTY = 'SAGA/UPDATE_OH_QTY';
@@ -96,6 +97,7 @@ export const SUBMIT_FEEDBACK_RATING = 'SAGA/SUBMIT_FEEDBACK_RATING';
 export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
 export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY_V2';
+export const GET_AUDIT_LOCATIONS = 'SAGA/GET_AUDIT_LOCATIONS';
 
 export const SAVE_AUDITS_PROGRESS = 'SAGA/SAVE_AUDITS_PROGRESS';
 
@@ -115,6 +117,9 @@ export const getWorklist = (payload?: { worklistType?: string[] }) => ({ type: G
 export const getWorklistV1 = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST_V1, payload } as const);
 export const getWorklistAudits = (payload?: { worklistType?: string[] }) => (
   { type: GET_WORKLIST_AUDIT, payload } as const
+);
+export const getWorklistAuditsV1 = (payload?: { worklistType?: string[] }) => (
+  { type: GET_WORKLIST_AUDIT_V1, payload } as const
 );
 export const getPalletWorklist = (payload: { worklistType: PalletWorklistType[] }) => (
   { type: GET_PALLET_WORKLIST, payload } as const
@@ -307,6 +312,11 @@ export const updateMultiPalletUPCQtyV2 = (payload: UpdateMultiPalletUPCQtyReques
   payload
 } as const);
 
+export const getAuditLocations = (payload: {itemNbr: number, hours?: number}) => ({
+  type: GET_AUDIT_LOCATIONS,
+  payload
+} as const);
+
 export const saveAuditLocations = (itemNbr: number, locations: SaveLocation[]) => ({
   type: SAVE_AUDITS_PROGRESS,
   payload: {
@@ -327,6 +337,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getWorklist>, 'payload'>
     & Pick<ReturnType<typeof getWorklistV1>, 'payload'>
     & Pick<ReturnType<typeof getWorklistAudits>, 'payload'>
+    & Pick<ReturnType<typeof getWorklistAuditsV1>, 'payload'>
     & Pick<ReturnType<typeof getPalletWorklist>, 'payload'>
     & Pick<ReturnType<typeof editLocation>, 'payload'>
     & Pick<ReturnType<typeof addLocation>, 'payload'>
@@ -371,4 +382,5 @@ export type SagaParams =
     & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>
     & Pick<ReturnType<typeof submitFeedbackRating>, 'payload'>
     & Pick<ReturnType<typeof updateMultiPalletUPCQtyV2>, 'payload'>
+    & Pick<ReturnType<typeof getAuditLocations>, 'payload'>
     & Pick<ReturnType<typeof saveAuditLocations>, 'payload'>;

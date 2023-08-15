@@ -29,7 +29,7 @@ interface PalletManagementState {
   createPallet: boolean;
 }
 
-const initialState: PalletManagementState = {
+export const initialState: PalletManagementState = {
   managePalletMenu: false,
   palletInfo: {
     id: '0',
