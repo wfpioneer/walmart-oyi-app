@@ -780,11 +780,11 @@ export const saveAuditsProgressApiHook = (
   saveAuditsProgressApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  reserveLocations: ItemPalletInfo[]
+  reserveLocations: ItemPalletInfo[],
+  setModalIsWaiting: UseStateType<boolean>[1]
 ) => {
   if (navigation.isFocused()) {
     if (!saveAuditsProgressApi.isWaiting) {
-      dispatch(hideActivityModal());
       if (saveAuditsProgressApi.result) {
         Toast.show({
           type: 'success',
@@ -792,8 +792,10 @@ export const saveAuditsProgressApiHook = (
           text1: strings('AUDITS.LOCATIONS_SAVED')
         });
         dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
+        setModalIsWaiting(true);
       }
       if (saveAuditsProgressApi.error) {
+        dispatch(hideActivityModal());
         Toast.show({
           type: 'error',
           position: 'bottom',
@@ -814,31 +816,37 @@ export const updateMultiPalletUPCQtyApiHook = (
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   itemNbr: number,
-  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
+  modalIsWaitingState: UseStateType<boolean>
 ) => {
   if (navigation.isFocused()) {
-    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
+    if (!updateMultiPalletUPCQtyApi.isWaiting) {
+      const [modalIsWaiting, setModalIsWaiting] = modalIsWaitingState;
+      if (modalIsWaiting) {
+        dispatch(hideActivityModal());
+      }
       setModalIsWaiting(false);
-      Toast.show({
-        type: 'success',
-        position: 'bottom',
-        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
-        visibilityTime: SNACKBAR_TIMEOUT
-      });
 
-      dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
-      setShowOnHandsConfirmationModal(false);
-      dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
-      navigation.goBack();
-    }
-    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
-      setModalIsWaiting(false);
-      Toast.show({
-        type: 'error',
-        position: 'bottom',
-        text1: strings('PALLET.SAVE_PALLET_FAILURE'),
-        visibilityTime: SNACKBAR_TIMEOUT
-      });
+      if (updateMultiPalletUPCQtyApi.result) {
+        Toast.show({
+          type: 'success',
+          position: 'bottom',
+          text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+        dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+        setShowOnHandsConfirmationModal(false);
+        dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
+        navigation.goBack();
+      }
+
+      if (updateMultiPalletUPCQtyApi.error) {
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('PALLET.SAVE_PALLET_FAILURE'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+      }
     }
   }
 };
@@ -1387,7 +1395,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Save Audits Progress api
   useEffectHook(
-    () => saveAuditsProgressApiHook(saveAuditsProgressApi, dispatch, navigation, reserveLocations),
+    () => saveAuditsProgressApiHook(saveAuditsProgressApi, dispatch, navigation, reserveLocations, setModalIsWaiting),
     [saveAuditsProgressApi, reserveLocations]
   );
 
@@ -1463,7 +1471,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     navigation,
     setShowOnHandsConfirmationModal,
     itemDetails?.itemNbr || 0,
-    setModalIsWaiting
+    modalIsWaitingState
   ), [updateMultiPalletUPCQtyApi]);
 
   if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {

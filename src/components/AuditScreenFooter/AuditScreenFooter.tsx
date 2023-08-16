@@ -27,6 +27,7 @@ const AuditScreenFooter = ({
           titleColor={COLOR.MAIN_THEME_COLOR}
           type={ButtonType.SOLID_WHITE}
           onPress={onSaveClick}
+          disabled={disabledContinue}
         />
       </View>
     ) : null}
