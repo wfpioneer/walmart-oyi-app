@@ -1,5 +1,5 @@
 import React, {
-  MutableRefObject, useCallback, useEffect, useMemo, useRef, useState
+  MutableRefObject, useCallback, useEffect, useRef, useState
 } from 'react';
 import {
   BackHandler,
@@ -8,7 +8,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Pressable,
-  Switch,
   Text,
   TouchableOpacity,
   View
@@ -55,7 +54,6 @@ import Button, { ButtonType } from '../../components/buttons/Button';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { setupPallet } from '../../state/actions/PalletManagement';
-import BottomSheetBaseCard from '../../components/BottomSheetBaseCard/BottomSheetBaseCard';
 
 const SCREEN_NAME = 'Binning_Screen';
 export interface BinningScreenProps {

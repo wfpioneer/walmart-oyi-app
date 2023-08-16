@@ -677,14 +677,15 @@ describe('BinningScreen', () => {
     });
 
     it('tests toggleMultiBinCheckbox', async () => {
-      const { toJSON, findByTestId, update } = render(
+      const { toJSON, getByTestId, update } = render(
         toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, false)
       );
 
-      const multiBinButton = findByTestId('toggle multi bin');
-      const checkBoxIcon = findByTestId('checkbox icon');
-      fireEvent.press(await multiBinButton);
-      fireEvent.press(await checkBoxIcon)
+      const multiBinButton = getByTestId('toggle multi bin');
+      const checkBoxIcon = getByTestId('checkbox icon');
+      await fireEvent.press(multiBinButton);
+      await fireEvent.press(checkBoxIcon);
+
       expect(toJSON()).toMatchSnapshot();
       expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin());
       expect(mockTrackEvent).toHaveBeenCalledWith('toggle_multi_bin_pallets');
@@ -694,8 +695,8 @@ describe('BinningScreen', () => {
         toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, true)
       );
 
-      fireEvent.press(await checkBoxIcon);
-      expect((await checkBoxIcon).props.name).toStrictEqual('checkbox-marked-outline');
+      await fireEvent.press(checkBoxIcon);
+      expect(checkBoxIcon.props.name).toStrictEqual('checkbox-marked-outline');
     });
   });
 });
