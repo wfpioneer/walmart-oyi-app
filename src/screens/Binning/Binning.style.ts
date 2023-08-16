@@ -21,21 +21,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 15
   },
-  binSwitchView: {
-    flex: 0.25,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: COLOR.GREY_500,
-    backgroundColor: COLOR.WHITE
-  },
-  binText: {
-    fontSize: 16,
-    textAlign: 'center',
-    margin: 15,
-    fontWeight: 'bold',
-    alignSelf: 'center'
-  },
   separator: {
     backgroundColor: COLOR.GREY_300,
     height: 1,
@@ -81,6 +66,28 @@ const styles = StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 20,
     borderWidth: 2
+  },
+  checkBoxContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    borderColor: COLOR.GREY_200,
+    borderWidth: 1,
+    width: '75%',
+    marginTop: 2
+  },
+  checkBoxView: {
+    height: 75,
+    width: 75,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  checkBoxTextView: {
+    justifyContent: 'center',
+    flex: 1
+  },
+  checkBoxText: {
+    fontSize: 18
   }
 });
 export default styles;
