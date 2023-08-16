@@ -1794,19 +1794,21 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.footer}>
-        <AuditScreenFooter
-          onContinueClick={handleContinueAction}
-          disabledContinue={disabledContinue(
-            floorLocations,
-            reserveLocations,
-            userConfig.scanRequired,
-            getItemDetailsApi.isWaiting
-          )}
-          onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
-          showSaveButton={userConfig.enableAuditSave}
-        />
-      </View>
+      {userConfig.enableAuditSave ? (
+        <View style={styles.footer}>
+          <AuditScreenFooter
+            onContinueClick={handleContinueAction}
+            disabledContinue={disabledContinue(
+              floorLocations,
+              reserveLocations,
+              userConfig.scanRequired,
+              getItemDetailsApi.isWaiting
+            )}
+            onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
+            showSaveButton={userConfig.enableAuditsInProgress}
+          />
+        </View>
+      ) : null}
     </>
   );
 };
