@@ -27,6 +27,10 @@ jest.mock('react-native-config', () => {
     ENVIRONMENT: ' DEV'
   };
 });
+jest.mock('../../utils/AppCenterTool', () => ({
+  ...jest.requireActual('../../utils/AppCenterTool'),
+  trackEvent: jest.fn()
+}));
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
