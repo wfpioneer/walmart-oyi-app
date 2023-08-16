@@ -15,7 +15,6 @@ import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import Toast from 'react-native-toast-message';
 import { UPDATE_FLOOR_LOCATION_QTY, UPDATE_PALLET_QTY } from '../../../state/actions/AuditItemScreen';
-import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen,
@@ -36,6 +35,7 @@ import AuditItem, {
   getItemLocationsV1ApiHook,
   getItemPalletsApiHook,
   getItemQuantity,
+  getLocationsToSave,
   getMultiPalletList,
   getScannedPalletEffect,
   getUpdatedFloorLocations,
@@ -47,16 +47,18 @@ import AuditItem, {
   renderConfirmOnHandsModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
+  saveAuditsProgressApiHook,
   sortReserveLocations,
   updateManagerApprovalApiHook,
   updateMultiPalletUPCQtyApiHook,
   updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
-import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { getMockItemDetails } from '../../../mockData';
 import { mockPalletLocations, mockSortedLocations } from '../../../mockData/getItemPallets';
+import { mockConfig } from '../../../mockData/mockConfig';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import {
@@ -69,6 +71,7 @@ import { setFloorLocations, setReserveLocations, setupScreen } from '../../../st
 import ItemDetails from '../../../models/ItemDetails';
 import Location from '../../../models/Location';
 import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../../models/ApprovalListItem';
+import { mockLocations, mockSomeSaveableLocations } from '../../../mockData/mockPickList';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -168,6 +171,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   getItemDetailsApi: defaultAsyncState,
   getItemLocationsApi: defaultAsyncState,
   getItemLocationsV1Api: defaultAsyncState,
+  saveAuditsProgressApi: defaultAsyncState,
   itemDetails: null,
   userId: 'testUser',
   route: routeProp,
@@ -527,7 +531,7 @@ describe('AuditItemScreen', () => {
             }
           }
         }
-      }
+      };
       getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
     });
@@ -541,7 +545,7 @@ describe('AuditItemScreen', () => {
             salesFloorLocation: []
           }
         }
-      }
+      };
       getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
     });
@@ -957,7 +961,7 @@ describe('AuditItemScreen', () => {
         mockSetModalWaiting
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockSetModalWaiting).toHaveBeenCalledWith(false)
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -1524,6 +1528,40 @@ describe('AuditItemScreen', () => {
         jest.fn()
       );
       expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('tests the save audits progress api hook success', () => {
+      saveAuditsProgressApiHook(successApi, mockDispatch, navigationProp, mockPalletLocations);
+
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
+    });
+
+    it('tests the save audits progress api hook failure', () => {
+      saveAuditsProgressApiHook(failureApi, mockDispatch, navigationProp, mockPalletLocations);
+
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
+    });
+
+    it('tests that the save audits progress api hook shows activity modal on waiting', () => {
+      const waitingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true
+      };
+      saveAuditsProgressApiHook(waitingApi, mockDispatch, navigationProp, mockPalletLocations);
+
+      expect(mockDispatch).toHaveBeenCalledWith({ type: 'MODAL/SHOW_ACTIVITY' });
+    });
+
+    it('tests the getLocationsToSave', () => {
+      const results = getLocationsToSave(mockLocations);
+
+      expect(results.length).toBe(2);
+
+      const someSaveableResults = getLocationsToSave(mockSomeSaveableLocations);
+
+      expect(someSaveableResults.length).toBe(1);
     });
   });
 });

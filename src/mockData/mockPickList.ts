@@ -78,6 +78,35 @@ export const mockLocations: Location[] = [
   }
 ];
 
+export const mockSomeSaveableLocations: Location[] = [
+  {
+    aisleId: 2,
+    aisleName: '1',
+    locationName: 'ABAR1-1',
+    sectionId: 3,
+    sectionName: '1',
+    type: 'floor',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR',
+    qty: 10,
+    newQty: 0
+  },
+  {
+    aisleId: 2,
+    aisleName: '2',
+    locationName: 'ABAR2-2',
+    sectionId: 4,
+    sectionName: '2',
+    type: 'floor',
+    typeNbr: 2,
+    zoneId: 1,
+    zoneName: 'ABAR',
+    qty: 10,
+    newQty: 10
+  }
+];
+
 export const mockReserveLocations: Location[] = [
   {
     aisleId: 2,
