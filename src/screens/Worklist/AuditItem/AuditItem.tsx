@@ -112,6 +112,7 @@ import CalculatorModal from '../../../components/CustomCalculatorModal/Calculato
 import { UpdateMultiPalletsPallet } from '../../../services/PalletManagement.service';
 import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
+import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -119,6 +120,7 @@ export interface AuditItemScreenProps {
   getItemDetailsApi: AsyncState;
   getItemLocationsApi: AsyncState;
   getItemLocationsV1Api: AsyncState;
+  saveAuditsProgressApi: AsyncState;
   getItemPalletsApi: AsyncState;
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -778,27 +780,30 @@ export const saveAuditsProgressApiHook = (
   saveAuditsProgressApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  reserveLocations: ItemPalletInfo[],
-  setModalIsWaiting: UseStateType<boolean>[1]
+  reserveLocations: ItemPalletInfo[]
 ) => {
-  if (navigation.isFocused() && !saveAuditsProgressApi.isWaiting) {
-    if (saveAuditsProgressApi.result) {
-      Toast.show({
-        type: 'success',
-        position: 'bottom',
-        text1: strings('AUDITS.LOCATIONS_SAVED')
-      });
-      dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
-    }
-    if (saveAuditsProgressApi.error) {
-      setModalIsWaiting(false);
-      Toast.show({
-        type: 'error',
-        position: 'bottom',
-        text1: strings('AUDITS.LOCATION_SAVE_FAIL'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: SNACKBAR_TIMEOUT
-      });
+  if (navigation.isFocused()) {
+    if (!saveAuditsProgressApi.isWaiting) {
+      dispatch(hideActivityModal());
+      if (saveAuditsProgressApi.result) {
+        Toast.show({
+          type: 'success',
+          position: 'bottom',
+          text1: strings('AUDITS.LOCATIONS_SAVED')
+        });
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
+      }
+      if (saveAuditsProgressApi.error) {
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('AUDITS.LOCATION_SAVE_FAIL'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+      }
+    } else {
+      dispatch(showActivityModal());
     }
   }
 };
@@ -1236,21 +1241,6 @@ export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] =
   return saveableLocations;
 };
 
-export const getPalletsToSave = (reserveLocations: ItemPalletInfo[]): UpdateMultiPalletsPallet[] => {
-  const saveablePallets: UpdateMultiPalletsPallet[] = [];
-  reserveLocations.forEach(location => {
-    if (location.newQty !== location.quantity) {
-      saveablePallets.push({
-        expirationDate: '',
-        palletId: location.palletId,
-        upcs: [{ upcNbr: location.upcNbr || '0', quantity: location.newQty }]
-      });
-    }
-  });
-
-  return saveablePallets;
-};
-
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
   const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => {
     if (a.locationName > b.locationName) return 1;
@@ -1271,6 +1261,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     isManualScanEnabled,
     getItemLocationsApi,
     getItemLocationsV1Api,
+    saveAuditsProgressApi,
     getItemDetailsApi,
     deleteFloorLocationApi,
     updateOHQtyApi,
@@ -1392,6 +1383,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemPalletsApiHook(getItemPalletsApi, dispatch, navigation, reserveLocations, setGetItemPalletsError),
     [getItemPalletsApi]
+  );
+
+  // Save Audits Progress api
+  useEffectHook(
+    () => saveAuditsProgressApiHook(saveAuditsProgressApi, dispatch, navigation, reserveLocations),
+    [saveAuditsProgressApi, reserveLocations]
   );
 
   // Complete Item API
@@ -1834,6 +1831,7 @@ const AuditItem = (): JSX.Element => {
     : useTypedSelector(state => state.async.updateOHQty);
   const getItemLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
   const getItemLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
+  const saveAuditsProgressApi = useTypedSelector(state => state.async.saveAuditsProgress);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const {
@@ -1880,6 +1878,7 @@ const AuditItem = (): JSX.Element => {
       deleteFloorLocationApi={deleteFloorLocationApi}
       getItemLocationsApi={getItemLocationsApi}
       getItemLocationsV1Api={getItemLocationsV1Api}
+      saveAuditsProgressApi={saveAuditsProgressApi}
       updateOHQtyApi={updateOHQtyApi}
       completeItemApi={completeItemApi}
       getItemApprovalApi={getItemApprovalApi}
