@@ -175,7 +175,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "75%",
             }
           }
-          testID="category button"
+          testID="toggle multi bin"
         >
           <View
             style={
@@ -191,6 +191,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               color="#9e9e9e"
               name="checkbox-blank-outline"
               size={40}
+              testID="checkbox icon"
             />
           </View>
           <View
@@ -393,7 +394,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "75%",
             }
           }
-          testID="category button"
+          testID="toggle multi bin"
         >
           <View
             style={
@@ -409,6 +410,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               color="#9e9e9e"
               name="checkbox-blank-outline"
               size={40}
+              testID="checkbox icon"
             />
           </View>
           <View
@@ -597,7 +599,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               "width": "75%",
             }
           }
-          testID="category button"
+          testID="toggle multi bin"
         >
           <View
             style={
@@ -613,6 +615,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
               color="#9e9e9e"
               name="checkbox-blank-outline"
               size={40}
+              testID="checkbox icon"
             />
           </View>
           <View
@@ -849,7 +852,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                   "width": "75%",
                 }
               }
-              testID="category button"
+              testID="toggle multi bin"
             >
               <View
                 style={
@@ -865,6 +868,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                   color="#0071e9"
                   name="checkbox-marked-outline"
                   size={40}
+                  testID="checkbox icon"
                 />
               </View>
               <View
@@ -1082,7 +1086,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                   "width": "75%",
                 }
               }
-              testID="category button"
+              testID="toggle multi bin"
             >
               <View
                 style={
@@ -1098,6 +1102,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                   color="#0071e9"
                   name="checkbox-marked-outline"
                   size={40}
+                  testID="checkbox icon"
                 />
               </View>
               <View
@@ -1348,7 +1353,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                   "width": "75%",
                 }
               }
-              testID="category button"
+              testID="toggle multi bin"
             >
               <View
                 style={
@@ -1364,6 +1369,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                   color="#0071e9"
                   name="checkbox-marked-outline"
                   size={40}
+                  testID="checkbox icon"
                 />
               </View>
               <View
@@ -1401,4 +1407,68 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     </View>
   </View>
 </KeyboardAvoidingView>
+`;
+
+exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "borderColor": "#eeeeee",
+      "borderWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "marginTop": 2,
+      "opacity": 1,
+      "width": "75%",
+    }
+  }
+  testID="toggle multi bin"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 75,
+        "justifyContent": "center",
+        "width": 75,
+      }
+    }
+  >
+    <Icon
+      color="#9e9e9e"
+      name="checkbox-blank-outline"
+      size={40}
+      testID="checkbox icon"
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+        }
+      }
+    >
+      [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+    </Text>
+  </View>
+</View>
 `;

@@ -319,6 +319,45 @@ export const scannedEventHook = (
   }
 };
 
+export const toggleMultiBinCheckbox = (
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
+  enableMultiPalletBin: boolean
+) => (
+  <TouchableOpacity
+    testID="toggle multi bin"
+    style={styles.checkBoxContainer}
+    onPress={() => {
+      dispatch(toggleMultiBin());
+      trackEventCall('toggle_multi_bin_pallets');
+      return undefined;
+    }}
+  >
+    <View style={styles.checkBoxView}>
+      {enableMultiPalletBin ? (
+        <Icon
+          name="checkbox-marked-outline"
+          size={40}
+          color={COLOR.MAIN_THEME_COLOR}
+          testID="checkbox icon"
+        />
+      ) : (
+        <Icon
+          name="checkbox-blank-outline"
+          size={40}
+          color={COLOR.GREY_500}
+          testID="checkbox icon"
+        />
+      )}
+    </View>
+    <View style={styles.checkBoxTextView}>
+      <Text style={styles.checkBoxText}>
+        {strings('BINNING.MULTIPLE_BIN_ENABLED')}
+      </Text>
+    </View>
+  </TouchableOpacity>
+);
+
 export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   const {
     scannedPallets, isManualScanEnabled, dispatch, navigation, route,
@@ -422,29 +461,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
               <View style={styles.scanText}>
                 <Text>{strings('BINNING.SCAN_PALLET')}</Text>
               </View>
-              <TouchableOpacity
-                testID="category button"
-                style={styles.checkBoxContainer}
-                onPress={() => {
-                  dispatch(toggleMultiBin());
-                  trackEventCall('toggle_multi_bin_pallets');
-                  return undefined;
-                }}
-              >
-                <View style={styles.checkBoxView}>
-                  <Icon
-                    name="checkbox-blank-outline"
-                    size={40}
-                    color={COLOR.GREY_500}
-                  />
-
-                </View>
-                <View style={styles.checkBoxTextView}>
-                  <Text style={styles.checkBoxText}>
-                    {strings('BINNING.MULTIPLE_BIN_ENABLED')}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+              {toggleMultiBinCheckbox(dispatch, trackEventCall, enableMultiPalletBin)}
             </View>
           )}
           {enableMultiPalletBin && (
@@ -467,28 +484,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
                 <View style={styles.scanText}>
                   <Text>{strings('BINNING.SCAN_PALLET')}</Text>
                 </View>
-                <TouchableOpacity
-                  testID="category button"
-                  style={styles.checkBoxContainer}
-                  onPress={() => {
-                    dispatch(toggleMultiBin());
-                    trackEventCall('toggle_multi_bin_pallets');
-                    return undefined;
-                  }}
-                >
-                  <View style={styles.checkBoxView}>
-                    <Icon
-                      name="checkbox-marked-outline"
-                      size={40}
-                      color={COLOR.MAIN_THEME_COLOR}
-                    />
-                  </View>
-                  <View style={styles.checkBoxTextView}>
-                    <Text style={styles.checkBoxText}>
-                      {strings('BINNING.MULTIPLE_BIN_ENABLED')}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                {toggleMultiBinCheckbox(dispatch, trackEventCall, enableMultiPalletBin)}
               </View>
           )}
           />

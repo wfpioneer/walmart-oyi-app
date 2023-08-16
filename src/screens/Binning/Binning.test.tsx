@@ -16,7 +16,8 @@ import {
   onBinningItemPress,
   onValidateHardwareBackPress,
   resetApis,
-  scannedEventHook
+  scannedEventHook,
+  toggleMultiBinCheckbox
 } from './Binning';
 import { AsyncState } from '../../models/AsyncState';
 import { mockPallets } from '../../mockData/binning';
@@ -24,6 +25,7 @@ import { BeforeRemoveEvent, ScannedEvent, UseStateType } from '../../models/Gene
 import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 import { validateSession } from '../../utils/sessionTimeout';
+import { toggleMultiBin } from '../../state/actions/Binning';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -672,6 +674,28 @@ describe('BinningScreen', () => {
       expect(mockSetState).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalled();
       expect(mockGoBack).toHaveBeenCalled();
+    });
+
+    it('tests toggleMultiBinCheckbox', async () => {
+      const { toJSON, findByTestId, update } = render(
+        toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, false)
+      );
+
+      const multiBinButton = findByTestId('toggle multi bin');
+      const checkBoxIcon = findByTestId('checkbox icon');
+      fireEvent.press(await multiBinButton);
+      fireEvent.press(await checkBoxIcon)
+      expect(toJSON()).toMatchSnapshot();
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin());
+      expect(mockTrackEvent).toHaveBeenCalledWith('toggle_multi_bin_pallets');
+      expect((await checkBoxIcon).props.name).toStrictEqual('checkbox-blank-outline');
+
+      update(
+        toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, true)
+      );
+
+      fireEvent.press(await checkBoxIcon);
+      expect((await checkBoxIcon).props.name).toStrictEqual('checkbox-marked-outline');
     });
   });
 });
