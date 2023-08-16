@@ -33,6 +33,9 @@ export const getWorklistV1 = makeAsyncActionCreators(GET_WORKLIST_V1);
 export const GET_WORKLIST_AUDIT = makeAsyncActionTypes('API/GET_WORKLIST_AUDIT');
 export const getWorklistAudit = makeAsyncActionCreators(GET_WORKLIST_AUDIT);
 
+export const GET_WORKLIST_AUDIT_V1 = makeAsyncActionTypes('API/GET_WORKLIST_AUDIT_V1');
+export const getWorklistAuditV1 = makeAsyncActionCreators(GET_WORKLIST_AUDIT_V1);
+
 export const GET_PALLET_WORKLIST = makeAsyncActionTypes('API/GET_PALLET_WORKLIST');
 export const getPalletWorklist = makeAsyncActionCreators(GET_PALLET_WORKLIST);
 

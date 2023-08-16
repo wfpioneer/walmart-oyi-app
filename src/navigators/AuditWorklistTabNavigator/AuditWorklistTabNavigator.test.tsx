@@ -2,8 +2,9 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { AuditWorklistTabNavigator } from './AuditWorklistTabNavigator';
+import { AuditWorklistTabNavigator, getWorklistAuditApiToUse } from './AuditWorklistTabNavigator';
 import store from '../../state';
+import { AsyncState } from '../../models/AsyncState';
 
 let navigationProp: NavigationProp<any>;
 const routeProp: RouteProp<any, string> = {
@@ -29,7 +30,6 @@ describe('AuditWorklistTab Navigator', () => {
         />
       </Provider>
     );
-
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
@@ -52,5 +52,33 @@ describe('AuditWorklistTab Navigator', () => {
     );
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  describe('externalized functions', () => {
+    it('tests the get worklist audits api to use function', () => {
+      const auditWorklistApi: AsyncState = {
+        error: null,
+        isWaiting: false,
+        result: null,
+        value: {
+          description: 'Im the v0 endpoint'
+        }
+      };
+
+      const auditWorklistV1Api: AsyncState = {
+        error: null,
+        isWaiting: false,
+        result: null,
+        value: {
+          description: 'Im the v1 endpoint'
+        }
+      };
+
+      const auditsInProgressApi = getWorklistAuditApiToUse(true, auditWorklistApi, auditWorklistV1Api);
+      const auditsNoProgressApi = getWorklistAuditApiToUse(false, auditWorklistApi, auditWorklistV1Api);
+
+      expect(auditsInProgressApi).toStrictEqual(auditWorklistV1Api);
+      expect(auditsNoProgressApi).toStrictEqual(auditWorklistApi);
+    });
   });
 });

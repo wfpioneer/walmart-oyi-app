@@ -18,7 +18,7 @@ export interface StateType {
   showBinningMenu: boolean;
 }
 
-const initialState: StateType = {
+export const initialState: StateType = {
   pallets: [],
   binLocation: null,
   enableMultiplePalletBin: false,
