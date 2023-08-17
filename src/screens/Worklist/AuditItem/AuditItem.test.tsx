@@ -370,11 +370,13 @@ describe('AuditItemScreen', () => {
       result: {
         data: mockItemDetails,
         status: 200
-      }
+      },
+      value: {}
     };
     const failureApi: AsyncState = {
       ...defaultAsyncState,
-      error: 'Internal Server Error'
+      error: 'Internal Server Error',
+      value: {}
     };
 
     it('test onValidateItemNumber', async () => {
@@ -1599,7 +1601,8 @@ describe('AuditItemScreen', () => {
     it('tests that the save audits progress api hook shows activity modal on waiting', () => {
       const waitingApi: AsyncState = {
         ...defaultAsyncState,
-        isWaiting: true
+        isWaiting: true,
+        value: {}
       };
       saveAuditsProgressApiHook(
         waitingApi,
