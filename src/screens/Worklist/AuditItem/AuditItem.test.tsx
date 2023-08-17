@@ -1572,7 +1572,11 @@ describe('AuditItemScreen', () => {
         mockModalIsWaitingState[1]
       );
 
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({ type: 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY' })
+      );
       expect(mockModalIsWaitingState[1]).toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
     });
@@ -1586,7 +1590,8 @@ describe('AuditItemScreen', () => {
         mockModalIsWaitingState[1]
       );
 
-      expect(mockDispatch).toHaveBeenCalledTimes(1);
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'MODAL/HIDE_ACTIVITY' });
       expect(mockModalIsWaitingState[1]).not.toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
     });

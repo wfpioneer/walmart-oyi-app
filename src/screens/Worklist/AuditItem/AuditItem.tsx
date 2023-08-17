@@ -53,6 +53,7 @@ import {
   GET_LOCATIONS_FOR_ITEM,
   GET_LOCATIONS_FOR_ITEM_V1,
   NO_ACTION,
+  SAVE_AUDITS_PROGRESS,
   UPDATE_APPROVAL_LIST,
   UPDATE_MULTI_PALLET_UPC_QTY,
   UPDATE_OH_QTY,
@@ -783,7 +784,7 @@ export const saveAuditsProgressApiHook = (
   reserveLocations: ItemPalletInfo[],
   setModalIsWaiting: UseStateType<boolean>[1]
 ) => {
-  if (navigation.isFocused()) {
+  if (navigation.isFocused() && saveAuditsProgressApi.value) {
     if (!saveAuditsProgressApi.isWaiting) {
       if (saveAuditsProgressApi.result) {
         Toast.show({
@@ -804,6 +805,7 @@ export const saveAuditsProgressApiHook = (
           visibilityTime: SNACKBAR_TIMEOUT
         });
       }
+      dispatch({ type: SAVE_AUDITS_PROGRESS.RESET });
     } else {
       dispatch(showActivityModal());
     }
@@ -1241,7 +1243,7 @@ export const disabledContinue = (
 export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] => {
   const saveableLocations: SaveLocation[] = [];
   floorLocations.forEach(location => {
-    if (typeof location.newQty === 'number' && typeof location.qty === 'number' && location.newQty !== location.qty) {
+    if (typeof location.newQty === 'number' && location.newQty !== location.qty) {
       saveableLocations.push({ name: location.locationName, qty: location.newQty });
     }
   });
