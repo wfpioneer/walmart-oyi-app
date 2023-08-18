@@ -54,6 +54,7 @@ import {
   GET_LOCATIONS_FOR_ITEM,
   GET_LOCATIONS_FOR_ITEM_V1,
   NO_ACTION,
+  SAVE_AUDITS_PROGRESS,
   UPDATE_APPROVAL_LIST,
   UPDATE_MULTI_PALLET_UPC_QTY,
   UPDATE_OH_QTY,
@@ -70,6 +71,7 @@ import {
   getLocationsForItem,
   getLocationsForItemV1,
   noAction,
+  saveAuditLocations,
   updateApprovalList,
   updateMultiPalletUPCQty,
   updateOHQty,
@@ -110,8 +112,10 @@ import {
   approvalStatus
 } from '../../../models/ApprovalListItem';
 import CalculatorModal from '../../../components/CustomCalculatorModal/CalculatorModal';
-import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
+import { UpdateMultiPalletsPallet } from '../../../services/PalletManagement.service';
 import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
+import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
+import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -119,6 +123,7 @@ export interface AuditItemScreenProps {
   getItemDetailsApi: AsyncState;
   getItemLocationsApi: AsyncState;
   getItemLocationsV1Api: AsyncState;
+  saveAuditsProgressApi: AsyncState;
   getItemPalletsApi: AsyncState;
   deleteFloorLocationApi: AsyncState;
   updateOHQtyApi: AsyncState;
@@ -755,7 +760,7 @@ export const renderpalletQtyUpdateModal = (
 };
 
 export const getMultiPalletList = (reserveLocations: ItemPalletInfo[]) => {
-  const newPalletList: UpdateMultiPalletUPCQtyRequest['PalletList'] = reserveLocations.map(item => (
+  const newPalletList: UpdateMultiPalletsPallet[] = reserveLocations.map(item => (
     {
       palletId: item.palletId,
       expirationDate: '', // This is fine as it does not update the expiration date on the pallet
@@ -873,37 +878,78 @@ export const updateOHQtyApiHook = (
   }
 };
 
+export const saveAuditsProgressApiHook = (
+  saveAuditsProgressApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  reserveLocations: ItemPalletInfo[],
+  setModalIsWaiting: UseStateType<boolean>[1]
+) => {
+  if (navigation.isFocused() && saveAuditsProgressApi.value) {
+    if (!saveAuditsProgressApi.isWaiting) {
+      if (saveAuditsProgressApi.result) {
+        Toast.show({
+          type: 'success',
+          position: 'bottom',
+          text1: strings('AUDITS.LOCATIONS_SAVED')
+        });
+        dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
+        setModalIsWaiting(true);
+      }
+      if (saveAuditsProgressApi.error) {
+        dispatch(hideActivityModal());
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('AUDITS.LOCATION_SAVE_FAIL'),
+          text2: strings('GENERICS.TRY_AGAIN'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+      }
+      dispatch({ type: SAVE_AUDITS_PROGRESS.RESET });
+    } else {
+      dispatch(showActivityModal());
+    }
+  }
+};
+
 export const updateMultiPalletUPCQtyApiHook = (
   updateMultiPalletUPCQtyApi: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   itemNbr: number,
-  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
+  modalIsWaitingState: UseStateType<boolean>
 ) => {
   if (navigation.isFocused()) {
-    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.result) {
+    if (!updateMultiPalletUPCQtyApi.isWaiting) {
+      const [modalIsWaiting, setModalIsWaiting] = modalIsWaitingState;
+      if (modalIsWaiting) {
+        dispatch(hideActivityModal());
+      }
       setModalIsWaiting(false);
-      Toast.show({
-        type: 'success',
-        position: 'bottom',
-        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
-        visibilityTime: SNACKBAR_TIMEOUT
-      });
 
-      dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
-      setShowOnHandsConfirmationModal(false);
-      dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
-      navigation.goBack();
-    }
-    if (!updateMultiPalletUPCQtyApi.isWaiting && updateMultiPalletUPCQtyApi.error) {
-      setModalIsWaiting(false);
-      Toast.show({
-        type: 'error',
-        position: 'bottom',
-        text1: strings('PALLET.SAVE_PALLET_FAILURE'),
-        visibilityTime: SNACKBAR_TIMEOUT
-      });
+      if (updateMultiPalletUPCQtyApi.result) {
+        Toast.show({
+          type: 'success',
+          position: 'bottom',
+          text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+        dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+        setShowOnHandsConfirmationModal(false);
+        dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
+        navigation.goBack();
+      }
+
+      if (updateMultiPalletUPCQtyApi.error) {
+        Toast.show({
+          type: 'error',
+          position: 'bottom',
+          text1: strings('PALLET.SAVE_PALLET_FAILURE'),
+          visibilityTime: SNACKBAR_TIMEOUT
+        });
+      }
     }
   }
 };
@@ -1284,6 +1330,7 @@ export const renderCalculatorModal = (
     />
   );
 };
+
 export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
@@ -1293,6 +1340,17 @@ export const disabledContinue = (
   || reserveLocations.some(
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
   );
+
+export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] => {
+  const saveableLocations: SaveLocation[] = [];
+  floorLocations.forEach(location => {
+    if (typeof location.newQty === 'number' && location.newQty !== location.qty) {
+      saveableLocations.push({ name: location.locationName, qty: location.newQty });
+    }
+  });
+
+  return saveableLocations;
+};
 
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
   const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => {
@@ -1314,6 +1372,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     isManualScanEnabled,
     getItemLocationsApi,
     getItemLocationsV1Api,
+    saveAuditsProgressApi,
     getItemDetailsApi,
     deleteFloorLocationApi,
     updateOHQtyApi,
@@ -1454,6 +1513,12 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     [getItemPalletsApi]
   );
 
+  // Save Audits Progress api
+  useEffectHook(
+    () => saveAuditsProgressApiHook(saveAuditsProgressApi, dispatch, navigation, reserveLocations, setModalIsWaiting),
+    [saveAuditsProgressApi, reserveLocations]
+  );
+
   // Complete Item API
   useEffectHook(
     () => completeItemApiHook(completeItemApi, dispatch, navigation, reserveLocations, hasNewQty),
@@ -1526,7 +1591,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     navigation,
     setShowOnHandsConfirmationModal,
     itemDetails?.itemNbr || 0,
-    setModalIsWaiting
+    modalIsWaitingState
   ), [updateMultiPalletUPCQtyApi]);
 
   if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
@@ -1874,17 +1939,21 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.footer}>
-        <AuditScreenFooter
-          onContinueClick={handleContinueAction}
-          disabledContinue={disabledContinue(
-            floorLocations,
-            reserveLocations,
-            userConfig.scanRequired,
-            getItemDetailsApi.isWaiting
-          )}
-        />
-      </View>
+      {userConfig.enableAuditSave ? (
+        <View style={styles.footer}>
+          <AuditScreenFooter
+            onContinueClick={handleContinueAction}
+            disabledContinue={disabledContinue(
+              floorLocations,
+              reserveLocations,
+              userConfig.scanRequired,
+              getItemDetailsApi.isWaiting
+            )}
+            onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
+            showSaveButton={userConfig.enableAuditsInProgress}
+          />
+        </View>
+      ) : null}
     </>
   );
 };
@@ -1915,6 +1984,7 @@ const AuditItem = (): JSX.Element => {
     : useTypedSelector(state => state.async.updateOHQty);
   const getItemLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
   const getItemLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
+  const saveAuditsProgressApi = useTypedSelector(state => state.async.saveAuditsProgress);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
@@ -1959,6 +2029,7 @@ const AuditItem = (): JSX.Element => {
       deleteFloorLocationApi={deleteFloorLocationApi}
       getItemLocationsApi={getItemLocationsApi}
       getItemLocationsV1Api={getItemLocationsV1Api}
+      saveAuditsProgressApi={saveAuditsProgressApi}
       updateOHQtyApi={updateOHQtyApi}
       completeItemApi={completeItemApi}
       getItemApprovalApi={getItemApprovalApi}

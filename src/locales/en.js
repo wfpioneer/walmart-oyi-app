@@ -562,7 +562,7 @@ export default {
     IN_PROGRESS: 'In Progress',
     CURRENT_TOTAL: 'Current Total',
     LOCATIONS_SAVED: 'Locations Saved',
-    LOCATIONS_SAVE_FAIL: 'Unable to save locations'
+    LOCATIONS_SAVE_FAIL: 'Unable to Save Locations'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',

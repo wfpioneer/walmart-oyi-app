@@ -18,7 +18,7 @@ export default class SaveAuditsProgressService {
   public static saveAuditLocations(payload: { itemNbr: number, locations: SaveLocation[] }) {
     const urls = getEnvironment();
     return Request.put(
-      `${urls.orchestrationURL}/worklist/audits/locations`,
+      `${urls.worklistURL}/worklist/audits/locations`,
       { ...payload }
     );
   }

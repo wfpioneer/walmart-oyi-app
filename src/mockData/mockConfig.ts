@@ -46,5 +46,5 @@ export const mockConfig: Configurations = {
   peteGetLocations: false,
   showQuantityStocked: false,
   enableAuditsInProgress: false,
-  auditSave: false
+  enableAuditSave: false
 };

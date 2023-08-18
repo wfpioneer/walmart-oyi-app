@@ -38,11 +38,13 @@ export interface GetPalletConfigResponse {
 
 export interface UpdateMultiPalletUPCQtyRequest {
   itemNbr?: number;
-  PalletList: {
-    palletId: number;
-    expirationDate: string;
-    upcs: Pick<PalletItem, 'quantity' | 'upcNbr'>[];
-  }[];
+  PalletList: UpdateMultiPalletsPallet[];
+}
+
+export interface UpdateMultiPalletsPallet {
+  palletId: number;
+  expirationDate: string;
+  upcs: Pick<PalletItem, 'quantity' | 'upcNbr'>[];
 }
 
 export default class PalletManagementService {
