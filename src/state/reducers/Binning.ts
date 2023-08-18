@@ -16,7 +16,7 @@ export interface StateType {
   enableMultiplePalletBin: boolean;
 }
 
-const initialState: StateType = {
+export const initialState: StateType = {
   pallets: [],
   binLocation: null,
   enableMultiplePalletBin: false

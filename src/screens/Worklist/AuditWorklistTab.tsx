@@ -314,8 +314,9 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
-  const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
   const { configs } = useTypedSelector(state => state.User);
+  const { isWaiting, error } = useTypedSelector(state => (
+    configs.enableAuditsInProgress ? state.async.getWorklistAuditsV1 : state.async.getWorklistAudits));
   const items = getItemsForTab(auditWorklistItems, completionLevel, configs);
   const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
