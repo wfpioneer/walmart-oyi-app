@@ -2,11 +2,13 @@ import React, {
   EffectCallback,
   RefObject,
   createRef,
+  useCallback,
   useEffect,
   useState
 } from 'react';
 import {
   ActivityIndicator,
+  BackHandler,
   EmitterSubscription,
   ScrollView,
   Text,
@@ -16,6 +18,7 @@ import {
 import {
   NavigationProp,
   RouteProp,
+  useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -99,8 +102,8 @@ import {
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
-import Button from '../../../components/buttons/Button';
-import { UseStateType } from '../../../models/Generics.d';
+import Button, { ButtonType } from '../../../components/buttons/Button';
+import { BeforeRemoveEvent, UseStateType } from '../../../models/Generics.d';
 import {
   ApprovalListItem,
   approvalAction,
@@ -175,8 +178,56 @@ export interface AuditItemScreenProps {
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   updateMultiPalletUPCQtyApi: AsyncState;
-  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1;
+  useFocusEffectHook: typeof useFocusEffect;
+  useCallbackHook: typeof useCallback;
+  displayWarningModalState: UseStateType<boolean>
 }
+
+export const navigationRemoveListenerHook = (
+  e: BeforeRemoveEvent,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  enableAuditsInProgress: boolean,
+  locationsToSaveExist: boolean
+) => {
+  if (!enableAuditsInProgress && locationsToSaveExist) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  }
+};
+
+export const backConfirmedHook = (
+  displayWarningModal: boolean,
+  locationsToSaveExist: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  navigation: NavigationProp<any>
+) => {
+  if (displayWarningModal && !locationsToSaveExist) {
+    setDisplayWarningModal(false);
+    navigation.goBack();
+  }
+};
+
+export const onValidateHardwareBackPress = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  locationsToSaveExist: boolean
+) => {
+  if (locationsToSaveExist) {
+    setDisplayWarningModal(true);
+    return true;
+  }
+  return false;
+};
+
+export const backConfirmed = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  setDisplayWarningModal(false);
+  dispatch(clearAuditScreenData());
+  navigation.goBack();
+};
 
 export const getItemQuantity = (itemQty: number, pendingQty: number) => {
   if (pendingQty >= 0) {
@@ -1183,6 +1234,44 @@ export const renderCalculatorModal = (
     />
   );
 };
+
+export const renderUnsavedWarningModal = (
+  displayWarningModal: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => (
+  <CustomModalComponent
+    isVisible={displayWarningModal}
+    onClose={() => setDisplayWarningModal(false)}
+    modalType="Popup"
+  >
+    <>
+      <View>
+        <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
+        <Text style={styles.message}>{strings('GENERICS.UNSAVED_WARNING_MSG')}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.CANCEL')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          type={ButtonType.SOLID_WHITE}
+          onPress={() => setDisplayWarningModal(false)}
+          testID="cancelBack"
+        />
+        <Button
+          style={styles.buttonAlign}
+          title={strings('GENERICS.OK')}
+          type={ButtonType.PRIMARY}
+          onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
+          testID="confirmBack"
+        />
+      </View>
+    </>
+  </CustomModalComponent>
+);
+
 export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
@@ -1253,7 +1342,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     countryCode,
     updateMultiPalletUPCQtyApi,
     getItemPalletsDispatch,
-    modalIsWaitingState
+    modalIsWaitingState,
+    displayWarningModalState,
+    useCallbackHook,
+    useFocusEffectHook
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1261,6 +1353,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const [showCalcModal, setShowCalcModal] = showCalcModalState;
   const [location, setLocation] = locationListState;
   const [modalIsWaiting, setModalIsWaiting] = modalIsWaitingState;
+  const [displayWarningModal, setDisplayWarningModal] = displayWarningModalState;
 
   const totalOHQty = calculateTotalOHQty(
     floorLocations,
@@ -1410,6 +1503,35 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     itemDetails?.itemNbr || 0,
     setModalIsWaiting
   ), [updateMultiPalletUPCQtyApi]);
+
+  // validation on app back press
+  useEffectHook(() => navigation.addListener('beforeRemove', e => {
+    navigationRemoveListenerHook(
+      e,
+      setDisplayWarningModal,
+      userConfig.enableAuditsInProgress,
+      !disabledContinue(floorLocations, reserveLocations, userConfig.scanRequired, getItemDetailsApi.isWaiting)
+    );
+  }), [navigation, floorLocations, reserveLocations, getItemDetailsApi]);
+
+  useEffectHook(() => backConfirmedHook(
+    displayWarningModal,
+    !disabledContinue(floorLocations, reserveLocations, userConfig.scanRequired, getItemDetailsApi.isWaiting),
+    setDisplayWarningModal,
+    navigation
+  ), [floorLocations, reserveLocations, displayWarningModal, getItemDetailsApi]);
+
+  // validation on Hardware backPress
+  useFocusEffectHook(
+    useCallbackHook(() => {
+      const onHardwareBackPress = () => onValidateHardwareBackPress(
+        setDisplayWarningModal,
+        !disabledContinue(floorLocations, reserveLocations, userConfig.scanRequired, getItemDetailsApi.isWaiting)
+      );
+      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+    }, [floorLocations, reserveLocations, getItemDetailsApi])
+  );
 
   if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
     setModalIsWaiting(true);
@@ -1807,6 +1929,8 @@ const AuditItem = (): JSX.Element => {
     palletId: '-1'
   });
 
+  const displayWarningModalState = useState(false);
+
   const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <AuditItemScreen
@@ -1858,6 +1982,9 @@ const AuditItem = (): JSX.Element => {
       locationListState={locationListState}
       countryCode={countryCode}
       updateMultiPalletUPCQtyApi={updateMultiPalletUPCQtyApi}
+      displayWarningModalState={displayWarningModalState}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
     />
   );
 };
