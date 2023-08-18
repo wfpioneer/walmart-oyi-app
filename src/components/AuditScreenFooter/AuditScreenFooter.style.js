@@ -21,6 +21,7 @@ export default StyleSheet.create({
     fontSize: 16
   },
   continueBtn: {
-    flex: 1
+    flex: 1,
+    marginHorizontal: 3
   }
 });

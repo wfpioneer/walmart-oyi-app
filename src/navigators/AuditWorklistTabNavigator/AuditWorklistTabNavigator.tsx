@@ -20,6 +20,7 @@ import { setWorklistItems } from '../../state/actions/AuditWorklist';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { GET_WORKLIST_AUDIT, GET_WORKLIST_AUDIT_V1 } from '../../state/actions/asyncAPI';
 
 interface AuditWorklistTabNavigatorProps {
   dispatch: Dispatch<any>;
@@ -43,6 +44,8 @@ const getWorklistAuditApiHook = (
   if (navigation.isFocused()) {
     if (!getWorklistAuditApi.isWaiting && getWorklistAuditApi.result && getWorklistAuditApi.result.data) {
       dispatch(setWorklistItems(getWorklistAuditApi.result.data as WorklistItemI[]));
+      dispatch({ type: GET_WORKLIST_AUDIT.RESET });
+      dispatch({ type: GET_WORKLIST_AUDIT_V1.RESET });
     }
   }
 };

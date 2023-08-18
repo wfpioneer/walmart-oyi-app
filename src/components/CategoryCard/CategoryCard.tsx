@@ -3,7 +3,7 @@ import {
   FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import styles from './CategoryCard.style';
+import styles, { ITEM_CARD_HEIGHT, ITEM_CARD_SEPARATOR_HEIGHT } from './CategoryCard.style';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
@@ -54,6 +54,7 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             showItemImage={showItemImage}
             countryCode={countryCode}
             status={enableAuditsInProgress ? item.worklistStatus : undefined}
+            totalQty={undefined}
           />
         </View>
       </TouchableOpacity>
@@ -86,6 +87,11 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
           data={listOfItems}
           renderItem={renderItem}
           keyExtractor={(item: WorklistItemI, index: number) => item.itemNbr + index.toString()}
+          getItemLayout={(data, index) => ({
+            index,
+            length: ITEM_CARD_HEIGHT + ITEM_CARD_SEPARATOR_HEIGHT,
+            offset: (ITEM_CARD_HEIGHT + ITEM_CARD_SEPARATOR_HEIGHT) * index
+          })}
         />
       )}
     </View>
