@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unsaved warning modal render tests does not render the warning modal 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={false}
+/>
+`;
+
+exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#00000099",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "#ffffffff",
+            "borderRadius": 7.5,
+            "justifyContent": "space-between",
+            "paddingVertical": 15,
+            "width": "75%",
+          },
+          Object {
+            "minHeight": undefined,
+          },
+        ]
+      }
+    >
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          yes
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          no
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "alignSelf": "center",
+                "margin": 10,
+                "width": "40%",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ffffffff",
+                  "borderColor": "#0071e9",
+                  "borderRadius": 5,
+                  "borderWidth": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="cancelBack"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#0071e9",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.CANCEL" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              Object {
+                "alignSelf": "center",
+                "margin": 10,
+                "width": "40%",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="confirmBack"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.OK" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;

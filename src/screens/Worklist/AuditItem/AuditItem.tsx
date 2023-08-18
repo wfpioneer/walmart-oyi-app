@@ -104,7 +104,7 @@ import {
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
-import Button, { ButtonType } from '../../../components/buttons/Button';
+import Button from '../../../components/buttons/Button';
 import { BeforeRemoveEvent, UseStateType } from '../../../models/Generics.d';
 import {
   ApprovalListItem,
@@ -117,6 +117,8 @@ import { UpdateMultiPalletsPallet } from '../../../services/PalletManagement.ser
 import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
+import { mockLocations } from '../../../mockData/mockPickList';
+import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -1285,43 +1287,6 @@ export const renderCalculatorModal = (
   );
 };
 
-export const renderUnsavedWarningModal = (
-  displayWarningModal: boolean,
-  setDisplayWarningModal: UseStateType<boolean>[1],
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
-) => (
-  <CustomModalComponent
-    isVisible={displayWarningModal}
-    onClose={() => setDisplayWarningModal(false)}
-    modalType="Popup"
-  >
-    <>
-      <View>
-        <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
-        <Text style={styles.message}>{strings('GENERICS.UNSAVED_WARNING_MSG')}</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.buttonAlign}
-          title={strings('GENERICS.CANCEL')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          type={ButtonType.SOLID_WHITE}
-          onPress={() => setDisplayWarningModal(false)}
-          testID="cancelBack"
-        />
-        <Button
-          style={styles.buttonAlign}
-          title={strings('GENERICS.OK')}
-          type={ButtonType.PRIMARY}
-          onPress={() => backConfirmed(setDisplayWarningModal, dispatch, navigation)}
-          testID="confirmBack"
-        />
-      </View>
-    </>
-  </CustomModalComponent>
-);
-
 export const disabledContinue = (
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
@@ -1855,7 +1820,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         userConfig.inProgress
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
-      {renderUnsavedWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
+      {renderUnsavedWarningModal(
+        displayWarningModal,
+        setDisplayWarningModal,
+        strings('GENERICS.WARNING_LABEL'),
+        strings('GENERICS.UNSAVED_WARNING_MSG'),
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation)
+      )}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
       )}

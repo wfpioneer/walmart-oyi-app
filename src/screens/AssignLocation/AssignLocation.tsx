@@ -42,15 +42,14 @@ import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
 import { PickingState } from '../../state/reducers/Picking';
 import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScreen';
 import { Configurations } from '../../models/User';
-import { Pallet } from '../../models/PalletManagementTypes';
-import { setupPallet } from '../../state/actions/PalletManagement';
 import { UseStateType } from '../../models/Generics.d';
 import {
+  backConfirmed,
   backConfirmedHook,
   navigationRemoveListenerHook,
-  onBinningItemPress,
-  renderWarningModal
+  onBinningItemPress
 } from '../Binning/Binning';
+import { renderUnsavedWarningModal } from '../../components/UnsavedWarningModal/UnsavedWarningModal';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -426,7 +425,13 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
 
   return (
     <View style={styles.container}>
-      {renderWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
+      {renderUnsavedWarningModal(
+        displayWarningModal,
+        setDisplayWarningModal,
+        strings('BINNING.WARNING_LABEL'),
+        strings('BINNING.WARNING_DESCRIPTION'),
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation)
+      )}
       {isManualScanEnabled && (
         <ManualScanComponent
           placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}

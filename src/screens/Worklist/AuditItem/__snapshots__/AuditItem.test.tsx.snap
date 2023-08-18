@@ -2260,7 +2260,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
             }
@@ -2272,11 +2272,11 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       <View
         style={
           Object {
-            "alignContent": "space-around",
+            "alignContent": "center",
+            "elevation": 10,
             "flexDirection": "row",
+            "height": 80,
             "justifyContent": "space-evenly",
-            "paddingTop": 10,
-            "width": "100%",
           }
         }
       >
@@ -2800,7 +2800,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
             }
@@ -2812,11 +2812,11 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       <View
         style={
           Object {
-            "alignContent": "space-around",
+            "alignContent": "center",
+            "elevation": 10,
             "flexDirection": "row",
+            "height": 80,
             "justifyContent": "space-evenly",
-            "paddingTop": 10,
-            "width": "100%",
           }
         }
       >
@@ -3400,7 +3400,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
             }
@@ -3412,11 +3412,11 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       <View
         style={
           Object {
-            "alignContent": "space-around",
+            "alignContent": "center",
+            "elevation": 10,
             "flexDirection": "row",
+            "height": 80,
             "justifyContent": "space-evenly",
-            "paddingTop": 10,
-            "width": "100%",
           }
         }
       >
@@ -3948,7 +3948,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
             }
@@ -3960,11 +3960,11 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       <View
         style={
           Object {
-            "alignContent": "space-around",
+            "alignContent": "center",
+            "elevation": 10,
             "flexDirection": "row",
+            "height": 80,
             "justifyContent": "space-evenly",
-            "paddingTop": 10,
-            "width": "100%",
           }
         }
       >
@@ -4496,7 +4496,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         <Text
           style={
             Object {
-              "fontSize": 18,
+              "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
             }
@@ -4508,11 +4508,11 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       <View
         style={
           Object {
-            "alignContent": "space-around",
+            "alignContent": "center",
+            "elevation": 10,
             "flexDirection": "row",
+            "height": 80,
             "justifyContent": "space-evenly",
-            "paddingTop": 10,
-            "width": "100%",
           }
         }
       >
