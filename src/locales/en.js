@@ -560,7 +560,9 @@ export default {
     ITEMS: 'Items',
     CUSTOM_ITEMS: 'Items',
     IN_PROGRESS: 'In Progress',
-    CURRENT_TOTAL: 'Current Total'
+    CURRENT_TOTAL: 'Current Total',
+    LOCATIONS_SAVED: 'Locations saved',
+    LOCATIONS_SAVE_FAIL: 'Unable to save locations'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',
