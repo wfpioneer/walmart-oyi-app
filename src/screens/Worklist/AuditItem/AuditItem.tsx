@@ -192,12 +192,14 @@ export interface AuditItemScreenProps {
 export const navigationRemoveListenerHook = (
   e: BeforeRemoveEvent,
   setDisplayWarningModal: UseStateType<boolean>[1],
-  enableAuditsInProgress: boolean,
-  locationsToSaveExist: boolean
+  locationsToSaveExist: boolean,
+  dispatch: Dispatch<any>
 ) => {
-  if (!enableAuditsInProgress && locationsToSaveExist) {
+  if (locationsToSaveExist) {
     setDisplayWarningModal(true);
     e.preventDefault();
+  } else {
+    dispatch(clearAuditScreenData());
   }
 };
 
@@ -205,10 +207,12 @@ export const backConfirmedHook = (
   displayWarningModal: boolean,
   locationsToSaveExist: boolean,
   setDisplayWarningModal: UseStateType<boolean>[1],
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
 ) => {
   if (displayWarningModal && !locationsToSaveExist) {
     setDisplayWarningModal(false);
+    dispatch(clearAuditScreenData());
     navigation.goBack();
   }
 };
@@ -1339,6 +1343,9 @@ export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] =
   return saveableLocations;
 };
 
+export const getReservesToSaveExist = (reserveLocations: ItemPalletInfo[]) => reserveLocations
+  .some(loc => typeof loc.newQty === 'number' && loc.newQty !== loc.quantity);
+
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
   const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => {
     if (a.locationName > b.locationName) return 1;
@@ -1541,14 +1548,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     [deletePalletApi]
   );
 
-  // Navigation Listener
-  useEffectHook(() => {
-    // Clear Audit Item Screen redux state before removing the component
-    navigation.addListener('beforeRemove', () => {
-      dispatch(clearAuditScreenData());
-    });
-  }, []);
-
   // Update OH quantity API
   useEffectHook(() => updateOHQtyApiHook(
     updateOHQtyApi,
@@ -1557,6 +1556,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reserveLocations,
     setModalIsWaiting
   ), [updateOHQtyApi]);
+
+  const doSaveablesExist = !!getLocationsToSave(floorLocations).length || getReservesToSaveExist(reserveLocations);
 
   // Update Multiple Pallet's UPC Qty API
   useEffectHook(() => updateMultiPalletUPCQtyApiHook(
@@ -1573,17 +1574,18 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     navigationRemoveListenerHook(
       e,
       setDisplayWarningModal,
-      userConfig.enableAuditsInProgress,
-      !disabledContinue(floorLocations, reserveLocations, userConfig.scanRequired, getItemDetailsApi.isWaiting)
+      doSaveablesExist,
+      dispatch
     );
-  }), [navigation, floorLocations, reserveLocations, getItemDetailsApi]);
+  }), [navigation, doSaveablesExist]);
 
   useEffectHook(() => backConfirmedHook(
     displayWarningModal,
-    !disabledContinue(floorLocations, reserveLocations, userConfig.scanRequired, getItemDetailsApi.isWaiting),
+    doSaveablesExist,
     setDisplayWarningModal,
-    navigation
-  ), [floorLocations, reserveLocations, displayWarningModal, getItemDetailsApi]);
+    navigation,
+    dispatch
+  ), [doSaveablesExist, displayWarningModal]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
@@ -1853,6 +1855,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         userConfig.inProgress
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
+      {renderUnsavedWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
       )}
