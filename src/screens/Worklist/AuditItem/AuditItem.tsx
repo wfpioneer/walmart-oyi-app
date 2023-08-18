@@ -227,7 +227,8 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
     trackEventCall,
     validateSessionCall,
     itemNumber,
-    getItemPalletsDispatch
+    getItemPalletsDispatch,
+    userConfig
   } = props;
 
   if (navigation.isFocused()) {
@@ -241,6 +242,12 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
           if (peteGetLocations) {
             dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
             dispatch(getLocationsForItemV1(itemNumber));
+          } else {
+            dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+            dispatch(getLocationsForItem(itemNumber));
+          }
+          if (userConfig.auditSave) {
+            dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
             dispatch(getAuditLocations({ itemNbr: itemNumber }));
           }
         }
@@ -394,15 +401,59 @@ export const getItemLocationsApiHook = (
   itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  existingFloorLocations: Location[]
+  existingFloorLocations: Location[],
+  getAuditLocationsApi: AsyncState,
+  auditSave: boolean
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result && getItemLocationsApi.value === itemNumber) {
+    const getLocsForItemsCheck: boolean = !getItemLocationsApi.isWaiting
+    && getItemLocationsApi.result
+    && getItemLocationsApi.value === itemNumber;
+    if (auditSave) {
+      if (getLocsForItemsCheck
+          && !getAuditLocationsApi.isWaiting
+          && getAuditLocationsApi.result) {
+        if (getAuditLocationsApi.result.status === 200) {
+          const locDetails = getItemLocationsApi.result.data;
+          const { locations }: {
+                locations: {
+                  name: string,
+                  qty: number,
+                  lastModifiedTimeStamp: string
+                }[]
+              } = getAuditLocationsApi.result.data;
+
+          const locationDictionary = new Map<string, number>();
+          locations.forEach(loc => {
+            locationDictionary.set(loc.name, loc.qty);
+          });
+          if (locDetails && locDetails.location) {
+            getUpdatedFloorLocations(locDetails, dispatch, existingFloorLocations, locationDictionary);
+          }
+        }
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+        dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
+      }
+      if (getLocsForItemsCheck && !getAuditLocationsApi.isWaiting && getAuditLocationsApi.error) {
+        const locDetails = getItemLocationsApi.result.data;
+        if (locDetails && locDetails.location) {
+          getUpdatedFloorLocations(locDetails, dispatch, existingFloorLocations, undefined);
+        }
+        Toast.show({
+          type: 'error',
+          text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+        dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
+      }
+    } else if (!auditSave && getLocsForItemsCheck) {
       const locDetails = getItemLocationsApi.result.data;
       if (locDetails && locDetails.location) {
         getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined);
-        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       }
+      dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
     }
   }
 };
@@ -417,11 +468,11 @@ export const getItemLocationsV1ApiHook = (
   auditSave: boolean
 ) => {
   if (navigation.isFocused()) {
-    const getLocsForItemsCheck = !getItemLocationsV1Api.isWaiting
+    const getLocsForItemsV1Check: boolean = !getItemLocationsV1Api.isWaiting
     && getItemLocationsV1Api.result
     && getItemLocationsV1Api.value === itemNumber;
     if (auditSave) {
-      if (getLocsForItemsCheck
+      if (getLocsForItemsV1Check
           && !getAuditLocationsApi.isWaiting
           && getAuditLocationsApi.result) {
         if (getAuditLocationsApi.result.status === 200) {
@@ -440,24 +491,23 @@ export const getItemLocationsV1ApiHook = (
           });
 
           getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, locationDictionary);
-          dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
-          dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
         }
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+        dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       }
-      if (getLocsForItemsCheck && !getAuditLocationsApi.isWaiting && getAuditLocationsApi.error) {
+      if (getLocsForItemsV1Check && !getAuditLocationsApi.isWaiting && getAuditLocationsApi.error) {
         const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
         getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, undefined);
-        dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
-
         Toast.show({
           type: 'error',
           text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
           visibilityTime: SNACKBAR_TIMEOUT,
           position: 'bottom'
         });
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       }
-    } else if (!auditSave && getLocsForItemsCheck) {
+    } else if (!auditSave && getLocsForItemsV1Check) {
       const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
       getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, undefined);
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
@@ -1366,8 +1416,16 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Item Location API
   useEffectHook(
-    () => getItemLocationsApiHook(getItemLocationsApi, itemNumber, dispatch, navigation, floorLocations),
-    [getItemLocationsApi, floorLocations]
+    () => getItemLocationsApiHook(
+      getItemLocationsApi,
+      itemNumber,
+      dispatch,
+      navigation,
+      floorLocations,
+      getAuditLocationsApi,
+      userConfig.auditSave
+    ),
+    [getItemLocationsApi, floorLocations, getAuditLocationsApi]
   );
 
   // Get Item Locations V1 API
@@ -1381,7 +1439,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       getAuditLocationsApi,
       userConfig.auditSave
     ),
-    [getItemLocationsV1Api, floorLocations]
+    [getItemLocationsV1Api, floorLocations, getAuditLocationsApi]
   );
 
   // Get Item Details UPC api

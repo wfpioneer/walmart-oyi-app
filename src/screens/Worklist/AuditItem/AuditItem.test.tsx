@@ -60,6 +60,7 @@ import { mockPalletLocations, mockSortedLocations } from '../../../mockData/getI
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import {
+  GET_AUDIT_LOCATIONS,
   GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1, UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY, UPDATE_OH_QTY_V1
 } from '../../../state/actions/asyncAPI';
 import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
@@ -215,7 +216,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   countryCode: 'CN',
   updateMultiPalletUPCQtyApi: defaultAsyncState,
   getItemPalletsDispatch: jest.fn(),
-  modalIsWaitingState: [false, jest.fn()]
+  modalIsWaitingState: [false, jest.fn()],
+  getAuditLocationsApi: defaultAsyncState
 };
 
 describe('AuditItemScreen', () => {
@@ -464,7 +466,8 @@ describe('AuditItemScreen', () => {
         typeNbr: 8,
         newQty: 0
       }];
-      getUpdatedFloorLocations(newResults, mockDispatch, mockItemDetails?.location?.floor || []);
+      const saveAuditLocMap: Map<string, number> = new Map([['A1-1', 5]]);
+      getUpdatedFloorLocations(newResults, mockDispatch, mockItemDetails?.location?.floor || [], saveAuditLocMap);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -527,9 +530,39 @@ describe('AuditItemScreen', () => {
             }
           }
         }
-      }
-      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
+      };
+      const getSavedLocationSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            locations: [],
+            itemNbr: 1
+          },
+          status: 200
+        }
+      };
+      const getSavedLocationError: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        error: 'Network Error'
+      };
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, false);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, true);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError, true);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
     });
 
     it('Tests get item locations v1 api hook success with correct item number', () => {
@@ -541,9 +574,48 @@ describe('AuditItemScreen', () => {
             salesFloorLocation: []
           }
         }
-      }
-      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
+      };
+      const getSavedLocationSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            locations: [],
+            itemNbr: 1
+          },
+          status: 200
+        }
+      };
+      const getSavedLocationError: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        error: 'Network Error'
+      };
+
+      getItemLocationsV1ApiHook(
+        locationSuccessApi,
+        1,
+        mockDispatch,
+        navigationProp,
+        [],
+        getSavedLocationSuccess,
+        false
+      );
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, true);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError, true);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
     });
 
     it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
@@ -957,7 +1029,7 @@ describe('AuditItemScreen', () => {
         mockSetModalWaiting
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockSetModalWaiting).toHaveBeenCalledWith(false)
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
