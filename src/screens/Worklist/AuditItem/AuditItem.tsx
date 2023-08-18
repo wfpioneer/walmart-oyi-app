@@ -248,7 +248,7 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
           }
           if (userConfig.auditSave) {
             dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
-            dispatch(getAuditLocations({ itemNbr: itemNumber }));
+            dispatch(getAuditLocations({ itemNbr: itemNumber, hours: undefined }));
           }
         }
       })
@@ -1599,6 +1599,22 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }).catch(() => { });
   };
 
+  const handleFloorLocsRetry = () => {
+    validateSession(navigation, route.name).then(() => {
+      if (userConfig.peteGetLocations) {
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+        dispatch(getLocationsForItemV1(itemNumber));
+      } else {
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+        dispatch(getLocationsForItem(itemNumber));
+      }
+      if (userConfig.auditSave) {
+        dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
+        dispatch(getAuditLocations({ itemNbr: itemNumber, hours: undefined }));
+      }
+    }).catch(() => { });
+  };
+
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall(
@@ -1819,9 +1835,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
-              loading={getItemDetailsApi.isWaiting || getItemLocationsApi.isWaiting || getItemLocationsV1Api.isWaiting}
-              error={!!(getItemDetailsApi.error || getItemLocationsApi.error || getItemLocationsV1Api.error)}
-              onRetry={() => {}}
+              loading={
+                getItemLocationsApi.isWaiting
+                || getItemLocationsV1Api.isWaiting
+                || getAuditLocationsApi.isWaiting
+              }
+              error={!!(getItemLocationsApi.error || getItemLocationsV1Api.error)}
+              onRetry={handleFloorLocsRetry}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
               minQty={MIN}
