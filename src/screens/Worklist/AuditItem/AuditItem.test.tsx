@@ -65,7 +65,9 @@ import {
   GET_AUDIT_LOCATIONS,
   GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1, UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY, UPDATE_OH_QTY_V1
 } from '../../../state/actions/asyncAPI';
-import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
+import {
+  getApprovalList, getAuditLocations, getLocationsForItem, getLocationsForItemV1, updateMultiPalletUPCQty
+} from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
 import { setFloorLocations, setReserveLocations, setupScreen } from '../../../state/actions/ItemDetailScreen';
@@ -399,6 +401,18 @@ describe('AuditItemScreen', () => {
         2,
         expectedGetItemDetailsAction
       );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_LOCATIONS_FOR_ITEM.RESET }
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        6,
+        getLocationsForItem(123)
+      );
     });
 
     it('test onValidateItemNumber with get pete locations', async () => {
@@ -418,6 +432,51 @@ describe('AuditItemScreen', () => {
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         2,
         expectedGetItemDetailsAction
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_LOCATIONS_FOR_ITEM_V1.RESET }
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        6,
+        getLocationsForItemV1(123)
+      );
+    });
+
+    it('test onValidateItemNumber with Audit Save Enabled', async () => {
+      const expectedGetItemDetailsAction = {
+        payload: {
+          id: 123
+        },
+        type: 'SAGA/GET_ITEM_DETAILS_V4'
+      };
+      await onValidateItemNumber({
+        ...mockAuditItemScreenProps,
+        itemNumber: 123,
+        userConfig: { ...mockConfig, enableAuditSave: true }
+      }, true);
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
+        type: 'API/GET_ITEM_DETAILS_V4/RESET'
+      });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        2,
+        expectedGetItemDetailsAction
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        7,
+        { type: GET_AUDIT_LOCATIONS.RESET }
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        8,
+        getAuditLocations({ itemNbr: 123, hours: undefined })
       );
     });
 
@@ -477,6 +536,24 @@ describe('AuditItemScreen', () => {
       }];
       const saveAuditLocMap: Map<string, number> = new Map([['A1-1', 5]]);
       getUpdatedFloorLocations(newResults, mockDispatch, mockItemDetails?.location?.floor || [], saveAuditLocMap);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('tests getFloorLocationsResult with no existing locations', () => {
+      const newResults: Location[] = [...mockItemDetails?.location?.floor || [], {
+        zoneId: 0,
+        aisleId: 1,
+        sectionId: 1,
+        zoneName: 'A',
+        aisleName: '1',
+        sectionName: '1',
+        locationName: 'A1-1',
+        type: 'Sales Floor',
+        typeNbr: 8,
+        newQty: 0
+      }];
+      const saveAuditLocMap: Map<string, number> = new Map([['A1-1', 5]]);
+      getUpdatedFloorLocations(newResults, mockDispatch, [], saveAuditLocMap);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -612,11 +689,11 @@ describe('AuditItemScreen', () => {
       );
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
 
-      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, true);
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, true);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
 
-      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError, true);
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError, true);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
         text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
