@@ -71,8 +71,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    borderColor: COLOR.GREY_200,
-    borderWidth: 1,
     width: '75%',
     marginTop: 2
   },

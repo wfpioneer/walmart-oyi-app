@@ -167,8 +167,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           style={
             Object {
               "alignItems": "center",
-              "borderColor": "#eeeeee",
-              "borderWidth": 1,
               "flexDirection": "row",
               "justifyContent": "center",
               "marginTop": 2,
@@ -386,8 +384,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           style={
             Object {
               "alignItems": "center",
-              "borderColor": "#eeeeee",
-              "borderWidth": 1,
               "flexDirection": "row",
               "justifyContent": "center",
               "marginTop": 2,
@@ -591,8 +587,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           style={
             Object {
               "alignItems": "center",
-              "borderColor": "#eeeeee",
-              "borderWidth": 1,
               "flexDirection": "row",
               "justifyContent": "center",
               "marginTop": 2,
@@ -844,8 +838,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               style={
                 Object {
                   "alignItems": "center",
-                  "borderColor": "#eeeeee",
-                  "borderWidth": 1,
                   "flexDirection": "row",
                   "justifyContent": "center",
                   "marginTop": 2,
@@ -1078,8 +1070,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               style={
                 Object {
                   "alignItems": "center",
-                  "borderColor": "#eeeeee",
-                  "borderWidth": 1,
                   "flexDirection": "row",
                   "justifyContent": "center",
                   "marginTop": 2,
@@ -1345,8 +1335,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               style={
                 Object {
                   "alignItems": "center",
-                  "borderColor": "#eeeeee",
-                  "borderWidth": 1,
                   "flexDirection": "row",
                   "justifyContent": "center",
                   "marginTop": 2,
@@ -1424,8 +1412,6 @@ exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 
   style={
     Object {
       "alignItems": "center",
-      "borderColor": "#eeeeee",
-      "borderWidth": 1,
       "flexDirection": "row",
       "justifyContent": "center",
       "marginTop": 2,

@@ -398,7 +398,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       const onHardwareBackPress = () => onValidateHardwareBackPress(setDisplayWarningModal, scannedPallets);
       BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
       return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
-    }, [])
+    }, [scannedPallets])
   );
 
   useEffectHook(() => scannedEventHook(
