@@ -11,7 +11,7 @@ export default class SaveAuditsProgressService {
     const urls = getEnvironment();
     const timeLimitParams = payload.hours ? `?timelimit=${payload.hours}` : '';
     return Request.get(
-      `${urls.orchestrationURL}/worklist/audits/${payload.itemNbr}${timeLimitParams}`
+      `${urls.worklistURL}/worklist/audits/locations/${payload.itemNbr}${timeLimitParams}`
     );
   }
 

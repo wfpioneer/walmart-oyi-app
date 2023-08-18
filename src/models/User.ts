@@ -122,6 +122,7 @@ export interface Configurations {
   peteGetLocations: boolean;
   showQuantityStocked: boolean;
   enableAuditsInProgress: boolean;
+  auditSave: boolean;
 }
 
 export interface area {

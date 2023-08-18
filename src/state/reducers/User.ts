@@ -193,7 +193,8 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           overridePalletPerishables: action.payload.overridePltPerish || false,
           peteGetLocations: action.payload.peteGetLocations || false,
           showQuantityStocked: action.payload.showQtyStocked || false,
-          enableAuditsInProgress: action.payload.enableAuditsIP || false
+          enableAuditsInProgress: action.payload.enableAuditsIP || false,
+          auditSave: action.payload.auditSave || false
         }
       };
     default:
