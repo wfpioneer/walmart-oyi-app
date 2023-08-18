@@ -48,6 +48,7 @@ import {
   CLEAR_PALLET,
   DELETE_LOCATION,
   GET_APPROVAL_LIST,
+  GET_AUDIT_LOCATIONS,
   GET_ITEM_DETAILS_V4,
   GET_ITEM_PALLETS,
   GET_LOCATIONS_FOR_ITEM,
@@ -62,6 +63,7 @@ import {
   clearPallet,
   deleteLocation,
   getApprovalList,
+  getAuditLocations,
   getItemDetailsV4,
   getItemPallets,
   getItemPalletsV1,
@@ -175,7 +177,8 @@ export interface AuditItemScreenProps {
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   updateMultiPalletUPCQtyApi: AsyncState;
-  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1,
+  getAuditLocationsApi: AsyncState;
 }
 
 export const getItemQuantity = (itemQty: number, pendingQty: number) => {
@@ -238,6 +241,7 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
           if (peteGetLocations) {
             dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
             dispatch(getLocationsForItemV1(itemNumber));
+            dispatch(getAuditLocations({ itemNbr: itemNumber }));
           }
         }
       })
@@ -336,7 +340,8 @@ export const calculatePalletIncreaseQty = (
 export const getUpdatedFloorLocations = (
   floorResultsData: Location[] | undefined,
   dispatch: Dispatch<any>,
-  existingFloorLocations: Location[]
+  existingFloorLocations: Location[],
+  savedFloorLocation: Map<string, number> | undefined
 ) => {
   let updatedFloorLocations: Location[] = [];
   if (floorResultsData && floorResultsData.length > 0) {
@@ -345,11 +350,18 @@ export const getUpdatedFloorLocations = (
         const alreadyExistedLocation = existingFloorLocations.find(
           existingLoc => existingLoc.locationName === `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`
         );
-        return alreadyExistedLocation?.newQty
-          ? { ...loc, newQty: alreadyExistedLocation.newQty } : { ...loc, newQty: loc.qty || 0 };
+        const savedAuditLocationQty = savedFloorLocation?.get(`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`);
+
+        return (alreadyExistedLocation?.newQty || savedAuditLocationQty)
+          ? { ...loc, newQty: alreadyExistedLocation?.newQty || savedAuditLocationQty || 0 }
+          : { ...loc, newQty: loc.qty || 0 };
       });
     } else {
-      updatedFloorLocations = floorResultsData.map((loc: Location) => ({ ...loc, newQty: loc.qty || 0 }));
+      updatedFloorLocations = floorResultsData.map((loc: Location) => {
+        const savedAuditLocationQty = savedFloorLocation?.get(`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`);
+
+        return savedAuditLocationQty ? { ...loc, newQty: savedAuditLocationQty } : { ...loc, newQty: loc.qty || 0 };
+      });
     }
   }
   dispatch(setFloorLocations(updatedFloorLocations));
@@ -388,7 +400,7 @@ export const getItemLocationsApiHook = (
     if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result && getItemLocationsApi.value === itemNumber) {
       const locDetails = getItemLocationsApi.result.data;
       if (locDetails && locDetails.location) {
-        getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations);
+        getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined);
         dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       }
     }
@@ -401,14 +413,53 @@ export const getItemLocationsV1ApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
+  getAuditLocationsApi: AsyncState,
+  auditSave: boolean
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsV1Api.isWaiting
-      && getItemLocationsV1Api.result
-      && getItemLocationsV1Api.value === itemNumber
-    ) {
+    const getLocsForItemsCheck = !getItemLocationsV1Api.isWaiting
+    && getItemLocationsV1Api.result
+    && getItemLocationsV1Api.value === itemNumber;
+    if (auditSave) {
+      if (getLocsForItemsCheck
+          && !getAuditLocationsApi.isWaiting
+          && getAuditLocationsApi.result) {
+        if (getAuditLocationsApi.result.status === 200) {
+          const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
+          const { locations }: {
+                locations: {
+                  name: string,
+                  qty: number,
+                  lastModifiedTimeStamp: string
+                }[]
+              } = getAuditLocationsApi.result.data;
+
+          const locationDictionary = new Map<string, number>();
+          locations.forEach(loc => {
+            locationDictionary.set(loc.name, loc.qty);
+          });
+
+          getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, locationDictionary);
+          dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+          dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
+        }
+      }
+      if (getLocsForItemsCheck && !getAuditLocationsApi.isWaiting && getAuditLocationsApi.error) {
+        const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
+        getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, undefined);
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+
+        Toast.show({
+          type: 'error',
+          text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+        dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
+      }
+    } else if (!auditSave && getLocsForItemsCheck) {
       const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
-      getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations);
+      getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, undefined);
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
     }
   }
@@ -1253,7 +1304,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     countryCode,
     updateMultiPalletUPCQtyApi,
     getItemPalletsDispatch,
-    modalIsWaitingState
+    modalIsWaitingState,
+    getAuditLocationsApi
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1320,7 +1372,15 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
 
   // Get Item Locations V1 API
   useEffectHook(
-    () => getItemLocationsV1ApiHook(getItemLocationsV1Api, itemNumber, dispatch, navigation, floorLocations),
+    () => getItemLocationsV1ApiHook(
+      getItemLocationsV1Api,
+      itemNumber,
+      dispatch,
+      navigation,
+      floorLocations,
+      getAuditLocationsApi,
+      userConfig.auditSave
+    ),
     [getItemLocationsV1Api, floorLocations]
   );
 
@@ -1701,8 +1761,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
-              loading={getItemDetailsApi.isWaiting || getItemLocationsApi.isWaiting}
-              error={!!(getItemDetailsApi.error || getItemLocationsApi.error)}
+              loading={getItemDetailsApi.isWaiting || getItemLocationsApi.isWaiting || getItemLocationsV1Api.isWaiting}
+              error={!!(getItemDetailsApi.error || getItemLocationsApi.error || getItemLocationsV1Api.error)}
               onRetry={() => {}}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
@@ -1755,15 +1815,20 @@ const AuditItem = (): JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(
     state => state.Global
   );
-  const getItemDetailsApi = useTypedSelector(
-    state => state.async.getItemDetailsV4
-  );
   const {
     userId,
     features: userFeatures,
     configs: userConfig,
     countryCode
   } = useTypedSelector(state => state.User);
+  const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
+  const {
+    approvalItem, itemDetails, floorLocations, reserveLocations, scannedPalletId
+  } = useTypedSelector(state => state.AuditItemScreen);
+
+  const getItemDetailsApi = useTypedSelector(
+    state => state.async.getItemDetailsV4
+  );
   const deleteFloorLocationApi = useTypedSelector(state => state.async.deleteLocation);
   const deletePalletApi = useTypedSelector(state => state.async.clearPallet);
   const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
@@ -1773,13 +1838,11 @@ const AuditItem = (): JSX.Element => {
   const getItemLocationsApi = useTypedSelector(state => state.async.getLocationsForItem);
   const getItemLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
-  const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
-  const {
-    approvalItem, itemDetails, floorLocations, reserveLocations, scannedPalletId
-  } = useTypedSelector(state => state.AuditItemScreen);
   const completeItemApi = useTypedSelector(state => state.async.noAction);
   const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
+  const getAuditLocationsApi = useTypedSelector(state => state.async.getAuditLocations);
+
   const route = useRoute();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -1858,6 +1921,7 @@ const AuditItem = (): JSX.Element => {
       locationListState={locationListState}
       countryCode={countryCode}
       updateMultiPalletUPCQtyApi={updateMultiPalletUPCQtyApi}
+      getAuditLocationsApi={getAuditLocationsApi}
     />
   );
 };

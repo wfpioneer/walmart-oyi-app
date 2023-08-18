@@ -559,7 +559,9 @@ export default {
     ITEMS: 'Artículos',
     CUSTOM_ITEMS: 'Artículos',
     IN_PROGRESS: 'En Progreso',
-    CURRENT_TOTAL: 'Total Actual'
+    CURRENT_TOTAL: 'Total Actual',
+    LOCATIONS_SAVED: 'Ubicaciones Guardadas',
+    LOCATIONS_SAVE_FAIL: 'Incapaz de Guardar Ubicaciones'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',

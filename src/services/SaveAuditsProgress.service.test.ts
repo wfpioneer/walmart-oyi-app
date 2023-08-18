@@ -28,13 +28,13 @@ describe('SaveAuditProgress Service Tests', () => {
 
     const getAudLocResponse = await getAudLoc({ itemNbr: 123, hours: 5 });
     expect(getRequestSpy).toHaveBeenCalledWith(
-      `${urls.orchestrationURL}/worklist/audits/${123}?timelimit=5`
+      `${urls.worklistURL}/worklist/audits/locations/${123}?timelimit=5`
     );
     expect(getAudLocResponse).toStrictEqual(mockResponse);
 
     getAudLoc({ itemNbr: 456 });
     expect(getRequestSpy).toHaveBeenCalledWith(
-      `${urls.orchestrationURL}/worklist/audits/${456}`
+      `${urls.worklistURL}/worklist/audits/locations/${456}`
     );
   });
 });
