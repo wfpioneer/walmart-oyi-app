@@ -567,7 +567,8 @@ export default {
     IN_PROGRESS: '正在进行中',
     CURRENT_TOTAL: '当前总数',
     LOCATIONS_SAVED: '货位已保存',
-    LOCATIONS_SAVE_FAIL: '无法保存货位'
+    LOCATIONS_SAVE_FAIL: '无法保存货位',
+    SCANNED_ITEM_NOT_PRESENT: '扫描的商品不在盘点任务清单'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',

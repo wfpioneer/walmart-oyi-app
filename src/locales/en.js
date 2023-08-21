@@ -563,7 +563,8 @@ export default {
     IN_PROGRESS: 'In Progress',
     CURRENT_TOTAL: 'Current Total',
     LOCATIONS_SAVED: 'Locations saved',
-    LOCATIONS_SAVE_FAIL: 'Unable to save locations'
+    LOCATIONS_SAVE_FAIL: 'Unable to save locations',
+    SCANNED_ITEM_NOT_PRESENT: 'The scanned item is not on the audit worklist'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',

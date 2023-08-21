@@ -1,9 +1,15 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { groupBy, partition } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute
+} from '@react-navigation/native';
+import { groupBy, partition } from 'lodash';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import {
+  EmitterSubscription,
   FlatList, Text, TouchableOpacity, View
 } from 'react-native';
 import { AxiosError } from 'axios';
@@ -23,6 +29,9 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { UseStateType } from '../../models/Generics.d';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setScannedEvent } from '../../state/actions/Global';
+import { validateSession } from '../../utils/sessionTimeout';
 
 const ROLLOVER_AUDITS = 'RA';
 
@@ -46,6 +55,8 @@ export interface AuditWorklistTabScreenProps {
     collapsedState: UseStateType<boolean>;
     isLoadedState: UseStateType<boolean>;
     useEffectHook: typeof useEffect;
+    validateSessionCall: typeof validateSession;
+    route: RouteProp<any>;
 }
 
 const onItemClick = (
@@ -155,7 +166,8 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
     items, refreshing, dispatch, navigation, error, useEffectHook,
     trackEventCall, config, filterExceptions, filterCategories,
-    onRefresh, countryCode, collapsedState, isLoadedState
+    onRefresh, countryCode, collapsedState, isLoadedState,
+    validateSessionCall, route
   } = props;
   const {
     areas, enableAreaFilter, showItemImage, showRollOverAudit
@@ -164,6 +176,26 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 
   const [collapsed, setCollapsed] = collapsedState;
   const fullExceptionList = ExceptionList.getInstance();
+  let scannedSubscription: EmitterSubscription;
+
+  // Scanner listener
+  useEffectHook(() => {
+    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused() && config.scanRequired) {
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall('Audit_Item', {
+            action: 'section_details_scan',
+            value: scan.value,
+            type: scan.type
+          });
+          dispatch(setScannedEvent(scan));
+        });
+      }
+    });
+    return () => {
+      scannedSubscription.remove();
+    };
+  }, []);
 
   const isRollOverComplete = () => !items.some(item => item.worklistType === ROLLOVER_AUDITS && !item.completed);
   useEffectHook(() => {
@@ -313,6 +345,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const { completionLevel, onRefresh } = props;
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const route = useRoute();
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
   const { configs } = useTypedSelector(state => state.User);
   const { isWaiting, error } = useTypedSelector(state => (
@@ -338,6 +371,8 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       config={configs}
       useEffectHook={useEffect}
       isLoadedState={isLoadedState}
+      route={route}
+      validateSessionCall={validateSession}
     />
   );
 };
