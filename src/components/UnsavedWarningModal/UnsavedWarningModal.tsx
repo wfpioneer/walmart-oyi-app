@@ -1,7 +1,5 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { Dispatch } from 'redux';
-import { NavigationProp } from '@react-navigation/native';
 import { CustomModalComponent } from '../../screens/Modal/Modal';
 import { strings } from '../../locales';
 import { UseStateType } from '../../models/Generics.d';
@@ -14,7 +12,6 @@ export const renderUnsavedWarningModal = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   title: string,
   message: string,
-  // eslint-disable-next-line @typescript-eslint/ban-types
   onConfirm: () => void
 ) => (
   <CustomModalComponent
