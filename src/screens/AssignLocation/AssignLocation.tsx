@@ -44,7 +44,6 @@ import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScr
 import { Configurations } from '../../models/User';
 import { UseStateType } from '../../models/Generics.d';
 import {
-  backConfirmed,
   backConfirmedHook,
   navigationRemoveListenerHook,
   onBinningItemPress
@@ -299,6 +298,16 @@ export const binPalletsApiEffect = (
   }
 };
 
+export const backConfirmed = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  setDisplayWarningModal(false);
+  dispatch(clearPallets());
+  navigation.goBack();
+};
+
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState, navigation,
@@ -354,7 +363,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
-      navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, palletsToBin);
+      navigationRemoveListenerHook(e, setDisplayWarningModal, palletsToBin);
     });
     return navigationListener;
   }, [navigation, palletsToBin, enableMultiPalletBin]);

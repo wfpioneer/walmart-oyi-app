@@ -42,6 +42,26 @@ const styles = StyleSheet.create({
     borderColor: COLOR.GREY_200,
     borderRadius: 20,
     borderWidth: 2
+  },
+  checkBoxContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    width: '75%',
+    marginTop: 2
+  },
+  checkBoxView: {
+    height: 75,
+    width: 75,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  checkBoxTextView: {
+    justifyContent: 'center',
+    flex: 1
+  },
+  checkBoxText: {
+    fontSize: 18
   }
 });
 export default styles;
