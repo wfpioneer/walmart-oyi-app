@@ -224,7 +224,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   updateMultiPalletUPCQtyApi: defaultAsyncState,
   getItemPalletsDispatch: jest.fn(),
   modalIsWaitingState: [false, jest.fn()],
-  getAuditLocationsApi: defaultAsyncState
+  getSavedAuditLocationsApi: defaultAsyncState
 };
 
 const mockModalIsWaitingState: UseStateType<boolean> = [false, jest.fn()];
@@ -635,6 +635,7 @@ describe('AuditItemScreen', () => {
       };
       getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, false);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(navigationProp.isFocused).toHaveBeenCalled();
 
       getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, true);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
@@ -688,6 +689,7 @@ describe('AuditItemScreen', () => {
         false
       );
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(navigationProp.isFocused).toHaveBeenCalled();
 
       getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess, true);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
