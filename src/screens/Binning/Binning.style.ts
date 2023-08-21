@@ -37,6 +37,11 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     flex: 1
+  },
+  bottomSheetModal: {
+    borderColor: COLOR.GREY_200,
+    borderRadius: 20,
+    borderWidth: 2
   }
 });
 export default styles;

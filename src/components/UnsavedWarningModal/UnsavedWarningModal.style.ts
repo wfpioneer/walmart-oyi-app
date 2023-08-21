@@ -24,11 +24,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: COLOR.RED_500,
     paddingBottom: 5
-  },
-  bottomSheetModal: {
-    borderColor: COLOR.GREY_200,
-    borderRadius: 20,
-    borderWidth: 2
   }
 });
 
