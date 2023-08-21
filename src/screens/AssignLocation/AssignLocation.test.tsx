@@ -10,6 +10,7 @@ import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import {
   AssignLocationScreen,
+  backConfirmed,
   binPalletsApiEffect,
   binningItemCard,
   getFailedPallets,
@@ -657,5 +658,13 @@ describe('Assign Location externalized function tests', () => {
     // multi bin, pallets
     onValidateHardwareBackPress(mockSetState, mockPallets, true);
     expect(mockSetState).not.toHaveBeenCalled();
+  });
+  it('tests backConfirmed', () => {
+    const mockSetState = jest.fn();
+
+    backConfirmed(mockSetState, mockDispatch, navigationProp);
+    expect(mockSetState).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalled();
+    expect(mockGoBack).toHaveBeenCalled();
   });
 });

@@ -13,8 +13,6 @@ import styles from './BinningNavigator.style';
 import ManagePallet from '../screens/ManagePallet/ManagePallet';
 import CombinePallets from '../screens/CombinePallets/CombinePallets';
 import { renderManagePalletKebabButton } from './PalletManagementNavigator';
-import { toggleBinMenu } from '../state/actions/Binning';
-import { trackEvent } from '../utils/AppCenterTool';
 
 const Stack = createStackNavigator();
 
@@ -37,24 +35,6 @@ export const renderScanButton = (
       <MaterialCommunityIcon
         name="barcode-scan"
         size={20}
-        color={COLOR.WHITE}
-      />
-    </View>
-  </TouchableOpacity>
-);
-
-export const renderKebabButton = (dispatch: Dispatch<any>, trackEventCall: typeof trackEvent) => (
-  <TouchableOpacity
-    onPress={() => {
-      dispatch(toggleBinMenu());
-      trackEventCall('binning_menu_button_click');
-    }}
-    testID="kebabButton"
-  >
-    <View style={styles.rightButton}>
-      <MaterialCommunityIcon
-        name="dots-vertical"
-        size={30}
         color={COLOR.WHITE}
       />
     </View>
@@ -90,8 +70,7 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
           headerTitle: strings('BINNING.BINNING'),
           headerRight: () => (
             <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled, false)}
-              {renderKebabButton(dispatch, trackEvent)}
+              {renderScanButton(dispatch, isManualScanEnabled, true)}
             </View>
           )
         }}
