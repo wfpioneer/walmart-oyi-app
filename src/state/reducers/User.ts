@@ -122,8 +122,7 @@ export const initialState: User = {
     overridePalletPerishables: false,
     peteGetLocations: false,
     showQuantityStocked: false,
-    enableAuditsInProgress: false,
-    enableAuditSave: false
+    enableAuditsInProgress: false
   },
   userTokens: {
     accessToken: '',
@@ -194,8 +193,7 @@ export const UserReducer = (state = initialState, action: Actions): User => {
           overridePalletPerishables: action.payload.overridePltPerish || false,
           peteGetLocations: action.payload.peteGetLocations || false,
           showQuantityStocked: action.payload.showQtyStocked || false,
-          enableAuditsInProgress: action.payload.enableAuditsIP || false,
-          enableAuditSave: action.payload.enableAuditSave || false
+          enableAuditsInProgress: action.payload.enableAuditsIP || false
         }
       };
     default:

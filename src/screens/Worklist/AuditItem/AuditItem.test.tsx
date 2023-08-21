@@ -457,7 +457,7 @@ describe('AuditItemScreen', () => {
       await onValidateItemNumber({
         ...mockAuditItemScreenProps,
         itemNumber: 123,
-        userConfig: { ...mockConfig, enableAuditSave: true }
+        userConfig: { ...mockConfig, enableAuditsInProgress: true }
       }, true);
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
         type: 'API/GET_ITEM_DETAILS_V4/RESET'

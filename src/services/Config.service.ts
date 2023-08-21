@@ -34,7 +34,6 @@ export interface ConfigResponse {
   peteGetLocations: boolean;
   showQtyStocked: boolean;
   enableAuditsIP: boolean;
-  enableAuditSave: boolean;
 }
 
 export default class ConfigService {

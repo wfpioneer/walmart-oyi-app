@@ -251,7 +251,7 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
             dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
             dispatch(getLocationsForItem(itemNumber));
           }
-          if (userConfig.enableAuditSave) {
+          if (userConfig.enableAuditsInProgress) {
             dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
             dispatch(getAuditLocations({ itemNbr: itemNumber, hours: undefined }));
           }
@@ -408,13 +408,13 @@ export const getItemLocationsApiHook = (
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
   getAuditLocationsApi: AsyncState,
-  enableAuditSave: boolean
+  enableAuditsInProgress: boolean
 ) => {
   if (navigation.isFocused()) {
     const getLocsForItemsCheck: boolean = !getItemLocationsApi.isWaiting
     && getItemLocationsApi.result
     && getItemLocationsApi.value === itemNumber;
-    if (enableAuditSave) {
+    if (enableAuditsInProgress) {
       if (getLocsForItemsCheck
           && !getAuditLocationsApi.isWaiting
           && getAuditLocationsApi.result) {
@@ -453,7 +453,7 @@ export const getItemLocationsApiHook = (
         dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       }
-    } else if (!enableAuditSave && getLocsForItemsCheck) {
+    } else if (!enableAuditsInProgress && getLocsForItemsCheck) {
       const locDetails = getItemLocationsApi.result.data;
       if (locDetails && locDetails.location) {
         getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined);
@@ -470,13 +470,13 @@ export const getItemLocationsV1ApiHook = (
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
   getAuditLocationsApi: AsyncState,
-  enableAuditSave: boolean
+  enableAuditsInProgress: boolean
 ) => {
   if (navigation.isFocused()) {
     const getLocsForItemsV1Check: boolean = !getItemLocationsV1Api.isWaiting
     && getItemLocationsV1Api.result
     && getItemLocationsV1Api.value === itemNumber;
-    if (enableAuditSave) {
+    if (enableAuditsInProgress) {
       if (getLocsForItemsV1Check
           && !getAuditLocationsApi.isWaiting
           && getAuditLocationsApi.result) {
@@ -512,7 +512,7 @@ export const getItemLocationsV1ApiHook = (
         dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       }
-    } else if (!enableAuditSave && getLocsForItemsV1Check) {
+    } else if (!enableAuditsInProgress && getLocsForItemsV1Check) {
       const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
       getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, undefined);
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
@@ -1482,7 +1482,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       navigation,
       floorLocations,
       getAuditLocationsApi,
-      userConfig.enableAuditSave
+      userConfig.enableAuditsInProgress
     ),
     [getItemLocationsApi, floorLocations, getAuditLocationsApi]
   );
@@ -1496,7 +1496,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       navigation,
       floorLocations,
       getAuditLocationsApi,
-      userConfig.enableAuditSave
+      userConfig.enableAuditsInProgress
     ),
     [getItemLocationsV1Api, floorLocations, getAuditLocationsApi]
   );
@@ -1673,7 +1673,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
         dispatch(getLocationsForItem(itemNumber));
       }
-      if (userConfig.enableAuditSave) {
+      if (userConfig.enableAuditsInProgress) {
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
         dispatch(getAuditLocations({ itemNbr: itemNumber, hours: undefined }));
       }
@@ -1939,7 +1939,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
-      {userConfig.enableAuditSave ? (
+      {userConfig.enableAuditsInProgress ? (
         <View style={styles.footer}>
           <AuditScreenFooter
             onContinueClick={handleContinueAction}
