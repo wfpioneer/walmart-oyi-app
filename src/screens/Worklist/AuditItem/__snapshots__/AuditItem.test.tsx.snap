@@ -2257,6 +2257,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
+      tokenIsWaiting={false}
       totalQty={0}
     />
   </View>
@@ -2769,6 +2770,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       pendingQty={35}
       showItemImage={false}
       showOHItems={false}
+      tokenIsWaiting={false}
       totalQty={42}
     />
   </View>
@@ -3229,6 +3231,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       pendingQty={-999}
       showItemImage={false}
       showOHItems={false}
+      tokenIsWaiting={false}
       totalQty={15}
     />
   </View>
@@ -3689,6 +3692,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       pendingQty={35}
       showItemImage={false}
       showOHItems={false}
+      tokenIsWaiting={false}
       totalQty={42}
     />
   </View>

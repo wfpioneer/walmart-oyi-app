@@ -49,6 +49,8 @@ describe('AuditWorklistTab', () => {
           config={mockConfig}
           isLoadedState={[false, jest.fn()]}
           useEffectHook={jest.fn()}
+          imageToken={undefined}
+          tokenIsWaiting={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -72,6 +74,8 @@ describe('AuditWorklistTab', () => {
           config={mockConfig}
           isLoadedState={[false, jest.fn()]}
           useEffectHook={jest.fn()}
+          imageToken={undefined}
+          tokenIsWaiting={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -95,6 +99,8 @@ describe('AuditWorklistTab', () => {
           config={mockConfig}
           isLoadedState={[false, jest.fn()]}
           useEffectHook={jest.fn()}
+          imageToken={undefined}
+          tokenIsWaiting={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -119,6 +125,8 @@ describe('AuditWorklistTab', () => {
           config={itemImageShownConfig}
           isLoadedState={[false, jest.fn()]}
           useEffectHook={jest.fn()}
+          imageToken={undefined}
+          tokenIsWaiting={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -143,6 +151,8 @@ describe('AuditWorklistTab', () => {
           config={mockConfig}
           isLoadedState={[false, jest.fn()]}
           useEffectHook={jest.fn()}
+          imageToken={undefined}
+          tokenIsWaiting={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');
@@ -166,6 +176,8 @@ describe('AuditWorklistTab', () => {
           config={mockConfig}
           isLoadedState={[false, jest.fn()]}
           useEffectHook={jest.fn()}
+          imageToken={undefined}
+          tokenIsWaiting={false}
         />
       );
       const btnCollapse = getByTestId('collapse-text-btn');

@@ -45,9 +45,8 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
           ]
         }
       >
-        <FastImageView
-          defaultSource={null}
-          onFastImageError={[Function]}
+        <Image
+          onError={[Function]}
           resizeMode="contain"
           source={
             Object {
@@ -56,13 +55,18 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
             }
           }
           style={
-            Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
+            Array [
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "tintColor": undefined,
+              },
+            ]
           }
         />
       </View>

@@ -922,9 +922,8 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       ]
                     }
                   >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
+                    <Image
+                      onError={[Function]}
                       resizeMode="contain"
                       source={
                         Object {
@@ -933,13 +932,18 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                         }
                       }
                       style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
+                        Array [
+                          Object {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          Object {
+                            "tintColor": undefined,
+                          },
+                        ]
                       }
                     />
                   </View>
@@ -1075,9 +1079,8 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       ]
                     }
                   >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
+                    <Image
+                      onError={[Function]}
                       resizeMode="contain"
                       source={
                         Object {
@@ -1086,13 +1089,18 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                         }
                       }
                       style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
+                        Array [
+                          Object {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          Object {
+                            "tintColor": undefined,
+                          },
+                        ]
                       }
                     />
                   </View>
@@ -1228,9 +1236,8 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       ]
                     }
                   >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
+                    <Image
+                      onError={[Function]}
                       resizeMode="contain"
                       source={
                         Object {
@@ -1239,13 +1246,18 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                         }
                       }
                       style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
+                        Array [
+                          Object {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          Object {
+                            "tintColor": undefined,
+                          },
+                        ]
                       }
                     />
                   </View>
@@ -1381,9 +1393,8 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       ]
                     }
                   >
-                    <FastImageView
-                      defaultSource={null}
-                      onFastImageError={[Function]}
+                    <Image
+                      onError={[Function]}
                       resizeMode="contain"
                       source={
                         Object {
@@ -1392,13 +1403,18 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                         }
                       }
                       style={
-                        Object {
-                          "bottom": 0,
-                          "left": 0,
-                          "position": "absolute",
-                          "right": 0,
-                          "top": 0,
-                        }
+                        Array [
+                          Object {
+                            "bottom": 0,
+                            "left": 0,
+                            "position": "absolute",
+                            "right": 0,
+                            "top": 0,
+                          },
+                          Object {
+                            "tintColor": undefined,
+                          },
+                        ]
                       }
                     />
                   </View>

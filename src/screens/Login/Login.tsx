@@ -17,7 +17,7 @@ import {
 } from '../../state/actions/User';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 import {
-  getClubConfig, getFluffyFeatures, updateUserConfig
+  getClubConfig, getFluffyFeatures, getItemCenterToken, updateUserConfig
 } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
@@ -234,8 +234,8 @@ export const userConfigsApiHook = (
   }
 
   if (!getFluffyApiState.isWaiting && getFluffyApiState.result) {
+    const userCountryCode = user.countryCode.toUpperCase();
     if (getFluffyApiState.result.status === 200) {
-      const userCountryCode = user.countryCode.toUpperCase();
       const fluffyResultData = getFluffyApiState.result.data;
       const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
         : fluffyResultData;
@@ -243,8 +243,12 @@ export const userConfigsApiHook = (
     }
     dispatch(resetFluffyFeaturesApiState());
     dispatch(getClubConfig());
+    if (userCountryCode === 'CN') {
+      dispatch(getItemCenterToken());
+    }
     dispatch(updateUserConfig());
   } else if (getFluffyApiState.error) {
+    const userCountryCode = user.countryCode.toUpperCase();
     // TODO Display toast/popup letting user know roles could not be retrieved
     // TODO remove mocked response once app is onboarded to dev fluffy in service registry
     const mockFluffyResponse = [
@@ -258,6 +262,9 @@ export const userConfigsApiHook = (
       dispatch(assignFluffyFeatures(mockFluffyResponse));
     }
     dispatch(getClubConfig());
+    if (userCountryCode === 'CN') {
+      dispatch(getItemCenterToken());
+    }
     dispatch(resetFluffyFeaturesApiState());
     dispatch(updateUserConfig());
   }
