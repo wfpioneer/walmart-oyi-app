@@ -26,13 +26,14 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { UseStateType } from '../../models/Generics.d';
+import ManualScan from '../../components/manualscan/ManualScan';
 
 const ROLLOVER_AUDITS = 'RA';
 
 export interface AuditWorklistTabProps {
     completionLevel: number;
     onRefresh: () => void;
-    auditWorklistItems: WorklistItemI[];
+    auditWorklistItems: WorklistItemI[]
 }
 
 export interface AuditWorklistTabScreenProps {
@@ -275,6 +276,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         />
       </View>
       ) }
+      {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       {auditItemKeys.length > 0
         && (
         <CollapseAllBar
