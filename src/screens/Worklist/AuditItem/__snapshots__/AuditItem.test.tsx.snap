@@ -1434,6 +1434,13 @@ Array [
     transparent={true}
     visible={false}
   />,
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />,
   <View
     style={
       Object {
@@ -1880,6 +1887,546 @@ Array [
 ]
 `;
 
+exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audit screen with the back warning modal present 1`] = `
+<React.Fragment>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Form"
+    onClose={[Function]}
+  >
+    <PalletQtyUpdate
+      handleClose={[Function]}
+      handleSubmit={[Function]}
+      palletId={4928}
+      qty={0}
+      showCalculator={false}
+    />
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.CANCEL_APPROVAL" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={100}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 18,
+            "padding": 15,
+            "textAlign": "center",
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#D6512D"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    minHeight={150}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        [missing "en.AUDITS.CONFIRM_AUDIT" translation]
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.APPROVAL.CURRENT_QUANTITY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#9e9e9e",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.GENERICS.CHANGE" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#ab2703",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          <mockMaterialCommunityIcons
+            name="arrow-down-bold"
+            size={16}
+          />
+          $0.00
+        </Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#ab2703",
+              "fontSize": 15,
+              "marginLeft": 30,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "marginBottom": 5,
+            "paddingVertical": 5,
+            "width": "90%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          [missing "en.AUDITS.UPDATED_QTY" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 15,
+            }
+          }
+        >
+          0
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "space-around",
+            "flexDirection": "row",
+            "justifyContent": "space-evenly",
+            "paddingTop": 10,
+            "width": "100%",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-cancel-button"
+          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={true}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "flex": 1,
+              "paddingHorizontal": 10,
+            }
+          }
+          testID="modal-confirm-button"
+          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <CalculatorModal
+    disableAcceptButton={[Function]}
+    onAccept={[Function]}
+    onClose={[Function]}
+    showAcceptButton={true}
+    visible={false}
+  />
+  <CustomModalComponent
+    animationType="none"
+    isVisible={true}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
+  <View
+    style={
+      Object {
+        "marginBottom": 8,
+      }
+    }
+  >
+    <ItemCard
+      OHItemInfo={
+        Object {
+          "claimsOH": 0,
+          "consolidatorOH": 0,
+          "flyCloudInTransitOH": 0,
+          "flyCloudOH": 0,
+          "salesFloorOH": 0,
+        }
+      }
+      countryCode="CN"
+      description=""
+      disabled={true}
+      itemNumber={0}
+      loading={false}
+      onClick={[Function]}
+      onHandQty={0}
+      pendingQty={-999}
+      showItemImage={false}
+      showOHItems={false}
+      totalQty={0}
+    />
+  </View>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+      }
+    }
+    nestedScrollEnabled={true}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          add={[Function]}
+          error={false}
+          loading={false}
+          locationList={Array []}
+          locationType="floor"
+          maxQty={9999}
+          minQty={0}
+          onRetry={[Function]}
+          scanRequired={false}
+          showCalculator={false}
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "marginBottom": 6,
+          }
+        }
+      >
+        <LocationListCard
+          error={false}
+          loading={false}
+          locationList={Array []}
+          locationType="reserve"
+          maxQty={9999}
+          minQty={0}
+          onRetry={[Function]}
+          scanRequired={false}
+          showCalculator={false}
+        />
+      </View>
+      <View>
+        <OtherOHItemCard
+          claimsOH={0}
+          collapsed={false}
+          consolidatorOH={0}
+          countryCode="CN"
+          flyCloudInTransitOH={0}
+          flyCloudOH={0}
+          loading={false}
+        />
+      </View>
+    </View>
+  </ScrollView>
+</React.Fragment>
+`;
+
 exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activity Indicator' waiting for ItemDetails Response  1`] = `
 <React.Fragment>
   <CustomModalComponent
@@ -2230,6 +2777,94 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     showAcceptButton={true}
     visible={false}
   />
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -2742,6 +3377,94 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
     showAcceptButton={true}
     visible={false}
   />
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -3202,6 +3925,94 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     showAcceptButton={true}
     visible={false}
   />
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {
@@ -3662,6 +4473,94 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     showAcceptButton={true}
     visible={false}
   />
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Popup"
+    onClose={[Function]}
+  >
+    <React.Fragment>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#f44336",
+              "fontSize": 18,
+              "paddingBottom": 5,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.WARNING_LABEL" translation]
+        </Text>
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "padding": 15,
+              "textAlign": "center",
+            }
+          }
+        >
+          [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignContent": "center",
+            "elevation": 10,
+            "flexDirection": "row",
+            "height": 80,
+            "justifyContent": "space-evenly",
+          }
+        }
+      >
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="cancelBack"
+          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          titleColor="#0071e9"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={2}
+          width={-1}
+        />
+        <Button
+          backgroundColor="#0071e9"
+          disabled={false}
+          height={45}
+          onPress={[Function]}
+          radius={5}
+          style={
+            Object {
+              "alignSelf": "center",
+              "margin": 10,
+              "width": "40%",
+            }
+          }
+          testID="confirmBack"
+          title="[missing \\"en.GENERICS.OK\\" translation]"
+          titleColor="#ffffffff"
+          titleFontSize={16}
+          titleFontWeight="normal"
+          type={1}
+          width={-1}
+        />
+      </View>
+    </React.Fragment>
+  </CustomModalComponent>
   <View
     style={
       Object {

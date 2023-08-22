@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: 'Aviso',
     CLOSE: 'Cerrar',
     NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}',
-    FEEDBACK: 'Retroalimentación'
+    FEEDBACK: 'Retroalimentación',
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
-    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
     CREATE_PALLET: 'Crear Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet creado con éxito',
     CREATE_PALLET_FAILED: 'Falló la creación de pallet',
