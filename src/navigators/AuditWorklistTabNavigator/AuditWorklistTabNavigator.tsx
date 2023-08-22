@@ -1,12 +1,14 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, {
-  DependencyList, EffectCallback, useCallback, useEffect
+  DependencyList, EffectCallback, useCallback, useEffect, useRef
 } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import {
   NavigationProp, RouteProp, useFocusEffect, useNavigation, useRoute
 } from '@react-navigation/native';
+import { EmitterSubscription } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
 import CompletedAuditWorklist from '../../screens/Worklist/AuditWorklist/CompletedAuditWorklist';
@@ -16,11 +18,14 @@ import { getWorklistAudits, getWorklistAuditsV1 } from '../../state/actions/saga
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
-import { setWorklistItems } from '../../state/actions/AuditWorklist';
+import { setAuditItemNumber, setWorklistItems } from '../../state/actions/AuditWorklist';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { GET_WORKLIST_AUDIT, GET_WORKLIST_AUDIT_V1 } from '../../state/actions/asyncAPI';
+import { barcodeEmitter } from '../../utils/scannerUtils';
+import { setScannedEvent } from '../../state/actions/Global';
+import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
 interface AuditWorklistTabNavigatorProps {
   dispatch: Dispatch<any>;
@@ -32,9 +37,52 @@ interface AuditWorklistTabNavigatorProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   trackEventCall: typeof trackEvent;
   enableAuditsInProgress: boolean;
+  isMounted: React.MutableRefObject<boolean>;
+  scannedEvent: { type: string | null; value: string | null };
+  auditWorklistItems: WorklistItemI[];
 }
 
 const Tab = createMaterialTopTabNavigator();
+
+export const scannedEventHook = (
+  isMounted: React.MutableRefObject<boolean>,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any>,
+  scannedEvent: { value: any; type: string | null },
+  trackEventCall: typeof trackEvent,
+  dispatch: Dispatch<any>,
+  auditWorklistItems: WorklistItemI[]
+) => {
+  if (isMounted.current) {
+    if (navigation.isFocused()) {
+      validateSession(navigation, route.name).then(() => {
+        if (auditWorklistItems.some(
+          item => scannedEvent.value === item.itemNbr?.toString() || scannedEvent.value === item.upcNbr
+        )) {
+          trackEventCall('Audit_Worklist', {
+            action: 'scanned_item_on_worklist',
+            scannedEvent: JSON.stringify(scannedEvent)
+          });
+          dispatch(setAuditItemNumber(scannedEvent.value));
+          navigation.navigate('AuditItem');
+        } else {
+          trackEventCall('Audit_Worklist', {
+            action: 'scanned_item_off_worklist',
+            scannedEvent: JSON.stringify(scannedEvent)
+          });
+          Toast.show({
+            type: 'error',
+            position: 'bottom',
+            text1: strings('AUDITS.SCANNED_ITEM_NOT_PRESENT'),
+            visibilityTime: SNACKBAR_TIMEOUT
+          });
+        }
+      });
+    }
+  } else {
+    isMounted.current = true;
+  }
+};
 
 const getWorklistAuditApiHook = (
   getWorklistAuditApi: AsyncState,
@@ -69,7 +117,7 @@ export const getWorklistAuditApiToUse = (
 export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps) => {
   const {
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
-    useEffectHook, trackEventCall, enableAuditsInProgress
+    useEffectHook, trackEventCall, enableAuditsInProgress, isMounted, scannedEvent, auditWorklistItems
   } = props;
   const getWorklistAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
   const getWorklistAuditV1Api = useTypedSelector(state => state.async.getWorklistAuditsV1);
@@ -78,13 +126,43 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     getWorklistAuditApi,
     getWorklistAuditV1Api
   );
-  const { showRollOverAudit } = useTypedSelector(state => state.User.configs);
+  const { showRollOverAudit, scanRequired } = useTypedSelector(state => state.User.configs);
   const wlSummary: WorklistSummary[] = enableAuditsInProgress
     ? useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data)
     : useTypedSelector(state => state.async.getWorklistSummary.result?.data);
   const selectedWorklistGoal = WorklistGoal.AUDITS;
   const worklistIndex = wlSummary.findIndex(item => item.worklistGoal === selectedWorklistGoal);
   const disableAuditWL = showRollOverAudit && !isRollOverComplete(wlSummary[worklistIndex]);
+  let scannedSubscription: EmitterSubscription;
+
+  useEffectHook(() => scannedEventHook(
+    isMounted,
+    navigation,
+    route,
+    scannedEvent,
+    trackEventCall,
+    dispatch,
+    auditWorklistItems
+  ), [scannedEvent, auditWorklistItems]);
+
+  // Scanner listener
+  useEffectHook(() => {
+    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      if (navigation.isFocused() && scanRequired) {
+        validateSessionCall(navigation, route.name).then(() => {
+          trackEventCall('Audit_Worklist', {
+            action: 'item_barcode_scan',
+            value: scan.value,
+            type: scan.type
+          });
+          dispatch(setScannedEvent(scan));
+        });
+      }
+    });
+    return () => {
+      scannedSubscription.remove();
+    };
+  }, []);
 
   const getAuditWlItems = () => {
     validateSessionCall(navigation, route.name).then(() => {
@@ -116,15 +194,15 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
       }}
     >
       <Tab.Screen name={strings('WORKLIST.TODO')}>
-        {() => <TodoAuditWorklist onRefresh={getAuditWlItems} />}
+        {() => <TodoAuditWorklist onRefresh={getAuditWlItems} auditWorklistItems={auditWorklistItems} />}
       </Tab.Screen>
       {enableAuditsInProgress ? (
         <Tab.Screen name={strings('AUDITS.IN_PROGRESS')}>
-          {() => <InProgressAuditWorklist onRefresh={getAuditWlItems} />}
+          {() => <InProgressAuditWorklist onRefresh={getAuditWlItems} auditWorklistItems={auditWorklistItems} />}
         </Tab.Screen>
       ) : null}
       <Tab.Screen name={strings('WORKLIST.COMPLETED')}>
-        {() => <CompletedAuditWorklist onRefresh={getAuditWlItems} />}
+        {() => <CompletedAuditWorklist onRefresh={getAuditWlItems} auditWorklistItems={auditWorklistItems} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
@@ -134,6 +212,9 @@ const AuditWorklistTabs = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { enableAuditsInProgress } = useTypedSelector(state => state.User.configs);
+  const { scannedEvent } = useTypedSelector(state => state.Global);
+  const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
+  const isMounted = useRef(false);
   return (
     <AuditWorklistTabNavigator
       dispatch={dispatch}
@@ -145,6 +226,9 @@ const AuditWorklistTabs = () => {
       useEffectHook={useEffect}
       trackEventCall={trackEvent}
       enableAuditsInProgress={enableAuditsInProgress}
+      isMounted={isMounted}
+      scannedEvent={scannedEvent}
+      auditWorklistItems={auditWorklistItems}
     />
   );
 };

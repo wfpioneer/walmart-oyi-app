@@ -1,25 +1,28 @@
 import React from 'react';
 import AuditWorklistTab from '../AuditWorklistTab';
+import { WorklistItemI } from '../../../models/WorklistItem';
 
 export interface InProgressAuditWorklistScreenProps {
   onRefresh: () => void;
+  auditWorklistItems: WorklistItemI[];
 }
 
 export interface InProgressAuditWorklistProps {
   onRefresh: () => void;
+  auditWorklistItems: WorklistItemI[];
 }
 
 export const InProgressAuditWorklistScreen = (props: InProgressAuditWorklistScreenProps) => {
-  const { onRefresh } = props;
+  const { onRefresh, auditWorklistItems } = props;
   return (
-    <AuditWorklistTab completionLevel={1} onRefresh={onRefresh} />
+    <AuditWorklistTab completionLevel={1} onRefresh={onRefresh} auditWorklistItems={auditWorklistItems} />
   );
 };
 
 const InProgressAuditWorklist = (props: InProgressAuditWorklistProps) => {
-  const { onRefresh } = props;
+  const { onRefresh, auditWorklistItems } = props;
   return (
-    <InProgressAuditWorklistScreen onRefresh={onRefresh} />
+    <InProgressAuditWorklistScreen onRefresh={onRefresh} auditWorklistItems={auditWorklistItems} />
   );
 };
 
