@@ -1933,7 +1933,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
-      {userConfig.enableAuditsInProgress ? (
+      {userConfig.enableAuditSave ? (
         <View style={styles.footer}>
           <AuditScreenFooter
             onContinueClick={handleContinueAction}
