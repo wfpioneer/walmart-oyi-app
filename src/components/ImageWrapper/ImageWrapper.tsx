@@ -62,20 +62,28 @@ export const createSource = (imageUri: string, countryCode: string, imageToken: 
   };
 };
 
+export const imageWrapperUseEffect = (
+  itemNumber: number,
+  countryCode: string,
+  setImageUri: React.Dispatch<React.SetStateAction<string>>
+) => {
+  if (itemNumber > 0) {
+    if (countryCode === 'CN') {
+      setCNImageUri(itemNumber, setImageUri, postApiCall);
+    } else {
+      setImageUri(getMXImageUri(itemNumber));
+    }
+  } else {
+    setImageUri('');
+  }
+};
+
 const ImageWrapper = ({
   itemNumber, imageStyle, countryCode, imageToken, tokenIsWaiting
 }: ImageWrapperProps) => {
   const [imageUri, setImageUri] = useState('');
   useEffect(() => {
-    if (itemNumber > 0) {
-      if (countryCode === 'CN') {
-        setCNImageUri(itemNumber, setImageUri, postApiCall);
-      } else {
-        setImageUri(getMXImageUri(itemNumber));
-      }
-    } else {
-      setImageUri('');
-    }
+    imageWrapperUseEffect(itemNumber, countryCode, setImageUri);
   }, [itemNumber]);
 
   return (

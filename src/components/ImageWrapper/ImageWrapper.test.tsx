@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { render, waitFor } from '@testing-library/react-native';
-import ImageWrapper, { createSource, setCNImageUri } from './ImageWrapper';
+import ImageWrapper, { createSource, imageWrapperUseEffect, setCNImageUri } from './ImageWrapper';
 import * as utils from './ImageWrapperUtils';
 import { getEnvironment } from '../../utils/environment';
 
@@ -131,5 +131,19 @@ describe('ImageWrapper Component', () => {
     const mxResults = createSource('dummyMXUrl', 'MX', undefined);
     expect(cnResults).toEqual(expectedCNResults);
     expect(mxResults).toEqual(expectedMXResults);
+  });
+
+  it('test imageWrapperUseEffect', () => {
+    const mockSetItemImage = jest.fn();
+    imageWrapperUseEffect(123, 'CN', mockSetItemImage);
+    expect(mockSetItemImage).toHaveBeenCalledWith('');
+    mockSetItemImage.mockReset();
+    imageWrapperUseEffect(123, 'MX', mockSetItemImage);
+    // eslint-disable-next-line max-len
+    expect(mockSetItemImage).toHaveBeenCalledWith('https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/123m.jpg');
+    mockSetItemImage.mockReset();
+    imageWrapperUseEffect(0, 'CN', mockSetItemImage);
+    expect(mockSetItemImage).toHaveBeenCalledWith('');
+    mockSetItemImage.mockReset();
   });
 });
