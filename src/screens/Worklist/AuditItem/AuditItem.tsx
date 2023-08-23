@@ -2,11 +2,13 @@ import React, {
   EffectCallback,
   RefObject,
   createRef,
+  useCallback,
   useEffect,
   useState
 } from 'react';
 import {
   ActivityIndicator,
+  BackHandler,
   EmitterSubscription,
   ScrollView,
   Text,
@@ -16,6 +18,7 @@ import {
 import {
   NavigationProp,
   RouteProp,
+  useFocusEffect,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -104,7 +107,7 @@ import { ItemPalletInfo } from '../../../models/AuditItem';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import PalletQtyUpdate from '../../../components/PalletQtyUpdate/PalletQtyUpdate';
 import Button from '../../../components/buttons/Button';
-import { UseStateType } from '../../../models/Generics.d';
+import { BeforeRemoveEvent, UseStateType } from '../../../models/Generics.d';
 import {
   ApprovalListItem,
   approvalAction,
@@ -116,6 +119,8 @@ import { UpdateMultiPalletsPallet } from '../../../services/PalletManagement.ser
 import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
+import { mockLocations } from '../../../mockData/mockPickList';
+import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -184,7 +189,59 @@ export interface AuditItemScreenProps {
   updateMultiPalletUPCQtyApi: AsyncState;
   getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1,
   getSavedAuditLocationsApi: AsyncState;
+  useFocusEffectHook: typeof useFocusEffect;
+  useCallbackHook: typeof useCallback;
+  displayWarningModalState: UseStateType<boolean>
 }
+
+export const navigationRemoveListenerHook = (
+  e: BeforeRemoveEvent,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  locationsToSaveExist: boolean,
+  dispatch: Dispatch<any>
+) => {
+  if (locationsToSaveExist) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  } else {
+    dispatch(clearAuditScreenData());
+  }
+};
+
+export const backConfirmedHook = (
+  displayWarningModal: boolean,
+  locationsToSaveExist: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => {
+  if (displayWarningModal && !locationsToSaveExist) {
+    setDisplayWarningModal(false);
+    dispatch(clearAuditScreenData());
+    navigation.goBack();
+  }
+};
+
+export const onValidateHardwareBackPress = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  locationsToSaveExist: boolean
+) => {
+  if (locationsToSaveExist) {
+    setDisplayWarningModal(true);
+    return true;
+  }
+  return false;
+};
+
+export const backConfirmed = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>
+) => {
+  setDisplayWarningModal(false);
+  dispatch(clearAuditScreenData());
+  navigation.goBack();
+};
 
 export const getItemQuantity = (itemQty: number, pendingQty: number) => {
   if (pendingQty >= 0) {
@@ -1346,6 +1403,9 @@ export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] =
   return saveableLocations;
 };
 
+export const getReservesToSaveExist = (reserveLocations: ItemPalletInfo[]) => reserveLocations
+  .some(loc => typeof loc.newQty === 'number' && loc.newQty !== loc.quantity);
+
 export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
   const sortLocationNames = (a: ItemPalletInfo, b: ItemPalletInfo) => {
     if (a.locationName > b.locationName) return 1;
@@ -1408,7 +1468,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     updateMultiPalletUPCQtyApi,
     getItemPalletsDispatch,
     modalIsWaitingState,
-    getSavedAuditLocationsApi
+    getSavedAuditLocationsApi,
+    displayWarningModalState,
+    useCallbackHook,
+    useFocusEffectHook
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1416,6 +1479,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const [showCalcModal, setShowCalcModal] = showCalcModalState;
   const [location, setLocation] = locationListState;
   const [modalIsWaiting, setModalIsWaiting] = modalIsWaitingState;
+  const [displayWarningModal, setDisplayWarningModal] = displayWarningModalState;
 
   const totalOHQty = calculateTotalOHQty(
     floorLocations,
@@ -1561,14 +1625,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     [deletePalletApi]
   );
 
-  // Navigation Listener
-  useEffectHook(() => {
-    // Clear Audit Item Screen redux state before removing the component
-    navigation.addListener('beforeRemove', () => {
-      dispatch(clearAuditScreenData());
-    });
-  }, []);
-
   // Update OH quantity API
   useEffectHook(() => updateOHQtyApiHook(
     updateOHQtyApi,
@@ -1577,6 +1633,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     reserveLocations,
     setModalIsWaiting
   ), [updateOHQtyApi]);
+
+  const doSaveablesExist = !!getLocationsToSave(floorLocations).length || getReservesToSaveExist(reserveLocations);
 
   // Update Multiple Pallet's UPC Qty API
   useEffectHook(() => updateMultiPalletUPCQtyApiHook(
@@ -1587,6 +1645,36 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     itemDetails?.itemNbr || 0,
     modalIsWaitingState
   ), [updateMultiPalletUPCQtyApi]);
+
+  // validation on app back press
+  useEffectHook(() => navigation.addListener('beforeRemove', e => {
+    navigationRemoveListenerHook(
+      e,
+      setDisplayWarningModal,
+      doSaveablesExist,
+      dispatch
+    );
+  }), [navigation, doSaveablesExist]);
+
+  useEffectHook(() => backConfirmedHook(
+    displayWarningModal,
+    doSaveablesExist,
+    setDisplayWarningModal,
+    navigation,
+    dispatch
+  ), [doSaveablesExist, displayWarningModal]);
+
+  // validation on Hardware backPress
+  useFocusEffectHook(
+    useCallbackHook(() => {
+      const onHardwareBackPress = () => onValidateHardwareBackPress(
+        setDisplayWarningModal,
+        !disabledContinue(floorLocations, reserveLocations, userConfig.scanRequired, getItemDetailsApi.isWaiting)
+      );
+      BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
+    }, [floorLocations, reserveLocations, getItemDetailsApi])
+  );
 
   if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
     setModalIsWaiting(true);
@@ -1860,6 +1948,13 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         userConfig.inProgress
       )}
       {(renderCalculatorModal(location, showCalcModal, setShowCalcModal, dispatch))}
+      {renderUnsavedWarningModal(
+        displayWarningModal,
+        setDisplayWarningModal,
+        strings('GENERICS.WARNING_LABEL'),
+        strings('GENERICS.UNSAVED_WARNING_MSG'),
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation)
+      )}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
       )}
@@ -2012,6 +2107,8 @@ const AuditItem = (): JSX.Element => {
     palletId: '-1'
   });
 
+  const displayWarningModalState = useState(false);
+
   const getItemPalletsDispatch = userConfig.peteGetPallets ? getItemPalletsV1 : getItemPallets;
   return (
     <AuditItemScreen
@@ -2065,6 +2162,9 @@ const AuditItem = (): JSX.Element => {
       countryCode={countryCode}
       updateMultiPalletUPCQtyApi={updateMultiPalletUPCQtyApi}
       getSavedAuditLocationsApi={getSavedAuditLocationsApi}
+      displayWarningModalState={displayWarningModalState}
+      useCallbackHook={useCallback}
+      useFocusEffectHook={useFocusEffect}
     />
   );
 };
