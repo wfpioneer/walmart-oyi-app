@@ -347,7 +347,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       config={configs}
       useEffectHook={useEffect}
       isLoadedState={isLoadedState}
-      imageToken={countryCode === 'CN' ? imageToken?.result?.data.data.accessToken || undefined : undefined}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
       tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );

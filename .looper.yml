@@ -92,7 +92,7 @@ envs:
       # CN Image Auth Client ID and Secret
       CN_IMAGE_AUTH_CLIENT_ID: ENC[c7gsJUW4bWJg2IHKIcxhhLmYVh6NQxbzVzN9D+zYC4R09VQzh5cdpTOdCdyEEZYo]
       CN_IMAGE_AUTH_SECRET: ENC[exyE4QqpRmHvnPE7bkcM28gdR8Vf+pn8RnRRmRwOMKZ+BmNOdJej/2RhNgtwAALxS63uoYmnfHHwFO+S6IFzCHT1VDOHlx2lM50J3IQRlig=]
-      CN_ITEM_CENTER_TOKEN_SECRET: ENC[XM8LrxuQJH4dnHGUktHSNVhPvTK1qgtbjF5uuCMIYMl09VQzh5cdpTOdCdyEEZYo]
+      CN_ITEM_CENTER_TOKEN_SECRET: ENC[B4ccZDapcp+KUr3gr7+eFsX6chDKpfO1ucKsnE9Kyrl09VQzh5cdpTOdCdyEEZYo]
 
       projects:
         - rootDir: './android'

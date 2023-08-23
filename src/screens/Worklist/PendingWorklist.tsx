@@ -23,13 +23,15 @@ interface TodoWorklistProps {
   countryCode: string;
   showItemImage: boolean;
   onHandsEnabled: boolean;
+  imageToken: string | undefined;
+  tokenIsWaiting: boolean;
 }
 
 export const PendingWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
-    countryCode, showItemImage, onHandsEnabled
+    countryCode, showItemImage, onHandsEnabled, imageToken, tokenIsWaiting
   } = props;
 
   let pendingData: WorklistItemI[] | undefined;
@@ -58,6 +60,8 @@ export const PendingWorklistScreen = (props: TodoWorklistProps): JSX.Element => 
       enableAreaFilter={enableAreaFilter}
       countryCode={countryCode}
       showItemImage={showItemImage}
+      imageToken={imageToken}
+      tokenIsWaiting={tokenIsWaiting}
     />
   );
 };
@@ -68,6 +72,7 @@ export const PendingWorklist = (): JSX.Element => {
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
   const { countryCode, features } = useTypedSelector(state => state.User);
+  const imageToken = useTypedSelector(state => state.async.getItemCenterToken);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -88,6 +93,8 @@ export const PendingWorklist = (): JSX.Element => {
       countryCode={countryCode}
       showItemImage={showItemImage}
       onHandsEnabled={onHandsEnabled}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
+      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );
 };

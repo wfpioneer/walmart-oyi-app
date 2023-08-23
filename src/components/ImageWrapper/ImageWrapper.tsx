@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './ImageWrapper.style';
@@ -81,20 +81,18 @@ export const imageWrapperUseEffect = (
 const ImageWrapper = ({
   itemNumber, imageStyle, countryCode, imageToken, tokenIsWaiting
 }: ImageWrapperProps) => {
-  const [imageUri, setImageUri] = useState('');
-  useEffect(() => {
+  const [imageUri, setImageUri] = useState(countryCode === 'MX' ? getMXImageUri(itemNumber) : '');
+  useLayoutEffect(() => {
     imageWrapperUseEffect(itemNumber, countryCode, setImageUri);
   }, [itemNumber]);
-
   return (
     <View>
       <FastImage
         style={{ ...styles.image, ...imageStyle }}
-        source={imageUri !== '' && !tokenIsWaiting
+        source={imageUri !== '' && !tokenIsWaiting && imageToken
           ? createSource(imageUri, countryCode, imageToken)
           : require('../../assets/images/placeholder.png')}
         resizeMode={FastImage.resizeMode.contain}
-        fallback={true}
         onError={() => setImageUri('')}
       />
     </View>

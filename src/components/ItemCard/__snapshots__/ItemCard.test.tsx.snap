@@ -45,28 +45,19 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
           ]
         }
       >
-        <Image
-          onError={[Function]}
+        <FastImageView
+          defaultSource={null}
+          onFastImageError={[Function]}
           resizeMode="contain"
-          source={
-            Object {
-              "priority": "normal",
-              "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234m.jpg",
-            }
-          }
+          source={null}
           style={
-            Array [
-              Object {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-              Object {
-                "tintColor": undefined,
-              },
-            ]
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
           }
         />
       </View>
