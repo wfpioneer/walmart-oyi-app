@@ -1,6 +1,4 @@
-import { AxiosResponse } from 'axios';
-import { getEnvironment } from '../utils/environment';
-import Request, { mockAxiosResponse } from './Request';
+import Request from './Request';
 import ItmCenterTokenService from './ItemCenterToken.service';
 
 describe('SaveAuditProgress Service Tests', () => {

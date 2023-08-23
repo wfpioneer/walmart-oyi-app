@@ -125,8 +125,8 @@ export interface ItemDetailsScreenProps {
   userConfigs: Configurations;
   countryCode: string;
   userDomain: string;
-  imageToken: string | undefined;
-  tokenIsWaiting: boolean;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 }
 
 export interface HandleProps {
@@ -1834,9 +1834,16 @@ const ReviewItemDetails = (): JSX.Element => {
       userConfigs={userConfigs}
       countryCode={countryCode}
       userDomain={domain}
-      imageToken={countryCode === 'CN' ? imageToken?.result?.data.data.accessToken || undefined : undefined}
-      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
+      imageToken={
+      countryCode === 'CN' && imageToken ? imageToken?.result?.data.data.accessToken || undefined : undefined
+      }
+      tokenIsWaiting={countryCode === 'CN' && imageToken ? imageToken.isWaiting : false}
     />
   );
 };
 export default ReviewItemDetails;
+
+ReviewItemDetails.defaultProps = {
+  imageToken: undefined,
+  tokenIsWaiting: false
+};

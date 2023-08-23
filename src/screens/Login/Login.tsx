@@ -229,12 +229,11 @@ export const userConfigsApiHook = (
   navigation: NavigationProp<any>,
   env: string
 ) => {
+  const userCountryCode = user.countryCode.toUpperCase();
   if (getFluffyApiState.isWaiting || getClubConfigApiState.isWaiting) {
     dispatch(showActivityModal());
   }
-
   if (!getFluffyApiState.isWaiting && getFluffyApiState.result) {
-    const userCountryCode = user.countryCode.toUpperCase();
     if (getFluffyApiState.result.status === 200) {
       const fluffyResultData = getFluffyApiState.result.data;
       const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
@@ -248,7 +247,6 @@ export const userConfigsApiHook = (
     }
     dispatch(updateUserConfig());
   } else if (getFluffyApiState.error) {
-    const userCountryCode = user.countryCode.toUpperCase();
     // TODO Display toast/popup letting user know roles could not be retrieved
     // TODO remove mocked response once app is onboarded to dev fluffy in service registry
     const mockFluffyResponse = [
