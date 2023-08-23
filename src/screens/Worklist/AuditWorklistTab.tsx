@@ -51,6 +51,7 @@ export interface AuditWorklistTabScreenProps {
     collapsedState: UseStateType<boolean>;
     isLoadedState: UseStateType<boolean>;
     useEffectHook: typeof useEffect;
+    isManualScanEnabled: boolean;
 }
 
 const onItemClick = ( // hekki
@@ -160,7 +161,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
     items, refreshing, dispatch, navigation, error, useEffectHook,
     trackEventCall, config, filterExceptions, filterCategories,
-    onRefresh, countryCode, collapsedState, isLoadedState
+    onRefresh, countryCode, collapsedState, isLoadedState, isManualScanEnabled
   } = props;
   const {
     areas, enableAreaFilter, showItemImage, showRollOverAudit
@@ -258,7 +259,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 
   return (
     <>
-      { (filterCategories.length > 0 || (filterExceptions.length > 0)) && (
+      {(filterCategories.length > 0 || (filterExceptions.length > 0)) && (
       <View style={styles.filterContainer}>
         <FlatList
           data={[...typedFilterExceptions, ...typedFilterAreaOrCategoryList]}
@@ -275,7 +276,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           keyExtractor={item => item.value}
         />
       </View>
-      ) }
+      )}
       {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
       {auditItemKeys.length > 0
         && (
@@ -320,6 +321,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { configs } = useTypedSelector(state => state.User);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error } = useTypedSelector(state => (
     configs.enableAuditsInProgress ? state.async.getWorklistAuditsV1 : state.async.getWorklistAudits));
   const items = getItemsForTab(auditWorklistItems, completionLevel, configs);
@@ -343,6 +345,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       config={configs}
       useEffectHook={useEffect}
       isLoadedState={isLoadedState}
+      isManualScanEnabled={isManualScanEnabled}
     />
   );
 };

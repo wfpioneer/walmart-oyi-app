@@ -8,7 +8,7 @@ describe('Audit worklist render tests', () => {
   it('renders the todo tab', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    renderer.render(<TodoAuditWorklist onRefresh={jest.fn()} />);
+    renderer.render(<TodoAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -16,7 +16,7 @@ describe('Audit worklist render tests', () => {
   it('renders the in progress tab', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    renderer.render(<InProgressAuditWorklist onRefresh={jest.fn()} />);
+    renderer.render(<InProgressAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
@@ -24,7 +24,7 @@ describe('Audit worklist render tests', () => {
   it('renders the completed tab', () => {
     const renderer = ShallowRenderer.createRenderer();
 
-    renderer.render(<CompletedAuditWorklist onRefresh={jest.fn()} />);
+    renderer.render(<CompletedAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
 
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });

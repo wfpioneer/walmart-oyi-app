@@ -27,6 +27,9 @@ describe('AuditWorklistTab Navigator', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           enableAuditsInProgress={false}
+          auditWorklistItems={[]}
+          isMounted={{ current: false }}
+          scannedEvent={{ type: null, value: null }}
         />
       </Provider>
     );
@@ -47,6 +50,9 @@ describe('AuditWorklistTab Navigator', () => {
           useEffectHook={jest.fn()}
           trackEventCall={jest.fn()}
           enableAuditsInProgress={true}
+          auditWorklistItems={[]}
+          isMounted={{ current: false }}
+          scannedEvent={{ type: null, value: null }}
         />
       </Provider>
     );
