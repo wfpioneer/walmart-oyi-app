@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: '警示',
     CLOSE: '关闭',
     NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间',
-    FEEDBACK: '反馈'
+    FEEDBACK: '反馈',
+    UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '确定要清除此卡板信息?',
     CLEAR_PALLET_ERROR: '清除卡板信息发生错误导致失败',
     CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理成功',
-    UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失',
     CREATE_PALLET: '创建卡板',
     CREATE_PALLET_SUCCESS: '卡板创建成功',
     CREATE_PALLET_FAILED: '卡板创建失败',
@@ -530,8 +530,8 @@ export default {
     FIRST_ITEM: '第一个item',
     EMPTY_PALLET: '空卡板',
     PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态',
-    MULTIPLE_BIN_ENABLED: '开启批量上架',
-    SINGLE_BIN_ENABLED: 'Single Bin Enabled' // TODO MANDARIN TRANSLATION
+    MULTIPLE_BIN_ENABLED: '多卡板上架',
+    SINGLE_BIN_ENABLED: '单卡板上架'
   },
   SETTINGS: {
     TITLE: '设置',
@@ -565,7 +565,9 @@ export default {
     ITEMS: '个库存',
     CUSTOM_ITEMS: '个 item',
     IN_PROGRESS: '正在进行中',
-    CURRENT_TOTAL: '当前总数'
+    CURRENT_TOTAL: '当前总数',
+    LOCATIONS_SAVED: '货位已保存',
+    LOCATIONS_SAVE_FAIL: '无法保存货位'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',

@@ -751,7 +751,7 @@ export const renderWarningModal = (
     <>
       <View>
         <Text style={styles.labelHeader}>{strings('GENERICS.WARNING_LABEL')}</Text>
-        <Text style={styles.message}>{strings('PALLET.UNSAVED_WARNING_MSG')}</Text>
+        <Text style={styles.message}>{strings('GENERICS.UNSAVED_WARNING_MSG')}</Text>
       </View>
       <View style={styles.buttonWarningContainer}>
         <Button

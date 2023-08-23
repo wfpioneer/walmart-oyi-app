@@ -2,8 +2,6 @@ import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { head } from 'lodash';
-// eslint-disable-next-line import/no-unresolved
-import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
 import {
@@ -18,7 +16,8 @@ import {
   onBinningItemPress,
   onValidateHardwareBackPress,
   resetApis,
-  scannedEventHook
+  scannedEventHook,
+  toggleMultiBinCheckbox
 } from './Binning';
 import { AsyncState } from '../../models/AsyncState';
 import { mockPallets } from '../../mockData/binning';
@@ -26,6 +25,7 @@ import { BeforeRemoveEvent, ScannedEvent, UseStateType } from '../../models/Gene
 import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 import { validateSession } from '../../utils/sessionTimeout';
+import { toggleMultiBin } from '../../state/actions/Binning';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -674,6 +674,29 @@ describe('BinningScreen', () => {
       expect(mockSetState).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalled();
       expect(mockGoBack).toHaveBeenCalled();
+    });
+
+    it('tests toggleMultiBinCheckbox', async () => {
+      const { toJSON, getByTestId, update } = render(
+        toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, false)
+      );
+
+      const multiBinButton = getByTestId('toggle multi bin');
+      const checkBoxIcon = getByTestId('checkbox icon');
+      await fireEvent.press(multiBinButton);
+      await fireEvent.press(checkBoxIcon);
+
+      expect(toJSON()).toMatchSnapshot();
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin());
+      expect(mockTrackEvent).toHaveBeenCalledWith('toggle_multi_bin_pallets');
+      expect((await checkBoxIcon).props.name).toStrictEqual('checkbox-blank-outline');
+
+      update(
+        toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, true)
+      );
+
+      await fireEvent.press(checkBoxIcon);
+      expect(checkBoxIcon.props.name).toStrictEqual('checkbox-marked-outline');
     });
   });
 });

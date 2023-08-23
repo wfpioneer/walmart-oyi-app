@@ -94,6 +94,17 @@ const styles = StyleSheet.create({
     height: 60,
     borderTopWidth: 4,
     borderTopColor: COLOR.GREY_200
+  },
+  buttonAlign: {
+    alignSelf: 'center',
+    width: '40%',
+    margin: 10
+  },
+  labelHeader: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: COLOR.RED_500,
+    paddingBottom: 5
   }
 });
 

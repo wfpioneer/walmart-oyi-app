@@ -30,7 +30,7 @@ export interface PickingState {
   multiPickEnabled: boolean;
 }
 
-const initialState: PickingState = {
+export const initialState: PickingState = {
   pickList: [],
   selectedPicks: [],
   pickCreateItem: {

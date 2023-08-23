@@ -208,6 +208,7 @@ Array [
                 "borderBottomWidth": 1,
                 "borderColor": "#616161",
                 "flexDirection": "row",
+                "height": 50,
                 "paddingHorizontal": 15,
                 "paddingVertical": 10,
               }
@@ -294,6 +295,7 @@ Array [
             }
             getItem={[Function]}
             getItemCount={[Function]}
+            getItemLayout={[Function]}
             keyExtractor={[Function]}
             onContentSizeChange={[Function]}
             onLayout={[Function]}
@@ -309,7 +311,6 @@ Array [
             viewabilityConfigCallbackPairs={Array []}
           >
             <View
-              onLayout={[Function]}
               style={null}
             >
               <View
@@ -432,7 +433,6 @@ Array [
               </View>
             </View>
             <View
-              onLayout={[Function]}
               style={null}
             >
               <View
@@ -570,6 +570,7 @@ Array [
                 "borderBottomWidth": 1,
                 "borderColor": "#616161",
                 "flexDirection": "row",
+                "height": 50,
                 "paddingHorizontal": 15,
                 "paddingVertical": 10,
               }
@@ -643,6 +644,7 @@ Array [
             }
             getItem={[Function]}
             getItemCount={[Function]}
+            getItemLayout={[Function]}
             keyExtractor={[Function]}
             onContentSizeChange={[Function]}
             onLayout={[Function]}
@@ -658,7 +660,6 @@ Array [
             viewabilityConfigCallbackPairs={Array []}
           >
             <View
-              onLayout={[Function]}
               style={null}
             >
               <View
@@ -796,6 +797,7 @@ Array [
                 "borderBottomWidth": 1,
                 "borderColor": "#616161",
                 "flexDirection": "row",
+                "height": 50,
                 "paddingHorizontal": 15,
                 "paddingVertical": 10,
               }
@@ -869,6 +871,7 @@ Array [
             }
             getItem={[Function]}
             getItemCount={[Function]}
+            getItemLayout={[Function]}
             keyExtractor={[Function]}
             onContentSizeChange={[Function]}
             onLayout={[Function]}
@@ -884,7 +887,6 @@ Array [
             viewabilityConfigCallbackPairs={Array []}
           >
             <View
-              onLayout={[Function]}
               style={null}
             >
               <View
@@ -1106,6 +1108,7 @@ Array [
                 "borderBottomWidth": 1,
                 "borderColor": "#616161",
                 "flexDirection": "row",
+                "height": 50,
                 "paddingHorizontal": 15,
                 "paddingVertical": 10,
               }
@@ -1174,6 +1177,7 @@ Array [
                 "borderBottomWidth": 1,
                 "borderColor": "#616161",
                 "flexDirection": "row",
+                "height": 50,
                 "paddingHorizontal": 15,
                 "paddingVertical": 10,
               }
@@ -1242,6 +1246,7 @@ Array [
                 "borderBottomWidth": 1,
                 "borderColor": "#616161",
                 "flexDirection": "row",
+                "height": 50,
                 "paddingHorizontal": 15,
                 "paddingVertical": 10,
               }

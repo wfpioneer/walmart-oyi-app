@@ -21,20 +21,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 15
   },
-  binSwitchView: {
-    flex: 0.25,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: COLOR.GREY_500
-  },
-  binText: {
-    fontSize: 16,
-    textAlign: 'center',
-    margin: 15,
-    fontWeight: 'bold',
-    alignSelf: 'center'
-  },
   separator: {
     backgroundColor: COLOR.GREY_300,
     height: 1,
@@ -52,34 +38,30 @@ const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1
   },
-  // Warning Modal styles
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignContent: 'center',
-    height: 80,
-    elevation: 10
-  },
-  buttonAlign: {
-    alignSelf: 'center',
-    width: '40%',
-    margin: 10
-  },
-  message: {
-    textAlign: 'center',
-    fontSize: 16,
-    padding: 15
-  },
-  labelHeader: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: COLOR.RED_500,
-    paddingBottom: 5
-  },
   bottomSheetModal: {
     borderColor: COLOR.GREY_200,
     borderRadius: 20,
     borderWidth: 2
+  },
+  checkBoxContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    width: '75%',
+    marginTop: 2
+  },
+  checkBoxView: {
+    height: 75,
+    width: 75,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  checkBoxTextView: {
+    justifyContent: 'center',
+    flex: 1
+  },
+  checkBoxText: {
+    fontSize: 18
   }
 });
 export default styles;

@@ -15,12 +15,13 @@ import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import Toast from 'react-native-toast-message';
 import { UPDATE_FLOOR_LOCATION_QTY, UPDATE_PALLET_QTY } from '../../../state/actions/AuditItemScreen';
-import { mockConfig } from '../../../mockData/mockConfig';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen,
   AuditItemScreenProps,
   addLocationHandler,
+  backConfirmed,
+  backConfirmedHook,
   calculateFloorLocDecreaseQty,
   calculateFloorLocIncreaseQty,
   calculatePalletDecreaseQty,
@@ -36,27 +37,32 @@ import AuditItem, {
   getItemLocationsV1ApiHook,
   getItemPalletsApiHook,
   getItemQuantity,
+  getLocationsToSave,
   getMultiPalletList,
   getScannedPalletEffect,
   getUpdatedFloorLocations,
   getUpdatedReserveLocations,
   isError,
+  navigationRemoveListenerHook,
+  onValidateHardwareBackPress,
   onValidateItemNumber,
   renderCalculatorModal,
   renderCancelApprovalModal,
   renderConfirmOnHandsModal,
   renderDeleteLocationModal,
   renderpalletQtyUpdateModal,
+  saveAuditsProgressApiHook,
   sortReserveLocations,
   updateManagerApprovalApiHook,
   updateMultiPalletUPCQtyApiHook,
   updateOHQtyApiHook
 } from './AuditItem';
 import { AsyncState } from '../../../models/AsyncState';
-import { getMockItemDetails } from '../../../mockData';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
+import { getMockItemDetails } from '../../../mockData';
 import { mockPalletLocations, mockSortedLocations } from '../../../mockData/getItemPallets';
+import { mockConfig } from '../../../mockData/mockConfig';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import {
@@ -69,6 +75,8 @@ import { setFloorLocations, setReserveLocations, setupScreen } from '../../../st
 import ItemDetails from '../../../models/ItemDetails';
 import Location from '../../../models/Location';
 import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../../models/ApprovalListItem';
+import { mockLocations, mockSomeSaveableLocations } from '../../../mockData/mockPickList';
+import { BeforeRemoveEvent, UseStateType } from '../../../models/Generics.d';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -168,6 +176,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   getItemDetailsApi: defaultAsyncState,
   getItemLocationsApi: defaultAsyncState,
   getItemLocationsV1Api: defaultAsyncState,
+  saveAuditsProgressApi: defaultAsyncState,
   itemDetails: null,
   userId: 'testUser',
   route: routeProp,
@@ -215,8 +224,13 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   countryCode: 'CN',
   updateMultiPalletUPCQtyApi: defaultAsyncState,
   getItemPalletsDispatch: jest.fn(),
-  modalIsWaitingState: [false, jest.fn()]
+  modalIsWaitingState: [false, jest.fn()],
+  displayWarningModalState: [false, jest.fn()],
+  useCallbackHook: jest.fn(fn => fn()),
+  useFocusEffectHook: jest.fn()
 };
+
+const mockModalIsWaitingState: UseStateType<boolean> = [false, jest.fn()];
 
 describe('AuditItemScreen', () => {
   const mockError: AxiosError = {
@@ -344,6 +358,17 @@ describe('AuditItemScreen', () => {
       renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('render the audit screen with the back warning modal present', () => {
+      const testProps: AuditItemScreenProps = {
+        ...mockAuditItemScreenProps,
+        displayWarningModalState: [true, jest.fn()]
+      };
+
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<AuditItemScreen {...testProps} />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Manage AuditItem externalized function tests', () => {
@@ -363,11 +388,13 @@ describe('AuditItemScreen', () => {
       result: {
         data: mockItemDetails,
         status: 200
-      }
+      },
+      value: {}
     };
     const failureApi: AsyncState = {
       ...defaultAsyncState,
-      error: 'Internal Server Error'
+      error: 'Internal Server Error',
+      value: {}
     };
 
     it('test onValidateItemNumber', async () => {
@@ -527,7 +554,7 @@ describe('AuditItemScreen', () => {
             }
           }
         }
-      }
+      };
       getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
     });
@@ -541,7 +568,7 @@ describe('AuditItemScreen', () => {
             salesFloorLocation: []
           }
         }
-      }
+      };
       getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
     });
@@ -957,7 +984,7 @@ describe('AuditItemScreen', () => {
         mockSetModalWaiting
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockSetModalWaiting).toHaveBeenCalledWith(false)
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -969,17 +996,16 @@ describe('AuditItemScreen', () => {
 
     it('Tests updateMultiPalletUPCQtyApiHook on success', () => {
       const setShowOnHands = jest.fn();
-      const mockSetModalWaiting = jest.fn();
       updateMultiPalletUPCQtyApiHook(
         successApi,
         mockDispatch,
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockSetModalWaiting
+        mockModalIsWaitingState
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
+      expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
 
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1000,17 +1026,16 @@ describe('AuditItemScreen', () => {
 
     it('Tests updateMultiPalletUPCQtyApiHook on failure', () => {
       const setShowOnHands = jest.fn();
-      const mockSetModalWaiting = jest.fn();
       updateMultiPalletUPCQtyApiHook(
         failureApi,
         mockDispatch,
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockSetModalWaiting
+        mockModalIsWaitingState
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
-      expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
+      expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -1018,6 +1043,38 @@ describe('AuditItemScreen', () => {
         text1: strings('PALLET.SAVE_PALLET_FAILURE'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
+    });
+
+    it('Tests updateMultiPalletUPCQtyApiHook on end and closes redux modal from save progress', () => {
+      const setShowOnHands = jest.fn();
+      mockModalIsWaitingState[0] = true;
+      updateMultiPalletUPCQtyApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands,
+        mockItemDetails.itemNbr,
+        mockModalIsWaitingState
+      );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'MODAL/HIDE_ACTIVITY' });
+
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        3,
+        setScannedEvent({ type: 'worklist', value: mockItemDetails.itemNbr.toString() })
+      );
+
+      expect(setShowOnHands).toHaveBeenCalledWith(false);
+      expect(navigationProp.goBack).toHaveBeenCalled();
     });
 
     it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
@@ -1524,6 +1581,128 @@ describe('AuditItemScreen', () => {
         jest.fn()
       );
       expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('tests the save audits progress api hook success', () => {
+      saveAuditsProgressApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        mockModalIsWaitingState[1]
+      );
+
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({ type: 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY' })
+      );
+      expect(mockModalIsWaitingState[1]).toHaveBeenCalled();
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
+    });
+
+    it('tests the save audits progress api hook failure', () => {
+      saveAuditsProgressApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        mockModalIsWaitingState[1]
+      );
+
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockModalIsWaitingState[1]).not.toHaveBeenCalled();
+      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
+    });
+
+    it('tests that the save audits progress api hook shows activity modal on waiting', () => {
+      const waitingApi: AsyncState = {
+        ...defaultAsyncState,
+        isWaiting: true,
+        value: {}
+      };
+      saveAuditsProgressApiHook(
+        waitingApi,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        mockModalIsWaitingState[1]
+      );
+
+      expect(mockModalIsWaitingState[1]).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith({ type: 'MODAL/SHOW_ACTIVITY' });
+    });
+
+    it('tests the getLocationsToSave', () => {
+      const results = getLocationsToSave(mockLocations);
+
+      expect(results.length).toBe(2);
+
+      const someSaveableResults = getLocationsToSave(mockSomeSaveableLocations);
+
+      expect(someSaveableResults.length).toBe(1);
+    });
+
+    const mockSetDisplayWarningModal = jest.fn();
+
+    it('tests the navigation remove listener hook', () => {
+      const mockE: BeforeRemoveEvent = {
+        data: { action: { type: 'I is the removal' } },
+        defaultPrevented: false,
+        preventDefault: jest.fn(),
+        type: 'beforeRemove'
+      };
+
+      // nothing needing saving
+      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, false, mockDispatch);
+      expect(mockE.preventDefault).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+
+      // something to save
+      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, true, mockDispatch);
+      expect(mockE.preventDefault).toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+
+    it('tests the back confirmed hook', () => {
+      backConfirmedHook(false, false, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      backConfirmedHook(false, true, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      backConfirmedHook(true, true, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      backConfirmedHook(true, false, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+    });
+
+    it('tests the on validate hardware back press', () => {
+      const shouldBeFalse = onValidateHardwareBackPress(mockSetDisplayWarningModal, false);
+
+      expect(shouldBeFalse).toBeFalsy();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      const shouldBeTrue = onValidateHardwareBackPress(mockSetDisplayWarningModal, true);
+      expect(shouldBeTrue).toBeTruthy();
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+    });
+
+    it('tests back confirmed', () => {
+      backConfirmed(mockSetDisplayWarningModal, mockDispatch, navigationProp);
+      expect(mockSetDisplayWarningModal).toHaveBeenCalledWith(false);
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(navigationProp.goBack).toHaveBeenCalled();
     });
   });
 });

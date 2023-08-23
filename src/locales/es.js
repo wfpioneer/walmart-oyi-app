@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: 'Aviso',
     CLOSE: 'Cerrar',
     NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}',
-    FEEDBACK: 'Retroalimentación'
+    FEEDBACK: 'Retroalimentación',
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
-    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
     CREATE_PALLET: 'Crear Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet creado con éxito',
     CREATE_PALLET_FAILED: 'Falló la creación de pallet',
@@ -526,7 +526,7 @@ export default {
     EMPTY_PALLET: 'Pallet vacía',
     PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo',
     MULTIPLE_BIN_ENABLED: 'Habilitar Múltiple Ingreso a Bodega',
-    SINGLE_BIN_ENABLED: 'Habilitar Solo Ingreso a Bodega' // TODO DOUBLE CHECK SPANISH TRANSLATION WITH CONFLUENCE
+    SINGLE_BIN_ENABLED: 'Ingreso a bodega individual habilitado'
   },
   SETTINGS: {
     TITLE: 'Ajustes',
@@ -560,7 +560,9 @@ export default {
     ITEMS: 'Artículos',
     CUSTOM_ITEMS: 'Artículos',
     IN_PROGRESS: 'En Progreso',
-    CURRENT_TOTAL: 'Total Actual'
+    CURRENT_TOTAL: 'Total Actual',
+    LOCATIONS_SAVED: 'Ubicaciones Guardadas',
+    LOCATIONS_SAVE_FAIL: 'Incapaz de guardar ubicaciones'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',

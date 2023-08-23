@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: 'Warning',
     CLOSE: 'Close',
     NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
-    FEEDBACK: 'Feedback'
+    FEEDBACK: 'Feedback',
+    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
-    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
     CREATE_PALLET: 'Create Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet created successfully',
     CREATE_PALLET_FAILED: 'Failed to create pallet',
@@ -526,7 +526,7 @@ export default {
     FIRST_ITEM: 'First Item',
     EMPTY_PALLET: 'Empty Pallet',
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick',
-    MULTIPLE_BIN_ENABLED: 'Multiple Bin Enabled',
+    MULTIPLE_BIN_ENABLED: 'Enable Multiple Bins',
     SINGLE_BIN_ENABLED: 'Single Bin Enabled'
   },
   SETTINGS: {
@@ -561,7 +561,9 @@ export default {
     ITEMS: 'Items',
     CUSTOM_ITEMS: 'Items',
     IN_PROGRESS: 'In Progress',
-    CURRENT_TOTAL: 'Current Total'
+    CURRENT_TOTAL: 'Current Total',
+    LOCATIONS_SAVED: 'Locations saved',
+    LOCATIONS_SAVE_FAIL: 'Unable to save locations'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',

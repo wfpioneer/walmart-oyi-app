@@ -162,6 +162,55 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             [missing "en.BINNING.SCAN_PALLET" translation]
           </Text>
         </View>
+        <TouchableOpacity
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 2,
+              "width": "75%",
+            }
+          }
+          testID="toggle multi bin"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "height": 75,
+                "justifyContent": "center",
+                "width": 75,
+              }
+            }
+          >
+            <Icon
+              color="#9e9e9e"
+              name="checkbox-blank-outline"
+              size={40}
+              testID="checkbox icon"
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                }
+              }
+            >
+              [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   </View>
@@ -330,6 +379,55 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             [missing "en.BINNING.SCAN_PALLET" translation]
           </Text>
         </View>
+        <TouchableOpacity
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 2,
+              "width": "75%",
+            }
+          }
+          testID="toggle multi bin"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "height": 75,
+                "justifyContent": "center",
+                "width": 75,
+              }
+            }
+          >
+            <Icon
+              color="#9e9e9e"
+              name="checkbox-blank-outline"
+              size={40}
+              testID="checkbox icon"
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                }
+              }
+            >
+              [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   </View>
@@ -450,42 +548,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     <View
       style={
         Object {
-          "borderColor": "#9e9e9e",
-          "borderWidth": 1,
-          "flex": 0.25,
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "alignSelf": "center",
-            "fontSize": 16,
-            "fontWeight": "bold",
-            "margin": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.BINNING.SINGLE_BIN_ENABLED" translation]
-      </Text>
-      <ForwardRef(Switch)
-        onChange={[Function]}
-        thumbColor="#f4f3f4"
-        trackColor={
-          Object {
-            "false": "#0071e9",
-            "true": "#33691E",
-          }
-        }
-        value={false}
-      />
-    </View>
-    <View
-      style={
-        Object {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -520,6 +582,55 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
             [missing "en.BINNING.SCAN_PALLET" translation]
           </Text>
         </View>
+        <TouchableOpacity
+          onPress={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginTop": 2,
+              "width": "75%",
+            }
+          }
+          testID="toggle multi bin"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "height": 75,
+                "justifyContent": "center",
+                "width": 75,
+              }
+            }
+          >
+            <Icon
+              color="#9e9e9e"
+              name="checkbox-blank-outline"
+              size={40}
+              testID="checkbox icon"
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "fontSize": 18,
+                }
+              }
+            >
+              [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   </View>
@@ -685,42 +796,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     <View
       style={
         Object {
-          "borderColor": "#9e9e9e",
-          "borderWidth": 1,
-          "flex": 0.25,
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "alignSelf": "center",
-            "fontSize": 16,
-            "fontWeight": "bold",
-            "margin": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
-      </Text>
-      <ForwardRef(Switch)
-        onChange={[Function]}
-        thumbColor="#f5dd4b"
-        trackColor={
-          Object {
-            "false": "#0071e9",
-            "true": "#33691E",
-          }
-        }
-        value={true}
-      />
-    </View>
-    <View
-      style={
-        Object {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -758,6 +833,55 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                 [missing "en.BINNING.SCAN_PALLET" translation]
               </Text>
             </View>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "marginTop": 2,
+                  "width": "75%",
+                }
+              }
+              testID="toggle multi bin"
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "height": 75,
+                    "justifyContent": "center",
+                    "width": 75,
+                  }
+                }
+              >
+                <Icon
+                  color="#0071e9"
+                  name="checkbox-marked-outline"
+                  size={40}
+                  testID="checkbox icon"
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Object {
+                      "fontSize": 18,
+                    }
+                  }
+                >
+                  [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         }
         contentContainerStyle={
@@ -941,6 +1065,55 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                 [missing "en.BINNING.SCAN_PALLET" translation]
               </Text>
             </View>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "marginTop": 2,
+                  "width": "75%",
+                }
+              }
+              testID="toggle multi bin"
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "height": 75,
+                    "justifyContent": "center",
+                    "width": 75,
+                  }
+                }
+              >
+                <Icon
+                  color="#0071e9"
+                  name="checkbox-marked-outline"
+                  size={40}
+                  testID="checkbox icon"
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Object {
+                      "fontSize": 18,
+                    }
+                  }
+                >
+                  [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         }
         contentContainerStyle={false}
@@ -1120,42 +1293,6 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     <View
       style={
         Object {
-          "borderColor": "#9e9e9e",
-          "borderWidth": 1,
-          "flex": 0.25,
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-        }
-      }
-    >
-      <Text
-        style={
-          Object {
-            "alignSelf": "center",
-            "fontSize": 16,
-            "fontWeight": "bold",
-            "margin": 15,
-            "textAlign": "center",
-          }
-        }
-      >
-        [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
-      </Text>
-      <ForwardRef(Switch)
-        onChange={[Function]}
-        thumbColor="#f5dd4b"
-        trackColor={
-          Object {
-            "false": "#0071e9",
-            "true": "#33691E",
-          }
-        }
-        value={true}
-      />
-    </View>
-    <View
-      style={
-        Object {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -1193,6 +1330,55 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                 [missing "en.BINNING.SCAN_PALLET" translation]
               </Text>
             </View>
+            <TouchableOpacity
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "marginTop": 2,
+                  "width": "75%",
+                }
+              }
+              testID="toggle multi bin"
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "height": 75,
+                    "justifyContent": "center",
+                    "width": 75,
+                  }
+                }
+              >
+                <Icon
+                  color="#0071e9"
+                  name="checkbox-marked-outline"
+                  size={40}
+                  testID="checkbox icon"
+                />
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    Object {
+                      "fontSize": 18,
+                    }
+                  }
+                >
+                  [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         }
         contentContainerStyle={
@@ -1209,4 +1395,66 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     </View>
   </View>
 </KeyboardAvoidingView>
+`;
+
+exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "marginTop": 2,
+      "opacity": 1,
+      "width": "75%",
+    }
+  }
+  testID="toggle multi bin"
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 75,
+        "justifyContent": "center",
+        "width": 75,
+      }
+    }
+  >
+    <Icon
+      color="#9e9e9e"
+      name="checkbox-blank-outline"
+      size={40}
+      testID="checkbox icon"
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontSize": 18,
+        }
+      }
+    >
+      [missing "en.BINNING.MULTIPLE_BIN_ENABLED" translation]
+    </Text>
+  </View>
+</View>
 `;

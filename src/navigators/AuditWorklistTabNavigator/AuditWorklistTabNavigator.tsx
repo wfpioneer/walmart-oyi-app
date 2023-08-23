@@ -12,7 +12,7 @@ import COLOR from '../../themes/Color';
 import CompletedAuditWorklist from '../../screens/Worklist/AuditWorklist/CompletedAuditWorklist';
 import InProgressAuditWorklist from '../../screens/Worklist/AuditWorklist/InProgressAuditWorklist';
 import TodoAuditWorklist from '../../screens/Worklist/AuditWorklist/TodoAuditWorklist';
-import { getWorklistAudits } from '../../state/actions/saga';
+import { getWorklistAudits, getWorklistAuditsV1 } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
@@ -20,6 +20,7 @@ import { setWorklistItems } from '../../state/actions/AuditWorklist';
 import { WorklistItemI } from '../../models/WorklistItem';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { trackEvent } from '../../utils/AppCenterTool';
+import { GET_WORKLIST_AUDIT, GET_WORKLIST_AUDIT_V1 } from '../../state/actions/asyncAPI';
 
 interface AuditWorklistTabNavigatorProps {
   dispatch: Dispatch<any>;
@@ -43,6 +44,8 @@ const getWorklistAuditApiHook = (
   if (navigation.isFocused()) {
     if (!getWorklistAuditApi.isWaiting && getWorklistAuditApi.result && getWorklistAuditApi.result.data) {
       dispatch(setWorklistItems(getWorklistAuditApi.result.data as WorklistItemI[]));
+      dispatch({ type: GET_WORKLIST_AUDIT.RESET });
+      dispatch({ type: GET_WORKLIST_AUDIT_V1.RESET });
     }
   }
 };
@@ -55,14 +58,28 @@ const isRollOverComplete = (wlSummary: WorklistSummary) => {
   return true;
 };
 
+export const getWorklistAuditApiToUse = (
+  enableAuditsInProgress: boolean,
+  getWorklistAuditsApi: AsyncState,
+  getWorklistAuditsV1Api: AsyncState
+): AsyncState => (enableAuditsInProgress
+  ? getWorklistAuditsV1Api
+  : getWorklistAuditsApi);
+
 export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps) => {
   const {
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
     useEffectHook, trackEventCall, enableAuditsInProgress
   } = props;
-  const getWorklistAuditApi: AsyncState = useTypedSelector(state => state.async.getWorklistAudits);
-  const { showRollOverAudit, inProgress } = useTypedSelector(state => state.User.configs);
-  const wlSummary: WorklistSummary[] = inProgress
+  const getWorklistAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
+  const getWorklistAuditV1Api = useTypedSelector(state => state.async.getWorklistAuditsV1);
+  const getAuditWorklistApi = getWorklistAuditApiToUse(
+    enableAuditsInProgress,
+    getWorklistAuditApi,
+    getWorklistAuditV1Api
+  );
+  const { showRollOverAudit } = useTypedSelector(state => state.User.configs);
+  const wlSummary: WorklistSummary[] = enableAuditsInProgress
     ? useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data)
     : useTypedSelector(state => state.async.getWorklistSummary.result?.data);
   const selectedWorklistGoal = WorklistGoal.AUDITS;
@@ -76,7 +93,9 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
         auditWlType.push('AU');
       }
       trackEventCall('Audit_Worklist', { action: 'get_worklist_api_retry' });
-      dispatch(getWorklistAudits({ worklistType: auditWlType }));
+      dispatch(enableAuditsInProgress
+        ? getWorklistAuditsV1({ worklistType: auditWlType })
+        : getWorklistAudits({ worklistType: auditWlType }));
     });
   };
   // Get Audit worklist items call
@@ -86,7 +105,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     }, [navigation])
   );
 
-  useEffectHook(() => getWorklistAuditApiHook(getWorklistAuditApi, dispatch, navigation), [getWorklistAuditApi]);
+  useEffectHook(() => getWorklistAuditApiHook(getAuditWorklistApi, dispatch, navigation), [getAuditWorklistApi]);
 
   return (
     <Tab.Navigator
