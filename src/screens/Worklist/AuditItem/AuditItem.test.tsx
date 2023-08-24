@@ -662,7 +662,7 @@ describe('AuditItemScreen', () => {
       getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError, true);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
-        text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+        text1: strings('AUDITS.GET_SAVED_LOC_FAIL'),
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
@@ -716,7 +716,7 @@ describe('AuditItemScreen', () => {
       getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError, true);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
-        text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+        text1: strings('AUDITS.GET_SAVED_LOC_FAIL'),
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });

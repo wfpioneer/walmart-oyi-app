@@ -500,7 +500,7 @@ export const getItemLocationsApiHook = (
           }
           Toast.show({
             type: 'error',
-            text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+            text1: strings('AUDITS.GET_SAVED_LOC_FAIL'),
             visibilityTime: SNACKBAR_TIMEOUT,
             position: 'bottom'
           });
@@ -556,7 +556,7 @@ export const getItemLocationsV1ApiHook = (
           getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, undefined);
           Toast.show({
             type: 'error',
-            text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
+            text1: strings('AUDITS.GET_SAVED_LOC_FAIL'),
             visibilityTime: SNACKBAR_TIMEOUT,
             position: 'bottom'
           });
