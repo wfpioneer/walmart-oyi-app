@@ -952,7 +952,7 @@ export const saveAuditsProgressApiHook = (
         Toast.show({
           type: 'error',
           position: 'bottom',
-          text1: strings('AUDITS.LOCATION_SAVE_FAIL'),
+          text1: strings('AUDITS.LOCATIONS_SAVE_FAIL'),
           text2: strings('GENERICS.TRY_AGAIN'),
           visibilityTime: SNACKBAR_TIMEOUT
         });
