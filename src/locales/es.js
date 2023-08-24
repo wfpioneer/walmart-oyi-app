@@ -563,7 +563,7 @@ export default {
     CURRENT_TOTAL: 'Total Actual',
     LOCATIONS_SAVED: 'Ubicaciones Guardadas',
     LOCATIONS_SAVE_FAIL: 'Incapaz de Guardar Ubicaciones',
-    GET_SAVED_LOC_FAIL: 'Incapaz de mostrar las ubicaciones guardadas' // MX TRANSLATION this is google translate + inference from existing translations
+    GET_SAVED_LOC_FAIL: 'Incapaz de recuperar las ubicaciones guardadas'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',

@@ -568,7 +568,7 @@ export default {
     CURRENT_TOTAL: '当前总数',
     LOCATIONS_SAVED: '货位已保存',
     LOCATIONS_SAVE_FAIL: '无法保存货位',
-    GET_SAVED_LOC_FAIL: '无法检索已保存的位置' // CN TRANSLATION this is google translate
+    GET_SAVED_LOC_FAIL: '无法重置保存的位置'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',
