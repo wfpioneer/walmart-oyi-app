@@ -1,6 +1,8 @@
 import Request from './Request';
 import { getEnvironment } from '../utils/environment';
 
+const TIMEOUT = 30000; // ms
+
 export interface SaveLocation {
   name: string;
   qty: number;
@@ -11,7 +13,9 @@ export default class SaveAuditsProgressService {
     const urls = getEnvironment();
     const timeLimitParams = payload.hours ? `?timelimit=${payload.hours}` : '';
     return Request.get(
-      `${urls.orchestrationURL}/worklist/audits/${payload.itemNbr}${timeLimitParams}`
+      `${urls.worklistURL}/worklist/audits/locations/${payload.itemNbr}${timeLimitParams}`,
+      undefined,
+      { timeout: TIMEOUT }
     );
   }
 

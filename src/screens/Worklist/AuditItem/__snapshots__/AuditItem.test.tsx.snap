@@ -2922,7 +2922,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         <LocationListCard
           add={[Function]}
           error={false}
-          loading={true}
+          loading={false}
           locationList={Array []}
           locationType="floor"
           maxQty={9999}

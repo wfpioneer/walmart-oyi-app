@@ -214,7 +214,7 @@ export default {
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
     INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
-    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo' // TODO SPANISH TRANSLATION
+    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -272,7 +272,7 @@ export default {
     DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
-    CHANGE_LOCATION: 'Actualiza la ubicación del artículo', // TODO SPANISH TRANSLATION
+    CHANGE_LOCATION: 'Actualiza la ubicación del artículo',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Artículos',
     PALLETS: 'Pallets',
@@ -562,7 +562,8 @@ export default {
     IN_PROGRESS: 'En Progreso',
     CURRENT_TOTAL: 'Total Actual',
     LOCATIONS_SAVED: 'Ubicaciones Guardadas',
-    LOCATIONS_SAVE_FAIL: 'Incapaz de guardar ubicaciones'
+    LOCATIONS_SAVE_FAIL: 'Incapaz de Guardar Ubicaciones',
+    GET_SAVED_LOC_FAIL: 'Incapaz de mostrar las ubicaciones guardadas' // MX TRANSLATION this is google translate + inference from existing translations
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',

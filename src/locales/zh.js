@@ -234,7 +234,7 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: '扫描的商品已经在此卡板',
     ITEMS_DETAILS_ERROR: '报错:无法找到此商品UPC信息',
-    ITEMS_NOT_FOUND: 'Item Not found', // TODO MANDARIN TRANSLATION
+    ITEMS_NOT_FOUND: 'Item Not found',
     PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
     ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
     ADD_UPC_ERROR: '添加商品到卡板时出错',
@@ -567,7 +567,8 @@ export default {
     IN_PROGRESS: '正在进行中',
     CURRENT_TOTAL: '当前总数',
     LOCATIONS_SAVED: '货位已保存',
-    LOCATIONS_SAVE_FAIL: '无法保存货位'
+    LOCATIONS_SAVE_FAIL: '无法保存货位',
+    GET_SAVED_LOC_FAIL: '无法检索已保存的位置' // CN TRANSLATION this is google translate
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',
