@@ -52,11 +52,12 @@ export const scannedEventHook = (
   scannedEvent: { value: any; type: string | null },
   trackEventCall: typeof trackEvent,
   dispatch: Dispatch<any>,
-  auditWorklistItems: WorklistItemI[]
+  auditWorklistItems: WorklistItemI[],
+  validateSessionCall: typeof validateSession
 ) => {
   if (isMounted.current) {
     if (navigation.isFocused() && scannedEvent.value) {
-      validateSession(navigation, route.name).then(() => {
+      validateSessionCall(navigation, route.name).then(() => {
         if (auditWorklistItems.some(
           item => scannedEvent.value === item.itemNbr?.toString()
             || compareWithMaybeCheckDigit(scannedEvent.value, item.upcNbr || '')
@@ -165,7 +166,8 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     scannedEvent,
     trackEventCall,
     dispatch,
-    auditWorklistItems
+    auditWorklistItems,
+    validateSessionCall
   ), [scannedEvent, auditWorklistItems]);
 
   // Scanner listener

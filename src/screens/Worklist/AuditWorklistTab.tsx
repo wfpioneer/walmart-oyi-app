@@ -277,7 +277,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         />
       </View>
       )}
-      {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
+      {isManualScanEnabled ? <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} /> : null}
       {auditItemKeys.length > 0
         && (
         <CollapseAllBar
