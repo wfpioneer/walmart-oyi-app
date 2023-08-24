@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: 'Aviso',
     CLOSE: 'Cerrar',
     NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}',
-    FEEDBACK: 'Retroalimentación'
+    FEEDBACK: 'Retroalimentación',
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -213,7 +214,7 @@ export default {
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
     INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
-    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo' // TODO SPANISH TRANSLATION
+    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
-    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
     CREATE_PALLET: 'Crear Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet creado con éxito',
     CREATE_PALLET_FAILED: 'Falló la creación de pallet',
@@ -272,7 +272,7 @@ export default {
     DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
-    CHANGE_LOCATION: 'Actualiza la ubicación del artículo', // TODO SPANISH TRANSLATION
+    CHANGE_LOCATION: 'Actualiza la ubicación del artículo',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Artículos',
     PALLETS: 'Pallets',
@@ -563,7 +563,8 @@ export default {
     CURRENT_TOTAL: 'Total Actual',
     LOCATIONS_SAVED: 'Ubicaciones Guardadas',
     LOCATIONS_SAVE_FAIL: 'Incapaz de guardar ubicaciones',
-    SCANNED_ITEM_NOT_PRESENT: 'El artículo escaneado no está en la lista de auditorías'
+    SCANNED_ITEM_NOT_PRESENT: 'El artículo escaneado no está en la lista de auditorías',
+    GET_SAVED_LOC_FAIL: 'Incapaz de recuperar las ubicaciones guardadas'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',

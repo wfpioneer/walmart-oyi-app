@@ -20,6 +20,8 @@ import AuditItem, {
   AuditItemScreen,
   AuditItemScreenProps,
   addLocationHandler,
+  backConfirmed,
+  backConfirmedHook,
   calculateFloorLocDecreaseQty,
   calculateFloorLocIncreaseQty,
   calculatePalletDecreaseQty,
@@ -41,6 +43,8 @@ import AuditItem, {
   getUpdatedFloorLocations,
   getUpdatedReserveLocations,
   isError,
+  navigationRemoveListenerHook,
+  onValidateHardwareBackPress,
   onValidateItemNumber,
   renderCalculatorModal,
   renderCancelApprovalModal,
@@ -62,9 +66,12 @@ import { mockConfig } from '../../../mockData/mockConfig';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import {
+  GET_AUDIT_LOCATIONS,
   GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1, UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY, UPDATE_OH_QTY_V1
 } from '../../../state/actions/asyncAPI';
-import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
+import {
+  getApprovalList, getAuditLocations, getLocationsForItem, getLocationsForItemV1, updateMultiPalletUPCQty
+} from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
 import { setFloorLocations, setReserveLocations, setupScreen } from '../../../state/actions/ItemDetailScreen';
@@ -72,7 +79,7 @@ import ItemDetails from '../../../models/ItemDetails';
 import Location from '../../../models/Location';
 import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../../models/ApprovalListItem';
 import { mockLocations, mockSomeSaveableLocations } from '../../../mockData/mockPickList';
-import { UseStateType } from '../../../models/Generics.d';
+import { BeforeRemoveEvent, UseStateType } from '../../../models/Generics.d';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -220,7 +227,12 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   countryCode: 'CN',
   updateMultiPalletUPCQtyApi: defaultAsyncState,
   getItemPalletsDispatch: jest.fn(),
-  modalIsWaitingState: [false, jest.fn()]
+  modalIsWaitingState: [false, jest.fn()],
+  getSavedAuditLocationsApi: defaultAsyncState,
+  displayWarningModalState: [false, jest.fn()],
+  useCallbackHook: jest.fn(fn => fn()),
+  useFocusEffectHook: jest.fn(),
+  auditSavedWarningState: [false, jest.fn()]
 };
 
 const mockModalIsWaitingState: UseStateType<boolean> = [false, jest.fn()];
@@ -351,6 +363,17 @@ describe('AuditItemScreen', () => {
       renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('render the audit screen with the back warning modal present', () => {
+      const testProps: AuditItemScreenProps = {
+        ...mockAuditItemScreenProps,
+        displayWarningModalState: [true, jest.fn()]
+      };
+
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<AuditItemScreen {...testProps} />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Manage AuditItem externalized function tests', () => {
@@ -359,6 +382,7 @@ describe('AuditItemScreen', () => {
     const mockDeleteLocationConfirmed = jest.fn();
     const mockSetShowOnHandsConfirmModal = jest.fn();
     const mockSetGetItemPalletsError = jest.fn();
+    const mockSetAuditSaved = jest.fn();
     const mockExistingReserveLocations: ItemPalletInfo[] = [];
     const mockLocationName = 'A1-1';
     const mockItemNumber = 9800065634;
@@ -397,6 +421,18 @@ describe('AuditItemScreen', () => {
         2,
         expectedGetItemDetailsAction
       );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_LOCATIONS_FOR_ITEM.RESET }
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        6,
+        getLocationsForItem(123)
+      );
     });
 
     it('test onValidateItemNumber with get pete locations', async () => {
@@ -416,6 +452,51 @@ describe('AuditItemScreen', () => {
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         2,
         expectedGetItemDetailsAction
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_LOCATIONS_FOR_ITEM_V1.RESET }
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        6,
+        getLocationsForItemV1(123)
+      );
+    });
+
+    it('test onValidateItemNumber with Audit Save Enabled', async () => {
+      const expectedGetItemDetailsAction = {
+        payload: {
+          id: 123
+        },
+        type: 'SAGA/GET_ITEM_DETAILS_V4'
+      };
+      await onValidateItemNumber({
+        ...mockAuditItemScreenProps,
+        itemNumber: 123,
+        userConfig: { ...mockConfig, enableAuditsInProgress: true }
+      }, true);
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
+        type: 'API/GET_ITEM_DETAILS_V4/RESET'
+      });
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        2,
+        expectedGetItemDetailsAction
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        7,
+        { type: GET_AUDIT_LOCATIONS.RESET }
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        8,
+        getAuditLocations({ itemNbr: 123, hours: undefined })
       );
     });
 
@@ -473,7 +554,26 @@ describe('AuditItemScreen', () => {
         typeNbr: 8,
         newQty: 0
       }];
-      getUpdatedFloorLocations(newResults, mockDispatch, mockItemDetails?.location?.floor || []);
+      const saveAuditLocMap: Map<string, number> = new Map([['A1-1', 5]]);
+      getUpdatedFloorLocations(newResults, mockDispatch, mockItemDetails?.location?.floor || [], saveAuditLocMap);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+
+    it('tests getFloorLocationsResult with no existing locations', () => {
+      const newResults: Location[] = [...mockItemDetails?.location?.floor || [], {
+        zoneId: 0,
+        aisleId: 1,
+        sectionId: 1,
+        zoneName: 'A',
+        aisleName: '1',
+        sectionName: '1',
+        locationName: 'A1-1',
+        type: 'Sales Floor',
+        typeNbr: 8,
+        newQty: 0
+      }];
+      const saveAuditLocMap: Map<string, number> = new Map([['A1-1', 5]]);
+      getUpdatedFloorLocations(newResults, mockDispatch, [], saveAuditLocMap);
       expect(mockDispatch).toBeCalledTimes(1);
     });
 
@@ -532,13 +632,58 @@ describe('AuditItemScreen', () => {
         result: {
           data: {
             location: {
-              floor: []
+              floor: [mockLocations[0]]
             }
           }
         }
       };
-      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
+      const getSavedLocationSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            locations: [{
+              name: 'ABAR1-1',
+              qty: 5,
+              lastModifiedTimestamp: '2023-08-24'
+            }],
+            itemNbr: 1
+          },
+          status: 200
+        }
+      };
+      const getSavedLocation204: AsyncState = {
+        ...getSavedLocationSuccess,
+        result: {
+          status: 204
+        }
+      };
+      const getSavedLocationError: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        error: 'Network Error'
+      };
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], defaultAsyncState);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(navigationProp.isFocused).toHaveBeenCalled();
+
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocation204);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.GET_SAVED_LOC_FAIL'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
     });
 
     it('Tests get item locations v1 api hook success with correct item number', () => {
@@ -547,12 +692,64 @@ describe('AuditItemScreen', () => {
         value: 1,
         result: {
           data: {
-            salesFloorLocation: []
+            salesFloorLocation: [mockLocations[0]]
           }
         }
       };
-      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
+      const getSavedLocationSuccess: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        result: {
+          data: {
+            locations: [{
+              name: 'ABAR1-1',
+              qty: 5,
+              lastModifiedTimestamp: '2023-08-24'
+            }],
+            itemNbr: 1
+          },
+          status: 200
+        }
+      };
+      const getSavedLocation204: AsyncState = {
+        ...getSavedLocationSuccess,
+        result: {
+          status: 204
+        }
+      };
+      const getSavedLocationError: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        error: 'Network Error'
+      };
+      getItemLocationsV1ApiHook(
+        locationSuccessApi,
+        1,
+        mockDispatch,
+        navigationProp,
+        [],
+        defaultAsyncState
+      );
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(navigationProp.isFocused).toHaveBeenCalled();
+
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationSuccess);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocation204);
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], getSavedLocationError);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.GET_SAVED_LOC_FAIL'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
     });
 
     it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
@@ -847,7 +1044,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        false
+        false,
+        mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'success',
@@ -856,6 +1054,7 @@ describe('AuditItemScreen', () => {
         position: 'bottom'
       });
       expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
 
@@ -865,7 +1064,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        true
+        true,
+        mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'success',
@@ -874,6 +1074,7 @@ describe('AuditItemScreen', () => {
         position: 'bottom'
       });
       expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
     });
 
     it('Tests deletePalletApiHook on failure', () => {
@@ -893,7 +1094,14 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
-      completeItemApiHook(failureApi, mockDispatch, navigationProp, mockPalletLocations, false);
+      completeItemApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        false,
+        mockAuditItemScreenProps.auditSavedWarningState[1]
+      );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
@@ -934,7 +1142,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockReserveLocations,
-        jest.fn()
+        jest.fn(),
+        mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -944,6 +1153,7 @@ describe('AuditItemScreen', () => {
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
+      expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
       expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_OH_QTY.RESET });
       expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_OH_QTY_V1.RESET });
@@ -963,7 +1173,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        mockSetModalWaiting
+        mockSetModalWaiting,
+        mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockSetModalWaiting).toHaveBeenCalledWith(false);
@@ -1571,7 +1782,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        mockModalIsWaitingState[1]
+        mockModalIsWaitingState[1],
+        mockSetAuditSaved
       );
 
       expect(mockDispatch).toHaveBeenCalledTimes(2);
@@ -1581,6 +1793,7 @@ describe('AuditItemScreen', () => {
       );
       expect(mockModalIsWaitingState[1]).toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
+      expect(mockSetAuditSaved).toHaveBeenCalledWith(true);
     });
 
     it('tests the save audits progress api hook failure', () => {
@@ -1589,7 +1802,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        mockModalIsWaitingState[1]
+        mockModalIsWaitingState[1],
+        mockSetAuditSaved
       );
 
       expect(mockDispatch).toHaveBeenCalledTimes(2);
@@ -1609,7 +1823,8 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockPalletLocations,
-        mockModalIsWaitingState[1]
+        mockModalIsWaitingState[1],
+        mockSetAuditSaved
       );
 
       expect(mockModalIsWaitingState[1]).not.toHaveBeenCalled();
@@ -1624,6 +1839,67 @@ describe('AuditItemScreen', () => {
       const someSaveableResults = getLocationsToSave(mockSomeSaveableLocations);
 
       expect(someSaveableResults.length).toBe(1);
+    });
+
+    const mockSetDisplayWarningModal = jest.fn();
+
+    it('tests the navigation remove listener hook', () => {
+      const mockE: BeforeRemoveEvent = {
+        data: { action: { type: 'I is the removal' } },
+        defaultPrevented: false,
+        preventDefault: jest.fn(),
+        type: 'beforeRemove'
+      };
+
+      // nothing needing saving
+      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, false, mockDispatch, false);
+      expect(mockE.preventDefault).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+
+      // something to save
+      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, true, mockDispatch, false);
+      expect(mockE.preventDefault).toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+
+    it('tests the back confirmed hook', () => {
+      backConfirmedHook(false, false, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      backConfirmedHook(false, true, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      backConfirmedHook(true, true, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      backConfirmedHook(true, false, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+    });
+
+    it('tests the on validate hardware back press', () => {
+      const shouldBeFalse = onValidateHardwareBackPress(mockSetDisplayWarningModal, false);
+
+      expect(shouldBeFalse).toBeFalsy();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+
+      const shouldBeTrue = onValidateHardwareBackPress(mockSetDisplayWarningModal, true);
+      expect(shouldBeTrue).toBeTruthy();
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+    });
+
+    it('tests back confirmed', () => {
+      backConfirmed(mockSetDisplayWarningModal, mockDispatch, navigationProp);
+      expect(mockSetDisplayWarningModal).toHaveBeenCalledWith(false);
+      expect(mockDispatch).toHaveBeenCalled();
+      expect(navigationProp.goBack).toHaveBeenCalled();
     });
   });
 });

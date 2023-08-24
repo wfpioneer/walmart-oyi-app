@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: 'Warning',
     CLOSE: 'Close',
     NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
-    FEEDBACK: 'Feedback'
+    FEEDBACK: 'Feedback',
+    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
-    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
     CREATE_PALLET: 'Create Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet created successfully',
     CREATE_PALLET_FAILED: 'Failed to create pallet',
@@ -564,7 +564,8 @@ export default {
     CURRENT_TOTAL: 'Current Total',
     LOCATIONS_SAVED: 'Locations saved',
     LOCATIONS_SAVE_FAIL: 'Unable to save locations',
-    SCANNED_ITEM_NOT_PRESENT: 'The scanned item is not on the audit worklist'
+    SCANNED_ITEM_NOT_PRESENT: 'The scanned item is not on the audit worklist',
+    GET_SAVED_LOC_FAIL: 'Unable to retrieve saved locations'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',

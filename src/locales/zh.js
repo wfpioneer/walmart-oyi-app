@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: '警示',
     CLOSE: '关闭',
     NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间',
-    FEEDBACK: '反馈'
+    FEEDBACK: '反馈',
+    UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -233,7 +234,7 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: '扫描的商品已经在此卡板',
     ITEMS_DETAILS_ERROR: '报错:无法找到此商品UPC信息',
-    ITEMS_NOT_FOUND: 'Item Not found', // TODO MANDARIN TRANSLATION
+    ITEMS_NOT_FOUND: 'Item Not found',
     PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
     ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
     ADD_UPC_ERROR: '添加商品到卡板时出错',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '确定要清除此卡板信息?',
     CLEAR_PALLET_ERROR: '清除卡板信息发生错误导致失败',
     CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理成功',
-    UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失',
     CREATE_PALLET: '创建卡板',
     CREATE_PALLET_SUCCESS: '卡板创建成功',
     CREATE_PALLET_FAILED: '卡板创建失败',
@@ -568,7 +568,8 @@ export default {
     CURRENT_TOTAL: '当前总数',
     LOCATIONS_SAVED: '货位已保存',
     LOCATIONS_SAVE_FAIL: '无法保存货位',
-    SCANNED_ITEM_NOT_PRESENT: '扫描的商品不在盘点任务清单'
+    SCANNED_ITEM_NOT_PRESENT: '扫描的商品不在盘点任务清单',
+    GET_SAVED_LOC_FAIL: '无法重置保存的位置'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',

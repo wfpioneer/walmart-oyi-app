@@ -49,11 +49,11 @@ import {
 } from '../../state/actions/Binning';
 import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import { BeforeRemoveEvent, ScannedEvent, UseStateType } from '../../models/Generics.d';
-import { CustomModalComponent } from '../Modal/Modal';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import BinningItemCard from '../../components/BinningItemCard/BinningItemCard';
 import { Pallet } from '../../models/PalletManagementTypes';
 import { setupPallet } from '../../state/actions/PalletManagement';
+import { renderUnsavedWarningModal } from '../../components/UnsavedWarningModal/UnsavedWarningModal';
 
 const SCREEN_NAME = 'Binning_Screen';
 export interface BinningScreenProps {
@@ -145,42 +145,6 @@ export const binningItemCard = (
     />
   );
 };
-
-export const renderWarningModal = (
-  displayWarningModal: boolean,
-  setDisplayWarningModal: UseStateType<boolean>[1],
-  backConfirm: () => void
-) => (
-  <CustomModalComponent
-    isVisible={displayWarningModal}
-    onClose={() => setDisplayWarningModal(false)}
-    modalType="Popup"
-  >
-    <>
-      <View>
-        <Text style={styles.labelHeader}>{strings('BINNING.WARNING_LABEL')}</Text>
-        <Text style={styles.message}>{strings('BINNING.WARNING_DESCRIPTION')}</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          style={styles.buttonAlign}
-          title={strings('GENERICS.CANCEL')}
-          titleColor={COLOR.MAIN_THEME_COLOR}
-          type={ButtonType.SOLID_WHITE}
-          onPress={() => setDisplayWarningModal(false)}
-          testID="cancelBack"
-        />
-        <Button
-          style={styles.buttonAlign}
-          title={strings('GENERICS.OK')}
-          type={ButtonType.PRIMARY}
-          onPress={backConfirm}
-          testID="confirmBack"
-        />
-      </View>
-    </>
-  </CustomModalComponent>
-);
 
 export const resetApis = (dispatch: Dispatch<any>) => {
   dispatch({ type: GET_PALLET_DETAILS.RESET });
@@ -432,9 +396,11 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
       keyboardVerticalOffset={110}
       onStartShouldSetResponder={handleUnhandledTouches}
     >
-      {renderWarningModal(
+      {renderUnsavedWarningModal(
         displayWarningModal,
         setDisplayWarningModal,
+        strings('BINNING.WARNING_LABEL'),
+        strings('BINNING.WARNING_DESCRIPTION'),
         () => backConfirmed(setDisplayWarningModal, dispatch, navigation, enableMultiPalletBin)
       )}
       <View style={styles.container}>
