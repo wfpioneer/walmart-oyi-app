@@ -485,10 +485,17 @@ export const getItemLocationsApiHook = (
 
             const locationDictionary = new Map<string, number>();
             locations.forEach(loc => {
-              locationDictionary.set(loc.name, loc.qty);
+              if (loc && loc.name) {
+                locationDictionary.set(loc.name, loc.qty);
+              }
             });
             if (locDetails && locDetails.location) {
-              getUpdatedFloorLocations(locDetails, dispatch, existingFloorLocations, locationDictionary);
+              getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, locationDictionary);
+            }
+          } else if (getSavedAuditLocationsApi.result.status === 204) {
+            const locDetails = getItemLocationsApi.result.data;
+            if (locDetails && locDetails.location) {
+              getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined);
             }
           }
           dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
@@ -496,7 +503,7 @@ export const getItemLocationsApiHook = (
         if (!getSavedAuditLocationsApi.isWaiting && getSavedAuditLocationsApi.error) {
           const locDetails = getItemLocationsApi.result.data;
           if (locDetails && locDetails.location) {
-            getUpdatedFloorLocations(locDetails, dispatch, existingFloorLocations, undefined);
+            getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined);
           }
           Toast.show({
             type: 'error',
@@ -548,6 +555,9 @@ export const getItemLocationsV1ApiHook = (
             });
 
             getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, locationDictionary);
+          } else if (getSavedAuditLocationsApi.result.status === 204) {
+            const { salesFloorLocation }: { salesFloorLocation: Location[] } = getItemLocationsV1Api.result.data;
+            getUpdatedFloorLocations(salesFloorLocation, dispatch, existingFloorLocations, undefined);
           }
           dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
         }
