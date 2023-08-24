@@ -24,8 +24,9 @@ import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { GET_WORKLIST_AUDIT, GET_WORKLIST_AUDIT_V1 } from '../../state/actions/asyncAPI';
 import { barcodeEmitter } from '../../utils/scannerUtils';
-import { setScannedEvent } from '../../state/actions/Global';
+import { resetScannedEvent, setScannedEvent } from '../../state/actions/Global';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
+import { compareWithMaybeCheckDigit } from '../../utils/barcodeUtils';
 
 interface AuditWorklistTabNavigatorProps {
   dispatch: Dispatch<any>;
@@ -54,10 +55,11 @@ export const scannedEventHook = (
   auditWorklistItems: WorklistItemI[]
 ) => {
   if (isMounted.current) {
-    if (navigation.isFocused()) {
+    if (navigation.isFocused() && scannedEvent.value) {
       validateSession(navigation, route.name).then(() => {
         if (auditWorklistItems.some(
-          item => scannedEvent.value === item.itemNbr?.toString() || scannedEvent.value === item.upcNbr
+          item => scannedEvent.value === item.itemNbr?.toString()
+            || compareWithMaybeCheckDigit(scannedEvent.value, item.upcNbr || '')
         )) {
           trackEventCall('Audit_Worklist', {
             action: 'scanned_item_on_worklist',
@@ -77,10 +79,31 @@ export const scannedEventHook = (
             visibilityTime: SNACKBAR_TIMEOUT
           });
         }
+        dispatch(resetScannedEvent());
       });
     }
   } else {
     isMounted.current = true;
+  }
+};
+
+export const scannerListenerHook = (
+  navigation: NavigationProp<any>,
+  validateSessionCall: typeof validateSession,
+  route: RouteProp<any>,
+  trackEventCall: typeof trackEvent,
+  scan: any,
+  dispatch: Dispatch<any>
+) => {
+  if (navigation.isFocused()) {
+    validateSessionCall(navigation, route.name).then(() => {
+      trackEventCall('Audit_Worklist', {
+        action: 'item_barcode_scan',
+        value: scan.value,
+        type: scan.type
+      });
+      dispatch(setScannedEvent(scan));
+    });
   }
 };
 
@@ -126,7 +149,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     getWorklistAuditApi,
     getWorklistAuditV1Api
   );
-  const { showRollOverAudit, scanRequired } = useTypedSelector(state => state.User.configs);
+  const { showRollOverAudit } = useTypedSelector(state => state.User.configs);
   const wlSummary: WorklistSummary[] = enableAuditsInProgress
     ? useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data)
     : useTypedSelector(state => state.async.getWorklistSummary.result?.data);
@@ -147,18 +170,14 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
 
   // Scanner listener
   useEffectHook(() => {
-    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused() && scanRequired) {
-        validateSessionCall(navigation, route.name).then(() => {
-          trackEventCall('Audit_Worklist', {
-            action: 'item_barcode_scan',
-            value: scan.value,
-            type: scan.type
-          });
-          dispatch(setScannedEvent(scan));
-        });
-      }
-    });
+    scannedSubscription = barcodeEmitter.addListener('scanned', scan => scannerListenerHook(
+      navigation,
+      validateSessionCall,
+      route,
+      trackEventCall,
+      scan,
+      dispatch
+    ));
     return () => {
       scannedSubscription.remove();
     };

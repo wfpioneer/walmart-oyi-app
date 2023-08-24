@@ -175,8 +175,8 @@ export const AuditWorklistNavigatorStack = (
             ),
             headerRight: () => (
               <View style={styles.headerContainer}>
-                {renderFilterButton(dispatch, menuOpen)}
                 {renderScanButton(dispatch, isManualScanEnabled)}
+                {renderFilterButton(dispatch, menuOpen)}
               </View>
             )
           }}
