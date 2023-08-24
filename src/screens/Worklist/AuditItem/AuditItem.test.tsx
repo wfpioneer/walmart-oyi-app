@@ -632,7 +632,7 @@ describe('AuditItemScreen', () => {
         result: {
           data: {
             location: {
-              floor: []
+              floor: [mockLocations[0]]
             }
           }
         }
@@ -642,7 +642,11 @@ describe('AuditItemScreen', () => {
         value: 1,
         result: {
           data: {
-            locations: [],
+            locations: [{
+              name: 'ABAR1-1',
+              qty: 5,
+              lastModifiedTimestamp: '2023-08-24'
+            }],
             itemNbr: 1
           },
           status: 200
@@ -688,7 +692,7 @@ describe('AuditItemScreen', () => {
         value: 1,
         result: {
           data: {
-            salesFloorLocation: []
+            salesFloorLocation: [mockLocations[0]]
           }
         }
       };
@@ -697,7 +701,11 @@ describe('AuditItemScreen', () => {
         value: 1,
         result: {
           data: {
-            locations: [],
+            locations: [{
+              name: 'ABAR1-1',
+              qty: 5,
+              lastModifiedTimestamp: '2023-08-24'
+            }],
             itemNbr: 1
           },
           status: 200
