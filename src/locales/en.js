@@ -562,8 +562,9 @@ export default {
     CUSTOM_ITEMS: 'Items',
     IN_PROGRESS: 'In Progress',
     CURRENT_TOTAL: 'Current Total',
-    LOCATIONS_SAVED: 'Locations saved',
-    LOCATIONS_SAVE_FAIL: 'Unable to save locations'
+    LOCATIONS_SAVED: 'Locations Saved',
+    LOCATIONS_SAVE_FAIL: 'Unable to Save Locations',
+    GET_SAVED_LOC_FAIL: 'Unable to retrieve saved locations'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',
