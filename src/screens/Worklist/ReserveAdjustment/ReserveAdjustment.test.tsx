@@ -482,7 +482,8 @@ describe('ReserveAdjustmentScreen', () => {
         mockDispatch,
         navigationProp,
         setShowOnHands,
-        mockItemDetails.itemNbr
+        mockItemDetails.itemNbr,
+        routeProp
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -510,7 +511,8 @@ describe('ReserveAdjustmentScreen', () => {
         mockDispatch,
         navigationProp,
         setShowOnHands,
-        mockItemDetails.itemNbr
+        mockItemDetails.itemNbr,
+        routeProp
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);

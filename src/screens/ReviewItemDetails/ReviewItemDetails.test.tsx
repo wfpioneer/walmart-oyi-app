@@ -184,8 +184,9 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
 
 describe('ReviewItemDetailsScreen', () => {
   const defaultResult: AxiosResponse<any> = {
-    // @ts-expect-error type error for AxiosRequestHeaders
-    config: {},
+    config: {
+      headers: new AxiosHeaders()
+    },
     data: {},
     headers: {},
     status: 200,

@@ -1045,6 +1045,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         false,
+        routeProp,
         mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1065,6 +1066,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         true,
+        routeProp,
         mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1100,6 +1102,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         false,
+        routeProp,
         mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1195,6 +1198,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
+        routeProp,
         mockModalIsWaitingState
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
@@ -1225,6 +1229,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
+        routeProp,
         mockModalIsWaitingState
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
@@ -1247,6 +1252,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
+        routeProp,
         mockModalIsWaitingState
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
@@ -1745,7 +1751,8 @@ describe('AuditItemScreen', () => {
         mockPalletLocations,
         mockItemDetails,
         false,
-        jest.fn()
+        jest.fn(),
+        routeProp
       );
       expect(mockDispatch).toBeCalledTimes(2);
     });
@@ -1758,7 +1765,8 @@ describe('AuditItemScreen', () => {
         mockPalletLocations,
         mockItemDetails,
         true,
-        jest.fn()
+        jest.fn(),
+        routeProp
       );
       expect(mockDispatch).toBeCalledTimes(2);
     });
@@ -1771,7 +1779,8 @@ describe('AuditItemScreen', () => {
         mockPalletLocations,
         mockItemDetails,
         false,
-        jest.fn()
+        jest.fn(),
+        routeProp
       );
       expect(mockDispatch).toBeCalledTimes(1);
     });

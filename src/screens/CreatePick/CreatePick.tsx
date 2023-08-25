@@ -13,7 +13,9 @@ import {
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Picker } from '@react-native-picker/picker';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  NavigationProp, RouteProp, useNavigation, useRoute
+} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import ItemInfo from '../../components/iteminfo/ItemInfo';
 import NumericSelector from '../../components/NumericSelector/NumericSelector';
@@ -57,6 +59,7 @@ interface CreatePickProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   countryCode: string;
   userConfigs: Configurations;
+  route: RouteProp<any, string>
 }
 
 export const getLocationsApiHook = (getLocationApi: AsyncState, dispatch: Dispatch<any>, isFocused: boolean) => {
@@ -134,7 +137,8 @@ export const getLocationsV1ApiHook = (
 export const createPickApiHook = (
   createPickApi: AsyncState,
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>
 ) => {
   const { isWaiting, result, error } = createPickApi;
   if (navigation.isFocused()) {
@@ -143,7 +147,11 @@ export const createPickApiHook = (
       dispatch(hideActivityModal());
       dispatch({ type: CREATE_NEW_PICK.RESET });
       dispatch({ type: CREATE_NEW_PICK_V1.RESET });
-      navigation.goBack();
+      if (route.params && route.params.source === 'OtherAction') {
+        navigation.navigate('ReviewItemDetailsHome');
+      } else {
+        navigation.goBack();
+      }
       Toast.show({
         type: 'success',
         text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
@@ -211,7 +219,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
   const {
     item, floorLocations, reserveLocations, selectedSectionState, createPickApi,
     palletNumberState, dispatch, navigation, getLocationApi, getLocationV1Api,
-    useEffectHook, selectedTab, countryCode, userConfigs
+    useEffectHook, selectedTab, countryCode, userConfigs, route
   } = props;
 
   const [selectedSection, setSelectedSection] = selectedSectionState;
@@ -226,7 +234,7 @@ export const CreatePickScreen = (props: CreatePickProps) => {
     [getLocationV1Api]
   );
   useEffectHook(
-    () => createPickApiHook(createPickApi, dispatch, navigation),
+    () => createPickApiHook(createPickApi, dispatch, navigation, route),
     [createPickApi]
   );
 
@@ -402,7 +410,7 @@ const CreatePick = () => {
   const palletNumberState = useState(1);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
+  const route = useRoute();
   return (
     <CreatePickScreen
       item={item}
@@ -419,6 +427,7 @@ const CreatePick = () => {
       useEffectHook={useEffect}
       countryCode={countryCode}
       userConfigs={configs}
+      route={route}
     />
   );
 };

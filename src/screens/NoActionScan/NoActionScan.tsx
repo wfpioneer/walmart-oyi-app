@@ -103,7 +103,8 @@ export const callBackbarcodeEmitter = (
 export const completeItemApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  completeItemApi: AsyncState
+  completeItemApi: AsyncState,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     // on api success
@@ -119,8 +120,14 @@ export const completeItemApiHook = (
         });
       } else {
         dispatch(setActionCompleted());
-        navigation.goBack();
-        navigation.goBack();
+        if (route.params && route.params.source === 'OtherAction') {
+          navigation.goBack();
+          navigation.goBack();
+          navigation.goBack();
+        } else {
+          navigation.goBack();
+          navigation.goBack();
+        }
       }
     }
 
@@ -190,7 +197,7 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
 
   // Complete Item Details API
   useEffectHook(() => {
-    completeItemApiHook(dispatch, navigation, completeItemApi);
+    completeItemApiHook(dispatch, navigation, completeItemApi, route);
   }, [completeItemApi]);
 
   if (completeItemApi.isWaiting) {
