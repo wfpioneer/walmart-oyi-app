@@ -25,11 +25,14 @@ export type FloorItemRowProps = {
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 };
 
 const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
   const {
-    item, dispatch, navigation, trackEventCall
+    item, dispatch, navigation, trackEventCall,
+    imageToken, tokenIsWaiting
   } = props;
   const user = useTypedSelector(state => state.User);
   const location = useTypedSelector(state => state.Location);
@@ -61,6 +64,8 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
             itemNumber={item.itemNbr}
             countryCode={user.countryCode}
             imageStyle={styles.itemImage}
+            imageToken={imageToken}
+            tokenIsWaiting={tokenIsWaiting}
           />
           )}
         </View>
@@ -100,3 +105,8 @@ const FloorItemRow = (props: FloorItemRowProps): JSX.Element => {
 };
 
 export default FloorItemRow;
+
+FloorItemRow.defaultProps = {
+  imageToken: undefined,
+  tokenIsWaiting: false
+};

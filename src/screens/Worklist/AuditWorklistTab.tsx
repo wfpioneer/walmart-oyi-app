@@ -46,6 +46,8 @@ export interface AuditWorklistTabScreenProps {
     collapsedState: UseStateType<boolean>;
     isLoadedState: UseStateType<boolean>;
     useEffectHook: typeof useEffect;
+    imageToken: string | undefined;
+    tokenIsWaiting: boolean;
 }
 
 const onItemClick = (
@@ -68,7 +70,9 @@ const renderCategoryCard = (
   trackEventCall: typeof trackEvent,
   showItemImage: boolean,
   countryCode: string,
-  enableAuditsInProgress: boolean
+  enableAuditsInProgress: boolean,
+  imageToken: string | undefined = undefined,
+  tokenIsWaiting = false
 ) => (
   <CategoryCard
     category={category}
@@ -80,6 +84,8 @@ const renderCategoryCard = (
     showItemImage={showItemImage}
     countryCode={countryCode}
     enableAuditsInProgress={enableAuditsInProgress}
+    imageToken={imageToken}
+    tokenIsWaiting={tokenIsWaiting}
   />
 );
 
@@ -155,7 +161,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
     items, refreshing, dispatch, navigation, error, useEffectHook,
     trackEventCall, config, filterExceptions, filterCategories,
-    onRefresh, countryCode, collapsedState, isLoadedState
+    onRefresh, countryCode, collapsedState, isLoadedState, imageToken, tokenIsWaiting
   } = props;
   const {
     areas, enableAreaFilter, showItemImage, showRollOverAudit
@@ -295,7 +301,9 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           trackEventCall,
           showItemImage,
           countryCode,
-          config.enableAuditsInProgress
+          config.enableAuditsInProgress,
+          imageToken,
+          tokenIsWaiting
         )}
         keyExtractor={item => `category-${item}`}
         onRefresh={() => {
@@ -322,6 +330,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const collapsedState = useState(false);
   const isLoadedState = useState(false);
+  const imageToken = useTypedSelector(state => state.async.getItemCenterToken);
   return (
     <AuditWorklistTabScreen
       items={items}
@@ -338,6 +347,8 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       config={configs}
       useEffectHook={useEffect}
       isLoadedState={isLoadedState}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
+      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );
 };

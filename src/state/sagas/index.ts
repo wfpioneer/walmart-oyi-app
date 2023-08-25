@@ -31,6 +31,7 @@ import GetItemPalletsService from '../../services/GetItemPallets.service';
 import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
 import SaveAuditsProgressService from '../../services/SaveAuditsProgress.service';
+import ItemCenterTokenService from '../../services/ItemCenterToken.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V4, actions.getItemDetailsV4, GetItemDetailsService.getItemDetailsV4),
@@ -148,6 +149,11 @@ const genericSagas = [
     saga.SAVE_AUDITS_PROGRESS,
     actions.saveAuditsProgress,
     SaveAuditsProgressService.saveAuditLocations
+  ),
+  makeAsyncSaga(
+    saga.GET_ITEM_CENTER_TOKEN,
+    actions.getItemCenterToken,
+    ItemCenterTokenService.getItemCenterToken
   )
 ];
 

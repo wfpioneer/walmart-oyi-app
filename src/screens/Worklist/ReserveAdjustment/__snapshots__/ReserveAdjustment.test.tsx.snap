@@ -1058,6 +1058,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       pendingQty={-999}
       showItemImage={false}
       showOHItems={true}
+      tokenIsWaiting={false}
     />
   </View>
   <ScrollView
@@ -1328,6 +1329,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       pendingQty={-999}
       showItemImage={false}
       showOHItems={true}
+      tokenIsWaiting={false}
     />
   </View>
   <ScrollView
