@@ -502,6 +502,21 @@ describe('ReserveAdjustmentScreen', () => {
       ));
       expect(setShowOnHands).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toHaveBeenCalled();
+
+      // Tests if user navigated frpm the other action screen
+      const routeOtherAction: RouteProp<any, string> = {
+        ...routeProp,
+        params: { source: 'OtherAction' }
+      };
+      updateMultiPalletUPCQtyV2ApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands,
+        mockItemDetails.itemNbr,
+        routeOtherAction
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
     });
 
     it('Tests updateMultiPalletUPCQtyV2ApiHook on failure', () => {
