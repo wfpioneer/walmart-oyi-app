@@ -107,6 +107,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders array of pe
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -125,6 +126,7 @@ exports[`PendingWorklistScreen Tests rendering Worklist data Renders empty array
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -142,6 +144,7 @@ exports[`PendingWorklistScreen Tests rendering worklist api responses Renders er
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -159,6 +162,7 @@ exports[`PendingWorklistScreen Tests rendering worklist api responses Renders re
   onRefresh={[Function]}
   refreshing={true}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;

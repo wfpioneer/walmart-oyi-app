@@ -101,6 +101,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -119,6 +120,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array fo
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -137,6 +139,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array fo
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -242,6 +245,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -259,6 +263,7 @@ exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders error
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -276,6 +281,7 @@ exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders refre
   onRefresh={[Function]}
   refreshing={true}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;

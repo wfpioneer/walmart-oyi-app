@@ -17,7 +17,7 @@ import {
 } from '../../state/actions/User';
 import { GET_CLUB_CONFIG, GET_FLUFFY_ROLES } from '../../state/actions/asyncAPI';
 import {
-  getClubConfig, getFluffyFeatures, updateUserConfig
+  getClubConfig, getFluffyFeatures, getItemCenterToken, updateUserConfig
 } from '../../state/actions/saga';
 import User from '../../models/User';
 import { setLanguage, strings } from '../../locales';
@@ -229,13 +229,12 @@ export const userConfigsApiHook = (
   navigation: NavigationProp<any>,
   env: string
 ) => {
+  const userCountryCode = user.countryCode.toUpperCase();
   if (getFluffyApiState.isWaiting || getClubConfigApiState.isWaiting) {
     dispatch(showActivityModal());
   }
-
   if (!getFluffyApiState.isWaiting && getFluffyApiState.result) {
     if (getFluffyApiState.result.status === 200) {
-      const userCountryCode = user.countryCode.toUpperCase();
       const fluffyResultData = getFluffyApiState.result.data;
       const fluffyFeatures = userCountryCode === 'CN' ? addCNAssociateRoleOverrides(fluffyResultData)
         : fluffyResultData;
@@ -243,6 +242,9 @@ export const userConfigsApiHook = (
     }
     dispatch(resetFluffyFeaturesApiState());
     dispatch(getClubConfig());
+    if (userCountryCode === 'CN') {
+      dispatch(getItemCenterToken());
+    }
     dispatch(updateUserConfig());
   } else if (getFluffyApiState.error) {
     // TODO Display toast/popup letting user know roles could not be retrieved
@@ -258,6 +260,9 @@ export const userConfigsApiHook = (
       dispatch(assignFluffyFeatures(mockFluffyResponse));
     }
     dispatch(getClubConfig());
+    if (userCountryCode === 'CN') {
+      dispatch(getItemCenterToken());
+    }
     dispatch(resetFluffyFeaturesApiState());
     dispatch(updateUserConfig());
   }

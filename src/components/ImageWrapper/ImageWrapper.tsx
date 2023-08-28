@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './ImageWrapper.style';
@@ -10,6 +10,8 @@ import {
 interface ImageWrapperProps {
   itemNumber: number,
   countryCode: string;
+  imageToken?: string;
+  tokenIsWaiting?: boolean;
   imageStyle?: any,
 }
 
@@ -18,102 +20,77 @@ const urls: Environment = getEnvironment();
 // eslint-disable-next-line max-len
 export const getMXImageUri = (itemNumber: number) => `https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/${itemNumber}m.jpg`;
 
-export const getImgDataParams = (uuid: string) => ({
-  params: {
-    query: {
-      id: uuid,
-      filters: {
-        typesCriterion: [
-          'item'
-        ]
-      }
-    }
-  }
-});
-
 export const setCNImageUri = (
   itemNumber: number,
-  setImageUri: React.Dispatch<React.SetStateAction<any>>
+  setImageUri: React.Dispatch<React.SetStateAction<any>>,
+  postApiCallCN: (apiUrl: string, data: any) => Promise<Response>
 ) => {
-  const uuidDataParams = {
-    params: {
-      query: {
-        filters: {
-          typesCriterion: [
-            'item'
-          ],
-          attributesCriterion: [{
-            itemnumber: {
-              exact: itemNumber.toString()
-            }
-          }]
-        }
-      }
+  const riversandParams = {
+    param: {
+      itemNbrs: [itemNumber]
     }
   };
 
   setImageUri('');
-  try {
-    postApiCall(urls.itemImageUUIDUrlCN, JSON.stringify(uuidDataParams))
-      .then(res => res.json())
-      .then(data => {
-        const { status, entities, totalRecords } = data.response;
-        let uuid;
-        if (status === 'success' && totalRecords > 0 && entities?.length) {
-          uuid = entities[0].id;
-        }
-        if (uuid) {
-          postApiCall(urls.itemImageUrlCN, JSON.stringify(getImgDataParams(uuid)))
-            .then(res => res.json())
-            .then(imgResponseData => {
-              const {
-                status: imgStatus, entities: imgEntitites, totalRecords: imgTotalRecords
-              } = imgResponseData.response;
-              if (imgStatus === 'success' && imgTotalRecords > 0 && imgEntitites?.length) {
-                const imageUri = imgEntitites[0].data.relationships
-                  .hasimages[0].relTo.data.attributes.downloadURL.values[0].value;
-                if (imageUri) {
-                  setImageUri(imageUri);
-                }
-              }
-            })
-            // eslint-disable-next-line no-console
-            .catch(error => console.log('❌ ', 'while fetching image using uuid ', error));
-        }
-      })
-      // eslint-disable-next-line no-console
-      .catch(error => console.log('❌ ', 'while fetching image uuid ', error));
-  } catch (err) {
+  postApiCallCN(urls.itemCenterRiversandURL, riversandParams)
+    .then(res => res.json())
+    .then(responseData => {
+      const imageArray = responseData.data[0].data.relationShips.hasImages || [];
+      const primaryImage = imageArray.find((imageElement: any) => imageElement.imageIsPrimary);
+      if (primaryImage) {
+        setImageUri(urls.itemCenterImageURL + primaryImage.walmartOssUploadId);
+      }
+    })
     // eslint-disable-next-line no-console
-    console.log('❌ ', 'error while fetching item image ', err);
+    .catch(error => console.log('❌ ', 'while fetching image uuid ', error));
+};
+
+export const createSource = (imageUri: string, countryCode: string, imageToken: string | undefined) => {
+  if (countryCode === 'CN') {
+    return {
+      uri: imageUri,
+      headers: {
+        clientId: 'oyi',
+        accessToken: imageToken
+      },
+      priority: FastImage.priority.normal
+    };
+  }
+  return {
+    uri: imageUri,
+    priority: FastImage.priority.normal
+  };
+};
+
+export const imageWrapperUseEffect = (
+  itemNumber: number,
+  countryCode: string,
+  setImageUri: React.Dispatch<React.SetStateAction<string>>
+) => {
+  if (itemNumber > 0) {
+    if (countryCode === 'CN') {
+      setCNImageUri(itemNumber, setImageUri, postApiCall);
+    } else {
+      setImageUri(getMXImageUri(itemNumber));
+    }
+  } else {
+    setImageUri('');
   }
 };
 
 const ImageWrapper = ({
-  itemNumber, imageStyle, countryCode
+  itemNumber, imageStyle, countryCode, imageToken, tokenIsWaiting
 }: ImageWrapperProps) => {
-  const [imageUri, setImageUri] = useState('');
-  useEffect(() => {
-    if (itemNumber > 0) {
-      if (countryCode === 'CN') {
-        setCNImageUri(itemNumber, setImageUri);
-      } else {
-        setImageUri(getMXImageUri(itemNumber));
-      }
-    } else {
-      setImageUri('');
-    }
+  const [imageUri, setImageUri] = useState(countryCode === 'MX' ? getMXImageUri(itemNumber) : '');
+  useLayoutEffect(() => {
+    imageWrapperUseEffect(itemNumber, countryCode, setImageUri);
   }, [itemNumber]);
-
   return (
     <View>
       <FastImage
         style={{ ...styles.image, ...imageStyle }}
-        source={imageUri
-          ? {
-            uri: imageUri,
-            priority: FastImage.priority.normal
-          }
+        source={imageUri !== '' && !tokenIsWaiting && imageToken
+          ? createSource(imageUri, countryCode, imageToken)
           : require('../../assets/images/placeholder.png')}
         resizeMode={FastImage.resizeMode.contain}
         onError={() => setImageUri('')}
@@ -125,5 +102,7 @@ const ImageWrapper = ({
 export default ImageWrapper;
 
 ImageWrapper.defaultProps = {
+  imageToken: undefined,
+  tokenIsWaiting: false,
   imageStyle: {}
 };

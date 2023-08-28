@@ -57,6 +57,8 @@ describe('AuditWorklistTab', () => {
             isLoadedState={[false, jest.fn()]}
             useEffectHook={jest.fn()}
             isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
           />
         </Provider>
       );
@@ -83,6 +85,8 @@ describe('AuditWorklistTab', () => {
             isLoadedState={[false, jest.fn()]}
             useEffectHook={jest.fn()}
             isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
           />
         </Provider>
       );
@@ -109,6 +113,8 @@ describe('AuditWorklistTab', () => {
             isLoadedState={[false, jest.fn()]}
             useEffectHook={jest.fn()}
             isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
           />
         </Provider>
       );
@@ -136,6 +142,8 @@ describe('AuditWorklistTab', () => {
             isLoadedState={[false, jest.fn()]}
             useEffectHook={jest.fn()}
             isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
           />
         </Provider>
       );
@@ -163,6 +171,8 @@ describe('AuditWorklistTab', () => {
             isLoadedState={[false, jest.fn()]}
             useEffectHook={jest.fn()}
             isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
           />
         </Provider>
       );
@@ -189,6 +199,8 @@ describe('AuditWorklistTab', () => {
             isLoadedState={[false, jest.fn()]}
             useEffectHook={jest.fn()}
             isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
           />
         </Provider>
       );
@@ -217,6 +229,8 @@ describe('AuditWorklistTab', () => {
             isLoadedState={[false, jest.fn()]}
             useEffectHook={jest.fn()}
             isManualScanEnabled={false}
+            imageToken={undefined}
+            tokenIsWaiting={false}
           />
         </Provider>
       );
