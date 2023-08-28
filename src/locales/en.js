@@ -562,8 +562,9 @@ export default {
     CUSTOM_ITEMS: 'Items',
     IN_PROGRESS: 'In Progress',
     CURRENT_TOTAL: 'Current Total',
-    LOCATIONS_SAVED: 'Locations Saved',
-    LOCATIONS_SAVE_FAIL: 'Unable to Save Locations',
+    LOCATIONS_SAVED: 'Locations saved',
+    LOCATIONS_SAVE_FAIL: 'Unable to save locations',
+    SCANNED_ITEM_NOT_PRESENT: 'The scanned item is not on the audit worklist',
     GET_SAVED_LOC_FAIL: 'Unable to retrieve saved locations'
   },
   FEEDBACK: {

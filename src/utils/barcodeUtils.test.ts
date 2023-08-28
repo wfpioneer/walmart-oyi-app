@@ -2,6 +2,7 @@ import React from 'react';
 import {
   BARCODE_TYPES,
   cleanScanIfUpcOrEanBarcode,
+  compareWithMaybeCheckDigit,
   removeCheckDigit,
   removeLeadingZero
 } from './barcodeUtils';
@@ -68,5 +69,35 @@ describe('Barcode utilities function tests', () => {
 
       expect(actualOutput).toBe(expectedOutput[key]);
     });
+  });
+
+  it('tests that comparing a barcode to a upc works regardless of check digit', () => {
+    // scanned shorter than upc
+    let result = compareWithMaybeCheckDigit('123456', '1234567');
+    expect(result).toBeFalsy();
+
+    // scanned same length as upc, not same
+    result = compareWithMaybeCheckDigit('123456', '123455');
+    expect(result).toBeFalsy();
+
+    // scanned same length as upc, same
+    result = compareWithMaybeCheckDigit('123456', '123456');
+    expect(result).toBeTruthy();
+
+    // scanned longer than upc, not same
+    result = compareWithMaybeCheckDigit('1234557', '123456');
+    expect(result).toBeFalsy();
+
+    // scanned longer than upc, same
+    result = compareWithMaybeCheckDigit('1234567', '123456');
+    expect(result).toBeTruthy();
+
+    // scanned too long, not same
+    result = compareWithMaybeCheckDigit('12345478', '123456');
+    expect(result).toBeFalsy();
+
+    // scanned too long, same
+    result = compareWithMaybeCheckDigit('12345678', '123456');
+    expect(result).toBeFalsy();
   });
 });
