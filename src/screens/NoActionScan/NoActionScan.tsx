@@ -122,12 +122,9 @@ export const completeItemApiHook = (
         dispatch(setActionCompleted());
         if (route.params && route.params.source === 'OtherAction') {
           navigation.goBack();
-          navigation.goBack();
-          navigation.goBack();
-        } else {
-          navigation.goBack();
-          navigation.goBack();
         }
+        navigation.goBack();
+        navigation.goBack();
       }
     }
 
