@@ -60,8 +60,6 @@ export async function validateSession(navigation: NavigationProp<any>, route?: s
 
     const introspectionResponseJson = await introspectionResponse.json();
 
-    introspectionResponseJson.active = false;
-
     if (introspectionResponseJson.active) {
       return Promise.resolve();
     }
