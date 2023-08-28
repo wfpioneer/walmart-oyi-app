@@ -24,13 +24,15 @@ interface CompletedWorklistProps {
     showItemImage: boolean;
     onHandsEnabled: boolean;
     userConfigs: Configurations;
+    imageToken: string | undefined;
+    tokenIsWaiting: boolean;
 }
 
 export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
-    countryCode, showItemImage, onHandsEnabled, userConfigs
+    countryCode, showItemImage, onHandsEnabled, userConfigs, imageToken, tokenIsWaiting
   } = props;
 
   let completedItems: WorklistItemI[] | undefined;
@@ -62,6 +64,8 @@ export const CompletedWorklistScreen = (props: CompletedWorklistProps): JSX.Elem
       enableAreaFilter={enableAreaFilter}
       countryCode={countryCode}
       showItemImage={showItemImage}
+      imageToken={imageToken}
+      tokenIsWaiting={tokenIsWaiting}
     />
   );
 };
@@ -74,6 +78,7 @@ export const CompletedWorklist = (): JSX.Element => {
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
+  const imageToken = useTypedSelector(state => state.async.getItemCenterToken);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -95,6 +100,8 @@ export const CompletedWorklist = (): JSX.Element => {
       showItemImage={showItemImage}
       onHandsEnabled={onHandsEnabled}
       userConfigs={configs}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
+      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );
 };

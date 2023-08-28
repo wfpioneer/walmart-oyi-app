@@ -10,6 +10,9 @@ export interface Environment {
   fluffyURL: string;
   locationUrl: string;
   configUrl: string;
+  itemCenterTokenURL: string;
+  itemCenterRiversandURL: string;
+  itemCenterImageURL: string;
   itemImageUUIDUrlCN: string;
   itemImageUrlCN: string;
   atmtUrl: string;
@@ -101,6 +104,9 @@ export const getEnvironment = (): Environment => {
       locationUrl: `https://intl-oyi-location-api.${countryCode}.dev.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.dev.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.dev.walmart.com`,
+      itemCenterTokenURL: 'http://esb-qa.cn.wal-mart.com/oauth2/getToken',
+      itemCenterRiversandURL: 'http://esb.cn.wal-mart.com/ssp-item-oe/riversand/export/es/info',
+      itemCenterImageURL: 'https://cos.cn.wal-mart.com/download/',
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
       itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
       atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
@@ -115,6 +121,9 @@ export const getEnvironment = (): Environment => {
       locationUrl: `https://intl-oyi-location-api.${countryCode}.stg.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.stg.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.stg.walmart.com`,
+      itemCenterTokenURL: 'http://esb-qa.cn.wal-mart.com/oauth2/getToken',
+      itemCenterRiversandURL: 'http://esb.cn.wal-mart.com/ssp-item-oe/riversand/export/es/info',
+      itemCenterImageURL: 'https://cos.cn.wal-mart.com/download/',
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
       itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
       atmtUrl: 'https://api.atmt-feedback.qa.walmart.com'
@@ -129,6 +138,9 @@ export const getEnvironment = (): Environment => {
       locationUrl: `https://intl-oyi-location-api.${countryCode}.prod.walmart.com`,
       printingUrl: `https://intl-oyi-printing-api.${countryCode}.prod.walmart.com`,
       configUrl: `https://intl-oyi-config-api.${countryCode}.prod.walmart.com`,
+      itemCenterTokenURL: 'http://esb.cn.wal-mart.com/oauth2/getToken',
+      itemCenterRiversandURL: 'http://esb.cn.wal-mart.com/ssp-item-oe/riversand/export/es/info',
+      itemCenterImageURL: 'https://cos.cn.wal-mart.com/download/',
       itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
       itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl',
       atmtUrl: 'https://api.atmt-feedback.prod.walmart.com'

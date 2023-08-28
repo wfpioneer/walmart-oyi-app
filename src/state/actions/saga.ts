@@ -98,8 +98,8 @@ export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
 export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY_V2';
 export const GET_AUDIT_LOCATIONS = 'SAGA/GET_AUDIT_LOCATIONS';
-
 export const SAVE_AUDITS_PROGRESS = 'SAGA/SAVE_AUDITS_PROGRESS';
+export const GET_ITEM_CENTER_TOKEN = 'SAGA/GET_ITEM_CENTER_TOKEN';
 
 export const getItemDetailsV4 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V4, payload } as const);
 
@@ -324,6 +324,8 @@ export const saveAuditLocations = (itemNbr: number, locations: SaveLocation[]) =
     locations
   }
 } as const);
+
+export const getItemCenterToken = () => ({ type: GET_ITEM_CENTER_TOKEN } as const);
 
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =

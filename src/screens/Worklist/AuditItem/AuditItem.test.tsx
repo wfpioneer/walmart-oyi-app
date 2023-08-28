@@ -374,6 +374,17 @@ describe('AuditItemScreen', () => {
       renderer.render(<AuditItemScreen {...testProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
+
+    it('render the audit screen with the back warning modal present', () => {
+      const testProps: AuditItemScreenProps = {
+        ...mockAuditItemScreenProps,
+        displayWarningModalState: [true, jest.fn()]
+      };
+
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(<AuditItemScreen {...testProps} />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
   });
 
   describe('Manage AuditItem externalized function tests', () => {

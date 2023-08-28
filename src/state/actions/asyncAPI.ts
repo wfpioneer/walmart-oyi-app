@@ -203,3 +203,6 @@ export const getAuditLocations = makeAsyncActionCreators(GET_AUDIT_LOCATIONS);
 
 export const SAVE_AUDITS_PROGRESS = makeAsyncActionTypes('API/SAVE_AUDITS_PROGRESS');
 export const saveAuditsProgress = makeAsyncActionCreators(SAVE_AUDITS_PROGRESS);
+
+export const GET_ITEM_CENTER_TOKEN = makeAsyncActionTypes('API/GET_ITEM_CENTER_TOKEN');
+export const getItemCenterToken = makeAsyncActionCreators(GET_ITEM_CENTER_TOKEN);

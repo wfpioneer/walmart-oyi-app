@@ -125,6 +125,8 @@ export interface ItemDetailsScreenProps {
   userConfigs: Configurations;
   countryCode: string;
   userDomain: string;
+  imageToken: string | undefined;
+  tokenIsWaiting: boolean;
 }
 
 export interface HandleProps {
@@ -1433,6 +1435,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     numberOfPallets, setNumberOfPallets,
     isQuickPick, setIsQuickPick,
     newOHQty, setNewOHQty,
+    imageToken, tokenIsWaiting,
     trackEventCall,
     validateSessionCall,
     useEffectHook,
@@ -1667,6 +1670,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               showItemImage={userConfigs.showItemImage}
               worklistAuditType={itemDetails.worklistAuditType}
               worklistStatus={itemDetails.worklistStatus ?? itemDetails.auditWorklistStatus}
+              imageToken={imageToken}
+              tokenIsWaiting={tokenIsWaiting}
             />
             <SFTCard
               title={strings('ITEM.QUANTITY')}
@@ -1741,6 +1746,7 @@ const ReviewItemDetails = (): JSX.Element => {
   const getItemPiHistoryApi = useTypedSelector(state => state.async.getItemPiHistory);
   const getItemPiSalesHistoryApi = useTypedSelector(state => state.async.getItemPiSalesHistory);
   const getItemPicklistHistoryApi = useTypedSelector(state => state.async.getItemPicklistHistory);
+  const imageToken = useTypedSelector(state => state.async.getItemCenterToken);
   const {
     userId, countryCode, configs: userConfigs, features: userFeatures, 'wm-BusinessUnitType': domain
   } = useTypedSelector(state => state.User);
@@ -1828,6 +1834,8 @@ const ReviewItemDetails = (): JSX.Element => {
       userConfigs={userConfigs}
       countryCode={countryCode}
       userDomain={domain}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
+      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );
 };

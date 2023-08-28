@@ -33,6 +33,8 @@ interface ItemCardProps {
   pendingQty?: number | undefined;
   status?: WorkListStatus;
   totalQty: number | undefined;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 }
 
 interface OtherOnHandsItemsProps {
@@ -158,7 +160,7 @@ const OtherOnHandsItems = (props: OtherOnHandsItemsProps) => {
 
 const ItemCard = ({
   itemNumber, description, onClick, loading, onHandQty, disabled, countryCode,
-  showItemImage, showOHItems, OHItemInfo, pendingQty, totalQty, status
+  showItemImage, showOHItems, OHItemInfo, pendingQty, totalQty, status, imageToken, tokenIsWaiting
 }: ItemCardProps) => (
   <View style={styles.mainContainer}>
     <TouchableOpacity
@@ -175,6 +177,8 @@ const ItemCard = ({
       <ImageWrapper
         countryCode={countryCode}
         itemNumber={itemNumber}
+        imageToken={imageToken}
+        tokenIsWaiting={tokenIsWaiting}
       />
       )}
       {loading && (
@@ -232,7 +236,9 @@ ItemCard.defaultProps = {
   disabled: false,
   pendingQty: -999,
   onClick: () => {},
-  status: undefined
+  status: undefined,
+  imageToken: undefined,
+  tokenIsWaiting: false
 };
 
 OtherOnHandsItems.defaultProps = {

@@ -17,12 +17,14 @@ export type CategoryCardProps = {
   showItemImage: boolean;
   countryCode: string;
   enableAuditsInProgress: boolean;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 };
 
 const CategoryCard = (props: CategoryCardProps): JSX.Element => {
   const {
     listOfItems, category, collapsed, onItemCardClick, showItemImage,
-    countryCode, enableAuditsInProgress
+    countryCode, enableAuditsInProgress, tokenIsWaiting, imageToken
   } = props;
 
   const [open, setOpen] = useState(true);
@@ -55,6 +57,8 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
             countryCode={countryCode}
             status={enableAuditsInProgress ? item.worklistStatus : undefined}
             totalQty={undefined}
+            imageToken={imageToken}
+            tokenIsWaiting={tokenIsWaiting}
           />
         </View>
       </TouchableOpacity>
@@ -99,3 +103,8 @@ const CategoryCard = (props: CategoryCardProps): JSX.Element => {
 };
 
 export default CategoryCard;
+
+CategoryCard.defaultProps = {
+  imageToken: undefined,
+  tokenIsWaiting: false
+};

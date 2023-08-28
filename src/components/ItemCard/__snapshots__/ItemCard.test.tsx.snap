@@ -49,12 +49,7 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
           defaultSource={null}
           onFastImageError={[Function]}
           resizeMode="contain"
-          source={
-            Object {
-              "priority": "normal",
-              "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234m.jpg",
-            }
-          }
+          source={null}
           style={
             Object {
               "bottom": 0,
