@@ -180,9 +180,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
       scan,
       dispatch
     ));
-    return () => {
-      scannedSubscription.remove();
-    };
+    return () => scannedSubscription.remove();
   }, []);
 
   const getAuditWlItems = () => {

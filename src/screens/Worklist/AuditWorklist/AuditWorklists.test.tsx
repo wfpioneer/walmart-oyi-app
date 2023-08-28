@@ -1,31 +1,32 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import { render } from '@testing-library/react-native';
 import InProgressAuditWorklist from './InProgressAuditWorklist';
 import TodoAuditWorklist from './TodoAuditWorklist';
 import CompletedAuditWorklist from './CompletedAuditWorklist';
 
+jest.mock('../AuditWorklistTab', () => {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  const mocked = (props: any) => <div title="mockAuditWorklistTab" {...props} />;
+
+  return mocked;
+});
+
 describe('Audit worklist render tests', () => {
   it('renders the todo tab', () => {
-    const renderer = ShallowRenderer.createRenderer();
+    const { toJSON } = render(<TodoAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
 
-    renderer.render(<TodoAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
-
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('renders the in progress tab', () => {
-    const renderer = ShallowRenderer.createRenderer();
+    const { toJSON } = render(<InProgressAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
 
-    renderer.render(<InProgressAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
-
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('renders the completed tab', () => {
-    const renderer = ShallowRenderer.createRenderer();
+    const { toJSON } = render(<CompletedAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
 
-    renderer.render(<CompletedAuditWorklist onRefresh={jest.fn()} auditWorklistItems={[]} />);
-
-    expect(renderer.getRenderOutput()).toMatchSnapshot();
+    expect(toJSON()).toMatchSnapshot();
   });
 });
