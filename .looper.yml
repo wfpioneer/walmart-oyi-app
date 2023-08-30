@@ -111,7 +111,7 @@ tools:
     - build-tools;33.0.0
     - extras;android;m2repository
     - ndk;23.1.7779620
-  gradle: 7.2.1
+  gradle: 7.3.1
   maven: 3.8.2
   nodejs: 18.17.0
   npm: 9.6.7

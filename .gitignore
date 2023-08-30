@@ -28,12 +28,14 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
 .cxx/
-android/java_pid*.hprof
 android/TEMPLATE-APK*
 cx.json
 .scannerwork/
 BuildSupport/
+*.keystore
+!debug.keystore
 # Visual Studio Code
 #
 .vscode/
@@ -43,12 +45,6 @@ BuildSupport/
 node_modules/
 npm-debug.log
 yarn-error.log
-
-# BUCK
-buck-out/
-\.buckd/
-*.keystore
-!debug.keystore
 
 # fastlane
 #
@@ -69,6 +65,9 @@ buck-out/
 /ios/Pods/
 /config/
 /vendor/bundle/
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
 
 # JEST
 *coverage
