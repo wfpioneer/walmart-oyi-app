@@ -24,6 +24,8 @@ interface ListItemProps {
   navigation: NavigationProp<any>;
   countryCode: string;
   showItemImage: boolean;
+  imageToken: string | undefined;
+  tokenIsWaiting: boolean;
 }
 
 interface WorklistProps {
@@ -41,12 +43,14 @@ interface WorklistProps {
   enableAreaFilter: boolean;
   countryCode: string;
   showItemImage: boolean;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 }
 
 const screen = 'Item_Worklist';
 export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
   const {
-    dispatch, item, navigation, countryCode, showItemImage
+    dispatch, item, navigation, countryCode, showItemImage, imageToken, tokenIsWaiting
   } = props;
   if (item.worklistType === 'CATEGORY') {
     const { catgName, itemCount } = item;
@@ -77,6 +81,8 @@ export const RenderWorklistItem = (props: ListItemProps): JSX.Element => {
       showItemImage={showItemImage}
       pendingApproval={pendApproval}
       pendingPick={pendPick}
+      imageToken={imageToken}
+      tokenIsWaiting={tokenIsWaiting}
     />
   );
 };
@@ -179,7 +185,7 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
   const {
     data, dispatch, error, filterCategories, filterExceptions,
     groupToggle, onRefresh, refreshing, updateGroupToggle, navigation, areas, enableAreaFilter,
-    countryCode, showItemImage
+    countryCode, showItemImage, imageToken, tokenIsWaiting
   } = props;
   const fullExceptionList = ExceptionList.getInstance();
   if (error) {
@@ -328,6 +334,8 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
             navigation={navigation}
             countryCode={countryCode}
             showItemImage={showItemImage}
+            imageToken={imageToken}
+            tokenIsWaiting={tokenIsWaiting || false}
           />
         )}
         onRefresh={onRefresh}
@@ -336,4 +344,9 @@ export const Worklist = (props: WorklistProps): JSX.Element => {
       />
     </View>
   );
+};
+
+Worklist.defaultProps = {
+  imageToken: undefined,
+  tokenIsWaiting: false
 };

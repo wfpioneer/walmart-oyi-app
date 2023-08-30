@@ -3226,6 +3226,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         price={2000.94}
         showItemImage={false}
         status="Active"
+        tokenIsWaiting={false}
         upcNbr="000055559999"
       />
       <SFTCard
@@ -3937,6 +3938,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         price={2000.94}
         showItemImage={false}
         status="Active"
+        tokenIsWaiting={false}
         upcNbr="777555333"
       />
       <SFTCard
@@ -4430,6 +4432,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         price={2000.94}
         showItemImage={false}
         status="Active"
+        tokenIsWaiting={false}
         upcNbr="000055559999"
       />
       <SFTCard
@@ -5119,6 +5122,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         price={2000.94}
         showItemImage={false}
         status="Active"
+        tokenIsWaiting={false}
         upcNbr="000055559999"
       />
       <SFTCard
@@ -5808,6 +5812,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         price={2000.94}
         showItemImage={false}
         status="Active"
+        tokenIsWaiting={false}
         upcNbr="000055559999"
       />
       <SFTCard
@@ -6297,6 +6302,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         price={2000.94}
         showItemImage={false}
         status="Active"
+        tokenIsWaiting={false}
         upcNbr="000055559999"
       />
       <SFTCard
@@ -6786,6 +6792,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         price={2000.94}
         showItemImage={false}
         status="Active"
+        tokenIsWaiting={false}
         upcNbr="000055559999"
       />
       <SFTCard

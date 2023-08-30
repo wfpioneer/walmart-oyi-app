@@ -27,6 +27,8 @@ export type ItemInfoProps = {
   showItemImage: boolean;
   worklistAuditType?: string;
   worklistStatus?: WorkListStatus;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 };
 
 export type AdditionalItemDetailsProps = {
@@ -113,7 +115,8 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
     price, exceptionType, navigationForPrint: navigation, additionalItemDetails,
-    countryCode, showItemImage, worklistAuditType, worklistStatus
+    countryCode, showItemImage, worklistAuditType, worklistStatus,
+    imageToken, tokenIsWaiting
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -132,6 +135,8 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
             itemNumber={itemNbr}
             countryCode={countryCode}
             imageStyle={styles.image}
+            imageToken={imageToken}
+            tokenIsWaiting={tokenIsWaiting}
           />
         </View>
         )}
@@ -184,7 +189,9 @@ ItemInfo.defaultProps = {
   price: undefined,
   additionalItemDetails: undefined,
   worklistAuditType: undefined,
-  worklistStatus: undefined
+  worklistStatus: undefined,
+  imageToken: undefined,
+  tokenIsWaiting: false
 };
 
 export default ItemInfo;

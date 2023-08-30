@@ -10,6 +10,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         "borderBottomWidth": 1,
         "borderColor": "#616161",
         "flexDirection": "row",
+        "height": 50,
         "paddingHorizontal": 15,
         "paddingVertical": 10,
       }
@@ -76,6 +77,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         "borderBottomWidth": 1,
         "borderColor": "#616161",
         "flexDirection": "row",
+        "height": 50,
         "paddingHorizontal": 15,
         "paddingVertical": 10,
       }
@@ -188,6 +190,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
     }
     getItem={[Function]}
     getItemCount={[Function]}
+    getItemLayout={[Function]}
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -204,7 +207,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
   >
     <View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -327,7 +329,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -450,7 +451,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -573,7 +573,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -710,6 +709,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         "borderBottomWidth": 1,
         "borderColor": "#616161",
         "flexDirection": "row",
+        "height": 50,
         "paddingHorizontal": 15,
         "paddingVertical": 10,
       }
@@ -822,6 +822,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
     }
     getItem={[Function]}
     getItemCount={[Function]}
+    getItemLayout={[Function]}
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -838,7 +839,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
   >
     <View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -926,12 +926,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={
-                        Object {
-                          "priority": "normal",
-                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234567890m.jpg",
-                        }
-                      }
+                      source={null}
                       style={
                         Object {
                           "bottom": 0,
@@ -992,7 +987,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -1080,12 +1074,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={
-                        Object {
-                          "priority": "normal",
-                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234567899m.jpg",
-                        }
-                      }
+                      source={null}
                       style={
                         Object {
                           "bottom": 0,
@@ -1146,7 +1135,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -1234,12 +1222,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={
-                        Object {
-                          "priority": "normal",
-                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/987654321m.jpg",
-                        }
-                      }
+                      source={null}
                       style={
                         Object {
                           "bottom": 0,
@@ -1300,7 +1283,6 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -1388,12 +1370,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={
-                        Object {
-                          "priority": "normal",
-                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/123789456m.jpg",
-                        }
-                      }
+                      source={null}
                       style={
                         Object {
                           "bottom": 0,
@@ -1468,6 +1445,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         "borderBottomWidth": 1,
         "borderColor": "#616161",
         "flexDirection": "row",
+        "height": 50,
         "paddingHorizontal": 15,
         "paddingVertical": 10,
       }
@@ -1580,6 +1558,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
     }
     getItem={[Function]}
     getItemCount={[Function]}
+    getItemLayout={[Function]}
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -1596,7 +1575,6 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
   >
     <View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -1719,7 +1697,6 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -1842,7 +1819,6 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View
@@ -1965,7 +1941,6 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         </View>
       </View>
       <View
-        onLayout={[Function]}
         style={null}
       >
         <View

@@ -37,6 +37,7 @@ exports[`FloorItemRow Component Renders a FloorItem 1`] = `
         "upcNbr": "123456789098",
       }
     }
+    tokenIsWaiting={false}
     trackEventCall={[MockFunction]}
   />
 </Context.Provider>
@@ -79,6 +80,7 @@ exports[`FloorItemRow Component Renders a FloorItem with a long name 1`] = `
         "upcNbr": "123456789098",
       }
     }
+    tokenIsWaiting={false}
     trackEventCall={[MockFunction]}
   />
 </Context.Provider>

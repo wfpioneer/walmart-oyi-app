@@ -23,13 +23,15 @@ interface WorklistItemProps {
   showItemImage: boolean;
   pendingApproval: boolean;
   pendingPick: boolean;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 }
 
 export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
   const {
     navigation, dispatch, exceptionType, itemDescription,
     itemNumber, trackEventSource, countryCode, showItemImage,
-    pendingApproval, pendingPick
+    pendingApproval, pendingPick, imageToken, tokenIsWaiting
   } = props;
   const worklistItemOnPress = () => {
     trackEvent(trackEventSource.screen, {
@@ -47,6 +49,8 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
         itemNumber={itemNumber}
         countryCode={countryCode}
         imageStyle={styles.image}
+        imageToken={imageToken}
+        tokenIsWaiting={tokenIsWaiting}
       />
       )}
       <View style={styles.content}>
@@ -66,4 +70,9 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
       </View>
     </TouchableOpacity>
   );
+};
+
+WorklistItem.defaultProps = {
+  imageToken: undefined,
+  tokenIsWaiting: false
 };

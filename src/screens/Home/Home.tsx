@@ -27,6 +27,7 @@ import { WorklistGoal, WorklistSummary, WorklistType } from '../../models/Workli
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
+import { getFiniteFixedPercent } from '../../utils/global';
 
 export interface WorklistGoalMove {
   worklistType: WorklistType;
@@ -85,6 +86,40 @@ interface HomeScreenState {
   activeGoal: number;
   errorModalVisible: boolean;
 }
+
+/**
+ * If bad data appears, such as the summed total of the todo, in progress, and completed items
+ * is greater than the given total or the completed items are negative, this will correct that
+ * bad data
+ * @param givenGoals the goals that are returned from the service
+ */
+export const fixSumOfItemsMoreThanTotal = (givenGoals: WorklistSummary[], trackEventCall: typeof trackEvent) => {
+  // somehow we got bad data, this is here to correct any
+  givenGoals.forEach(goal => goal.worklistTypes.forEach(worklist => {
+    let isError = false;
+    if (worklist.completedItems + worklist.inProgressItems + worklist.todoItems > worklist.totalItems) {
+      isError = true;
+      let correction = worklist.totalItems;
+      if (worklist.todoItems > 0) {
+        correction -= worklist.todoItems;
+      }
+      if (worklist.inProgressItems > 0) {
+        correction -= worklist.inProgressItems;
+      }
+      worklist.completedItems = correction;
+    } else if (worklist.completedItems < 0) {
+      isError = true;
+      worklist.completedItems = 0;
+    }
+    if (isError) {
+      trackEventCall('HOME_SCREEN', {
+        action: 'worklist_summary_bad_data',
+        worklistSummary: JSON.stringify(worklist)
+      });
+    }
+  }));
+  return givenGoals;
+};
 
 /**
  * This is a method to move certain worklist summaries from one goal to another.
@@ -157,7 +192,7 @@ export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGo
   });
 
   newGoals.forEach(goal => {
-    goal.worklistGoalPct = Math.round((goal.totalCompletedItems / goal.totalItems) * 100);
+    goal.worklistGoalPct = getFiniteFixedPercent(goal.totalCompletedItems, goal.totalItems);
   });
 
   return newGoals;
@@ -307,6 +342,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     }
 
     const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
+
+    const badDataLess = fixSumOfItemsMoreThanTotal(data, trackEvent);
     const worklistToMove: WorklistGoalMove[] = [{
       worklistType: 'NSFQ',
       destinationGoal: WorklistGoal.PALLETS
@@ -317,7 +354,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         destinationGoal: WorklistGoal.AUDITS
       });
     }
-    const reorganizedGoals = reorganizeGoals(data, worklistToMove);
+
+    const reorganizedGoals = reorganizeGoals(badDataLess, worklistToMove);
 
     const nativeWorklists: NativeWorklist[] = [];
 
@@ -437,22 +475,19 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
           }).catch(() => {});
         };
 
-        const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
-        const completionPercentageValue = Number.isFinite(calculationValue) ? calculationValue : 0;
-
-        const pendingCalcValue = ((worklist.completedItems + worklist.inProgressItems) / worklist.totalItems) * 100;
-        const pendingPercentageValue = Number.isFinite(pendingCalcValue) ? pendingCalcValue : 0;
-
         return (
           <WorklistCard
             key={worklist.worklistType}
             goalTitle={worklistType}
             goal={worklist.totalItems}
             complete={worklist.completedItems}
-            completionPercentage={completionPercentageValue}
+            completionPercentage={getFiniteFixedPercent(worklist.completedItems, worklist.totalItems)}
             completionGoal={goalSummary.worklistEndGoalPct}
             onPress={onWorklistCardPress}
-            pendingPercentage={pendingPercentageValue}
+            pendingPercentage={getFiniteFixedPercent(
+              worklist.completedItems + worklist.inProgressItems,
+              worklist.totalItems
+            )}
             inProgress={inProgressEnabled}
           />
         );

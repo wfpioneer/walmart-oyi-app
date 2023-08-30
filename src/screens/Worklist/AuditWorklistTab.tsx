@@ -1,6 +1,9 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { groupBy, partition } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import {
+  NavigationProp,
+  useNavigation
+} from '@react-navigation/native';
+import { groupBy, partition } from 'lodash';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import {
@@ -23,12 +26,14 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { UseStateType } from '../../models/Generics.d';
+import ManualScan from '../../components/manualscan/ManualScan';
 
 const ROLLOVER_AUDITS = 'RA';
 
 export interface AuditWorklistTabProps {
     completionLevel: number;
     onRefresh: () => void;
+    auditWorklistItems: WorklistItemI[]
 }
 
 export interface AuditWorklistTabScreenProps {
@@ -46,9 +51,12 @@ export interface AuditWorklistTabScreenProps {
     collapsedState: UseStateType<boolean>;
     isLoadedState: UseStateType<boolean>;
     useEffectHook: typeof useEffect;
+    isManualScanEnabled: boolean;
+    imageToken: string | undefined;
+    tokenIsWaiting: boolean;
 }
 
-const onItemClick = (
+const onItemClick = ( // hekki
   itemNumber: number,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
@@ -68,7 +76,9 @@ const renderCategoryCard = (
   trackEventCall: typeof trackEvent,
   showItemImage: boolean,
   countryCode: string,
-  enableAuditsInProgress: boolean
+  enableAuditsInProgress: boolean,
+  imageToken: string | undefined = undefined,
+  tokenIsWaiting = false
 ) => (
   <CategoryCard
     category={category}
@@ -80,6 +90,8 @@ const renderCategoryCard = (
     showItemImage={showItemImage}
     countryCode={countryCode}
     enableAuditsInProgress={enableAuditsInProgress}
+    imageToken={imageToken}
+    tokenIsWaiting={tokenIsWaiting}
   />
 );
 
@@ -153,9 +165,9 @@ export const getItemsForTab = (
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, refreshing, dispatch, navigation, error, useEffectHook,
-    trackEventCall, config, filterExceptions, filterCategories,
-    onRefresh, countryCode, collapsedState, isLoadedState
+    items, refreshing, dispatch, navigation, error, useEffectHook, trackEventCall,
+    config, filterExceptions, filterCategories, onRefresh, countryCode, collapsedState,
+    isLoadedState, isManualScanEnabled, imageToken, tokenIsWaiting
   } = props;
   const {
     areas, enableAreaFilter, showItemImage, showRollOverAudit
@@ -253,7 +265,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 
   return (
     <>
-      { (filterCategories.length > 0 || (filterExceptions.length > 0)) && (
+      {(filterCategories.length > 0 || (filterExceptions.length > 0)) && (
       <View style={styles.filterContainer}>
         <FlatList
           data={[...typedFilterExceptions, ...typedFilterAreaOrCategoryList]}
@@ -270,7 +282,8 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           keyExtractor={item => item.value}
         />
       </View>
-      ) }
+      )}
+      {isManualScanEnabled ? <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} /> : null}
       {auditItemKeys.length > 0
         && (
         <CollapseAllBar
@@ -295,7 +308,9 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           trackEventCall,
           showItemImage,
           countryCode,
-          config.enableAuditsInProgress
+          config.enableAuditsInProgress,
+          imageToken,
+          tokenIsWaiting
         )}
         keyExtractor={item => `category-${item}`}
         onRefresh={() => {
@@ -310,17 +325,19 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 };
 
 const AuditWorklistTab = (props: AuditWorklistTabProps) => {
-  const { completionLevel, onRefresh } = props;
+  const { completionLevel, onRefresh, auditWorklistItems } = props;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
-  const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
   const { configs } = useTypedSelector(state => state.User);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isWaiting, error } = useTypedSelector(state => (
+    configs.enableAuditsInProgress ? state.async.getWorklistAuditsV1 : state.async.getWorklistAudits));
   const items = getItemsForTab(auditWorklistItems, completionLevel, configs);
   const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const collapsedState = useState(false);
   const isLoadedState = useState(false);
+  const imageToken = useTypedSelector(state => state.async.getItemCenterToken);
   return (
     <AuditWorklistTabScreen
       items={items}
@@ -337,6 +354,9 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       config={configs}
       useEffectHook={useEffect}
       isLoadedState={isLoadedState}
+      isManualScanEnabled={isManualScanEnabled}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
+      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );
 };

@@ -24,7 +24,7 @@ export interface ItemDetailsState {
   salesFloor: boolean;
 }
 
-const initialState : ItemDetailsState = {
+export const initialState : ItemDetailsState = {
   itemNbr: 0,
   upcNbr: '',
   pendingOnHandsQty: -999,

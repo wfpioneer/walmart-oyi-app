@@ -69,7 +69,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               }
             }
           >
-            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+            [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
           </Text>
         </View>
         <View
@@ -445,7 +445,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               }
             }
           >
-            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+            [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
           </Text>
         </View>
         <View
@@ -821,7 +821,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               }
             }
           >
-            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+            [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
           </Text>
         </View>
         <View
@@ -1197,7 +1197,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               }
             }
           >
-            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+            [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
           </Text>
         </View>
         <View
@@ -1573,7 +1573,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               }
             }
           >
-            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+            [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
           </Text>
         </View>
         <View
@@ -1949,7 +1949,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               }
             }
           >
-            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+            [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
           </Text>
         </View>
         <View
@@ -2325,7 +2325,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               }
             }
           >
-            [missing "en.PALLET.UNSAVED_WARNING_MSG" translation]
+            [missing "en.GENERICS.UNSAVED_WARNING_MSG" translation]
           </Text>
         </View>
         <View

@@ -29,7 +29,8 @@ describe('testing User reducer', () => {
       ...mockConfig,
       locMgmtEdit: false,
       overridePltPerish: false,
-      showQtyStocked: false
+      showQtyStocked: false,
+      enableAuditsIP: false
     };
     testChangedState = {
       ...initialState,

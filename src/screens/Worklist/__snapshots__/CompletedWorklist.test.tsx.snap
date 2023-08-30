@@ -107,6 +107,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders every wor
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -125,6 +126,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders no workli
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -143,6 +145,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders no workli
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -254,6 +257,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -365,6 +369,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders only comp
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -566,6 +571,7 @@ exports[`CompletedWorklistScreen Tests rendering Worklist data Renders worklist 
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -583,6 +589,7 @@ exports[`CompletedWorklistScreen Tests rendering worklist api responses Renders 
   onRefresh={[Function]}
   refreshing={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;
@@ -600,6 +607,7 @@ exports[`CompletedWorklistScreen Tests rendering worklist api responses Renders 
   onRefresh={[Function]}
   refreshing={true}
   showItemImage={false}
+  tokenIsWaiting={false}
   updateGroupToggle={[MockFunction]}
 />
 `;

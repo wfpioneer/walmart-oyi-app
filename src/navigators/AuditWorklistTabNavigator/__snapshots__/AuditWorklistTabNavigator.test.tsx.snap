@@ -27,12 +27,41 @@ exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator com
   }
 >
   <AuditWorklistTabNavigator
+    auditWorklistItems={Array []}
     dispatch={[MockFunction]}
     enableAuditsInProgress={false}
+    isMounted={
+      Object {
+        "current": false,
+      }
+    }
+    navigation={
+      Object {
+        "addListener": [MockFunction],
+        "canGoBack": [MockFunction],
+        "dispatch": [MockFunction],
+        "getId": [MockFunction],
+        "getParent": [MockFunction],
+        "getState": [MockFunction],
+        "goBack": [MockFunction],
+        "isFocused": [MockFunction],
+        "navigate": [MockFunction],
+        "removeListener": [MockFunction],
+        "reset": [MockFunction],
+        "setOptions": [MockFunction],
+        "setParams": [MockFunction],
+      }
+    }
     route={
       Object {
         "key": "",
         "name": "AuditWorklistTabs",
+      }
+    }
+    scannedEvent={
+      Object {
+        "type": null,
+        "value": null,
       }
     }
     trackEventCall={[MockFunction]}
@@ -71,12 +100,41 @@ exports[`AuditWorklistTab Navigator renders the Audit worklist tab navigator com
   }
 >
   <AuditWorklistTabNavigator
+    auditWorklistItems={Array []}
     dispatch={[MockFunction]}
     enableAuditsInProgress={true}
+    isMounted={
+      Object {
+        "current": false,
+      }
+    }
+    navigation={
+      Object {
+        "addListener": [MockFunction],
+        "canGoBack": [MockFunction],
+        "dispatch": [MockFunction],
+        "getId": [MockFunction],
+        "getParent": [MockFunction],
+        "getState": [MockFunction],
+        "goBack": [MockFunction],
+        "isFocused": [MockFunction],
+        "navigate": [MockFunction],
+        "removeListener": [MockFunction],
+        "reset": [MockFunction],
+        "setOptions": [MockFunction],
+        "setParams": [MockFunction],
+      }
+    }
     route={
       Object {
         "key": "",
         "name": "AuditWorklistTabs",
+      }
+    }
+    scannedEvent={
+      Object {
+        "type": null,
+        "value": null,
       }
     }
     trackEventCall={[MockFunction]}

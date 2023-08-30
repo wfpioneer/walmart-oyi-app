@@ -1,7 +1,7 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { render, waitFor } from '@testing-library/react-native';
-import ImageWrapper, { getImgDataParams } from './ImageWrapper';
+import ImageWrapper, { createSource, imageWrapperUseEffect, setCNImageUri } from './ImageWrapper';
 import * as utils from './ImageWrapperUtils';
 import { getEnvironment } from '../../utils/environment';
 
@@ -16,74 +16,43 @@ jest.mock('../../utils/environment', () => {
   return {
     ...environments,
     getEnvironment: jest.fn().mockImplementation(() => ({
-      itemImageUUIDUrlCN: 'https://samsclubcnds.riversand.com/api/entityappservice/get',
-      itemImageUrlCN: 'https://samsclubcnds.riversand.com/api/rsAssetService/getlinkedasseturl'
+      itemCenterRiversandURL: 'http://esb.cn.wal-mart.com/ssp-item-oe/riversand/export/es/info'
     }))
   };
 });
 
-const mockUUIDSuccessResponse = {
-  response: {
-    entities: [{
-      id: '184073ec-7b7c-4616-a8e6-9748f26166cd', name: '123456', type: 'item', domain: ''
-    }],
-    status: 'success',
-    totalRecords: 1
-  }
-};
-
-const mockImageSuccessResponse = {
-  response: {
-    entities: [{
-      id: '184073ec-7b7c-4616-a8e6-9748f26166cd',
-      name: '123456',
-      type: 'item',
-      domain: '',
+const mockItemCenterRiverSandSuccessResponse = {
+  data: [
+    {
       data: {
-        relationships: {
-          hasimages: [{
-            id: '8e733b0a-8bdf-4320-8f94-7523cc92e961',
-            relTo: {
-              id: 'khucAZJDRlaGhybfNxR0yg',
-              type: 'image',
-              data: {
-                attributes: {
-                  downloadURL: { values: [{ value: 'final-image-url', source: 'internal', locale: 'zh-CN' }] }
-                }
-              }
+        relationShips: {
+          hasImages: [
+            {
+              walmartOssUploadId: 'dummyImage.jpg',
+              imageIsPrimary: true
             }
-          }]
+          ]
         }
       }
-    }],
-    status: 'success',
-    totalRecords: 1
-  }
+    }
+  ]
 };
 
-const mockUUIDJsonPromise = Promise.resolve(mockUUIDSuccessResponse);
-const mockImgJsonPromise = Promise.resolve(mockImageSuccessResponse);
+const mockItemCenterRiverSandJsonPromise = Promise.resolve(mockItemCenterRiverSandSuccessResponse);
 
-const mockFetchUUIDPromise = Promise.resolve({
-  json: () => mockUUIDJsonPromise
+const mockFetchItemCenterPromise = Promise.resolve({
+  json: () => mockItemCenterRiverSandJsonPromise
 });
-const mockFetchImgPromise = Promise.resolve({
-  json: () => mockImgJsonPromise
-});
+
+const mockFetchItemCenterPromiseFailure = Promise.reject(new Error('test error'));
 
 const urls = getEnvironment();
-const mockUUIDAprUrlCN = urls.itemImageUUIDUrlCN;
 
 jest.mock('./ImageWrapperUtils', () => {
   const actual = jest.requireActual('./ImageWrapperUtils');
   return {
     ...actual,
-    postApiCall: jest.fn().mockImplementation((url: string, data: any) => {
-      if (url === mockUUIDAprUrlCN) {
-        return mockFetchUUIDPromise;
-      }
-      return mockFetchImgPromise;
-    })
+    postApiCall: jest.fn().mockImplementation(() => mockFetchItemCenterPromise)
   };
 });
 
@@ -109,6 +78,8 @@ describe('ImageWrapper Component', () => {
       <ImageWrapper
         countryCode="CN"
         itemNumber={12345}
+        imageToken="dummyToken"
+        tokenIsWaiting={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -119,30 +90,60 @@ describe('ImageWrapper Component', () => {
       <ImageWrapper
         countryCode="CN"
         itemNumber={12345}
+        imageToken="dummyToken"
+        tokenIsWaiting={false}
       />
     );
 
-    const uuidDataParams = {
-      params: {
-        query: {
-          filters: {
-            typesCriterion: [
-              'item'
-            ],
-            attributesCriterion: [{
-              itemnumber: {
-                exact: '12345'
-              }
-            }]
-          }
-        }
+    const itemCenterDataParams = {
+      param: {
+        itemNbrs: [12345]
       }
     };
 
-    const mockUUID = mockUUIDSuccessResponse.response.entities[0].id;
-    const imgDataParam = getImgDataParams(mockUUID);
-    await waitFor(() => expect(utils.postApiCall).toHaveBeenCalledTimes(2));
-    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUUIDUrlCN, JSON.stringify(uuidDataParams));
-    expect(utils.postApiCall).toBeCalledWith(urls.itemImageUrlCN, JSON.stringify(imgDataParam));
+    await waitFor(() => expect(utils.postApiCall).toHaveBeenCalledTimes(1));
+    expect(utils.postApiCall).toBeCalledWith(urls.itemCenterRiversandURL, itemCenterDataParams);
+  });
+  it('test setCNImageUri', async () => {
+    const mockDispatch = jest.fn();
+    let mockPostApiCall = jest.fn().mockImplementation(() => mockFetchItemCenterPromise);
+    setCNImageUri(1234, mockDispatch, mockPostApiCall);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    mockPostApiCall = jest.fn().mockImplementation(() => mockFetchItemCenterPromiseFailure);
+    setCNImageUri(1234, mockDispatch, mockPostApiCall);
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+  });
+
+  it('test createSource', () => {
+    const expectedCNResults = {
+      uri: 'dummyCNUrl',
+      headers: {
+        clientId: 'oyi',
+        accessToken: 'dummyToken'
+      },
+      priority: 'normal'
+    };
+    const expectedMXResults = {
+      uri: 'dummyMXUrl',
+      priority: 'normal'
+    };
+    const cnResults = createSource('dummyCNUrl', 'CN', 'dummyToken');
+    const mxResults = createSource('dummyMXUrl', 'MX', undefined);
+    expect(cnResults).toEqual(expectedCNResults);
+    expect(mxResults).toEqual(expectedMXResults);
+  });
+
+  it('test imageWrapperUseEffect', () => {
+    const mockSetItemImage = jest.fn();
+    imageWrapperUseEffect(123, 'CN', mockSetItemImage);
+    expect(mockSetItemImage).toHaveBeenCalledWith('');
+    mockSetItemImage.mockReset();
+    imageWrapperUseEffect(123, 'MX', mockSetItemImage);
+    // eslint-disable-next-line max-len
+    expect(mockSetItemImage).toHaveBeenCalledWith('https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/123m.jpg');
+    mockSetItemImage.mockReset();
+    imageWrapperUseEffect(0, 'CN', mockSetItemImage);
+    expect(mockSetItemImage).toHaveBeenCalledWith('');
+    mockSetItemImage.mockReset();
   });
 });

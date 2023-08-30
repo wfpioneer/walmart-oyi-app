@@ -4,6 +4,8 @@ import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp } from '@react-navigation/native';
 import { AxiosError } from 'axios';
 import { object } from 'prop-types';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import {
   mockCombinationAuditsWorklist,
   mockCompletedAuditWorklist, mockToDoAuditWorklist
@@ -15,6 +17,8 @@ import { ExceptionList } from './FullExceptionList';
 import { FilterType } from '../../models/FilterListItem';
 import { mockAreas, mockConfig } from '../../mockData/mockConfig';
 import { Configurations } from '../../models/User';
+import RootReducer from '../../state/reducers/RootReducer';
+import { mockInitialState } from '../../mockData/mockStore';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'mockMaterialCommunityIcons');
@@ -28,28 +32,35 @@ const mockError: AxiosError = {
 };
 
 let navigationProp: NavigationProp<any>;
+
+const store = createStore(RootReducer, mockInitialState);
 describe('AuditWorklistTab', () => {
   const mockDispatch = jest.fn();
   describe('Tests rendering Audit worklist component', () => {
     it('Renders to-do Audit worklist items', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <AuditWorklistTabScreen
-          items={mockToDoAuditWorklist}
-          navigation={navigationProp}
-          dispatch={mockDispatch}
-          collapsedState={[false, jest.fn()]}
-          refreshing={false}
-          error={null}
-          filterCategories={[]}
-          filterExceptions={[]}
-          onRefresh={() => {}}
-          countryCode="MX"
-          trackEventCall={jest.fn()}
-          config={mockConfig}
-          isLoadedState={[false, jest.fn()]}
-          useEffectHook={jest.fn()}
-        />
+        <Provider store={store}>
+          <AuditWorklistTabScreen
+            items={mockToDoAuditWorklist}
+            navigation={navigationProp}
+            dispatch={mockDispatch}
+            collapsedState={[false, jest.fn()]}
+            refreshing={false}
+            error={null}
+            filterCategories={[]}
+            filterExceptions={[]}
+            onRefresh={() => {}}
+            countryCode="MX"
+            trackEventCall={jest.fn()}
+            config={mockConfig}
+            isLoadedState={[false, jest.fn()]}
+            useEffectHook={jest.fn()}
+            isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -57,22 +68,27 @@ describe('AuditWorklistTab', () => {
     it('Renders completed Audit worklist items', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <AuditWorklistTabScreen
-          items={mockCompletedAuditWorklist}
-          navigation={navigationProp}
-          dispatch={mockDispatch}
-          collapsedState={[false, jest.fn()]}
-          refreshing={false}
-          error={null}
-          filterCategories={[]}
-          filterExceptions={[]}
-          onRefresh={() => {}}
-          countryCode="MX"
-          trackEventCall={jest.fn()}
-          config={mockConfig}
-          isLoadedState={[false, jest.fn()]}
-          useEffectHook={jest.fn()}
-        />
+        <Provider store={store}>
+          <AuditWorklistTabScreen
+            items={mockCompletedAuditWorklist}
+            navigation={navigationProp}
+            dispatch={mockDispatch}
+            collapsedState={[false, jest.fn()]}
+            refreshing={false}
+            error={null}
+            filterCategories={[]}
+            filterExceptions={[]}
+            onRefresh={() => {}}
+            countryCode="MX"
+            trackEventCall={jest.fn()}
+            config={mockConfig}
+            isLoadedState={[false, jest.fn()]}
+            useEffectHook={jest.fn()}
+            isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -80,22 +96,27 @@ describe('AuditWorklistTab', () => {
     it('Renders Audit worklist with errors', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
-        <AuditWorklistTabScreen
-          items={mockCompletedAuditWorklist}
-          navigation={navigationProp}
-          dispatch={mockDispatch}
-          collapsedState={[false, jest.fn()]}
-          refreshing={false}
-          error={mockError}
-          filterCategories={[]}
-          filterExceptions={[]}
-          onRefresh={() => {}}
-          countryCode="MX"
-          trackEventCall={jest.fn()}
-          config={mockConfig}
-          isLoadedState={[false, jest.fn()]}
-          useEffectHook={jest.fn()}
-        />
+        <Provider store={store}>
+          <AuditWorklistTabScreen
+            items={mockCompletedAuditWorklist}
+            navigation={navigationProp}
+            dispatch={mockDispatch}
+            collapsedState={[false, jest.fn()]}
+            refreshing={false}
+            error={mockError}
+            filterCategories={[]}
+            filterExceptions={[]}
+            onRefresh={() => {}}
+            countryCode="MX"
+            trackEventCall={jest.fn()}
+            config={mockConfig}
+            isLoadedState={[false, jest.fn()]}
+            useEffectHook={jest.fn()}
+            isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -104,22 +125,27 @@ describe('AuditWorklistTab', () => {
       const renderer = ShallowRenderer.createRenderer();
       const itemImageShownConfig: Configurations = { ...mockConfig, showItemImage: true };
       renderer.render(
-        <AuditWorklistTabScreen
-          items={mockCompletedAuditWorklist}
-          navigation={navigationProp}
-          dispatch={mockDispatch}
-          collapsedState={[false, jest.fn()]}
-          refreshing={false}
-          error={null}
-          filterCategories={[]}
-          filterExceptions={[]}
-          onRefresh={() => {}}
-          countryCode="MX"
-          trackEventCall={jest.fn()}
-          config={itemImageShownConfig}
-          isLoadedState={[false, jest.fn()]}
-          useEffectHook={jest.fn()}
-        />
+        <Provider store={store}>
+          <AuditWorklistTabScreen
+            items={mockCompletedAuditWorklist}
+            navigation={navigationProp}
+            dispatch={mockDispatch}
+            collapsedState={[false, jest.fn()]}
+            refreshing={false}
+            error={null}
+            filterCategories={[]}
+            filterExceptions={[]}
+            onRefresh={() => {}}
+            countryCode="MX"
+            trackEventCall={jest.fn()}
+            config={itemImageShownConfig}
+            isLoadedState={[false, jest.fn()]}
+            useEffectHook={jest.fn()}
+            isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
+          />
+        </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -128,22 +154,27 @@ describe('AuditWorklistTab', () => {
   describe('Tests rendering AuditWorklistTab component with collapsible prop', () => {
     it('Renders the worklist items in collapsible mode when collapse button clicked', () => {
       const { toJSON, getByTestId } = render(
-        <AuditWorklistTabScreen
-          items={mockToDoAuditWorklist}
-          navigation={navigationProp}
-          dispatch={mockDispatch}
-          collapsedState={[false, jest.fn()]}
-          refreshing={false}
-          error={null}
-          filterCategories={[]}
-          filterExceptions={[]}
-          onRefresh={() => {}}
-          trackEventCall={jest.fn()}
-          countryCode="MX"
-          config={mockConfig}
-          isLoadedState={[false, jest.fn()]}
-          useEffectHook={jest.fn()}
-        />
+        <Provider store={store}>
+          <AuditWorklistTabScreen
+            items={mockToDoAuditWorklist}
+            navigation={navigationProp}
+            dispatch={mockDispatch}
+            collapsedState={[false, jest.fn()]}
+            refreshing={false}
+            error={null}
+            filterCategories={[]}
+            filterExceptions={[]}
+            onRefresh={() => {}}
+            trackEventCall={jest.fn()}
+            countryCode="MX"
+            config={mockConfig}
+            isLoadedState={[false, jest.fn()]}
+            useEffectHook={jest.fn()}
+            isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
+          />
+        </Provider>
       );
       const btnCollapse = getByTestId('collapse-text-btn');
       fireEvent.press(btnCollapse);
@@ -151,26 +182,59 @@ describe('AuditWorklistTab', () => {
     });
     it('Renders the worklist items in open mode when expand button clicked', () => {
       const { toJSON, getByTestId } = render(
-        <AuditWorklistTabScreen
-          items={mockToDoAuditWorklist}
-          navigation={navigationProp}
-          dispatch={mockDispatch}
-          collapsedState={[true, jest.fn()]}
-          refreshing={false}
-          error={null}
-          filterCategories={[]}
-          filterExceptions={[]}
-          onRefresh={() => {}}
-          trackEventCall={jest.fn()}
-          countryCode="MX"
-          config={mockConfig}
-          isLoadedState={[false, jest.fn()]}
-          useEffectHook={jest.fn()}
-        />
+        <Provider store={store}>
+          <AuditWorklistTabScreen
+            items={mockToDoAuditWorklist}
+            navigation={navigationProp}
+            dispatch={mockDispatch}
+            collapsedState={[true, jest.fn()]}
+            refreshing={false}
+            error={null}
+            filterCategories={[]}
+            filterExceptions={[]}
+            onRefresh={() => {}}
+            trackEventCall={jest.fn()}
+            countryCode="MX"
+            config={mockConfig}
+            isLoadedState={[false, jest.fn()]}
+            useEffectHook={jest.fn()}
+            isManualScanEnabled={true}
+            imageToken={undefined}
+            tokenIsWaiting={false}
+          />
+        </Provider>
       );
       const btnCollapse = getByTestId('collapse-text-btn');
       fireEvent.press(btnCollapse);
       expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('Renders to-do Audit worklist items without manual scan enabled', () => {
+      const renderer = ShallowRenderer.createRenderer();
+      renderer.render(
+        <Provider store={store}>
+          <AuditWorklistTabScreen
+            items={mockToDoAuditWorklist}
+            navigation={navigationProp}
+            dispatch={mockDispatch}
+            collapsedState={[false, jest.fn()]}
+            refreshing={false}
+            error={null}
+            filterCategories={[]}
+            filterExceptions={[]}
+            onRefresh={() => {}}
+            countryCode="MX"
+            trackEventCall={jest.fn()}
+            config={mockConfig}
+            isLoadedState={[false, jest.fn()]}
+            useEffectHook={jest.fn()}
+            isManualScanEnabled={false}
+            imageToken={undefined}
+            tokenIsWaiting={false}
+          />
+        </Provider>
+      );
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
 });

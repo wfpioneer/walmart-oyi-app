@@ -14,6 +14,7 @@ export const asyncReducer = combineReducers({
   getWorklist: makeAsyncReducer(asyncActions.GET_WORKLIST),
   getWorklistV1: makeAsyncReducer(asyncActions.GET_WORKLIST_V1),
   getWorklistAudits: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT),
+  getWorklistAuditsV1: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT_V1),
   getPalletWorklist: makeAsyncReducer(asyncActions.GET_PALLET_WORKLIST),
   editLocation: makeAsyncReducer(asyncActions.EDIT_LOCATION),
   addLocation: makeAsyncReducer(asyncActions.ADD_LOCATION),
@@ -67,7 +68,10 @@ export const asyncReducer = combineReducers({
   submitFeedbackRating: makeAsyncReducer(asyncActions.SUBMIT_FEEDBACK_RATING),
   getUserConfig: makeAsyncReducer(asyncActions.GET_USER_CONFIG),
   updateUserConfig: makeAsyncReducer(asyncActions.UPDATE_USER_CONFIG),
-  updateMultiPalletUPCQtyV2: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY_V2)
+  updateMultiPalletUPCQtyV2: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY_V2),
+  getAuditLocations: makeAsyncReducer(asyncActions.GET_AUDIT_LOCATIONS),
+  saveAuditsProgress: makeAsyncReducer(asyncActions.SAVE_AUDITS_PROGRESS),
+  getItemCenterToken: makeAsyncReducer(asyncActions.GET_ITEM_CENTER_TOKEN)
 });
 
 export default asyncReducer;
