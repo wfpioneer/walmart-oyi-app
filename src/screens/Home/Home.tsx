@@ -456,20 +456,37 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
               );
             } else if (isAuditWorklist) {
               this.props.setWorklistType('AUDIT');
-              this.props.navigation.navigate(
-                strings('WORKLIST.WORKLIST'),
-                { screen: 'AuditWorklistNavigator', initial: false }
-              );
+              this.props.navigation.navigate(strings('WORKLIST.WORKLIST'), {
+                screen: 'AuditWorklistNavigator',
+                initial: false,
+                params: {
+                  screen: 'AuditWorklistTabs',
+                  params: {
+                    screen: strings('WORKLIST.TODO')
+                  }
+                }
+              });
             } else {
               const { auditWorklists, palletWorklists } = this.props.userConfig;
               this.props.setWorklistType('ITEM');
               if (auditWorklists || palletWorklists) {
-                this.props.navigation.navigate(
-                  strings('WORKLIST.WORKLIST'),
-                  { screen: 'WorklistNavigator', initial: false }
-                );
+                this.props.navigation.navigate(strings('WORKLIST.WORKLIST'), {
+                  screen: 'WorklistNavigator',
+                  initial: false,
+                  params: {
+                    screen: 'ITEMWORKLIST',
+                    params: {
+                      screen: strings('WORKLIST.TODO')
+                    }
+                  }
+                });
               } else {
-                this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
+                this.props.navigation.navigate('WorklistNavigator', {
+                  screen: 'ITEMWORKLIST',
+                  params: {
+                    screen: strings('WORKLIST.TODO')
+                  }
+                });
               }
             }
           }).catch(() => {});
