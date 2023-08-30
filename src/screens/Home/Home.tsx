@@ -23,7 +23,9 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
-import { WorklistGoal, WorklistSummary, WorklistType } from '../../models/WorklistSummary';
+import {
+  WorklistGoal, WorklistSummary, WorklistType, WorklistTypeDetails
+} from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
@@ -198,6 +200,61 @@ export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGo
   return newGoals;
 };
 
+export const onWorklistCardPress = (
+  worklist: WorklistTypeDetails,
+  updateFilterExceptionsDispatch: (worklistTypes: string[]) => void,
+  setWorklistTypeDispatch: (worklistType: string) => void,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  userConfig: Configurations,
+  isPalletWorklist: boolean,
+  isAuditWorklist: boolean
+) => {
+  trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
+  updateFilterExceptionsDispatch([worklist.worklistType]);
+  validateSession(navigation, route.name).then(() => {
+    if (isPalletWorklist) {
+      navigation.navigate(
+        strings('WORKLIST.WORKLIST'),
+        { screen: 'MissingPalletWorklist', initial: false }
+      );
+    } else if (isAuditWorklist) {
+      setWorklistTypeDispatch('AUDIT');
+      navigation.navigate(strings('WORKLIST.WORKLIST'), {
+        screen: 'AuditWorklistNavigator',
+        initial: false,
+        params: {
+          screen: 'AuditWorklistTabs',
+          params: {
+            screen: strings('WORKLIST.TODO')
+          }
+        }
+      });
+    } else {
+      const { auditWorklists, palletWorklists } = userConfig;
+      setWorklistTypeDispatch('ITEM');
+      if (auditWorklists || palletWorklists) {
+        navigation.navigate(strings('WORKLIST.WORKLIST'), {
+          screen: 'WorklistNavigator',
+          initial: false,
+          params: {
+            screen: 'ITEMWORKLIST',
+            params: {
+              screen: strings('WORKLIST.TODO')
+            }
+          }
+        });
+      } else {
+        navigation.navigate('WorklistNavigator', {
+          screen: 'ITEMWORKLIST',
+          params: {
+            screen: strings('WORKLIST.TODO')
+          }
+        });
+      }
+    }
+  }).catch(() => {});
+};
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
 
@@ -445,53 +502,6 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const isPalletWorklist = nativeWorklist?.nativeGoal === WorklistGoal.PALLETS;
         const isAuditWorklist = nativeWorklist?.nativeGoal === WorklistGoal.AUDITS;
 
-        const onWorklistCardPress = () => {
-          trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
-          this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation, this.props.route.name).then(() => {
-            if (isPalletWorklist) {
-              this.props.navigation.navigate(
-                strings('WORKLIST.WORKLIST'),
-                { screen: 'MissingPalletWorklist', initial: false }
-              );
-            } else if (isAuditWorklist) {
-              this.props.setWorklistType('AUDIT');
-              this.props.navigation.navigate(strings('WORKLIST.WORKLIST'), {
-                screen: 'AuditWorklistNavigator',
-                initial: false,
-                params: {
-                  screen: 'AuditWorklistTabs',
-                  params: {
-                    screen: strings('WORKLIST.TODO')
-                  }
-                }
-              });
-            } else {
-              const { auditWorklists, palletWorklists } = this.props.userConfig;
-              this.props.setWorklistType('ITEM');
-              if (auditWorklists || palletWorklists) {
-                this.props.navigation.navigate(strings('WORKLIST.WORKLIST'), {
-                  screen: 'WorklistNavigator',
-                  initial: false,
-                  params: {
-                    screen: 'ITEMWORKLIST',
-                    params: {
-                      screen: strings('WORKLIST.TODO')
-                    }
-                  }
-                });
-              } else {
-                this.props.navigation.navigate('WorklistNavigator', {
-                  screen: 'ITEMWORKLIST',
-                  params: {
-                    screen: strings('WORKLIST.TODO')
-                  }
-                });
-              }
-            }
-          }).catch(() => {});
-        };
-
         return (
           <WorklistCard
             key={worklist.worklistType}
@@ -500,7 +510,16 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             complete={worklist.completedItems}
             completionPercentage={getFiniteFixedPercent(worklist.completedItems, worklist.totalItems)}
             completionGoal={goalSummary.worklistEndGoalPct}
-            onPress={onWorklistCardPress}
+            onPress={() => onWorklistCardPress(
+              worklist,
+              this.props.updateFilterExceptions,
+              this.props.setWorklistType,
+              this.props.navigation,
+              this.props.route,
+              this.props.userConfig,
+              isPalletWorklist,
+              isAuditWorklist
+            )}
             pendingPercentage={getFiniteFixedPercent(
               worklist.completedItems + worklist.inProgressItems,
               worklist.totalItems
