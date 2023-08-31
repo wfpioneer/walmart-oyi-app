@@ -11,6 +11,7 @@ import Login, {
   SelectCountryCodeModal,
   addCNAssociateRoleOverrides,
   getPrinterDetailsFromAsyncStorage,
+  isCountryCodeSet,
   onSubmitClubNbr,
   onSubmitCountryCode,
   resetFluffyFeaturesApiState,
@@ -27,7 +28,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { assignFluffyFeatures, setConfigs, setUserTokens } from '../../state/actions/User';
-import {getClubConfig, getFluffyFeatures, getItemCenterToken} from '../../state/actions/saga';
+import { getClubConfig, getItemCenterToken } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
 import store from '../../state';
 
@@ -79,7 +80,7 @@ const navigationProp: NavigationProp<any> = {
   canGoBack: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
-  isFocused: jest.fn(),
+  isFocused: jest.fn(() => true),
   removeListener: jest.fn(),
   reset: jest.fn(),
   setOptions: jest.fn(),
@@ -97,7 +98,7 @@ const testUser: User = {
   co: '',
   codePage: '',
   company: '',
-  countryCode: '',
+  countryCode: '0',
   ctscSecurityAnswers: '',
   department: '',
   departmentNumber: '',
@@ -209,6 +210,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -268,6 +270,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -307,6 +310,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -334,6 +338,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -361,6 +366,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -448,7 +454,9 @@ describe('Tests login screen functions', () => {
       ...mockConfig,
       printingUpdate: true,
       locMgmtEdit: mockConfig.locationManagementEdit,
-      overridePltPerish: false
+      overridePltPerish: false,
+      showQtyStocked: true,
+      enableAuditsIP: true
     };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
@@ -499,7 +507,9 @@ describe('Tests login screen functions', () => {
       ...mockConfig,
       printingUpdate: true,
       locMgmtEdit: mockConfig.locationManagementEdit,
-      overridePltPerish: false
+      overridePltPerish: false,
+      showQtyStocked: true,
+      enableAuditsIP: true
     };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
@@ -693,5 +703,19 @@ describe('Tests login screen functions', () => {
   it('test addCNAssociateRoleOverrides', () => {
     const testResults = addCNAssociateRoleOverrides(['test feature']);
     expect(testResults).toEqual(['test feature', 'on hands change']);
+  });
+
+  it('tests the isCountryCodeSet function', () => {
+    let result = isCountryCodeSet('MX', 'MX');
+    expect(result).toBeTruthy();
+
+    result = isCountryCodeSet('US', 'US');
+    expect(result).toBeFalsy();
+
+    result = isCountryCodeSet('US', '0');
+    expect(result).toBeFalsy();
+
+    result = isCountryCodeSet('US', 'MX');
+    expect(result).toBeTruthy();
   });
 });
