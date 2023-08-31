@@ -41,6 +41,9 @@ interface NativeWorklist {
   nativeGoal: WorklistGoal
 }
 
+const WORKLIST = 'WORKLIST.WORKLIST';
+const TODOWORKLIST = 'WORKLIST.TODO';
+
 export const resetUserConfigUpdateApiState = () => ({ type: UPDATE_USER_CONFIG.RESET });
 const mapStateToProps = (state: RootState) => ({
   userName: state.User.displayName,
@@ -215,18 +218,18 @@ export const onWorklistCardPress = (
   validateSession(navigation, route.name).then(() => {
     if (isPalletWorklist) {
       navigation.navigate(
-        strings('WORKLIST.WORKLIST'),
+        strings(WORKLIST),
         { screen: 'MissingPalletWorklist', initial: false }
       );
     } else if (isAuditWorklist) {
       setWorklistTypeDispatch('AUDIT');
-      navigation.navigate(strings('WORKLIST.WORKLIST'), {
+      navigation.navigate(strings(WORKLIST), {
         screen: 'AuditWorklistNavigator',
         initial: false,
         params: {
           screen: 'AuditWorklistTabs',
           params: {
-            screen: strings('WORKLIST.TODO')
+            screen: strings(TODOWORKLIST)
           }
         }
       });
@@ -234,13 +237,13 @@ export const onWorklistCardPress = (
       const { auditWorklists, palletWorklists } = userConfig;
       setWorklistTypeDispatch('ITEM');
       if (auditWorklists || palletWorklists) {
-        navigation.navigate(strings('WORKLIST.WORKLIST'), {
+        navigation.navigate(strings(WORKLIST), {
           screen: 'WorklistNavigator',
           initial: false,
           params: {
             screen: 'ITEMWORKLIST',
             params: {
-              screen: strings('WORKLIST.TODO')
+              screen: strings(TODOWORKLIST)
             }
           }
         });
@@ -248,7 +251,7 @@ export const onWorklistCardPress = (
         navigation.navigate('WorklistNavigator', {
           screen: 'ITEMWORKLIST',
           params: {
-            screen: strings('WORKLIST.TODO')
+            screen: strings(TODOWORKLIST)
           }
         });
       }
