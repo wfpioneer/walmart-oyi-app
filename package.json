@@ -10,6 +10,7 @@
     "test:coverage": "TZ='America/Chicago' jest --collect-coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build-release": "cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "build-stage-release": "cd android && ./gradlew clean && ./gradlew assembleStagingRelease",
     "postinstall": "npx jetify"
   },
   "dependencies": {

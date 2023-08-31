@@ -6,10 +6,11 @@ import User from '../models/User';
 export default class GetFluffyRolesService {
   public static getFluffyRoles(payload: User): Promise<AxiosResponse> {
     let { sAMAccountName, countryCode, siteId: clubNbr } = payload;
+    const { c } = payload;
 
-    if (__DEV__) {
+    if (countryCode !== c) {
       // This is to get Fluffy to correctly return features
-      countryCode = 'US';
+      countryCode = c;
       clubNbr = 1;
     } else if (countryCode === 'MX' && clubNbr === 5522) {
       // This is to allow feature toggle for UAT for MX (unless Fluffy allows test clubs to be configured)

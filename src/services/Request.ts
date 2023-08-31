@@ -58,7 +58,7 @@ class Request {
           // For use with all of the OYI APIs
           interceptRequest.headers.worklistDate = currentTime.format('YYYY-MM-DD');
           interceptRequest.headers.userId = store.getState().User.userId;
-          interceptRequest.headers.countryCode = store.getState().User.c;
+          interceptRequest.headers.countryCode = store.getState().User.countryCode;
           interceptRequest.headers.clubNbr = store.getState().User.siteId;
 
           if (request.url.includes(envUrls.worklistURL)) {
