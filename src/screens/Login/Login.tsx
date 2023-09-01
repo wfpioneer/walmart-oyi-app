@@ -424,7 +424,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}
-          onPress={() => signInUserInit()}
+          onPress={() => signOutUser(dispatch, user).then(() => signInUserInit())}
         />
       </View>
       <Text style={styles.versionDisplay}>
