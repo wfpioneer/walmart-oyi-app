@@ -1,6 +1,7 @@
 import {
   ACTION_COMPLETED,
   Actions,
+  CLEAR_SCREEN,
   CLEAR_SELECTED_LOCATION,
   DELETE_LOCATION_FROM_EXISTING,
   RESET_LOCATIONS,
@@ -11,6 +12,7 @@ import {
   UPDATE_PENDING_OH_QTY
 } from '../actions/ItemDetailScreen';
 import LocationType from '../../models/Location';
+import ItemDetails from '../../models/ItemDetails';
 
 export interface ItemDetailsState {
   itemNbr: number;
@@ -22,6 +24,7 @@ export interface ItemDetailsState {
   reserveLocations: Array<LocationType>;
   selectedLocation: LocationType | null;
   salesFloor: boolean;
+  itemDetails: ItemDetails | null;
 }
 
 export const initialState : ItemDetailsState = {
@@ -33,7 +36,8 @@ export const initialState : ItemDetailsState = {
   floorLocations: [],
   reserveLocations: [],
   selectedLocation: null,
-  salesFloor: false
+  salesFloor: false,
+  itemDetails: null
 };
 
 export const ItemDetailScreen = (
@@ -49,8 +53,11 @@ export const ItemDetailScreen = (
         exceptionType: action.payload.exceptionType,
         pendingOnHandsQty: action.payload.pendingOHQty,
         actionCompleted: action.payload.completed,
-        salesFloor: action.payload.salesFloor
+        salesFloor: action.payload.salesFloor,
+        itemDetails: action.payload.itemDetails
       };
+    case CLEAR_SCREEN:
+      return initialState;
     case UPDATE_PENDING_OH_QTY:
       return {
         ...state,
@@ -104,7 +111,12 @@ export const ItemDetailScreen = (
       };
     }
     case RESET_LOCATIONS:
-      return initialState;
+      return {
+        ...state,
+        floorLocations: [],
+        reserveLocations: [],
+        selectedLocation: null
+      };
     case SET_SELECTED_LOCATION:
       return {
         ...state,
