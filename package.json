@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "build-release": "cd android && ./gradlew clean && ./gradlew assembleRelease",
     "ios": "react-native run-ios",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postinstall": "npx jetify",
     "start": "react-native start",
     "test": "TZ='America/Chicago' jest",
-    "test:coverage": "TZ='America/Chicago' jest --collect-coverage"
+    "test:coverage": "TZ='America/Chicago' jest --collect-coverage",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "build-release": "cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "build-stage-release": "cd android && ./gradlew clean && ./gradlew assembleStagingRelease",
+    "postinstall": "npx jetify"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.3",
