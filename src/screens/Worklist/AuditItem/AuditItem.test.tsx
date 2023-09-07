@@ -62,7 +62,7 @@ import { LocationList } from '../../../components/LocationListCard/LocationListC
 import {
   GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1, UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY, UPDATE_OH_QTY_V1
 } from '../../../state/actions/asyncAPI';
-import { updateMultiPalletUPCQty } from '../../../state/actions/saga';
+import { getApprovalList, getLocationsForItem, updateMultiPalletUPCQty } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
 import { setFloorLocations, setReserveLocations, setupScreen } from '../../../state/actions/ItemDetailScreen';
@@ -388,6 +388,18 @@ describe('AuditItemScreen', () => {
         2,
         expectedGetItemDetailsAction
       );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_LOCATIONS_FOR_ITEM.RESET }
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        6,
+        getLocationsForItem(123)
+      );
     });
 
     it('test onValidateItemNumber with get pete locations', async () => {
@@ -407,6 +419,14 @@ describe('AuditItemScreen', () => {
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         2,
         expectedGetItemDetailsAction
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
+      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_LOCATIONS_FOR_ITEM_V1.RESET }
       );
     });
 

@@ -238,6 +238,9 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
           if (peteGetLocations) {
             dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
             dispatch(getLocationsForItemV1(itemNumber));
+          } else {
+            dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+            dispatch(getLocationsForItem(itemNumber));
           }
         }
       })
