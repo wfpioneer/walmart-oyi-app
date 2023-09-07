@@ -46,7 +46,7 @@ export const ItemDetailScreen = (
 ) : ItemDetailsState => {
   switch (action.type) {
     case SETUP_SCREEN:
-      return {
+      return action.payload.itemDetails ? {
         ...state,
         itemNbr: action.payload.itemNbr,
         upcNbr: action.payload.upcNbr,
@@ -55,6 +55,14 @@ export const ItemDetailScreen = (
         actionCompleted: action.payload.completed,
         salesFloor: action.payload.salesFloor,
         itemDetails: action.payload.itemDetails
+      } : {
+        ...state,
+        itemNbr: action.payload.itemNbr,
+        upcNbr: action.payload.upcNbr,
+        exceptionType: action.payload.exceptionType,
+        pendingOnHandsQty: action.payload.pendingOHQty,
+        actionCompleted: action.payload.completed,
+        salesFloor: action.payload.salesFloor
       };
     case CLEAR_SCREEN:
       return initialState;

@@ -21,7 +21,7 @@ export const setupScreen = (
   pendingOHQty: number,
   completed: boolean,
   salesFloor: boolean,
-  itemDetails: ItemDetails
+  itemDetails?: ItemDetails
 ) => ({
   type: SETUP_SCREEN,
   payload: {
