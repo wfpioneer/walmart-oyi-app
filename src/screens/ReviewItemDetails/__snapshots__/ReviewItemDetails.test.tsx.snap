@@ -3206,6 +3206,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -3915,11 +3916,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "viewProfitMargin": true,
           }
         }
-        category="99 - Store Use"
+        category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
-        itemName="Small, Store Use Item"
-        itemNbr={987654321}
+        imageToken="bearer megaalakazamvsvanillishswarm"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
         navigationForPrint={
           Object {
             "addListener": [MockFunction],
@@ -3941,7 +3943,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         showItemImage={false}
         status="Active"
         tokenIsWaiting={false}
-        upcNbr="777555333"
+        upcNbr="000055559999"
       />
       <SFTCard
         iconName="pallet"
@@ -3958,7 +3960,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               },
               Object {
                 "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
-                "value": -11,
+                "value": 21,
               },
               Object {
                 "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
@@ -3970,11 +3972,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               },
               Object {
                 "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
-                "value": 0,
-              },
-              Object {
-                "label": "[missing \\"en.ITEM.FLY_CLOUD_QTY\\" translation]",
-                "value": 42,
+                "value": 10,
               },
             ]
           }
@@ -4132,7 +4130,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "action": "pick_history_click",
               "otherInfo": Object {
-                "itemNbr": 987654321,
+                "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
@@ -4412,6 +4410,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -5102,6 +5101,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -5792,6 +5792,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -6282,6 +6283,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -6772,6 +6774,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={

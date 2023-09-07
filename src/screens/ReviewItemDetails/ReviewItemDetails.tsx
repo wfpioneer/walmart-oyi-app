@@ -45,7 +45,6 @@ import { resetScannedEvent, setManualScan, setScannedEvent } from '../../state/a
 import OHQtyUpdate from '../../components/ohqtyupdate/OHQtyUpdate';
 import CreatePickDialog from '../../components/CreatePickDialog/CreatePickDialog';
 import {
-  clearScreen,
   resetLocations,
   setActionCompleted,
   setFloorLocations,
@@ -1553,7 +1552,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     );
   }
 
-  if (isWaiting || !result) {
+  // Need to make sure that we have a result from APIs to remove this
+  // result could be stored in redux
+  if (isWaiting || !(result || itemDetails)) {
     return (
       <ActivityIndicator
         animating={isWaiting}

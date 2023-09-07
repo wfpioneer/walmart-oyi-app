@@ -542,7 +542,10 @@ describe('AuditItemScreen', () => {
         mockItemDetails?.location?.floor || [],
         mockTrackEventCall
       );
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, setupScreen(itemNbr, upcNbr, exceptionType, -999, false, false));
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        1,
+        setupScreen(itemNbr, upcNbr, exceptionType, -999, false, false, mockItemDetails)
+      );
       expect(mockDispatch).toHaveBeenNthCalledWith(2, setFloorLocations(location?.floor || []));
       expect(mockDispatch).toHaveBeenNthCalledWith(3, setReserveLocations(location?.reserve || []));
       expect(mockNavigate).toBeCalledWith('AddLocation');

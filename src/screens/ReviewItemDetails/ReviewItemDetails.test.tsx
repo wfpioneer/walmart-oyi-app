@@ -41,7 +41,7 @@ import {
   getLocationsForItem,
   getLocationsForItemV1
 } from '../../state/actions/saga';
-import { OHChangeHistory } from '../../models/ItemDetails';
+import ItemDetails, { OHChangeHistory } from '../../models/ItemDetails';
 import { setActionCompleted, setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
 import { WorkListStatus } from '../../models/WorklistItem';
 import {
@@ -179,7 +179,10 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   userConfigs: mockConfig,
   countryCode: 'MX',
   locationForItemsV1Api: defaultAsyncState,
-  userDomain: 'HO'
+  userDomain: 'HO',
+  imageToken: 'bearer megaalakazamvsvanillishswarm',
+  itemDetails: null,
+  tokenIsWaiting: false
 };
 
 describe('ReviewItemDetailsScreen', () => {
@@ -224,19 +227,21 @@ describe('ReviewItemDetailsScreen', () => {
       const { toJSON } = render(component);
       expect(toJSON()).toMatchSnapshot();
     });
+    const mockItemDetails: ItemDetails = { ...mockItemDetail123, ...mockAdditionalItemDetails };
     it('renders the details for a single item with non-null status', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
+          data: mockItemDetails,
           status: 200
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
-        reserveLocations: mockItemDetail123?.location?.reserve
+        reserveLocations: mockItemDetail123?.location?.reserve,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -250,7 +255,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
+          data: mockItemDetails,
           status: 200
         },
         piHistResult: {
@@ -266,7 +271,8 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        ohQtyModalVisible: true
+        ohQtyModalVisible: true,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -279,7 +285,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
+          data: mockItemDetails,
           status: 200
         },
         piHistResult: {
@@ -295,7 +301,8 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        createPickModalVisible: true
+        createPickModalVisible: true,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -308,7 +315,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
+          data: mockItemDetails,
           status: 200
         },
         piHistResult: {
@@ -324,7 +331,8 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        errorModalVisible: true
+        errorModalVisible: true,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -337,14 +345,15 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
+          data: mockItemDetails,
           status: 200
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
-        reserveLocations: mockItemDetail123?.location?.reserve
+        reserveLocations: mockItemDetail123?.location?.reserve,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -358,14 +367,15 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: { ...mockItemDetail456, ...mockAdditionalItemDetails },
+          data: mockItemDetails,
           status: 200
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail456.onHandsQty,
         pendingOnHandsQty: mockItemDetail456.pendingOnHandsQty,
         floorLocations: mockItemDetail456?.location?.floor,
-        reserveLocations: mockItemDetail456?.location?.reserve
+        reserveLocations: mockItemDetail456?.location?.reserve,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       // Mock Item Number 456 has cloud Qty defined
@@ -379,7 +389,7 @@ describe('ReviewItemDetailsScreen', () => {
         ...mockItemDetailsScreenProps,
         result: {
           ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
+          data: mockItemDetails,
           status: 200
         },
         exceptionType: 'NSFL',
@@ -387,7 +397,8 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        userFeatures: [onHandsChangeText]
+        userFeatures: [onHandsChangeText],
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -887,7 +898,8 @@ describe('ReviewItemDetailsScreen', () => {
           itemNbr: 1234567890,
           pendingOHQty: -999,
           salesFloor: true,
-          upcNbr: '000055559999'
+          upcNbr: '000055559999',
+          itemDetails: mockItemDetail123
         },
         type: 'ITEM_DETAILS_SCREEN/SETUP'
       };
