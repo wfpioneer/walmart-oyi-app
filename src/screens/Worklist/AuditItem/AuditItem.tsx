@@ -2060,7 +2060,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               getItemDetailsApi.isWaiting
             )}
             onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
-            showSaveButton={userConfig.enableAuditsInProgress}
+            showSaveButton={userConfig.enableAuditsInProgress
+            && (itemDetails?.worklistAuditType === 'AU' || itemDetails?.worklistAuditType === 'RA')}
           />
         </View>
       ) : null}
