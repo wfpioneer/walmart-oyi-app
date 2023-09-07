@@ -329,16 +329,19 @@ export const addLocationHandler = (
   trackEventCall: (eventName: string, params?: any) => void,
 ) => {
   const reserveLoc = itemDetails?.location?.reserve;
-  dispatch(
-    setupScreen(
-      itemDetails ? itemDetails.itemNbr : 0,
-      itemDetails ? itemDetails.upcNbr : '',
-      itemDetails?.exceptionType,
-      -999,
-      false,
-      false
-    )
-  );
+  if (itemDetails) {
+    dispatch(
+      setupScreen(
+        itemDetails.itemNbr,
+        itemDetails.upcNbr,
+        itemDetails.exceptionType,
+        -999,
+        false,
+        false,
+        itemDetails
+      )
+    );
+  }
 
   if (floorLocations.length > 0) {
     dispatch(setItemFloorLocations(floorLocations));
