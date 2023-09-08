@@ -7,6 +7,7 @@ import {
   RESET_LOCATIONS,
   SETUP_SCREEN,
   SET_FLOOR_LOCATIONS,
+  SET_ITEM_DETAILS,
   SET_RESERVE_LOCATIONS,
   SET_SELECTED_LOCATION, SET_UPC,
   UPDATE_PENDING_OH_QTY
@@ -66,6 +67,11 @@ export const ItemDetailScreen = (
       };
     case CLEAR_SCREEN:
       return initialState;
+    case SET_ITEM_DETAILS:
+      return {
+        ...state,
+        itemDetails: action.payload
+      };
     case UPDATE_PENDING_OH_QTY:
       return {
         ...state,

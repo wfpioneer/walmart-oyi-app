@@ -3,6 +3,7 @@ import Location from '../../models/Location';
 
 export const SETUP_SCREEN = 'ITEM_DETAILS_SCREEN/SETUP';
 export const CLEAR_SCREEN = 'ITEM_DETAILS_SCREEN/CLEAR';
+export const SET_ITEM_DETAILS = 'ITEM_DETAILS_SCREEN/SET_ITEM_DETAILS';
 export const ACTION_COMPLETED = 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED';
 export const UPDATE_PENDING_OH_QTY = 'ITEM_DETAILS_SCREEN/UPDATE_PENDING_OH_QTY';
 export const SET_FLOOR_LOCATIONS = 'ITEM_DETAILS_SCREEN/SET_FLOOR_LOCATIONS';
@@ -36,6 +37,11 @@ export const setupScreen = (
 } as const);
 
 export const clearScreen = () => ({ type: CLEAR_SCREEN } as const);
+
+export const setItemDetails = (itemDetails: ItemDetails) => ({
+  type: SET_ITEM_DETAILS,
+  payload: itemDetails
+} as const);
 
 export const updatePendingOHQty = (pendingOHQty: number) => ({
   type: UPDATE_PENDING_OH_QTY,
@@ -96,6 +102,7 @@ export const setUPC = (upc: string) => ({
 export type Actions =
   ReturnType<typeof setupScreen>
   | ReturnType<typeof clearScreen>
+  | ReturnType<typeof setItemDetails>
   | ReturnType<typeof updatePendingOHQty>
   | ReturnType<typeof setActionCompleted>
   | ReturnType<typeof setFloorLocations>

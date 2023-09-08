@@ -90,7 +90,7 @@ const REVIEW_ITEM_DETAILS = 'Review_Item_Details';
 export interface ItemDetailsScreenProps {
   scannedEvent: { value: string | null; type: string | null; };
   isManualScanEnabled: boolean;
-  isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
+  itemDetailsApi: AsyncState;
   isPiHistWaiting: boolean; piHistError: AxiosError | null; piHistResult: AxiosResponse | null;
   isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
   managerApprovalHistoryApi: AsyncState;
@@ -1195,7 +1195,7 @@ export const renderBarcodeErrorModal = (
 export const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails.exceptionType
   ? itemDetails.completed : true);
 
-export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails) => {
+export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails | null) => {
   if (itemDetails) {
     dispatch(setItemDetails(itemDetails));
     dispatch(setupScreen(
@@ -1324,7 +1324,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
 };
 
 export const onIsWaiting = (isWaiting: boolean) => (
-  isWaiting && (
+  isWaiting ? (
     <ActivityIndicator
       animating={isWaiting}
       hidesWhenStopped
@@ -1332,7 +1332,7 @@ export const onIsWaiting = (isWaiting: boolean) => (
       size="large"
       style={styles.activityIndicator}
     />
-  )
+  ) : null
 );
 
 export const getLocationCount = (props: ItemDetailsScreenProps) => {
@@ -1340,9 +1340,10 @@ export const getLocationCount = (props: ItemDetailsScreenProps) => {
   return (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
 };
 
-export const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales.lastUpdateTs')
-  ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales?.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
-  : undefined);
+export const getUpdatedSales = (itemDetails: ItemDetails | null) => (
+  itemDetails && _.get(itemDetails, 'sales.lastUpdateTs')
+    ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales?.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
+    : undefined);
 
 export const isError = (
   error: AxiosError | null,
@@ -1416,18 +1417,12 @@ export const handleRefresh = (
 
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
-    scannedEvent, isManualScanEnabled,
-    isWaiting, error, result,
+    scannedEvent, isManualScanEnabled, itemDetailsApi,
     isPiHistWaiting, piHistError, piHistResult,
     isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
-    managerApprovalHistoryApi,
-    picklistHistoryApi,
-    createNewPickApi,
-    updateOHQtyApi,
+    managerApprovalHistoryApi, picklistHistoryApi, createNewPickApi, updateOHQtyApi,
     userId, actionCompleted, pendingOnHandsQty,
-    route,
-    dispatch,
-    navigation,
+    route, navigation, dispatch,
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
@@ -1466,23 +1461,24 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     onValidateScannedEvent(props);
   }, [scannedEvent]);
 
-  const apiItemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
+  const itemDetailsApiData = (itemDetailsApi.result ? itemDetailsApi.result.data as ItemDetails : null);
+  const apiErrorMessage = (itemDetailsApiData && itemDetailsApiData.message) ? itemDetailsApiData.message : undefined;
 
   const picklistHistory: PickHistory[] = (
     picklistHistoryApi.result && picklistHistoryApi.result.data.picklists
   ) ? picklistHistoryApi.result.data.picklists : [];
 
   const locationCount = getLocationCount(props);
-  const updatedSalesTS = itemDetails ? getUpdatedSales(itemDetails) : '';
+  const updatedSalesTS = getUpdatedSales(itemDetails);
 
   const viewProfitMargin = (userDomain === 'HO' || countryCode !== 'CN')
   || (countryCode === 'CN' && userFeatures.includes('manager approval'));
 
   // Set Item Details
   useEffectHook(() => {
-    onValidateItemDetails(dispatch, apiItemDetails);
-    setNewOHQty(apiItemDetails?.onHandsQty || 0);
-  }, [apiItemDetails]);
+    onValidateItemDetails(dispatch, itemDetailsApiData);
+    setNewOHQty(itemDetailsApiData?.onHandsQty || 0);
+  }, [itemDetailsApiData]);
 
   useEffectHook(() => getLocationsForItemsApiHook(
     locationForItemsApi,
@@ -1538,26 +1534,25 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   ), [updateOHQtyApi]);
 
   // Get Item Details Error
-  if (!isWaiting && (error || (apiItemDetails && apiItemDetails.message))) {
-    const message = (apiItemDetails && apiItemDetails.message) ? apiItemDetails.message : undefined;
+  if (!itemDetailsApi.isWaiting && (itemDetailsApi.error || apiErrorMessage)) {
     return isError(
-      error,
+      itemDetailsApi.error,
       errorModalVisible,
       setErrorModalVisible,
       isManualScanEnabled,
       scannedEvent,
       dispatch,
       trackEventCall,
-      message // Checks for an error message from ItemDetails orchestration
+      apiErrorMessage // Checks for an error message from ItemDetails orchestration
     );
   }
 
   // Need to make sure that we have a result from APIs to remove this
   // result could be stored in redux
-  if (isWaiting || !(result || itemDetails)) {
+  if (itemDetailsApi.isWaiting) {
     return (
       <ActivityIndicator
-        animating={isWaiting}
+        animating={itemDetailsApi.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -1567,7 +1562,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   }
 
   // no item found
-  if (_.get(result, 'status') === 204 || _.get(apiItemDetails, 'code') === 204) {
+  if (_.get(itemDetailsApi.result, 'status') === 204 || _.get(itemDetailsApiData, 'code') === 204) {
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
@@ -1589,7 +1584,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
-  return itemDetails?.itemName ? (
+  return itemDetails ? (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
@@ -1649,101 +1644,97 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
           />
         )}
       >
-        {onIsWaiting(isWaiting)}
-        {itemDetails
-          ? (
-            <View>
-              <ItemInfo
-                itemName={itemDetails.itemName}
-                itemNbr={itemDetails.itemNbr}
-                upcNbr={itemDetails.upcNbr}
-                status={itemDetails.status || ''}
-                category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
-                price={itemDetails.price}
-                exceptionType={getExceptionType(actionCompleted, itemDetails)}
-                navigationForPrint={navigation}
-                additionalItemDetails={{
-                  color: itemDetails.color,
-                  margin: itemDetails.margin,
-                  vendorPackQty: itemDetails.vendorPackQty,
-                  grossProfit: itemDetails.grossProfit,
-                  size: itemDetails.size,
-                  basePrice: itemDetails.basePrice,
-                  source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' },
-                  viewProfitMargin
-                }}
-                countryCode={countryCode}
-                showItemImage={userConfigs.showItemImage}
-                worklistAuditType={itemDetails.worklistAuditType}
-                worklistStatus={itemDetails.worklistStatus ?? itemDetails.auditWorklistStatus}
-                imageToken={imageToken}
-                tokenIsWaiting={tokenIsWaiting}
-              />
-              <SFTCard
-                title={strings('ITEM.QUANTITY')}
-                iconName="pallet"
-                topRightBtnTxt={userFeatures.includes('on hands change') ? strings('GENERICS.CHANGE') : undefined}
-                topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
-              >
-                {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
-              </SFTCard>
-              <View style={styles.historyContainer}>
-                {renderOHChangeHistory(props, mahResult, mahError, itemDetails.itemNbr, dispatch, trackEventCall)}
-              </View>
-              <View style={styles.historyContainer}>
-                {renderReplenishmentCard(
-                  itemDetails,
-                  piHistResult,
-                  piHistError,
-                  isPiHistWaiting,
-                  trackEventCall,
-                  itemDetails.itemNbr,
-                  dispatch
-                )}
-              </View>
-              <SFTCard
-                iconName="map-marker-alt"
-                title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-                topRightBtnTxt={getTopRightBtnTxt(locationCount)}
-                topRightBtnAction={() => handleLocationAction(props, itemDetails)}
-              >
-                {renderLocationComponent(
-                  props,
-                  itemDetails,
-                  setCreatePickModalVisible,
-                  dispatch,
-                  locationForItemsApi,
-                  locationForItemsV1Api
-                )}
-              </SFTCard>
-              <View style={styles.historyContainer}>
-                {renderPickHistory(
-                  props,
-                  picklistHistory,
-                  picklistHistoryApi.result,
-                  picklistHistoryApi.isWaiting,
-                  itemDetails.itemNbr
-                )}
-              </View>
-              {(
-                renderSalesGraphV4(
-                  updatedSalesTS,
-                  toggleSalesGraphView,
-                  isSalesMetricsGraphView,
-                  piSalesHistResult,
-                  piSalesHistError,
-                  isPiSalesHistWaiting,
-                  trackEventCall,
-                  itemDetails.itemNbr,
-                  dispatch
-                ))}
-            </View>
-          ) : <View />}
+        {onIsWaiting(itemDetailsApi.isWaiting)}
+        <View>
+          <ItemInfo
+            itemName={itemDetails.itemName}
+            itemNbr={itemDetails.itemNbr}
+            upcNbr={itemDetails.upcNbr}
+            status={itemDetails.status || ''}
+            category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
+            price={itemDetails.price}
+            exceptionType={getExceptionType(actionCompleted, itemDetails)}
+            navigationForPrint={navigation}
+            additionalItemDetails={{
+              color: itemDetails.color,
+              margin: itemDetails.margin,
+              vendorPackQty: itemDetails.vendorPackQty,
+              grossProfit: itemDetails.grossProfit,
+              size: itemDetails.size,
+              basePrice: itemDetails.basePrice,
+              source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' },
+              viewProfitMargin
+            }}
+            countryCode={countryCode}
+            showItemImage={userConfigs.showItemImage}
+            worklistAuditType={itemDetails.worklistAuditType}
+            worklistStatus={itemDetails.worklistStatus ?? itemDetails.auditWorklistStatus}
+            imageToken={imageToken}
+            tokenIsWaiting={tokenIsWaiting}
+          />
+          <SFTCard
+            title={strings('ITEM.QUANTITY')}
+            iconName="pallet"
+            topRightBtnTxt={userFeatures.includes('on hands change') ? strings('GENERICS.CHANGE') : undefined}
+            topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
+          >
+            {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
+          </SFTCard>
+          <View style={styles.historyContainer}>
+            {renderOHChangeHistory(props, mahResult, mahError, itemDetails.itemNbr, dispatch, trackEventCall)}
+          </View>
+          <View style={styles.historyContainer}>
+            {renderReplenishmentCard(
+              itemDetails,
+              piHistResult,
+              piHistError,
+              isPiHistWaiting,
+              trackEventCall,
+              itemDetails.itemNbr,
+              dispatch
+            )}
+          </View>
+          <SFTCard
+            iconName="map-marker-alt"
+            title={`${strings('ITEM.LOCATION')}(${locationCount})`}
+            topRightBtnTxt={getTopRightBtnTxt(locationCount)}
+            topRightBtnAction={() => handleLocationAction(props, itemDetails)}
+          >
+            {renderLocationComponent(
+              props,
+              itemDetails,
+              setCreatePickModalVisible,
+              dispatch,
+              locationForItemsApi,
+              locationForItemsV1Api
+            )}
+          </SFTCard>
+          <View style={styles.historyContainer}>
+            {renderPickHistory(
+              props,
+              picklistHistory,
+              picklistHistoryApi.result,
+              picklistHistoryApi.isWaiting,
+              itemDetails.itemNbr
+            )}
+          </View>
+          {(
+            renderSalesGraphV4(
+              updatedSalesTS,
+              toggleSalesGraphView,
+              isSalesMetricsGraphView,
+              piSalesHistResult,
+              piSalesHistError,
+              isPiSalesHistWaiting,
+              trackEventCall,
+              itemDetails.itemNbr,
+              dispatch
+            ))}
+        </View>
       </ScrollView>
       {completeButtonComponent(props, itemDetails)}
     </View>
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  ) : <View key="Empty item" />;
+  ) : <View />;
 };
 
 const ReviewItemDetails = (): JSX.Element => {
@@ -1793,9 +1784,7 @@ const ReviewItemDetails = (): JSX.Element => {
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
-      isWaiting={getItemDetailsV4Api.isWaiting}
-      error={getItemDetailsV4Api.error}
-      result={getItemDetailsV4Api.result}
+      itemDetailsApi={getItemDetailsV4Api}
       isPiHistWaiting={getItemPiHistoryApi.isWaiting}
       piHistError={getItemPiHistoryApi.error}
       piHistResult={getItemPiHistoryApi.result}

@@ -87,6 +87,7 @@ import LocationListCard, {
 } from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 import {
+  setItemDetails,
   setFloorLocations as setItemFloorLocations,
   setReserveLocations as setItemReserveLocations,
   setupScreen
@@ -96,7 +97,6 @@ import {
   clearAuditScreenData,
   setApprovalItem,
   setFloorLocations,
-  setItemDetails,
   setReserveLocations,
   setScannedPalletId,
   updateFloorLocationQty,
@@ -291,15 +291,18 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
     validateSessionCall,
     itemNumber,
     getItemPalletsDispatch,
-    userConfig
+    userConfig,
+    itemDetails
   } = props;
 
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name)
       .then(() => {
         if (itemNumber > 0) {
-          dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-          dispatch(getItemDetailsV4({ id: itemNumber }));
+          if (!itemDetails || itemDetails.itemNbr !== itemNumber) {
+            dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+            dispatch(getItemDetailsV4({ id: itemNumber }));
+          }
           dispatch(getApprovalList({ itemNbr: itemNumber, status: approvalStatus.Pending }));
           dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
           if (peteGetLocations) {
@@ -329,19 +332,6 @@ export const addLocationHandler = (
   trackEventCall: (eventName: string, params?: any) => void,
 ) => {
   const reserveLoc = itemDetails?.location?.reserve;
-  if (itemDetails) {
-    dispatch(
-      setupScreen(
-        itemDetails.itemNbr,
-        itemDetails.upcNbr,
-        itemDetails.exceptionType,
-        -999,
-        false,
-        false,
-        itemDetails
-      )
-    );
-  }
 
   if (floorLocations.length > 0) {
     dispatch(setItemFloorLocations(floorLocations));
@@ -2081,8 +2071,9 @@ const AuditItem = (): JSX.Element => {
   } = useTypedSelector(state => state.User);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const {
-    approvalItem, itemDetails, floorLocations, reserveLocations, scannedPalletId
+    approvalItem, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
+  const { itemDetails } = useTypedSelector(state => state.ItemDetailScreen);
 
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetailsV4
