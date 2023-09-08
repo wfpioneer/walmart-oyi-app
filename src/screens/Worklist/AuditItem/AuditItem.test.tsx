@@ -215,7 +215,9 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   countryCode: 'CN',
   updateMultiPalletUPCQtyApi: defaultAsyncState,
   getItemPalletsDispatch: jest.fn(),
-  modalIsWaitingState: [false, jest.fn()]
+  modalIsWaitingState: [false, jest.fn()],
+  floorLocationIsWaitingState: [false, jest.fn()],
+  reserveLocationIsWaitingState: [false, jest.fn()]
 };
 
 describe('AuditItemScreen', () => {
@@ -355,6 +357,9 @@ describe('AuditItemScreen', () => {
     const mockExistingReserveLocations: ItemPalletInfo[] = [];
     const mockLocationName = 'A1-1';
     const mockItemNumber = 9800065634;
+    const mockSetFloorLocIsWaiting = jest.fn();
+    const mockSetReserveLocIsWaiting = jest.fn();
+
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -484,8 +489,14 @@ describe('AuditItemScreen', () => {
         typeNbr: 8,
         newQty: 0
       }];
-      getUpdatedFloorLocations(newResults, mockDispatch, mockItemDetails?.location?.floor || []);
+      getUpdatedFloorLocations(
+        newResults,
+        mockDispatch,
+        mockItemDetails?.location?.floor || [],
+        mockSetFloorLocIsWaiting
+      );
       expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetFloorLocIsWaiting).toHaveBeenCalledWith(false);
     });
 
     it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
@@ -547,9 +558,19 @@ describe('AuditItemScreen', () => {
             }
           }
         }
-      }
-      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
+      };
+      getItemLocationsApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], mockSetFloorLocIsWaiting);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+    });
+
+    it('Tests get item locations api hook isWaiting', () => {
+      const locationIsWaitingApi: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        isWaiting: true
+      };
+      getItemLocationsApiHook(locationIsWaitingApi, 1, mockDispatch, navigationProp, [], mockSetFloorLocIsWaiting);
+      expect(mockSetFloorLocIsWaiting).toHaveBeenCalledWith(true);
     });
 
     it('Tests get item locations v1 api hook success with correct item number', () => {
@@ -561,9 +582,19 @@ describe('AuditItemScreen', () => {
             salesFloorLocation: []
           }
         }
-      }
-      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, []);
+      };
+      getItemLocationsV1ApiHook(locationSuccessApi, 1, mockDispatch, navigationProp, [], mockSetFloorLocIsWaiting);
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+    });
+
+    it('Tests get item locations v1 api hook isWaiting', () => {
+      const locationIsWaitingApi: AsyncState = {
+        ...defaultAsyncState,
+        value: 1,
+        isWaiting: true
+      };
+      getItemLocationsV1ApiHook(locationIsWaitingApi, 1, mockDispatch, navigationProp, [], mockSetFloorLocIsWaiting);
+      expect(mockSetFloorLocIsWaiting).toHaveBeenCalledWith(true);
     });
 
     it('Tests getScannedPalletEffect when the scanned pallet matches the pallet associated with the item', () => {
@@ -1286,10 +1317,12 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockExistingReserveLocations,
-        mockSetGetItemPalletsError
+        mockSetGetItemPalletsError,
+        mockSetReserveLocIsWaiting
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetGetItemPalletsError).toHaveBeenCalledWith(false);
+      expect(mockSetReserveLocIsWaiting).toHaveBeenCalledWith(false);
     });
 
     it('Tests getItemPalletsApiHook on 204 response', () => {
@@ -1305,10 +1338,28 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockExistingReserveLocations,
-        mockSetGetItemPalletsError
+        mockSetGetItemPalletsError,
+        mockSetReserveLocIsWaiting
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetGetItemPalletsError).toBeCalledWith(false);
+      expect(mockSetReserveLocIsWaiting).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests getItemPalletsApiHook on isWaiting', () => {
+      const successApi204: AsyncState = {
+        ...defaultAsyncState,
+       isWaiting: true
+      };
+      getItemPalletsApiHook(
+        successApi204,
+        mockDispatch,
+        navigationProp,
+        mockExistingReserveLocations,
+        mockSetGetItemPalletsError,
+        mockSetReserveLocIsWaiting
+      );
+      expect(mockSetReserveLocIsWaiting).toHaveBeenCalledWith(true);
     });
 
     it('Tests getItemPalletsApiHook on failure', () => {
@@ -1317,10 +1368,12 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockExistingReserveLocations,
-        mockSetGetItemPalletsError
+        mockSetGetItemPalletsError,
+        mockSetReserveLocIsWaiting
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetGetItemPalletsError).toBeCalledWith(true);
+      expect(mockSetReserveLocIsWaiting).toHaveBeenCalledWith(false);
     });
 
     it('Tests renderCalculatorModal close button action', () => {
