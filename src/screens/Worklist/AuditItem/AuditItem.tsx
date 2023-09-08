@@ -1484,6 +1484,18 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }).catch(() => { });
   };
 
+  const handleFloorLocsRetry = () => {
+    validateSession(navigation, route.name).then(() => {
+      if (userConfig.peteGetLocations) {
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+        dispatch(getLocationsForItemV1(itemNumber));
+      } else {
+        dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+        dispatch(getLocationsForItem(itemNumber));
+      }
+    }).catch(() => { });
+  };
+
   const handleDeleteLocation = (loc: Location, locIndex: number) => {
     validateSession(navigation, route.name).then(() => {
       trackEventCall(
@@ -1699,9 +1711,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
-              loading={getItemDetailsApi.isWaiting || getItemLocationsApi.isWaiting}
-              error={!!(getItemDetailsApi.error || getItemLocationsApi.error)}
-              onRetry={() => {}}
+              loading={getItemLocationsApi.isWaiting
+                || getItemLocationsV1Api.isWaiting}
+              error={!!(getItemLocationsApi.error || getItemLocationsV1Api.error)}
+              onRetry={handleFloorLocsRetry}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
               minQty={MIN}
