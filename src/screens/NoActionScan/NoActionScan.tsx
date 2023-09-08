@@ -13,6 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {
   NavigationProp,
   RouteProp,
+  StackActions,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -121,10 +122,9 @@ export const completeItemApiHook = (
       } else {
         dispatch(setActionCompleted());
         if (route.params && route.params.source === 'OtherAction') {
-          navigation.goBack();
+          navigation.dispatch(StackActions.pop(3));
         }
-        navigation.goBack();
-        navigation.goBack();
+        navigation.dispatch(StackActions.pop(2));
       }
     }
 

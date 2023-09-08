@@ -4,7 +4,8 @@ import {
   NavigationContainer,
   NavigationContext,
   NavigationProp,
-  RouteProp
+  RouteProp,
+  StackActions
 } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
@@ -186,10 +187,8 @@ describe('NoActionScan', () => {
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
-      expect(navigationProp.goBack).toHaveBeenCalledTimes(2);
+      expect(navigationProp.dispatch).toHaveBeenCalledWith(StackActions.pop(2));
 
-      // @ts-expect-error this function is mocked by jest
-      navigationProp.goBack.mockReset();
       const routeOtherAction: RouteProp<any, string> = {
         ...routeProp,
         params: { source: 'OtherAction' }
@@ -198,7 +197,7 @@ describe('NoActionScan', () => {
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
-      expect(navigationProp.goBack).toHaveBeenCalledTimes(3);
+      expect(navigationProp.dispatch).toHaveBeenCalledWith(StackActions.pop(3));
     });
 
     it('test completeItemApiHook on error result', () => {
