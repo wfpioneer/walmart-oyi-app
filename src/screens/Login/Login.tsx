@@ -74,6 +74,7 @@ export interface LoginScreenProps {
   getClubConfigApiState: AsyncState;
   dispatch: Dispatch<any>;
   useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  activityModalShown: boolean
 }
 
 export const getSystemLanguage = (): string => {
@@ -101,6 +102,20 @@ const extractUserId = (fullUserId: string) => {
 };
 
 const userIsSignedIn = (user: User): boolean => user.sAMAccountName !== '' && user.userTokens.accessToken !== '';
+
+/**
+ * This method is here so that we can determine if a US user has set the country code for the app's use.
+ * Our app does not work for US country, but our developers have US logins and so the country code will need
+ * to be set manually.  If not US, then the user will already have the correct country
+ *
+ * @param c comes from the pingfed user's c value, which designates the country
+ * @param countryCode comes from the pingfed user's countryCode value, which appears to numerically designate
+ * the country.  For our app's purposes, we use this field instead of c
+ * @returns t/f whether the country code has been set for a US user
+ */
+export const isCountryCodeSet = (c: string, countryCode: string) => (c === 'US'
+  ? !countryCode.match(/[^A-Za-z]/) && countryCode !== c : true);
+
 export const SelectCountryCodeModal = (
   props: {
     onSignOut: () => void,
@@ -181,7 +196,7 @@ export const signInUser = async (dispatch: Dispatch<any>): Promise<void> => {
     if (parseInt(userInfo[CLUB_NBR], 10)) {
       userInfo.siteId = parseInt(userInfo[CLUB_NBR], 10);
     }
-    userInfo.countryCode = userInfo.c;
+    userInfo.countryCode = userInfo.c; // setting country code to c
     dispatch(loginUser({ ...userInfo }));
     trackEvent('user_sign_in');
     if (userInfo[DOMAIN] !== 'HO' && userInfo.c !== 'US') {
@@ -325,13 +340,13 @@ export const onSubmitClubNbr = (clubNbr: number, dispatch: Dispatch<any>, user: 
   const updatedUser = { ...user, 'wm-BusinessUnitNumber': clubNbr.toString(), siteId: clubNbr };
   dispatch(loginUser(updatedUser));
   trackEvent('user_sign_in');
-  if (user.c !== 'US') {
+  if (isCountryCodeSet(user.c, user.countryCode)) {
     dispatch(getFluffyFeatures(updatedUser));
   }
 };
 
 export const onSubmitCountryCode = (countryCode: string, dispatch: Dispatch<any>, user: User) => {
-  const updatedUser = { ...user, c: countryCode, countryCode };
+  const updatedUser = { ...user, countryCode };
   dispatch(loginUser(updatedUser));
   if (updatedUser[DOMAIN] !== 'HO') {
     dispatch(getFluffyFeatures(updatedUser));
@@ -345,7 +360,8 @@ export const LoginScreen = (props: LoginScreenProps) => {
     getClubConfigApiState,
     navigation,
     dispatch,
-    useEffectHook
+    useEffectHook,
+    activityModalShown
   } = props;
 
   const signInUserInit = () => {
@@ -380,7 +396,8 @@ export const LoginScreen = (props: LoginScreenProps) => {
   return (
     <View style={styles.container}>
       <CustomModalComponent
-        isVisible={user[DOMAIN] === 'HO' && user.c !== 'US' && userIsSignedIn(user)}
+        isVisible={navigation.isFocused() && !activityModalShown
+          && user[DOMAIN] === 'HO' && isCountryCodeSet(user.c, user.countryCode) && userIsSignedIn(user)}
         onClose={() => null}
         modalType="Form"
       >
@@ -391,7 +408,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
       </CustomModalComponent>
       <CustomModalComponent
         isVisible={
-          user.c === 'US'
+          !isCountryCodeSet(user.c, user.countryCode)
           && userIsSignedIn(user)
         }
         onClose={() => signOutUser(dispatch, user)}
@@ -407,7 +424,7 @@ export const LoginScreen = (props: LoginScreenProps) => {
         <Button
           title={strings('GENERICS.SIGN_IN')}
           style={styles.signInButton}
-          onPress={() => signInUserInit()}
+          onPress={() => signOutUser(dispatch, user).then(() => signInUserInit())}
         />
       </View>
       <Text style={styles.versionDisplay}>
@@ -421,6 +438,7 @@ const Login = () => {
   const configUser = useTypedSelector(state => state.User);
   const getFluffyApiState = useTypedSelector(state => state.async.getFluffyRoles);
   const getClubConfigApiState = useTypedSelector(state => state.async.getClubConfig);
+  const { showActivity } = useTypedSelector(state => state.modal);
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -433,6 +451,7 @@ const Login = () => {
       getClubConfigApiState={getClubConfigApiState}
       navigation={navigation}
       useEffectHook={useEffect}
+      activityModalShown={showActivity}
     />
   );
 };

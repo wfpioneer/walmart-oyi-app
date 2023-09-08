@@ -456,18 +456,21 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const [isDeleteItems, setIsDeleteItems] = deleteItemsState;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
-  const assigned = selectedPicks[0].assignedAssociate;
-  const { palletId } = selectedPicks[0];
+  const firstSelectedPick = selectedPicks.length ? selectedPicks[0] : null;
+  const assigned = firstSelectedPick?.assignedAssociate;
+  const palletId = firstSelectedPick?.palletId || '';
 
   useEffectHook(() => navigation.addListener('focus', () => {
-    if (perishableCategories.length) {
-      dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId], isAllItems: true }));
-    } else if (!overridePalletPerishables) {
-      dispatch(getPalletConfig());
-    } else {
-      const backupPerishableCategories = backupCategories.split('-').map(Number);
-      dispatch(setPerishableCategories(backupPerishableCategories));
-      setConfigComplete(true);
+    if (firstSelectedPick) {
+      if (perishableCategories.length) {
+        dispatch(getPalletDetails({ palletIds: [firstSelectedPick.palletId], isAllItems: true }));
+      } else if (!overridePalletPerishables) {
+        dispatch(getPalletConfig());
+      } else {
+        const backupPerishableCategories = backupCategories.split('-').map(Number);
+        dispatch(setPerishableCategories(backupPerishableCategories));
+        setConfigComplete(true);
+      }
     }
   }), []);
 
@@ -481,8 +484,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   }, [palletDetailsApi]);
 
   useEffectHook(() => {
-    if (configComplete) {
-      dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId], isAllItems: true }));
+    if (configComplete && firstSelectedPick) {
+      dispatch(getPalletDetails({ palletIds: [firstSelectedPick.palletId], isAllItems: true }));
     }
   }, [configComplete]);
 
@@ -568,7 +571,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
-  const isPickQtyZero = ():boolean => selectedPicks.every(pick => pick.newQuantityLeft === 0);
+  const isPickQtyZero = (): boolean => selectedPicks.every(pick => pick.newQuantityLeft === 0);
 
   const isAnyNewInvalidPickQty = ():boolean => selectedPicks.some(
     pick => !!pick.quantityLeft && Number.isNaN(pick.newQuantityLeft)
@@ -643,14 +646,15 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     );
   }
   // Added palletDetails API 204 status check to restrict the user from binning the pick if Pallet not found(Edge case)
-  if (palletDetailsApi.error || (palletDetailsApi.result && palletDetailsApi.result.status === 204)) {
+  if ((palletDetailsApi.error || (palletDetailsApi.result && palletDetailsApi.result.status === 204))
+    && firstSelectedPick) {
     return (
       <View style={styles.errorView}>
         <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
         <Text style={styles.errorText}>{strings('PALLET.PALLET_DETAILS_ERROR')}</Text>
         <TouchableOpacity
           style={styles.errorButton}
-          onPress={() => dispatch(getPalletDetails({ palletIds: [selectedPicks[0].palletId] }))}
+          onPress={() => dispatch(getPalletDetails({ palletIds: [firstSelectedPick.palletId] }))}
         >
           <Text>{strings('GENERICS.RETRY')}</Text>
         </TouchableOpacity>
@@ -662,7 +666,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     const currentQuantity = getCurrentQuantity(item);
     return (
       <SalesFloorItemCard
-        assigned={assigned}
+        assigned={assigned || ''}
         category={item.category}
         createdBy={item.createdBy}
         createdTS={item.createTs}
@@ -745,10 +749,10 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
       <PickPalletInfoCard
         onPress={() => {}}
         palletId={palletId}
-        palletLocation={selectedPicks[0].palletLocationName}
+        palletLocation={firstSelectedPick?.palletLocationName || ''}
         // no items here because we need the sf item card
         pickListItems={[]}
-        pickStatus={selectedPicks[0].status}
+        pickStatus={firstSelectedPick?.status || PickStatus.NO_PALLETS_FOUND}
         canDelete={false}
         dispatch={dispatch}
         showCheckbox={false}
@@ -823,7 +827,7 @@ const SalesFloorWorkflow = () => {
     const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
     const palletDetails: Pallet = {
       palletInfo: {
-        id: selectedPicks[0].palletId
+        id: selectedPicks[0]?.palletId || ''
       },
       items: []
     };

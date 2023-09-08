@@ -562,7 +562,8 @@ export default {
     IN_PROGRESS: 'En Progreso',
     CURRENT_TOTAL: 'Total Actual',
     LOCATIONS_SAVED: 'Ubicaciones Guardadas',
-    LOCATIONS_SAVE_FAIL: 'Incapaz de Guardar Ubicaciones',
+    LOCATIONS_SAVE_FAIL: 'Incapaz de guardar ubicaciones',
+    SCANNED_ITEM_NOT_PRESENT: 'El artículo escaneado no está en la lista de auditorías',
     GET_SAVED_LOC_FAIL: 'Incapaz de recuperar las ubicaciones guardadas'
   },
   FEEDBACK: {

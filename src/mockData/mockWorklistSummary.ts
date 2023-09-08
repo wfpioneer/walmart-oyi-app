@@ -221,6 +221,8 @@ export const mockItemAndPalletWorklistSummary: WorklistSummary[] = [
 
 export const mockItemNPalletNAuditWorklistSummary: WorklistSummary[] = [
   {
+    totalCompletedItems: 98,
+    totalItems: 196,
     worklistGoal: WorklistGoal.ITEMS,
     worklistGoalPct: 50,
     worklistEndGoalPct: 100,
@@ -260,9 +262,7 @@ export const mockItemNPalletNAuditWorklistSummary: WorklistSummary[] = [
         inProgressItems: 0,
         todoItems: 4
       }
-    ],
-    totalItems: 196,
-    totalCompletedItems: 98
+    ]
   },
   {
     totalCompletedItems: 1,

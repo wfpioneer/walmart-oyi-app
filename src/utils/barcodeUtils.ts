@@ -12,6 +12,9 @@ export enum BARCODE_TYPES {
 
 export const removeCheckDigit = (barcode: string): string => barcode.substring(0, barcode.length - 1);
 
+export const compareWithMaybeCheckDigit = (scanned: string, upc: string): boolean => (
+  scanned.includes(upc) && scanned.length <= upc.length + 1);
+
 export const removeLeadingZero = (barcode: string): string => barcode.replace(/\D|^0+/g, '');
 
 export const cleanScanIfUpcOrEanBarcode = (scanned: { type: string | null; value: string | null }): string => {
