@@ -3010,21 +3010,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
-<ActivityIndicator
-  animating={false}
-  color="#0071e9"
-  hidesWhenStopped={true}
-  size="large"
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
-/>
-`;
+exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `<View />`;
 
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders "Generic Change translation" if pendingOH is -999 and user has OH role 1`] = `
 <View

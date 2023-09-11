@@ -131,9 +131,7 @@ const mockHandleProps: (HandleProps & RenderProps) = {
 const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
-  isWaiting: false,
-  error: null,
-  result: null,
+  itemDetailsApi: defaultAsyncState,
   isPiHistWaiting: false,
   piHistError: null,
   piHistResult: null,
@@ -231,10 +229,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with non-null status', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: mockItemDetails,
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
@@ -253,10 +254,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with ohQtyModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: mockItemDetails,
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         piHistResult: {
           ...defaultResult,
@@ -283,10 +287,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with createPickModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: mockItemDetails,
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         piHistResult: {
           ...defaultResult,
@@ -313,10 +320,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with errorModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: mockItemDetails,
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         piHistResult: {
           ...defaultResult,
@@ -343,10 +353,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with null status', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: mockItemDetails,
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
@@ -365,10 +378,13 @@ describe('ReviewItemDetailsScreen', () => {
       const mockItemDetail456 = itemDetail[456];
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: mockItemDetails,
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail456.onHandsQty,
@@ -387,10 +403,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: mockItemDetails,
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
@@ -409,7 +428,10 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Item Details Api Error\' for a failed request ', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        error: mockError,
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          error: mockError
+        },
         exceptionType: '',
         pendingOnHandsQty: 0
       };
@@ -423,10 +445,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: [],
-          status: 204
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: [],
+            status: 204
+          }
         },
         exceptionType: '',
         pendingOnHandsQty: 0
@@ -440,7 +465,10 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        isWaiting: true,
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          isWaiting: true
+        },
         exceptionType: '',
         pendingOnHandsQty: 0
       };
