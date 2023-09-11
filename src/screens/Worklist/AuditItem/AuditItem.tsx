@@ -120,6 +120,7 @@ import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
+import { isItemDetailsCompleted } from '../../ReviewItemDetails/ReviewItemDetails';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -191,7 +192,8 @@ export interface AuditItemScreenProps {
   useFocusEffectHook: typeof useFocusEffect;
   useCallbackHook: typeof useCallback;
   displayWarningModalState: UseStateType<boolean>,
-  auditSavedWarningState: UseStateType<boolean>
+  auditSavedWarningState: UseStateType<boolean>,
+  itemNbr: number;
 }
 
 export const navigationRemoveListenerHook = (
@@ -324,14 +326,39 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
   }
 };
 
+/**
+ * This is used to set the item details redux as the Assign Location
+ * screen uses the state from there.  If we're arriving here from the
+ * RID screen, most of this will already be populated, so we can skip the
+ * setup screen call
+ * @param itemDetails
+ * @param dispatch passed redux dispatch hook
+ * @param navigation passed navigation hook
+ * @param floorLocations
+ * @param trackEventCall passed track event function
+ * @param itemNbr
+ */
 export const addLocationHandler = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   floorLocations: Location[],
   trackEventCall: (eventName: string, params?: any) => void,
+  itemNbr: number
 ) => {
   const reserveLoc = itemDetails?.location?.reserve;
+  // Not set if we get here from audits worklist
+  if (!itemNbr && itemDetails) {
+    dispatch(setupScreen(
+      itemDetails.itemNbr,
+      itemDetails.upcNbr,
+      itemDetails.exceptionType,
+      itemDetails.pendingOnHandsQty,
+      isItemDetailsCompleted(itemDetails),
+      false,
+      itemDetails
+    ));
+  }
 
   if (floorLocations.length > 0) {
     dispatch(setItemFloorLocations(floorLocations));
@@ -1474,7 +1501,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     displayWarningModalState,
     useCallbackHook,
     useFocusEffectHook,
-    auditSavedWarningState
+    auditSavedWarningState,
+    itemNbr
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1999,7 +2027,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             <LocationListCard
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
-              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
+              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall, itemNbr)}
               loading={
                 getItemLocationsApi.isWaiting
                 || getItemLocationsV1Api.isWaiting
@@ -2073,7 +2101,7 @@ const AuditItem = (): JSX.Element => {
   const {
     approvalItem, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
-  const { itemDetails } = useTypedSelector(state => state.ItemDetailScreen);
+  const { itemDetails, itemNbr } = useTypedSelector(state => state.ItemDetailScreen);
 
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetailsV4
@@ -2180,6 +2208,7 @@ const AuditItem = (): JSX.Element => {
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
       auditSavedWarningState={auditSavedWarningState}
+      itemNbr={itemNbr}
     />
   );
 };

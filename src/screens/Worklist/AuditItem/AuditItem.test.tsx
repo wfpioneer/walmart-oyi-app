@@ -232,7 +232,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   displayWarningModalState: [false, jest.fn()],
   useCallbackHook: jest.fn(fn => fn()),
   useFocusEffectHook: jest.fn(),
-  auditSavedWarningState: [false, jest.fn()]
+  auditSavedWarningState: [false, jest.fn()],
+  itemNbr: 1234567890
 };
 
 const mockModalIsWaitingState: UseStateType<boolean> = [false, jest.fn()];
@@ -540,7 +541,29 @@ describe('AuditItemScreen', () => {
         mockDispatch,
         navigationProp,
         mockItemDetails?.location?.floor || [],
-        mockTrackEventCall
+        mockTrackEventCall,
+        1234567890
+      );
+      expect(mockDispatch).not.toHaveBeenCalledWith(
+        setupScreen(itemNbr, upcNbr, exceptionType, -999, false, false, mockItemDetails)
+      );
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, setFloorLocations(location?.floor || []));
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, setReserveLocations(location?.reserve || []));
+      expect(mockNavigate).toBeCalledWith('AddLocation');
+      expect(mockTrackEventCall).toBeCalledWith(
+        'Audit_Item',
+        { action: 'add_new_floor_location_click', itemNumber: 1234567890 }
+      );
+
+      jest.clearAllMocks();
+
+      addLocationHandler(
+        mockItemDetails,
+        mockDispatch,
+        navigationProp,
+        mockItemDetails?.location?.floor || [],
+        mockTrackEventCall,
+        0
       );
       expect(mockDispatch).toHaveBeenNthCalledWith(
         1,
