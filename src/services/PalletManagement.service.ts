@@ -105,7 +105,8 @@ export default class PalletManagementService {
 
     return Request.patch(
       `${urls.locationUrl}/pallet/upc`,
-      payload.PalletList
+      payload.PalletList,
+      { timeout: 30000 }
     );
   }
 
@@ -114,7 +115,8 @@ export default class PalletManagementService {
 
     return Request.patch(
       `${urls.orchestrationURL}/pallet/upc`,
-      { itemNbr: payload.itemNbr, updatePalletsDTO: payload.PalletList }
+      { itemNbr: payload.itemNbr, updatePalletsDTO: payload.PalletList },
+      { timeout: 30000 }
     );
   }
 }

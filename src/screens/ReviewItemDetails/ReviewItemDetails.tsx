@@ -177,6 +177,7 @@ export const handleUpdateQty = (
         dispatch(resetScannedEvent());
       }
       dispatch(setAuditItemNumber(itemDetails.itemNbr));
+      console.log('navigating from on hands change')
       navigation.navigate('AuditItem');
     } else {
       setOhQtyModalVisible(true);
@@ -1294,7 +1295,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
 
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name).then(() => {
-      if (scannedEvent.value) {
+      if (scannedEvent.value && scannedEvent.type !== 'card_click') {
         // TODO revert V2 changes once BE orchestration is pushed to production
         dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
         dispatch({ type: GET_ITEM_PIHISTORY.RESET });

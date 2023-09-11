@@ -27,6 +27,7 @@ import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { UseStateType } from '../../models/Generics.d';
 import ManualScan from '../../components/manualscan/ManualScan';
+import { setScannedEvent } from '../../state/actions/Global';
 
 const ROLLOVER_AUDITS = 'RA';
 
@@ -56,15 +57,14 @@ export interface AuditWorklistTabScreenProps {
     tokenIsWaiting: boolean;
 }
 
-const onItemClick = ( // hekki
+const onItemClick = (
   itemNumber: number,
   navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent
 ) => {
-  dispatch(setAuditItemNumber(itemNumber));
+  dispatch(setScannedEvent({ value: itemNumber.toString(), type: 'card_click' }));
   trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
-  navigation.navigate('AuditItem');
 };
 
 const renderCategoryCard = (

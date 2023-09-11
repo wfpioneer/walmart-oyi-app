@@ -247,6 +247,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
           if (userConfigs.auditWorklists) {
             dispatch(setAuditItemNumber(itemDetails.itemNbr));
             dispatch(resetScannedEvent());
+            console.log('navigating from other actions')
             navigation.navigate('AuditItem');
           }
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
