@@ -177,7 +177,6 @@ export const handleUpdateQty = (
         dispatch(resetScannedEvent());
       }
       dispatch(setAuditItemNumber(itemDetails.itemNbr));
-      console.log('navigating from on hands change')
       navigation.navigate('AuditItem');
     } else {
       setOhQtyModalVisible(true);

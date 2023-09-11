@@ -61,7 +61,6 @@ export const scannedEventHook = (
         if (scannedEvent.type === 'card_click') {
           dispatch(setAuditItemNumber(scannedEvent.value));
           navigation.navigate('AuditItem');
-          console.log('navigating on item click')
         } else if (auditWorklistItems.some(
           item => scannedEvent.value === item.itemNbr?.toString()
             || compareWithMaybeCheckDigit(scannedEvent.value, item.upcNbr || '')
@@ -71,7 +70,6 @@ export const scannedEventHook = (
             scannedEvent: JSON.stringify(scannedEvent)
           });
           dispatch(setAuditItemNumber(scannedEvent.value));
-          console.log('navigating on item scan')
           navigation.navigate('AuditItem');
         } else {
           trackEventCall('Audit_Worklist', {

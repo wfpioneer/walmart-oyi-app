@@ -190,13 +190,14 @@ describe('AuditWorklistTab Navigator', () => {
     });
 
     it('tests the scan event hook with successful scan', async () => {
+      const mockTrackEventCall = jest.fn();
       // called with something scanned that is in the worklist
       await scannedEventHook(
         mockMounted,
         navigationProp,
         routeProp,
         mockScannedEvent,
-        jest.fn(),
+        mockTrackEventCall,
         mockDispatch,
         mockCombinationAuditsWorklist,
         mockValidateSession
@@ -205,6 +206,28 @@ describe('AuditWorklistTab Navigator', () => {
       expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ payload: '777555333' }));
       expect(navigationProp.navigate).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
+      expect(mockTrackEventCall).toHaveBeenCalled();
+    });
+
+    it('tests the scan event hook with an item click from the worklist', async () => {
+      mockScannedEvent.type = 'card_click';
+      const mockTrackEventCall = jest.fn();
+      await scannedEventHook(
+        mockMounted,
+        navigationProp,
+        routeProp,
+        mockScannedEvent,
+        mockTrackEventCall,
+        mockDispatch,
+        mockCombinationAuditsWorklist,
+        mockValidateSession
+      );
+
+      expect(Toast.show).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ payload: '777555333' }));
+      expect(navigationProp.navigate).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
+      expect(mockTrackEventCall).not.toHaveBeenCalled();
     });
   });
 });
