@@ -87,10 +87,11 @@ import LocationListCard, {
 } from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 import {
+  clearScreen,
   setItemDetails,
   setFloorLocations as setItemFloorLocations,
   setReserveLocations as setItemReserveLocations,
-  setupScreen
+  setUPC
 } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import {
@@ -120,7 +121,6 @@ import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
-import { isItemDetailsCompleted } from '../../ReviewItemDetails/ReviewItemDetails';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -193,7 +193,7 @@ export interface AuditItemScreenProps {
   useCallbackHook: typeof useCallback;
   displayWarningModalState: UseStateType<boolean>,
   auditSavedWarningState: UseStateType<boolean>,
-  itemNbr: number;
+  upcNbr: string;
 }
 
 export const navigationRemoveListenerHook = (
@@ -208,6 +208,7 @@ export const navigationRemoveListenerHook = (
     e.preventDefault();
   } else {
     dispatch(clearAuditScreenData());
+    dispatch(clearScreen());
   }
 };
 
@@ -221,6 +222,7 @@ export const backConfirmedHook = (
   if (displayWarningModal && !locationsToSaveExist) {
     setDisplayWarningModal(false);
     dispatch(clearAuditScreenData());
+    dispatch(clearScreen());
     navigation.goBack();
   }
 };
@@ -243,6 +245,7 @@ export const backConfirmed = (
 ) => {
   setDisplayWarningModal(false);
   dispatch(clearAuditScreenData());
+  dispatch(clearScreen());
   navigation.goBack();
 };
 
@@ -344,20 +347,13 @@ export const addLocationHandler = (
   navigation: NavigationProp<any>,
   floorLocations: Location[],
   trackEventCall: (eventName: string, params?: any) => void,
-  itemNbr: number
+  upcNbr: string
 ) => {
   const reserveLoc = itemDetails?.location?.reserve;
-  // Not set if we get here from audits worklist
-  if (!itemNbr && itemDetails) {
-    dispatch(setupScreen(
-      itemDetails.itemNbr,
-      itemDetails.upcNbr,
-      itemDetails.exceptionType,
-      itemDetails.pendingOnHandsQty,
-      isItemDetailsCompleted(itemDetails),
-      false,
-      itemDetails
-    ));
+  // This needs to be set if we're arriving from the audits worklist
+  // so that the assign location works
+  if (!upcNbr && itemDetails) {
+    dispatch(setUPC(itemDetails.upcNbr));
   }
 
   if (floorLocations.length > 0) {
@@ -1502,7 +1498,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     useCallbackHook,
     useFocusEffectHook,
     auditSavedWarningState,
-    itemNbr
+    upcNbr
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -2027,7 +2023,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             <LocationListCard
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
-              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall, itemNbr)}
+              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall, upcNbr)}
               loading={
                 getItemLocationsApi.isWaiting
                 || getItemLocationsV1Api.isWaiting
@@ -2101,7 +2097,7 @@ const AuditItem = (): JSX.Element => {
   const {
     approvalItem, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
-  const { itemDetails, itemNbr } = useTypedSelector(state => state.ItemDetailScreen);
+  const { itemDetails, upcNbr } = useTypedSelector(state => state.ItemDetailScreen);
 
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetailsV4
@@ -2208,7 +2204,7 @@ const AuditItem = (): JSX.Element => {
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
       auditSavedWarningState={auditSavedWarningState}
-      itemNbr={itemNbr}
+      upcNbr={upcNbr}
     />
   );
 };

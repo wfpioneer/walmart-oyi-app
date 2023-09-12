@@ -74,7 +74,7 @@ import {
 } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
-import { setFloorLocations, setReserveLocations, setupScreen } from '../../../state/actions/ItemDetailScreen';
+import { setFloorLocations, setReserveLocations, setUPC } from '../../../state/actions/ItemDetailScreen';
 import ItemDetails from '../../../models/ItemDetails';
 import Location from '../../../models/Location';
 import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../../models/ApprovalListItem';
@@ -233,7 +233,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   useCallbackHook: jest.fn(fn => fn()),
   useFocusEffectHook: jest.fn(),
   auditSavedWarningState: [false, jest.fn()],
-  itemNbr: 1234567890
+  upcNbr: '1234567890'
 };
 
 const mockModalIsWaitingState: UseStateType<boolean> = [false, jest.fn()];
@@ -533,20 +533,16 @@ describe('AuditItemScreen', () => {
     it('tests addLocationHandler', () => {
       const mockNavigate = jest.fn();
       navigationProp.navigate = mockNavigate;
-      const {
-        itemNbr, upcNbr, exceptionType, location
-      } = mockItemDetails;
+      const { upcNbr, location } = mockItemDetails;
       addLocationHandler(
         mockItemDetails,
         mockDispatch,
         navigationProp,
         mockItemDetails?.location?.floor || [],
         mockTrackEventCall,
-        1234567890
+        '1234567890'
       );
-      expect(mockDispatch).not.toHaveBeenCalledWith(
-        setupScreen(itemNbr, upcNbr, exceptionType, -999, false, false, mockItemDetails)
-      );
+      expect(mockDispatch).not.toHaveBeenCalledWith(setUPC(upcNbr));
       expect(mockDispatch).toHaveBeenNthCalledWith(1, setFloorLocations(location?.floor || []));
       expect(mockDispatch).toHaveBeenNthCalledWith(2, setReserveLocations(location?.reserve || []));
       expect(mockNavigate).toBeCalledWith('AddLocation');
@@ -563,12 +559,9 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockItemDetails?.location?.floor || [],
         mockTrackEventCall,
-        0
+        ''
       );
-      expect(mockDispatch).toHaveBeenNthCalledWith(
-        1,
-        setupScreen(itemNbr, upcNbr, exceptionType, -999, false, false, mockItemDetails)
-      );
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, setUPC(upcNbr));
       expect(mockDispatch).toHaveBeenNthCalledWith(2, setFloorLocations(location?.floor || []));
       expect(mockDispatch).toHaveBeenNthCalledWith(3, setReserveLocations(location?.reserve || []));
       expect(mockNavigate).toBeCalledWith('AddLocation');
