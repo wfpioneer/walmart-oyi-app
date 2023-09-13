@@ -50,6 +50,7 @@ import AuditScreenFooter from '../../../components/AuditScreenFooter/AuditScreen
 import {
   CLEAR_PALLET,
   DELETE_LOCATION,
+  DELETE_UPCS,
   GET_APPROVAL_LIST,
   GET_AUDIT_LOCATIONS,
   GET_ITEM_DETAILS_V4,
@@ -66,6 +67,7 @@ import {
 import {
   clearPallet,
   deleteLocation,
+  deleteUpcs,
   getApprovalList,
   getAuditLocations,
   getItemDetailsV4,
@@ -121,6 +123,15 @@ import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
 
+type LocationConfirm = {
+  locationName: string;
+  locationArea: string;
+  locationIndex: number;
+  locationTypeNbr: number;
+  palletId: number;
+  sectionId: number;
+  isMixedPallet: boolean;
+}
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
   isManualScanEnabled: boolean;
@@ -161,22 +172,8 @@ export interface AuditItemScreenProps {
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>;
   showCancelApprovalModal: boolean;
   setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>;
-  locToConfirm: {
-    locationName: string;
-    locationArea: string;
-    locationIndex: number;
-    locationTypeNbr: number;
-    palletId: number;
-    sectionId: number;
-  };
-  setLocToConfirm: React.Dispatch<React.SetStateAction<{
-    locationName: string;
-    locationArea: string;
-    locationIndex: number;
-    locationTypeNbr: number;
-    palletId: number;
-    sectionId: number;
-  }>>;
+  locToConfirm: LocationConfirm;
+  setLocToConfirm: React.Dispatch<React.SetStateAction<LocationConfirm>>;
   deletePalletApi: AsyncState;
   showOnHandsConfirmState: UseStateType<boolean>;
   getItemPalletsError: boolean;
@@ -192,6 +189,7 @@ export interface AuditItemScreenProps {
   useCallbackHook: typeof useCallback;
   displayWarningModalState: UseStateType<boolean>,
   auditSavedWarningState: UseStateType<boolean>
+  deletePalletUPCsApi: AsyncState;
 }
 
 export const navigationRemoveListenerHook = (
@@ -686,6 +684,41 @@ export const deletePalletApiHook = (
   }
 };
 
+export const deletePalletUPCsApiHook = (
+  deletePalletUPCsApi: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
+  palletId: number,
+  itemNbr: number,
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1
+) => {
+  if (navigation.isFocused()) {
+    if (!deletePalletUPCsApi.isWaiting && deletePalletUPCsApi.result) {
+      setShowDeleteConfirmationModal(false);
+      if (deletePalletUPCsApi.result.status === 200) {
+        Toast.show({
+          type: 'success',
+          text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', { palletId }),
+          visibilityTime: SNACKBAR_TIMEOUT,
+          position: 'bottom'
+        });
+        dispatch(getItemPalletsDispatch({ itemNbr }));
+        dispatch({ type: DELETE_UPCS.RESET });
+      }
+    } else if (!deletePalletUPCsApi.isWaiting && deletePalletUPCsApi.error) {
+      setShowDeleteConfirmationModal(false);
+      Toast.show({
+        type: 'error',
+        text1: strings('ITEM.DELETE_PALLET_FAILURE'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      dispatch({ type: DELETE_UPCS.RESET });
+    }
+  }
+};
+
 export const getItemPalletsApiHook = (
   getItemPalletsApi: AsyncState,
   dispatch: Dispatch<any>,
@@ -1127,8 +1160,8 @@ export const renderCancelApprovalModal = (
 );
 
 export const renderDeleteLocationModal = (
-  deleteFloorLocationApi: AsyncState,
-  deletePalletApi: AsyncState,
+  deleteApiIsWaiting: boolean,
+  deleteApiHasError: boolean,
   showDeleteConfirmationModal: boolean,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   deleteLocationConfirmed: (locType: string) => void,
@@ -1143,9 +1176,9 @@ export const renderDeleteLocationModal = (
     modalType="Error"
     minHeight={100}
   >
-    {deleteFloorLocationApi.isWaiting || deletePalletApi.isWaiting ? (
+    {deleteApiIsWaiting ? (
       <ActivityIndicator
-        animating={deleteFloorLocationApi.isWaiting || deletePalletApi.isWaiting}
+        animating={deleteApiIsWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -1154,11 +1187,11 @@ export const renderDeleteLocationModal = (
     ) : (
       <>
         <Text style={styles.message}>
-          {locationType === 'floor' && (deleteFloorLocationApi.error
+          {locationType === 'floor' && (deleteApiHasError
             ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
             : `${strings('LOCATION.DELETE_CONFIRMATION')}${locationName
             }`)}
-          {locationType === 'reserve' && (deletePalletApi.error
+          {locationType === 'reserve' && (deleteApiHasError
             ? strings('ITEM.DELETE_PALLET_FAILURE')
             : `${strings('MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION', { palletId })}`)}
         </Text>
@@ -1175,23 +1208,12 @@ export const renderDeleteLocationModal = (
           />
           <Button
             style={styles.button}
-            title={deleteFloorLocationApi.error || deletePalletApi.error
+            title={deleteApiHasError
               ? strings('GENERICS.RETRY') : strings('GENERICS.OK')}
             testID="modal-confirm-button"
             backgroundColor={COLOR.TRACKER_RED}
             onPress={() => {
               deleteLocationConfirmed(locationType);
-              if (locationType === 'reserve') {
-                trackEventCall(
-                  'Audit_Item',
-                  { action: 'delete_pallet_confirmation_click', palletId }
-                );
-              } else {
-                trackEventCall(
-                  'Audit_Item',
-                  { action: 'confirm_delete_location_click', locName: locationName }
-                );
-              }
             }}
           />
         </View>
@@ -1481,7 +1503,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     displayWarningModalState,
     useCallbackHook,
     useFocusEffectHook,
-    auditSavedWarningState
+    auditSavedWarningState,
+    deletePalletUPCsApi
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1641,6 +1664,20 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     [deletePalletApi]
   );
 
+  // remove item from pallet
+  useEffectHook(
+    () => deletePalletUPCsApiHook(
+      deletePalletUPCsApi,
+      dispatch,
+      navigation,
+      setShowDeleteConfirmationModal,
+      locToConfirm.palletId,
+      itemNumber,
+      getItemPalletsDispatch
+    ),
+    [deletePalletUPCsApi]
+  );
+
   // Update OH quantity API
   useEffectHook(() => updateOHQtyApiHook(
     updateOHQtyApi,
@@ -1694,7 +1731,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     }, [floorLocations, reserveLocations, getItemDetailsApi])
   );
 
-  if (!modalIsWaiting && (updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
+  if ((updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
     setModalIsWaiting(true);
   }
 
@@ -1727,11 +1764,25 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   }
 
   const deleteLocationConfirmed = (locType: string) => {
-    if (locType === 'reserve') {
+    if (locType === 'reserve' && locToConfirm.isMixedPallet) {
+      dispatch(deleteUpcs({
+        palletId: locToConfirm.palletId.toString(),
+        removeExpirationDate: false,
+        upcs: [itemDetails?.upcNbr || '0']
+      }));
+      trackEventCall(
+        'Audit_Item',
+        { action: 'delete_item_from_pallet_confirmation_click', palletId: locToConfirm.palletId }
+      );
+    } else if (locType === 'reserve' && !locToConfirm.isMixedPallet) {
       dispatch(
         clearPallet({
           palletId: locToConfirm.palletId ? locToConfirm.palletId.toString() : '0'
         }),
+      );
+      trackEventCall(
+        'Audit_Item',
+        { action: 'delete_pallet_confirmation_click', palletId: locToConfirm.palletId }
       );
     } else {
       dispatch(
@@ -1741,6 +1792,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           sectionId: locToConfirm.locationName,
           locationTypeNbr: locToConfirm.locationTypeNbr
         }),
+      );
+      trackEventCall(
+        'Audit_Item',
+        { action: 'confirm_delete_location_click', locName: locToConfirm.locationName }
       );
     }
   };
@@ -1792,7 +1847,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         locationIndex: locIndex,
         locationTypeNbr: loc.typeNbr,
         palletId: 0,
-        sectionId: 0
+        sectionId: 0,
+        isMixedPallet: false
       });
       setShowDeleteConfirmationModal(true);
     }).catch(() => { });
@@ -1810,7 +1866,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         locationIndex: locIndex,
         locationTypeNbr: 0,
         palletId: loc.palletId,
-        sectionId: loc.sectionId
+        sectionId: loc.sectionId,
+        isMixedPallet: loc.mixedPallet
       });
       setShowDeleteConfirmationModal(true);
     }).catch(() => { });
@@ -1944,8 +2001,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         updateApproval
       )}
       {renderDeleteLocationModal(
-        deleteFloorLocationApi,
-        deletePalletApi,
+        deleteFloorLocationApi.isWaiting || deletePalletApi.isWaiting || deletePalletUPCsApi.isWaiting,
+        deleteFloorLocationApi.error !== null || deletePalletApi.error !== null || deletePalletUPCsApi.error !== null,
         showDeleteConfirmationModal,
         setShowDeleteConfirmationModal,
         deleteLocationConfirmed,
@@ -2098,6 +2155,7 @@ const AuditItem = (): JSX.Element => {
   const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const getSavedAuditLocationsApi = useTypedSelector(state => state.async.getAuditLocations);
+  const deletePalletUPCsApi = useTypedSelector(state => state.async.deleteUpcs);
 
   const route = useRoute();
   const dispatch = useDispatch();
@@ -2117,7 +2175,8 @@ const AuditItem = (): JSX.Element => {
     locationIndex: -1,
     locationTypeNbr: -1,
     sectionId: 0,
-    palletId: 0
+    palletId: 0,
+    isMixedPallet: false
   });
 
   const locationListState = useState({
@@ -2186,6 +2245,7 @@ const AuditItem = (): JSX.Element => {
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
       auditSavedWarningState={auditSavedWarningState}
+      deletePalletUPCsApi={deletePalletUPCsApi}
     />
   );
 };

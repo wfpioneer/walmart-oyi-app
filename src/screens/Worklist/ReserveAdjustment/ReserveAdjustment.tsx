@@ -749,6 +749,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
           showOHItems
+          totalQty={undefined}
         />
       </View>
       <ScrollView

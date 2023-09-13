@@ -358,7 +358,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getSectionDetails>, 'payload'>
     & Pick<ReturnType<typeof printLocationLabel>, 'payload'>
     & Pick<ReturnType<typeof addPallet>, 'payload'>
-    & Pick<ReturnType<typeof deletePallet>, 'payload'>
+    & Pick<ReturnType<typeof deletePalletFromSection>, 'payload'>
     & Pick<ReturnType<typeof createSections>, 'payload'>
     & Pick<ReturnType<typeof deleteZone>, 'payload'>
     & Pick<ReturnType<typeof postCreateAisles>, 'payload'>

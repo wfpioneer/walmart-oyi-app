@@ -33,7 +33,7 @@ export function makeAsyncSaga<Q = any, R = AxiosResponse, E = AxiosError>(
     const eventParams = {
       apiName: eventName,
       id: payload?.id,
-      itemNbr: payload?.itemNbr || payload?.itemNumber,
+      itemNbr: payload?.itemNbr,
       description: payload?.itemDesc || payload?.description,
       upc: payload?.upc || payload?.upcNbr,
       zoneId: payload?.zoneId,
