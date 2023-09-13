@@ -56,9 +56,12 @@ export const scannedEventHook = (
   validateSessionCall: typeof validateSession
 ) => {
   if (isMounted.current) {
-    if (navigation.isFocused() && scannedEvent.value) {
+    if (navigation.isFocused() && scannedEvent.type && scannedEvent.type !== 'itemDetails') {
       validateSessionCall(navigation, route.name).then(() => {
-        if (auditWorklistItems.some(
+        if (scannedEvent.type === 'card_click') {
+          dispatch(setAuditItemNumber(scannedEvent.value));
+          navigation.navigate('AuditItem');
+        } else if (auditWorklistItems.some(
           item => scannedEvent.value === item.itemNbr?.toString()
             || compareWithMaybeCheckDigit(scannedEvent.value, item.upcNbr || '')
         )) {
