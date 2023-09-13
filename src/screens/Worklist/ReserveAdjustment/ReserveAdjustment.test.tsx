@@ -311,7 +311,7 @@ describe('ReserveAdjustmentScreen', () => {
       fireEvent.press(confirmButton);
       expect(mockDispatch).toHaveBeenCalledWith({
         payload: { palletId: 55689 },
-        type: 'SAGA/DELETE_PALLET'
+        type: 'SAGA/DELETE_PALLET_FROM_SECTION'
       });
     });
 

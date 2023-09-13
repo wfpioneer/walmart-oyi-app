@@ -39,10 +39,10 @@ import { strings } from '../../../locales';
 import Button, { ButtonType } from '../../../components/buttons/Button';
 import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/AuditItem';
 import {
-  DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY_V2
+  DELETE_PALLET_FROM_SECTION, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY_V2
 } from '../../../state/actions/asyncAPI';
 import {
-  deletePallet, deleteUpcs, getItemPallets, getItemPalletsV1, updateMultiPalletUPCQtyV2
+  deletePalletFromSection, deleteUpcs, getItemPallets, getItemPalletsV1, updateMultiPalletUPCQtyV2
 } from '../../../state/actions/saga';
 import {
   setReserveLocations, setScannedPalletId, updatePalletQty, updatePalletScannedStatus
@@ -285,7 +285,7 @@ export const renderDeleteLocationModal = (
                     upcs: [upcNbr]
                   }));
                 } else {
-                  dispatch(deletePallet({ palletId: locToConfirm.palletId }));
+                  dispatch(deletePalletFromSection({ palletId: locToConfirm.palletId }));
                 }
               }}
             />
@@ -677,7 +677,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   useEffectHook(() => {
     // on delete pallet api success
     if (navigation.isFocused() && !deletePalletApi.isWaiting && deletePalletApi.result && showDeleteConfirmationModal) {
-      handleDeletePalletSuccess(DELETE_PALLET.RESET);
+      handleDeletePalletSuccess(DELETE_PALLET_FROM_SECTION.RESET);
     }
   }, [deletePalletApi]);
 
@@ -799,7 +799,7 @@ const ReserveAdjustment = (): JSX.Element => {
   const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
     : useTypedSelector(state => state.async.getItemPallets);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
-  const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
+  const deletePalletApi = useTypedSelector(state => state.async.deletePalletFromSection);
   const updateMultiPalletUPCQtyV2Api = useTypedSelector(state => state.async.updateMultiPalletUPCQtyV2);
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);
