@@ -966,6 +966,9 @@ export const updateOHQtyApiHook = (
         visibilityTime: SNACKBAR_TIMEOUT
       });
     }
+    if (updateOHQtyApi.isWaiting) {
+      setModalIsWaiting(true);
+    }
   }
 };
 
@@ -1012,11 +1015,11 @@ export const updateMultiPalletUPCQtyApiHook = (
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
   itemNbr: number,
-  modalIsWaitingState: UseStateType<boolean>
+  modalIsWaiting: boolean,
+  setModalIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyApi.isWaiting) {
-      const [modalIsWaiting, setModalIsWaiting] = modalIsWaitingState;
       if (modalIsWaiting) {
         dispatch(hideActivityModal());
       }
@@ -1043,6 +1046,8 @@ export const updateMultiPalletUPCQtyApiHook = (
           visibilityTime: SNACKBAR_TIMEOUT
         });
       }
+    } else if (!modalIsWaiting && updateMultiPalletUPCQtyApi.isWaiting) {
+      setModalIsWaiting(true);
     }
   }
 };
@@ -1697,7 +1702,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     navigation,
     setShowOnHandsConfirmationModal,
     itemDetails?.itemNbr || 0,
-    modalIsWaitingState
+    modalIsWaiting,
+    setModalIsWaiting
   ), [updateMultiPalletUPCQtyApi]);
 
   // validation on app back press
@@ -1730,10 +1736,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       return () => BackHandler.removeEventListener('hardwareBackPress', onHardwareBackPress);
     }, [floorLocations, reserveLocations, getItemDetailsApi])
   );
-
-  if ((updateOHQtyApi.isWaiting || updateMultiPalletUPCQtyApi.isWaiting)) {
-    setModalIsWaiting(true);
-  }
 
   if (!getItemDetailsApi.isWaiting && (getItemDetailsApi.error || (itemDetails && itemDetails.message))) {
     const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;

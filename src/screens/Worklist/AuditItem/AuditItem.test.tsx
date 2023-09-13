@@ -418,6 +418,10 @@ describe('AuditItemScreen', () => {
       error: 'Internal Server Error',
       value: {}
     };
+    const apiIsWaiting: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
 
     it('test onValidateItemNumber', async () => {
       const expectedGetItemDetailsAction = {
@@ -1195,6 +1199,20 @@ describe('AuditItemScreen', () => {
       });
     });
 
+    it('Tests updateOHQtyApiHook if Api is loading', () => {
+      const mockSetModalWaiting = jest.fn();
+      updateOHQtyApiHook(
+        apiIsWaiting,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        mockSetModalWaiting,
+        mockAuditItemScreenProps.auditSavedWarningState[1]
+      );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(true);
+    });
+
     it('Tests updateMultiPalletUPCQtyApiHook on success', () => {
       const setShowOnHands = jest.fn();
       updateMultiPalletUPCQtyApiHook(
@@ -1203,7 +1221,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockModalIsWaitingState
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1]
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
@@ -1233,7 +1252,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockModalIsWaitingState
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1],
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
@@ -1255,7 +1275,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockModalIsWaitingState
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1],
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
@@ -1276,6 +1297,22 @@ describe('AuditItemScreen', () => {
 
       expect(setShowOnHands).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests updateMultiPalletUPCQtyApiHook if Api is loading', () => {
+      const setShowOnHands = jest.fn();
+      mockModalIsWaitingState[0] = false;
+      updateMultiPalletUPCQtyApiHook(
+        apiIsWaiting,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands,
+        mockItemDetails.itemNbr,
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1],
+      );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(true);
     });
 
     it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
