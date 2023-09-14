@@ -121,6 +121,7 @@ import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
+import { AUDITS } from '../../../navigators/AuditWorklistTabNavigator/AuditWorklistTabNavigator';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -201,14 +202,17 @@ export const navigationRemoveListenerHook = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   locationsToSaveExist: boolean,
   dispatch: Dispatch<any>,
-  isAuditSaved: boolean
+  isAuditSaved: boolean,
+  route: RouteProp<any>
 ) => {
   if (locationsToSaveExist && !isAuditSaved) {
     setDisplayWarningModal(true);
     e.preventDefault();
   } else {
     dispatch(clearAuditScreenData());
-    dispatch(clearScreen());
+    if (route.params && route.params.source === AUDITS) {
+      dispatch(clearScreen());
+    }
   }
 };
 
@@ -217,12 +221,15 @@ export const backConfirmedHook = (
   locationsToSaveExist: boolean,
   setDisplayWarningModal: UseStateType<boolean>[1],
   navigation: NavigationProp<any>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  route: RouteProp<any>
 ) => {
   if (displayWarningModal && !locationsToSaveExist) {
     setDisplayWarningModal(false);
     dispatch(clearAuditScreenData());
-    dispatch(clearScreen());
+    if (route.params && route.params.source === AUDITS) {
+      dispatch(clearScreen());
+    }
     navigation.goBack();
   }
 };
@@ -241,11 +248,14 @@ export const onValidateHardwareBackPress = (
 export const backConfirmed = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  route: RouteProp<any>
 ) => {
   setDisplayWarningModal(false);
   dispatch(clearAuditScreenData());
-  dispatch(clearScreen());
+  if (route.params && route.params.source === AUDITS) {
+    dispatch(clearScreen());
+  }
   navigation.goBack();
 };
 
@@ -1687,7 +1697,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       setDisplayWarningModal,
       doSaveablesExist,
       dispatch,
-      isAuditSaved
+      isAuditSaved,
+      route
     );
   }), [navigation, doSaveablesExist, isAuditSaved]);
 
@@ -1696,7 +1707,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     doSaveablesExist,
     setDisplayWarningModal,
     navigation,
-    dispatch
+    dispatch,
+    route
   ), [doSaveablesExist, displayWarningModal]);
 
   // validation on Hardware backPress
@@ -1988,7 +2000,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         setDisplayWarningModal,
         strings('GENERICS.WARNING_LABEL'),
         strings('GENERICS.UNSAVED_WARNING_MSG'),
-        () => backConfirmed(setDisplayWarningModal, dispatch, navigation)
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation, route)
       )}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />

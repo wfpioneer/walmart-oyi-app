@@ -132,7 +132,13 @@ const navigationProp: NavigationProp<any> = {
 
 const mockTrackEventCall = jest.fn();
 
-const routeProp: RouteProp<any, string> = {
+const auditsRouteProp: RouteProp<any, string> = {
+  key: 'test',
+  name: 'test',
+  params: { source: 'audits' }
+};
+
+const ridRouteProp: RouteProp<any, string> = {
   key: 'test',
   name: 'test'
 };
@@ -182,7 +188,7 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   saveAuditsProgressApi: defaultAsyncState,
   itemDetails: null,
   userId: 'testUser',
-  route: routeProp,
+  route: auditsRouteProp,
   dispatch: jest.fn(),
   navigation: navigationProp,
   scrollViewRef: scrollViewProp,
@@ -1881,36 +1887,50 @@ describe('AuditItemScreen', () => {
         type: 'beforeRemove'
       };
 
-      // nothing needing saving
-      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, false, mockDispatch, false);
+      // nothing needing saving, source audits
+      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, false, mockDispatch, false, auditsRouteProp);
       expect(mockE.preventDefault).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
-      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+
+      mockDispatch.mockReset();
+
+      // nothing needing saving, source RID
+      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, false, mockDispatch, false, ridRouteProp);
+      expect(mockE.preventDefault).not.toHaveBeenCalled();
+      expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
 
       mockDispatch.mockReset();
 
       // something to save
-      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, true, mockDispatch, false);
+      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, true, mockDispatch, false, auditsRouteProp);
       expect(mockE.preventDefault).toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockDispatch).not.toHaveBeenCalled();
     });
 
     it('tests the back confirmed hook', () => {
-      backConfirmedHook(false, false, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      backConfirmedHook(false, false, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
 
-      backConfirmedHook(false, true, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      backConfirmedHook(false, true, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
 
-      backConfirmedHook(true, true, mockSetDisplayWarningModal, navigationProp, mockDispatch);
+      backConfirmedHook(true, true, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
 
-      backConfirmedHook(true, false, mockSetDisplayWarningModal, navigationProp, mockDispatch);
-      expect(mockDispatch).toHaveBeenCalled();
+      backConfirmedHook(true, false, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+
+      mockDispatch.mockReset();
+
+      backConfirmedHook(true, false, mockSetDisplayWarningModal, navigationProp, mockDispatch, ridRouteProp);
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
     });
 
@@ -1926,9 +1946,16 @@ describe('AuditItemScreen', () => {
     });
 
     it('tests back confirmed', () => {
-      backConfirmed(mockSetDisplayWarningModal, mockDispatch, navigationProp);
+      backConfirmed(mockSetDisplayWarningModal, mockDispatch, navigationProp, auditsRouteProp);
       expect(mockSetDisplayWarningModal).toHaveBeenCalledWith(false);
-      expect(mockDispatch).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+      expect(navigationProp.goBack).toHaveBeenCalled();
+
+      jest.clearAllMocks();
+
+      backConfirmed(mockSetDisplayWarningModal, mockDispatch, navigationProp, ridRouteProp);
+      expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
     });
   });
