@@ -1240,7 +1240,7 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
       expect(mockDispatch).toHaveBeenNthCalledWith(
         2,
-        setScannedEvent({ type: 'worklist', value: mockItemDetails.itemNbr.toString() })
+        setScannedEvent({ type: 'itemDetails', value: mockItemDetails.itemNbr.toString() })
       );
 
       expect(setShowOnHands).toHaveBeenCalledWith(false);
@@ -1293,7 +1293,7 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
       expect(mockDispatch).toHaveBeenNthCalledWith(
         3,
-        setScannedEvent({ type: 'worklist', value: mockItemDetails.itemNbr.toString() })
+        setScannedEvent({ type: 'itemDetails', value: mockItemDetails.itemNbr.toString() })
       );
 
       expect(setShowOnHands).toHaveBeenCalledWith(false);

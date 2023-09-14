@@ -1034,6 +1034,16 @@ describe('ReviewItemDetailsScreen', () => {
         { type: 'API/GET_LOCATIONS_FOR_ITEM_V1/RESET' }
       );
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(11, getLocationsForItemV1(123));
+
+      jest.clearAllMocks();
+      await onValidateScannedEvent({
+        ...mockItemDetailsScreenProps,
+        scannedEvent: {
+          ...mockItemDetailsScreenProps.scannedEvent,
+          type: 'card_click'
+        }
+      });
+      expect(mockItemDetailsScreenProps.dispatch).not.toHaveBeenCalled();
     });
 
     it('test onIsWaiting', () => {
