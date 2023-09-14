@@ -41,7 +41,18 @@ export const initialState : ItemDetailsState = {
   itemDetails: null
 };
 
+/**
+ * Redux mainly for ReviewItemDetails screen, but we do use its values elsewhere to
+ * prevent data redundancy.
+ * TODO Redux will be refactored to a flow based system instead of
+ * current screen based system for clarity of data redundancy avoidance
+ *
+ * @param state current or initial state of redux
+ * @param action changes being made to state
+ * @returns new state
+ */
 export const ItemDetailScreen = (
+  // eslint-disable-next-line default-param-last
   state = initialState,
   action: Actions
 ) : ItemDetailsState => {

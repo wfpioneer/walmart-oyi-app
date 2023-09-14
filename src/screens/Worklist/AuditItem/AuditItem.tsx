@@ -2109,6 +2109,9 @@ const AuditItem = (): JSX.Element => {
   const {
     approvalItem, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
+  // We're grabbing this from item details to avoid storing the same information in different
+  // areas.  The redux will be revised to align with this better, instead of using one
+  // screen's redux for another
   const { itemDetails, upcNbr } = useTypedSelector(state => state.ItemDetailScreen);
 
   const getItemDetailsApi = useTypedSelector(
