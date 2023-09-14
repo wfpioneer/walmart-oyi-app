@@ -2,7 +2,6 @@ import {
   CLEAR_AUDIT_SCREEN_DATA,
   SET_APPROVAL_ITEM,
   SET_FLOOR_LOCATIONS,
-  SET_ITEM_DETAILS,
   SET_RESERVE_LOCATIONS,
   SET_SCANNED_PALLET_ID,
   UPDATE_FLOOR_LOCATION_QTY,
@@ -11,7 +10,6 @@ import {
   clearAuditScreenData,
   setApprovalItem,
   setFloorLocations,
-  setItemDetails,
   setReserveLocations,
   setScannedPalletId,
   updateFloorLocationQty,
@@ -46,13 +44,6 @@ describe('Audit Item Screen actions', () => {
   const mockItemDetails = getMockItemDetails('123');
   const mockPalletId = 4567;
 
-  it('handles setting item details in AuditItemScreen redux state', () => {
-    const setItemDetailsResult = setItemDetails(mockItemDetails);
-    expect(setItemDetailsResult).toStrictEqual({
-      type: SET_ITEM_DETAILS,
-      payload: mockItemDetails
-    });
-  });
   it('handles setting floor locations in AuditItemScreen redux state', () => {
     const mockFloorLocations = mockItemDetails.location.floor;
     const setFloorLocationsResult = setFloorLocations(mockFloorLocations);
