@@ -1066,6 +1066,40 @@ describe('AuditItemScreen', () => {
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
+    it('Tests deletePalletUPCsApi false cases for navigation & 204', () => {
+      const success204Api: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 204
+        }
+      };
+      deletePalletUPCsApiHook(
+        success204Api,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        jest.fn()
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+      expect(Toast.show).not.toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      navigationProp.isFocused = jest.fn(() => false);
+      deletePalletUPCsApiHook(
+        success204Api,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        jest.fn()
+      );
+      expect(navigationProp.isFocused()).toBeFalsy();
+      navigationProp.isFocused = jest.fn(() => true);
+    });
+
     it('Tests completeItemApiHook on 200 success for completing an item', () => {
       completeItemApiHook(
         successApi,
