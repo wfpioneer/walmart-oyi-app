@@ -72,6 +72,8 @@ export const getAuditsBadgeStyle = (status: WorkListStatus) => {
   }
 };
 
+export const isQuantityPending = (pendingQty: number | undefined) => typeof pendingQty === 'number' && pendingQty >= 0;
+
 const getContainerStyle = (isLoading: boolean, showItemImage: boolean) => {
   if (isLoading) {
     return showItemImage ? styles.loaderContainer : { ...styles.loaderContainer, height: 60 };
@@ -203,9 +205,9 @@ const ItemCard = ({
           <View style={styles.itemQtyContainer}>
             <View style={styles.itemQtyView}>
               <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
-              {(pendingQty && pendingQty >= 0) ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
+              {isQuantityPending(pendingQty) ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
             </View>
-            {(pendingQty && pendingQty >= 0) ? (
+            {isQuantityPending(pendingQty) ? (
               <View style={styles.itemQtyView}>
                 <FontAwesome5Icon
                   name="info-circle"
