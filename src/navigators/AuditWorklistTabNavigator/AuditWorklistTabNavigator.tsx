@@ -43,8 +43,6 @@ interface AuditWorklistTabNavigatorProps {
   auditWorklistItems: WorklistItemI[];
 }
 
-export const AUDITS = 'audits';
-
 const Tab = createMaterialTopTabNavigator();
 
 export const scannedEventHook = (
@@ -62,7 +60,7 @@ export const scannedEventHook = (
       validateSessionCall(navigation, route.name).then(() => {
         if (scannedEvent.type === 'card_click') {
           dispatch(setAuditItemNumber(scannedEvent.value));
-          navigation.navigate('AuditItem', { source: AUDITS });
+          navigation.navigate('AuditItem');
         } else if (auditWorklistItems.some(
           item => scannedEvent.value === item.itemNbr?.toString()
             || compareWithMaybeCheckDigit(scannedEvent.value, item.upcNbr || '')
@@ -72,7 +70,7 @@ export const scannedEventHook = (
             scannedEvent: JSON.stringify(scannedEvent)
           });
           dispatch(setAuditItemNumber(scannedEvent.value));
-          navigation.navigate('AuditItem', { source: AUDITS });
+          navigation.navigate('AuditItem');
         } else {
           trackEventCall('Audit_Worklist', {
             action: 'scanned_item_off_worklist',

@@ -1,10 +1,12 @@
 import { ItemPalletInfo } from '../../models/AuditItem';
+import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 import {
   Actions,
   CLEAR_AUDIT_SCREEN_DATA,
   SET_APPROVAL_ITEM,
   SET_FLOOR_LOCATIONS,
+  SET_ITEM_DETAILS,
   SET_RESERVE_LOCATIONS,
   SET_SCANNED_PALLET_ID,
   UPDATE_FLOOR_LOCATION_QTY,
@@ -14,6 +16,7 @@ import {
 import { ApprovalListItem } from '../../models/ApprovalListItem';
 
 export interface AuditItemScreenState {
+  itemDetails: ItemDetails | null,
   floorLocations: Location[],
   reserveLocations: ItemPalletInfo[],
   scannedPalletId: number,
@@ -21,6 +24,7 @@ export interface AuditItemScreenState {
 }
 
 export const initialState: AuditItemScreenState = {
+  itemDetails: null,
   floorLocations: [],
   reserveLocations: [],
   scannedPalletId: 0,
@@ -29,6 +33,11 @@ export const initialState: AuditItemScreenState = {
 
 export const AuditItemScreen = (state = initialState, action: Actions) : AuditItemScreenState => {
   switch (action.type) {
+    case SET_ITEM_DETAILS:
+      return {
+        ...state,
+        itemDetails: action.payload
+      };
     case SET_FLOOR_LOCATIONS:
       return {
         ...state,
