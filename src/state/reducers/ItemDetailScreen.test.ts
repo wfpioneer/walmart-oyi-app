@@ -25,8 +25,7 @@ describe('ItemDetailScreen reducer tests', () => {
       floorLocations: [],
       reserveLocations: [],
       selectedLocation: null,
-      salesFloor: false,
-      itemDetails: null
+      salesFloor: false
     };
     const testMutatedState: ItemDetailsState = {
       itemNbr: 0,
@@ -37,11 +36,9 @@ describe('ItemDetailScreen reducer tests', () => {
       floorLocations: [],
       reserveLocations: [],
       selectedLocation: null,
-      salesFloor: false,
-      itemDetails: null
+      salesFloor: false
     };
 
-    const item = getItemDetails[123];
     // SetUpScreen
     const screenSetupState: ItemDetailsState = {
       itemNbr: 1234567890,
@@ -52,18 +49,17 @@ describe('ItemDetailScreen reducer tests', () => {
       floorLocations: [],
       reserveLocations: [],
       selectedLocation: null,
-      salesFloor: true,
-      itemDetails: item
+      salesFloor: true
     };
 
+    const item = getItemDetails[123];
     let testResults = ItemDetailScreen(testInitialState, setupScreen(
       item.itemNbr,
       item.upcNbr,
       item.exceptionType,
       item.pendingOnHandsQty,
       true,
-      true,
-      item
+      true
     ));
     expect(testResults).toStrictEqual(screenSetupState);
 

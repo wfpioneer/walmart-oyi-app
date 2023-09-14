@@ -338,7 +338,7 @@ describe('LocationDetailsScreen', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
   });
-
+  
   describe('external function tests', () => {
     afterEach(() => {
       jest.clearAllMocks();
@@ -359,10 +359,8 @@ describe('LocationDetailsScreen', () => {
       };
 
       getLocationsApiHook(successApi, mockDispatch);
-      expect(mockDispatch).toHaveBeenCalledWith(expect
-        .objectContaining({ type: 'ITEM_DETAILS_SCREEN/SET_FLOOR_LOCATIONS' }));
-      expect(mockDispatch).toHaveBeenCalledWith(expect
-        .objectContaining({ type: 'ITEM_DETAILS_SCREEN/SET_RESERVE_LOCATIONS' }));
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_FLOOR_LOCATIONS' }));
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_RESERVE_LOCATIONS' }));
     });
 
     it('Tests get item locations v1 api hook success with correct item number', () => {
@@ -376,12 +374,10 @@ describe('LocationDetailsScreen', () => {
           }
         }
       };
-
+      
       getLocationsV1ApiHook(successApi, mockDispatch);
-      expect(mockDispatch).toHaveBeenCalledWith(expect
-        .objectContaining({ type: 'ITEM_DETAILS_SCREEN/SET_FLOOR_LOCATIONS' }));
-      expect(mockDispatch).toHaveBeenCalledWith(expect
-        .objectContaining({ type: 'ITEM_DETAILS_SCREEN/SET_RESERVE_LOCATIONS' }));
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_FLOOR_LOCATIONS' }));
+      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'LOCATION/SET_RESERVE_LOCATIONS' }));
     });
   })
 });

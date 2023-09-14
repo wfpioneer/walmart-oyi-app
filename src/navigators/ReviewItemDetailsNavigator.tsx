@@ -24,7 +24,6 @@ import AuditItem from '../screens/Worklist/AuditItem/AuditItem';
 import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdjustment';
 import NoActionScan from '../screens/NoActionScan/NoActionScan';
 import OtherAction from '../screens/OtherAction/OtherAction';
-import { clearScreen } from '../state/actions/ItemDetailScreen';
 
 interface ReviewItemDetailsNavigatorProps {
   isManualScanEnabled: boolean;
@@ -218,7 +217,6 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         listeners={{
           beforeRemove: () => {
             dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-            dispatch(clearScreen());
           }
         }}
       />

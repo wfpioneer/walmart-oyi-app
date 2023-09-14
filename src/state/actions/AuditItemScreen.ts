@@ -1,7 +1,9 @@
 import { ItemPalletInfo } from '../../models/AuditItem';
+import ItemDetails from '../../models/ItemDetails';
 import Location from '../../models/Location';
 import { ApprovalListItem } from '../../models/ApprovalListItem';
 
+export const SET_ITEM_DETAILS = 'AUDIT_ITEM_SCREEN/SET_ITEM_DETAILS';
 export const SET_FLOOR_LOCATIONS = 'AUDIT_ITEM_SCREEN/SET_FLOOR_LOCATIONS';
 export const SET_RESERVE_LOCATIONS = 'AUDIT_ITEM_SCREEN/SET_RESERVE_LOCATIONS';
 export const CLEAR_AUDIT_SCREEN_DATA = 'AUDIT_ITEM_SCREEN/CLEAR_AUDIT_SCREEN_DATA';
@@ -10,6 +12,11 @@ export const UPDATE_PALLET_QTY = 'AUDIT_ITEM_SCREEN/UPDATE_PALLET_QTY';
 export const UPDATE_FLOOR_LOCATION_QTY = 'AUDIT_ITEM_SCREEN/UPDATE_FLOOR_LOCATION_QTY';
 export const UPDATE_SCANNED_PALLET_STATUS = 'AUDIT_ITEM_SCREEN/UPDATE_SCANNED_PALLET_STATUS';
 export const SET_APPROVAL_ITEM = 'AUDIT_ITEM_SCREEN/SET_APPROVAL_ITEM';
+
+export const setItemDetails = (items: ItemDetails) => ({
+  type: SET_ITEM_DETAILS,
+  payload: items
+} as const);
 
 export const setFloorLocations = (locations: Location[]) => ({
   type: SET_FLOOR_LOCATIONS,
@@ -48,9 +55,10 @@ export const updatePalletScannedStatus = (palletId: number, scanned: boolean) =>
 export const setApprovalItem = (approvalItem: ApprovalListItem | null) => ({
   type: SET_APPROVAL_ITEM,
   payload: approvalItem
-}as const);
+}as const)
 
 export type Actions =
+  | ReturnType<typeof setItemDetails>
   | ReturnType<typeof setFloorLocations>
   | ReturnType<typeof setReserveLocations>
   | ReturnType<typeof clearAuditScreenData>

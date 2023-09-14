@@ -45,8 +45,7 @@ describe('ItemDetailScreen action creator tests', () => {
         exceptionType: item.exceptionType,
         pendingOHQty: item.pendingOnHandsQty,
         completed: true,
-        salesFloor: true,
-        itemDetails: undefined
+        salesFloor: true
       }
     });
 
