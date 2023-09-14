@@ -87,16 +87,17 @@ import LocationListCard, {
 } from '../../../components/LocationListCard/LocationListCard';
 import OtherOHItemCard from '../../../components/OtherOHItemCard/OtherOHItemCard';
 import {
+  clearScreen,
+  setItemDetails,
   setFloorLocations as setItemFloorLocations,
   setReserveLocations as setItemReserveLocations,
-  setupScreen
+  setUPC
 } from '../../../state/actions/ItemDetailScreen';
 import { AsyncState } from '../../../models/AsyncState';
 import {
   clearAuditScreenData,
   setApprovalItem,
   setFloorLocations,
-  setItemDetails,
   setReserveLocations,
   setScannedPalletId,
   updateFloorLocationQty,
@@ -120,6 +121,7 @@ import { GetItemPalletsResponse, Pallet } from '../../../models/ItemPallets';
 import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
+import { AUDITS } from '../../../navigators/AuditWorklistTabNavigator/AuditWorklistTabNavigator';
 
 export interface AuditItemScreenProps {
   scannedEvent: { value: string | null; type: string | null };
@@ -191,7 +193,8 @@ export interface AuditItemScreenProps {
   useFocusEffectHook: typeof useFocusEffect;
   useCallbackHook: typeof useCallback;
   displayWarningModalState: UseStateType<boolean>,
-  auditSavedWarningState: UseStateType<boolean>
+  auditSavedWarningState: UseStateType<boolean>,
+  upcNbr: string;
 }
 
 export const navigationRemoveListenerHook = (
@@ -199,13 +202,17 @@ export const navigationRemoveListenerHook = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   locationsToSaveExist: boolean,
   dispatch: Dispatch<any>,
-  isAuditSaved: boolean
+  isAuditSaved: boolean,
+  route: RouteProp<any>
 ) => {
   if (locationsToSaveExist && !isAuditSaved) {
     setDisplayWarningModal(true);
     e.preventDefault();
   } else {
     dispatch(clearAuditScreenData());
+    if (route.params && route.params.source === AUDITS) {
+      dispatch(clearScreen());
+    }
   }
 };
 
@@ -214,11 +221,15 @@ export const backConfirmedHook = (
   locationsToSaveExist: boolean,
   setDisplayWarningModal: UseStateType<boolean>[1],
   navigation: NavigationProp<any>,
-  dispatch: Dispatch<any>
+  dispatch: Dispatch<any>,
+  route: RouteProp<any>
 ) => {
   if (displayWarningModal && !locationsToSaveExist) {
     setDisplayWarningModal(false);
     dispatch(clearAuditScreenData());
+    if (route.params && route.params.source === AUDITS) {
+      dispatch(clearScreen());
+    }
     navigation.goBack();
   }
 };
@@ -237,10 +248,14 @@ export const onValidateHardwareBackPress = (
 export const backConfirmed = (
   setDisplayWarningModal: UseStateType<boolean>[1],
   dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>
+  navigation: NavigationProp<any>,
+  route: RouteProp<any>
 ) => {
   setDisplayWarningModal(false);
   dispatch(clearAuditScreenData());
+  if (route.params && route.params.source === AUDITS) {
+    dispatch(clearScreen());
+  }
   navigation.goBack();
 };
 
@@ -291,15 +306,18 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
     validateSessionCall,
     itemNumber,
     getItemPalletsDispatch,
-    userConfig
+    userConfig,
+    itemDetails
   } = props;
 
   if (navigation.isFocused()) {
     validateSessionCall(navigation, route.name)
       .then(() => {
         if (itemNumber > 0) {
-          dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-          dispatch(getItemDetailsV4({ id: itemNumber }));
+          if (!itemDetails || itemDetails.itemNbr !== itemNumber) {
+            dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+            dispatch(getItemDetailsV4({ id: itemNumber }));
+          }
           dispatch(getApprovalList({ itemNbr: itemNumber, status: approvalStatus.Pending }));
           dispatch(getItemPalletsDispatch({ itemNbr: itemNumber }));
           if (peteGetLocations) {
@@ -321,24 +339,32 @@ export const onValidateItemNumber = (props: AuditItemScreenProps, peteGetLocatio
   }
 };
 
+/**
+ * This is used to set the item details redux as the Assign Location
+ * screen uses the state from there.  If we're arriving here from the
+ * RID screen, most of this will already be populated, so we can skip the
+ * setup screen call
+ * @param itemDetails
+ * @param dispatch passed redux dispatch hook
+ * @param navigation passed navigation hook
+ * @param floorLocations
+ * @param trackEventCall passed track event function
+ * @param itemNbr
+ */
 export const addLocationHandler = (
   itemDetails: ItemDetails | null,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   floorLocations: Location[],
   trackEventCall: (eventName: string, params?: any) => void,
+  upcNbr: string
 ) => {
   const reserveLoc = itemDetails?.location?.reserve;
-  dispatch(
-    setupScreen(
-      itemDetails ? itemDetails.itemNbr : 0,
-      itemDetails ? itemDetails.upcNbr : '',
-      itemDetails?.exceptionType,
-      -999,
-      false,
-      false
-    )
-  );
+  // This needs to be set if we're arriving from the audits worklist
+  // so that the assign location works
+  if (!upcNbr && itemDetails) {
+    dispatch(setUPC(itemDetails.upcNbr));
+  }
 
   if (floorLocations.length > 0) {
     dispatch(setItemFloorLocations(floorLocations));
@@ -1481,7 +1507,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     displayWarningModalState,
     useCallbackHook,
     useFocusEffectHook,
-    auditSavedWarningState
+    auditSavedWarningState,
+    upcNbr
   } = props;
   let scannedSubscription: EmitterSubscription;
 
@@ -1670,7 +1697,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       setDisplayWarningModal,
       doSaveablesExist,
       dispatch,
-      isAuditSaved
+      isAuditSaved,
+      route
     );
   }), [navigation, doSaveablesExist, isAuditSaved]);
 
@@ -1679,7 +1707,8 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     doSaveablesExist,
     setDisplayWarningModal,
     navigation,
-    dispatch
+    dispatch,
+    route
   ), [doSaveablesExist, displayWarningModal]);
 
   // validation on Hardware backPress
@@ -1971,7 +2000,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         setDisplayWarningModal,
         strings('GENERICS.WARNING_LABEL'),
         strings('GENERICS.UNSAVED_WARNING_MSG'),
-        () => backConfirmed(setDisplayWarningModal, dispatch, navigation)
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation, route)
       )}
       {isManualScanEnabled && (
         <ManualScanComponent placeholder={strings('LOCATION.PALLET')} />
@@ -2006,7 +2035,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
             <LocationListCard
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
-              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
+              add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall, upcNbr)}
               loading={
                 getItemLocationsApi.isWaiting
                 || getItemLocationsV1Api.isWaiting
@@ -2078,8 +2107,9 @@ const AuditItem = (): JSX.Element => {
   } = useTypedSelector(state => state.User);
   const itemNumber = useTypedSelector(state => state.AuditWorklist.itemNumber);
   const {
-    approvalItem, itemDetails, floorLocations, reserveLocations, scannedPalletId
+    approvalItem, floorLocations, reserveLocations, scannedPalletId
   } = useTypedSelector(state => state.AuditItemScreen);
+  const { itemDetails, upcNbr } = useTypedSelector(state => state.ItemDetailScreen);
 
   const getItemDetailsApi = useTypedSelector(
     state => state.async.getItemDetailsV4
@@ -2186,6 +2216,7 @@ const AuditItem = (): JSX.Element => {
       useCallbackHook={useCallback}
       useFocusEffectHook={useFocusEffect}
       auditSavedWarningState={auditSavedWarningState}
+      upcNbr={upcNbr}
     />
   );
 };
