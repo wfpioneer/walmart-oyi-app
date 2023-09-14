@@ -123,7 +123,7 @@ import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
 
-type LocationConfirm = {
+export type LocationConfirm = {
   locationName: string;
   locationArea: string;
   locationIndex: number;
@@ -1169,7 +1169,7 @@ export const renderDeleteLocationModal = (
   deleteApiHasError: boolean,
   showDeleteConfirmationModal: boolean,
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  deleteLocationConfirmed: (locType: string) => void,
+  deleteLocationConfirmed: () => void,
   locationName: string,
   locationType: string,
   palletId: number,
@@ -1191,7 +1191,7 @@ export const renderDeleteLocationModal = (
       />
     ) : (
       <>
-        <Text style={styles.message}>
+        <Text style={styles.message} testID="confirm-error-text">
           {locationType === 'floor' && (deleteApiHasError
             ? strings('LOCATION.DELETE_LOCATION_API_ERROR')
             : `${strings('LOCATION.DELETE_CONFIRMATION')}${locationName
@@ -1218,7 +1218,7 @@ export const renderDeleteLocationModal = (
             testID="modal-confirm-button"
             backgroundColor={COLOR.TRACKER_RED}
             onPress={() => {
-              deleteLocationConfirmed(locationType);
+              deleteLocationConfirmed();
             }}
           />
         </View>
@@ -1454,6 +1454,49 @@ export const sortReserveLocations = (locations: ItemPalletInfo[]) => {
   };
 
   return locations.sort(sortLocationNames);
+};
+
+export const deleteLocationConfirmed = (
+  locToConfirm: LocationConfirm,
+  dispatch: Dispatch<any>,
+  trackEventCall: typeof trackEvent,
+  itemDetails: ItemDetails | null,
+  itemNumber: number
+) => {
+  if (locToConfirm.locationArea === 'reserve' && locToConfirm.isMixedPallet) {
+    dispatch(deleteUpcs({
+      palletId: locToConfirm.palletId.toString(),
+      removeExpirationDate: false,
+      upcs: [itemDetails?.upcNbr || '0']
+    }));
+    trackEventCall(
+      'Audit_Item',
+      { action: 'delete_item_from_pallet_confirmation_click', palletId: locToConfirm.palletId }
+    );
+  } else if (locToConfirm.locationArea === 'reserve' && !locToConfirm.isMixedPallet) {
+    dispatch(
+      clearPallet({
+        palletId: locToConfirm.palletId ? locToConfirm.palletId.toString() : '0'
+      }),
+    );
+    trackEventCall(
+      'Audit_Item',
+      { action: 'delete_pallet_confirmation_click', palletId: locToConfirm.palletId }
+    );
+  } else {
+    dispatch(
+      deleteLocation({
+        headers: new AxiosHeaders({ itemNumber }),
+        upc: itemDetails?.upcNbr || '',
+        sectionId: locToConfirm.locationName,
+        locationTypeNbr: locToConfirm.locationTypeNbr
+      }),
+    );
+    trackEventCall(
+      'Audit_Item',
+      { action: 'confirm_delete_location_click', locName: locToConfirm.locationName }
+    );
+  }
 };
 
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
@@ -1765,43 +1808,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     );
   }
 
-  const deleteLocationConfirmed = (locType: string) => {
-    if (locType === 'reserve' && locToConfirm.isMixedPallet) {
-      dispatch(deleteUpcs({
-        palletId: locToConfirm.palletId.toString(),
-        removeExpirationDate: false,
-        upcs: [itemDetails?.upcNbr || '0']
-      }));
-      trackEventCall(
-        'Audit_Item',
-        { action: 'delete_item_from_pallet_confirmation_click', palletId: locToConfirm.palletId }
-      );
-    } else if (locType === 'reserve' && !locToConfirm.isMixedPallet) {
-      dispatch(
-        clearPallet({
-          palletId: locToConfirm.palletId ? locToConfirm.palletId.toString() : '0'
-        }),
-      );
-      trackEventCall(
-        'Audit_Item',
-        { action: 'delete_pallet_confirmation_click', palletId: locToConfirm.palletId }
-      );
-    } else {
-      dispatch(
-        deleteLocation({
-          headers: new AxiosHeaders({ itemNumber }),
-          upc: itemDetails?.upcNbr || '',
-          sectionId: locToConfirm.locationName,
-          locationTypeNbr: locToConfirm.locationTypeNbr
-        }),
-      );
-      trackEventCall(
-        'Audit_Item',
-        { action: 'confirm_delete_location_click', locName: locToConfirm.locationName }
-      );
-    }
-  };
-
   const updateApproval = (itemApprovalData: ApprovalListItem) => {
     itemApprovalData.resolvedTimestamp = moment().toISOString();
     dispatch(
@@ -2007,7 +2013,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
         deleteFloorLocationApi.error !== null || deletePalletApi.error !== null || deletePalletUPCsApi.error !== null,
         showDeleteConfirmationModal,
         setShowDeleteConfirmationModal,
-        deleteLocationConfirmed,
+        () => deleteLocationConfirmed(locToConfirm, dispatch, trackEventCall, itemDetails, itemNumber),
         locToConfirm.locationName,
         locToConfirm.locationArea,
         locToConfirm.palletId,

@@ -1060,6 +1060,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       >
         [missing "en.LOCATION.DELETE_CONFIRMATION" translation]A1-1
       </Text>
@@ -1935,6 +1936,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -2476,6 +2478,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -3017,6 +3020,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -3610,6 +3614,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -4159,6 +4164,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -4708,6 +4714,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
