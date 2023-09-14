@@ -1534,7 +1534,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   ), [updateOHQtyApi]);
 
   // Get Item Details Error
-  if (!itemDetailsApi.isWaiting && (itemDetailsApi.error || apiErrorMessage)) {
+  // Need to show this also when we don't have a result and redux is empty
+  if (!itemDetailsApi.isWaiting
+      && (itemDetailsApi.error
+        || apiErrorMessage
+        || (!itemDetailsApi.result && !itemDetails))) {
     return isError(
       itemDetailsApi.error,
       errorModalVisible,
@@ -1547,21 +1551,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     );
   }
 
-  // Need to make sure that we have a result from APIs to remove this
-  // result could be stored in redux
-  if (itemDetailsApi.isWaiting) {
-    return (
-      <ActivityIndicator
-        animating={itemDetailsApi.isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
-  // no item found
+  // If no item found, we won't put it into redux, so we need to return this before the activity indicator
   if (_.get(itemDetailsApi.result, 'status') === 204 || _.get(itemDetailsApiData, 'code') === 204) {
     return (
       <View style={styles.safeAreaView}>
@@ -1575,6 +1565,20 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     );
   }
 
+  // Need to make sure that we have a result from APIs and the is result in redux to remove this
+  // The second check is necessary as there is a fraction of a second between the api succeeding and
+  // the result getting put into redux
+  if (itemDetailsApi.isWaiting || (itemDetailsApi.result && !itemDetails)) {
+    return (
+      <ActivityIndicator
+        animating={itemDetailsApi.isWaiting}
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
   const toggleSalesGraphView = () => {
     trackEventCall(REVIEW_ITEM_DETAILS, {
       action: 'toggle_graph_click',
@@ -1584,6 +1588,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
+  // still need the null check here for typescript
   return itemDetails ? (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
@@ -1594,13 +1599,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         modalType="Form"
       >
         <OHQtyUpdate
-          onHandsQty={itemDetails?.onHandsQty || 0}
+          onHandsQty={itemDetails.onHandsQty || 0}
           newOHQty={newOHQty}
           setNewOHQty={setNewOHQty}
           isWaiting={updateOHQtyApi.isWaiting}
           error={updateOHQtyApi.error}
           handleClose={() => handleOHQtyClose(
-            itemDetails?.onHandsQty || 0,
+            itemDetails.onHandsQty || 0,
             dispatch,
             setOhQtyModalVisible,
             setNewOHQty

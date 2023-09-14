@@ -3508,7 +3508,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 <ActivityIndicator
   animating={true}
   color="#0071e9"
-  hidesWhenStopped={true}
   size="large"
   style={
     Object {
