@@ -859,7 +859,7 @@ export const updateManagerApprovalApiHook = (
         dispatch(updateMultiPalletUPCQty({ PalletList: getMultiPalletList(reserveLocations) }));
       } else {
         setShowCancelApprovalModal(false);
-        dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
+        dispatch(setScannedEvent({ type: 'itemDetails', value: itemNbr.toString() }));
         if (route.params && route.params.source === 'OtherAction') {
           navigation.navigate('ReviewItemDetailsHome');
         } else {
@@ -1007,7 +1007,7 @@ export const updateMultiPalletUPCQtyApiHook = (
         });
         dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
         setShowOnHandsConfirmationModal(false);
-        dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
+        dispatch(setScannedEvent({ type: 'itemDetails', value: itemNbr.toString() }));
         if (route.params && route.params.source === 'OtherAction') {
           navigation.navigate('ReviewItemDetailsHome');
         } else {
