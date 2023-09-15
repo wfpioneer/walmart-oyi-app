@@ -492,17 +492,35 @@ export const getItemLocationsApiHook = (
             }
           });
           if (locDetails && locDetails.location) {
-            getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, locationDictionary, setFloorLocationIsWaiting);
+            getUpdatedFloorLocations(
+              locDetails.location.floor,
+              dispatch,
+              existingFloorLocations,
+              locationDictionary,
+              setFloorLocationIsWaiting
+            );
           }
         } else if (getSavedAuditLocationsApi.result.status === 204) {
           if (locDetails && locDetails.location) {
-            getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined, setFloorLocationIsWaiting);
+            getUpdatedFloorLocations(
+              locDetails.location.floor,
+              dispatch,
+              existingFloorLocations,
+              undefined,
+              setFloorLocationIsWaiting
+            );
           }
         }
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       } else if (!getSavedAuditLocationsApi.isWaiting && getSavedAuditLocationsApi.error) {
         if (locDetails && locDetails.location) {
-          getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined, setFloorLocationIsWaiting);
+          getUpdatedFloorLocations(
+            locDetails.location.floor,
+            dispatch,
+            existingFloorLocations,
+            undefined,
+            setFloorLocationIsWaiting
+          );
         }
         Toast.show({
           type: 'error',
@@ -512,12 +530,18 @@ export const getItemLocationsApiHook = (
         });
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       } else if (locDetails && locDetails.location) {
-        getUpdatedFloorLocations(locDetails.location.floor, dispatch, existingFloorLocations, undefined, setFloorLocationIsWaiting);
+        getUpdatedFloorLocations(
+          locDetails.location.floor,
+          dispatch,
+          existingFloorLocations,
+          undefined,
+          setFloorLocationIsWaiting
+        );
       }
       dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
     }
 
-    if (getItemLocationsApi.isWaiting) {
+    if (getItemLocationsApi.isWaiting || getSavedAuditLocationsApi.isWaiting) {
       setFloorLocationIsWaiting(true);
     }
   }
@@ -563,11 +587,23 @@ export const getItemLocationsV1ApiHook = (
             setFloorLocationIsWaiting
           );
         } else if (getSavedAuditLocationsApi.result.status === 204) {
-          getUpdatedFloorLocations(locDetails.salesFloorLocation, dispatch, existingFloorLocations, undefined, setFloorLocationIsWaiting);
+          getUpdatedFloorLocations(
+            locDetails.salesFloorLocation,
+            dispatch,
+            existingFloorLocations,
+            undefined,
+            setFloorLocationIsWaiting
+          );
         }
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       } else if (!getSavedAuditLocationsApi.isWaiting && getSavedAuditLocationsApi.error) {
-        getUpdatedFloorLocations(locDetails.salesFloorLocation, dispatch, existingFloorLocations, undefined, setFloorLocationIsWaiting);
+        getUpdatedFloorLocations(
+          locDetails.salesFloorLocation,
+          dispatch,
+          existingFloorLocations,
+          undefined,
+          setFloorLocationIsWaiting
+        );
         Toast.show({
           type: 'error',
           text1: strings('AUDITS.GET_SAVED_LOC_FAIL'),
@@ -576,12 +612,18 @@ export const getItemLocationsV1ApiHook = (
         });
         dispatch({ type: GET_AUDIT_LOCATIONS.RESET });
       } else {
-        getUpdatedFloorLocations(locDetails.salesFloorLocation, dispatch, existingFloorLocations, undefined, setFloorLocationIsWaiting);
+        getUpdatedFloorLocations(
+          locDetails.salesFloorLocation,
+          dispatch,
+          existingFloorLocations,
+          undefined,
+          setFloorLocationIsWaiting
+        );
       }
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
     }
 
-    if (getItemLocationsV1Api.isWaiting) {
+    if (getItemLocationsV1Api.isWaiting || getSavedAuditLocationsApi.isWaiting) {
       setFloorLocationIsWaiting(true);
     }
   }
@@ -2107,11 +2149,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               locationList={getFloorLocationList(floorLocations)}
               locationType="floor"
               add={() => addLocationHandler(itemDetails, dispatch, navigation, floorLocations, trackEventCall)}
-              loading={
-                getItemLocationsApi.isWaiting
-                || getItemLocationsV1Api.isWaiting
-                || getSavedAuditLocationsApi.isWaiting
-              }
+              loading={floorLocationIsWaiting}
               error={!!(getItemLocationsApi.error || getItemLocationsV1Api.error)}
               onRetry={handleFloorLocsRetry}
               scanRequired={userConfig.scanRequired}
