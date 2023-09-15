@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
-  deletePallet,
-  getPalletDetails, getSectionDetails
+  deletePalletFromSection,
+  getPalletDetails,
+  getSectionDetails
 } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import styles from './ReservePalletRow.style';
@@ -30,7 +31,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
   const dispatch = useDispatch();
   const user = useTypedSelector(state => state.User);
   const [displayConfirmation, setDisplayConfirmation] = useState(false);
-  const delPalletAPI = useTypedSelector(state => state.async.deletePallet);
+  const delPalletAPI = useTypedSelector(state => state.async.deletePalletFromSection);
   const deletePalletConfirmation = () => {
     setDisplayConfirmation(true);
   };
@@ -48,7 +49,7 @@ const ReservePalletRow = (props: ReservePalletRowProps): JSX.Element => {
       palletId: reservePallet.id,
       sectionId: section.id
     });
-    dispatch(deletePallet({
+    dispatch(deletePalletFromSection({
       palletId: reservePallet.id
     }));
   };

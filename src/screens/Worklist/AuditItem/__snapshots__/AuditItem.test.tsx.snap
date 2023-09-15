@@ -1013,63 +1013,6 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 </Modal>
 `;
 
-exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderDeleteLocationModal should render modal with loader 2`] = `
-<Modal
-  animationType="none"
-  hardwareAccelerated={false}
-  onRequestClose={[Function]}
-  transparent={true}
-  visible={true}
->
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#00000099",
-        "flex": 1,
-        "justifyContent": "center",
-      }
-    }
-  >
-    <View
-      style={
-        Array [
-          Object {
-            "alignContent": "center",
-            "alignSelf": "center",
-            "backgroundColor": "#ffffffff",
-            "borderColor": "#545F7A",
-            "borderRadius": 10,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "justifyContent": "center",
-            "padding": 10,
-            "width": "80%",
-          },
-          Object {
-            "minHeight": 100,
-          },
-        ]
-      }
-    >
-      <ActivityIndicator
-        animating={true}
-        color="#0071e9"
-        hidesWhenStopped={true}
-        size="large"
-        style={
-          Object {
-            "alignItems": "center",
-            "flex": 1,
-            "justifyContent": "center",
-          }
-        }
-      />
-    </View>
-  </View>
-</Modal>
-`;
-
 exports[`AuditItemScreen Manage AuditItem externalized function tests Tests renderDeleteLocationModal should render modal with locationName and action buttons 1`] = `
 <Modal
   animationType="none"
@@ -1117,6 +1060,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       >
         [missing "en.LOCATION.DELETE_CONFIRMATION" translation]A1-1
       </Text>
@@ -1988,6 +1932,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -2529,6 +2474,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -3070,6 +3016,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -3663,6 +3610,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -4212,6 +4160,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={
@@ -4761,6 +4710,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
             "textAlign": "center",
           }
         }
+        testID="confirm-error-text"
       />
       <View
         style={

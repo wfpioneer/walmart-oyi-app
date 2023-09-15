@@ -13,9 +13,11 @@ import {
 } from '../../mockData/mockWorklistSummary';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  HomeScreen, HomeScreenProps, WorklistGoalMove, fixSumOfItemsMoreThanTotal, reorganizeGoals
+  HomeScreen, HomeScreenProps, WorklistGoalMove, fixSumOfItemsMoreThanTotal, onWorklistCardPress, reorganizeGoals
 } from './Home';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
+import { trackEvent } from '../../utils/AppCenterTool';
+import { strings } from '../../locales';
 
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
@@ -31,6 +33,12 @@ jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
   trackEvent: jest.fn()
 }));
+
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/sessionTimeout.ts'),
+  validateSession: jest.fn(() => Promise.resolve())
+}));
+
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
@@ -686,6 +694,88 @@ describe('HomeScreen', () => {
 
       const fixedData = fixSumOfItemsMoreThanTotal(badDataCombinedWorklistSummary, jest.fn());
       expect(fixedData).toStrictEqual(expectedMultiReorganized);
+    });
+
+    it('tests the onWorklistCardPress function', async () => {
+      const mockUpdateFilterExceptions = jest.fn();
+      const mockSetWorklistType = jest.fn();
+
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        mockConfig,
+        false,
+        false
+      );
+      expect(trackEvent).toHaveBeenCalledWith('home_worklist_summary_card_press', { worklistCard: 'NSFL' });
+      expect(mockUpdateFilterExceptions).toHaveBeenCalledWith(['NSFL']);
+      expect(mockSetWorklistType).toHaveBeenCalledWith('ITEM');
+      expect(navigationProp.navigate).toHaveBeenCalledWith('WorklistNavigator', {
+        screen: 'ITEMWORKLIST',
+        params: {
+          screen: strings('WORKLIST.TODO')
+        }
+      });
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        mockConfig,
+        true,
+        false
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith(
+        strings('WORKLIST.WORKLIST'),
+        { screen: 'MissingPalletWorklist', initial: false }
+      );
+
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        mockConfig,
+        false,
+        true
+      );
+      expect(mockSetWorklistType).toHaveBeenCalledWith('AUDIT');
+      expect(navigationProp.navigate).toHaveBeenCalledWith(strings('WORKLIST.WORKLIST'), {
+        screen: 'AuditWorklistNavigator',
+        initial: false,
+        params: {
+          screen: 'AuditWorklistTabs',
+          params: {
+            screen: strings('WORKLIST.TODO')
+          }
+        }
+      });
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        { ...mockConfig, auditWorklists: true, palletWorklists: true },
+        false,
+        false
+      );
+      expect(mockSetWorklistType).toHaveBeenCalledWith('ITEM');
+      expect(navigationProp.navigate).toHaveBeenCalledWith(strings('WORKLIST.WORKLIST'), {
+        screen: 'WorklistNavigator',
+        initial: false,
+        params: {
+          screen: 'ITEMWORKLIST',
+          params: {
+            screen: strings('WORKLIST.TODO')
+          }
+        }
+      });
     });
   });
 });
