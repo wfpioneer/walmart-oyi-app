@@ -92,7 +92,11 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_SECTIONS, actions.getSections, LocationService.getSections),
   makeAsyncSaga(saga.GET_SECTION_DETAILS, actions.getSectionDetails, LocationService.getSectionDetails),
   makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet),
-  makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet),
+  makeAsyncSaga(
+    saga.DELETE_PALLET_FROM_SECTION,
+    actions.deletePalletFromSection,
+    DeletePalletService.deletePalletFromSection
+  ),
   makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels),
   makeAsyncSaga(saga.POST_CREATE_AISLES, actions.postCreateAisles, LocationService.createLocationAislesSection),
   makeAsyncSaga(saga.CREATE_SECTIONS, actions.createSections, LocationService.createSections),

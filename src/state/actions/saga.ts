@@ -62,7 +62,7 @@ export const GET_SECTIONS = 'SAGA/GET_SECTIONS';
 export const GET_SECTION_DETAILS = 'SAGA/GET_SECTION_DETAILS';
 export const PRINT_LOCATION_LABELS = 'SAGA/PRINT_SECTION_LABELS';
 export const ADD_PALLET = 'SAGA/ADD_PALLET';
-export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
+export const DELETE_PALLET_FROM_SECTION = 'SAGA/DELETE_PALLET_FROM_SECTION';
 export const POST_CREATE_AISLES = 'SAGA/POST_CREATE_AISLES';
 export const CREATE_SECTIONS = 'SAGA/CREATE_SECTIONS';
 export const CREATE_ZONE = 'SAGA/CREATE_ZONE';
@@ -187,7 +187,9 @@ export const addPallet = (payload: {
   sectionId?: number;
   locationName?: string
 }) => ({ type: ADD_PALLET, payload } as const);
-export const deletePallet = (payload: { palletId: number }) => ({ type: DELETE_PALLET, payload } as const);
+export const deletePalletFromSection = (payload: {
+   palletId: number
+}) => ({ type: DELETE_PALLET_FROM_SECTION, payload } as const);
 export const createSections = (
   payload: { aisleId: number; sectionCount: number }[]
 ) => ({ type: CREATE_SECTIONS, payload } as const);
@@ -356,7 +358,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getSectionDetails>, 'payload'>
     & Pick<ReturnType<typeof printLocationLabel>, 'payload'>
     & Pick<ReturnType<typeof addPallet>, 'payload'>
-    & Pick<ReturnType<typeof deletePallet>, 'payload'>
+    & Pick<ReturnType<typeof deletePalletFromSection>, 'payload'>
     & Pick<ReturnType<typeof createSections>, 'payload'>
     & Pick<ReturnType<typeof deleteZone>, 'payload'>
     & Pick<ReturnType<typeof postCreateAisles>, 'payload'>
