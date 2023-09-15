@@ -1038,7 +1038,7 @@ describe('AuditItemScreen', () => {
       );
       expect(mockTrackEventCall).toHaveBeenCalledWith(
         'Audit_Item',
-        { action: 'delete_item_from_pallet_confirmation_click', palletId: mockLocToConfirm.palletId }
+        { action: 'delete_item_from_mixed_pallet_confirmation_click', palletId: mockLocToConfirm.palletId }
       );
 
       mockLocToConfirm.isMixedPallet = false;

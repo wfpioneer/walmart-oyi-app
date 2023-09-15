@@ -1471,7 +1471,7 @@ export const deleteLocationConfirmed = (
     }));
     trackEventCall(
       'Audit_Item',
-      { action: 'delete_item_from_pallet_confirmation_click', palletId: locToConfirm.palletId }
+      { action: 'delete_item_from_mixed_pallet_confirmation_click', palletId: locToConfirm.palletId }
     );
   } else if (locToConfirm.locationArea === 'reserve' && !locToConfirm.isMixedPallet) {
     dispatch(
