@@ -122,11 +122,13 @@ export const completeItemApiHook = (
       } else {
         dispatch(setActionCompleted());
         if (route.params && route.params.source === 'OtherAction') {
+          const popItemDetailsAndOtherActionsScreen = 3;
           // Navigates back to the screen before ReviewItemDetails
-          navigation.dispatch(StackActions.pop(3));
+          navigation.dispatch(StackActions.pop(popItemDetailsAndOtherActionsScreen));
         }
+        const popToScreenBeforeItemDetails = 2;
         // Navigates back to the screen before ReviewItemDetails
-        navigation.dispatch(StackActions.pop(2));
+        navigation.dispatch(StackActions.pop(popToScreenBeforeItemDetails));
       }
     }
 
