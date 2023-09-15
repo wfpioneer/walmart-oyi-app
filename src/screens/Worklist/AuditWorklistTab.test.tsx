@@ -31,8 +31,6 @@ const mockError: AxiosError = {
   toJSON: () => object
 };
 
-let navigationProp: NavigationProp<any>;
-
 const store = createStore(RootReducer, mockInitialState);
 describe('AuditWorklistTab', () => {
   const mockDispatch = jest.fn();
@@ -43,7 +41,6 @@ describe('AuditWorklistTab', () => {
         <Provider store={store}>
           <AuditWorklistTabScreen
             items={mockToDoAuditWorklist}
-            navigation={navigationProp}
             dispatch={mockDispatch}
             collapsedState={[false, jest.fn()]}
             refreshing={false}
@@ -71,7 +68,6 @@ describe('AuditWorklistTab', () => {
         <Provider store={store}>
           <AuditWorklistTabScreen
             items={mockCompletedAuditWorklist}
-            navigation={navigationProp}
             dispatch={mockDispatch}
             collapsedState={[false, jest.fn()]}
             refreshing={false}
@@ -99,7 +95,6 @@ describe('AuditWorklistTab', () => {
         <Provider store={store}>
           <AuditWorklistTabScreen
             items={mockCompletedAuditWorklist}
-            navigation={navigationProp}
             dispatch={mockDispatch}
             collapsedState={[false, jest.fn()]}
             refreshing={false}
@@ -128,7 +123,6 @@ describe('AuditWorklistTab', () => {
         <Provider store={store}>
           <AuditWorklistTabScreen
             items={mockCompletedAuditWorklist}
-            navigation={navigationProp}
             dispatch={mockDispatch}
             collapsedState={[false, jest.fn()]}
             refreshing={false}
@@ -157,7 +151,6 @@ describe('AuditWorklistTab', () => {
         <Provider store={store}>
           <AuditWorklistTabScreen
             items={mockToDoAuditWorklist}
-            navigation={navigationProp}
             dispatch={mockDispatch}
             collapsedState={[false, jest.fn()]}
             refreshing={false}
@@ -185,7 +178,6 @@ describe('AuditWorklistTab', () => {
         <Provider store={store}>
           <AuditWorklistTabScreen
             items={mockToDoAuditWorklist}
-            navigation={navigationProp}
             dispatch={mockDispatch}
             collapsedState={[true, jest.fn()]}
             refreshing={false}
@@ -215,7 +207,6 @@ describe('AuditWorklistTab', () => {
         <Provider store={store}>
           <AuditWorklistTabScreen
             items={mockToDoAuditWorklist}
-            navigation={navigationProp}
             dispatch={mockDispatch}
             collapsedState={[false, jest.fn()]}
             refreshing={false}

@@ -13,7 +13,6 @@ import { AxiosError } from 'axios';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
-import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 import { strings } from '../../locales';
@@ -27,6 +26,7 @@ import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { UseStateType } from '../../models/Generics.d';
 import ManualScan from '../../components/manualscan/ManualScan';
+import { setScannedEvent } from '../../state/actions/Global';
 
 const ROLLOVER_AUDITS = 'RA';
 
@@ -38,7 +38,6 @@ export interface AuditWorklistTabProps {
 
 export interface AuditWorklistTabScreenProps {
     items: WorklistItemI[];
-    navigation: NavigationProp<any>;
     dispatch: Dispatch<any>;
     refreshing: boolean;
     error: AxiosError | null;
@@ -56,22 +55,19 @@ export interface AuditWorklistTabScreenProps {
     tokenIsWaiting: boolean;
 }
 
-const onItemClick = ( // hekki
+const onItemClick = (
   itemNumber: number,
-  navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent
 ) => {
-  dispatch(setAuditItemNumber(itemNumber));
+  dispatch(setScannedEvent({ value: itemNumber.toString(), type: 'card_click' }));
   trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
-  navigation.navigate('AuditItem');
 };
 
 const renderCategoryCard = (
   category: string,
   items: WorklistItemI[],
   collapsed: boolean,
-  navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent,
   showItemImage: boolean,
@@ -85,7 +81,7 @@ const renderCategoryCard = (
     listOfItems={items}
     collapsed={collapsed}
     onItemCardClick={(itemNumber: number) => {
-      onItemClick(itemNumber, navigation, dispatch, trackEventCall);
+      onItemClick(itemNumber, dispatch, trackEventCall);
     }}
     showItemImage={showItemImage}
     countryCode={countryCode}
@@ -165,7 +161,7 @@ export const getItemsForTab = (
 
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, refreshing, dispatch, navigation, error, useEffectHook, trackEventCall,
+    items, refreshing, dispatch, error, useEffectHook, trackEventCall,
     config, filterExceptions, filterCategories, onRefresh, countryCode, collapsedState,
     isLoadedState, isManualScanEnabled, imageToken, tokenIsWaiting
   } = props;
@@ -303,7 +299,6 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           key,
           itemsBasedOnCategory[key],
           collapsed,
-          navigation,
           dispatch,
           trackEventCall,
           showItemImage,
@@ -327,7 +322,6 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const { completionLevel, onRefresh, auditWorklistItems } = props;
   const dispatch = useDispatch();
-  const navigation = useNavigation();
   const { configs } = useTypedSelector(state => state.User);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const { isWaiting, error } = useTypedSelector(state => (
@@ -342,7 +336,6 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
     <AuditWorklistTabScreen
       items={items}
       dispatch={dispatch}
-      navigation={navigation}
       refreshing={isWaiting}
       error={error}
       filterExceptions={filterExceptions}
