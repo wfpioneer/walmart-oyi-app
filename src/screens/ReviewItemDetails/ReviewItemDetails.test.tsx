@@ -19,14 +19,14 @@ itemDetail, {
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook,
-  getExceptionType, getLocationCount, getLocationsForItemsApiHook, getLocationsForItemsV1ApiHook, getTopRightBtnTxt,
-  getUpdatedSales, handleCreateNewPick, handleLocationAction,
-  handleOHQtyClose, handleOHQtySubmit, handleRefresh, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
-  onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton,
-  renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory,
-  renderOHQtyComponent, renderOtherActionButton, renderPickHistory, renderPrintPriceSignButton, renderReplenishmentCard,
-  renderReserveLocQtys, renderSalesGraphV4, updateOHQtyApiHook
+  callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook, getExceptionType,
+  getLocationCount, getLocationsForItemsApiHook, getLocationsForItemsV1ApiHook, getTopRightBtnTxt,
+  getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit,
+  handleRefresh, handleUpdateQty, isItemDetailsCompleted, onIsWaiting, onValidateBackPress,
+  onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton, renderAddPicklistButton,
+  renderBarcodeErrorModal, renderErrorView, renderLocationComponent, renderOHChangeHistory,
+  renderOHQtyComponent, renderOtherActionButton, renderPickHistory, renderPrintPriceSignButton,
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -1080,21 +1080,20 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
-      const { getByTestId, rerender, toJSON } = render(isError(
-        mockError,
+      const { getByTestId, rerender, toJSON } = render(renderErrorView(
         true,
         jest.fn(),
         false,
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
-        jest.fn(),
+        jest.fn()
       ));
       expect(toJSON()).toMatchSnapshot();
       const retryButton = getByTestId('scanErrorRetry');
       fireEvent.press(retryButton);
       expect(mockDispatch).toHaveBeenCalledWith(expectedGetItemDetailAction);
-      rerender(isError(
-        mockError,
+
+      rerender(renderErrorView(
         false,
         jest.fn(),
         false,
@@ -1103,12 +1102,13 @@ describe('ReviewItemDetailsScreen', () => {
         jest.fn(),
       ));
       expect(toJSON()).toMatchSnapshot();
-      rerender(isError(
-        null,
+
+      // no error, but empty
+      rerender(renderErrorView(
         false,
         jest.fn(),
         false,
-        { value: '1234567890098', type: 'UPC-A' },
+        { value: null, type: null },
         mockDispatch,
         jest.fn(),
       ));

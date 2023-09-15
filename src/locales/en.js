@@ -164,7 +164,9 @@ export default {
     NO_ACTION_NEEDED: 'The item is up to date no action is needed',
     REPLENISH_RESERVE: 'Please replenish the reserve, to add item to pick list.',
     CANCEL_APPROVAL: 'This action will cancel the currently pending action. Would you Like to continue?',
-    UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval'
+    UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval',
+    NO_ITEM_SCANNED: 'No Item Scanned',
+    SCAN_ITEM: 'Please scan an item'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',

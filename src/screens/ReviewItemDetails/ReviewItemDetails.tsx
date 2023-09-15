@@ -1345,41 +1345,43 @@ export const getUpdatedSales = (itemDetails: ItemDetails | null) => (
     ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales?.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
     : undefined);
 
-export const isError = (
-  error: AxiosError | null,
+export const renderErrorView = (
   errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   isManualScanEnabled: boolean,
   scannedEvent: { value: string | null; type: string | null; },
   dispatch: Dispatch<any>,
-  trackEventCall: (eventName: string, params?: any) => void,
-  message?: string
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
-  if (error || message) {
-    const scannedValue = scannedEvent.value || '';
-    return (
-      <View style={styles.safeAreaView}>
-        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
-        <View style={styles.activityIndicator}>
-          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-          <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
-          <TouchableOpacity
-            testID="scanErrorRetry"
-            style={styles.errorButton}
-            onPress={() => {
-              trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
-              return dispatch(getItemDetailsV4({ id: parseInt(scannedValue, 10) }));
-            }}
-          >
-            <Text>{strings('GENERICS.RETRY')}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
+  const scannedValue = scannedEvent.value || '';
   return (
-    <View />
+    <View style={styles.safeAreaView}>
+      {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
+        {!scannedValue
+          ? (
+            <View style={styles.errorTextContainer}>
+              <Text style={styles.errorText}>{strings('ITEM.NO_ITEM_SCANNED')}</Text>
+              <Text style={styles.errorText}>{strings('ITEM.SCAN_ITEM')}</Text>
+            </View>
+          )
+          : (
+            <TouchableOpacity
+              testID="scanErrorRetry"
+              style={styles.errorButton}
+              onPress={() => {
+                trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
+                return dispatch(getItemDetailsV4({ id: parseInt(scannedValue, 10) }));
+              }}
+            >
+              <Text>{strings('GENERICS.RETRY')}</Text>
+            </TouchableOpacity>
+          )}
+      </View>
+    </View>
   );
 };
 
@@ -1539,15 +1541,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       && (itemDetailsApi.error
         || apiErrorMessage
         || (!itemDetailsApi.result && !itemDetails))) {
-    return isError(
-      itemDetailsApi.error,
+    return renderErrorView(
       errorModalVisible,
       setErrorModalVisible,
       isManualScanEnabled,
       scannedEvent,
       dispatch,
-      trackEventCall,
-      apiErrorMessage // Checks for an error message from ItemDetails orchestration
+      trackEventCall
     );
   }
 

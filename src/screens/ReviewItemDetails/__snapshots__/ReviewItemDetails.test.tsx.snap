@@ -273,7 +273,76 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 3`] = `<View />`;
+exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 3`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.NO_ITEM_SCANNED" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_ITEM" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test onIsWaiting 1`] = `
 <View>
@@ -3010,7 +3079,76 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `<View />`;
+exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.NO_ITEM_SCANNED" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_ITEM" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders "Generic Change translation" if pendingOH is -999 and user has OH role 1`] = `
 <View
