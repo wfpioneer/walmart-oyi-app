@@ -205,7 +205,7 @@ const ItemCard = ({
           <View style={styles.itemQtyContainer}>
             <View style={styles.itemQtyView}>
               <Text style={styles.itemNbr}>{`${strings('ITEM.ON_HANDS')} ${onHandQty.toString()}`}</Text>
-              {isQuantityPending(pendingQty) ? <Text style={styles.itemNbr}>{` (${pendingQty})`}</Text> : null}
+              {isQuantityPending(pendingQty) ? <Text style={styles.pendingQtyText}>{` (${pendingQty})`}</Text> : null}
             </View>
             {isQuantityPending(pendingQty) ? (
               <View style={styles.itemQtyView}>
@@ -215,7 +215,7 @@ const ItemCard = ({
                   color={COLOR.ORANGE}
                   style={styles.infoIcon}
                 />
-                <Text style={styles.itemNbr}>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>
+                <Text style={styles.pendingQtyText}>{` ${strings('ITEM.PENDING_MGR_APPROVAL')}`}</Text>
               </View>
             ) : null}
           </View>
