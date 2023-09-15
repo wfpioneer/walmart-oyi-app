@@ -27,8 +27,8 @@ import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { strings } from '../../../locales';
 import { mockPalletLocations } from '../../../mockData/getItemPallets';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
-import { UPDATE_MULTI_PALLET_UPC_QTY_V2 } from '../../../state/actions/asyncAPI';
-import { UPDATE_PALLET_QTY } from '../../../state/actions/ReserveAdjustmentScreen';
+import { DELETE_PALLET_FROM_SECTION, DELETE_UPCS, UPDATE_MULTI_PALLET_UPC_QTY_V2 } from '../../../state/actions/asyncAPI';
+import { UPDATE_PALLET_QTY, setReserveLocations } from '../../../state/actions/ReserveAdjustmentScreen';
 import { setScannedEvent } from '../../../state/actions/Global';
 import ItemDetails from '../../../models/ItemDetails';
 
@@ -200,6 +200,59 @@ describe('ReserveAdjustmentScreen', () => {
     );
     expect(toJSON()).toMatchSnapshot();
   });
+
+  it('Tests the ReserveAdjustment delete pallet useEffectHooks', () => {
+    const mockUseEffectHook = jest.fn().mockImplementation((callback, deps) => {
+      callback();
+    });
+    const { showDeleteConfirmationState, setLocToConfirm, dispatch } = mockReserveAdjustmentScreenProps;
+    showDeleteConfirmationState[0] = true;
+
+    const { update } = render(
+      <ReserveAdjustmentScreen
+        {...mockReserveAdjustmentScreenProps}
+        useEffectHook={mockUseEffectHook}
+        deletePalletApi={successApi}
+      />
+    );
+    expect(showDeleteConfirmationState[1]).toHaveBeenCalledWith(false);
+    expect(setLocToConfirm).toHaveBeenCalledWith({
+      locationName: '',
+      locationArea: '',
+      locationIndex: -1,
+      locationTypeNbr: -1,
+      sectionId: 0,
+      palletId: 0,
+      mixedPallet: false
+    });
+    expect(dispatch).toHaveBeenNthCalledWith(1, setReserveLocations([]));
+    expect(dispatch).toHaveBeenNthCalledWith(2, { type: DELETE_PALLET_FROM_SECTION.RESET });
+
+    // @ts-expect-error this dispatch property is mocked by jest
+    dispatch.mockReset();
+    update(
+      <ReserveAdjustmentScreen
+        {...mockReserveAdjustmentScreenProps}
+        useEffectHook={mockUseEffectHook}
+        deleteUpcsApi={successApi}
+      />
+    );
+    expect(showDeleteConfirmationState[1]).toHaveBeenCalledWith(false);
+    expect(setLocToConfirm).toHaveBeenCalledWith({
+      locationName: '',
+      locationArea: '',
+      locationIndex: -1,
+      locationTypeNbr: -1,
+      sectionId: 0,
+      palletId: 0,
+      mixedPallet: false
+    });
+    expect(dispatch).toHaveBeenNthCalledWith(1, setReserveLocations([]));
+    expect(dispatch).toHaveBeenNthCalledWith(2, { type: DELETE_UPCS.RESET });
+    // reset delete confirmation state
+    showDeleteConfirmationState[0] = false;
+  });
+
   describe('Manage ReserveAdjustmentScreen externalized function tests', () => {
     const mockDispatch = jest.fn();
     const mockSetGetItemPalletsError = jest.fn();
@@ -311,7 +364,7 @@ describe('ReserveAdjustmentScreen', () => {
       fireEvent.press(confirmButton);
       expect(mockDispatch).toHaveBeenCalledWith({
         payload: { palletId: 55689 },
-        type: 'SAGA/DELETE_PALLET'
+        type: 'SAGA/DELETE_PALLET_FROM_SECTION'
       });
     });
 
@@ -664,8 +717,10 @@ describe('ReserveAdjustmentScreen', () => {
       const modalConfirmButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalConfirmButton);
       expect(mockSetShowOnHandsConfirmModal).toHaveBeenCalledWith(false);
-      expect(mockTrackEvent).toBeCalledWith(SCREEN_NAME,
-        { action: 'cancel_multi_OH_qty_update', itemNumber: 1234567890, upcNbr: '000055559999' });
+      expect(mockTrackEvent).toBeCalledWith(
+        SCREEN_NAME,
+        { action: 'cancel_multi_OH_qty_update', itemNumber: 1234567890, upcNbr: '000055559999' }
+      );
     });
   });
 });
