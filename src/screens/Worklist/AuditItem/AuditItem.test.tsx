@@ -11,14 +11,18 @@ import { ScrollView } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosHeaders } from 'axios';
 import { object } from 'prop-types';
 import Toast from 'react-native-toast-message';
-import { UPDATE_FLOOR_LOCATION_QTY, UPDATE_PALLET_QTY } from '../../../state/actions/AuditItemScreen';
+import {
+  UPDATE_FLOOR_LOCATION_QTY,
+  UPDATE_PALLET_QTY
+} from '../../../state/actions/AuditItemScreen';
 import store from '../../../state/index';
 import AuditItem, {
   AuditItemScreen,
   AuditItemScreenProps,
+  LocationConfirm,
   addLocationHandler,
   backConfirmed,
   backConfirmedHook,
@@ -29,7 +33,9 @@ import AuditItem, {
   calculateTotalOHQty,
   completeItemApiHook,
   deleteFloorLocationApiHook,
+  deleteLocationConfirmed,
   deletePalletApiHook,
+  deletePalletUPCsApiHook,
   disabledContinue,
   getItemApprovalApiHook,
   getItemDetailsApiHook,
@@ -66,19 +72,43 @@ import { mockConfig } from '../../../mockData/mockConfig';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
 import {
+  CLEAR_PALLET,
+  DELETE_UPCS,
   GET_AUDIT_LOCATIONS,
-  GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1, UPDATE_MULTI_PALLET_UPC_QTY, UPDATE_OH_QTY, UPDATE_OH_QTY_V1
+  GET_LOCATIONS_FOR_ITEM,
+  GET_LOCATIONS_FOR_ITEM_V1,
+  UPDATE_MULTI_PALLET_UPC_QTY,
+  UPDATE_OH_QTY,
+  UPDATE_OH_QTY_V1
 } from '../../../state/actions/asyncAPI';
 import {
-  getApprovalList, getAuditLocations, getLocationsForItem, getLocationsForItemV1, updateMultiPalletUPCQty
+  clearPallet,
+  deleteLocation,
+  deleteUpcs,
+  getApprovalList,
+  getAuditLocations,
+  getLocationsForItem,
+  getLocationsForItemV1,
+  updateMultiPalletUPCQty
 } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
-import { setFloorLocations, setReserveLocations, setupScreen } from '../../../state/actions/ItemDetailScreen';
+import {
+  setFloorLocations,
+  setReserveLocations,
+  setupScreen
+} from '../../../state/actions/ItemDetailScreen';
 import ItemDetails from '../../../models/ItemDetails';
 import Location from '../../../models/Location';
-import { ApprovalListItem, approvalRequestSource, approvalStatus } from '../../../models/ApprovalListItem';
-import { mockLocations, mockSomeSaveableLocations } from '../../../mockData/mockPickList';
+import {
+  ApprovalListItem,
+  approvalRequestSource,
+  approvalStatus
+} from '../../../models/ApprovalListItem';
+import {
+  mockLocations,
+  mockSomeSaveableLocations
+} from '../../../mockData/mockPickList';
 import { BeforeRemoveEvent, UseStateType } from '../../../models/Generics.d';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
@@ -164,7 +194,7 @@ const mockApprovalItem: ApprovalListItem = {
   subCategoryDescription: '',
   newQuantity: 20,
   oldQuantity: 5,
-  dollarChange: 150.50,
+  dollarChange: 150.5,
   initiatedUserId: 'Associate Employee',
   initiatedTimestamp: '2021-03-27T00:00:00.000Z',
   approvalStatus: approvalStatus.Pending,
@@ -213,7 +243,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
     locationIndex: -1,
     locationTypeNbr: -1,
     palletId: 0,
-    sectionId: 0
+    sectionId: 0,
+    isMixedPallet: false
   },
   setLocToConfirm: jest.fn(),
   deleteFloorLocationApi: defaultAsyncState,
@@ -223,7 +254,10 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   getItemPalletsError: false,
   setGetItemPalletsError: jest.fn(),
   showCalcModalState: [false, jest.fn()],
-  locationListState: [{ locationName: '', locationType: 'floor', palletId: 0 }, jest.fn()],
+  locationListState: [
+    { locationName: '', locationType: 'floor', palletId: 0 },
+    jest.fn()
+  ],
   countryCode: 'CN',
   updateMultiPalletUPCQtyApi: defaultAsyncState,
   getItemPalletsDispatch: jest.fn(),
@@ -232,7 +266,8 @@ const mockAuditItemScreenProps: AuditItemScreenProps = {
   displayWarningModalState: [false, jest.fn()],
   useCallbackHook: jest.fn(fn => fn()),
   useFocusEffectHook: jest.fn(),
-  auditSavedWarningState: [false, jest.fn()]
+  auditSavedWarningState: [false, jest.fn()],
+  deletePalletUPCsApi: defaultAsyncState
 };
 
 const mockModalIsWaitingState: UseStateType<boolean> = [false, jest.fn()];
@@ -412,6 +447,10 @@ describe('AuditItemScreen', () => {
       ...defaultAsyncState,
       error: 'Internal Server Error',
       value: {}
+    };
+    const apiIsWaiting: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
     };
 
     it('test onValidateItemNumber', async () => {
@@ -594,7 +633,7 @@ describe('AuditItemScreen', () => {
         successApi,
         mockDispatch,
         navigationProp,
-        mockSetShowItemNotFoundMsg,
+        mockSetShowItemNotFoundMsg
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockSetShowItemNotFoundMsg).toHaveBeenCalledWith(false);
@@ -619,7 +658,7 @@ describe('AuditItemScreen', () => {
         successApi204,
         mockDispatch,
         navigationProp,
-        mockSetShowItemNotFoundMsg,
+        mockSetShowItemNotFoundMsg
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(true);
       expect(Toast.show).toHaveBeenCalledWith(toastItemNotFound);
@@ -631,7 +670,7 @@ describe('AuditItemScreen', () => {
         failureApi,
         mockDispatch,
         navigationProp,
-        mockSetShowItemNotFoundMsg,
+        mockSetShowItemNotFoundMsg
       );
       expect(mockSetShowItemNotFoundMsg).toBeCalledWith(false);
     });
@@ -822,51 +861,53 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderDeleteLocationModal should render modal with locationName and action buttons', () => {
-      const { toJSON } = render(renderDeleteLocationModal(
-        defaultAsyncState,
-        defaultAsyncState,
-        true,
-        mockSetShowDeleteConfirmationModal,
-        mockDeleteLocationConfirmed,
-        mockLocationName,
-        'floor',
-        0,
-        mockTrackEventCall
-      ));
+      const { toJSON } = render(
+        renderDeleteLocationModal(
+          false,
+          false,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'floor',
+          1234,
+          mockTrackEventCall
+        )
+      );
       expect(toJSON()).toMatchSnapshot();
     });
 
     it('Tests renderDeleteLocationModal should render modal with loader', () => {
-      const mockDeleteFloorLocationApiState = {
-        ...defaultAsyncState,
-        isWaiting: true
-      };
-      const { toJSON } = render(renderDeleteLocationModal(
-        mockDeleteFloorLocationApiState,
-        defaultAsyncState,
-        true,
-        mockSetShowDeleteConfirmationModal,
-        mockDeleteLocationConfirmed,
-        mockLocationName,
-        'floor',
-        0,
-        mockTrackEventCall
-      ));
+      const { toJSON } = render(
+        renderDeleteLocationModal(
+          true,
+          false,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'floor',
+          1234,
+          mockTrackEventCall
+        )
+      );
       expect(toJSON()).toMatchSnapshot();
     });
 
     it('Tests renderDeleteLocationModal cancel button action', () => {
-      const { getByTestId } = render(renderDeleteLocationModal(
-        defaultAsyncState,
-        defaultAsyncState,
-        true,
-        mockSetShowDeleteConfirmationModal,
-        mockDeleteLocationConfirmed,
-        mockLocationName,
-        'floor',
-        0,
-        mockTrackEventCall
-      ));
+      const { getByTestId } = render(
+        renderDeleteLocationModal(
+          false,
+          false,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'floor',
+          1234,
+          mockTrackEventCall
+        )
+      );
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
       expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
@@ -874,26 +915,169 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
+        action: 'cancel_delete_location_click',
+        locationType: 'floor'
+      });
     });
 
     it('Tests renderDeleteLocationModal confirm button action', () => {
-      const { getByTestId } = render(renderDeleteLocationModal(
-        defaultAsyncState,
-        defaultAsyncState,
-        true,
-        mockSetShowDeleteConfirmationModal,
-        mockDeleteLocationConfirmed,
-        mockLocationName,
-        'floor',
-        0,
-        mockTrackEventCall
-      ));
+      const { getByTestId } = render(
+        renderDeleteLocationModal(
+          false,
+          false,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'floor',
+          1234,
+          mockTrackEventCall
+        )
+      );
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockDeleteLocationConfirmed).toBeCalled();
-      expect(mockTrackEventCall).toBeCalledWith(
+    });
+
+    it('Tests renderDeleteLocationModal error text', () => {
+      const { getByTestId, update } = render(
+        renderDeleteLocationModal(
+          false,
+          false,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'floor',
+          1234,
+          mockTrackEventCall
+        )
+      );
+      const deleteLocModalConfirmErrorText = getByTestId(
+        'confirm-error-text'
+      );
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
+        [`${strings('LOCATION.DELETE_CONFIRMATION')}${mockLocationName}`]
+      );
+
+      update(
+        renderDeleteLocationModal(
+          false,
+          true,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'floor',
+          1234,
+          mockTrackEventCall
+        )
+      );
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
+        [strings('LOCATION.DELETE_LOCATION_API_ERROR')]
+      );
+
+      update(
+        renderDeleteLocationModal(
+          false,
+          false,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'reserve',
+          1234,
+          mockTrackEventCall
+        )
+      );
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
+        [`${strings('MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION', { palletId: 1234 })}`]
+      );
+
+      update(
+        renderDeleteLocationModal(
+          false,
+          true,
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDeleteLocationConfirmed,
+          mockLocationName,
+          'reserve',
+          1234,
+          mockTrackEventCall
+        )
+      );
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
+        [strings('ITEM.DELETE_PALLET_FAILURE')]
+      );
+    });
+
+    it('Tests deleteLocationConfirmed Function', () => {
+      const mockLocToConfirm: LocationConfirm = {
+        ...mockAuditItemScreenProps.locToConfirm,
+        isMixedPallet: true,
+        locationArea: 'reserve',
+        locationName: 'A1-1',
+        palletId: 1234
+      };
+
+      deleteLocationConfirmed(
+        mockLocToConfirm,
+        mockDispatch,
+        mockTrackEventCall,
+        mockItemDetails,
+        123
+      );
+      expect(mockDispatch).toHaveBeenCalledWith(
+        deleteUpcs({
+          palletId: mockLocToConfirm.palletId.toString(),
+          removeExpirationDate: false,
+          upcs: [mockItemDetails?.upcNbr || '0']
+        })
+      );
+      expect(mockTrackEventCall).toHaveBeenCalledWith(
         'Audit_Item',
-        { action: 'confirm_delete_location_click', locName: 'A1-1' }
+        { action: 'delete_item_from_mixed_pallet_confirmation_click', palletId: mockLocToConfirm.palletId }
+      );
+
+      mockLocToConfirm.isMixedPallet = false;
+      deleteLocationConfirmed(
+        mockLocToConfirm,
+        mockDispatch,
+        mockTrackEventCall,
+        mockItemDetails,
+        123
+      );
+      expect(mockDispatch).toHaveBeenCalledWith(
+        clearPallet({
+          palletId: mockLocToConfirm.palletId ? mockLocToConfirm.palletId.toString() : '0'
+        })
+      );
+      expect(mockTrackEventCall).toHaveBeenCalledWith(
+        'Audit_Item',
+        { action: 'delete_pallet_confirmation_click', palletId: mockLocToConfirm.palletId }
+      );
+
+      mockLocToConfirm.locationArea = 'floor';
+      deleteLocationConfirmed(
+        mockLocToConfirm,
+        mockDispatch,
+        mockTrackEventCall,
+        mockItemDetails,
+        123
+      );
+      expect(mockDispatch).toHaveBeenCalledWith(
+        deleteLocation({
+          headers: new AxiosHeaders({ itemNumber: 123 }),
+          upc: mockItemDetails?.upcNbr || '',
+          sectionId: mockLocToConfirm.locationName,
+          locationTypeNbr: mockLocToConfirm.locationTypeNbr
+        })
+      );
+      expect(mockTrackEventCall).toHaveBeenCalledWith(
+        'Audit_Item',
+        { action: 'confirm_delete_location_click', locName: mockLocToConfirm.locationName }
       );
     });
 
@@ -969,68 +1153,6 @@ describe('AuditItemScreen', () => {
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
-    it('Tests renderDeleteLocationModal should render modal with loader', () => {
-      const mockdeletePalletApiState = {
-        ...defaultAsyncState,
-        isWaiting: true
-      };
-      const { toJSON } = render(renderDeleteLocationModal(
-        defaultAsyncState,
-        mockdeletePalletApiState,
-        true,
-        mockSetShowDeleteConfirmationModal,
-        mockDeleteLocationConfirmed,
-        mockLocationName,
-        'reserve',
-        1234,
-        mockTrackEventCall
-      ));
-      expect(toJSON()).toMatchSnapshot();
-    });
-
-    it('Tests renderDeleteLocationModal cancel button action', () => {
-      const { getByTestId } = render(renderDeleteLocationModal(
-        defaultAsyncState,
-        defaultAsyncState,
-        true,
-        mockSetShowDeleteConfirmationModal,
-        mockDeleteLocationConfirmed,
-        mockLocationName,
-        'reserve',
-        1234,
-        mockTrackEventCall
-      ));
-      const modalCancelButton = getByTestId('modal-cancel-button');
-      fireEvent.press(modalCancelButton);
-      expect(mockSetShowDeleteConfirmationModal).toBeCalledTimes(1);
-      expect(mockSetShowDeleteConfirmationModal).toBeCalledWith(false);
-      const modalConfirmButton = getByTestId('modal-confirm-button');
-      fireEvent.press(modalConfirmButton);
-      expect(mockDeleteLocationConfirmed).toBeCalled();
-      expect(mockTrackEventCall).toBeCalledTimes(2);
-    });
-
-    it('Tests renderDeleteLocationModal confirm button action', () => {
-      const { getByTestId } = render(renderDeleteLocationModal(
-        defaultAsyncState,
-        defaultAsyncState,
-        true,
-        mockSetShowDeleteConfirmationModal,
-        mockDeleteLocationConfirmed,
-        mockLocationName,
-        'reserve',
-        1234,
-        mockTrackEventCall
-      ));
-      const modalConfirmButton = getByTestId('modal-confirm-button');
-      fireEvent.press(modalConfirmButton);
-      expect(mockDeleteLocationConfirmed).toBeCalled();
-      expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item',
-        { action: 'delete_pallet_confirmation_click', palletId: 1234 }
-      );
-    });
-
     it('Tests deletePalletApiHook on 200 success for deleting location', () => {
       const mockGetItemPalletDispatch = jest.fn();
       deletePalletApiHook(
@@ -1043,10 +1165,118 @@ describe('AuditItemScreen', () => {
         mockGetItemPalletDispatch
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockGetItemPalletDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith(mockGetItemPalletDispatch({ itemNbr: 1234 }));
+      expect(mockDispatch).toBeCalledWith({ type: CLEAR_PALLET.RESET });
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'success' }));
+      expect(Toast.show).toBeCalledWith({
+        type: 'success',
+        text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', { palletId: 1234 }),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests deletePalletApiHook on failure', () => {
+      deletePalletApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        jest.fn()
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith({ type: CLEAR_PALLET.RESET });
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith({
+        type: 'error',
+        text1: strings('WORKLIST.MISSING_PALLET_API_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests deletePalletUPCsApiHook on 200 success for deleting location', () => {
+      const mockGetItemPalletDispatch = jest.fn();
+      deletePalletUPCsApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        mockGetItemPalletDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledWith(mockGetItemPalletDispatch({ itemNbr: 1234 }));
+      expect(mockDispatch).toBeCalledWith({ type: DELETE_UPCS.RESET });
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith({
+        type: 'success',
+        text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', { palletId: 1234 }),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests deletePalletUPCsApiHook on failure', () => {
+      deletePalletUPCsApiHook(
+        failureApi,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        jest.fn()
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledWith({ type: DELETE_UPCS.RESET });
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith({
+        type: 'error',
+        text1: strings('ITEM.DELETE_PALLET_FAILURE'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+    });
+
+    it('Tests deletePalletUPCsApi false cases for navigation & 204', () => {
+      const success204Api: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 204
+        }
+      };
+      deletePalletUPCsApiHook(
+        success204Api,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        jest.fn()
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+      expect(Toast.show).not.toHaveBeenCalled();
+      expect(mockDispatch).not.toHaveBeenCalled();
+
+      navigationProp.isFocused = jest.fn(() => false);
+      deletePalletUPCsApiHook(
+        success204Api,
+        mockDispatch,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal,
+        1234,
+        1234,
+        jest.fn()
+      );
+      expect(navigationProp.isFocused()).toBeFalsy();
+      navigationProp.isFocused = jest.fn(() => true);
     });
 
     it('Tests completeItemApiHook on 200 success for completing an item', () => {
@@ -1086,22 +1316,6 @@ describe('AuditItemScreen', () => {
       });
       expect(mockDispatch).toBeCalledTimes(2);
       expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
-    });
-
-    it('Tests deletePalletApiHook on failure', () => {
-      deletePalletApiHook(
-        failureApi,
-        mockDispatch,
-        navigationProp,
-        mockSetShowDeleteConfirmationModal,
-        1234,
-        1234,
-        jest.fn()
-      );
-      expect(mockDispatch).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
-      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
@@ -1198,6 +1412,20 @@ describe('AuditItemScreen', () => {
       });
     });
 
+    it('Tests updateOHQtyApiHook if Api is loading', () => {
+      const mockSetModalWaiting = jest.fn();
+      updateOHQtyApiHook(
+        apiIsWaiting,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        mockSetModalWaiting,
+        mockAuditItemScreenProps.auditSavedWarningState[1]
+      );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockSetModalWaiting).toHaveBeenCalledWith(true);
+    });
+
     it('Tests updateMultiPalletUPCQtyApiHook on success', () => {
       const setShowOnHands = jest.fn();
       updateMultiPalletUPCQtyApiHook(
@@ -1206,7 +1434,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockModalIsWaitingState
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1]
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
@@ -1236,7 +1465,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockModalIsWaitingState
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1]
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
@@ -1258,7 +1488,8 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
-        mockModalIsWaitingState
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1]
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
@@ -1279,6 +1510,22 @@ describe('AuditItemScreen', () => {
 
       expect(setShowOnHands).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('Tests updateMultiPalletUPCQtyApiHook if Api is loading', () => {
+      const setShowOnHands = jest.fn();
+      mockModalIsWaitingState[0] = false;
+      updateMultiPalletUPCQtyApiHook(
+        apiIsWaiting,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands,
+        mockItemDetails.itemNbr,
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1]
+      );
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(true);
     });
 
     it('Tests renderConfirmOnHandsModal with itemDetails onHandsQty', () => {
@@ -1361,7 +1608,7 @@ describe('AuditItemScreen', () => {
     });
 
     it('Test disabledContinue functionality return true when floor location qty is negative', () => {
-      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      const mockFloorLocations = [...(mockItemDetails?.location?.floor || [])];
       mockFloorLocations[0].qty = -1;
 
       expect(
@@ -1371,7 +1618,7 @@ describe('AuditItemScreen', () => {
 
     it(`Test disabledContinue functionality return true 
       when all of the location qty is present and reserve pallet is not scanned but scan is required`, () => {
-      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      const mockFloorLocations = [...(mockItemDetails?.location?.floor || [])];
       mockFloorLocations[0].qty = 10;
       const mockReserveLocations: ItemPalletInfo[] = [
         {
@@ -1393,7 +1640,7 @@ describe('AuditItemScreen', () => {
 
     it(`Test disabledContinue functionality return false 
       when all of the location qty is present and reserve pallet is scanned and scan is required`, () => {
-      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      const mockFloorLocations = [...(mockItemDetails?.location?.floor || [])];
       mockFloorLocations[0].qty = 10;
       const mockReserveLocations: ItemPalletInfo[] = [
         {
@@ -1415,7 +1662,7 @@ describe('AuditItemScreen', () => {
 
     it(`Test disabledContinue functionality return false 
       when all of the location qty is present and reserve pallet is not scanned but scan is not required`, () => {
-      const mockFloorLocations = [...mockItemDetails?.location?.floor || []];
+      const mockFloorLocations = [...(mockItemDetails?.location?.floor || [])];
       mockFloorLocations[0].qty = 10;
       const mockReserveLocations: ItemPalletInfo[] = [
         {
@@ -1592,7 +1839,7 @@ describe('AuditItemScreen', () => {
         palletId: 3
       };
       const mockSetShowCalc = jest.fn();
-      jest.spyOn(React, 'useState').mockImplementation(() => ([5, jest.fn]));
+      jest.spyOn(React, 'useState').mockImplementation(() => [5, jest.fn]);
       const { getByTestId, update } = render(
         renderCalculatorModal(
           mockLocationListItem,
@@ -1731,20 +1978,12 @@ describe('AuditItemScreen', () => {
           status: 200
         }
       };
-      getItemApprovalApiHook(
-        mockSuccessApi,
-        mockDispatch,
-        navigationProp
-      );
+      getItemApprovalApiHook(mockSuccessApi, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(2);
     });
 
     it('test getItemApprovalApiHook failure', () => {
-      getItemApprovalApiHook(
-        failureApi,
-        mockDispatch,
-        navigationProp
-      );
+      getItemApprovalApiHook(failureApi, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(2);
     });
 

@@ -33,7 +33,7 @@ export const asyncReducer = combineReducers({
   getSections: makeAsyncReducer(asyncActions.GET_SECTIONS),
   getSectionDetails: makeAsyncReducer(asyncActions.GET_SECTION_DETAILS),
   addPallet: makeAsyncReducer(asyncActions.ADD_PALLET),
-  deletePallet: makeAsyncReducer(asyncActions.DELETE_PALLET),
+  deletePalletFromSection: makeAsyncReducer(asyncActions.DELETE_PALLET_FROM_SECTION),
   printLocationLabels: makeAsyncReducer(asyncActions.PRINT_LOCATION_LABELS),
   postCreateAisles: makeAsyncReducer(asyncActions.POST_CREATE_AISLES),
   createSections: makeAsyncReducer(asyncActions.CREATE_SECTIONS),
