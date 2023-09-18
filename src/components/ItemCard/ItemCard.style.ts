@@ -60,9 +60,15 @@ const styles = StyleSheet.create({
   },
   itemQtyView: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     width: '100%',
     paddingRight: 5
+  },
+  pendingQtyText: {
+    fontSize: 12,
+    color: COLOR.ORANGE,
+    flexWrap: 'wrap',
+    flexShrink: 1
   },
   itemQtyContainer: {
     flexDirection: 'column'
