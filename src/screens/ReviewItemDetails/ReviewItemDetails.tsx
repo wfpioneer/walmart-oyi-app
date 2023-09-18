@@ -1537,10 +1537,11 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   // Get Item Details Error
   // Need to show this also when we don't have a result and redux is empty
+  // scannedEvent check to make sure that the API call isn't about to start
   if (!itemDetailsApi.isWaiting
       && (itemDetailsApi.error
         || apiErrorMessage
-        || (!itemDetailsApi.result && !itemDetails))) {
+        || (!scannedEvent.value && !itemDetailsApi.result && !itemDetails))) {
     return renderErrorView(
       errorModalVisible,
       setErrorModalVisible,
@@ -1565,13 +1566,12 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     );
   }
 
-  // Need to make sure that we have a result from APIs and the is result in redux to remove this
-  // The second check is necessary as there is a fraction of a second between the api succeeding and
-  // the result getting put into redux
-  if (itemDetailsApi.isWaiting || (itemDetailsApi.result && !itemDetails)) {
+  // Any instance of itemDetails not existing that reaches here will be waiting on the API to finish
+  // Also have the API isWaiting check for if we've started a new call while there's already details
+  if (itemDetailsApi.isWaiting || !itemDetails) {
     return (
       <ActivityIndicator
-        animating={itemDetailsApi.isWaiting}
+        animating
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
         style={styles.activityIndicator}
@@ -1589,7 +1589,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   };
 
   // still need the null check here for typescript
-  return itemDetails ? (
+  return (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
       {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
@@ -1739,7 +1739,7 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
       </ScrollView>
       {completeButtonComponent(props, itemDetails)}
     </View>
-  ) : <View />;
+  );
 };
 
 const ReviewItemDetails = (): JSX.Element => {
