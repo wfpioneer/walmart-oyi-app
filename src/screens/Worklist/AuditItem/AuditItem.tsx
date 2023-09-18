@@ -185,12 +185,12 @@ export interface AuditItemScreenProps {
   locationListState: UseStateType<Pick<LocationList, 'locationName' | 'locationType' | 'palletId'>>;
   countryCode: string;
   updateMultiPalletUPCQtyApi: AsyncState;
-  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1,
+  getItemPalletsDispatch: typeof getItemPallets | typeof getItemPalletsV1;
   getSavedAuditLocationsApi: AsyncState;
   useFocusEffectHook: typeof useFocusEffect;
   useCallbackHook: typeof useCallback;
-  displayWarningModalState: UseStateType<boolean>,
-  auditSavedWarningState: UseStateType<boolean>,
+  displayWarningModalState: UseStateType<boolean>;
+  auditSavedWarningState: UseStateType<boolean>;
   upcNbr: string;
   deletePalletUPCsApi: AsyncState;
   floorLocationIsWaitingState: UseStateType<boolean>;
