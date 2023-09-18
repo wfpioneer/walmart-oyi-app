@@ -4,7 +4,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
@@ -17,7 +17,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -27,18 +27,35 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
     >
       <Text
         style={
-          Object {
+          {
             "marginRight": 0,
           }
         }
       />
       <Text
-        style={Object {}}
+        style={{}}
       >
         History
       </Text>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -50,7 +67,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flex": 0.1,
           "opacity": 1,
           "paddingLeft": 5,
@@ -72,7 +89,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
@@ -85,7 +102,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -95,18 +112,35 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
     >
       <Text
         style={
-          Object {
+          {
             "marginRight": 0,
           }
         }
       />
       <Text
-        style={Object {}}
+        style={{}}
       >
         History
       </Text>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -118,7 +152,7 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flex": 0.1,
           "opacity": 1,
           "paddingLeft": 5,

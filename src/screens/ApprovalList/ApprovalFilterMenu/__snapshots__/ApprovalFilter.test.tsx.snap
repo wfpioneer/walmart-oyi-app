@@ -3,18 +3,18 @@
 exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
       "noopCheck": "once",
       "stabilityCheck": "once",
-      "store": Object {
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -28,8 +28,8 @@ exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
 >
   <ApprovalFilterScreen
     approvalList={
-      Array [
-        Object {
+      [
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
@@ -48,7 +48,7 @@ exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
           "subCategoryNbr": 1,
           "upcNbr": 40000000123,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -67,7 +67,7 @@ exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
           "subCategoryNbr": 1,
           "upcNbr": 40000000456,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -86,7 +86,7 @@ exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
           "subCategoryNbr": 1,
           "upcNbr": 40000000457,
         },
-        Object {
+        {
           "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -109,8 +109,8 @@ exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
     }
     categoryOpen={false}
     dispatch={[MockFunction]}
-    filteredCategories={Array []}
-    filteredSources={Array []}
+    filteredCategories={[]}
+    filteredSources={[]}
     sourceOpen={false}
   />
 </Context.Provider>
@@ -119,7 +119,7 @@ exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
 exports[`Approval filter render tests Test renders the filter menu component and calls onPress Function 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -129,7 +129,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#0071e9",
         "flexDirection": "row",
@@ -141,7 +141,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
   >
     <Text
       style={
-        Object {
+        {
           "color": "#ffffffff",
           "flex": 1,
           "marginLeft": 15,
@@ -151,6 +151,23 @@ exports[`Approval filter render tests Test renders the filter menu component and
       [missing "en.WORKLIST.REFINE" translation]
     </Text>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -162,7 +179,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flex": 0.5,
           "marginRight": 15,
           "opacity": 1,
@@ -171,7 +188,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "textAlign": "right",
           }
@@ -182,6 +199,23 @@ exports[`Approval filter render tests Test renders the filter menu component and
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -193,7 +227,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#e0e0e0",
         "borderBottomWidth": 1,
@@ -206,7 +240,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -217,7 +251,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
           }
@@ -228,7 +262,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 0.1,
         }
       }
@@ -241,6 +275,23 @@ exports[`Approval filter render tests Test renders the filter menu component and
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -252,7 +303,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#e0e0e0",
         "borderBottomWidth": 1,
@@ -266,7 +317,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -277,7 +328,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
           }
@@ -288,7 +339,7 @@ exports[`Approval filter render tests Test renders the filter menu component and
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 0.1,
         }
       }

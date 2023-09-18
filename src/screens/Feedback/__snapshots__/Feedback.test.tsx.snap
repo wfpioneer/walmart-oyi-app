@@ -7,7 +7,7 @@ exports[`Feedback Screen renders the loading screen when feedbackRatingApiStatus
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -22,14 +22,14 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "display": "flex",
         "flexDirection": "column",
         "justifyContent": "space-between",
@@ -39,7 +39,7 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
         }
       }
@@ -56,7 +56,7 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "borderColor": "#c5c5c5",
           "borderWidth": 1,
           "marginVertical": 20,
@@ -67,10 +67,10 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
         multiline={true}
         numberOfLines={10}
         onChangeText={[Function]}
-        placeholder="[missing \\"en.FEEDBACK.COMMENT_PLACEHOLDER_LABEL\\" translation]"
+        placeholder="[missing "en.FEEDBACK.COMMENT_PLACEHOLDER_LABEL" translation]"
         placeholderTextColor="#c5c5c5"
         style={
-          Object {
+          {
             "textAlignVertical": "top",
           }
         }
@@ -80,7 +80,7 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "paddingVertical": 20,
         }
       }
@@ -92,7 +92,7 @@ exports[`Feedback Screen should render the screen based on props 1`] = `
         onPress={[Function]}
         radius={5}
         testID="Submit Feedback"
-        title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+        title="[missing "en.GENERICS.SUBMIT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"

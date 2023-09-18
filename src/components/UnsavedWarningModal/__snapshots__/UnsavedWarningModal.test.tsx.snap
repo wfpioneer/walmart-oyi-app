@@ -20,7 +20,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -30,8 +30,8 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -40,7 +40,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -49,7 +49,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -61,7 +61,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -73,7 +73,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -84,11 +84,11 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "alignSelf": "center",
                 "margin": 10,
                 "width": "40%",
@@ -98,15 +98,27 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -120,7 +132,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "borderColor": "#0071e9",
@@ -135,7 +147,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#0071e9",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -151,11 +163,11 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "alignSelf": "center",
                 "margin": 10,
                 "width": "40%",
@@ -165,15 +177,27 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -187,7 +211,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -201,7 +225,7 @@ exports[`Unsaved warning modal render tests renders the warning modal 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,

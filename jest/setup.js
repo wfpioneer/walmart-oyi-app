@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler/jestSetup';
 import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import '@testing-library/jest-native/extend-expect';
 import { cleanup } from '@testing-library/react-native';
 

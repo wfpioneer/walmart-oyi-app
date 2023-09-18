@@ -9,14 +9,14 @@ exports[`Api Confirmation Modal render tests does not show when isVisible is set
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "padding": 15,
           "textAlign": "center",
@@ -28,7 +28,7 @@ exports[`Api Confirmation Modal render tests does not show when isVisible is set
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -42,12 +42,12 @@ exports[`Api Confirmation Modal render tests does not show when isVisible is set
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -61,12 +61,12 @@ exports[`Api Confirmation Modal render tests does not show when isVisible is set
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -86,7 +86,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
@@ -96,14 +96,14 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "padding": 15,
           "textAlign": "center",
@@ -115,7 +115,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -129,12 +129,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -148,12 +148,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.RETRY\\" translation]"
+      title="[missing "en.GENERICS.RETRY" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -173,14 +173,14 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -193,7 +193,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -206,7 +206,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -220,12 +220,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -239,12 +239,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api has 
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.RETRY\\" translation]"
+      title="[missing "en.GENERICS.RETRY" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -264,14 +264,14 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -284,7 +284,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -297,7 +297,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -311,12 +311,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -330,7 +330,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
@@ -355,14 +355,14 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -375,7 +375,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -388,7 +388,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -402,7 +402,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
@@ -421,12 +421,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -446,14 +446,14 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -466,7 +466,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -478,7 +478,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -491,7 +491,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -505,12 +505,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -524,12 +524,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -549,14 +549,14 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -569,7 +569,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -582,7 +582,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -596,12 +596,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -615,12 +615,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the api is a
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -640,14 +640,14 @@ exports[`Api Confirmation Modal render tests renders correctly when the the api 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "padding": 15,
           "textAlign": "center",
@@ -659,7 +659,7 @@ exports[`Api Confirmation Modal render tests renders correctly when the the api 
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -673,12 +673,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the the api 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -692,12 +692,12 @@ exports[`Api Confirmation Modal render tests renders correctly when the the api 
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"

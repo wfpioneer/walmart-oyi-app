@@ -5,7 +5,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#eeeeee",
@@ -18,7 +18,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "flexDirection": "row",
@@ -28,14 +28,14 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
       >
         <Text
           style={
-            Object {
+            {
               "marginRight": 0,
             }
           }
         />
         <Text
           style={
-            Object {
+            {
               "fontWeight": "500",
               "paddingLeft": 10,
             }
@@ -45,6 +45,23 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
         </Text>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -56,7 +73,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "flex": 0.1,
             "opacity": 1,
             "paddingLeft": 5,
@@ -80,7 +97,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#eeeeee",
@@ -93,7 +110,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "flexDirection": "row",
@@ -103,14 +120,14 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
       >
         <Text
           style={
-            Object {
+            {
               "marginRight": 0,
             }
           }
         />
         <Text
           style={
-            Object {
+            {
               "fontWeight": "500",
               "paddingLeft": 10,
             }
@@ -120,6 +137,23 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
         </Text>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -131,7 +165,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "flex": 0.1,
             "opacity": 1,
             "paddingLeft": 5,
@@ -149,7 +183,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
     <View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "justifyContent": "center",
             "margin": 8,
@@ -172,7 +206,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#eeeeee",
@@ -185,7 +219,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "flexDirection": "row",
@@ -195,14 +229,14 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
       >
         <Text
           style={
-            Object {
+            {
               "marginRight": 0,
             }
           }
         />
         <Text
           style={
-            Object {
+            {
               "fontWeight": "500",
               "paddingLeft": 10,
             }
@@ -212,6 +246,23 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
         </Text>
       </View>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -223,7 +274,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "flex": 0.1,
             "opacity": 1,
             "paddingLeft": 5,
@@ -241,7 +292,7 @@ exports[`Tests OtherOHItemCard Component should tests rendering OtherOHItemCard 
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#ffffffff",
             "flexDirection": "row",
             "justifyContent": "space-evenly",

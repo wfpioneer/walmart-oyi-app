@@ -27,9 +27,9 @@ exports[`Worklist Navigator Renders the worklist Navigator 1`] = `
 >
   <StackNavigator
     screenOptions={
-      Object {
+      {
         "headerMode": "float",
-        "headerStyle": Object {
+        "headerStyle": {
           "backgroundColor": "#0071e9",
         },
         "headerTintColor": "#ffffffff",
@@ -48,18 +48,18 @@ exports[`Worklist Navigator Renders the worklist Navigator 1`] = `
 exports[`Worklist Navigator Renders the worklist Tabs 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
       "noopCheck": "once",
       "stabilityCheck": "once",
-      "store": Object {
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],

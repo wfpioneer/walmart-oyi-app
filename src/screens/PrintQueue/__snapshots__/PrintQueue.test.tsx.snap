@@ -3,7 +3,7 @@
 exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Modal should be visible 1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -18,8 +18,8 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
       countryCode="CN"
       itemIndexToEdit={0}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -32,10 +32,10 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "000000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front Desk Printer",
@@ -47,7 +47,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -55,7 +55,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
   >
     <View
       style={
-        Object {
+        {
           "marginHorizontal": 18,
           "marginVertical": 8,
         }
@@ -67,7 +67,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -77,19 +77,19 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {},
+            {},
           ]
         }
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -97,7 +97,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -108,7 +108,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -118,7 +118,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -127,7 +127,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -137,7 +137,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -157,7 +157,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -174,7 +174,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -186,7 +186,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -204,12 +204,12 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 6,
         }
       }
-      title="[missing \\"en.PRINT.PRINT_ALL\\" translation]"
+      title="[missing "en.PRINT.PRINT_ALL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -223,7 +223,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Edit PrintQueue Mod
 exports[`PrintQueueScreen Test rendering items in printQueue Renders Empty Print list for Zero Items in queue 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "flex-start",
@@ -243,13 +243,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders Empty Print
       />
     }
     radius={250}
-    style={Object {}}
+    style={{}}
     type={1}
     width={250}
   />
   <Text
     style={
-      Object {
+      {
         "color": "#616161",
         "marginVertical": 16,
       }
@@ -263,19 +263,19 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders Empty Print
 exports[`PrintQueueScreen Test rendering items in printQueue Renders a single item for renderPrintItem 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flexDirection": "row",
         "paddingBottom": 6,
         "paddingTop": 12,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "paddingLeft": 8,
       }
@@ -283,7 +283,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "paddingBottom": 8,
           "paddingRight": 14,
@@ -294,7 +294,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "paddingTop": 4,
         }
@@ -304,7 +304,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
     </Text>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -313,7 +313,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
     >
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "flex": 3,
           }
@@ -323,7 +323,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
       </Text>
       <View
         style={
-          Object {
+          {
             "flex": 1,
             "flexDirection": "row",
             "justifyContent": "space-between",
@@ -343,7 +343,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
           }
           onPress={[Function]}
           radius={5}
-          style={Object {}}
+          style={{}}
           type={3}
           width={-1}
         />
@@ -360,7 +360,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
           }
           onPress={[Function]}
           radius={5}
-          style={Object {}}
+          style={{}}
           type={3}
           width={-1}
         />
@@ -373,7 +373,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders a single it
 exports[`PrintQueueScreen Test rendering items in printQueue Renders the print queue with 10 items in it 1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -388,8 +388,8 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       countryCode="CN"
       itemIndexToEdit={-1}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -398,7 +398,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -407,7 +407,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -416,7 +416,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -425,7 +425,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -434,7 +434,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
@@ -443,7 +443,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
@@ -452,7 +452,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
@@ -461,7 +461,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
@@ -470,7 +470,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "itemName": "Store Use Item",
             "itemNbr": 789012,
@@ -483,10 +483,10 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "000000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front Desk Printer",
@@ -498,7 +498,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -506,7 +506,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
   >
     <View
       style={
-        Object {
+        {
           "marginHorizontal": 18,
           "marginVertical": 8,
         }
@@ -518,7 +518,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -528,13 +528,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -543,7 +543,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -551,7 +551,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -562,7 +562,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -572,7 +572,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -581,7 +581,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -591,7 +591,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -611,7 +611,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -628,7 +628,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -638,13 +638,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -653,7 +653,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -661,7 +661,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -672,7 +672,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -682,7 +682,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -691,7 +691,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -701,7 +701,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -721,7 +721,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -738,7 +738,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -748,13 +748,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -763,7 +763,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -771,7 +771,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -782,7 +782,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -792,7 +792,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -801,7 +801,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -811,7 +811,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -831,7 +831,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -848,7 +848,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -858,13 +858,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -873,7 +873,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -881,7 +881,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -892,7 +892,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -902,7 +902,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -911,7 +911,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -921,7 +921,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -941,7 +941,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -958,7 +958,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -968,13 +968,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -983,7 +983,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -991,7 +991,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -1002,7 +1002,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -1012,7 +1012,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -1021,7 +1021,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -1031,7 +1031,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -1051,7 +1051,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1068,7 +1068,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1078,13 +1078,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -1093,7 +1093,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -1101,7 +1101,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -1112,7 +1112,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -1122,7 +1122,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -1131,7 +1131,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -1141,7 +1141,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -1161,7 +1161,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1178,7 +1178,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1188,13 +1188,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -1203,7 +1203,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -1211,7 +1211,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -1222,7 +1222,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -1232,7 +1232,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -1241,7 +1241,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -1251,7 +1251,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -1271,7 +1271,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1288,7 +1288,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1298,13 +1298,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -1313,7 +1313,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -1321,7 +1321,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -1332,7 +1332,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -1342,7 +1342,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -1351,7 +1351,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -1361,7 +1361,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -1381,7 +1381,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1398,7 +1398,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1408,13 +1408,13 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {
+            {
               "borderBottomColor": "#e0e0e0",
               "borderBottomWidth": 1,
             },
@@ -1423,7 +1423,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -1431,7 +1431,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -1442,7 +1442,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -1452,7 +1452,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -1461,7 +1461,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -1471,7 +1471,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -1491,7 +1491,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1508,7 +1508,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1518,19 +1518,19 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {},
+            {},
           ]
         }
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -1538,7 +1538,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -1549,7 +1549,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -1559,7 +1559,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -1568,7 +1568,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -1578,7 +1578,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -1598,7 +1598,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1615,7 +1615,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1627,7 +1627,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -1645,12 +1645,12 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 6,
         }
       }
-      title="[missing \\"en.PRINT.PRINT_ALL\\" translation]"
+      title="[missing "en.PRINT.PRINT_ALL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1664,7 +1664,7 @@ exports[`PrintQueueScreen Test rendering items in printQueue Renders the print q
 exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print service error  1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -1679,8 +1679,8 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
       countryCode="CN"
       itemIndexToEdit={-1}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -1693,10 +1693,10 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "000000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front Desk Printer",
@@ -1708,7 +1708,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -1716,7 +1716,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
   >
     <View
       style={
-        Object {
+        {
           "marginHorizontal": 18,
           "marginVertical": 8,
         }
@@ -1728,7 +1728,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -1738,19 +1738,19 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {},
+            {},
           ]
         }
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -1758,7 +1758,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -1769,7 +1769,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -1779,7 +1779,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -1788,7 +1788,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -1798,7 +1798,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -1818,7 +1818,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1835,7 +1835,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -1846,7 +1846,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
     </View>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -1862,7 +1862,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
       />
       <Text
         style={
-          Object {
+          {
             "color": "#ec0439",
             "fontSize": 16,
           }
@@ -1874,7 +1874,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -1892,12 +1892,12 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 6,
         }
       }
-      title="[missing \\"en.PRINT.PRINT_ALL\\" translation]"
+      title="[missing "en.PRINT.PRINT_ALL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1911,7 +1911,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders Print 
 exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader waiting for printApi response  1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -1926,8 +1926,8 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
       countryCode="CN"
       itemIndexToEdit={-1}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "itemName": "Test item",
             "itemNbr": 123456,
@@ -1940,10 +1940,10 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "000000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front Desk Printer",
@@ -1955,7 +1955,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -1963,7 +1963,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
   >
     <View
       style={
-        Object {
+        {
           "marginHorizontal": 18,
           "marginVertical": 8,
         }
@@ -1975,7 +1975,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -1985,19 +1985,19 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "flexDirection": "row",
               "paddingBottom": 6,
               "paddingTop": 12,
             },
-            Object {},
+            {},
           ]
         }
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 8,
             }
@@ -2005,7 +2005,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "paddingBottom": 8,
                 "paddingRight": 14,
@@ -2016,7 +2016,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "paddingTop": 4,
               }
@@ -2026,7 +2026,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
           </Text>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
                 "justifyContent": "space-between",
@@ -2035,7 +2035,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flex": 3,
                 }
@@ -2045,7 +2045,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
             </Text>
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "row",
                   "justifyContent": "space-between",
@@ -2065,7 +2065,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -2082,7 +2082,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
                 }
                 onPress={[Function]}
                 radius={5}
-                style={Object {}}
+                style={{}}
                 type={3}
                 width={-1}
               />
@@ -2094,7 +2094,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -2111,7 +2111,7 @@ exports[`PrintQueueScreen Tests rendering printQueue api response Renders loader
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }

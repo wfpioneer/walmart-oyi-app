@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tests rendering EnterClubNbrForm Renders the EnterClubNbrForm 1`] = `
-Array [
+[
   <Text
     style={
-      Object {
+      {
         "paddingTop": 12,
       }
     }
@@ -15,7 +15,7 @@ Array [
     keyboardType="numeric"
     maxLength={5}
     onChangeText={[Function]}
-    placeholder="[missing \\"en.LOGIN.ENTER_CLUB_NBR\\" translation]"
+    placeholder="[missing "en.LOGIN.ENTER_CLUB_NBR" translation]"
     selectionColor="#0071e9"
     testID="txtClubNbr"
     textAlign="center"
@@ -23,7 +23,7 @@ Array [
   />,
   <View
     style={
-      Object {
+      {
         "flex": 0,
         "flexDirection": "row",
       }
@@ -31,11 +31,11 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
-          Object {
+          {
             "paddingHorizontal": 12,
             "width": "50%",
           },
@@ -44,15 +44,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -66,7 +78,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "borderColor": "#0071e9",
@@ -81,7 +93,7 @@ Array [
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#0071e9",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
@@ -97,11 +109,11 @@ Array [
     </View>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
-          Object {
+          {
             "paddingHorizontal": 12,
             "width": "50%",
           },
@@ -110,15 +122,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -132,7 +156,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#BABBBE",
               "borderRadius": 5,
@@ -146,7 +170,7 @@ Array [
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,

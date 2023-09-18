@@ -3,7 +3,7 @@
 exports[`WorklistHeader Component Test worklistHeader component snaphsot 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -16,7 +16,7 @@ exports[`WorklistHeader Component Test worklistHeader component snaphsot 1`] = `
 >
   <Text
     style={
-      Object {
+      {
         "color": "#616161",
         "fontSize": 14,
       }
@@ -26,7 +26,7 @@ exports[`WorklistHeader Component Test worklistHeader component snaphsot 1`] = `
   </Text>
   <Text
     style={
-      Object {
+      {
         "color": "#616161",
         "fontSize": 12,
       }

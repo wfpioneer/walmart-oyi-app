@@ -3,18 +3,18 @@
 exports[`FloorItemRow Component Renders a FloorItem 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
       "noopCheck": "once",
       "stabilityCheck": "once",
-      "store": Object {
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -29,7 +29,7 @@ exports[`FloorItemRow Component Renders a FloorItem 1`] = `
   <FloorItemRow
     dispatch={[MockFunction]}
     item={
-      Object {
+      {
         "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
         "itemNbr": 980078597,
         "locationType": 8,
@@ -46,18 +46,18 @@ exports[`FloorItemRow Component Renders a FloorItem 1`] = `
 exports[`FloorItemRow Component Renders a FloorItem with a long name 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
       "noopCheck": "once",
       "stabilityCheck": "once",
-      "store": Object {
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -72,7 +72,7 @@ exports[`FloorItemRow Component Renders a FloorItem with a long name 1`] = `
   <FloorItemRow
     dispatch={[MockFunction]}
     item={
-      Object {
+      {
         "itemDesc": "An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description",
         "itemNbr": 980078597,
         "locationType": 8,

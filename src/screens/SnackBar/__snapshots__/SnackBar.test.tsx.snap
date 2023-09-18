@@ -5,7 +5,7 @@ exports[`SnackBarComponent Renders the default snack bar component 1`] = `
   duration={5000}
   onDismiss={[Function]}
   style={
-    Object {
+    {
       "alignSelf": "center",
       "backgroundColor": "#212121",
       "marginBottom": 60,
@@ -24,7 +24,7 @@ exports[`SnackBarComponent Renders the snack bar component with a message 1`] = 
   duration={5000}
   onDismiss={[Function]}
   style={
-    Object {
+    {
       "alignSelf": "center",
       "backgroundColor": "#212121",
       "marginBottom": 60,

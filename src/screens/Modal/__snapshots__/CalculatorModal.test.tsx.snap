@@ -3,18 +3,18 @@
 exports[`Calculator Modal render tests does not show when calcOpen is set to false 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
       "noopCheck": "once",
       "stabilityCheck": "once",
-      "store": Object {
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -33,18 +33,18 @@ exports[`Calculator Modal render tests does not show when calcOpen is set to fal
 exports[`Calculator Modal render tests show when calcOpen is set to true 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
       "noopCheck": "once",
       "stabilityCheck": "once",
-      "store": Object {
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],

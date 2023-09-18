@@ -3,7 +3,7 @@
 exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the NoPrintQueueMessage component 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "flex-start",
@@ -28,7 +28,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   />
   <Text
     style={
-      Object {
+      {
         "color": "#616161",
         "marginVertical": 16,
       }
@@ -42,7 +42,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
 exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the PrintListScreen with a single item 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
     }
@@ -58,8 +58,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -73,10 +73,10 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
@@ -88,7 +88,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   </CustomModalComponent>
   <Text
     style={
-      Object {
+      {
         "borderBottomWidth": 1,
         "fontSize": 16,
         "paddingLeft": 10,
@@ -100,8 +100,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   <FlatList
     ListEmptyComponent={<NoPrintQueueMessage />}
     data={
-      Array [
-        Object {
+      [
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -118,7 +118,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "column",
@@ -131,7 +131,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -141,7 +141,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "flex-start",
             "paddingLeft": 10,
@@ -154,7 +154,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         />
         <Text
           style={
-            Object {
+            {
               "color": "#000000",
               "fontSize": 14,
               "paddingLeft": 5,
@@ -170,7 +170,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       >
         <Text
           style={
-            Object {
+            {
               "color": "#0071e9",
               "fontSize": 14,
               "paddingRight": 10,
@@ -183,7 +183,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
@@ -195,12 +195,12 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 6,
           }
         }
-        title="[missing \\"en.PRINT.PRINT\\" translation]"
+        title="[missing "en.PRINT.PRINT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -215,7 +215,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
 exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the PrintListScreen with multiple items 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
     }
@@ -231,8 +231,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -242,7 +242,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -252,7 +252,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -262,7 +262,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -272,7 +272,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -282,7 +282,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "123456",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Store Use Item",
@@ -292,7 +292,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Store Use Item",
@@ -302,7 +302,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Store Use Item",
@@ -312,7 +312,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Store Use Item",
@@ -322,7 +322,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
             "upcNbr": "789012",
             "worklistType": "NSFL",
           },
-          Object {
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Store Use Item",
@@ -336,10 +336,10 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
@@ -351,7 +351,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   </CustomModalComponent>
   <Text
     style={
-      Object {
+      {
         "borderBottomWidth": 1,
         "fontSize": 16,
         "paddingLeft": 10,
@@ -363,8 +363,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   <FlatList
     ListEmptyComponent={<NoPrintQueueMessage />}
     data={
-      Array [
-        Object {
+      [
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -374,7 +374,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "123456",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -384,7 +384,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "123456",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -394,7 +394,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "123456",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -404,7 +404,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "123456",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -414,7 +414,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "123456",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Store Use Item",
@@ -424,7 +424,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "789012",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Store Use Item",
@@ -434,7 +434,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "789012",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Store Use Item",
@@ -444,7 +444,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "789012",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Store Use Item",
@@ -454,7 +454,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
           "upcNbr": "789012",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Store Use Item",
@@ -471,7 +471,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "column",
@@ -484,7 +484,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -494,7 +494,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "flex-start",
             "paddingLeft": 10,
@@ -507,7 +507,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         />
         <Text
           style={
-            Object {
+            {
               "color": "#000000",
               "fontSize": 14,
               "paddingLeft": 5,
@@ -523,7 +523,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       >
         <Text
           style={
-            Object {
+            {
               "color": "#0071e9",
               "fontSize": 14,
               "paddingRight": 10,
@@ -536,7 +536,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
@@ -548,12 +548,12 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 6,
           }
         }
-        title="[missing \\"en.PRINT.PRINT\\" translation]"
+        title="[missing "en.PRINT.PRINT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -568,7 +568,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
 exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the PrintListScreen with the PrintQueueEdit Modal as visible 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
     }
@@ -584,8 +584,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       countryCode="MX"
       itemIndexToEdit={0}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -599,10 +599,10 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
@@ -614,7 +614,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   </CustomModalComponent>
   <Text
     style={
-      Object {
+      {
         "borderBottomWidth": 1,
         "fontSize": 16,
         "paddingLeft": 10,
@@ -626,8 +626,8 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   <FlatList
     ListEmptyComponent={<NoPrintQueueMessage />}
     data={
-      Array [
-        Object {
+      [
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -644,7 +644,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "column",
@@ -657,7 +657,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -667,7 +667,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "flex-start",
             "paddingLeft": 10,
@@ -680,7 +680,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         />
         <Text
           style={
-            Object {
+            {
               "color": "#000000",
               "fontSize": 14,
               "paddingLeft": 5,
@@ -696,7 +696,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       >
         <Text
           style={
-            Object {
+            {
               "color": "#0071e9",
               "fontSize": 14,
               "paddingRight": 10,
@@ -709,7 +709,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
@@ -721,12 +721,12 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 6,
           }
         }
-        title="[missing \\"en.PRINT.PRINT\\" translation]"
+        title="[missing "en.PRINT.PRINT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -741,7 +741,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
 exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the default empty PrintListScreen 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
     }
@@ -756,13 +756,13 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     <PrintQueueEdit
       countryCode="MX"
       itemIndexToEdit={-1}
-      printQueue={Array []}
+      printQueue={[]}
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
@@ -774,13 +774,13 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   </CustomModalComponent>
   <FlatList
     ListEmptyComponent={<NoPrintQueueMessage />}
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "column",
@@ -793,7 +793,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -803,7 +803,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "flex-start",
             "paddingLeft": 10,
@@ -816,7 +816,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         />
         <Text
           style={
-            Object {
+            {
               "color": "#000000",
               "fontSize": 14,
               "paddingLeft": 5,
@@ -832,7 +832,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
       >
         <Text
           style={
-            Object {
+            {
               "color": "#0071e9",
               "fontSize": 14,
               "paddingRight": 10,
@@ -845,7 +845,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
@@ -857,12 +857,12 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 6,
           }
         }
-        title="[missing \\"en.PRINT.PRINT\\" translation]"
+        title="[missing "en.PRINT.PRINT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -877,7 +877,7 @@ exports[`PrintListScreen Test rendering items in the PrintListScreen Renders the
 exports[`PrintListScreen Tests rendering printing api responses Renders the loading indicator when waiting for the printAPI response 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
     }
@@ -893,8 +893,8 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -908,10 +908,10 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
@@ -923,7 +923,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
   </CustomModalComponent>
   <Text
     style={
-      Object {
+      {
         "borderBottomWidth": 1,
         "fontSize": 16,
         "paddingLeft": 10,
@@ -935,8 +935,8 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
   <FlatList
     ListEmptyComponent={<NoPrintQueueMessage />}
     data={
-      Array [
-        Object {
+      [
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -953,7 +953,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
   />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "column",
@@ -970,7 +970,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }
@@ -983,7 +983,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
 exports[`PrintListScreen Tests rendering printing api responses Renders the loading indicator when waiting for the printLocationAPI response 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
     }
@@ -999,8 +999,8 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       countryCode="MX"
       itemIndexToEdit={-1}
       printQueue={
-        Array [
-          Object {
+        [
+          {
             "catgNbr": 2,
             "isSizeValid": true,
             "itemName": "Test item",
@@ -1014,10 +1014,10 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       }
       queueName="PRICESIGN"
       selectedPrinter={
-        Object {
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
@@ -1029,7 +1029,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
   </CustomModalComponent>
   <Text
     style={
-      Object {
+      {
         "borderBottomWidth": 1,
         "fontSize": 16,
         "paddingLeft": 10,
@@ -1041,8 +1041,8 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
   <FlatList
     ListEmptyComponent={<NoPrintQueueMessage />}
     data={
-      Array [
-        Object {
+      [
+        {
           "catgNbr": 2,
           "isSizeValid": true,
           "itemName": "Test item",
@@ -1059,7 +1059,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
   />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "column",
@@ -1076,7 +1076,7 @@ exports[`PrintListScreen Tests rendering printing api responses Renders the load
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }

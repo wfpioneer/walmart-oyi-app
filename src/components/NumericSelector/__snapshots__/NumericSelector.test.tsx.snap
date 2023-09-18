@@ -3,14 +3,14 @@
 exports[`Numeric selector component NumericSelector minus button is disabled if value is less than or equal to minValue 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
       },
-      Object {
+      {
         "borderColor": "#e0e0e0",
       },
     ]
@@ -38,7 +38,7 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
     onChangeText={[Function]}
     onEndEditing={[Function]}
     style={
-      Object {
+      {
         "color": "#0071e9",
         "height": 40,
         "minWidth": "15%",
@@ -71,14 +71,14 @@ exports[`Numeric selector component NumericSelector minus button is disabled if 
 exports[`Numeric selector component NumericSelector plus button is disabled if value is greater than or equal to maxValue 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
       },
-      Object {
+      {
         "borderColor": "#e0e0e0",
       },
     ]
@@ -106,7 +106,7 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
     onChangeText={[Function]}
     onEndEditing={[Function]}
     style={
-      Object {
+      {
         "color": "#0071e9",
         "height": 40,
         "minWidth": "15%",
@@ -139,14 +139,14 @@ exports[`Numeric selector component NumericSelector plus button is disabled if v
 exports[`Numeric selector component NumericSelector with invalid input 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
       },
-      Object {
+      {
         "borderColor": "#b71c1c",
       },
     ]
@@ -174,7 +174,7 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
     onChangeText={[Function]}
     onEndEditing={[Function]}
     style={
-      Object {
+      {
         "color": "#0071e9",
         "height": 40,
         "minWidth": "15%",
@@ -207,14 +207,14 @@ exports[`Numeric selector component NumericSelector with invalid input 1`] = `
 exports[`Numeric selector component NumericSelector with valid input 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "borderRadius": 10,
         "borderWidth": 1,
         "flexDirection": "row",
       },
-      Object {
+      {
         "borderColor": "#e0e0e0",
       },
     ]
@@ -242,7 +242,7 @@ exports[`Numeric selector component NumericSelector with valid input 1`] = `
     onChangeText={[Function]}
     onEndEditing={[Function]}
     style={
-      Object {
+      {
         "color": "#0071e9",
         "height": 40,
         "minWidth": "15%",

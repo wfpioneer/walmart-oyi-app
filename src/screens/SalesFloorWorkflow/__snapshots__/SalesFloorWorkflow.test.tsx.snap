@@ -3,7 +3,7 @@
 exports[`Sales floor workflow tests renders the screen with additional items warning label 1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -17,7 +17,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#5a9ae0",
           "borderRadius": 2,
@@ -36,7 +36,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "column",
           "justifyContent": "space-between",
@@ -50,7 +50,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
       <Memo(Pressable)
         onPress={[Function]}
         style={
-          Object {
+          {
             "borderBottomWidth": 1,
             "marginTop": 10,
           }
@@ -58,7 +58,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
             }
           }
@@ -68,7 +68,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
       </Memo(Pressable)>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginTop": 30,
             "width": "100%",
@@ -82,12 +82,12 @@ exports[`Sales floor workflow tests renders the screen with additional items war
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -101,12 +101,12 @@ exports[`Sales floor workflow tests renders the screen with additional items war
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+          title="[missing "en.GENERICS.CONTINUE" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -124,13 +124,13 @@ exports[`Sales floor workflow tests renders the screen with additional items war
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
-    pickListItems={Array []}
+    pickListItems={[]}
     pickStatus="ready to work"
     showCheckbox={false}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "padding": 5,
@@ -139,7 +139,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 13,
         }
       }
@@ -149,8 +149,8 @@ exports[`Sales floor workflow tests renders the screen with additional items war
   </View>
   <FlatList
     data={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -176,7 +176,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "padding": 10,
@@ -190,7 +190,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 13,
         }
       }
@@ -200,7 +200,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
   </View>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#bdbdbd",
         "borderTopWidth": 2,
         "flexDirection": "row",
@@ -216,13 +216,13 @@ exports[`Sales floor workflow tests renders the screen with additional items war
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "margin": 5,
         }
       }
       testID="continue"
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -236,7 +236,7 @@ exports[`Sales floor workflow tests renders the screen with additional items war
 exports[`Sales floor workflow tests renders the screen with one item on pallet 1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -250,7 +250,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#5a9ae0",
           "borderRadius": 2,
@@ -269,7 +269,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "column",
           "justifyContent": "space-between",
@@ -283,7 +283,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
       <Memo(Pressable)
         onPress={[Function]}
         style={
-          Object {
+          {
             "borderBottomWidth": 1,
             "marginTop": 10,
           }
@@ -291,7 +291,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
             }
           }
@@ -301,7 +301,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
       </Memo(Pressable)>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginTop": 30,
             "width": "100%",
@@ -315,12 +315,12 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -334,12 +334,12 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+          title="[missing "en.GENERICS.CONTINUE" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -357,13 +357,13 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
-    pickListItems={Array []}
+    pickListItems={[]}
     pickStatus="ready to work"
     showCheckbox={false}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "padding": 5,
@@ -372,7 +372,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 13,
         }
       }
@@ -382,8 +382,8 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
   </View>
   <FlatList
     data={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -408,7 +408,7 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
   />
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#bdbdbd",
         "borderTopWidth": 2,
         "flexDirection": "row",
@@ -424,13 +424,13 @@ exports[`Sales floor workflow tests renders the screen with one item on pallet 1
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "margin": 5,
         }
       }
       testID="continue"
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -448,7 +448,7 @@ exports[`Sales floor workflow tests renders the screen with several items on the
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -464,7 +464,7 @@ exports[`Sales floor workflow tests shows the activity indicator when waiting fo
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -480,7 +480,7 @@ exports[`Sales floor workflow tests shows the activity indicator when waiting fo
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -492,7 +492,7 @@ exports[`Sales floor workflow tests shows the activity indicator when waiting fo
 exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -506,7 +506,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#5a9ae0",
           "borderRadius": 2,
@@ -525,7 +525,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "column",
           "justifyContent": "space-between",
@@ -539,7 +539,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
       <Memo(Pressable)
         onPress={[Function]}
         style={
-          Object {
+          {
             "borderBottomWidth": 1,
             "marginTop": 10,
           }
@@ -547,7 +547,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
             }
           }
@@ -557,7 +557,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
       </Memo(Pressable)>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginTop": 30,
             "width": "100%",
@@ -571,12 +571,12 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -590,12 +590,12 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+          title="[missing "en.GENERICS.CONTINUE" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -613,13 +613,13 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
-    pickListItems={Array []}
+    pickListItems={[]}
     pickStatus="ready to work"
     showCheckbox={false}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "padding": 5,
@@ -628,7 +628,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 13,
         }
       }
@@ -638,8 +638,8 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
   </View>
   <FlatList
     data={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -664,7 +664,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#bdbdbd",
         "borderTopWidth": 2,
         "flexDirection": "row",
@@ -680,13 +680,13 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "margin": 5,
         }
       }
       testID="continue"
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -700,7 +700,7 @@ exports[`Sales floor workflow tests shows the expiration date modal 1`] = `
 exports[`Sales floor workflow tests shows the expiration date modal date picker 1`] = `
 <RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -714,7 +714,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#5a9ae0",
           "borderRadius": 2,
@@ -733,7 +733,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "column",
           "justifyContent": "space-between",
@@ -747,7 +747,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
       <Memo(Pressable)
         onPress={[Function]}
         style={
-          Object {
+          {
             "borderBottomWidth": 1,
             "marginTop": 10,
           }
@@ -755,7 +755,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
             }
           }
@@ -765,7 +765,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
       </Memo(Pressable)>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginTop": 30,
             "width": "100%",
@@ -779,12 +779,12 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -798,12 +798,12 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
-          title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+          title="[missing "en.GENERICS.CONTINUE" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -829,13 +829,13 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
     onPress={[Function]}
     palletId="43"
     palletLocation="ABAR1-2"
-    pickListItems={Array []}
+    pickListItems={[]}
     pickStatus="ready to work"
     showCheckbox={false}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "padding": 5,
@@ -844,7 +844,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 13,
         }
       }
@@ -854,8 +854,8 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   </View>
   <FlatList
     data={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -880,7 +880,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
   />
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#bdbdbd",
         "borderTopWidth": 2,
         "flexDirection": "row",
@@ -896,13 +896,13 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "margin": 5,
         }
       }
       testID="continue"
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -916,7 +916,7 @@ exports[`Sales floor workflow tests shows the expiration date modal date picker 
 exports[`Sales floor workflow tests shows the retry button when get pallet details errors 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -932,7 +932,7 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
   />
   <Text
     style={
-      Object {
+      {
         "marginVertical": 10,
         "textAlign": "center",
       }
@@ -943,7 +943,7 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,

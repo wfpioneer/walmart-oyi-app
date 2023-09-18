@@ -4,7 +4,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
 <React.Fragment>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "row",
         "justifyContent": "center",
@@ -13,7 +13,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "fontWeight": "bold",
         }
@@ -25,7 +25,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "flex": 0.1,
         "paddingLeft": 5,
       }
@@ -44,7 +44,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
 <React.Fragment>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "row",
         "justifyContent": "center",
@@ -53,7 +53,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "fontWeight": "bold",
         }
@@ -65,7 +65,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "flex": 0.1,
         "paddingLeft": 5,
       }
@@ -83,7 +83,7 @@ exports[`SettingsToolScreen Tests rendering CollapsibleCard component Collapsibl
 exports[`SettingsToolScreen Tests rendering featureCard component featureCard function renders "Disabled" translation if isEnabled is set to False 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-end",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#9e9e9e",
@@ -97,7 +97,7 @@ exports[`SettingsToolScreen Tests rendering featureCard component featureCard fu
 >
   <Text
     style={
-      Object {
+      {
         "paddingTop": 5,
       }
     }
@@ -106,7 +106,7 @@ exports[`SettingsToolScreen Tests rendering featureCard component featureCard fu
   </Text>
   <Text
     style={
-      Object {
+      {
         "paddingTop": 5,
       }
     }
@@ -119,7 +119,7 @@ exports[`SettingsToolScreen Tests rendering featureCard component featureCard fu
 exports[`SettingsToolScreen Tests rendering featureCard component featureCard function renders "Enabled" translation if isEnabled is set to True 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-end",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#9e9e9e",
@@ -133,7 +133,7 @@ exports[`SettingsToolScreen Tests rendering featureCard component featureCard fu
 >
   <Text
     style={
-      Object {
+      {
         "paddingTop": 5,
       }
     }
@@ -142,7 +142,7 @@ exports[`SettingsToolScreen Tests rendering featureCard component featureCard fu
   </Text>
   <Text
     style={
-      Object {
+      {
         "paddingTop": 5,
       }
     }
@@ -155,7 +155,7 @@ exports[`SettingsToolScreen Tests rendering featureCard component featureCard fu
 exports[`SettingsToolScreen Tests rendering printerCard component printerCard functions renders "Not Assigned" translation if Printer is null 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "borderBottomColor": "#9e9e9e",
       "borderBottomWidth": 1,
@@ -169,7 +169,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
   <View>
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
         }
       }
@@ -184,14 +184,14 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
   <TouchableOpacity
     onPress={[MockFunction]}
     style={
-      Object {
+      {
         "justifyContent": "flex-end",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "color": "#006DE5",
         }
       }
@@ -205,7 +205,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
 exports[`SettingsToolScreen Tests rendering printerCard component printerCard functions renders Printer Name if Printer is not null 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "borderBottomColor": "#9e9e9e",
       "borderBottomWidth": 1,
@@ -219,7 +219,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
   <View>
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
         }
       }
@@ -234,14 +234,14 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
   <TouchableOpacity
     onPress={[MockFunction]}
     style={
-      Object {
+      {
         "justifyContent": "flex-end",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "color": "#006DE5",
         }
       }
@@ -255,7 +255,7 @@ exports[`SettingsToolScreen Tests rendering printerCard component printerCard fu
 exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the SettingsToolScreen with Selected Printers 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -264,14 +264,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -283,11 +283,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
+        title="[missing "en.PRINT.CHANGE_TITLE" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_printer_collapsible_card",
           }
         }
@@ -295,7 +295,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -309,7 +309,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -324,14 +324,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -342,7 +342,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -356,7 +356,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -371,14 +371,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -389,7 +389,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -403,7 +403,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -418,14 +418,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -436,7 +436,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -448,11 +448,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
+        title="[missing "en.SETTINGS.FEATURES" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_features_collapsible_card",
           }
         }
@@ -461,76 +461,76 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     <ForwardRef
       ListFooterComponent={<View />}
       ListFooterComponentStyle={
-        Object {
+        {
           "borderBottomWidth": 1,
         }
       }
       data={
-        Array [
-          Object {
+        [
+          {
             "configKey": "managerApproval",
             "fluffyKey": "manager approval",
-            "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
+            "name": "[missing "en.APPROVAL.MANAGER_APPROVAL" translation]",
           },
-          Object {
+          {
             "configKey": "locationManagement",
             "fluffyKey": "location management",
-            "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
+            "name": "[missing "en.LOCATION.LOCATION_MANAGEMENT" translation]",
           },
-          Object {
+          {
             "configKey": "onHandsChange",
             "fluffyKey": "on hands change",
-            "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
+            "name": "[missing "en.APPROVAL.OH_CHANGE" translation]",
           },
-          Object {
+          {
             "configKey": "locationManagementEdit",
             "fluffyKey": "location management edit",
-            "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
+            "name": "[missing "en.LOCATION.LOCATION_MGMT_EDIT" translation]",
           },
-          Object {
+          {
             "configKey": "locationPrinting",
             "fluffyKey": "location printing",
-            "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
+            "name": "[missing "en.PRINT.LOCATION_PRINTING" translation]",
           },
-          Object {
+          {
             "configKey": "palletManagement",
             "fluffyKey": "pallet management",
-            "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
+            "name": "[missing "en.LOCATION.PALLET_MANAGEMENT" translation]",
           },
-          Object {
+          {
             "configKey": "picking",
             "fluffyKey": "picking",
-            "name": "[missing \\"en.PICKING.PICKING\\" translation]",
+            "name": "[missing "en.PICKING.PICKING" translation]",
           },
-          Object {
+          {
             "configKey": "binning",
             "fluffyKey": "binning",
-            "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+            "name": "[missing "en.BINNING.BINNING" translation]",
           },
-          Object {
+          {
             "configKey": "enableAreaFilter",
             "fluffyKey": "enable area filter",
-            "name": "[missing \\"en.SETTINGS.AREA_FILTER\\" translation]",
+            "name": "[missing "en.SETTINGS.AREA_FILTER" translation]",
           },
-          Object {
+          {
             "configKey": "createPallet",
             "fluffyKey": "create Pallet",
-            "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
+            "name": "[missing "en.PALLET.CREATE_PALLET" translation]",
           },
-          Object {
+          {
             "configKey": "palletWorklists",
             "fluffyKey": "pallet worklists",
-            "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
+            "name": "[missing "en.EXCEPTION.MISSING_PALLETS" translation]",
           },
-          Object {
+          {
             "configKey": "auditWorklists",
             "fluffyKey": "audit worklists",
-            "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+            "name": "[missing "en.WORKLIST.AUDIT_WORKLIST" translation]",
           },
-          Object {
+          {
             "configKey": "showRollOverAudit",
             "fluffyKey": "show roll over audit",
-            "name": "[missing \\"en.AUDITS.ROLLOVER_AUDITS\\" translation]",
+            "name": "[missing "en.AUDITS.ROLLOVER_AUDITS" translation]",
           },
         ]
       }
@@ -540,7 +540,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
   </View>
   <View
     style={
-      Object {
+      {
         "marginHorizontal": 15,
         "marginVertical": 10,
       }
@@ -553,7 +553,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       onPress={[Function]}
       radius={5}
       testID="updateButton"
-      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      title="[missing "en.GENERICS.UPDATE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -567,7 +567,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
 exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the SettingsToolScreen with the Feature List collapsed 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -576,14 +576,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -595,11 +595,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
+        title="[missing "en.PRINT.CHANGE_TITLE" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_printer_collapsible_card",
           }
         }
@@ -607,7 +607,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -621,7 +621,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -636,14 +636,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -654,7 +654,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -668,7 +668,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -683,14 +683,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -701,7 +701,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -715,7 +715,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -730,14 +730,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -748,7 +748,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -760,11 +760,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={false}
-        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
+        title="[missing "en.SETTINGS.FEATURES" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_features_collapsible_card",
           }
         }
@@ -773,7 +773,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
   </View>
   <View
     style={
-      Object {
+      {
         "marginHorizontal": 15,
         "marginVertical": 10,
       }
@@ -786,7 +786,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       onPress={[Function]}
       radius={5}
       testID="updateButton"
-      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      title="[missing "en.GENERICS.UPDATE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -800,7 +800,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
 exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the SettingsToolScreen with the Printer List collapsed 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -809,14 +809,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -828,11 +828,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={false}
-        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
+        title="[missing "en.PRINT.CHANGE_TITLE" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_printer_collapsible_card",
           }
         }
@@ -840,7 +840,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -852,11 +852,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
+        title="[missing "en.SETTINGS.FEATURES" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_features_collapsible_card",
           }
         }
@@ -865,76 +865,76 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     <ForwardRef
       ListFooterComponent={<View />}
       ListFooterComponentStyle={
-        Object {
+        {
           "borderBottomWidth": 1,
         }
       }
       data={
-        Array [
-          Object {
+        [
+          {
             "configKey": "managerApproval",
             "fluffyKey": "manager approval",
-            "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
+            "name": "[missing "en.APPROVAL.MANAGER_APPROVAL" translation]",
           },
-          Object {
+          {
             "configKey": "locationManagement",
             "fluffyKey": "location management",
-            "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
+            "name": "[missing "en.LOCATION.LOCATION_MANAGEMENT" translation]",
           },
-          Object {
+          {
             "configKey": "onHandsChange",
             "fluffyKey": "on hands change",
-            "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
+            "name": "[missing "en.APPROVAL.OH_CHANGE" translation]",
           },
-          Object {
+          {
             "configKey": "locationManagementEdit",
             "fluffyKey": "location management edit",
-            "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
+            "name": "[missing "en.LOCATION.LOCATION_MGMT_EDIT" translation]",
           },
-          Object {
+          {
             "configKey": "locationPrinting",
             "fluffyKey": "location printing",
-            "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
+            "name": "[missing "en.PRINT.LOCATION_PRINTING" translation]",
           },
-          Object {
+          {
             "configKey": "palletManagement",
             "fluffyKey": "pallet management",
-            "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
+            "name": "[missing "en.LOCATION.PALLET_MANAGEMENT" translation]",
           },
-          Object {
+          {
             "configKey": "picking",
             "fluffyKey": "picking",
-            "name": "[missing \\"en.PICKING.PICKING\\" translation]",
+            "name": "[missing "en.PICKING.PICKING" translation]",
           },
-          Object {
+          {
             "configKey": "binning",
             "fluffyKey": "binning",
-            "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+            "name": "[missing "en.BINNING.BINNING" translation]",
           },
-          Object {
+          {
             "configKey": "enableAreaFilter",
             "fluffyKey": "enable area filter",
-            "name": "[missing \\"en.SETTINGS.AREA_FILTER\\" translation]",
+            "name": "[missing "en.SETTINGS.AREA_FILTER" translation]",
           },
-          Object {
+          {
             "configKey": "createPallet",
             "fluffyKey": "create Pallet",
-            "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
+            "name": "[missing "en.PALLET.CREATE_PALLET" translation]",
           },
-          Object {
+          {
             "configKey": "palletWorklists",
             "fluffyKey": "pallet worklists",
-            "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
+            "name": "[missing "en.EXCEPTION.MISSING_PALLETS" translation]",
           },
-          Object {
+          {
             "configKey": "auditWorklists",
             "fluffyKey": "audit worklists",
-            "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+            "name": "[missing "en.WORKLIST.AUDIT_WORKLIST" translation]",
           },
-          Object {
+          {
             "configKey": "showRollOverAudit",
             "fluffyKey": "show roll over audit",
-            "name": "[missing \\"en.AUDITS.ROLLOVER_AUDITS\\" translation]",
+            "name": "[missing "en.AUDITS.ROLLOVER_AUDITS" translation]",
           },
         ]
       }
@@ -944,7 +944,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
   </View>
   <View
     style={
-      Object {
+      {
         "marginHorizontal": 15,
         "marginVertical": 10,
       }
@@ -957,7 +957,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       onPress={[Function]}
       radius={5}
       testID="updateButton"
-      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      title="[missing "en.GENERICS.UPDATE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -971,7 +971,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
 exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Test renders the default SettingsToolScreen  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -980,14 +980,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -999,11 +999,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="[missing \\"en.PRINT.CHANGE_TITLE\\" translation]"
+        title="[missing "en.PRINT.CHANGE_TITLE" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_printer_collapsible_card",
           }
         }
@@ -1011,7 +1011,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -1025,7 +1025,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -1040,14 +1040,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -1058,7 +1058,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -1072,7 +1072,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -1087,14 +1087,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -1105,7 +1105,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#9e9e9e",
           "borderBottomWidth": 1,
@@ -1119,7 +1119,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -1134,14 +1134,14 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "justifyContent": "flex-end",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#006DE5",
             }
           }
@@ -1152,7 +1152,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomWidth": 1,
@@ -1164,11 +1164,11 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     >
       <CollapsibleCard
         isOpened={true}
-        title="[missing \\"en.SETTINGS.FEATURES\\" translation]"
+        title="[missing "en.SETTINGS.FEATURES" translation]"
         toggleIsOpened={[MockFunction]}
         trackEventCall={[MockFunction]}
         trackEventInfo={
-          Object {
+          {
             "action": "toggle_features_collapsible_card",
           }
         }
@@ -1177,76 +1177,76 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
     <ForwardRef
       ListFooterComponent={<View />}
       ListFooterComponentStyle={
-        Object {
+        {
           "borderBottomWidth": 1,
         }
       }
       data={
-        Array [
-          Object {
+        [
+          {
             "configKey": "managerApproval",
             "fluffyKey": "manager approval",
-            "name": "[missing \\"en.APPROVAL.MANAGER_APPROVAL\\" translation]",
+            "name": "[missing "en.APPROVAL.MANAGER_APPROVAL" translation]",
           },
-          Object {
+          {
             "configKey": "locationManagement",
             "fluffyKey": "location management",
-            "name": "[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]",
+            "name": "[missing "en.LOCATION.LOCATION_MANAGEMENT" translation]",
           },
-          Object {
+          {
             "configKey": "onHandsChange",
             "fluffyKey": "on hands change",
-            "name": "[missing \\"en.APPROVAL.OH_CHANGE\\" translation]",
+            "name": "[missing "en.APPROVAL.OH_CHANGE" translation]",
           },
-          Object {
+          {
             "configKey": "locationManagementEdit",
             "fluffyKey": "location management edit",
-            "name": "[missing \\"en.LOCATION.LOCATION_MGMT_EDIT\\" translation]",
+            "name": "[missing "en.LOCATION.LOCATION_MGMT_EDIT" translation]",
           },
-          Object {
+          {
             "configKey": "locationPrinting",
             "fluffyKey": "location printing",
-            "name": "[missing \\"en.PRINT.LOCATION_PRINTING\\" translation]",
+            "name": "[missing "en.PRINT.LOCATION_PRINTING" translation]",
           },
-          Object {
+          {
             "configKey": "palletManagement",
             "fluffyKey": "pallet management",
-            "name": "[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]",
+            "name": "[missing "en.LOCATION.PALLET_MANAGEMENT" translation]",
           },
-          Object {
+          {
             "configKey": "picking",
             "fluffyKey": "picking",
-            "name": "[missing \\"en.PICKING.PICKING\\" translation]",
+            "name": "[missing "en.PICKING.PICKING" translation]",
           },
-          Object {
+          {
             "configKey": "binning",
             "fluffyKey": "binning",
-            "name": "[missing \\"en.BINNING.BINNING\\" translation]",
+            "name": "[missing "en.BINNING.BINNING" translation]",
           },
-          Object {
+          {
             "configKey": "enableAreaFilter",
             "fluffyKey": "enable area filter",
-            "name": "[missing \\"en.SETTINGS.AREA_FILTER\\" translation]",
+            "name": "[missing "en.SETTINGS.AREA_FILTER" translation]",
           },
-          Object {
+          {
             "configKey": "createPallet",
             "fluffyKey": "create Pallet",
-            "name": "[missing \\"en.PALLET.CREATE_PALLET\\" translation]",
+            "name": "[missing "en.PALLET.CREATE_PALLET" translation]",
           },
-          Object {
+          {
             "configKey": "palletWorklists",
             "fluffyKey": "pallet worklists",
-            "name": "[missing \\"en.EXCEPTION.MISSING_PALLETS\\" translation]",
+            "name": "[missing "en.EXCEPTION.MISSING_PALLETS" translation]",
           },
-          Object {
+          {
             "configKey": "auditWorklists",
             "fluffyKey": "audit worklists",
-            "name": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+            "name": "[missing "en.WORKLIST.AUDIT_WORKLIST" translation]",
           },
-          Object {
+          {
             "configKey": "showRollOverAudit",
             "fluffyKey": "show roll over audit",
-            "name": "[missing \\"en.AUDITS.ROLLOVER_AUDITS\\" translation]",
+            "name": "[missing "en.AUDITS.ROLLOVER_AUDITS" translation]",
           },
         ]
       }
@@ -1256,7 +1256,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
   </View>
   <View
     style={
-      Object {
+      {
         "marginHorizontal": 15,
         "marginVertical": 10,
       }
@@ -1269,7 +1269,7 @@ exports[`SettingsToolScreen Tests rendering the SettingsToolScreen component Tes
       onPress={[Function]}
       radius={5}
       testID="updateButton"
-      title="[missing \\"en.GENERICS.UPDATE\\" translation]"
+      title="[missing "en.GENERICS.UPDATE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"

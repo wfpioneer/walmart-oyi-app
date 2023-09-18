@@ -6,7 +6,6 @@ import {
 } from '@gorhom/bottom-sheet';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
-import { trackEvent } from 'appcenter-analytics';
 import {
   BackHandler, BackHandlerStatic, NativeEventEmitter, Text, TouchableOpacity
 } from 'react-native';
@@ -53,6 +52,7 @@ import {
 import ItemDetails from '../../models/ItemDetails';
 import styles from './PickingTabNavigator.style';
 import COLOR from '../../themes/Color';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -472,7 +472,7 @@ export const PickingTabs = (): JSX.Element => {
   const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
 
   const renderBackdrop = useCallback(
-    // eslint-disable-next-line no-shadow
+    // @ts-expect-error useCallBack prop types is any
     props => (
       <BottomSheetBackdrop
         // eslint-disable-next-line react/jsx-props-no-spreading

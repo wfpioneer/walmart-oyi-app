@@ -3,7 +3,7 @@
 exports[`ScanLocation Screen Test renders the scanLocation Screen 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -11,7 +11,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -19,6 +19,23 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen 1`] = `
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -40,7 +57,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "paddingTop": 30,
         }
       }
@@ -56,7 +73,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen 1`] = `
 exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan enabled 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -64,7 +81,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan en
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "column",
@@ -75,7 +92,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan en
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
@@ -87,10 +104,10 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan en
         keyboardType="default"
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
-        placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+        placeholder="[missing "en.LOCATION.MANUAL_ENTRY_BUTTON" translation]"
         selectionColor="#0071e9"
         style={
-          Object {
+          {
             "color": "#000000",
             "flex": 1,
             "paddingLeft": 10,
@@ -102,7 +119,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan en
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -110,6 +127,23 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan en
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -131,7 +165,7 @@ exports[`ScanLocation Screen Test renders the scanLocation Screen Manual scan en
     </View>
     <View
       style={
-        Object {
+        {
           "paddingTop": 30,
         }
       }

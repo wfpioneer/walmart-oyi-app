@@ -10,7 +10,7 @@ exports[`PickBin Workflow render tests ContinueActionDialog render tests renders
   <React.Fragment>
     <View
       style={
-        Object {
+        {
           "margin": 5,
         }
       }
@@ -21,7 +21,7 @@ exports[`PickBin Workflow render tests ContinueActionDialog render tests renders
     </View>
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "column",
@@ -37,11 +37,11 @@ exports[`PickBin Workflow render tests ContinueActionDialog render tests renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "margin": 10,
           }
         }
-        title="[missing \\"en.PICKING.READY_TO_WORK\\" translation]"
+        title="[missing "en.PICKING.READY_TO_WORK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -55,11 +55,11 @@ exports[`PickBin Workflow render tests ContinueActionDialog render tests renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "margin": 10,
           }
         }
-        title="[missing \\"en.PICKING.COMPLETE\\" translation]"
+        title="[missing "en.PICKING.COMPLETE" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -73,11 +73,11 @@ exports[`PickBin Workflow render tests ContinueActionDialog render tests renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "margin": 10,
           }
         }
-        title="[missing \\"en.PICKING.PALLET_NOT_FOUND\\" translation]"
+        title="[missing "en.PICKING.PALLET_NOT_FOUND" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -91,11 +91,11 @@ exports[`PickBin Workflow render tests ContinueActionDialog render tests renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "margin": 10,
           }
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        title="[missing "en.GENERICS.CANCEL" translation]"
         titleColor="#0071e9"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -110,7 +110,7 @@ exports[`PickBin Workflow render tests ContinueActionDialog render tests renders
 exports[`PickBin Workflow render tests renders screen with accepted bin & current user 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -119,8 +119,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -145,11 +145,11 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -157,18 +157,18 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -221,8 +221,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
       palletId="45"
       palletLocation="ABAR1-4"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "vn50pz4",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -247,7 +247,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -263,12 +263,12 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        title="[missing "en.PICKING.RELEASE" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -282,12 +282,12 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.PICKING.BIN\\" translation]"
+        title="[missing "en.PICKING.BIN" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -302,7 +302,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & curren
 exports[`PickBin Workflow render tests renders screen with accepted bin & not current user 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -311,8 +311,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "t0s0og",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -337,11 +337,11 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -349,18 +349,18 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -413,8 +413,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
       palletId="43"
       palletLocation="ABAR1-2"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "t0s0og",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -439,7 +439,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -455,7 +455,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin & not cu
 exports[`PickBin Workflow render tests renders screen with accepted bin, not current user, and manager 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -464,8 +464,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "t0s0og",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -490,11 +490,11 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -502,18 +502,18 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -566,8 +566,8 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
       palletId="43"
       palletLocation="ABAR1-2"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "t0s0og",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -592,7 +592,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -608,12 +608,12 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        title="[missing "en.PICKING.RELEASE" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -628,7 +628,7 @@ exports[`PickBin Workflow render tests renders screen with accepted bin, not cur
 exports[`PickBin Workflow render tests renders screen with accepted pick & current user 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -637,8 +637,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -663,11 +663,11 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -675,18 +675,18 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -739,8 +739,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
       palletId="44"
       palletLocation="ABAR1-2"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "vn50pz4",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -765,7 +765,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -781,12 +781,12 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        title="[missing "en.PICKING.RELEASE" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -800,12 +800,12 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+        title="[missing "en.GENERICS.CONTINUE" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -820,7 +820,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick & curre
 exports[`PickBin Workflow render tests renders screen with accepted pick and not current user 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -829,8 +829,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "t0s0og",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -855,11 +855,11 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -867,18 +867,18 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -931,8 +931,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
       palletId="40"
       palletLocation="ABAR1-2"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "t0s0og",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -957,7 +957,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -973,7 +973,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick and not
 exports[`PickBin Workflow render tests renders screen with accepted pick, not current user, and manager 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -982,8 +982,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "t0s0og",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1008,11 +1008,11 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -1020,18 +1020,18 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -1084,8 +1084,8 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
       palletId="40"
       palletLocation="ABAR1-2"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "t0s0og",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1110,7 +1110,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -1126,12 +1126,12 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.PICKING.RELEASE\\" translation]"
+        title="[missing "en.PICKING.RELEASE" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -1146,7 +1146,7 @@ exports[`PickBin Workflow render tests renders screen with accepted pick, not cu
 exports[`PickBin Workflow render tests renders screen with ready to bin items selected 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -1155,8 +1155,8 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1174,7 +1174,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
           "status": "ready to bin",
           "upcNbr": "1234567890123",
         },
-        Object {
+        {
           "assignedAssociate": "",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1199,11 +1199,11 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -1211,18 +1211,18 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -1275,8 +1275,8 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
       palletId="42"
       palletLocation="ABAR1-2"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1294,7 +1294,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
             "status": "ready to bin",
             "upcNbr": "1234567890123",
           },
-          Object {
+          {
             "assignedAssociate": "",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1319,7 +1319,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -1335,12 +1335,12 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+        title="[missing "en.PICKING.ACCEPT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -1355,7 +1355,7 @@ exports[`PickBin Workflow render tests renders screen with ready to bin items se
 exports[`PickBin Workflow render tests renders screen with ready to pick item selected 1`] = `
 <ForwardRef
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
     }
@@ -1364,8 +1364,8 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
   <ContinueActionDialog
     dispatch={[Function]}
     items={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1390,11 +1390,11 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
     showContinueActionDialog={false}
     trackEventCall={[MockFunction]}
     userConfigs={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -1402,18 +1402,18 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -1466,8 +1466,8 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
       palletId="41"
       palletLocation="ABAR1-2"
       pickListItems={
-        Array [
-          Object {
+        [
+          {
             "assignedAssociate": "",
             "category": 3,
             "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -1492,7 +1492,7 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
     />
     <View
       style={
-        Object {
+        {
           "borderTopColor": "#bdbdbd",
           "borderTopWidth": 2,
           "flexDirection": "row",
@@ -1508,12 +1508,12 @@ exports[`PickBin Workflow render tests renders screen with ready to pick item se
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 5,
           }
         }
-        title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+        title="[missing "en.PICKING.ACCEPT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"

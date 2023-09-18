@@ -4,11 +4,11 @@ exports[`Tests rendering PickItemInfoCard Renders the deleteView component and f
 <View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 45,
         },
-        Object {
+        {
           "flex": 1,
           "width": 60,
         },
@@ -17,15 +17,27 @@ exports[`Tests rendering PickItemInfoCard Renders the deleteView component and f
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -39,7 +51,7 @@ exports[`Tests rendering PickItemInfoCard Renders the deleteView component and f
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#ec0439",
             "borderRadius": 5,
@@ -52,7 +64,7 @@ exports[`Tests rendering PickItemInfoCard Renders the deleteView component and f
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontFamily": "Roboto-Medium",
               "fontSize": 16,
@@ -79,7 +91,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
   onGestureHandlerStateChange={[Function]}
   onLayout={[Function]}
   style={
-    Object {
+    {
       "overflow": "hidden",
     }
   }
@@ -87,15 +99,15 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "bottom": 0,
         "flexDirection": "row-reverse",
         "left": 0,
         "position": "absolute",
         "right": 0,
         "top": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "translateX": -10000,
           },
         ],
@@ -105,11 +117,11 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
     <View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "height": 45,
             },
-            Object {
+            {
               "flex": 1,
               "width": 60,
             },
@@ -118,15 +130,27 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
         >
           <View
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
               }
             }
             accessible={true}
@@ -140,7 +164,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ec0439",
                 "borderRadius": 5,
@@ -153,7 +177,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#ffffffff",
                   "fontFamily": "Roboto-Medium",
                   "fontSize": 16,
@@ -181,9 +205,9 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
     onGestureHandlerStateChange={[Function]}
     pointerEvents="auto"
     style={
-      Object {
-        "transform": Array [
-          Object {
+      {
+        "transform": [
+          {
             "translateX": -0,
           },
         ],
@@ -192,7 +216,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-start",
           "backgroundColor": "#ffffffff",
           "borderColor": "#dbecff",
@@ -205,7 +229,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 7,
@@ -214,7 +238,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 14,
             }
@@ -224,7 +248,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 12,
             }
           }
@@ -234,7 +258,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
           }
@@ -242,7 +266,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "flexDirection": "column",
               "justifyContent": "space-between",
@@ -252,7 +276,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 12,
               }
             }
@@ -261,7 +285,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 12,
               }
             }
@@ -270,7 +294,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 12,
               }
             }
@@ -280,7 +304,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "flexDirection": "column",
               "justifyContent": "space-between",
@@ -290,7 +314,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 12,
               }
             }
@@ -299,7 +323,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 12,
               }
             }
@@ -308,7 +332,7 @@ exports[`Tests rendering PickItemInfoCard Renders the pickItemInfoCard 1`] = `
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 12,
               }
             }

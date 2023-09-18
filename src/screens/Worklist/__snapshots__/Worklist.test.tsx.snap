@@ -3,7 +3,7 @@
 exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button for list filter type AREA 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#0071e9",
       "borderRadius": 20,
@@ -18,7 +18,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
 >
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "paddingHorizontal": 10,
       }
@@ -42,7 +42,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
 exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button for list filter type CATEGORY  1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#0071e9",
       "borderRadius": 20,
@@ -57,7 +57,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
 >
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "paddingHorizontal": 10,
       }
@@ -81,7 +81,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
 exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button for list filter type EXCEPTION 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#0071e9",
       "borderRadius": 20,
@@ -96,7 +96,7 @@ exports[`WorklistScreen Tests rendering Filter \`Pills\` Renders a filter button
 >
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "paddingHorizontal": 10,
       }
@@ -128,7 +128,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders Loading in
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -140,7 +140,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders Loading in
 exports[`WorklistScreen Tests rendering Worklist api response Renders error for retrieving the worklist data 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "flex-start",
@@ -156,7 +156,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
   />
   <Text
     style={
-      Object {
+      {
         "marginVertical": 10,
         "textAlign": "center",
       }
@@ -167,7 +167,7 @@ exports[`WorklistScreen Tests rendering Worklist api response Renders error for 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -196,9 +196,9 @@ exports[`WorklistScreen Tests rendering WorklistItem Renders a single worklist i
   showItemImage={false}
   tokenIsWaiting={false}
   trackEventSource={
-    Object {
+    {
       "action": "worklist_item_click",
-      "otherInfo": Object {
+      "otherInfo": {
         "itemDescription": "WINE ITEM",
         "itemNbr": 456789123,
         "upc": "444455556666",
@@ -219,7 +219,7 @@ exports[`WorklistScreen Tests rendering WorklistItem Renders the category header
 exports[`WorklistScreen Tests rendering worklist data Renders completed worklist data 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -229,7 +229,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -261,13 +261,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
   </View>
   <FlatList
     data={
-      Array [
-        Object {
-          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+      [
+        {
+          "catgName": "[missing "en.WORKLIST.ALL" translation]",
           "itemCount": 6,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "actionTaken": "ADD_TO_PICKLIST",
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
@@ -282,7 +282,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistStatus": "COMPLETED",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "actionTaken": "QTY_UPDATE",
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
@@ -297,7 +297,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistStatus": "COMPLETED",
           "worklistType": "NO",
         },
-        Object {
+        {
           "actionTaken": "QTY_UPDATE",
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
@@ -312,7 +312,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistStatus": "COMPLETED",
           "worklistType": "NO",
         },
-        Object {
+        {
           "actionTaken": "QTY_UPDATE",
           "catgName": "WINE",
           "catgNbr": 19,
@@ -327,7 +327,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistStatus": "COMPLETED",
           "worklistType": "C",
         },
-        Object {
+        {
           "actionTaken": "ADD_TO_PICKLIST",
           "catgName": "PHARMACY RX",
           "catgNbr": 87,
@@ -342,7 +342,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
           "worklistStatus": "COMPLETED",
           "worklistType": "C",
         },
-        Object {
+        {
           "actionTaken": "ADD_TO_PICKLIST",
           "catgName": "ELECTRONICS",
           "catgNbr": 199,
@@ -364,7 +364,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -376,7 +376,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders completed worklist
 exports[`WorklistScreen Tests rendering worklist data Renders empty data for items with invalid exception type filtered by exceptions 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -386,7 +386,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "height": 50,
         "justifyContent": "center",
@@ -396,8 +396,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
   >
     <FlatList
       data={
-        Array [
-          Object {
+        [
+          {
             "type": "EXCEPTION",
             "value": "NSFL",
           },
@@ -407,7 +407,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
       keyExtractor={[Function]}
       renderItem={[Function]}
       style={
-        Object {
+        {
           "paddingHorizontal": 0,
         }
       }
@@ -415,7 +415,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -447,9 +447,9 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
   </View>
   <FlatList
     data={
-      Array [
-        Object {
-          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+      [
+        {
+          "catgName": "[missing "en.WORKLIST.ALL" translation]",
           "itemCount": 0,
           "worklistType": "CATEGORY",
         },
@@ -460,7 +460,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -472,7 +472,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders empty data for ite
 exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for both filtered categories & exceptions  1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -482,7 +482,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "height": 50,
         "justifyContent": "center",
@@ -492,12 +492,12 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   >
     <FlatList
       data={
-        Array [
-          Object {
+        [
+          {
             "type": "EXCEPTION",
             "value": "NSFL",
           },
-          Object {
+          {
             "type": "CATEGORY",
             "value": "99 - ELECTRONICS",
           },
@@ -507,7 +507,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
       keyExtractor={[Function]}
       renderItem={[Function]}
       style={
-        Object {
+        {
           "paddingHorizontal": 0,
         }
       }
@@ -515,7 +515,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -547,9 +547,9 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   </View>
   <FlatList
     data={
-      Array [
-        Object {
-          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+      [
+        {
+          "catgName": "[missing "en.WORKLIST.ALL" translation]",
           "itemCount": 0,
           "worklistType": "CATEGORY",
         },
@@ -560,7 +560,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -572,7 +572,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for filtered categories 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -582,7 +582,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "height": 50,
         "justifyContent": "center",
@@ -592,8 +592,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   >
     <FlatList
       data={
-        Array [
-          Object {
+        [
+          {
             "type": "CATEGORY",
             "value": "99 - ELECTRONICS",
           },
@@ -603,7 +603,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
       keyExtractor={[Function]}
       renderItem={[Function]}
       style={
-        Object {
+        {
           "paddingHorizontal": 0,
         }
       }
@@ -611,7 +611,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -643,13 +643,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   </View>
   <FlatList
     data={
-      Array [
-        Object {
-          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+      [
+        {
+          "catgName": "[missing "en.WORKLIST.ALL" translation]",
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -670,7 +670,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -682,7 +682,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 exports[`WorklistScreen Tests rendering worklist data Renders the filtered view for filtered exceptions  1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -692,7 +692,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "height": 50,
         "justifyContent": "center",
@@ -702,8 +702,8 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   >
     <FlatList
       data={
-        Array [
-          Object {
+        [
+          {
             "type": "EXCEPTION",
             "value": "NSFL",
           },
@@ -713,7 +713,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
       keyExtractor={[Function]}
       renderItem={[Function]}
       style={
-        Object {
+        {
           "paddingHorizontal": 0,
         }
       }
@@ -721,7 +721,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -753,13 +753,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
   </View>
   <FlatList
     data={
-      Array [
-        Object {
-          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+      [
+        {
+          "catgName": "[missing "en.WORKLIST.ALL" translation]",
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -780,7 +780,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -792,7 +792,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders the filtered view 
 exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -802,7 +802,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -834,13 +834,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
   </View>
   <FlatList
     data={
-      Array [
-        Object {
-          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+      [
+        {
+          "catgName": "[missing "en.WORKLIST.ALL" translation]",
           "itemCount": 6,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -854,7 +854,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -868,7 +868,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "NO",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -882,7 +882,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "NO",
         },
-        Object {
+        {
           "catgName": "WINE",
           "catgNbr": 19,
           "completed": false,
@@ -896,7 +896,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "C",
         },
-        Object {
+        {
           "catgName": "PHARMACY RX",
           "catgNbr": 87,
           "completed": false,
@@ -910,7 +910,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "C",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 199,
           "completed": false,
@@ -931,7 +931,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -943,7 +943,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
 exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data with image 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -953,7 +953,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -985,13 +985,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
   </View>
   <FlatList
     data={
-      Array [
-        Object {
-          "catgName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+      [
+        {
+          "catgName": "[missing "en.WORKLIST.ALL" translation]",
           "itemCount": 6,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -1005,7 +1005,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -1019,7 +1019,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "NO",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -1033,7 +1033,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "NO",
         },
-        Object {
+        {
           "catgName": "WINE",
           "catgNbr": 19,
           "completed": false,
@@ -1047,7 +1047,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "C",
         },
-        Object {
+        {
           "catgName": "PHARMACY RX",
           "catgNbr": 87,
           "completed": false,
@@ -1061,7 +1061,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
           "worklistStatus": "TODO",
           "worklistType": "C",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 199,
           "completed": false,
@@ -1082,7 +1082,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -1094,7 +1094,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders todo worklist data
 exports[`WorklistScreen Tests rendering worklist data Renders worklist items toggled by category list  1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -1104,7 +1104,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-end",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -1136,14 +1136,14 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
   </View>
   <FlatList
     data={
-      Array [
-        Object {
+      [
+        {
           "catgName": "WINE",
           "catgNbr": 19,
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "WINE",
           "catgNbr": 19,
           "completed": false,
@@ -1157,13 +1157,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "worklistStatus": "TODO",
           "worklistType": "C",
         },
-        Object {
+        {
           "catgName": "PHARMACY RX",
           "catgNbr": 87,
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "PHARMACY RX",
           "catgNbr": 87,
           "completed": false,
@@ -1177,13 +1177,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "worklistStatus": "TODO",
           "worklistType": "C",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -1197,13 +1197,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "worklistStatus": "TODO",
           "worklistType": "NO",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -1217,13 +1217,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "worklistStatus": "TODO",
           "worklistType": "NSFL",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -1237,13 +1237,13 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
           "worklistStatus": "TODO",
           "worklistType": "NO",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 199,
           "itemCount": 1,
           "worklistType": "CATEGORY",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 199,
           "completed": false,
@@ -1264,7 +1264,7 @@ exports[`WorklistScreen Tests rendering worklist data Renders worklist items tog
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }

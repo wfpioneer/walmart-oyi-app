@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tests rendering EnterLocation: Renders an EnterLocation with mock fnction 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-end",
         "width": "100%",
@@ -13,8 +13,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -23,15 +23,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -45,7 +57,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -66,7 +78,7 @@ Array [
   </View>,
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -79,10 +91,10 @@ Array [
       autoFocus={true}
       keyboardType="default"
       onChangeText={[Function]}
-      placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+      placeholder="[missing "en.LOCATION.MANUAL_ENTRY_BUTTON" translation]"
       selectionColor="#0071e9"
       style={
-        Object {
+        {
           "flex": 1,
           "paddingLeft": 10,
         }
@@ -93,11 +105,11 @@ Array [
   </View>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 45,
         },
-        Object {
+        {
           "width": "100%",
         },
       ]
@@ -105,15 +117,27 @@ Array [
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -127,7 +151,7 @@ Array [
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#BABBBE",
             "borderRadius": 5,
@@ -141,7 +165,7 @@ Array [
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontFamily": "Roboto-Medium",
               "fontSize": 16,

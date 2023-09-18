@@ -3,8 +3,8 @@
 exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignContent": "center",
         "backgroundColor": "#ffffffff",
         "elevation": 10,
@@ -12,7 +12,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
         "height": 80,
         "justifyContent": "space-evenly",
       },
-      Object {
+      {
         "height": 80,
       },
     ]
@@ -25,7 +25,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "alignSelf": "center",
         "width": "45%",
       }
@@ -44,7 +44,7 @@ exports[`ButtonTabCard Component Renders the Button Bottom Tab component 1`] = `
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "alignSelf": "center",
         "width": "45%",
       }
