@@ -1482,7 +1482,7 @@ Array [
               style={
                 Object {
                   "flexDirection": "row",
-                  "justifyContent": "space-between",
+                  "justifyContent": "flex-start",
                   "paddingRight": 5,
                   "width": "100%",
                 }

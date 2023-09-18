@@ -318,7 +318,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           style={
             Object {
               "flexDirection": "row",
-              "justifyContent": "space-between",
+              "justifyContent": "flex-start",
               "paddingRight": 5,
               "width": "100%",
             }
@@ -451,7 +451,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           style={
             Object {
               "flexDirection": "row",
-              "justifyContent": "space-between",
+              "justifyContent": "flex-start",
               "paddingRight": 5,
               "width": "100%",
             }
@@ -472,7 +472,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           <Text
             style={
               Object {
-                "color": "#616161",
+                "color": "#e74517",
                 "flexShrink": 1,
                 "flexWrap": "wrap",
                 "fontSize": 12,
@@ -486,7 +486,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           style={
             Object {
               "flexDirection": "row",
-              "justifyContent": "space-between",
+              "justifyContent": "flex-start",
               "paddingRight": 5,
               "width": "100%",
             }
@@ -521,14 +521,14 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           <Text
             style={
               Object {
-                "color": "#616161",
+                "color": "#e74517",
                 "flexShrink": 1,
                 "flexWrap": "wrap",
                 "fontSize": 12,
               }
             }
           >
-            [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
+             [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
           </Text>
         </View>
       </View>
@@ -698,7 +698,7 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
           style={
             Object {
               "flexDirection": "row",
-              "justifyContent": "space-between",
+              "justifyContent": "flex-start",
               "paddingRight": 5,
               "width": "100%",
             }
