@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react-native';
-import ItemCard, { getAuditsBadgeStyle, getAuditsBadgeText } from './ItemCard';
+import ItemCard, { getAuditsBadgeStyle, getAuditsBadgeText, isQuantityPending } from './ItemCard';
 import { WorkListStatus } from '../../models/WorklistItem';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
@@ -153,5 +153,19 @@ describe('Audits ItemCard Component', () => {
     expect(completedStyle).toStrictEqual({});
     expect(inProgressStyle).toStrictEqual(expect.objectContaining({ backgroundColor: COLOR.MEDIUM_AQUA_BLUE }));
     expect(awaitingApprovalStyle).toStrictEqual(expect.objectContaining({ backgroundColor: COLOR.GREY_300 }));
+  });
+
+  it('tests determining if a quantity update is pending', () => {
+    let result = isQuantityPending(undefined);
+    expect(result).toBeFalsy();
+
+    result = isQuantityPending(-999);
+    expect(result).toBeFalsy();
+
+    result = isQuantityPending(0);
+    expect(result).toBeTruthy();
+
+    result = isQuantityPending(432454);
+    expect(result).toBeTruthy();
   });
 });
