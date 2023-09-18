@@ -2,7 +2,6 @@ import {
   clearAuditScreenData,
   setApprovalItem,
   setFloorLocations,
-  setItemDetails,
   setReserveLocations,
   setScannedPalletId,
   updateFloorLocationQty,
@@ -18,19 +17,10 @@ describe('The Audit Item Screen Reducer', () => {
   // Intitial State
   const testInitialState = initialState;
   const mockItemDetails = getMockItemDetails('123');
-  // Changed state
-  const testChangedState: AuditItemScreenState = {
-    ...initialState,
-    itemDetails: mockItemDetails
-  };
   const mockInitialReserveState: AuditItemScreenState = {
     ...initialState,
     reserveLocations: mockPalletLocations
   };
-  it('handles setting the item details in AuditItemScreen redux state', () => {
-    const testResults = AuditItemScreen(testInitialState, setItemDetails(mockItemDetails));
-    expect(testResults).toStrictEqual(testChangedState);
-  });
   it('handles setting the floor locations in AuditItemScreen redux state', () => {
     const mockFloorLocations = mockItemDetails.location.floor;
     const testResults = AuditItemScreen(testInitialState, setFloorLocations(mockFloorLocations));

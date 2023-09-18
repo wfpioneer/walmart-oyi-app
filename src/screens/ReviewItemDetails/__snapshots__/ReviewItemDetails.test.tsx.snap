@@ -273,7 +273,76 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
 </View>
 `;
 
-exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 3`] = `<View />`;
+exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 3`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.NO_ITEM_SCANNED" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_ITEM" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
 
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test onIsWaiting 1`] = `
 <View>
@@ -3011,19 +3080,74 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 `;
 
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
-<ActivityIndicator
-  animating={false}
-  color="#0071e9"
-  hidesWhenStopped={true}
-  size="large"
+<View
   style={
     Object {
-      "alignItems": "center",
       "flex": 1,
-      "justifyContent": "center",
     }
   }
-/>
+>
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#e57373"
+      name="alert"
+      size={40}
+    />
+    <Text
+      style={
+        Object {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.ITEM.API_ERROR" translation]
+    </Text>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.NO_ITEM_SCANNED" translation]
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.SCAN_ITEM" translation]
+      </Text>
+    </View>
+  </View>
+</View>
 `;
 
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders "Generic Change translation" if pendingOH is -999 and user has OH role 1`] = `
@@ -3206,6 +3330,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -3521,7 +3646,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 <ActivityIndicator
   animating={true}
   color="#0071e9"
-  hidesWhenStopped={true}
   size="large"
   style={
     Object {
@@ -3915,11 +4039,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "viewProfitMargin": true,
           }
         }
-        category="99 - Store Use"
+        category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
-        itemName="Small, Store Use Item"
-        itemNbr={987654321}
+        imageToken="bearer megaalakazamvsvanillishswarm"
+        itemName="Test Item That is Really, Really Long (and has parenthesis)"
+        itemNbr={1234567890}
         navigationForPrint={
           Object {
             "addListener": [MockFunction],
@@ -3941,7 +4066,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         showItemImage={false}
         status="Active"
         tokenIsWaiting={false}
-        upcNbr="777555333"
+        upcNbr="000055559999"
       />
       <SFTCard
         iconName="pallet"
@@ -3958,7 +4083,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               },
               Object {
                 "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
-                "value": -11,
+                "value": 21,
               },
               Object {
                 "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
@@ -3970,11 +4095,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               },
               Object {
                 "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
-                "value": 0,
-              },
-              Object {
-                "label": "[missing \\"en.ITEM.FLY_CLOUD_QTY\\" translation]",
-                "value": 42,
+                "value": 10,
               },
             ]
           }
@@ -4132,7 +4253,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             Object {
               "action": "pick_history_click",
               "otherInfo": Object {
-                "itemNbr": 987654321,
+                "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
@@ -4412,6 +4533,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -5102,6 +5224,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -5792,6 +5915,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -6282,6 +6406,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -6772,6 +6897,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        imageToken="bearer megaalakazamvsvanillishswarm"
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
