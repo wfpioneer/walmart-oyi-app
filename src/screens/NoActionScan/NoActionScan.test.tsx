@@ -4,7 +4,8 @@ import {
   NavigationContainer,
   NavigationContext,
   NavigationProp,
-  RouteProp
+  RouteProp,
+  StackActions
 } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
@@ -170,7 +171,7 @@ describe('NoActionScan', () => {
         }
       };
 
-      completeItemApiHook(mockDispatch, navigationProp, completedApiNotFound);
+      completeItemApiHook(mockDispatch, navigationProp, completedApiNotFound, routeProp);
       expect(navigationProp.isFocused).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({ type: NO_ACTION.RESET });
       mockDispatch.mockReset();
@@ -182,13 +183,21 @@ describe('NoActionScan', () => {
         position: 'bottom'
       });
 
-      const mockGoBack = jest.fn();
-      navigationProp.goBack = mockGoBack;
-      completeItemApiHook(mockDispatch, navigationProp, completedApiSuccess);
+      completeItemApiHook(mockDispatch, navigationProp, completedApiSuccess, routeProp);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
-      expect(mockGoBack).toHaveBeenCalledTimes(2);
+      expect(navigationProp.dispatch).toHaveBeenCalledWith(StackActions.pop(2));
+
+      const routeOtherAction: RouteProp<any, string> = {
+        ...routeProp,
+        params: { source: 'OtherAction' }
+      };
+      completeItemApiHook(mockDispatch, navigationProp, completedApiSuccess, routeOtherAction);
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
+      });
+      expect(navigationProp.dispatch).toHaveBeenCalledWith(StackActions.pop(3));
     });
 
     it('test completeItemApiHook on error result', () => {
@@ -201,7 +210,7 @@ describe('NoActionScan', () => {
         error: 'Network Error'
       };
 
-      completeItemApiHook(mockDispatch, navigationProp, errorApi409);
+      completeItemApiHook(mockDispatch, navigationProp, errorApi409, routeProp);
       expect(navigationProp.isFocused).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({ type: NO_ACTION.RESET });
       expect(Toast.show).toHaveBeenCalledWith({
@@ -213,7 +222,7 @@ describe('NoActionScan', () => {
       });
       mockDispatch.mockReset();
 
-      completeItemApiHook(mockDispatch, navigationProp, errorApi);
+      completeItemApiHook(mockDispatch, navigationProp, errorApi, routeProp);
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
         text1: strings('ITEM.ACTION_COMPLETE_ERROR'),

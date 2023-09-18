@@ -123,7 +123,10 @@ describe('OtherActionScreen Tests', () => {
         OTHER_ACTIONS,
         { action: 'scan_for_no_action_click', itemNbr: mockItemDetails[654].itemNbr }
       );
-      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('NoActionScan');
+      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith(
+        'NoActionScan',
+        { source: 'OtherAction' }
+      );
 
       // Edit Location Flow
       mockOtherActionProps.chosenActionState[0] = strings('LOCATION.EDIT_LOCATION');
@@ -141,6 +144,31 @@ describe('OtherActionScreen Tests', () => {
       );
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('LocationDetails');
 
+      // On Hands Change Flow
+      mockOtherActionProps.chosenActionState[0] = strings('APPROVAL.OH_CHANGE');
+      update(
+        <OtherActionScreen
+          {...mockOtherActionProps}
+        />
+      );
+      fireEvent.press(continueButton);
+
+      mockOtherActionProps.appUser.configs.auditWorklists = true;
+      expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
+      expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
+        OTHER_ACTIONS,
+        { action: 'update_OH_qty_click', itemNbr: mockItemDetails[654].itemNbr }
+      );
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
+        setAuditItemNumber(mockItemDetails[654].itemNbr)
+      );
+      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(resetScannedEvent());
+      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith(
+        'AuditItem',
+        { source: 'OtherAction' }
+      );
+      mockOtherActionProps.appUser.configs.auditWorklists = false;
+
       // Reserve Adjustment Flow
       mockOtherActionProps.chosenActionState[0] = strings('ITEM.CLEAN_RESERVE');
       update(
@@ -157,45 +185,9 @@ describe('OtherActionScreen Tests', () => {
       );
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setItemDetails(mockItemDetails[654]));
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(resetScannedEvent());
-      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('ReserveAdjustment');
-
-      // On Hands Change Flow
-      mockOtherActionProps.chosenActionState[0] = strings('APPROVAL.OH_CHANGE');
-      update(
-        <OtherActionScreen
-          {...mockOtherActionProps}
-        />
-      );
-      fireEvent.press(continueButton);
-
-      mockOtherActionProps.appUser.configs.auditWorklists = true;
-      expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
-      expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
-        OTHER_ACTIONS,
-        { action: 'update_OH_qty_click', itemNbr: mockItemDetails[654].itemNbr }
-      );
-      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(setAuditItemNumber(mockItemDetails[654].itemNbr));
-      expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(resetScannedEvent());
-      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('AuditItem');
-      mockOtherActionProps.appUser.configs.auditWorklists = false;
-
-      // Print Price Sign Flow
-      mockOtherActionProps.chosenActionState[0] = strings('PRINT.PRICE_SIGN');
-      update(
-        <OtherActionScreen
-          {...mockOtherActionProps}
-        />
-      );
-      fireEvent.press(continueButton);
-
-      expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
-      expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
-        OTHER_ACTIONS,
-        { action: 'print_sign_button_click', itemNbr: mockItemDetails[654].itemNbr }
-      );
       expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith(
-        'PrintPriceSign',
-        { screen: 'PrintPriceSignScreen' }
+        'ReserveAdjustment',
+        { source: 'OtherAction' }
       );
 
       // Add to PickList Flow
@@ -228,7 +220,29 @@ describe('OtherActionScreen Tests', () => {
       expect(await mockOtherActionProps.dispatch).toHaveBeenCalledWith(
         setPickCreateReserve(mockItemDetails[654]?.location?.reserve || [])
       );
-      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith('Picking', { screen: 'CreatePick' });
+      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith(
+        'Picking',
+        { screen: 'CreatePick', source: 'OtherAction' }
+      );
+
+      // Print Price Sign Flow
+      mockOtherActionProps.chosenActionState[0] = strings('PRINT.PRICE_SIGN');
+      update(
+        <OtherActionScreen
+          {...mockOtherActionProps}
+        />
+      );
+      fireEvent.press(continueButton);
+
+      expect(mockOtherActionProps.validateSessionCall).toHaveBeenCalled();
+      expect(await mockOtherActionProps.trackEventCall).toHaveBeenCalledWith(
+        OTHER_ACTIONS,
+        { action: 'print_sign_button_click', itemNbr: mockItemDetails[654].itemNbr }
+      );
+      expect(await mockOtherActionProps.navigation.navigate).toHaveBeenCalledWith(
+        'PrintPriceSign',
+        { screen: 'PrintPriceSignScreen', source: 'OtherAction' }
+      );
     });
   });
 });

@@ -308,7 +308,8 @@ export const printSignApiHook = (
   setError: React.Dispatch<React.SetStateAction<{ error: boolean; message: string }>>,
   dispatch: Dispatch<any>,
   actionCompleted: boolean,
-  exceptionType: string
+  exceptionType: string,
+  route: RouteProp<any, string>
 ) => {
   // on api success
   if (!printAPI.isWaiting && printAPI.result) {
@@ -320,7 +321,11 @@ export const printSignApiHook = (
         position: 'bottom'
       });
       isValidDispatch(dispatch, actionCompleted, exceptionType);
-      navigation.goBack();
+      if (route.params && route.params.source === 'OtherAction') {
+        navigation.navigate('ReviewItemDetailsHome');
+      } else {
+        navigation.goBack();
+      }
     }
     if (printAPI.result.status === 204) {
       Toast.show({
@@ -613,7 +618,8 @@ export const PrintPriceSignScreen = (props: PriceSignProps): JSX.Element => {
     setError,
     dispatch,
     actionCompleted,
-    exceptionType
+    exceptionType,
+    route
   ), [printAPI]);
 
   // Print Label API
