@@ -90,7 +90,7 @@ const REVIEW_ITEM_DETAILS = 'Review_Item_Details';
 export interface ItemDetailsScreenProps {
   scannedEvent: { value: string | null; type: string | null; };
   isManualScanEnabled: boolean;
-  isWaiting: boolean; error: AxiosError | null; result: AxiosResponse | null;
+  itemDetailsApi: AsyncState;
   isPiHistWaiting: boolean; piHistError: AxiosError | null; piHistResult: AxiosResponse | null;
   isPiSalesHistWaiting: boolean; piSalesHistError: AxiosError | null; piSalesHistResult: AxiosResponse | null;
   managerApprovalHistoryApi: AsyncState;
@@ -127,6 +127,7 @@ export interface ItemDetailsScreenProps {
   userDomain: string;
   imageToken: string | undefined;
   tokenIsWaiting: boolean;
+  itemDetails: ItemDetails | null;
 }
 
 export interface HandleProps {
@@ -1194,7 +1195,7 @@ export const renderBarcodeErrorModal = (
 export const isItemDetailsCompleted = (itemDetails: ItemDetails) => (itemDetails.exceptionType
   ? itemDetails.completed : true);
 
-export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails) => {
+export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: ItemDetails | null) => {
   if (itemDetails) {
     dispatch(setItemDetails(itemDetails));
     dispatch(setupScreen(
@@ -1203,7 +1204,8 @@ export const onValidateItemDetails = (dispatch: Dispatch<any>, itemDetails: Item
       itemDetails.exceptionType,
       itemDetails.pendingOnHandsQty,
       isItemDetailsCompleted(itemDetails),
-      true
+      true,
+      itemDetails
     ));
 
     if (itemDetails.worklistStatus === WorkListStatus.COMPLETED) {
@@ -1322,7 +1324,7 @@ export const onValidateScannedEvent = (props: ItemDetailsScreenProps) => {
 };
 
 export const onIsWaiting = (isWaiting: boolean) => (
-  isWaiting && (
+  isWaiting ? (
     <ActivityIndicator
       animating={isWaiting}
       hidesWhenStopped
@@ -1330,7 +1332,7 @@ export const onIsWaiting = (isWaiting: boolean) => (
       size="large"
       style={styles.activityIndicator}
     />
-  )
+  ) : null
 );
 
 export const getLocationCount = (props: ItemDetailsScreenProps) => {
@@ -1338,45 +1340,48 @@ export const getLocationCount = (props: ItemDetailsScreenProps) => {
   return (floorLocations?.length ?? 0) + (reserveLocations?.length ?? 0);
 };
 
-export const getUpdatedSales = (itemDetails: ItemDetails) => (_.get(itemDetails, 'sales.lastUpdateTs')
-  ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales?.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
-  : undefined);
+export const getUpdatedSales = (itemDetails: ItemDetails | null) => (
+  itemDetails && _.get(itemDetails, 'sales.lastUpdateTs')
+    ? `${strings('GENERICS.UPDATED')} ${moment(itemDetails.sales?.lastUpdateTs).format('dddd, MMM DD hh:mm a')}`
+    : undefined);
 
-export const isError = (
-  error: AxiosError | null,
+export const renderErrorView = (
   errorModalVisible: boolean,
   setErrorModalVisible: React.Dispatch<React.SetStateAction<boolean>>,
   isManualScanEnabled: boolean,
   scannedEvent: { value: string | null; type: string | null; },
   dispatch: Dispatch<any>,
-  trackEventCall: (eventName: string, params?: any) => void,
-  message?: string
+  trackEventCall: (eventName: string, params?: any) => void
 ) => {
-  if (error || message) {
-    const scannedValue = scannedEvent.value || '';
-    return (
-      <View style={styles.safeAreaView}>
-        {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
-        {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
-        <View style={styles.activityIndicator}>
-          <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-          <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
-          <TouchableOpacity
-            testID="scanErrorRetry"
-            style={styles.errorButton}
-            onPress={() => {
-              trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
-              return dispatch(getItemDetailsV4({ id: parseInt(scannedValue, 10) }));
-            }}
-          >
-            <Text>{strings('GENERICS.RETRY')}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
+  const scannedValue = scannedEvent.value || '';
   return (
-    <View />
+    <View style={styles.safeAreaView}>
+      {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
+      {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
+      <View style={styles.activityIndicator}>
+        <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
+        <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
+        {!scannedValue
+          ? (
+            <View style={styles.errorTextContainer}>
+              <Text style={styles.errorText}>{strings('ITEM.NO_ITEM_SCANNED')}</Text>
+              <Text style={styles.errorText}>{strings('ITEM.SCAN_ITEM')}</Text>
+            </View>
+          )
+          : (
+            <TouchableOpacity
+              testID="scanErrorRetry"
+              style={styles.errorButton}
+              onPress={() => {
+                trackEventCall(REVIEW_ITEM_DETAILS, { action: 'api_retry_click', barcode: scannedValue });
+                return dispatch(getItemDetailsV4({ id: parseInt(scannedValue, 10) }));
+              }}
+            >
+              <Text>{strings('GENERICS.RETRY')}</Text>
+            </TouchableOpacity>
+          )}
+      </View>
+    </View>
   );
 };
 
@@ -1414,18 +1419,12 @@ export const handleRefresh = (
 
 export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Element => {
   const {
-    scannedEvent, isManualScanEnabled,
-    isWaiting, error, result,
+    scannedEvent, isManualScanEnabled, itemDetailsApi,
     isPiHistWaiting, piHistError, piHistResult,
     isPiSalesHistWaiting, piSalesHistError, piSalesHistResult,
-    managerApprovalHistoryApi,
-    picklistHistoryApi,
-    createNewPickApi,
-    updateOHQtyApi,
+    managerApprovalHistoryApi, picklistHistoryApi, createNewPickApi, updateOHQtyApi,
     userId, actionCompleted, pendingOnHandsQty,
-    route,
-    dispatch,
-    navigation,
+    route, navigation, dispatch,
     scrollViewRef,
     isSalesMetricsGraphView, setIsSalesMetricsGraphView,
     ohQtyModalVisible, setOhQtyModalVisible,
@@ -1444,7 +1443,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     countryCode,
     locationForItemsApi,
     locationForItemsV1Api,
-    userDomain
+    userDomain,
+    itemDetails
   } = props;
   const { result: mahResult, error: mahError } = managerApprovalHistoryApi;
 
@@ -1463,7 +1463,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     onValidateScannedEvent(props);
   }, [scannedEvent]);
 
-  const itemDetails: ItemDetails = (result && result.data); // || getMockItemDetails(scannedEvent.value);
+  const itemDetailsApiData = (itemDetailsApi.result ? itemDetailsApi.result.data as ItemDetails : null);
+  const apiErrorMessage = (itemDetailsApiData && itemDetailsApiData.message) ? itemDetailsApiData.message : undefined;
 
   const picklistHistory: PickHistory[] = (
     picklistHistoryApi.result && picklistHistoryApi.result.data.picklists
@@ -1477,9 +1478,9 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
 
   // Set Item Details
   useEffectHook(() => {
-    onValidateItemDetails(dispatch, itemDetails);
-    setNewOHQty(itemDetails?.onHandsQty || 0);
-  }, [itemDetails]);
+    onValidateItemDetails(dispatch, itemDetailsApiData);
+    setNewOHQty(itemDetailsApiData?.onHandsQty || 0);
+  }, [itemDetailsApiData]);
 
   useEffectHook(() => getLocationsForItemsApiHook(
     locationForItemsApi,
@@ -1535,33 +1536,24 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
   ), [updateOHQtyApi]);
 
   // Get Item Details Error
-  if (!isWaiting && (error || (itemDetails && itemDetails.message))) {
-    const message = (itemDetails && itemDetails.message) ? itemDetails.message : undefined;
-    return isError(
-      error,
+  // Need to show this also when we don't have a result and redux is empty
+  // scannedEvent check to make sure that the API call isn't about to start
+  if (!itemDetailsApi.isWaiting
+      && (itemDetailsApi.error
+        || apiErrorMessage
+        || (!scannedEvent.value && !itemDetailsApi.result && !itemDetails))) {
+    return renderErrorView(
       errorModalVisible,
       setErrorModalVisible,
       isManualScanEnabled,
       scannedEvent,
       dispatch,
-      trackEventCall,
-      message // Checks for an error message from ItemDetails orchestration
+      trackEventCall
     );
   }
 
-  if (isWaiting || !result) {
-    return (
-      <ActivityIndicator
-        animating={isWaiting}
-        hidesWhenStopped
-        color={COLOR.MAIN_THEME_COLOR}
-        size="large"
-        style={styles.activityIndicator}
-      />
-    );
-  }
-
-  if (_.get(result, 'status') === 204 || _.get(itemDetails, 'code') === 204) {
+  // If no item found, we won't put it into redux, so we need to return this before the activity indicator
+  if (_.get(itemDetailsApi.result, 'status') === 204 || _.get(itemDetailsApiData, 'code') === 204) {
     return (
       <View style={styles.safeAreaView}>
         {renderBarcodeErrorModal(errorModalVisible, setErrorModalVisible)}
@@ -1574,15 +1566,29 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
     );
   }
 
+  // Any instance of itemDetails not existing that reaches here will be waiting on the API to finish
+  // Also have the API isWaiting check for if we've started a new call while there's already details
+  if (itemDetailsApi.isWaiting || !itemDetails) {
+    return (
+      <ActivityIndicator
+        animating
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    );
+  }
+
   const toggleSalesGraphView = () => {
     trackEventCall(REVIEW_ITEM_DETAILS, {
       action: 'toggle_graph_click',
-      itemNbr: itemDetails.itemNbr,
+      itemNbr: itemDetails?.itemNbr,
       isGraphView: !isSalesMetricsGraphView
     });
     setIsSalesMetricsGraphView((prevState: boolean) => !prevState);
   };
 
+  // still need the null check here for typescript
   return (
     <View style={styles.safeAreaView}>
       {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
@@ -1593,13 +1599,13 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
         modalType="Form"
       >
         <OHQtyUpdate
-          onHandsQty={itemDetails?.onHandsQty || 0}
+          onHandsQty={itemDetails.onHandsQty || 0}
           newOHQty={newOHQty}
           setNewOHQty={setNewOHQty}
           isWaiting={updateOHQtyApi.isWaiting}
           error={updateOHQtyApi.error}
           handleClose={() => handleOHQtyClose(
-            itemDetails?.onHandsQty || 0,
+            itemDetails.onHandsQty || 0,
             dispatch,
             setOhQtyModalVisible,
             setNewOHQty
@@ -1641,98 +1647,95 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
               userConfigs.peteGetLocations
             )}
           />
-)}
+        )}
       >
-        {onIsWaiting(isWaiting)}
-        {!isWaiting && itemDetails
-          && (
-          <View>
-            <ItemInfo
-              itemName={itemDetails.itemName}
-              itemNbr={itemDetails.itemNbr}
-              upcNbr={itemDetails.upcNbr}
-              status={itemDetails.status || ''}
-              category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
-              price={itemDetails.price}
-              exceptionType={getExceptionType(actionCompleted, itemDetails)}
-              navigationForPrint={navigation}
-              additionalItemDetails={{
-                color: itemDetails.color,
-                margin: itemDetails.margin,
-                vendorPackQty: itemDetails.vendorPackQty,
-                grossProfit: itemDetails.grossProfit,
-                size: itemDetails.size,
-                basePrice: itemDetails.basePrice,
-                source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' },
-                viewProfitMargin
-              }}
-              countryCode={countryCode}
-              showItemImage={userConfigs.showItemImage}
-              worklistAuditType={itemDetails.worklistAuditType}
-              worklistStatus={itemDetails.worklistStatus ?? itemDetails.auditWorklistStatus}
-              imageToken={imageToken}
-              tokenIsWaiting={tokenIsWaiting}
-            />
-            <SFTCard
-              title={strings('ITEM.QUANTITY')}
-              iconName="pallet"
-              topRightBtnTxt={userFeatures.includes('on hands change') ? strings('GENERICS.CHANGE') : undefined}
-              topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
-            >
-              {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
-            </SFTCard>
-            <View style={styles.historyContainer}>
-              {renderOHChangeHistory(props, mahResult, mahError, itemDetails.itemNbr, dispatch, trackEventCall)}
-            </View>
-            <View style={styles.historyContainer}>
-              {renderReplenishmentCard(
-                itemDetails,
-                piHistResult,
-                piHistError,
-                isPiHistWaiting,
-                trackEventCall,
-                itemDetails.itemNbr,
-                dispatch
-              )}
-            </View>
-            <SFTCard
-              iconName="map-marker-alt"
-              title={`${strings('ITEM.LOCATION')}(${locationCount})`}
-              topRightBtnTxt={getTopRightBtnTxt(locationCount)}
-              topRightBtnAction={() => handleLocationAction(props, itemDetails)}
-            >
-              {renderLocationComponent(
-                props,
-                itemDetails,
-                setCreatePickModalVisible,
-                dispatch,
-                locationForItemsApi,
-                locationForItemsV1Api
-              )}
-            </SFTCard>
-            <View style={styles.historyContainer}>
-              {renderPickHistory(
-                props,
-                picklistHistory,
-                picklistHistoryApi.result,
-                picklistHistoryApi.isWaiting,
-                itemDetails.itemNbr
-              )}
-            </View>
-            {(
-              renderSalesGraphV4(
-                updatedSalesTS,
-                toggleSalesGraphView,
-                isSalesMetricsGraphView,
-                piSalesHistResult,
-                piSalesHistError,
-                isPiSalesHistWaiting,
-                trackEventCall,
-                itemDetails.itemNbr,
-                dispatch
-              ))}
+        {onIsWaiting(itemDetailsApi.isWaiting)}
+        <View>
+          <ItemInfo
+            itemName={itemDetails.itemName}
+            itemNbr={itemDetails.itemNbr}
+            upcNbr={itemDetails.upcNbr}
+            status={itemDetails.status || ''}
+            category={`${itemDetails.categoryNbr} - ${itemDetails.categoryDesc}`}
+            price={itemDetails.price}
+            exceptionType={getExceptionType(actionCompleted, itemDetails)}
+            navigationForPrint={navigation}
+            additionalItemDetails={{
+              color: itemDetails.color,
+              margin: itemDetails.margin,
+              vendorPackQty: itemDetails.vendorPackQty,
+              grossProfit: itemDetails.grossProfit,
+              size: itemDetails.size,
+              basePrice: itemDetails.basePrice,
+              source: { screen: REVIEW_ITEM_DETAILS, action: 'additional_item_details_click' },
+              viewProfitMargin
+            }}
+            countryCode={countryCode}
+            showItemImage={userConfigs.showItemImage}
+            worklistAuditType={itemDetails.worklistAuditType}
+            worklistStatus={itemDetails.worklistStatus ?? itemDetails.auditWorklistStatus}
+            imageToken={imageToken}
+            tokenIsWaiting={tokenIsWaiting}
+          />
+          <SFTCard
+            title={strings('ITEM.QUANTITY')}
+            iconName="pallet"
+            topRightBtnTxt={userFeatures.includes('on hands change') ? strings('GENERICS.CHANGE') : undefined}
+            topRightBtnAction={() => handleUpdateQty(props, itemDetails, scannedEvent, userConfigs)}
+          >
+            {renderOHQtyComponent({ ...itemDetails, pendingOnHandsQty })}
+          </SFTCard>
+          <View style={styles.historyContainer}>
+            {renderOHChangeHistory(props, mahResult, mahError, itemDetails.itemNbr, dispatch, trackEventCall)}
           </View>
-          )}
+          <View style={styles.historyContainer}>
+            {renderReplenishmentCard(
+              itemDetails,
+              piHistResult,
+              piHistError,
+              isPiHistWaiting,
+              trackEventCall,
+              itemDetails.itemNbr,
+              dispatch
+            )}
+          </View>
+          <SFTCard
+            iconName="map-marker-alt"
+            title={`${strings('ITEM.LOCATION')}(${locationCount})`}
+            topRightBtnTxt={getTopRightBtnTxt(locationCount)}
+            topRightBtnAction={() => handleLocationAction(props, itemDetails)}
+          >
+            {renderLocationComponent(
+              props,
+              itemDetails,
+              setCreatePickModalVisible,
+              dispatch,
+              locationForItemsApi,
+              locationForItemsV1Api
+            )}
+          </SFTCard>
+          <View style={styles.historyContainer}>
+            {renderPickHistory(
+              props,
+              picklistHistory,
+              picklistHistoryApi.result,
+              picklistHistoryApi.isWaiting,
+              itemDetails.itemNbr
+            )}
+          </View>
+          {(
+            renderSalesGraphV4(
+              updatedSalesTS,
+              toggleSalesGraphView,
+              isSalesMetricsGraphView,
+              piSalesHistResult,
+              piSalesHistError,
+              isPiSalesHistWaiting,
+              trackEventCall,
+              itemDetails.itemNbr,
+              dispatch
+            ))}
+        </View>
       </ScrollView>
       {completeButtonComponent(props, itemDetails)}
     </View>
@@ -1760,7 +1763,8 @@ const ReviewItemDetails = (): JSX.Element => {
     actionCompleted,
     pendingOnHandsQty,
     floorLocations,
-    reserveLocations
+    reserveLocations,
+    itemDetails
   } = useTypedSelector(state => state.ItemDetailScreen);
   const route = useRoute();
   const dispatch = useDispatch();
@@ -1785,9 +1789,7 @@ const ReviewItemDetails = (): JSX.Element => {
     <ReviewItemDetailsScreen
       scannedEvent={scannedEvent}
       isManualScanEnabled={isManualScanEnabled}
-      isWaiting={getItemDetailsV4Api.isWaiting}
-      error={getItemDetailsV4Api.error}
-      result={getItemDetailsV4Api.result}
+      itemDetailsApi={getItemDetailsV4Api}
       isPiHistWaiting={getItemPiHistoryApi.isWaiting}
       piHistError={getItemPiHistoryApi.error}
       piHistResult={getItemPiHistoryApi.result}
@@ -1836,6 +1838,7 @@ const ReviewItemDetails = (): JSX.Element => {
       userDomain={domain}
       imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
       tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
+      itemDetails={itemDetails}
     />
   );
 };

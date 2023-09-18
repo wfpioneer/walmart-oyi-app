@@ -106,8 +106,8 @@ android {
         applicationId "com.walmart.intl.oyi"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 279
-        versionName "4.9.9"
+        versionCode 280
+        versionName "4.9.10"
         resValue "string", "build_config_package", "com.samsclub.intl.oyi"
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.samsclub.intl.oyi'

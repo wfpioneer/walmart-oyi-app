@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center'
   },
+  errorTextContainer: {
+    flexDirection: 'column'
+  },
   errorText: {
     fontSize: 16,
     textAlign: 'center'
