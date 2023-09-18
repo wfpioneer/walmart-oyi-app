@@ -535,7 +535,8 @@ describe('ReserveAdjustmentScreen', () => {
         mockDispatch,
         navigationProp,
         setShowOnHands,
-        mockItemDetails.itemNbr
+        mockItemDetails.itemNbr,
+        routeProp
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
@@ -554,6 +555,21 @@ describe('ReserveAdjustmentScreen', () => {
       ));
       expect(setShowOnHands).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toHaveBeenCalled();
+
+      // Tests if user navigated frpm the other action screen
+      const routeOtherAction: RouteProp<any, string> = {
+        ...routeProp,
+        params: { source: 'OtherAction' }
+      };
+      updateMultiPalletUPCQtyV2ApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands,
+        mockItemDetails.itemNbr,
+        routeOtherAction
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
     });
 
     it('Tests updateMultiPalletUPCQtyV2ApiHook on failure', () => {
@@ -563,7 +579,8 @@ describe('ReserveAdjustmentScreen', () => {
         mockDispatch,
         navigationProp,
         setShowOnHands,
-        mockItemDetails.itemNbr
+        mockItemDetails.itemNbr,
+        routeProp
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);

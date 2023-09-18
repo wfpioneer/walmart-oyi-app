@@ -493,12 +493,14 @@ export const disabledContinue = (
 ): boolean => getItemPalletApiLoading || reserveLocations.length === 0 || reserveLocations.some(
   loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
 );
+
 export const updateMultiPalletUPCQtyV2ApiHook = (
   updateMultiPalletUPCQtyV2Api: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  itemNbr: number
+  itemNbr: number,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyV2Api.isWaiting && updateMultiPalletUPCQtyV2Api.result) {
@@ -512,7 +514,11 @@ export const updateMultiPalletUPCQtyV2ApiHook = (
       dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY_V2.RESET });
       setShowOnHandsConfirmationModal(false);
       dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
-      navigation.goBack();
+      if (route.params && route.params.source === 'OtherAction') {
+        navigation.navigate('ReviewItemDetailsHome');
+      } else {
+        navigation.goBack();
+      }
     }
     if (!updateMultiPalletUPCQtyV2Api.isWaiting && updateMultiPalletUPCQtyV2Api.error) {
       Toast.show({
@@ -702,7 +708,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     dispatch,
     navigation,
     setShowOnHandsConfirmationModal,
-    itemDetails?.itemNbr || 0
+    itemDetails?.itemNbr || 0,
+    route
   ), [updateMultiPalletUPCQtyV2Api]);
 
   return (

@@ -1398,6 +1398,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         false,
+        routeProp,
         mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1409,6 +1410,22 @@ describe('AuditItemScreen', () => {
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
       expect(navigationProp.goBack).toHaveBeenCalled();
+
+      // Tests if user navigated frpm the other action screen
+      const routeOtherAction: RouteProp<any, string> = {
+        ...routeProp,
+        params: { source: 'OtherAction' }
+      };
+      completeItemApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        false,
+        routeOtherAction,
+        mockAuditItemScreenProps.auditSavedWarningState[1]
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
     });
 
     it('Tests completeItemApiHook on 200 success for completing an item with "hasNewQty" set to true', () => {
@@ -1418,6 +1435,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         true,
+        routeProp,
         mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1437,6 +1455,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         mockPalletLocations,
         false,
+        routeProp,
         mockAuditItemScreenProps.auditSavedWarningState[1]
       );
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1546,6 +1565,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
+        routeProp,
         mockModalIsWaitingState[0],
         mockModalIsWaitingState[1]
       );
@@ -1567,6 +1587,23 @@ describe('AuditItemScreen', () => {
 
       expect(setShowOnHands).toHaveBeenCalledWith(false);
       expect(navigationProp.goBack).toHaveBeenCalled();
+
+      // Tests if user navigated frpm the other action screen
+      const routeOtherAction: RouteProp<any, string> = {
+        ...routeProp,
+        params: { source: 'OtherAction' }
+      };
+      updateMultiPalletUPCQtyApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        setShowOnHands,
+        mockItemDetails.itemNbr,
+        routeOtherAction,
+        mockModalIsWaitingState[0],
+        mockModalIsWaitingState[1]
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
     });
 
     it('Tests updateMultiPalletUPCQtyApiHook on failure', () => {
@@ -1577,6 +1614,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
+        routeProp,
         mockModalIsWaitingState[0],
         mockModalIsWaitingState[1]
       );
@@ -1600,6 +1638,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
+        routeProp,
         mockModalIsWaitingState[0],
         mockModalIsWaitingState[1]
       );
@@ -1633,6 +1672,7 @@ describe('AuditItemScreen', () => {
         navigationProp,
         setShowOnHands,
         mockItemDetails.itemNbr,
+        routeProp,
         mockModalIsWaitingState[0],
         mockModalIsWaitingState[1]
       );
@@ -2129,9 +2169,33 @@ describe('AuditItemScreen', () => {
         mockPalletLocations,
         mockItemDetails,
         false,
-        jest.fn()
+        jest.fn(),
+        routeProp
       );
       expect(mockDispatch).toBeCalledTimes(2);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
+
+      // Tests if user navigated frpm the other action screen
+      const routeOtherAction: RouteProp<any, string> = {
+        ...routeProp,
+        params: { source: 'OtherAction' }
+      };
+      updateManagerApprovalApiHook(
+        successApi,
+        mockDispatch,
+        navigationProp,
+        mockPalletLocations,
+        mockItemDetails,
+        false,
+        jest.fn(),
+        routeOtherAction
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
     });
 
     it('test updateManagerApprovalApiHook success with pallet updates', () => {
@@ -2142,7 +2206,8 @@ describe('AuditItemScreen', () => {
         mockPalletLocations,
         mockItemDetails,
         true,
-        jest.fn()
+        jest.fn(),
+        routeProp
       );
       expect(mockDispatch).toBeCalledTimes(2);
     });
@@ -2155,8 +2220,15 @@ describe('AuditItemScreen', () => {
         mockPalletLocations,
         mockItemDetails,
         false,
-        jest.fn()
+        jest.fn(),
+        routeProp
       );
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT,
+        position: 'bottom'
+      });
       expect(mockDispatch).toBeCalledTimes(1);
     });
 

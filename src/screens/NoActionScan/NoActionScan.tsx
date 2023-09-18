@@ -13,6 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {
   NavigationProp,
   RouteProp,
+  StackActions,
   useNavigation,
   useRoute
 } from '@react-navigation/native';
@@ -103,7 +104,8 @@ export const callBackbarcodeEmitter = (
 export const completeItemApiHook = (
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
-  completeItemApi: AsyncState
+  completeItemApi: AsyncState,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     // on api success
@@ -119,8 +121,14 @@ export const completeItemApiHook = (
         });
       } else {
         dispatch(setActionCompleted());
-        navigation.goBack();
-        navigation.goBack();
+        if (route.params && route.params.source === 'OtherAction') {
+          const popItemDetailsAndOtherActionsScreen = 3;
+          // Navigates back to the screen before ReviewItemDetails
+          navigation.dispatch(StackActions.pop(popItemDetailsAndOtherActionsScreen));
+        }
+        const popToScreenBeforeItemDetails = 2;
+        // Navigates back to the screen before ReviewItemDetails
+        navigation.dispatch(StackActions.pop(popToScreenBeforeItemDetails));
       }
     }
 
@@ -190,7 +198,7 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
 
   // Complete Item Details API
   useEffectHook(() => {
-    completeItemApiHook(dispatch, navigation, completeItemApi);
+    completeItemApiHook(dispatch, navigation, completeItemApi, route);
   }, [completeItemApi]);
 
   if (completeItemApi.isWaiting) {

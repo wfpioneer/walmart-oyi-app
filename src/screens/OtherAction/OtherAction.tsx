@@ -220,7 +220,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
               action: 'scan_for_no_action_click',
               itemNbr: itemDetails.itemNbr
             });
-            navigation.navigate('NoActionScan');
+            navigation.navigate('NoActionScan', { source: 'OtherAction' });
           })
           .catch(() => {
             trackEventCall('session_timeout', { user: userId });
@@ -247,7 +247,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
           if (userConfigs.auditWorklists) {
             dispatch(setAuditItemNumber(itemDetails.itemNbr));
             dispatch(resetScannedEvent());
-            navigation.navigate('AuditItem');
+            navigation.navigate('AuditItem', { source: 'OtherAction' });
           }
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
@@ -257,7 +257,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
           trackEventCall(OTHER_ACTIONS, { action: 'reserve_adjustment_click', itemNbr: itemDetails.itemNbr });
           dispatch(setItemDetails(itemDetails));
           dispatch(resetScannedEvent());
-          navigation.navigate('ReserveAdjustment');
+          navigation.navigate('ReserveAdjustment', { source: 'OtherAction' });
         }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
       }
@@ -280,7 +280,7 @@ export const OtherActionScreen = (props: OtherActionProps) => {
             );
             dispatch(setPickCreateFloor(floorLocations));
             dispatch(setPickCreateReserve(reserveLocations));
-            navigation.navigate('Picking', { screen: 'CreatePick' });
+            navigation.navigate('Picking', { screen: 'CreatePick', source: 'OtherAction' });
           }).catch(() => { trackEventCall('session_timeout', { user: userId }); });
         break;
       }
@@ -292,7 +292,8 @@ export const OtherActionScreen = (props: OtherActionProps) => {
               itemNbr: itemDetails.itemNbr
             });
             navigation.navigate('PrintPriceSign', {
-              screen: 'PrintPriceSignScreen'
+              screen: 'PrintPriceSignScreen',
+              source: 'OtherAction'
             });
           })
           .catch(() => {
