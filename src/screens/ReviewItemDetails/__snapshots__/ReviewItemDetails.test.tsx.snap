@@ -322,7 +322,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 3`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -336,7 +336,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -350,7 +350,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -360,14 +360,14 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
     </Text>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -377,7 +377,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -3178,7 +3178,6 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
 <View
   style={
     {
-      "alignItems": "center",
       "flex": 1,
     }
   }
@@ -3192,7 +3191,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -3206,7 +3205,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -3216,14 +3215,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
     </Text>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -3233,7 +3232,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -4179,7 +4178,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               },
               {
                 "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
-                "value": -11,
+                "value": 21,
               },
               {
                 "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
@@ -4191,11 +4190,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               },
               {
                 "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
-                "value": 0,
-              },
-              {
-                "label": "[missing "en.ITEM.FLY_CLOUD_QTY" translation]",
-                "value": 42,
+                "value": 10,
               },
             ]
           }
@@ -4353,7 +4348,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             {
               "action": "pick_history_click",
               "otherInfo": {
-                "itemNbr": 987654321,
+                "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }

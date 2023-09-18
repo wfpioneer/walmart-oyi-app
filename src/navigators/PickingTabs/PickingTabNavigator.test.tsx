@@ -311,7 +311,6 @@ describe('Manage PickingNavigator externalized function tests', () => {
   const mockDispatch = jest.fn();
   afterEach(() => {
     jest.clearAllMocks();
-    jest.restoreAllMocks();
   });
 
   it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
@@ -533,6 +532,7 @@ describe('Manage PickingNavigator externalized function tests', () => {
     expect(navigationProp.isFocused).toHaveBeenCalled();
     expect(validateSession).toHaveBeenCalled();
     expect(trackEvent).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
   });
 
   it('Tests onBackPress event listener', () => {

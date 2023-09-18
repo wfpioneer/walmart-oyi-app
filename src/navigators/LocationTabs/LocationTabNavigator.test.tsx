@@ -33,10 +33,26 @@ import User from '../../models/User';
 import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
 import { HIDE_LOCATION_POPUP } from '../../state/actions/Location';
 import { mockConfig } from '../../mockData/mockConfig';
+import mockUser from '../../mockData/mockUser';
 
 const REACT_NAV_NATIVE = '@react-navigation/native';
 
-let navigationProp: NavigationProp<any>;
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn(),
+  getId: jest.fn(),
+  getParent: jest.fn(),
+  getState: jest.fn()
+};
+
 const routeProp: RouteProp<any, string> = {
   key: '',
   name: 'LocationTab'
@@ -47,42 +63,23 @@ const defaultScannedEvent = {
   value: null
 };
 
-const mockNavigate = jest.fn();
-const mockIsFocused = jest.fn(() => true);
 jest.mock(REACT_NAV_NATIVE, () => {
   const actualNav = jest.requireActual(REACT_NAV_NATIVE);
   return {
     ...actualNav,
     useNavigation: () => ({
-      navigate: mockNavigate,
-      isFocused: mockIsFocused,
+      navigate: jest.fn(),
+      isFocused: jest.fn(() => true),
       addListener: jest.fn()
     })
   };
 });
-const mockValidateSession = jest
-  .fn()
-  .mockImplementation(() => Promise.resolve());
+
+const mockValidateSession = jest.fn(() => Promise.resolve());
 
 afterEach(() => {
   jest.clearAllMocks();
 });
-
-const user: User = {
-  userId: 'vn50pz4',
-  additional: {
-    clockCheckResult: 'yo',
-    displayName: 'Kyle Welch',
-    loginId: 'vn50pz4',
-    mailId: 'vn50pz4@homeoffice.wal-mart.com'
-  },
-  configs: mockConfig,
-  countryCode: 'CN',
-  domain: 'Homeoffice',
-  features: [],
-  siteId: 5597,
-  token: 'gibberish'
-};
 
 describe('Test Location Tabs', (): void => {
   const defaultAsyncState: AsyncState = {
@@ -118,7 +115,7 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
         locationPopupVisible={false}
-        user={user}
+        user={mockUser}
         itemPopupVisible={false}
         getSectionDetailsApi={successApi}
         section={defaultSection}
@@ -159,7 +156,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
-        user={user}
+        user={mockUser}
         itemPopupVisible={false}
         getSectionDetailsApi={emptyApi}
         section={defaultSection}
@@ -196,7 +193,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={false}
-        user={user}
+        user={mockUser}
         itemPopupVisible={false}
         getSectionDetailsApi={successApi}
         section={defaultSection}
@@ -233,7 +230,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook={jest.fn()}
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
-        user={user}
+        user={mockUser}
         itemPopupVisible={false}
         getSectionDetailsApi={successApi}
         section={defaultSection}
@@ -272,7 +269,7 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
-        user={user}
+        user={mockUser}
         itemPopupVisible={false}
         getSectionDetailsApi={successApi}
         section={defaultSection}
@@ -307,7 +304,7 @@ describe('Test Location Tabs', (): void => {
         validateSessionCall={jest.fn()}
         isManualScanEnabled={true}
         locationPopupVisible={false}
-        user={{ ...user, features: ['location management edit'] }}
+        user={{ ...mockUser, features: ['location management edit'] }}
         itemPopupVisible={false}
         getSectionDetailsApi={successApi}
         section={defaultSection}
@@ -348,7 +345,7 @@ describe('Test Location Tabs', (): void => {
           validateSessionCall={jest.fn()}
           isManualScanEnabled={true}
           locationPopupVisible={false}
-          user={user}
+          user={mockUser}
           itemPopupVisible={false}
           getSectionDetailsApi={successApi}
           section={defaultSection}
@@ -388,7 +385,7 @@ describe('Test Location Tabs', (): void => {
           validateSessionCall={jest.fn()}
           isManualScanEnabled={true}
           locationPopupVisible={false}
-          user={user}
+          user={mockUser}
           itemPopupVisible={false}
           getSectionDetailsApi={successApi}
           section={defaultSection}
@@ -430,7 +427,7 @@ describe('Test Location Tabs', (): void => {
           validateSessionCall={jest.fn()}
           isManualScanEnabled={true}
           locationPopupVisible={false}
-          user={user}
+          user={mockUser}
           itemPopupVisible={false}
           getSectionDetailsApi={getSectionDetailsApiLoading}
           section={defaultSection}
@@ -470,7 +467,7 @@ describe('Test Location Tabs', (): void => {
           validateSessionCall={jest.fn()}
           isManualScanEnabled={true}
           locationPopupVisible={false}
-          user={user}
+          user={mockUser}
           itemPopupVisible={false}
           getSectionDetailsApi={getSectionDetailsApiError}
           section={defaultSection}
@@ -520,13 +517,6 @@ describe('Test Location Tabs', (): void => {
   describe('Location Tabs Navigator (section details) externalized function tests', () => {
     const mockSetDisplayConfirmation = jest.fn();
     const mockDispatch = jest.fn();
-    const mockGoBack = jest.fn();
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    navigationProp = {
-      isFocused: mockIsFocused, navigate: mockNavigate, goBack: mockGoBack
-    };
 
     afterEach(() => {
       jest.clearAllMocks();
@@ -545,18 +535,16 @@ describe('Test Location Tabs', (): void => {
       expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
     });
 
-    // async done is needed to test .then() of validateSession
-    it('ensures getSectionDetailsEffect works properly on success', async done => {
-      const doneDispatch = jest.fn(() => done());
+    it('ensures getSectionDetailsEffect works properly on success', async () => {
       const somethingScanned = {
         type: 'CODE-128',
         value: '12345'
       };
-      getSectionDetailsEffect(mockValidateSession, routeProp, somethingScanned, navigationProp, doneDispatch);
+      await getSectionDetailsEffect(mockValidateSession, routeProp, somethingScanned, navigationProp, mockDispatch);
 
       expect(mockValidateSession).toBeCalledTimes(1);
-      expect(mockIsFocused).toBeCalledTimes(1);
-      expect(doneDispatch).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(1);
     });
 
     it('ensures clearSectionApiEffect works properly on success, sales floor', () => {
@@ -577,12 +565,13 @@ describe('Test Location Tabs', (): void => {
       };
 
       clearSectionApiEffect(
-        mockDispatch, navigationProp,
+        mockDispatch,
+        navigationProp,
         salesFloorSuccess,
         section,
         mockSetDisplayConfirmation
       );
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       // called thrice because of handleClearModalClose
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(1);
@@ -607,12 +596,13 @@ describe('Test Location Tabs', (): void => {
       };
 
       clearSectionApiEffect(
-        mockDispatch, navigationProp,
+        mockDispatch,
+        navigationProp,
         salesFloorSuccess,
         section,
         mockSetDisplayConfirmation
       );
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       // called thrice because of handleClearModalClose
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(1);
@@ -637,12 +627,13 @@ describe('Test Location Tabs', (): void => {
       };
 
       clearSectionApiEffect(
-        mockDispatch, navigationProp,
+        mockDispatch,
+        navigationProp,
         salesFloorFail,
         section,
         mockSetDisplayConfirmation
       );
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(0);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
@@ -655,7 +646,7 @@ describe('Test Location Tabs', (): void => {
       };
 
       removeSectionApiEffect(navigationProp, mockDispatch, successNotFoundApi, mockSetDisplayConfirmation);
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockSetDisplayConfirmation).toBeCalledTimes(1);
       expect(mockSetDisplayConfirmation).lastCalledWith(false);
       expect(mockDispatch).toBeCalledTimes(2);
@@ -672,7 +663,7 @@ describe('Test Location Tabs', (): void => {
       };
 
       removeSectionApiEffect(navigationProp, mockDispatch, failApi, mockSetDisplayConfirmation);
-      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith(expect.objectContaining({ type: 'error' }));
       expect(mockSetDisplayConfirmation).toBeCalledTimes(0);
@@ -697,7 +688,7 @@ describe('Test Location Tabs', (): void => {
         useEffectHook: useEffect,
         validateSessionCall: mockValidateSession,
         isManualScanEnabled: false,
-        user,
+        user: mockUser,
         itemPopupVisible: false,
         getSectionDetailsApi: defaultAsyncState,
         section: defaultSection,
@@ -752,11 +743,6 @@ describe('Test Location Tabs', (): void => {
     });
 
     it('Test if barcodeEmitter is called with "scanned" event', () => {
-      const mockNavFocused = {
-        ...jest.requireMock(REACT_NAV_NATIVE),
-        isFocused: jest.fn(() => true)
-      };
-
       jest.spyOn(barcodeEmitter, 'addListener');
       barcodeEmitter.addListener = jest
         .fn()
@@ -776,14 +762,14 @@ describe('Test Location Tabs', (): void => {
               locationName="-"
               dispatch={jest.fn()}
               locationPopupVisible={false}
-              navigation={mockNavFocused}
+              navigation={navigationProp}
               route={routeProp}
               scannedEvent={defaultScannedEvent}
               trackEventCall={jest.fn()}
               useEffectHook={useEffect}
               validateSessionCall={mockValidateSession}
               isManualScanEnabled={false}
-              user={user}
+              user={mockUser}
               itemPopupVisible={false}
               getSectionDetailsApi={defaultAsyncState}
               section={defaultSection}
