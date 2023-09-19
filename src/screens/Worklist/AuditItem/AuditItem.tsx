@@ -878,7 +878,7 @@ export const getScannedPalletEffect = (
   dispatch: Dispatch<any>,
   setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  if (navigation.isFocused() && scannedEvent.value) {
+  if (navigation.isFocused() && scannedEvent.value && scannedEvent.type !== 'card_click') {
     const scannedPallet = parseInt(scannedEvent.value, 10);
     const matchedPallet = reserveLocations.find(
       loc => loc.palletId === scannedPallet
@@ -1716,11 +1716,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(() => {
     onValidateItemNumber(props, userConfig.peteGetLocations);
   }, [itemNumber]);
-
-  // Scanned Item Event Listener
-  useEffectHook(() => {
-    // TO DO
-  }, [scannedEvent]);
 
   // Get Item Location API
   useEffectHook(
