@@ -120,8 +120,8 @@ tools:
     - ndk;23.1.7779620
   gradle: 7.3.1
   maven: 3.8.2
-  nodejs: 18.17.0
-  npm: 9.6.7
+  nodejs: 16.20.0
+  npm: 8.19.4
   sonarscanner: 4.8.0.2856
 
 flows:
