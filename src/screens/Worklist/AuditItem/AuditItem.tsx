@@ -489,7 +489,6 @@ export const getUpdatedReserveLocations = (
 
 export const getItemLocationsApiHook = (
   getItemLocationsApi: AsyncState,
-  itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
@@ -573,7 +572,6 @@ export const getItemLocationsApiHook = (
 
 export const getItemLocationsV1ApiHook = (
   getItemLocationsV1Api: AsyncState,
-  itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
@@ -1722,7 +1720,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemLocationsApiHook(
       getItemLocationsApi,
-      itemNumber,
       dispatch,
       navigation,
       floorLocations,
@@ -1736,7 +1733,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemLocationsV1ApiHook(
       getItemLocationsV1Api,
-      itemNumber,
       dispatch,
       navigation,
       floorLocations,
