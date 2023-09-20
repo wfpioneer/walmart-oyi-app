@@ -497,9 +497,7 @@ export const getItemLocationsApiHook = (
   setFloorLocationIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsApi.isWaiting
-      && getItemLocationsApi.result
-      && getItemLocationsApi.value === itemNumber) {
+    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result) {
       const locDetails = getItemLocationsApi.result.data;
       if (!getSavedAuditLocationsApi.isWaiting && getSavedAuditLocationsApi.result) {
         if (getSavedAuditLocationsApi.result.status === 200) {
@@ -583,9 +581,7 @@ export const getItemLocationsV1ApiHook = (
   setFloorLocationIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsV1Api.isWaiting
-      && getItemLocationsV1Api.result
-      && getItemLocationsV1Api.value === itemNumber) {
+    if (!getItemLocationsV1Api.isWaiting && getItemLocationsV1Api.result) {
       const locDetails: {
           reserveLocation: Location[];
           salesFloorLocation: Location[];
