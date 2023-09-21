@@ -100,6 +100,7 @@ export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY_
 export const GET_AUDIT_LOCATIONS = 'SAGA/GET_AUDIT_LOCATIONS';
 export const SAVE_AUDITS_PROGRESS = 'SAGA/SAVE_AUDITS_PROGRESS';
 export const GET_ITEM_CENTER_TOKEN = 'SAGA/GET_ITEM_CENTER_TOKEN';
+export const DELETE_BAD_PALLET = 'SAGA/DELETE_BAD_PALLET';
 
 export const getItemDetailsV4 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V4, payload } as const);
 
@@ -329,6 +330,13 @@ export const saveAuditLocations = (itemNbr: number, locations: SaveLocation[]) =
 
 export const getItemCenterToken = () => ({ type: GET_ITEM_CENTER_TOKEN } as const);
 
+export const deleteBadPallet = (palletId: number) => ({
+  type: DELETE_BAD_PALLET,
+  payload: {
+    palletId
+  }
+} as const);
+
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
     & Pick<ReturnType<typeof getItemDetailsV4>, 'payload'>
@@ -387,4 +395,5 @@ export type SagaParams =
     & Pick<ReturnType<typeof submitFeedbackRating>, 'payload'>
     & Pick<ReturnType<typeof updateMultiPalletUPCQtyV2>, 'payload'>
     & Pick<ReturnType<typeof getAuditLocations>, 'payload'>
-    & Pick<ReturnType<typeof saveAuditLocations>, 'payload'>;
+    & Pick<ReturnType<typeof saveAuditLocations>, 'payload'>
+    & Pick<ReturnType<typeof deleteBadPallet>, 'payload'>;

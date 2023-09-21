@@ -157,6 +157,11 @@ const genericSagas = [
     saga.GET_ITEM_CENTER_TOKEN,
     actions.getItemCenterToken,
     ItemCenterTokenService.getItemCenterToken
+  ),
+  makeAsyncSaga(
+    saga.DELETE_BAD_PALLET,
+    actions.deleteBadPallet,
+    DeletePalletService.deleteBadPallet
   )
 ];
 

@@ -42,4 +42,11 @@ export default class DeletePalletService {
       }
     );
   }
+
+  public static deleteBadPallet(payload: {palletId: number}) {
+    const urls: Environment = getEnvironment();
+    return Request.put(
+      `${urls.locationUrl}/picklist/pallet/${payload.palletId}`
+    );
+  }
 }
