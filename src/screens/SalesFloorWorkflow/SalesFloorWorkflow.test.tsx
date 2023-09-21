@@ -682,6 +682,44 @@ describe('Sales floor workflow tests', () => {
       expect(mockDispatch).not.toBeCalled();
     });
 
+    it('tests the get pallet details error with status code 422', () => {
+      const failure422API: AsyncState = {
+        ...defaultAsyncState,
+        error: {
+          response: {
+            status: 422,
+            data: {
+              pallets: [
+                {
+                  id: '43',
+                  items: [],
+                  status: 204
+                }
+              ]
+            }
+          }
+        }
+      };
+      const selectedPicks: PickListItem[] = [
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK
+        }
+      ];
+      palletDetailsApiEffect(
+        navigationProp,
+        failure422API,
+        selectedPicks,
+        mockDispatch,
+        mockSetExpiration,
+        mockSetPerishables,
+        mockSetIsReadytoComplete,
+        [],
+        mockSetShowDeleteConfirmationModal
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(true);
+    });
+
     it('test getPalletConfigHook', async () => {
       const dispatch = jest.fn();
       const setConfigComplete = jest.fn();

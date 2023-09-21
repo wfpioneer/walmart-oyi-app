@@ -214,6 +214,16 @@ export const palletDetailsApiEffect = (
         });
       }
     }
+
+    if (!palletDetailsApi.isWaiting && palletDetailsApi.error && palletDetailsApi.error.response.status === 422) {
+      const errorResponse = palletDetailsApi.error.response;
+      if (
+        errorResponse.data.pallets[0].status === 204
+        && errorResponse.data.pallets[0].id === selectedPicks[0].palletId
+      ) {
+        setShowDeleteConfirmationModal(true);
+      }
+    }
   }
 };
 
@@ -895,7 +905,7 @@ const SalesFloorWorkflow = () => {
   const palletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const updatePalletItemsApi = useTypedSelector(state => state.async.updatePalletItemQty);
   const deletePalletItemsApi = useTypedSelector(state => state.async.deleteUpcs);
-  const deleteBadPalletApi = useTypedSelector(state => state.async.deleteBadPallet)
+  const deleteBadPalletApi = useTypedSelector(state => state.async.deleteBadPallet);
   const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
   const { showActivity } = useTypedSelector(state => state.modal);
   const dispatch = useDispatch();
