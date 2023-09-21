@@ -330,7 +330,7 @@ export const saveAuditLocations = (itemNbr: number, locations: SaveLocation[]) =
 
 export const getItemCenterToken = () => ({ type: GET_ITEM_CENTER_TOKEN } as const);
 
-export const deleteBadPallet = (palletId: number) => ({
+export const deleteBadPallet = (palletId: string) => ({
   type: DELETE_BAD_PALLET,
   payload: {
     palletId

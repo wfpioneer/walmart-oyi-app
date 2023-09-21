@@ -27,6 +27,7 @@ import { Pallet, PalletItem, PalletItemDetails } from '../../models/PalletManage
 import { UseStateType } from '../../models/Generics.d';
 import { AsyncState } from '../../models/AsyncState';
 import {
+  deleteBadPallet,
   deleteUpcs, getPalletConfig, getPalletDetails, updatePalletItemQty, updatePicklistStatus, updatePicklistStatusV1
 } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
@@ -72,6 +73,8 @@ interface SFWorklfowProps {
   updateItemsState: UseStateType<boolean>;
   deleteItemsState: UseStateType<boolean>;
   configs: Configurations;
+  showDeleteConfirmationState: UseStateType<boolean>;
+  deleteBadPalletApi: AsyncState;
 }
 
 export const activityIndicatorEffect = (
@@ -168,6 +171,7 @@ export const palletDetailsApiEffect = (
   setPerishableItems: UseStateType<Array<number>>[1],
   setIsReadyToComplete: UseStateType<boolean>[1],
   perishableCategories: number[],
+  setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
     if (!palletDetailsApi.isWaiting && palletDetailsApi.result) {
@@ -201,6 +205,7 @@ export const palletDetailsApiEffect = (
         dispatch(updatePicks(quantifiedPicks));
         dispatch({ type: GET_PALLET_DETAILS.RESET });
       } else if (palletDetailsApi.result.status === 204) {
+        setShowDeleteConfirmationModal(true);
         Toast.show({
           type: 'error',
           text1: strings('LOCATION.PALLET_NOT_FOUND'),
@@ -299,6 +304,33 @@ export const binApisEffect = (
       }
       setIsUpdateItems(false);
       setIsDeleteItems(false);
+    }
+  }
+};
+
+export const deleteBadPalletApiEffect = (
+  deleteBadPalletApi: AsyncState,
+  navigation: NavigationProp<any>,
+  setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (navigation.isFocused()) {
+    if (!deleteBadPalletApi.isWaiting && deleteBadPalletApi.result) {
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      setShowDeleteConfirmationModal(false);
+      navigation.goBack();
+    }
+    if (!deleteBadPalletApi.isWaiting && deleteBadPalletApi.error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
     }
   }
 };
@@ -430,6 +462,55 @@ export const onEndEditing = (
   }
 };
 
+export const deleteBadPalletModal = (
+  showDeleteConfirmationModal: boolean,
+  setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>,
+  deleteBadPalletApi: AsyncState,
+  palletId: string
+): JSX.Element => (
+  <CustomModalComponent
+    isVisible={showDeleteConfirmationModal}
+    modalType="Form"
+    onClose={() => {}}
+    minHeight={100}
+  >
+    {deleteBadPalletApi.isWaiting ? (
+      <ActivityIndicator
+        animating={deleteBadPalletApi.isWaiting}
+        hidesWhenStopped
+        color={COLOR.MAIN_THEME_COLOR}
+        size="large"
+        style={styles.activityIndicator}
+      />
+    ) : (
+      <View>
+        <Text style={styles.message}>{strings('PICKING.PALLET_NOT_IN_SYSTEM')}</Text>
+        <View style={styles.updateExpirationButtonsView}>
+          <Button
+            style={styles.actionButton}
+            title={strings('GENERICS.CANCEL')}
+            titleColor={COLOR.MAIN_THEME_COLOR}
+            type={ButtonType.SOLID_WHITE}
+            onPress={() => { setShowDeleteConfirmationModal(false); }}
+            testID="Cancel Delete Button"
+          />
+          <Button
+            style={styles.actionButton}
+            title={strings('GENERICS.YES')}
+            type={ButtonType.PRIMARY}
+            backgroundColor={COLOR.TRACKER_RED}
+            onPress={() => {
+              dispatch(deleteBadPallet(palletId));
+            }}
+            testID="Confirm Delete Button"
+          />
+        </View>
+      </View>
+    )}
+  </CustomModalComponent>
+);
+
 export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const {
     pickingState, palletDetailsApi, palletConfigApi, dispatch,
@@ -437,7 +518,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     showExpiryPromptState, perishableCategories, configs,
     configCompleteState, showActivity, updatePalletItemsApi,
     deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
-    updateItemsState, deleteItemsState
+    updateItemsState, deleteItemsState, showDeleteConfirmationState,
+    deleteBadPalletApi
   } = props;
 
   const {
@@ -454,6 +536,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const [isReadyToComplete, setIsReadyToComplete] = completePalletState;
   const [isUpdateItems, setIsUpdateItems] = updateItemsState;
   const [isDeleteItems, setIsDeleteItems] = deleteItemsState;
+  const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = showDeleteConfirmationState;
 
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const firstSelectedPick = selectedPicks.length ? selectedPicks[0] : null;
@@ -518,7 +601,8 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     setExpiration,
     setPerishableItems,
     setIsReadyToComplete,
-    perishableCategories
+    perishableCategories,
+    setShowDeleteConfirmationModal
   ), [palletDetailsApi]);
 
   useEffectHook(() => binApisEffect(
@@ -531,6 +615,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     selectedPicks,
     inProgress
   ), [updatePalletItemsApi, deletePalletItemsApi, isUpdateItems, isDeleteItems]);
+
+  // Delete Bad Pallet Api Config
+  useEffectHook(() => deleteBadPalletApiEffect(
+    deleteBadPalletApi,
+    navigation,
+    setShowDeleteConfirmationModal
+  ), [deleteBadPalletApi]);
 
   const handleBin = (newExpirationDate?: string) => {
     const toUpdateItems: PickListItem[] = [];
@@ -650,6 +741,13 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     && firstSelectedPick) {
     return (
       <View style={styles.errorView}>
+        {deleteBadPalletModal(
+          showDeleteConfirmationModal,
+          setShowDeleteConfirmationModal,
+          dispatch,
+          deleteBadPalletApi,
+          firstSelectedPick.palletId
+        )}
         <MaterialIcons name="error" size={60} color={COLOR.RED_300} />
         <Text style={styles.errorText}>{strings('PALLET.PALLET_DETAILS_ERROR')}</Text>
         <TouchableOpacity
@@ -797,6 +895,7 @@ const SalesFloorWorkflow = () => {
   const palletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const updatePalletItemsApi = useTypedSelector(state => state.async.updatePalletItemQty);
   const deletePalletItemsApi = useTypedSelector(state => state.async.deleteUpcs);
+  const deleteBadPalletApi = useTypedSelector(state => state.async.deleteBadPallet)
   const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
   const { showActivity } = useTypedSelector(state => state.modal);
   const dispatch = useDispatch();
@@ -808,6 +907,7 @@ const SalesFloorWorkflow = () => {
   const completePalletState = useState(false);
   const updateItemsState = useState(false);
   const deleteItemsState = useState(false);
+  const showDeleteConfirmationState = useState(false);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['21%'], []);
 
@@ -864,6 +964,8 @@ const SalesFloorWorkflow = () => {
           updateItemsState={updateItemsState}
           deleteItemsState={deleteItemsState}
           configs={configs}
+          showDeleteConfirmationState={showDeleteConfirmationState}
+          deleteBadPalletApi={deleteBadPalletApi}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}
