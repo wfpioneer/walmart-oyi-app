@@ -45,7 +45,7 @@ export default class DeletePalletService {
 
   public static deleteBadPallet(payload: {palletId: string}) {
     const urls: Environment = getEnvironment();
-    return Request.put(
+    return Request.delete(
       `${urls.locationUrl}/picklist/pallet/${payload.palletId}`
     );
   }
