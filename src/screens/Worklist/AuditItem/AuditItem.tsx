@@ -489,7 +489,6 @@ export const getUpdatedReserveLocations = (
 
 export const getItemLocationsApiHook = (
   getItemLocationsApi: AsyncState,
-  itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
@@ -497,9 +496,7 @@ export const getItemLocationsApiHook = (
   setFloorLocationIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsApi.isWaiting
-      && getItemLocationsApi.result
-      && getItemLocationsApi.value === itemNumber) {
+    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result) {
       const locDetails = getItemLocationsApi.result.data;
       if (!getSavedAuditLocationsApi.isWaiting && getSavedAuditLocationsApi.result) {
         if (getSavedAuditLocationsApi.result.status === 200) {
@@ -575,7 +572,6 @@ export const getItemLocationsApiHook = (
 
 export const getItemLocationsV1ApiHook = (
   getItemLocationsV1Api: AsyncState,
-  itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
@@ -583,9 +579,7 @@ export const getItemLocationsV1ApiHook = (
   setFloorLocationIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsV1Api.isWaiting
-      && getItemLocationsV1Api.result
-      && getItemLocationsV1Api.value === itemNumber) {
+    if (!getItemLocationsV1Api.isWaiting && getItemLocationsV1Api.result) {
       const locDetails: {
           reserveLocation: Location[];
           salesFloorLocation: Location[];
@@ -1721,7 +1715,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemLocationsApiHook(
       getItemLocationsApi,
-      itemNumber,
       dispatch,
       navigation,
       floorLocations,
@@ -1735,7 +1728,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemLocationsV1ApiHook(
       getItemLocationsV1Api,
-      itemNumber,
       dispatch,
       navigation,
       floorLocations,
