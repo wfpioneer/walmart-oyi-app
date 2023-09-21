@@ -30,7 +30,6 @@ import { WorklistState } from '../../../state/reducers/Worklist';
 import { WorklistGoal, WorklistSummary } from '../../../models/WorklistSummary';
 import { RenderCategoryCollapsibleCard } from '../../../components/CategoryCollapsibleCard/CategoryCollapsibleCard';
 import { MenuCard } from '../../../components/FilterMenuCard/FilterMenuCard';
-import { getWorklistSummaryV2 } from '../../../state/actions/asyncAPI';
 
 interface FilteredArea extends area {
   isSelected: boolean;
