@@ -2,11 +2,13 @@ import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { fireEvent, render } from '@testing-library/react-native';
 import {
   DELETE_UPCS,
   UPDATE_PALLET_ITEM_QTY,
   UPDATE_PICKLIST_STATUS,
-  UPDATE_PICKLIST_STATUS_V1
+  UPDATE_PICKLIST_STATUS_V1,
+  deleteBadPallet
 } from '../../state/actions/saga';
 import { strings } from '../../locales';
 import { mockItem } from '../../mockData/mockPickList';
@@ -25,6 +27,7 @@ import {
   binApisEffect,
   binServiceCall,
   deleteBadPalletApiEffect,
+  deleteBadPalletModal,
   getCurrentQuantity,
   getInitialQuantity,
   handleDecrement,
@@ -1377,6 +1380,26 @@ describe('Sales floor workflow tests', () => {
           itemQty: 0
         })]
       }));
+    });
+
+    it('tests the deleteBadPalletModal confirm and cancel buttons', () => {
+      const { getByTestId } = render(
+        deleteBadPalletModal(
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDispatch,
+          defaultAsyncState,
+          '0'
+        )
+      );
+
+      const cancelButton = getByTestId('Cancel-Delete-Button');
+      fireEvent.press(cancelButton);
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+
+      const confirmButton = getByTestId('Confirm-Delete-Button');
+      fireEvent.press(confirmButton);
+      expect(mockDispatch).toHaveBeenCalledWith(deleteBadPallet('0'));
     });
   });
 });

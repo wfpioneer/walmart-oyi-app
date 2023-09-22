@@ -1033,7 +1033,7 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
               "margin": 5,
             }
           }
-          testID="Cancel Delete Button"
+          testID="Cancel-Delete-Button"
           title="[missing \\"en.GENERICS.CANCEL\\" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
@@ -1053,7 +1053,7 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
               "margin": 5,
             }
           }
-          testID="Confirm Delete Button"
+          testID="Confirm-Delete-Button"
           title="[missing \\"en.GENERICS.YES\\" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}

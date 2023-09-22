@@ -503,7 +503,7 @@ export const deleteBadPalletModal = (
             titleColor={COLOR.MAIN_THEME_COLOR}
             type={ButtonType.SOLID_WHITE}
             onPress={() => { setShowDeleteConfirmationModal(false); }}
-            testID="Cancel Delete Button"
+            testID="Cancel-Delete-Button"
           />
           <Button
             style={styles.actionButton}
@@ -513,7 +513,7 @@ export const deleteBadPalletModal = (
             onPress={() => {
               dispatch(deleteBadPallet(palletId));
             }}
-            testID="Confirm Delete Button"
+            testID="Confirm-Delete-Button"
           />
         </View>
       </View>
