@@ -197,7 +197,7 @@ export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGo
   });
 
   newGoals.forEach(goal => {
-    goal.worklistGoalPct = getFiniteFixedPercent(goal.totalCompletedItems, goal.totalItems);
+    goal.worklistGoalPct = getFiniteFixedPercent(goal.totalCompletedItems, goal.totalItems, true);
   });
 
   return newGoals;
@@ -511,7 +511,7 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             goalTitle={worklistType}
             goal={worklist.totalItems}
             complete={worklist.completedItems}
-            completionPercentage={getFiniteFixedPercent(worklist.completedItems, worklist.totalItems)}
+            completionPercentage={getFiniteFixedPercent(worklist.completedItems, worklist.totalItems, true)}
             completionGoal={goalSummary.worklistEndGoalPct}
             onPress={() => onWorklistCardPress(
               worklist,
@@ -525,7 +525,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
             )}
             pendingPercentage={getFiniteFixedPercent(
               worklist.completedItems + worklist.inProgressItems,
-              worklist.totalItems
+              worklist.totalItems,
+              true
             )}
             inProgress={inProgressEnabled}
           />
