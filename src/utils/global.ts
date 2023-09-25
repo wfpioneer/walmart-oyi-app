@@ -35,9 +35,8 @@ export const getPaperSizeBasedOnCountry = (
   }
 };
 
-export const getFiniteFixedPercent = (completed: number, total: number, showWholeNumber: boolean): number => {
+export const getFiniteFixedPercent = (completed: number, total: number, decimalPlaces = 0): number => {
   const percent = (completed / total) * 100;
   const finitePercent = Number.isFinite(percent) ? percent : 0;
-  const fixedPercent = Number(finitePercent.toFixed(2));
-  return showWholeNumber ? Math.round(finitePercent) : fixedPercent;
+  return Number(finitePercent.toFixed(decimalPlaces));
 };
