@@ -43,6 +43,7 @@ export default class DeletePalletService {
     );
   }
 
+  // New EndPoint to Update the PickList Status of a Bad Pallet to DELETE
   public static deleteBadPallet(payload: {palletId: string}) {
     const urls: Environment = getEnvironment();
     return Request.delete(
