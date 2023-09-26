@@ -198,7 +198,7 @@ const ItemCard = ({
         </View>
         {(status && getAuditsBadgeText(status)) ? (
           <View style={getAuditsBadgeStyle(status)}>
-            <Text>{getAuditsBadgeText(status)}</Text>
+            <Text style={styles.badgeText}>{getAuditsBadgeText(status)}</Text>
           </View>
         ) : null}
         {onHandQty !== undefined ? (

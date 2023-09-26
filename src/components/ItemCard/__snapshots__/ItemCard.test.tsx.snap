@@ -809,12 +809,18 @@ exports[`Audits ItemCard Component tests rendering item card with worklist statu
             "borderWidth": 1,
             "fontSize": 11,
             "marginVertical": 5,
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
             "paddingVertical": 5,
           }
         }
       >
-        <Text>
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+            }
+          }
+        >
           [missing "en.AUDITS.AUDITS" translation] - [missing "en.AUDITS.IN_PROGRESS" translation]
         </Text>
       </View>
