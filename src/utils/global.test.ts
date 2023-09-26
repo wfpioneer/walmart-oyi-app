@@ -27,8 +27,16 @@ describe('test global utilities function', () => {
   it('tests getting a percentage', () => {
     const piPercent = 31.43;
 
-    const actual = getFiniteFixedPercent(11, 35);
+    const actual = getFiniteFixedPercent(11, 35, 2);
 
     expect(actual).toBe(piPercent);
+  });
+
+  it('tests getting a whole percentage', () => {
+    const wholePercentage = 31;
+    // 11/35 roughly equals ~0.3143 or ~31.43%
+    const actual = getFiniteFixedPercent(11, 35);
+
+    expect(actual).toBe(wholePercentage);
   });
 });
