@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     paddingRight: 6
   },
   pendingApproval: {
-    backgroundColor: COLOR.GREY_300,
+    backgroundColor: COLOR.PALE_ORANGE,
     marginRight: 10,
     marginVertical: 5,
     borderRadius: 4,
