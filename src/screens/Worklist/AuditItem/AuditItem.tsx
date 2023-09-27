@@ -197,6 +197,10 @@ export interface AuditItemScreenProps {
   reserveLocationIsWaitingState: UseStateType<boolean>;
 }
 
+const FLOOR_MIN = 0;
+const PALLET_MIN = 1;
+const MAX = 9999;
+
 export const navigationRemoveListenerHook = (
   e: BeforeRemoveEvent,
   setDisplayWarningModal: UseStateType<boolean>[1],
@@ -1521,9 +1525,9 @@ export const disabledContinue = (
   reserveLocations: ItemPalletInfo[],
   scanRequired: boolean,
   itemDetailsLoading: boolean
-): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 0)
+): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || -1) < FLOOR_MIN)
   || reserveLocations.some(
-    loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
+    loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || 0) < PALLET_MIN
   );
 
 export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] => {
@@ -1673,9 +1677,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   );
 
   const hasNewQty = reserveLocations.some(loc => loc.quantity !== loc.newQty);
-  const MIN = 0;
-  const MAX = 9999;
-
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -2186,7 +2187,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               onRetry={handleFloorLocsRetry}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
-              minQty={MIN}
+              minQty={FLOOR_MIN}
               maxQty={MAX}
             />
           </View>
@@ -2199,7 +2200,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               scanRequired={userConfig.scanRequired}
               onRetry={handleReserveLocsRetry}
               showCalculator={userConfig.showCalculator}
-              minQty={MIN}
+              minQty={PALLET_MIN}
               maxQty={MAX}
             />
           </View>

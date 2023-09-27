@@ -1819,7 +1819,7 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
+        disabledContinue([mockFloorLocations[0]], mockReserveLocations, true, false)
       ).toBe(false);
     });
 
@@ -1841,7 +1841,7 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
+        disabledContinue([mockFloorLocations[0]], mockReserveLocations, false, false)
       ).toBe(false);
     });
 
