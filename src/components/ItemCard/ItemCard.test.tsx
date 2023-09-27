@@ -3,6 +3,7 @@ import ItemCard, { getAuditsBadgeStyle, getAuditsBadgeText, isQuantityPending } 
 import { WorkListStatus } from '../../models/WorklistItem';
 import { strings } from '../../locales';
 import COLOR from '../../themes/Color';
+import styles from './ItemCard.style';
 
 describe('Audits ItemCard Component', () => {
   it('Test renders default ItemCard when loading is false', () => {
@@ -151,8 +152,8 @@ describe('Audits ItemCard Component', () => {
 
     expect(toDoStyle).toStrictEqual({});
     expect(completedStyle).toStrictEqual({});
-    expect(inProgressStyle).toStrictEqual(expect.objectContaining({ backgroundColor: COLOR.MEDIUM_AQUA_BLUE }));
-    expect(awaitingApprovalStyle).toStrictEqual(expect.objectContaining({ backgroundColor: COLOR.GREY_300 }));
+    expect(inProgressStyle).toStrictEqual(expect.objectContaining(styles.inProgress));
+    expect(awaitingApprovalStyle).toStrictEqual(expect.objectContaining(styles.pendingApproval));
   });
 
   it('tests determining if a quantity update is pending', () => {
