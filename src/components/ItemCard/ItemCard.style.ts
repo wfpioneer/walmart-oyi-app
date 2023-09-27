@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 4,
     paddingVertical: 5,
-    paddingHorizontal: 4,
-    fontSize: 11,
+    paddingHorizontal: 8,
+    fontSize: 12,
     borderWidth: 1,
     borderColor: COLOR.GREY_200
   },
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 4,
     paddingVertical: 5,
-    paddingHorizontal: 4,
-    fontSize: 11,
+    paddingHorizontal: 8,
+    fontSize: 12,
     borderWidth: 1,
     borderColor: COLOR.GREY_200
   },
-  badgeText: {
-    alignSelf: 'center'
+  pendingBadges: {
+    flexDirection: 'row'
   }
 });
 
