@@ -380,7 +380,6 @@ export default {
     TODO: '待完成',
     COMPLETED: '已完成',
     PENDING: '待办的',
-    PENDING_APPROVAL: '待审批',
     PENDING_PICK: '待补货',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
     AREA: '区域',

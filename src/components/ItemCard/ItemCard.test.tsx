@@ -2,7 +2,6 @@ import { fireEvent, render } from '@testing-library/react-native';
 import ItemCard, { getAuditsBadgeStyle, getAuditsBadgeText, isQuantityPending } from './ItemCard';
 import { WorkListStatus } from '../../models/WorklistItem';
 import { strings } from '../../locales';
-import COLOR from '../../themes/Color';
 import styles from './ItemCard.style';
 
 describe('Audits ItemCard Component', () => {

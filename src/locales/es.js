@@ -377,7 +377,6 @@ export default {
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
     PENDING: 'Pendiente',
-    PENDING_APPROVAL: 'Pendiente de Aprobación',
     PENDING_PICK: 'Pickeo Pendiente',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
     AREA: 'Área',
