@@ -45,6 +45,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { setPrintingPalletLabel } from '../../state/actions/Print';
 import { Configurations } from '../../models/User';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 // eslint-disable-next-line no-shadow
 export enum ExpiryPromptShow {
@@ -512,6 +513,7 @@ export const deleteBadPalletModal = (
             backgroundColor={COLOR.TRACKER_RED}
             onPress={() => {
               dispatch(deleteBadPallet(palletId));
+              trackEvent('sales_floor_workflow_screen', { action: 'delete_bad_pallet_click', palletId });
             }}
             testID="Confirm-Delete-Button"
           />

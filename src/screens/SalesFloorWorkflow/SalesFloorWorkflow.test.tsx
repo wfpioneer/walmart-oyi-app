@@ -45,10 +45,16 @@ import {
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { UPDATE_PICKS } from '../../state/actions/Picking';
 import { mockConfig } from '../../mockData/mockConfig';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
+}));
+
+jest.mock('../../utils/AppCenterTool.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
+  trackEvent: jest.fn()
 }));
 
 const basePickItem: PickListItem = {
@@ -1400,6 +1406,10 @@ describe('Sales floor workflow tests', () => {
       const confirmButton = getByTestId('Confirm-Delete-Button');
       fireEvent.press(confirmButton);
       expect(mockDispatch).toHaveBeenCalledWith(deleteBadPallet('0'));
+      expect(trackEvent).toHaveBeenCalledWith(
+        'sales_floor_workflow_screen',
+        { action: 'delete_bad_pallet_click', palletId: '0' }
+      );
     });
   });
 });
