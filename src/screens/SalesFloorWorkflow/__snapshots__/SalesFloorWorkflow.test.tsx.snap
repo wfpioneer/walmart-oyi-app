@@ -938,7 +938,7 @@ exports[`Sales floor workflow tests shows the loading indicator over in custom d
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -953,7 +953,7 @@ exports[`Sales floor workflow tests shows the loading indicator over in custom d
   />
   <Text
     style={
-      Object {
+      {
         "marginVertical": 10,
         "textAlign": "center",
       }
@@ -964,7 +964,7 @@ exports[`Sales floor workflow tests shows the loading indicator over in custom d
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -984,7 +984,7 @@ exports[`Sales floor workflow tests shows the loading indicator over in custom d
 exports[`Sales floor workflow tests shows the retry button when get pallet details errors 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -1003,7 +1003,7 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
     <View>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "paddingTop": 10,
             "textAlign": "center",
@@ -1014,7 +1014,7 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginTop": 30,
             "width": "100%",
@@ -1028,13 +1028,13 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
           testID="Cancel-Delete-Button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1048,13 +1048,13 @@ exports[`Sales floor workflow tests shows the retry button when get pallet detai
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "margin": 5,
             }
           }
           testID="Confirm-Delete-Button"
-          title="[missing \\"en.GENERICS.YES\\" translation]"
+          title="[missing "en.GENERICS.YES" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
