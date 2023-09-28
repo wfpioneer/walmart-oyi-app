@@ -11,6 +11,7 @@ import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import {
   AssignLocationScreen,
   backConfirmed,
+  backConfirmedHook,
   binPalletsApiEffect,
   binningItemCard,
   getFailedPallets,
@@ -665,6 +666,21 @@ describe('Assign Location externalized function tests', () => {
     backConfirmed(mockSetState, mockDispatch, navigationProp);
     expect(mockSetState).toHaveBeenCalled();
     expect(mockDispatch).toHaveBeenCalled();
+    expect(mockGoBack).toHaveBeenCalled();
+  });
+
+  it('tests the back confirmed hook that does a navigate back', () => {
+    const mockSetState = jest.fn();
+    backConfirmedHook(false, true, mockSetState, navigationProp);
+    expect(mockSetState).not.toHaveBeenCalled();
+    expect(mockGoBack).not.toHaveBeenCalled();
+
+    backConfirmedHook(false, false, mockSetState, navigationProp);
+    expect(mockSetState).not.toHaveBeenCalled();
+    expect(mockGoBack).not.toHaveBeenCalled();
+
+    backConfirmedHook(true, false, mockSetState, navigationProp);
+    expect(mockSetState).toHaveBeenCalled();
     expect(mockGoBack).toHaveBeenCalled();
   });
 });

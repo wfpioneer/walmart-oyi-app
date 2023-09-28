@@ -44,7 +44,6 @@ import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScr
 import { Configurations } from '../../models/User';
 import { UseStateType } from '../../models/Generics.d';
 import {
-  backConfirmedHook,
   navigationRemoveListenerHook,
   onBinningItemPress
 } from '../Binning/Binning';
@@ -306,6 +305,18 @@ export const backConfirmed = (
   setDisplayWarningModal(false);
   dispatch(clearPallets());
   navigation.goBack();
+};
+
+export const backConfirmedHook = (
+  displayWarningModal: boolean,
+  palletExistForBinning: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  navigation: NavigationProp<any>
+) => {
+  if (displayWarningModal && !palletExistForBinning) {
+    setDisplayWarningModal(false);
+    navigation.goBack();
+  }
 };
 
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {

@@ -6,7 +6,6 @@ import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
 import {
   BinningScreen,
-  backConfirmedHook,
   binningItemCard,
   callPalletDetailsHook,
   cancelBinConfirmed,
@@ -650,21 +649,6 @@ describe('BinningScreen', () => {
       returned = onValidateHardwareBackPress(mockSetState, []);
       expect(mockSetState).not.toHaveBeenCalled();
       expect(returned).toBe(false);
-    });
-
-    it('tests the back confirmed hook that does a navigate back', () => {
-      const mockSetState = jest.fn();
-      backConfirmedHook(false, true, mockSetState, navigationProp);
-      expect(mockSetState).not.toHaveBeenCalled();
-      expect(mockGoBack).not.toHaveBeenCalled();
-
-      backConfirmedHook(false, false, mockSetState, navigationProp);
-      expect(mockSetState).not.toHaveBeenCalled();
-      expect(mockGoBack).not.toHaveBeenCalled();
-
-      backConfirmedHook(true, false, mockSetState, navigationProp);
-      expect(mockSetState).toHaveBeenCalled();
-      expect(mockGoBack).toHaveBeenCalled();
     });
 
     it('tests cancelBinConfirmed', () => {

@@ -217,18 +217,6 @@ export const navigationRemoveListenerHook = (
   }
 };
 
-export const backConfirmedHook = (
-  displayWarningModal: boolean,
-  palletExistForBinning: boolean,
-  setDisplayWarningModal: UseStateType<boolean>[1],
-  navigation: NavigationProp<any>
-) => {
-  if (displayWarningModal && !palletExistForBinning) {
-    setDisplayWarningModal(false);
-    navigation.goBack();
-  }
-};
-
 export const callPalletDetailsHook = (
   scannedPallets: BinningPallet[],
   scannedEvent: ScannedEvent,
@@ -343,13 +331,6 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
   useEffectHook(() => navigation.addListener('beforeRemove', e => {
     navigationRemoveListenerHook(e, setDisplayWarningModal, scannedPallets);
   }), [navigation, scannedPallets]);
-
-  useEffectHook(() => backConfirmedHook(
-    displayWarningModal,
-    palletExistForBinning,
-    setDisplayWarningModal,
-    navigation
-  ), [palletExistForBinning, displayWarningModal]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
