@@ -81,7 +81,8 @@ export const ItemDetailScreen = (
     case SET_ITEM_DETAILS:
       return {
         ...state,
-        itemDetails: action.payload
+        itemDetails: action.payload,
+        itemNbr: action.payload.itemNbr
       };
     case UPDATE_PENDING_OH_QTY:
       return {

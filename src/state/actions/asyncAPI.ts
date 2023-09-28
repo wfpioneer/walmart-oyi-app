@@ -206,3 +206,6 @@ export const saveAuditsProgress = makeAsyncActionCreators(SAVE_AUDITS_PROGRESS);
 
 export const GET_ITEM_CENTER_TOKEN = makeAsyncActionTypes('API/GET_ITEM_CENTER_TOKEN');
 export const getItemCenterToken = makeAsyncActionCreators(GET_ITEM_CENTER_TOKEN);
+
+export const DELETE_BAD_PALLET = makeAsyncActionTypes('API/DELETE_BAD_PALLET');
+export const deleteBadPallet = makeAsyncActionCreators(DELETE_BAD_PALLET);

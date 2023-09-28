@@ -749,7 +749,6 @@ describe('AuditItemScreen', () => {
       };
       getItemLocationsApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -761,7 +760,6 @@ describe('AuditItemScreen', () => {
 
       getItemLocationsApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -773,7 +771,6 @@ describe('AuditItemScreen', () => {
 
       getItemLocationsV1ApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -785,7 +782,6 @@ describe('AuditItemScreen', () => {
 
       getItemLocationsApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -810,7 +806,6 @@ describe('AuditItemScreen', () => {
       };
       getItemLocationsApiHook(
         locationIsWaitingApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -858,7 +853,6 @@ describe('AuditItemScreen', () => {
       };
       getItemLocationsV1ApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -870,7 +864,6 @@ describe('AuditItemScreen', () => {
 
       getItemLocationsV1ApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
 
@@ -885,7 +878,6 @@ describe('AuditItemScreen', () => {
 
       getItemLocationsV1ApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
 
@@ -900,7 +892,6 @@ describe('AuditItemScreen', () => {
 
       getItemLocationsV1ApiHook(
         locationSuccessApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -925,7 +916,6 @@ describe('AuditItemScreen', () => {
       };
       getItemLocationsV1ApiHook(
         locationIsWaitingApi,
-        1,
         mockDispatch,
         navigationProp,
         [],
@@ -1829,7 +1819,7 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, true, false)
+        disabledContinue([mockFloorLocations[0]], mockReserveLocations, true, false)
       ).toBe(false);
     });
 
@@ -1851,7 +1841,7 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue(mockFloorLocations, mockReserveLocations, false, false)
+        disabledContinue([mockFloorLocations[0]], mockReserveLocations, false, false)
       ).toBe(false);
     });
 

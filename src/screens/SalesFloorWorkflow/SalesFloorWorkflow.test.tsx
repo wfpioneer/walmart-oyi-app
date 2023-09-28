@@ -2,11 +2,13 @@ import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { fireEvent, render } from '@testing-library/react-native';
 import {
   DELETE_UPCS,
   UPDATE_PALLET_ITEM_QTY,
   UPDATE_PICKLIST_STATUS,
-  UPDATE_PICKLIST_STATUS_V1
+  UPDATE_PICKLIST_STATUS_V1,
+  deleteBadPallet
 } from '../../state/actions/saga';
 import { strings } from '../../locales';
 import { mockItem } from '../../mockData/mockPickList';
@@ -24,6 +26,8 @@ import {
   activityIndicatorEffect,
   binApisEffect,
   binServiceCall,
+  deleteBadPalletApiEffect,
+  deleteBadPalletModal,
   getCurrentQuantity,
   getInitialQuantity,
   handleDecrement,
@@ -41,10 +45,16 @@ import {
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { UPDATE_PICKS } from '../../state/actions/Picking';
 import { mockConfig } from '../../mockData/mockConfig';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
   hideActivityModal: jest.fn()
+}));
+
+jest.mock('../../utils/AppCenterTool.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
+  trackEvent: jest.fn()
 }));
 
 const basePickItem: PickListItem = {
@@ -138,6 +148,9 @@ const mockUpdateItemsState: UseStateType<boolean> = [false, mockSetIsUpdateItems
 const mockSetIsDeleteItems = jest.fn();
 const mockDeleteItemsState: UseStateType<boolean> = [false, mockSetIsDeleteItems];
 
+const mockSetShowDeleteConfirmationModal = jest.fn();
+const mockShowDeleteConfirmationState: UseStateType<boolean> = [false, mockSetShowDeleteConfirmationModal];
+
 describe('Sales floor workflow tests', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -167,6 +180,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
       />
     );
 
@@ -202,6 +217,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
       />
     );
 
@@ -240,6 +257,51 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('shows the loading indicator over in custom delete bad pallet modal', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    const errorAsyncState: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        status: 418,
+        message: 'Im a teapot'
+      }
+    };
+
+    const apiIsWaiting: AsyncState = {
+      ...defaultAsyncState,
+      isWaiting: true
+    };
+    renderer.render(
+      <SalesFloorWorkflowScreen
+        dispatch={jest.fn()}
+        pickingState={pickingState}
+        navigation={navigationProp}
+        updatePicklistStatusApi={defaultAsyncState}
+        palletDetailsApi={errorAsyncState}
+        useEffectHook={jest.fn()}
+        expirationState={mockExpirationState}
+        perishableItemsState={mockPerishablesState}
+        perishableCategories={[]}
+        palletConfigApi={defaultAsyncState}
+        configCompleteState={mockConfigCompleteState}
+        showExpiryPromptState={mockExpirationShowState}
+        showActivity={false}
+        updatePalletItemsApi={defaultAsyncState}
+        deletePalletItemsApi={defaultAsyncState}
+        completePalletState={mockCompletePalletState}
+        deleteItemsState={mockDeleteItemsState}
+        updateItemsState={mockUpdateItemsState}
+        configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={apiIsWaiting}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -286,6 +348,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
       />
     );
 
@@ -334,6 +398,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
       />
     );
 
@@ -382,6 +448,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
       />
     );
 
@@ -430,6 +498,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
       />
     );
 
@@ -496,6 +566,8 @@ describe('Sales floor workflow tests', () => {
         deleteItemsState={mockDeleteItemsState}
         updateItemsState={mockUpdateItemsState}
         configs={mockConfig}
+        showDeleteConfirmationState={mockShowDeleteConfirmationState}
+        deleteBadPalletApi={defaultAsyncState}
       />
     );
 
@@ -571,6 +643,7 @@ describe('Sales floor workflow tests', () => {
         mockSetPerishables,
         mockSetIsReadytoComplete,
         perishableCategories,
+        mockSetShowDeleteConfirmationModal
       );
       expect(mockSetPerishables).toBeCalledTimes(1);
       expect(mockSetPerishables).toBeCalledWith([2]);
@@ -603,7 +676,8 @@ describe('Sales floor workflow tests', () => {
         mockSetExpiration,
         mockSetPerishables,
         mockSetIsReadytoComplete,
-        perishableCategories
+        perishableCategories,
+        mockSetShowDeleteConfirmationModal
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -615,6 +689,58 @@ describe('Sales floor workflow tests', () => {
       expect(mockSetExpiration).not.toBeCalled();
       expect(mockSetIsReadytoComplete).not.toBeCalled();
       expect(mockDispatch).not.toBeCalled();
+    });
+
+    it('tests the get pallet details error with status code 422', () => {
+      const failure422API: AsyncState = {
+        ...defaultAsyncState,
+        error: {
+          response: {
+            status: 422,
+            data: {
+              pallets: [
+                {
+                  id: '43',
+                  items: [],
+                  status: 204
+                }
+              ]
+            }
+          }
+        }
+      };
+      const selectedPicks: PickListItem[] = [
+        {
+          ...basePickItem,
+          status: PickStatus.READY_TO_WORK
+        }
+      ];
+      palletDetailsApiEffect(
+        navigationProp,
+        failure422API,
+        selectedPicks,
+        mockDispatch,
+        mockSetExpiration,
+        mockSetPerishables,
+        mockSetIsReadytoComplete,
+        [],
+        mockSetShowDeleteConfirmationModal
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(true);
+
+      failure422API.error.response.data.pallets[0].status = 207;
+      palletDetailsApiEffect(
+        navigationProp,
+        failure422API,
+        selectedPicks,
+        mockDispatch,
+        mockSetExpiration,
+        mockSetPerishables,
+        mockSetIsReadytoComplete,
+        [],
+        mockSetShowDeleteConfirmationModal
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
     it('test getPalletConfigHook', async () => {
@@ -731,6 +857,39 @@ describe('Sales floor workflow tests', () => {
       expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PICKLIST_STATUS_V1 }));
       expect(Toast.show).not.toBeCalled();
+    });
+
+    it('test deleteBadPalletApiEffect', async () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 200,
+          data: ''
+        }
+      };
+      const failureApi: AsyncState = {
+        ...defaultAsyncState,
+        error: 'test'
+      };
+
+      deleteBadPalletApiEffect(successApi, navigationProp, mockSetShowDeleteConfirmationModal);
+      expect(navigationProp.isFocused).toHaveBeenCalled();
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('PICKING.NO_PALLETS_AVAILABLE_PICK_DELETED'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+
+      deleteBadPalletApiEffect(failureApi, navigationProp, mockSetShowDeleteConfirmationModal);
+      expect(navigationProp.isFocused).toHaveBeenCalled();
+      expect(Toast.show).toHaveBeenCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
     });
 
     it('tests the activity indicator hook', () => {
@@ -1241,6 +1400,30 @@ describe('Sales floor workflow tests', () => {
           itemQty: 0
         })]
       }));
+    });
+
+    it('tests the deleteBadPalletModal confirm and cancel buttons', () => {
+      const { getByTestId } = render(
+        deleteBadPalletModal(
+          true,
+          mockSetShowDeleteConfirmationModal,
+          mockDispatch,
+          defaultAsyncState,
+          '0'
+        )
+      );
+
+      const cancelButton = getByTestId('Cancel-Delete-Button');
+      fireEvent.press(cancelButton);
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
+
+      const confirmButton = getByTestId('Confirm-Delete-Button');
+      fireEvent.press(confirmButton);
+      expect(mockDispatch).toHaveBeenCalledWith(deleteBadPallet('0'));
+      expect(trackEvent).toHaveBeenCalledWith(
+        'sales_floor_workflow_screen',
+        { action: 'delete_bad_pallet_click', palletId: '0' }
+      );
     });
   });
 });

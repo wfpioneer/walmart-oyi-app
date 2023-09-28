@@ -197,6 +197,10 @@ export interface AuditItemScreenProps {
   reserveLocationIsWaitingState: UseStateType<boolean>;
 }
 
+const FLOOR_MIN = 0;
+const PALLET_MIN = 1;
+const MAX = 9999;
+
 export const navigationRemoveListenerHook = (
   e: BeforeRemoveEvent,
   setDisplayWarningModal: UseStateType<boolean>[1],
@@ -489,7 +493,6 @@ export const getUpdatedReserveLocations = (
 
 export const getItemLocationsApiHook = (
   getItemLocationsApi: AsyncState,
-  itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
@@ -497,9 +500,7 @@ export const getItemLocationsApiHook = (
   setFloorLocationIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsApi.isWaiting
-      && getItemLocationsApi.result
-      && getItemLocationsApi.value === itemNumber) {
+    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.result) {
       const locDetails = getItemLocationsApi.result.data;
       if (!getSavedAuditLocationsApi.isWaiting && getSavedAuditLocationsApi.result) {
         if (getSavedAuditLocationsApi.result.status === 200) {
@@ -575,7 +576,6 @@ export const getItemLocationsApiHook = (
 
 export const getItemLocationsV1ApiHook = (
   getItemLocationsV1Api: AsyncState,
-  itemNumber: number,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   existingFloorLocations: Location[],
@@ -583,9 +583,7 @@ export const getItemLocationsV1ApiHook = (
   setFloorLocationIsWaiting: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
-    if (!getItemLocationsV1Api.isWaiting
-      && getItemLocationsV1Api.result
-      && getItemLocationsV1Api.value === itemNumber) {
+    if (!getItemLocationsV1Api.isWaiting && getItemLocationsV1Api.result) {
       const locDetails: {
           reserveLocation: Location[];
           salesFloorLocation: Location[];
@@ -878,7 +876,7 @@ export const getScannedPalletEffect = (
   dispatch: Dispatch<any>,
   setShowPalletQtyUpdateModal: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  if (navigation.isFocused() && scannedEvent.value) {
+  if (navigation.isFocused() && scannedEvent.value && scannedEvent.type !== 'card_click') {
     const scannedPallet = parseInt(scannedEvent.value, 10);
     const matchedPallet = reserveLocations.find(
       loc => loc.palletId === scannedPallet
@@ -1527,9 +1525,9 @@ export const disabledContinue = (
   reserveLocations: ItemPalletInfo[],
   scanRequired: boolean,
   itemDetailsLoading: boolean
-): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < 0)
+): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || -1) < FLOOR_MIN)
   || reserveLocations.some(
-    loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
+    loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || 0) < PALLET_MIN
   );
 
 export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] => {
@@ -1679,9 +1677,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   );
 
   const hasNewQty = reserveLocations.some(loc => loc.quantity !== loc.newQty);
-  const MIN = 0;
-  const MAX = 9999;
-
   // Scanner listener
   useEffectHook(() => {
     scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
@@ -1717,16 +1712,10 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     onValidateItemNumber(props, userConfig.peteGetLocations);
   }, [itemNumber]);
 
-  // Scanned Item Event Listener
-  useEffectHook(() => {
-    // TO DO
-  }, [scannedEvent]);
-
   // Get Item Location API
   useEffectHook(
     () => getItemLocationsApiHook(
       getItemLocationsApi,
-      itemNumber,
       dispatch,
       navigation,
       floorLocations,
@@ -1740,7 +1729,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   useEffectHook(
     () => getItemLocationsV1ApiHook(
       getItemLocationsV1Api,
-      itemNumber,
       dispatch,
       navigation,
       floorLocations,
@@ -2199,7 +2187,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               onRetry={handleFloorLocsRetry}
               scanRequired={userConfig.scanRequired}
               showCalculator={userConfig.showCalculator}
-              minQty={MIN}
+              minQty={FLOOR_MIN}
               maxQty={MAX}
             />
           </View>
@@ -2212,7 +2200,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
               scanRequired={userConfig.scanRequired}
               onRetry={handleReserveLocsRetry}
               showCalculator={userConfig.showCalculator}
-              minQty={MIN}
+              minQty={PALLET_MIN}
               maxQty={MAX}
             />
           </View>

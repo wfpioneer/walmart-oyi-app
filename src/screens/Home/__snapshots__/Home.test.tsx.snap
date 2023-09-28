@@ -1167,14 +1167,14 @@ exports[`HomeScreen rendering renders wl summaries when api data has summaries, 
       <GoalCircle
         active={false}
         completionGoal={100}
-        completionPercentage={2.52}
+        completionPercentage={3}
         goalTitle="[missing "en.LOCATION.PALLETS" translation]"
         onPress={[Function]}
       />
       <GoalCircle
         active={false}
         completionGoal={100}
-        completionPercentage={46.15}
+        completionPercentage={46}
         goalTitle="[missing "en.EXCEPTION.AUDITS" translation]"
         onPress={[Function]}
       />
@@ -1745,7 +1745,7 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       <GoalCircle
         active={false}
         completionGoal={100}
-        completionPercentage={2.52}
+        completionPercentage={3}
         goalTitle="[missing "en.LOCATION.PALLETS" translation]"
         onPress={[Function]}
       />
@@ -1893,14 +1893,14 @@ exports[`HomeScreen rendering renders worklist summaries when worklistApiState.r
       <GoalCircle
         active={false}
         completionGoal={100}
-        completionPercentage={2.52}
+        completionPercentage={3}
         goalTitle="[missing "en.LOCATION.PALLETS" translation]"
         onPress={[Function]}
       />
       <GoalCircle
         active={false}
         completionGoal={100}
-        completionPercentage={46.15}
+        completionPercentage={46}
         goalTitle="[missing "en.EXCEPTION.AUDITS" translation]"
         onPress={[Function]}
       />

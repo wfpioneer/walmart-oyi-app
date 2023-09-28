@@ -2547,7 +2547,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           locationList={[]}
           locationType="reserve"
           maxQty={9999}
-          minQty={0}
+          minQty={1}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -3089,7 +3089,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           locationList={[]}
           locationType="reserve"
           maxQty={9999}
-          minQty={0}
+          minQty={1}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -3631,7 +3631,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           locationList={[]}
           locationType="reserve"
           maxQty={9999}
-          minQty={0}
+          minQty={1}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -4233,7 +4233,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           locationList={[]}
           locationType="reserve"
           maxQty={9999}
-          minQty={0}
+          minQty={1}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -4783,7 +4783,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationList={[]}
           locationType="reserve"
           maxQty={9999}
-          minQty={0}
+          minQty={1}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
@@ -5333,7 +5333,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           locationList={[]}
           locationType="reserve"
           maxQty={9999}
-          minQty={0}
+          minQty={1}
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}

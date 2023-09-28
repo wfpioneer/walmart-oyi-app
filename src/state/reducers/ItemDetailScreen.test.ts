@@ -6,6 +6,7 @@ import {
   resetLocations,
   setActionCompleted,
   setFloorLocations,
+  setItemDetails,
   setReserveLocations,
   setSelectedLocation,
   setUPC,
@@ -154,5 +155,13 @@ describe('ItemDetailScreen reducer tests', () => {
     testResults = ItemDetailScreen(testMutatedState, setUPC('500252'));
     expect(testResults).toStrictEqual(testMutatedState);
     testMutatedState.upcNbr = '';
+
+    // set itemDetails
+    const testState: ItemDetailsState = {
+      ...testInitialState,
+      itemNbr: 123,
+      itemDetails: getItemDetails[123]
+    };
+    testResults = ItemDetailScreen(testState, setItemDetails(getItemDetails[123]));
   });
 });
