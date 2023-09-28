@@ -6,10 +6,10 @@ import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
 import {
   BinningScreen,
-  backConfirmed,
   backConfirmedHook,
   binningItemCard,
   callPalletDetailsHook,
+  cancelBinConfirmed,
   getPalletDetailsApiHook,
   navigateAssignLocationScreen,
   navigationRemoveListenerHook,
@@ -667,13 +667,12 @@ describe('BinningScreen', () => {
       expect(mockGoBack).toHaveBeenCalled();
     });
 
-    it('tests backConfirmed', () => {
+    it('tests cancelBinConfirmed', () => {
       const mockSetState = jest.fn();
 
-      backConfirmed(mockSetState, mockDispatch, navigationProp, false);
+      cancelBinConfirmed(mockSetState, mockDispatch);
       expect(mockSetState).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalled();
-      expect(mockGoBack).toHaveBeenCalled();
     });
 
     it('tests toggleMultiBinCheckbox', async () => {

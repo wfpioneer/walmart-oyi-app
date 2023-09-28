@@ -84,17 +84,12 @@ export const onValidateHardwareBackPress = (
   return false;
 };
 
-export const backConfirmed = (
+export const cancelBinConfirmed = (
   setDisplayWarningModal: UseStateType<boolean>[1],
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>,
-  enableMultiPalletBin: boolean,
+  dispatch: Dispatch<any>
 ) => {
   setDisplayWarningModal(false);
   dispatch(clearPallets());
-  if (!enableMultiPalletBin) {
-    navigation.goBack();
-  }
 };
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -401,7 +396,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         setDisplayWarningModal,
         strings('BINNING.WARNING_LABEL'),
         strings('BINNING.WARNING_DESCRIPTION'),
-        () => backConfirmed(setDisplayWarningModal, dispatch, navigation, enableMultiPalletBin)
+        () => cancelBinConfirmed(setDisplayWarningModal, dispatch)
       )}
       <View style={styles.container}>
         {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
