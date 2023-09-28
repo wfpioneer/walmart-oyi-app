@@ -97,90 +97,90 @@ describe('CombinePalletsScreen', () => {
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-});
 
-describe('Combine Pallets externalized function tests', () => {
-  const mockDispatch = jest.fn();
-  const mockGoBack = jest.fn();
-  const mockIsFocused = jest.fn(() => true);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  navigationProp = { goBack: mockGoBack, isFocused: mockIsFocused };
+  describe('Combine Pallets externalized function tests', () => {
+    const mockDispatch = jest.fn();
+    const mockGoBack = jest.fn();
+    const mockIsFocused = jest.fn(() => true);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    navigationProp = { goBack: mockGoBack, isFocused: mockIsFocused };
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
-  it('Tests the combine pallets api effect, on success', () => {
-    const successApi: AsyncState = { ...defaultAsyncState, result: {} };
+    it('Tests the combine pallets api effect, on success', () => {
+      const successApi: AsyncState = { ...defaultAsyncState, result: {} };
 
-    combinePalletsApiEffect(successApi, '12', navigationProp, mockDispatch);
-    expect(mockDispatch).toBeCalledTimes(2);
-    expect(mockGoBack).toBeCalledTimes(1);
-    expect(Toast.show).toBeCalledTimes(1);
-  });
+      combinePalletsApiEffect(successApi, '12', navigationProp, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockGoBack).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+    });
 
-  it('Tests the combine pallets api effect, on fail', () => {
-    const failApi: AsyncState = { ...defaultAsyncState, error: {} };
+    it('Tests the combine pallets api effect, on fail', () => {
+      const failApi: AsyncState = { ...defaultAsyncState, error: {} };
 
-    combinePalletsApiEffect(failApi, '12', navigationProp, mockDispatch);
-    expect(mockDispatch).toBeCalledTimes(1);
-    expect(mockGoBack).toBeCalledTimes(0);
-    expect(Toast.show).toBeCalledTimes(1);
-  });
+      combinePalletsApiEffect(failApi, '12', navigationProp, mockDispatch);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockGoBack).toBeCalledTimes(0);
+      expect(Toast.show).toBeCalledTimes(1);
+    });
 
-  it('Tests the get pallet info api effect, on success', () => {
-    const successApi: AsyncState = {
-      ...defaultAsyncState,
-      result: {
-        data: {
-          pallets: [{
-            id: 28,
-            items: [
-              {}
-            ]
-          }]
-        },
-        status: 200
-      }
-    };
+    it('Tests the get pallet info api effect, on success', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          data: {
+            pallets: [{
+              id: 28,
+              items: [
+                {}
+              ]
+            }]
+          },
+          status: 200
+        }
+      };
 
-    getPalletDetailsApiEffect(successApi, mockDispatch, navigationProp);
-    expect(mockIsFocused).toBeCalledTimes(1);
-    expect(mockDispatch).toBeCalledTimes(2);
-    expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: ADD_COMBINE_PALLET }));
-    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
-    expect(Toast.show).toBeCalledTimes(0);
-  });
+      getPalletDetailsApiEffect(successApi, mockDispatch, navigationProp);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(2);
+      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: ADD_COMBINE_PALLET }));
+      expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
+      expect(Toast.show).toBeCalledTimes(0);
+    });
 
-  it('Tests the get pallet info api effect, on 204', () => {
-    const successApi: AsyncState = {
-      ...defaultAsyncState,
-      result: {
-        status: 204
-      }
-    };
+    it('Tests the get pallet info api effect, on 204', () => {
+      const successApi: AsyncState = {
+        ...defaultAsyncState,
+        result: {
+          status: 204
+        }
+      };
 
-    getPalletDetailsApiEffect(successApi, mockDispatch, navigationProp);
-    expect(mockIsFocused).toBeCalledTimes(1);
-    expect(Toast.show).toBeCalledTimes(1);
-    expect(mockDispatch).toBeCalledTimes(1);
-    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
-  });
+      getPalletDetailsApiEffect(successApi, mockDispatch, navigationProp);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
+    });
 
-  it('Tests the get pallet info api effect, on fail', () => {
-    const failApi: AsyncState = {
-      ...defaultAsyncState,
-      error: {
-        status: 418,
-        message: 'I\'m a teapot'
-      }
-    };
+    it('Tests the get pallet info api effect, on fail', () => {
+      const failApi: AsyncState = {
+        ...defaultAsyncState,
+        error: {
+          status: 418,
+          message: 'I\'m a teapot'
+        }
+      };
 
-    getPalletDetailsApiEffect(failApi, mockDispatch, navigationProp);
-    expect(mockIsFocused).toBeCalledTimes(1);
-    expect(Toast.show).toBeCalledTimes(1);
-    expect(mockDispatch).toBeCalledTimes(1);
-    expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
+      getPalletDetailsApiEffect(failApi, mockDispatch, navigationProp);
+      expect(mockIsFocused).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockDispatch).lastCalledWith(expect.objectContaining({ type: GET_PALLET_DETAILS.RESET }));
+    });
   });
 });

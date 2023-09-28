@@ -115,23 +115,25 @@ class Request {
         } else if (!err.response && message.includes('timeout')) {
           // Network request timeout
           console.warn('network request timeout');
+        } else if (!err.response && message.includes('ENOTFOUND')) {
+          console.warn('DNS Failure, Gateway cannot resolve the host');
         } else if (message.includes(NETWORK_ERROR)) {
           // Network error
           console.warn(NETWORK_ERROR);
-        } else if (err.response.status === 500) {
+        } else if (err.response?.status === 500) {
           // Request failed with status code 500, Internal Server Error
-        } else if (err.response.status === 415) {
+        } else if (err.response?.status === 415) {
           // Request failed with status code 415, Unsupported Media Type
-        } else if (err.response.status === 409) {
+        } else if (err.response?.status === 409) {
           // Request failed with status code 409, Conflict
-        } else if (err.response.status === 404) {
+        } else if (err.response?.status === 404) {
           // Request failed with status code 404, Not Found
-        } else if (err.response.status === 403) {
+        } else if (err.response?.status === 403) {
           // Request failed with status code 403, Forbidden
-        } else if (err.response.status === 401) {
+        } else if (err.response?.status === 401) {
           // Request failed with status code 401, Unauthorized
-          console.warn(err.response.data.reason);
-        } else if (err.response.status === 400) {
+          console.warn(err.response?.data.reason);
+        } else if (err.response?.status === 400) {
           // Request failed with status code 400, Bad Request
         }
         return Promise.reject(err);

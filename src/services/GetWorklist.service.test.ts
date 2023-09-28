@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { getEnvironment } from '../utils/environment';
-import Request, { mockAxiosResponse } from './Request';
+import Request from './Request';
 import GetWorklistService from './GetWorklist.service';
 
 describe('Get Worklist Service Tests', () => {
@@ -11,7 +11,6 @@ describe('Get Worklist Service Tests', () => {
   // TODO refactor test Spike story for Mock Service Worker
   it('ensures that the get audit worklist v1 function calls correctly', async () => {
     const getAuditWorklistV1 = GetWorklistService.getWorklistAuditV1;
-    mockAxiosResponse(undefined);
     const mockResponse = { data: [], status: 200, statusText: 'ok' } as AxiosResponse;
     const getRequestSpy = jest.spyOn(Request, 'get');
     getRequestSpy.mockResolvedValue(mockResponse);
