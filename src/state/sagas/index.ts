@@ -24,7 +24,6 @@ import ConfigService from '../../services/Config.service';
 import GetItemDetailsUPCService from '../../services/GetItemDetailsUPCService';
 import PalletManagementService from '../../services/PalletManagement.service';
 import CreatePalletService from '../../services/CreatePallet.service';
-import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 import ReportMissingPalletService from '../../services/ReportMissingPallet.service';
 import GetItemPalletsService from '../../services/GetItemPallets.service';
@@ -110,7 +109,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_DETAIL_UPC, actions.getItemDetailsUPC, GetItemDetailsUPCService.getItemDetailsUPC),
   makeAsyncSaga(saga.ADD_PALLET_UPCS, actions.addPalletUPCs, AddPalletService.addPalletUPCs),
   makeAsyncSaga(saga.UPDATE_PALLET_ITEM_QTY, actions.updatePalletItemQty, PalletManagementService.updateItemQuantity),
-  makeAsyncSaga(saga.DELETE_UPCS, actions.deleteUpcs, DeletePalletUPCsService.deletePalletUPCs),
+  makeAsyncSaga(saga.DELETE_UPCS, actions.deleteUpcs, DeletePalletService.deletePalletUPCs),
   makeAsyncSaga(saga.COMBINE_PALLETS, actions.combinePallets, PalletManagementService.combinePallets),
   makeAsyncSaga(saga.PRINT_PALLET_LABEL, actions.printPalletLabel, PrintService.printPallet),
   makeAsyncSaga(saga.CLEAR_PALLET, actions.clearPallet, DeletePalletService.clearPallet),
@@ -158,6 +157,11 @@ const genericSagas = [
     saga.GET_ITEM_CENTER_TOKEN,
     actions.getItemCenterToken,
     ItemCenterTokenService.getItemCenterToken
+  ),
+  makeAsyncSaga(
+    saga.DELETE_BAD_PALLET,
+    actions.deleteBadPallet,
+    DeletePalletService.deleteBadPallet
   )
 ];
 
