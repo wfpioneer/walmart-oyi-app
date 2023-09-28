@@ -28,7 +28,6 @@ export default class DeletePalletService {
   }) {
     const upcsUrlParam = payload.upcs.reduce((reducer, current, index, array) => {
       if (index !== array.length - 1) {
-        // TODO: eslint issue is not easily resolvable and we many need tech debt story to fix this issue.
         return reducer.concat(`upcs=${current}&`);
       }
       return reducer.concat(`upcs=${current}`);
