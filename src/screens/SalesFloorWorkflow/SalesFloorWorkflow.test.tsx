@@ -727,6 +727,20 @@ describe('Sales floor workflow tests', () => {
         mockSetShowDeleteConfirmationModal
       );
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(true);
+
+      failure422API.error.response.data.pallets[0].status = 207;
+      palletDetailsApiEffect(
+        navigationProp,
+        failure422API,
+        selectedPicks,
+        mockDispatch,
+        mockSetExpiration,
+        mockSetPerishables,
+        mockSetIsReadytoComplete,
+        [],
+        mockSetShowDeleteConfirmationModal
+      );
+      expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
     it('test getPalletConfigHook', async () => {

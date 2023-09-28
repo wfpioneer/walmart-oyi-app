@@ -163,6 +163,16 @@ export const updatePicklistStatusApiEffect = (
   }
 };
 
+const getPalletPerishableItems = (
+  pallet: PalletItemDetails,
+  perishableCategories: number[],
+): number[] => pallet.items.reduce(
+  (perishableItems: number[], palletItem) => (perishableCategories.includes(palletItem.categoryNbr ?? 0)
+    ? [...perishableItems, Number(palletItem.itemNbr)]
+    : perishableItems),
+  []
+);
+
 export const palletDetailsApiEffect = (
   navigation: NavigationProp<any>,
   palletDetailsApi: AsyncState,
@@ -175,37 +185,28 @@ export const palletDetailsApiEffect = (
   setShowDeleteConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (navigation.isFocused()) {
-    const palletHasResult = !palletDetailsApi.isWaiting && palletDetailsApi.result;
-    if (palletHasResult && palletDetailsApi.result.status === 200) {
+    if (!palletDetailsApi.isWaiting && palletDetailsApi.result && palletDetailsApi.result.status === 200) {
       // success
       const { pallets }: { pallets: PalletItemDetails[] } = palletDetailsApi.result.data;
       const pallet = pallets[0];
       // validate that there are no other items besides the selectedPicks on the pallet
       const quantifiedPicks: PickListItem[] = [];
 
-      // Check if all pallet items are in selectedPicks
-      if (pallet.items.length === selectedPicks.length) {
-        setIsReadyToComplete(true);
-      }
+      setIsReadyToComplete(pallet.items.length === selectedPicks.length);
 
       selectedPicks.forEach(pick => {
         const itemWithQty = pallet.items.find(palletItem => pick.itemNbr === palletItem.itemNbr);
-        const initialQty = itemWithQty?.quantity ?? 0;
+        const initialQty = itemWithQty?.quantity;
         quantifiedPicks.push({ ...pick, quantityLeft: initialQty });
       });
 
-      const palletPerishableItems = pallet.items.reduce(
-        (perishableItems: number[], palletItem) => (perishableCategories.includes(palletItem.categoryNbr ?? 0)
-          ? [...perishableItems, Number(palletItem.itemNbr)]
-          : perishableItems),
-        []
-      );
+      const palletPerishableItems = getPalletPerishableItems(pallet, perishableCategories);
 
       setPerishableItems(palletPerishableItems);
       setExpiration(pallet.expirationDate ?? '');
       dispatch(updatePicks(quantifiedPicks));
       dispatch({ type: GET_PALLET_DETAILS.RESET });
-    } else if (palletHasResult && palletDetailsApi.result.status === 204) {
+    } else if (!palletDetailsApi.isWaiting && palletDetailsApi.result && palletDetailsApi.result.status === 204) {
       setShowDeleteConfirmationModal(true);
       Toast.show({
         type: 'error',
@@ -216,13 +217,9 @@ export const palletDetailsApiEffect = (
     }
 
     if (!palletDetailsApi.isWaiting && palletDetailsApi.error && palletDetailsApi.error.response.status === 422) {
-      const errorResponse = palletDetailsApi.error.response;
-      if (
-        errorResponse.data.pallets[0].status === 204
-        && errorResponse.data.pallets[0].id === selectedPicks[0].palletId
-      ) {
-        setShowDeleteConfirmationModal(true);
-      }
+      const palletResponse = palletDetailsApi.error.response.data.pallets[0];
+
+      setShowDeleteConfirmationModal(palletResponse.status === 204 && palletResponse.id === selectedPicks[0].palletId);
     }
   }
 };
