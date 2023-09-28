@@ -25,6 +25,7 @@ import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 import { validateSession } from '../../utils/sessionTimeout';
 import { toggleMultiBin } from '../../state/actions/Binning';
+import { resetScannedEvent } from '../../state/actions/Global';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -623,15 +624,18 @@ describe('BinningScreen', () => {
       };
       const mockSetDisplayWarningModal = jest.fn();
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, [], mockDispatch, false);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, [], mockDispatch, true);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin(false));
+      expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, mockPallets);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, mockPallets, mockDispatch, false);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockPreventDefault).toHaveBeenCalled();
     });

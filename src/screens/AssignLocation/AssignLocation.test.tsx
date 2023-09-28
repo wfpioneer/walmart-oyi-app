@@ -15,6 +15,7 @@ import {
   binPalletsApiEffect,
   binningItemCard,
   getFailedPallets,
+  navigationRemoveListenerHook,
   onValidateHardwareBackPress,
   updatePicklistStatusApiHook
 } from './AssignLocation';
@@ -23,7 +24,7 @@ import { BinningPallet } from '../../models/Binning';
 import { mockPallets } from '../../mockData/binning';
 import { mockPickingState } from '../../mockData/mockPickingState';
 import { mockConfig } from '../../mockData/mockConfig';
-import { UseStateType } from '../../models/Generics.d';
+import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -682,5 +683,28 @@ describe('Assign Location externalized function tests', () => {
     backConfirmedHook(true, false, mockSetState, navigationProp);
     expect(mockSetState).toHaveBeenCalled();
     expect(mockGoBack).toHaveBeenCalled();
+  });
+
+  it('tests the remove listener hook', () => {
+    const mockPreventDefault = jest.fn();
+    const beforeRemoveEvent: BeforeRemoveEvent = {
+      data: {
+        action: {
+          type: 'salkdf'
+        }
+      },
+      defaultPrevented: false,
+      preventDefault: mockPreventDefault,
+      type: 'beforeRemove'
+    };
+    const mockSetDisplayWarningModal = jest.fn();
+
+    navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, []);
+    expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
+    expect(mockPreventDefault).not.toHaveBeenCalled();
+
+    navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, mockPallets);
+    expect(mockSetDisplayWarningModal).toHaveBeenCalled();
+    expect(mockPreventDefault).toHaveBeenCalled();
   });
 });

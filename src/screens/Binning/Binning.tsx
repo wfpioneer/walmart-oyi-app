@@ -209,12 +209,21 @@ export const getPalletDetailsApiHook = (
 export const navigationRemoveListenerHook = (
   e: BeforeRemoveEvent,
   setDisplayWarningModal: UseStateType<boolean>[1],
-  palletsToBin: BinningPallet[]
+  palletsToBin: BinningPallet[],
+  dispatch: Dispatch<any>,
+  enableMultiPalletBin: boolean
 ) => {
   if (palletsToBin.length > 0) {
     setDisplayWarningModal(true);
     e.preventDefault();
+    return true;
   }
+
+  if (enableMultiPalletBin) {
+    dispatch(toggleMultiBin(false));
+  }
+  dispatch(resetScannedEvent());
+  return false;
 };
 
 export const callPalletDetailsHook = (
@@ -329,8 +338,8 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
   // validation on app back press
   useEffectHook(() => navigation.addListener('beforeRemove', e => {
-    navigationRemoveListenerHook(e, setDisplayWarningModal, scannedPallets);
-  }), [navigation, scannedPallets]);
+    navigationRemoveListenerHook(e, setDisplayWarningModal, scannedPallets, dispatch, enableMultiPalletBin);
+  }), [navigation, scannedPallets, enableMultiPalletBin]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
