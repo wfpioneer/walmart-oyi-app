@@ -6,10 +6,9 @@ import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
 import {
   BinningScreen,
-  backConfirmed,
-  backConfirmedHook,
   binningItemCard,
   callPalletDetailsHook,
+  cancelBinConfirmed,
   getPalletDetailsApiHook,
   navigateAssignLocationScreen,
   navigationRemoveListenerHook,
@@ -26,6 +25,7 @@ import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 import { validateSession } from '../../utils/sessionTimeout';
 import { toggleMultiBin } from '../../state/actions/Binning';
+import { resetScannedEvent } from '../../state/actions/Global';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -624,15 +624,18 @@ describe('BinningScreen', () => {
       };
       const mockSetDisplayWarningModal = jest.fn();
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, [], mockDispatch, false);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, [], mockDispatch, true);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin(false));
+      expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, mockPallets);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, mockPallets, mockDispatch, false);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockPreventDefault).toHaveBeenCalled();
     });
@@ -652,28 +655,12 @@ describe('BinningScreen', () => {
       expect(returned).toBe(false);
     });
 
-    it('tests the back confirmed hook that does a navigate back', () => {
-      const mockSetState = jest.fn();
-      backConfirmedHook(false, true, mockSetState, navigationProp);
-      expect(mockSetState).not.toHaveBeenCalled();
-      expect(mockGoBack).not.toHaveBeenCalled();
-
-      backConfirmedHook(false, false, mockSetState, navigationProp);
-      expect(mockSetState).not.toHaveBeenCalled();
-      expect(mockGoBack).not.toHaveBeenCalled();
-
-      backConfirmedHook(true, false, mockSetState, navigationProp);
-      expect(mockSetState).toHaveBeenCalled();
-      expect(mockGoBack).toHaveBeenCalled();
-    });
-
-    it('tests backConfirmed', () => {
+    it('tests cancelBinConfirmed', () => {
       const mockSetState = jest.fn();
 
-      backConfirmed(mockSetState, mockDispatch, navigationProp, false);
+      cancelBinConfirmed(mockSetState, mockDispatch);
       expect(mockSetState).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalled();
-      expect(mockGoBack).toHaveBeenCalled();
     });
 
     it('tests toggleMultiBinCheckbox', async () => {
