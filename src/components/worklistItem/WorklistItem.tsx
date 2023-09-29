@@ -65,7 +65,7 @@ export const WorklistItem = (props: WorklistItemProps): JSX.Element => {
         </Text>
         <View style={styles.pendingBadges}>
           {pendingPick && <Text style={styles.pendingPick}>{strings('WORKLIST.PENDING_PICK')}</Text>}
-          {pendingApproval && <Text style={styles.pendingApproval}>{strings('WORKLIST.PENDING_APPROVAL')}</Text>}
+          {pendingApproval && <Text style={styles.pendingApproval}>{strings('ITEM.PENDING_MGR_APPROVAL')}</Text>}
         </View>
       </View>
     </TouchableOpacity>
