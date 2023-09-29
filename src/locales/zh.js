@@ -510,7 +510,8 @@ export default {
     ACCEPT_MULTIPLE_PICKS: '批量接收补货任务',
     ACCEPT_FOLLOWING_PICKS: '接受这些补货任务清单?',
     ACCEPT_FOLLOWING_BINS: '接受这些上架任务清单?',
-    LOC_LABEL: '货架位置'
+    LOC_LABEL: '货架位置',
+    PALLET_NOT_IN_SYSTEM: '系统无法找到该卡板，是否取消该补货?'
   },
   BINNING: {
     BINNING: '上架',

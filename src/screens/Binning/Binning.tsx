@@ -84,17 +84,12 @@ export const onValidateHardwareBackPress = (
   return false;
 };
 
-export const backConfirmed = (
+export const cancelBinConfirmed = (
   setDisplayWarningModal: UseStateType<boolean>[1],
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>,
-  enableMultiPalletBin: boolean,
+  dispatch: Dispatch<any>
 ) => {
   setDisplayWarningModal(false);
   dispatch(clearPallets());
-  if (!enableMultiPalletBin) {
-    navigation.goBack();
-  }
 };
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -214,24 +209,21 @@ export const getPalletDetailsApiHook = (
 export const navigationRemoveListenerHook = (
   e: BeforeRemoveEvent,
   setDisplayWarningModal: UseStateType<boolean>[1],
-  palletsToBin: BinningPallet[]
+  palletsToBin: BinningPallet[],
+  dispatch: Dispatch<any>,
+  enableMultiPalletBin: boolean
 ) => {
   if (palletsToBin.length > 0) {
     setDisplayWarningModal(true);
     e.preventDefault();
+    return true;
   }
-};
 
-export const backConfirmedHook = (
-  displayWarningModal: boolean,
-  palletExistForBinning: boolean,
-  setDisplayWarningModal: UseStateType<boolean>[1],
-  navigation: NavigationProp<any>
-) => {
-  if (displayWarningModal && !palletExistForBinning) {
-    setDisplayWarningModal(false);
-    navigation.goBack();
+  if (enableMultiPalletBin) {
+    dispatch(toggleMultiBin(false));
   }
+  dispatch(resetScannedEvent());
+  return false;
 };
 
 export const callPalletDetailsHook = (
@@ -346,15 +338,8 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
 
   // validation on app back press
   useEffectHook(() => navigation.addListener('beforeRemove', e => {
-    navigationRemoveListenerHook(e, setDisplayWarningModal, scannedPallets);
-  }), [navigation, scannedPallets]);
-
-  useEffectHook(() => backConfirmedHook(
-    displayWarningModal,
-    palletExistForBinning,
-    setDisplayWarningModal,
-    navigation
-  ), [palletExistForBinning, displayWarningModal]);
+    navigationRemoveListenerHook(e, setDisplayWarningModal, scannedPallets, dispatch, enableMultiPalletBin);
+  }), [navigation, scannedPallets, enableMultiPalletBin]);
 
   // validation on Hardware backPress
   useFocusEffectHook(
@@ -401,7 +386,7 @@ export const BinningScreen = (props: BinningScreenProps): JSX.Element => {
         setDisplayWarningModal,
         strings('BINNING.WARNING_LABEL'),
         strings('BINNING.WARNING_DESCRIPTION'),
-        () => backConfirmed(setDisplayWarningModal, dispatch, navigation, enableMultiPalletBin)
+        () => cancelBinConfirmed(setDisplayWarningModal, dispatch)
       )}
       <View style={styles.container}>
         {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}

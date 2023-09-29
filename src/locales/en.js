@@ -507,9 +507,10 @@ export default {
     QUANTITY_STOCKED: 'Quantity Stocked',
     ACCEPT_FOLLOWING_PICKS: 'Accept the following picks?',
     ACCEPT_FOLLOWING_BINS: 'Accept the following bins?',
-    LOC_LABEL: 'Loc',
     ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
-    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
+    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks',
+    LOC_LABEL: 'Loc',
+    PALLET_NOT_IN_SYSTEM: 'Pallet cannot be found in the system. Do you wish to delete this pick?'
   },
   BINNING: {
     BINNING: 'Binning',

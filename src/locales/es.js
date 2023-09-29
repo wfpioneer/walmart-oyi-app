@@ -506,7 +506,8 @@ export default {
     ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos',
     ACCEPT_FOLLOWING_PICKS: 'Aceptar los siguientes pickeos?',
     ACCEPT_FOLLOWING_BINS: 'Aceptar los siguientes ingresos a bodega?',
-    LOC_LABEL: 'Ubi'
+    LOC_LABEL: 'Ubi',
+    PALLET_NOT_IN_SYSTEM: 'El pallet no se pudo encontrar en el sistema, ¿quieres borrar el pickeo?'
   },
   BINNING: {
     BINNING: 'Bodega',

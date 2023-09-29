@@ -98,6 +98,11 @@ const styles = StyleSheet.create({
   },
   additionalItemsLabel: {
     fontSize: 13
+  },
+  message: {
+    textAlign: 'center',
+    fontSize: 18,
+    paddingTop: 10
   }
 });
 

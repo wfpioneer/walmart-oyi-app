@@ -71,7 +71,8 @@ export const asyncReducer = combineReducers({
   updateMultiPalletUPCQtyV2: makeAsyncReducer(asyncActions.UPDATE_MULTI_PALLET_UPC_QTY_V2),
   getAuditLocations: makeAsyncReducer(asyncActions.GET_AUDIT_LOCATIONS),
   saveAuditsProgress: makeAsyncReducer(asyncActions.SAVE_AUDITS_PROGRESS),
-  getItemCenterToken: makeAsyncReducer(asyncActions.GET_ITEM_CENTER_TOKEN)
+  getItemCenterToken: makeAsyncReducer(asyncActions.GET_ITEM_CENTER_TOKEN),
+  deleteBadPallet: makeAsyncReducer(asyncActions.DELETE_BAD_PALLET)
 });
 
 export default asyncReducer;
