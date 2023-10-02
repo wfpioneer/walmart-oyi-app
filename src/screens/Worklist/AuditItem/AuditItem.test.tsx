@@ -440,6 +440,14 @@ describe('AuditItemScreen', () => {
     const mockSetFloorLocIsWaiting = jest.fn();
     const mockSetReserveLocIsWaiting = jest.fn();
 
+    const locationErrorApi: AsyncState = {
+      ...defaultAsyncState,
+      error: {
+        code: 'ERR_CANCELED',
+        message: 'Timeout'
+      }
+    };
+
     afterEach(() => {
       jest.clearAllMocks();
     });
@@ -796,6 +804,16 @@ describe('AuditItemScreen', () => {
       });
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsApiHook(
+        locationErrorApi,
+        mockDispatch,
+        navigationProp,
+        [],
+        getSavedLocationError,
+        mockSetFloorLocIsWaiting
+      );
+      expect(mockSetFloorLocIsWaiting).toBeCalledWith(false);
     });
 
     it('Tests get item locations api hook isWaiting', () => {
@@ -866,10 +884,7 @@ describe('AuditItemScreen', () => {
         locationSuccessApi,
         mockDispatch,
         navigationProp,
-
-        [
-
-        ],
+        [],
         getSavedLocationSuccess,
         mockSetFloorLocIsWaiting
       );
@@ -880,10 +895,7 @@ describe('AuditItemScreen', () => {
         locationSuccessApi,
         mockDispatch,
         navigationProp,
-
-        [
-
-        ],
+        [],
         getSavedLocation204,
         mockSetFloorLocIsWaiting
       );
@@ -906,6 +918,16 @@ describe('AuditItemScreen', () => {
       });
       expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
+
+      getItemLocationsV1ApiHook(
+        locationErrorApi,
+        mockDispatch,
+        navigationProp,
+        [],
+        getSavedLocationError,
+        mockSetFloorLocIsWaiting
+      );
+      expect(mockSetFloorLocIsWaiting).toBeCalledWith(false);
     });
 
     it('Tests get item locations v1 api hook isWaiting', () => {
