@@ -4,6 +4,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { mockConfig } from '../../mockData/mockConfig';
 import {
+  badDataCombinedWorklistSummary,
   mockAllCompleteWorklistSummaries,
   mockHalfCompleteWorklistSummaries,
   mockItemAndPalletWorklistSummary,
@@ -12,9 +13,11 @@ import {
 } from '../../mockData/mockWorklistSummary';
 import { AsyncState } from '../../models/AsyncState';
 import {
-  HomeScreen, HomeScreenProps, WorklistGoalMove, reorganizeGoals
+  HomeScreen, HomeScreenProps, WorklistGoalMove, fixSumOfItemsMoreThanTotal, onWorklistCardPress, reorganizeGoals
 } from './Home';
 import { WorklistGoal, WorklistSummary } from '../../models/WorklistSummary';
+import { trackEvent } from '../../utils/AppCenterTool';
+import { strings } from '../../locales';
 
 jest.mock('../../../package.json', () => ({
   version: '1.1.0'
@@ -26,6 +29,16 @@ jest.mock('react-native-config', () => {
     ENVIRONMENT: ' DEV'
   };
 });
+jest.mock('../../utils/AppCenterTool', () => ({
+  ...jest.requireActual('../../utils/AppCenterTool'),
+  trackEvent: jest.fn()
+}));
+
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/sessionTimeout.ts'),
+  validateSession: jest.fn(() => Promise.resolve())
+}));
+
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
@@ -453,20 +466,20 @@ describe('HomeScreen', () => {
   });
 
   describe('externalized function tests', () => {
-    it('tests the reorganizeGoals function', () => {
-      const nsfqToPalletsMove: WorklistGoalMove = {
-        worklistType: 'NSFQ',
-        destinationGoal: WorklistGoal.PALLETS
-      };
-      const nohToAuditsMove: WorklistGoalMove = {
-        worklistType: 'NO',
-        destinationGoal: WorklistGoal.AUDITS
-      };
-      const raToItemsMove: WorklistGoalMove = {
-        worklistType: 'RA',
-        destinationGoal: WorklistGoal.ITEMS
-      };
+    const nsfqToPalletsMove: WorklistGoalMove = {
+      worklistType: 'NSFQ',
+      destinationGoal: WorklistGoal.PALLETS
+    };
+    const nohToAuditsMove: WorklistGoalMove = {
+      worklistType: 'NO',
+      destinationGoal: WorklistGoal.AUDITS
+    };
+    const raToItemsMove: WorklistGoalMove = {
+      worklistType: 'RA',
+      destinationGoal: WorklistGoal.ITEMS
+    };
 
+    it('tests the reorganizeGoals function', () => {
       const expectedNsfqReorganized: WorklistSummary[] = [{
         worklistGoal: WorklistGoal.ITEMS,
         totalCompletedItems: 94,
@@ -484,14 +497,14 @@ describe('HomeScreen', () => {
         }]
       }, {
         worklistGoal: WorklistGoal.PALLETS,
-        totalCompletedItems: 5,
+        totalCompletedItems: 4,
         totalItems: 159,
         worklistEndGoalPct: 100,
         worklistGoalPct: 3,
         worklistTypes: [{
           worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
         }, {
-          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+          worklistType: 'MP', totalItems: 151, completedItems: 0, inProgressItems: 0, todoItems: 151
         }]
       }, {
         worklistGoal: WorklistGoal.AUDITS,
@@ -523,12 +536,12 @@ describe('HomeScreen', () => {
         }]
       }, {
         worklistGoal: WorklistGoal.PALLETS,
-        totalCompletedItems: 1,
+        totalCompletedItems: 0,
         totalItems: 151,
         worklistEndGoalPct: 100,
-        worklistGoalPct: 1,
+        worklistGoalPct: 0,
         worklistTypes: [{
-          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+          worklistType: 'MP', totalItems: 151, completedItems: 0, inProgressItems: 0, todoItems: 151
         }]
       }, {
         worklistGoal: WorklistGoal.AUDITS,
@@ -566,12 +579,12 @@ describe('HomeScreen', () => {
         }]
       }, {
         worklistGoal: WorklistGoal.PALLETS,
-        totalCompletedItems: 1,
+        totalCompletedItems: 0,
         totalItems: 151,
-        worklistGoalPct: 1,
+        worklistGoalPct: 0,
         worklistEndGoalPct: 100,
         worklistTypes: [{
-          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+          worklistType: 'MP', totalItems: 151, completedItems: 0, inProgressItems: 0, todoItems: 151
         }]
       }, {
         worklistGoal: WorklistGoal.AUDITS,
@@ -599,14 +612,14 @@ describe('HomeScreen', () => {
         }]
       }, {
         worklistGoal: WorklistGoal.PALLETS,
-        totalCompletedItems: 5,
+        totalCompletedItems: 4,
         totalItems: 159,
         worklistGoalPct: 3,
         worklistEndGoalPct: 100,
         worklistTypes: [{
           worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
         }, {
-          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 151
+          worklistType: 'MP', totalItems: 151, completedItems: 0, inProgressItems: 0, todoItems: 151
         }]
       }, {
         worklistGoal: WorklistGoal.AUDITS,
@@ -637,6 +650,132 @@ describe('HomeScreen', () => {
         [nsfqToPalletsMove, nohToAuditsMove]
       );
       expect(multiGoalMoves).toStrictEqual(expectedMultiReorganized);
+    });
+
+    it('tests giving the fix sums function', () => {
+      const expectedMultiReorganized: WorklistSummary[] = [{
+        worklistGoal: WorklistGoal.ITEMS,
+        totalCompletedItems: 98,
+        totalItems: 196,
+        worklistGoalPct: 50,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'NSFL', totalItems: 100, completedItems: 50, inProgressItems: 0, todoItems: 50
+        }, {
+          worklistType: 'C', totalItems: 50, completedItems: 24, inProgressItems: 26, todoItems: 0
+        }, {
+          worklistType: 'NS', totalItems: 24, completedItems: 24, inProgressItems: 0, todoItems: 0
+        }, {
+          worklistType: 'NSFQ', totalItems: 8, completedItems: 4, inProgressItems: 0, todoItems: 4
+        }, {
+          worklistType: 'NO', totalItems: 14, completedItems: 7, inProgressItems: 0, todoItems: 7
+        }]
+      }, {
+        worklistGoal: WorklistGoal.PALLETS,
+        totalCompletedItems: 1,
+        totalItems: 151,
+        worklistGoalPct: 1,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'MP', totalItems: 151, completedItems: 1, inProgressItems: 0, todoItems: 124
+        }]
+      }, {
+        worklistGoal: WorklistGoal.AUDITS,
+        totalCompletedItems: 6,
+        totalItems: 20,
+        worklistGoalPct: 30,
+        worklistEndGoalPct: 100,
+        worklistTypes: [{
+          worklistType: 'AU', totalItems: 20, completedItems: 6, inProgressItems: 0, todoItems: 14
+        }, {
+          worklistType: 'RA', totalItems: 0, completedItems: 0, inProgressItems: 0, todoItems: 0
+        }]
+      }];
+
+      const fixedData = fixSumOfItemsMoreThanTotal(badDataCombinedWorklistSummary, jest.fn());
+      expect(fixedData).toStrictEqual(expectedMultiReorganized);
+    });
+
+    it('tests the onWorklistCardPress function', async () => {
+      const mockUpdateFilterExceptions = jest.fn();
+      const mockSetWorklistType = jest.fn();
+
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        mockConfig,
+        false,
+        false
+      );
+      expect(trackEvent).toHaveBeenCalledWith('home_worklist_summary_card_press', { worklistCard: 'NSFL' });
+      expect(mockUpdateFilterExceptions).toHaveBeenCalledWith(['NSFL']);
+      expect(mockSetWorklistType).toHaveBeenCalledWith('ITEM');
+      expect(navigationProp.navigate).toHaveBeenCalledWith('WorklistNavigator', {
+        screen: 'ITEMWORKLIST',
+        params: {
+          screen: strings('WORKLIST.TODO')
+        }
+      });
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        mockConfig,
+        true,
+        false
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith(
+        strings('WORKLIST.WORKLIST'),
+        { screen: 'MissingPalletWorklist', initial: false }
+      );
+
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        mockConfig,
+        false,
+        true
+      );
+      expect(mockSetWorklistType).toHaveBeenCalledWith('AUDIT');
+      expect(navigationProp.navigate).toHaveBeenCalledWith(strings('WORKLIST.WORKLIST'), {
+        screen: 'AuditWorklistNavigator',
+        initial: false,
+        params: {
+          screen: 'AuditWorklistTabs',
+          params: {
+            screen: strings('WORKLIST.TODO')
+          }
+        }
+      });
+      await onWorklistCardPress(
+        mockItemNPalletNAuditWorklistSummary[0].worklistTypes[0],
+        mockUpdateFilterExceptions,
+        mockSetWorklistType,
+        navigationProp,
+        routeProp,
+        { ...mockConfig, auditWorklists: true, palletWorklists: true },
+        false,
+        false
+      );
+      expect(mockSetWorklistType).toHaveBeenCalledWith('ITEM');
+      expect(navigationProp.navigate).toHaveBeenCalledWith(strings('WORKLIST.WORKLIST'), {
+        screen: 'WorklistNavigator',
+        initial: false,
+        params: {
+          screen: 'ITEMWORKLIST',
+          params: {
+            screen: strings('WORKLIST.TODO')
+          }
+        }
+      });
     });
   });
 });

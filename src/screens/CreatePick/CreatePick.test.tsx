@@ -1,6 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import { UseStateType } from '../../models/Generics.d';
 import Location from '../../models/Location';
@@ -44,6 +44,11 @@ const navigationProp: NavigationProp<any> = {
   getId: jest.fn(),
   getParent: jest.fn(),
   getState: jest.fn()
+};
+
+const routeProp: RouteProp<any, string> = {
+  key: '',
+  name: 'CreatePick'
 };
 
 const mockLocations: Location[] = [
@@ -146,6 +151,7 @@ describe('Create Pick screen render tests', () => {
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
         userConfigs={mockConfig}
+        route={routeProp}
       />
     );
 
@@ -176,6 +182,8 @@ describe('Create Pick screen render tests', () => {
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
         userConfigs={mockConfig}
+        route={routeProp}
+
       />
     );
 
@@ -206,6 +214,8 @@ describe('Create Pick screen render tests', () => {
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
         userConfigs={mockConfig}
+        route={routeProp}
+
       />
     );
 
@@ -236,6 +246,8 @@ describe('Create Pick screen render tests', () => {
         selectedTab={Tabs.PICK}
         countryCode={mockUser.countryCode}
         userConfigs={mockConfig}
+        route={routeProp}
+
       />
     );
 
@@ -384,10 +396,27 @@ describe('createPick function tests', () => {
     };
 
     // API Success
-    createPickApiHook(successAsyncState, mockDispatch, navigationProp);
+    createPickApiHook(successAsyncState, mockDispatch, navigationProp, routeProp);
     expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(navigationProp.isFocused).toHaveBeenCalled();
     expect(navigationProp.goBack).toHaveBeenCalled();
+    expect(Toast.show).toHaveBeenCalledWith({
+      type: 'success',
+      text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
+      visibilityTime: SNACKBAR_TIMEOUT,
+      position: 'bottom'
+    });
+
+    // API Success navigating from OtherAction
+    mockDispatch.mockReset();
+    const routeOtherAction: RouteProp<any, string> = {
+      ...routeProp,
+      params: { source: 'OtherAction' }
+    };
+    createPickApiHook(successAsyncState, mockDispatch, navigationProp, routeOtherAction);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
+    expect(navigationProp.isFocused).toHaveBeenCalled();
+    expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'success',
       text1: strings('PICKING.CREATE_NEW_PICK_SUCCESS'),
@@ -399,7 +428,7 @@ describe('createPick function tests', () => {
     mockDispatch.mockReset();
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
-    createPickApiHook(failureAsyncState, mockDispatch, navigationProp);
+    createPickApiHook(failureAsyncState, mockDispatch, navigationProp, routeProp);
     expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
@@ -411,7 +440,7 @@ describe('createPick function tests', () => {
     mockDispatch.mockReset();
     // @ts-expect-error Reset Toast Object
     Toast.show.mockReset();
-    createPickApiHook(failure409AsyncState, mockDispatch, navigationProp);
+    createPickApiHook(failure409AsyncState, mockDispatch, navigationProp, routeProp);
     expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(Toast.show).toHaveBeenCalledWith({
       type: 'error',
@@ -427,7 +456,8 @@ describe('createPick function tests', () => {
     createPickApiHook(
       failure409AsyncStateWithoutReservePallet,
       mockDispatch,
-      navigationProp
+      navigationProp,
+      routeProp
     );
     expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(Toast.show).toHaveBeenCalledWith({
@@ -439,7 +469,7 @@ describe('createPick function tests', () => {
 
     // API waiting
     mockDispatch.mockReset();
-    createPickApiHook(isWaitingAsyncState, mockDispatch, navigationProp);
+    createPickApiHook(isWaitingAsyncState, mockDispatch, navigationProp, routeProp);
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
 });

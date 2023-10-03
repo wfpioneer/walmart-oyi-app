@@ -29,6 +29,8 @@ interface PalletItemCardProp {
     onEndEditing(): void;
     showItemImage: boolean;
     countryCode: string;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
   }
 
 export const styleSelector = (isAdded: boolean, isEdited: boolean): Record<string, any> => {
@@ -56,7 +58,9 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
     isAdded,
     onEndEditing,
     showItemImage,
-    countryCode
+    countryCode,
+    imageToken,
+    tokenIsWaiting
   } = props;
   return (
     <View style={styleSelector(isAdded, markEdited)}>
@@ -65,6 +69,8 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
       <ImageWrapper
         countryCode={countryCode}
         itemNumber={Number(itemNumber)}
+        imageToken={imageToken}
+        tokenIsWaiting={tokenIsWaiting}
       />
       )}
       <View style={styles.content}>
@@ -120,3 +126,8 @@ const PalletItemCard = (props: PalletItemCardProp): JSX.Element => {
   );
 };
 export default PalletItemCard;
+
+PalletItemCard.defaultProps = {
+  imageToken: undefined,
+  tokenIsWaiting: false
+};

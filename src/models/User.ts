@@ -121,6 +121,8 @@ export interface Configurations {
   overridePalletPerishables: boolean;
   peteGetLocations: boolean;
   showQuantityStocked: boolean;
+  enableAuditsInProgress: boolean;
+  enableAuditSave: boolean;
 }
 
 export interface area {

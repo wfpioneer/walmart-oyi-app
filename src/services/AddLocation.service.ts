@@ -2,6 +2,7 @@ import { AxiosRequestHeaders } from 'axios';
 import Request from './Request';
 import { Environment, getEnvironment } from '../utils/environment';
 
+const TIMEOUT = 15000;
 export default class AddLocationService {
   public static addLocation(payload: {
     headers?: AxiosRequestHeaders;
@@ -16,7 +17,7 @@ export default class AddLocationService {
         sectionId: payload.sectionId,
         locationTypeNbr: payload.locationTypeNbr
       },
-      { headers: payload.headers }
+      { headers: payload.headers, timeout: TIMEOUT }
     );
   }
 }

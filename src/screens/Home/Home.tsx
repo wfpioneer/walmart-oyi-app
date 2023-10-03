@@ -23,10 +23,13 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { trackEvent } from '../../utils/AppCenterTool';
 import Button, { ButtonType } from '../../components/buttons/Button';
 import { exceptionTypeToDisplayString } from '../Worklist/FullExceptionList';
-import { WorklistGoal, WorklistSummary, WorklistType } from '../../models/WorklistSummary';
+import {
+  WorklistGoal, WorklistSummary, WorklistType, WorklistTypeDetails
+} from '../../models/WorklistSummary';
 import { CustomModalComponent } from '../Modal/Modal';
 import { getBuildEnvironment } from '../../utils/environment';
 import { UPDATE_USER_CONFIG } from '../../state/actions/asyncAPI';
+import { getFiniteFixedPercent } from '../../utils/global';
 
 export interface WorklistGoalMove {
   worklistType: WorklistType;
@@ -37,6 +40,9 @@ interface NativeWorklist {
   worklistType: WorklistType;
   nativeGoal: WorklistGoal
 }
+
+const WORKLIST = 'WORKLIST.WORKLIST';
+const TODOWORKLIST = 'WORKLIST.TODO';
 
 export const resetUserConfigUpdateApiState = () => ({ type: UPDATE_USER_CONFIG.RESET });
 const mapStateToProps = (state: RootState) => ({
@@ -85,6 +91,40 @@ interface HomeScreenState {
   activeGoal: number;
   errorModalVisible: boolean;
 }
+
+/**
+ * If bad data appears, such as the summed total of the todo, in progress, and completed items
+ * is greater than the given total or the completed items are negative, this will correct that
+ * bad data
+ * @param givenGoals the goals that are returned from the service
+ */
+export const fixSumOfItemsMoreThanTotal = (givenGoals: WorklistSummary[], trackEventCall: typeof trackEvent) => {
+  // somehow we got bad data, this is here to correct any
+  givenGoals.forEach(goal => goal.worklistTypes.forEach(worklist => {
+    let isError = false;
+    if (worklist.completedItems + worklist.inProgressItems + worklist.todoItems > worklist.totalItems) {
+      isError = true;
+      let correction = worklist.totalItems;
+      if (worklist.todoItems > 0) {
+        correction -= worklist.todoItems;
+      }
+      if (worklist.inProgressItems > 0) {
+        correction -= worklist.inProgressItems;
+      }
+      worklist.completedItems = correction;
+    } else if (worklist.completedItems < 0) {
+      isError = true;
+      worklist.completedItems = 0;
+    }
+    if (isError) {
+      trackEventCall('HOME_SCREEN', {
+        action: 'worklist_summary_bad_data',
+        worklistSummary: JSON.stringify(worklist)
+      });
+    }
+  }));
+  return givenGoals;
+};
 
 /**
  * This is a method to move certain worklist summaries from one goal to another.
@@ -157,12 +197,67 @@ export const reorganizeGoals = (givenGoals: WorklistSummary[], moves: WorklistGo
   });
 
   newGoals.forEach(goal => {
-    goal.worklistGoalPct = Math.round((goal.totalCompletedItems / goal.totalItems) * 100);
+    goal.worklistGoalPct = getFiniteFixedPercent(goal.totalCompletedItems, goal.totalItems);
   });
 
   return newGoals;
 };
 
+export const onWorklistCardPress = (
+  worklist: WorklistTypeDetails,
+  updateFilterExceptionsDispatch: (worklistTypes: string[]) => void,
+  setWorklistTypeDispatch: (worklistType: string) => void,
+  navigation: NavigationProp<any>,
+  route: RouteProp<any, string>,
+  userConfig: Configurations,
+  isPalletWorklist: boolean,
+  isAuditWorklist: boolean
+) => {
+  trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
+  updateFilterExceptionsDispatch([worklist.worklistType]);
+  validateSession(navigation, route.name).then(() => {
+    if (isPalletWorklist) {
+      navigation.navigate(
+        strings(WORKLIST),
+        { screen: 'MissingPalletWorklist', initial: false }
+      );
+    } else if (isAuditWorklist) {
+      setWorklistTypeDispatch('AUDIT');
+      navigation.navigate(strings(WORKLIST), {
+        screen: 'AuditWorklistNavigator',
+        initial: false,
+        params: {
+          screen: 'AuditWorklistTabs',
+          params: {
+            screen: strings(TODOWORKLIST)
+          }
+        }
+      });
+    } else {
+      const { auditWorklists, palletWorklists } = userConfig;
+      setWorklistTypeDispatch('ITEM');
+      if (auditWorklists || palletWorklists) {
+        navigation.navigate(strings(WORKLIST), {
+          screen: 'WorklistNavigator',
+          initial: false,
+          params: {
+            screen: 'ITEMWORKLIST',
+            params: {
+              screen: strings(TODOWORKLIST)
+            }
+          }
+        });
+      } else {
+        navigation.navigate('WorklistNavigator', {
+          screen: 'ITEMWORKLIST',
+          params: {
+            screen: strings(TODOWORKLIST)
+          }
+        });
+      }
+    }
+  }).catch(() => {});
+};
 export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenState> {
   private readonly scannedSubscription: EmitterSubscription;
 
@@ -307,6 +402,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
     }
 
     const { data }: { data: WorklistSummary[] } = worklistSummaryApiState.result || worklistSummaryV2ApiState.result;
+
+    const badDataLess = fixSumOfItemsMoreThanTotal(data, trackEvent);
     const worklistToMove: WorklistGoalMove[] = [{
       worklistType: 'NSFQ',
       destinationGoal: WorklistGoal.PALLETS
@@ -317,7 +414,8 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         destinationGoal: WorklistGoal.AUDITS
       });
     }
-    const reorganizedGoals = reorganizeGoals(data, worklistToMove);
+
+    const reorganizedGoals = reorganizeGoals(badDataLess, worklistToMove);
 
     const nativeWorklists: NativeWorklist[] = [];
 
@@ -407,52 +505,28 @@ export class HomeScreen extends React.PureComponent<HomeScreenProps, HomeScreenS
         const isPalletWorklist = nativeWorklist?.nativeGoal === WorklistGoal.PALLETS;
         const isAuditWorklist = nativeWorklist?.nativeGoal === WorklistGoal.AUDITS;
 
-        const onWorklistCardPress = () => {
-          trackEvent('home_worklist_summary_card_press', { worklistCard: worklist.worklistType });
-          this.props.updateFilterExceptions([worklist.worklistType]);
-          validateSession(this.props.navigation, this.props.route.name).then(() => {
-            if (isPalletWorklist) {
-              this.props.navigation.navigate(
-                strings('WORKLIST.WORKLIST'),
-                { screen: 'MissingPalletWorklist', initial: false }
-              );
-            } else if (isAuditWorklist) {
-              this.props.setWorklistType('AUDIT');
-              this.props.navigation.navigate(
-                strings('WORKLIST.WORKLIST'),
-                { screen: 'AuditWorklistNavigator', initial: false }
-              );
-            } else {
-              const { auditWorklists, palletWorklists } = this.props.userConfig;
-              this.props.setWorklistType('ITEM');
-              if (auditWorklists || palletWorklists) {
-                this.props.navigation.navigate(
-                  strings('WORKLIST.WORKLIST'),
-                  { screen: 'WorklistNavigator', initial: false }
-                );
-              } else {
-                this.props.navigation.navigate('WorklistNavigator', { screen: 'ITEMWORKLIST' });
-              }
-            }
-          }).catch(() => {});
-        };
-
-        const calculationValue = (worklist.completedItems / worklist.totalItems) * 100;
-        const completionPercentageValue = Number.isFinite(calculationValue) ? calculationValue : 0;
-
-        const pendingCalcValue = ((worklist.completedItems + worklist.inProgressItems) / worklist.totalItems) * 100;
-        const pendingPercentageValue = Number.isFinite(pendingCalcValue) ? pendingCalcValue : 0;
-
         return (
           <WorklistCard
             key={worklist.worklistType}
             goalTitle={worklistType}
             goal={worklist.totalItems}
             complete={worklist.completedItems}
-            completionPercentage={completionPercentageValue}
+            completionPercentage={getFiniteFixedPercent(worklist.completedItems, worklist.totalItems)}
             completionGoal={goalSummary.worklistEndGoalPct}
-            onPress={onWorklistCardPress}
-            pendingPercentage={pendingPercentageValue}
+            onPress={() => onWorklistCardPress(
+              worklist,
+              this.props.updateFilterExceptions,
+              this.props.setWorklistType,
+              this.props.navigation,
+              this.props.route,
+              this.props.userConfig,
+              isPalletWorklist,
+              isAuditWorklist
+            )}
+            pendingPercentage={getFiniteFixedPercent(
+              worklist.completedItems + worklist.inProgressItems,
+              worklist.totalItems
+            )}
             inProgress={inProgressEnabled}
           />
         );

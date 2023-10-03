@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: '警示',
     CLOSE: '关闭',
     NUMBER_MIN_MAX: '数字必须再%{minimum}和%{maximum}之间',
-    FEEDBACK: '反馈'
+    FEEDBACK: '反馈',
+    UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失'
   },
   HOME: {
     OWN_YOUR_INVENTORY: '管理库存工具',
@@ -233,7 +234,7 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: '商品库存不可是负',
     ITEMS_DETAILS_EXIST: '扫描的商品已经在此卡板',
     ITEMS_DETAILS_ERROR: '报错:无法找到此商品UPC信息',
-    ITEMS_NOT_FOUND: 'Item Not found', // TODO MANDARIN TRANSLATION
+    ITEMS_NOT_FOUND: 'Item Not found',
     PALLET_UPC_NOT_FOUND: '未找到卡板或者UPC',
     ADD_UPC_SUCCESS: '所有商品成功添加到卡板',
     ADD_UPC_ERROR: '添加商品到卡板时出错',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '确定要清除此卡板信息?',
     CLEAR_PALLET_ERROR: '清除卡板信息发生错误导致失败',
     CLEAR_PALLET_SUCCESS: '卡板%{palletId}清理成功',
-    UNSAVED_WARNING_MSG: '未保存的卡板补货信息将丢失',
     CREATE_PALLET: '创建卡板',
     CREATE_PALLET_SUCCESS: '卡板创建成功',
     CREATE_PALLET_FAILED: '卡板创建失败',
@@ -380,7 +380,6 @@ export default {
     TODO: '待完成',
     COMPLETED: '已完成',
     PENDING: '待办的',
-    PENDING_APPROVAL: '待审批',
     PENDING_PICK: '待补货',
     WORKLIST_ITEM_API_ERROR: '检索任务清单时出错，请重试',
     AREA: '区域',
@@ -511,7 +510,8 @@ export default {
     ACCEPT_MULTIPLE_PICKS: '批量接收补货任务',
     ACCEPT_FOLLOWING_PICKS: '接受这些补货任务清单?',
     ACCEPT_FOLLOWING_BINS: '接受这些上架任务清单?',
-    LOC_LABEL: '货架位置'
+    LOC_LABEL: '货架位置',
+    PALLET_NOT_IN_SYSTEM: '系统无法找到该卡板，是否取消该补货?'
   },
   BINNING: {
     BINNING: '上架',
@@ -530,7 +530,8 @@ export default {
     FIRST_ITEM: '第一个item',
     EMPTY_PALLET: '空卡板',
     PALLET_NOT_READY: '尚不可上架，部分卡板正处于补货状态',
-    MULTIPLE_BIN_ENABLED: '开启批量上架'
+    MULTIPLE_BIN_ENABLED: '多卡板上架',
+    SINGLE_BIN_ENABLED: '单卡板上架'
   },
   SETTINGS: {
     TITLE: '设置',
@@ -562,7 +563,13 @@ export default {
     NO_PALLETS_FOUND_FOR_ITEM: '未找到此item卡板信息',
     NEGATIVE_VALIDATION: '无效结果，位置数量不可小于0',
     ITEMS: '个库存',
-    CUSTOM_ITEMS: '个 item'
+    CUSTOM_ITEMS: '个 item',
+    IN_PROGRESS: '正在进行中',
+    CURRENT_TOTAL: '当前总数',
+    LOCATIONS_SAVED: '货位已保存',
+    LOCATIONS_SAVE_FAIL: '无法保存货位',
+    SCANNED_ITEM_NOT_PRESENT: '扫描的商品不在盘点任务清单',
+    GET_SAVED_LOC_FAIL: '无法重置保存的位置'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: '很差',

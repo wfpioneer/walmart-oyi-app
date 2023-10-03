@@ -1,6 +1,9 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { groupBy, partition } from 'lodash';
 import React, { useEffect, useState } from 'react';
+import {
+  NavigationProp,
+  useNavigation
+} from '@react-navigation/native';
+import { groupBy, partition } from 'lodash';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import {
@@ -9,8 +12,7 @@ import {
 import { AxiosError } from 'axios';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { WorklistItemI } from '../../models/WorklistItem';
-import { setAuditItemNumber } from '../../state/actions/AuditWorklist';
+import { WorkListStatus, WorklistItemI } from '../../models/WorklistItem';
 import COLOR from '../../themes/Color';
 import styles from './AuditWorklistTab.style';
 import { strings } from '../../locales';
@@ -23,17 +25,19 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import CollapseAllBar from '../../components/CollapseAllBar/CollapseAllBar';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import { UseStateType } from '../../models/Generics.d';
+import ManualScan from '../../components/manualscan/ManualScan';
+import { setScannedEvent } from '../../state/actions/Global';
 
 const ROLLOVER_AUDITS = 'RA';
 
 export interface AuditWorklistTabProps {
-    toDo: boolean;
+    completionLevel: number;
     onRefresh: () => void;
+    auditWorklistItems: WorklistItemI[]
 }
 
 export interface AuditWorklistTabScreenProps {
     items: WorklistItemI[];
-    navigation: NavigationProp<any>;
     dispatch: Dispatch<any>;
     refreshing: boolean;
     error: AxiosError | null;
@@ -46,38 +50,44 @@ export interface AuditWorklistTabScreenProps {
     collapsedState: UseStateType<boolean>;
     isLoadedState: UseStateType<boolean>;
     useEffectHook: typeof useEffect;
+    isManualScanEnabled: boolean;
+    imageToken: string | undefined;
+    tokenIsWaiting: boolean;
 }
 
 const onItemClick = (
   itemNumber: number,
-  navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent
 ) => {
-  dispatch(setAuditItemNumber(itemNumber));
+  dispatch(setScannedEvent({ value: itemNumber.toString(), type: 'card_click' }));
   trackEventCall('Audit_Worklist', { action: 'worklist_item_click', itemNbr: itemNumber });
-  navigation.navigate('AuditItem');
 };
 
 const renderCategoryCard = (
   category: string,
   items: WorklistItemI[],
   collapsed: boolean,
-  navigation: NavigationProp<any>,
   dispatch: Dispatch<any>,
   trackEventCall: typeof trackEvent,
   showItemImage: boolean,
-  countryCode: string
+  countryCode: string,
+  enableAuditsInProgress: boolean,
+  imageToken: string | undefined = undefined,
+  tokenIsWaiting = false
 ) => (
   <CategoryCard
     category={category}
     listOfItems={items}
     collapsed={collapsed}
     onItemCardClick={(itemNumber: number) => {
-      onItemClick(itemNumber, navigation, dispatch, trackEventCall);
+      onItemClick(itemNumber, dispatch, trackEventCall);
     }}
     showItemImage={showItemImage}
     countryCode={countryCode}
+    enableAuditsInProgress={enableAuditsInProgress}
+    imageToken={imageToken}
+    tokenIsWaiting={tokenIsWaiting}
   />
 );
 
@@ -125,11 +135,35 @@ export const renderFilterPills = (
   return <View />;
 };
 
+export const getItemsForTab = (
+  auditWorklistItems: WorklistItemI[],
+  completionLevel: number,
+  configs: Configurations
+) => {
+  if (configs.enableAuditsInProgress) {
+    switch (completionLevel) {
+      case 0:
+        return auditWorklistItems.filter(item => item.worklistStatus === WorkListStatus.TODO);
+      case 1:
+        return auditWorklistItems.filter(item => (
+          item.worklistStatus === WorkListStatus.AUDITSTARTED || item.worklistStatus === WorkListStatus.INPROGRESS
+        ));
+      case 2:
+        return auditWorklistItems.filter(item => item.worklistStatus === WorkListStatus.COMPLETED);
+      default:
+        return [];
+    }
+  } else {
+    const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
+    return completionLevel === 2 ? completedItems : toDoItems;
+  }
+};
+
 export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
   const {
-    items, refreshing, dispatch, navigation, error, useEffectHook,
-    trackEventCall, config, filterExceptions, filterCategories,
-    onRefresh, countryCode, collapsedState, isLoadedState
+    items, refreshing, dispatch, error, useEffectHook, trackEventCall,
+    config, filterExceptions, filterCategories, onRefresh, countryCode, collapsedState,
+    isLoadedState, isManualScanEnabled, imageToken, tokenIsWaiting
   } = props;
   const {
     areas, enableAreaFilter, showItemImage, showRollOverAudit
@@ -227,17 +261,25 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 
   return (
     <>
-      { (filterCategories.length > 0 || (filterExceptions.length > 0)) && (
+      {(filterCategories.length > 0 || (filterExceptions.length > 0)) && (
       <View style={styles.filterContainer}>
         <FlatList
           data={[...typedFilterExceptions, ...typedFilterAreaOrCategoryList]}
           horizontal
-          renderItem={({ item }) => renderFilterPills(item, dispatch, filterCategories, filterExceptions, fullExceptionList, areas)}
+          renderItem={({ item }) => renderFilterPills(
+            item,
+            dispatch,
+            filterCategories,
+            filterExceptions,
+            fullExceptionList,
+            areas
+          )}
           style={styles.filterList}
           keyExtractor={item => item.value}
         />
       </View>
-      ) }
+      )}
+      {isManualScanEnabled ? <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} /> : null}
       {auditItemKeys.length > 0
         && (
         <CollapseAllBar
@@ -257,11 +299,13 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
           key,
           itemsBasedOnCategory[key],
           collapsed,
-          navigation,
           dispatch,
           trackEventCall,
           showItemImage,
-          countryCode
+          countryCode,
+          config.enableAuditsInProgress,
+          imageToken,
+          tokenIsWaiting
         )}
         keyExtractor={item => `category-${item}`}
         onRefresh={() => {
@@ -276,23 +320,22 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
 };
 
 const AuditWorklistTab = (props: AuditWorklistTabProps) => {
-  const { toDo, onRefresh } = props;
+  const { completionLevel, onRefresh, auditWorklistItems } = props;
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
-  const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
-  const items = toDo ? toDoItems : completedItems;
-  const { isWaiting, error } = useTypedSelector(state => state.async.getWorklistAudits);
   const { configs } = useTypedSelector(state => state.User);
+  const { isManualScanEnabled } = useTypedSelector(state => state.Global);
+  const { isWaiting, error } = useTypedSelector(state => (
+    configs.enableAuditsInProgress ? state.async.getWorklistAuditsV1 : state.async.getWorklistAudits));
+  const items = getItemsForTab(auditWorklistItems, completionLevel, configs);
   const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const collapsedState = useState(false);
   const isLoadedState = useState(false);
+  const imageToken = useTypedSelector(state => state.async.getItemCenterToken);
   return (
     <AuditWorklistTabScreen
       items={items}
       dispatch={dispatch}
-      navigation={navigation}
       refreshing={isWaiting}
       error={error}
       filterExceptions={filterExceptions}
@@ -304,6 +347,9 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
       config={configs}
       useEffectHook={useEffect}
       isLoadedState={isLoadedState}
+      isManualScanEnabled={isManualScanEnabled}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
+      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );
 };

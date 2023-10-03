@@ -2,24 +2,21 @@ import React from 'react';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { head } from 'lodash';
-// eslint-disable-next-line import/no-unresolved
-import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { fireEvent, render } from '@testing-library/react-native';
 import Toast from 'react-native-toast-message';
 import {
   BinningScreen,
-  backConfirmed,
-  backConfirmedHook,
   binningItemCard,
-  bottomModalPresentationHook,
   callPalletDetailsHook,
+  cancelBinConfirmed,
   getPalletDetailsApiHook,
   navigateAssignLocationScreen,
   navigationRemoveListenerHook,
   onBinningItemPress,
   onValidateHardwareBackPress,
   resetApis,
-  scannedEventHook
+  scannedEventHook,
+  toggleMultiBinCheckbox
 } from './Binning';
 import { AsyncState } from '../../models/AsyncState';
 import { mockPallets } from '../../mockData/binning';
@@ -27,6 +24,8 @@ import { BeforeRemoveEvent, ScannedEvent, UseStateType } from '../../models/Gene
 import { Pallet } from '../../models/PalletManagementTypes';
 import { SETUP_PALLET } from '../../state/actions/PalletManagement';
 import { validateSession } from '../../utils/sessionTimeout';
+import { toggleMultiBin } from '../../state/actions/Binning';
+import { resetScannedEvent } from '../../state/actions/Global';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
 
@@ -625,15 +624,18 @@ describe('BinningScreen', () => {
       };
       const mockSetDisplayWarningModal = jest.fn();
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, true, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, [], mockDispatch, false);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, false, []);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, [], mockDispatch, true);
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockPreventDefault).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin(false));
+      expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
 
-      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, false, mockPallets);
+      navigationRemoveListenerHook(beforeRemoveEvent, mockSetDisplayWarningModal, mockPallets, mockDispatch, false);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockPreventDefault).toHaveBeenCalled();
     });
@@ -653,61 +655,35 @@ describe('BinningScreen', () => {
       expect(returned).toBe(false);
     });
 
-    it('tests the back confirmed hook that does a navigate back', () => {
-      const mockSetState = jest.fn();
-      backConfirmedHook(false, true, mockSetState, navigationProp);
-      expect(mockSetState).not.toHaveBeenCalled();
-      expect(mockGoBack).not.toHaveBeenCalled();
-
-      backConfirmedHook(false, false, mockSetState, navigationProp);
-      expect(mockSetState).not.toHaveBeenCalled();
-      expect(mockGoBack).not.toHaveBeenCalled();
-
-      backConfirmedHook(true, false, mockSetState, navigationProp);
-      expect(mockSetState).toHaveBeenCalled();
-      expect(mockGoBack).toHaveBeenCalled();
-    });
-
-    it('tests the bottom sheet modal presention methods', () => {
-      const mockDismiss = jest.fn();
-      const mockPresent = jest.fn();
-      const bottomSheetMockRef: React.RefObject<BottomSheetModalMethods> = {
-        current: {
-          close: jest.fn(),
-          collapse: jest.fn(),
-          dismiss: mockDismiss,
-          expand: jest.fn(),
-          forceClose: jest.fn(),
-          present: mockPresent,
-          snapToIndex: jest.fn(),
-          snapToPosition: jest.fn()
-        }
-      };
-
-      // screen hidden
-      bottomModalPresentationHook(unfocusedNavigationProp, bottomSheetMockRef, false);
-      expect(mockDismiss).not.toHaveBeenCalled();
-      expect(mockPresent).not.toHaveBeenCalled();
-
-      // screen shown, modal opening
-      bottomModalPresentationHook(navigationProp, bottomSheetMockRef, true);
-      expect(mockDismiss).not.toHaveBeenCalled();
-      expect(mockPresent).toHaveBeenCalled();
-      mockPresent.mockClear();
-
-      // screen shown, modal closing
-      bottomModalPresentationHook(navigationProp, bottomSheetMockRef, false);
-      expect(mockDismiss).toHaveBeenCalled();
-      expect(mockPresent).not.toHaveBeenCalled();
-    });
-
-    it('tests backConfirmed', () => {
+    it('tests cancelBinConfirmed', () => {
       const mockSetState = jest.fn();
 
-      backConfirmed(mockSetState, mockDispatch, navigationProp);
+      cancelBinConfirmed(mockSetState, mockDispatch);
       expect(mockSetState).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalled();
-      expect(mockGoBack).toHaveBeenCalled();
+    });
+
+    it('tests toggleMultiBinCheckbox', async () => {
+      const { toJSON, getByTestId, update } = render(
+        toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, false)
+      );
+
+      const multiBinButton = getByTestId('toggle multi bin');
+      const checkBoxIcon = getByTestId('checkbox icon');
+      await fireEvent.press(multiBinButton);
+      await fireEvent.press(checkBoxIcon);
+
+      expect(toJSON()).toMatchSnapshot();
+      expect(mockDispatch).toHaveBeenCalledWith(toggleMultiBin());
+      expect(mockTrackEvent).toHaveBeenCalledWith('toggle_multi_bin_pallets');
+      expect((await checkBoxIcon).props.name).toStrictEqual('checkbox-blank-outline');
+
+      update(
+        toggleMultiBinCheckbox(mockDispatch, mockTrackEvent, true)
+      );
+
+      await fireEvent.press(checkBoxIcon);
+      expect(checkBoxIcon.props.name).toStrictEqual('checkbox-marked-outline');
     });
   });
 });

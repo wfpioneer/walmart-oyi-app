@@ -7,7 +7,7 @@ interface SnackBarState {
   messageContent: string;
   duration: number;
 }
-const initialState: SnackBarState = {
+export const initialState: SnackBarState = {
   showSnackBar: false,
   messageContent: '',
   duration: 5000

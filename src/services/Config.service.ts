@@ -33,6 +33,8 @@ export interface ConfigResponse {
   overridePltPerish: boolean;
   peteGetLocations: boolean;
   showQtyStocked: boolean;
+  enableAuditsIP: boolean;
+  enableAuditSave: boolean;
 }
 
 export default class ConfigService {

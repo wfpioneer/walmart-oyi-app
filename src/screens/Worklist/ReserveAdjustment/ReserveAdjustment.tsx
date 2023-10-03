@@ -39,10 +39,10 @@ import { strings } from '../../../locales';
 import Button, { ButtonType } from '../../../components/buttons/Button';
 import { getUpdatedReserveLocations, sortReserveLocations } from '../AuditItem/AuditItem';
 import {
-  DELETE_PALLET, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY_V2
+  DELETE_PALLET_FROM_SECTION, DELETE_UPCS, GET_ITEM_PALLETS, UPDATE_MULTI_PALLET_UPC_QTY_V2
 } from '../../../state/actions/asyncAPI';
 import {
-  deletePallet, deleteUpcs, getItemPallets, getItemPalletsV1, updateMultiPalletUPCQtyV2
+  deletePalletFromSection, deleteUpcs, getItemPallets, getItemPalletsV1, updateMultiPalletUPCQtyV2
 } from '../../../state/actions/saga';
 import {
   setReserveLocations, setScannedPalletId, updatePalletQty, updatePalletScannedStatus
@@ -285,7 +285,7 @@ export const renderDeleteLocationModal = (
                     upcs: [upcNbr]
                   }));
                 } else {
-                  dispatch(deletePallet({ palletId: locToConfirm.palletId }));
+                  dispatch(deletePalletFromSection({ palletId: locToConfirm.palletId }));
                 }
               }}
             />
@@ -493,12 +493,14 @@ export const disabledContinue = (
 ): boolean => getItemPalletApiLoading || reserveLocations.length === 0 || reserveLocations.some(
   loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || -1) < 0
 );
+
 export const updateMultiPalletUPCQtyV2ApiHook = (
   updateMultiPalletUPCQtyV2Api: AsyncState,
   dispatch: Dispatch<any>,
   navigation: NavigationProp<any>,
   setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>,
-  itemNbr: number
+  itemNbr: number,
+  route: RouteProp<any, string>
 ) => {
   if (navigation.isFocused()) {
     if (!updateMultiPalletUPCQtyV2Api.isWaiting && updateMultiPalletUPCQtyV2Api.result) {
@@ -512,7 +514,11 @@ export const updateMultiPalletUPCQtyV2ApiHook = (
       dispatch({ type: UPDATE_MULTI_PALLET_UPC_QTY_V2.RESET });
       setShowOnHandsConfirmationModal(false);
       dispatch(setScannedEvent({ type: 'worklist', value: itemNbr.toString() }));
-      navigation.goBack();
+      if (route.params && route.params.source === 'OtherAction') {
+        navigation.navigate('ReviewItemDetailsHome');
+      } else {
+        navigation.goBack();
+      }
     }
     if (!updateMultiPalletUPCQtyV2Api.isWaiting && updateMultiPalletUPCQtyV2Api.error) {
       Toast.show({
@@ -677,7 +683,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
   useEffectHook(() => {
     // on delete pallet api success
     if (navigation.isFocused() && !deletePalletApi.isWaiting && deletePalletApi.result && showDeleteConfirmationModal) {
-      handleDeletePalletSuccess(DELETE_PALLET.RESET);
+      handleDeletePalletSuccess(DELETE_PALLET_FROM_SECTION.RESET);
     }
   }, [deletePalletApi]);
 
@@ -702,7 +708,8 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
     dispatch,
     navigation,
     setShowOnHandsConfirmationModal,
-    itemDetails?.itemNbr || 0
+    itemDetails?.itemNbr || 0,
+    route
   ), [updateMultiPalletUPCQtyV2Api]);
 
   return (
@@ -749,6 +756,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
           showOHItems
+          totalQty={undefined}
         />
       </View>
       <ScrollView
@@ -799,7 +807,7 @@ const ReserveAdjustment = (): JSX.Element => {
   const getItemPalletsApi = userConfig.peteGetPallets ? useTypedSelector(state => state.async.getItemPalletsV1)
     : useTypedSelector(state => state.async.getItemPallets);
   const deleteUpcsApi = useTypedSelector(state => state.async.deleteUpcs);
-  const deletePalletApi = useTypedSelector(state => state.async.deletePallet);
+  const deletePalletApi = useTypedSelector(state => state.async.deletePalletFromSection);
   const updateMultiPalletUPCQtyV2Api = useTypedSelector(state => state.async.updateMultiPalletUPCQtyV2);
   const { itemDetails, reserveLocations, scannedPalletId } = useTypedSelector(state => state.ReserveAdjustmentScreen);
   const { isManualScanEnabled, scannedEvent } = useTypedSelector(state => state.Global);

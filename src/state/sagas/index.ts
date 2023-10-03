@@ -24,12 +24,13 @@ import ConfigService from '../../services/Config.service';
 import GetItemDetailsUPCService from '../../services/GetItemDetailsUPCService';
 import PalletManagementService from '../../services/PalletManagement.service';
 import CreatePalletService from '../../services/CreatePallet.service';
-import DeletePalletUPCsService from '../../services/DeletePalletUPCs.service';
 import PickingService from '../../services/Picking.service';
 import ReportMissingPalletService from '../../services/ReportMissingPallet.service';
 import GetItemPalletsService from '../../services/GetItemPallets.service';
 import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
+import SaveAuditsProgressService from '../../services/SaveAuditsProgress.service';
+import ItemCenterTokenService from '../../services/ItemCenterToken.service';
 
 const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V4, actions.getItemDetailsV4, GetItemDetailsService.getItemDetailsV4),
@@ -63,6 +64,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
   makeAsyncSaga(saga.GET_WORKLIST_V1, actions.getWorklistV1, GetWorklistService.getWorklistV1),
   makeAsyncSaga(saga.GET_WORKLIST_AUDIT, actions.getWorklistAudit, GetWorklistService.getWorklistAudit),
+  makeAsyncSaga(saga.GET_WORKLIST_AUDIT_V1, actions.getWorklistAuditV1, GetWorklistService.getWorklistAuditV1),
   makeAsyncSaga(
     saga.GET_PALLET_WORKLIST,
     actions.getPalletWorklist,
@@ -89,7 +91,11 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_SECTIONS, actions.getSections, LocationService.getSections),
   makeAsyncSaga(saga.GET_SECTION_DETAILS, actions.getSectionDetails, LocationService.getSectionDetails),
   makeAsyncSaga(saga.ADD_PALLET, actions.addPallet, AddPalletService.addPallet),
-  makeAsyncSaga(saga.DELETE_PALLET, actions.deletePallet, DeletePalletService.deletePallet),
+  makeAsyncSaga(
+    saga.DELETE_PALLET_FROM_SECTION,
+    actions.deletePalletFromSection,
+    DeletePalletService.deletePalletFromSection
+  ),
   makeAsyncSaga(saga.PRINT_LOCATION_LABELS, actions.printLocationLabels, PrintService.printLabels),
   makeAsyncSaga(saga.POST_CREATE_AISLES, actions.postCreateAisles, LocationService.createLocationAislesSection),
   makeAsyncSaga(saga.CREATE_SECTIONS, actions.createSections, LocationService.createSections),
@@ -103,7 +109,7 @@ const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_DETAIL_UPC, actions.getItemDetailsUPC, GetItemDetailsUPCService.getItemDetailsUPC),
   makeAsyncSaga(saga.ADD_PALLET_UPCS, actions.addPalletUPCs, AddPalletService.addPalletUPCs),
   makeAsyncSaga(saga.UPDATE_PALLET_ITEM_QTY, actions.updatePalletItemQty, PalletManagementService.updateItemQuantity),
-  makeAsyncSaga(saga.DELETE_UPCS, actions.deleteUpcs, DeletePalletUPCsService.deletePalletUPCs),
+  makeAsyncSaga(saga.DELETE_UPCS, actions.deleteUpcs, DeletePalletService.deletePalletUPCs),
   makeAsyncSaga(saga.COMBINE_PALLETS, actions.combinePallets, PalletManagementService.combinePallets),
   makeAsyncSaga(saga.PRINT_PALLET_LABEL, actions.printPalletLabel, PrintService.printPallet),
   makeAsyncSaga(saga.CLEAR_PALLET, actions.clearPallet, DeletePalletService.clearPallet),
@@ -136,6 +142,26 @@ const genericSagas = [
     saga.UPDATE_MULTI_PALLET_UPC_QTY_V2,
     actions.updateMultiPalletUPCQtyV2,
     PalletManagementService.updateMultiPalletUPCQtyV2
+  ),
+  makeAsyncSaga(
+    saga.GET_AUDIT_LOCATIONS,
+    actions.getAuditLocations,
+    SaveAuditsProgressService.getAuditLocations
+  ),
+  makeAsyncSaga(
+    saga.SAVE_AUDITS_PROGRESS,
+    actions.saveAuditsProgress,
+    SaveAuditsProgressService.saveAuditLocations
+  ),
+  makeAsyncSaga(
+    saga.GET_ITEM_CENTER_TOKEN,
+    actions.getItemCenterToken,
+    ItemCenterTokenService.getItemCenterToken
+  ),
+  makeAsyncSaga(
+    saga.DELETE_BAD_PALLET,
+    actions.deleteBadPallet,
+    DeletePalletService.deleteBadPallet
   )
 ];
 

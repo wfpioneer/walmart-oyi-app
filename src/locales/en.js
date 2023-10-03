@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: 'Warning',
     CLOSE: 'Close',
     NUMBER_MIN_MAX: 'Number must be between %{minimum} and %{maximum}',
-    FEEDBACK: 'Feedback'
+    FEEDBACK: 'Feedback',
+    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Own Your Inventory',
@@ -163,7 +164,9 @@ export default {
     NO_ACTION_NEEDED: 'The item is up to date no action is needed',
     REPLENISH_RESERVE: 'Please replenish the reserve, to add item to pick list.',
     CANCEL_APPROVAL: 'This action will cancel the currently pending action. Would you Like to continue?',
-    UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval'
+    UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval',
+    NO_ITEM_SCANNED: 'No Item Scanned',
+    SCAN_ITEM: 'Please scan an item'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -248,7 +251,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: 'Are you sure you want to clear this pallet?',
     CLEAR_PALLET_ERROR: 'Error Clearing Pallet was unsuccessful',
     CLEAR_PALLET_SUCCESS: 'Pallet: %{palletId} was successfully cleared',
-    UNSAVED_WARNING_MSG: 'All unsaved changes will be lost',
     CREATE_PALLET: 'Create Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet created successfully',
     CREATE_PALLET_FAILED: 'Failed to create pallet',
@@ -268,7 +270,7 @@ export default {
     SELECTION_INSTRUCTION: '1. Select a location type.',
     SCAN_INSTRUCTION: 'Scan location label.',
     DELETE_CONFIRMATION: 'Confirm: \ndelete location ',
-    DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nRetry?',
+    DELETE_LOCATION_API_ERROR: 'There was an error deleting the location. \nPlease try again.',
     DELETE_LOCATION_API_SUCCESS: 'Location %{locationName} has been successfully deleted',
     ADD_NEW_LOCATION: 'Add New Location',
     EDIT_LOCATION: 'Edit Location',
@@ -377,7 +379,6 @@ export default {
     TODO: 'Todo',
     COMPLETED: 'Completed',
     PENDING: 'Pending',
-    PENDING_APPROVAL: 'Pending Approval',
     PENDING_PICK: 'Pending Pick',
     WORKLIST_ITEM_API_ERROR: 'There was an error retrieving worklist items.\nPlease try again.',
     AREA: 'Area',
@@ -506,9 +507,10 @@ export default {
     QUANTITY_STOCKED: 'Quantity Stocked',
     ACCEPT_FOLLOWING_PICKS: 'Accept the following picks?',
     ACCEPT_FOLLOWING_BINS: 'Accept the following bins?',
-    LOC_LABEL: 'Loc',
     ACCEPT_MULTIPLE_BINS: 'Accept Multiple Bins',
-    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks'
+    ACCEPT_MULTIPLE_PICKS: 'Accept Multiple Picks',
+    LOC_LABEL: 'Loc',
+    PALLET_NOT_IN_SYSTEM: 'Pallet cannot be found in the system. Do you wish to delete this pick?'
   },
   BINNING: {
     BINNING: 'Binning',
@@ -526,7 +528,8 @@ export default {
     FIRST_ITEM: 'First Item',
     EMPTY_PALLET: 'Empty Pallet',
     PALLET_NOT_READY: 'Not ready to bin, pallet part of an active pick',
-    MULTIPLE_BIN_ENABLED: 'Multiple Bin Enabled'
+    MULTIPLE_BIN_ENABLED: 'Enable Multiple Bins',
+    SINGLE_BIN_ENABLED: 'Single Bin Enabled'
   },
   SETTINGS: {
     TITLE: 'Settings',
@@ -558,7 +561,13 @@ export default {
     NO_PALLETS_FOUND_FOR_ITEM: 'No Pallets found for the item',
     NEGATIVE_VALIDATION: 'Invalid result, location qty should be 0 or greater',
     ITEMS: 'Items',
-    CUSTOM_ITEMS: 'Items'
+    CUSTOM_ITEMS: 'Items',
+    IN_PROGRESS: 'In Progress',
+    CURRENT_TOTAL: 'Current Total',
+    LOCATIONS_SAVED: 'Locations saved',
+    LOCATIONS_SAVE_FAIL: 'Unable to save locations',
+    SCANNED_ITEM_NOT_PRESENT: 'The scanned item is not on the audit worklist',
+    GET_SAVED_LOC_FAIL: 'Unable to retrieve saved locations'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Very Poor',

@@ -4,6 +4,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import ItemInfo, { AdditionalItemDetailsProps, ItemInfoProps, getExceptionTranslation } from './ItemInfo';
 import { strings } from '../../locales';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 
@@ -111,7 +112,28 @@ describe('ItemInfo Component', () => {
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Tests toogle additional item details through collapsible card', () => {
+    it('Renders Item Info Card with AuditWorkList type and InProgress status enabled ', () => {
+      const renderer = ShallowRenderer.createRenderer();
+
+      renderer.render(<ItemInfo
+        itemName={mockItem.itemName}
+        itemNbr={mockItem.itemNbr}
+        upcNbr={mockItem.upcNbr}
+        status={mockItem.status || ''}
+        category={mockItem.category}
+        price={mockItem.price}
+        exceptionType={mockItem.exceptionType}
+        navigationForPrint={navigationProp}
+        additionalItemDetails={{ ...mockAdditionalItemDetails }}
+        countryCode={mockItem.countryCode}
+        showItemImage={mockItem.showItemImage}
+        worklistAuditType="AU"
+        worklistStatus={WorkListStatus.AUDITSTARTED}
+      />);
+      expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Tests toggle additional item details through collapsible card', () => {
       const {
         getByTestId, queryAllByTestId
       } = render(

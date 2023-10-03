@@ -6,6 +6,7 @@ import {
   resetLocations,
   setActionCompleted,
   setFloorLocations,
+  setItemDetails,
   setReserveLocations,
   setSelectedLocation,
   setUPC,
@@ -25,7 +26,8 @@ describe('ItemDetailScreen reducer tests', () => {
       floorLocations: [],
       reserveLocations: [],
       selectedLocation: null,
-      salesFloor: false
+      salesFloor: false,
+      itemDetails: null
     };
     const testMutatedState: ItemDetailsState = {
       itemNbr: 0,
@@ -36,9 +38,11 @@ describe('ItemDetailScreen reducer tests', () => {
       floorLocations: [],
       reserveLocations: [],
       selectedLocation: null,
-      salesFloor: false
+      salesFloor: false,
+      itemDetails: null
     };
 
+    const item = getItemDetails[123];
     // SetUpScreen
     const screenSetupState: ItemDetailsState = {
       itemNbr: 1234567890,
@@ -49,17 +53,18 @@ describe('ItemDetailScreen reducer tests', () => {
       floorLocations: [],
       reserveLocations: [],
       selectedLocation: null,
-      salesFloor: true
+      salesFloor: true,
+      itemDetails: item
     };
 
-    const item = getItemDetails[123];
     let testResults = ItemDetailScreen(testInitialState, setupScreen(
       item.itemNbr,
       item.upcNbr,
       item.exceptionType,
       item.pendingOnHandsQty,
       true,
-      true
+      true,
+      item
     ));
     expect(testResults).toStrictEqual(screenSetupState);
 
@@ -150,5 +155,13 @@ describe('ItemDetailScreen reducer tests', () => {
     testResults = ItemDetailScreen(testMutatedState, setUPC('500252'));
     expect(testResults).toStrictEqual(testMutatedState);
     testMutatedState.upcNbr = '';
+
+    // set itemDetails
+    const testState: ItemDetailsState = {
+      ...testInitialState,
+      itemNbr: 123,
+      itemDetails: getItemDetails[123]
+    };
+    testResults = ItemDetailScreen(testState, setItemDetails(getItemDetails[123]));
   });
 });

@@ -1,7 +1,7 @@
 import {
   LaserPaperCn, LaserPaperMx, LaserPaperPrice, PortablePaperCn, PortablePaperMx, PrinterType
 } from '../models/Printer';
-import { getPaperSizeBasedOnCountry } from './global';
+import { getFiniteFixedPercent, getPaperSizeBasedOnCountry } from './global';
 
 describe('test global utilities function', () => {
   it('test getPaperSizeBasedOnCountry utility function', () => {
@@ -22,5 +22,21 @@ describe('test global utilities function', () => {
     mockSelectedPrinterType = PrinterType.PORTABLE;
     paperSizeObj = getPaperSizeBasedOnCountry(mockSelectedPrinterType, mockCountryCode);
     expect(paperSizeObj).toEqual(PortablePaperMx);
+  });
+
+  it('tests getting a percentage', () => {
+    const piPercent = 31.43;
+
+    const actual = getFiniteFixedPercent(11, 35, 2);
+
+    expect(actual).toBe(piPercent);
+  });
+
+  it('tests getting a whole percentage', () => {
+    const wholePercentage = 31;
+    // 11/35 roughly equals ~0.3143 or ~31.43%
+    const actual = getFiniteFixedPercent(11, 35);
+
+    expect(actual).toBe(wholePercentage);
   });
 });

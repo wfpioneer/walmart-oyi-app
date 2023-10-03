@@ -33,6 +33,9 @@ export const getWorklistV1 = makeAsyncActionCreators(GET_WORKLIST_V1);
 export const GET_WORKLIST_AUDIT = makeAsyncActionTypes('API/GET_WORKLIST_AUDIT');
 export const getWorklistAudit = makeAsyncActionCreators(GET_WORKLIST_AUDIT);
 
+export const GET_WORKLIST_AUDIT_V1 = makeAsyncActionTypes('API/GET_WORKLIST_AUDIT_V1');
+export const getWorklistAuditV1 = makeAsyncActionCreators(GET_WORKLIST_AUDIT_V1);
+
 export const GET_PALLET_WORKLIST = makeAsyncActionTypes('API/GET_PALLET_WORKLIST');
 export const getPalletWorklist = makeAsyncActionCreators(GET_PALLET_WORKLIST);
 
@@ -90,8 +93,8 @@ export const printLocationLabels = makeAsyncActionCreators(PRINT_LOCATION_LABELS
 export const ADD_PALLET = makeAsyncActionTypes('API/ADD_PALLET');
 export const addPallet = makeAsyncActionCreators(ADD_PALLET);
 
-export const DELETE_PALLET = makeAsyncActionTypes('API/DELETE_PALLET');
-export const deletePallet = makeAsyncActionCreators(DELETE_PALLET);
+export const DELETE_PALLET_FROM_SECTION = makeAsyncActionTypes('API/DELETE_PALLET_FROM_SECTION');
+export const deletePalletFromSection = makeAsyncActionCreators(DELETE_PALLET_FROM_SECTION);
 
 export const POST_CREATE_AISLES = makeAsyncActionTypes('API/POST_CREATE_AISLES');
 export const postCreateAisles = makeAsyncActionCreators(POST_CREATE_AISLES);
@@ -194,3 +197,15 @@ export const updateUserConfig = makeAsyncActionCreators(UPDATE_USER_CONFIG);
 
 export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = makeAsyncActionTypes('API/UPDATE_MULTI_PALLET_UPC_QTY_V2');
 export const updateMultiPalletUPCQtyV2 = makeAsyncActionCreators(UPDATE_MULTI_PALLET_UPC_QTY_V2);
+
+export const GET_AUDIT_LOCATIONS = makeAsyncActionTypes('API/GET_AUDIT_LOCATIONS');
+export const getAuditLocations = makeAsyncActionCreators(GET_AUDIT_LOCATIONS);
+
+export const SAVE_AUDITS_PROGRESS = makeAsyncActionTypes('API/SAVE_AUDITS_PROGRESS');
+export const saveAuditsProgress = makeAsyncActionCreators(SAVE_AUDITS_PROGRESS);
+
+export const GET_ITEM_CENTER_TOKEN = makeAsyncActionTypes('API/GET_ITEM_CENTER_TOKEN');
+export const getItemCenterToken = makeAsyncActionCreators(GET_ITEM_CENTER_TOKEN);
+
+export const DELETE_BAD_PALLET = makeAsyncActionTypes('API/DELETE_BAD_PALLET');
+export const deleteBadPallet = makeAsyncActionCreators(DELETE_BAD_PALLET);

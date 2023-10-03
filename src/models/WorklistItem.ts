@@ -4,6 +4,7 @@ import { WorklistType } from './WorklistSummary';
 export enum WorkListStatus {
   TODO = 'TODO',
   INPROGRESS = 'IN_PROGRESS',
+  AUDITSTARTED = 'AUDIT_STARTED',
   COMPLETED = 'COMPLETED'
 }
 export type ActionTaken = 'QTY_UPDATE' | 'ADD_TO_PICKLIST';

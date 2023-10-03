@@ -106,6 +106,7 @@ interface ItemDetails extends Partial<ItemLocation>{
   auditCompleted: boolean;
   worklistAuditType: string;
   worklistStatus?: WorkListStatus;
+  auditWorklistStatus?: WorkListStatus;
   actionTaken?: ActionTaken;
 }
 export interface ItemOHChangeHistory {

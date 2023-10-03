@@ -19,7 +19,7 @@ export interface StateType {
   calcOpen: boolean;
 }
 
-const initialState: StateType = {
+export const initialState: StateType = {
   isByod: false,
   scannedEvent: {
     value: null,

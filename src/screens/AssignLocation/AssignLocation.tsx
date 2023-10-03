@@ -42,15 +42,9 @@ import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
 import { PickingState } from '../../state/reducers/Picking';
 import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScreen';
 import { Configurations } from '../../models/User';
-import { Pallet } from '../../models/PalletManagementTypes';
-import { setupPallet } from '../../state/actions/PalletManagement';
-import { UseStateType } from '../../models/Generics.d';
-import {
-  backConfirmedHook,
-  navigationRemoveListenerHook,
-  onBinningItemPress,
-  renderWarningModal
-} from '../Binning/Binning';
+import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
+import { onBinningItemPress } from '../Binning/Binning';
+import { renderUnsavedWarningModal } from '../../components/UnsavedWarningModal/UnsavedWarningModal';
 
 interface AssignLocationProps {
   palletsToBin: BinningPallet[];
@@ -300,6 +294,39 @@ export const binPalletsApiEffect = (
   }
 };
 
+export const backConfirmed = (
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+) => {
+  setDisplayWarningModal(false);
+  dispatch(clearPallets());
+  navigation.goBack();
+};
+
+export const backConfirmedHook = (
+  displayWarningModal: boolean,
+  palletExistForBinning: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  navigation: NavigationProp<any>
+) => {
+  if (displayWarningModal && !palletExistForBinning) {
+    setDisplayWarningModal(false);
+    navigation.goBack();
+  }
+};
+
+export const navigationRemoveListenerHook = (
+  e: BeforeRemoveEvent,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  palletsToBin: BinningPallet[]
+) => {
+  if (palletsToBin.length > 0) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  }
+};
+
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   const {
     palletsToBin, isManualScanEnabled, useEffectHook, pickingState, navigation,
@@ -355,7 +382,7 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
   // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
-      navigationRemoveListenerHook(e, setDisplayWarningModal, enableMultiPalletBin, palletsToBin);
+      navigationRemoveListenerHook(e, setDisplayWarningModal, palletsToBin);
     });
     return navigationListener;
   }, [navigation, palletsToBin, enableMultiPalletBin]);
@@ -426,7 +453,13 @@ export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {
 
   return (
     <View style={styles.container}>
-      {renderWarningModal(displayWarningModal, setDisplayWarningModal, dispatch, navigation)}
+      {renderUnsavedWarningModal(
+        displayWarningModal,
+        setDisplayWarningModal,
+        strings('BINNING.WARNING_LABEL'),
+        strings('BINNING.WARNING_DESCRIPTION'),
+        () => backConfirmed(setDisplayWarningModal, dispatch, navigation)
+      )}
       {isManualScanEnabled && (
         <ManualScanComponent
           placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}

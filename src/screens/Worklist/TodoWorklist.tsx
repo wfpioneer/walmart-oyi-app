@@ -24,13 +24,15 @@ interface TodoWorklistProps {
   showItemImage: boolean;
   onHandsEnabled: boolean;
   userConfigs: Configurations;
+  imageToken: string | undefined;
+  tokenIsWaiting: boolean;
 }
 
 export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
   const {
     isWaiting, result, error, dispatch, navigation,
     groupToggle, updateGroupToggle, filterCategories, filterExceptions, areas, enableAreaFilter,
-    countryCode, showItemImage, onHandsEnabled, userConfigs
+    countryCode, showItemImage, onHandsEnabled, userConfigs, imageToken, tokenIsWaiting
   } = props;
 
   let todoData: WorklistItemI[] | undefined;
@@ -61,6 +63,8 @@ export const TodoWorklistScreen = (props: TodoWorklistProps): JSX.Element => {
       enableAreaFilter={enableAreaFilter}
       countryCode={countryCode}
       showItemImage={showItemImage}
+      imageToken={imageToken}
+      tokenIsWaiting={tokenIsWaiting}
     />
   );
 };
@@ -70,6 +74,7 @@ export const TodoWorklist = (): JSX.Element => {
   // TODO We can remove inProgress Flag here once the V1 endpoint is in use in Prod
   const { isWaiting, result, error } = configs.inProgress ? useTypedSelector(state => state.async.getWorklistV1)
     : useTypedSelector(state => state.async.getWorklist);
+  const imageToken = useTypedSelector(state => state.async.getItemCenterToken);
   const [groupToggle, updateGroupToggle] = useState(false);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);
   const { areas, enableAreaFilter, showItemImage } = useTypedSelector(state => state.User.configs);
@@ -94,6 +99,8 @@ export const TodoWorklist = (): JSX.Element => {
       showItemImage={showItemImage}
       onHandsEnabled={onHandsEnabled}
       userConfigs={configs}
+      imageToken={countryCode === 'CN' ? imageToken?.result?.data?.data?.accessToken || undefined : undefined}
+      tokenIsWaiting={countryCode === 'CN' ? imageToken.isWaiting : false}
     />
   );
 };

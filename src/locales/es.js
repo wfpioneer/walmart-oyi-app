@@ -60,7 +60,8 @@ export default {
     WARNING_LABEL: 'Aviso',
     CLOSE: 'Cerrar',
     NUMBER_MIN_MAX: 'El número debe estar entre %{minimum} y %{maximum}',
-    FEEDBACK: 'Retroalimentación'
+    FEEDBACK: 'Retroalimentación',
+    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán'
   },
   HOME: {
     OWN_YOUR_INVENTORY: 'Aduéñate de tu inventario',
@@ -213,7 +214,7 @@ export default {
     Was_Small: 'Promo - Chico',
     Was_XSmall: 'Promo - Xchico',
     INVALID_SIZE: 'Algunos artículos no se imprimirán debido a un tamaño inválido de señalización',
-    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo' // TODO SPANISH TRANSLATION
+    CHOOSE_PRICE_SIGN: 'Imprime el precio del artículo'
   },
   PALLET: {
     PALLET_MANAGEMENT: 'Administración de Pallet',
@@ -248,7 +249,6 @@ export default {
     CLEAR_PALLET_CONFIRMATION: '¿Estás seguro que deseas limpiar el pallet?',
     CLEAR_PALLET_ERROR: 'Error limpiando el pallet',
     CLEAR_PALLET_SUCCESS: 'Pallet %{palletId} eliminado correctamente',
-    UNSAVED_WARNING_MSG: 'Cambios no guardados se perderán',
     CREATE_PALLET: 'Crear Pallet',
     CREATE_PALLET_SUCCESS: 'Pallet creado con éxito',
     CREATE_PALLET_FAILED: 'Falló la creación de pallet',
@@ -268,11 +268,11 @@ export default {
     SELECTION_INSTRUCTION: '1. Elija un tipo de ubicación.',
     SCAN_INSTRUCTION: 'Escanea la etiqueta de Ubicación.',
     DELETE_CONFIRMATION: 'Confirma la eliminación de \nla ubicación ',
-    DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nInténtalo de nuevo?',
+    DELETE_LOCATION_API_ERROR: 'Hubo un error eliminando la ubicación. \nPor favor inténtalo de nuevo?',
     DELETE_LOCATION_API_SUCCESS: 'La ubicación %{locationName} ha sido eliminada con éxitoç',
     ADD_NEW_LOCATION: 'Agregar Nueva Ubicación',
     EDIT_LOCATION: 'Editar Ubicación',
-    CHANGE_LOCATION: 'Actualiza la ubicación del artículo', // TODO SPANISH TRANSLATION
+    CHANGE_LOCATION: 'Actualiza la ubicación del artículo',
     LOCATION_MANAGEMENT: 'Administración de Ubicaciones',
     ITEMS: 'Artículos',
     PALLETS: 'Pallets',
@@ -377,7 +377,6 @@ export default {
     TODO: 'Que hacer',
     COMPLETED: 'Terminado',
     PENDING: 'Pendiente',
-    PENDING_APPROVAL: 'Pendiente de Aprobación',
     PENDING_PICK: 'Pickeo Pendiente',
     WORKLIST_ITEM_API_ERROR: 'Hubo un error al recuperar los artículos de la lista de trabajo. \nPor favor inténtalo de nuevo',
     AREA: 'Área',
@@ -507,7 +506,8 @@ export default {
     ACCEPT_MULTIPLE_PICKS: 'Aceptar Múltiples Pickeos',
     ACCEPT_FOLLOWING_PICKS: 'Aceptar los siguientes pickeos?',
     ACCEPT_FOLLOWING_BINS: 'Aceptar los siguientes ingresos a bodega?',
-    LOC_LABEL: 'Ubi'
+    LOC_LABEL: 'Ubi',
+    PALLET_NOT_IN_SYSTEM: 'El pallet no se pudo encontrar en el sistema, ¿quieres borrar el pickeo?'
   },
   BINNING: {
     BINNING: 'Bodega',
@@ -525,7 +525,8 @@ export default {
     FIRST_ITEM: 'Primer articulo',
     EMPTY_PALLET: 'Pallet vacía',
     PALLET_NOT_READY: 'No se puede ingresar a bodega. Ell pallet es parte de un pick activo',
-    MULTIPLE_BIN_ENABLED: 'Habilitar multiple ingreso a bodega'
+    MULTIPLE_BIN_ENABLED: 'Habilitar Múltiple Ingreso a Bodega',
+    SINGLE_BIN_ENABLED: 'Ingreso a bodega individual habilitado'
   },
   SETTINGS: {
     TITLE: 'Ajustes',
@@ -557,7 +558,13 @@ export default {
     NO_PALLETS_FOUND_FOR_ITEM: 'No hay pallets encontrados para este artículo',
     NEGATIVE_VALIDATION: 'Resultado inválido. La cantidad debe ser 0 o mayor',
     ITEMS: 'Artículos',
-    CUSTOM_ITEMS: 'Artículos'
+    CUSTOM_ITEMS: 'Artículos',
+    IN_PROGRESS: 'En Progreso',
+    CURRENT_TOTAL: 'Total Actual',
+    LOCATIONS_SAVED: 'Ubicaciones Guardadas',
+    LOCATIONS_SAVE_FAIL: 'Incapaz de guardar ubicaciones',
+    SCANNED_ITEM_NOT_PRESENT: 'El artículo escaneado no está en la lista de auditorías',
+    GET_SAVED_LOC_FAIL: 'Incapaz de recuperar las ubicaciones guardadas'
   },
   FEEDBACK: {
     VERY_POOR_RATE_LABEL: 'Muy Malo',

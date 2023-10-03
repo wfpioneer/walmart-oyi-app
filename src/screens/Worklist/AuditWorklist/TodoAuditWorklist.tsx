@@ -1,25 +1,28 @@
 import React from 'react';
 import AuditWorklistTab from '../AuditWorklistTab';
+import { WorklistItemI } from '../../../models/WorklistItem';
 
 export interface TodoAuditWorklistScreenProps {
   onRefresh: () => void;
+  auditWorklistItems: WorklistItemI[];
 }
 
 export interface TodoAuditWorklistProps {
   onRefresh: () => void;
+  auditWorklistItems: WorklistItemI[];
 }
 
 export const TodoAuditWorklistScreen = (props: TodoAuditWorklistScreenProps) => {
-  const { onRefresh } = props;
+  const { onRefresh, auditWorklistItems } = props;
   return (
-    <AuditWorklistTab toDo onRefresh={onRefresh} />
+    <AuditWorklistTab completionLevel={0} onRefresh={onRefresh} auditWorklistItems={auditWorklistItems} />
   );
 };
 
 const TodoAuditWorklist = (props: TodoAuditWorklistProps) => {
-  const { onRefresh } = props;
+  const { onRefresh, auditWorklistItems } = props;
   return (
-    <TodoAuditWorklistScreen onRefresh={onRefresh} />
+    <TodoAuditWorklistScreen onRefresh={onRefresh} auditWorklistItems={auditWorklistItems} />
   );
 };
 

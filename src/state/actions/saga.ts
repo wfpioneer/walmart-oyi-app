@@ -26,6 +26,7 @@ import { PickAction } from '../../models/Picking.d';
 import { CreatePickRequest } from '../../services/Picking.service';
 import { CreatePallet, PalletItem } from '../../models/PalletManagementTypes';
 import { submitFeedbackRequest } from '../../services/Feedback.service';
+import { SaveLocation } from '../../services/SaveAuditsProgress.service';
 
 export const GET_ITEM_DETAILS_V4 = 'SAGA/GET_ITEM_DETAILS_V4';
 
@@ -40,6 +41,7 @@ export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_WORKLIST = 'SAGA/GET_WORKLIST';
 export const GET_WORKLIST_V1 = 'SAGA/GET_WORKLIST_V1';
 export const GET_WORKLIST_AUDIT = 'SAGA/GET_WORKLIST_AUDIT';
+export const GET_WORKLIST_AUDIT_V1 = 'SAGA/GET_WORKLIST_AUDIT_V1';
 export const GET_PALLET_WORKLIST = 'SAGA/GET_PALLET_WORKLIST';
 export const EDIT_LOCATION = 'SAGA/EDIT_LOCATION';
 export const UPDATE_OH_QTY = 'SAGA/UPDATE_OH_QTY';
@@ -47,7 +49,7 @@ export const UPDATE_OH_QTY_V1 = 'SAGA/UPDATE_OH_QTY_V1';
 export const ADD_TO_PICKLIST = 'SAGA/ADD_TO_PICKLIST';
 export const ADD_LOCATION = 'SAGA/ADD_LOCATION';
 export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
-export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V@';
+export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V2';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
@@ -60,7 +62,7 @@ export const GET_SECTIONS = 'SAGA/GET_SECTIONS';
 export const GET_SECTION_DETAILS = 'SAGA/GET_SECTION_DETAILS';
 export const PRINT_LOCATION_LABELS = 'SAGA/PRINT_SECTION_LABELS';
 export const ADD_PALLET = 'SAGA/ADD_PALLET';
-export const DELETE_PALLET = 'SAGA/DELETE_PALLET';
+export const DELETE_PALLET_FROM_SECTION = 'SAGA/DELETE_PALLET_FROM_SECTION';
 export const POST_CREATE_AISLES = 'SAGA/POST_CREATE_AISLES';
 export const CREATE_SECTIONS = 'SAGA/CREATE_SECTIONS';
 export const CREATE_ZONE = 'SAGA/CREATE_ZONE';
@@ -95,6 +97,10 @@ export const SUBMIT_FEEDBACK_RATING = 'SAGA/SUBMIT_FEEDBACK_RATING';
 export const GET_USER_CONFIG = 'SAGA/GET_USER_CONFIG';
 export const UPDATE_USER_CONFIG = 'SAGA/UPDATE_USER_CONFIG';
 export const UPDATE_MULTI_PALLET_UPC_QTY_V2 = 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY_V2';
+export const GET_AUDIT_LOCATIONS = 'SAGA/GET_AUDIT_LOCATIONS';
+export const SAVE_AUDITS_PROGRESS = 'SAGA/SAVE_AUDITS_PROGRESS';
+export const GET_ITEM_CENTER_TOKEN = 'SAGA/GET_ITEM_CENTER_TOKEN';
+export const DELETE_BAD_PALLET = 'SAGA/DELETE_BAD_PALLET';
 
 export const getItemDetailsV4 = (payload: GetItemDetailsPayload) => ({ type: GET_ITEM_DETAILS_V4, payload } as const);
 
@@ -112,6 +118,9 @@ export const getWorklist = (payload?: { worklistType?: string[] }) => ({ type: G
 export const getWorklistV1 = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST_V1, payload } as const);
 export const getWorklistAudits = (payload?: { worklistType?: string[] }) => (
   { type: GET_WORKLIST_AUDIT, payload } as const
+);
+export const getWorklistAuditsV1 = (payload?: { worklistType?: string[] }) => (
+  { type: GET_WORKLIST_AUDIT_V1, payload } as const
 );
 export const getPalletWorklist = (payload: { worklistType: PalletWorklistType[] }) => (
   { type: GET_PALLET_WORKLIST, payload } as const
@@ -179,7 +188,9 @@ export const addPallet = (payload: {
   sectionId?: number;
   locationName?: string
 }) => ({ type: ADD_PALLET, payload } as const);
-export const deletePallet = (payload: { palletId: number }) => ({ type: DELETE_PALLET, payload } as const);
+export const deletePalletFromSection = (payload: {
+   palletId: number
+}) => ({ type: DELETE_PALLET_FROM_SECTION, payload } as const);
 export const createSections = (
   payload: { aisleId: number; sectionCount: number }[]
 ) => ({ type: CREATE_SECTIONS, payload } as const);
@@ -304,6 +315,28 @@ export const updateMultiPalletUPCQtyV2 = (payload: UpdateMultiPalletUPCQtyReques
   payload
 } as const);
 
+export const getAuditLocations = (payload: {itemNbr: number, hours?: number}) => ({
+  type: GET_AUDIT_LOCATIONS,
+  payload
+} as const);
+
+export const saveAuditLocations = (itemNbr: number, locations: SaveLocation[]) => ({
+  type: SAVE_AUDITS_PROGRESS,
+  payload: {
+    itemNbr,
+    locations
+  }
+} as const);
+
+export const getItemCenterToken = () => ({ type: GET_ITEM_CENTER_TOKEN } as const);
+
+export const deleteBadPallet = (palletId: string) => ({
+  type: DELETE_BAD_PALLET,
+  payload: {
+    palletId
+  }
+} as const);
+
 // Add sagaActions that pass "payload" as a parameter
 export type SagaParams =
     & Pick<ReturnType<typeof getItemDetailsV4>, 'payload'>
@@ -316,6 +349,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getWorklist>, 'payload'>
     & Pick<ReturnType<typeof getWorklistV1>, 'payload'>
     & Pick<ReturnType<typeof getWorklistAudits>, 'payload'>
+    & Pick<ReturnType<typeof getWorklistAuditsV1>, 'payload'>
     & Pick<ReturnType<typeof getPalletWorklist>, 'payload'>
     & Pick<ReturnType<typeof editLocation>, 'payload'>
     & Pick<ReturnType<typeof addLocation>, 'payload'>
@@ -332,7 +366,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getSectionDetails>, 'payload'>
     & Pick<ReturnType<typeof printLocationLabel>, 'payload'>
     & Pick<ReturnType<typeof addPallet>, 'payload'>
-    & Pick<ReturnType<typeof deletePallet>, 'payload'>
+    & Pick<ReturnType<typeof deletePalletFromSection>, 'payload'>
     & Pick<ReturnType<typeof createSections>, 'payload'>
     & Pick<ReturnType<typeof deleteZone>, 'payload'>
     & Pick<ReturnType<typeof postCreateAisles>, 'payload'>
@@ -359,4 +393,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getItemPalletsV1>, 'payload'>
     & Pick<ReturnType<typeof updateMultiPalletUPCQty>, 'payload'>
     & Pick<ReturnType<typeof submitFeedbackRating>, 'payload'>
-    & Pick<ReturnType<typeof updateMultiPalletUPCQtyV2>, 'payload'>;
+    & Pick<ReturnType<typeof updateMultiPalletUPCQtyV2>, 'payload'>
+    & Pick<ReturnType<typeof getAuditLocations>, 'payload'>
+    & Pick<ReturnType<typeof saveAuditLocations>, 'payload'>
+    & Pick<ReturnType<typeof deleteBadPallet>, 'payload'>;

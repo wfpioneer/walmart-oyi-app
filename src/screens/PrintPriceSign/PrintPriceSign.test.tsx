@@ -1,10 +1,10 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp, Route } from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import _ from 'lodash';
 import Toast from 'react-native-toast-message';
 import { fireEvent, render } from '@testing-library/react-native';
-import { AxiosResponse } from 'axios';
+import { AxiosHeaders, AxiosResponse } from 'axios';
 import ItemDetails from '../../models/ItemDetails';
 import {
   PrintPriceSignScreen,
@@ -38,7 +38,6 @@ import {
   mockLocationPrintQueue,
   mockPrintQueue
 } from '../../mockData/mockPrintQueue';
-import { mockSections } from '../../mockData/sectionDetails';
 import { LocationIdName } from '../../state/reducers/Location';
 import { trackEvent } from '../../utils/AppCenterTool';
 import { validateSession } from '../../utils/sessionTimeout';
@@ -76,7 +75,7 @@ const navigationProp: NavigationProp<any> = {
   navigate: jest.fn()
 };
 
-const routeProp: Route<any> = {
+const routeProp: RouteProp<any, string> = {
   key: '',
   name: 'PrintPriceSign'
 };
@@ -123,7 +122,9 @@ describe('PrintPriceSignScreen', () => {
   };
 
   const defaultResult: AxiosResponse = {
-    config: {},
+    config: {
+      headers: new AxiosHeaders()
+    },
     data: {},
     headers: {},
     status: 200,
@@ -610,7 +611,8 @@ describe('PrintPriceSignScreen', () => {
         mockSetError,
         mockDispatch,
         true,
-        'NSFL'
+        'NSFL',
+        routeProp
       );
       expect(navigationProp.goBack).toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith({
@@ -619,6 +621,21 @@ describe('PrintPriceSignScreen', () => {
         visibilityTime: 4000,
         position: 'bottom'
       });
+
+      const routeOtherAction: RouteProp<any, string> = {
+        ...routeProp,
+        params: { source: 'OtherAction' }
+      };
+      printSignApiHook(
+        printSuccessApi,
+        navigationProp,
+        mockSetError,
+        mockDispatch,
+        true,
+        'NSFL',
+        routeOtherAction
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
 
       const printSuccess204: AsyncState = {
         ...defaultAsyncState,
@@ -632,7 +649,8 @@ describe('PrintPriceSignScreen', () => {
         mockSetError,
         mockDispatch,
         true,
-        'NSFL'
+        'NSFL',
+        routeProp
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -647,7 +665,8 @@ describe('PrintPriceSignScreen', () => {
         mockSetError,
         mockDispatch,
         true,
-        'NSFL'
+        'NSFL',
+        routeProp
       );
       expect(mockSetError).toHaveBeenCalledWith({
         error: true,
@@ -660,7 +679,8 @@ describe('PrintPriceSignScreen', () => {
         mockSetError,
         mockDispatch,
         true,
-        'NSFL'
+        'NSFL',
+        routeProp
       );
       expect(mockSetError).toHaveBeenCalledWith({
         error: false,

@@ -19,14 +19,14 @@ itemDetail, {
   from '../../mockData/getItemDetails';
 import ReviewItemDetails, {
   HandleProps, ItemDetailsScreenProps, RenderProps, ReviewItemDetailsScreen,
-  callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook,
-  getExceptionType, getLocationCount, getLocationsForItemsApiHook, getLocationsForItemsV1ApiHook, getTopRightBtnTxt,
-  getUpdatedSales, handleCreateNewPick, handleLocationAction,
-  handleOHQtyClose, handleOHQtySubmit, handleUpdateQty, isError, isItemDetailsCompleted, onIsWaiting,
-  onValidateBackPress, onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton,
-  renderAddPicklistButton, renderBarcodeErrorModal, renderLocationComponent, renderOHChangeHistory,
-  renderOHQtyComponent, renderOtherActionButton, renderPickHistory, renderPrintPriceSignButton, renderReplenishmentCard,
-  renderReserveLocQtys, renderSalesGraphV4, updateOHQtyApiHook
+  callBackbarcodeEmitter, completeButtonComponent, createNewPickApiHook, getExceptionType,
+  getLocationCount, getLocationsForItemsApiHook, getLocationsForItemsV1ApiHook, getTopRightBtnTxt,
+  getUpdatedSales, handleCreateNewPick, handleLocationAction, handleOHQtyClose, handleOHQtySubmit,
+  handleRefresh, handleUpdateQty, isItemDetailsCompleted, onIsWaiting, onValidateBackPress,
+  onValidateItemDetails, onValidateScannedEvent, renderAddLocationButton, renderAddPicklistButton,
+  renderBarcodeErrorModal, renderErrorView, renderLocationComponent, renderOHChangeHistory,
+  renderOHQtyComponent, renderOtherActionButton, renderPickHistory, renderPrintPriceSignButton,
+  renderReplenishmentCard, renderReserveLocQtys, renderSalesGraphV4, updateOHQtyApiHook
 } from './ReviewItemDetails';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
@@ -34,15 +34,26 @@ import store from '../../state/index';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import {
   getItemDetailsV4,
+  getItemManagerApprovalHistory,
   getItemPiHistory,
   getItemPiSalesHistory,
   getItemPicklistHistory,
   getLocationsForItem,
   getLocationsForItemV1
 } from '../../state/actions/saga';
-import { OHChangeHistory } from '../../models/ItemDetails';
-import { setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
+import ItemDetails, { OHChangeHistory } from '../../models/ItemDetails';
+import { setActionCompleted, setFloorLocations, setReserveLocations } from '../../state/actions/ItemDetailScreen';
 import { WorkListStatus } from '../../models/WorklistItem';
+import {
+  GET_ITEM_DETAILS_V4,
+  GET_ITEM_MANAGERAPPROVALHISTORY,
+  GET_ITEM_PICKLISTHISTORY,
+  GET_ITEM_PIHISTORY,
+  GET_ITEM_PISALESHISTORY,
+  GET_LOCATIONS_FOR_ITEM,
+  GET_LOCATIONS_FOR_ITEM_V1
+} from '../../state/actions/asyncAPI';
+import { setItemDetails } from '../../state/actions/ReserveAdjustmentScreen';
 
 jest.mock('../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../utils/AppCenterTool'),
@@ -120,9 +131,7 @@ const mockHandleProps: (HandleProps & RenderProps) = {
 const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   scannedEvent: { value: '123', type: 'UPC-A' },
   isManualScanEnabled: false,
-  isWaiting: false,
-  error: null,
-  result: null,
+  itemDetailsApi: defaultAsyncState,
   isPiHistWaiting: false,
   piHistError: null,
   piHistResult: null,
@@ -168,13 +177,17 @@ const mockItemDetailsScreenProps: ItemDetailsScreenProps = {
   userConfigs: mockConfig,
   countryCode: 'MX',
   locationForItemsV1Api: defaultAsyncState,
-  userDomain: 'HO'
+  userDomain: 'HO',
+  imageToken: 'bearer megaalakazamvsvanillishswarm',
+  itemDetails: null,
+  tokenIsWaiting: false
 };
 
 describe('ReviewItemDetailsScreen', () => {
   const defaultResult: AxiosResponse<any> = {
-    // @ts-expect-error type error for AxiosRequestHeaders
-    config: {},
+    config: {
+      headers: new AxiosHeaders()
+    },
     data: {},
     headers: {},
     status: 200,
@@ -190,7 +203,9 @@ describe('ReviewItemDetailsScreen', () => {
   };
   const onHandsChangeText = 'on hands change';
   const mockItemDetail123 = itemDetail[123];
-
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   describe('Tests renders ItemDetails API Responses', () => {
     const actualNav = jest.requireActual('@react-navigation/native');
     const navContextValue = {
@@ -211,19 +226,24 @@ describe('ReviewItemDetailsScreen', () => {
       const { toJSON } = render(component);
       expect(toJSON()).toMatchSnapshot();
     });
+    const mockItemDetails: ItemDetails = { ...mockItemDetail123, ...mockAdditionalItemDetails };
     it('renders the details for a single item with non-null status', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
-        reserveLocations: mockItemDetail123?.location?.reserve
+        reserveLocations: mockItemDetail123?.location?.reserve,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -235,10 +255,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with ohQtyModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         piHistResult: {
           ...defaultResult,
@@ -253,7 +276,8 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        ohQtyModalVisible: true
+        ohQtyModalVisible: true,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -264,10 +288,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with createPickModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         piHistResult: {
           ...defaultResult,
@@ -282,7 +309,8 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        createPickModalVisible: true
+        createPickModalVisible: true,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -293,10 +321,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with errorModalVisible true', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         piHistResult: {
           ...defaultResult,
@@ -311,7 +342,8 @@ describe('ReviewItemDetailsScreen', () => {
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        errorModalVisible: true
+        errorModalVisible: true,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -322,16 +354,20 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders the details for a single item with null status', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
-        reserveLocations: mockItemDetail123?.location?.reserve
+        reserveLocations: mockItemDetail123?.location?.reserve,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -343,16 +379,20 @@ describe('ReviewItemDetailsScreen', () => {
       const mockItemDetail456 = itemDetail[456];
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...mockItemDetail456, ...mockAdditionalItemDetails },
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail456.onHandsQty,
         pendingOnHandsQty: mockItemDetail456.pendingOnHandsQty,
         floorLocations: mockItemDetail456?.location?.floor,
-        reserveLocations: mockItemDetail456?.location?.reserve
+        reserveLocations: mockItemDetail456?.location?.reserve,
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       // Mock Item Number 456 has cloud Qty defined
@@ -364,17 +404,21 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders "Generic Change translation" if pendingOH is -999 and user has OH role', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: { ...mockItemDetail123, ...mockAdditionalItemDetails },
-          status: 200
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: mockItemDetails,
+            status: 200
+          }
         },
         exceptionType: 'NSFL',
         newOHQty: mockItemDetail123.onHandsQty,
         pendingOnHandsQty: mockItemDetail123.pendingOnHandsQty,
         floorLocations: mockItemDetail123?.location?.floor,
         reserveLocations: mockItemDetail123?.location?.reserve,
-        userFeatures: [onHandsChangeText]
+        userFeatures: [onHandsChangeText],
+        itemDetails: mockItemDetails
       };
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -385,7 +429,10 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Item Details Api Error\' for a failed request ', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        error: mockError,
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          error: mockError
+        },
         exceptionType: '',
         pendingOnHandsQty: 0
       };
@@ -399,10 +446,13 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Scanned Item Not Found\' on request status 204', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        result: {
-          ...defaultResult,
-          data: [],
-          status: 204
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          result: {
+            ...defaultResult,
+            data: [],
+            status: 204
+          }
         },
         exceptionType: '',
         pendingOnHandsQty: 0
@@ -416,7 +466,10 @@ describe('ReviewItemDetailsScreen', () => {
     it('renders \'Activity Indicator\' waiting for ItemDetails Response ', () => {
       const testProps: ItemDetailsScreenProps = {
         ...mockItemDetailsScreenProps,
-        isWaiting: true,
+        itemDetailsApi: {
+          ...defaultAsyncState,
+          isWaiting: true
+        },
         exceptionType: '',
         pendingOnHandsQty: 0
       };
@@ -645,9 +698,6 @@ describe('ReviewItemDetailsScreen', () => {
     const mockSetSelectedSection = jest.fn();
     const mockSetIsQuickPick = jest.fn();
     const mockSetNumberOfPallets = jest.fn();
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
     const HIDE_ACTIVITY = 'MODAL/HIDE_ACTIVITY';
     const RESET_CREATE_PICK = 'API/CREATE_NEW_PICK/RESET';
     const RESET_CREATE_PICK_V1 = 'API/CREATE_NEW_PICK_V1/RESET';
@@ -877,12 +927,16 @@ describe('ReviewItemDetailsScreen', () => {
           itemNbr: 1234567890,
           pendingOHQty: -999,
           salesFloor: true,
-          upcNbr: '000055559999'
+          upcNbr: '000055559999',
+          itemDetails: mockItemDetail123
         },
         type: 'ITEM_DETAILS_SCREEN/SETUP'
       };
+      mockItemDetail123.worklistStatus = WorkListStatus.COMPLETED;
       onValidateItemDetails(mockDispatch, mockItemDetail123);
-      expect(mockDispatch).toHaveBeenCalledWith(expectedResults);
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, setItemDetails(mockItemDetail123));
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, expectedResults);
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, setActionCompleted());
     });
 
     it('testing callBackbarcodeEmitter', async () => {
@@ -981,6 +1035,16 @@ describe('ReviewItemDetailsScreen', () => {
         { type: 'API/GET_LOCATIONS_FOR_ITEM_V1/RESET' }
       );
       expect(mockItemDetailsScreenProps.dispatch).toHaveBeenNthCalledWith(11, getLocationsForItemV1(123));
+
+      jest.clearAllMocks();
+      await onValidateScannedEvent({
+        ...mockItemDetailsScreenProps,
+        scannedEvent: {
+          ...mockItemDetailsScreenProps.scannedEvent,
+          type: 'card_click'
+        }
+      });
+      expect(mockItemDetailsScreenProps.dispatch).not.toHaveBeenCalled();
     });
 
     it('test onIsWaiting', () => {
@@ -1017,21 +1081,20 @@ describe('ReviewItemDetailsScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
-      const { getByTestId, rerender, toJSON } = render(isError(
-        mockError,
+      const { getByTestId, rerender, toJSON } = render(renderErrorView(
         true,
         jest.fn(),
         false,
         { value: '1234567890098', type: 'UPC-A' },
         mockDispatch,
-        jest.fn(),
+        jest.fn()
       ));
       expect(toJSON()).toMatchSnapshot();
       const retryButton = getByTestId('scanErrorRetry');
       fireEvent.press(retryButton);
       expect(mockDispatch).toHaveBeenCalledWith(expectedGetItemDetailAction);
-      rerender(isError(
-        mockError,
+
+      rerender(renderErrorView(
         false,
         jest.fn(),
         false,
@@ -1040,12 +1103,13 @@ describe('ReviewItemDetailsScreen', () => {
         jest.fn(),
       ));
       expect(toJSON()).toMatchSnapshot();
-      rerender(isError(
-        null,
+
+      // no error, but empty
+      rerender(renderErrorView(
         false,
         jest.fn(),
         false,
-        { value: '1234567890098', type: 'UPC-A' },
+        { value: null, type: null },
         mockDispatch,
         jest.fn(),
       ));
@@ -1173,10 +1237,6 @@ describe('ReviewItemDetailsScreen', () => {
 
     const mockDispatch = jest.fn();
     const mockTrackEvent = jest.fn();
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
     it('Renders OH history flat list', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -1486,6 +1546,110 @@ describe('ReviewItemDetailsScreen', () => {
         { screen: 'PrintPriceSignScreen' }
       );
       expect(toJSON).toMatchSnapshot();
+    });
+
+    it('Tests handleRefresh Function', async () => {
+      const mockItemNbr = mockItemDetail123.itemNbr;
+      await handleRefresh(
+        mockHandleProps.validateSessionCall,
+        navigationProp,
+        routeProp,
+        mockItemDetail123,
+        mockHandleProps.trackEventCall,
+        mockHandleProps.dispatch,
+        'Test User',
+        true
+      );
+      expect(mockHandleProps.validateSessionCall).toHaveBeenCalled();
+      expect(mockHandleProps.trackEventCall).toHaveBeenNthCalledWith(
+        1,
+        'Review_Item_Details',
+        { action: 'refresh', itemNbr: mockItemDetail123.itemNbr }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        1,
+        { type: GET_ITEM_DETAILS_V4.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        2,
+        { type: GET_ITEM_PIHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        3,
+        { type: GET_ITEM_PISALESHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        4,
+        { type: GET_ITEM_PICKLISTHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        5,
+        { type: GET_ITEM_MANAGERAPPROVALHISTORY.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        6,
+        getItemDetailsV4({ id: mockItemNbr })
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        7,
+        getItemPiHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        8,
+        getItemPiSalesHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        9,
+        getItemPicklistHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        10,
+        getItemManagerApprovalHistory(mockItemNbr)
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        11,
+        { type: GET_LOCATIONS_FOR_ITEM_V1.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        12,
+        getLocationsForItemV1(mockItemNbr)
+      );
+
+      // If PeteGetLocations is false
+      jest.clearAllMocks();
+      await handleRefresh(
+        mockHandleProps.validateSessionCall,
+        navigationProp,
+        routeProp,
+        mockItemDetail123,
+        mockHandleProps.trackEventCall,
+        mockHandleProps.dispatch,
+        'Test User',
+        false
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        11,
+        { type: GET_LOCATIONS_FOR_ITEM.RESET }
+      );
+      expect(mockHandleProps.dispatch).toHaveBeenNthCalledWith(
+        12,
+        getLocationsForItem(mockItemNbr)
+      );
+
+      // TrackEventCall in the Catch Statement can't be tested but the line pass in Test Coverage
+      const mockValidateSessionReject = jest.fn(() => Promise.reject(
+        new Error('Session Timed Out')
+      ));
+      await handleRefresh(
+        mockValidateSessionReject,
+        navigationProp,
+        routeProp,
+        mockItemDetail123,
+        mockHandleProps.trackEventCall,
+        mockHandleProps.dispatch,
+        'Test User',
+        true
+      );
     });
   });
 });

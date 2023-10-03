@@ -2,7 +2,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import {
-  BinningNavigatorStack, renderKebabButton, renderScanButton, resetManualScan
+  BinningNavigatorStack, renderScanButton, resetManualScan
 } from './BinningNavigator';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
@@ -43,18 +43,6 @@ describe('Binning Navigator', () => {
     const scanButton = getByTestId('scanButton');
     fireEvent.press(scanButton);
     expect(mockDispatch).toHaveBeenCalled();
-  });
-
-  it('renders the kebab button and presses it for the binning screen', () => {
-    const mockDispatch = jest.fn();
-    const mockTrackEvent = jest.fn();
-
-    const { getByTestId } = render(renderKebabButton(mockDispatch, mockTrackEvent));
-
-    const kebabButton = getByTestId('kebabButton');
-    fireEvent.press(kebabButton);
-    expect(mockDispatch).toHaveBeenCalled();
-    expect(mockTrackEvent).toHaveBeenCalled();
   });
 
   it('Expects dispatch to be called if isManualScanEnabled is true for "resetManualScan()"', () => {

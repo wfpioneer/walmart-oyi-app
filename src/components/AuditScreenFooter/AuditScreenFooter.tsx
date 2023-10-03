@@ -1,22 +1,36 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Button, { ButtonType } from '../buttons/Button';
 import styles from './AuditScreenFooter.style';
 import { strings } from '../../locales';
+import COLOR from '../../themes/Color';
 
 interface AuditScreenFooterProps {
-  totalCount: number;
   onContinueClick: () => void;
+  onSaveClick: () => void;
   disabledContinue: boolean;
+  showSaveButton: boolean;
 }
 
-const AuditScreenFooter = ({ totalCount, onContinueClick, disabledContinue }: AuditScreenFooterProps) => (
+const AuditScreenFooter = ({
+  onContinueClick,
+  disabledContinue,
+  onSaveClick,
+  showSaveButton
+}: AuditScreenFooterProps) => (
   <View style={styles.container}>
-    <View style={styles.totalCntVw}>
-      <Text style={styles.totalCnt}>
-        {`${totalCount} ${strings('AUDITS.ITEMS')}`}
-      </Text>
-    </View>
+    {showSaveButton ? (
+      <View style={styles.continueBtn}>
+        <Button
+          testID="btnSave"
+          title={strings('GENERICS.SAVE')}
+          titleColor={COLOR.MAIN_THEME_COLOR}
+          type={ButtonType.SOLID_WHITE}
+          onPress={onSaveClick}
+          disabled={disabledContinue}
+        />
+      </View>
+    ) : null}
     <View style={styles.continueBtn}>
       <Button
         testID="btnContinue"

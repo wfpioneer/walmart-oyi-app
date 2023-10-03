@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Audit worklist render tests renders the completed tab 1`] = `
+<div
+  auditWorklistItems={Array []}
+  completionLevel={2}
+  onRefresh={[MockFunction]}
+  title="mockAuditWorklistTab"
+/>
+`;
+
+exports[`Audit worklist render tests renders the in progress tab 1`] = `
+<div
+  auditWorklistItems={Array []}
+  completionLevel={1}
+  onRefresh={[MockFunction]}
+  title="mockAuditWorklistTab"
+/>
+`;
+
+exports[`Audit worklist render tests renders the todo tab 1`] = `
+<div
+  auditWorklistItems={Array []}
+  completionLevel={0}
+  onRefresh={[MockFunction]}
+  title="mockAuditWorklistTab"
+/>
+`;

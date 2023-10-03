@@ -1,4 +1,4 @@
-inherit: job:///Mobile/templates-android/androidTemplate-1.3.0
+inherit: job:///Mobile/templates-android/androidTemplate-2.0.0
 
 # Maximum commits to be ShallowCloned by Looper
 gitShallowDepth: 2147483647
@@ -74,14 +74,17 @@ envs:
       # Optional - weather the build will be zip aligned. Defaults to false
       ZIPALIGN_REQUIRED: false
 
-      #Proximity related vars
-      RELEASES_REPO: 'pangaea_releases'
-      # Optional - Promity repo for snapshots & PRs, default is pangaea_snapshots
-      SNAPSHOTS_REPO: 'pangaea_snapshots'
-      # Define what type of repo you want to use (releases/snapshots)
-      PROXIMITY_REPO: 'snapshots'
-      # artifact group id
-      NEXUS_GROUP_ID: 'IntlSamsTech'
+      # Artifactory related vars
+      DEFAULT_CURRENT_VERSION: "4.9.6"
+      DEFAULT_VERSION_CODE: 276
+      ALLOW_ARTIFACTORY: true
+      GIT_ORG: "intlsamstech"
+      TARGET_REPO: "snapshots"
+      REPO_GROUP_ID: "IntlSamsTech"
+
+      #Slack related vars
+      # Optional - Slack channel for notifications
+      SLACK_CHANNEL: 'intl_sams_oyi_ops_alerts'
 
       #BetaCrash vars
       #      betaCrashDetails:
@@ -95,6 +98,7 @@ envs:
       # CN Image Auth Client ID and Secret
       CN_IMAGE_AUTH_CLIENT_ID: ENC[c7gsJUW4bWJg2IHKIcxhhLmYVh6NQxbzVzN9D+zYC4R09VQzh5cdpTOdCdyEEZYo]
       CN_IMAGE_AUTH_SECRET: ENC[exyE4QqpRmHvnPE7bkcM28gdR8Vf+pn8RnRRmRwOMKZ+BmNOdJej/2RhNgtwAALxS63uoYmnfHHwFO+S6IFzCHT1VDOHlx2lM50J3IQRlig=]
+      CN_ITEM_CENTER_TOKEN_SECRET: ENC[B4ccZDapcp+KUr3gr7+eFsX6chDKpfO1ucKsnE9Kyrl09VQzh5cdpTOdCdyEEZYo]
 
       projects:
         - rootDir: './android'
@@ -124,7 +128,7 @@ flows:
   gradlew-wrapper:
     - group("writing API secrets"):
       - 'echo "Building src/constant/Secrets.json using looper-encrypted secrets"'
-      - 'echo "{ \"CN_IMAGE_AUTH_CLIENT_ID\": \"$CN_IMAGE_AUTH_CLIENT_ID\", \"CN_IMAGE_AUTH_SECRET\": \"$CN_IMAGE_AUTH_SECRET\" }" >> ../src/constant/Secrets.json'
+      - 'echo "{ \"CN_ITEM_CENTER_TOKEN_SECRET\": \"$CN_ITEM_CENTER_TOKEN_SECRET\", \"CN_IMAGE_AUTH_CLIENT_ID\": \"$CN_IMAGE_AUTH_CLIENT_ID\", \"CN_IMAGE_AUTH_SECRET\": \"$CN_IMAGE_AUTH_SECRET\" }" >> ../src/constant/Secrets.json'
     - group("npm install"):
         - npm ci --legacy-peer-deps
         - TZ='America/Chicago' npm run test:coverage

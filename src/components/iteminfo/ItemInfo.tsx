@@ -11,6 +11,7 @@ import CollapsibleCard from '../CollapsibleCard/CollapsibleCard';
 import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDetailsList';
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
 import { TrackEventSource } from '../../models/Generics.d';
+import { WorkListStatus } from '../../models/WorklistItem';
 
 export type ItemInfoProps = {
   itemName: string;
@@ -25,6 +26,9 @@ export type ItemInfoProps = {
   countryCode: string;
   showItemImage: boolean;
   worklistAuditType?: string;
+  worklistStatus?: WorkListStatus;
+  imageToken?: string | undefined;
+  tokenIsWaiting?: boolean;
 };
 
 export type AdditionalItemDetailsProps = {
@@ -111,7 +115,8 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
   const {
     itemName, itemNbr, upcNbr, status, category,
     price, exceptionType, navigationForPrint: navigation, additionalItemDetails,
-    countryCode, showItemImage, worklistAuditType
+    countryCode, showItemImage, worklistAuditType, worklistStatus,
+    imageToken, tokenIsWaiting
   } = props;
 
   const handlePrintPriceSign = () => {
@@ -130,12 +135,28 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
             itemNumber={itemNbr}
             countryCode={countryCode}
             imageStyle={styles.image}
+            imageToken={imageToken}
+            tokenIsWaiting={tokenIsWaiting}
           />
         </View>
         )}
         <View>
           {exceptionType && <Text style={styles.exceptionText}>{exceptionString}</Text>}
-          {worklistAuditType && <Text style={styles.auditFlagText}>{strings('AUDITS.AUDITS')}</Text>}
+          <View style={styles.auditFlagView}>
+            {worklistAuditType && (
+            <Text style={styles.auditFlagText}>
+              {strings('AUDITS.AUDITS')}
+              {' '}
+            </Text>
+            )}
+            {(worklistStatus === WorkListStatus.AUDITSTARTED || worklistStatus === WorkListStatus.INPROGRESS) && (
+            <Text style={styles.auditFlagText}>
+              -
+              {' '}
+              { strings('AUDITS.IN_PROGRESS')}
+            </Text>
+            )}
+          </View>
           <Text style={styles.itemNameText}>{itemName}</Text>
           <View style={styles.nbrContainer}>
             <Text style={styles.itemNbrText}>{`${strings('ITEM.ITEM')} ${itemNbr}`}</Text>
@@ -167,7 +188,10 @@ ItemInfo.defaultProps = {
   navigationForPrint: undefined,
   price: undefined,
   additionalItemDetails: undefined,
-  worklistAuditType: undefined
+  worklistAuditType: undefined,
+  worklistStatus: undefined,
+  imageToken: undefined,
+  tokenIsWaiting: false
 };
 
 export default ItemInfo;

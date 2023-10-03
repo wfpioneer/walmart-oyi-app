@@ -194,6 +194,7 @@ exports[`WorklistScreen Tests rendering WorklistItem Renders a single worklist i
   pendingApproval={false}
   pendingPick={false}
   showItemImage={false}
+  tokenIsWaiting={false}
   trackEventSource={
     Object {
       "action": "worklist_item_click",

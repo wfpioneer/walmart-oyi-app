@@ -11,6 +11,7 @@ import Login, {
   SelectCountryCodeModal,
   addCNAssociateRoleOverrides,
   getPrinterDetailsFromAsyncStorage,
+  isCountryCodeSet,
   onSubmitClubNbr,
   onSubmitCountryCode,
   resetFluffyFeaturesApiState,
@@ -27,7 +28,7 @@ import { hideActivityModal, showActivityModal } from '../../state/actions/Modal'
 import { setEndTime } from '../../state/actions/SessionTimeout';
 import { sessionEnd } from '../../utils/sessionTimeout';
 import { assignFluffyFeatures, setConfigs, setUserTokens } from '../../state/actions/User';
-import { getClubConfig, getFluffyFeatures } from '../../state/actions/saga';
+import { getClubConfig, getItemCenterToken } from '../../state/actions/saga';
 import { ConfigResponse } from '../../services/Config.service';
 import store from '../../state';
 
@@ -79,7 +80,7 @@ const navigationProp: NavigationProp<any> = {
   canGoBack: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
-  isFocused: jest.fn(),
+  isFocused: jest.fn(() => true),
   removeListener: jest.fn(),
   reset: jest.fn(),
   setOptions: jest.fn(),
@@ -97,7 +98,7 @@ const testUser: User = {
   co: '',
   codePage: '',
   company: '',
-  countryCode: '',
+  countryCode: '0',
   ctscSecurityAnswers: '',
   department: '',
   departmentNumber: '',
@@ -209,6 +210,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -268,6 +270,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -307,6 +310,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -334,6 +338,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -361,6 +366,7 @@ describe('LoginScreen', () => {
         }}
         dispatch={jest.fn()}
         useEffectHook={jest.fn()}
+        activityModalShown={false}
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -448,7 +454,9 @@ describe('Tests login screen functions', () => {
       ...mockConfig,
       printingUpdate: true,
       locMgmtEdit: mockConfig.locationManagementEdit,
-      overridePltPerish: false
+      overridePltPerish: false,
+      showQtyStocked: true,
+      enableAuditsIP: true
     };
     const mockGetFluffyApiSuccess: AsyncState = {
       ...defaultAsyncState,
@@ -476,6 +484,61 @@ describe('Tests login screen functions', () => {
     expect(mockDispatch).toHaveBeenCalledTimes(9);
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
+    expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());
+    expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
+    expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
+    expect(mockDispatch).toHaveBeenCalledWith(setConfigs(mockConfigResponse));
+    expect(mockGetPrinterDetailsFromAsyncStorage).toHaveBeenCalledTimes(1);
+    expect(navigationProp.reset).toHaveBeenCalledWith({
+      index: 0,
+      routes: [{ name: 'Tabs' }]
+    });
+  });
+
+  it('Tests userConfigsApiHook on Success for CN', () => {
+    const mockFluffyData = [
+      'manager approval',
+      'location management',
+      'on hands change',
+      'location management edit',
+      'location printing'
+    ];
+    const mockConfigResponse: ConfigResponse = {
+      ...mockConfig,
+      printingUpdate: true,
+      locMgmtEdit: mockConfig.locationManagementEdit,
+      overridePltPerish: false,
+      showQtyStocked: true,
+      enableAuditsIP: true
+    };
+    const mockGetFluffyApiSuccess: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        status: 200,
+        data: mockFluffyData
+      }
+    };
+    const mockGetClubConfigApiSuccess: AsyncState = {
+      ...defaultAsyncState,
+      result: {
+        data: mockConfigResponse
+      }
+    };
+    const mockCNuser = { ...mockUser, countryCode: 'CN', c: 'CN' };
+    userConfigsApiHook(
+      mockGetFluffyApiSuccess,
+      mockGetClubConfigApiSuccess,
+      mockCNuser,
+      mockDispatch,
+      mockGetPrinterDetailsFromAsyncStorage,
+      navigationProp,
+      '-STAGE'
+    );
+
+    expect(mockDispatch).toHaveBeenCalledTimes(8);
+    expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
+    expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
+    expect(mockDispatch).toHaveBeenCalledWith(getItemCenterToken());
     expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
     expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
@@ -531,6 +594,35 @@ describe('Tests login screen functions', () => {
     expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
     expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
     expect(mockDispatch).toHaveBeenCalledTimes(5);
+    expect(navigationProp.reset).toHaveBeenCalledWith({
+      index: 0,
+      routes: [{ name: 'Tabs' }]
+    });
+  });
+
+  it('Tests userConfigsApiHook on api error for CN', () => {
+    const mockGetFluffyApiError: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    const mockGetClubConfigApiError: AsyncState = {
+      ...defaultAsyncState,
+      error: 'Internal Server Error'
+    };
+    const mockCNuser = { ...mockUser, countryCode: 'CN', c: 'CN' };
+    userConfigsApiHook(
+      mockGetFluffyApiError,
+      mockGetClubConfigApiError,
+      mockCNuser,
+      mockDispatch,
+      mockGetPrinterDetailsFromAsyncStorage,
+      navigationProp,
+      '-STAGE'
+    );
+    expect(mockDispatch).toHaveBeenCalledWith(hideActivityModal());
+    expect(mockDispatch).toHaveBeenCalledWith(setEndTime(sessionEnd()));
+    expect(mockDispatch).toHaveBeenCalledWith(getItemCenterToken());
+    expect(mockDispatch).toHaveBeenCalledTimes(6);
     expect(navigationProp.reset).toHaveBeenCalledWith({
       index: 0,
       routes: [{ name: 'Tabs' }]
@@ -611,5 +703,19 @@ describe('Tests login screen functions', () => {
   it('test addCNAssociateRoleOverrides', () => {
     const testResults = addCNAssociateRoleOverrides(['test feature']);
     expect(testResults).toEqual(['test feature', 'on hands change']);
+  });
+
+  it('tests the isCountryCodeSet function', () => {
+    let result = isCountryCodeSet('MX', 'MX');
+    expect(result).toBeTruthy();
+
+    result = isCountryCodeSet('US', 'US');
+    expect(result).toBeFalsy();
+
+    result = isCountryCodeSet('US', '0');
+    expect(result).toBeFalsy();
+
+    result = isCountryCodeSet('US', 'MX');
+    expect(result).toBeTruthy();
   });
 });

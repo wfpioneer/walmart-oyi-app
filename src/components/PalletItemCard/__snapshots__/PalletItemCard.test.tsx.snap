@@ -171,6 +171,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
     countryCode="MX"
     imageStyle={Object {}}
     itemNumber={234234234}
+    tokenIsWaiting={false}
   />
   <View
     style={

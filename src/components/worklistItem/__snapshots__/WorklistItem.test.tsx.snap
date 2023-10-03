@@ -93,6 +93,7 @@ exports[`WorklistItem Component Renders an WorklistItem component with both pend
       }
     }
     itemNumber={1234}
+    tokenIsWaiting={false}
   />
   <View
     style={
@@ -172,7 +173,7 @@ exports[`WorklistItem Component Renders an WorklistItem component with both pend
           }
         }
       >
-        [missing "en.WORKLIST.PENDING_APPROVAL" translation]
+        [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
       </Text>
     </View>
   </View>
@@ -204,6 +205,7 @@ exports[`WorklistItem Component Renders an WorklistItem component with image 1`]
       }
     }
     itemNumber={1234}
+    tokenIsWaiting={false}
   />
   <View
     style={
@@ -281,6 +283,7 @@ exports[`WorklistItem Component Renders an WorklistItem component with pending a
       }
     }
     itemNumber={1234}
+    tokenIsWaiting={false}
   />
   <View
     style={
@@ -343,7 +346,7 @@ exports[`WorklistItem Component Renders an WorklistItem component with pending a
           }
         }
       >
-        [missing "en.WORKLIST.PENDING_APPROVAL" translation]
+        [missing "en.ITEM.PENDING_MGR_APPROVAL" translation]
       </Text>
     </View>
   </View>
@@ -375,6 +378,7 @@ exports[`WorklistItem Component Renders an WorklistItem component with pending p
       }
     }
     itemNumber={1234}
+    tokenIsWaiting={false}
   />
   <View
     style={
