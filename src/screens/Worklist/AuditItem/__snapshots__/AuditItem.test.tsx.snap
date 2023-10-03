@@ -1828,6 +1828,102 @@ Array [
       </View>
     </View>
   </RCTScrollView>,
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffffff",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "paddingHorizontal": 10,
+          "paddingVertical": 5,
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "marginHorizontal": 3,
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 45,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                Object {
+                  "disabled": false,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#0071e9",
+                  "borderRadius": 5,
+                  "elevation": 1,
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                }
+              }
+              testID="btnContinue"
+            >
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffffff",
+                    "fontFamily": "Roboto-Medium",
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textAlign": undefined,
+                  }
+                }
+              >
+                [missing "en.GENERICS.CONTINUE" translation]
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>,
 ]
 `;
 
@@ -2370,6 +2466,22 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
     </View>
   </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={false}
+      onContinueClick={[Function]}
+      onSaveClick={[Function]}
+      showSaveButton={false}
+    />
+  </View>
 </React.Fragment>
 `;
 
@@ -2912,6 +3024,22 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
     </View>
   </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={false}
+      onContinueClick={[Function]}
+      onSaveClick={[Function]}
+      showSaveButton={false}
+    />
+  </View>
 </React.Fragment>
 `;
 
@@ -3454,6 +3582,22 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
     </View>
   </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={true}
+      onContinueClick={[Function]}
+      onSaveClick={[Function]}
+      showSaveButton={false}
+    />
+  </View>
 </React.Fragment>
 `;
 
@@ -4056,6 +4200,22 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </View>
     </View>
   </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={false}
+      onContinueClick={[Function]}
+      onSaveClick={[Function]}
+      showSaveButton={false}
+    />
+  </View>
 </React.Fragment>
 `;
 
@@ -4606,6 +4766,22 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
     </View>
   </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={false}
+      onContinueClick={[Function]}
+      onSaveClick={[Function]}
+      showSaveButton={false}
+    />
+  </View>
 </React.Fragment>
 `;
 
@@ -5156,5 +5332,21 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
     </View>
   </ScrollView>
+  <View
+    style={
+      Object {
+        "borderTopColor": "#eeeeee",
+        "borderTopWidth": 4,
+        "height": 60,
+      }
+    }
+  >
+    <AuditScreenFooter
+      disabledContinue={false}
+      onContinueClick={[Function]}
+      onSaveClick={[Function]}
+      showSaveButton={false}
+    />
+  </View>
 </React.Fragment>
 `;
