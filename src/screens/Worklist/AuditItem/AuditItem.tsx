@@ -2223,22 +2223,20 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
-      {userConfig.enableAuditSave ? (
-        <View style={styles.footer}>
-          <AuditScreenFooter
-            onContinueClick={handleContinueAction}
-            disabledContinue={disabledContinue(
-              floorLocations,
-              reserveLocations,
-              userConfig.scanRequired,
-              getItemDetailsApi.isWaiting
-            )}
-            onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
-            showSaveButton={userConfig.enableAuditsInProgress
+      <View style={styles.footer}>
+        <AuditScreenFooter
+          onContinueClick={handleContinueAction}
+          disabledContinue={disabledContinue(
+            floorLocations,
+            reserveLocations,
+            userConfig.scanRequired,
+            getItemDetailsApi.isWaiting
+          )}
+          onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
+          showSaveButton={userConfig.enableAuditSave && userConfig.enableAuditsInProgress
             && (itemDetails?.worklistAuditType === 'AU' || itemDetails?.worklistAuditType === 'RA')}
-          />
-        </View>
-      ) : null}
+        />
+      </View>
     </>
   );
 };
