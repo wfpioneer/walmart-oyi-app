@@ -42,12 +42,8 @@ import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
 import { PickingState } from '../../state/reducers/Picking';
 import { updatePicklistItemsStatus } from '../PickBinWorkflow/PickBinWorkflowScreen';
 import { Configurations } from '../../models/User';
-import { UseStateType } from '../../models/Generics.d';
-import {
-  backConfirmedHook,
-  navigationRemoveListenerHook,
-  onBinningItemPress
-} from '../Binning/Binning';
+import { BeforeRemoveEvent, UseStateType } from '../../models/Generics.d';
+import { onBinningItemPress } from '../Binning/Binning';
 import { renderUnsavedWarningModal } from '../../components/UnsavedWarningModal/UnsavedWarningModal';
 
 interface AssignLocationProps {
@@ -306,6 +302,29 @@ export const backConfirmed = (
   setDisplayWarningModal(false);
   dispatch(clearPallets());
   navigation.goBack();
+};
+
+export const backConfirmedHook = (
+  displayWarningModal: boolean,
+  palletExistForBinning: boolean,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  navigation: NavigationProp<any>
+) => {
+  if (displayWarningModal && !palletExistForBinning) {
+    setDisplayWarningModal(false);
+    navigation.goBack();
+  }
+};
+
+export const navigationRemoveListenerHook = (
+  e: BeforeRemoveEvent,
+  setDisplayWarningModal: UseStateType<boolean>[1],
+  palletsToBin: BinningPallet[]
+) => {
+  if (palletsToBin.length > 0) {
+    setDisplayWarningModal(true);
+    e.preventDefault();
+  }
 };
 
 export function AssignLocationScreen(props: AssignLocationProps): JSX.Element {

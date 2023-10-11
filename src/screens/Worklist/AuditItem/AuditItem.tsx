@@ -568,6 +568,10 @@ export const getItemLocationsApiHook = (
       dispatch({ type: GET_LOCATIONS_FOR_ITEM.RESET });
     }
 
+    if (!getItemLocationsApi.isWaiting && getItemLocationsApi.error) {
+      setFloorLocationIsWaiting(false);
+    }
+
     if (getItemLocationsApi.isWaiting || getSavedAuditLocationsApi.isWaiting) {
       setFloorLocationIsWaiting(true);
     }
@@ -645,6 +649,10 @@ export const getItemLocationsV1ApiHook = (
         );
       }
       dispatch({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+    }
+
+    if (!getItemLocationsV1Api.isWaiting && getItemLocationsV1Api.error) {
+      setFloorLocationIsWaiting(false);
     }
 
     if (getItemLocationsV1Api.isWaiting || getSavedAuditLocationsApi.isWaiting) {
@@ -1537,7 +1545,6 @@ export const getLocationsToSave = (floorLocations: Location[]): SaveLocation[] =
       saveableLocations.push({ name: location.locationName, qty: location.newQty });
     }
   });
-
   return saveableLocations;
 };
 
@@ -1669,7 +1676,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const [isAuditSaved, setAuditSaved] = auditSavedWarningState;
   const [floorLocationIsWaiting, setFloorLocationIsWaiting] = floorLocationIsWaitingState;
   const [reserveLocationIsWaiting, setReserveLocationIsWaiting] = reserveLocationIsWaitingState;
-
   const totalOHQty = calculateTotalOHQty(
     floorLocations,
     reserveLocations,
@@ -1867,7 +1873,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       isAuditSaved,
       route
     );
-  }), [navigation, doSaveablesExist, isAuditSaved]);
+  }), [navigation, doSaveablesExist, isAuditSaved, completeItemApi]);
 
   useEffectHook(() => backConfirmedHook(
     displayWarningModal,
@@ -2217,22 +2223,20 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           </View>
         </View>
       </ScrollView>
-      {userConfig.enableAuditSave ? (
-        <View style={styles.footer}>
-          <AuditScreenFooter
-            onContinueClick={handleContinueAction}
-            disabledContinue={disabledContinue(
-              floorLocations,
-              reserveLocations,
-              userConfig.scanRequired,
-              getItemDetailsApi.isWaiting
-            )}
-            onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
-            showSaveButton={userConfig.enableAuditsInProgress
+      <View style={styles.footer}>
+        <AuditScreenFooter
+          onContinueClick={handleContinueAction}
+          disabledContinue={disabledContinue(
+            floorLocations,
+            reserveLocations,
+            userConfig.scanRequired,
+            getItemDetailsApi.isWaiting
+          )}
+          onSaveClick={() => dispatch(saveAuditLocations(itemNumber, getLocationsToSave(floorLocations)))}
+          showSaveButton={userConfig.enableAuditSave && userConfig.enableAuditsInProgress
             && (itemDetails?.worklistAuditType === 'AU' || itemDetails?.worklistAuditType === 'RA')}
-          />
-        </View>
-      ) : null}
+        />
+      </View>
     </>
   );
 };

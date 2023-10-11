@@ -78,13 +78,13 @@ const styles = StyleSheet.create({
     paddingRight: 6
   },
   pendingApproval: {
-    backgroundColor: COLOR.GREY_300,
+    backgroundColor: COLOR.PALE_ORANGE,
     marginRight: 10,
     marginVertical: 5,
     borderRadius: 4,
     paddingVertical: 5,
     paddingHorizontal: 8,
-    fontSize: 11,
+    fontSize: 12,
     borderWidth: 1,
     borderColor: COLOR.GREY_200
   },
@@ -94,9 +94,12 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingVertical: 5,
     paddingHorizontal: 8,
-    fontSize: 11,
+    fontSize: 12,
     borderWidth: 1,
     borderColor: COLOR.GREY_200
+  },
+  pendingBadges: {
+    flexDirection: 'row'
   }
 });
 
