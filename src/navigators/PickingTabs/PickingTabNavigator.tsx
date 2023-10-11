@@ -19,6 +19,9 @@ import {
 } from '@react-navigation/native';
 import { Badge } from 'react-native-paper';
 import { Dispatch } from 'redux';
+import {
+  BottomSheetDefaultBackdropProps
+} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types.d';
 import { strings } from '../../locales';
 import QuickPickTab from '../../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -472,8 +475,7 @@ export const PickingTabs = (): JSX.Element => {
   const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
 
   const renderBackdrop = useCallback(
-    // @ts-expect-error useCallBack prop types is any
-    props => (
+    (props: BottomSheetDefaultBackdropProps) => (
       <BottomSheetBackdrop
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
