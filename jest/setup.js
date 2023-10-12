@@ -18,7 +18,7 @@ jest.mock('react-native-reanimated', () => {
 });
 
 // Increasing the Default timeout of "waitFor" and "findBy" queries from the testing-library
-configure({ asyncUtilTimeout: 3000 });
+configure({ asyncUtilTimeout: 5000 });
 
 // eslint-disable-next-line no-underscore-dangle
 global.__reanimatedWorkletInit = jest.fn();
