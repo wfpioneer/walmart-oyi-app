@@ -2,7 +2,7 @@ import 'react-native-gesture-handler/jestSetup';
 import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-native/extend-expect';
-import { cleanup } from '@testing-library/react-native';
+import { cleanup, configure } from '@testing-library/react-native';
 
 jest.mock('react-native-device-info', () => mockRNDeviceInfo);
 jest.mock('react-native-reanimated', () => {
@@ -16,6 +16,10 @@ jest.mock('react-native-reanimated', () => {
 
   return Reanimated;
 });
+
+// Increasing the Default timeout of "waitFor" and "findBy" queries from the testing-library
+configure({ asyncUtilTimeout: 3000 });
+
 // eslint-disable-next-line no-underscore-dangle
 global.__reanimatedWorkletInit = jest.fn();
 

@@ -2026,7 +2026,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
   </RCTScrollView>,
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -2035,7 +2035,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "flex": 1,
@@ -2049,7 +2049,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
             "marginHorizontal": 3,
           }
@@ -2057,8 +2057,8 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
               undefined,
@@ -2067,15 +2067,27 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -2089,7 +2101,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -2103,7 +2115,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -2664,7 +2676,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -3222,7 +3234,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -3780,7 +3792,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -4398,7 +4410,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -4964,7 +4976,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -5530,7 +5542,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
