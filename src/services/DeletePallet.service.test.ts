@@ -2,7 +2,7 @@ import { getEnvironment } from '../utils/environment';
 import Request from './Request';
 import DeletePalletService from './DeletePallet.service';
 
-// Skipping this test as ENOTFOUND occurs for non GET & POST requests
+// TODO Skipping this test as ENOTFOUND occurs for non GET & POST requests https://jira.walmart.com/browse/INTLSAOPS-10057
 describe.skip('Delete Pallet Service Tests', () => {
   afterEach(() => {
     jest.restoreAllMocks();
@@ -11,7 +11,7 @@ describe.skip('Delete Pallet Service Tests', () => {
     deletePalletUPCs, deleteBadPallet, deletePalletFromSection, clearPallet
   } = DeletePalletService;
 
-  // TODO refactor test Spike story for Mock Service Worker
+  // TODO refactor test Spike story for Mock Service Worker https://jira.walmart.com/browse/INTLSAOPS-10057
   it('ensures that the deletePalletUPCs function calls correctly', async () => {
     const deleteRequestSpy = jest.spyOn(Request, 'delete');
     const urls = getEnvironment();

@@ -8,7 +8,7 @@ describe('Get Worklist Service Tests', () => {
     jest.restoreAllMocks();
   });
 
-  // TODO refactor test Spike story for Mock Service Worker
+  // TODO refactor test Spike story for Mock Service Worker https://jira.walmart.com/browse/INTLSAOPS-10057
   it('ensures that the get audit worklist v1 function calls correctly', async () => {
     const getAuditWorklistV1 = GetWorklistService.getWorklistAuditV1;
     const mockResponse = { data: [], status: 200, statusText: 'ok' } as AxiosResponse;

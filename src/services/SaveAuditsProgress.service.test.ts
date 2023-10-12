@@ -8,8 +8,8 @@ describe('SaveAuditProgress Service Tests', () => {
     jest.restoreAllMocks();
   });
 
-  // TODO refactor test Spike story for Mock Service Worker
-  // Skipping this test as ENOTFOUND occurs for non GET & POST requests
+  // TODO refactor test Spike story for Mock Service Worker https://jira.walmart.com/browse/INTLSAOPS-10057
+  // TODO Skipping this test as ENOTFOUND occurs for non GET & POST requests ^^
   it.skip('ensures that the put - save function calls correctly', async () => {
     const saveLocations = SaveAuditsProgressService.saveAuditLocations;
     const putRequestSpy = jest.spyOn(Request, 'put');
