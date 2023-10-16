@@ -154,7 +154,8 @@ export const getItemsForTab = (
         return [];
     }
   } else {
-    const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
+    const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed
+    || item.worklistStatus === WorkListStatus.COMPLETED);
     return completionLevel === 2 ? completedItems : toDoItems;
   }
 };
