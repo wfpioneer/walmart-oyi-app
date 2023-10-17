@@ -714,7 +714,7 @@ Array [
       keyboardType="numeric"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
       selectionColor="#0071e9"
       style={
         Object {
@@ -1643,7 +1643,7 @@ Array [
       keyboardType="numeric"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
       selectionColor="#0071e9"
       style={
         Object {

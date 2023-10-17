@@ -14,7 +14,7 @@ import COLOR from '../../themes/Color';
 import CompletedAuditWorklist from '../../screens/Worklist/AuditWorklist/CompletedAuditWorklist';
 import InProgressAuditWorklist from '../../screens/Worklist/AuditWorklist/InProgressAuditWorklist';
 import TodoAuditWorklist from '../../screens/Worklist/AuditWorklist/TodoAuditWorklist';
-import { getWorklistAudit, getWorklistAuditV1 } from '../../state/actions/saga';
+import { getWorklistAuditV1 } from '../../state/actions/saga';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { validateSession } from '../../utils/sessionTimeout';
 import { AsyncState } from '../../models/AsyncState';
@@ -135,26 +135,13 @@ const isRollOverComplete = (wlSummary: WorklistSummary) => {
   return true;
 };
 
-export const getWorklistAuditApiToUse = (
-  enableAuditsInProgress: boolean,
-  getWorklistAuditApi: AsyncState,
-  getWorklistAuditV1Api: AsyncState
-): AsyncState => (enableAuditsInProgress
-  ? getWorklistAuditV1Api
-  : getWorklistAuditApi);
-
 export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps) => {
   const {
     dispatch, navigation, route, useCallbackHook, useFocusEffectHook, validateSessionCall,
     useEffectHook, trackEventCall, enableAuditsInProgress, isMounted, scannedEvent, auditWorklistItems
   } = props;
-  const getWorklistAuditApi = useTypedSelector(state => state.async.getWorklistAudit);
   const getWorklistAuditV1Api = useTypedSelector(state => state.async.getWorklistAuditV1);
-  const getAuditWorklistApi = getWorklistAuditApiToUse(
-    enableAuditsInProgress,
-    getWorklistAuditApi,
-    getWorklistAuditV1Api
-  );
+
   const { showRollOverAudit } = useTypedSelector(state => state.User.configs);
   const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data
     || state.async.getWorklistSummary.result?.data);
@@ -194,9 +181,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
         auditWlType.push('AU');
       }
       trackEventCall('Audit_Worklist', { action: 'get_worklist_api_retry' });
-      dispatch(enableAuditsInProgress
-        ? getWorklistAuditV1({ worklistType: auditWlType })
-        : getWorklistAudit({ worklistType: auditWlType }));
+      dispatch(getWorklistAuditV1({ worklistType: auditWlType }));
     });
   };
   // Get Audit worklist items call
@@ -206,7 +191,7 @@ export const AuditWorklistTabNavigator = (props: AuditWorklistTabNavigatorProps)
     }, [navigation])
   );
 
-  useEffectHook(() => getWorklistAuditApiHook(getAuditWorklistApi, dispatch, navigation), [getAuditWorklistApi]);
+  useEffectHook(() => getWorklistAuditApiHook(getWorklistAuditV1Api, dispatch, navigation), [getWorklistAuditV1Api]);
 
   return (
     <Tab.Navigator

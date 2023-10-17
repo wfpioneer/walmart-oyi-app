@@ -1,7 +1,6 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
-import { NavigationProp } from '@react-navigation/native';
 import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import { createStore } from 'redux';

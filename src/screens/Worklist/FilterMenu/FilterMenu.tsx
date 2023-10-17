@@ -515,7 +515,6 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
   } = appUser.configs;
   const workListApi = inProgress ? useTypedSelector(state => state.async.getWorklistV1)
     : useTypedSelector(state => state.async.getWorklist);
-  const workListAuditApi = useTypedSelector(state => state.async.getWorklistAudit);
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
   const { screenName } = props;
   const {
@@ -528,9 +527,9 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
   } = useTypedSelector(state => state.Worklist) as WorklistState;
   const wlSummary: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummary.result?.data);
   const wlSummaryV2: WorklistSummary[] = useTypedSelector(state => state.async.getWorklistSummaryV2.result?.data) || [];
-  const result = workListType === 'AUDIT' ? workListAuditApi.result : workListApi.result;
+  const { result } = workListApi;
   let data: WorklistItemI[] = result && result.data && Array.isArray(result.data) ? result.data : [];
-  if (!data.length && workListType === 'AUDIT') {
+  if (workListType === 'AUDIT') {
     data = auditWorklistItems;
   }
   const categoryMap: FilteredCategory[] = getCategoryMap(

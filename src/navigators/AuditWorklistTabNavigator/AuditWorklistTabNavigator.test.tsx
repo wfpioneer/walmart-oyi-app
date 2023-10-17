@@ -6,11 +6,9 @@ import Toast from 'react-native-toast-message';
 import { createStore } from 'redux';
 import {
   AuditWorklistTabNavigator,
-  getWorklistAuditApiToUse,
   scannedEventHook,
   scannerListenerHook
 } from './AuditWorklistTabNavigator';
-import { AsyncState } from '../../models/AsyncState';
 import RootReducer from '../../state/reducers/RootReducer';
 import { mockInitialState } from '../../mockData/mockStore';
 import { resetScannedEvent } from '../../state/actions/Global';
@@ -94,32 +92,6 @@ describe('AuditWorklistTab Navigator', () => {
   });
 
   describe('externalized functions', () => {
-    it('tests the get worklist audits api to use function', () => {
-      const auditWorklistApi: AsyncState = {
-        error: null,
-        isWaiting: false,
-        result: null,
-        value: {
-          description: 'Im the v0 endpoint'
-        }
-      };
-
-      const auditWorklistV1Api: AsyncState = {
-        error: null,
-        isWaiting: false,
-        result: null,
-        value: {
-          description: 'Im the v1 endpoint'
-        }
-      };
-
-      const auditsInProgressApi = getWorklistAuditApiToUse(true, auditWorklistApi, auditWorklistV1Api);
-      const auditsNoProgressApi = getWorklistAuditApiToUse(false, auditWorklistApi, auditWorklistV1Api);
-
-      expect(auditsInProgressApi).toStrictEqual(auditWorklistV1Api);
-      expect(auditsNoProgressApi).toStrictEqual(auditWorklistApi);
-    });
-
     const mockUnscannedEvent = { type: null, value: null };
     const mockScannedEvent = { type: 'yes', value: '777555333' };
 
