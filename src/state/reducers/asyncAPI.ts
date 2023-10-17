@@ -13,7 +13,6 @@ export const asyncReducer = combineReducers({
   hitGoogle: makeAsyncReducer(asyncActions.HIT_GOOGLE),
   getWorklist: makeAsyncReducer(asyncActions.GET_WORKLIST),
   getWorklistV1: makeAsyncReducer(asyncActions.GET_WORKLIST_V1),
-  getWorklistAudit: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT),
   getWorklistAuditV1: makeAsyncReducer(asyncActions.GET_WORKLIST_AUDIT_V1),
   getPalletWorklist: makeAsyncReducer(asyncActions.GET_PALLET_WORKLIST),
   editLocation: makeAsyncReducer(asyncActions.EDIT_LOCATION),
