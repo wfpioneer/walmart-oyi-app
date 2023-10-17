@@ -515,7 +515,7 @@ export const FilterMenu = (props: {screenName: string;}): JSX.Element => {
   } = appUser.configs;
   const workListApi = inProgress ? useTypedSelector(state => state.async.getWorklistV1)
     : useTypedSelector(state => state.async.getWorklist);
-  const workListAuditApi = useTypedSelector(state => state.async.getWorklistAudits);
+  const workListAuditApi = useTypedSelector(state => state.async.getWorklistAudit);
   const auditWorklistItems = useTypedSelector(state => state.AuditWorklist.items);
   const { screenName } = props;
   const {
