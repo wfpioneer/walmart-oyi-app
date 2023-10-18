@@ -174,6 +174,39 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
 </Context.Provider>
 `;
 
+exports[`AuditWorklistTab Tests rendering Audit worklist component Renders AuditWorkListTab component wrapper 1`] = `
+<RCTScrollView
+  data={Array []}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  keyExtractor={[Function]}
+  onContentSizeChange={[Function]}
+  onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onRefresh={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  refreshControl={
+    <RefreshControlMock
+      onRefresh={[Function]}
+      refreshing={false}
+    />
+  }
+  refreshing={false}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={3}
+>
+  <RCTRefreshControl />
+  <View />
+</RCTScrollView>
+`;
+
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders completed Audit worklist items 1`] = `
 <Context.Provider
   value={

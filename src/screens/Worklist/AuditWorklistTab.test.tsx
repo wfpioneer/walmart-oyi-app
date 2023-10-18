@@ -5,11 +5,12 @@ import { AxiosError } from 'axios';
 import { object } from 'prop-types';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { NavigationContainer, NavigationContext } from '@react-navigation/native';
 import {
   mockCombinationAuditsWorklist,
   mockCompletedAuditWorklist, mockToDoAuditWorklist
 } from '../../mockData/mockWorkList';
-import {
+import AuditWorklistTab, {
   AuditWorklistTabScreen, getItemsForTab, renderFilterPills
 } from './AuditWorklistTab';
 import { ExceptionList } from './FullExceptionList';
@@ -141,6 +142,26 @@ describe('AuditWorklistTab', () => {
         </Provider>
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Renders AuditWorkListTab component wrapper', () => {
+      const actualNav = jest.requireActual('@react-navigation/native');
+      const navContextValue = {
+        ...actualNav.navigation,
+        isFocused: () => false,
+        addListener: jest.fn(() => jest.fn())
+      };
+
+      const { toJSON } = render(
+        <Provider store={store}>
+          <NavigationContainer>
+            <NavigationContext.Provider value={navContextValue}>
+              <AuditWorklistTab auditWorklistItems={[]} completionLevel={0} onRefresh={jest.fn()} />
+            </NavigationContext.Provider>
+          </NavigationContainer>
+        </Provider>
+      );
+      expect(toJSON()).toMatchSnapshot();
     });
   });
 

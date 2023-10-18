@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AuditWorklistTab Navigator Renders AuditWorkListTab component wrapper 1`] = `
+<Context.Provider
+  value={
+    Object {
+      "getServerState": undefined,
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ForwardRef(NavigationContainerInner)>
+    <Context.Provider
+      value={
+        Object {
+          "addListener": [MockFunction],
+          "isFocused": [Function],
+        }
+      }
+    >
+      <AuditWorklistTabs />
+    </Context.Provider>
+  </ForwardRef(NavigationContainerInner)>
+</Context.Provider>
+`;
+
 exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator component without in progress tab 1`] = `
 <Context.Provider
   value={

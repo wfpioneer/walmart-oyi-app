@@ -1,18 +1,26 @@
-import { NavigationProp, RouteProp } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  NavigationContext,
+  NavigationProp,
+  RouteProp
+} from '@react-navigation/native';
 import React from 'react';
 import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import Toast from 'react-native-toast-message';
 import { createStore } from 'redux';
-import {
+import { render } from '@testing-library/react-native';
+import { AxiosHeaders } from 'axios';
+import AuditWorklistTabs, {
   AuditWorklistTabNavigator,
   scannedEventHook,
   scannerListenerHook
 } from './AuditWorklistTabNavigator';
-import RootReducer from '../../state/reducers/RootReducer';
-import { mockInitialState } from '../../mockData/mockStore';
+import RootReducer, { RootState } from '../../state/reducers/RootReducer';
+import { defaultAsyncState, mockInitialState } from '../../mockData/mockStore';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { mockCombinationAuditsWorklist } from '../../mockData/mockWorkList';
+import { mockZeroCompleteWorklistSummaries } from '../../mockData/mockWorklistSummary';
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
@@ -37,12 +45,17 @@ const mockDispatch = jest.fn();
 
 const store = createStore(RootReducer, mockInitialState);
 
-const mockValidateSession = jest
-  .fn()
-  .mockResolvedValue(true);
+const mockValidateSession = jest.fn().mockResolvedValue(true);
 jest.useFakeTimers();
 
 describe('AuditWorklistTab Navigator', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  const navContextValue = {
+    ...actualNav.navigation,
+    isFocused: () => true,
+    addListener: jest.fn(() => jest.fn())
+  };
+
   afterEach(() => jest.clearAllMocks());
   it('Renders the Audit WorkList Tab Navigator component without in progress tab', () => {
     const renderer = ShallowRenderer.createRenderer();
@@ -88,6 +101,80 @@ describe('AuditWorklistTab Navigator', () => {
       </Provider>
     );
 
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Tests the AuditWorkListTabNavigator React Hooks', () => {
+    const mockUseEffectHook = jest.fn().mockImplementation((callback, deps) => {
+      callback();
+    });
+    const mockUseCallBackHook = jest.fn().mockImplementation((callback, deps) => {
+      callback();
+    });
+    const mockUseFocusEffectHook = jest.fn();
+
+    // Needed so the "wlSummary" is populated with data for findIndex()
+    const mockRootState: RootState = {
+      ...mockInitialState,
+      async: {
+        ...mockInitialState.async,
+        getWorklistSummaryV2: {
+          ...defaultAsyncState,
+          result: {
+            config: {
+              headers: new AxiosHeaders()
+            },
+            data: mockZeroCompleteWorklistSummaries,
+            headers: {},
+            status: 200,
+            statusText: 'OK',
+            request: {}
+          }
+        }
+      }
+    };
+    const mockStore = createStore(RootReducer, mockRootState);
+    render(
+      <Provider store={mockStore}>
+        <NavigationContainer>
+          <NavigationContext.Provider value={navContextValue}>
+            <AuditWorklistTabNavigator
+              dispatch={mockDispatch}
+              navigation={navigationProp}
+              route={routeProp}
+              validateSessionCall={mockValidateSession}
+              useCallbackHook={mockUseCallBackHook}
+              useFocusEffectHook={mockUseFocusEffectHook}
+              useEffectHook={mockUseEffectHook}
+              trackEventCall={jest.fn()}
+              enableAuditsInProgress={true}
+              auditWorklistItems={[]}
+              isMounted={{ current: false }}
+              scannedEvent={{ type: null, value: null }}
+            />
+          </NavigationContext.Provider>
+        </NavigationContainer>
+      </Provider>
+    );
+
+    expect(mockUseEffectHook).toHaveBeenCalled();
+    expect(mockValidateSession).toHaveBeenCalled();
+    expect(mockUseCallBackHook).toHaveBeenCalled();
+    expect(mockUseFocusEffectHook).toHaveBeenCalled();
+  });
+
+  it('Renders AuditWorkListTab component wrapper', () => {
+    const renderer = ShallowRenderer.createRenderer();
+
+    renderer.render(
+      <Provider store={store}>
+        <NavigationContainer>
+          <NavigationContext.Provider value={navContextValue}>
+            <AuditWorklistTabs />
+          </NavigationContext.Provider>
+        </NavigationContainer>
+      </Provider>
+    );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
 
@@ -155,7 +242,9 @@ describe('AuditWorklistTab Navigator', () => {
       );
       expect(mockValidateSession).toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalled();
-      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({ payload: '777555333' }));
+      expect(mockDispatch).not.toHaveBeenCalledWith(
+        expect.objectContaining({ payload: '777555333' })
+      );
       expect(navigationProp.navigate).not.toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
       jest.clearAllMocks();
@@ -175,7 +264,9 @@ describe('AuditWorklistTab Navigator', () => {
         mockValidateSession
       );
       expect(Toast.show).not.toHaveBeenCalled();
-      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ payload: '777555333' }));
+      expect(mockDispatch).toHaveBeenCalledWith(
+        expect.objectContaining({ payload: '777555333' })
+      );
       expect(navigationProp.navigate).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
       expect(mockTrackEventCall).toHaveBeenCalled();
@@ -196,7 +287,9 @@ describe('AuditWorklistTab Navigator', () => {
       );
 
       expect(Toast.show).not.toHaveBeenCalled();
-      expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ payload: '777555333' }));
+      expect(mockDispatch).toHaveBeenCalledWith(
+        expect.objectContaining({ payload: '777555333' })
+      );
       expect(navigationProp.navigate).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith(resetScannedEvent());
       expect(mockTrackEventCall).not.toHaveBeenCalled();
