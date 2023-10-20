@@ -43,8 +43,8 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 
-describe('ReviewItemsDetailsNavigation', () => {
-  it('Render ReviewItemsNavigator', () => {
+describe('ReviewItemDetailsNavigation', () => {
+  it('Render ReviewItemNavigator', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <ReviewItemDetailsNavigatorStack
