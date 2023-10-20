@@ -51,7 +51,7 @@ const PickPalletInfoCard = (props: PickPalletInfoProps) => {
   const renderItem = ({ item }: { item: PickListItem }) => (
     <PickItemInfo
       pickListItem={item}
-      canDelete={canDelete && pickStatus === PickStatus.READY_TO_PICK}
+      canDelete={canDelete}
       onDeletePressed={() => {
         if (inProgress) {
           dispatch(updatePicklistStatusV1({

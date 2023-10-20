@@ -926,7 +926,6 @@ export const mockCombinationAuditsWorklist: WorklistItemI[] = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false,
   worklistStatus: WorkListStatus.TODO
 },
 {
@@ -940,7 +939,6 @@ export const mockCombinationAuditsWorklist: WorklistItemI[] = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false,
   worklistStatus: WorkListStatus.AUDITSTARTED
 },
 {
@@ -954,7 +952,6 @@ export const mockCombinationAuditsWorklist: WorklistItemI[] = [{
   subCatgName: undefined,
   completedTs: undefined,
   completedUserId: undefined,
-  completed: false,
   worklistStatus: WorkListStatus.INPROGRESS
 },
 {
