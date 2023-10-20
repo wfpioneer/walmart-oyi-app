@@ -58,7 +58,6 @@ export const mockInitialState: RootState = {
     createSections: { ...defaultAsyncState },
     deleteAisle: { ...defaultAsyncState },
     deleteLocation: { ...defaultAsyncState },
-    deletePallet: { ...defaultAsyncState },
     deleteUpcs: { ...defaultAsyncState },
     deleteZone: { ...defaultAsyncState },
     editLocation: { ...defaultAsyncState },
@@ -86,8 +85,7 @@ export const mockInitialState: RootState = {
     getSections: { ...defaultAsyncState },
     getUserConfig: { ...defaultAsyncState },
     getWorklist: { ...defaultAsyncState },
-    getWorklistAudits: { ...defaultAsyncState },
-    getWorklistAuditsV1: { ...defaultAsyncState },
+    getWorklistAuditV1: { ...defaultAsyncState },
     getWorklistSummary: { ...defaultAsyncState },
     getWorklistSummaryV2: { ...defaultAsyncState },
     getWorklistV1: { ...defaultAsyncState },
@@ -113,6 +111,9 @@ export const mockInitialState: RootState = {
     updatePalletNotFound: { ...defaultAsyncState },
     updatePicklistStatus: { ...defaultAsyncState },
     updatePicklistStatusV1: { ...defaultAsyncState },
-    updateUserConfig: { ...defaultAsyncState }
+    updateUserConfig: { ...defaultAsyncState },
+    deleteBadPallet: { ...defaultAsyncState },
+    deletePalletFromSection: { ...defaultAsyncState },
+    getItemCenterToken: { ...defaultAsyncState }
   }
 };

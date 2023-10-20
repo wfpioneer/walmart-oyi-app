@@ -2,10 +2,12 @@ import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { Provider } from 'react-redux';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import { NavigationContainer, NavigationContext } from '@react-navigation/native';
 import { strings } from '../../../locales';
 import store from '../../../state';
 import { trackEvent } from '../../../utils/AppCenterTool';
 import {
+  FilterMenu,
   FilterMenuComponent,
   RenderAreaCard,
   RenderExceptionTypeCard,
@@ -18,13 +20,12 @@ import {
   FilterListItem,
   FilteredCategory
 } from '../../../models/FilterListItem';
-import {
-  mockCategoryMap
-} from '../../../mockData/mockWorkList';
+import { mockCategoryMap } from '../../../mockData/mockWorkList';
 import { mockAreas } from '../../../mockData/mockConfig';
 import { WorklistGoal } from '../../../models/WorklistSummary';
 import { mockItemNPalletNAuditWorklistSummary } from '../../../mockData/mockWorklistSummary';
 import mockUser from '../../../mockData/mockUser';
+import { setWorklistType } from '../../../state/actions/Worklist';
 
 jest.mock('../../../utils/AppCenterTool.ts', () => ({
   ...jest.requireActual('../../../utils/__mocks__/AppCenterTool'),
@@ -32,6 +33,18 @@ jest.mock('../../../utils/AppCenterTool.ts', () => ({
 }));
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
+
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native');
+  return {
+    ...actualNav,
+    useRoute: () => ({
+      key: 'test',
+      name: 'test'
+    })
+  };
+});
+
 describe('FilterMenu Component', () => {
   const mockDispatch = jest.fn();
   const mockFilterCategories: string[] = [
@@ -125,6 +138,26 @@ describe('FilterMenu Component', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
+  it('Test renders the FilterMenu Wrapper component', () => {
+    const actualNav = jest.requireActual('@react-navigation/native');
+    const navContextValue = {
+      ...actualNav.navigation,
+      isFocused: () => false,
+      addListener: jest.fn(() => jest.fn())
+    };
+    store.dispatch(setWorklistType('AUDIT'));
+    const { toJSON } = render(
+      <Provider store={store}>
+        <NavigationContainer>
+          <NavigationContext.Provider value={navContextValue}>
+            <FilterMenu screenName="Test Component" />
+          </NavigationContext.Provider>
+        </NavigationContainer>
+      </Provider>
+    );
+
+    expect(toJSON()).toMatchSnapshot();
+  });
   it('Test the renderExceptionFilterCard component with an item selected', () => {
     const mockFilterItemSelected: FilterListItem = {
       value: 'NP',
@@ -132,7 +165,12 @@ describe('FilterMenu Component', () => {
       selected: true
     };
     const { toJSON, getByTestId } = render(
-      renderExceptionFilterCard(mockFilterItemSelected, mockDispatch, mockFilterExeceptions, 'Worklist')
+      renderExceptionFilterCard(
+        mockFilterItemSelected,
+        mockDispatch,
+        mockFilterExeceptions,
+        'Worklist'
+      )
     );
     const exceptionButton = getByTestId('exception button');
     fireEvent.press(exceptionButton);
@@ -148,7 +186,12 @@ describe('FilterMenu Component', () => {
       selected: false
     };
     const { toJSON, getByTestId } = render(
-      renderExceptionFilterCard(mockFilterItem, mockDispatch, mockFilterExeceptions, 'Worklist')
+      renderExceptionFilterCard(
+        mockFilterItem,
+        mockDispatch,
+        mockFilterExeceptions,
+        'Worklist'
+      )
     );
     const exceptionButton = getByTestId('exception button');
     fireEvent.press(exceptionButton);
