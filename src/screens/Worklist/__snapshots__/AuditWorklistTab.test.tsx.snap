@@ -178,7 +178,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
 
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders AuditWorkListTab component wrapper 1`] = `
 <RCTScrollView
-  data={Array []}
+  data={[]}
   getItem={[Function]}
   getItemCount={[Function]}
   keyExtractor={[Function]}
@@ -200,8 +200,8 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
   removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  viewabilityConfigCallbackPairs={Array []}
+  stickyHeaderIndices={[]}
+  viewabilityConfigCallbackPairs={[]}
   windowSize={3}
 >
   <RCTRefreshControl />
@@ -755,7 +755,7 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
       keyboardType="numeric"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
       selectionColor="#0071e9"
       style={
         {
@@ -1875,7 +1875,7 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
       keyboardType="numeric"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
       selectionColor="#0071e9"
       style={
         {

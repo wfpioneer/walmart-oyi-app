@@ -331,7 +331,7 @@ exports[`FilterMenu Component ShallowRender FilterMenu with Audits WL Goal 1`] =
 exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -341,7 +341,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#0071e9",
         "flexDirection": "row",
@@ -353,7 +353,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
   >
     <Text
       style={
-        Object {
+        {
           "color": "#ffffffff",
           "flex": 1,
           "marginLeft": 15,
@@ -363,6 +363,23 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
       [missing "en.WORKLIST.REFINE" translation]
     </Text>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -374,7 +391,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flex": 0.5,
           "marginRight": 15,
           "opacity": 1,
@@ -383,7 +400,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "textAlign": "right",
           }
@@ -394,6 +411,23 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -405,7 +439,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#e0e0e0",
         "borderBottomWidth": 1,
@@ -418,7 +452,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -429,7 +463,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
           }
@@ -440,7 +474,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 0.1,
         }
       }
@@ -453,6 +487,23 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -464,7 +515,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#e0e0e0",
         "borderBottomWidth": 1,
@@ -477,7 +528,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -488,7 +539,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
           }
@@ -499,7 +550,7 @@ exports[`FilterMenu Component Test renders the FilterMenu Wrapper component 1`] 
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 0.1,
         }
       }
