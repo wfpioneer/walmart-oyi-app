@@ -3,8 +3,8 @@
 exports[`LocationCard Tests rendering LocationCard LocationCard with locationType as reserve 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#ffffffff",
       },
       false,
@@ -13,7 +13,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-evenly",
@@ -24,7 +24,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -34,7 +34,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -46,7 +46,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 12,
               "marginTop": 1,
             }
@@ -58,7 +58,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -97,8 +97,8 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with locationTyp
 exports[`LocationCard Tests rendering LocationCard LocationCard with valid input 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#ffffffff",
       },
       false,
@@ -107,7 +107,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-evenly",
@@ -118,7 +118,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -128,7 +128,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -140,7 +140,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -179,8 +179,8 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
 exports[`LocationCard Tests rendering LocationCard LocationCard with valid input and show calculator as true 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#ffffffff",
       },
       false,
@@ -189,7 +189,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-evenly",
@@ -200,7 +200,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -210,7 +210,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -222,7 +222,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1.2,
           "flexDirection": "row",
@@ -244,7 +244,7 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
       </View>
       <View
         style={
-          Object {
+          {
             "paddingLeft": 8,
           }
         }
@@ -281,8 +281,8 @@ exports[`LocationCard Tests rendering LocationCard LocationCard with valid input
 exports[`LocationCard Tests rendering LocationCard renders the card with locationType reserve and scannerEnabled true 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#ffffffff",
       },
       false,
@@ -291,7 +291,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-evenly",
@@ -302,7 +302,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -312,7 +312,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#ef5350",
               "fontSize": 16,
               "fontWeight": "bold",
@@ -325,7 +325,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#ef5350",
               "fontSize": 12,
               "marginTop": 1,
@@ -338,7 +338,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -377,8 +377,8 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 exports[`LocationCard Tests rendering LocationCard renders the card with locationType reserve, scannerEnabled true and scanned true 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#ffffffff",
       },
       false,
@@ -387,7 +387,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-evenly",
@@ -398,7 +398,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -408,7 +408,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#33691E",
               "fontSize": 16,
               "fontWeight": "bold",
@@ -421,7 +421,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#33691E",
               "fontSize": 12,
               "marginTop": 1,
@@ -434,7 +434,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -473,11 +473,11 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 exports[`LocationCard Tests rendering LocationCard renders the card with locationType reserve, showQtyChanged true 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#ffffffff",
       },
-      Object {
+      {
         "backgroundColor": "#FFFFE0",
       },
     ]
@@ -485,7 +485,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "space-evenly",
@@ -496,7 +496,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -506,7 +506,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#33691E",
               "fontSize": 16,
               "fontWeight": "bold",
@@ -519,7 +519,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#33691E",
               "fontSize": 12,
               "marginTop": 1,
@@ -532,7 +532,7 @@ exports[`LocationCard Tests rendering LocationCard renders the card with locatio
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",

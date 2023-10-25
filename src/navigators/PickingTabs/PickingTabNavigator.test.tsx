@@ -25,6 +25,7 @@ import { GET_ITEM_DETAILS_V4 } from '../../state/actions/asyncAPI';
 import { getLocationsForItem, getLocationsForItemV1 } from '../../state/actions/saga';
 import { resetMultiPickBinSelection, setPickCreateItem } from '../../state/actions/Picking';
 import { validateSession } from '../../utils/sessionTimeout';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 jest.mock('../../state/actions/Modal', () => ({
   showActivityModal: jest.fn(),
@@ -68,8 +69,7 @@ const barCodeEmitterProp: NativeEventEmitter = {
   removeAllListeners: jest.fn(),
   removeSubscription: jest.fn(),
   listenerCount: jest.fn(),
-  emit: jest.fn(),
-  removeListener: jest.fn()
+  emit: jest.fn()
 };
 
 const routeProp: RouteProp<any, string> = {
@@ -311,7 +311,6 @@ describe('Manage PickingNavigator externalized function tests', () => {
   const mockDispatch = jest.fn();
   afterEach(() => {
     jest.clearAllMocks();
-    jest.restoreAllMocks();
   });
 
   it('Tests getItemDetailsApiHook on 200 success for a new item', () => {
@@ -532,6 +531,8 @@ describe('Manage PickingNavigator externalized function tests', () => {
     );
     expect(navigationProp.isFocused).toHaveBeenCalled();
     expect(validateSession).toHaveBeenCalled();
+    expect(trackEvent).toHaveBeenCalled();
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
   });
 
   it('Tests onBackPress event listener', () => {

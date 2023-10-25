@@ -4,7 +4,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -18,7 +18,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -35,7 +35,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       <View>
         <Text
           style={
-            Object {
+            {
               "fontWeight": "bold",
             }
           }
@@ -44,7 +44,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 12,
             }
           }
@@ -54,11 +54,28 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       </View>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={false}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 15,
           "right": 15,
@@ -73,7 +90,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -89,18 +106,18 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
   <View>
     <View
       style={
-        Object {
+        {
           "marginBottom": 2,
         }
       }
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#ffffffff",
             },
-            Object {
+            {
               "backgroundColor": "#FFFFE0",
             },
           ]
@@ -108,7 +125,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "space-evenly",
@@ -119,7 +136,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -129,7 +146,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
             <View>
               <Text
                 style={
-                  Object {
+                  {
                     "fontSize": 16,
                     "fontWeight": "bold",
                   }
@@ -141,7 +158,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "flexDirection": "row",
@@ -152,14 +169,14 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
             <View>
               <View
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "alignItems": "center",
                       "borderRadius": 10,
                       "borderWidth": 1,
                       "flexDirection": "row",
                     },
-                    Object {
+                    {
                       "borderColor": "#e0e0e0",
                     },
                   ]
@@ -167,8 +184,8 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
               >
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "height": 15,
                         "width": 35,
                       },
@@ -178,15 +195,27 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "flex": 1,
                       }
                     }
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -200,7 +229,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "alignItems": "center",
                           "backgroundColor": "#00000000",
                           "flex": 1,
@@ -223,7 +252,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                   onChangeText={[Function]}
                   onEndEditing={[Function]}
                   style={
-                    Object {
+                    {
                       "color": "#0071e9",
                       "height": 40,
                       "minWidth": "15%",
@@ -235,8 +264,8 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 />
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "height": 15,
                         "width": 35,
                       },
@@ -246,15 +275,27 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "flex": 1,
                       }
                     }
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -268,7 +309,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "alignItems": "center",
                           "backgroundColor": "#00000000",
                           "flex": 1,
@@ -290,6 +331,23 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
             </View>
             <View>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -301,7 +359,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
@@ -325,7 +383,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -339,7 +397,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -356,7 +414,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       <View>
         <Text
           style={
-            Object {
+            {
               "fontWeight": "bold",
             }
           }
@@ -365,7 +423,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 12,
             }
           }
@@ -375,11 +433,28 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       </View>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={false}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 15,
           "right": 15,
@@ -394,7 +469,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -410,18 +485,18 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
   <View>
     <View
       style={
-        Object {
+        {
           "marginBottom": 2,
         }
       }
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#ffffffff",
             },
-            Object {
+            {
               "backgroundColor": "#FFFFE0",
             },
           ]
@@ -429,7 +504,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "space-evenly",
@@ -440,7 +515,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -450,7 +525,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
             <View>
               <Text
                 style={
-                  Object {
+                  {
                     "fontSize": 16,
                     "fontWeight": "bold",
                   }
@@ -462,7 +537,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1.2,
                 "flexDirection": "row",
@@ -473,14 +548,14 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
             <View>
               <View
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "alignItems": "center",
                       "borderRadius": 10,
                       "borderWidth": 1,
                       "flexDirection": "row",
                     },
-                    Object {
+                    {
                       "borderColor": "#e0e0e0",
                     },
                   ]
@@ -488,8 +563,8 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
               >
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "height": 15,
                         "width": 35,
                       },
@@ -499,15 +574,27 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "flex": 1,
                       }
                     }
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -521,7 +608,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "alignItems": "center",
                           "backgroundColor": "#00000000",
                           "flex": 1,
@@ -544,7 +631,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                   onChangeText={[Function]}
                   onEndEditing={[Function]}
                   style={
-                    Object {
+                    {
                       "color": "#0071e9",
                       "height": 40,
                       "minWidth": "15%",
@@ -556,8 +643,8 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 />
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "height": 15,
                         "width": 35,
                       },
@@ -567,15 +654,27 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "flex": 1,
                       }
                     }
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -589,7 +688,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "alignItems": "center",
                           "backgroundColor": "#00000000",
                           "flex": 1,
@@ -611,12 +710,29 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
             </View>
             <View
               style={
-                Object {
+                {
                   "paddingLeft": 8,
                 }
               }
             >
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -628,7 +744,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
@@ -645,6 +761,23 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
             </View>
             <View>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -656,7 +789,7 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
@@ -680,7 +813,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -694,7 +827,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -711,7 +844,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
       <View>
         <Text
           style={
-            Object {
+            {
               "fontWeight": "bold",
             }
           }
@@ -720,7 +853,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 12,
             }
           }
@@ -732,7 +865,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -748,7 +881,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -757,6 +890,23 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
       [missing "en.LOCATION.LOCATION_API_ERROR" translation]
     </Text>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -768,7 +918,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -793,7 +943,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -807,7 +957,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -824,7 +974,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
       <View>
         <Text
           style={
-            Object {
+            {
               "fontWeight": "bold",
             }
           }
@@ -833,7 +983,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 12,
             }
           }
@@ -845,7 +995,7 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "padding": 30,

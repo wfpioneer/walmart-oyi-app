@@ -4,10 +4,10 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
 <View>
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
-        "result": Object {
+        "result": {
           "data": "",
           "status": 204,
         },
@@ -19,14 +19,14 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
+    mainText="[missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]"
     onClose={[Function]}
-    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext1="[missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]"
     subtext2={null}
   />
   <ClearItemsModal
     clearAisleApi={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -41,18 +41,18 @@ exports[`Rendering Remove Aisle responses Renders the success response from Remo
     setDisplayConfirmation={[MockFunction]}
   />
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    details="0 [missing "en.LOCATION.SECTIONS" translation]"
     isDisabled={false}
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+    location="[missing "en.LOCATION.AISLE" translation] CARN1"
   />
   <FlatList
     ListEmptyComponent={<NoSectionMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
@@ -63,7 +63,7 @@ exports[`Rendering Remove Aisle responses Renders the waiting for response from 
 <View>
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": true,
         "result": null,
@@ -75,14 +75,14 @@ exports[`Rendering Remove Aisle responses Renders the waiting for response from 
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
+    mainText="[missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]"
     onClose={[Function]}
-    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext1="[missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]"
     subtext2={null}
   />
   <ClearItemsModal
     clearAisleApi={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -97,18 +97,18 @@ exports[`Rendering Remove Aisle responses Renders the waiting for response from 
     setDisplayConfirmation={[MockFunction]}
   />
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    details="0 [missing "en.LOCATION.SECTIONS" translation]"
     isDisabled={false}
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+    location="[missing "en.LOCATION.AISLE" translation] CARN1"
   />
   <FlatList
     ListEmptyComponent={<NoSectionMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
@@ -124,14 +124,14 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -144,7 +144,7 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -157,7 +157,7 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -171,12 +171,12 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      title="[missing "en.ITEM.FLOOR" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -190,12 +190,12 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      title="[missing "en.ITEM.RESERVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -209,12 +209,12 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      title="[missing "en.GENERICS.ALL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -224,14 +224,14 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -244,7 +244,7 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -258,12 +258,12 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -277,12 +277,12 @@ exports[`Rendering clear Aisle responses Ensures the clearAisleModal does not sh
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -302,7 +302,7 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
@@ -312,14 +312,14 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -333,7 +333,7 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -347,12 +347,12 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      title="[missing "en.ITEM.FLOOR" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -366,12 +366,12 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      title="[missing "en.ITEM.RESERVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -385,12 +385,12 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      title="[missing "en.GENERICS.ALL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -400,14 +400,14 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -420,7 +420,7 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -434,12 +434,12 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -453,12 +453,12 @@ exports[`Rendering clear Aisle responses Renders the failed response from clear 
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -478,14 +478,14 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -498,7 +498,7 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -511,7 +511,7 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -525,12 +525,12 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      title="[missing "en.ITEM.FLOOR" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -544,12 +544,12 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      title="[missing "en.ITEM.RESERVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -563,12 +563,12 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      title="[missing "en.GENERICS.ALL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -578,14 +578,14 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -598,7 +598,7 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -612,12 +612,12 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -631,12 +631,12 @@ exports[`Rendering clear Aisle responses Renders the preflight view of clearAisl
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -656,14 +656,14 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
           "paddingBottom": 5,
           "paddingHorizontal": 15,
@@ -676,7 +676,7 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -689,7 +689,7 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -703,12 +703,12 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.FLOOR\\" translation]"
+      title="[missing "en.ITEM.FLOOR" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -722,12 +722,12 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.ITEM.RESERVE\\" translation]"
+      title="[missing "en.ITEM.RESERVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -741,12 +741,12 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.ALL\\" translation]"
+      title="[missing "en.GENERICS.ALL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -756,14 +756,14 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "column",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
           "paddingBottom": 15,
           "paddingHorizontal": 15,
@@ -776,7 +776,7 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "flexDirection": "row",
         "width": "100%",
@@ -790,12 +790,12 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+      title="[missing "en.GENERICS.CANCEL" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -809,12 +809,12 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
       onPress={[MockFunction]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 10,
         }
       }
-      title="[missing \\"en.GENERICS.OK\\" translation]"
+      title="[missing "en.GENERICS.OK" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -828,7 +828,7 @@ exports[`Rendering clear Aisle responses Renders the success response from clear
 exports[`Test Get Section Api Response Renders Error Message when result is 400 error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -844,7 +844,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 400 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -855,7 +855,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 400 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -876,7 +876,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 400 
 exports[`Test Get Section Api Response Renders Error Message when result is 424 error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -892,7 +892,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 424 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -903,7 +903,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 424 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -924,7 +924,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 424 
 exports[`Test Get Section Api Response Renders Error Message when result is 500 error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -940,7 +940,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 500 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -951,7 +951,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 500 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -972,7 +972,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is 500 
 exports[`Test Get Section Api Response Renders Error Message when result is network error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -988,7 +988,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is netw
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -999,7 +999,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is netw
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -1020,7 +1020,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is netw
 exports[`Test Get Section Api Response Renders Error Message when result is timeout error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -1036,7 +1036,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is time
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -1047,7 +1047,7 @@ exports[`Test Get Section Api Response Renders Error Message when result is time
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -1072,7 +1072,7 @@ exports[`Test Get Section Api Response Renders loading indicator when waiting fo
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -1085,7 +1085,7 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
 <View>
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -1097,14 +1097,14 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
+    mainText="[missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]"
     onClose={[Function]}
-    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext1="[missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]"
     subtext2={null}
   />
   <ClearItemsModal
     clearAisleApi={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -1122,18 +1122,18 @@ exports[`Test Section List Renders Manual Scan Component when isManualScanEnable
     keyboardType="default"
   />
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    details="0 [missing "en.LOCATION.SECTIONS" translation]"
     isDisabled={false}
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+    location="[missing "en.LOCATION.AISLE" translation] CARN1"
   />
   <FlatList
     ListEmptyComponent={<NoSectionMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
@@ -1144,7 +1144,7 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
 <View>
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -1156,14 +1156,14 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
+    mainText="[missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]"
     onClose={[Function]}
-    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext1="[missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]"
     subtext2={null}
   />
   <ClearItemsModal
     clearAisleApi={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -1178,40 +1178,40 @@ exports[`Test Section List Renders Section Screen with Data 1`] = `
     setDisplayConfirmation={[MockFunction]}
   />
   <LocationHeader
-    details="6 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    details="6 [missing "en.LOCATION.SECTIONS" translation]"
     isDisabled={false}
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+    location="[missing "en.LOCATION.AISLE" translation] CARN1"
   />
   <FlatList
     ListEmptyComponent={<NoSectionMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "sectionId": 1,
           "sectionName": "Section ABAR1-1",
         },
-        Object {
+        {
           "sectionId": 2,
           "sectionName": "Section ABAR1-2",
         },
-        Object {
+        {
           "sectionId": 3,
           "sectionName": "Section ABAR1-3",
         },
-        Object {
+        {
           "sectionId": 4,
           "sectionName": "Section ABAR1-4",
         },
-        Object {
+        {
           "sectionId": 5,
           "sectionName": "Section ABAR1-5",
         },
-        Object {
+        {
           "sectionId": 6,
           "sectionName": "Section ABAR1-6",
         },
@@ -1227,7 +1227,7 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
 <View>
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -1239,14 +1239,14 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.LOCATION.REMOVE_AISLE_CONFIRMATION\\" translation]"
+    mainText="[missing "en.LOCATION.REMOVE_AISLE_CONFIRMATION" translation]"
     onClose={[Function]}
-    subtext1="[missing \\"en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS\\" translation]"
+    subtext1="[missing "en.LOCATION.REMOVE_AISLE_WILL_REMOVE_SECTIONS" translation]"
     subtext2={null}
   />
   <ClearItemsModal
     clearAisleApi={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
@@ -1261,18 +1261,18 @@ exports[`Test Section List Renders Section Screen with no-section-message when g
     setDisplayConfirmation={[MockFunction]}
   />
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.SECTIONS\\" translation]"
+    details="0 [missing "en.LOCATION.SECTIONS" translation]"
     isDisabled={false}
-    location="[missing \\"en.LOCATION.AISLE\\" translation] CARN1"
+    location="[missing "en.LOCATION.AISLE" translation] CARN1"
   />
   <FlatList
     ListEmptyComponent={<NoSectionMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />

@@ -17,6 +17,9 @@ import {
 } from '@react-navigation/native';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import moment from 'moment';
+import {
+  BottomSheetDefaultBackdropProps
+} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types.d';
 import styles from './ZoneList.style';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import LocationItemCard from '../../components/LocationItemCard/LocationItemCard';
@@ -346,8 +349,7 @@ const ZoneList = (): JSX.Element => {
   };
 
   const renderBackdrop = useCallback(
-    // eslint-disable-next-line no-shadow
-    props => (
+    (props: BottomSheetDefaultBackdropProps) => (
       <BottomSheetBackdrop
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}

@@ -3,7 +3,7 @@
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - accepted bin 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -15,7 +15,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -27,7 +27,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -41,13 +41,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.ACCEPTED_BIN" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -59,7 +59,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - accepted pick 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -71,7 +71,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -83,7 +83,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -97,13 +97,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.ACCEPTED_PICK" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -115,7 +115,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - complete 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -127,7 +127,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -139,7 +139,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -153,13 +153,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.COMPLETE" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -171,7 +171,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - deleted 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -183,7 +183,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -195,7 +195,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -209,13 +209,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.DELETED" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -227,7 +227,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - no pallets found 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -239,7 +239,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -251,7 +251,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -265,13 +265,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.NO_PALLETS_FOUND" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -283,7 +283,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - ready to bin 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -295,7 +295,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -307,7 +307,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -321,13 +321,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.READY_TO_BIN" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -339,7 +339,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - ready to pick 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -351,7 +351,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -363,7 +363,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -377,13 +377,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.READY_TO_PICK" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -395,7 +395,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card for each picking type: Pick status - ready to work 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -407,7 +407,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -419,7 +419,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -433,13 +433,13 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
         [missing "en.PICKING.READY_TO_WORK" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -451,7 +451,7 @@ exports[`Pick pallet info card render tests renders the card for each picking ty
 exports[`Pick pallet info card render tests renders the card with items (some filtered) 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -463,7 +463,7 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -475,7 +475,7 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -489,13 +489,13 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
         [missing "en.PICKING.READY_TO_PICK" translation]
       </Text>
       <Text
-        style={Object {}}
+        style={{}}
       >
         ABAR1-1
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -507,7 +507,7 @@ exports[`Pick pallet info card render tests renders the card with items (some fi
 exports[`Pick pallet info card render tests renders the card with items and show checkbox in pallet title 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -519,7 +519,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -530,7 +530,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -551,7 +551,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
       </Text>
       <Text
         style={
-          Object {
+          {
             "paddingRight": 10,
           }
         }
@@ -560,7 +560,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}
@@ -572,7 +572,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
 exports[`Pick pallet info card render tests renders the card with items and show pallet selected 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -584,7 +584,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#dbecff",
           "flexDirection": "row",
@@ -595,7 +595,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -616,7 +616,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
       </Text>
       <Text
         style={
-          Object {
+          {
             "paddingRight": 10,
           }
         }
@@ -625,7 +625,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
       </Text>
     </View>
     <FlatList
-      data={Array []}
+      data={[]}
       keyExtractor={[Function]}
       renderItem={[Function]}
       scrollEnabled={false}

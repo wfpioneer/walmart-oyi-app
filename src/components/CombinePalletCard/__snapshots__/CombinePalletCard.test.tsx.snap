@@ -3,7 +3,7 @@
 exports[`Test CombinePalletCard Component Renders the Combine Pallet Card 1`] = `
 <View
   style={
-    Object {
+    {
       "borderBottomColor": "#757575",
       "borderBottomWidth": 2,
       "flexDirection": "row",
@@ -15,14 +15,14 @@ exports[`Test CombinePalletCard Component Renders the Combine Pallet Card 1`] = 
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
         }
       }
@@ -31,7 +31,7 @@ exports[`Test CombinePalletCard Component Renders the Combine Pallet Card 1`] = 
     </Text>
     <Text
       style={
-        Object {
+        {
           "fontSize": 14,
         }
       }
@@ -42,7 +42,7 @@ exports[`Test CombinePalletCard Component Renders the Combine Pallet Card 1`] = 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "justifyContent": "center",
         "paddingHorizontal": 10,
       }

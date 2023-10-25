@@ -481,7 +481,7 @@ describe('Tests login screen functions', () => {
       '-STAGE'
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(9);
+    expect(mockDispatch).toHaveBeenCalledTimes(7);
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
     expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());

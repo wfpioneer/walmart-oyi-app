@@ -4,7 +4,7 @@ exports[`MainNavigator Renders the main navigator component 1`] = `
 <ForwardRef(NavigationContainerInner)>
   <StackNavigator
     screenOptions={
-      Object {
+      {
         "headerShown": false,
       }
     }

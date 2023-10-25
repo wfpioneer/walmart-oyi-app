@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test renders PickBinTabScreen component with multi bin enabled and atleast 1 bin ready to start 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -21,7 +21,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -31,7 +31,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -43,7 +43,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -54,8 +54,8 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
         </View>
         <FlatList
           data={
-            Array [
-              Object {
+            [
+              {
                 "assignedAssociate": "",
                 "category": 46,
                 "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -79,7 +79,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -90,7 +90,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -104,13 +104,13 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -124,13 +124,13 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -142,7 +142,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -157,18 +157,18 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    leftTitle="[missing "en.GENERICS.CANCEL" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+    rightTitle="[missing "en.GENERICS.CONTINUE" translation]"
   />
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test renders PickBinTabScreen component with multi pick enabled and atleast 1 pick ready to start 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -186,7 +186,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -196,7 +196,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -208,7 +208,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -218,11 +218,11 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
           </Text>
         </View>
         <FlatList
-          data={Array []}
+          data={[]}
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -233,7 +233,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -247,13 +247,13 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -267,13 +267,13 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -285,7 +285,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -300,12 +300,12 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests Test rend
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={true}
-    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    leftTitle="[missing "en.GENERICS.CANCEL" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+    rightTitle="[missing "en.GENERICS.CONTINUE" translation]"
   />
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests rendered output for renderMultipickConfirmationDialog when multiBin was enabled 1`] = `
@@ -318,7 +318,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -328,8 +328,8 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 8,
@@ -337,7 +337,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
             "paddingBottom": 12,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 150,
           },
         ]
@@ -346,7 +346,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
       <View>
         <View
           style={
-            Object {
+            {
               "backgroundColor": "#0071e9",
               "borderTopEndRadius": 8,
               "borderTopStartRadius": 8,
@@ -356,7 +356,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontSize": 18,
               }
@@ -368,7 +368,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         <View>
           <View
             style={
-              Object {
+              {
                 "padding": 12,
               }
             }
@@ -379,8 +379,8 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           </View>
           <RCTScrollView
             data={
-              Array [
-                Object {
+              [
+                {
                   "assignedAssociate": "Associate 1",
                   "category": 71,
                   "createTs": "2022-04-02T12:55:31.9633333Z",
@@ -399,7 +399,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                   "status": "accepted pick",
                   "upcNbr": "000041800003",
                 },
-                Object {
+                {
                   "assignedAssociate": "Associate 1",
                   "category": 71,
                   "createTs": "2022-02-09T12:55:31.9633333Z",
@@ -433,25 +433,26 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
             removeClippedSubviews={false}
             renderItem={[Function]}
             scrollEventThrottle={50}
-            stickyHeaderIndices={Array []}
+            stickyHeaderIndices={[]}
             style={
-              Object {
+              {
                 "borderWidth": 1,
                 "flexGrow": 0,
                 "margin": 12,
                 "maxHeight": 120,
               }
             }
-            viewabilityConfigCallbackPairs={Array []}
+            viewabilityConfigCallbackPairs={[]}
           >
             <View>
               <View
+                onFocusCapture={[Function]}
                 onLayout={[Function]}
                 style={null}
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "flexDirection": "row",
                       "justifyContent": "space-evenly",
@@ -468,12 +469,13 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                 </View>
               </View>
               <View
+                onFocusCapture={[Function]}
                 onLayout={[Function]}
                 style={null}
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "flexDirection": "row",
                       "justifyContent": "space-evenly",
@@ -494,7 +496,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         </View>
         <View
           style={
-            Object {
+            {
               "flex": 0,
               "flexDirection": "row",
               "margin": 12,
@@ -503,11 +505,11 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "height": 45,
                 },
-                Object {
+                {
                   "paddingRight": 12,
                   "width": "50%",
                 },
@@ -516,15 +518,27 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                 }
               }
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -538,7 +552,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "borderColor": "#0071e9",
@@ -553,7 +567,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "#0071e9",
                       "fontFamily": "Roboto-Medium",
                       "fontSize": 16,
@@ -569,11 +583,11 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "height": 45,
                 },
-                Object {
+                {
                   "paddingLeft": 12,
                   "width": "50%",
                 },
@@ -582,15 +596,27 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                 }
               }
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -604,7 +630,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#0071e9",
                     "borderRadius": 5,
@@ -618,7 +644,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "#ffffffff",
                       "fontFamily": "Roboto-Medium",
                       "fontSize": 16,
@@ -649,7 +675,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -659,8 +685,8 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 8,
@@ -668,7 +694,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
             "paddingBottom": 12,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 150,
           },
         ]
@@ -677,7 +703,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
       <View>
         <View
           style={
-            Object {
+            {
               "backgroundColor": "#0071e9",
               "borderTopEndRadius": 8,
               "borderTopStartRadius": 8,
@@ -687,7 +713,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontSize": 18,
               }
@@ -699,7 +725,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         <View>
           <View
             style={
-              Object {
+              {
                 "padding": 12,
               }
             }
@@ -710,8 +736,8 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           </View>
           <RCTScrollView
             data={
-              Array [
-                Object {
+              [
+                {
                   "assignedAssociate": "Associate 1",
                   "category": 71,
                   "createTs": "2022-04-02T12:55:31.9633333Z",
@@ -730,7 +756,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                   "status": "accepted pick",
                   "upcNbr": "000041800003",
                 },
-                Object {
+                {
                   "assignedAssociate": "Associate 1",
                   "category": 71,
                   "createTs": "2022-02-09T12:55:31.9633333Z",
@@ -764,25 +790,26 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
             removeClippedSubviews={false}
             renderItem={[Function]}
             scrollEventThrottle={50}
-            stickyHeaderIndices={Array []}
+            stickyHeaderIndices={[]}
             style={
-              Object {
+              {
                 "borderWidth": 1,
                 "flexGrow": 0,
                 "margin": 12,
                 "maxHeight": 120,
               }
             }
-            viewabilityConfigCallbackPairs={Array []}
+            viewabilityConfigCallbackPairs={[]}
           >
             <View>
               <View
+                onFocusCapture={[Function]}
                 onLayout={[Function]}
                 style={null}
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "flexDirection": "row",
                       "justifyContent": "space-evenly",
@@ -799,12 +826,13 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                 </View>
               </View>
               <View
+                onFocusCapture={[Function]}
                 onLayout={[Function]}
                 style={null}
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "flexDirection": "row",
                       "justifyContent": "space-evenly",
@@ -825,7 +853,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         </View>
         <View
           style={
-            Object {
+            {
               "flex": 0,
               "flexDirection": "row",
               "margin": 12,
@@ -834,11 +862,11 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "height": 45,
                 },
-                Object {
+                {
                   "paddingRight": 12,
                   "width": "50%",
                 },
@@ -847,15 +875,27 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                 }
               }
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -869,7 +909,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "borderColor": "#0071e9",
@@ -884,7 +924,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "#0071e9",
                       "fontFamily": "Roboto-Medium",
                       "fontSize": 16,
@@ -900,11 +940,11 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "height": 45,
                 },
-                Object {
+                {
                   "paddingLeft": 12,
                   "width": "50%",
                 },
@@ -913,15 +953,27 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                 }
               }
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -935,7 +987,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#0071e9",
                     "borderRadius": 5,
@@ -949,7 +1001,7 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "#ffffffff",
                       "fontFamily": "Roboto-Medium",
                       "fontSize": 16,
@@ -971,9 +1023,9 @@ exports[`PickBinTabScreen Tests PickBinTab externalized function tests tests ren
 `;
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component when user clicks continue on multi pick/bin mode 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -991,7 +1043,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -1001,7 +1053,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -1013,7 +1065,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -1023,11 +1075,11 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           </Text>
         </View>
         <FlatList
-          data={Array []}
+          data={[]}
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -1038,7 +1090,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -1052,13 +1104,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1072,13 +1124,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1090,7 +1142,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -1105,18 +1157,18 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={true}
-    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    leftTitle="[missing "en.GENERICS.CANCEL" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+    rightTitle="[missing "en.GENERICS.CONTINUE" translation]"
   />
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component while refreshing 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -1134,7 +1186,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -1144,7 +1196,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -1154,7 +1206,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -1162,11 +1214,11 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           <Text />
         </View>
         <FlatList
-          data={Array []}
+          data={[]}
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -1177,7 +1229,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -1191,13 +1243,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1211,13 +1263,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1229,7 +1281,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -1242,7 +1294,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eeeeee",
         "padding": 10,
@@ -1253,13 +1305,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with "cancel & continue" buttons if multiPick/multiBin is enabled 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -1277,7 +1329,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -1287,7 +1339,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -1300,7 +1352,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -1311,11 +1363,11 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           </Text>
         </View>
         <FlatList
-          data={Array []}
+          data={[]}
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -1326,7 +1378,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -1340,13 +1392,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1360,13 +1412,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1378,7 +1430,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -1393,18 +1445,18 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={true}
-    leftTitle="[missing \\"en.GENERICS.CANCEL\\" translation]"
+    leftTitle="[missing "en.GENERICS.CANCEL" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+    rightTitle="[missing "en.GENERICS.CONTINUE" translation]"
   />
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with AssignedToMe List and zone 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -1422,7 +1474,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -1432,7 +1484,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -1442,7 +1494,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -1450,11 +1502,11 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           <Text />
         </View>
         <FlatList
-          data={Array []}
+          data={[]}
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -1465,7 +1517,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -1479,13 +1531,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1499,13 +1551,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1517,7 +1569,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -1530,7 +1582,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eeeeee",
         "padding": 10,
@@ -1541,13 +1593,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component with accept multiPick and multiBin buttons 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -1565,7 +1617,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -1575,7 +1627,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -1585,7 +1637,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -1593,11 +1645,11 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           <Text />
         </View>
         <FlatList
-          data={Array []}
+          data={[]}
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -1608,7 +1660,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -1622,13 +1674,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1642,13 +1694,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1660,7 +1712,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -1673,7 +1725,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eeeeee",
         "padding": 10,
@@ -1684,13 +1736,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test renders the PickBinTabScreen component without AssignedToMe List and zone 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -1708,7 +1760,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
     <View>
       <View
         style={
-          Object {
+          {
             "backgroundColor": "#0071e9",
             "borderTopEndRadius": 8,
             "borderTopStartRadius": 8,
@@ -1718,7 +1770,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 18,
             }
@@ -1728,7 +1780,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       <View>
         <View
           style={
-            Object {
+            {
               "padding": 12,
             }
           }
@@ -1736,11 +1788,11 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           <Text />
         </View>
         <FlatList
-          data={Array []}
+          data={[]}
           keyExtractor={[Function]}
           renderItem={[Function]}
           style={
-            Object {
+            {
               "borderWidth": 1,
               "flexGrow": 0,
               "margin": 12,
@@ -1751,7 +1803,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       </View>
       <View
         style={
-          Object {
+          {
             "flex": 0,
             "flexDirection": "row",
             "margin": 12,
@@ -1765,13 +1817,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingRight": 12,
               "width": "50%",
             }
           }
           testID="cancelButton"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1785,13 +1837,13 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "paddingLeft": 12,
               "width": "50%",
             }
           }
           testID="acceptButton"
-          title="[missing \\"en.PICKING.ACCEPT\\" translation]"
+          title="[missing "en.PICKING.ACCEPT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1803,7 +1855,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   </CustomModalComponent>
   <FlatList
     data={
-      Array [
+      [
         "assignedToMe",
         "BREW",
         "C",
@@ -1816,7 +1868,7 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eeeeee",
         "padding": 10,
@@ -1827,5 +1879,5 @@ exports[`PickBinTabScreen Tests rendering the PickBinTabScreen component Test re
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;

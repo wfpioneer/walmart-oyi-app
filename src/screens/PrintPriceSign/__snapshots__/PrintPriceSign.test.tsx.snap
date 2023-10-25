@@ -3,7 +3,7 @@
 exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine button' for wine items 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "row",
       "flexWrap": "wrap",
       "marginVertical": 4,
@@ -17,12 +17,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.XSmall\\" translation]"
+    title="[missing "en.PRINT.XSmall" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -37,12 +37,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Small\\" translation]"
+    title="[missing "en.PRINT.Small" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -57,12 +57,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Medium\\" translation]"
+    title="[missing "en.PRINT.Medium" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -77,12 +77,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Large\\" translation]"
+    title="[missing "en.PRINT.Large" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -97,12 +97,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Wine\\" translation]"
+    title="[missing "en.PRINT.Wine" translation]"
     titleAlign="center"
     titleColor="#ffffffff"
     titleFontSize={12}
@@ -117,12 +117,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_Large\\" translation]"
+    title="[missing "en.PRINT.Was_Large" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -137,12 +137,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+    title="[missing "en.PRINT.Was_Medium" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -157,12 +157,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_Small\\" translation]"
+    title="[missing "en.PRINT.Was_Small" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -177,12 +177,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+    title="[missing "en.PRINT.Was_XSmall" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -196,7 +196,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes  Renders 'Wine bu
 exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button should be disabled for Portable Printers  1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "row",
       "flexWrap": "wrap",
       "marginVertical": 4,
@@ -210,12 +210,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.XSmall\\" translation]"
+    title="[missing "en.PRINT.XSmall" translation]"
     titleAlign="center"
     titleColor="#ffffffff"
     titleFontSize={12}
@@ -230,12 +230,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Small\\" translation]"
+    title="[missing "en.PRINT.Small" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -250,12 +250,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Medium\\" translation]"
+    title="[missing "en.PRINT.Medium" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -269,7 +269,7 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Large button shou
 exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button should be disabled for non-wine items 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "row",
       "flexWrap": "wrap",
       "marginVertical": 4,
@@ -283,12 +283,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.XSmall\\" translation]"
+    title="[missing "en.PRINT.XSmall" translation]"
     titleAlign="center"
     titleColor="#ffffffff"
     titleFontSize={12}
@@ -303,12 +303,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Small\\" translation]"
+    title="[missing "en.PRINT.Small" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -323,12 +323,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Medium\\" translation]"
+    title="[missing "en.PRINT.Medium" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -343,12 +343,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Large\\" translation]"
+    title="[missing "en.PRINT.Large" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -363,12 +363,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_Large\\" translation]"
+    title="[missing "en.PRINT.Was_Large" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -383,12 +383,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+    title="[missing "en.PRINT.Was_Medium" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -403,12 +403,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_Small\\" translation]"
+    title="[missing "en.PRINT.Was_Small" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -423,12 +423,12 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
     onPress={[Function]}
     radius={20}
     style={
-      Object {
+      {
         "marginHorizontal": 6,
         "marginVertical": 4,
       }
     }
-    title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+    title="[missing "en.PRINT.Was_XSmall" translation]"
     titleAlign="center"
     titleColor="#000000"
     titleFontSize={12}
@@ -440,16 +440,16 @@ exports[`PrintPriceSignScreen Tests rendering Price Sign Sizes Wine button shoul
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Label Service response   1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -457,7 +457,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
           "paddingHorizontal": 8,
@@ -467,7 +467,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "flexWrap": "wrap",
             "fontSize": 12,
@@ -482,7 +482,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -493,7 +493,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -504,7 +504,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
             "marginBottom": 12,
@@ -533,8 +533,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           keyboardType="numeric"
           onChangeText={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "borderColor": "#0071e9",
                 "borderWidth": 1,
                 "fontSize": 12,
@@ -544,7 +544,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
                 "padding": 6,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "borderColor": "#0071e9",
               },
             ]
@@ -574,7 +574,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -585,7 +585,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -596,7 +596,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "flexWrap": "wrap",
             "marginVertical": 4,
@@ -610,12 +610,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.XSmall\\" translation]"
+          title="[missing "en.PRINT.XSmall" translation]"
           titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
@@ -630,12 +630,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Small\\" translation]"
+          title="[missing "en.PRINT.Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -650,12 +650,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Medium\\" translation]"
+          title="[missing "en.PRINT.Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -670,12 +670,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Large\\" translation]"
+          title="[missing "en.PRINT.Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -690,12 +690,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          title="[missing "en.PRINT.Was_Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -710,12 +710,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          title="[missing "en.PRINT.Was_Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -730,12 +730,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          title="[missing "en.PRINT.Was_Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -750,12 +750,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          title="[missing "en.PRINT.Was_XSmall" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -767,7 +767,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -780,7 +780,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -792,7 +792,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         />
         <View
           style={
-            Object {
+            {
               "marginLeft": 12,
               "paddingTop": 14,
             }
@@ -803,7 +803,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#757575",
                 "fontSize": 12,
               }
@@ -820,11 +820,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "alignSelf": "center",
           }
         }
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -835,7 +835,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -852,27 +852,27 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }
       }
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Pallet Label Service response   1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -880,7 +880,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -900,7 +900,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         height={20}
         onPress={[Function]}
         radius={5}
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -911,7 +911,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -928,27 +928,27 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }
       }
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Loader waiting for Print Sign Service response   1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -956,7 +956,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
           "paddingHorizontal": 8,
@@ -966,7 +966,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "flexWrap": "wrap",
             "fontSize": 12,
@@ -981,7 +981,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -992,7 +992,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -1003,7 +1003,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
             "marginBottom": 12,
@@ -1032,8 +1032,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           keyboardType="numeric"
           onChangeText={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "borderColor": "#0071e9",
                 "borderWidth": 1,
                 "fontSize": 12,
@@ -1043,7 +1043,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
                 "padding": 6,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "borderColor": "#0071e9",
               },
             ]
@@ -1073,7 +1073,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -1084,7 +1084,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -1095,7 +1095,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "flexWrap": "wrap",
             "marginVertical": 4,
@@ -1109,12 +1109,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.XSmall\\" translation]"
+          title="[missing "en.PRINT.XSmall" translation]"
           titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
@@ -1129,12 +1129,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Small\\" translation]"
+          title="[missing "en.PRINT.Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1149,12 +1149,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Medium\\" translation]"
+          title="[missing "en.PRINT.Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1169,12 +1169,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Large\\" translation]"
+          title="[missing "en.PRINT.Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1189,12 +1189,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          title="[missing "en.PRINT.Was_Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1209,12 +1209,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          title="[missing "en.PRINT.Was_Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1229,12 +1229,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          title="[missing "en.PRINT.Was_Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1249,12 +1249,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          title="[missing "en.PRINT.Was_XSmall" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1266,7 +1266,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -1279,7 +1279,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -1291,7 +1291,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         />
         <View
           style={
-            Object {
+            {
               "marginLeft": 12,
               "paddingTop": 14,
             }
@@ -1302,7 +1302,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#757575",
                 "fontSize": 12,
               }
@@ -1319,11 +1319,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "alignSelf": "center",
           }
         }
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -1334,7 +1334,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -1351,27 +1351,27 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }
       }
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders OH Update Error for invalid amount of copies  1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -1379,7 +1379,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
           "paddingHorizontal": 8,
@@ -1389,7 +1389,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "flexWrap": "wrap",
             "fontSize": 12,
@@ -1404,7 +1404,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -1415,7 +1415,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -1426,7 +1426,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
             "marginBottom": 12,
@@ -1455,8 +1455,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           keyboardType="numeric"
           onChangeText={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "borderColor": "#0071e9",
                 "borderWidth": 1,
                 "fontSize": 12,
@@ -1466,7 +1466,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
                 "padding": 6,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "borderColor": "#b71c1c",
               },
             ]
@@ -1495,7 +1495,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#b71c1c",
             "fontSize": 10,
             "marginBottom": 12,
@@ -1507,7 +1507,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -1518,7 +1518,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -1529,7 +1529,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "flexWrap": "wrap",
             "marginVertical": 4,
@@ -1543,12 +1543,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.XSmall\\" translation]"
+          title="[missing "en.PRINT.XSmall" translation]"
           titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
@@ -1563,12 +1563,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Small\\" translation]"
+          title="[missing "en.PRINT.Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1583,12 +1583,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Medium\\" translation]"
+          title="[missing "en.PRINT.Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1603,12 +1603,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Large\\" translation]"
+          title="[missing "en.PRINT.Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1623,12 +1623,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          title="[missing "en.PRINT.Was_Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1643,12 +1643,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          title="[missing "en.PRINT.Was_Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1663,12 +1663,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          title="[missing "en.PRINT.Was_Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1683,12 +1683,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          title="[missing "en.PRINT.Was_XSmall" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -1700,7 +1700,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -1713,7 +1713,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -1725,7 +1725,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         />
         <View
           style={
-            Object {
+            {
               "marginLeft": 12,
               "paddingTop": 14,
             }
@@ -1736,7 +1736,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#757575",
                 "fontSize": 12,
               }
@@ -1753,11 +1753,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "alignSelf": "center",
           }
         }
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -1768,7 +1768,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -1786,12 +1786,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      title="[missing "en.PRINT.ADD_TO_QUEUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1805,12 +1805,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      title="[missing "en.PRINT.PRINT" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1818,20 +1818,20 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Renders Print Service Api Error 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -1839,7 +1839,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
           "paddingHorizontal": 8,
@@ -1849,7 +1849,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "flexWrap": "wrap",
             "fontSize": 12,
@@ -1864,7 +1864,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -1875,7 +1875,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -1886,7 +1886,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
             "marginBottom": 12,
@@ -1915,8 +1915,8 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           keyboardType="numeric"
           onChangeText={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "borderColor": "#0071e9",
                 "borderWidth": 1,
                 "fontSize": 12,
@@ -1926,7 +1926,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
                 "padding": 6,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "borderColor": "#0071e9",
               },
             ]
@@ -1956,7 +1956,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -1967,7 +1967,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -1978,7 +1978,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "flexWrap": "wrap",
             "marginVertical": 4,
@@ -1992,12 +1992,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.XSmall\\" translation]"
+          title="[missing "en.PRINT.XSmall" translation]"
           titleAlign="center"
           titleColor="#ffffffff"
           titleFontSize={12}
@@ -2012,12 +2012,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Small\\" translation]"
+          title="[missing "en.PRINT.Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -2032,12 +2032,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Medium\\" translation]"
+          title="[missing "en.PRINT.Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -2052,12 +2052,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Large\\" translation]"
+          title="[missing "en.PRINT.Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -2072,12 +2072,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Large\\" translation]"
+          title="[missing "en.PRINT.Was_Large" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -2092,12 +2092,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Medium\\" translation]"
+          title="[missing "en.PRINT.Was_Medium" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -2112,12 +2112,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_Small\\" translation]"
+          title="[missing "en.PRINT.Was_Small" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -2132,12 +2132,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           onPress={[Function]}
           radius={20}
           style={
-            Object {
+            {
               "marginHorizontal": 6,
               "marginVertical": 4,
             }
           }
-          title="[missing \\"en.PRINT.Was_XSmall\\" translation]"
+          title="[missing "en.PRINT.Was_XSmall" translation]"
           titleAlign="center"
           titleColor="#000000"
           titleFontSize={12}
@@ -2149,7 +2149,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -2162,7 +2162,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -2174,7 +2174,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         />
         <View
           style={
-            Object {
+            {
               "marginLeft": 12,
               "paddingTop": 14,
             }
@@ -2185,7 +2185,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#757575",
                 "fontSize": 12,
               }
@@ -2202,11 +2202,11 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "alignSelf": "center",
           }
         }
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -2216,7 +2216,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
     </View>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -2232,7 +2232,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       />
       <Text
         style={
-          Object {
+          {
             "color": "#ec0439",
             "fontSize": 16,
           }
@@ -2244,7 +2244,7 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -2262,12 +2262,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      title="[missing "en.PRINT.ADD_TO_QUEUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2281,12 +2281,12 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      title="[missing "en.PRINT.PRINT" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2294,20 +2294,20 @@ exports[`PrintPriceSignScreen Tests rendering print Errors/Api responses  Render
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle labels 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -2315,7 +2315,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
           "paddingHorizontal": 8,
@@ -2329,7 +2329,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -2340,7 +2340,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -2351,7 +2351,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
       </Text>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
             "marginBottom": 12,
@@ -2380,8 +2380,8 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
           keyboardType="numeric"
           onChangeText={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "borderColor": "#0071e9",
                 "borderWidth": 1,
                 "fontSize": 12,
@@ -2391,7 +2391,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
                 "padding": 6,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "borderColor": "#b71c1c",
               },
             ]
@@ -2420,7 +2420,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#b71c1c",
             "fontSize": 10,
             "marginBottom": 12,
@@ -2432,7 +2432,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -2452,7 +2452,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
         height={20}
         onPress={[Function]}
         radius={5}
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -2463,7 +2463,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -2481,12 +2481,12 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      title="[missing "en.PRINT.ADD_TO_QUEUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2500,12 +2500,12 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      title="[missing "en.PRINT.PRINT" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2513,20 +2513,20 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when aisle lab
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing the pallets 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -2534,7 +2534,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -2554,7 +2554,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
         height={20}
         onPress={[Function]}
         radius={5}
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -2565,7 +2565,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -2583,12 +2583,12 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      title="[missing "en.PRINT.PRINT" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2596,20 +2596,20 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when printing 
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section labels 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -2617,7 +2617,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
           "paddingHorizontal": 8,
@@ -2631,7 +2631,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "marginTop": 8,
@@ -2642,7 +2642,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
     >
       <Text
         style={
-          Object {
+          {
             "color": "#9e9e9e",
             "fontSize": 12,
             "marginVertical": 8,
@@ -2653,7 +2653,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       </Text>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
             "marginBottom": 12,
@@ -2682,8 +2682,8 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
           keyboardType="numeric"
           onChangeText={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "borderColor": "#0071e9",
                 "borderWidth": 1,
                 "fontSize": 12,
@@ -2693,7 +2693,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
                 "padding": 6,
                 "textAlign": "center",
               },
-              Object {
+              {
                 "borderColor": "#b71c1c",
               },
             ]
@@ -2722,7 +2722,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#b71c1c",
             "fontSize": 10,
             "marginBottom": 12,
@@ -2734,7 +2734,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "flex-end",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -2754,7 +2754,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
         height={20}
         onPress={[Function]}
         radius={5}
-        title="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        title="[missing "en.GENERICS.CHANGE" translation]"
         titleColor="#0071e9"
         titleFontSize={14}
         titleFontWeight="normal"
@@ -2765,7 +2765,7 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "elevation": 16,
         "flexDirection": "row",
@@ -2783,12 +2783,12 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.ADD_TO_QUEUE\\" translation]"
+      title="[missing "en.PRINT.ADD_TO_QUEUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2802,12 +2802,12 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "flex": 1,
           "paddingHorizontal": 4,
         }
       }
-      title="[missing \\"en.PRINT.PRINT\\" translation]"
+      title="[missing "en.PRINT.PRINT" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2815,5 +2815,5 @@ exports[`PrintPriceSignScreen renders the Print Price Sign Screen when section l
       width={-1}
     />
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;

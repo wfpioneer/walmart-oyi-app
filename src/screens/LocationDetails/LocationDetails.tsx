@@ -6,7 +6,6 @@ import {
   NavigationProp, RouteProp, useNavigation, useRoute
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import FAB from 'react-native-fab';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Dispatch } from 'redux';
 import Button from '../../components/buttons/Button';
@@ -25,6 +24,7 @@ import { trackEvent } from '../../utils/AppCenterTool';
 import { AsyncState } from '../../models/AsyncState';
 import { DELETE_LOCATION, GET_LOCATIONS_FOR_ITEM, GET_LOCATIONS_FOR_ITEM_V1 } from '../../state/actions/asyncAPI';
 import { CustomModalComponent } from '../Modal/Modal';
+import IconButton from '../../components/buttons/IconButton';
 
 interface LocationDetailsProps {
   navigation: NavigationProp<any>;
@@ -249,11 +249,14 @@ export const LocationDetailsScreen = (props: LocationDetailsProps): JSX.Element 
       </ScrollView>
       <View style={styles.container}>
         <View style={styles.button}>
-          <FAB
-            buttonColor={COLOR.MAIN_THEME_COLOR}
-            onClickAction={addNewLocationNav}
-            visible={true}
-            iconTextComponent={<MaterialCommunityIcon name="plus" size={40} color={COLOR.WHITE} />}
+          <IconButton
+            icon={<MaterialCommunityIcon name="plus" size={25} color={COLOR.WHITE} />}
+            backgroundColor={COLOR.MAIN_THEME_COLOR}
+            onPress={addNewLocationNav}
+            radius={100}
+            height={60}
+            width={60}
+            style={styles.floatingActionButton}
           />
         </View>
       </View>

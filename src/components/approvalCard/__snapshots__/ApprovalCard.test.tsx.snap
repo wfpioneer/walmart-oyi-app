@@ -3,7 +3,7 @@
 exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approval Item with a decreased change in quantity 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -16,7 +16,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flex": 1,
@@ -27,7 +27,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#8492a8",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -40,7 +40,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "width": "100%",
@@ -49,7 +49,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#424242",
           "fontSize": 18,
@@ -69,7 +69,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   </View>
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#bdbdbd",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -84,7 +84,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       ellipsizeMode="tail"
       numberOfLines={1}
       style={
-        Object {
+        {
           "color": "#8492a8",
           "flexBasis": "auto",
           "flexGrow": 0,
@@ -97,7 +97,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#8492a8",
           "fontSize": 14,
           "marginHorizontal": 4,
@@ -108,7 +108,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#B40C00",
           "flexBasis": "60%",
           "flexGrow": 1,
@@ -132,7 +132,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
 exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approval Item with a positive price change 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -145,7 +145,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flex": 1,
@@ -156,7 +156,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#8492a8",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -169,7 +169,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "width": "100%",
@@ -178,7 +178,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#424242",
           "fontSize": 18,
@@ -198,7 +198,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   </View>
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#bdbdbd",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -213,7 +213,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       ellipsizeMode="tail"
       numberOfLines={1}
       style={
-        Object {
+        {
           "color": "#8492a8",
           "flexBasis": "auto",
           "flexGrow": 0,
@@ -226,7 +226,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#8492a8",
           "fontSize": 14,
           "marginHorizontal": 4,
@@ -237,7 +237,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#B40C00",
           "flexBasis": "60%",
           "flexGrow": 1,
@@ -261,7 +261,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
 exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approval Item with a source label as Audits after itemNumber 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -274,7 +274,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flex": 1,
@@ -285,7 +285,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#8492a8",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -298,7 +298,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#d938ab",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -312,7 +312,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "width": "100%",
@@ -321,7 +321,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#424242",
           "fontSize": 18,
@@ -341,7 +341,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
   </View>
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#bdbdbd",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -356,7 +356,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
       ellipsizeMode="tail"
       numberOfLines={1}
       style={
-        Object {
+        {
           "color": "#8492a8",
           "flexBasis": "auto",
           "flexGrow": 0,
@@ -369,7 +369,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#8492a8",
           "fontSize": 14,
           "marginHorizontal": 4,
@@ -380,7 +380,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#B40C00",
           "flexBasis": "60%",
           "flexGrow": 1,
@@ -404,7 +404,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders an Approva
 exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approval Item CheckBox as "checked"  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -417,7 +417,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flex": 1,
@@ -428,7 +428,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#8492a8",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -441,7 +441,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "width": "100%",
@@ -450,7 +450,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#424242",
           "fontSize": 18,
@@ -470,7 +470,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
   </View>
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#bdbdbd",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -485,7 +485,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       ellipsizeMode="tail"
       numberOfLines={1}
       style={
-        Object {
+        {
           "color": "#8492a8",
           "flexBasis": "auto",
           "flexGrow": 0,
@@ -498,7 +498,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#8492a8",
           "fontSize": 14,
           "marginHorizontal": 4,
@@ -509,7 +509,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#B40C00",
           "flexBasis": "60%",
           "flexGrow": 1,
@@ -533,7 +533,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
 exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approval Item CheckBox as "unchecked"  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -546,7 +546,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flex": 1,
@@ -557,7 +557,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#8492a8",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -570,7 +570,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "width": "100%",
@@ -579,7 +579,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#424242",
           "fontSize": 18,
@@ -599,7 +599,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
   </View>
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#bdbdbd",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -614,7 +614,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
       ellipsizeMode="tail"
       numberOfLines={1}
       style={
-        Object {
+        {
           "color": "#8492a8",
           "flexBasis": "auto",
           "flexGrow": 0,
@@ -627,7 +627,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#8492a8",
           "fontSize": 14,
           "marginHorizontal": 4,
@@ -638,7 +638,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#B40C00",
           "flexBasis": "60%",
           "flexGrow": 1,
@@ -662,7 +662,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders the Approv
 exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if days left is undefined  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -675,7 +675,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "flex": 1,
@@ -686,7 +686,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#8492a8",
             "fontSize": 14,
             "fontWeight": "bold",
@@ -699,7 +699,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "width": "100%",
@@ -708,7 +708,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#424242",
           "fontSize": 18,
@@ -728,7 +728,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
   </View>
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#bdbdbd",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -743,7 +743,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
       ellipsizeMode="tail"
       numberOfLines={1}
       style={
-        Object {
+        {
           "color": "#8492a8",
           "flexBasis": "auto",
           "flexGrow": 0,
@@ -756,7 +756,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#8492a8",
           "fontSize": 14,
           "marginHorizontal": 4,
@@ -767,7 +767,7 @@ exports[`ApprovalCard Component Tests rendering ApprovalCard: Renders zero if da
     </Text>
     <Text
       style={
-        Object {
+        {
           "color": "#B40C00",
           "flexBasis": "60%",
           "flexGrow": 1,

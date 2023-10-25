@@ -6,7 +6,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -21,7 +21,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -33,7 +33,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -45,7 +45,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -61,14 +61,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -82,14 +82,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -101,7 +101,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -109,12 +109,12 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing "en.PALLET.ENTER_PALLET_ID" translation]"
     />
     <View>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "margin": 15,
             "textAlign": "center",
@@ -127,7 +127,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -135,7 +135,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
           }
         }
@@ -153,7 +153,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         </Memo(Pressable)>
         <View
           style={
-            Object {
+            {
               "paddingTop": 30,
             }
           }
@@ -165,7 +165,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         <TouchableOpacity
           onPress={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
@@ -177,7 +177,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "height": 75,
                 "justifyContent": "center",
@@ -194,7 +194,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
                 "justifyContent": "center",
               }
@@ -202,7 +202,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           >
             <Text
               style={
-                Object {
+                {
                   "fontSize": 18,
                 }
               }
@@ -223,7 +223,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -238,7 +238,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -250,7 +250,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -262,7 +262,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -278,14 +278,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -299,14 +299,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -318,7 +318,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -326,12 +326,12 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing "en.PALLET.ENTER_PALLET_ID" translation]"
     />
     <View>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "margin": 15,
             "textAlign": "center",
@@ -344,7 +344,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -352,7 +352,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
           }
         }
@@ -370,7 +370,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         </Memo(Pressable)>
         <View
           style={
-            Object {
+            {
               "paddingTop": 30,
             }
           }
@@ -382,7 +382,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         <TouchableOpacity
           onPress={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
@@ -394,7 +394,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "height": 75,
                 "justifyContent": "center",
@@ -411,7 +411,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
                 "justifyContent": "center",
               }
@@ -419,7 +419,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           >
             <Text
               style={
-                Object {
+                {
                   "fontSize": 18,
                 }
               }
@@ -440,7 +440,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -455,7 +455,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -467,7 +467,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -479,7 +479,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -495,14 +495,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -516,14 +516,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -535,7 +535,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -543,11 +543,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
   >
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing "en.PALLET.ENTER_PALLET_ID" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -555,7 +555,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
           }
         }
@@ -573,7 +573,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         </Memo(Pressable)>
         <View
           style={
-            Object {
+            {
               "paddingTop": 30,
             }
           }
@@ -585,7 +585,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         <TouchableOpacity
           onPress={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
@@ -597,7 +597,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "height": 75,
                 "justifyContent": "center",
@@ -614,7 +614,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
                 "justifyContent": "center",
               }
@@ -622,7 +622,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component Test renders 
           >
             <Text
               style={
-                Object {
+                {
                   "fontSize": 18,
                 }
               }
@@ -643,7 +643,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -654,7 +654,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   >
     <View
       style={
-        Object {
+        {
           "flex": 4,
           "flexDirection": "column",
           "margin": 10,
@@ -663,7 +663,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 5,
           }
         }
@@ -688,7 +688,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -703,7 +703,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -715,7 +715,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -727,7 +727,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -743,14 +743,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -764,14 +764,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -783,7 +783,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -791,11 +791,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   >
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing "en.PALLET.ENTER_PALLET_ID" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -806,7 +806,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         ListEmptyComponent={
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
               }
             }
@@ -824,7 +824,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             </Memo(Pressable)>
             <View
               style={
-                Object {
+                {
                   "paddingTop": 30,
                 }
               }
@@ -836,7 +836,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             <TouchableOpacity
               onPress={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "flexDirection": "row",
                   "justifyContent": "center",
@@ -848,7 +848,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "height": 75,
                     "justifyContent": "center",
@@ -865,7 +865,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "justifyContent": "center",
                   }
@@ -873,7 +873,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "fontSize": 18,
                     }
                   }
@@ -885,12 +885,12 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           </View>
         }
         contentContainerStyle={
-          Object {
+          {
             "flex": 1,
             "justifyContent": "center",
           }
         }
-        data={Array []}
+        data={[]}
         keyExtractor={[Function]}
         removeClippedSubviews={false}
         renderItem={[Function]}
@@ -906,7 +906,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -921,7 +921,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -933,7 +933,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -945,7 +945,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -961,14 +961,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -982,14 +982,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1001,7 +1001,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -1009,12 +1009,12 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   >
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing "en.PALLET.ENTER_PALLET_ID" translation]"
     />
     <View>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "margin": 15,
             "textAlign": "center",
@@ -1027,7 +1027,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -1038,7 +1038,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         ListEmptyComponent={
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
               }
             }
@@ -1056,7 +1056,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             </Memo(Pressable)>
             <View
               style={
-                Object {
+                {
                   "paddingTop": 30,
                 }
               }
@@ -1068,7 +1068,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             <TouchableOpacity
               onPress={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "flexDirection": "row",
                   "justifyContent": "center",
@@ -1080,7 +1080,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "height": 75,
                     "justifyContent": "center",
@@ -1097,7 +1097,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "justifyContent": "center",
                   }
@@ -1105,7 +1105,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "fontSize": 18,
                     }
                   }
@@ -1118,12 +1118,12 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         }
         contentContainerStyle={false}
         data={
-          Array [
-            Object {
+          [
+            {
               "expirationDate": "10/3/2022",
               "id": "123456",
-              "items": Array [
-                Object {
+              "items": [
+                {
                   "itemDesc": "itemDesc",
                   "itemNbr": 351231,
                   "price": 123,
@@ -1132,11 +1132,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
                 },
               ],
             },
-            Object {
+            {
               "expirationDate": "10/3/2022",
               "id": "345345",
-              "items": Array [
-                Object {
+              "items": [
+                {
                   "itemDesc": "itemDesc",
                   "itemNbr": 351231,
                   "price": 123,
@@ -1161,13 +1161,13 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginHorizontal": 15,
             "marginVertical": 10,
           }
         }
         testID="nextButton"
-        title="[missing \\"en.GENERICS.NEXT\\" translation]"
+        title="[missing "en.GENERICS.NEXT" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -1185,7 +1185,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -1200,7 +1200,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -1212,7 +1212,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -1224,7 +1224,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -1240,14 +1240,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1261,14 +1261,14 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1280,7 +1280,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -1288,11 +1288,11 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
   >
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.PALLET.ENTER_PALLET_ID\\" translation]"
+      placeholder="[missing "en.PALLET.ENTER_PALLET_ID" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -1303,7 +1303,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
         ListEmptyComponent={
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
               }
             }
@@ -1321,7 +1321,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             </Memo(Pressable)>
             <View
               style={
-                Object {
+                {
                   "paddingTop": 30,
                 }
               }
@@ -1333,7 +1333,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             <TouchableOpacity
               onPress={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "flexDirection": "row",
                   "justifyContent": "center",
@@ -1345,7 +1345,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "height": 75,
                     "justifyContent": "center",
@@ -1362,7 +1362,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               </View>
               <View
                 style={
-                  Object {
+                  {
                     "flex": 1,
                     "justifyContent": "center",
                   }
@@ -1370,7 +1370,7 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "fontSize": 18,
                     }
                   }
@@ -1382,12 +1382,12 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
           </View>
         }
         contentContainerStyle={
-          Object {
+          {
             "flex": 1,
             "justifyContent": "center",
           }
         }
-        data={Array []}
+        data={[]}
         keyExtractor={[Function]}
         removeClippedSubviews={false}
         renderItem={[Function]}
@@ -1399,6 +1399,23 @@ exports[`BinningScreen Tests rendering the BinningScreen component renders the b
 
 exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -1410,7 +1427,7 @@ exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "flexDirection": "row",
       "justifyContent": "center",
@@ -1423,7 +1440,7 @@ exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "height": 75,
         "justifyContent": "center",
@@ -1440,7 +1457,7 @@ exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "center",
       }
@@ -1448,7 +1465,7 @@ exports[`BinningScreen externalized function tests tests toggleMultiBinCheckbox 
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
         }
       }

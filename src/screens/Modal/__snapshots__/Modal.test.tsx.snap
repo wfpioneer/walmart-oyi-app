@@ -3,16 +3,18 @@
 exports[`ActivityModalComponent should hide info modal when show info modal is set to false 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -31,16 +33,18 @@ exports[`ActivityModalComponent should hide info modal when show info modal is s
 exports[`ActivityModalComponent show activity loader when show activity is set to true 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -64,7 +68,7 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -74,7 +78,7 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
   >
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "alignSelf": "center",
           "backgroundColor": "#ffffffff",
@@ -89,14 +93,14 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
         name="info"
         size={30}
         style={
-          Object {
+          {
             "textAlign": "center",
           }
         }
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 20,
             "textAlign": "center",
           }
@@ -106,7 +110,7 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
       </Text>
       <Text
         style={
-          Object {
+          {
             "textAlign": "center",
           }
         }
@@ -114,6 +118,23 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
         content
       </Text>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -125,7 +146,7 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#0071e9",
             "borderRadius": 4,
@@ -139,7 +160,7 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
             }
           }
@@ -155,16 +176,18 @@ exports[`ActivityModalComponent show content modal when show info modal is true 
 exports[`ActivityModalComponent show when show activity is set to false 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -190,7 +213,7 @@ exports[`Test CustomModalComponent Component should render component visible set
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -200,8 +223,8 @@ exports[`Test CustomModalComponent Component should render component visible set
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 7.5,
@@ -210,7 +233,7 @@ exports[`Test CustomModalComponent Component should render component visible set
             "paddingHorizontal": 8,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 10,
           },
         ]
@@ -236,7 +259,7 @@ exports[`Test CustomModalComponent Component should render component visible set
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -246,8 +269,8 @@ exports[`Test CustomModalComponent Component should render component visible set
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 8,
@@ -255,7 +278,7 @@ exports[`Test CustomModalComponent Component should render component visible set
             "paddingBottom": 12,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 10,
           },
         ]
@@ -281,7 +304,7 @@ exports[`Test CustomModalComponent Component should render component visible set
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -291,8 +314,8 @@ exports[`Test CustomModalComponent Component should render component visible set
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -304,7 +327,7 @@ exports[`Test CustomModalComponent Component should render component visible set
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 10,
           },
         ]
@@ -330,7 +353,7 @@ exports[`Test CustomModalComponent Component should render component visible set
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -340,8 +363,8 @@ exports[`Test CustomModalComponent Component should render component visible set
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -350,7 +373,7 @@ exports[`Test CustomModalComponent Component should render component visible set
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": 10,
           },
         ]
@@ -376,7 +399,7 @@ exports[`Test CustomModalComponent Component should render component when visibl
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -386,8 +409,8 @@ exports[`Test CustomModalComponent Component should render component when visibl
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 7.5,
@@ -396,7 +419,7 @@ exports[`Test CustomModalComponent Component should render component when visibl
             "paddingHorizontal": 8,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 10,
           },
         ]

@@ -12,7 +12,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -23,7 +23,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -37,12 +37,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -56,12 +56,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -74,7 +74,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -86,7 +86,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -97,7 +97,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     <React.Fragment />
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -109,7 +109,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -121,7 +121,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -130,25 +130,32 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -167,7 +174,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -178,7 +185,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -192,12 +199,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -211,12 +218,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.RETRY\\" translation]"
+          title="[missing "en.GENERICS.RETRY" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -229,7 +236,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -241,7 +248,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -252,7 +259,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     <React.Fragment />
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -264,7 +271,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -276,7 +283,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -285,25 +292,32 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Delete L
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -317,7 +331,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "justifyContent": "center",
     }
@@ -337,7 +351,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -348,7 +362,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -362,12 +376,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -381,12 +395,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -399,7 +413,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -411,7 +425,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -422,7 +436,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     <React.Fragment />
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -434,7 +448,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -446,7 +460,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -455,25 +469,32 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -495,7 +516,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }
@@ -505,7 +526,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -517,7 +538,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -528,7 +549,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     <React.Fragment />
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -540,7 +561,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -552,7 +573,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -561,25 +582,32 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders Loader w
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -598,7 +626,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -609,7 +637,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -623,12 +651,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -642,12 +670,12 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -660,7 +688,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -672,7 +700,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -683,7 +711,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
     <React.Fragment />
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -695,7 +723,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -707,7 +735,7 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -716,25 +744,32 @@ exports[`LocationDetailsScreen Tests Locations Api Async State: Renders the Dele
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -753,7 +788,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -764,7 +799,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -778,12 +813,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -797,12 +832,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -815,7 +850,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -827,7 +862,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -838,7 +873,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     <React.Fragment />
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -850,7 +885,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -869,7 +904,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -878,25 +913,32 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -915,7 +957,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -926,7 +968,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -940,12 +982,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -959,12 +1001,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -977,7 +1019,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -989,7 +1031,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -1013,7 +1055,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     </React.Fragment>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -1025,7 +1067,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -1037,7 +1079,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -1046,25 +1088,32 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -1083,7 +1132,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -1094,7 +1143,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -1108,12 +1157,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1127,12 +1176,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1145,7 +1194,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -1157,7 +1206,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -1181,7 +1230,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     </React.Fragment>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -1193,7 +1242,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -1212,7 +1261,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -1221,25 +1270,32 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
@@ -1258,7 +1314,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -1269,7 +1325,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "width": "100%",
@@ -1283,12 +1339,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1302,12 +1358,12 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1320,7 +1376,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   <ScrollView>
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -1332,7 +1388,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -1343,7 +1399,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     <React.Fragment />
     <View
       style={
-        Object {
+        {
           "alignContent": "center",
           "backgroundColor": "#e0e0e0",
           "height": 70,
@@ -1355,7 +1411,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontWeight": "bold",
           }
         }
@@ -1367,7 +1423,7 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-end",
         "width": "100%",
@@ -1376,25 +1432,32 @@ exports[`LocationDetailsScreen Tests for rendering an item's Locations: Renders 
   >
     <View
       style={
-        Object {
+        {
           "alignSelf": "flex-end",
         }
       }
     >
-      <FAB
-        buttonColor="#0071e9"
-        iconTextColor="#FFFFFF"
-        iconTextComponent={
+      <IconButton
+        backgroundColor="#0071e9"
+        disabled={false}
+        height={60}
+        icon={
           <mockConstructor
             color="#ffffffff"
             name="plus"
-            size={40}
+            size={25}
           />
         }
-        onClickAction={[Function]}
-        snackOffset={0}
-        style={Object {}}
-        visible={true}
+        onPress={[Function]}
+        radius={100}
+        style={
+          {
+            "marginHorizontal": 30,
+            "marginVertical": 25,
+          }
+        }
+        type={1}
+        width={60}
       />
     </View>
   </View>
