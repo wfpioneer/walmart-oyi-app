@@ -138,12 +138,15 @@ export const onBarcodeEmitterResponse = (
   }
 };
 
+const isValidException = (actionCompleted: boolean, exceptionType: string) => !actionCompleted
+  && (exceptionType === 'NSFL' || exceptionType === 'C' || exceptionType === 'NS');
+
 export const isNotActionCompleted = (
   actionCompleted: boolean,
   dispatch: Dispatch<any>,
   exceptionType: string | null | undefined
 ) => {
-  if (!actionCompleted && exceptionType === 'NSFL') {
+  if (isValidException(actionCompleted, exceptionType ?? '')) {
     dispatch(setActionCompleted());
   }
 };
