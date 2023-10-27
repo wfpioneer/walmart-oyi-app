@@ -3,7 +3,7 @@
 exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Enabled Submit button for MacAddress equal to 12 characters 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -15,10 +15,10 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Enabled Submit b
   <TextInput
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
+    placeholder="[missing "en.PRINT.MAC_ADDRESS" translation]"
     selectionColor="#0071e9"
     style={
-      Object {
+      {
         "borderRadius": 4,
         "borderWidth": 1,
         "marginTop": 10,
@@ -34,12 +34,12 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Enabled Submit b
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginTop": 10,
         "width": "100%",
       }
     }
-    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    title="[missing "en.GENERICS.SUBMIT" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -52,7 +52,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Enabled Submit b
 exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printer MacAddress not equal to 12 characters 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -64,10 +64,10 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printe
   <TextInput
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
+    placeholder="[missing "en.PRINT.MAC_ADDRESS" translation]"
     selectionColor="#0071e9"
     style={
-      Object {
+      {
         "borderRadius": 4,
         "borderWidth": 1,
         "marginTop": 10,
@@ -78,7 +78,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printe
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "flex-start",
@@ -93,7 +93,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printe
     />
     <Text
       style={
-        Object {
+        {
           "color": "#e57373",
           "fontSize": 12,
           "marginHorizontal": 5,
@@ -110,12 +110,12 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printe
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginTop": 10,
         "width": "100%",
       }
     }
-    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    title="[missing "en.GENERICS.SUBMIT" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -128,7 +128,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders Error for Printe
 exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit button if no duplicate printers exist 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -140,10 +140,10 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit b
   <TextInput
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
+    placeholder="[missing "en.PRINT.MAC_ADDRESS" translation]"
     selectionColor="#0071e9"
     style={
-      Object {
+      {
         "borderRadius": 4,
         "borderWidth": 1,
         "marginTop": 10,
@@ -154,7 +154,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit b
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "flex-start",
@@ -169,7 +169,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit b
     />
     <Text
       style={
-        Object {
+        {
           "color": "#e57373",
           "fontSize": 12,
           "marginHorizontal": 5,
@@ -186,12 +186,12 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit b
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginTop": 10,
         "width": "100%",
       }
     }
-    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    title="[missing "en.GENERICS.SUBMIT" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -204,7 +204,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders enabled submit b
 exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplicate printers exist 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -216,10 +216,10 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplica
   <TextInput
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    placeholder="[missing \\"en.PRINT.MAC_ADDRESS\\" translation]"
+    placeholder="[missing "en.PRINT.MAC_ADDRESS" translation]"
     selectionColor="#0071e9"
     style={
-      Object {
+      {
         "borderRadius": 4,
         "borderWidth": 1,
         "marginTop": 10,
@@ -230,7 +230,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplica
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "flex-start",
@@ -245,7 +245,7 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplica
     />
     <Text
       style={
-        Object {
+        {
           "color": "#e57373",
           "fontSize": 12,
           "marginHorizontal": 5,
@@ -262,12 +262,12 @@ exports[`ChangePrinterScreen Tests ChangePrinterScreen  Renders error if duplica
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginTop": 10,
         "width": "100%",
       }
     }
-    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    title="[missing "en.GENERICS.SUBMIT" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"

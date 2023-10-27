@@ -7,7 +7,7 @@ exports[`ImageWrapper Component Renders a ImageWrapper with country code CN 1`] 
     resizeMode="contain"
     source=""
     style={
-      Object {
+      {
         "height": 80,
         "width": 80,
       }
@@ -23,7 +23,7 @@ exports[`ImageWrapper Component Renders a ImageWrapper with country code MX 1`] 
     resizeMode="contain"
     source=""
     style={
-      Object {
+      {
         "height": 80,
         "width": 80,
       }

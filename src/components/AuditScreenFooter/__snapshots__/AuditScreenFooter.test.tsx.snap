@@ -3,7 +3,7 @@
 exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with continue disabled 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -17,7 +17,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "marginHorizontal": 3,
       }
@@ -25,8 +25,8 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -35,15 +35,27 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -57,7 +69,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#BABBBE",
               "borderRadius": 5,
@@ -71,7 +83,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
@@ -92,7 +104,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
 exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with continue enabled 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -106,7 +118,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "marginHorizontal": 3,
       }
@@ -114,8 +126,8 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -124,15 +136,27 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -146,7 +170,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#0071e9",
               "borderRadius": 5,
@@ -160,7 +184,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
@@ -181,7 +205,7 @@ exports[`AuditScreenFooter Component Test renders AuditScreenFooter Screen with 
 exports[`AuditScreenFooter Component renders the footer with save set to true 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -195,7 +219,7 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "marginHorizontal": 3,
       }
@@ -203,8 +227,8 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -213,15 +237,27 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -235,7 +271,7 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "borderColor": "#0071e9",
@@ -250,7 +286,7 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#0071e9",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
@@ -267,7 +303,7 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "marginHorizontal": 3,
       }
@@ -275,8 +311,8 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -285,15 +321,27 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -307,7 +355,7 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#0071e9",
               "borderRadius": 5,
@@ -321,7 +369,7 @@ exports[`AuditScreenFooter Component renders the footer with save set to true 1`
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,

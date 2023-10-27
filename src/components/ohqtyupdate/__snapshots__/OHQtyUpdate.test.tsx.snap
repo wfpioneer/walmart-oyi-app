@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with different onhands and new qty 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "alignContent": "flex-start",
         "flexDirection": "row",
         "height": 45,
@@ -15,8 +15,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -25,15 +25,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -47,7 +59,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -68,14 +80,14 @@ Array [
   </View>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
         },
-        Object {
+        {
           "borderColor": "#e0e0e0",
         },
       ]
@@ -84,8 +96,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -95,15 +107,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -117,7 +141,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -140,7 +164,7 @@ Array [
       onChangeText={[Function]}
       onEndEditing={[Function]}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "height": 40,
           "minWidth": "15%",
@@ -152,8 +176,8 @@ Array [
     />
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -163,15 +187,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -185,7 +221,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -206,7 +242,7 @@ Array [
   </View>,
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "paddingVertical": 4,
       }
@@ -216,11 +252,11 @@ Array [
   </Text>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 45,
         },
-        Object {
+        {
           "marginTop": 16,
           "width": "100%",
         },
@@ -229,15 +265,27 @@ Array [
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -251,7 +299,7 @@ Array [
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#0071e9",
             "borderRadius": 5,
@@ -265,7 +313,7 @@ Array [
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontFamily": "Roboto-Medium",
               "fontSize": 16,
@@ -283,10 +331,10 @@ Array [
 `;
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with error 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "alignContent": "flex-start",
         "flexDirection": "row",
         "height": 45,
@@ -297,8 +345,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -307,15 +355,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -329,7 +389,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -350,14 +410,14 @@ Array [
   </View>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
         },
-        Object {
+        {
           "borderColor": "#e0e0e0",
         },
       ]
@@ -366,8 +426,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -377,15 +437,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -399,7 +471,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -422,7 +494,7 @@ Array [
       onChangeText={[Function]}
       onEndEditing={[Function]}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "height": 40,
           "minWidth": "15%",
@@ -434,8 +506,8 @@ Array [
     />
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -445,15 +517,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -467,7 +551,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -488,7 +572,7 @@ Array [
   </View>,
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "paddingVertical": 4,
       }
@@ -498,7 +582,7 @@ Array [
   </Text>,
   <Text
     style={
-      Object {
+      {
         "color": "#b71c1c",
         "fontSize": 10,
         "marginBottom": 12,
@@ -509,11 +593,11 @@ Array [
   </Text>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 45,
         },
-        Object {
+        {
           "marginTop": 16,
           "width": "100%",
         },
@@ -522,15 +606,27 @@ Array [
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -544,7 +640,7 @@ Array [
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#0071e9",
             "borderRadius": 5,
@@ -558,7 +654,7 @@ Array [
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontFamily": "Roboto-Medium",
               "fontSize": 16,
@@ -576,10 +672,10 @@ Array [
 `;
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with invalid new qty 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "alignContent": "flex-start",
         "flexDirection": "row",
         "height": 45,
@@ -590,8 +686,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -600,15 +696,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -622,7 +730,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -643,14 +751,14 @@ Array [
   </View>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
         },
-        Object {
+        {
           "borderColor": "#b71c1c",
         },
       ]
@@ -659,8 +767,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -670,15 +778,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -692,7 +812,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -715,7 +835,7 @@ Array [
       onChangeText={[Function]}
       onEndEditing={[Function]}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "height": 40,
           "minWidth": "15%",
@@ -727,8 +847,8 @@ Array [
     />
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -738,15 +858,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -760,7 +892,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -781,7 +913,7 @@ Array [
   </View>,
   <Text
     style={
-      Object {
+      {
         "color": "#b71c1c",
         "fontSize": 10,
         "marginBottom": 12,
@@ -792,7 +924,7 @@ Array [
   </Text>,
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "paddingVertical": 4,
       }
@@ -802,11 +934,11 @@ Array [
   </Text>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 45,
         },
-        Object {
+        {
           "marginTop": 16,
           "width": "100%",
         },
@@ -815,15 +947,27 @@ Array [
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -837,7 +981,7 @@ Array [
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#BABBBE",
             "borderRadius": 5,
@@ -851,7 +995,7 @@ Array [
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontFamily": "Roboto-Medium",
               "fontSize": 16,
@@ -869,10 +1013,10 @@ Array [
 `;
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with isWating true 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "alignContent": "flex-start",
         "flexDirection": "row",
         "height": 45,
@@ -883,14 +1027,14 @@ Array [
   />,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
         },
-        Object {
+        {
           "borderColor": "#e0e0e0",
         },
       ]
@@ -899,8 +1043,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -910,15 +1054,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -932,7 +1088,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -955,7 +1111,7 @@ Array [
       onChangeText={[Function]}
       onEndEditing={[Function]}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "height": 40,
           "minWidth": "15%",
@@ -967,8 +1123,8 @@ Array [
     />
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -978,15 +1134,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -1000,7 +1168,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -1021,7 +1189,7 @@ Array [
   </View>,
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "paddingVertical": 4,
       }
@@ -1034,7 +1202,7 @@ Array [
     hidesWhenStopped={true}
     size="large"
     style={
-      Object {
+      {
         "marginTop": 16,
       }
     }
@@ -1043,10 +1211,10 @@ Array [
 `;
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with same onhands and new qty 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "alignContent": "flex-start",
         "flexDirection": "row",
         "height": 45,
@@ -1057,8 +1225,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
           undefined,
@@ -1067,15 +1235,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -1089,7 +1269,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -1110,14 +1290,14 @@ Array [
   </View>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "borderRadius": 10,
           "borderWidth": 1,
           "flexDirection": "row",
         },
-        Object {
+        {
           "borderColor": "#e0e0e0",
         },
       ]
@@ -1126,8 +1306,8 @@ Array [
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -1137,15 +1317,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -1159,7 +1351,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -1182,7 +1374,7 @@ Array [
       onChangeText={[Function]}
       onEndEditing={[Function]}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "height": 40,
           "minWidth": "15%",
@@ -1194,8 +1386,8 @@ Array [
     />
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 15,
             "width": 35,
           },
@@ -1205,15 +1397,27 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -1227,7 +1431,7 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#00000000",
               "flex": 1,
@@ -1248,7 +1452,7 @@ Array [
   </View>,
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "paddingVertical": 4,
       }
@@ -1258,11 +1462,11 @@ Array [
   </Text>,
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 45,
         },
-        Object {
+        {
           "marginTop": 16,
           "width": "100%",
         },
@@ -1271,15 +1475,27 @@ Array [
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1293,7 +1509,7 @@ Array [
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#BABBBE",
             "borderRadius": 5,
@@ -1307,7 +1523,7 @@ Array [
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontFamily": "Roboto-Medium",
               "fontSize": 16,

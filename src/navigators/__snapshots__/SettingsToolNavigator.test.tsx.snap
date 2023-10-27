@@ -3,9 +3,9 @@
 exports[`SettingsTool Navigator Renders the settings tool navigator component 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -16,8 +16,8 @@ exports[`SettingsTool Navigator Renders the settings tool navigator component 1`
     component={[Function]}
     name="SettingsToolHome"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.SETTINGS.TITLE\\" translation]",
+      {
+        "headerTitle": "[missing "en.SETTINGS.TITLE" translation]",
       }
     }
   />

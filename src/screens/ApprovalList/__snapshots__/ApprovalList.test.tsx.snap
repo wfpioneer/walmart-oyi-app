@@ -3,7 +3,7 @@
 exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders Approval Api error message 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -19,7 +19,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders A
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "paddingHorizontal": 8,
         "textAlign": "center",
@@ -31,7 +31,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders A
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -56,7 +56,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders l
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -68,7 +68,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders l
 exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders pop-up on update approval api response status 207 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -81,7 +81,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "paddingHorizontal": 8,
           "textAlign": "center",
@@ -92,8 +92,8 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
     </Text>
     <FlatList
       data={
-        Array [
-          Object {
+        [
+          {
             "id": 4785,
             "itemNbr": 125,
             "message": "failure",
@@ -104,7 +104,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
       keyExtractor={[Function]}
       renderItem={[Function]}
       style={
-        Object {
+        {
           "minHeight": 80,
           "paddingVertical": 20,
         }
@@ -117,11 +117,11 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "width": "50%",
         }
       }
-      title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+      title="[missing "en.APPROVAL.CONFIRM" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -133,7 +133,7 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
     ListEmptyComponent={
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -151,13 +151,13 @@ exports[`ApprovalListScreen Tests rendering Get Approval Api responses Renders p
         </Text>
       </View>
     }
-    data={Array []}
-    extraData={Array []}
+    data={[]}
+    extraData={[]}
     keyExtractor={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -192,7 +192,7 @@ exports[`ApprovalListScreen Tests rendering the approval list RenderApprovalItem
 exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Reject buttons for selected approval items 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -201,7 +201,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
     ListEmptyComponent={
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -220,14 +220,14 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
       </View>
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "categoryDescription": "SNACKS",
           "categoryHeader": true,
           "categoryNbr": 1,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
@@ -246,13 +246,13 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "subCategoryNbr": 1,
           "upcNbr": 40000000123,
         },
-        Object {
+        {
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryHeader": true,
           "categoryNbr": 2,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -271,7 +271,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "subCategoryNbr": 1,
           "upcNbr": 40000000456,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -290,7 +290,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "subCategoryNbr": 1,
           "upcNbr": 40000000457,
         },
-        Object {
+        {
           "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -312,14 +312,14 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
       ]
     }
     extraData={
-      Array [
-        Object {
+      [
+        {
           "categoryDescription": "SNACKS",
           "categoryHeader": true,
           "categoryNbr": 1,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
@@ -338,13 +338,13 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "subCategoryNbr": 1,
           "upcNbr": 40000000123,
         },
-        Object {
+        {
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryHeader": true,
           "categoryNbr": 2,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -363,7 +363,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "subCategoryNbr": 1,
           "upcNbr": 40000000456,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -382,7 +382,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
           "subCategoryNbr": 1,
           "upcNbr": 40000000457,
         },
-        Object {
+        {
           "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -407,13 +407,13 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
     removeClippedSubviews={false}
     renderItem={[Function]}
     stickyHeaderIndices={
-      Array [
+      [
         0,
         2,
       ]
     }
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -422,10 +422,10 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.REJECT\\" translation]"
+    leftTitle="[missing "en.APPROVAL.REJECT" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.APPROVE\\" translation]"
+    rightTitle="[missing "en.APPROVAL.APPROVE" translation]"
   />
 </View>
 `;
@@ -433,7 +433,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Approve/Re
 exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Approval list on response status 204 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -442,7 +442,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Appr
     ListEmptyComponent={
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -460,13 +460,13 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Appr
         </Text>
       </View>
     }
-    data={Array []}
-    extraData={Array []}
+    data={[]}
+    extraData={[]}
     keyExtractor={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -477,7 +477,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders Empty Appr
 exports[`ApprovalListScreen Tests rendering the approval list Renders a list of Approval Items 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -486,7 +486,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
     ListEmptyComponent={
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -505,14 +505,14 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
       </View>
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "categoryDescription": "SNACKS",
           "categoryHeader": true,
           "categoryNbr": 1,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
@@ -531,13 +531,13 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "subCategoryNbr": 1,
           "upcNbr": 40000000123,
         },
-        Object {
+        {
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryHeader": true,
           "categoryNbr": 2,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -556,7 +556,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "subCategoryNbr": 1,
           "upcNbr": 40000000456,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -575,7 +575,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "subCategoryNbr": 1,
           "upcNbr": 40000000457,
         },
-        Object {
+        {
           "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -597,14 +597,14 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
       ]
     }
     extraData={
-      Array [
-        Object {
+      [
+        {
           "categoryDescription": "SNACKS",
           "categoryHeader": true,
           "categoryNbr": 1,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "SNACKS",
@@ -623,13 +623,13 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "subCategoryNbr": 1,
           "upcNbr": 40000000123,
         },
-        Object {
+        {
           "categoryDescription": "FRUITS/VEGETABLES",
           "categoryHeader": true,
           "categoryNbr": 2,
           "isChecked": false,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -648,7 +648,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "subCategoryNbr": 1,
           "upcNbr": 40000000456,
         },
-        Object {
+        {
           "approvalRequestSource": "itemdetails",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -667,7 +667,7 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
           "subCategoryNbr": 1,
           "upcNbr": 40000000457,
         },
-        Object {
+        {
           "approvalRequestSource": "audits",
           "approvalStatus": "Pending",
           "categoryDescription": "FRUITS/VEGETABLES",
@@ -692,13 +692,13 @@ exports[`ApprovalListScreen Tests rendering the approval list Renders a list of 
     removeClippedSubviews={false}
     renderItem={[Function]}
     stickyHeaderIndices={
-      Array [
+      [
         0,
         2,
       ]
     }
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -716,7 +716,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -726,8 +726,8 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -736,7 +736,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -744,7 +744,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "paddingHorizontal": 8,
             "textAlign": "center",
@@ -755,8 +755,8 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
       </Text>
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "id": 4785,
               "itemNbr": 125,
               "message": "failure",
@@ -767,7 +767,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         keyExtractor={[Function]}
         renderItem={[Function]}
         style={
-          Object {
+          {
             "minHeight": 80,
             "paddingVertical": 20,
           }
@@ -780,11 +780,11 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "width": "50%",
           }
         }
-        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        title="[missing "en.APPROVAL.CONFIRM" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -806,7 +806,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -816,8 +816,8 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -826,7 +826,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -834,7 +834,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "paddingHorizontal": 8,
             "textAlign": "center",
@@ -845,7 +845,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
       </Text>
       <Text
         style={
-          Object {
+          {
             "paddingVertical": 20,
           }
         }
@@ -859,11 +859,11 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "width": "50%",
           }
         }
-        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        title="[missing "en.APPROVAL.CONFIRM" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -885,7 +885,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -895,8 +895,8 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -905,7 +905,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -913,7 +913,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "paddingHorizontal": 8,
             "textAlign": "center",
@@ -923,11 +923,11 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         [missing "en.APPROVAL.FAILED_APPROVE" translation]
       </Text>
       <FlatList
-        data={Array []}
+        data={[]}
         keyExtractor={[Function]}
         renderItem={[Function]}
         style={
-          Object {
+          {
             "minHeight": 80,
             "paddingVertical": 20,
           }
@@ -940,11 +940,11 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "width": "50%",
           }
         }
-        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        title="[missing "en.APPROVAL.CONFIRM" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -966,7 +966,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -976,8 +976,8 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -986,7 +986,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -994,7 +994,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "paddingHorizontal": 8,
             "textAlign": "center",
@@ -1005,8 +1005,8 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
       </Text>
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "id": 4785,
               "itemNbr": 125,
               "message": "failure",
@@ -1017,7 +1017,7 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         keyExtractor={[Function]}
         renderItem={[Function]}
         style={
-          Object {
+          {
             "minHeight": 80,
             "paddingVertical": 20,
           }
@@ -1030,11 +1030,11 @@ exports[`ApprovalListScreen Tests rendering update approval api 207 responses Po
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "width": "50%",
           }
         }
-        title="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+        title="[missing "en.APPROVAL.CONFIRM" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"

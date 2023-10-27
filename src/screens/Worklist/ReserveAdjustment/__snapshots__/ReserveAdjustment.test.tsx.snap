@@ -10,7 +10,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -20,8 +20,8 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -30,7 +30,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": 150,
           },
         ]
@@ -42,7 +42,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         hidesWhenStopped={true}
         size="large"
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -64,7 +64,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -74,8 +74,8 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -84,7 +84,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": 150,
           },
         ]
@@ -97,7 +97,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
             "paddingBottom": 10,
@@ -108,7 +108,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -119,11 +119,11 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -132,15 +132,27 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -154,7 +166,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "borderColor": "#0071e9",
@@ -169,7 +181,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#0071e9",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -185,11 +197,11 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -198,15 +210,27 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -220,7 +244,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -234,7 +258,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -264,7 +288,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -274,8 +298,8 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -287,7 +311,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 100,
           },
         ]
@@ -299,7 +323,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         hidesWhenStopped={true}
         size="large"
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -321,7 +345,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -331,8 +355,8 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -344,7 +368,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 100,
           },
         ]
@@ -352,7 +376,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -363,7 +387,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -374,11 +398,11 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -387,15 +411,27 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -409,7 +445,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -423,7 +459,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -439,11 +475,11 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -452,15 +488,27 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -474,7 +522,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#D6512D",
                   "borderRadius": 5,
@@ -488,7 +536,7 @@ exports[`ReserveAdjustmentScreen Manage ReserveAdjustmentScreen externalized fun
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -518,7 +566,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -528,8 +576,8 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 7.5,
@@ -538,7 +586,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
             "paddingHorizontal": 8,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -554,7 +602,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
               "paddingVertical": 8,
               "textAlign": "center",
@@ -566,14 +614,14 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "borderRadius": 10,
               "borderWidth": 1,
               "flexDirection": "row",
             },
-            Object {
+            {
               "borderColor": "#e0e0e0",
             },
           ]
@@ -582,8 +630,8 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 15,
                 "width": 35,
               },
@@ -593,15 +641,27 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": true,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -615,7 +675,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#00000000",
                   "flex": 1,
@@ -638,7 +698,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
           onChangeText={[Function]}
           onEndEditing={[Function]}
           style={
-            Object {
+            {
               "color": "#0071e9",
               "height": 40,
               "minWidth": "15%",
@@ -650,8 +710,8 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
         />
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 15,
                 "width": 35,
               },
@@ -661,15 +721,27 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -683,7 +755,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#00000000",
                   "flex": 1,
@@ -704,7 +776,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
       </View>
       <View
         style={
-          Object {
+          {
             "display": "flex",
             "flexDirection": "row",
             "justifyContent": "space-around",
@@ -714,11 +786,11 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "paddingHorizontal": 8,
                 "width": "50%",
               },
@@ -727,15 +799,27 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -749,7 +833,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "borderColor": "#0071e9",
@@ -764,7 +848,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#0071e9",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -780,11 +864,11 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "paddingHorizontal": 8,
                 "width": "50%",
               },
@@ -793,15 +877,27 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -815,7 +911,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -829,7 +925,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -852,7 +948,7 @@ exports[`ReserveAdjustmentScreen Snapshot test for update pallet qty modal 1`] =
 exports[`ReserveAdjustmentScreen renders loader for Location List while getting reserve locations for the item 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -869,7 +965,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -880,7 +976,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -896,13 +992,13 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -916,13 +1012,13 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -961,7 +1057,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
             "paddingBottom": 10,
@@ -972,7 +1068,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -988,13 +1084,13 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1008,13 +1104,13 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1033,14 +1129,14 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
   />
   <View
     style={
-      Object {
+      {
         "marginBottom": 6,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -1063,7 +1159,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
         "marginBottom": 6,
@@ -1080,7 +1176,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
     <LocationListCard
       error={false}
       loading={true}
-      locationList={Array []}
+      locationList={[]}
       locationType="reserve"
       maxQty={9999}
       minQty={0}
@@ -1092,7 +1188,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
   <ItemSeparator />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
       }
     }
@@ -1104,12 +1200,12 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "marginHorizontal": 15,
           "marginVertical": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1123,7 +1219,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
 exports[`ReserveAdjustmentScreen renders the details for a item with non-null status 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -1140,7 +1236,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -1151,7 +1247,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -1167,13 +1263,13 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1187,13 +1283,13 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1232,7 +1328,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
             "paddingBottom": 10,
@@ -1243,7 +1339,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -1259,13 +1355,13 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1279,13 +1375,13 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1304,14 +1400,14 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
   />
   <View
     style={
-      Object {
+      {
         "marginBottom": 6,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -1334,7 +1430,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
         "marginBottom": 6,
@@ -1351,7 +1447,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
     <LocationListCard
       error={false}
       loading={false}
-      locationList={Array []}
+      locationList={[]}
       locationType="reserve"
       maxQty={9999}
       minQty={0}
@@ -1363,7 +1459,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
   <ItemSeparator />
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
       }
     }
@@ -1375,12 +1471,12 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "marginHorizontal": 15,
           "marginVertical": 10,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"

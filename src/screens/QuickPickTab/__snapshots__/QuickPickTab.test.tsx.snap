@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "height": "100%",
@@ -12,10 +12,10 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
 >
   <FlatList
     data={
-      Array [
-        Object {
-          "picks": Array [
-            Object {
+      [
+        {
+          "picks": [
+            {
               "assignedAssociate": "vn50pz4",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -33,7 +33,7 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
               "status": "ready to bin",
               "upcNbr": "1234567890123",
             },
-            Object {
+            {
               "assignedAssociate": "vn50pz4",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -52,15 +52,15 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
               "upcNbr": "1234567890123",
             },
           ],
-          "title": "[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation]",
+          "title": "[missing "en.PICKING.ASSIGNED_TO_ME" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.PICK" translation]",
         },
-        Object {
-          "picks": Array [
-            Object {
+        {
+          "picks": [
+            {
               "assignedAssociate": "t0s0og",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -79,17 +79,17 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
               "upcNbr": "1234567890123",
             },
           ],
-          "title": "[missing \\"en.PICKING.WORK\\" translation]",
+          "title": "[missing "en.PICKING.WORK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.BIN\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.BIN" translation]",
         },
       ]
     }
     extraData={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "t0s0og",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -107,7 +107,7 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
           "status": "ready to work",
           "upcNbr": "1234567890123",
         },
-        Object {
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -125,7 +125,7 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
           "status": "ready to bin",
           "upcNbr": "1234567890123",
         },
-        Object {
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -152,7 +152,7 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eaeaea",
         "marginTop": "auto",
@@ -163,7 +163,7 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
         }
       }
@@ -171,13 +171,13 @@ exports[`Quick pick tab render tests renders the screen while refreshing 1`] = `
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Quick pick tab render tests renders the screen with no picking items 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "height": "100%",
@@ -186,26 +186,26 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
 >
   <FlatList
     data={
-      Array [
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation]",
+      [
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.ASSIGNED_TO_ME" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.PICK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.WORK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.WORK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.BIN\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.BIN" translation]",
         },
       ]
     }
-    extraData={Array []}
+    extraData={[]}
     keyExtractor={[Function]}
     onRefresh={[MockFunction]}
     refreshing={false}
@@ -213,7 +213,7 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eaeaea",
         "marginTop": "auto",
@@ -224,7 +224,7 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
         }
       }
@@ -232,13 +232,13 @@ exports[`Quick pick tab render tests renders the screen with no picking items 1`
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Quick pick tab render tests renders the screen with no picking items and manual scan true 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "height": "100%",
@@ -247,30 +247,30 @@ exports[`Quick pick tab render tests renders the screen with no picking items an
 >
   <ManualScanComponent
     keyboardType="numeric"
-    placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+    placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
   />
   <FlatList
     data={
-      Array [
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation]",
+      [
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.ASSIGNED_TO_ME" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.PICK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.WORK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.WORK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.BIN\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.BIN" translation]",
         },
       ]
     }
-    extraData={Array []}
+    extraData={[]}
     keyExtractor={[Function]}
     onRefresh={[MockFunction]}
     refreshing={false}
@@ -278,7 +278,7 @@ exports[`Quick pick tab render tests renders the screen with no picking items an
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eaeaea",
         "marginTop": "auto",
@@ -289,7 +289,7 @@ exports[`Quick pick tab render tests renders the screen with no picking items an
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
         }
       }
@@ -297,13 +297,13 @@ exports[`Quick pick tab render tests renders the screen with no picking items an
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Quick pick tab render tests renders the screen with not all items assigned to me 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "height": "100%",
@@ -312,10 +312,10 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
 >
   <FlatList
     data={
-      Array [
-        Object {
-          "picks": Array [
-            Object {
+      [
+        {
+          "picks": [
+            {
               "assignedAssociate": "vn50pz4",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -333,7 +333,7 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
               "status": "ready to bin",
               "upcNbr": "1234567890123",
             },
-            Object {
+            {
               "assignedAssociate": "vn50pz4",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -352,15 +352,15 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
               "upcNbr": "1234567890123",
             },
           ],
-          "title": "[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation]",
+          "title": "[missing "en.PICKING.ASSIGNED_TO_ME" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.PICK" translation]",
         },
-        Object {
-          "picks": Array [
-            Object {
+        {
+          "picks": [
+            {
               "assignedAssociate": "t0s0og",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -379,17 +379,17 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
               "upcNbr": "1234567890123",
             },
           ],
-          "title": "[missing \\"en.PICKING.WORK\\" translation]",
+          "title": "[missing "en.PICKING.WORK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.BIN\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.BIN" translation]",
         },
       ]
     }
     extraData={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "t0s0og",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -407,7 +407,7 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
           "status": "ready to work",
           "upcNbr": "1234567890123",
         },
-        Object {
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -425,7 +425,7 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
           "status": "ready to bin",
           "upcNbr": "1234567890123",
         },
-        Object {
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -452,7 +452,7 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eaeaea",
         "marginTop": "auto",
@@ -463,7 +463,7 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
         }
       }
@@ -471,13 +471,13 @@ exports[`Quick pick tab render tests renders the screen with not all items assig
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;
 
 exports[`Quick pick tab render tests renders the screen with picking items all assigned to me 1`] = `
-<ForwardRef(SafeAreaView)
+<RCTSafeAreaView
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "height": "100%",
@@ -486,10 +486,10 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
 >
   <FlatList
     data={
-      Array [
-        Object {
-          "picks": Array [
-            Object {
+      [
+        {
+          "picks": [
+            {
               "assignedAssociate": "vn50pz4",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -507,7 +507,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
               "status": "ready to work",
               "upcNbr": "1234567890123",
             },
-            Object {
+            {
               "assignedAssociate": "vn50pz4",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -525,7 +525,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
               "status": "ready to bin",
               "upcNbr": "1234567890123",
             },
-            Object {
+            {
               "assignedAssociate": "vn50pz4",
               "category": 3,
               "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -544,25 +544,25 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
               "upcNbr": "1234567890123",
             },
           ],
-          "title": "[missing \\"en.PICKING.ASSIGNED_TO_ME\\" translation]",
+          "title": "[missing "en.PICKING.ASSIGNED_TO_ME" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.PICK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.PICK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.WORK\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.WORK" translation]",
         },
-        Object {
-          "picks": Array [],
-          "title": "[missing \\"en.PICKING.BIN\\" translation]",
+        {
+          "picks": [],
+          "title": "[missing "en.PICKING.BIN" translation]",
         },
       ]
     }
     extraData={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -580,7 +580,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
           "status": "ready to work",
           "upcNbr": "1234567890123",
         },
-        Object {
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -598,7 +598,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
           "status": "ready to bin",
           "upcNbr": "1234567890123",
         },
-        Object {
+        {
           "assignedAssociate": "vn50pz4",
           "category": 3,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -625,7 +625,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#eaeaea",
         "marginTop": "auto",
@@ -636,7 +636,7 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
         }
       }
@@ -644,5 +644,5 @@ exports[`Quick pick tab render tests renders the screen with picking items all a
       [missing "en.PICKING.SCAN_ITEM_LABEL" translation]
     </Text>
   </View>
-</ForwardRef(SafeAreaView)>
+</RCTSafeAreaView>
 `;

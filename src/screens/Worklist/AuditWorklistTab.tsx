@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import {
-  NavigationProp,
-  useNavigation
-} from '@react-navigation/native';
 import { groupBy, partition } from 'lodash';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
@@ -154,7 +150,10 @@ export const getItemsForTab = (
         return [];
     }
   } else {
-    const [completedItems, toDoItems] = partition(auditWorklistItems, item => item.completed);
+    const [completedItems, toDoItems] = partition(
+      auditWorklistItems,
+      item => item.worklistStatus === WorkListStatus.COMPLETED
+    );
     return completionLevel === 2 ? completedItems : toDoItems;
   }
 };
@@ -279,7 +278,7 @@ export const AuditWorklistTabScreen = (props: AuditWorklistTabScreenProps) => {
         />
       </View>
       )}
-      {isManualScanEnabled ? <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} /> : null}
+      {isManualScanEnabled ? <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} /> : null}
       {auditItemKeys.length > 0
         && (
         <CollapseAllBar
@@ -324,8 +323,7 @@ const AuditWorklistTab = (props: AuditWorklistTabProps) => {
   const dispatch = useDispatch();
   const { configs } = useTypedSelector(state => state.User);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
-  const { isWaiting, error } = useTypedSelector(state => (
-    configs.enableAuditsInProgress ? state.async.getWorklistAuditsV1 : state.async.getWorklistAudits));
+  const { isWaiting, error } = useTypedSelector(state => (state.async.getWorklistAuditV1));
   const items = getItemsForTab(auditWorklistItems, completionLevel, configs);
   const { countryCode } = useTypedSelector(state => state.User);
   const { filterExceptions, filterCategories } = useTypedSelector(state => state.Worklist);

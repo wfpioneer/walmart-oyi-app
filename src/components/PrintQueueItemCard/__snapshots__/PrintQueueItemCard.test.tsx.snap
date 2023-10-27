@@ -3,8 +3,8 @@
 exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock print queue item 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "backgroundColor": "#ffe5dd",
         "borderColor": "#f44336",
@@ -18,7 +18,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "space-evenly",
@@ -28,7 +28,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -37,7 +37,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 16,
           }
@@ -47,7 +47,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       </Text>
       <Text
         style={
-          Object {
+          {
             "textAlign": "right",
           }
         }
@@ -57,7 +57,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-around",
@@ -67,7 +67,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     >
       <Text
         style={
-          Object {
+          {
             "color": "#424242",
             "flex": 1,
           }
@@ -78,7 +78,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "paddingHorizontal": 5,
             "paddingVertical": 5,
           }
@@ -95,7 +95,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "paddingHorizontal": 5,
             "paddingVertical": 5,
           }
@@ -117,8 +117,8 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
 exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock print queue item without size prop 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "backgroundColor": "#ffe5dd",
         "borderColor": "#f44336",
@@ -132,7 +132,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "space-evenly",
@@ -142,7 +142,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -151,7 +151,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 16,
           }
@@ -161,7 +161,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       </Text>
       <Text
         style={
-          Object {
+          {
             "textAlign": "right",
           }
         }
@@ -171,7 +171,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-around",
@@ -181,7 +181,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
     >
       <Text
         style={
-          Object {
+          {
             "color": "#424242",
             "flex": 1,
           }
@@ -192,7 +192,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "paddingHorizontal": 5,
             "paddingVertical": 5,
           }
@@ -209,7 +209,7 @@ exports[`Test Print Queue Item Card Renders Print Queue Item Card with mock prin
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "paddingHorizontal": 5,
             "paddingVertical": 5,
           }

@@ -40,7 +40,6 @@ export const GET_ITEM_MANAGER_APPROVAL_HISTORY = 'SAGA/GET_ITEM_MANAGER_APPROVAL
 export const HIT_GOOGLE = 'SAGA/HIT_GOOGLE';
 export const GET_WORKLIST = 'SAGA/GET_WORKLIST';
 export const GET_WORKLIST_V1 = 'SAGA/GET_WORKLIST_V1';
-export const GET_WORKLIST_AUDIT = 'SAGA/GET_WORKLIST_AUDIT';
 export const GET_WORKLIST_AUDIT_V1 = 'SAGA/GET_WORKLIST_AUDIT_V1';
 export const GET_PALLET_WORKLIST = 'SAGA/GET_PALLET_WORKLIST';
 export const EDIT_LOCATION = 'SAGA/EDIT_LOCATION';
@@ -116,10 +115,7 @@ export const getItemManagerApprovalHistory = (payload: number) => ({
 export const hitGoogle = () => ({ type: HIT_GOOGLE } as const);
 export const getWorklist = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST, payload } as const);
 export const getWorklistV1 = (payload?: { worklistType?: string[] }) => ({ type: GET_WORKLIST_V1, payload } as const);
-export const getWorklistAudits = (payload?: { worklistType?: string[] }) => (
-  { type: GET_WORKLIST_AUDIT, payload } as const
-);
-export const getWorklistAuditsV1 = (payload?: { worklistType?: string[] }) => (
+export const getWorklistAuditV1 = (payload?: { worklistType?: string[] }) => (
   { type: GET_WORKLIST_AUDIT_V1, payload } as const
 );
 export const getPalletWorklist = (payload: { worklistType: PalletWorklistType[] }) => (
@@ -348,8 +344,7 @@ export type SagaParams =
     & Pick<ReturnType<typeof getItemManagerApprovalHistory>, 'payload'>
     & Pick<ReturnType<typeof getWorklist>, 'payload'>
     & Pick<ReturnType<typeof getWorklistV1>, 'payload'>
-    & Pick<ReturnType<typeof getWorklistAudits>, 'payload'>
-    & Pick<ReturnType<typeof getWorklistAuditsV1>, 'payload'>
+    & Pick<ReturnType<typeof getWorklistAuditV1>, 'payload'>
     & Pick<ReturnType<typeof getPalletWorklist>, 'payload'>
     & Pick<ReturnType<typeof editLocation>, 'payload'>
     & Pick<ReturnType<typeof addLocation>, 'payload'>

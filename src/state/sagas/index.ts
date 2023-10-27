@@ -63,7 +63,6 @@ const genericSagas = [
   makeAsyncSaga(saga.HIT_GOOGLE, actions.hitGoogle, HitGoogleService.hitGoogle),
   makeAsyncSaga(saga.GET_WORKLIST, actions.getWorklist, GetWorklistService.getWorklist),
   makeAsyncSaga(saga.GET_WORKLIST_V1, actions.getWorklistV1, GetWorklistService.getWorklistV1),
-  makeAsyncSaga(saga.GET_WORKLIST_AUDIT, actions.getWorklistAudit, GetWorklistService.getWorklistAudit),
   makeAsyncSaga(saga.GET_WORKLIST_AUDIT_V1, actions.getWorklistAuditV1, GetWorklistService.getWorklistAuditV1),
   makeAsyncSaga(
     saga.GET_PALLET_WORKLIST,

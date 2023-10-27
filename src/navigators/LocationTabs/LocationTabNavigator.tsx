@@ -15,6 +15,9 @@ import {
 import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
+import {
+  BottomSheetDefaultBackdropProps
+} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types.d';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -44,7 +47,6 @@ import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAP
 import User from '../../models/User';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
-
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
 const LOCATION_PALLETS = 'LOCATION.PALLETS';
@@ -580,8 +582,7 @@ const LocationTabs = () : JSX.Element => {
   }, [locationPopupVisible]);
 
   const renderBackdrop = useCallback(
-    // eslint-disable-next-line no-shadow
-    props => (
+    (props: BottomSheetDefaultBackdropProps) => (
       <BottomSheetBackdrop
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}

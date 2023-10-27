@@ -1,18 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator component without in progress tab 1`] = `
+exports[`AuditWorklistTab Navigator Renders AuditWorkListTab component wrapper 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
+    }
+  }
+>
+  <ForwardRef(NavigationContainerInner)>
+    <Context.Provider
+      value={
+        {
+          "addListener": [MockFunction],
+          "isFocused": [Function],
+        }
+      }
+    >
+      <AuditWorklistTabs />
+    </Context.Provider>
+  </ForwardRef(NavigationContainerInner)>
+</Context.Provider>
+`;
+
+exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator component without in progress tab 1`] = `
+<Context.Provider
+  value={
+    {
+      "getServerState": undefined,
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -25,16 +68,16 @@ exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator com
   }
 >
   <AuditWorklistTabNavigator
-    auditWorklistItems={Array []}
+    auditWorklistItems={[]}
     dispatch={[MockFunction]}
     enableAuditsInProgress={false}
     isMounted={
-      Object {
+      {
         "current": false,
       }
     }
     navigation={
-      Object {
+      {
         "addListener": [MockFunction],
         "canGoBack": [MockFunction],
         "dispatch": [MockFunction],
@@ -51,13 +94,13 @@ exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator com
       }
     }
     route={
-      Object {
+      {
         "key": "",
         "name": "AuditWorklistTabs",
       }
     }
     scannedEvent={
-      Object {
+      {
         "type": null,
         "value": null,
       }
@@ -74,16 +117,18 @@ exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator com
 exports[`AuditWorklistTab Navigator renders the Audit worklist tab navigator component with in progress tab 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -96,16 +141,16 @@ exports[`AuditWorklistTab Navigator renders the Audit worklist tab navigator com
   }
 >
   <AuditWorklistTabNavigator
-    auditWorklistItems={Array []}
+    auditWorklistItems={[]}
     dispatch={[MockFunction]}
     enableAuditsInProgress={true}
     isMounted={
-      Object {
+      {
         "current": false,
       }
     }
     navigation={
-      Object {
+      {
         "addListener": [MockFunction],
         "canGoBack": [MockFunction],
         "dispatch": [MockFunction],
@@ -122,13 +167,13 @@ exports[`AuditWorklistTab Navigator renders the Audit worklist tab navigator com
       }
     }
     route={
-      Object {
+      {
         "key": "",
         "name": "AuditWorklistTabs",
       }
     }
     scannedEvent={
-      Object {
+      {
         "type": null,
         "value": null,
       }
