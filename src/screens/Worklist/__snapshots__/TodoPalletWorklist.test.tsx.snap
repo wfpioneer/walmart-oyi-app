@@ -3,7 +3,7 @@
 exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist items with incomplete and complete items 1`] = `
 <PalletWorklist
   clearPalletAPI={
-    Object {
+    {
       "error": null,
       "isWaiting": false,
       "result": null,
@@ -16,8 +16,8 @@ exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist
   groupToggle={false}
   onRefresh={[Function]}
   palletWorklist={
-    Array [
-      Object {
+    [
+      {
         "completed": false,
         "completedTs": undefined,
         "completedUserId": undefined,
@@ -29,7 +29,7 @@ exports[`TodoPalletWorklistScreen Renders an array of incomplete pallet worklist
         "palletId": 7988,
         "sectionID": 1,
       },
-      Object {
+      {
         "completed": false,
         "completedTs": undefined,
         "completedUserId": undefined,

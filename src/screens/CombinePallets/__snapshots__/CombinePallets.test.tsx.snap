@@ -3,14 +3,14 @@
 exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine pallets has data 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomWidth": 1,
         "borderColor": "#757575",
@@ -20,7 +20,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
   >
     <Text
       style={
-        Object {
+        {
           "fontSize": 18,
         }
       }
@@ -30,7 +30,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
     ListEmptyComponent={
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "flexDirection": "column",
@@ -46,7 +46,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
         />
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
             }
           }
@@ -56,12 +56,12 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       </View>
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "itemCount": 7,
           "palletId": "789",
         },
-        Object {
+        {
           "itemCount": 4,
           "palletId": "902",
         },
@@ -72,7 +72,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flexDirection": "column",
       }
@@ -80,7 +80,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#757575",
@@ -90,7 +90,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "paddingVertical": 12,
           }
@@ -101,7 +101,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
     </View>
     <View
       style={
-        Object {
+        {
           "borderBottomWidth": 2,
           "borderColor": "#757575",
           "paddingHorizontal": 10,
@@ -112,7 +112,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
           }
         }
@@ -121,7 +121,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 14,
           }
         }
@@ -132,7 +132,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
     <React.Fragment>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "paddingVertical": 16,
             "width": "100%",
@@ -141,7 +141,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
             }
           }
@@ -151,7 +151,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "width": "100%",
           }
@@ -159,7 +159,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
             }
           }
@@ -175,7 +175,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
           </Memo(Pressable)>
           <View
             style={
-              Object {
+              {
                 "paddingVertical": 10,
               }
             }
@@ -186,7 +186,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
           </View>
           <View
             style={
-              Object {
+              {
                 "marginBottom": 14,
                 "paddingVertical": 10,
               }
@@ -206,7 +206,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "center",
           "flexDirection": "row",
@@ -214,7 +214,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
           "width": "90%",
         }
       }
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -228,7 +228,7 @@ exports[`CombinePalletsScreen Renders Combine Pallet Merge Text if combine palle
 exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders Save button as "Disabled" if combine pallets is empty 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
     }
@@ -238,7 +238,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
     ListEmptyComponent={
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "flexDirection": "column",
@@ -254,7 +254,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
         />
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
             }
           }
@@ -263,13 +263,13 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
         </Text>
       </View>
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flexDirection": "column",
       }
@@ -277,7 +277,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
   >
     <View
       style={
-        Object {
+        {
           "paddingHorizontal": 20,
           "paddingVertical": 10,
         }
@@ -285,7 +285,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
           }
         }
@@ -294,7 +294,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 14,
           }
         }
@@ -309,7 +309,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "alignItems": "center",
           "alignSelf": "center",
           "flexDirection": "row",
@@ -317,7 +317,7 @@ exports[`CombinePalletsScreen Tests rendering the CombinePallets Screen Renders 
           "width": "90%",
         }
       }
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"

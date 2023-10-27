@@ -3,7 +3,7 @@
 exports[`AddPalletScreen Rendering Add pallet API responses Renders the success response from Add pallet API 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -14,7 +14,7 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the success 
 >
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "fontWeight": "bold",
         "marginHorizontal": 5,
@@ -30,10 +30,10 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the success 
     keyboardType="numeric"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    placeholder="[missing \\"en.LOCATION.PALLET_PLACEHOLDER\\" translation]"
+    placeholder="[missing "en.LOCATION.PALLET_PLACEHOLDER" translation]"
     selectionColor="#0071e9"
     style={
-      Object {
+      {
         "borderRadius": 4,
         "borderWidth": 1,
         "marginTop": 10,
@@ -49,12 +49,12 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the success 
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginTop": 10,
         "width": "100%",
       }
     }
-    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    title="[missing "en.GENERICS.SUBMIT" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -71,7 +71,7 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the waiting 
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -83,7 +83,7 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the waiting 
 exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing only numeric digits 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -94,7 +94,7 @@ exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing 
 >
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "fontWeight": "bold",
         "marginHorizontal": 5,
@@ -110,10 +110,10 @@ exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing 
     keyboardType="numeric"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    placeholder="[missing \\"en.LOCATION.PALLET_PLACEHOLDER\\" translation]"
+    placeholder="[missing "en.LOCATION.PALLET_PLACEHOLDER" translation]"
     selectionColor="#0071e9"
     style={
-      Object {
+      {
         "borderRadius": 4,
         "borderWidth": 1,
         "marginTop": 10,
@@ -129,12 +129,12 @@ exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing 
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginTop": 10,
         "width": "100%",
       }
     }
-    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    title="[missing "en.GENERICS.SUBMIT" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -147,7 +147,7 @@ exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing 
 exports[`AddPalletScreen Renders Error for pallet ID containing non number digits 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "flex-start",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -158,7 +158,7 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
 >
   <Text
     style={
-      Object {
+      {
         "fontSize": 18,
         "fontWeight": "bold",
         "marginHorizontal": 5,
@@ -174,10 +174,10 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
     keyboardType="numeric"
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
-    placeholder="[missing \\"en.LOCATION.PALLET_PLACEHOLDER\\" translation]"
+    placeholder="[missing "en.LOCATION.PALLET_PLACEHOLDER" translation]"
     selectionColor="#0071e9"
     style={
-      Object {
+      {
         "borderRadius": 4,
         "borderWidth": 1,
         "marginTop": 10,
@@ -188,7 +188,7 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flexDirection": "row",
         "justifyContent": "flex-start",
@@ -203,7 +203,7 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
     />
     <Text
       style={
-        Object {
+        {
           "color": "#e57373",
           "fontSize": 12,
           "marginHorizontal": 5,
@@ -220,12 +220,12 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginTop": 10,
         "width": "100%",
       }
     }
-    title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+    title="[missing "en.GENERICS.SUBMIT" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"

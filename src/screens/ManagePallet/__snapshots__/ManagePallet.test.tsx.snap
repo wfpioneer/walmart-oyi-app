@@ -6,33 +6,33 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
         "value": null,
       }
     }
-    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
-    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    cancelText="[missing "en.GENERICS.NO" translation]"
+    confirmText="[missing "en.GENERICS.YES" translation]"
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    mainText="[missing "en.PALLET.CLEAR_PALLET_CONFIRMATION" translation]"
     onClose={[Function]}
     subtext1={null}
     subtext2={null}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 1,
         "justifyContent": "flex-start",
@@ -50,7 +50,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "#f44336",
                 "fontSize": 18,
                 "paddingBottom": 5,
@@ -62,7 +62,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "padding": 10,
                 "textAlign": "center",
@@ -74,7 +74,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </View>
         <View
           style={
-            Object {
+            {
               "alignContent": "center",
               "elevation": 10,
               "flexDirection": "row",
@@ -90,14 +90,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Cancel Back Button"
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            title="[missing "en.GENERICS.CANCEL" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -111,14 +111,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Confirm Back Button"
-            title="[missing \\"en.GENERICS.OK\\" translation]"
+            title="[missing "en.GENERICS.OK" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -130,11 +130,11 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
@@ -144,7 +144,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -152,7 +152,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -162,7 +162,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -172,7 +172,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -180,7 +180,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -190,7 +190,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -200,7 +200,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -208,7 +208,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -218,7 +218,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -229,7 +229,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#000000",
@@ -240,7 +240,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -250,7 +250,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -261,7 +261,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 16,
           }
@@ -274,7 +274,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "textDecorationLine": "underline",
@@ -287,15 +287,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -308,7 +308,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "1234567890",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -321,7 +321,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "12345678901",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "deli",
               "categoryNbr": 72,
@@ -344,7 +344,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 20,
       }
@@ -357,7 +357,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "height": "140%",
           "marginHorizontal": 20,
           "marginVertical": 10,
@@ -365,7 +365,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         }
       }
       testID="Enable Save Button"
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -382,33 +382,33 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
         "value": null,
       }
     }
-    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
-    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    cancelText="[missing "en.GENERICS.NO" translation]"
+    confirmText="[missing "en.GENERICS.YES" translation]"
     errorText={null}
     handleConfirm={[Function]}
     isVisible={true}
-    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    mainText="[missing "en.PALLET.CLEAR_PALLET_CONFIRMATION" translation]"
     onClose={[Function]}
     subtext1={null}
     subtext2={null}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 1,
         "justifyContent": "flex-start",
@@ -426,7 +426,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "#f44336",
                 "fontSize": 18,
                 "paddingBottom": 5,
@@ -438,7 +438,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "padding": 10,
                 "textAlign": "center",
@@ -450,7 +450,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </View>
         <View
           style={
-            Object {
+            {
               "alignContent": "center",
               "elevation": 10,
               "flexDirection": "row",
@@ -466,14 +466,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Cancel Back Button"
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            title="[missing "en.GENERICS.CANCEL" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -487,14 +487,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Confirm Back Button"
-            title="[missing \\"en.GENERICS.OK\\" translation]"
+            title="[missing "en.GENERICS.OK" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -506,11 +506,11 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
@@ -520,7 +520,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -528,7 +528,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -538,7 +538,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -548,7 +548,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -556,7 +556,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -566,7 +566,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -576,7 +576,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -584,7 +584,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -594,7 +594,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -605,7 +605,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#000000",
@@ -616,7 +616,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -626,7 +626,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -637,7 +637,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 16,
           }
@@ -650,7 +650,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "textDecorationLine": "underline",
@@ -663,15 +663,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -684,7 +684,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "1234567890",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -697,7 +697,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "12345678901",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "deli",
               "categoryNbr": 72,
@@ -720,7 +720,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 20,
       }
@@ -733,7 +733,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "height": "140%",
           "marginHorizontal": 20,
           "marginVertical": 10,
@@ -741,7 +741,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         }
       }
       testID="Enable Save Button"
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -758,33 +758,33 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
         "value": null,
       }
     }
-    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
-    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    cancelText="[missing "en.GENERICS.NO" translation]"
+    confirmText="[missing "en.GENERICS.YES" translation]"
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    mainText="[missing "en.PALLET.CLEAR_PALLET_CONFIRMATION" translation]"
     onClose={[Function]}
     subtext1={null}
     subtext2={null}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 1,
         "justifyContent": "flex-start",
@@ -802,7 +802,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "#f44336",
                 "fontSize": 18,
                 "paddingBottom": 5,
@@ -814,7 +814,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "padding": 10,
                 "textAlign": "center",
@@ -826,7 +826,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </View>
         <View
           style={
-            Object {
+            {
               "alignContent": "center",
               "elevation": 10,
               "flexDirection": "row",
@@ -842,14 +842,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Cancel Back Button"
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            title="[missing "en.GENERICS.CANCEL" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -863,14 +863,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Confirm Back Button"
-            title="[missing \\"en.GENERICS.OK\\" translation]"
+            title="[missing "en.GENERICS.OK" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -882,11 +882,11 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
@@ -896,7 +896,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -904,7 +904,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -914,7 +914,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -924,7 +924,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -932,7 +932,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -942,7 +942,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -952,7 +952,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -960,7 +960,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -970,7 +970,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -981,7 +981,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#000000",
@@ -992,7 +992,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -1002,7 +1002,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -1013,7 +1013,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 16,
           }
@@ -1026,7 +1026,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "textDecorationLine": "underline",
@@ -1039,15 +1039,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -1060,7 +1060,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "1234567890",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -1073,7 +1073,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "12345678901",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "deli",
               "categoryNbr": 72,
@@ -1096,7 +1096,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 20,
       }
@@ -1109,7 +1109,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "height": "140%",
           "marginHorizontal": 20,
           "marginVertical": 10,
@@ -1117,7 +1117,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         }
       }
       testID="Enable Save Button"
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1134,33 +1134,33 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
         "value": null,
       }
     }
-    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
-    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    cancelText="[missing "en.GENERICS.NO" translation]"
+    confirmText="[missing "en.GENERICS.YES" translation]"
     errorText={null}
     handleConfirm={[Function]}
     isVisible={true}
-    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    mainText="[missing "en.PALLET.CLEAR_PALLET_CONFIRMATION" translation]"
     onClose={[Function]}
     subtext1={null}
     subtext2={null}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 1,
         "justifyContent": "flex-start",
@@ -1178,7 +1178,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "#f44336",
                 "fontSize": 18,
                 "paddingBottom": 5,
@@ -1190,7 +1190,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "padding": 10,
                 "textAlign": "center",
@@ -1202,7 +1202,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </View>
         <View
           style={
-            Object {
+            {
               "alignContent": "center",
               "elevation": 10,
               "flexDirection": "row",
@@ -1218,14 +1218,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Cancel Back Button"
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            title="[missing "en.GENERICS.CANCEL" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -1239,14 +1239,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Confirm Back Button"
-            title="[missing \\"en.GENERICS.OK\\" translation]"
+            title="[missing "en.GENERICS.OK" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -1258,11 +1258,11 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
@@ -1272,7 +1272,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -1280,7 +1280,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -1290,7 +1290,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -1300,7 +1300,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -1308,7 +1308,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -1318,7 +1318,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -1328,7 +1328,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -1336,7 +1336,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -1346,7 +1346,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -1357,7 +1357,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#000000",
@@ -1368,7 +1368,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -1378,7 +1378,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -1389,7 +1389,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 16,
           }
@@ -1402,7 +1402,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "textDecorationLine": "underline",
@@ -1415,15 +1415,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -1436,7 +1436,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "1234567890",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -1449,7 +1449,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "12345678901",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "deli",
               "categoryNbr": 72,
@@ -1472,7 +1472,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 20,
       }
@@ -1485,7 +1485,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "height": "140%",
           "marginHorizontal": 20,
           "marginVertical": 10,
@@ -1493,7 +1493,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         }
       }
       testID="Enable Save Button"
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1510,33 +1510,33 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
         "value": null,
       }
     }
-    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
-    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    cancelText="[missing "en.GENERICS.NO" translation]"
+    confirmText="[missing "en.GENERICS.YES" translation]"
     errorText={null}
     handleConfirm={[Function]}
     isVisible={false}
-    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    mainText="[missing "en.PALLET.CLEAR_PALLET_CONFIRMATION" translation]"
     onClose={[Function]}
     subtext1={null}
     subtext2={null}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 1,
         "justifyContent": "flex-start",
@@ -1554,7 +1554,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "#f44336",
                 "fontSize": 18,
                 "paddingBottom": 5,
@@ -1566,7 +1566,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "padding": 10,
                 "textAlign": "center",
@@ -1578,7 +1578,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </View>
         <View
           style={
-            Object {
+            {
               "alignContent": "center",
               "elevation": 10,
               "flexDirection": "row",
@@ -1594,14 +1594,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Cancel Back Button"
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            title="[missing "en.GENERICS.CANCEL" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -1615,14 +1615,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Confirm Back Button"
-            title="[missing \\"en.GENERICS.OK\\" translation]"
+            title="[missing "en.GENERICS.OK" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -1634,11 +1634,11 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
@@ -1648,7 +1648,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -1656,7 +1656,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -1666,7 +1666,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -1676,7 +1676,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -1684,7 +1684,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -1694,7 +1694,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -1704,7 +1704,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -1712,7 +1712,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -1722,7 +1722,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -1733,7 +1733,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#000000",
@@ -1744,7 +1744,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -1754,7 +1754,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -1765,7 +1765,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 16,
           }
@@ -1778,7 +1778,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "textDecorationLine": "underline",
@@ -1791,15 +1791,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -1812,7 +1812,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "1234567890",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -1825,7 +1825,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "12345678901",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "deli",
               "categoryNbr": 72,
@@ -1848,7 +1848,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 20,
       }
@@ -1861,7 +1861,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "height": "140%",
           "marginHorizontal": 20,
           "marginVertical": 10,
@@ -1869,7 +1869,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         }
       }
       testID="Enable Save Button"
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -1886,33 +1886,33 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
         "value": null,
       }
     }
-    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
-    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    cancelText="[missing "en.GENERICS.NO" translation]"
+    confirmText="[missing "en.GENERICS.YES" translation]"
     errorText={null}
     handleConfirm={[Function]}
     isVisible={true}
-    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    mainText="[missing "en.PALLET.CLEAR_PALLET_CONFIRMATION" translation]"
     onClose={[Function]}
     subtext1={null}
     subtext2={null}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 1,
         "justifyContent": "flex-start",
@@ -1930,7 +1930,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "#f44336",
                 "fontSize": 18,
                 "paddingBottom": 5,
@@ -1942,7 +1942,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "padding": 10,
                 "textAlign": "center",
@@ -1954,7 +1954,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </View>
         <View
           style={
-            Object {
+            {
               "alignContent": "center",
               "elevation": 10,
               "flexDirection": "row",
@@ -1970,14 +1970,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Cancel Back Button"
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            title="[missing "en.GENERICS.CANCEL" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -1991,14 +1991,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Confirm Back Button"
-            title="[missing \\"en.GENERICS.OK\\" translation]"
+            title="[missing "en.GENERICS.OK" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -2010,11 +2010,11 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
@@ -2024,7 +2024,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -2032,7 +2032,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -2042,7 +2042,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2052,7 +2052,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -2060,7 +2060,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -2070,7 +2070,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2080,7 +2080,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -2088,7 +2088,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -2098,7 +2098,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2109,7 +2109,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#000000",
@@ -2120,7 +2120,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -2130,7 +2130,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -2141,7 +2141,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 16,
           }
@@ -2154,7 +2154,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "textDecorationLine": "underline",
@@ -2167,15 +2167,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -2188,7 +2188,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "1234567890",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -2201,7 +2201,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "12345678901",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "deli",
               "categoryNbr": 72,
@@ -2224,7 +2224,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 20,
       }
@@ -2237,7 +2237,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "height": "140%",
           "marginHorizontal": 20,
           "marginVertical": 10,
@@ -2245,7 +2245,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         }
       }
       testID="Enable Save Button"
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -2262,33 +2262,33 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <ApiConfirmationModal
     api={
-      Object {
+      {
         "error": null,
         "isWaiting": false,
         "result": null,
         "value": null,
       }
     }
-    cancelText="[missing \\"en.GENERICS.NO\\" translation]"
-    confirmText="[missing \\"en.GENERICS.YES\\" translation]"
+    cancelText="[missing "en.GENERICS.NO" translation]"
+    confirmText="[missing "en.GENERICS.YES" translation]"
     errorText={null}
     handleConfirm={[Function]}
     isVisible={true}
-    mainText="[missing \\"en.PALLET.CLEAR_PALLET_CONFIRMATION\\" translation]"
+    mainText="[missing "en.PALLET.CLEAR_PALLET_CONFIRMATION" translation]"
     onClose={[Function]}
     subtext1={null}
     subtext2={null}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 1,
         "justifyContent": "flex-start",
@@ -2306,7 +2306,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         <View>
           <Text
             style={
-              Object {
+              {
                 "color": "#f44336",
                 "fontSize": 18,
                 "paddingBottom": 5,
@@ -2318,7 +2318,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
           </Text>
           <Text
             style={
-              Object {
+              {
                 "fontSize": 16,
                 "padding": 10,
                 "textAlign": "center",
@@ -2330,7 +2330,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </View>
         <View
           style={
-            Object {
+            {
               "alignContent": "center",
               "elevation": 10,
               "flexDirection": "row",
@@ -2346,14 +2346,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Cancel Back Button"
-            title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+            title="[missing "en.GENERICS.CANCEL" translation]"
             titleColor="#0071e9"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -2367,14 +2367,14 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
             onPress={[Function]}
             radius={5}
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "marginHorizontal": 10,
                 "width": "40%",
               }
             }
             testID="Confirm Back Button"
-            title="[missing \\"en.GENERICS.OK\\" translation]"
+            title="[missing "en.GENERICS.OK" translation]"
             titleColor="#ffffffff"
             titleFontSize={16}
             titleFontWeight="normal"
@@ -2386,11 +2386,11 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </CustomModalComponent>
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-around",
           "marginBottom": 5,
@@ -2400,7 +2400,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -2408,7 +2408,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -2418,7 +2418,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2428,7 +2428,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -2436,7 +2436,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -2446,7 +2446,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2456,7 +2456,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       </View>
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "column",
           }
@@ -2464,7 +2464,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "fontWeight": "bold",
             }
@@ -2474,7 +2474,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2485,7 +2485,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "borderBottomWidth": 1,
           "borderColor": "#000000",
@@ -2496,7 +2496,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -2506,7 +2506,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#B40C00",
           "flexDirection": "row",
@@ -2517,7 +2517,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 16,
           }
@@ -2530,7 +2530,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "textDecorationLine": "underline",
@@ -2543,15 +2543,15 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
     >
       <FlatList
         data={
-          Array [
-            Object {
+          [
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -2564,7 +2564,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "1234567890",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "test cat",
               "categoryNbr": 54,
@@ -2577,7 +2577,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
               "quantity": 3,
               "upcNbr": "12345678901",
             },
-            Object {
+            {
               "added": false,
               "categoryDesc": "deli",
               "categoryNbr": 72,
@@ -2600,7 +2600,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 20,
       }
@@ -2613,7 +2613,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "height": "140%",
           "marginHorizontal": 20,
           "marginVertical": 10,
@@ -2621,7 +2621,7 @@ exports[`ManagePalletScreen Tests rendering the PalletManagement Screen Tests re
         }
       }
       testID="Enable Save Button"
-      title="[missing \\"en.GENERICS.SAVE\\" translation]"
+      title="[missing "en.GENERICS.SAVE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"

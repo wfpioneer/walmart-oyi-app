@@ -7,7 +7,7 @@ exports[`PalletManagementScreen Tests rendering Get Pallet Info Api responses Re
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -23,7 +23,7 @@ exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Rend
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",

@@ -3,14 +3,14 @@
 exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as false and completion perc 40 1`] = `
 <View
   style={
-    Object {
+    {
       "marginHorizontal": 5,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "center",
         "backgroundColor": "#e0e0e0",
@@ -24,17 +24,17 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 80,
             "left": 0,
             "position": "absolute",
             "top": 0,
             "width": 80,
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "rotate": "144deg",
               },
             ],
@@ -44,11 +44,11 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#D6512D",
             },
-            Object {
+            {
               "borderBottomLeftRadius": 40,
               "borderTopLeftRadius": 40,
               "height": 80,
@@ -63,17 +63,17 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     </View>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 80,
             "left": 0,
             "position": "absolute",
             "top": 0,
             "width": 80,
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "rotate": "0deg",
               },
             ],
@@ -83,11 +83,11 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#e0e0e0",
             },
-            Object {
+            {
               "borderBottomLeftRadius": 40,
               "borderTopLeftRadius": 40,
               "height": 80,
@@ -102,7 +102,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderRadius": 33,
@@ -114,7 +114,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 20,
             "textAlign": "center",
             "textAlignVertical": "center",
@@ -127,6 +127,23 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -138,7 +155,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -146,7 +163,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
   >
     <Text
       style={
-        Object {
+        {
           "backgroundColor": "#e0e0e0",
           "borderRadius": 30,
           "color": "#006DE5",
@@ -167,14 +184,14 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
 exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as true and completion perc 100 1`] = `
 <View
   style={
-    Object {
+    {
       "marginHorizontal": 5,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "center",
         "backgroundColor": "#e0e0e0",
@@ -188,17 +205,17 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 80,
             "left": 0,
             "position": "absolute",
             "top": 0,
             "width": 80,
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "rotate": "180deg",
               },
             ],
@@ -208,11 +225,11 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#33691E",
             },
-            Object {
+            {
               "borderBottomLeftRadius": 40,
               "borderTopLeftRadius": 40,
               "height": 80,
@@ -227,17 +244,17 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     </View>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 80,
             "left": 0,
             "position": "absolute",
             "top": 0,
             "width": 80,
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "rotate": "360deg",
               },
             ],
@@ -247,11 +264,11 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#33691E",
             },
-            Object {
+            {
               "borderBottomLeftRadius": 40,
               "borderTopLeftRadius": 40,
               "height": 80,
@@ -266,7 +283,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderRadius": 33,
@@ -278,7 +295,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 20,
             "textAlign": "center",
             "textAlignVertical": "center",
@@ -291,6 +308,23 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -302,7 +336,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -310,7 +344,7 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
   >
     <Text
       style={
-        Object {
+        {
           "backgroundColor": "#006DE5",
           "borderRadius": 30,
           "color": "#ffffffff",
@@ -331,14 +365,14 @@ exports[`GoalCircle Component Renders an GoalCircle  with goal tiltle, active as
 exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as false and completion perc 100 1`] = `
 <View
   style={
-    Object {
+    {
       "marginHorizontal": 5,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "center",
         "backgroundColor": "#e0e0e0",
@@ -352,17 +386,17 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 80,
             "left": 0,
             "position": "absolute",
             "top": 0,
             "width": 80,
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "rotate": "180deg",
               },
             ],
@@ -372,11 +406,11 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#33691E",
             },
-            Object {
+            {
               "borderBottomLeftRadius": 40,
               "borderTopLeftRadius": 40,
               "height": 80,
@@ -391,17 +425,17 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
     </View>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 80,
             "left": 0,
             "position": "absolute",
             "top": 0,
             "width": 80,
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "rotate": "360deg",
               },
             ],
@@ -411,11 +445,11 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "backgroundColor": "#33691E",
             },
-            Object {
+            {
               "borderBottomLeftRadius": 40,
               "borderTopLeftRadius": 40,
               "height": 80,
@@ -430,7 +464,7 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderRadius": 33,
@@ -442,7 +476,7 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 20,
             "textAlign": "center",
             "textAlignVertical": "center",
@@ -455,6 +489,23 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
     </View>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -466,7 +517,7 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -474,7 +525,7 @@ exports[`GoalCircle Component Renders an GoalCircle with goal tiltle, active as 
   >
     <Text
       style={
-        Object {
+        {
           "backgroundColor": "#e0e0e0",
           "borderRadius": 30,
           "color": "#006DE5",

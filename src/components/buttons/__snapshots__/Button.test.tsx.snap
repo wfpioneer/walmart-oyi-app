@@ -3,18 +3,18 @@
 exports[`Button Component Renders the button with other custom specification props 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 5,
         "width": 10,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -24,7 +24,7 @@ exports[`Button Component Renders the button with other custom specification pro
       disabled={false}
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#0071e9",
           "borderRadius": 2,
@@ -37,7 +37,7 @@ exports[`Button Component Renders the button with other custom specification pro
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontFamily": "Roboto-Medium",
             "fontSize": 12,
@@ -56,8 +56,8 @@ exports[`Button Component Renders the button with other custom specification pro
 exports[`Button Component Renders the button with type as No Border 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 45,
       },
       undefined,
@@ -66,7 +66,7 @@ exports[`Button Component Renders the button with type as No Border 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -76,7 +76,7 @@ exports[`Button Component Renders the button with type as No Border 1`] = `
       disabled={false}
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#00000000",
           "flex": 1,
@@ -86,7 +86,7 @@ exports[`Button Component Renders the button with type as No Border 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
@@ -105,8 +105,8 @@ exports[`Button Component Renders the button with type as No Border 1`] = `
 exports[`Button Component Renders the button with type as Primary 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 45,
       },
       undefined,
@@ -115,7 +115,7 @@ exports[`Button Component Renders the button with type as Primary 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -125,7 +125,7 @@ exports[`Button Component Renders the button with type as Primary 1`] = `
       disabled={false}
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#0071e9",
           "borderRadius": 5,
@@ -137,7 +137,7 @@ exports[`Button Component Renders the button with type as Primary 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
@@ -156,8 +156,8 @@ exports[`Button Component Renders the button with type as Primary 1`] = `
 exports[`Button Component Renders the button with type as Solid White 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 45,
       },
       undefined,
@@ -166,7 +166,7 @@ exports[`Button Component Renders the button with type as Solid White 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -176,7 +176,7 @@ exports[`Button Component Renders the button with type as Solid White 1`] = `
       disabled={false}
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -189,7 +189,7 @@ exports[`Button Component Renders the button with type as Solid White 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
@@ -208,8 +208,8 @@ exports[`Button Component Renders the button with type as Solid White 1`] = `
 exports[`Button Component Renders the default button 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 45,
       },
       undefined,
@@ -218,7 +218,7 @@ exports[`Button Component Renders the default button 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -228,7 +228,7 @@ exports[`Button Component Renders the default button 1`] = `
       disabled={false}
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#0071e9",
           "borderRadius": 5,
@@ -240,7 +240,7 @@ exports[`Button Component Renders the default button 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,
@@ -259,8 +259,8 @@ exports[`Button Component Renders the default button 1`] = `
 exports[`Button Component Renders the disabled button 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "height": 45,
       },
       undefined,
@@ -269,7 +269,7 @@ exports[`Button Component Renders the disabled button 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -279,7 +279,7 @@ exports[`Button Component Renders the disabled button 1`] = `
       disabled={true}
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#BABBBE",
           "borderRadius": 5,
@@ -291,7 +291,7 @@ exports[`Button Component Renders the disabled button 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontFamily": "Roboto-Medium",
             "fontSize": 16,

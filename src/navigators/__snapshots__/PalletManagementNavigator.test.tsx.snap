@@ -2,6 +2,23 @@
 
 exports[`PalletManagement Navigator Renders and Calls the Kebab Menu button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -13,7 +30,7 @@ exports[`PalletManagement Navigator Renders and Calls the Kebab Menu button 1`] 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -21,7 +38,7 @@ exports[`PalletManagement Navigator Renders and Calls the Kebab Menu button 1`] 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -32,7 +49,7 @@ exports[`PalletManagement Navigator Renders and Calls the Kebab Menu button 1`] 
     <Image
       source=""
       style={
-        Object {
+        {
           "height": 25,
           "marginRight": 10,
           "width": 25,
@@ -45,6 +62,23 @@ exports[`PalletManagement Navigator Renders and Calls the Kebab Menu button 1`] 
 
 exports[`PalletManagement Navigator Renders and Calls the Manual Scan Button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -56,7 +90,7 @@ exports[`PalletManagement Navigator Renders and Calls the Manual Scan Button 1`]
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -64,7 +98,7 @@ exports[`PalletManagement Navigator Renders and Calls the Manual Scan Button 1`]
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -84,9 +118,9 @@ exports[`PalletManagement Navigator Renders and Calls the Manual Scan Button 1`]
 exports[`PalletManagement Navigator Renders the PalletManagement Navigator 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -97,7 +131,7 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator 1`] =
     component={[Function]}
     name="PalletManagementHome"
     options={
-      Object {
+      {
         "headerRight": [Function],
         "headerTitle": [Function],
       }
@@ -107,9 +141,9 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator 1`] =
     component={[Function]}
     name="ManagePallet"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PALLET.MANAGE_PALLET\\" translation]",
+        "headerTitle": "[missing "en.PALLET.MANAGE_PALLET" translation]",
       }
     }
   />
@@ -117,9 +151,9 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator 1`] =
     component={[Function]}
     name="CombinePallets"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PALLET.COMBINE_PALLETS\\" translation]",
+        "headerTitle": "[missing "en.PALLET.COMBINE_PALLETS" translation]",
       }
     }
   />
@@ -129,9 +163,9 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator 1`] =
 exports[`PalletManagement Navigator Renders the PalletManagement Navigator when create pallet is true 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -142,7 +176,7 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator when 
     component={[Function]}
     name="PalletManagementHome"
     options={
-      Object {
+      {
         "headerRight": [Function],
         "headerTitle": [Function],
       }
@@ -152,9 +186,9 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator when 
     component={[Function]}
     name="ManagePallet"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PALLET.MANAGE_PALLET\\" translation]",
+        "headerTitle": "[missing "en.PALLET.MANAGE_PALLET" translation]",
       }
     }
   />
@@ -162,9 +196,9 @@ exports[`PalletManagement Navigator Renders the PalletManagement Navigator when 
     component={[Function]}
     name="CombinePallets"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PALLET.COMBINE_PALLETS\\" translation]",
+        "headerTitle": "[missing "en.PALLET.COMBINE_PALLETS" translation]",
       }
     }
   />

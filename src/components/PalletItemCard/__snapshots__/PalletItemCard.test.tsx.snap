@@ -3,7 +3,7 @@
 exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid input 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flexDirection": "row",
@@ -16,7 +16,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "space-evenly",
@@ -26,14 +26,14 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -42,7 +42,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
       </Text>
       <Text
         style={
-          Object {
+          {
             "paddingRight": 15,
           }
         }
@@ -52,7 +52,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -62,7 +62,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -73,7 +73,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -85,7 +85,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -95,7 +95,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -106,7 +106,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -118,7 +118,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-between",
           "paddingTop": 10,
@@ -157,7 +157,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard PalletItemCard with valid
 exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Item Image 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#EAFCDA",
       "flexDirection": "row",
@@ -169,13 +169,13 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
 >
   <ImageWrapper
     countryCode="MX"
-    imageStyle={Object {}}
+    imageStyle={{}}
     itemNumber={234234234}
     tokenIsWaiting={false}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "space-evenly",
@@ -185,14 +185,14 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -201,7 +201,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
       </Text>
       <Text
         style={
-          Object {
+          {
             "paddingRight": 15,
           }
         }
@@ -211,7 +211,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -221,7 +221,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -232,7 +232,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -244,7 +244,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -254,7 +254,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -265,7 +265,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -277,7 +277,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-between",
           "paddingTop": 10,
@@ -316,7 +316,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with Ite
 exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edited true 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#FFFFE0",
       "flexDirection": "row",
@@ -328,7 +328,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "space-evenly",
@@ -338,14 +338,14 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -354,7 +354,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
       </Text>
       <Text
         style={
-          Object {
+          {
             "paddingRight": 15,
           }
         }
@@ -364,7 +364,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -374,7 +374,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -385,7 +385,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -397,7 +397,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -407,7 +407,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -418,7 +418,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -430,7 +430,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-between",
           "paddingTop": 10,
@@ -469,7 +469,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with edi
 exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isAdded true 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#EAFCDA",
       "flexDirection": "row",
@@ -481,7 +481,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "space-evenly",
@@ -491,14 +491,14 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -507,7 +507,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
       </Text>
       <Text
         style={
-          Object {
+          {
             "paddingRight": 15,
           }
         }
@@ -517,7 +517,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -527,7 +527,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -538,7 +538,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -550,7 +550,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "row",
           "fontSize": 8,
@@ -560,7 +560,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
     >
       <Text
         style={
-          Object {
+          {
             "flex": 1,
             "fontSize": 10,
           }
@@ -571,7 +571,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
       <View>
         <Text
           style={
-            Object {
+            {
               "flex": 1,
               "fontSize": 10,
             }
@@ -583,7 +583,7 @@ exports[`PalletItemCard Tests rendering PalletItemCard renders the card with isA
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "space-between",
           "paddingTop": 10,

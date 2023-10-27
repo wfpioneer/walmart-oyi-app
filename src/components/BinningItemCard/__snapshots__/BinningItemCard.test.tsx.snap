@@ -6,7 +6,7 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -17,7 +17,7 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "flex": 4,
           "flexDirection": "column",
           "margin": 10,
@@ -26,7 +26,7 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 5,
           }
         }
@@ -42,7 +42,7 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 5,
           }
         }
@@ -56,7 +56,7 @@ exports[`Binning Item card render tests renders the binning item card 1`] = `
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 10,
             "paddingBottom": 5,
@@ -84,7 +84,7 @@ exports[`Binning Item card render tests renders the binning item card for empty 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -95,7 +95,7 @@ exports[`Binning Item card render tests renders the binning item card for empty 
   >
     <View
       style={
-        Object {
+        {
           "flex": 4,
           "flexDirection": "column",
           "margin": 10,
@@ -104,7 +104,7 @@ exports[`Binning Item card render tests renders the binning item card for empty 
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 5,
           }
         }
@@ -116,7 +116,7 @@ exports[`Binning Item card render tests renders the binning item card for empty 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
             }
           }
@@ -129,7 +129,7 @@ exports[`Binning Item card render tests renders the binning item card for empty 
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 10,
             "paddingBottom": 5,
@@ -157,7 +157,7 @@ exports[`Binning Item card render tests renders the binning item card in read on
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -168,7 +168,7 @@ exports[`Binning Item card render tests renders the binning item card in read on
   >
     <View
       style={
-        Object {
+        {
           "flex": 4,
           "flexDirection": "column",
           "margin": 10,
@@ -177,7 +177,7 @@ exports[`Binning Item card render tests renders the binning item card in read on
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 5,
           }
         }
@@ -193,7 +193,7 @@ exports[`Binning Item card render tests renders the binning item card in read on
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 5,
           }
         }
@@ -213,7 +213,7 @@ exports[`Binning Item card render tests renders the binning item card without la
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -224,7 +224,7 @@ exports[`Binning Item card render tests renders the binning item card without la
   >
     <View
       style={
-        Object {
+        {
           "flex": 4,
           "flexDirection": "column",
           "margin": 10,
@@ -233,7 +233,7 @@ exports[`Binning Item card render tests renders the binning item card without la
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 5,
           }
         }
@@ -252,7 +252,7 @@ exports[`Binning Item card render tests renders the binning item card without la
       <TouchableOpacity
         onPress={[Function]}
         style={
-          Object {
+          {
             "flex": 1,
             "margin": 10,
             "paddingBottom": 5,

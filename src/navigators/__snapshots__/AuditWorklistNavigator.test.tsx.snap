@@ -2,6 +2,23 @@
 
 exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -13,7 +30,7 @@ exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -21,7 +38,7 @@ exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`
 >
   <View
     style={
-      Object {
+      {
         "width": 35,
       }
     }
@@ -37,6 +54,23 @@ exports[`AuditItemWorklist Navigator Renders and Calls the Manual Scan Button 1`
 
 exports[`AuditItemWorklist Navigator Renders and Calls the calculator Button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -48,7 +82,7 @@ exports[`AuditItemWorklist Navigator Renders and Calls the calculator Button 1`]
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -56,7 +90,7 @@ exports[`AuditItemWorklist Navigator Renders and Calls the calculator Button 1`]
 >
   <View
     style={
-      Object {
+      {
         "width": 35,
       }
     }
@@ -98,7 +132,7 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
   <StackNavigator
     initialRouteName="AuditWorklistTabs"
     screenListeners={
-      Object {
+      {
         "focus": [Function],
       }
     }
@@ -108,25 +142,25 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
       component={[Function]}
       name="AuditWorklistTabs"
       options={
-        Object {
+        {
           "headerLeft": [Function],
           "headerRight": [Function],
-          "headerTitle": "[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]",
+          "headerTitle": "[missing "en.WORKLIST.AUDIT_WORKLIST" translation]",
         }
       }
     />
     <Screen
       component={[Function]}
       listeners={
-        Object {
+        {
           "beforeRemove": [Function],
         }
       }
       name="AuditItem"
       options={
-        Object {
+        {
           "headerRight": [Function],
-          "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+          "headerTitle": "[missing "en.AUDITS.AUDIT_ITEM" translation]",
         }
       }
     />
@@ -134,9 +168,9 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
       component={[Function]}
       name="AddLocation"
       options={
-        Object {
+        {
           "headerBackTitleVisible": false,
-          "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+          "headerTitle": "[missing "en.LOCATION.ADD_NEW_LOCATION" translation]",
           "headerTitleAlign": "left",
         }
       }

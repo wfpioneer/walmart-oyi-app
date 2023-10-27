@@ -3,7 +3,7 @@
 exports[`Tests Rendering Renders item history flat list 1`] = `
 <View>
   <RCTScrollView
-    data={Array []}
+    data={[]}
     getItem={[Function]}
     getItemCount={[Function]}
     keyExtractor={[Function]}
@@ -17,8 +17,8 @@ exports[`Tests Rendering Renders item history flat list 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View />
   </RCTScrollView>

@@ -3,7 +3,7 @@
 exports[`Test Location Manual Scan Component Renders Error message with Invalid Location Name 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flexDirection": "column",
@@ -14,7 +14,7 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }
@@ -26,10 +26,10 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
       keyboardType="default"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+      placeholder="[missing "en.LOCATION.MANUAL_ENTRY_BUTTON" translation]"
       selectionColor="#0071e9"
       style={
-        Object {
+        {
           "color": "#000000",
           "flex": 1,
           "paddingLeft": 10,
@@ -56,7 +56,7 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "alignSelf": "flex-start",
         "backgroundColor": "#f5f5f5",
@@ -73,7 +73,7 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
     />
     <Text
       style={
-        Object {
+        {
           "color": "#ef5350",
           "fontSize": 12,
           "paddingHorizontal": 5,
@@ -89,7 +89,7 @@ exports[`Test Location Manual Scan Component Renders Error message with Invalid 
 exports[`Test Location Manual Scan Component Renders Manual Scan component with a Valid Section ID  1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flexDirection": "column",
@@ -100,7 +100,7 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }
@@ -112,10 +112,10 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
       keyboardType="default"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+      placeholder="[missing "en.LOCATION.MANUAL_ENTRY_BUTTON" translation]"
       selectionColor="#0071e9"
       style={
-        Object {
+        {
           "color": "#000000",
           "flex": 1,
           "paddingLeft": 10,
@@ -146,7 +146,7 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
 exports[`Test Location Manual Scan Component Renders Manual Scan component with a Valid Section Name 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flexDirection": "column",
@@ -157,7 +157,7 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }
@@ -169,10 +169,10 @@ exports[`Test Location Manual Scan Component Renders Manual Scan component with 
       keyboardType="default"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+      placeholder="[missing "en.LOCATION.MANUAL_ENTRY_BUTTON" translation]"
       selectionColor="#0071e9"
       style={
-        Object {
+        {
           "color": "#000000",
           "flex": 1,
           "paddingLeft": 10,

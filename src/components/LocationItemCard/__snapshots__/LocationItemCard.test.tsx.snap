@@ -3,8 +3,20 @@
 exports[`Test Location Item Card Renders Location Item Card with mock Aisle data 1`] = `
 <View
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -18,7 +30,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "marginHorizontal": 0,
       "marginVertical": 1,
@@ -30,7 +42,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "flexDirection": "row",
@@ -39,7 +51,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
   >
     <View
       style={
-        Object {
+        {
           "flex": 8,
         }
       }
@@ -50,7 +62,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#9e9e9e",
               "fontSize": 12,
             }
@@ -62,7 +74,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -80,8 +92,20 @@ exports[`Test Location Item Card Renders Location Item Card with mock Aisle data
 exports[`Test Location Item Card Renders Location Item Card with mock Section data 1`] = `
 <View
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -95,7 +119,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "marginHorizontal": 0,
       "marginVertical": 1,
@@ -107,7 +131,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "flexDirection": "row",
@@ -116,7 +140,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
   >
     <View
       style={
-        Object {
+        {
           "flex": 8,
         }
       }
@@ -127,7 +151,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#9e9e9e",
               "fontSize": 12,
             }
@@ -139,7 +163,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -157,8 +181,20 @@ exports[`Test Location Item Card Renders Location Item Card with mock Section da
 exports[`Test Location Item Card Renders Location Item Card with mock Zone data with card button disabled 1`] = `
 <View
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -172,7 +208,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "marginHorizontal": 0,
       "marginVertical": 1,
@@ -184,7 +220,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "flexDirection": "row",
@@ -193,7 +229,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
   >
     <View
       style={
-        Object {
+        {
           "flex": 8,
         }
       }
@@ -204,7 +240,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#9e9e9e",
               "fontSize": 12,
             }
@@ -216,7 +252,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -234,8 +270,20 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
 exports[`Test Location Item Card Renders Location Item Card with mock Zone data with card click 1`] = `
 <View
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -249,7 +297,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "marginHorizontal": 0,
       "marginVertical": 1,
@@ -261,7 +309,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "flexDirection": "row",
@@ -270,7 +318,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
   >
     <View
       style={
-        Object {
+        {
           "flex": 8,
         }
       }
@@ -281,7 +329,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#9e9e9e",
               "fontSize": 12,
             }
@@ -293,7 +341,7 @@ exports[`Test Location Item Card Renders Location Item Card with mock Zone data 
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 1,
         }
       }

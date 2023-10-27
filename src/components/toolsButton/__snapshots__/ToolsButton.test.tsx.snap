@@ -5,7 +5,7 @@ exports[`ToolsButton Component Tests Rendering ToolsButton Renders a ToolButton 
   activeOpacity={0.8}
   onPress={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "borderBottomWidth": 2,
@@ -29,7 +29,7 @@ exports[`ToolsButton Component Tests Rendering ToolsButton Renders a ToolButton 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 12,
         "marginTop": 6,
         "textAlign": "center",

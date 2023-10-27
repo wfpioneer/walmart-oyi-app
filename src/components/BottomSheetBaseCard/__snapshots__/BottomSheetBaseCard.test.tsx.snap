@@ -3,7 +3,7 @@
 exports[`Base card render tests renders the bottom sheet base card with image 1`] = `
 <Memo(BottomSheetView)
   style={
-    Object {
+    {
       "flexDirection": "row",
       "height": 75,
     }
@@ -12,7 +12,7 @@ exports[`Base card render tests renders the bottom sheet base card with image 1`
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "borderColor": "#eeeeee",
         "borderWidth": 1,
         "flexDirection": "row",
@@ -22,7 +22,7 @@ exports[`Base card render tests renders the bottom sheet base card with image 1`
   >
     <Memo(BottomSheetView)
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 75,
           "justifyContent": "center",
@@ -32,12 +32,12 @@ exports[`Base card render tests renders the bottom sheet base card with image 1`
     >
       <Image
         source={
-          Object {
+          {
             "testUri": "../../../src/assets/images/sams_logo.jpeg",
           }
         }
         style={
-          Object {
+          {
             "height": 30,
             "width": 30,
           }
@@ -46,7 +46,7 @@ exports[`Base card render tests renders the bottom sheet base card with image 1`
     </Memo(BottomSheetView)>
     <Memo(BottomSheetView)
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -54,7 +54,7 @@ exports[`Base card render tests renders the bottom sheet base card with image 1`
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
@@ -69,7 +69,7 @@ exports[`Base card render tests renders the bottom sheet base card with image 1`
 exports[`Base card render tests renders the bottom sheet base card with material community icon 1`] = `
 <Memo(BottomSheetView)
   style={
-    Object {
+    {
       "flexDirection": "row",
       "height": 75,
     }
@@ -78,7 +78,7 @@ exports[`Base card render tests renders the bottom sheet base card with material
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "borderColor": "#eeeeee",
         "borderWidth": 1,
         "flexDirection": "row",
@@ -88,7 +88,7 @@ exports[`Base card render tests renders the bottom sheet base card with material
   >
     <Memo(BottomSheetView)
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 75,
           "justifyContent": "center",
@@ -103,7 +103,7 @@ exports[`Base card render tests renders the bottom sheet base card with material
     </Memo(BottomSheetView)>
     <Memo(BottomSheetView)
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "center",
         }
@@ -111,7 +111,7 @@ exports[`Base card render tests renders the bottom sheet base card with material
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
           }
         }
