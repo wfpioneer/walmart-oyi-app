@@ -121,7 +121,7 @@ exports[`ReviewItemDetailsNavigation Render ReviewItemNavigator 1`] = `
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
       }
     }

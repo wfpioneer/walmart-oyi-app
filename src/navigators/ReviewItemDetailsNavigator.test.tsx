@@ -1,6 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
+import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
   ReviewItemDetailsNavigatorStack,
