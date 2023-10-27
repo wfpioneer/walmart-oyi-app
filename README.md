@@ -50,9 +50,16 @@ For more information go to https://confluence.walmart.com/display/ISCM/Own+Your+
 - Using a version manager like [Node Version Manager](https://github.com/nvm-sh/nvm) makes it simple to manage node
   versions
   - the command `nvm ls-remote --lts` will list all available stable versions of node
-  - to install a desired version, use `nvm install` eg: `nvm install 14.17.3`
-  - to set it as your default node version, use `nvm alias default` eg: `nvm alias default 14.17.3`
+  - to install a desired version, use `nvm install` eg: `nvm install 16.20.2`
+  - to set it as your default node version, use `nvm alias default` eg: `nvm alias default 16.20.2`
   - after installing a new version, get the latest version of NPM via `npm install -g npm`
+- Create a `.npmrc` file to reroute from the public [NPM Registry](https://www.npmjs.com/) to [Walmart's NPM Registry](https://npme.walmart.com/)
+  - Run the command `npm config edit` to create a `.npmrc` file in your home directory
+  - Add the following to your `.npmrc` file
+    - `email=<your_walmart_email_address>`
+    - `lockfile-version=3`
+    - `registry=https://npme.walmart.com/`
+    - `strict-ssl=false`
 
 ### AppCenter Secrets
 
