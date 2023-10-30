@@ -25,6 +25,7 @@ import ReserveAdjustment from '../screens/Worklist/ReserveAdjustment/ReserveAdju
 import NoActionScan from '../screens/NoActionScan/NoActionScan';
 import OtherAction from '../screens/OtherAction/OtherAction';
 import { clearScreen } from '../state/actions/ItemDetailScreen';
+import { clearReserveAdjustmentScreenData } from '../state/actions/ReserveAdjustmentScreen';
 
 interface ReviewItemDetailsNavigatorProps {
   isManualScanEnabled: boolean;
@@ -294,6 +295,11 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
           headerTitleStyle: { fontSize: 18 },
           headerBackTitleVisible: false,
           headerRight: palletAdjustmentHeaderRight
+        }}
+        listeners={{
+          beforeRemove: () => {
+            dispatch(clearReserveAdjustmentScreenData());
+          }
         }}
       />
       <Stack.Screen

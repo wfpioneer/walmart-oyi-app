@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
+exports[`ReviewItemDetailsNavigation Render ReviewItemNavigator 1`] = `
 <StackNavigator
   screenOptions={
     {
@@ -120,6 +120,11 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
   />
   <Screen
     component={[Function]}
+    listeners={
+      {
+        "beforeRemove": [Function],
+      }
+    }
     name="ReserveAdjustment"
     options={
       {
@@ -149,7 +154,7 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
 </StackNavigator>
 `;
 
-exports[`ReviewItemsDetailsNavigation Render calcutator button  1`] = `
+exports[`ReviewItemDetailsNavigation Render calcutator button  1`] = `
 <View
   accessibilityState={
     {
@@ -201,7 +206,7 @@ exports[`ReviewItemsDetailsNavigation Render calcutator button  1`] = `
 </View>
 `;
 
-exports[`ReviewItemsDetailsNavigation Render open camera button 1`] = `
+exports[`ReviewItemDetailsNavigation Render open camera button 1`] = `
 <View
   accessibilityState={
     {
@@ -256,7 +261,7 @@ exports[`ReviewItemsDetailsNavigation Render open camera button 1`] = `
 </View>
 `;
 
-exports[`ReviewItemsDetailsNavigation Render print queue button  1`] = `
+exports[`ReviewItemDetailsNavigation Render print queue button  1`] = `
 <View
   accessibilityState={
     {
@@ -308,7 +313,7 @@ exports[`ReviewItemsDetailsNavigation Render print queue button  1`] = `
 </View>
 `;
 
-exports[`ReviewItemsDetailsNavigation Renders and Calls the Manual Scan Button 1`] = `
+exports[`ReviewItemDetailsNavigation Renders and Calls the Manual Scan Button 1`] = `
 <View
   accessibilityState={
     {
