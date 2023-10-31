@@ -143,7 +143,7 @@ export const clearSectionApiEffect = (
       const selectedTab: ClearLocationTarget = clearSectionApi.value.target;
       // TODO refactor screen to put section details information into redux so we
       // need to clear only that for this part
-      dispatch({ type: 'API/GET_SECTION_DETAILS/RESET' });
+      dispatch({ type: GET_SECTION_DETAILS.RESET });
       dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       Toast.show({
         type: 'success',
@@ -385,7 +385,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
   // adjusted to work from loc management state instead of scanned
   useEffectHook(() => {
     navigation.addListener('focus', () => {
-      validateSession(navigation, route.name).then(() => {
+      validateSessionCall(navigation, route.name).then(() => {
         if (!scannedEvent.value) {
           dispatch(getSectionDetails({ sectionId: section.id.toString() }));
           dispatch(setIsToolBarNavigation(true));
@@ -396,10 +396,10 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
       if (itemPopupVisible) {
         dispatch(hideItemPopup());
       }
-      dispatch({ type: GET_SECTION_DETAILS.RESET });
       if (scannedEvent.value) {
         dispatch(resetScannedEvent());
       }
+      dispatch({ type: GET_SECTION_DETAILS.RESET });
     });
     return () => {
       navigation.removeListener('focus', () => {});
