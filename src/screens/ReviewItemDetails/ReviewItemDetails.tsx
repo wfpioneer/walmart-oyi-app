@@ -1360,7 +1360,9 @@ export const renderErrorView = (
       {isManualScanEnabled && <ManualScanComponent placeholder={strings(GENERICS_ENTER_UPC)} />}
       <View style={styles.activityIndicator}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
+        <View style={styles.errorTextContainer}>
+          <Text style={styles.errorText}>{strings('ITEM.API_ERROR')}</Text>
+        </View>
         {!scannedValue
           ? (
             <View style={styles.errorTextContainer}>

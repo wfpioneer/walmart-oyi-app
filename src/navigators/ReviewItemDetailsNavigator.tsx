@@ -9,7 +9,7 @@ import Config from 'react-native-config';
 import COLOR from '../themes/Color';
 import ReviewItemDetails from '../screens/ReviewItemDetails/ReviewItemDetails';
 import { strings } from '../locales';
-import { setCalcOpen, setManualScan } from '../state/actions/Global';
+import { resetScannedEvent, setCalcOpen, setManualScan } from '../state/actions/Global';
 import { useTypedSelector } from '../state/reducers/RootReducer';
 import styles from './ReviewItemDetailsNavigator.style';
 import LocationDetails from '../screens/LocationDetails/LocationDetails';
@@ -136,7 +136,6 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
   } = props;
 
   const itemDetailsHeader = () => (
-    // @ts-expect-error HeaderTitle can accept the same props as <Text/>
     <HeaderTitle
       style={{ color: COLOR.WHITE }}
       lineBreakMode="tail"
@@ -219,6 +218,7 @@ export const ReviewItemDetailsNavigatorStack = (props:ReviewItemDetailsNavigator
         listeners={{
           beforeRemove: () => {
             dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+            dispatch(resetScannedEvent());
             dispatch(clearScreen());
           }
         }}

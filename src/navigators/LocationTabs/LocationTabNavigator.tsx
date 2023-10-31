@@ -47,6 +47,7 @@ import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAP
 import User from '../../models/User';
 import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
 import { cleanScanIfUpcOrEanBarcode } from '../../utils/barcodeUtils';
+
 const Tab = createMaterialTopTabNavigator();
 const LOCATION_EDIT_FLAG = 'location management edit';
 const LOCATION_PALLETS = 'LOCATION.PALLETS';
@@ -230,25 +231,23 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
     navigation.navigate('AddPallet');
   };
   return (
-    <>
-      <View style={styles.tabHeader}>
-        <Text style={styles.tabHeaderText}>
-          {headerText}
-        </Text>
-        {isEditEnabled ? (
-          <TouchableOpacity
-            onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
-            disabled={isDisabled}
-          >
-            <View>
-              <Text style={isDisabled ? styles.addTextDisabled : styles.addText}>
-                {strings('GENERICS.ADD')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ) : null}
-      </View>
-    </>
+    <View style={styles.tabHeader}>
+      <Text style={styles.tabHeaderText}>
+        {headerText}
+      </Text>
+      {isEditEnabled ? (
+        <TouchableOpacity
+          onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+          disabled={isDisabled}
+        >
+          <View>
+            <Text style={isDisabled ? styles.addTextDisabled : styles.addText}>
+              {strings('GENERICS.ADD')}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      ) : null}
+    </View>
   );
 };
 
@@ -351,20 +350,36 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     dispatch
   ), [navigation, scannedEvent]);
 
-  useEffectHook(() => activityModalEffect(
-    navigation, dispatch, activityModal, removeSectionApi, clearSectionApi
-  ), [activityModal, removeSectionApi, clearSectionApi]);
+  useEffectHook(
+    () => activityModalEffect(
+      navigation,
+      dispatch,
+      activityModal,
+      removeSectionApi,
+      clearSectionApi
+    ),
+    [activityModal, removeSectionApi, clearSectionApi]
+  );
 
   // Clear Section API
   useEffectHook(() => clearSectionApiEffect(
-    dispatch, navigation, clearSectionApi,
-    section, setDisplayClearConfirmation
+    dispatch,
+    navigation,
+    clearSectionApi,
+    section,
+    setDisplayClearConfirmation
   ), [clearSectionApi]);
 
   // Remove Section Api
-  useEffectHook(() => removeSectionApiEffect(
-    navigation, dispatch, removeSectionApi, setDisplayRemoveConfirmation
-  ), [removeSectionApi]);
+  useEffectHook(
+    () => removeSectionApiEffect(
+      navigation,
+      dispatch,
+      removeSectionApi,
+      setDisplayRemoveConfirmation
+    ),
+    [removeSectionApi]
+  );
 
   // Call get section details on select from list
   // adjusted to work from loc management state instead of scanned
@@ -377,8 +392,10 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         }
       });
     });
-    navigation.addListener('blur', () => {
-      dispatch(hideItemPopup());
+    navigation.addListener('beforeRemove', () => {
+      if (itemPopupVisible) {
+        dispatch(hideItemPopup());
+      }
       dispatch({ type: GET_SECTION_DETAILS.RESET });
       if (scannedEvent.value) {
         dispatch(resetScannedEvent());
@@ -386,7 +403,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     });
     return () => {
       navigation.removeListener('focus', () => {});
-      navigation.removeListener('blur', () => {});
+      navigation.removeListener('beforeRemove', () => {});
     };
   }, [navigation, scannedEvent, section]);
 
