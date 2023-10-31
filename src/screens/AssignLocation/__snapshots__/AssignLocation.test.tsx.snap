@@ -3,7 +3,7 @@
 exports[`Assign Location screen render tests renders screen with items 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -20,7 +20,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -32,7 +32,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -44,7 +44,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -60,14 +60,14 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -81,14 +81,14 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -101,12 +101,12 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
   <FlatList
     ItemSeparatorComponent={[Function]}
     data={
-      Array [
-        Object {
+      [
+        {
           "expirationDate": "10/3/2022",
           "id": "123456",
-          "items": Array [
-            Object {
+          "items": [
+            {
               "itemDesc": "itemDesc",
               "itemNbr": 351231,
               "price": 123,
@@ -115,11 +115,11 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
             },
           ],
         },
-        Object {
+        {
           "expirationDate": "10/3/2022",
           "id": "345345",
-          "items": Array [
-            Object {
+          "items": [
+            {
               "itemDesc": "itemDesc",
               "itemNbr": 351231,
               "price": 123,
@@ -136,7 +136,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderTopColor": "#888888",
         "borderTopWidth": 1,
@@ -158,7 +158,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
     </Memo(Pressable)>
     <Text
       style={
-        Object {
+        {
           "fontSize": 20,
         }
       }
@@ -172,7 +172,7 @@ exports[`Assign Location screen render tests renders screen with items 1`] = `
 exports[`Assign Location screen render tests renders screen with manual scan enabled 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -189,7 +189,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -201,7 +201,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -213,7 +213,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -229,14 +229,14 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -250,14 +250,14 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -269,18 +269,18 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
   </CustomModalComponent>
   <ManualScanComponent
     keyboardType="default"
-    placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+    placeholder="[missing "en.LOCATION.MANUAL_ENTRY_BUTTON" translation]"
   />
   <FlatList
     ItemSeparatorComponent={[Function]}
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderTopColor": "#888888",
         "borderTopWidth": 1,
@@ -302,7 +302,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
     </Memo(Pressable)>
     <Text
       style={
-        Object {
+        {
           "fontSize": 20,
         }
       }
@@ -316,7 +316,7 @@ exports[`Assign Location screen render tests renders screen with manual scan ena
 exports[`Assign Location screen render tests renders screen with no items 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -333,7 +333,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -345,7 +345,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -357,7 +357,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -373,14 +373,14 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -394,14 +394,14 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -413,14 +413,14 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
   </CustomModalComponent>
   <FlatList
     ItemSeparatorComponent={[Function]}
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderTopColor": "#888888",
         "borderTopWidth": 1,
@@ -442,7 +442,7 @@ exports[`Assign Location screen render tests renders screen with no items 1`] = 
     </Memo(Pressable)>
     <Text
       style={
-        Object {
+        {
           "fontSize": 20,
         }
       }
@@ -459,7 +459,7 @@ exports[`Assign Location screen render tests renders the binning item card 1`] =
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -470,7 +470,7 @@ exports[`Assign Location screen render tests renders the binning item card 1`] =
   >
     <View
       style={
-        Object {
+        {
           "flex": 4,
           "flexDirection": "column",
           "margin": 10,
@@ -479,7 +479,7 @@ exports[`Assign Location screen render tests renders the binning item card 1`] =
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 5,
           }
         }
@@ -501,7 +501,7 @@ exports[`Assign Location screen render tests renders the binning item card 1`] =
 exports[`Assign Location screen render tests renders the screen with the unsaved warning modal showing 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "column",
       "justifyContent": "space-between",
@@ -518,7 +518,7 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -530,7 +530,7 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -542,7 +542,7 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -558,14 +558,14 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -579,14 +579,14 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -598,18 +598,18 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
   </CustomModalComponent>
   <ManualScanComponent
     keyboardType="default"
-    placeholder="[missing \\"en.LOCATION.MANUAL_ENTRY_BUTTON\\" translation]"
+    placeholder="[missing "en.LOCATION.MANUAL_ENTRY_BUTTON" translation]"
   />
   <FlatList
     ItemSeparatorComponent={[Function]}
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderTopColor": "#888888",
         "borderTopWidth": 1,
@@ -631,7 +631,7 @@ exports[`Assign Location screen render tests renders the screen with the unsaved
     </Memo(Pressable)>
     <Text
       style={
-        Object {
+        {
           "fontSize": 20,
         }
       }

@@ -6,29 +6,29 @@ exports[`PrinterList Renders list of Printers in Flatlist  1`] = `
   <FlatList
     ItemSeparatorComponent={[Function]}
     data={
-      Array [
-        Object {
+      [
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "0",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Invalid printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "456000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
             "location",
             "pallet",
@@ -41,7 +41,7 @@ exports[`PrinterList Renders list of Printers in Flatlist  1`] = `
     keyExtractor={[Function]}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
       }
     }
@@ -53,7 +53,7 @@ exports[`PrinterList Renders list of Printers in Flatlist setting location 1`] =
 <React.Fragment>
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "margin": 15,
         "textAlign": "center",
@@ -65,29 +65,29 @@ exports[`PrinterList Renders list of Printers in Flatlist setting location 1`] =
   <FlatList
     ItemSeparatorComponent={[Function]}
     data={
-      Array [
-        Object {
+      [
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "0",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Invalid printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "456000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
             "location",
             "pallet",
@@ -100,7 +100,7 @@ exports[`PrinterList Renders list of Printers in Flatlist setting location 1`] =
     keyExtractor={[Function]}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
       }
     }
@@ -112,7 +112,7 @@ exports[`PrinterList Renders list of Printers in Flatlist setting pallet 1`] = `
 <React.Fragment>
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "margin": 15,
         "textAlign": "center",
@@ -124,29 +124,29 @@ exports[`PrinterList Renders list of Printers in Flatlist setting pallet 1`] = `
   <FlatList
     ItemSeparatorComponent={[Function]}
     data={
-      Array [
-        Object {
+      [
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "0",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Invalid printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "456000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
             "location",
             "pallet",
@@ -159,7 +159,7 @@ exports[`PrinterList Renders list of Printers in Flatlist setting pallet 1`] = `
     keyExtractor={[Function]}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
       }
     }
@@ -171,7 +171,7 @@ exports[`PrinterList Renders list of Printers in Flatlist setting price sign 1`]
 <React.Fragment>
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "margin": 15,
         "textAlign": "center",
@@ -183,29 +183,29 @@ exports[`PrinterList Renders list of Printers in Flatlist setting price sign 1`]
   <FlatList
     ItemSeparatorComponent={[Function]}
     data={
-      Array [
-        Object {
+      [
+        {
           "desc": "Default",
           "id": "123000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Front desk printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "0",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
           ],
           "name": "Invalid printer",
           "type": 0,
         },
-        Object {
+        {
           "desc": "Default",
           "id": "456000000000",
-          "labelsAvailable": Array [
+          "labelsAvailable": [
             "price",
             "location",
             "pallet",
@@ -218,7 +218,7 @@ exports[`PrinterList Renders list of Printers in Flatlist setting price sign 1`]
     keyExtractor={[Function]}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
       }
     }
@@ -232,7 +232,7 @@ exports[`PrinterList Renders printer item card that is disabled 1`] = `
   hostRef={null}
   onPress={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "flexDirection": "row",
       "height": 40,
@@ -250,7 +250,7 @@ exports[`PrinterList Renders printer item card that is disabled 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "center",
@@ -264,7 +264,7 @@ exports[`PrinterList Renders printer item card that is disabled 1`] = `
   </View>
   <TouchableOpacity
     hitSlop={
-      Object {
+      {
         "bottom": 10,
         "left": 15,
         "right": 15,
@@ -273,7 +273,7 @@ exports[`PrinterList Renders printer item card that is disabled 1`] = `
     }
     onPress={[Function]}
     style={
-      Object {
+      {
         "paddingLeft": 15,
         "paddingRight": 5,
         "paddingVertical": 10,
@@ -295,7 +295,7 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
   hostRef={null}
   onPress={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "flexDirection": "row",
       "height": 40,
@@ -312,7 +312,7 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "center",
@@ -326,7 +326,7 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
   </View>
   <TouchableOpacity
     hitSlop={
-      Object {
+      {
         "bottom": 10,
         "left": 15,
         "right": 15,
@@ -335,7 +335,7 @@ exports[`PrinterList Renders printer item card that is not disabled when locatio
     }
     onPress={[Function]}
     style={
-      Object {
+      {
         "paddingLeft": 15,
         "paddingRight": 5,
         "paddingVertical": 10,
@@ -357,7 +357,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
   hostRef={null}
   onPress={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "flexDirection": "row",
       "height": 40,
@@ -374,7 +374,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "center",
@@ -388,7 +388,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
   </View>
   <TouchableOpacity
     hitSlop={
-      Object {
+      {
         "bottom": 10,
         "left": 15,
         "right": 15,
@@ -397,7 +397,7 @@ exports[`PrinterList Renders printer item card with no delete icon 1`] = `
     }
     onPress={[Function]}
     style={
-      Object {
+      {
         "paddingLeft": 15,
         "paddingRight": 5,
         "paddingVertical": 10,
@@ -419,7 +419,7 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
   hostRef={null}
   onPress={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "flexDirection": "row",
       "height": 40,
@@ -436,7 +436,7 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "flex-start",
         "flex": 1,
         "justifyContent": "center",
@@ -450,7 +450,7 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
   </View>
   <TouchableOpacity
     hitSlop={
-      Object {
+      {
         "bottom": 10,
         "left": 15,
         "right": 15,
@@ -459,7 +459,7 @@ exports[`PrinterList Renders the delete icon for PrinterIds not equal to 0 1`] =
     }
     onPress={[Function]}
     style={
-      Object {
+      {
         "paddingLeft": 15,
         "paddingRight": 5,
         "paddingVertical": 10,

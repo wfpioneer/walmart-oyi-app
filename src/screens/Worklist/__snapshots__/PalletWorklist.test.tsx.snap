@@ -3,7 +3,7 @@
 exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -19,7 +19,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#0071e9",
           "borderBottomWidth": 1,
           "borderTopLeftRadius": 8,
@@ -31,7 +31,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
     >
       <Text
         style={
-          Object {
+          {
             "color": "#ffffffff",
             "fontSize": 18,
             "padding": 10,
@@ -43,7 +43,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
     </View>
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "paddingHorizontal": 10,
           "paddingVertical": 20,
@@ -55,7 +55,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "width": "100%",
@@ -69,12 +69,12 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        title="[missing "en.GENERICS.CANCEL" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -88,12 +88,12 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -108,19 +108,19 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
   />
   <FlatList
     data={
-      Array [
-        Object {
+      [
+        {
           "completed": false,
           "createTs": "",
           "createUserId": "",
           "itemCount": 2,
           "lastKnownPalletLocationId": -1,
-          "lastKnownPalletLocationName": "[missing \\"en.WORKLIST.ALL\\" translation]",
+          "lastKnownPalletLocationName": "[missing "en.WORKLIST.ALL" translation]",
           "palletDeleted": false,
           "palletId": 0,
           "sectionID": 0,
         },
-        Object {
+        {
           "completed": false,
           "completedTs": undefined,
           "completedUserId": undefined,
@@ -132,7 +132,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
           "palletId": 7988,
           "sectionID": 1,
         },
-        Object {
+        {
           "completed": false,
           "completedTs": undefined,
           "completedUserId": undefined,
@@ -151,7 +151,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
     refreshing={false}
     renderItem={[Function]}
     style={
-      Object {
+      {
         "flex": 1,
         "width": "100%",
       }
@@ -167,7 +167,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -179,7 +179,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
 exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen when the backend service encouters an error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "flex-start",
@@ -195,7 +195,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
   />
   <Text
     style={
-      Object {
+      {
         "marginVertical": 10,
         "textAlign": "center",
       }
@@ -206,7 +206,7 @@ exports[`Tests rendering PalletWorklist screen Renders the PalletWorklist screen
   <TouchableOpacity
     onPress={[MockFunction]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,

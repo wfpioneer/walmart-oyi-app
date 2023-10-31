@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'flex-end'
   },
+  floatingActionButton: {
+    marginHorizontal: 30,
+    marginVertical: 25
+  },
   activityIndicator: {
     justifyContent: 'center',
     alignItems: 'center'

@@ -3,9 +3,9 @@
 exports[`Tools Navigator Renders the Tools Navigator 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -16,22 +16,22 @@ exports[`Tools Navigator Renders the Tools Navigator 1`] = `
     component={[Function]}
     name="ToolsHomeScreen"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.GENERICS.TOOLS\\" translation]",
+      {
+        "headerTitle": "[missing "en.GENERICS.TOOLS" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "blur": [Function],
       }
     }
     name="LocationManagement"
     options={
-      Object {
+      {
         "headerShown": false,
       }
     }

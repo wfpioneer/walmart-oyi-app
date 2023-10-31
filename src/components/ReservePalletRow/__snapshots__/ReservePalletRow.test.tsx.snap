@@ -3,16 +3,18 @@
 exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -26,19 +28,19 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
 >
   <ReservePalletRow
     reservePallet={
-      Object {
+      {
         "createDate": "2022-01-05T12:04:50.000Z",
         "expirationDate": "12/31/2022",
         "id": 1,
-        "items": Array [
-          Object {
+        "items": [
+          {
             "itemDesc": "Nature Valley Honey Nut Granola Bars",
             "itemNbr": 500252,
             "locationType": 8,
             "price": 0,
             "upcNbr": "750500252570",
           },
-          Object {
+          {
             "itemDesc": "Cabbage",
             "itemNbr": 123456,
             "locationType": 8,
@@ -52,7 +54,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
       }
     }
     section={
-      Object {
+      {
         "id": 1,
         "name": "Section 1",
       }
@@ -66,16 +68,18 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
 exports[`ReservePalletRow Component Renders a ReservePallet with an item with a long name 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -89,26 +93,26 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
 >
   <ReservePalletRow
     reservePallet={
-      Object {
+      {
         "createDate": "2022-01-05T12:04:50.000Z",
         "expirationDate": "12/31/2022",
         "id": 1,
-        "items": Array [
-          Object {
+        "items": [
+          {
             "itemDesc": "Nature Valley Honey Nut Granola Bars",
             "itemNbr": 500252,
             "locationType": 8,
             "price": 0,
             "upcNbr": "750500252570",
           },
-          Object {
+          {
             "itemDesc": "Cabbage",
             "itemNbr": 123456,
             "locationType": 8,
             "price": 0,
             "upcNbr": "123456000789",
           },
-          Object {
+          {
             "itemDesc": "An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description An Item With A Very Long Item Description",
             "itemNbr": 980078597,
             "locationType": 8,
@@ -122,7 +126,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
       }
     }
     section={
-      Object {
+      {
         "id": 1,
         "name": "Section 1",
       }
@@ -136,16 +140,18 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
 exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -159,18 +165,18 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
 >
   <ReservePalletRow
     reservePallet={
-      Object {
+      {
         "createDate": "2022-01-05T12:04:50.000Z",
         "expirationDate": "12/31/2022",
         "id": 1,
-        "items": Array [],
+        "items": [],
         "palletCreateTS": "2021-01-01",
         "palletId": "1",
         "statusCode": 200,
       }
     }
     section={
-      Object {
+      {
         "id": 1,
         "name": "Section 1",
       }

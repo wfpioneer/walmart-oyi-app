@@ -3,8 +3,20 @@
 exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWorklistCard 1`] = `
 <View
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -18,7 +30,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "borderColor": "#dbecff",
       "marginBottom": 2,
@@ -32,7 +44,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   <View>
     <Text
       style={
-        Object {
+        {
           "color": "#d938ab",
           "fontSize": 12,
           "fontWeight": "bold",
@@ -44,7 +56,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   </View>
   <View
     style={
-      Object {
+      {
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "space-between",
@@ -53,7 +65,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
         }
@@ -61,7 +73,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -71,7 +83,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -82,7 +94,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
         }
@@ -90,7 +102,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -100,7 +112,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -116,8 +128,20 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
 exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWorklistCard with expanded prop as true 1`] = `
 <View
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
+      "checked": undefined,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -131,7 +155,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "borderColor": "#dbecff",
       "marginBottom": 2,
@@ -145,7 +169,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   <View>
     <Text
       style={
-        Object {
+        {
           "color": "#d938ab",
           "fontSize": 12,
           "fontWeight": "bold",
@@ -157,7 +181,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   </View>
   <View
     style={
-      Object {
+      {
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "space-between",
@@ -166,7 +190,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
         }
@@ -174,7 +198,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -184,7 +208,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -195,7 +219,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
         }
@@ -203,7 +227,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -213,7 +237,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 12,
             "paddingVertical": 2,
           }
@@ -224,7 +248,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     </View>
     <View
       style={
-        Object {
+        {
           "flex": 0.5,
         }
       }
@@ -239,7 +263,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   </View>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-between",
         "flexDirection": "row",
         "justifyContent": "center",
@@ -249,11 +273,11 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
-          Object {
+          {
             "flex": 1,
             "fontSize": 12,
             "paddingRight": 10,
@@ -263,15 +287,27 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -285,7 +321,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#0071e9",
               "borderRadius": 5,
@@ -299,7 +335,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,
@@ -315,11 +351,11 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     </View>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": 45,
           },
-          Object {
+          {
             "flex": 1,
             "fontSize": 12,
             "paddingRight": 10,
@@ -329,15 +365,27 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
       >
         <View
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -351,7 +399,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#D6512D",
               "borderRadius": 5,
@@ -365,7 +413,7 @@ exports[`Tests rendering MissingPalletWorklistCard Renders the MissingPalletWork
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#ffffffff",
                 "fontFamily": "Roboto-Medium",
                 "fontSize": 16,

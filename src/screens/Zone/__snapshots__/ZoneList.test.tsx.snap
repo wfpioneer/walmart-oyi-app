@@ -13,14 +13,14 @@ exports[`Test Zone List Screen Renders Get Zone Name Error Modal if errorVisible
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -30,7 +30,7 @@ exports[`Test Zone List Screen Renders Get Zone Name Error Modal if errorVisible
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -46,13 +46,13 @@ exports[`Test Zone List Screen Renders Get Zone Name Error Modal if errorVisible
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrCancel"
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        title="[missing "en.GENERICS.CANCEL" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -66,13 +66,13 @@ exports[`Test Zone List Screen Renders Get Zone Name Error Modal if errorVisible
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrRetry"
-        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        title="[missing "en.GENERICS.RETRY" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -82,18 +82,18 @@ exports[`Test Zone List Screen Renders Get Zone Name Error Modal if errorVisible
     </View>
   </CustomModalComponent>
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    details="0 [missing "en.LOCATION.ZONES" translation]"
     isDisabled={false}
-    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+    location="[missing "en.GENERICS.CLUB" translation] 5522"
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
@@ -113,14 +113,14 @@ exports[`Test Zone List Screen Renders Manual Scan Component when isManualScanEn
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -130,7 +130,7 @@ exports[`Test Zone List Screen Renders Manual Scan Component when isManualScanEn
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -146,13 +146,13 @@ exports[`Test Zone List Screen Renders Manual Scan Component when isManualScanEn
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrCancel"
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        title="[missing "en.GENERICS.CANCEL" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -166,13 +166,13 @@ exports[`Test Zone List Screen Renders Manual Scan Component when isManualScanEn
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrRetry"
-        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        title="[missing "en.GENERICS.RETRY" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -185,18 +185,18 @@ exports[`Test Zone List Screen Renders Manual Scan Component when isManualScanEn
     keyboardType="default"
   />
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    details="0 [missing "en.LOCATION.ZONES" translation]"
     isDisabled={false}
-    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+    location="[missing "en.GENERICS.CLUB" translation] 5522"
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
@@ -216,14 +216,14 @@ exports[`Test Zone List Screen Renders Zone Screen with Data 1`] = `
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -233,7 +233,7 @@ exports[`Test Zone List Screen Renders Zone Screen with Data 1`] = `
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -249,13 +249,13 @@ exports[`Test Zone List Screen Renders Zone Screen with Data 1`] = `
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrCancel"
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        title="[missing "en.GENERICS.CANCEL" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -269,13 +269,13 @@ exports[`Test Zone List Screen Renders Zone Screen with Data 1`] = `
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrRetry"
-        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        title="[missing "en.GENERICS.RETRY" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -285,190 +285,190 @@ exports[`Test Zone List Screen Renders Zone Screen with Data 1`] = `
     </View>
   </CustomModalComponent>
   <LocationHeader
-    details="35 [missing \\"en.LOCATION.ZONES\\" translation]"
+    details="35 [missing "en.LOCATION.ZONES" translation]"
     isDisabled={false}
-    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+    location="[missing "en.GENERICS.CLUB" translation] 5522"
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "aisleCount": 30,
           "zoneId": 2,
           "zoneName": "ABAR",
         },
-        Object {
+        {
           "aisleCount": 0,
           "zoneId": 1355,
           "zoneName": "ANEX",
         },
-        Object {
+        {
           "aisleCount": 3,
           "zoneId": 1079,
           "zoneName": "BLAN",
         },
-        Object {
+        {
           "aisleCount": 1,
           "zoneId": 774,
           "zoneName": "BUNK",
         },
-        Object {
+        {
           "aisleCount": 1,
           "zoneId": 381,
           "zoneName": "CAJA",
         },
-        Object {
+        {
           "aisleCount": 3,
           "zoneId": 751,
           "zoneName": "CARN",
         },
-        Object {
+        {
           "aisleCount": 9,
           "zoneId": 807,
           "zoneName": "CONG",
         },
-        Object {
+        {
           "aisleCount": 2,
           "zoneId": 763,
           "zoneName": "DELI",
         },
-        Object {
+        {
           "aisleCount": 2,
           "zoneId": 1455,
           "zoneName": "DEVO",
         },
-        Object {
+        {
           "aisleCount": 6,
           "zoneId": 635,
           "zoneName": "DULC",
         },
-        Object {
+        {
           "aisleCount": 9,
           "zoneId": 873,
           "zoneName": "ELEC",
         },
-        Object {
+        {
           "aisleCount": 5,
           "zoneId": 1394,
           "zoneName": "FARM",
         },
-        Object {
+        {
           "aisleCount": 2,
           "zoneId": 612,
           "zoneName": "FERR",
         },
-        Object {
+        {
           "aisleCount": 7,
           "zoneId": 433,
           "zoneName": "FLEX",
         },
-        Object {
+        {
           "aisleCount": 3,
           "zoneId": 727,
           "zoneName": "FRUT",
         },
-        Object {
+        {
           "aisleCount": 2,
           "zoneId": 995,
           "zoneName": "GOUR",
         },
-        Object {
+        {
           "aisleCount": 4,
           "zoneId": 574,
           "zoneName": "HOGA",
         },
-        Object {
+        {
           "aisleCount": 0,
           "zoneId": 1305,
           "zoneName": "LLAN",
         },
-        Object {
+        {
           "aisleCount": 16,
           "zoneId": 12,
           "zoneName": "MGEN",
         },
-        Object {
+        {
           "aisleCount": 2,
           "zoneId": 986,
           "zoneName": "MOTO",
         },
-        Object {
+        {
           "aisleCount": 1,
           "zoneId": 925,
           "zoneName": "PAAB",
         },
-        Object {
+        {
           "aisleCount": 3,
           "zoneId": 926,
           "zoneName": "PADE",
         },
-        Object {
+        {
           "aisleCount": 1,
           "zoneId": 394,
           "zoneName": "PAMG",
         },
-        Object {
+        {
           "aisleCount": 4,
           "zoneId": 854,
           "zoneName": "PANA",
         },
-        Object {
+        {
           "aisleCount": 16,
           "zoneId": 994,
           "zoneName": "PODA",
         },
-        Object {
+        {
           "aisleCount": 15,
           "zoneId": 993,
           "zoneName": "PODM",
         },
-        Object {
+        {
           "aisleCount": 1,
           "zoneId": 1556,
           "zoneName": "RECI",
         },
-        Object {
+        {
           "aisleCount": 5,
           "zoneId": 780,
           "zoneName": "REFR",
         },
-        Object {
+        {
           "aisleCount": 2,
           "zoneId": 1,
           "zoneName": "RIEL",
         },
-        Object {
+        {
           "aisleCount": 24,
           "zoneId": 476,
           "zoneName": "ROPA",
         },
-        Object {
+        {
           "aisleCount": 7,
           "zoneId": 636,
           "zoneName": "SERV",
         },
-        Object {
+        {
           "aisleCount": 10,
           "zoneId": 1218,
           "zoneName": "TECN",
         },
-        Object {
+        {
           "aisleCount": 3,
           "zoneId": 698,
           "zoneName": "TOCA",
         },
-        Object {
+        {
           "aisleCount": 7,
           "zoneId": 992,
           "zoneName": "VINO",
         },
-        Object {
+        {
           "aisleCount": 1,
           "zoneId": 743,
           "zoneName": "WALK",
@@ -494,14 +494,14 @@ exports[`Test Zone List Screen Renders Zone Screen with Empty Data 1`] = `
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -511,7 +511,7 @@ exports[`Test Zone List Screen Renders Zone Screen with Empty Data 1`] = `
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -527,13 +527,13 @@ exports[`Test Zone List Screen Renders Zone Screen with Empty Data 1`] = `
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrCancel"
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        title="[missing "en.GENERICS.CANCEL" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -547,13 +547,13 @@ exports[`Test Zone List Screen Renders Zone Screen with Empty Data 1`] = `
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrRetry"
-        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        title="[missing "en.GENERICS.RETRY" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -563,18 +563,18 @@ exports[`Test Zone List Screen Renders Zone Screen with Empty Data 1`] = `
     </View>
   </CustomModalComponent>
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    details="0 [missing "en.LOCATION.ZONES" translation]"
     isDisabled={false}
-    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+    location="[missing "en.GENERICS.CLUB" translation] 5522"
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
@@ -594,14 +594,14 @@ exports[`Test Zone List Screen Renders Zone Screen with no-zones-message when ge
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -611,7 +611,7 @@ exports[`Test Zone List Screen Renders Zone Screen with no-zones-message when ge
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -627,13 +627,13 @@ exports[`Test Zone List Screen Renders Zone Screen with no-zones-message when ge
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrCancel"
-        title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+        title="[missing "en.GENERICS.CANCEL" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -647,13 +647,13 @@ exports[`Test Zone List Screen Renders Zone Screen with no-zones-message when ge
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "flex": 1,
             "paddingHorizontal": 10,
           }
         }
         testID="btnErrRetry"
-        title="[missing \\"en.GENERICS.RETRY\\" translation]"
+        title="[missing "en.GENERICS.RETRY" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -663,18 +663,18 @@ exports[`Test Zone List Screen Renders Zone Screen with no-zones-message when ge
     </View>
   </CustomModalComponent>
   <LocationHeader
-    details="0 [missing \\"en.LOCATION.ZONES\\" translation]"
+    details="0 [missing "en.LOCATION.ZONES" translation]"
     isDisabled={false}
-    location="[missing \\"en.GENERICS.CLUB\\" translation] 5522"
+    location="[missing "en.GENERICS.CLUB" translation] 5522"
   />
   <FlatList
     ListEmptyComponent={<NoZonesMessage />}
     contentContainerStyle={
-      Object {
+      {
         "paddingBottom": 100,
       }
     }
-    data={Array []}
+    data={[]}
     keyExtractor={[Function]}
     renderItem={[Function]}
   />
@@ -684,7 +684,7 @@ exports[`Test Zone List Screen Renders Zone Screen with no-zones-message when ge
 exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is 400 error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -700,7 +700,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -711,7 +711,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -732,7 +732,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
 exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is 424 error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -748,7 +748,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -759,7 +759,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -780,7 +780,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
 exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is 500 error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -796,7 +796,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -807,7 +807,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -828,7 +828,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
 exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is network error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -844,7 +844,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -855,7 +855,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -876,7 +876,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
 exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message when result is timeout error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -892,7 +892,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -903,7 +903,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders Error Message 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -928,7 +928,7 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders loading indica
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -938,21 +938,21 @@ exports[`Test Zone List Screen Test Get Zone Api Response Renders loading indica
 `;
 
 exports[`Test ZoneList render ZoneList with default value 1`] = `
-Array [
+[
   <View
     onLayout={[Function]}
     pointerEvents="box-none"
     style={
-      Array [
+      [
         undefined,
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
         },
-        Object {
+        {
           "bottom": 0,
           "overflow": "hidden",
           "top": 0,
@@ -970,7 +970,7 @@ Array [
     />
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderBottomColor": "#eeeeee",
@@ -984,7 +984,7 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
@@ -994,7 +994,7 @@ Array [
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#9e9e9e",
               "fontSize": 12,
             }
@@ -1007,11 +1007,11 @@ Array [
     <RCTScrollView
       ListEmptyComponent={<NoZonesMessage />}
       contentContainerStyle={
-        Object {
+        {
           "paddingBottom": 100,
         }
       }
-      data={Array []}
+      data={[]}
       getItem={[Function]}
       getItemCount={[Function]}
       keyExtractor={[Function]}
@@ -1025,13 +1025,13 @@ Array [
       removeClippedSubviews={false}
       renderItem={[Function]}
       scrollEventThrottle={50}
-      stickyHeaderIndices={Array []}
-      viewabilityConfigCallbackPairs={Array []}
+      stickyHeaderIndices={[]}
+      viewabilityConfigCallbackPairs={[]}
     >
       <View>
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "column",
               "justifyContent": "center",
@@ -1041,7 +1041,7 @@ Array [
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
               }
             }
@@ -1065,7 +1065,7 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -1075,8 +1075,8 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -1088,7 +1088,7 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -1099,14 +1099,14 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
         name="alert"
         size={30}
         style={
-          Object {
+          {
             "alignSelf": "center",
           }
         }
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -1116,7 +1116,7 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "center",
@@ -1127,11 +1127,11 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -1140,15 +1140,27 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -1162,7 +1174,7 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#D6512D",
                   "borderRadius": 5,
@@ -1176,7 +1188,7 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -1192,11 +1204,11 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -1205,15 +1217,27 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -1227,7 +1251,7 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -1241,7 +1265,7 @@ exports[`Test getZoneErrorModal render getZoneErrorModal with default value 1`] 
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,

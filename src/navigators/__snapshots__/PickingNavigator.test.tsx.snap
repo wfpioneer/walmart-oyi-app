@@ -2,6 +2,23 @@
 
 exports[`Picking Navigator Renders and Calls the Kebab Menu button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -15,13 +32,13 @@ exports[`Picking Navigator Renders and Calls the Kebab Menu button 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "paddingRight": 10,
       },
-      Object {
+      {
         "opacity": 1,
       },
     ]
@@ -38,6 +55,23 @@ exports[`Picking Navigator Renders and Calls the Kebab Menu button 1`] = `
 
 exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -49,7 +83,7 @@ exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -57,7 +91,7 @@ exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "paddingRight": 20,
@@ -76,9 +110,9 @@ exports[`Picking Navigator Renders and Calls the Manual Scan Button 1`] = `
 exports[`Picking Navigator Renders the Picking Navigator 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -94,10 +128,10 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     component={[Function]}
     name="PickBinWorkflow"
     options={
-      Object {
+      {
         "headerLeft": [Function],
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
       }
     }
   />
@@ -105,10 +139,10 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     component={[Function]}
     name="SalesFloorWorkflow"
     options={
-      Object {
+      {
         "headerLeft": [Function],
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
       }
     }
   />
@@ -116,9 +150,9 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     component={[Function]}
     name="CreatePick"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PICKING.CREATE_PICK\\" translation]",
+        "headerTitle": "[missing "en.PICKING.CREATE_PICK" translation]",
       }
     }
   />
@@ -126,9 +160,9 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
     component={[Function]}
     name="AddLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.ADD_NEW_LOCATION" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -139,9 +173,9 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
 exports[`Picking Navigator Renders the Picking Navigator with kebab menu 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -157,10 +191,10 @@ exports[`Picking Navigator Renders the Picking Navigator with kebab menu 1`] = `
     component={[Function]}
     name="PickBinWorkflow"
     options={
-      Object {
+      {
         "headerLeft": [Function],
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
       }
     }
   />
@@ -168,10 +202,10 @@ exports[`Picking Navigator Renders the Picking Navigator with kebab menu 1`] = `
     component={[Function]}
     name="SalesFloorWorkflow"
     options={
-      Object {
+      {
         "headerLeft": [Function],
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PICKING.PICKING\\" translation]",
+        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
       }
     }
   />
@@ -179,9 +213,9 @@ exports[`Picking Navigator Renders the Picking Navigator with kebab menu 1`] = `
     component={[Function]}
     name="CreatePick"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.PICKING.CREATE_PICK\\" translation]",
+        "headerTitle": "[missing "en.PICKING.CREATE_PICK" translation]",
       }
     }
   />
@@ -189,9 +223,9 @@ exports[`Picking Navigator Renders the Picking Navigator with kebab menu 1`] = `
     component={[Function]}
     name="AddLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.ADD_NEW_LOCATION" translation]",
         "headerTitleAlign": "left",
       }
     }

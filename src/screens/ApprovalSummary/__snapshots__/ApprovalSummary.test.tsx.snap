@@ -3,7 +3,7 @@
 exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summary of approvals" translation if Approve route is selected  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -12,7 +12,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
 >
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -22,7 +22,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -34,7 +34,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -43,7 +43,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -61,7 +61,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -70,7 +70,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -90,10 +90,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -101,7 +101,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
 exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summary of rejections" translation if Reject route is selected 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -110,7 +110,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
 >
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -120,7 +120,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -132,7 +132,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -141,7 +141,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -159,7 +159,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -168,7 +168,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -188,10 +188,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -199,7 +199,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders "summa
 exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item\` translation for selected approval items with one onHands increase/decrease change  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -208,7 +208,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
 >
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -218,7 +218,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -230,7 +230,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -239,7 +239,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -257,7 +257,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -266,7 +266,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -286,10 +286,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -297,7 +297,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
 exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`items\` translation for selected approval items with mulitple onHands changes 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -306,7 +306,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
 >
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -316,7 +316,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -328,7 +328,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -337,7 +337,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -355,7 +355,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -364,7 +364,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -384,10 +384,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -395,7 +395,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders \`item
 exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increased/decreased on hands changes for selected approval items 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -404,7 +404,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
 >
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -414,7 +414,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -426,7 +426,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -435,7 +435,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -453,7 +453,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -462,7 +462,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -482,10 +482,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -493,7 +493,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders increa
 exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes for all on hands changes if no approval items are selected 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -502,7 +502,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
 >
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -512,7 +512,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -524,7 +524,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -533,7 +533,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -551,7 +551,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -560,7 +560,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -580,10 +580,10 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -591,7 +591,7 @@ exports[`ApprovalSummaryScreen Tests rendering the Summary Page:  Renders zeroes
 exports[`ApprovalSummaryScreen Tests rendering the update approval api error modal:  Renders error pop-up if errorModalVisible is set to true  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -609,14 +609,14 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -626,7 +626,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -641,12 +641,12 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -657,7 +657,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -667,7 +667,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -679,7 +679,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -688,7 +688,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -706,7 +706,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -715,7 +715,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -735,10 +735,10 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -746,7 +746,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
 exports[`ApprovalSummaryScreen Tests rendering the update approval api error modal:  Renders no error pop-up if errorModalVisible is set to false 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "flex": 1,
       "flexDirection": "column",
@@ -755,7 +755,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
 >
   <View
     style={
-      Object {
+      {
         "flex": 0.4,
         "flexDirection": "column",
         "justifyContent": "center",
@@ -765,7 +765,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   >
     <Text
       style={
-        Object {
+        {
           "color": "#323a4e",
           "fontSize": 20,
           "fontWeight": "bold",
@@ -777,7 +777,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -786,7 +786,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -804,7 +804,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "justifyContent": "flex-start",
         "marginHorizontal": 15,
@@ -813,7 +813,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
   >
     <Text
       style={
-        Object {
+        {
           "color": "#616161",
           "fontSize": 16,
           "fontWeight": "bold",
@@ -833,10 +833,10 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
     containerHeight={80}
     disableLeftButton={false}
     disableRightButton={false}
-    leftTitle="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+    leftTitle="[missing "en.APPROVAL.GO_BACK" translation]"
     onLeftPress={[Function]}
     onRightPress={[Function]}
-    rightTitle="[missing \\"en.APPROVAL.CONFIRM\\" translation]"
+    rightTitle="[missing "en.APPROVAL.CONFIRM" translation]"
   />
 </View>
 `;
@@ -844,7 +844,7 @@ exports[`ApprovalSummaryScreen Tests rendering the update approval api error mod
 exports[`ApprovalSummaryScreen Tests rendering update approval api response:  Renders loading indicator when waiting for Update Approval Api response  1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",

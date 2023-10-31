@@ -2,6 +2,23 @@
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with inProgress Bar enabled 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -13,7 +30,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "borderRadius": 10,
       "elevation": 2,
@@ -27,14 +44,14 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -43,7 +60,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
     </Text>
     <Text
       style={
-        Object {
+        {
           "flex": 1,
           "fontWeight": "bold",
           "textAlign": "right",
@@ -55,7 +72,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   </View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#e0e0e0",
         "borderRadius": 10,
         "flexDirection": "row",
@@ -68,19 +85,19 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "bottom": 0,
             "left": 0,
             "position": "absolute",
             "right": 0,
             "top": 0,
           },
-          Object {
+          {
             "backgroundColor": "#D6512D",
             "borderRadius": 10,
           },
-          Object {
+          {
             "width": "75%",
           },
         ]
@@ -89,7 +106,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   </View>
   <Text
     style={
-      Object {
+      {
         "color": "#006DE5",
         "textAlign": "right",
       }
@@ -102,6 +119,23 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with some test data and goal as zero 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -113,7 +147,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "borderRadius": 10,
       "elevation": 2,
@@ -127,14 +161,14 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -143,7 +177,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
     </Text>
     <Text
       style={
-        Object {
+        {
           "flex": 1,
           "fontWeight": "bold",
           "textAlign": "right",
@@ -155,7 +189,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   </View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#e0e0e0",
         "borderRadius": 10,
         "flexDirection": "row",
@@ -168,19 +202,19 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "bottom": 0,
             "left": 0,
             "position": "absolute",
             "right": 0,
             "top": 0,
           },
-          Object {
+          {
             "backgroundColor": "#e0e0e0",
             "borderRadius": 10,
           },
-          Object {
+          {
             "width": "90%",
           },
         ]
@@ -189,7 +223,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   </View>
   <Text
     style={
-      Object {
+      {
         "color": "#006DE5",
         "textAlign": "right",
       }
@@ -202,6 +236,23 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
 
 exports[`testing OHQtyUpdate component render component and test buttons render component with some test data and goal not as zero 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -213,7 +264,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "borderRadius": 10,
       "elevation": 2,
@@ -227,14 +278,14 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }
   >
     <Text
       style={
-        Object {
+        {
           "flex": 1,
         }
       }
@@ -243,7 +294,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
     </Text>
     <Text
       style={
-        Object {
+        {
           "flex": 1,
           "fontWeight": "bold",
           "textAlign": "right",
@@ -255,7 +306,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   </View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#e0e0e0",
         "borderRadius": 10,
         "flexDirection": "row",
@@ -268,19 +319,19 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "bottom": 0,
             "left": 0,
             "position": "absolute",
             "right": 0,
             "top": 0,
           },
-          Object {
+          {
             "backgroundColor": "#D6512D",
             "borderRadius": 10,
           },
-          Object {
+          {
             "width": "90%",
           },
         ]
@@ -289,7 +340,7 @@ exports[`testing OHQtyUpdate component render component and test buttons render 
   </View>
   <Text
     style={
-      Object {
+      {
         "color": "#006DE5",
         "textAlign": "right",
       }

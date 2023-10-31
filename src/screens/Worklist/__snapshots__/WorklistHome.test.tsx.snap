@@ -3,7 +3,7 @@
 exports[`WorkListHome Renders WorkListHome screen 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -17,14 +17,14 @@ exports[`WorkListHome Renders WorkListHome screen 1`] = `
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "height": 40,
         "marginBottom": 15,
         "width": "90%",
       }
     }
     testID="itemWorkListButton"
-    title="[missing \\"en.WORKLIST.ITEM_WORKLIST\\" translation]"
+    title="[missing "en.WORKLIST.ITEM_WORKLIST" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -37,7 +37,7 @@ exports[`WorkListHome Renders WorkListHome screen 1`] = `
 exports[`WorkListHome Renders WorkListHome screen with Configs all configs enabled 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -51,14 +51,14 @@ exports[`WorkListHome Renders WorkListHome screen with Configs all configs enabl
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "height": 40,
         "marginBottom": 15,
         "width": "90%",
       }
     }
     testID="itemWorkListButton"
-    title="[missing \\"en.WORKLIST.ITEM_WORKLIST\\" translation]"
+    title="[missing "en.WORKLIST.ITEM_WORKLIST" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -72,14 +72,14 @@ exports[`WorkListHome Renders WorkListHome screen with Configs all configs enabl
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "height": 40,
         "marginBottom": 15,
         "width": "90%",
       }
     }
     testID="palletWorkListButton"
-    title="[missing \\"en.WORKLIST.PALLET_WORKLIST\\" translation]"
+    title="[missing "en.WORKLIST.PALLET_WORKLIST" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -93,14 +93,14 @@ exports[`WorkListHome Renders WorkListHome screen with Configs all configs enabl
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "height": 40,
         "marginBottom": 15,
         "width": "90%",
       }
     }
     testID="auditWorkListButton"
-    title="[missing \\"en.WORKLIST.AUDIT_WORKLIST\\" translation]"
+    title="[missing "en.WORKLIST.AUDIT_WORKLIST" translation]"
     titleColor="#ffffffff"
     titleFontSize={16}
     titleFontWeight="normal"

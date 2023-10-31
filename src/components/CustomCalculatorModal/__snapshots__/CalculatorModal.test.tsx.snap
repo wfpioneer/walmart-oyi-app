@@ -30,7 +30,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -40,8 +40,8 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 7.5,
@@ -50,7 +50,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             "paddingHorizontal": 8,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -58,14 +58,14 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "paddingTop": 10,
           }
         }
       />
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "borderColor": "#00000099",
             "borderRadius": 8,
@@ -77,7 +77,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "alignItems": "flex-end",
               "borderRadius": 7,
               "borderWidth": 1,
@@ -92,7 +92,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             onContentSizeChange={[Function]}
             showsHorizontalScrollIndicator={false}
             style={
-              Object {
+              {
                 "direction": "rtl",
                 "flexDirection": "row",
                 "flexGrow": 0,
@@ -103,7 +103,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             <View>
               <Text
                 style={
-                  Object {
+                  {
                     "fontSize": 16,
                     "paddingHorizontal": 2,
                     "paddingVertical": 4,
@@ -111,16 +111,14 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
                   }
                 }
                 testID="calc-paper-tape"
-              >
-                
-              </Text>
+              />
             </View>
           </RCTScrollView>
           <View>
             <TextInput
               editable={false}
               style={
-                Object {
+                {
                   "color": "#000000",
                   "fontSize": 20,
                   "height": 107.14285714285714,
@@ -129,26 +127,41 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
                 }
               }
               testID="calc-text"
-            >
-              
-            </TextInput>
+            />
           </View>
         </View>
         <View
           style={
-            Object {
+            {
               "margin": 2,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
               }
             }
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -162,7 +175,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -178,7 +191,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -188,6 +201,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -201,7 +231,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -217,7 +247,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -227,6 +257,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -240,7 +287,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -256,7 +303,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -266,6 +313,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -279,7 +343,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -295,7 +359,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -307,12 +371,29 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
               }
             }
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -326,7 +407,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -342,7 +423,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -352,6 +433,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -365,7 +463,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -381,7 +479,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -391,6 +489,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -404,7 +519,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -420,7 +535,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -430,6 +545,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -443,7 +575,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -459,7 +591,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -471,12 +603,29 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
               }
             }
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -490,7 +639,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -506,7 +655,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -516,6 +665,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -529,7 +695,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -545,7 +711,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -555,6 +721,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -568,7 +751,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -584,7 +767,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -594,6 +777,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -607,7 +807,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -623,7 +823,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -635,12 +835,29 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
               }
             }
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -654,7 +871,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -670,7 +887,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -680,6 +897,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -693,7 +927,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -709,7 +943,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -719,6 +953,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -732,7 +983,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -748,7 +999,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -758,6 +1009,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -771,7 +1039,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -787,7 +1055,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -799,12 +1067,29 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
               }
             }
           >
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -818,7 +1103,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -834,7 +1119,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -844,6 +1129,23 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
@@ -857,7 +1159,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderColor": "#000000",
@@ -873,7 +1175,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -884,8 +1186,20 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             </View>
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": true,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -901,7 +1215,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#c5c5c5",
                   "borderColor": "#000000",
@@ -917,7 +1231,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontSize": 30,
                   }
@@ -931,7 +1245,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -942,11 +1256,11 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -955,15 +1269,27 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -977,7 +1303,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -991,7 +1317,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -1007,11 +1333,11 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -1020,15 +1346,27 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -1042,7 +1380,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -1056,7 +1394,7 @@ exports[`Calculator Modal render tests render modal with visible true 1`] = `
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,

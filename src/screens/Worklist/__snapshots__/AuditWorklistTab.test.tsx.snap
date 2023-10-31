@@ -3,16 +3,18 @@
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit worklist with errors 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -26,17 +28,17 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
 >
   <AuditWorklistTabScreen
     collapsedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     config={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -44,18 +46,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -100,18 +102,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
     countryCode="MX"
     dispatch={[MockFunction]}
     error={[Function]}
-    filterCategories={Array []}
-    filterExceptions={Array []}
+    filterCategories={[]}
+    filterExceptions={[]}
     isLoadedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     isManualScanEnabled={true}
     items={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": true,
@@ -124,7 +126,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": true,
@@ -137,7 +139,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": true,
@@ -150,7 +152,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": true,
@@ -176,7 +178,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
 
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders AuditWorkListTab component wrapper 1`] = `
 <RCTScrollView
-  data={Array []}
+  data={[]}
   getItem={[Function]}
   getItemCount={[Function]}
   keyExtractor={[Function]}
@@ -198,8 +200,8 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
   removeClippedSubviews={false}
   renderItem={[Function]}
   scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  viewabilityConfigCallbackPairs={Array []}
+  stickyHeaderIndices={[]}
+  viewabilityConfigCallbackPairs={[]}
   windowSize={3}
 >
   <RCTRefreshControl />
@@ -210,16 +212,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders completed Audit worklist items 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -233,17 +237,17 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
 >
   <AuditWorklistTabScreen
     collapsedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     config={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -251,18 +255,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -307,18 +311,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
     countryCode="MX"
     dispatch={[MockFunction]}
     error={null}
-    filterCategories={Array []}
-    filterExceptions={Array []}
+    filterCategories={[]}
+    filterExceptions={[]}
     isLoadedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     isManualScanEnabled={true}
     items={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": true,
@@ -331,7 +335,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": true,
@@ -344,7 +348,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": true,
@@ -357,7 +361,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": true,
@@ -384,16 +388,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders completed Audit worklist items with images 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -407,17 +413,17 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
 >
   <AuditWorklistTabScreen
     collapsedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     config={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -425,18 +431,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -481,18 +487,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
     countryCode="MX"
     dispatch={[MockFunction]}
     error={null}
-    filterCategories={Array []}
-    filterExceptions={Array []}
+    filterCategories={[]}
+    filterExceptions={[]}
     isLoadedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     isManualScanEnabled={true}
     items={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": true,
@@ -505,7 +511,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": true,
@@ -518,7 +524,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": true,
@@ -531,7 +537,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": true,
@@ -558,16 +564,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
 exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do Audit worklist items 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -581,17 +589,17 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
 >
   <AuditWorklistTabScreen
     collapsedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     config={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -599,18 +607,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -655,18 +663,18 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
     countryCode="MX"
     dispatch={[MockFunction]}
     error={null}
-    filterCategories={Array []}
-    filterExceptions={Array []}
+    filterCategories={[]}
+    filterExceptions={[]}
     isLoadedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     isManualScanEnabled={true}
     items={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -679,7 +687,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -692,7 +700,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -705,7 +713,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -730,10 +738,10 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
 `;
 
 exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collapsible prop Renders the worklist items in collapsible mode when collapse button clicked 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -747,10 +755,10 @@ Array [
       keyboardType="numeric"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
       selectionColor="#0071e9"
       style={
-        Object {
+        {
           "color": "#000000",
           "flex": 1,
           "paddingLeft": 10,
@@ -762,7 +770,7 @@ Array [
   </View>,
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -773,6 +781,23 @@ Array [
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -784,7 +809,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -792,7 +817,7 @@ Array [
     >
       <Text
         style={
-          Object {
+          {
             "color": "#5a9ae0",
             "fontSize": 12,
           }
@@ -804,7 +829,7 @@ Array [
   </View>,
   <RCTScrollView
     data={
-      Array [
+      [
         "93 - FOODSERVICE",
         "99 - ELECTRONICS",
         "88 - FRESH BAKERY",
@@ -831,20 +856,21 @@ Array [
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
     windowSize={3}
   >
     <RCTRefreshControl />
     <View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomWidth": 1,
@@ -858,7 +884,7 @@ Array [
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "column",
                 }
@@ -872,11 +898,28 @@ Array [
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 10,
                   "left": 15,
                   "right": 15,
@@ -891,7 +934,7 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -906,8 +949,8 @@ Array [
           </View>
           <View
             data={
-              Array [
-                Object {
+              [
+                {
                   "catgName": "FOODSERVICE",
                   "catgNbr": 93,
                   "completed": false,
@@ -920,7 +963,7 @@ Array [
                   "upcNbr": "000055559999",
                   "worklistType": "AU",
                 },
-                Object {
+                {
                   "catgName": "FOODSERVICE",
                   "catgNbr": 93,
                   "completed": false,
@@ -949,13 +992,31 @@ Array [
             removeClippedSubviews={false}
             renderItem={[Function]}
             scrollEventThrottle={50}
-            stickyHeaderIndices={Array []}
-            viewabilityConfigCallbackPairs={Array []}
+            stickyHeaderIndices={[]}
+            viewabilityConfigCallbackPairs={[]}
           >
             <View
+              onFocusCapture={[Function]}
               style={null}
             >
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={false}
@@ -967,7 +1028,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
@@ -980,7 +1041,7 @@ Array [
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "flex-start",
                       "flex": 1,
                       "justifyContent": "space-evenly",
@@ -989,7 +1050,7 @@ Array [
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "marginTop": 2,
                         "width": "100%",
                       }
@@ -997,8 +1058,20 @@ Array [
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -1012,7 +1085,7 @@ Array [
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "backgroundColor": "#ffffffff",
                           "flexDirection": "row",
                           "opacity": 1,
@@ -1025,7 +1098,7 @@ Array [
                     >
                       <View
                         style={
-                          Object {
+                          {
                             "flexDirection": "column",
                             "flexShrink": 1,
                             "justifyContent": "space-around",
@@ -1036,14 +1109,14 @@ Array [
                       >
                         <View
                           style={
-                            Object {
+                            {
                               "paddingBottom": 10,
                             }
                           }
                         >
                           <Text
                             style={
-                              Object {
+                              {
                                 "color": "#616161",
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
@@ -1057,7 +1130,7 @@ Array [
                         <View>
                           <Text
                             style={
-                              Object {
+                              {
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
                                 "fontSize": 14,
@@ -1075,9 +1148,27 @@ Array [
               </View>
             </View>
             <View
+              onFocusCapture={[Function]}
               style={null}
             >
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={false}
@@ -1089,7 +1180,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
@@ -1102,7 +1193,7 @@ Array [
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "flex-start",
                       "flex": 1,
                       "justifyContent": "space-evenly",
@@ -1111,7 +1202,7 @@ Array [
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "marginTop": 2,
                         "width": "100%",
                       }
@@ -1119,8 +1210,20 @@ Array [
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -1134,7 +1237,7 @@ Array [
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "backgroundColor": "#ffffffff",
                           "flexDirection": "row",
                           "opacity": 1,
@@ -1147,7 +1250,7 @@ Array [
                     >
                       <View
                         style={
-                          Object {
+                          {
                             "flexDirection": "column",
                             "flexShrink": 1,
                             "justifyContent": "space-around",
@@ -1158,14 +1261,14 @@ Array [
                       >
                         <View
                           style={
-                            Object {
+                            {
                               "paddingBottom": 10,
                             }
                           }
                         >
                           <Text
                             style={
-                              Object {
+                              {
                                 "color": "#616161",
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
@@ -1179,7 +1282,7 @@ Array [
                         <View>
                           <Text
                             style={
-                              Object {
+                              {
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
                                 "fontSize": 14,
@@ -1200,13 +1303,14 @@ Array [
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomWidth": 1,
@@ -1220,7 +1324,7 @@ Array [
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "column",
                 }
@@ -1234,11 +1338,28 @@ Array [
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 10,
                   "left": 15,
                   "right": 15,
@@ -1253,7 +1374,7 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -1268,8 +1389,8 @@ Array [
           </View>
           <View
             data={
-              Array [
-                Object {
+              [
+                {
                   "catgName": "ELECTRONICS",
                   "catgNbr": 99,
                   "completed": false,
@@ -1298,13 +1419,31 @@ Array [
             removeClippedSubviews={false}
             renderItem={[Function]}
             scrollEventThrottle={50}
-            stickyHeaderIndices={Array []}
-            viewabilityConfigCallbackPairs={Array []}
+            stickyHeaderIndices={[]}
+            viewabilityConfigCallbackPairs={[]}
           >
             <View
+              onFocusCapture={[Function]}
               style={null}
             >
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={false}
@@ -1316,7 +1455,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
@@ -1329,7 +1468,7 @@ Array [
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "flex-start",
                       "flex": 1,
                       "justifyContent": "space-evenly",
@@ -1338,7 +1477,7 @@ Array [
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "marginTop": 2,
                         "width": "100%",
                       }
@@ -1346,8 +1485,20 @@ Array [
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -1361,7 +1512,7 @@ Array [
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "backgroundColor": "#ffffffff",
                           "flexDirection": "row",
                           "opacity": 1,
@@ -1374,7 +1525,7 @@ Array [
                     >
                       <View
                         style={
-                          Object {
+                          {
                             "flexDirection": "column",
                             "flexShrink": 1,
                             "justifyContent": "space-around",
@@ -1385,14 +1536,14 @@ Array [
                       >
                         <View
                           style={
-                            Object {
+                            {
                               "paddingBottom": 10,
                             }
                           }
                         >
                           <Text
                             style={
-                              Object {
+                              {
                                 "color": "#616161",
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
@@ -1406,7 +1557,7 @@ Array [
                         <View>
                           <Text
                             style={
-                              Object {
+                              {
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
                                 "fontSize": 14,
@@ -1427,13 +1578,14 @@ Array [
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomWidth": 1,
@@ -1447,7 +1599,7 @@ Array [
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "column",
                 }
@@ -1461,11 +1613,28 @@ Array [
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 10,
                   "left": 15,
                   "right": 15,
@@ -1480,7 +1649,7 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -1495,8 +1664,8 @@ Array [
           </View>
           <View
             data={
-              Array [
-                Object {
+              [
+                {
                   "catgName": "FRESH BAKERY",
                   "catgNbr": 88,
                   "completed": false,
@@ -1525,13 +1694,31 @@ Array [
             removeClippedSubviews={false}
             renderItem={[Function]}
             scrollEventThrottle={50}
-            stickyHeaderIndices={Array []}
-            viewabilityConfigCallbackPairs={Array []}
+            stickyHeaderIndices={[]}
+            viewabilityConfigCallbackPairs={[]}
           >
             <View
+              onFocusCapture={[Function]}
               style={null}
             >
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={false}
@@ -1543,7 +1730,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
@@ -1556,7 +1743,7 @@ Array [
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "flex-start",
                       "flex": 1,
                       "justifyContent": "space-evenly",
@@ -1565,7 +1752,7 @@ Array [
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "marginTop": 2,
                         "width": "100%",
                       }
@@ -1573,8 +1760,20 @@ Array [
                   >
                     <View
                       accessibilityState={
-                        Object {
+                        {
+                          "busy": undefined,
+                          "checked": undefined,
                           "disabled": false,
+                          "expanded": undefined,
+                          "selected": undefined,
+                        }
+                      }
+                      accessibilityValue={
+                        {
+                          "max": undefined,
+                          "min": undefined,
+                          "now": undefined,
+                          "text": undefined,
                         }
                       }
                       accessible={true}
@@ -1588,7 +1787,7 @@ Array [
                       onResponderTerminationRequest={[Function]}
                       onStartShouldSetResponder={[Function]}
                       style={
-                        Object {
+                        {
                           "backgroundColor": "#ffffffff",
                           "flexDirection": "row",
                           "opacity": 1,
@@ -1601,7 +1800,7 @@ Array [
                     >
                       <View
                         style={
-                          Object {
+                          {
                             "flexDirection": "column",
                             "flexShrink": 1,
                             "justifyContent": "space-around",
@@ -1612,14 +1811,14 @@ Array [
                       >
                         <View
                           style={
-                            Object {
+                            {
                               "paddingBottom": 10,
                             }
                           }
                         >
                           <Text
                             style={
-                              Object {
+                              {
                                 "color": "#616161",
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
@@ -1633,7 +1832,7 @@ Array [
                         <View>
                           <Text
                             style={
-                              Object {
+                              {
                                 "flexShrink": 1,
                                 "flexWrap": "wrap",
                                 "fontSize": 14,
@@ -1659,10 +1858,10 @@ Array [
 `;
 
 exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collapsible prop Renders the worklist items in open mode when expand button clicked 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -1676,10 +1875,10 @@ Array [
       keyboardType="numeric"
       onChangeText={[Function]}
       onSubmitEditing={[Function]}
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
       selectionColor="#0071e9"
       style={
-        Object {
+        {
           "color": "#000000",
           "flex": 1,
           "paddingLeft": 10,
@@ -1691,7 +1890,7 @@ Array [
   </View>,
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -1702,6 +1901,23 @@ Array [
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -1713,7 +1929,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -1721,7 +1937,7 @@ Array [
     >
       <Text
         style={
-          Object {
+          {
             "color": "#5a9ae0",
             "fontSize": 12,
           }
@@ -1733,7 +1949,7 @@ Array [
   </View>,
   <RCTScrollView
     data={
-      Array [
+      [
         "93 - FOODSERVICE",
         "99 - ELECTRONICS",
         "88 - FRESH BAKERY",
@@ -1760,20 +1976,21 @@ Array [
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
     windowSize={3}
   >
     <RCTRefreshControl />
     <View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomWidth": 1,
@@ -1787,7 +2004,7 @@ Array [
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "column",
                 }
@@ -1801,11 +2018,28 @@ Array [
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 10,
                   "left": 15,
                   "right": 15,
@@ -1820,7 +2054,7 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -1836,13 +2070,14 @@ Array [
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomWidth": 1,
@@ -1856,7 +2091,7 @@ Array [
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "column",
                 }
@@ -1870,11 +2105,28 @@ Array [
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 10,
                   "left": 15,
                   "right": 15,
@@ -1889,7 +2141,7 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -1905,13 +2157,14 @@ Array [
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         onLayout={[Function]}
         style={null}
       >
         <View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomWidth": 1,
@@ -1925,7 +2178,7 @@ Array [
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                   "flexDirection": "column",
                 }
@@ -1939,11 +2192,28 @@ Array [
               </Text>
             </View>
             <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
               accessible={true}
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 10,
                   "left": 15,
                   "right": 15,
@@ -1958,7 +2228,7 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "opacity": 1,
                 }
               }
@@ -1981,16 +2251,18 @@ Array [
 exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collapsible prop Renders to-do Audit worklist items without manual scan enabled 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -2004,17 +2276,17 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
 >
   <AuditWorklistTabScreen
     collapsedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     config={
-      Object {
-        "areas": Array [
-          Object {
+      {
+        "areas": [
+          {
             "area": "CENTER",
-            "categories": Array [
+            "categories": [
               5,
               7,
               9,
@@ -2022,18 +2294,18 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
               16,
             ],
           },
-          Object {
+          {
             "area": "GM",
-            "categories": Array [
+            "categories": [
               23,
               24,
               28,
               31,
             ],
           },
-          Object {
+          {
             "area": "Fresh",
-            "categories": Array [
+            "categories": [
               41,
               42,
               43,
@@ -2078,18 +2350,18 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
     countryCode="MX"
     dispatch={[MockFunction]}
     error={null}
-    filterCategories={Array []}
-    filterExceptions={Array []}
+    filterCategories={[]}
+    filterExceptions={[]}
     isLoadedState={
-      Array [
+      [
         false,
         [MockFunction],
       ]
     }
     isManualScanEnabled={false}
     items={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -2102,7 +2374,7 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -2115,7 +2387,7 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -2128,7 +2400,7 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -2155,7 +2427,7 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
 exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filter type AREA 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#0071e9",
       "borderRadius": 20,
@@ -2170,7 +2442,7 @@ exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filte
 >
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "paddingHorizontal": 10,
       }
@@ -2194,7 +2466,7 @@ exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filte
 exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filter type CATEGORY  1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#0071e9",
       "borderRadius": 20,
@@ -2209,7 +2481,7 @@ exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filte
 >
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "paddingHorizontal": 10,
       }
@@ -2233,7 +2505,7 @@ exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filte
 exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filter type EXCEPTION 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#0071e9",
       "borderRadius": 20,
@@ -2248,7 +2520,7 @@ exports[`Tests rendering Filter \`Pills\` Renders a filter button for list filte
 >
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "paddingHorizontal": 10,
       }

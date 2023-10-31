@@ -3,7 +3,7 @@
 exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard when the card is closed 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#5a9ae0",
       "borderBottomWidth": 1,
@@ -14,7 +14,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "flexDirection": "row",
@@ -24,7 +24,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
   >
     <Text
       style={
-        Object {
+        {
           "flex": 1,
           "fontSize": 16,
         }
@@ -34,6 +34,23 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
     </Text>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -45,7 +62,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -63,7 +80,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard when the card is opened 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#5a9ae0",
       "borderBottomWidth": 1,
@@ -74,7 +91,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "flexDirection": "row",
@@ -84,7 +101,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
   >
     <Text
       style={
-        Object {
+        {
           "flex": 1,
           "fontSize": 16,
         }
@@ -94,6 +111,23 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
     </Text>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -105,7 +139,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -123,7 +157,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard with showCheckbox is true 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#5a9ae0",
       "borderBottomWidth": 1,
@@ -134,7 +168,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "flexDirection": "row",
@@ -150,7 +184,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
     />
     <Text
       style={
-        Object {
+        {
           "flex": 1,
           "fontSize": 16,
         }
@@ -162,7 +196,7 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "paddingRight": 10,
       }
     }
@@ -180,16 +214,18 @@ exports[`ListGroup Tests CollapsibleCard Component should tests CollapsibleCard 
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems and multiBinEnabled as true 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -208,8 +244,8 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     multiBinEnabled={true}
     multiPickEnabled={false}
     pickListItems={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-04-02T12:55:31.9633333Z",
@@ -227,7 +263,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "status": "accepted pick",
           "upcNbr": "000041800003",
         },
-        Object {
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-02-09T12:55:31.9633333Z",
@@ -245,7 +281,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "status": "accepted pick",
           "upcNbr": "000052900004",
         },
-        Object {
+        {
           "assignedAssociate": "",
           "category": 46,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -273,16 +309,18 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems and multiPickEnabled as true 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -301,8 +339,8 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     multiBinEnabled={false}
     multiPickEnabled={true}
     pickListItems={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-04-02T12:55:31.9633333Z",
@@ -320,7 +358,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "status": "accepted pick",
           "upcNbr": "000041800003",
         },
-        Object {
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-02-09T12:55:31.9633333Z",
@@ -338,7 +376,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "status": "accepted pick",
           "upcNbr": "000052900004",
         },
-        Object {
+        {
           "assignedAssociate": "",
           "category": 46,
           "createTs": "2022-04-03T12:55:31.9633333Z",
@@ -366,16 +404,18 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as false 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -394,8 +434,8 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     multiBinEnabled={false}
     multiPickEnabled={false}
     pickListItems={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-04-02T12:55:31.9633333Z",
@@ -413,7 +453,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "status": "accepted pick",
           "upcNbr": "000041800003",
         },
-        Object {
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-02-09T12:55:31.9633333Z",
@@ -441,16 +481,18 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
 exports[`ListGroup Tests rendering the ListGroup component Test renders the ListGroup component with groupItems prop as true 1`] = `
 <Context.Provider
   value={
-    Object {
+    {
       "getServerState": undefined,
-      "store": Object {
+      "noopCheck": "once",
+      "stabilityCheck": "once",
+      "store": {
         "@@observable": [Function],
         "dispatch": [Function],
         "getState": [Function],
         "replaceReducer": [Function],
         "subscribe": [Function],
       },
-      "subscription": Object {
+      "subscription": {
         "addNestedSub": [Function],
         "getListeners": [Function],
         "handleChangeWrapper": [Function],
@@ -469,8 +511,8 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
     multiBinEnabled={false}
     multiPickEnabled={false}
     pickListItems={
-      Array [
-        Object {
+      [
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-04-02T12:55:31.9633333Z",
@@ -488,7 +530,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "status": "accepted pick",
           "upcNbr": "000041800003",
         },
-        Object {
+        {
           "assignedAssociate": "Associate 1",
           "category": 71,
           "createTs": "2022-02-09T12:55:31.9633333Z",
@@ -506,7 +548,7 @@ exports[`ListGroup Tests rendering the ListGroup component Test renders the List
           "status": "accepted pick",
           "upcNbr": "000052900004",
         },
-        Object {
+        {
           "assignedAssociate": "Associate 2",
           "category": 46,
           "createTs": "2022-04-03T12:55:31.9633333Z",

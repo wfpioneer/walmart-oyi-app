@@ -3,7 +3,7 @@
 exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Renders negative change in quantity 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -11,7 +11,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
@@ -22,7 +22,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#8492a8",
           "fontSize": 14,
@@ -33,7 +33,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
     </Text>
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#545F7A",
           "fontSize": 16,
@@ -45,7 +45,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
@@ -56,7 +56,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#8492a8",
           "fontSize": 14,
@@ -67,14 +67,14 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
     </Text>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "alignSelf": "flex-start",
             "color": "#ab2703",
             "fontSize": 16,
@@ -91,7 +91,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 16,
             "marginHorizontal": 4,
@@ -102,7 +102,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
       </Text>
       <Text
         style={
-          Object {
+          {
             "alignSelf": "flex-start",
             "color": "#ab2703",
             "fontSize": 16,
@@ -116,7 +116,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   </View>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 1,
         "flexDirection": "row",
@@ -128,7 +128,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#545F7A",
           "fontSize": 16,
@@ -145,7 +145,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
 exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Renders no change arrow if oldOHQuantity and newOHQuantity are zero 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -153,7 +153,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
@@ -164,7 +164,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#8492a8",
           "fontSize": 14,
@@ -175,7 +175,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
     </Text>
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#545F7A",
           "fontSize": 16,
@@ -187,7 +187,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
@@ -198,7 +198,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#8492a8",
           "fontSize": 14,
@@ -209,14 +209,14 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
     </Text>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "alignSelf": "center",
             "color": "#545F7A",
             "fontSize": 16,
@@ -228,7 +228,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 16,
             "marginHorizontal": 4,
@@ -239,7 +239,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
       </Text>
       <Text
         style={
-          Object {
+          {
             "alignSelf": "center",
             "color": "#545F7A",
             "fontSize": 16,
@@ -253,7 +253,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   </View>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 1,
         "flexDirection": "row",
@@ -265,7 +265,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#545F7A",
           "fontSize": 16,
@@ -282,7 +282,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
 exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Renders positive change in quantity 1`] = `
 <View
   style={
-    Object {
+    {
       "flexDirection": "column",
       "width": "100%",
     }
@@ -290,7 +290,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
@@ -301,7 +301,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#8492a8",
           "fontSize": 14,
@@ -312,7 +312,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
     </Text>
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#545F7A",
           "fontSize": 16,
@@ -324,7 +324,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-between",
         "marginVertical": 6,
@@ -335,7 +335,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#8492a8",
           "fontSize": 14,
@@ -346,14 +346,14 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
     </Text>
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
         }
       }
     >
       <Text
         style={
-          Object {
+          {
             "alignSelf": "flex-start",
             "color": "#33691E",
             "fontSize": 16,
@@ -370,7 +370,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 16,
             "marginHorizontal": 4,
@@ -381,7 +381,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
       </Text>
       <Text
         style={
-          Object {
+          {
             "alignSelf": "flex-start",
             "color": "#33691E",
             "fontSize": 16,
@@ -395,7 +395,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   </View>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 1,
         "flexDirection": "row",
@@ -407,7 +407,7 @@ exports[`QuantityChange Component Tests rendering Quantity On-Hands Change: Rend
   >
     <Text
       style={
-        Object {
+        {
           "alignSelf": "center",
           "color": "#545F7A",
           "fontSize": 16,

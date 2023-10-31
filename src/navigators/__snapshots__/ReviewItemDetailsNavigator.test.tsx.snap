@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
+exports[`ReviewItemDetailsNavigation Render ReviewItemNavigator 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -15,19 +15,19 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
       }
     }
     name="ReviewItemDetailsHome"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
         "headerLeft": [Function],
         "headerRight": [Function],
         "headerTitle": [Function],
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -37,12 +37,12 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
     component={[Function]}
     name="NoActionScan"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -52,11 +52,11 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
     component={[Function]}
     name="LocationDetails"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.TITLE\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.TITLE" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -66,12 +66,12 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
     component={[Function]}
     name="EditLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.EDIT_LOCATION" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -81,12 +81,12 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
     component={[Function]}
     name="AddLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.ADD_NEW_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.ADD_NEW_LOCATION" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -96,13 +96,13 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
     component={[Function]}
     name="ItemHistory"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
         "headerLeft": [Function],
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.\\" translation]",
+        "headerTitle": "[missing "en." translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -112,22 +112,27 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
     component={[Function]}
     name="AuditItem"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.AUDITS.AUDIT_ITEM\\" translation]",
+        "headerTitle": "[missing "en.AUDITS.AUDIT_ITEM" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
+    listeners={
+      {
+        "beforeRemove": [Function],
+      }
+    }
     name="ReserveAdjustment"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.ITEM.RESERVE_ADJUSTMENT\\" translation]",
+        "headerTitle": "[missing "en.ITEM.RESERVE_ADJUSTMENT" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -137,10 +142,10 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
     component={[Function]}
     name="OtherAction"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.ITEM.CHOOSE_ACTION\\" translation]",
+      {
+        "headerTitle": "[missing "en.ITEM.CHOOSE_ACTION" translation]",
         "headerTitleAlign": "left",
-        "headerTitleStyle": Object {
+        "headerTitleStyle": {
           "fontSize": 18,
         },
       }
@@ -149,8 +154,25 @@ exports[`ReviewItemsDetailsNavigation Render ReviewItemsNavigator 1`] = `
 </StackNavigator>
 `;
 
-exports[`ReviewItemsDetailsNavigation Render calcutator button  1`] = `
+exports[`ReviewItemDetailsNavigation Render calcutator button  1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -162,7 +184,7 @@ exports[`ReviewItemsDetailsNavigation Render calcutator button  1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -170,7 +192,7 @@ exports[`ReviewItemsDetailsNavigation Render calcutator button  1`] = `
 >
   <View
     style={
-      Object {
+      {
         "width": 35,
       }
     }
@@ -184,8 +206,25 @@ exports[`ReviewItemsDetailsNavigation Render calcutator button  1`] = `
 </View>
 `;
 
-exports[`ReviewItemsDetailsNavigation Render open camera button 1`] = `
+exports[`ReviewItemDetailsNavigation Render open camera button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -197,7 +236,7 @@ exports[`ReviewItemsDetailsNavigation Render open camera button 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -205,7 +244,7 @@ exports[`ReviewItemsDetailsNavigation Render open camera button 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -222,8 +261,25 @@ exports[`ReviewItemsDetailsNavigation Render open camera button 1`] = `
 </View>
 `;
 
-exports[`ReviewItemsDetailsNavigation Render print queue button  1`] = `
+exports[`ReviewItemDetailsNavigation Render print queue button  1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -235,7 +291,7 @@ exports[`ReviewItemsDetailsNavigation Render print queue button  1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -243,7 +299,7 @@ exports[`ReviewItemsDetailsNavigation Render print queue button  1`] = `
 >
   <View
     style={
-      Object {
+      {
         "width": 35,
       }
     }
@@ -257,8 +313,25 @@ exports[`ReviewItemsDetailsNavigation Render print queue button  1`] = `
 </View>
 `;
 
-exports[`ReviewItemsDetailsNavigation Renders and Calls the Manual Scan Button 1`] = `
+exports[`ReviewItemDetailsNavigation Renders and Calls the Manual Scan Button 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -270,7 +343,7 @@ exports[`ReviewItemsDetailsNavigation Renders and Calls the Manual Scan Button 1
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -278,7 +351,7 @@ exports[`ReviewItemsDetailsNavigation Renders and Calls the Manual Scan Button 1
 >
   <View
     style={
-      Object {
+      {
         "width": 35,
       }
     }

@@ -44,8 +44,6 @@ const mockFetchItemCenterPromise = Promise.resolve({
   json: () => mockItemCenterRiverSandJsonPromise
 });
 
-const mockFetchItemCenterPromiseFailure = Promise.reject(new Error('test error'));
-
 const urls = getEnvironment();
 
 jest.mock('./ImageWrapperUtils', () => {
@@ -105,6 +103,8 @@ describe('ImageWrapper Component', () => {
     expect(utils.postApiCall).toBeCalledWith(urls.itemCenterRiversandURL, itemCenterDataParams);
   });
   it('test setCNImageUri', async () => {
+    const mockFetchItemCenterPromiseFailure = Promise.reject(new Error('test error'));
+
     const mockDispatch = jest.fn();
     let mockPostApiCall = jest.fn().mockImplementation(() => mockFetchItemCenterPromise);
     setCNImageUri(1234, mockDispatch, mockPostApiCall);
