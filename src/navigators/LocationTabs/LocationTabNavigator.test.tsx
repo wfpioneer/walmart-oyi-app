@@ -29,10 +29,8 @@ import store from '../../state';
 import { AsyncState } from '../../models/AsyncState';
 import { LocationIdName } from '../../state/reducers/Location';
 import { ClearLocationTarget } from '../../models/Location';
-import User from '../../models/User';
 import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAPI';
 import { HIDE_LOCATION_POPUP, hideItemPopup, setIsToolBarNavigation } from '../../state/actions/Location';
-import { mockConfig } from '../../mockData/mockConfig';
 import mockUser from '../../mockData/mockUser';
 import { getSectionDetails } from '../../state/actions/saga';
 import { resetScannedEvent } from '../../state/actions/Global';
@@ -700,7 +698,7 @@ describe('Test Location Tabs', (): void => {
       setSelectedTab: jest.fn(),
       activityModal: false
     };
-    it('Tests useEffect Hooks Navigation Listener', () => {
+    it('Tests useEffect Hooks Navigation Listener', async () => {
       navigationProp.addListener = jest.fn()
         .mockImplementation((event, callback) => {
           callback();
@@ -709,7 +707,7 @@ describe('Test Location Tabs', (): void => {
         .mockImplementation((event, callback) => {
           callback();
         });
-      const { unmount } = render(
+      const { update, unmount } = await render(
         <Provider store={store}>
           <NavigationContainer>
             <LocationTabsNavigator
@@ -736,6 +734,20 @@ describe('Test Location Tabs', (): void => {
       expect(mockDispatch).toHaveBeenNthCalledWith(2, resetScannedEvent());
       expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: GET_SECTION_DETAILS.RESET });
 
+      await update(
+        <Provider store={store}>
+          <NavigationContainer>
+            <LocationTabsNavigator
+              {...tabProps}
+              dispatch={mockDispatch}
+              itemPopupVisible={false}
+            />
+          </NavigationContainer>
+        </Provider>
+      );
+      expect(mockDispatch).toHaveBeenNthCalledWith(5, { type: GET_SECTION_DETAILS.RESET });
+      expect(await mockDispatch).toHaveBeenNthCalledWith(6, getSectionDetails({ sectionId: '0' }));
+      expect(await mockDispatch).toHaveBeenNthCalledWith(7, setIsToolBarNavigation(true));
       unmount();
       expect(navigationProp.removeListener).toBeCalledWith(
         'beforeRemove',
