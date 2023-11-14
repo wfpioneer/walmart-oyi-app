@@ -671,7 +671,7 @@ describe('Test Location Tabs', (): void => {
   });
 
   describe('Tests LocationTabNavigator React Hooks', () => {
-    const mockReact = jest.requireActual('React');
+    const mockReact = jest.requireActual('react');
 
     const tabProps: LocationProps = {
       floorItems: [],
