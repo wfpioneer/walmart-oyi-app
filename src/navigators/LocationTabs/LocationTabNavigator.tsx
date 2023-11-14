@@ -471,7 +471,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         api={removeSectionApi}
         handleConfirm={handleRemoveSection}
         isVisible={displayRemoveConfirmation}
-        mainText={`${strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}`}
+        mainText={strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}
         onClose={() => setDisplayRemoveConfirmation(false)}
       />
       <ApiConfirmationModal

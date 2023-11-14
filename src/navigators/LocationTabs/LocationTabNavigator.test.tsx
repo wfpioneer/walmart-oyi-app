@@ -671,9 +671,8 @@ describe('Test Location Tabs', (): void => {
   });
 
   describe('Tests LocationTabNavigator React Hooks', () => {
-    const mockUseEffectHook = jest.fn().mockImplementation((callback, deps) => {
-      callback();
-    });
+    const mockReact = jest.requireActual('React');
+
     const tabProps: LocationProps = {
       floorItems: [],
       reserveItems: [],
@@ -684,7 +683,7 @@ describe('Test Location Tabs', (): void => {
       route: routeProp,
       scannedEvent: defaultScannedEvent,
       trackEventCall: jest.fn(),
-      useEffectHook: mockUseEffectHook,
+      useEffectHook: mockReact.useEffect,
       validateSessionCall: mockValidateSession,
       isManualScanEnabled: false,
       user: mockUser,
@@ -706,8 +705,11 @@ describe('Test Location Tabs', (): void => {
         .mockImplementation((event, callback) => {
           callback();
         });
-
-      render(
+      navigationProp.removeListener = jest.fn()
+        .mockImplementation((event, callback) => {
+          callback();
+        });
+      const { unmount } = render(
         <Provider store={store}>
           <NavigationContainer>
             <LocationTabsNavigator
@@ -719,6 +721,7 @@ describe('Test Location Tabs', (): void => {
           </NavigationContainer>
         </Provider>
       );
+
       expect(mockValidateSession).toBeCalledTimes(2);
       expect(navigationProp.addListener).toBeCalledWith(
         'beforeRemove',
@@ -728,10 +731,22 @@ describe('Test Location Tabs', (): void => {
         'focus',
         expect.any(Function)
       );
+
       expect(mockDispatch).toHaveBeenNthCalledWith(1, hideItemPopup());
       expect(mockDispatch).toHaveBeenNthCalledWith(2, resetScannedEvent());
       expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: GET_SECTION_DETAILS.RESET });
+
+      unmount();
+      expect(navigationProp.removeListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(navigationProp.removeListener).toBeCalledWith(
+        'focus',
+        expect.any(Function)
+      );
       navigationProp.addListener = jest.fn();
+      navigationProp.removeListener = jest.fn();
     });
 
     it('Test if barcodeEmitter is called with "scanned" event', () => {
