@@ -170,16 +170,25 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       name="alert"
       size={40}
     />
-    <Text
+    <View
       style={
         {
-          "fontSize": 16,
-          "textAlign": "center",
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
     <View
       accessibilityState={
         {
@@ -259,16 +268,25 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       name="alert"
       size={40}
     />
-    <Text
+    <View
       style={
         {
-          "fontSize": 16,
-          "textAlign": "center",
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
     <View
       accessibilityState={
         {
@@ -348,20 +366,30 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       name="alert"
       size={40}
     />
-    <Text
-      style={
-        {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
     <View
       style={
         {
           "flexDirection": "column",
+          "paddingHorizontal": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
@@ -3203,20 +3231,30 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
       name="alert"
       size={40}
     />
-    <Text
-      style={
-        {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
     <View
       style={
         {
           "flexDirection": "column",
+          "paddingHorizontal": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
@@ -3831,16 +3869,25 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={40}
     />
-    <Text
+    <View
       style={
         {
-          "fontSize": 16,
-          "textAlign": "center",
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
     <TouchableOpacity
       onPress={[Function]}
       style={

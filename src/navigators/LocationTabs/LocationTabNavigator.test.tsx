@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
+import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
   NavigationContainer,
@@ -29,11 +29,11 @@ import store from '../../state';
 import { AsyncState } from '../../models/AsyncState';
 import { LocationIdName } from '../../state/reducers/Location';
 import { ClearLocationTarget } from '../../models/Location';
-import User from '../../models/User';
-import { REMOVE_SECTION } from '../../state/actions/asyncAPI';
-import { HIDE_LOCATION_POPUP } from '../../state/actions/Location';
-import { mockConfig } from '../../mockData/mockConfig';
+import { GET_SECTION_DETAILS, REMOVE_SECTION } from '../../state/actions/asyncAPI';
+import { HIDE_LOCATION_POPUP, hideItemPopup, setIsToolBarNavigation } from '../../state/actions/Location';
 import mockUser from '../../mockData/mockUser';
+import { getSectionDetails } from '../../state/actions/saga';
+import { resetScannedEvent } from '../../state/actions/Global';
 
 const REACT_NAV_NATIVE = '@react-navigation/native';
 
@@ -75,13 +75,10 @@ jest.mock(REACT_NAV_NATIVE, () => {
   };
 });
 
-const mockValidateSession = jest.fn(() => Promise.resolve());
-
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('Test Location Tabs', (): void => {
+  const mockValidateSession = jest.fn(() => Promise.resolve());
+  const mockDispatch = jest.fn();
+
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
     value: null,
@@ -96,6 +93,11 @@ describe('Test Location Tabs', (): void => {
     ...defaultAsyncState,
     result: mockLocationDetails
   };
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Renders Location Tabs with Mock Data', () => {
     const renderer = ShallowRenderer.createRenderer();
     const {
@@ -516,11 +518,6 @@ describe('Test Location Tabs', (): void => {
 
   describe('Location Tabs Navigator (section details) externalized function tests', () => {
     const mockSetDisplayConfirmation = jest.fn();
-    const mockDispatch = jest.fn();
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
 
     it('ensures handleClearSection works properly', () => {
       handleClearSection(mockDispatch, 1, ClearLocationTarget.FLOOR, mockSetDisplayConfirmation, jest.fn());
@@ -671,75 +668,97 @@ describe('Test Location Tabs', (): void => {
     });
   });
 
-  // TODO Fix unmounted component no-op error for testing useEffect Hook
-  describe.skip('Tests calling UseEffect Hook', () => {
-    it('Tests ValidateSessionCall with updates to scannedEvent and navigation props', () => {
-      const mockNav = jest.requireMock(REACT_NAV_NATIVE);
-      const tabProps: LocationProps = {
-        floorItems: [],
-        reserveItems: [],
-        locationName: '-',
-        dispatch: jest.fn(),
-        locationPopupVisible: false,
-        navigation: navigationProp,
-        route: routeProp,
-        scannedEvent: defaultScannedEvent,
-        trackEventCall: jest.fn(),
-        useEffectHook: useEffect,
-        validateSessionCall: mockValidateSession,
-        isManualScanEnabled: false,
-        user: mockUser,
-        itemPopupVisible: false,
-        getSectionDetailsApi: defaultAsyncState,
-        section: defaultSection,
-        removeSectionApi: defaultAsyncState,
-        displayRemoveConfirmation: false,
-        setDisplayRemoveConfirmation: jest.fn(),
-        clearSectionApi: defaultAsyncState,
-        displayClearConfirmation: false,
-        setDisplayClearConfirmation: jest.fn(),
-        selectedTab: ClearLocationTarget.FLOOR,
-        setSelectedTab: jest.fn(),
-        activityModal: false
-      };
-      const scannedEventUpdate = {
-        type: 'manualscan',
-        value: 'A1-1'
-      };
+  describe('Tests LocationTabNavigator React Hooks', () => {
+    const mockReact = jest.requireActual('react');
 
-      const { update } = render(
-        <Provider store={store}>
-          <NavigationContainer>
-            <LocationTabsNavigator {...tabProps} />
-          </NavigationContainer>
-        </Provider>
-      );
-      expect(mockValidateSession).toBeCalledTimes(1);
-
-      update(
+    const tabProps: LocationProps = {
+      floorItems: [],
+      reserveItems: [],
+      locationName: '-',
+      dispatch: jest.fn(),
+      locationPopupVisible: false,
+      navigation: navigationProp,
+      route: routeProp,
+      scannedEvent: defaultScannedEvent,
+      trackEventCall: jest.fn(),
+      useEffectHook: mockReact.useEffect,
+      validateSessionCall: mockValidateSession,
+      isManualScanEnabled: false,
+      user: mockUser,
+      itemPopupVisible: false,
+      getSectionDetailsApi: defaultAsyncState,
+      section: defaultSection,
+      removeSectionApi: defaultAsyncState,
+      displayRemoveConfirmation: false,
+      setDisplayRemoveConfirmation: jest.fn(),
+      clearSectionApi: defaultAsyncState,
+      displayClearConfirmation: false,
+      setDisplayClearConfirmation: jest.fn(),
+      selectedTab: ClearLocationTarget.FLOOR,
+      setSelectedTab: jest.fn(),
+      activityModal: false
+    };
+    it('Tests useEffect Hooks Navigation Listener', async () => {
+      navigationProp.addListener = jest.fn()
+        .mockImplementation((event, callback) => {
+          callback();
+        });
+      navigationProp.removeListener = jest.fn()
+        .mockImplementation((event, callback) => {
+          callback();
+        });
+      const { update, unmount } = await render(
         <Provider store={store}>
           <NavigationContainer>
             <LocationTabsNavigator
               {...tabProps}
-              scannedEvent={scannedEventUpdate}
+              dispatch={mockDispatch}
+              itemPopupVisible={true}
+              scannedEvent={{ value: 'test', type: 'test' }}
             />
           </NavigationContainer>
         </Provider>
       );
+
       expect(mockValidateSession).toBeCalledTimes(2);
+      expect(navigationProp.addListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(navigationProp.addListener).toBeCalledWith(
+        'focus',
+        expect.any(Function)
+      );
 
-      update(
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, hideItemPopup());
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, resetScannedEvent());
+      expect(mockDispatch).toHaveBeenNthCalledWith(3, { type: GET_SECTION_DETAILS.RESET });
+
+      await update(
         <Provider store={store}>
           <NavigationContainer>
             <LocationTabsNavigator
               {...tabProps}
-              scannedEvent={scannedEventUpdate}
-              navigation={mockNav}
+              dispatch={mockDispatch}
+              itemPopupVisible={false}
             />
           </NavigationContainer>
         </Provider>
       );
-      expect(mockValidateSession).toBeCalledTimes(3);
+      expect(mockDispatch).toHaveBeenNthCalledWith(5, { type: GET_SECTION_DETAILS.RESET });
+      expect(await mockDispatch).toHaveBeenNthCalledWith(6, getSectionDetails({ sectionId: '0' }));
+      expect(await mockDispatch).toHaveBeenNthCalledWith(7, setIsToolBarNavigation(true));
+      unmount();
+      expect(navigationProp.removeListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(navigationProp.removeListener).toBeCalledWith(
+        'focus',
+        expect.any(Function)
+      );
+      navigationProp.addListener = jest.fn();
+      navigationProp.removeListener = jest.fn();
     });
 
     it('Test if barcodeEmitter is called with "scanned" event', () => {
@@ -747,7 +766,7 @@ describe('Test Location Tabs', (): void => {
       barcodeEmitter.addListener = jest
         .fn()
         .mockImplementation((event, callback) => {
-          callback();
+          callback({ value: 'test', type: 'UPC-A' });
           return {
             remove: jest.fn()
           };
@@ -756,33 +775,7 @@ describe('Test Location Tabs', (): void => {
       render(
         <Provider store={store}>
           <NavigationContainer>
-            <LocationTabsNavigator
-              floorItems={[]}
-              reserveItems={[]}
-              locationName="-"
-              dispatch={jest.fn()}
-              locationPopupVisible={false}
-              navigation={navigationProp}
-              route={routeProp}
-              scannedEvent={defaultScannedEvent}
-              trackEventCall={jest.fn()}
-              useEffectHook={useEffect}
-              validateSessionCall={mockValidateSession}
-              isManualScanEnabled={false}
-              user={mockUser}
-              itemPopupVisible={false}
-              getSectionDetailsApi={defaultAsyncState}
-              section={defaultSection}
-              removeSectionApi={defaultAsyncState}
-              displayRemoveConfirmation={false}
-              setDisplayRemoveConfirmation={jest.fn()}
-              clearSectionApi={defaultAsyncState}
-              displayClearConfirmation={false}
-              setDisplayClearConfirmation={jest.fn()}
-              selectedTab={ClearLocationTarget.FLOOR}
-              setSelectedTab={jest.fn()}
-              activityModal={false}
-            />
+            <LocationTabsNavigator {...tabProps} />
           </NavigationContainer>
         </Provider>
       );

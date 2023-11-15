@@ -599,99 +599,95 @@ exports[`Test Location Tabs Renders Print Label button if "location printing" fe
 `;
 
 exports[`Test Location Tabs Tests rendering Tab Headers Renders items Header 1`] = `
-<React.Fragment>
-  <View
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "borderBottomColor": "#eeeeee",
+      "borderBottomWidth": 2,
+      "flexDirection": "row",
+      "marginHorizontal": 0,
+      "paddingLeft": 10,
+    }
+  }
+>
+  <Text
     style={
       {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#eeeeee",
-        "borderBottomWidth": 2,
-        "flexDirection": "row",
-        "marginHorizontal": 0,
-        "paddingLeft": 10,
+        "flex": 1,
+        "fontSize": 18,
       }
     }
   >
-    <Text
-      style={
-        {
-          "flex": 1,
-          "fontSize": 18,
-        }
-      }
-    >
-      ITEMS
-    </Text>
-    <TouchableOpacity
-      disabled={false}
-      onPress={[Function]}
-    >
-      <View>
-        <Text
-          style={
-            {
-              "color": "#0071e9",
-              "fontSize": 14,
-              "paddingHorizontal": 25,
-              "paddingVertical": 10,
-            }
+    ITEMS
+  </Text>
+  <TouchableOpacity
+    disabled={false}
+    onPress={[Function]}
+  >
+    <View>
+      <Text
+        style={
+          {
+            "color": "#0071e9",
+            "fontSize": 14,
+            "paddingHorizontal": 25,
+            "paddingVertical": 10,
           }
-        >
-          [missing "en.GENERICS.ADD" translation]
-        </Text>
-      </View>
-    </TouchableOpacity>
-  </View>
-</React.Fragment>
+        }
+      >
+        [missing "en.GENERICS.ADD" translation]
+      </Text>
+    </View>
+  </TouchableOpacity>
+</View>
 `;
 
 exports[`Test Location Tabs Tests rendering Tab Headers Renders pallet Header 1`] = `
-<React.Fragment>
-  <View
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#ffffffff",
+      "borderBottomColor": "#eeeeee",
+      "borderBottomWidth": 2,
+      "flexDirection": "row",
+      "marginHorizontal": 0,
+      "paddingLeft": 10,
+    }
+  }
+>
+  <Text
     style={
       {
-        "alignItems": "center",
-        "backgroundColor": "#ffffffff",
-        "borderBottomColor": "#eeeeee",
-        "borderBottomWidth": 2,
-        "flexDirection": "row",
-        "marginHorizontal": 0,
-        "paddingLeft": 10,
+        "flex": 1,
+        "fontSize": 18,
       }
     }
   >
-    <Text
-      style={
-        {
-          "flex": 1,
-          "fontSize": 18,
-        }
-      }
-    >
-      PALLETS
-    </Text>
-    <TouchableOpacity
-      disabled={false}
-      onPress={[Function]}
-    >
-      <View>
-        <Text
-          style={
-            {
-              "color": "#0071e9",
-              "fontSize": 14,
-              "paddingHorizontal": 25,
-              "paddingVertical": 10,
-            }
+    PALLETS
+  </Text>
+  <TouchableOpacity
+    disabled={false}
+    onPress={[Function]}
+  >
+    <View>
+      <Text
+        style={
+          {
+            "color": "#0071e9",
+            "fontSize": 14,
+            "paddingHorizontal": 25,
+            "paddingVertical": 10,
           }
-        >
-          [missing "en.GENERICS.ADD" translation]
-        </Text>
-      </View>
-    </TouchableOpacity>
-  </View>
-</React.Fragment>
+        }
+      >
+        [missing "en.GENERICS.ADD" translation]
+      </Text>
+    </View>
+  </TouchableOpacity>
+</View>
 `;
 
 exports[`Test Location Tabs Tests rendering getSectionsDetails api Renders Loading Indicator for get Section details 1`] = `
