@@ -86,8 +86,18 @@ describe('ScanLocation Screen', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
         result: {
-          status: 204,
-          data: ''
+          status: 200,
+          data: {
+            assignPalletToSectionResponse: {
+              code: 200
+            },
+            completePicklistResponse: {
+              code: 204
+            },
+            completeWorklistResponse: {
+              code: 204
+            }
+          }
         }
       };
       const error409Api: AsyncState = {
@@ -107,33 +117,51 @@ describe('ScanLocation Screen', () => {
       expect(navigationProp.dispatch).toBeCalledTimes(1);
       expect(mockDispatch).toBeCalledTimes(3);
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(
-        expect.objectContaining({ type: 'success' })
-      );
+      expect(Toast.show).toBeCalledWith({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('LOCATION.PALLET_ADDED'),
+        visibilityTime: 3000
+      });
+
+      jest.clearAllMocks();
+      successApi.result.data.assignPalletToSectionResponse.code = 204;
+      updatePalletLocationHook(successApi, mockDispatch, navigationProp);
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledTimes(1);
+      expect(Toast.show).toBeCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('LOCATION.PALLET_ERROR'),
+        text2: strings('LOCATION.PALLET_NOT_FOUND'),
+        visibilityTime: 3000
+      });
 
       jest.clearAllMocks();
 
       updatePalletLocationHook(error409Api, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(
-        expect.objectContaining({
-          type: 'error',
-          text1: strings('LOCATION.PALLET_ERROR')
-        })
-      );
+      expect(Toast.show).toBeCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('LOCATION.PALLET_ERROR'),
+        text2: strings('LOCATION.PALLET_NOT_FOUND'),
+        visibilityTime: 3000
+      });
 
       jest.clearAllMocks();
 
       updatePalletLocationHook(errorApi, mockDispatch, navigationProp);
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(
-        expect.objectContaining({
-          type: 'error',
-          text1: strings('LOCATION.ADD_PALLET_ERROR')
-        })
-      );
+      expect(Toast.show).toBeCalledWith({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('LOCATION.ADD_PALLET_ERROR'),
+        text2: strings('LOCATION.ADD_PALLET_API_ERROR'),
+        visibilityTime: 3000
+      });
 
       jest.clearAllMocks();
       updatePalletLocationHook(apiIsWaiting, mockDispatch, navigationProp);

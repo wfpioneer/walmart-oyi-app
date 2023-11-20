@@ -24,7 +24,7 @@ exports[`AddPalletScreen Rendering Add pallet API responses Renders the success 
       }
     }
   >
-    [missing "en.LOCATION.SECTION" translation] 1A-1
+    [missing "en.LOCATION.SECTION" translation] A1-1
   </Text>
   <TextInput
     keyboardType="numeric"
@@ -104,7 +104,7 @@ exports[`AddPalletScreen Renders Enabled Submit button for pallet ID containing 
       }
     }
   >
-    [missing "en.LOCATION.SECTION" translation] 1A-1
+    [missing "en.LOCATION.SECTION" translation] A1-1
   </Text>
   <TextInput
     keyboardType="numeric"
@@ -168,7 +168,7 @@ exports[`AddPalletScreen Renders Error for pallet ID containing non number digit
       }
     }
   >
-    [missing "en.LOCATION.SECTION" translation] 1A-1
+    [missing "en.LOCATION.SECTION" translation] A1-1
   </Text>
   <TextInput
     keyboardType="numeric"
