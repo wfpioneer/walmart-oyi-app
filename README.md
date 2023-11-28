@@ -83,6 +83,10 @@ For more information go to https://confluence.walmart.com/display/ISCM/Own+Your+
 - You can find those secrets in <https://confluence.walmart.com/pages/viewpage.action?pageId=1060167829#OYIPropertySecrets-CNItemImageAPISecrets> copy and paste in Secrets.json
 - After adding the above secrets, image can be shown for CN market locally in dev environment.
 
+### Setting up your Debugger
+
+- [Flipper Setup for debugging OYI App](https://confluence.walmart.com/display/ISCM/Flipper+Setup+for+debugging+OYI+App)
+
 ### To run the app
 
 - Clone the repo
