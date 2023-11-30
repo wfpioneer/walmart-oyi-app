@@ -243,7 +243,7 @@ describe('LoginScreen', () => {
         navigation={navigationProp}
         user={{
           ...testUser,
-          'wm-BusinessUnitCategory': 'HO',
+          'wm-BusinessUnitType': 'HO',
           c: 'MX',
           sAMAccountName: 'blah',
           userTokens: {

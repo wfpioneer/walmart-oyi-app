@@ -113,7 +113,7 @@ const userIsSignedIn = (user: User): boolean => user.sAMAccountName !== '' && us
  * the country.  For our app's purposes, we use this field instead of c
  * @returns t/f whether the country code has been set for a US user
  */
-export const isCountryCodeSet = (c: string, countryCode: string) => (c === 'US'
+export const isCountryCodeSet = (c: string, countryCode: string) => (c === 'US' || c === 'NOT_FOUND'
   ? !countryCode.match(/[^A-Za-z]/) && countryCode !== c : true);
 
 export const SelectCountryCodeModal = (
@@ -340,6 +340,7 @@ export const onSubmitClubNbr = (clubNbr: number, dispatch: Dispatch<any>, user: 
   const updatedUser = { ...user, 'wm-BusinessUnitNumber': clubNbr.toString(), siteId: clubNbr };
   dispatch(loginUser(updatedUser));
   trackEvent('user_sign_in');
+  console.log(updatedUser);
   if (isCountryCodeSet(user.c, user.countryCode)) {
     dispatch(getFluffyFeatures(updatedUser));
   }
