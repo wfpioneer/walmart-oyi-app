@@ -340,7 +340,6 @@ export const onSubmitClubNbr = (clubNbr: number, dispatch: Dispatch<any>, user: 
   const updatedUser = { ...user, 'wm-BusinessUnitNumber': clubNbr.toString(), siteId: clubNbr };
   dispatch(loginUser(updatedUser));
   trackEvent('user_sign_in');
-  console.log(updatedUser);
   if (isCountryCodeSet(user.c, user.countryCode)) {
     dispatch(getFluffyFeatures(updatedUser));
   }
