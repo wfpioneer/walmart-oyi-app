@@ -126,7 +126,7 @@ flows:
       - 'echo "Building src/constant/Secrets.json using looper-encrypted secrets"'
       - 'echo "{ \"CN_ITEM_CENTER_TOKEN_SECRET\": \"$CN_ITEM_CENTER_TOKEN_SECRET\", \"CN_IMAGE_AUTH_CLIENT_ID\": \"$CN_IMAGE_AUTH_CLIENT_ID\", \"CN_IMAGE_AUTH_SECRET\": \"$CN_IMAGE_AUTH_SECRET\" }" >> ../src/constant/Secrets.json'
     - group("npm install"):
-        - npm ci
+        - npm ci --legacy-peer-deps
         - TZ='America/Chicago' npm run test:coverage
     - group ("appcenter commands"):
         - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'
