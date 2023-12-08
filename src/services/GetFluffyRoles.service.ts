@@ -8,7 +8,11 @@ export default class GetFluffyRolesService {
     let { sAMAccountName, countryCode, siteId: clubNbr } = payload;
     const { c } = payload;
 
-    if (countryCode === 'MX' && clubNbr === 5522) {
+    if (c === 'US') {
+      // This is to get Fluffy to correctly return features
+      countryCode = c;
+      clubNbr = 1;
+    } else if (countryCode === 'MX' && clubNbr === 5522) {
       // This is to allow feature toggle for UAT for MX (unless Fluffy allows test clubs to be configured)
       clubNbr = 4879;
 
