@@ -85,11 +85,12 @@ const ImageWrapper = ({
   useLayoutEffect(() => {
     imageWrapperUseEffect(itemNumber, countryCode, setImageUri);
   }, [itemNumber]);
+
   return (
     <View>
       <FastImage
         style={{ ...styles.image, ...imageStyle }}
-        source={imageUri !== '' && !tokenIsWaiting && imageToken
+        source={imageUri !== '' && !tokenIsWaiting
           ? createSource(imageUri, countryCode, imageToken)
           : require('../../assets/images/placeholder.png')}
         resizeMode={FastImage.resizeMode.contain}
