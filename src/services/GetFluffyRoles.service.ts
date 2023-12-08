@@ -8,11 +8,7 @@ export default class GetFluffyRolesService {
     let { sAMAccountName, countryCode, siteId: clubNbr } = payload;
     const { c } = payload;
 
-    if (countryCode !== c) {
-      // This is to get Fluffy to correctly return features
-      countryCode = c;
-      clubNbr = 1;
-    } else if (countryCode === 'MX' && clubNbr === 5522) {
+    if (countryCode === 'MX' && clubNbr === 5522) {
       // This is to allow feature toggle for UAT for MX (unless Fluffy allows test clubs to be configured)
       clubNbr = 4879;
 
@@ -22,11 +18,11 @@ export default class GetFluffyRolesService {
       }
     } else if (countryCode === 'CN' && clubNbr === 5597) {
       // This is to allow feature toggle for UAT for CN (unless Fluffy allows test clubs to be configured)
-      clubNbr = 4830;
-
+      clubNbr = 4879;
+      countryCode = 'MX';
       if (sAMAccountName.includes('SVC')) {
-        // Set to Eileen's userId in case our CN service account is used, due to Fluffy not allowing underscores
-        sAMAccountName = 'eyu7';
+        // Set to Gonzalo's userId now in case our CN service account is used, due to Fluffy not allowing underscores
+        sAMAccountName = 'g0a01r7';
       }
     }
 
