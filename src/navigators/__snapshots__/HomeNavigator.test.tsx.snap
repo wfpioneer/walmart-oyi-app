@@ -2,6 +2,23 @@
 
 exports[`Home Navigator Click action to open camera 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -13,7 +30,7 @@ exports[`Home Navigator Click action to open camera 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -21,7 +38,7 @@ exports[`Home Navigator Click action to open camera 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -41,9 +58,9 @@ exports[`Home Navigator Click action to open camera 1`] = `
 exports[`Home Navigator Renders the Home navigator component 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -52,7 +69,7 @@ exports[`Home Navigator Renders the Home navigator component 1`] = `
 >
   <Screen
     component={
-      Object {
+      {
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
@@ -60,7 +77,7 @@ exports[`Home Navigator Renders the Home navigator component 1`] = `
       }
     }
     listeners={
-      Object {
+      {
         "blur": [Function],
       }
     }
@@ -83,7 +100,7 @@ exports[`Home Navigator Renders the cameraButton header icon 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -103,7 +120,7 @@ exports[`Home Navigator Renders the cameraButton header icon 1`] = `
 exports[`Home Navigator Renders the home header when isManualScanEnabled is false 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "row",
     }
@@ -115,7 +132,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is fals
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -135,7 +152,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is fals
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -146,7 +163,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is fals
       <Image
         source=""
         style={
-          Object {
+          {
             "height": 25,
             "marginRight": 10,
             "width": 25,
@@ -161,7 +178,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is fals
 exports[`Home Navigator Renders the home header when isManualScanEnabled is true 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "row",
     }
@@ -173,7 +190,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is true
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -193,7 +210,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is true
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -204,7 +221,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is true
       <Image
         source=""
         style={
-          Object {
+          {
             "height": 25,
             "marginRight": 10,
             "width": 25,
@@ -218,6 +235,23 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is true
 
 exports[`Home Navigator Renders the home menu button and onclick call track event 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -229,7 +263,7 @@ exports[`Home Navigator Renders the home menu button and onclick call track even
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -237,7 +271,7 @@ exports[`Home Navigator Renders the home menu button and onclick call track even
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -248,7 +282,7 @@ exports[`Home Navigator Renders the home menu button and onclick call track even
     <Image
       source=""
       style={
-        Object {
+        {
           "height": 25,
           "marginRight": 10,
           "width": 25,
@@ -261,6 +295,23 @@ exports[`Home Navigator Renders the home menu button and onclick call track even
 
 exports[`Home Navigator Renders the scanButton header icon when manual scan set to false 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -272,7 +323,7 @@ exports[`Home Navigator Renders the scanButton header icon when manual scan set 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -280,7 +331,7 @@ exports[`Home Navigator Renders the scanButton header icon when manual scan set 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -298,6 +349,23 @@ exports[`Home Navigator Renders the scanButton header icon when manual scan set 
 
 exports[`Home Navigator Renders the scanButton header icon when manual scan set to true 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -309,7 +377,7 @@ exports[`Home Navigator Renders the scanButton header icon when manual scan set 
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "opacity": 1,
     }
   }
@@ -317,7 +385,7 @@ exports[`Home Navigator Renders the scanButton header icon when manual scan set 
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",

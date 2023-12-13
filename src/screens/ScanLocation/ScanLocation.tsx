@@ -52,17 +52,29 @@ export const updatePalletLocationHook = (
   // on api success
   if (!addPalletAPI.isWaiting && addPalletAPI.result) {
     dispatch(hideActivityModal());
-    Toast.show({
-      type: 'success',
-      position: 'bottom',
-      text1: strings('LOCATION.PALLET_ADDED'),
-      visibilityTime: SNACKBAR_TIMEOUT
-    });
-    dispatch({ type: ADD_PALLET.RESET });
-    dispatch(clearSelectedWorklistPalletId());
+    if (addPalletAPI.result.data?.assignPalletToSectionResponse.code === 200) {
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: strings('LOCATION.PALLET_ADDED'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
+      dispatch({ type: ADD_PALLET.RESET });
+      dispatch(clearSelectedWorklistPalletId());
 
-    if (navigation.canGoBack()) {
-      navigation.dispatch(StackActions.pop(2));
+      if (navigation.canGoBack()) {
+        navigation.dispatch(StackActions.pop(2));
+      }
+    }
+
+    if (addPalletAPI.result.data?.assignPalletToSectionResponse.code === 204) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: strings('LOCATION.PALLET_ERROR'),
+        text2: strings('LOCATION.PALLET_NOT_FOUND'),
+        visibilityTime: SNACKBAR_TIMEOUT
+      });
     }
   }
 

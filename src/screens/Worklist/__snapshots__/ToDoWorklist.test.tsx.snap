@@ -2,11 +2,11 @@
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncompleted worklist items 1`] = `
 <Worklist
-  areas={Array []}
+  areas={[]}
   countryCode="MX"
   data={
-    Array [
-      Object {
+    [
+      {
         "catgName": "FOODSERVICE",
         "catgNbr": 93,
         "completed": false,
@@ -20,7 +20,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "worklistStatus": "TODO",
         "worklistType": "NSFL",
       },
-      Object {
+      {
         "catgName": "ELECTRONICS",
         "catgNbr": 99,
         "completed": false,
@@ -34,7 +34,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "worklistStatus": "TODO",
         "worklistType": "NO",
       },
-      Object {
+      {
         "catgName": "FRESH BAKERY",
         "catgNbr": 88,
         "completed": false,
@@ -48,7 +48,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "worklistStatus": "TODO",
         "worklistType": "NO",
       },
-      Object {
+      {
         "catgName": "WINE",
         "catgNbr": 19,
         "completed": false,
@@ -62,7 +62,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "worklistStatus": "TODO",
         "worklistType": "C",
       },
-      Object {
+      {
         "catgName": "PHARMACY RX",
         "catgNbr": 87,
         "completed": false,
@@ -76,7 +76,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
         "worklistStatus": "TODO",
         "worklistType": "C",
       },
-      Object {
+      {
         "catgName": "ELECTRONICS",
         "catgNbr": 199,
         "completed": false,
@@ -95,8 +95,8 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
   dispatch={[MockFunction]}
   enableAreaFilter={false}
   error={null}
-  filterCategories={Array []}
-  filterExceptions={Array []}
+  filterCategories={[]}
+  filterExceptions={[]}
   groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
@@ -108,14 +108,14 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders array of uncom
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for completed worklist items  1`] = `
 <Worklist
-  areas={Array []}
+  areas={[]}
   countryCode="MX"
-  data={Array []}
+  data={[]}
   dispatch={[MockFunction]}
   enableAreaFilter={false}
   error={null}
-  filterCategories={Array []}
-  filterExceptions={Array []}
+  filterCategories={[]}
+  filterExceptions={[]}
   groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
@@ -127,14 +127,14 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array fo
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array for zero worklist items 1`] = `
 <Worklist
-  areas={Array []}
+  areas={[]}
   countryCode="MX"
-  data={Array []}
+  data={[]}
   dispatch={[MockFunction]}
   enableAreaFilter={false}
   error={null}
-  filterCategories={Array []}
-  filterExceptions={Array []}
+  filterCategories={[]}
+  filterExceptions={[]}
   groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
@@ -146,11 +146,11 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Renders empty array fo
 
 exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render incomplete items for a WorkList with incomplete & complete items 1`] = `
 <Worklist
-  areas={Array []}
+  areas={[]}
   countryCode="MX"
   data={
-    Array [
-      Object {
+    [
+      {
         "catgName": "FOODSERVICE",
         "catgNbr": 93,
         "completed": false,
@@ -164,7 +164,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "worklistStatus": "TODO",
         "worklistType": "NSFL",
       },
-      Object {
+      {
         "catgName": "ELECTRONICS",
         "catgNbr": 99,
         "completed": false,
@@ -178,7 +178,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "worklistStatus": "TODO",
         "worklistType": "NO",
       },
-      Object {
+      {
         "catgName": "FRESH BAKERY",
         "catgNbr": 88,
         "completed": false,
@@ -192,7 +192,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "worklistStatus": "TODO",
         "worklistType": "NO",
       },
-      Object {
+      {
         "catgName": "WINE",
         "catgNbr": 19,
         "completed": false,
@@ -206,7 +206,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "worklistStatus": "TODO",
         "worklistType": "C",
       },
-      Object {
+      {
         "catgName": "PHARMACY RX",
         "catgNbr": 87,
         "completed": false,
@@ -220,7 +220,7 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
         "worklistStatus": "TODO",
         "worklistType": "C",
       },
-      Object {
+      {
         "catgName": "ELECTRONICS",
         "catgNbr": 199,
         "completed": false,
@@ -239,8 +239,8 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
   dispatch={[MockFunction]}
   enableAreaFilter={false}
   error={null}
-  filterCategories={Array []}
-  filterExceptions={Array []}
+  filterCategories={[]}
+  filterExceptions={[]}
   groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
@@ -252,13 +252,13 @@ exports[`ToDoWorklistScreen Tests rendering Worklist data Should only render inc
 
 exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders error message for failed worklist request 1`] = `
 <Worklist
-  areas={Array []}
+  areas={[]}
   countryCode="MX"
   dispatch={[MockFunction]}
   enableAreaFilter={false}
   error="Network Error"
-  filterCategories={Array []}
-  filterExceptions={Array []}
+  filterCategories={[]}
+  filterExceptions={[]}
   groupToggle={false}
   onRefresh={[Function]}
   refreshing={false}
@@ -270,13 +270,13 @@ exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders error
 
 exports[`ToDoWorklistScreen Tests rendering worklist api responses Renders refresh set to true waiting for worklist api response 1`] = `
 <Worklist
-  areas={Array []}
+  areas={[]}
   countryCode="MX"
   dispatch={[MockFunction]}
   enableAreaFilter={false}
   error={null}
-  filterCategories={Array []}
-  filterExceptions={Array []}
+  filterCategories={[]}
+  filterExceptions={[]}
   groupToggle={false}
   onRefresh={[Function]}
   refreshing={true}

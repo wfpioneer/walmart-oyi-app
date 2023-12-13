@@ -3,7 +3,7 @@
 exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with AuditWorkList type and InProgress status enabled  1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "padding": 8,
     }
@@ -11,7 +11,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-start",
       }
@@ -20,7 +20,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#d938ab",
             "fontSize": 12,
             "fontWeight": "bold",
@@ -31,14 +31,14 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#d938ab",
               "fontSize": 14,
               "fontWeight": "bold",
@@ -50,7 +50,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#d938ab",
               "fontSize": 14,
               "fontWeight": "bold",
@@ -64,7 +64,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
       </View>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
             "marginVertical": 4,
@@ -75,7 +75,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginBottom": 4,
             "marginTop": 4,
@@ -84,7 +84,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -94,7 +94,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
               "marginHorizontal": 8,
@@ -105,7 +105,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -116,7 +116,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -127,7 +127,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -141,8 +141,8 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
   <CollapsibleCard
     icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.ADDITIONAL_ITEM_DETAILS" translation]"
+    titleStyle={{}}
   >
     <View
       testID="additional-item-details"
@@ -150,29 +150,29 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
       <ItemDetailsList
         indentAfterFirstRow={false}
         rows={
-          Array [
-            Object {
-              "label": "[missing \\"en.ITEM.VENDOR_PACK\\" translation]",
+          [
+            {
+              "label": "[missing "en.ITEM.VENDOR_PACK" translation]",
               "value": 33,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.COLOR\\" translation]",
+            {
+              "label": "[missing "en.ITEM.COLOR" translation]",
               "value": "red",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.SIZE\\" translation]",
+            {
+              "label": "[missing "en.ITEM.SIZE" translation]",
               "value": 88,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.PRICE_BEFORE_TAX\\" translation]",
+            {
+              "label": "[missing "en.ITEM.PRICE_BEFORE_TAX" translation]",
               "value": "$15.05",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.MARGIN\\" translation]",
+            {
+              "label": "[missing "en.ITEM.MARGIN" translation]",
               "value": "14.00%",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.GROSS_PROFIT\\" translation]",
+            {
+              "label": "[missing "en.ITEM.GROSS_PROFIT" translation]",
               "value": "$2.50",
             },
           ]
@@ -182,7 +182,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
   </CollapsibleCard>
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "marginBottom": 6,
         "marginTop": 16,
@@ -198,12 +198,12 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginVertical": 10,
       }
     }
     testID="print-price-sign"
-    title="[missing \\"en.PRINT.PRICE_SIGN\\" translation]"
+    title="[missing "en.PRINT.PRICE_SIGN" translation]"
     titleColor="#0071e9"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -216,7 +216,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders Item Info Card with
 exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info component with additional item details 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "padding": 8,
     }
@@ -224,7 +224,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-start",
       }
@@ -233,7 +233,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#d938ab",
             "fontSize": 12,
             "fontWeight": "bold",
@@ -244,14 +244,14 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
           }
         }
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
             "marginVertical": 4,
@@ -262,7 +262,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginBottom": 4,
             "marginTop": 4,
@@ -271,7 +271,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -281,7 +281,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
               "marginHorizontal": 8,
@@ -292,7 +292,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -303,7 +303,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -314,7 +314,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -328,8 +328,8 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   <CollapsibleCard
     icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.ADDITIONAL_ITEM_DETAILS" translation]"
+    titleStyle={{}}
   >
     <View
       testID="additional-item-details"
@@ -337,29 +337,29 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       <ItemDetailsList
         indentAfterFirstRow={false}
         rows={
-          Array [
-            Object {
-              "label": "[missing \\"en.ITEM.VENDOR_PACK\\" translation]",
+          [
+            {
+              "label": "[missing "en.ITEM.VENDOR_PACK" translation]",
               "value": 33,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.COLOR\\" translation]",
+            {
+              "label": "[missing "en.ITEM.COLOR" translation]",
               "value": "red",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.SIZE\\" translation]",
+            {
+              "label": "[missing "en.ITEM.SIZE" translation]",
               "value": 88,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.PRICE_BEFORE_TAX\\" translation]",
+            {
+              "label": "[missing "en.ITEM.PRICE_BEFORE_TAX" translation]",
               "value": "$15.05",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.MARGIN\\" translation]",
+            {
+              "label": "[missing "en.ITEM.MARGIN" translation]",
               "value": "14.00%",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.GROSS_PROFIT\\" translation]",
+            {
+              "label": "[missing "en.ITEM.GROSS_PROFIT" translation]",
               "value": "$2.50",
             },
           ]
@@ -369,7 +369,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   </CollapsibleCard>
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "marginBottom": 6,
         "marginTop": 16,
@@ -385,12 +385,12 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginVertical": 10,
       }
     }
     testID="print-price-sign"
-    title="[missing \\"en.PRINT.PRICE_SIGN\\" translation]"
+    title="[missing "en.PRINT.PRICE_SIGN" translation]"
     titleColor="#0071e9"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -403,7 +403,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
 exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info component without additional item details 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "padding": 8,
     }
@@ -411,7 +411,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-start",
       }
@@ -420,7 +420,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#d938ab",
             "fontSize": 12,
             "fontWeight": "bold",
@@ -431,14 +431,14 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
           }
         }
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
             "marginVertical": 4,
@@ -449,7 +449,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginBottom": 4,
             "marginTop": 4,
@@ -458,7 +458,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -468,7 +468,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
               "marginHorizontal": 8,
@@ -479,7 +479,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -490,7 +490,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -501,7 +501,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -515,8 +515,8 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   <CollapsibleCard
     icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.ADDITIONAL_ITEM_DETAILS" translation]"
+    titleStyle={{}}
   >
     <View
       testID="additional-item-details"
@@ -524,29 +524,29 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       <ItemDetailsList
         indentAfterFirstRow={false}
         rows={
-          Array [
-            Object {
-              "label": "[missing \\"en.ITEM.VENDOR_PACK\\" translation]",
+          [
+            {
+              "label": "[missing "en.ITEM.VENDOR_PACK" translation]",
               "value": 33,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.COLOR\\" translation]",
+            {
+              "label": "[missing "en.ITEM.COLOR" translation]",
               "value": "red",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.SIZE\\" translation]",
+            {
+              "label": "[missing "en.ITEM.SIZE" translation]",
               "value": 88,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.PRICE_BEFORE_TAX\\" translation]",
+            {
+              "label": "[missing "en.ITEM.PRICE_BEFORE_TAX" translation]",
               "value": "$15.05",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.MARGIN\\" translation]",
+            {
+              "label": "[missing "en.ITEM.MARGIN" translation]",
               "value": "14.00%",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.GROSS_PROFIT\\" translation]",
+            {
+              "label": "[missing "en.ITEM.GROSS_PROFIT" translation]",
               "value": "$2.50",
             },
           ]
@@ -556,7 +556,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   </CollapsibleCard>
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "marginBottom": 6,
         "marginTop": 16,
@@ -572,12 +572,12 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     onPress={[Function]}
     radius={5}
     style={
-      Object {
+      {
         "marginVertical": 10,
       }
     }
     testID="print-price-sign"
-    title="[missing \\"en.PRINT.PRICE_SIGN\\" translation]"
+    title="[missing "en.PRINT.PRICE_SIGN" translation]"
     titleColor="#0071e9"
     titleFontSize={16}
     titleFontWeight="normal"
@@ -590,7 +590,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
 exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info component without print print price sign button enabled 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
       "padding": 8,
     }
@@ -598,7 +598,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-start",
       }
@@ -607,7 +607,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
     <View>
       <Text
         style={
-          Object {
+          {
             "color": "#d938ab",
             "fontSize": 12,
             "fontWeight": "bold",
@@ -618,14 +618,14 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
           }
         }
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
             "marginVertical": 4,
@@ -636,7 +636,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "marginBottom": 4,
             "marginTop": 4,
@@ -645,7 +645,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -655,7 +655,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
               "marginHorizontal": 8,
@@ -666,7 +666,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
         </Text>
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "fontSize": 12,
             }
@@ -677,7 +677,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -688,7 +688,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       </Text>
       <Text
         style={
-          Object {
+          {
             "color": "#616161",
             "fontSize": 12,
             "marginBottom": 4,
@@ -702,8 +702,8 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   <CollapsibleCard
     icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.ADDITIONAL_ITEM_DETAILS\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.ADDITIONAL_ITEM_DETAILS" translation]"
+    titleStyle={{}}
   >
     <View
       testID="additional-item-details"
@@ -711,29 +711,29 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
       <ItemDetailsList
         indentAfterFirstRow={false}
         rows={
-          Array [
-            Object {
-              "label": "[missing \\"en.ITEM.VENDOR_PACK\\" translation]",
+          [
+            {
+              "label": "[missing "en.ITEM.VENDOR_PACK" translation]",
               "value": 33,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.COLOR\\" translation]",
+            {
+              "label": "[missing "en.ITEM.COLOR" translation]",
               "value": "red",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.SIZE\\" translation]",
+            {
+              "label": "[missing "en.ITEM.SIZE" translation]",
               "value": 88,
             },
-            Object {
-              "label": "[missing \\"en.ITEM.PRICE_BEFORE_TAX\\" translation]",
+            {
+              "label": "[missing "en.ITEM.PRICE_BEFORE_TAX" translation]",
               "value": "$15.05",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.MARGIN\\" translation]",
+            {
+              "label": "[missing "en.ITEM.MARGIN" translation]",
               "value": "14.00%",
             },
-            Object {
-              "label": "[missing \\"en.ITEM.GROSS_PROFIT\\" translation]",
+            {
+              "label": "[missing "en.ITEM.GROSS_PROFIT" translation]",
               "value": "$2.50",
             },
           ]
@@ -743,7 +743,7 @@ exports[`ItemInfo Component Tests rendering ItemInfo Renders an Item Info compon
   </CollapsibleCard>
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "marginBottom": 6,
         "marginTop": 16,

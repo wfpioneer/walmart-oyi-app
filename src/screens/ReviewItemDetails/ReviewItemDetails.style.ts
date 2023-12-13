@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   errorTextContainer: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingHorizontal: 5
   },
   errorText: {
     fontSize: 16,

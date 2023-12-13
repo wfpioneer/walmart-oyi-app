@@ -4,7 +4,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -18,7 +18,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "column",
         }
@@ -32,11 +32,28 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
       </Text>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 15,
           "right": 15,
@@ -51,7 +68,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -71,7 +88,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -85,7 +102,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "column",
         }
@@ -99,11 +116,28 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
       </Text>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 15,
           "right": 15,
@@ -118,7 +152,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -133,8 +167,8 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
   </View>
   <RCTScrollView
     data={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -147,7 +181,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -160,7 +194,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -173,7 +207,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -202,14 +236,32 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -221,7 +273,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -234,7 +286,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -243,7 +295,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -251,8 +303,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -266,7 +330,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -279,7 +343,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -290,14 +354,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -311,7 +375,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -329,9 +393,27 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -343,7 +425,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -356,7 +438,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -365,7 +447,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -373,8 +455,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -388,7 +482,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -401,7 +495,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -412,14 +506,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -433,7 +527,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -451,9 +545,27 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -465,7 +577,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -478,7 +590,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -487,7 +599,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -495,8 +607,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -510,7 +634,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -523,7 +647,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -534,14 +658,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -555,7 +679,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -573,9 +697,27 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -587,7 +729,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -600,7 +742,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -609,7 +751,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -617,8 +759,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -632,7 +786,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -645,7 +799,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -656,14 +810,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -677,7 +831,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -703,7 +857,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -717,7 +871,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "column",
         }
@@ -731,11 +885,28 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
       </Text>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 15,
           "right": 15,
@@ -750,7 +921,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -765,8 +936,8 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
   </View>
   <RCTScrollView
     data={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -779,7 +950,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -792,7 +963,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -805,7 +976,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -834,14 +1005,32 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -853,7 +1042,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -866,7 +1055,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -875,7 +1064,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -883,8 +1072,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -898,7 +1099,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -911,11 +1112,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 <View>
                   <View
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "overflow": "hidden",
                         },
-                        Object {
+                        {
                           "height": 80,
                           "width": 80,
                         },
@@ -926,9 +1127,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={null}
+                      source={
+                        {
+                          "priority": "normal",
+                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234567890m.jpg",
+                        }
+                      }
                       style={
-                        Object {
+                        {
                           "bottom": 0,
                           "left": 0,
                           "position": "absolute",
@@ -941,7 +1147,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 </View>
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -951,11 +1157,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   testID="item-details"
                 >
                   <View
-                    style={Object {}}
+                    style={{}}
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -969,7 +1175,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -987,9 +1193,27 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -1001,7 +1225,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -1014,7 +1238,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -1023,7 +1247,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -1031,8 +1255,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -1046,7 +1282,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -1059,11 +1295,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 <View>
                   <View
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "overflow": "hidden",
                         },
-                        Object {
+                        {
                           "height": 80,
                           "width": 80,
                         },
@@ -1074,9 +1310,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={null}
+                      source={
+                        {
+                          "priority": "normal",
+                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234567899m.jpg",
+                        }
+                      }
                       style={
-                        Object {
+                        {
                           "bottom": 0,
                           "left": 0,
                           "position": "absolute",
@@ -1089,7 +1330,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 </View>
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -1099,11 +1340,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   testID="item-details"
                 >
                   <View
-                    style={Object {}}
+                    style={{}}
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -1117,7 +1358,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -1135,9 +1376,27 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -1149,7 +1408,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -1162,7 +1421,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -1171,7 +1430,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -1179,8 +1438,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -1194,7 +1465,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -1207,11 +1478,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 <View>
                   <View
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "overflow": "hidden",
                         },
-                        Object {
+                        {
                           "height": 80,
                           "width": 80,
                         },
@@ -1222,9 +1493,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={null}
+                      source={
+                        {
+                          "priority": "normal",
+                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/987654321m.jpg",
+                        }
+                      }
                       style={
-                        Object {
+                        {
                           "bottom": 0,
                           "left": 0,
                           "position": "absolute",
@@ -1237,7 +1513,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 </View>
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -1247,11 +1523,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   testID="item-details"
                 >
                   <View
-                    style={Object {}}
+                    style={{}}
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -1265,7 +1541,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -1283,9 +1559,27 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -1297,7 +1591,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -1310,7 +1604,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -1319,7 +1613,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -1327,8 +1621,20 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -1342,7 +1648,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -1355,11 +1661,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 <View>
                   <View
                     style={
-                      Array [
-                        Object {
+                      [
+                        {
                           "overflow": "hidden",
                         },
-                        Object {
+                        {
                           "height": 80,
                           "width": 80,
                         },
@@ -1370,9 +1676,14 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                       defaultSource={null}
                       onFastImageError={[Function]}
                       resizeMode="contain"
-                      source={null}
+                      source={
+                        {
+                          "priority": "normal",
+                          "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/123789456m.jpg",
+                        }
+                      }
                       style={
-                        Object {
+                        {
                           "bottom": 0,
                           "left": 0,
                           "position": "absolute",
@@ -1385,7 +1696,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                 </View>
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -1395,11 +1706,11 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   testID="item-details"
                 >
                   <View
-                    style={Object {}}
+                    style={{}}
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -1413,7 +1724,7 @@ exports[`Tests CategoryCard Component should tests CategoryCard when the card is
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -1439,7 +1750,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomWidth": 1,
@@ -1453,7 +1764,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "flexDirection": "column",
         }
@@ -1467,11 +1778,28 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
       </Text>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 15,
           "right": 15,
@@ -1486,7 +1814,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "opacity": 1,
         }
       }
@@ -1501,8 +1829,8 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
   </View>
   <RCTScrollView
     data={
-      Array [
-        Object {
+      [
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -1515,7 +1843,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           "upcNbr": "000055559999",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FOODSERVICE",
           "catgNbr": 93,
           "completed": false,
@@ -1528,7 +1856,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           "upcNbr": "000055559934",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "ELECTRONICS",
           "catgNbr": 99,
           "completed": false,
@@ -1541,7 +1869,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           "upcNbr": "777555333",
           "worklistType": "AU",
         },
-        Object {
+        {
           "catgName": "FRESH BAKERY",
           "catgNbr": 88,
           "completed": false,
@@ -1570,14 +1898,32 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -1589,7 +1935,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -1602,7 +1948,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -1611,7 +1957,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -1619,8 +1965,20 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -1634,7 +1992,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -1647,7 +2005,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -1658,14 +2016,14 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -1679,7 +2037,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -1697,9 +2055,27 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -1711,7 +2087,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -1724,7 +2100,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -1733,7 +2109,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -1741,8 +2117,20 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -1756,7 +2144,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -1769,7 +2157,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -1780,14 +2168,14 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -1801,7 +2189,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -1819,9 +2207,27 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -1833,7 +2239,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -1846,7 +2252,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -1855,7 +2261,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -1863,8 +2269,20 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -1878,7 +2296,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -1891,7 +2309,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -1902,14 +2320,14 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -1923,7 +2341,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,
@@ -1941,9 +2359,27 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={false}
@@ -1955,7 +2391,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "backgroundColor": "#ffffffff",
               "flexDirection": "row",
@@ -1968,7 +2404,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "flex-start",
                 "flex": 1,
                 "justifyContent": "space-evenly",
@@ -1977,7 +2413,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
           >
             <View
               style={
-                Object {
+                {
                   "marginTop": 2,
                   "width": "100%",
                 }
@@ -1985,8 +2421,20 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -2000,7 +2448,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "backgroundColor": "#ffffffff",
                     "flexDirection": "row",
                     "opacity": 1,
@@ -2013,7 +2461,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
               >
                 <View
                   style={
-                    Object {
+                    {
                       "flexDirection": "column",
                       "flexShrink": 1,
                       "justifyContent": "space-around",
@@ -2024,14 +2472,14 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "paddingBottom": 10,
                       }
                     }
                   >
                     <Text
                       style={
-                        Object {
+                        {
                           "color": "#616161",
                           "flexShrink": 1,
                           "flexWrap": "wrap",
@@ -2045,7 +2493,7 @@ exports[`Tests CategoryCard Component tests sending the status of an item when a
                   <View>
                     <Text
                       style={
-                        Object {
+                        {
                           "flexShrink": 1,
                           "flexWrap": "wrap",
                           "fontSize": 14,

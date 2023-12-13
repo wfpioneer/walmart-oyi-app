@@ -3,20 +3,20 @@
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator with LocationKebabMenu disabled 1`] = `
 <StackNavigator
   screenListeners={
-    Object {
+    {
       "beforeRemove": [Function],
       "blur": [Function],
       "focus": [Function],
     }
   }
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
-      "headerTitleStyle": Object {
+      "headerTitleStyle": {
         "fontSize": 18,
       },
     }
@@ -26,9 +26,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="Zones"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
       }
     }
   />
@@ -36,9 +36,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="Aisles"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
       }
     }
   />
@@ -46,9 +46,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="Sections"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
       }
     }
   />
@@ -56,25 +56,25 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="SectionDetails"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="EditLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.EDIT_LOCATION" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -83,38 +83,38 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="AddPallet"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.SCAN_PALLET" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddZone"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_ZONE" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddSection"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_SECTIONS" translation]",
       }
     }
   />
@@ -122,9 +122,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="AddItems"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
       }
     }
   />
@@ -134,20 +134,20 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator with Print List Button 1`] = `
 <StackNavigator
   screenListeners={
-    Object {
+    {
       "beforeRemove": [Function],
       "blur": [Function],
       "focus": [Function],
     }
   }
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
-      "headerTitleStyle": Object {
+      "headerTitleStyle": {
         "fontSize": 18,
       },
     }
@@ -157,9 +157,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="Zones"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
       }
     }
   />
@@ -167,9 +167,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="Aisles"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
       }
     }
   />
@@ -177,9 +177,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="Sections"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
       }
     }
   />
@@ -187,25 +187,25 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="SectionDetails"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="EditLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.EDIT_LOCATION" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -214,38 +214,38 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="AddPallet"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.SCAN_PALLET" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddZone"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_ZONE" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddSection"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_SECTIONS" translation]",
       }
     }
   />
@@ -253,9 +253,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
     component={[Function]}
     name="AddItems"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
       }
     }
   />
@@ -265,20 +265,20 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, manager 1`] = `
 <StackNavigator
   screenListeners={
-    Object {
+    {
       "beforeRemove": [Function],
       "blur": [Function],
       "focus": [Function],
     }
   }
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
-      "headerTitleStyle": Object {
+      "headerTitleStyle": {
         "fontSize": 18,
       },
     }
@@ -288,9 +288,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="Zones"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
       }
     }
   />
@@ -298,9 +298,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="Aisles"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
       }
     }
   />
@@ -308,9 +308,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="Sections"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
       }
     }
   />
@@ -318,25 +318,25 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="SectionDetails"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="EditLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.EDIT_LOCATION" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -345,38 +345,38 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="AddPallet"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.SCAN_PALLET" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddZone"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_ZONE" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddSection"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_SECTIONS" translation]",
       }
     }
   />
@@ -384,9 +384,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="AddItems"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
       }
     }
   />
@@ -396,20 +396,20 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
 exports[`LocationManagement Navigator Renders the LocationManagement Navigator, non manager 1`] = `
 <StackNavigator
   screenListeners={
-    Object {
+    {
       "beforeRemove": [Function],
       "blur": [Function],
       "focus": [Function],
     }
   }
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
-      "headerTitleStyle": Object {
+      "headerTitleStyle": {
         "fontSize": 18,
       },
     }
@@ -419,9 +419,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="Zones"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.ZONES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
       }
     }
   />
@@ -429,9 +429,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="Aisles"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.AISLES\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
       }
     }
   />
@@ -439,9 +439,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="Sections"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SECTIONS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
       }
     }
   />
@@ -449,25 +449,25 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="SectionDetails"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.LOCATION_DETAILS\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="EditLocation"
     options={
-      Object {
+      {
         "headerBackTitleVisible": false,
-        "headerTitle": "[missing \\"en.LOCATION.EDIT_LOCATION\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.EDIT_LOCATION" translation]",
         "headerTitleAlign": "left",
       }
     }
@@ -476,38 +476,38 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="AddPallet"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_PALLET\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.SCAN_PALLET" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddZone"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_ZONE\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_ZONE" translation]",
       }
     }
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "beforeRemove": [Function],
         "focus": [Function],
       }
     }
     name="AddSection"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.LOCATION.ADD_SECTIONS\\" translation]",
+      {
+        "headerTitle": "[missing "en.LOCATION.ADD_SECTIONS" translation]",
       }
     }
   />
@@ -515,9 +515,9 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
     component={[Function]}
     name="AddItems"
     options={
-      Object {
+      {
         "headerRight": [Function],
-        "headerTitle": "[missing \\"en.LOCATION.SCAN_ITEM\\" translation]",
+        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
       }
     }
   />
@@ -531,7 +531,7 @@ exports[`LocationManagement Navigator Renders the cameraButton header icon 1`] =
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -555,7 +555,7 @@ exports[`LocationManagement Navigator Renders the scanButton header icon 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",

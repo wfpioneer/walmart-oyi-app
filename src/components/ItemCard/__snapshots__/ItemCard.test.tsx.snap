@@ -3,13 +3,30 @@
 exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
 <View
   style={
-    Object {
+    {
       "marginTop": 2,
       "width": "100%",
     }
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -21,7 +38,7 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
         "opacity": 1,
@@ -34,11 +51,11 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
     <View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "overflow": "hidden",
             },
-            Object {
+            {
               "height": 80,
               "width": 80,
             },
@@ -49,9 +66,14 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
           defaultSource={null}
           onFastImageError={[Function]}
           resizeMode="contain"
-          source={null}
+          source={
+            {
+              "priority": "normal",
+              "uri": "https://assets.sams.com.mx/image/upload/f_auto,q_auto:eco,w_350,c_scale,dpr_auto/mx/images/product-images/img_medium/1234m.jpg",
+            }
+          }
           style={
-            Object {
+            {
               "bottom": 0,
               "left": 0,
               "position": "absolute",
@@ -64,7 +86,7 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "flexShrink": 1,
           "justifyContent": "space-around",
@@ -74,11 +96,11 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
       testID="item-details"
     >
       <View
-        style={Object {}}
+        style={{}}
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -92,7 +114,7 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
       <View>
         <Text
           style={
-            Object {
+            {
               "flexShrink": 1,
               "flexWrap": "wrap",
               "fontSize": 14,
@@ -105,14 +127,14 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -131,13 +153,30 @@ exports[`Audits ItemCard Component Test renders ItemCard with images 1`] = `
 exports[`Audits ItemCard Component Test renders ItemCard without onHands quantity 1`] = `
 <View
   style={
-    Object {
+    {
       "marginTop": 2,
       "width": "100%",
     }
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -149,7 +188,7 @@ exports[`Audits ItemCard Component Test renders ItemCard without onHands quantit
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
         "opacity": 1,
@@ -162,7 +201,7 @@ exports[`Audits ItemCard Component Test renders ItemCard without onHands quantit
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "flexShrink": 1,
           "justifyContent": "space-around",
@@ -173,14 +212,14 @@ exports[`Audits ItemCard Component Test renders ItemCard without onHands quantit
     >
       <View
         style={
-          Object {
+          {
             "paddingBottom": 10,
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -194,7 +233,7 @@ exports[`Audits ItemCard Component Test renders ItemCard without onHands quantit
       <View>
         <Text
           style={
-            Object {
+            {
               "flexShrink": 1,
               "flexWrap": "wrap",
               "fontSize": 14,
@@ -207,14 +246,14 @@ exports[`Audits ItemCard Component Test renders ItemCard without onHands quantit
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -233,13 +272,30 @@ exports[`Audits ItemCard Component Test renders ItemCard without onHands quantit
 exports[`Audits ItemCard Component Test renders default ItemCard when loading is false 1`] = `
 <View
   style={
-    Object {
+    {
       "marginTop": 2,
       "width": "100%",
     }
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -251,7 +307,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
         "opacity": 1,
@@ -264,7 +320,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "flexShrink": 1,
           "justifyContent": "space-around",
@@ -275,14 +331,14 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
     >
       <View
         style={
-          Object {
+          {
             "paddingBottom": 10,
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -296,7 +352,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
       <View>
         <Text
           style={
-            Object {
+            {
               "flexShrink": 1,
               "flexWrap": "wrap",
               "fontSize": 14,
@@ -309,14 +365,14 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "paddingRight": 5,
@@ -326,7 +382,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "flexShrink": 1,
                 "flexWrap": "wrap",
@@ -340,14 +396,14 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -366,13 +422,30 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
 exports[`Audits ItemCard Component Test renders default ItemCard when loading is false and there is a positive pendingQty 1`] = `
 <View
   style={
-    Object {
+    {
       "marginTop": 2,
       "width": "100%",
     }
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -384,7 +457,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
         "opacity": 1,
@@ -397,7 +470,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "flexShrink": 1,
           "justifyContent": "space-around",
@@ -408,14 +481,14 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
     >
       <View
         style={
-          Object {
+          {
             "paddingBottom": 10,
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -429,7 +502,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
       <View>
         <Text
           style={
-            Object {
+            {
               "flexShrink": 1,
               "flexWrap": "wrap",
               "fontSize": 14,
@@ -442,14 +515,14 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "paddingRight": 5,
@@ -459,7 +532,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "flexShrink": 1,
                 "flexWrap": "wrap",
@@ -471,7 +544,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#e74517",
                 "flexShrink": 1,
                 "flexWrap": "wrap",
@@ -484,7 +557,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
         </View>
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "paddingRight": 5,
@@ -496,21 +569,21 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
             allowFontScaling={false}
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "#e74517",
                   "fontSize": 12,
                 },
-                Object {
+                {
                   "paddingRight": 6,
                   "paddingTop": 2,
                 },
-                Object {
+                {
                   "fontFamily": "FontAwesome5Free-Solid",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {
+                {
                   "fontWeight": "900",
                 },
               ]
@@ -520,7 +593,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
           </Text>
           <Text
             style={
-              Object {
+              {
                 "color": "#e74517",
                 "flexShrink": 1,
                 "flexWrap": "wrap",
@@ -534,14 +607,14 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -560,13 +633,30 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
 exports[`Audits ItemCard Component Test renders default ItemCard when loading is true 1`] = `
 <View
   style={
-    Object {
+    {
       "marginTop": 2,
       "width": "100%",
     }
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -578,7 +668,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#f4f4f9",
         "flexDirection": "row",
         "height": 60,
@@ -590,7 +680,7 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -613,13 +703,30 @@ exports[`Audits ItemCard Component Test renders default ItemCard when loading is
 exports[`Audits ItemCard Component renders the item card without total quantity 1`] = `
 <View
   style={
-    Object {
+    {
       "marginTop": 2,
       "width": "100%",
     }
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -631,7 +738,7 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
         "opacity": 1,
@@ -644,7 +751,7 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "flexShrink": 1,
           "justifyContent": "space-around",
@@ -655,14 +762,14 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
     >
       <View
         style={
-          Object {
+          {
             "paddingBottom": 10,
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -676,7 +783,7 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
       <View>
         <Text
           style={
-            Object {
+            {
               "flexShrink": 1,
               "flexWrap": "wrap",
               "fontSize": 14,
@@ -689,14 +796,14 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "paddingRight": 5,
@@ -706,7 +813,7 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
         >
           <Text
             style={
-              Object {
+              {
                 "color": "#616161",
                 "flexShrink": 1,
                 "flexWrap": "wrap",
@@ -726,13 +833,30 @@ exports[`Audits ItemCard Component renders the item card without total quantity 
 exports[`Audits ItemCard Component tests rendering item card with worklist status 1`] = `
 <View
   style={
-    Object {
+    {
       "marginTop": 2,
       "width": "100%",
     }
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -744,7 +868,7 @@ exports[`Audits ItemCard Component tests rendering item card with worklist statu
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
         "opacity": 1,
@@ -757,7 +881,7 @@ exports[`Audits ItemCard Component tests rendering item card with worklist statu
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "flexShrink": 1,
           "justifyContent": "space-around",
@@ -768,14 +892,14 @@ exports[`Audits ItemCard Component tests rendering item card with worklist statu
     >
       <View
         style={
-          Object {
+          {
             "paddingBottom": 10,
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",
@@ -789,7 +913,7 @@ exports[`Audits ItemCard Component tests rendering item card with worklist statu
       <View>
         <Text
           style={
-            Object {
+            {
               "flexShrink": 1,
               "flexWrap": "wrap",
               "fontSize": 14,
@@ -802,14 +926,14 @@ exports[`Audits ItemCard Component tests rendering item card with worklist statu
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "backgroundColor": "#AAF0F2",
               "borderColor": "#eeeeee",
               "borderRadius": 4,
@@ -826,14 +950,14 @@ exports[`Audits ItemCard Component tests rendering item card with worklist statu
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "column",
           }
         }
       >
         <Text
           style={
-            Object {
+            {
               "color": "#616161",
               "flexShrink": 1,
               "flexWrap": "wrap",

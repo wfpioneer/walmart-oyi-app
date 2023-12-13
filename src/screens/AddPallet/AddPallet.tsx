@@ -1,9 +1,6 @@
 import React, { EffectCallback, useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
-  Text,
-  TextInput,
-  View
+  ActivityIndicator, Text, TextInput, View
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -12,7 +9,11 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { addPallet, getSectionDetails } from '../../state/actions/saga';
 import Button from '../../components/buttons/Button';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
-import { setBottomTab, setManualScan, setScannedEvent } from '../../state/actions/Global';
+import {
+  setBottomTab,
+  setManualScan,
+  setScannedEvent
+} from '../../state/actions/Global';
 import { barcodeEmitter } from '../../utils/scannerUtils';
 import { strings } from '../../locales';
 import styles from './AddPallet.style';
@@ -32,9 +33,52 @@ interface AddPalletScreenProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   section: LocationIdName;
   locationName: string;
-  addAPI: AsyncState;
+  addPalletAPI: AsyncState;
   trackEventCall: (eventName: string, params?: any) => void;
 }
+
+export const addPalletAPIHook = (
+  addPalletAPI: AsyncState,
+  dispatch: Dispatch<any>,
+  navigation: NavigationProp<any>,
+  section: LocationIdName
+) => {
+  // on api success
+  if (!addPalletAPI.isWaiting && addPalletAPI.result) {
+    if (addPalletAPI.result.data?.assignPalletToSectionResponse.code === 200) {
+      dispatch(getSectionDetails({ sectionId: section.id.toString() }));
+      dispatch(showSnackBar(strings('LOCATION.PALLET_ADDED'), 3000));
+      navigation.goBack();
+    }
+    if (addPalletAPI.result.data?.assignPalletToSectionResponse.code === 204) {
+      dispatch(
+        showInfoModal(
+          strings('LOCATION.PALLET_ERROR'),
+          strings('LOCATION.PALLET_NOT_FOUND')
+        )
+      );
+    }
+  }
+
+  // on api failure
+  if (!addPalletAPI.isWaiting && addPalletAPI.error) {
+    if (addPalletAPI.error === COMPLETE_API_409_ERROR) {
+      dispatch(
+        showInfoModal(
+          strings('LOCATION.PALLET_ERROR'),
+          strings('LOCATION.PALLET_NOT_FOUND')
+        )
+      );
+    } else {
+      dispatch(
+        showInfoModal(
+          strings('LOCATION.ADD_PALLET_ERROR'),
+          strings('LOCATION.ADD_PALLET_API_ERROR')
+        )
+      );
+    }
+  }
+};
 
 export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
   const {
@@ -45,17 +89,17 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
     useEffectHook,
     section,
     locationName,
-    addAPI,
+    addPalletAPI,
     trackEventCall
   } = props;
 
   const palletIDRegex = /^[0-9]+$/;
-  const nonNumRegex = new RegExp(/[^0-9]/g);
+  const nonNumRegex = /[^0-9]/g;
 
-  if (addAPI.isWaiting) {
+  if (addPalletAPI.isWaiting) {
     return (
       <ActivityIndicator
-        animating={addAPI.isWaiting}
+        animating={addPalletAPI.isWaiting}
         hidesWhenStopped
         color={COLOR.MAIN_THEME_COLOR}
         size="large"
@@ -64,24 +108,10 @@ export const AddPalletScreen = (props: AddPalletScreenProps): JSX.Element => {
     );
   }
   // Add Location API
-  useEffectHook(() => {
-    // on api success
-    // eslint-disable-next-line no-empty
-    if (!addAPI.isWaiting && addAPI.result) {
-      dispatch(getSectionDetails({ sectionId: section.id.toString() }));
-      dispatch(showSnackBar(strings('LOCATION.PALLET_ADDED'), 3000));
-      navigation.goBack();
-    }
-
-    // on api failure
-    if (!addAPI.isWaiting && addAPI.error) {
-      if (addAPI.error === COMPLETE_API_409_ERROR) {
-        dispatch(showInfoModal(strings('LOCATION.PALLET_ERROR'), strings('LOCATION.PALLET_NOT_FOUND')));
-      } else {
-        dispatch(showInfoModal(strings('LOCATION.ADD_PALLET_ERROR'), strings('LOCATION.ADD_PALLET_API_ERROR')));
-      }
-    }
-  }, [addAPI]);
+  useEffectHook(
+    () => addPalletAPIHook(addPalletAPI, dispatch, navigation, section),
+    [addPalletAPI]
+  );
   // Navigation Listener
   useEffectHook(() => {
     // Resets location api response data when navigating off-screen
@@ -165,7 +195,7 @@ const AddPallet = (): JSX.Element => {
   const aisle = useTypedSelector(state => state.Location.selectedAisle);
   const section = useTypedSelector(state => state.Location.selectedSection);
   const locationName = `${zone.name}${aisle.name}-${section.name}`;
-  const addAPI = useTypedSelector(state => state.async.addPallet);
+  const addPalletAPI = useTypedSelector(state => state.async.addPallet);
   return (
     <AddPalletScreen
       palletId={palletId}
@@ -175,7 +205,7 @@ const AddPallet = (): JSX.Element => {
       useEffectHook={useEffect}
       section={section}
       locationName={locationName}
-      addAPI={addAPI}
+      addPalletAPI={addPalletAPI}
       trackEventCall={trackEvent}
     />
   );

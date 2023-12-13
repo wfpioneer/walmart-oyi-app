@@ -6,7 +6,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -22,14 +22,14 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -39,7 +39,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -54,12 +54,12 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -70,7 +70,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -78,11 +78,11 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
   >
     <ManualScanComponent
       keyboardType="numeric"
-      placeholder="[missing \\"en.GENERICS.ENTER_UPC_ITEM_NBR\\" translation]"
+      placeholder="[missing "en.GENERICS.ENTER_UPC_ITEM_NBR" translation]"
     />
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "column",
@@ -102,7 +102,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
       </Memo(Pressable)>
       <View
         style={
-          Object {
+          {
             "paddingTop": 30,
           }
         }
@@ -122,7 +122,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -138,14 +138,14 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -155,7 +155,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -170,12 +170,12 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -186,7 +186,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -194,7 +194,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "column",
@@ -214,7 +214,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
       </Memo(Pressable)>
       <View
         style={
-          Object {
+          {
             "paddingTop": 30,
           }
         }
@@ -235,7 +235,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen whe
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -249,7 +249,7 @@ exports[`NoActionScan render NoActionScan screen render screen with navigation a
   onLayout={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -263,7 +263,7 @@ exports[`NoActionScan render NoActionScan screen render screen with navigation a
   />
   <View
     style={
-      Object {
+      {
         "flex": 1,
         "flexDirection": "column",
       }
@@ -271,7 +271,7 @@ exports[`NoActionScan render NoActionScan screen render screen with navigation a
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "column",
@@ -281,6 +281,23 @@ exports[`NoActionScan render NoActionScan screen render screen with navigation a
       }
     >
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -302,7 +319,7 @@ exports[`NoActionScan render NoActionScan screen render screen with navigation a
       </View>
       <View
         style={
-          Object {
+          {
             "paddingTop": 30,
           }
         }

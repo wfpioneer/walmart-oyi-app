@@ -4,7 +4,7 @@ exports[`SalesFloorTabScreen Renders the SalesFloorTabScreen Component 1`] = `
 <View>
   <FlatList
     data={
-      Array [
+      [
         "Front",
         "ABAR",
         "BREW",
@@ -22,7 +22,7 @@ exports[`SalesFloorTabScreen Renders the SalesFloorTabScreen Component while ref
 <View>
   <FlatList
     data={
-      Array [
+      [
         "Front",
         "ABAR",
         "BREW",

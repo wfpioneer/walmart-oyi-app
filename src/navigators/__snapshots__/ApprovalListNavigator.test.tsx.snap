@@ -4,7 +4,7 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
 <View>
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "fontSize": 20,
         "fontWeight": "bold",
@@ -16,7 +16,7 @@ exports[`ApprovalList Navigator Renders \`items\` translation for an approval li
   </Text>
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "fontSize": 14,
         "marginLeft": -2,
@@ -32,7 +32,7 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
 <View>
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "fontSize": 20,
         "fontWeight": "bold",
@@ -44,7 +44,7 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
   </Text>
   <Text
     style={
-      Object {
+      {
         "color": "#ffffffff",
         "fontSize": 14,
         "marginLeft": -2,
@@ -59,7 +59,7 @@ exports[`ApprovalList Navigator Renders single \`item\` translation for an appro
 exports[`ApprovalList Navigator Renders the SelectedItemQty component  1`] = `
 <Text
   style={
-    Object {
+    {
       "color": "#ffffffff",
       "fontSize": 20,
       "fontWeight": "bold",
@@ -94,9 +94,9 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
 >
   <StackNavigator
     screenOptions={
-      Object {
+      {
         "headerMode": "float",
-        "headerStyle": Object {
+        "headerStyle": {
           "backgroundColor": "#0071e9",
         },
         "headerTintColor": "#ffffffff",
@@ -107,10 +107,10 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
       component={[Function]}
       name="Approval"
       options={
-        Object {
+        {
           "headerLeft": undefined,
           "headerRight": [Function],
-          "headerRightContainerStyle": Object {
+          "headerRightContainerStyle": {
             "alignItems": "center",
             "flex": 1,
             "flexDirection": "row-reverse",
@@ -123,8 +123,8 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
       component={[Function]}
       name="ApproveSummary"
       options={
-        Object {
-          "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+        {
+          "headerTitle": "[missing "en.APPROVAL.REVIEW" translation]",
         }
       }
     />
@@ -132,8 +132,8 @@ exports[`ApprovalList Navigator Renders the approval list navigator component 1`
       component={[Function]}
       name="RejectSummary"
       options={
-        Object {
-          "headerTitle": "[missing \\"en.APPROVAL.REVIEW\\" translation]",
+        {
+          "headerTitle": "[missing "en.APPROVAL.REVIEW" translation]",
         }
       }
     />
@@ -157,7 +157,7 @@ exports[`ApprovalList Navigator Renders the closeButton component  1`] = `
 exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "flexDirection": "row-reverse",
@@ -166,7 +166,7 @@ exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "marginRight": 8,
       }
     }
@@ -187,7 +187,7 @@ exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "marginRight": 8,
             "maxWidth": 150,
             "minWidth": 80,
@@ -196,7 +196,7 @@ exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "fontWeight": "bold",
@@ -214,7 +214,7 @@ exports[`ApprovalList Navigator Renders the deselect all button header 1`] = `
 exports[`ApprovalList Navigator Renders the select all button header 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "flexDirection": "row-reverse",
@@ -223,7 +223,7 @@ exports[`ApprovalList Navigator Renders the select all button header 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "marginRight": 8,
       }
     }
@@ -244,7 +244,7 @@ exports[`ApprovalList Navigator Renders the select all button header 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "marginRight": 8,
             "maxWidth": 150,
             "minWidth": 80,
@@ -253,7 +253,7 @@ exports[`ApprovalList Navigator Renders the select all button header 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#ffffffff",
               "fontSize": 16,
               "fontWeight": "bold",

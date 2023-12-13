@@ -3,14 +3,14 @@
 exports[`StarsComponent should render Stars component with intial value and defined size 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }
@@ -77,14 +77,14 @@ exports[`StarsComponent should render Stars component with intial value and defi
 exports[`StarsComponent should render the component based on props 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
       }
     }

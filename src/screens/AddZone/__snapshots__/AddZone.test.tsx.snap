@@ -6,14 +6,14 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 0.9,
         "justifyContent": "flex-start",
@@ -22,7 +22,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "borderColor": "#c5c5c5",
           "borderRadius": 10,
           "borderWidth": 1,
@@ -32,7 +32,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "backgroundColor": "rgb(242, 242, 242)",
             "left": 15,
             "paddingHorizontal": 5,
@@ -45,7 +45,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#c5c5c5",
               "fontSize": 12,
             }
@@ -67,7 +67,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
           "marginHorizontal": 20,
@@ -76,7 +76,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-between",
             "marginHorizontal": 20,
@@ -85,7 +85,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "textAlignVertical": "center",
             }
@@ -106,7 +106,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#b71c1c",
             "fontSize": 10,
             "marginBottom": 12,
@@ -120,7 +120,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 15,
       }
@@ -133,11 +133,11 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add aisle 1`] = `
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -154,14 +154,14 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 0.9,
         "justifyContent": "flex-start",
@@ -170,7 +170,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "borderColor": "#c5c5c5",
           "borderRadius": 10,
           "borderWidth": 1,
@@ -180,7 +180,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "backgroundColor": "rgb(242, 242, 242)",
             "left": 15,
             "paddingHorizontal": 5,
@@ -193,7 +193,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#c5c5c5",
               "fontSize": 12,
             }
@@ -208,7 +208,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
         selectedValue=""
       >
         <PickerItem
-          label="[missing \\"en.LOCATION.SELECT_ZONE\\" translation]"
+          label="[missing "en.LOCATION.SELECT_ZONE" translation]"
           value=""
         />
         <PickerItem
@@ -399,7 +399,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
           "marginHorizontal": 20,
@@ -408,7 +408,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-between",
             "marginHorizontal": 20,
@@ -417,7 +417,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "textAlignVertical": "center",
             }
@@ -438,7 +438,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
       </View>
       <Text
         style={
-          Object {
+          {
             "color": "#b71c1c",
             "fontSize": 10,
             "marginBottom": 12,
@@ -452,7 +452,7 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 15,
       }
@@ -465,11 +465,11 @@ exports[`AddZoneScreen AddZoneScreen with invalid input from add zone 1`] = `
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -486,14 +486,14 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 0.9,
         "justifyContent": "flex-start",
@@ -502,7 +502,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "borderColor": "#c5c5c5",
           "borderRadius": 10,
           "borderWidth": 1,
@@ -512,7 +512,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "backgroundColor": "rgb(242, 242, 242)",
             "left": 15,
             "paddingHorizontal": 5,
@@ -525,7 +525,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#c5c5c5",
               "fontSize": 12,
             }
@@ -547,7 +547,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
           "marginHorizontal": 20,
@@ -556,7 +556,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-between",
             "marginHorizontal": 20,
@@ -565,7 +565,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "textAlignVertical": "center",
             }
@@ -588,7 +588,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 15,
       }
@@ -601,11 +601,11 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add aisle 1`] = `
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"
@@ -622,14 +622,14 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
   keyboardVerticalOffset={110}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "stretch",
         "flex": 0.9,
         "justifyContent": "flex-start",
@@ -638,7 +638,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "borderColor": "#c5c5c5",
           "borderRadius": 10,
           "borderWidth": 1,
@@ -648,7 +648,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "backgroundColor": "rgb(242, 242, 242)",
             "left": 15,
             "paddingHorizontal": 5,
@@ -661,7 +661,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#c5c5c5",
               "fontSize": 12,
             }
@@ -676,7 +676,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
         selectedValue=""
       >
         <PickerItem
-          label="[missing \\"en.LOCATION.SELECT_ZONE\\" translation]"
+          label="[missing "en.LOCATION.SELECT_ZONE" translation]"
           value=""
         />
         <PickerItem
@@ -867,7 +867,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
           "justifyContent": "space-between",
           "marginHorizontal": 20,
@@ -876,7 +876,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-between",
             "marginHorizontal": 20,
@@ -885,7 +885,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "textAlignVertical": "center",
             }
@@ -908,7 +908,7 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 0.1,
         "marginBottom": 15,
       }
@@ -921,11 +921,11 @@ exports[`AddZoneScreen AddZoneScreen with valid input from add zone 1`] = `
       onPress={[Function]}
       radius={5}
       style={
-        Object {
+        {
           "margin": 15,
         }
       }
-      title="[missing \\"en.GENERICS.CONTINUE\\" translation]"
+      title="[missing "en.GENERICS.CONTINUE" translation]"
       titleColor="#ffffffff"
       titleFontSize={16}
       titleFontWeight="normal"

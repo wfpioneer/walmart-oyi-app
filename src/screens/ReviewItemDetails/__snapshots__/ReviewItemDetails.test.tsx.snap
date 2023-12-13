@@ -3,7 +3,7 @@
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -17,7 +17,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#00000099",
           "flex": 1,
@@ -27,8 +27,8 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignContent": "center",
               "alignSelf": "center",
               "backgroundColor": "#ffffffff",
@@ -40,7 +40,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
               "padding": 10,
               "width": "80%",
             },
-            Object {
+            {
               "minHeight": undefined,
             },
           ]
@@ -51,14 +51,14 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
           name="alert"
           size={30}
           style={
-            Object {
+            {
               "alignSelf": "center",
             }
           }
         />
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "textAlign": "center",
             }
@@ -68,7 +68,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
         </Text>
         <View
           style={
-            Object {
+            {
               "alignContent": "space-around",
               "flexDirection": "row",
               "justifyContent": "center",
@@ -78,11 +78,11 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "height": 45,
                 },
-                Object {
+                {
                   "marginTop": 16,
                   "width": "70%",
                 },
@@ -91,15 +91,27 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
           >
             <View
               style={
-                Object {
+                {
                   "flex": 1,
                 }
               }
             >
               <View
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -113,7 +125,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#D6512D",
                     "borderRadius": 5,
@@ -126,7 +138,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
               >
                 <Text
                   style={
-                    Object {
+                    {
                       "color": "#ffffffff",
                       "fontFamily": "Roboto-Medium",
                       "fontSize": 16,
@@ -146,7 +158,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
   </Modal>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -158,17 +170,43 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       name="alert"
       size={40}
     />
-    <Text
+    <View
       style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
+        {
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -180,7 +218,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -204,7 +242,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 2`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -218,7 +256,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -230,17 +268,43 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       name="alert"
       size={40}
     />
-    <Text
+    <View
       style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
+        {
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -252,7 +316,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -276,7 +340,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
 exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function tests test isError 3`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -290,7 +354,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -302,26 +366,36 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       name="alert"
       size={40}
     />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
       <Text
         style={
-          Object {
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -331,7 +405,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -352,7 +426,7 @@ exports[`ReviewItemDetailsScreen Manage ReviewItemDetails externalized function 
     hidesWhenStopped={true}
     size="large"
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -369,13 +443,13 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
   <CollapsibleHeaderCard
     icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.OH_CHANGE_HISTORY" translation]"
+    titleStyle={{}}
     toggleIsOpened={[Function]}
     trackEventSource={
-      Object {
+      {
         "action": "OH_change_history_click",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 1,
         },
         "screen": "Review_Item_Details",
@@ -389,7 +463,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
@@ -402,7 +476,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "flexDirection": "row",
@@ -412,20 +486,35 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     >
       <Text
         style={
-          Object {
+          {
             "marginRight": 0,
           }
         }
-      >
-        
-      </Text>
+      />
       <Text
-        style={Object {}}
+        style={{}}
       >
         [missing "en.ITEM.OH_CHANGE_HISTORY" translation]
       </Text>
     </View>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -437,7 +526,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "flex": 0.1,
           "opacity": 1,
           "paddingLeft": 5,
@@ -455,7 +544,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -471,6 +560,23 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
         [missing "en.ITEM.ERROR_OH_CHANGE_HISTORY" translation]
       </Text>
       <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
         collapsable={false}
         focusable={true}
@@ -482,7 +588,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#e57373",
             "borderRadius": 4,
@@ -509,13 +615,13 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
   <CollapsibleHeaderCard
     icon=""
     isOpened={false}
-    title="[missing \\"en.ITEM.OH_CHANGE_HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.OH_CHANGE_HISTORY" translation]"
+    titleStyle={{}}
     toggleIsOpened={[Function]}
     trackEventSource={
-      Object {
+      {
         "action": "OH_change_history_click",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 2,
         },
         "screen": "Review_Item_Details",
@@ -530,13 +636,13 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
   <CollapsibleHeaderCard
     icon=""
     isOpened={true}
-    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.PICK_HISTORY" translation]"
+    titleStyle={{}}
     toggleIsOpened={[Function]}
     trackEventSource={
-      Object {
+      {
         "action": "pick_history_click",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 6,
         },
         "screen": "Review_Item_Details",
@@ -546,7 +652,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flex": 1,
           "justifyContent": "center",
@@ -571,13 +677,13 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
   <CollapsibleHeaderCard
     icon=""
     isOpened={true}
-    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.PICK_HISTORY" translation]"
+    titleStyle={{}}
     toggleIsOpened={[Function]}
     trackEventSource={
-      Object {
+      {
         "action": "pick_history_click",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 6,
         },
         "screen": "Review_Item_Details",
@@ -587,7 +693,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
   <View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
         }
       }
@@ -598,7 +704,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
         hidesWhenStopped={true}
         size="large"
         style={
-          Object {
+          {
             "alignItems": "center",
             "justifyContent": "center",
           }
@@ -614,13 +720,13 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
   <CollapsibleHeaderCard
     icon=""
     isOpened={true}
-    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.PICK_HISTORY" translation]"
+    titleStyle={{}}
     toggleIsOpened={[Function]}
     trackEventSource={
-      Object {
+      {
         "action": "pick_history_click",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 4,
         },
         "screen": "Review_Item_Details",
@@ -650,7 +756,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
     />
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#ffffffff",
         }
       }
@@ -662,11 +768,11 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "width": 60,
           }
         }
-        title="[missing \\"en.LOCATION.MORE\\" translation]..."
+        title="[missing "en.LOCATION.MORE" translation]..."
         titleColor="#0071e9"
         titleFontSize={12}
         titleFontWeight="bold"
@@ -683,13 +789,13 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
   <CollapsibleHeaderCard
     icon=""
     isOpened={true}
-    title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.PICK_HISTORY" translation]"
+    titleStyle={{}}
     toggleIsOpened={[Function]}
     trackEventSource={
-      Object {
+      {
         "action": "pick_history_click",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 5,
         },
         "screen": "Review_Item_Details",
@@ -699,7 +805,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderPickHistory' Renders pic
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "flex": 1,
@@ -721,7 +827,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
 <View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
         "borderBottomWidth": 1,
@@ -735,7 +841,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
@@ -757,7 +863,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
       }
     }
@@ -768,7 +874,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
       hidesWhenStopped={true}
       size="large"
       style={
-        Object {
+        {
           "alignItems": "center",
           "justifyContent": "center",
         }
@@ -782,7 +888,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
 <View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
         "borderBottomWidth": 1,
@@ -796,7 +902,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
@@ -820,16 +926,16 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
     icon=""
     isOpened={false}
     source={
-      Object {
+      {
         "action": "replenishment_history_clicked",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 123,
         },
         "screen": "Review_Item_Details",
       }
     }
-    title="[missing \\"en.ITEM.HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.HISTORY" translation]"
+    titleStyle={{}}
   >
     <RenderItemHistoryCard
       date="2022-10-03T17:55:50Z"
@@ -843,7 +949,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
 <View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
         "borderBottomWidth": 1,
@@ -857,7 +963,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
@@ -879,7 +985,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -895,7 +1001,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -906,7 +1012,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -930,7 +1036,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
 <View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
         "borderBottomWidth": 1,
@@ -944,7 +1050,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderBottomColor": "#eeeeee",
@@ -968,20 +1074,20 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReplenishments' Renders 
     icon=""
     isOpened={false}
     source={
-      Object {
+      {
         "action": "replenishment_history_clicked",
-        "otherInfo": Object {
+        "otherInfo": {
           "itemNbr": 123,
         },
         "screen": "Review_Item_Details",
       }
     }
-    title="[missing \\"en.ITEM.HISTORY\\" translation]"
-    titleStyle={Object {}}
+    title="[missing "en.ITEM.HISTORY" translation]"
+    titleStyle={{}}
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "flex": 1,
@@ -1001,7 +1107,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders 
 <View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -1021,7 +1127,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -1041,7 +1147,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -1061,7 +1167,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders 
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flexDirection": "row",
@@ -1085,7 +1191,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderReserveLocQtys' Renders 
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders renderSalesGraphV4 card with api waiting 1`] = `
 <View
   style={
-    Object {
+    {
       "alignSelf": "stretch",
       "backgroundColor": "#ffffffff",
       "marginTop": 8,
@@ -1094,7 +1200,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
 >
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -1106,7 +1212,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "flex-start",
@@ -1116,7 +1222,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
       <View>
         <Text
           style={
-            Object {
+            {
               "marginLeft": 0,
             }
           }
@@ -1133,7 +1239,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
     hidesWhenStopped={true}
     size="large"
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       }
@@ -1142,7 +1248,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   <View />
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-end",
         "padding": 16,
@@ -1151,7 +1257,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   >
     <Text
       style={
-        Object {
+        {
           "color": "#757575",
         }
       }
@@ -1165,7 +1271,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders renderSalesGraphV4 card with error 1`] = `
 <View
   style={
-    Object {
+    {
       "alignSelf": "stretch",
       "backgroundColor": "#ffffffff",
       "marginTop": 8,
@@ -1174,7 +1280,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
 >
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -1186,7 +1292,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "flex-start",
@@ -1196,7 +1302,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
       <View>
         <Text
           style={
-            Object {
+            {
               "marginLeft": 0,
             }
           }
@@ -1209,7 +1315,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "flex": 1,
@@ -1225,7 +1331,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -1236,7 +1342,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -1255,7 +1361,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-end",
         "padding": 16,
@@ -1264,7 +1370,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "flex-end",
         }
@@ -1272,7 +1378,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -1285,7 +1391,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
           onPress={[Function]}
           radius={5}
           testID="bottomRightBtn-0"
-          title="[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]"
+          title="[missing "en.ITEM.TOGGLE_GRAPH" translation]"
           titleColor="#0071e9"
           titleFontSize={14}
           titleFontWeight="bold"
@@ -1301,7 +1407,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
 exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders renderSalesGraphV4 card with sales history 1`] = `
 <View
   style={
-    Object {
+    {
       "alignSelf": "stretch",
       "backgroundColor": "#ffffffff",
       "marginTop": 8,
@@ -1310,7 +1416,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
 >
   <View
     style={
-      Object {
+      {
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
         "flexDirection": "row",
@@ -1322,7 +1428,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "flex-start",
@@ -1332,7 +1438,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
       <View>
         <Text
           style={
-            Object {
+            {
               "marginLeft": 0,
             }
           }
@@ -1347,56 +1453,56 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
     isGraphView={false}
     itemNbr={123}
     itemSalesHistory={
-      Object {
-        "daily": Array [
-          Object {
+      {
+        "daily": [
+          {
             "day": "2023-01-09T00:00:00.000Z",
             "value": 0,
           },
-          Object {
+          {
             "day": "2023-01-08T00:00:00.000Z",
             "value": 0,
           },
-          Object {
+          {
             "day": "2023-01-07T00:00:00.000Z",
             "value": 0,
           },
-          Object {
+          {
             "day": "2023-01-06T00:00:00.000Z",
             "value": 0,
           },
-          Object {
+          {
             "day": "2023-01-05T00:00:00.000Z",
             "value": 0,
           },
-          Object {
+          {
             "day": "2023-01-04T00:00:00.000Z",
             "value": 0,
           },
-          Object {
+          {
             "day": "2023-01-03T00:00:00.000Z",
             "value": 0,
           },
         ],
         "dailyAvgSales": 0,
-        "weekly": Array [
-          Object {
+        "weekly": [
+          {
             "value": 0,
             "week": 49,
           },
-          Object {
+          {
             "value": 0,
             "week": 48,
           },
-          Object {
+          {
             "value": 0,
             "week": 47,
           },
-          Object {
+          {
             "value": 0,
             "week": 46,
           },
-          Object {
+          {
             "value": 0,
             "week": 45,
           },
@@ -1407,7 +1513,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   />
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "flex-end",
         "padding": 16,
@@ -1416,7 +1522,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "justifyContent": "flex-end",
         }
@@ -1424,7 +1530,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "flexDirection": "row",
           }
@@ -1437,7 +1543,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderSalesGraphV4' Renders re
           onPress={[Function]}
           radius={5}
           testID="bottomRightBtn-0"
-          title="[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]"
+          title="[missing "en.ITEM.TOGGLE_GRAPH" translation]"
           titleColor="#0071e9"
           titleFontSize={14}
           titleFontWeight="bold"
@@ -1457,7 +1563,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Other Action 'Scan for No Actio
   hostRef={null}
   onPress={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "borderColor": "#0071e9",
@@ -1481,7 +1587,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Other Action 'Scan for No Actio
   <Text
     adjustsFontSizeToFit={true}
     style={
-      Object {
+      {
         "color": "#0071e9",
         "marginLeft": 10,
         "textAlign": "center",
@@ -1503,7 +1609,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -1513,8 +1619,8 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -1526,7 +1632,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -1537,14 +1643,14 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
         name="alert"
         size={30}
         style={
-          Object {
+          {
             "alignSelf": "center",
           }
         }
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -1554,7 +1660,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "center",
@@ -1569,12 +1675,12 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "marginTop": 16,
               "width": "70%",
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1597,7 +1703,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -1607,8 +1713,8 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -1620,7 +1726,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -1631,14 +1737,14 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
         name="alert"
         size={30}
         style={
-          Object {
+          {
             "alignSelf": "center",
           }
         }
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -1648,7 +1754,7 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "center",
@@ -1663,12 +1769,12 @@ exports[`ReviewItemDetailsScreen Tests Rendering Scanned Barcode Error Renders t
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "marginTop": 16,
               "width": "70%",
             }
           }
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -1688,7 +1794,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent Cancelled with 'Other Actions' 1`] = `
 <View
   style={
-    Object {
+    {
       "alignContent": "space-around",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#e0e0e0",
@@ -1702,7 +1808,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderColor": "#0071e9",
@@ -1720,7 +1826,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   >
     <Text
       style={
-        Object {
+        {
           "color": "#0071e9",
           "marginLeft": 10,
           "textAlign": "center",
@@ -1733,7 +1839,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#0071e9",
         "borderColor": "#0071e9",
@@ -1752,7 +1858,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#ffffffff",
           "marginLeft": 10,
           "textAlign": "center",
@@ -1770,7 +1876,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NO with negative on hands qty 1`] = `
 <View
   style={
-    Object {
+    {
       "alignContent": "space-around",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#e0e0e0",
@@ -1784,7 +1890,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderColor": "#0071e9",
@@ -1808,7 +1914,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "marginLeft": 10,
           "textAlign": "center",
@@ -1821,7 +1927,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#0071e9",
         "borderColor": "#0071e9",
@@ -1839,7 +1945,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   >
     <Text
       style={
-        Object {
+        {
           "color": "#ffffffff",
           "marginLeft": 10,
           "textAlign": "center",
@@ -1855,7 +1961,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFL 1`] = `
 <View
   style={
-    Object {
+    {
       "alignContent": "space-around",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#e0e0e0",
@@ -1869,7 +1975,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderColor": "#0071e9",
@@ -1893,7 +1999,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "marginLeft": 10,
           "textAlign": "center",
@@ -1906,7 +2012,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#0071e9",
         "borderColor": "#0071e9",
@@ -1930,7 +2036,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#ffffffff",
           "marginLeft": 10,
           "textAlign": "center",
@@ -1946,7 +2052,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFL with existing Location 1`] = `
 <View
   style={
-    Object {
+    {
       "alignContent": "space-around",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#e0e0e0",
@@ -1960,7 +2066,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderColor": "#0071e9",
@@ -1984,7 +2090,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "marginLeft": 10,
           "textAlign": "center",
@@ -2000,7 +2106,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFQ 1`] = `
 <View
   style={
-    Object {
+    {
       "alignContent": "space-around",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#e0e0e0",
@@ -2014,7 +2120,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderColor": "#0071e9",
@@ -2038,7 +2144,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "marginLeft": 10,
           "textAlign": "center",
@@ -2054,7 +2160,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent NSFQ with reserveAdjustment & reserveLocations available 1`] = `
 <View
   style={
-    Object {
+    {
       "alignContent": "space-around",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#e0e0e0",
@@ -2068,7 +2174,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderColor": "#0071e9",
@@ -2092,7 +2198,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#0071e9",
           "marginLeft": 10,
           "textAlign": "center",
@@ -2105,7 +2211,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#0071e9",
         "borderColor": "#0071e9",
@@ -2123,7 +2229,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   >
     <Text
       style={
-        Object {
+        {
           "color": "#ffffffff",
           "marginLeft": 10,
           "textAlign": "center",
@@ -2139,7 +2245,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Buttons Renders completeButtonComponent No Sales with 'Other Actions' 1`] = `
 <View
   style={
-    Object {
+    {
       "alignContent": "space-around",
       "backgroundColor": "#ffffffff",
       "borderTopColor": "#e0e0e0",
@@ -2153,7 +2259,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#ffffffff",
         "borderColor": "#0071e9",
@@ -2171,7 +2277,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   >
     <Text
       style={
-        Object {
+        {
           "color": "#0071e9",
           "marginLeft": 10,
           "textAlign": "center",
@@ -2184,7 +2290,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   <TouchableOpacity
     onPress={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#0071e9",
         "borderColor": "#0071e9",
@@ -2208,7 +2314,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     <Text
       adjustsFontSizeToFit={true}
       style={
-        Object {
+        {
           "color": "#ffffffff",
           "marginLeft": 10,
           "textAlign": "center",
@@ -2228,7 +2334,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
   hostRef={null}
   onPress={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "borderColor": "#0071e9",
@@ -2246,7 +2352,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 >
   <Text
     style={
-      Object {
+      {
         "color": "#0071e9",
         "marginLeft": 10,
         "textAlign": "center",
@@ -2261,7 +2367,7 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
 exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Picklist renders 'Added to Picklist Button ' with Picking enabled 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
       "flexDirection": "row",
       "justifyContent": "flex-end",
@@ -2274,7 +2380,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Pickl
     height={28}
     onPress={[Function]}
     radius={5}
-    title="[missing \\"en.GENERICS.ADD\\" translation][missing \\"en.ITEM.TO_PICKLIST\\" translation]"
+    title="[missing "en.GENERICS.ADD" translation][missing "en.ITEM.TO_PICKLIST" translation]"
     titleColor="#0071e9"
     titleFontSize={12}
     titleFontWeight="bold"
@@ -2287,7 +2393,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for Adding an Item to the Pickl
 exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Negative On Hands Quantity 1`] = `
 <View
   style={
-    Object {
+    {
       "paddingHorizontal": 10,
     }
   }
@@ -2295,15 +2401,15 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 0,
           },
           false,
@@ -2321,18 +2427,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2349,18 +2455,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2377,18 +2483,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2405,18 +2511,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2433,18 +2539,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2464,7 +2570,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Pending On Hands Quantity 'Pending Mgr Approval' 1`] = `
 <View
   style={
-    Object {
+    {
       "paddingHorizontal": 10,
     }
   }
@@ -2472,15 +2578,15 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 0,
           },
           false,
@@ -2496,7 +2602,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "paddingBottom": 16,
@@ -2513,7 +2619,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
         size={12}
         solid={false}
         style={
-          Object {
+          {
             "paddingRight": 6,
           }
         }
@@ -2526,18 +2632,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2554,18 +2660,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2582,18 +2688,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2610,18 +2716,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2641,7 +2747,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component renders Positive On Hands Quantity 'No Pending Mgr Approval' 1`] = `
 <View
   style={
-    Object {
+    {
       "paddingHorizontal": 10,
     }
   }
@@ -2649,15 +2755,15 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 0,
           },
           false,
@@ -2675,18 +2781,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2703,18 +2809,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2731,18 +2837,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2759,18 +2865,18 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
   <React.Fragment>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "borderTopColor": "#e0e0e0",
             "flexDirection": "row",
             "justifyContent": "space-between",
             "paddingHorizontal": 10,
             "paddingVertical": 12,
           },
-          Object {
+          {
             "borderTopWidth": 1,
           },
-          Object {
+          {
             "paddingLeft": 30,
           },
         ]
@@ -2790,14 +2896,14 @@ exports[`ReviewItemDetailsScreen Tests rendering for On Hands Quantity component
 exports[`ReviewItemDetailsScreen Tests rendering for the Location Component renders 'Floor' location Name with no Reserve location 1`] = `
 <View
   style={
-    Object {
+    {
       "paddingHorizontal": 8,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
@@ -2816,7 +2922,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
@@ -2833,7 +2939,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   <View />
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "paddingVertical": 8,
       }
@@ -2847,14 +2953,14 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 exports[`ReviewItemDetailsScreen Tests rendering for the Location Component renders 'Reserve' location Name with no Floor location 1`] = `
 <View
   style={
-    Object {
+    {
       "paddingHorizontal": 8,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
@@ -2870,7 +2976,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
@@ -2887,7 +2993,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -2908,7 +3014,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "paddingVertical": 8,
       }
@@ -2922,14 +3028,14 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 exports[`ReviewItemDetailsScreen Tests rendering for the Location Component renders both the floor & reserve Location Names 1`] = `
 <View
   style={
-    Object {
+    {
       "paddingHorizontal": 8,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
@@ -2948,7 +3054,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   </View>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#f5f5f5",
         "borderBottomWidth": 1,
@@ -2965,7 +3071,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   <View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "flexDirection": "row",
@@ -2986,7 +3092,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "paddingVertical": 8,
       }
@@ -3000,7 +3106,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 exports[`ReviewItemDetailsScreen Tests rendering for the Location Component renders getLocationForItemsApi error + test retry button 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "#ffffffff",
       "flex": 1,
@@ -3016,7 +3122,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
   />
   <Text
     style={
-      Object {
+      {
         "fontSize": 16,
         "textAlign": "center",
       }
@@ -3025,6 +3131,23 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     [missing "en.LOCATION.LOCATION_API_ERROR" translation]
   </Text>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -3036,7 +3159,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#e57373",
         "borderRadius": 4,
@@ -3059,7 +3182,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 exports[`ReviewItemDetailsScreen Tests rendering for the Location Component renders loading indicator for getLocationForItemsApi call 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#ffffffff",
     }
   }
@@ -3070,7 +3193,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
     hidesWhenStopped={true}
     size="large"
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       }
@@ -3082,7 +3205,7 @@ exports[`ReviewItemDetailsScreen Tests rendering for the Location Component rend
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -3096,7 +3219,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
   />
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -3108,26 +3231,36 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
       name="alert"
       size={40}
     />
-    <Text
-      style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
     <View
       style={
-        Object {
+        {
           "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
       <Text
         style={
-          Object {
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
+    <View
+      style={
+        {
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -3137,7 +3270,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
       </Text>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "textAlign": "center",
           }
@@ -3153,7 +3286,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses render 
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders "Generic Change translation" if pendingOH is -999 and user has OH role 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -3169,14 +3302,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -3186,7 +3319,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -3201,12 +3334,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -3240,8 +3373,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <CreatePickDialog
       isQuickPick={false}
       locations={
-        Array [
-          Object {
+        [
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-1",
@@ -3252,7 +3385,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 0,
             "aisleName": "1",
             "locationName": "A1-2",
@@ -3263,7 +3396,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-3",
@@ -3274,7 +3407,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-4",
@@ -3298,7 +3431,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -3313,13 +3446,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         additionalItemDetails={
-          Object {
+          {
             "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
-            "source": Object {
+            "source": {
               "action": "additional_item_details_click",
               "screen": "Review_Item_Details",
             },
@@ -3334,7 +3467,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
-          Object {
+          {
             "addListener": [MockFunction],
             "canGoBack": [MockFunction],
             "dispatch": [MockFunction],
@@ -3358,32 +3491,32 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       />
       <SFTCard
         iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        title="[missing "en.ITEM.QUANTITY" translation]"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.CHANGE\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.CHANGE" translation]"
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
           rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+            [
+              {
+                "label": "[missing "en.ITEM.ON_HANDS" translation]",
                 "value": 42,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
                 "value": 21,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
                 "value": 6,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CLAIMS_QTY" translation]",
                 "value": 5,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
                 "value": 10,
               },
             ]
@@ -3392,7 +3525,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -3401,7 +3534,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -3409,7 +3542,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View>
           <View
             style={
-              Object {
+              {
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
                 "borderBottomWidth": 1,
@@ -3423,7 +3556,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
@@ -3448,20 +3581,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        title="[missing "en.ITEM.LOCATION" translation](5)"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.SEE_ALL" translation]"
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 8,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -3480,7 +3613,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -3497,7 +3630,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flexDirection": "row",
@@ -3518,7 +3651,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
                 "paddingVertical": 8,
               }
@@ -3530,7 +3663,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -3539,20 +3672,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={true}
           source={
-            Object {
+            {
               "action": "pick_history_click",
-              "otherInfo": Object {
+              "otherInfo": {
                 "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
           }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
+          title="[missing "en.ITEM.PICK_HISTORY" translation]"
+          titleStyle={{}}
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -3572,17 +3705,17 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         bottomRightBtnAction={
-          Array [
+          [
             [Function],
           ]
         }
         bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          [
+            "[missing "en.ITEM.TOGGLE_GRAPH" translation]",
           ]
         }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+        subTitle="[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing "en.ITEM.SALES_METRICS" translation]"
       >
         <View />
       </SFTCard>
@@ -3590,7 +3723,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "backgroundColor": "#ffffffff",
         "borderTopColor": "#e0e0e0",
@@ -3604,7 +3737,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -3628,7 +3761,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <Text
         adjustsFontSizeToFit={true}
         style={
-          Object {
+          {
             "color": "#0071e9",
             "marginLeft": 10,
             "textAlign": "center",
@@ -3648,7 +3781,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   color="#0071e9"
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -3660,7 +3793,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders 'Item Details Api Error' for a failed request  1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -3676,14 +3809,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -3693,7 +3826,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -3708,12 +3841,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -3724,7 +3857,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -3736,20 +3869,29 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={40}
     />
-    <Text
+    <View
       style={
-        Object {
-          "fontSize": 16,
-          "textAlign": "center",
+        {
+          "flexDirection": "column",
+          "paddingHorizontal": 5,
         }
       }
     >
-      [missing "en.ITEM.API_ERROR" translation]
-    </Text>
+      <Text
+        style={
+          {
+            "fontSize": 16,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.API_ERROR" translation]
+      </Text>
+    </View>
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -3772,7 +3914,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders 'Scanned Item Not Found' on request status 204 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -3788,14 +3930,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -3805,7 +3947,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -3820,12 +3962,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -3836,7 +3978,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -3850,7 +3992,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -3865,7 +4007,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the On Hands Cloud Qty of 42 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -3881,14 +4023,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -3898,7 +4040,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -3913,12 +4055,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -3952,8 +4094,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <CreatePickDialog
       isQuickPick={false}
       locations={
-        Array [
-          Object {
+        [
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-1",
@@ -3964,7 +4106,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 0,
             "aisleName": "1",
             "locationName": "A1-2",
@@ -3975,7 +4117,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-3",
@@ -3986,7 +4128,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-4",
@@ -4010,7 +4152,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -4025,13 +4167,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         additionalItemDetails={
-          Object {
+          {
             "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
-            "source": Object {
+            "source": {
               "action": "additional_item_details_click",
               "screen": "Review_Item_Details",
             },
@@ -4046,7 +4188,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
-          Object {
+          {
             "addListener": [MockFunction],
             "canGoBack": [MockFunction],
             "dispatch": [MockFunction],
@@ -4070,31 +4212,31 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       />
       <SFTCard
         iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        title="[missing "en.ITEM.QUANTITY" translation]"
         topRightBtnAction={[Function]}
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
           rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+            [
+              {
+                "label": "[missing "en.ITEM.ON_HANDS" translation]",
                 "value": 42,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
                 "value": 21,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
                 "value": 6,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CLAIMS_QTY" translation]",
                 "value": 5,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
                 "value": 10,
               },
             ]
@@ -4103,7 +4245,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -4112,7 +4254,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -4120,7 +4262,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View>
           <View
             style={
-              Object {
+              {
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
                 "borderBottomWidth": 1,
@@ -4134,7 +4276,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
@@ -4159,20 +4301,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        title="[missing "en.ITEM.LOCATION" translation](5)"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.SEE_ALL" translation]"
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 8,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -4191,7 +4333,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -4208,7 +4350,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flexDirection": "row",
@@ -4229,7 +4371,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
                 "paddingVertical": 8,
               }
@@ -4241,7 +4383,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -4250,20 +4392,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={true}
           source={
-            Object {
+            {
               "action": "pick_history_click",
-              "otherInfo": Object {
+              "otherInfo": {
                 "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
           }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
+          title="[missing "en.ITEM.PICK_HISTORY" translation]"
+          titleStyle={{}}
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -4283,17 +4425,17 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         bottomRightBtnAction={
-          Array [
+          [
             [Function],
           ]
         }
         bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          [
+            "[missing "en.ITEM.TOGGLE_GRAPH" translation]",
           ]
         }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+        subTitle="[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing "en.ITEM.SALES_METRICS" translation]"
       >
         <View />
       </SFTCard>
@@ -4301,7 +4443,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "backgroundColor": "#ffffffff",
         "borderTopColor": "#e0e0e0",
@@ -4315,7 +4457,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -4339,7 +4481,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <Text
         adjustsFontSizeToFit={true}
         style={
-          Object {
+          {
             "color": "#0071e9",
             "marginLeft": 10,
             "textAlign": "center",
@@ -4356,7 +4498,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the details for a single item with createPickModalVisible true 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -4372,14 +4514,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -4389,7 +4531,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -4404,12 +4546,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -4443,8 +4585,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <CreatePickDialog
       isQuickPick={false}
       locations={
-        Array [
-          Object {
+        [
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-1",
@@ -4455,7 +4597,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 0,
             "aisleName": "1",
             "locationName": "A1-2",
@@ -4466,7 +4608,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-3",
@@ -4477,7 +4619,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-4",
@@ -4501,7 +4643,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -4516,13 +4658,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         additionalItemDetails={
-          Object {
+          {
             "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
-            "source": Object {
+            "source": {
               "action": "additional_item_details_click",
               "screen": "Review_Item_Details",
             },
@@ -4537,7 +4679,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
-          Object {
+          {
             "addListener": [MockFunction],
             "canGoBack": [MockFunction],
             "dispatch": [MockFunction],
@@ -4561,31 +4703,31 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       />
       <SFTCard
         iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        title="[missing "en.ITEM.QUANTITY" translation]"
         topRightBtnAction={[Function]}
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
           rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+            [
+              {
+                "label": "[missing "en.ITEM.ON_HANDS" translation]",
                 "value": 42,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
                 "value": 21,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
                 "value": 6,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CLAIMS_QTY" translation]",
                 "value": 5,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
                 "value": 10,
               },
             ]
@@ -4594,7 +4736,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -4603,7 +4745,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -4611,7 +4753,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View>
           <View
             style={
-              Object {
+              {
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
                 "borderBottomWidth": 1,
@@ -4625,7 +4767,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
@@ -4649,20 +4791,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             icon=""
             isOpened={false}
             source={
-              Object {
+              {
                 "action": "replenishment_history_clicked",
-                "otherInfo": Object {
+                "otherInfo": {
                   "itemNbr": 1234567890,
                 },
                 "screen": "Review_Item_Details",
               }
             }
-            title="[missing \\"en.ITEM.HISTORY\\" translation]"
-            titleStyle={Object {}}
+            title="[missing "en.ITEM.HISTORY" translation]"
+            titleStyle={{}}
           >
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flex": 1,
@@ -4679,20 +4821,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        title="[missing "en.ITEM.LOCATION" translation](5)"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.SEE_ALL" translation]"
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 8,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -4711,7 +4853,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -4728,7 +4870,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flexDirection": "row",
@@ -4749,7 +4891,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
                 "paddingVertical": 8,
               }
@@ -4761,7 +4903,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -4770,20 +4912,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={true}
           source={
-            Object {
+            {
               "action": "pick_history_click",
-              "otherInfo": Object {
+              "otherInfo": {
                 "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
           }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
+          title="[missing "en.ITEM.PICK_HISTORY" translation]"
+          titleStyle={{}}
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -4803,23 +4945,23 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         bottomRightBtnAction={
-          Array [
+          [
             [Function],
           ]
         }
         bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          [
+            "[missing "en.ITEM.TOGGLE_GRAPH" translation]",
           ]
         }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+        subTitle="[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing "en.ITEM.SALES_METRICS" translation]"
       >
         <SalesMetrics
           isGraphView={false}
           itemNbr={1234567890}
           itemSalesHistory={
-            Object {
+            {
               "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
@@ -4830,17 +4972,17 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "color": "blue",
               "completed": false,
               "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
+              "deliveryHistory": {
+                "deliveries": [
+                  {
                     "date": "2022-06-23",
                     "qty": 23,
                   },
-                  Object {
+                  {
                     "date": "2022-07-25",
                     "qty": 44,
                   },
-                  Object {
+                  {
                     "date": "2022-07-26",
                     "qty": 23,
                   },
@@ -4852,10 +4994,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
-              "location": Object {
+              "location": {
                 "count": 5,
-                "floor": Array [
-                  Object {
+                "floor": [
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
@@ -4866,7 +5008,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 0,
                     "aisleName": "1",
                     "locationName": "A1-2",
@@ -4877,7 +5019,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-3",
@@ -4888,7 +5030,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-4",
@@ -4900,8 +5042,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneName": "A",
                   },
                 ],
-                "reserve": Array [
-                  Object {
+                "reserve": [
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
@@ -4920,60 +5062,60 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
-              "replenishment": Object {
+              "replenishment": {
                 "onOrder": 48,
               },
-              "sales": Object {
-                "daily": Array [
-                  Object {
+              "sales": {
+                "daily": [
+                  {
                     "day": "2020-07-08",
                     "value": 100,
                   },
-                  Object {
+                  {
                     "day": "2020-07-09",
                     "value": 0,
                   },
-                  Object {
+                  {
                     "day": "2020-07-10",
                     "value": 10,
                   },
-                  Object {
+                  {
                     "day": "2020-07-11",
                     "value": 10,
                   },
-                  Object {
+                  {
                     "day": "2020-07-12",
                     "value": 42,
                   },
-                  Object {
+                  {
                     "day": "2020-07-13",
                     "value": 5,
                   },
-                  Object {
+                  {
                     "day": "2020-07-14",
                     "value": 1,
                   },
                 ],
                 "dailyAvgSales": 15,
                 "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
+                "weekly": [
+                  {
                     "value": 39,
                     "week": 51,
                   },
-                  Object {
+                  {
                     "value": 26,
                     "week": 52,
                   },
-                  Object {
+                  {
                     "value": 45,
                     "week": 53,
                   },
-                  Object {
+                  {
                     "value": 34,
                     "week": 54,
                   },
-                  Object {
+                  {
                     "value": 34,
                     "week": 55,
                   },
@@ -4992,7 +5134,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "backgroundColor": "#ffffffff",
         "borderTopColor": "#e0e0e0",
@@ -5006,7 +5148,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -5030,7 +5172,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <Text
         adjustsFontSizeToFit={true}
         style={
-          Object {
+          {
             "color": "#0071e9",
             "marginLeft": 10,
             "textAlign": "center",
@@ -5047,7 +5189,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the details for a single item with errorModalVisible true 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -5063,14 +5205,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -5080,7 +5222,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -5095,12 +5237,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -5134,8 +5276,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <CreatePickDialog
       isQuickPick={false}
       locations={
-        Array [
-          Object {
+        [
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-1",
@@ -5146,7 +5288,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 0,
             "aisleName": "1",
             "locationName": "A1-2",
@@ -5157,7 +5299,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-3",
@@ -5168,7 +5310,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-4",
@@ -5192,7 +5334,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -5207,13 +5349,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         additionalItemDetails={
-          Object {
+          {
             "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
-            "source": Object {
+            "source": {
               "action": "additional_item_details_click",
               "screen": "Review_Item_Details",
             },
@@ -5228,7 +5370,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
-          Object {
+          {
             "addListener": [MockFunction],
             "canGoBack": [MockFunction],
             "dispatch": [MockFunction],
@@ -5252,31 +5394,31 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       />
       <SFTCard
         iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        title="[missing "en.ITEM.QUANTITY" translation]"
         topRightBtnAction={[Function]}
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
           rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+            [
+              {
+                "label": "[missing "en.ITEM.ON_HANDS" translation]",
                 "value": 42,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
                 "value": 21,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
                 "value": 6,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CLAIMS_QTY" translation]",
                 "value": 5,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
                 "value": 10,
               },
             ]
@@ -5285,7 +5427,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -5294,7 +5436,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -5302,7 +5444,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View>
           <View
             style={
-              Object {
+              {
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
                 "borderBottomWidth": 1,
@@ -5316,7 +5458,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
@@ -5340,20 +5482,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             icon=""
             isOpened={false}
             source={
-              Object {
+              {
                 "action": "replenishment_history_clicked",
-                "otherInfo": Object {
+                "otherInfo": {
                   "itemNbr": 1234567890,
                 },
                 "screen": "Review_Item_Details",
               }
             }
-            title="[missing \\"en.ITEM.HISTORY\\" translation]"
-            titleStyle={Object {}}
+            title="[missing "en.ITEM.HISTORY" translation]"
+            titleStyle={{}}
           >
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flex": 1,
@@ -5370,20 +5512,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        title="[missing "en.ITEM.LOCATION" translation](5)"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.SEE_ALL" translation]"
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 8,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -5402,7 +5544,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -5419,7 +5561,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flexDirection": "row",
@@ -5440,7 +5582,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
                 "paddingVertical": 8,
               }
@@ -5452,7 +5594,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -5461,20 +5603,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={true}
           source={
-            Object {
+            {
               "action": "pick_history_click",
-              "otherInfo": Object {
+              "otherInfo": {
                 "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
           }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
+          title="[missing "en.ITEM.PICK_HISTORY" translation]"
+          titleStyle={{}}
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -5494,23 +5636,23 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         bottomRightBtnAction={
-          Array [
+          [
             [Function],
           ]
         }
         bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          [
+            "[missing "en.ITEM.TOGGLE_GRAPH" translation]",
           ]
         }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+        subTitle="[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing "en.ITEM.SALES_METRICS" translation]"
       >
         <SalesMetrics
           isGraphView={false}
           itemNbr={1234567890}
           itemSalesHistory={
-            Object {
+            {
               "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
@@ -5521,17 +5663,17 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "color": "blue",
               "completed": false,
               "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
+              "deliveryHistory": {
+                "deliveries": [
+                  {
                     "date": "2022-06-23",
                     "qty": 23,
                   },
-                  Object {
+                  {
                     "date": "2022-07-25",
                     "qty": 44,
                   },
-                  Object {
+                  {
                     "date": "2022-07-26",
                     "qty": 23,
                   },
@@ -5543,10 +5685,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
-              "location": Object {
+              "location": {
                 "count": 5,
-                "floor": Array [
-                  Object {
+                "floor": [
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
@@ -5557,7 +5699,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 0,
                     "aisleName": "1",
                     "locationName": "A1-2",
@@ -5568,7 +5710,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-3",
@@ -5579,7 +5721,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-4",
@@ -5591,8 +5733,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneName": "A",
                   },
                 ],
-                "reserve": Array [
-                  Object {
+                "reserve": [
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
@@ -5611,60 +5753,60 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
-              "replenishment": Object {
+              "replenishment": {
                 "onOrder": 48,
               },
-              "sales": Object {
-                "daily": Array [
-                  Object {
+              "sales": {
+                "daily": [
+                  {
                     "day": "2020-07-08",
                     "value": 100,
                   },
-                  Object {
+                  {
                     "day": "2020-07-09",
                     "value": 0,
                   },
-                  Object {
+                  {
                     "day": "2020-07-10",
                     "value": 10,
                   },
-                  Object {
+                  {
                     "day": "2020-07-11",
                     "value": 10,
                   },
-                  Object {
+                  {
                     "day": "2020-07-12",
                     "value": 42,
                   },
-                  Object {
+                  {
                     "day": "2020-07-13",
                     "value": 5,
                   },
-                  Object {
+                  {
                     "day": "2020-07-14",
                     "value": 1,
                   },
                 ],
                 "dailyAvgSales": 15,
                 "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
+                "weekly": [
+                  {
                     "value": 39,
                     "week": 51,
                   },
-                  Object {
+                  {
                     "value": 26,
                     "week": 52,
                   },
-                  Object {
+                  {
                     "value": 45,
                     "week": 53,
                   },
-                  Object {
+                  {
                     "value": 34,
                     "week": 54,
                   },
-                  Object {
+                  {
                     "value": 34,
                     "week": 55,
                   },
@@ -5683,7 +5825,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "backgroundColor": "#ffffffff",
         "borderTopColor": "#e0e0e0",
@@ -5697,7 +5839,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -5721,7 +5863,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <Text
         adjustsFontSizeToFit={true}
         style={
-          Object {
+          {
             "color": "#0071e9",
             "marginLeft": 10,
             "textAlign": "center",
@@ -5738,7 +5880,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the details for a single item with non-null status 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -5754,14 +5896,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -5771,7 +5913,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -5786,12 +5928,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -5825,8 +5967,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <CreatePickDialog
       isQuickPick={false}
       locations={
-        Array [
-          Object {
+        [
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-1",
@@ -5837,7 +5979,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 0,
             "aisleName": "1",
             "locationName": "A1-2",
@@ -5848,7 +5990,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-3",
@@ -5859,7 +6001,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-4",
@@ -5883,7 +6025,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -5898,13 +6040,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         additionalItemDetails={
-          Object {
+          {
             "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
-            "source": Object {
+            "source": {
               "action": "additional_item_details_click",
               "screen": "Review_Item_Details",
             },
@@ -5919,7 +6061,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
-          Object {
+          {
             "addListener": [MockFunction],
             "canGoBack": [MockFunction],
             "dispatch": [MockFunction],
@@ -5943,31 +6085,31 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       />
       <SFTCard
         iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        title="[missing "en.ITEM.QUANTITY" translation]"
         topRightBtnAction={[Function]}
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
           rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+            [
+              {
+                "label": "[missing "en.ITEM.ON_HANDS" translation]",
                 "value": 42,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
                 "value": 21,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
                 "value": 6,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CLAIMS_QTY" translation]",
                 "value": 5,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
                 "value": 10,
               },
             ]
@@ -5976,7 +6118,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -5985,7 +6127,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -5993,7 +6135,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View>
           <View
             style={
-              Object {
+              {
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
                 "borderBottomWidth": 1,
@@ -6007,7 +6149,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
@@ -6032,20 +6174,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        title="[missing "en.ITEM.LOCATION" translation](5)"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.SEE_ALL" translation]"
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 8,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -6064,7 +6206,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -6081,7 +6223,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flexDirection": "row",
@@ -6102,7 +6244,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
                 "paddingVertical": 8,
               }
@@ -6114,7 +6256,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -6123,20 +6265,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={true}
           source={
-            Object {
+            {
               "action": "pick_history_click",
-              "otherInfo": Object {
+              "otherInfo": {
                 "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
           }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
+          title="[missing "en.ITEM.PICK_HISTORY" translation]"
+          titleStyle={{}}
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -6156,17 +6298,17 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         bottomRightBtnAction={
-          Array [
+          [
             [Function],
           ]
         }
         bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          [
+            "[missing "en.ITEM.TOGGLE_GRAPH" translation]",
           ]
         }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+        subTitle="[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing "en.ITEM.SALES_METRICS" translation]"
       >
         <View />
       </SFTCard>
@@ -6174,7 +6316,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "backgroundColor": "#ffffffff",
         "borderTopColor": "#e0e0e0",
@@ -6188,7 +6330,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -6212,7 +6354,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <Text
         adjustsFontSizeToFit={true}
         style={
-          Object {
+          {
             "color": "#0071e9",
             "marginLeft": 10,
             "textAlign": "center",
@@ -6229,7 +6371,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the details for a single item with null status 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -6245,14 +6387,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -6262,7 +6404,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -6277,12 +6419,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -6316,8 +6458,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <CreatePickDialog
       isQuickPick={false}
       locations={
-        Array [
-          Object {
+        [
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-1",
@@ -6328,7 +6470,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 0,
             "aisleName": "1",
             "locationName": "A1-2",
@@ -6339,7 +6481,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-3",
@@ -6350,7 +6492,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-4",
@@ -6374,7 +6516,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -6389,13 +6531,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         additionalItemDetails={
-          Object {
+          {
             "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
-            "source": Object {
+            "source": {
               "action": "additional_item_details_click",
               "screen": "Review_Item_Details",
             },
@@ -6410,7 +6552,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
-          Object {
+          {
             "addListener": [MockFunction],
             "canGoBack": [MockFunction],
             "dispatch": [MockFunction],
@@ -6434,31 +6576,31 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       />
       <SFTCard
         iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        title="[missing "en.ITEM.QUANTITY" translation]"
         topRightBtnAction={[Function]}
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
           rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+            [
+              {
+                "label": "[missing "en.ITEM.ON_HANDS" translation]",
                 "value": 42,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
                 "value": 21,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
                 "value": 6,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CLAIMS_QTY" translation]",
                 "value": 5,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
                 "value": 10,
               },
             ]
@@ -6467,7 +6609,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -6476,7 +6618,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -6484,7 +6626,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View>
           <View
             style={
-              Object {
+              {
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
                 "borderBottomWidth": 1,
@@ -6498,7 +6640,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
@@ -6523,20 +6665,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        title="[missing "en.ITEM.LOCATION" translation](5)"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.SEE_ALL" translation]"
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 8,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -6555,7 +6697,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -6572,7 +6714,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flexDirection": "row",
@@ -6593,7 +6735,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
                 "paddingVertical": 8,
               }
@@ -6605,7 +6747,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -6614,20 +6756,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={true}
           source={
-            Object {
+            {
               "action": "pick_history_click",
-              "otherInfo": Object {
+              "otherInfo": {
                 "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
           }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
+          title="[missing "en.ITEM.PICK_HISTORY" translation]"
+          titleStyle={{}}
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -6647,17 +6789,17 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         bottomRightBtnAction={
-          Array [
+          [
             [Function],
           ]
         }
         bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          [
+            "[missing "en.ITEM.TOGGLE_GRAPH" translation]",
           ]
         }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+        subTitle="[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing "en.ITEM.SALES_METRICS" translation]"
       >
         <View />
       </SFTCard>
@@ -6665,7 +6807,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "backgroundColor": "#ffffffff",
         "borderTopColor": "#e0e0e0",
@@ -6679,7 +6821,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -6703,7 +6845,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <Text
         adjustsFontSizeToFit={true}
         style={
-          Object {
+          {
             "color": "#0071e9",
             "marginLeft": 10,
             "textAlign": "center",
@@ -6720,7 +6862,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
 exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders the details for a single item with ohQtyModalVisible true 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -6736,14 +6878,14 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       name="alert"
       size={30}
       style={
-        Object {
+        {
           "alignSelf": "center",
         }
       }
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -6753,7 +6895,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     </Text>
     <View
       style={
-        Object {
+        {
           "alignContent": "space-around",
           "flexDirection": "row",
           "justifyContent": "center",
@@ -6768,12 +6910,12 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         onPress={[Function]}
         radius={5}
         style={
-          Object {
+          {
             "marginTop": 16,
             "width": "70%",
           }
         }
-        title="[missing \\"en.GENERICS.OK\\" translation]"
+        title="[missing "en.GENERICS.OK" translation]"
         titleColor="#ffffffff"
         titleFontSize={16}
         titleFontWeight="normal"
@@ -6807,8 +6949,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <CreatePickDialog
       isQuickPick={false}
       locations={
-        Array [
-          Object {
+        [
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-1",
@@ -6819,7 +6961,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 0,
             "aisleName": "1",
             "locationName": "A1-2",
@@ -6830,7 +6972,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-3",
@@ -6841,7 +6983,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             "zoneId": 0,
             "zoneName": "A",
           },
-          Object {
+          {
             "aisleId": 1,
             "aisleName": "1",
             "locationName": "A1-4",
@@ -6865,7 +7007,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </CustomModalComponent>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -6880,13 +7022,13 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <View>
       <ItemInfo
         additionalItemDetails={
-          Object {
+          {
             "basePrice": 15.05,
             "color": "red",
             "grossProfit": 2.5,
             "margin": 14,
             "size": 88,
-            "source": Object {
+            "source": {
               "action": "additional_item_details_click",
               "screen": "Review_Item_Details",
             },
@@ -6901,7 +7043,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
-          Object {
+          {
             "addListener": [MockFunction],
             "canGoBack": [MockFunction],
             "dispatch": [MockFunction],
@@ -6925,31 +7067,31 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       />
       <SFTCard
         iconName="pallet"
-        title="[missing \\"en.ITEM.QUANTITY\\" translation]"
+        title="[missing "en.ITEM.QUANTITY" translation]"
         topRightBtnAction={[Function]}
       >
         <ItemDetailsList
           indentAfterFirstRow={true}
           rows={
-            Array [
-              Object {
-                "label": "[missing \\"en.ITEM.ON_HANDS\\" translation]",
+            [
+              {
+                "label": "[missing "en.ITEM.ON_HANDS" translation]",
                 "value": 42,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.SALES_FLOOR_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.SALES_FLOOR_QTY" translation]",
                 "value": 21,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.RESERVE_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.RESERVE_QTY" translation]",
                 "value": 6,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CLAIMS_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CLAIMS_QTY" translation]",
                 "value": 5,
               },
-              Object {
-                "label": "[missing \\"en.ITEM.CONSOLIDATED_QTY\\" translation]",
+              {
+                "label": "[missing "en.ITEM.CONSOLIDATED_QTY" translation]",
                 "value": 10,
               },
             ]
@@ -6958,7 +7100,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -6967,7 +7109,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -6975,7 +7117,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         <View>
           <View
             style={
-              Object {
+              {
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
                 "borderBottomWidth": 1,
@@ -6989,7 +7131,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "backgroundColor": "#ffffffff",
                 "borderBottomColor": "#eeeeee",
@@ -7013,20 +7155,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
             icon=""
             isOpened={false}
             source={
-              Object {
+              {
                 "action": "replenishment_history_clicked",
-                "otherInfo": Object {
+                "otherInfo": {
                   "itemNbr": 1234567890,
                 },
                 "screen": "Review_Item_Details",
               }
             }
-            title="[missing \\"en.ITEM.HISTORY\\" translation]"
-            titleStyle={Object {}}
+            title="[missing "en.ITEM.HISTORY" translation]"
+            titleStyle={{}}
           >
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flex": 1,
@@ -7043,20 +7185,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         iconName="map-marker-alt"
-        title="[missing \\"en.ITEM.LOCATION\\" translation](5)"
+        title="[missing "en.ITEM.LOCATION" translation](5)"
         topRightBtnAction={[Function]}
-        topRightBtnTxt="[missing \\"en.GENERICS.SEE_ALL\\" translation]"
+        topRightBtnTxt="[missing "en.GENERICS.SEE_ALL" translation]"
       >
         <View
           style={
-            Object {
+            {
               "paddingHorizontal": 8,
             }
           }
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -7075,7 +7217,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "borderBottomColor": "#f5f5f5",
                 "borderBottomWidth": 1,
@@ -7092,7 +7234,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "flexDirection": "row",
@@ -7113,7 +7255,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "row",
                 "paddingVertical": 8,
               }
@@ -7125,7 +7267,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </SFTCard>
       <View
         style={
-          Object {
+          {
             "marginTop": 8,
           }
         }
@@ -7134,20 +7276,20 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
           icon=""
           isOpened={true}
           source={
-            Object {
+            {
               "action": "pick_history_click",
-              "otherInfo": Object {
+              "otherInfo": {
                 "itemNbr": 1234567890,
               },
               "screen": "Review_Item_Details",
             }
           }
-          title="[missing \\"en.ITEM.PICK_HISTORY\\" translation]"
-          titleStyle={Object {}}
+          title="[missing "en.ITEM.PICK_HISTORY" translation]"
+          titleStyle={{}}
         >
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flex": 1,
                 "justifyContent": "center",
@@ -7167,23 +7309,23 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       </View>
       <SFTCard
         bottomRightBtnAction={
-          Array [
+          [
             [Function],
           ]
         }
         bottomRightBtnTxt={
-          Array [
-            "[missing \\"en.ITEM.TOGGLE_GRAPH\\" translation]",
+          [
+            "[missing "en.ITEM.TOGGLE_GRAPH" translation]",
           ]
         }
-        subTitle="[missing \\"en.GENERICS.UPDATED\\" translation] 星期三, 7月 15 08:02 早上"
-        title="[missing \\"en.ITEM.SALES_METRICS\\" translation]"
+        subTitle="[missing "en.GENERICS.UPDATED" translation] 星期三, 7月 15 08:02 早上"
+        title="[missing "en.ITEM.SALES_METRICS" translation]"
       >
         <SalesMetrics
           isGraphView={false}
           itemNbr={1234567890}
           itemSalesHistory={
-            Object {
+            {
               "backroomQty": 6,
               "basePrice": 1500.3,
               "categoryDesc": "Meat PI",
@@ -7194,17 +7336,17 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "color": "blue",
               "completed": false,
               "consolidatedOnHandQty": 10,
-              "deliveryHistory": Object {
-                "deliveries": Array [
-                  Object {
+              "deliveryHistory": {
+                "deliveries": [
+                  {
                     "date": "2022-06-23",
                     "qty": 23,
                   },
-                  Object {
+                  {
                     "date": "2022-07-25",
                     "qty": 44,
                   },
-                  Object {
+                  {
                     "date": "2022-07-26",
                     "qty": 23,
                   },
@@ -7216,10 +7358,10 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "imageUrlKey": undefined,
               "itemName": "Test Item That is Really, Really Long (and has parenthesis)",
               "itemNbr": 1234567890,
-              "location": Object {
+              "location": {
                 "count": 5,
-                "floor": Array [
-                  Object {
+                "floor": [
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
@@ -7230,7 +7372,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 0,
                     "aisleName": "1",
                     "locationName": "A1-2",
@@ -7241,7 +7383,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-3",
@@ -7252,7 +7394,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneId": 0,
                     "zoneName": "A",
                   },
-                  Object {
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-4",
@@ -7264,8 +7406,8 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
                     "zoneName": "A",
                   },
                 ],
-                "reserve": Array [
-                  Object {
+                "reserve": [
+                  {
                     "aisleId": 1,
                     "aisleName": "1",
                     "locationName": "A1-1",
@@ -7284,60 +7426,60 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
               "onHandsQty": 42,
               "pendingOnHandsQty": -999,
               "price": 2000.94,
-              "replenishment": Object {
+              "replenishment": {
                 "onOrder": 48,
               },
-              "sales": Object {
-                "daily": Array [
-                  Object {
+              "sales": {
+                "daily": [
+                  {
                     "day": "2020-07-08",
                     "value": 100,
                   },
-                  Object {
+                  {
                     "day": "2020-07-09",
                     "value": 0,
                   },
-                  Object {
+                  {
                     "day": "2020-07-10",
                     "value": 10,
                   },
-                  Object {
+                  {
                     "day": "2020-07-11",
                     "value": 10,
                   },
-                  Object {
+                  {
                     "day": "2020-07-12",
                     "value": 42,
                   },
-                  Object {
+                  {
                     "day": "2020-07-13",
                     "value": 5,
                   },
-                  Object {
+                  {
                     "day": "2020-07-14",
                     "value": 1,
                   },
                 ],
                 "dailyAvgSales": 15,
                 "lastUpdateTs": "2020-07-15T08:02:17-05:00",
-                "weekly": Array [
-                  Object {
+                "weekly": [
+                  {
                     "value": 39,
                     "week": 51,
                   },
-                  Object {
+                  {
                     "value": 26,
                     "week": 52,
                   },
-                  Object {
+                  {
                     "value": 45,
                     "week": 53,
                   },
-                  Object {
+                  {
                     "value": 34,
                     "week": 54,
                   },
-                  Object {
+                  {
                     "value": 34,
                     "week": 55,
                   },
@@ -7356,7 +7498,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "alignContent": "space-around",
         "backgroundColor": "#ffffffff",
         "borderTopColor": "#e0e0e0",
@@ -7370,7 +7512,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
     <TouchableOpacity
       onPress={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "borderColor": "#0071e9",
@@ -7394,7 +7536,7 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
       <Text
         adjustsFontSizeToFit={true}
         style={
-          Object {
+          {
             "color": "#0071e9",
             "marginLeft": 10,
             "textAlign": "center",

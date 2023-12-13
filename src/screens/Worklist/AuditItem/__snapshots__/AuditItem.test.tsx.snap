@@ -10,7 +10,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -20,8 +20,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "backgroundColor": "#ffffffff",
             "borderRadius": 7.5,
@@ -30,7 +30,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             "paddingHorizontal": 8,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": undefined,
           },
         ]
@@ -46,7 +46,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
       <View>
         <Text
           style={
-            Object {
+            {
               "fontSize": 18,
               "paddingVertical": 8,
               "textAlign": "center",
@@ -58,14 +58,14 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "borderRadius": 10,
               "borderWidth": 1,
               "flexDirection": "row",
             },
-            Object {
+            {
               "borderColor": "#e0e0e0",
             },
           ]
@@ -74,8 +74,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 15,
                 "width": 35,
               },
@@ -85,15 +85,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": true,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -107,7 +119,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#00000000",
                   "flex": 1,
@@ -130,7 +142,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
           onChangeText={[Function]}
           onEndEditing={[Function]}
           style={
-            Object {
+            {
               "color": "#0071e9",
               "height": 40,
               "minWidth": "15%",
@@ -142,8 +154,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         />
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 15,
                 "width": 35,
               },
@@ -153,15 +165,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -175,7 +199,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#00000000",
                   "flex": 1,
@@ -196,7 +220,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
       </View>
       <View
         style={
-          Object {
+          {
             "display": "flex",
             "flexDirection": "row",
             "justifyContent": "space-around",
@@ -206,11 +230,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "paddingHorizontal": 8,
                 "width": "50%",
               },
@@ -219,15 +243,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -241,7 +277,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "borderColor": "#0071e9",
@@ -256,7 +292,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#0071e9",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -272,11 +308,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "paddingHorizontal": 8,
                 "width": "50%",
               },
@@ -285,15 +321,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -307,7 +355,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -321,7 +369,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Snapshot t
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -351,7 +399,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -361,8 +409,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -371,7 +419,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": 100,
           },
         ]
@@ -379,7 +427,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -390,7 +438,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -401,11 +449,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -414,15 +462,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -436,7 +496,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -450,7 +510,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -466,11 +526,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -479,15 +539,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -501,7 +573,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#D6512D",
                   "borderRadius": 5,
@@ -515,7 +587,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -545,7 +617,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -555,8 +627,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -565,7 +637,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": 150,
           },
         ]
@@ -577,7 +649,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         hidesWhenStopped={true}
         size="large"
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -599,7 +671,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -609,8 +681,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -619,7 +691,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": 100,
           },
         ]
@@ -631,7 +703,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         hidesWhenStopped={true}
         size="large"
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -653,7 +725,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -663,8 +735,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -673,7 +745,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "paddingVertical": 15,
             "width": "75%",
           },
-          Object {
+          {
             "minHeight": 150,
           },
         ]
@@ -686,7 +758,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -699,7 +771,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       </Text>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -711,7 +783,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -720,7 +792,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -730,7 +802,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       </View>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -742,7 +814,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -751,7 +823,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#33691E",
               "fontSize": 15,
@@ -767,7 +839,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#33691E",
               "fontSize": 15,
@@ -780,7 +852,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
             "marginBottom": 5,
@@ -791,7 +863,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -800,7 +872,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -810,7 +882,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -821,11 +893,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -834,15 +906,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -856,7 +940,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "borderColor": "#0071e9",
@@ -871,7 +955,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#0071e9",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -887,11 +971,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -900,15 +984,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -922,7 +1018,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -936,7 +1032,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -966,7 +1062,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -976,8 +1072,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -989,7 +1085,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 100,
           },
         ]
@@ -1001,7 +1097,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         hidesWhenStopped={true}
         size="large"
         style={
-          Object {
+          {
             "alignItems": "center",
             "flex": 1,
             "justifyContent": "center",
@@ -1023,7 +1119,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#00000099",
         "flex": 1,
@@ -1033,8 +1129,8 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignContent": "center",
             "alignSelf": "center",
             "backgroundColor": "#ffffffff",
@@ -1046,7 +1142,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             "padding": 10,
             "width": "80%",
           },
-          Object {
+          {
             "minHeight": 100,
           },
         ]
@@ -1054,7 +1150,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
     >
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -1066,7 +1162,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -1077,11 +1173,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -1090,15 +1186,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -1112,7 +1220,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -1126,7 +1234,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -1142,11 +1250,11 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         </View>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
-              Object {
+              {
                 "flex": 1,
                 "paddingHorizontal": 10,
               },
@@ -1155,15 +1263,27 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -1177,7 +1297,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#D6512D",
                   "borderRadius": 5,
@@ -1191,7 +1311,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -1214,14 +1334,14 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests Tests rend
 exports[`AuditItemScreen Manage AuditItem externalized function tests test isError 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -1235,7 +1355,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -1244,6 +1364,23 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
       [missing "en.ITEM.API_ERROR" translation]
     </Text>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -1255,7 +1392,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -1279,14 +1416,14 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
 exports[`AuditItemScreen Manage AuditItem externalized function tests test isError 2`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -1300,7 +1437,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -1309,6 +1446,23 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
       [missing "en.ITEM.API_ERROR" translation]
     </Text>
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -1320,7 +1474,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#e57373",
           "borderRadius": 4,
@@ -1342,7 +1496,7 @@ exports[`AuditItemScreen Manage AuditItem externalized function tests test isErr
 `;
 
 exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen with redux 1`] = `
-Array [
+[
   <Modal
     animationType="none"
     hardwareAccelerated={false}
@@ -1387,14 +1541,14 @@ Array [
   />,
   <View
     style={
-      Object {
+      {
         "marginBottom": 8,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "marginTop": 2,
           "width": "100%",
         }
@@ -1402,8 +1556,20 @@ Array [
     >
       <View
         accessibilityState={
-          Object {
+          {
+            "busy": undefined,
+            "checked": undefined,
             "disabled": true,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
           }
         }
         accessible={true}
@@ -1417,7 +1583,7 @@ Array [
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
+          {
             "backgroundColor": "#ffffffff",
             "flexDirection": "row",
             "opacity": 1,
@@ -1430,7 +1596,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "column",
               "flexShrink": 1,
               "justifyContent": "space-around",
@@ -1441,14 +1607,14 @@ Array [
         >
           <View
             style={
-              Object {
+              {
                 "paddingBottom": 10,
               }
             }
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flexShrink": 1,
                   "flexWrap": "wrap",
@@ -1462,27 +1628,25 @@ Array [
           <View>
             <Text
               style={
-                Object {
+                {
                   "flexShrink": 1,
                   "flexWrap": "wrap",
                   "fontSize": 14,
                   "marginVertical": 2,
                 }
               }
-            >
-              
-            </Text>
+            />
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "column",
               }
             }
           >
             <View
               style={
-                Object {
+                {
                   "flexDirection": "row",
                   "justifyContent": "flex-start",
                   "paddingRight": 5,
@@ -1492,7 +1656,7 @@ Array [
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#616161",
                     "flexShrink": 1,
                     "flexWrap": "wrap",
@@ -1506,14 +1670,14 @@ Array [
           </View>
           <View
             style={
-              Object {
+              {
                 "flexDirection": "column",
               }
             }
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#616161",
                   "flexShrink": 1,
                   "flexWrap": "wrap",
@@ -1530,7 +1694,7 @@ Array [
   </View>,
   <RCTScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -1540,7 +1704,7 @@ Array [
     <View>
       <View
         style={
-          Object {
+          {
             "alignItems": "stretch",
             "justifyContent": "center",
           }
@@ -1548,7 +1712,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "marginBottom": 6,
             }
           }
@@ -1556,7 +1720,7 @@ Array [
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "borderBottomWidth": 1,
@@ -1570,7 +1734,7 @@ Array [
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "flex": 1,
                     "flexDirection": "row",
@@ -1587,7 +1751,7 @@ Array [
                 <View>
                   <Text
                     style={
-                      Object {
+                      {
                         "fontWeight": "bold",
                       }
                     }
@@ -1596,7 +1760,7 @@ Array [
                   </Text>
                   <Text
                     style={
-                      Object {
+                      {
                         "fontSize": 12,
                       }
                     }
@@ -1606,11 +1770,28 @@ Array [
                 </View>
               </View>
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
                 hitSlop={
-                  Object {
+                  {
                     "bottom": 10,
                     "left": 15,
                     "right": 15,
@@ -1625,7 +1806,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
@@ -1641,7 +1822,7 @@ Array [
             <View>
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "justifyContent": "center",
@@ -1659,7 +1840,7 @@ Array [
         </View>
         <View
           style={
-            Object {
+            {
               "marginBottom": 6,
             }
           }
@@ -1667,7 +1848,7 @@ Array [
           <View>
             <View
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#ffffffff",
                   "borderBottomWidth": 1,
@@ -1681,7 +1862,7 @@ Array [
             >
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "flex": 1,
                     "flexDirection": "row",
@@ -1698,7 +1879,7 @@ Array [
                 <View>
                   <Text
                     style={
-                      Object {
+                      {
                         "fontWeight": "bold",
                       }
                     }
@@ -1707,7 +1888,7 @@ Array [
                   </Text>
                   <Text
                     style={
-                      Object {
+                      {
                         "fontSize": 12,
                       }
                     }
@@ -1720,7 +1901,7 @@ Array [
             <View>
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "justifyContent": "center",
@@ -1741,7 +1922,7 @@ Array [
             <View>
               <View
                 style={
-                  Object {
+                  {
                     "alignItems": "center",
                     "backgroundColor": "#ffffffff",
                     "borderBottomColor": "#eeeeee",
@@ -1754,7 +1935,7 @@ Array [
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "flex": 1,
                       "flexDirection": "row",
@@ -1764,16 +1945,14 @@ Array [
                 >
                   <Text
                     style={
-                      Object {
+                      {
                         "marginRight": 0,
                       }
                     }
-                  >
-                    
-                  </Text>
+                  />
                   <Text
                     style={
-                      Object {
+                      {
                         "fontWeight": "500",
                         "paddingLeft": 10,
                       }
@@ -1783,6 +1962,23 @@ Array [
                   </Text>
                 </View>
                 <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -1794,7 +1990,7 @@ Array [
                   onResponderTerminationRequest={[Function]}
                   onStartShouldSetResponder={[Function]}
                   style={
-                    Object {
+                    {
                       "flex": 0.1,
                       "opacity": 1,
                       "paddingLeft": 5,
@@ -1812,7 +2008,7 @@ Array [
               <View>
                 <View
                   style={
-                    Object {
+                    {
                       "backgroundColor": "#ffffffff",
                       "flexDirection": "row",
                       "justifyContent": "space-evenly",
@@ -1830,7 +2026,7 @@ Array [
   </RCTScrollView>,
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -1839,7 +2035,7 @@ Array [
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#ffffffff",
           "flex": 1,
@@ -1853,7 +2049,7 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
             "marginHorizontal": 3,
           }
@@ -1861,8 +2057,8 @@ Array [
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "height": 45,
               },
               undefined,
@@ -1871,15 +2067,27 @@ Array [
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           >
             <View
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -1893,7 +2101,7 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "backgroundColor": "#0071e9",
                   "borderRadius": 5,
@@ -1907,7 +2115,7 @@ Array [
             >
               <Text
                 style={
-                  Object {
+                  {
                     "color": "#ffffffff",
                     "fontFamily": "Roboto-Medium",
                     "fontSize": 16,
@@ -1953,7 +2161,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -1964,7 +2172,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -1980,13 +2188,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2000,13 +2208,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2026,7 +2234,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -2036,7 +2244,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       />
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -2052,13 +2260,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2072,13 +2280,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2098,7 +2306,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -2108,7 +2316,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </Text>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -2120,7 +2328,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -2129,7 +2337,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2139,7 +2347,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -2151,7 +2359,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -2160,7 +2368,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -2176,7 +2384,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -2189,7 +2397,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
             "marginBottom": 5,
@@ -2200,7 +2408,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -2209,7 +2417,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2219,7 +2427,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -2235,13 +2443,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2255,13 +2463,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2288,7 +2496,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -2300,7 +2508,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -2312,7 +2520,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -2328,14 +2536,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2349,14 +2557,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2368,14 +2576,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "marginBottom": 8,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -2399,7 +2607,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -2408,7 +2616,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "stretch",
           "justifyContent": "center",
         }
@@ -2416,7 +2624,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -2425,7 +2633,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           add={[Function]}
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="floor"
           maxQty={9999}
           minQty={0}
@@ -2436,7 +2644,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -2444,7 +2652,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         <LocationListCard
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="reserve"
           maxQty={9999}
           minQty={1}
@@ -2468,7 +2676,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -2511,7 +2719,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -2522,7 +2730,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -2538,13 +2746,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2558,13 +2766,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2584,7 +2792,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -2594,7 +2802,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       />
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -2610,13 +2818,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2630,13 +2838,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2656,7 +2864,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -2666,7 +2874,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </Text>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -2678,7 +2886,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -2687,7 +2895,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2697,7 +2905,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -2709,7 +2917,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -2718,7 +2926,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -2734,7 +2942,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -2747,7 +2955,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
             "marginBottom": 5,
@@ -2758,7 +2966,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -2767,7 +2975,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -2777,7 +2985,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -2793,13 +3001,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2813,13 +3021,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2846,7 +3054,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -2858,7 +3066,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -2870,7 +3078,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -2886,14 +3094,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2907,14 +3115,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -2926,14 +3134,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "marginBottom": 8,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -2957,7 +3165,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -2966,7 +3174,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "stretch",
           "justifyContent": "center",
         }
@@ -2974,7 +3182,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -2983,7 +3191,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
           add={[Function]}
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="floor"
           maxQty={9999}
           minQty={0}
@@ -2994,7 +3202,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
       </View>
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -3002,7 +3210,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
         <LocationListCard
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="reserve"
           maxQty={9999}
           minQty={1}
@@ -3026,7 +3234,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render the audi
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -3069,7 +3277,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -3080,7 +3288,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -3096,13 +3304,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3116,13 +3324,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3142,7 +3350,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -3152,7 +3360,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       />
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -3168,13 +3376,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3188,13 +3396,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3214,7 +3422,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -3224,7 +3432,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </Text>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -3236,7 +3444,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -3245,7 +3453,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -3255,7 +3463,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -3267,7 +3475,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -3276,7 +3484,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -3292,7 +3500,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -3305,7 +3513,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
             "marginBottom": 5,
@@ -3316,7 +3524,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -3325,7 +3533,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -3335,7 +3543,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -3351,13 +3559,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3371,13 +3579,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3404,7 +3612,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -3416,7 +3624,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -3428,7 +3636,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -3444,14 +3652,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3465,14 +3673,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3484,14 +3692,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "marginBottom": 8,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -3515,7 +3723,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -3524,7 +3732,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "stretch",
           "justifyContent": "center",
         }
@@ -3532,7 +3740,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -3541,7 +3749,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
           add={[Function]}
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="floor"
           maxQty={9999}
           minQty={0}
@@ -3552,7 +3760,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
       </View>
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -3560,7 +3768,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
         <LocationListCard
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="reserve"
           maxQty={9999}
           minQty={1}
@@ -3584,7 +3792,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -3608,7 +3816,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
   hidesWhenStopped={true}
   size="large"
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -3620,14 +3828,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Activi
 exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Scanned Item Not Found' on request status 204 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
@@ -3641,7 +3849,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders 'Scanne
     />
     <Text
       style={
-        Object {
+        {
           "fontSize": 16,
           "textAlign": "center",
         }
@@ -3679,7 +3887,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -3690,7 +3898,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -3706,13 +3914,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3726,13 +3934,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3752,7 +3960,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -3762,7 +3970,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       />
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -3778,13 +3986,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3798,13 +4006,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3829,7 +4037,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -3842,7 +4050,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </Text>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -3854,7 +4062,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -3863,7 +4071,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -3873,7 +4081,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </View>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -3885,7 +4093,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -3894,7 +4102,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#33691E",
               "fontSize": 15,
@@ -3910,7 +4118,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#33691E",
               "fontSize": 15,
@@ -3923,7 +4131,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
             "marginBottom": 5,
@@ -3934,7 +4142,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -3943,7 +4151,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -3953,7 +4161,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -3969,13 +4177,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -3989,13 +4197,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4022,7 +4230,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -4034,7 +4242,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -4046,7 +4254,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -4062,14 +4270,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4083,14 +4291,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4102,14 +4310,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "marginBottom": 8,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -4133,7 +4341,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -4142,7 +4350,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "stretch",
           "justifyContent": "center",
         }
@@ -4150,7 +4358,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -4159,7 +4367,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
           add={[Function]}
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="floor"
           maxQty={9999}
           minQty={0}
@@ -4170,7 +4378,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
       </View>
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -4178,7 +4386,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
         <LocationListCard
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="reserve"
           maxQty={9999}
           minQty={1}
@@ -4202,7 +4410,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders screen 
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -4245,7 +4453,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -4256,7 +4464,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -4272,13 +4480,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4292,13 +4500,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4318,7 +4526,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -4328,7 +4536,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       />
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -4344,13 +4552,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4364,13 +4572,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4395,7 +4603,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -4408,7 +4616,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </Text>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -4420,7 +4628,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -4429,7 +4637,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -4439,7 +4647,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -4451,7 +4659,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -4460,7 +4668,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -4476,7 +4684,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#ab2703",
               "fontSize": 15,
@@ -4489,7 +4697,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
             "marginBottom": 5,
@@ -4500,7 +4708,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -4509,7 +4717,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -4519,7 +4727,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -4535,13 +4743,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4555,13 +4763,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4588,7 +4796,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -4600,7 +4808,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -4612,7 +4820,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -4628,14 +4836,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4649,14 +4857,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4668,14 +4876,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "marginBottom": 8,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -4699,7 +4907,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -4708,7 +4916,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "stretch",
           "justifyContent": "center",
         }
@@ -4716,7 +4924,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -4725,7 +4933,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           add={[Function]}
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="floor"
           maxQty={9999}
           minQty={0}
@@ -4736,7 +4944,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -4744,7 +4952,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         <LocationListCard
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="reserve"
           maxQty={9999}
           minQty={1}
@@ -4768,7 +4976,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,
@@ -4811,7 +5019,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -4822,7 +5030,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </Text>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -4838,13 +5046,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4858,13 +5066,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4884,7 +5092,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     <React.Fragment>
       <Text
         style={
-          Object {
+          {
             "fontSize": 18,
             "padding": 15,
             "textAlign": "center",
@@ -4894,7 +5102,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       />
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -4910,13 +5118,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4930,13 +5138,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -4961,7 +5169,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       />
       <Text
         style={
-          Object {
+          {
             "fontSize": 16,
             "fontWeight": "bold",
           }
@@ -4974,7 +5182,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </Text>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -4986,7 +5194,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -4995,7 +5203,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -5005,7 +5213,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "borderBottomColor": "#9e9e9e",
             "borderBottomWidth": 1,
             "flexDirection": "row",
@@ -5017,7 +5225,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -5026,7 +5234,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#33691E",
               "fontSize": 15,
@@ -5042,7 +5250,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "alignSelf": "flex-start",
               "color": "#33691E",
               "fontSize": 15,
@@ -5055,7 +5263,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "flexDirection": "row",
             "justifyContent": "space-evenly",
             "marginBottom": 5,
@@ -5066,7 +5274,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       >
         <Text
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -5075,7 +5283,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 15,
             }
           }
@@ -5085,7 +5293,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "space-around",
             "flexDirection": "row",
             "justifyContent": "space-evenly",
@@ -5101,13 +5309,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-cancel-button"
-          title="[missing \\"en.APPROVAL.GO_BACK\\" translation]"
+          title="[missing "en.APPROVAL.GO_BACK" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -5121,13 +5329,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "flex": 1,
               "paddingHorizontal": 10,
             }
           }
           testID="modal-confirm-button"
-          title="[missing \\"en.GENERICS.SUBMIT\\" translation]"
+          title="[missing "en.GENERICS.SUBMIT" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -5154,7 +5362,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       <View>
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
               "fontSize": 18,
               "paddingBottom": 5,
@@ -5166,7 +5374,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         </Text>
         <Text
           style={
-            Object {
+            {
               "fontSize": 16,
               "padding": 15,
               "textAlign": "center",
@@ -5178,7 +5386,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "alignContent": "center",
             "elevation": 10,
             "flexDirection": "row",
@@ -5194,14 +5402,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="cancelBack"
-          title="[missing \\"en.GENERICS.CANCEL\\" translation]"
+          title="[missing "en.GENERICS.CANCEL" translation]"
           titleColor="#0071e9"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -5215,14 +5423,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onPress={[Function]}
           radius={5}
           style={
-            Object {
+            {
               "alignSelf": "center",
               "margin": 10,
               "width": "40%",
             }
           }
           testID="confirmBack"
-          title="[missing \\"en.GENERICS.OK\\" translation]"
+          title="[missing "en.GENERICS.OK" translation]"
           titleColor="#ffffffff"
           titleFontSize={16}
           titleFontWeight="normal"
@@ -5234,14 +5442,14 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </CustomModalComponent>
   <View
     style={
-      Object {
+      {
         "marginBottom": 8,
       }
     }
   >
     <ItemCard
       OHItemInfo={
-        Object {
+        {
           "claimsOH": 0,
           "consolidatorOH": 0,
           "flyCloudInTransitOH": 0,
@@ -5265,7 +5473,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </View>
   <ScrollView
     contentContainerStyle={
-      Object {
+      {
         "alignItems": "stretch",
         "justifyContent": "center",
       }
@@ -5274,7 +5482,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "stretch",
           "justifyContent": "center",
         }
@@ -5282,7 +5490,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
     >
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -5291,7 +5499,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           add={[Function]}
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="floor"
           maxQty={9999}
           minQty={0}
@@ -5302,7 +5510,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
       </View>
       <View
         style={
-          Object {
+          {
             "marginBottom": 6,
           }
         }
@@ -5310,7 +5518,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
         <LocationListCard
           error={false}
           loading={false}
-          locationList={Array []}
+          locationList={[]}
           locationType="reserve"
           maxQty={9999}
           minQty={1}
@@ -5334,7 +5542,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
   </ScrollView>
   <View
     style={
-      Object {
+      {
         "borderTopColor": "#eeeeee",
         "borderTopWidth": 4,
         "height": 60,

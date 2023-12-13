@@ -1,6 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
+import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import {
   ReviewItemDetailsNavigatorStack,
@@ -43,8 +43,8 @@ const navigationProp: NavigationProp<any> = {
   getState: jest.fn()
 };
 
-describe('ReviewItemsDetailsNavigation', () => {
-  it('Render ReviewItemsNavigator', () => {
+describe('ReviewItemDetailsNavigation', () => {
+  it('Render ReviewItemNavigator', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <ReviewItemDetailsNavigatorStack

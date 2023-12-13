@@ -50,9 +50,16 @@ For more information go to https://confluence.walmart.com/display/ISCM/Own+Your+
 - Using a version manager like [Node Version Manager](https://github.com/nvm-sh/nvm) makes it simple to manage node
   versions
   - the command `nvm ls-remote --lts` will list all available stable versions of node
-  - to install a desired version, use `nvm install` eg: `nvm install 14.17.3`
-  - to set it as your default node version, use `nvm alias default` eg: `nvm alias default 14.17.3`
+  - to install a desired version, use `nvm install` eg: `nvm install 16.20.2`
+  - to set it as your default node version, use `nvm alias default` eg: `nvm alias default 16.20.2`
   - after installing a new version, get the latest version of NPM via `npm install -g npm`
+- Create a `.npmrc` file to reroute from the public [NPM Registry](https://www.npmjs.com/) to [Walmart's NPM Registry](https://npme.walmart.com/)
+  - Run the command `npm config edit` to create a `.npmrc` file in your home directory
+  - Add the following to your `.npmrc` file
+    - `email=<your_walmart_email_address>`
+    - `lockfile-version=3`
+    - `registry=https://npme.walmart.com/`
+    - `strict-ssl=false`
 
 ### AppCenter Secrets
 
@@ -75,6 +82,10 @@ For more information go to https://confluence.walmart.com/display/ISCM/Own+Your+
 - For CN Market images for item are fetched by calling image api and it uses client id and auth key, so locally create a new file Secrets.json under src/constant/ directory and add those keys.
 - You can find those secrets in <https://confluence.walmart.com/pages/viewpage.action?pageId=1060167829#OYIPropertySecrets-CNItemImageAPISecrets> copy and paste in Secrets.json
 - After adding the above secrets, image can be shown for CN market locally in dev environment.
+
+### Setting up your Debugger
+
+- [Flipper Setup for debugging OYI App](https://confluence.walmart.com/display/ISCM/Flipper+Setup+for+debugging+OYI+App)
 
 ### To run the app
 

@@ -3,9 +3,9 @@
 exports[`WorklistHome Navigator Renders the WorklistHome Navigator 1`] = `
 <StackNavigator
   screenOptions={
-    Object {
+    {
       "headerMode": "float",
-      "headerStyle": Object {
+      "headerStyle": {
         "backgroundColor": "#0071e9",
       },
       "headerTintColor": "#ffffffff",
@@ -16,8 +16,8 @@ exports[`WorklistHome Navigator Renders the WorklistHome Navigator 1`] = `
     component={[Function]}
     name="WorklistHome"
     options={
-      Object {
-        "headerTitle": "[missing \\"en.WORKLIST.WORKLIST\\" translation]",
+      {
+        "headerTitle": "[missing "en.WORKLIST.WORKLIST" translation]",
       }
     }
   />
@@ -25,7 +25,7 @@ exports[`WorklistHome Navigator Renders the WorklistHome Navigator 1`] = `
     component={[Function]}
     name="WorklistNavigator"
     options={
-      Object {
+      {
         "headerShown": false,
       }
     }
@@ -34,7 +34,7 @@ exports[`WorklistHome Navigator Renders the WorklistHome Navigator 1`] = `
     component={[Function]}
     name="MissingPalletWorklist"
     options={
-      Object {
+      {
         "headerShown": false,
       }
     }
@@ -43,7 +43,7 @@ exports[`WorklistHome Navigator Renders the WorklistHome Navigator 1`] = `
     component={[Function]}
     name="AuditWorklistNavigator"
     options={
-      Object {
+      {
         "headerShown": false,
       }
     }

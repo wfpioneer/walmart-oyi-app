@@ -15,6 +15,9 @@ import {
 import { Dispatch } from 'redux';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
+import {
+  BottomSheetDefaultBackdropProps
+} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types.d';
 import { strings } from '../../locales';
 import { LocationItem, SectionDetailsItem, SectionDetailsPallet } from '../../models/LocationItems';
 import { COLOR } from '../../themes/Color';
@@ -140,7 +143,7 @@ export const clearSectionApiEffect = (
       const selectedTab: ClearLocationTarget = clearSectionApi.value.target;
       // TODO refactor screen to put section details information into redux so we
       // need to clear only that for this part
-      dispatch({ type: 'API/GET_SECTION_DETAILS/RESET' });
+      dispatch({ type: GET_SECTION_DETAILS.RESET });
       dispatch(getSectionDetails({ sectionId: section.id.toString() }));
       Toast.show({
         type: 'success',
@@ -228,25 +231,23 @@ export const TabHeader = (props: TabHeaderProps): JSX.Element => {
     navigation.navigate('AddPallet');
   };
   return (
-    <>
-      <View style={styles.tabHeader}>
-        <Text style={styles.tabHeaderText}>
-          {headerText}
-        </Text>
-        {isEditEnabled ? (
-          <TouchableOpacity
-            onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
-            disabled={isDisabled}
-          >
-            <View>
-              <Text style={isDisabled ? styles.addTextDisabled : styles.addText}>
-                {strings('GENERICS.ADD')}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ) : null}
-      </View>
-    </>
+    <View style={styles.tabHeader}>
+      <Text style={styles.tabHeaderText}>
+        {headerText}
+      </Text>
+      {isEditEnabled ? (
+        <TouchableOpacity
+          onPress={isReserve ? () => addNewPallet() : () => addNewLocation()}
+          disabled={isDisabled}
+        >
+          <View>
+            <Text style={isDisabled ? styles.addTextDisabled : styles.addText}>
+              {strings('GENERICS.ADD')}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      ) : null}
+    </View>
   );
 };
 
@@ -349,42 +350,60 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
     dispatch
   ), [navigation, scannedEvent]);
 
-  useEffectHook(() => activityModalEffect(
-    navigation, dispatch, activityModal, removeSectionApi, clearSectionApi
-  ), [activityModal, removeSectionApi, clearSectionApi]);
+  useEffectHook(
+    () => activityModalEffect(
+      navigation,
+      dispatch,
+      activityModal,
+      removeSectionApi,
+      clearSectionApi
+    ),
+    [activityModal, removeSectionApi, clearSectionApi]
+  );
 
   // Clear Section API
   useEffectHook(() => clearSectionApiEffect(
-    dispatch, navigation, clearSectionApi,
-    section, setDisplayClearConfirmation
+    dispatch,
+    navigation,
+    clearSectionApi,
+    section,
+    setDisplayClearConfirmation
   ), [clearSectionApi]);
 
   // Remove Section Api
-  useEffectHook(() => removeSectionApiEffect(
-    navigation, dispatch, removeSectionApi, setDisplayRemoveConfirmation
-  ), [removeSectionApi]);
+  useEffectHook(
+    () => removeSectionApiEffect(
+      navigation,
+      dispatch,
+      removeSectionApi,
+      setDisplayRemoveConfirmation
+    ),
+    [removeSectionApi]
+  );
 
   // Call get section details on select from list
   // adjusted to work from loc management state instead of scanned
   useEffectHook(() => {
     navigation.addListener('focus', () => {
-      validateSession(navigation, route.name).then(() => {
+      validateSessionCall(navigation, route.name).then(() => {
         if (!scannedEvent.value) {
           dispatch(getSectionDetails({ sectionId: section.id.toString() }));
           dispatch(setIsToolBarNavigation(true));
         }
       });
     });
-    navigation.addListener('blur', () => {
-      dispatch(hideItemPopup());
-      dispatch({ type: GET_SECTION_DETAILS.RESET });
+    navigation.addListener('beforeRemove', () => {
+      if (itemPopupVisible) {
+        dispatch(hideItemPopup());
+      }
       if (scannedEvent.value) {
         dispatch(resetScannedEvent());
       }
+      dispatch({ type: GET_SECTION_DETAILS.RESET });
     });
     return () => {
       navigation.removeListener('focus', () => {});
-      navigation.removeListener('blur', () => {});
+      navigation.removeListener('beforeRemove', () => {});
     };
   }, [navigation, scannedEvent, section]);
 
@@ -452,7 +471,7 @@ export const LocationTabsNavigator = (props: LocationProps): JSX.Element => {
         api={removeSectionApi}
         handleConfirm={handleRemoveSection}
         isVisible={displayRemoveConfirmation}
-        mainText={`${strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}`}
+        mainText={strings('LOCATION.REMOVE_SECTION_CONFIRMATION', { sectionName: locationName })}
         onClose={() => setDisplayRemoveConfirmation(false)}
       />
       <ApiConfirmationModal
@@ -580,8 +599,7 @@ const LocationTabs = () : JSX.Element => {
   }, [locationPopupVisible]);
 
   const renderBackdrop = useCallback(
-    // eslint-disable-next-line no-shadow
-    props => (
+    (props: BottomSheetDefaultBackdropProps) => (
       <BottomSheetBackdrop
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}

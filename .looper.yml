@@ -104,15 +104,17 @@ envs:
       APK_NAME: 'OYI-International'
 
 tools:
-  jdk: 8
+  jdk:
+    flavor: azul
+    version: 11
   android:
     - tools
     - platform-tools
-    - platforms;android-29
-    - build-tools;29.0.3
+    - platforms;android-33
+    - build-tools;33.0.0
     - extras;android;m2repository
-    - ndk;21.3.6528147
-  gradle: 6.7.1
+    - ndk;23.1.7779620
+  gradle: 7.5.1
   maven: 3.8.2
   nodejs: 16.20.0
   npm: 8.19.4
@@ -124,7 +126,7 @@ flows:
       - 'echo "Building src/constant/Secrets.json using looper-encrypted secrets"'
       - 'echo "{ \"CN_ITEM_CENTER_TOKEN_SECRET\": \"$CN_ITEM_CENTER_TOKEN_SECRET\", \"CN_IMAGE_AUTH_CLIENT_ID\": \"$CN_IMAGE_AUTH_CLIENT_ID\", \"CN_IMAGE_AUTH_SECRET\": \"$CN_IMAGE_AUTH_SECRET\" }" >> ../src/constant/Secrets.json'
     - group("npm install"):
-        - npm ci
+        - npm ci --legacy-peer-deps
         - TZ='America/Chicago' npm run test:coverage
     - group ("appcenter commands"):
         - 'echo "Building android/app/src/main/assets/appcenter-config.json using looper-encrypted secrets"'

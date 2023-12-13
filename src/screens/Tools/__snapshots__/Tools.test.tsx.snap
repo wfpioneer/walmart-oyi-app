@@ -3,7 +3,7 @@
 exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, location management enabled by fluffy 1`] = `
 <View
   style={
-    Object {
+    {
       "display": "flex",
       "flexDirection": "row",
       "flexWrap": "wrap",
@@ -15,7 +15,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, loca
 >
   <ToolsButton
     destination="LocationManagement"
-    title="[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]"
+    title="[missing "en.LOCATION.LOCATION_MANAGEMENT" translation]"
   >
     <mockConstructor
       color="#0071e9"
@@ -29,7 +29,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders Tools screen, loca
 exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, Binning enabled by config 1`] = `
 <View
   style={
-    Object {
+    {
       "display": "flex",
       "flexDirection": "row",
       "flexWrap": "wrap",
@@ -41,16 +41,16 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, Binn
 >
   <ToolsButton
     destination="Binning"
-    title="[missing \\"en.BINNING.BINNING\\" translation]"
+    title="[missing "en.BINNING.BINNING" translation]"
   >
     <mockConstructor
       color="#0071e9"
       name="login-variant"
       size={28}
       style={
-        Object {
-          "transform": Array [
-            Object {
+        {
+          "transform": [
+            {
               "rotate": "270deg",
             },
           ],
@@ -64,7 +64,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, Binn
 exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, SettingsTool enabled by config 1`] = `
 <View
   style={
-    Object {
+    {
       "display": "flex",
       "flexDirection": "row",
       "flexWrap": "wrap",
@@ -76,7 +76,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, Sett
 >
   <ToolsButton
     destination="SettingsTool"
-    title="[missing \\"en.SETTINGS.TITLE\\" translation]"
+    title="[missing "en.SETTINGS.TITLE" translation]"
   >
     <mockConstructor
       color="#0071e9"
@@ -90,7 +90,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, Sett
 exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, location management enabled by config 1`] = `
 <View
   style={
-    Object {
+    {
       "display": "flex",
       "flexDirection": "row",
       "flexWrap": "wrap",
@@ -102,7 +102,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, loca
 >
   <ToolsButton
     destination="LocationManagement"
-    title="[missing \\"en.LOCATION.LOCATION_MANAGEMENT\\" translation]"
+    title="[missing "en.LOCATION.LOCATION_MANAGEMENT" translation]"
   >
     <mockConstructor
       color="#0071e9"
@@ -116,7 +116,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, loca
 exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, pallet management enabled by config 1`] = `
 <View
   style={
-    Object {
+    {
       "display": "flex",
       "flexDirection": "row",
       "flexWrap": "wrap",
@@ -128,7 +128,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, pall
 >
   <ToolsButton
     destination="PalletManagement"
-    title="[missing \\"en.LOCATION.PALLET_MANAGEMENT\\" translation]"
+    title="[missing "en.LOCATION.PALLET_MANAGEMENT" translation]"
   >
     <mockConstructor
       color="#0071e9"
@@ -142,7 +142,7 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, pall
 exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, picking enabled by config 1`] = `
 <View
   style={
-    Object {
+    {
       "display": "flex",
       "flexDirection": "row",
       "flexWrap": "wrap",
@@ -154,16 +154,16 @@ exports[`ToolsScreen Tests rendering the Tools Screen Renders tools screen, pick
 >
   <ToolsButton
     destination="Picking"
-    title="[missing \\"en.PICKING.PICKING\\" translation]"
+    title="[missing "en.PICKING.PICKING" translation]"
   >
     <mockConstructor
       color="#0071e9"
       name="login-variant"
       size={28}
       style={
-        Object {
-          "transform": Array [
-            Object {
+        {
+          "transform": [
+            {
               "rotate": "90deg",
             },
           ],

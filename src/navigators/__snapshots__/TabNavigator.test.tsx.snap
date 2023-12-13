@@ -6,18 +6,18 @@ exports[`Tab Navigator Render ReviewItemsNavigator 1`] = `
 >
   <Screen
     component={
-      Object {
+      {
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
         "type": [Function],
       }
     }
-    name="[missing \\"en.HOME.HOME\\" translation]"
+    name="[missing "en.HOME.HOME" translation]"
   />
   <Screen
     component={[Function]}
-    name="[missing \\"en.WORKLIST.WORKLIST\\" translation]"
+    name="[missing "en.WORKLIST.WORKLIST" translation]"
   />
 </BottomTabNavigator>
 `;
@@ -28,31 +28,31 @@ exports[`Tab Navigator Render ReviewItemsNavigator with user features 1`] = `
 >
   <Screen
     component={
-      Object {
+      {
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
         "type": [Function],
       }
     }
-    name="[missing \\"en.HOME.HOME\\" translation]"
+    name="[missing "en.HOME.HOME" translation]"
   />
   <Screen
     component={[Function]}
-    name="[missing \\"en.WORKLIST.WORKLIST\\" translation]"
+    name="[missing "en.WORKLIST.WORKLIST" translation]"
   />
   <Screen
     component={[Function]}
-    name="[missing \\"en.GENERICS.TOOLS\\" translation]"
+    name="[missing "en.GENERICS.TOOLS" translation]"
   />
   <Screen
     component={[Function]}
     listeners={
-      Object {
+      {
         "blur": [Function],
       }
     }
-    name="[missing \\"en.APPROVAL.APPROVALS\\" translation]"
+    name="[missing "en.APPROVAL.APPROVALS" translation]"
   />
 </BottomTabNavigator>
 `;

@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import {
+  StyleProp, TextStyle, TouchableOpacity, View
+} from 'react-native';
 import COLOR from '../../themes/Color';
 
 /**
@@ -14,7 +16,7 @@ interface IconButtonPropsI {
   height?: number,
   width?: number,
   radius?: number,
-  style?: object,
+  style?: StyleProp<TextStyle>,
   type?: number,
   disabled?: boolean,
   // eslint-disable-next-line react/require-default-props

@@ -243,7 +243,7 @@ describe('LoginScreen', () => {
         navigation={navigationProp}
         user={{
           ...testUser,
-          'wm-BusinessUnitCategory': 'HO',
+          'wm-BusinessUnitType': 'HO',
           c: 'MX',
           sAMAccountName: 'blah',
           userTokens: {
@@ -481,7 +481,7 @@ describe('Tests login screen functions', () => {
       '-STAGE'
     );
 
-    expect(mockDispatch).toHaveBeenCalledTimes(9);
+    expect(mockDispatch).toHaveBeenCalledTimes(7);
     expect(mockDispatch).toHaveBeenCalledWith(assignFluffyFeatures(mockFluffyData));
     expect(mockDispatch).toHaveBeenCalledWith(getClubConfig());
     expect(mockDispatch).toHaveBeenCalledWith(resetFluffyFeaturesApiState());

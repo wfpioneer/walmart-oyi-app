@@ -153,8 +153,7 @@ describe('ManagePalletScreen', () => {
     removeAllListeners: jest.fn(),
     removeSubscription: jest.fn(),
     listenerCount: jest.fn(),
-    emit: jest.fn(),
-    removeListener: jest.fn()
+    emit: jest.fn()
   };
 
   const mockCountryCode = 'MX';
@@ -610,8 +609,6 @@ describe('ManagePalletScreen', () => {
 
     afterEach(() => {
       jest.clearAllMocks();
-      // Resets methods overwritten with jest.spyOn
-      jest.restoreAllMocks();
     });
 
     it('tests getNumberOfDeleted', () => {
@@ -733,7 +730,7 @@ describe('ManagePalletScreen', () => {
               {
                 id: 1,
                 createDate: '2022-01-01T12:00:00.000Z',
-                expirationDate: '01/05/2022',
+                expirationDate: '',
                 items: []
               }
             ]
@@ -748,7 +745,7 @@ describe('ManagePalletScreen', () => {
     });
 
     it('Tests getPalletDetailsApiHook on success 204 ', () => {
-      const successApi: AsyncState = {
+      const success204Api: AsyncState = {
         ...defaultAsyncState,
         result: {
           status: 204,
@@ -756,7 +753,7 @@ describe('ManagePalletScreen', () => {
         }
       };
 
-      getPalletDetailsApiHook(successApi, mockDispatch, navigationProp);
+      getPalletDetailsApiHook(success204Api, mockDispatch, navigationProp);
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(1);
     });

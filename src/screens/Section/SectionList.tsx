@@ -17,6 +17,9 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import moment from 'moment';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
+import {
+  BottomSheetDefaultBackdropProps
+} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types.d';
 import BottomSheetSectionRemoveCard from '../../components/BottomSheetRemoveCard/BottomSheetRemoveCard';
 import BottomSheetPrintCard from '../../components/BottomSheetPrintCard/BottomSheetPrintCard';
 import BottomSheetClearCard from '../../components/BottomSheetClearCard/BottomSheetClearCard';
@@ -547,8 +550,7 @@ const SectionList = (): JSX.Element => {
   };
 
   const renderBackdrop = useCallback(
-    // eslint-disable-next-line no-shadow
-    props => (
+    (props: BottomSheetDefaultBackdropProps) => (
       <BottomSheetBackdrop
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
