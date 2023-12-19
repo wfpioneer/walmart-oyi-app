@@ -38,7 +38,7 @@ export interface PickHistory {
   palletLocationId: number,
   status: string,
   createdBy: string,
-  createTS: string
+  createTs: string
 }
 
 export interface ItemSalesHistory {
