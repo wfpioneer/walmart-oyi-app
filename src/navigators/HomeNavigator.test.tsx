@@ -8,6 +8,7 @@ import {
   renderHomeHeader,
   renderHomeMenuButton,
   renderHomeScanButton,
+  renderPrintQueueButton,
   showSignOutMenu
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
@@ -195,6 +196,15 @@ describe('Home Navigator', () => {
     const btnScan = getByTestId('btnShowMenu');
     fireEvent.press(btnScan);
     expect(mockAppCenter.trackEvent).toBeCalledWith('menu_button_click');
+  });
+  it('Render print queue button ', () => {
+    const { toJSON, getByTestId } = render(
+      renderPrintQueueButton(navigationProp)
+    );
+    const printButton = getByTestId('print-queue-button');
+    fireEvent.press(printButton);
+    expect(navigationProp.navigate).toHaveBeenCalled();
+    expect(toJSON()).toMatchSnapshot();
   });
   it('Render showSignoutMenu', () => {
     const actionSheetmock = jest.requireMock('react-native-action-sheet');

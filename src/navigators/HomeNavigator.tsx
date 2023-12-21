@@ -28,7 +28,8 @@ import {
   setPriceLabelPrinter as setPriceLabelPrinterAsyncStorage
 } from '../utils/asyncStorageUtils';
 import {
-  setPriceLabelPrinter, updatePrinterByID
+  setPriceLabelPrinter,
+  updatePrinterByID
 } from '../state/actions/Print';
 
 interface HomeNavigatorComponentProps {
@@ -65,7 +66,10 @@ const mapDispatchToProps = {
 
 const Stack = createStackNavigator();
 
-export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) => {
+export const showSignOutMenu = (
+  props: HomeNavigatorComponentProps,
+  navigation: any
+) => {
   const options = [
     strings('HOME.CHANGE_LANGUAGE'),
     strings('GENERICS.SIGN_OUT'),
@@ -90,7 +94,10 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
     };
     props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
     savePrinter(defPrinter);
-    if (props.priceLabelPrinter && props.priceLabelPrinter.id === defPrinter.id) {
+    if (
+      props.priceLabelPrinter
+      && props.priceLabelPrinter.id === defPrinter.id
+    ) {
       props.setPriceLabelPrinter(defPrinter);
       setPriceLabelPrinterAsyncStorage(defPrinter);
     }
@@ -188,7 +195,10 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
   );
 };
 
-export const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: (bool: boolean) => void) => (
+export const renderHomeScanButton = (
+  isManualScanEnabled: boolean,
+  setManualScanFunc: (bool: boolean) => void
+) => (
   <TouchableOpacity
     testID="btnScan"
     onPress={() => {
@@ -201,20 +211,32 @@ export const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScan
     }}
   >
     <View style={styles.leftButton}>
-      <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+      <MaterialCommunityIcon
+        name="barcode-scan"
+        size={20}
+        color={COLOR.WHITE}
+      />
     </View>
   </TouchableOpacity>
 );
 
 export const renderCamButton = () => (
-  <TouchableOpacity testID="camerabtn" onPress={() => { openCamera(); }}>
+  <TouchableOpacity
+    testID="camerabtn"
+    onPress={() => {
+      openCamera();
+    }}
+  >
     <View style={styles.camButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
 );
 
-export const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: any) => (
+export const renderHomeMenuButton = (
+  props: HomeNavigatorComponentProps,
+  navigation: any
+) => (
   <TouchableOpacity
     testID="btnShowMenu"
     onPress={() => {
@@ -231,19 +253,41 @@ export const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigat
   </TouchableOpacity>
 );
 
-export const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) => {
+export const renderPrintQueueButton = (navigation: any): JSX.Element => (
+  <TouchableOpacity
+    testID="print-queue-button"
+    onPress={() => {
+      trackEvent('print_queue_list_click');
+      navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
+    }}
+  >
+    <View style={styles.printerButton}>
+      <MaterialCommunityIcon name="printer" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
+);
+
+export const renderHomeHeader = (
+  props: HomeNavigatorComponentProps,
+  navigation: any
+) => {
   const { isManualScanEnabled } = props;
 
   return (
     <View style={styles.headerContainer}>
-      {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
+      {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage'
+        ? renderCamButton()
+        : null}
       {renderHomeScanButton(isManualScanEnabled, props.setManualScan)}
+      {renderPrintQueueButton(navigation)}
       {renderHomeMenuButton(props, navigation)}
     </View>
   );
 };
 
-export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.Element => (
+export const HomeNavigatorComponent = (
+  props: HomeNavigatorComponentProps
+): JSX.Element => (
   <Stack.Navigator
     screenOptions={{
       headerMode: 'float',
@@ -258,8 +302,14 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
         headerRight: () => renderHomeHeader(props, navigation),
         headerTitle: () => (
           <View>
-            <Text style={styles.headerTitle}>{strings('HOME.OWN_YOUR_INVENTORY')}</Text>
-            <Text style={styles.headerSubtitle}>{`${strings('GENERICS.CLUB')} ${props.clubNbr}`}</Text>
+            <Text style={styles.headerTitle}>
+              {strings('HOME.OWN_YOUR_INVENTORY')}
+            </Text>
+            <Text style={styles.headerSubtitle}>
+              {`${strings('GENERICS.CLUB')} ${
+                props.clubNbr
+              }`}
+            </Text>
           </View>
         )
       })}
@@ -270,7 +320,6 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
           }
         }
       }}
-
     />
     <Stack.Screen
       name="FeedbackScreen"
@@ -278,7 +327,9 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
       options={() => ({
         headerTitle: () => (
           <View>
-            <Text style={styles.headerTitle}>{strings('GENERICS.FEEDBACK')}</Text>
+            <Text style={styles.headerTitle}>
+              {strings('GENERICS.FEEDBACK')}
+            </Text>
           </View>
         )
       })}
@@ -286,4 +337,7 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
   </Stack.Navigator>
 );
 
-export const HomeNavigator = connect(mapStateToProps, mapDispatchToProps)(HomeNavigatorComponent);
+export const HomeNavigator = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeNavigatorComponent);
