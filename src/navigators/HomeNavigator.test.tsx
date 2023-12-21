@@ -136,7 +136,11 @@ describe('Home Navigator', () => {
     renderer.render(renderCamButton());
     expect(renderer.getRenderOutput()).toMatchSnapshot();
   });
-
+  it('Renders the printQueueButton header icon', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(renderPrintQueueButton(navigationProp));
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
   it('Renders the home header when isManualScanEnabled is true', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(renderHomeHeader(componentProps, navigationProp));

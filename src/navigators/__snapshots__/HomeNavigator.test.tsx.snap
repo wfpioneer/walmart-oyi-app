@@ -387,6 +387,31 @@ exports[`Home Navigator Renders the home menu button and onclick call track even
 </View>
 `;
 
+exports[`Home Navigator Renders the printQueueButton header icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+  testID="print-queue-button"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": 55,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="printer"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
+`;
+
 exports[`Home Navigator Renders the scanButton header icon when manual scan set to false 1`] = `
 <View
   accessibilityState={
