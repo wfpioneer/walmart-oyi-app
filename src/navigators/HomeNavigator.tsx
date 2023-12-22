@@ -1,8 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import {
-  Image, Platform, Text, TouchableOpacity, View
-} from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
@@ -95,8 +93,8 @@ export const showSignOutMenu = (
     props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
     savePrinter(defPrinter);
     if (
-      props.priceLabelPrinter
-      && props.priceLabelPrinter.id === defPrinter.id
+      props.priceLabelPrinter &&
+      props.priceLabelPrinter.id === defPrinter.id
     ) {
       props.setPriceLabelPrinter(defPrinter);
       setPriceLabelPrinterAsyncStorage(defPrinter);
@@ -306,9 +304,7 @@ export const HomeNavigatorComponent = (
               {strings('HOME.OWN_YOUR_INVENTORY')}
             </Text>
             <Text style={styles.headerSubtitle}>
-              {`${strings('GENERICS.CLUB')} ${
-                props.clubNbr
-              }`}
+              {`${strings('GENERICS.CLUB')} ${props.clubNbr}`}
             </Text>
           </View>
         )
