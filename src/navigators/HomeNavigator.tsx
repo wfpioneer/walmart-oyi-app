@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image, Platform, Text, TouchableOpacity, View
+} from 'react-native';
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
@@ -64,6 +66,135 @@ const mapDispatchToProps = {
 
 const Stack = createStackNavigator();
 
+// export const showSignOutMenu = (
+//   props: HomeNavigatorComponentProps,
+//   navigation: any
+// ) => {
+//   const options = [
+//     strings('HOME.CHANGE_LANGUAGE'),
+//     strings('GENERICS.SIGN_OUT'),
+//     strings('GENERICS.CANCEL')
+//   ];
+
+//   const { showFeedback } = props.userConfig;
+
+//   // to insert feedback into the menu before "Cancel"
+//   // option based on user config
+//   if (showFeedback) {
+//     options.splice(2, 0, strings('GENERICS.FEEDBACK'));
+//   }
+
+//   const updateDefaultPrinter = () => {
+//     const defPrinter = {
+//       type: PrinterType.LASER,
+//       name: strings('PRINT.FRONT_DESK'),
+//       desc: strings('GENERICS.DEFAULT'),
+//       id: '000000000000',
+//       labelsAvailable: ['price']
+//     };
+//     props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
+//     savePrinter(defPrinter);
+//     if (
+//       props.priceLabelPrinter &&
+//       props.priceLabelPrinter.id === defPrinter.id
+//     ) {
+//       props.setPriceLabelPrinter(defPrinter);
+//       setPriceLabelPrinterAsyncStorage(defPrinter);
+//     }
+//   };
+
+//   const logoutPFUser = async () => {
+//     const urls = getEnvironment();
+//     const config = {
+//       issuer: urls.pingFedURL
+//     };
+//     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//     // @ts-ignore
+//     return logout(config, {
+//       idToken: props.userTokens.idToken,
+//       postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
+//     });
+//   };
+
+//   ActionSheet.showActionSheetWithOptions(
+//     {
+//       options,
+//       // toggle cancel option index based on feedback config
+//       cancelButtonIndex: showFeedback ? 3 : 2
+//     },
+//     // eslint-disable-next-line consistent-return
+//     buttonIndex => {
+//       const languageOptions = [
+//         'English',
+//         'Español',
+//         '汉语',
+//         strings('GENERICS.CANCEL')
+//       ];
+//       switch (buttonIndex) {
+//         case 0:
+//           ActionSheet.showActionSheetWithOptions(
+//             {
+//               options: languageOptions,
+//               // toggle cancel option index based on feedback config
+//               cancelButtonIndex: showFeedback ? 3 : 2
+//             },
+//             selectedLanguageIndex => {
+//               switch (selectedLanguageIndex) {
+//                 case 0:
+//                   setLanguage('en');
+//                   updateDefaultPrinter();
+//                   trackEvent('change_language', { language: 'en' });
+//                   return navigation.dispatch(StackActions.replace('Tabs'));
+//                 case 1:
+//                   setLanguage('es');
+//                   updateDefaultPrinter();
+//                   trackEvent('change_language', { language: 'es' });
+//                   return navigation.dispatch(StackActions.replace('Tabs'));
+//                 case 2:
+//                   setLanguage('zh');
+//                   updateDefaultPrinter();
+//                   trackEvent('change_language', { language: 'zh' });
+//                   return navigation.dispatch(StackActions.replace('Tabs'));
+//                 default:
+//                   return null;
+//               }
+//             }
+//           );
+//           break;
+//         case 1:
+//           props.showActivityModal();
+//           trackEvent('user_sign_out', { lastPage: 'Home' });
+//           logoutPFUser()
+//             .then(() => {
+//               props.navigation.replace('Login');
+//               props.logoutUser();
+//               if (Platform.OS === 'android') {
+//                 props.hideActivityModal();
+//               }
+//             })
+//             .catch(() => {
+//               // we do the exact same thing. Pingfed actually won't redirect you back,
+//               // so the promise will likely be rejected
+//               props.navigation.replace('Login');
+//               props.logoutUser();
+//               if (Platform.OS === 'android') {
+//                 props.hideActivityModal();
+//               }
+//             });
+//           break;
+//         case 2:
+//           if (showFeedback) {
+//             props.navigation.navigate('FeedbackScreen');
+//             trackEvent('feedback_screen', { lastPage: 'Home' });
+//           }
+//           break;
+//         default:
+//           return null;
+//       }
+//     }
+//   );
+// };
+
 export const showSignOutMenu = (
   props: HomeNavigatorComponentProps,
   navigation: any
@@ -76,8 +207,6 @@ export const showSignOutMenu = (
 
   const { showFeedback } = props.userConfig;
 
-  // to insert feedback into the menu before "Cancel"
-  // option based on user config
   if (showFeedback) {
     options.splice(2, 0, strings('GENERICS.FEEDBACK'));
   }
@@ -92,105 +221,105 @@ export const showSignOutMenu = (
     };
     props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
     savePrinter(defPrinter);
-    if (
-      props.priceLabelPrinter &&
-      props.priceLabelPrinter.id === defPrinter.id
-    ) {
+    if (props.priceLabelPrinter && props.priceLabelPrinter.id === defPrinter.id) {
       props.setPriceLabelPrinter(defPrinter);
       setPriceLabelPrinterAsyncStorage(defPrinter);
     }
   };
 
-  const logoutPFUser = async () => {
-    const urls = getEnvironment();
-    const config = {
-      issuer: urls.pingFedURL
-    };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return logout(config, {
-      idToken: props.userTokens.idToken,
-      postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
-    });
+  const handleLanguageChange = (language: string) => {
+    setLanguage(language);
+    updateDefaultPrinter();
+    trackEvent('change_language', { language });
+    navigation.dispatch(StackActions.replace('Tabs'));
   };
 
-  ActionSheet.showActionSheetWithOptions(
-    {
-      options,
-      // toggle cancel option index based on feedback config
-      cancelButtonIndex: showFeedback ? 3 : 2
-    },
-    // eslint-disable-next-line consistent-return
-    buttonIndex => {
-      const languageOptions = [
-        'English',
-        'Español',
-        '汉语',
-        strings('GENERICS.CANCEL')
-      ];
-      switch (buttonIndex) {
-        case 0:
-          ActionSheet.showActionSheetWithOptions(
-            {
-              options: languageOptions,
-              // toggle cancel option index based on feedback config
-              cancelButtonIndex: showFeedback ? 3 : 2
-            },
-            selectedLanguageIndex => {
-              switch (selectedLanguageIndex) {
-                case 0:
-                  setLanguage('en');
-                  updateDefaultPrinter();
-                  trackEvent('change_language', { language: 'en' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                case 1:
-                  setLanguage('es');
-                  updateDefaultPrinter();
-                  trackEvent('change_language', { language: 'es' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                case 2:
-                  setLanguage('zh');
-                  updateDefaultPrinter();
-                  trackEvent('change_language', { language: 'zh' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                default:
-                  return null;
-              }
-            }
-          );
-          break;
-        case 1:
-          props.showActivityModal();
-          trackEvent('user_sign_out', { lastPage: 'Home' });
-          logoutPFUser()
-            .then(() => {
-              props.navigation.replace('Login');
-              props.logoutUser();
-              if (Platform.OS === 'android') {
-                props.hideActivityModal();
-              }
-            })
-            .catch(() => {
-              // we do the exact same thing. Pingfed actually won't redirect you back,
-              // so the promise will likely be rejected
-              props.navigation.replace('Login');
-              props.logoutUser();
-              if (Platform.OS === 'android') {
-                props.hideActivityModal();
-              }
-            });
-          break;
-        case 2:
-          if (showFeedback) {
-            props.navigation.navigate('FeedbackScreen');
-            trackEvent('feedback_screen', { lastPage: 'Home' });
-          }
-          break;
-        default:
-          return null;
+  const handleSignOut = async () => {
+    props.showActivityModal();
+    trackEvent('user_sign_out', { lastPage: 'Home' });
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      await logout(
+        {
+          issuer: getEnvironment().pingFedURL,
+          clientId: ''
+        },
+        {
+          idToken: props.userTokens.idToken,
+          postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
+        }
+      );
+    } catch (error) {
+      // Handle logout error
+    } finally {
+      props.navigation.replace('Login');
+      props.logoutUser();
+      if (Platform.OS === 'android') {
+        props.hideActivityModal();
       }
     }
-  );
+  };
+
+  const handleFeedback = () => {
+    if (showFeedback) {
+      props.navigation.navigate('FeedbackScreen');
+      trackEvent('feedback_screen', { lastPage: 'Home' });
+    }
+  };
+
+  const showLanguageOptions = () => {
+    const languageOptions = ['English', 'Español', '汉语', strings('GENERICS.CANCEL')];
+
+    ActionSheet.showActionSheetWithOptions(
+      {
+        options: languageOptions,
+        cancelButtonIndex: showFeedback ? 3 : 2
+      },
+      // eslint-disable-next-line consistent-return
+      selectedLanguageIndex => {
+        if (selectedLanguageIndex < 0 || selectedLanguageIndex > 2) {
+          return null;
+        }
+
+        const selectedLanguage = languageOptions[selectedLanguageIndex];
+        // eslint-disable-next-line no-nested-ternary
+        handleLanguageChange(selectedLanguage === 'English' ? 'en' : selectedLanguage === 'Español' ? 'es' : 'zh');
+      }
+    );
+  };
+
+  const showOptions = () => {
+    ActionSheet.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex: showFeedback ? 3 : 2
+      },
+      // eslint-disable-next-line consistent-return
+      buttonIndex => {
+        if (buttonIndex < 0 || buttonIndex > 2) {
+          return null;
+        }
+
+        switch (buttonIndex) {
+          case 0:
+            showLanguageOptions();
+            break;
+          case 1:
+            handleSignOut();
+            break;
+          case 2:
+            handleFeedback();
+            break;
+          default:
+            return null;
+        }
+      }
+    );
+  };
+
+  showOptions();
 };
 
 export const renderHomeScanButton = (
