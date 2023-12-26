@@ -251,7 +251,7 @@ export const renderHomeMenuButton = (
   </TouchableOpacity>
 );
 
-export const renderPrintQueueButton = (navigation: any): JSX.Element => (
+export const renderPrintQueueButton = (navigation: any): React.JSX.Element => (
   <TouchableOpacity
     testID="print-queue-button"
     onPress={() => {
@@ -285,7 +285,7 @@ export const renderHomeHeader = (
 
 export const HomeNavigatorComponent = (
   props: HomeNavigatorComponentProps
-): JSX.Element => (
+): React.JSX.Element => (
   <Stack.Navigator
     screenOptions={{
       headerMode: 'float',
