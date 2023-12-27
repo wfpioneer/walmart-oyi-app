@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image, Platform, Text, TouchableOpacity, View
+} from 'react-native';
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
@@ -64,6 +66,38 @@ const mapDispatchToProps = {
 
 const Stack = createStackNavigator();
 
+const updateDefaultPrinter = (props: HomeNavigatorComponentProps) => {
+  const defPrinter = {
+    type: PrinterType.LASER,
+    name: strings('PRINT.FRONT_DESK'),
+    desc: strings('GENERICS.DEFAULT'),
+    id: '000000000000',
+    labelsAvailable: ['price']
+  };
+  props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
+  savePrinter(defPrinter);
+  if (
+    props.priceLabelPrinter
+    && props.priceLabelPrinter.id === defPrinter.id
+  ) {
+    props.setPriceLabelPrinter(defPrinter);
+    setPriceLabelPrinterAsyncStorage(defPrinter);
+  }
+};
+
+const logoutPFUser = async (props: HomeNavigatorComponentProps) => {
+  const urls = getEnvironment();
+  const config = {
+    issuer: urls.pingFedURL
+  };
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return logout(config, {
+    idToken: props.userTokens.idToken,
+    postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
+  });
+};
+
 export const showSignOutMenu = (
   props: HomeNavigatorComponentProps,
   navigation: any
@@ -73,47 +107,12 @@ export const showSignOutMenu = (
     strings('GENERICS.SIGN_OUT'),
     strings('GENERICS.CANCEL')
   ];
-
   const { showFeedback } = props.userConfig;
-
   // to insert feedback into the menu before "Cancel"
   // option based on user config
   if (showFeedback) {
     options.splice(2, 0, strings('GENERICS.FEEDBACK'));
   }
-
-  const updateDefaultPrinter = () => {
-    const defPrinter = {
-      type: PrinterType.LASER,
-      name: strings('PRINT.FRONT_DESK'),
-      desc: strings('GENERICS.DEFAULT'),
-      id: '000000000000',
-      labelsAvailable: ['price']
-    };
-    props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
-    savePrinter(defPrinter);
-    if (
-      props.priceLabelPrinter &&
-      props.priceLabelPrinter.id === defPrinter.id
-    ) {
-      props.setPriceLabelPrinter(defPrinter);
-      setPriceLabelPrinterAsyncStorage(defPrinter);
-    }
-  };
-
-  const logoutPFUser = async () => {
-    const urls = getEnvironment();
-    const config = {
-      issuer: urls.pingFedURL
-    };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return logout(config, {
-      idToken: props.userTokens.idToken,
-      postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
-    });
-  };
-
   ActionSheet.showActionSheetWithOptions(
     {
       options,
@@ -140,17 +139,17 @@ export const showSignOutMenu = (
               switch (selectedLanguageIndex) {
                 case 0:
                   setLanguage('en');
-                  updateDefaultPrinter();
+                  updateDefaultPrinter(props);
                   trackEvent('change_language', { language: 'en' });
                   return navigation.dispatch(StackActions.replace('Tabs'));
                 case 1:
                   setLanguage('es');
-                  updateDefaultPrinter();
+                  updateDefaultPrinter(props);
                   trackEvent('change_language', { language: 'es' });
                   return navigation.dispatch(StackActions.replace('Tabs'));
                 case 2:
                   setLanguage('zh');
-                  updateDefaultPrinter();
+                  updateDefaultPrinter(props);
                   trackEvent('change_language', { language: 'zh' });
                   return navigation.dispatch(StackActions.replace('Tabs'));
                 default:
@@ -162,7 +161,7 @@ export const showSignOutMenu = (
         case 1:
           props.showActivityModal();
           trackEvent('user_sign_out', { lastPage: 'Home' });
-          logoutPFUser()
+          logoutPFUser(props)
             .then(() => {
               props.navigation.replace('Login');
               props.logoutUser();
