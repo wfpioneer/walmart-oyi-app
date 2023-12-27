@@ -307,7 +307,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
 
   const modelOnSubmit = (value: string) => {
     validateSessionCall(navigation).then(() => {
-      manualScan(value?.trim());
+      manualScan(value);
       dispatch(setManualScan(false));
       setInputLocation(false);
     }).catch(() => { });
@@ -315,7 +315,7 @@ export const SelectLocationTypeScreen = (props: SelectLocationProps): JSX.Elemen
 
   const onSubmit = () => {
     validateSessionCall(navigation).then(() => {
-      onValidateSessionCallResponse(loc?.trim(), setError, floorLocations, upcNbr, dispatch, trackEventCall, selectedLocation);
+      onValidateSessionCallResponse(loc, setError, floorLocations, upcNbr, dispatch, trackEventCall, selectedLocation);
     }).catch(() => { });
   };
 
