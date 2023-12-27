@@ -98,6 +98,67 @@ const logoutPFUser = async (props: HomeNavigatorComponentProps) => {
   });
 };
 
+const handleLanguageChange = (
+  languageOptions: string[],
+  showFeedback: boolean,
+  props: HomeNavigatorComponentProps,
+  navigation: any
+// eslint-disable-next-line consistent-return
+) => {
+  ActionSheet.showActionSheetWithOptions(
+    {
+      options: languageOptions,
+      // toggle cancel option index based on feedback config
+      cancelButtonIndex: showFeedback ? 3 : 2
+    },
+    selectedLanguageIndex => {
+      switch (selectedLanguageIndex) {
+        case 0:
+          setLanguage('en');
+          updateDefaultPrinter(props);
+          trackEvent('change_language', { language: 'en' });
+          return navigation.dispatch(StackActions.replace('Tabs'));
+        case 1:
+          setLanguage('es');
+          updateDefaultPrinter(props);
+          trackEvent('change_language', { language: 'es' });
+          return navigation.dispatch(StackActions.replace('Tabs'));
+        case 2:
+          setLanguage('zh');
+          updateDefaultPrinter(props);
+          trackEvent('change_language', { language: 'zh' });
+          return navigation.dispatch(StackActions.replace('Tabs'));
+        default:
+          return null;
+      }
+    }
+  );
+};
+
+const handleSignOut = async (
+  props: HomeNavigatorComponentProps
+) => {
+  props.showActivityModal();
+  trackEvent('user_sign_out', { lastPage: 'Home' });
+  try {
+    await logoutPFUser(props);
+  } catch (error) {
+    // Handle error (optional)
+  }
+  props.navigation.replace('Login');
+  props.logoutUser();
+  if (Platform.OS === 'android') {
+    props.hideActivityModal();
+  }
+};
+
+const handleFeedback = (
+  props: HomeNavigatorComponentProps
+) => {
+  props.navigation.navigate('FeedbackScreen');
+  trackEvent('feedback_screen', { lastPage: 'Home' });
+};
+
 export const showSignOutMenu = (
   props: HomeNavigatorComponentProps,
   navigation: any
@@ -129,61 +190,13 @@ export const showSignOutMenu = (
       ];
       switch (buttonIndex) {
         case 0:
-          ActionSheet.showActionSheetWithOptions(
-            {
-              options: languageOptions,
-              // toggle cancel option index based on feedback config
-              cancelButtonIndex: showFeedback ? 3 : 2
-            },
-            selectedLanguageIndex => {
-              switch (selectedLanguageIndex) {
-                case 0:
-                  setLanguage('en');
-                  updateDefaultPrinter(props);
-                  trackEvent('change_language', { language: 'en' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                case 1:
-                  setLanguage('es');
-                  updateDefaultPrinter(props);
-                  trackEvent('change_language', { language: 'es' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                case 2:
-                  setLanguage('zh');
-                  updateDefaultPrinter(props);
-                  trackEvent('change_language', { language: 'zh' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                default:
-                  return null;
-              }
-            }
-          );
+          handleLanguageChange(languageOptions, showFeedback, props, navigation);
           break;
         case 1:
-          props.showActivityModal();
-          trackEvent('user_sign_out', { lastPage: 'Home' });
-          logoutPFUser(props)
-            .then(() => {
-              props.navigation.replace('Login');
-              props.logoutUser();
-              if (Platform.OS === 'android') {
-                props.hideActivityModal();
-              }
-            })
-            .catch(() => {
-              // we do the exact same thing. Pingfed actually won't redirect you back,
-              // so the promise will likely be rejected
-              props.navigation.replace('Login');
-              props.logoutUser();
-              if (Platform.OS === 'android') {
-                props.hideActivityModal();
-              }
-            });
+          handleSignOut(props);
           break;
         case 2:
-          if (showFeedback) {
-            props.navigation.navigate('FeedbackScreen');
-            trackEvent('feedback_screen', { lastPage: 'Home' });
-          }
+          handleFeedback(props);
           break;
         default:
           return null;
