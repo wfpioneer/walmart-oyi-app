@@ -55,6 +55,61 @@ exports[`Home Navigator Click action to open camera 1`] = `
 </View>
 `;
 
+exports[`Home Navigator Render print queue button  1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "opacity": 1,
+    }
+  }
+  testID="print-queue-button"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": 55,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="printer"
+      size={20}
+    />
+  </View>
+</View>
+`;
+
 exports[`Home Navigator Renders the Home navigator component 1`] = `
 <StackNavigator
   screenOptions={
@@ -148,7 +203,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is fals
   </TouchableOpacity>
   <TouchableOpacity
     onPress={[Function]}
-    testID="btnShowMenu"
+    testID="print-queue-button"
   >
     <View
       style={
@@ -160,13 +215,33 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is fals
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#ffffffff"
+        name="printer"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="btnShowMenu"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
       <Image
         source=""
         style={
           {
             "height": 25,
             "marginRight": 10,
-            "width": 25,
+            "width": 10,
           }
         }
       />
@@ -206,7 +281,7 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is true
   </TouchableOpacity>
   <TouchableOpacity
     onPress={[Function]}
-    testID="btnShowMenu"
+    testID="print-queue-button"
   >
     <View
       style={
@@ -218,13 +293,33 @@ exports[`Home Navigator Renders the home header when isManualScanEnabled is true
         }
       }
     >
+      <mockMaterialCommunityIcons
+        color="#ffffffff"
+        name="printer"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="btnShowMenu"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
       <Image
         source=""
         style={
           {
             "height": 25,
             "marginRight": 10,
-            "width": 25,
+            "width": 10,
           }
         }
       />
@@ -275,7 +370,6 @@ exports[`Home Navigator Renders the home menu button and onclick call track even
         "alignItems": "center",
         "flex": 1,
         "justifyContent": "center",
-        "width": 55,
       }
     }
   >
@@ -285,12 +379,37 @@ exports[`Home Navigator Renders the home menu button and onclick call track even
         {
           "height": 25,
           "marginRight": 10,
-          "width": 25,
+          "width": 10,
         }
       }
     />
   </View>
 </View>
+`;
+
+exports[`Home Navigator Renders the printQueueButton header icon 1`] = `
+<TouchableOpacity
+  hostRef={null}
+  onPress={[Function]}
+  testID="print-queue-button"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": 55,
+      }
+    }
+  >
+    <mockMaterialCommunityIcons
+      color="#ffffffff"
+      name="printer"
+      size={20}
+    />
+  </View>
+</TouchableOpacity>
 `;
 
 exports[`Home Navigator Renders the scanButton header icon when manual scan set to false 1`] = `
