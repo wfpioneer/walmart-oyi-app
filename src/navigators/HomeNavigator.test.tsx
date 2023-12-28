@@ -2,14 +2,19 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
 import { NavigationProp } from '@react-navigation/native';
+import { strings } from '../locales';
 import {
   HomeNavigatorComponent,
+  handleLanguageChange,
+  handleSignOut,
+  logoutPFUser,
   renderCamButton,
   renderHomeHeader,
   renderHomeMenuButton,
   renderHomeScanButton,
   renderPrintQueueButton,
-  showSignOutMenu
+  showSignOutMenu,
+  updateDefaultPrinter
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
 import { mockConfig } from '../mockData/mockConfig';
@@ -71,6 +76,7 @@ jest.mock('react-native-app-auth', () => {
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
+  replace: jest.fn(),
   canGoBack: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
@@ -214,7 +220,54 @@ describe('Home Navigator', () => {
     const actionSheetmock = jest.requireMock('react-native-action-sheet');
     componentProps.userConfig = { ...mockConfig, showFeedback: true };
     showSignOutMenu(componentProps, navigationProp);
+    expect(actionSheetmock.showActionSheetWithOptions).toHaveBeenCalledWith(
+      {
+        options: expect.any(Array),
+        cancelButtonIndex: expect.any(Number)
+      },
+      expect.any(Function)
+    );
+  });
+  it('Renders the showSignOutMenu without feedback option', () => {
+    const actionSheetmock = jest.requireMock('react-native-action-sheet');
+    componentProps.userConfig = { ...mockConfig, showFeedback: false };
+    showSignOutMenu(componentProps, navigationProp);
     expect(actionSheetmock.showActionSheetWithOptions).toBeCalled();
+  });
+  it('Render updateDefaultPrinter', () => {
+    updateDefaultPrinter(componentProps);
+    // Verify that updatePrinterByID is called with the correct arguments
+    expect(componentProps.updatePrinterByID).toHaveBeenCalledWith({
+      id: '000000000000',
+      printer: {
+        type: PrinterType.LASER,
+        name: expect.any(String),
+        desc: expect.any(String),
+        id: '000000000000',
+        labelsAvailable: ['price']
+      }
+    });
+  });
+  it('Render logoutPFUser', async () => {
+    await logoutPFUser(componentProps);
+  });
+  it('Render handleLanguageChange', () => {
+    const navigation = {
+      dispatch: jest.fn()
+    };
+    const languageOptions = ['en', 'es', 'zh'];
+    const showFeedback = true;
+    handleLanguageChange(languageOptions, showFeedback, componentProps, navigation);
+    expect(componentProps.updatePrinterByID).toHaveBeenCalledWith({
+      id: '000000000000',
+      printer: {
+        type: PrinterType.LASER,
+        name: expect.any(String),
+        desc: expect.any(String),
+        id: '000000000000',
+        labelsAvailable: ['price']
+      }
+    });
   });
   it('Click action to open camera', () => {
     const { getByTestId, toJSON } = render(renderCamButton());

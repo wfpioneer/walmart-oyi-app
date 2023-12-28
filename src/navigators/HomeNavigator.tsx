@@ -66,7 +66,7 @@ const mapDispatchToProps = {
 
 const Stack = createStackNavigator();
 
-const updateDefaultPrinter = (props: HomeNavigatorComponentProps) => {
+export const updateDefaultPrinter = (props: HomeNavigatorComponentProps) => {
   const defPrinter = {
     type: PrinterType.LASER,
     name: strings('PRINT.FRONT_DESK'),
@@ -85,7 +85,7 @@ const updateDefaultPrinter = (props: HomeNavigatorComponentProps) => {
   }
 };
 
-const logoutPFUser = async (props: HomeNavigatorComponentProps) => {
+export const logoutPFUser = async (props: HomeNavigatorComponentProps) => {
   const urls = getEnvironment();
   const config = {
     issuer: urls.pingFedURL
@@ -98,7 +98,7 @@ const logoutPFUser = async (props: HomeNavigatorComponentProps) => {
   });
 };
 
-const handleLanguageChange = (
+export const handleLanguageChange = (
   languageOptions: string[],
   showFeedback: boolean,
   props: HomeNavigatorComponentProps,
@@ -135,7 +135,7 @@ const handleLanguageChange = (
   );
 };
 
-const handleSignOut = async (
+export const handleSignOut = async (
   props: HomeNavigatorComponentProps
 ) => {
   props.showActivityModal();
@@ -152,7 +152,7 @@ const handleSignOut = async (
   }
 };
 
-const handleFeedback = (
+export const handleFeedback = (
   props: HomeNavigatorComponentProps
 ) => {
   props.navigation.navigate('FeedbackScreen');
