@@ -8,7 +8,6 @@ export default StyleSheet.create({
   },
   rightButton: {
     flex: 1,
-    //  width: 35,
     alignItems: 'center',
     justifyContent: 'center'
   },
