@@ -404,11 +404,13 @@ const onMorePickHistoryClick = (
   pickHistoryList: PickHistory[],
   navigation: NavigationProp<any>
 ) => {
-  const data: ItemHistoryI[] = pickHistoryList.map(item => ({
-    id: item.id,
-    date: item.createTS,
-    qty: item.itemQty
-  }));
+  const data: ItemHistoryI[] = pickHistoryList.map(item => (
+
+    {
+      id: item.id,
+      date: item.createTs,
+      qty: item.itemQty
+    }));
   const title = 'ITEM.PICK_HISTORY';
   dispatch(setItemHistory(data, title));
   navigation.navigate('ItemHistory');
@@ -460,8 +462,8 @@ export const renderPickHistory = (
     if (result.data.code === SUCCESS_STATUS) {
       if (pickHistoryList && pickHistoryList.length) {
         const data = [...pickHistoryList].sort((a, b) => {
-          const date1 = new Date(a.createTS);
-          const date2 = new Date(b.createTS);
+          const date1 = new Date(a.createTs);
+          const date2 = new Date(b.createTs);
           return date2 > date1 ? 1 : -1;
         });
         return (
@@ -469,7 +471,7 @@ export const renderPickHistory = (
             {data.slice(0, 5).map(item => (
               <RenderItemHistoryCard
                 key={item.id}
-                date={item.createTS}
+                date={item.createTs}
                 qty={item.itemQty}
               />
             ))}
