@@ -1,8 +1,12 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
-import { NavigationProp } from '@react-navigation/native';
-import { strings } from '../locales';
+import { NavigationContainer, NavigationProp, RouteProp } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Text, View } from 'react-native';
+import { HomeScreen, HomeScreenProps } from '../screens/Home/Home';
+import styles from './HomeNavigator.style';
+import { setLanguage, strings } from '../locales';
 import {
   HomeNavigatorComponent,
   handleLanguageChange,
@@ -18,6 +22,9 @@ import {
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
 import { mockConfig } from '../mockData/mockConfig';
+import { AsyncState } from '../models/AsyncState';
+import mockUser from '../mockData/mockUser';
+import { FeedbackScreen } from '../screens/Feedback/Feedback';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock(
@@ -33,6 +40,15 @@ jest.mock('../utils/AppCenterTool', () => ({
 jest.mock('../utils/sessionTimeout.ts', () => ({
   ...jest.requireActual('../utils/sessionTimeout.ts'),
   validateSession: jest.fn(() => Promise.resolve())
+}));
+jest.mock('../locales', () => ({
+  ...jest.requireActual('../locales'),
+  setLanguage: jest.fn()
+}));
+
+jest.mock('appcenter-analytics', () => ({
+  ...jest.requireActual('appcenter-analytics'),
+  trackEvent: jest.fn()
 }));
 
 jest.mock('react-native-config', () => {
@@ -53,7 +69,11 @@ jest.mock('react-native-action-sheet', () => {
 });
 
 jest.mock('../utils/scannerUtils', () => ({
-  openCamera: jest.fn()
+  openCamera: jest.fn(),
+  barcodeEmitter: {
+    addListener: jest.fn(),
+    remove: jest.fn()
+  }
 }));
 
 jest.mock('react-native-app-auth', () => {
@@ -76,7 +96,6 @@ jest.mock('react-native-app-auth', () => {
 
 const navigationProp: NavigationProp<any> = {
   addListener: jest.fn(),
-  replace: jest.fn(),
   canGoBack: jest.fn(),
   dispatch: jest.fn(),
   goBack: jest.fn(),
@@ -125,9 +144,39 @@ describe('Home Navigator', () => {
     }
   };
 
+  const routeProp: RouteProp<any, string> = {
+    key: 'test',
+    name: 'test'
+  };
+
+  const defaultAsyncState: AsyncState = {
+    isWaiting: false,
+    value: null,
+    error: null,
+    result: null
+  };
+
+  const homeScreenProps: HomeScreenProps = {
+    userName: 'testUser',
+    setScannedEvent: jest.fn(),
+    setManualScan: jest.fn(),
+    setWorklistType: jest.fn(),
+    isManualScanEnabled: false,
+    worklistSummaryApiState: { ...defaultAsyncState },
+    worklistSummaryV2ApiState: { ...defaultAsyncState },
+    userConfigUpdateApiState: { ...defaultAsyncState },
+    getWorklistSummary: jest.fn(),
+    getWorklistSummaryV2: jest.fn(),
+    navigation: navigationProp,
+    updateFilterExceptions: jest.fn(),
+    route: routeProp,
+    userConfig: mockConfig,
+    resetUserConfigUpdateApiState: jest.fn(),
+    userFeatures: []
+  };
+
   it('Renders the Home navigator component', () => {
     const renderer = ShallowRenderer.createRenderer();
-
     renderer.render(
       <HomeNavigatorComponent
         // eslint-disable-next-line react/jsx-props-no-spreading
@@ -269,11 +318,73 @@ describe('Home Navigator', () => {
       }
     });
   });
+
+  it('Handles language change to English', () => {
+    const languageOptions = ['en', 'es', 'zh'];
+    const showFeedback = true;
+    const navigation = {
+      dispatch: jest.fn()
+    };
+    const actionSheetmock = jest.requireMock('react-native-action-sheet');
+    actionSheetmock.showActionSheetWithOptions.mockImplementation((options:any, callback:any) => {
+      callback(0);
+    });
+    handleLanguageChange(languageOptions, showFeedback, componentProps, navigation);
+    expect(setLanguage).toHaveBeenCalledWith('en');
+  });
+
+  it('Handles language change to Spanish', () => {
+    const languageOptions = ['en', 'es', 'zh'];
+    const showFeedback = true;
+    const navigation = {
+      dispatch: jest.fn()
+    };
+    const actionSheetmock = jest.requireMock('react-native-action-sheet');
+    actionSheetmock.showActionSheetWithOptions.mockImplementation((options:any, callback:any) => {
+      callback(1);
+    });
+    handleLanguageChange(languageOptions, showFeedback, componentProps, navigation);
+    expect(setLanguage).toHaveBeenCalledWith('es');
+  });
+
+  it('Handles language change to Chinese', () => {
+    const languageOptions = ['en', 'es', 'zh'];
+    const showFeedback = true;
+    const navigation = {
+      dispatch: jest.fn()
+    };
+    const actionSheetmock = jest.requireMock('react-native-action-sheet');
+    actionSheetmock.showActionSheetWithOptions.mockImplementation((options:any, callback:any) => {
+      callback(2);
+    });
+    handleLanguageChange(languageOptions, showFeedback, componentProps, navigation);
+    expect(setLanguage).toHaveBeenCalledWith('zh');
+  });
+
+  describe('Render handleSignOut', () => {
+    const props = {
+      logoutPFUser: jest.fn()
+    };
+    it('handles sign out successfully on Android', async () => {
+      props.logoutPFUser.mockResolvedValueOnce(componentProps);
+      await handleSignOut(componentProps);
+      expect(componentProps.showActivityModal).toHaveBeenCalled();
+      expect(componentProps.logoutUser).toHaveBeenCalled();
+    });
+
+    it('handles sign out failed', async () => {
+      const errorMessage = 'Logout failed';
+      props.logoutPFUser.mockRejectedValueOnce(new Error(errorMessage));
+      await handleSignOut(componentProps);
+      expect(componentProps.showActivityModal).toHaveBeenCalled();
+      expect(componentProps.logoutUser).toHaveBeenCalled();
+    });
+  });
+
   it('Click action to open camera', () => {
     const { getByTestId, toJSON } = render(renderCamButton());
     const btn = getByTestId('camerabtn');
     fireEvent.press(btn);
-
     expect(toJSON()).toMatchSnapshot();
   });
 });

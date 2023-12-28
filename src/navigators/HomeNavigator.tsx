@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
 import { AuthorizeResult, logout } from 'react-native-app-auth';
-import { StackActions } from '@react-navigation/native';
+import { NavigationProp, StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
 import { Configurations } from '../models/User';
@@ -36,7 +36,7 @@ interface HomeNavigatorComponentProps {
   logoutUser: () => void;
   showActivityModal: () => void;
   hideActivityModal: () => void;
-  navigation: Record<string, any>;
+  navigation: NavigationProp<any>;
   isManualScanEnabled: boolean;
   setManualScan: (bool: boolean) => void;
   clubNbr: number;
@@ -145,7 +145,9 @@ export const handleSignOut = async (
   } catch (error) {
     // Handle error (optional)
   }
-  props.navigation.replace('Login');
+  props.navigation.dispatch(
+    StackActions.replace('Login')
+  );
   props.logoutUser();
   if (Platform.OS === 'android') {
     props.hideActivityModal();
