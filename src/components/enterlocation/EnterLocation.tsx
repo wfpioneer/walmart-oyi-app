@@ -30,7 +30,9 @@ const EnterLocation = (
           ref={textInputRef}
           style={styles.textInput}
           value={textInput}
-          onChangeText={(text: string) => setTextInput(text)}
+          onChangeText={(text: string) => {
+            setTextInput(text.trim());
+          }}
           selectionColor={COLOR.MAIN_THEME_COLOR}
           placeholder={strings('LOCATION.MANUAL_ENTRY_BUTTON')}
           keyboardType="default"
