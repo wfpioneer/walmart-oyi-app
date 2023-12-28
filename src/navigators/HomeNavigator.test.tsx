@@ -1,12 +1,8 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import { fireEvent, render } from '@testing-library/react-native';
-import { NavigationContainer, NavigationProp, RouteProp } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Text, View } from 'react-native';
-import { HomeScreen, HomeScreenProps } from '../screens/Home/Home';
-import styles from './HomeNavigator.style';
-import { setLanguage, strings } from '../locales';
+import { NavigationProp } from '@react-navigation/native';
+import { setLanguage } from '../locales';
 import {
   HomeNavigatorComponent,
   handleLanguageChange,
@@ -22,9 +18,6 @@ import {
 } from './HomeNavigator';
 import { Printer, PrinterType } from '../models/Printer';
 import { mockConfig } from '../mockData/mockConfig';
-import { AsyncState } from '../models/AsyncState';
-import mockUser from '../mockData/mockUser';
-import { FeedbackScreen } from '../screens/Feedback/Feedback';
 
 jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 jest.mock(
@@ -142,37 +135,6 @@ describe('Home Navigator', () => {
       scopes: [],
       authorizationCode: 'dummyAuthCode'
     }
-  };
-
-  const routeProp: RouteProp<any, string> = {
-    key: 'test',
-    name: 'test'
-  };
-
-  const defaultAsyncState: AsyncState = {
-    isWaiting: false,
-    value: null,
-    error: null,
-    result: null
-  };
-
-  const homeScreenProps: HomeScreenProps = {
-    userName: 'testUser',
-    setScannedEvent: jest.fn(),
-    setManualScan: jest.fn(),
-    setWorklistType: jest.fn(),
-    isManualScanEnabled: false,
-    worklistSummaryApiState: { ...defaultAsyncState },
-    worklistSummaryV2ApiState: { ...defaultAsyncState },
-    userConfigUpdateApiState: { ...defaultAsyncState },
-    getWorklistSummary: jest.fn(),
-    getWorklistSummaryV2: jest.fn(),
-    navigation: navigationProp,
-    updateFilterExceptions: jest.fn(),
-    route: routeProp,
-    userConfig: mockConfig,
-    resetUserConfigUpdateApiState: jest.fn(),
-    userFeatures: []
   };
 
   it('Renders the Home navigator component', () => {
