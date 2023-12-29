@@ -75,7 +75,7 @@ import {
   getItemPalletsV1,
   getLocationsForItem,
   getLocationsForItemV1,
-  noAction,
+  noActionV1,
   saveAuditLocations,
   updateApprovalList,
   updateMultiPalletUPCQty,
@@ -2077,7 +2077,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
     trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
     if (itemOHQty === totalOHQty && pendingQty < 0) {
       dispatch(
-        noAction({
+        noActionV1({
           upc: itemDetails?.upcNbr || '',
           itemNbr: itemNumber,
           scannedValue: itemNumber.toString(),
@@ -2273,7 +2273,7 @@ const AuditItem = (): JSX.Element => {
   const getItemLocationsV1Api = useTypedSelector(state => state.async.getLocationsForItemV1);
   const saveAuditsProgressApi = useTypedSelector(state => state.async.saveAuditsProgress);
   const updateMultiPalletUPCQtyApi = useTypedSelector(state => state.async.updateMultiPalletUPCQty);
-  const completeItemApi = useTypedSelector(state => state.async.noAction);
+  const completeItemApi = useTypedSelector(state => state.async.noActionV1);
   const getItemApprovalApi = useTypedSelector(state => state.async.getApprovalList);
   const updateManagerApprovalApi = useTypedSelector(state => state.async.updateApprovalList);
   const getSavedAuditLocationsApi = useTypedSelector(state => state.async.getAuditLocations);

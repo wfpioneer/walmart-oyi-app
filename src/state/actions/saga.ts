@@ -52,7 +52,7 @@ export const GET_WORKLIST_SUMMARY = 'SAGA/GET_WORKLIST_SUMMARY';
 export const GET_WORKLIST_SUMMARY_V2 = 'SAGA/GET_WORKLIST_SUMMARY_V2';
 export const DELETE_LOCATION = 'SAGA/DELETE_LOCATION';
 export const NO_ACTION = 'SAGA/NO_ACTION';
-export const NO_ACTION_V2 = 'SAGA/NO_ACTION_V2';
+export const NO_ACTION_V1 = 'SAGA/NO_ACTION_V1';
 export const PRINT_SIGN = 'SAGA/PRINT_SIGN';
 export const GET_FLUFFY_FEATURES = 'SAGA/GET_FLUFFY_FEATURES';
 export const GET_APPROVAL_LIST = 'SAGA/GET_APPROVAL_LIST';
@@ -159,12 +159,12 @@ export const noAction = (payload: {
   itemNbr: number;
   scannedValue: string;
 }) => ({ type: NO_ACTION, payload } as const);
-export const noActionV2 = (payload: {
+export const noActionV1 = (payload: {
   headers?: NoActionHeaders;
   upc: string;
   itemNbr: number;
   scannedValue: string;
-}) => ({ type: NO_ACTION_V2, payload } as const);
+}) => ({ type: NO_ACTION_V1, payload } as const);
 export const printSign = (payload: {
   headers?: AxiosRequestHeaders;
   printList: PrintItemList[];

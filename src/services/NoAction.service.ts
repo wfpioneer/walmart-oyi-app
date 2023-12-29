@@ -24,7 +24,7 @@ export default class NoActionService {
     );
   }
 
-  public static noActionV2(payload: {
+  public static noActionV1(payload: {
     headers?: NoActionHeaders;
     upc: string;
     itemNbr: number;

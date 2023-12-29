@@ -23,7 +23,7 @@ export const asyncReducer = combineReducers({
   getWorklistSummaryV2: makeAsyncReducer(asyncActions.GET_WORKLIST_SUMMARY_V2),
   deleteLocation: makeAsyncReducer(asyncActions.DELETE_LOCATION),
   noAction: makeAsyncReducer(asyncActions.NO_ACTION),
-  noActionV2: makeAsyncReducer(asyncActions.NO_ACTION_V2),
+  noActionV1: makeAsyncReducer(asyncActions.NO_ACTION_V1),
   printSign: makeAsyncReducer(asyncActions.PRINT_SIGN),
   getFluffyRoles: makeAsyncReducer(asyncActions.GET_FLUFFY_ROLES),
   getApprovalList: makeAsyncReducer(asyncActions.GET_APPROVAL_LIST),

@@ -31,6 +31,7 @@ import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
 import SaveAuditsProgressService from '../../services/SaveAuditsProgress.service';
 import ItemCenterTokenService from '../../services/ItemCenterToken.service';
+import { noActionV1 } from '../actions/saga';
 
 const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V4, actions.getItemDetailsV4, GetItemDetailsService.getItemDetailsV4),
@@ -81,7 +82,7 @@ const genericSagas = [
   ),
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
-  makeAsyncSaga(saga.NO_ACTION_V2, actions.noActionV2, NoActionService.noActionV2),
+  makeAsyncSaga(saga.NO_ACTION_V1, actions.noActionV1, NoActionService.noActionV1),
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
   makeAsyncSaga(saga.GET_FLUFFY_FEATURES, actions.getFluffyRoles, GetFluffyRolesService.getFluffyRoles),
   makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList),
