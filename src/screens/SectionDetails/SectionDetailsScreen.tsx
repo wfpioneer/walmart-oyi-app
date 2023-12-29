@@ -167,8 +167,12 @@ export const SectionDetailsScreen = (props: SectionDetailsProps): JSX.Element =>
       dispatch(showSnackBar(strings('LOCATION.ERROR_DELETE_ITEM'), 3000));
     }
   }, [deleteLocationApi]);
+
+
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
   || undefined;
+  const sortItems = (a: SectionDetailsItem, b: SectionDetailsItem) => a.itemNbr - b.itemNbr
+  locationItem?.items.sectionItems.sort(sortItems)
 
   if (getSectionDetailsApi.result?.status === 204) {
     return (

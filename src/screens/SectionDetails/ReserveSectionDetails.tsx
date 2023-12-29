@@ -180,6 +180,9 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
   || undefined;
   const reservePallets: ReserveDetailsPallet[] | undefined = (
     getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
+  
+  const sortPallets = (a: ReserveDetailsPallet,b: ReserveDetailsPallet) => Number(a.id) - Number(b.id)
+  const palletsList:ReserveDetailsPallet[] = combineReserveArrays(reservePallets, locationItem?.pallets.palletData).sort(sortPallets)
 
   useEffectHook(() => {
     // Resets Get PalletDetails api response data when navigating off-screen
@@ -275,7 +278,7 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
   return (
     <View style={styles.locDetailsScreenContainer}>
       <FlatList
-        data={combineReserveArrays(reservePallets, locationItem?.pallets.palletData)}
+        data={palletsList}
         renderItem={({ item }) => (
           // Resolves type error, Section Id will never be zero in our case
           <ReservePalletRow
