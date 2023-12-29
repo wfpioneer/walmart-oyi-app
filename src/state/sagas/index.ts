@@ -81,6 +81,7 @@ const genericSagas = [
   ),
   makeAsyncSaga(saga.DELETE_LOCATION, actions.deleteLocation, DeleteLocationService.deleteLocation),
   makeAsyncSaga(saga.NO_ACTION, actions.noAction, NoActionService.noAction),
+  makeAsyncSaga(saga.NO_ACTION_V2, actions.noActionV2, NoActionService.noActionV2),
   makeAsyncSaga(saga.PRINT_SIGN, actions.printSign, PrintService.print),
   makeAsyncSaga(saga.GET_FLUFFY_FEATURES, actions.getFluffyRoles, GetFluffyRolesService.getFluffyRoles),
   makeAsyncSaga(saga.GET_APPROVAL_LIST, actions.getApprovalList, GetApprovalListService.getApprovalList),
