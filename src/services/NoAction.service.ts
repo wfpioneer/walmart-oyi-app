@@ -31,7 +31,7 @@ export default class NoActionService {
     scannedValue: string;
   }) {
     const urls: Environment = getEnvironment();
-    return Request.put(
+    return Request.patch(
       `${urls.orchestrationURL}/worklist/item/${payload.itemNbr}`,
       {
         worklistItemUpc: payload.upc,

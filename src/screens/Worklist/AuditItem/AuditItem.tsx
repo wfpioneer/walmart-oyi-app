@@ -124,6 +124,7 @@ import { SaveLocation } from '../../../services/SaveAuditsProgress.service';
 import { hideActivityModal, showActivityModal } from '../../../state/actions/Modal';
 import { renderUnsavedWarningModal } from '../../../components/UnsavedWarningModal/UnsavedWarningModal';
 import { AUDITS } from '../../../navigators/AuditWorklistTabNavigator/AuditWorklistTabNavigator';
+import { NoActionHeaders } from '../../../services/NoAction.service';
 
 export type LocationConfirm = {
   locationName: string;
@@ -1608,6 +1609,43 @@ export const deleteLocationConfirmed = (
   }
 };
 
+const handleContinueAction = (
+  itemDetails: ItemDetails,
+  trackEventCall: typeof trackEvent,
+  itemNumber: number,
+  totalOHQty: number,
+  dispatch: Dispatch<any>,
+  approvalItem: ApprovalListItem | null,
+  setShowCancelApprovalModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setShowOnHandsConfirmationModal: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  const itemOHQty = itemDetails?.onHandsQty || 0;
+  const pendingQty = itemDetails?.pendingOnHandsQty || -999;
+  trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
+  if (itemOHQty === totalOHQty && pendingQty < 0) {
+    const worklistTypes: string[] = [];
+    if (itemDetails?.exceptionType) {
+      worklistTypes.push(itemDetails.exceptionType);
+    }
+    if (itemDetails?.worklistAuditType) {
+      worklistTypes.push(itemDetails.worklistAuditType);
+    }
+
+    dispatch(
+      noActionV1({
+        upc: itemDetails?.upcNbr || '',
+        itemNbr: itemNumber,
+        scannedValue: itemNumber.toString(),
+        headers: { worklistType: worklistTypes } as NoActionHeaders
+      })
+    );
+  } else if (itemOHQty === totalOHQty && pendingQty >= 0 && approvalItem) {
+    setShowCancelApprovalModal(true);
+  } else {
+    setShowOnHandsConfirmationModal(true);
+  }
+};
+
 export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   const {
     scannedEvent,
@@ -2069,28 +2107,6 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       });
     }
     return locationLst;
-  };
-
-  const handleContinueAction = () => {
-    const itemOHQty = itemDetails?.onHandsQty || 0;
-    const pendingQty = itemDetails?.pendingOnHandsQty || -999;
-    trackEventCall('Audit_Item', { action: 'continue_action_click', itemNumber });
-    if (itemOHQty === totalOHQty && pendingQty < 0) {
-      dispatch(
-        noActionV1({
-          upc: itemDetails?.upcNbr || '',
-          itemNbr: itemNumber,
-          scannedValue: itemNumber.toString(),
-          headers: new AxiosHeaders({
-            worklistType: (itemDetails?.exceptionType ?? itemDetails?.worklistAuditType) || ''
-          })
-        })
-      );
-    } else if (itemOHQty === totalOHQty && pendingQty >= 0 && approvalItem) {
-      setShowCancelApprovalModal(true);
-    } else {
-      setShowOnHandsConfirmationModal(true);
-    }
   };
 
   if (completeItemApi.isWaiting) {

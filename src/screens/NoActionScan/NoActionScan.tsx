@@ -31,9 +31,11 @@ import COLOR from '../../themes/Color';
 import { NO_ACTION } from '../../state/actions/asyncAPI';
 import { setActionCompleted } from '../../state/actions/ItemDetailScreen';
 import { renderBarcodeErrorModal } from '../ReviewItemDetails/ReviewItemDetails';
-import { noAction } from '../../state/actions/saga';
+import { noActionV1 } from '../../state/actions/saga';
 import { validateSession } from '../../utils/sessionTimeout';
 import { SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
+import { NoActionHeaders } from '../../services/NoAction.service';
+import ItemDetails from '../../models/ItemDetails';
 
 const NO_ACTION_SCAN = 'No_Action_Scan';
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
@@ -55,6 +57,7 @@ export interface NoActionScanScreenProps {
   exceptionType: string | undefined | null;
   validateSessionCall: typeof validateSession;
   barcodeErrorState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+  itemDetails: ItemDetails | null;
 }
 
 const handleUnhandledTouches = () => {
@@ -66,6 +69,8 @@ export const callBackbarcodeEmitter = (
   scan: any,
   upcNbr: string,
   itemNbr: number,
+  exceptionType: string | null | undefined,
+  worklistAuditType: string | undefined,
   userId: string,
   route: RouteProp<any>,
   dispatch: Dispatch<any>,
@@ -83,11 +88,20 @@ export const callBackbarcodeEmitter = (
           type: scan.type
         });
         if (!(scan.type.includes('QR Code') || scan.type.includes('QRCODE'))) {
+          const worklistTypes: string[] = [];
+          if (exceptionType) {
+            worklistTypes.push(exceptionType);
+          }
+          if (worklistAuditType) {
+            worklistTypes.push(worklistAuditType);
+          }
+
           dispatch(
-            noAction({
+            noActionV1({
               upc: upcNbr,
               itemNbr,
-              scannedValue: scan.value
+              scannedValue: scan.value,
+              headers: { worklistType: worklistTypes } as NoActionHeaders
             })
           );
           dispatch(setManualScan(false));
@@ -124,7 +138,9 @@ export const completeItemApiHook = (
         if (route.params && route.params.source === 'OtherAction') {
           const popItemDetailsAndOtherActionsScreen = 3;
           // Navigates back to the screen before ReviewItemDetails
-          navigation.dispatch(StackActions.pop(popItemDetailsAndOtherActionsScreen));
+          navigation.dispatch(
+            StackActions.pop(popItemDetailsAndOtherActionsScreen)
+          );
         }
         const popToScreenBeforeItemDetails = 2;
         // Navigates back to the screen before ReviewItemDetails
@@ -156,7 +172,9 @@ export const completeItemApiHook = (
   }
 };
 
-export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element => {
+export const NoActionScanScreen = (
+  props: NoActionScanScreenProps
+): JSX.Element => {
   const {
     dispatch,
     navigation,
@@ -171,7 +189,8 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
     itemNbr,
     exceptionType,
     validateSessionCall,
-    barcodeErrorState
+    barcodeErrorState,
+    itemDetails
   } = props;
 
   const [barcodeErrorVisible, setBarcodeErrorVisible] = barcodeErrorState;
@@ -182,6 +201,8 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
         scan,
         upcNbr,
         itemNbr,
+        exceptionType,
+        itemDetails?.worklistAuditType,
         userId,
         route,
         dispatch,
@@ -226,12 +247,16 @@ export const NoActionScanScreen = (props: NoActionScanScreenProps): JSX.Element 
           <ManualScan placeholder={strings('GENERICS.ENTER_UPC_ITEM_NBR')} />
         )}
         <View style={styles.scanContainer}>
-          <Pressable onPress={() => {
-            if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
-              return openCamera();
-            }
-            return null;
-          }}
+          <Pressable
+            onPress={() => {
+              if (
+                Config.ENVIRONMENT === 'dev'
+                || Config.ENVIRONMENT === 'stage'
+              ) {
+                return openCamera();
+              }
+              return null;
+            }}
           >
             <MaterialCommunityIcons
               size={100}
@@ -252,16 +277,11 @@ const NoActionScan = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const completeItemApi = useTypedSelector(state => state.async.noAction);
+  const completeItemApi = useTypedSelector(state => state.async.noActionV1);
   const { isManualScanEnabled } = useTypedSelector(state => state.Global);
   const {
-    itemNbr,
-    upcNbr,
-    exceptionType,
-    actionCompleted
-  } = useTypedSelector(
-    state => state.ItemDetailScreen
-  );
+    itemNbr, upcNbr, exceptionType, actionCompleted, itemDetails
+  } = useTypedSelector(state => state.ItemDetailScreen);
   const { userId } = useTypedSelector(state => state.User);
   const barcodeErrorState = useState(false);
   return (
@@ -280,6 +300,7 @@ const NoActionScan = (): JSX.Element => {
       userId={userId}
       validateSessionCall={validateSession}
       barcodeErrorState={barcodeErrorState}
+      itemDetails={itemDetails}
     />
   );
 };

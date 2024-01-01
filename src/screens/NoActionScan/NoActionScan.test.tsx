@@ -91,7 +91,8 @@ const mockNoActionScreenProps: NoActionScanScreenProps = {
   upcNbr: '',
   useEffectHook: jest.fn(),
   userId: 'testUser',
-  validateSessionCall: jest.fn(() => Promise.resolve())
+  validateSessionCall: jest.fn(() => Promise.resolve()),
+  itemDetails: getMockItemDetails('123')
 };
 
 describe('NoActionScan', () => {
@@ -171,7 +172,12 @@ describe('NoActionScan', () => {
         }
       };
 
-      completeItemApiHook(mockDispatch, navigationProp, completedApiNotFound, routeProp);
+      completeItemApiHook(
+        mockDispatch,
+        navigationProp,
+        completedApiNotFound,
+        routeProp
+      );
       expect(navigationProp.isFocused).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({ type: NO_ACTION.RESET });
       mockDispatch.mockReset();
@@ -183,7 +189,12 @@ describe('NoActionScan', () => {
         position: 'bottom'
       });
 
-      completeItemApiHook(mockDispatch, navigationProp, completedApiSuccess, routeProp);
+      completeItemApiHook(
+        mockDispatch,
+        navigationProp,
+        completedApiSuccess,
+        routeProp
+      );
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
@@ -193,7 +204,12 @@ describe('NoActionScan', () => {
         ...routeProp,
         params: { source: 'OtherAction' }
       };
-      completeItemApiHook(mockDispatch, navigationProp, completedApiSuccess, routeOtherAction);
+      completeItemApiHook(
+        mockDispatch,
+        navigationProp,
+        completedApiSuccess,
+        routeOtherAction
+      );
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
@@ -240,9 +256,10 @@ describe('NoActionScan', () => {
         payload: {
           itemNbr: 1234567890,
           scannedValue: '1234567890098',
-          upc: '000055559999'
+          upc: '000055559999',
+          headers: { worklistType: ['nsfl'] }
         },
-        type: 'SAGA/NO_ACTION'
+        type: 'SAGA/NO_ACTION_V1'
       };
       const expectedSetManualScanResults = {
         payload: false,
@@ -254,6 +271,8 @@ describe('NoActionScan', () => {
         { value: '1234567890098', type: 'UPC-A' },
         mockItemDetails.upcNbr,
         mockItemDetails.itemNbr,
+        mockItemDetails.exceptionType,
+        mockItemDetails.worklistAuditType,
         mockNoActionScreenProps.userId,
         mockNoActionScreenProps.route,
         mockDispatch,
@@ -273,6 +292,8 @@ describe('NoActionScan', () => {
         { value: '1234567890098', type: 'QRCODE' },
         mockItemDetails.upcNbr,
         mockItemDetails.itemNbr,
+        mockItemDetails.exceptionType,
+        mockItemDetails.worklistAuditType,
         mockNoActionScreenProps.userId,
         mockNoActionScreenProps.route,
         mockDispatch,
