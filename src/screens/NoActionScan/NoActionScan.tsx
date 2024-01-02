@@ -17,7 +17,6 @@ import {
   useNavigation,
   useRoute
 } from '@react-navigation/native';
-import { trackEvent } from 'appcenter-analytics';
 import Toast from 'react-native-toast-message';
 import Config from 'react-native-config';
 import ManualScan from '../../components/manualscan/ManualScan';
@@ -36,6 +35,7 @@ import { validateSession } from '../../utils/sessionTimeout';
 import { SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import { NoActionHeaders } from '../../services/NoAction.service';
 import ItemDetails from '../../models/ItemDetails';
+import { trackEvent } from '../../utils/AppCenterTool';
 
 const NO_ACTION_SCAN = 'No_Action_Scan';
 export const COMPLETE_API_409_ERROR = 'Request failed with status code 409';
@@ -257,6 +257,7 @@ export const NoActionScanScreen = (
               }
               return null;
             }}
+            testID="open camera"
           >
             <MaterialCommunityIcons
               size={100}

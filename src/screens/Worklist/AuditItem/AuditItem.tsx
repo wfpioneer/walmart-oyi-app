@@ -1609,8 +1609,8 @@ export const deleteLocationConfirmed = (
   }
 };
 
-const handleContinueAction = (
-  itemDetails: ItemDetails,
+export const handleContinueAction = (
+  itemDetails: ItemDetails | null,
   trackEventCall: typeof trackEvent,
   itemNumber: number,
   totalOHQty: number,
@@ -2241,7 +2241,16 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
       </ScrollView>
       <View style={styles.footer}>
         <AuditScreenFooter
-          onContinueClick={handleContinueAction}
+          onContinueClick={() => handleContinueAction(
+            itemDetails,
+            trackEventCall,
+            itemNumber,
+            totalOHQty,
+            dispatch,
+            approvalItem,
+            setShowCancelApprovalModal,
+            setShowOnHandsConfirmationModal
+          )}
           disabledContinue={disabledContinue(
             floorLocations,
             reserveLocations,
