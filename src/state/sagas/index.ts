@@ -31,7 +31,6 @@ import FeedBackService from '../../services/Feedback.service';
 import UserConfigService from '../../services/UserConfig.service';
 import SaveAuditsProgressService from '../../services/SaveAuditsProgress.service';
 import ItemCenterTokenService from '../../services/ItemCenterToken.service';
-import { noActionV1 } from '../actions/saga';
 
 const genericSagas = [
   makeAsyncSaga(saga.GET_ITEM_DETAILS_V4, actions.getItemDetailsV4, GetItemDetailsService.getItemDetailsV4),

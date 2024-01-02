@@ -174,7 +174,7 @@ export const completeItemApiHook = (
 
 export const NoActionScanScreen = (
   props: NoActionScanScreenProps
-): JSX.Element => {
+): React.JSX.Element => {
   const {
     dispatch,
     navigation,
@@ -274,7 +274,7 @@ export const NoActionScanScreen = (
   );
 };
 
-const NoActionScan = (): JSX.Element => {
+const NoActionScan = (): React.JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();

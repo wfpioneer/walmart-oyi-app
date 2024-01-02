@@ -1646,7 +1646,7 @@ export const handleContinueAction = (
   }
 };
 
-export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
+export const AuditItemScreen = (props: AuditItemScreenProps): React.JSX.Element => {
   const {
     scannedEvent,
     isManualScanEnabled,
@@ -2186,11 +2186,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
           countryCode={countryCode}
           showItemImage={userConfig.showItemImage}
           disabled={true}
-          totalQty={calculateTotalOHQty(
-            floorLocations,
-            reserveLocations,
-            itemDetails
-          )}
+          totalQty={totalOHQty}
         />
       </View>
       <ScrollView
@@ -2266,7 +2262,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): JSX.Element => {
   );
 };
 
-const AuditItem = (): JSX.Element => {
+const AuditItem = (): React.JSX.Element => {
   const { scannedEvent, isManualScanEnabled } = useTypedSelector(
     state => state.Global
   );
