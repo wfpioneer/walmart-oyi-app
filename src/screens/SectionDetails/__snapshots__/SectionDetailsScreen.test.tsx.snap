@@ -161,18 +161,18 @@ exports[`Test Location Details Screen Tests rendering location details screen da
     data={
       [
         {
-          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
-          "itemNbr": 980078597,
-          "locationType": 8,
-          "price": 2.4,
-          "upcNbr": "123456789098",
-        },
-        {
           "itemDesc": "Nature Valley Honey Bars",
           "itemNbr": 980011111,
           "locationType": 8,
           "price": 5.8,
           "upcNbr": "123456789099",
+        },
+        {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "locationType": 8,
+          "price": 2.4,
+          "upcNbr": "123456789098",
         },
       ]
     }
@@ -1093,18 +1093,18 @@ exports[`Test Location Details Screen test delete api test delete api is complet
     data={
       [
         {
-          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
-          "itemNbr": 980078597,
-          "locationType": 8,
-          "price": 2.4,
-          "upcNbr": "123456789098",
-        },
-        {
           "itemDesc": "Nature Valley Honey Bars",
           "itemNbr": 980011111,
           "locationType": 8,
           "price": 5.8,
           "upcNbr": "123456789099",
+        },
+        {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "locationType": 8,
+          "price": 2.4,
+          "upcNbr": "123456789098",
         },
       ]
     }
@@ -1216,18 +1216,18 @@ exports[`Test Location Details Screen test delete api test delete api is waiting
     data={
       [
         {
-          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
-          "itemNbr": 980078597,
-          "locationType": 8,
-          "price": 2.4,
-          "upcNbr": "123456789098",
-        },
-        {
           "itemDesc": "Nature Valley Honey Bars",
           "itemNbr": 980011111,
           "locationType": 8,
           "price": 5.8,
           "upcNbr": "123456789099",
+        },
+        {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "locationType": 8,
+          "price": 2.4,
+          "upcNbr": "123456789098",
         },
       ]
     }
@@ -1291,18 +1291,18 @@ exports[`Test Location Details Screen test delete api test delete api with error
     data={
       [
         {
-          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
-          "itemNbr": 980078597,
-          "locationType": 8,
-          "price": 2.4,
-          "upcNbr": "123456789098",
-        },
-        {
           "itemDesc": "Nature Valley Honey Bars",
           "itemNbr": 980011111,
           "locationType": 8,
           "price": 5.8,
           "upcNbr": "123456789099",
+        },
+        {
+          "itemDesc": "Nature Valley Sweet and Salty Granola Bars",
+          "itemNbr": 980078597,
+          "locationType": 8,
+          "price": 2.4,
+          "upcNbr": "123456789098",
         },
       ]
     }
