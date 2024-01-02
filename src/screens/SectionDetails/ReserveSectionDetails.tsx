@@ -180,9 +180,11 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
   || undefined;
   const reservePallets: ReserveDetailsPallet[] | undefined = (
     getPalletDetailsApi.result && getPalletDetailsApi.result.data.pallets);
-  
-  const sortPallets = (a: ReserveDetailsPallet,b: ReserveDetailsPallet) => Number(a.id) - Number(b.id)
-  const palletsList:ReserveDetailsPallet[] = combineReserveArrays(reservePallets, locationItem?.pallets.palletData).sort(sortPallets)
+  const sortPallets = (a: ReserveDetailsPallet, b: ReserveDetailsPallet) => Number(a.id) - Number(b.id);
+  const palletsList:ReserveDetailsPallet[] = combineReserveArrays(
+    reservePallets,
+    locationItem?.pallets.palletData
+  ).sort(sortPallets);
 
   useEffectHook(() => {
     // Resets Get PalletDetails api response data when navigating off-screen
@@ -244,7 +246,9 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
 
   if (showActivitySpinner(
     getPalletConfigApi.isWaiting,
-    getPalletDetailsApi.isWaiting, getPalletDetailsComplete, getSectionDetailsApi.isWaiting
+    getPalletDetailsApi.isWaiting,
+    getPalletDetailsComplete,
+    getSectionDetailsApi.isWaiting
   )) {
     return (
       <ActivityIndicator
@@ -313,29 +317,27 @@ const ReserveSectionDetails = (): JSX.Element => {
   const dispatch = useDispatch();
   const { palletIds } = useTypedSelector(state => state.Location);
   return (
-    <>
-      <ReserveSectionDetailsScreen
-        getSectionDetailsApi={getSectionDetailsApi}
-        getPalletDetailsApi={getPalletDetailsApi}
-        getPalletConfigApi={getPalletConfigApi}
-        dispatch={dispatch}
-        navigation={navigation}
-        trackEventCall={trackEvent}
-        useEffectHook={useEffect}
-        palletIds={palletIds}
-        configComplete={configComplete}
-        setConfigComplete={setConfigComplete}
-        getPalletDetailsComplete={getPalletDetailsComplete}
-        setGetPalletDetailsComplete={setGetPalletDetailsComplete}
-        palletClicked={palletClicked}
-        setPalletClicked={setPalletClicked}
-        userConfig={userConfig}
-        perishableCategories={perishableCategories}
-        useFocusEffectHook={useFocusEffect}
-        useCallbackHook={useCallback}
-        palletInfo={palletInfo}
-      />
-    </>
+    <ReserveSectionDetailsScreen
+      getSectionDetailsApi={getSectionDetailsApi}
+      getPalletDetailsApi={getPalletDetailsApi}
+      getPalletConfigApi={getPalletConfigApi}
+      dispatch={dispatch}
+      navigation={navigation}
+      trackEventCall={trackEvent}
+      useEffectHook={useEffect}
+      palletIds={palletIds}
+      configComplete={configComplete}
+      setConfigComplete={setConfigComplete}
+      getPalletDetailsComplete={getPalletDetailsComplete}
+      setGetPalletDetailsComplete={setGetPalletDetailsComplete}
+      palletClicked={palletClicked}
+      setPalletClicked={setPalletClicked}
+      userConfig={userConfig}
+      perishableCategories={perishableCategories}
+      useFocusEffectHook={useFocusEffect}
+      useCallbackHook={useCallback}
+      palletInfo={palletInfo}
+    />
   );
 };
 
