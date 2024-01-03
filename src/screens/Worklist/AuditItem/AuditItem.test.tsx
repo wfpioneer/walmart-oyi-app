@@ -48,6 +48,7 @@ import AuditItem, {
   getScannedPalletEffect,
   getUpdatedFloorLocations,
   getUpdatedReserveLocations,
+  handleContinueAction,
   isError,
   navigationRemoveListenerHook,
   onValidateHardwareBackPress,
@@ -67,7 +68,10 @@ import { AsyncState } from '../../../models/AsyncState';
 import { strings } from '../../../locales';
 import { SNACKBAR_TIMEOUT } from '../../../utils/global';
 import { getMockItemDetails } from '../../../mockData';
-import { mockPalletLocations, mockSortedLocations } from '../../../mockData/getItemPallets';
+import {
+  mockPalletLocations,
+  mockSortedLocations
+} from '../../../mockData/getItemPallets';
 import { mockConfig } from '../../../mockData/mockConfig';
 import { ItemPalletInfo } from '../../../models/AuditItem';
 import { LocationList } from '../../../components/LocationListCard/LocationListCard';
@@ -89,11 +93,16 @@ import {
   getAuditLocations,
   getLocationsForItem,
   getLocationsForItemV1,
+  noActionV1,
   updateMultiPalletUPCQty
 } from '../../../state/actions/saga';
 import { UpdateMultiPalletUPCQtyRequest } from '../../../services/PalletManagement.service';
 import { setScannedEvent } from '../../../state/actions/Global';
-import { setFloorLocations, setReserveLocations, setUPC } from '../../../state/actions/ItemDetailScreen';
+import {
+  setFloorLocations,
+  setReserveLocations,
+  setUPC
+} from '../../../state/actions/ItemDetailScreen';
 import ItemDetails from '../../../models/ItemDetails';
 import Location from '../../../models/Location';
 import {
@@ -106,6 +115,7 @@ import {
   mockSomeSaveableLocations
 } from '../../../mockData/mockPickList';
 import { BeforeRemoveEvent, UseStateType } from '../../../models/Generics.d';
+import { NoActionHeaders } from '../../../services/NoAction.service';
 
 jest.mock('../../../utils/AppCenterTool', () => ({
   ...jest.requireActual('../../../utils/AppCenterTool'),
@@ -432,6 +442,7 @@ describe('AuditItemScreen', () => {
     const mockSetShowDeleteConfirmationModal = jest.fn();
     const mockDeleteLocationConfirmed = jest.fn();
     const mockSetShowOnHandsConfirmModal = jest.fn();
+    const mockSetShowCancelApprovalModal = jest.fn();
     const mockSetGetItemPalletsError = jest.fn();
     const mockSetAuditSaved = jest.fn();
     const mockExistingReserveLocations: ItemPalletInfo[] = [];
@@ -476,10 +487,13 @@ describe('AuditItemScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
-      await onValidateItemNumber({
-        ...mockAuditItemScreenProps,
-        itemNumber: 123
-      }, false);
+      await onValidateItemNumber(
+        {
+          ...mockAuditItemScreenProps,
+          itemNumber: 123
+        },
+        false
+      );
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
         type: 'API/GET_ITEM_DETAILS_V4/RESET'
       });
@@ -491,10 +505,9 @@ describe('AuditItemScreen', () => {
         3,
         getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
       );
-      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
-        5,
-        { type: GET_LOCATIONS_FOR_ITEM.RESET }
-      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(5, {
+        type: GET_LOCATIONS_FOR_ITEM.RESET
+      });
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         6,
         getLocationsForItem(123)
@@ -508,10 +521,13 @@ describe('AuditItemScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
-      await onValidateItemNumber({
-        ...mockAuditItemScreenProps,
-        itemNumber: 123
-      }, true);
+      await onValidateItemNumber(
+        {
+          ...mockAuditItemScreenProps,
+          itemNumber: 123
+        },
+        true
+      );
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
         type: 'API/GET_ITEM_DETAILS_V4/RESET'
       });
@@ -523,10 +539,9 @@ describe('AuditItemScreen', () => {
         3,
         getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
       );
-      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
-        5,
-        { type: GET_LOCATIONS_FOR_ITEM_V1.RESET }
-      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(5, {
+        type: GET_LOCATIONS_FOR_ITEM_V1.RESET
+      });
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         6,
         getLocationsForItemV1(123)
@@ -540,11 +555,14 @@ describe('AuditItemScreen', () => {
         },
         type: 'SAGA/GET_ITEM_DETAILS_V4'
       };
-      await onValidateItemNumber({
-        ...mockAuditItemScreenProps,
-        itemNumber: 123,
-        userConfig: { ...mockConfig, enableAuditsInProgress: true }
-      }, true);
+      await onValidateItemNumber(
+        {
+          ...mockAuditItemScreenProps,
+          itemNumber: 123,
+          userConfig: { ...mockConfig, enableAuditsInProgress: true }
+        },
+        true
+      );
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(1, {
         type: 'API/GET_ITEM_DETAILS_V4/RESET'
       });
@@ -556,10 +574,9 @@ describe('AuditItemScreen', () => {
         3,
         getApprovalList({ itemNbr: 123, status: approvalStatus.Pending })
       );
-      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
-        7,
-        { type: GET_AUDIT_LOCATIONS.RESET }
-      );
+      expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(7, {
+        type: GET_AUDIT_LOCATIONS.RESET
+      });
       expect(mockAuditItemScreenProps.dispatch).toHaveBeenNthCalledWith(
         8,
         getAuditLocations({ itemNbr: 123, hours: undefined })
@@ -597,13 +614,19 @@ describe('AuditItemScreen', () => {
         '1234567890'
       );
       expect(mockDispatch).not.toHaveBeenCalledWith(setUPC(upcNbr));
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, setFloorLocations(location?.floor || []));
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, setReserveLocations(location?.reserve || []));
-      expect(mockNavigate).toBeCalledWith('AddLocation');
-      expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item',
-        { action: 'add_new_floor_location_click', itemNumber: 1234567890 }
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        1,
+        setFloorLocations(location?.floor || [])
       );
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        2,
+        setReserveLocations(location?.reserve || [])
+      );
+      expect(mockNavigate).toBeCalledWith('AddLocation');
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
+        action: 'add_new_floor_location_click',
+        itemNumber: 1234567890
+      });
 
       jest.clearAllMocks();
 
@@ -616,28 +639,37 @@ describe('AuditItemScreen', () => {
         ''
       );
       expect(mockDispatch).toHaveBeenNthCalledWith(1, setUPC(upcNbr));
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, setFloorLocations(location?.floor || []));
-      expect(mockDispatch).toHaveBeenNthCalledWith(3, setReserveLocations(location?.reserve || []));
-      expect(mockNavigate).toBeCalledWith('AddLocation');
-      expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item',
-        { action: 'add_new_floor_location_click', itemNumber: 1234567890 }
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        2,
+        setFloorLocations(location?.floor || [])
       );
+      expect(mockDispatch).toHaveBeenNthCalledWith(
+        3,
+        setReserveLocations(location?.reserve || [])
+      );
+      expect(mockNavigate).toBeCalledWith('AddLocation');
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
+        action: 'add_new_floor_location_click',
+        itemNumber: 1234567890
+      });
     });
 
     it('tests getFloorLocationsResult', () => {
-      const newResults: Location[] = [...mockItemDetails?.location?.floor || [], {
-        zoneId: 0,
-        aisleId: 1,
-        sectionId: 1,
-        zoneName: 'A',
-        aisleName: '1',
-        sectionName: '1',
-        locationName: 'A1-1',
-        type: 'Sales Floor',
-        typeNbr: 8,
-        newQty: 0
-      }];
+      const newResults: Location[] = [
+        ...(mockItemDetails?.location?.floor || []),
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: 'Sales Floor',
+          typeNbr: 8,
+          newQty: 0
+        }
+      ];
       const saveAuditLocMap: Map<string, number> = new Map([['A1-1', 5]]);
       getUpdatedFloorLocations(
         newResults,
@@ -651,20 +683,29 @@ describe('AuditItemScreen', () => {
     });
 
     it('tests getFloorLocationsResult with no existing locations', () => {
-      const newResults: Location[] = [...mockItemDetails?.location?.floor || [], {
-        zoneId: 0,
-        aisleId: 1,
-        sectionId: 1,
-        zoneName: 'A',
-        aisleName: '1',
-        sectionName: '1',
-        locationName: 'A1-1',
-        type: 'Sales Floor',
-        typeNbr: 8,
-        newQty: 0
-      }];
+      const newResults: Location[] = [
+        ...(mockItemDetails?.location?.floor || []),
+        {
+          zoneId: 0,
+          aisleId: 1,
+          sectionId: 1,
+          zoneName: 'A',
+          aisleName: '1',
+          sectionName: '1',
+          locationName: 'A1-1',
+          type: 'Sales Floor',
+          typeNbr: 8,
+          newQty: 0
+        }
+      ];
       const saveAuditLocMap: Map<string, number> = new Map([['A1-1', 5]]);
-      getUpdatedFloorLocations(newResults, mockDispatch, [], saveAuditLocMap, mockSetFloorLocIsWaiting);
+      getUpdatedFloorLocations(
+        newResults,
+        mockDispatch,
+        [],
+        saveAuditLocMap,
+        mockSetFloorLocIsWaiting
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockSetFloorLocIsWaiting).toHaveBeenCalledWith(false);
     });
@@ -734,11 +775,13 @@ describe('AuditItemScreen', () => {
         value: 1,
         result: {
           data: {
-            locations: [{
-              name: 'ABAR1-1',
-              qty: 5,
-              lastModifiedTimestamp: '2023-08-24'
-            }],
+            locations: [
+              {
+                name: 'ABAR1-1',
+                qty: 5,
+                lastModifiedTimestamp: '2023-08-24'
+              }
+            ],
             itemNbr: 1
           },
           status: 200
@@ -763,7 +806,9 @@ describe('AuditItemScreen', () => {
         defaultAsyncState,
         mockSetFloorLocIsWaiting
       );
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM.RESET
+      });
       expect(navigationProp.isFocused).toHaveBeenCalled();
 
       getItemLocationsApiHook(
@@ -774,7 +819,9 @@ describe('AuditItemScreen', () => {
         getSavedLocationSuccess,
         mockSetFloorLocIsWaiting
       );
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM.RESET
+      });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
 
       getItemLocationsV1ApiHook(
@@ -785,7 +832,9 @@ describe('AuditItemScreen', () => {
         getSavedLocation204,
         mockSetFloorLocIsWaiting
       );
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM_V1.RESET
+      });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
 
       getItemLocationsApiHook(
@@ -802,7 +851,9 @@ describe('AuditItemScreen', () => {
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM.RESET
+      });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
 
       getItemLocationsApiHook(
@@ -848,11 +899,13 @@ describe('AuditItemScreen', () => {
         value: 1,
         result: {
           data: {
-            locations: [{
-              name: 'ABAR1-1',
-              qty: 5,
-              lastModifiedTimestamp: '2023-08-24'
-            }],
+            locations: [
+              {
+                name: 'ABAR1-1',
+                qty: 5,
+                lastModifiedTimestamp: '2023-08-24'
+              }
+            ],
             itemNbr: 1
           },
           status: 200
@@ -877,7 +930,9 @@ describe('AuditItemScreen', () => {
         defaultAsyncState,
         mockSetFloorLocIsWaiting
       );
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM_V1.RESET
+      });
       expect(navigationProp.isFocused).toHaveBeenCalled();
 
       getItemLocationsV1ApiHook(
@@ -888,7 +943,9 @@ describe('AuditItemScreen', () => {
         getSavedLocationSuccess,
         mockSetFloorLocIsWaiting
       );
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM_V1.RESET
+      });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
 
       getItemLocationsV1ApiHook(
@@ -899,7 +956,9 @@ describe('AuditItemScreen', () => {
         getSavedLocation204,
         mockSetFloorLocIsWaiting
       );
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM_V1.RESET
+      });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
 
       getItemLocationsV1ApiHook(
@@ -916,7 +975,9 @@ describe('AuditItemScreen', () => {
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
-      expect(mockDispatch).toBeCalledWith({ type: GET_LOCATIONS_FOR_ITEM_V1.RESET });
+      expect(mockDispatch).toBeCalledWith({
+        type: GET_LOCATIONS_FOR_ITEM_V1.RESET
+      });
       expect(mockDispatch).toBeCalledWith({ type: GET_AUDIT_LOCATIONS.RESET });
 
       getItemLocationsV1ApiHook(
@@ -1099,12 +1160,10 @@ describe('AuditItemScreen', () => {
           mockTrackEventCall
         )
       );
-      const deleteLocModalConfirmErrorText = getByTestId(
-        'confirm-error-text'
-      );
-      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
-        [`${strings('LOCATION.DELETE_CONFIRMATION')}${mockLocationName}`]
-      );
+      const deleteLocModalConfirmErrorText = getByTestId('confirm-error-text');
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual([
+        `${strings('LOCATION.DELETE_CONFIRMATION')}${mockLocationName}`
+      ]);
 
       update(
         renderDeleteLocationModal(
@@ -1119,9 +1178,9 @@ describe('AuditItemScreen', () => {
           mockTrackEventCall
         )
       );
-      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
-        [strings('LOCATION.DELETE_LOCATION_API_ERROR')]
-      );
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual([
+        strings('LOCATION.DELETE_LOCATION_API_ERROR')
+      ]);
 
       update(
         renderDeleteLocationModal(
@@ -1136,9 +1195,11 @@ describe('AuditItemScreen', () => {
           mockTrackEventCall
         )
       );
-      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
-        [`${strings('MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION', { palletId: 1234 })}`]
-      );
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual([
+        `${strings('MISSING_PALLET_WORKLIST.DELETE_PALLET_CONFIRMATION', {
+          palletId: 1234
+        })}`
+      ]);
 
       update(
         renderDeleteLocationModal(
@@ -1153,9 +1214,9 @@ describe('AuditItemScreen', () => {
           mockTrackEventCall
         )
       );
-      expect(deleteLocModalConfirmErrorText.children).toStrictEqual(
-        [strings('ITEM.DELETE_PALLET_FAILURE')]
-      );
+      expect(deleteLocModalConfirmErrorText.children).toStrictEqual([
+        strings('ITEM.DELETE_PALLET_FAILURE')
+      ]);
     });
 
     it('Tests deleteLocationConfirmed Function', () => {
@@ -1181,10 +1242,10 @@ describe('AuditItemScreen', () => {
           upcs: [mockItemDetails?.upcNbr || '0']
         })
       );
-      expect(mockTrackEventCall).toHaveBeenCalledWith(
-        'Audit_Item',
-        { action: 'delete_item_from_mixed_pallet_confirmation_click', palletId: mockLocToConfirm.palletId }
-      );
+      expect(mockTrackEventCall).toHaveBeenCalledWith('Audit_Item', {
+        action: 'delete_item_from_mixed_pallet_confirmation_click',
+        palletId: mockLocToConfirm.palletId
+      });
 
       mockLocToConfirm.isMixedPallet = false;
       deleteLocationConfirmed(
@@ -1196,13 +1257,15 @@ describe('AuditItemScreen', () => {
       );
       expect(mockDispatch).toHaveBeenCalledWith(
         clearPallet({
-          palletId: mockLocToConfirm.palletId ? mockLocToConfirm.palletId.toString() : '0'
+          palletId: mockLocToConfirm.palletId
+            ? mockLocToConfirm.palletId.toString()
+            : '0'
         })
       );
-      expect(mockTrackEventCall).toHaveBeenCalledWith(
-        'Audit_Item',
-        { action: 'delete_pallet_confirmation_click', palletId: mockLocToConfirm.palletId }
-      );
+      expect(mockTrackEventCall).toHaveBeenCalledWith('Audit_Item', {
+        action: 'delete_pallet_confirmation_click',
+        palletId: mockLocToConfirm.palletId
+      });
 
       mockLocToConfirm.locationArea = 'floor';
       deleteLocationConfirmed(
@@ -1220,10 +1283,10 @@ describe('AuditItemScreen', () => {
           locationTypeNbr: mockLocToConfirm.locationTypeNbr
         })
       );
-      expect(mockTrackEventCall).toHaveBeenCalledWith(
-        'Audit_Item',
-        { action: 'confirm_delete_location_click', locName: mockLocToConfirm.locationName }
-      );
+      expect(mockTrackEventCall).toHaveBeenCalledWith('Audit_Item', {
+        action: 'confirm_delete_location_click',
+        locName: mockLocToConfirm.locationName
+      });
     });
 
     it('Tests deleteFloorLocationApiHook on 200 success for deleting location', () => {
@@ -1310,12 +1373,16 @@ describe('AuditItemScreen', () => {
         mockGetItemPalletDispatch
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toBeCalledWith(mockGetItemPalletDispatch({ itemNbr: 1234 }));
+      expect(mockDispatch).toBeCalledWith(
+        mockGetItemPalletDispatch({ itemNbr: 1234 })
+      );
       expect(mockDispatch).toBeCalledWith({ type: CLEAR_PALLET.RESET });
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith({
         type: 'success',
-        text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', { palletId: 1234 }),
+        text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', {
+          palletId: 1234
+        }),
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
@@ -1356,12 +1423,16 @@ describe('AuditItemScreen', () => {
         mockGetItemPalletDispatch
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toBeCalledWith(mockGetItemPalletDispatch({ itemNbr: 1234 }));
+      expect(mockDispatch).toBeCalledWith(
+        mockGetItemPalletDispatch({ itemNbr: 1234 })
+      );
       expect(mockDispatch).toBeCalledWith({ type: DELETE_UPCS.RESET });
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledWith({
         type: 'success',
-        text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', { palletId: 1234 }),
+        text1: strings('WORKLIST.MISSING_PALLET_API_SUCCESS', {
+          palletId: 1234
+        }),
         visibilityTime: SNACKBAR_TIMEOUT,
         position: 'bottom'
       });
@@ -1441,10 +1512,12 @@ describe('AuditItemScreen', () => {
         position: 'bottom'
       });
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
+      expect(
+        mockAuditItemScreenProps.auditSavedWarningState[1]
+      ).toHaveBeenCalledWith(true);
       expect(navigationProp.goBack).toHaveBeenCalled();
 
-      // Tests if user navigated frpm the other action screen
+      // Tests if user navigated from the other action screen
       const routeOtherAction: RouteProp<any, string> = {
         ...auditsRouteProp,
         params: { source: 'OtherAction' }
@@ -1458,7 +1531,9 @@ describe('AuditItemScreen', () => {
         routeOtherAction,
         mockAuditItemScreenProps.auditSavedWarningState[1]
       );
-      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
+      expect(navigationProp.navigate).toHaveBeenCalledWith(
+        'ReviewItemDetailsHome'
+      );
     });
 
     it('Tests completeItemApiHook on 200 success for completing an item with "hasNewQty" set to true', () => {
@@ -1478,7 +1553,9 @@ describe('AuditItemScreen', () => {
         position: 'bottom'
       });
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
+      expect(
+        mockAuditItemScreenProps.auditSavedWarningState[1]
+      ).toHaveBeenCalledWith(true);
     });
 
     it('Tests completeItemApiHook on failure while completing an item', () => {
@@ -1542,17 +1619,30 @@ describe('AuditItemScreen', () => {
         text1: strings('AUDITS.COMPLETE_AUDIT_ITEM_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      expect(mockAuditItemScreenProps.auditSavedWarningState[1]).toHaveBeenCalledWith(true);
+      expect(
+        mockAuditItemScreenProps.auditSavedWarningState[1]
+      ).toHaveBeenCalledWith(true);
       expect(mockDispatch).toBeCalledTimes(3);
       expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_OH_QTY.RESET });
-      expect(mockDispatch).toHaveBeenCalledWith({ type: UPDATE_OH_QTY_V1.RESET });
-      expect(mockDispatch).toHaveBeenCalledWith(updateMultiPalletUPCQty({
-        PalletList: [{
-          expirationDate: '',
-          palletId: mockReserveLocations[0].palletId,
-          upcs: [{ upcNbr: mockReserveLocations[0].upcNbr, quantity: mockReserveLocations[0].newQty }]
-        }]
-      }));
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: UPDATE_OH_QTY_V1.RESET
+      });
+      expect(mockDispatch).toHaveBeenCalledWith(
+        updateMultiPalletUPCQty({
+          PalletList: [
+            {
+              expirationDate: '',
+              palletId: mockReserveLocations[0].palletId,
+              upcs: [
+                {
+                  upcNbr: mockReserveLocations[0].upcNbr,
+                  quantity: mockReserveLocations[0].newQty
+                }
+              ]
+            }
+          ]
+        })
+      );
     });
 
     it('Tests updateOHQtyApiHook on failure', () => {
@@ -1612,10 +1702,15 @@ describe('AuditItemScreen', () => {
         text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, {
+        type: UPDATE_MULTI_PALLET_UPC_QTY.RESET
+      });
       expect(mockDispatch).toHaveBeenNthCalledWith(
         2,
-        setScannedEvent({ type: 'itemDetails', value: mockItemDetails.itemNbr.toString() })
+        setScannedEvent({
+          type: 'itemDetails',
+          value: mockItemDetails.itemNbr.toString()
+        })
       );
 
       expect(setShowOnHands).toHaveBeenCalledWith(false);
@@ -1636,7 +1731,9 @@ describe('AuditItemScreen', () => {
         mockModalIsWaitingState[0],
         mockModalIsWaitingState[1]
       );
-      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
+      expect(navigationProp.navigate).toHaveBeenCalledWith(
+        'ReviewItemDetailsHome'
+      );
     });
 
     it('Tests updateMultiPalletUPCQtyApiHook on failure', () => {
@@ -1677,7 +1774,9 @@ describe('AuditItemScreen', () => {
       );
       expect(navigationProp.isFocused).toBeCalledTimes(1);
       expect(mockModalIsWaitingState[1]).toHaveBeenCalledWith(false);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, {
+        type: 'MODAL/HIDE_ACTIVITY'
+      });
 
       expect(Toast.show).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith({
@@ -1686,10 +1785,15 @@ describe('AuditItemScreen', () => {
         text1: strings('PALLET.SAVE_PALLET_SUCCESS'),
         visibilityTime: SNACKBAR_TIMEOUT
       });
-      expect(mockDispatch).toHaveBeenNthCalledWith(2, { type: UPDATE_MULTI_PALLET_UPC_QTY.RESET });
+      expect(mockDispatch).toHaveBeenNthCalledWith(2, {
+        type: UPDATE_MULTI_PALLET_UPC_QTY.RESET
+      });
       expect(mockDispatch).toHaveBeenNthCalledWith(
         3,
-        setScannedEvent({ type: 'itemDetails', value: mockItemDetails.itemNbr.toString() })
+        setScannedEvent({
+          type: 'itemDetails',
+          value: mockItemDetails.itemNbr.toString()
+        })
       );
 
       expect(setShowOnHands).toHaveBeenCalledWith(false);
@@ -1765,7 +1869,10 @@ describe('AuditItemScreen', () => {
       fireEvent.press(modalConfirmButton);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
-        action: 'complete_audit_item_click', itemNumber: 1234567890, type: 'OH_qty_update', upcNbr: '000055559999'
+        action: 'complete_audit_item_click',
+        itemNumber: 1234567890,
+        type: 'OH_qty_update',
+        upcNbr: '000055559999'
       });
     });
 
@@ -1786,10 +1893,11 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalConfirmButton);
       expect(mockSetShowOnHandsConfirmModal).toHaveBeenCalledWith(false);
-      expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item',
-        { action: 'cancel_OH_qty_update', itemNumber: 1234567890, upcNbr: '000055559999' }
-      );
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
+        action: 'cancel_OH_qty_update',
+        itemNumber: 1234567890,
+        upcNbr: '000055559999'
+      });
     });
 
     it('Test disabledContinue functionality return true when floor location qty is negative', () => {
@@ -1841,7 +1949,12 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue([mockFloorLocations[0]], mockReserveLocations, true, false)
+        disabledContinue(
+          [mockFloorLocations[0]],
+          mockReserveLocations,
+          true,
+          false
+        )
       ).toBe(false);
     });
 
@@ -1863,7 +1976,12 @@ describe('AuditItemScreen', () => {
       ];
 
       expect(
-        disabledContinue([mockFloorLocations[0]], mockReserveLocations, false, false)
+        disabledContinue(
+          [mockFloorLocations[0]],
+          mockReserveLocations,
+          false,
+          false
+        )
       ).toBe(false);
     });
 
@@ -1876,16 +1994,22 @@ describe('AuditItemScreen', () => {
     it('tests calculateFloorLocDecreaseQty when newOHQty is greater than min value', () => {
       calculateFloorLocDecreaseQty(22, 'A1-1', mockDispatch);
       expect(mockDispatch).toBeCalled();
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 21 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_FLOOR_LOCATION_QTY,
+          payload: { locationName: 'A1-1', newQty: 21 }
+        })
+      );
     });
 
     it('tests calculateFloorLocDecreaseQty when newOHQty is greater than max value', () => {
       calculateFloorLocDecreaseQty(99999, 'A1-1', mockDispatch);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 9999 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_FLOOR_LOCATION_QTY,
+          payload: { locationName: 'A1-1', newQty: 9999 }
+        })
+      );
     });
 
     it('tests calculateFloorLocDecreaseQty when newOHQty is less than or equals min value', () => {
@@ -1896,16 +2020,22 @@ describe('AuditItemScreen', () => {
     it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than max value', () => {
       calculateFloorLocIncreaseQty(22, 'A1-1', mockDispatch);
       expect(mockDispatch).toBeCalled();
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 23 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_FLOOR_LOCATION_QTY,
+          payload: { locationName: 'A1-1', newQty: 23 }
+        })
+      );
     });
 
     it('tests calculateFloorLocIncreaseQty when newOHQty is lesser than min value', () => {
       calculateFloorLocIncreaseQty(-22, 'A1-1', mockDispatch);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_FLOOR_LOCATION_QTY, payload: { locationName: 'A1-1', newQty: 1 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_FLOOR_LOCATION_QTY,
+          payload: { locationName: 'A1-1', newQty: 1 }
+        })
+      );
     });
 
     it('tests calculateFloorLocIncreaseQty when newOHQty is greater than max value', () => {
@@ -1916,16 +2046,22 @@ describe('AuditItemScreen', () => {
     it('tests calculatePalletDecreaseQty when newOHQty is greater than min value', () => {
       calculatePalletDecreaseQty(1, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_PALLET_QTY,
+          payload: { palletId: 4597, newQty: 0 }
+        })
+      );
     });
 
     it('tests calculatePalletDecreaseQty when newOHQty is greater than max value', () => {
       calculatePalletDecreaseQty(99999, 4597, mockDispatch);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 9999 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_PALLET_QTY,
+          payload: { palletId: 4597, newQty: 9999 }
+        })
+      );
     });
 
     it('tests calculatePalletDecreaseQty when newOHQty is less than or equals min value', () => {
@@ -1936,16 +2072,22 @@ describe('AuditItemScreen', () => {
     it('tests calculatePalletIncreaseQty when newOHQty is lesser than max value', () => {
       calculatePalletIncreaseQty(22, 4597, mockDispatch);
       expect(mockDispatch).toBeCalled();
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 23 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_PALLET_QTY,
+          payload: { palletId: 4597, newQty: 23 }
+        })
+      );
     });
 
     it('tests calculatePalletIncreaseQty when newOHQty is lesser than min value', () => {
       calculatePalletIncreaseQty(-22, 4597, mockDispatch);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining(
-        { type: UPDATE_PALLET_QTY, payload: { palletId: 4597, newQty: 0 } }
-      ));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({
+          type: UPDATE_PALLET_QTY,
+          payload: { palletId: 4597, newQty: 0 }
+        })
+      );
     });
 
     it('tests calculatePalletIncreaseQty when newOHQty is greater than max value', () => {
@@ -2019,7 +2161,10 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderCalculatorModal close button action', () => {
-      const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
+      const mockLocationListItem: Pick<
+        LocationList,
+        'locationName' | 'locationType' | 'palletId'
+      > = {
         locationName: 'A1-1',
         locationType: 'floor',
         palletId: 3
@@ -2040,7 +2185,10 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests renderCalculatorModal accept button action', () => {
-      const mockLocationListItem: Pick<LocationList, 'locationName' | 'locationType' | 'palletId'> = {
+      const mockLocationListItem: Pick<
+        LocationList,
+        'locationName' | 'locationType' | 'palletId'
+      > = {
         locationName: 'A1-1',
         locationType: 'floor',
         palletId: 3
@@ -2077,12 +2225,15 @@ describe('AuditItemScreen', () => {
     });
 
     it('Tests getMultiPalletList function', () => {
-      const multiPalletUPCRequestBody: UpdateMultiPalletUPCQtyRequest['PalletList'] = mockPalletLocations
-        .map(mockPallet => ({
+      const multiPalletUPCRequestBody: UpdateMultiPalletUPCQtyRequest['PalletList'] = mockPalletLocations.map(
+        mockPallet => ({
           palletId: mockPallet.palletId,
           expirationDate: '',
-          upcs: [{ upcNbr: mockPallet.upcNbr || '0', quantity: mockPallet.newQty }]
-        }));
+          upcs: [
+            { upcNbr: mockPallet.upcNbr || '0', quantity: mockPallet.newQty }
+          ]
+        })
+      );
 
       const multiPalletListResult = getMultiPalletList(mockPalletLocations);
       expect(multiPalletListResult).toStrictEqual(multiPalletUPCRequestBody);
@@ -2145,17 +2296,13 @@ describe('AuditItemScreen', () => {
       const modalConfirmButton = getByTestId('modal-confirm-button');
       fireEvent.press(modalConfirmButton);
       expect(mockUpdateApproval).toBeCalledTimes(1);
-      expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item',
-        {
-          action: 'update_manager_approval_click',
-          itemNbr: 123
-        }
-      );
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
+        action: 'update_manager_approval_click',
+        itemNbr: 123
+      });
     });
 
     it('Tests renderConfirmOnHandsModal cancel button action', () => {
-      const mockSetShowCancelApprovalModal = jest.fn();
       const { getByTestId } = render(
         renderCancelApprovalModal(
           defaultAsyncState,
@@ -2169,12 +2316,9 @@ describe('AuditItemScreen', () => {
       const modalCancelButton = getByTestId('modal-cancel-button');
       fireEvent.press(modalCancelButton);
       expect(mockSetShowCancelApprovalModal).toBeCalledTimes(1);
-      expect(mockTrackEventCall).toBeCalledWith(
-        'Audit_Item',
-        {
-          action: 'cancel_updateManagerApproval'
-        }
-      );
+      expect(mockTrackEventCall).toBeCalledWith('Audit_Item', {
+        action: 'cancel_updateManagerApproval'
+      });
     });
 
     it('test getItemApprovalApiHook success', () => {
@@ -2213,7 +2357,7 @@ describe('AuditItemScreen', () => {
         position: 'bottom'
       });
 
-      // Tests if user navigated frpm the other action screen
+      // Tests if user navigated from the other action screen
       const routeOtherAction: RouteProp<any, string> = {
         ...auditsRouteProp,
         params: { source: 'OtherAction' }
@@ -2228,7 +2372,9 @@ describe('AuditItemScreen', () => {
         jest.fn(),
         routeOtherAction
       );
-      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
+      expect(navigationProp.navigate).toHaveBeenCalledWith(
+        'ReviewItemDetailsHome'
+      );
     });
 
     it('test updateManagerApprovalApiHook success with pallet updates', () => {
@@ -2281,7 +2427,9 @@ describe('AuditItemScreen', () => {
         expect.objectContaining({ type: 'SAGA/UPDATE_MULTI_PALLET_UPC_QTY' })
       );
       expect(mockModalIsWaitingState[1]).toHaveBeenCalled();
-      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'success' }));
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining({ type: 'success' })
+      );
       expect(mockSetAuditSaved).toHaveBeenCalledWith(true);
     });
 
@@ -2296,9 +2444,13 @@ describe('AuditItemScreen', () => {
       );
 
       expect(mockDispatch).toHaveBeenCalledTimes(2);
-      expect(mockDispatch).toHaveBeenNthCalledWith(1, { type: 'MODAL/HIDE_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenNthCalledWith(1, {
+        type: 'MODAL/HIDE_ACTIVITY'
+      });
       expect(mockModalIsWaitingState[1]).not.toHaveBeenCalled();
-      expect(Toast.show).toHaveBeenCalledWith(expect.objectContaining({ type: 'error' }));
+      expect(Toast.show).toHaveBeenCalledWith(
+        expect.objectContaining({ type: 'error' })
+      );
     });
 
     it('tests that the save audits progress api hook shows activity modal on waiting', () => {
@@ -2317,7 +2469,9 @@ describe('AuditItemScreen', () => {
       );
 
       expect(mockModalIsWaitingState[1]).not.toHaveBeenCalled();
-      expect(mockDispatch).toHaveBeenCalledWith({ type: 'MODAL/SHOW_ACTIVITY' });
+      expect(mockDispatch).toHaveBeenCalledWith({
+        type: 'MODAL/SHOW_ACTIVITY'
+      });
     });
 
     it('tests the getLocationsToSave', () => {
@@ -2341,7 +2495,14 @@ describe('AuditItemScreen', () => {
       };
 
       // nothing needing saving, source audits
-      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, false, mockDispatch, false, auditsRouteProp);
+      navigationRemoveListenerHook(
+        mockE,
+        mockSetDisplayWarningModal,
+        false,
+        mockDispatch,
+        false,
+        auditsRouteProp
+      );
       expect(mockE.preventDefault).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledTimes(2);
@@ -2349,7 +2510,14 @@ describe('AuditItemScreen', () => {
       mockDispatch.mockReset();
 
       // nothing needing saving, source RID
-      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, false, mockDispatch, false, ridRouteProp);
+      navigationRemoveListenerHook(
+        mockE,
+        mockSetDisplayWarningModal,
+        false,
+        mockDispatch,
+        false,
+        ridRouteProp
+      );
       expect(mockE.preventDefault).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledTimes(1);
@@ -2357,59 +2525,185 @@ describe('AuditItemScreen', () => {
       mockDispatch.mockReset();
 
       // something to save
-      navigationRemoveListenerHook(mockE, mockSetDisplayWarningModal, true, mockDispatch, false, auditsRouteProp);
+      navigationRemoveListenerHook(
+        mockE,
+        mockSetDisplayWarningModal,
+        true,
+        mockDispatch,
+        false,
+        auditsRouteProp
+      );
       expect(mockE.preventDefault).toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockDispatch).not.toHaveBeenCalled();
     });
 
     it('tests the back confirmed hook', () => {
-      backConfirmedHook(false, false, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
+      backConfirmedHook(
+        false,
+        false,
+        mockSetDisplayWarningModal,
+        navigationProp,
+        mockDispatch,
+        auditsRouteProp
+      );
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
 
-      backConfirmedHook(false, true, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
+      backConfirmedHook(
+        false,
+        true,
+        mockSetDisplayWarningModal,
+        navigationProp,
+        mockDispatch,
+        auditsRouteProp
+      );
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
 
-      backConfirmedHook(true, true, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
+      backConfirmedHook(
+        true,
+        true,
+        mockSetDisplayWarningModal,
+        navigationProp,
+        mockDispatch,
+        auditsRouteProp
+      );
       expect(mockDispatch).not.toHaveBeenCalled();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
 
-      backConfirmedHook(true, false, mockSetDisplayWarningModal, navigationProp, mockDispatch, auditsRouteProp);
+      backConfirmedHook(
+        true,
+        false,
+        mockSetDisplayWarningModal,
+        navigationProp,
+        mockDispatch,
+        auditsRouteProp
+      );
       expect(mockDispatch).toHaveBeenCalledTimes(2);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
 
       mockDispatch.mockReset();
 
-      backConfirmedHook(true, false, mockSetDisplayWarningModal, navigationProp, mockDispatch, ridRouteProp);
+      backConfirmedHook(
+        true,
+        false,
+        mockSetDisplayWarningModal,
+        navigationProp,
+        mockDispatch,
+        ridRouteProp
+      );
       expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
     });
 
     it('tests the on validate hardware back press', () => {
-      const shouldBeFalse = onValidateHardwareBackPress(mockSetDisplayWarningModal, false);
+      const shouldBeFalse = onValidateHardwareBackPress(
+        mockSetDisplayWarningModal,
+        false
+      );
 
       expect(shouldBeFalse).toBeFalsy();
       expect(mockSetDisplayWarningModal).not.toHaveBeenCalled();
 
-      const shouldBeTrue = onValidateHardwareBackPress(mockSetDisplayWarningModal, true);
+      const shouldBeTrue = onValidateHardwareBackPress(
+        mockSetDisplayWarningModal,
+        true
+      );
       expect(shouldBeTrue).toBeTruthy();
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
     });
 
     it('tests back confirmed', () => {
-      backConfirmed(mockSetDisplayWarningModal, mockDispatch, navigationProp, auditsRouteProp);
+      backConfirmed(
+        mockSetDisplayWarningModal,
+        mockDispatch,
+        navigationProp,
+        auditsRouteProp
+      );
       expect(mockSetDisplayWarningModal).toHaveBeenCalledWith(false);
       expect(mockDispatch).toHaveBeenCalledTimes(2);
       expect(navigationProp.goBack).toHaveBeenCalled();
 
       jest.clearAllMocks();
 
-      backConfirmed(mockSetDisplayWarningModal, mockDispatch, navigationProp, ridRouteProp);
+      backConfirmed(
+        mockSetDisplayWarningModal,
+        mockDispatch,
+        navigationProp,
+        ridRouteProp
+      );
       expect(mockSetDisplayWarningModal).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledTimes(1);
       expect(navigationProp.goBack).toHaveBeenCalled();
+    });
+
+    it('tests handleContinueAction function', () => {
+      const mockTotalOHQty = calculateTotalOHQty(
+        mockItemDetails?.location?.floor ?? [],
+        mockPalletLocations,
+        mockItemDetails
+      );
+      const mockItemNbr = mockItemDetails.itemNbr;
+      // Tests Else Statement
+      handleContinueAction(
+        mockItemDetails,
+        mockTrackEventCall,
+        mockItemNbr,
+        mockTotalOHQty,
+        mockDispatch,
+        mockApprovalItem,
+        mockSetShowCancelApprovalModal,
+        mockSetShowOnHandsConfirmModal
+      );
+
+      expect(mockTrackEventCall).toHaveBeenCalledWith('Audit_Item', {
+        action: 'continue_action_click',
+        itemNumber: mockItemNbr
+      });
+
+      expect(mockSetShowOnHandsConfirmModal).toBeCalledWith(true);
+
+      // Tests Else If Statement
+      mockItemDetails.pendingOnHandsQty = 100;
+      handleContinueAction(
+        mockItemDetails,
+        mockTrackEventCall,
+        mockItemNbr,
+        mockItemDetails.onHandsQty,
+        mockDispatch,
+        mockApprovalItem,
+        mockSetShowCancelApprovalModal,
+        mockSetShowOnHandsConfirmModal
+      );
+      expect(mockSetShowOnHandsConfirmModal).toBeCalledWith(true);
+
+      // Tests If Statement
+      mockItemDetails.pendingOnHandsQty = -999;
+      mockItemDetails.worklistAuditType = 'RA';
+      handleContinueAction(
+        mockItemDetails,
+        mockTrackEventCall,
+        mockItemNbr,
+        mockItemDetails.onHandsQty,
+        mockDispatch,
+        mockApprovalItem,
+        mockSetShowCancelApprovalModal,
+        mockSetShowOnHandsConfirmModal
+      );
+      expect(mockDispatch).toHaveBeenCalledWith(
+        noActionV1({
+          upc: mockItemDetails?.upcNbr || '',
+          itemNbr: mockItemNbr,
+          scannedValue: mockItemNbr.toString(),
+          headers: {
+            worklistType: [
+              mockItemDetails.exceptionType,
+              mockItemDetails.worklistAuditType
+            ]
+          } as unknown as NoActionHeaders
+        })
+      );
     });
   });
 });
