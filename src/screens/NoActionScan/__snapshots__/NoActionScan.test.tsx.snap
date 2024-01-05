@@ -1,6 +1,119 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen before service call with manual scan 1`] = `
+exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen before service call with manual scan disabled 1`] = `
+<KeyboardAvoidingView
+  behavior="height"
+  keyboardVerticalOffset={110}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <CustomModalComponent
+    animationType="none"
+    isVisible={false}
+    modalType="Error"
+    onClose={[Function]}
+  >
+    <mockMaterialCommunityIcons
+      color="#f44336"
+      name="alert"
+      size={30}
+      style={
+        {
+          "alignSelf": "center",
+        }
+      }
+    />
+    <Text
+      style={
+        {
+          "fontSize": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
+    </Text>
+    <View
+      style={
+        {
+          "alignContent": "space-around",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Button
+        backgroundColor="#D6512D"
+        disabled={false}
+        height={45}
+        onPress={[Function]}
+        radius={5}
+        style={
+          {
+            "marginTop": 16,
+            "width": "70%",
+          }
+        }
+        title="[missing "en.GENERICS.OK" translation]"
+        titleColor="#ffffffff"
+        titleFontSize={16}
+        titleFontWeight="normal"
+        type={1}
+        width={-1}
+      />
+    </View>
+  </CustomModalComponent>
+  <View
+    style={
+      {
+        "flex": 1,
+        "flexDirection": "column",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <Memo(Pressable)
+        onPress={[Function]}
+        testID="open camera"
+      >
+        <mockMaterialCommunityIcons
+          color="#000000"
+          name="barcode-scan"
+          size={100}
+        />
+      </Memo(Pressable)>
+      <View
+        style={
+          {
+            "paddingTop": 30,
+          }
+        }
+      >
+        <Text>
+          [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+        </Text>
+      </View>
+    </View>
+  </View>
+</KeyboardAvoidingView>
+`;
+
+exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen before service call with manual scan enabled 1`] = `
 <KeyboardAvoidingView
   behavior="height"
   keyboardVerticalOffset={110}
@@ -93,118 +206,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen bef
     >
       <Memo(Pressable)
         onPress={[Function]}
-      >
-        <mockMaterialCommunityIcons
-          color="#000000"
-          name="barcode-scan"
-          size={100}
-        />
-      </Memo(Pressable)>
-      <View
-        style={
-          {
-            "paddingTop": 30,
-          }
-        }
-      >
-        <Text>
-          [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
-        </Text>
-      </View>
-    </View>
-  </View>
-</KeyboardAvoidingView>
-`;
-
-exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen before service call without manual scan 1`] = `
-<KeyboardAvoidingView
-  behavior="height"
-  keyboardVerticalOffset={110}
-  onStartShouldSetResponder={[Function]}
-  style={
-    {
-      "flex": 1,
-    }
-  }
->
-  <CustomModalComponent
-    animationType="none"
-    isVisible={false}
-    modalType="Error"
-    onClose={[Function]}
-  >
-    <mockMaterialCommunityIcons
-      color="#f44336"
-      name="alert"
-      size={30}
-      style={
-        {
-          "alignSelf": "center",
-        }
-      }
-    />
-    <Text
-      style={
-        {
-          "fontSize": 16,
-          "textAlign": "center",
-        }
-      }
-    >
-      [missing "en.GENERICS.BARCODE_SCAN_ERROR" translation]
-    </Text>
-    <View
-      style={
-        {
-          "alignContent": "space-around",
-          "flexDirection": "row",
-          "justifyContent": "center",
-          "width": "100%",
-        }
-      }
-    >
-      <Button
-        backgroundColor="#D6512D"
-        disabled={false}
-        height={45}
-        onPress={[Function]}
-        radius={5}
-        style={
-          {
-            "marginTop": 16,
-            "width": "70%",
-          }
-        }
-        title="[missing "en.GENERICS.OK" translation]"
-        titleColor="#ffffffff"
-        titleFontSize={16}
-        titleFontWeight="normal"
-        type={1}
-        width={-1}
-      />
-    </View>
-  </CustomModalComponent>
-  <View
-    style={
-      {
-        "flex": 1,
-        "flexDirection": "column",
-      }
-    }
-  >
-    <View
-      style={
-        {
-          "alignItems": "center",
-          "flex": 1,
-          "flexDirection": "column",
-          "justifyContent": "center",
-          "width": "100%",
-        }
-      }
-    >
-      <Memo(Pressable)
-        onPress={[Function]}
+        testID="open camera"
       >
         <mockMaterialCommunityIcons
           color="#000000"
@@ -244,7 +246,7 @@ exports[`NoActionScan render NoActionScan screen Renders NoActionScan screen whe
 />
 `;
 
-exports[`NoActionScan render NoActionScan screen render screen with navigation and state 1`] = `
+exports[`NoActionScan render NoActionScan screen Renders screen with navigation and state 1`] = `
 <View
   onLayout={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -310,6 +312,97 @@ exports[`NoActionScan render NoActionScan screen render screen with navigation a
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        testID="open camera"
+      >
+        <mockMaterialCommunityIcons
+          color="#000000"
+          name="barcode-scan"
+          size={100}
+        />
+      </View>
+      <View
+        style={
+          {
+            "paddingTop": 30,
+          }
+        }
+      >
+        <Text>
+          [missing "en.ITEM.SCAN_FOR_NO_ACTION" translation]
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`NoActionScan render NoActionScan screen Tests NoActionScanScreen openCamera 1`] = `
+<View
+  onLayout={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />
+  <View
+    style={
+      {
+        "flex": 1,
+        "flexDirection": "column",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID="open camera"
       >
         <mockMaterialCommunityIcons
           color="#000000"

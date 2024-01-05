@@ -8,6 +8,11 @@ export default StyleSheet.create({
   },
   rightButton: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  printerButton: {
+    flex: 1,
     width: 55,
     alignItems: 'center',
     justifyContent: 'center'
@@ -24,7 +29,7 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   image: {
-    width: 25,
+    width: 10,
     height: 25,
     marginRight: 10
   },

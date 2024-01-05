@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
 import { AuthorizeResult, logout } from 'react-native-app-auth';
-import { StackActions } from '@react-navigation/native';
+import { NavigationProp, StackActions } from '@react-navigation/native';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
 import { Configurations } from '../models/User';
@@ -28,14 +28,15 @@ import {
   setPriceLabelPrinter as setPriceLabelPrinterAsyncStorage
 } from '../utils/asyncStorageUtils';
 import {
-  setPriceLabelPrinter, updatePrinterByID
+  setPriceLabelPrinter,
+  updatePrinterByID
 } from '../state/actions/Print';
 
 interface HomeNavigatorComponentProps {
   logoutUser: () => void;
   showActivityModal: () => void;
   hideActivityModal: () => void;
-  navigation: Record<string, any>;
+  navigation: NavigationProp<any>;
   isManualScanEnabled: boolean;
   setManualScan: (bool: boolean) => void;
   clubNbr: number;
@@ -65,50 +66,116 @@ const mapDispatchToProps = {
 
 const Stack = createStackNavigator();
 
-export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: any) => {
+export const updateDefaultPrinter = (props: HomeNavigatorComponentProps) => {
+  const defPrinter = {
+    type: PrinterType.LASER,
+    name: strings('PRINT.FRONT_DESK'),
+    desc: strings('GENERICS.DEFAULT'),
+    id: '000000000000',
+    labelsAvailable: ['price']
+  };
+  props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
+  savePrinter(defPrinter);
+  if (
+    props.priceLabelPrinter
+    && props.priceLabelPrinter.id === defPrinter.id
+  ) {
+    props.setPriceLabelPrinter(defPrinter);
+    setPriceLabelPrinterAsyncStorage(defPrinter);
+  }
+};
+
+export const logoutPFUser = async (props: HomeNavigatorComponentProps) => {
+  const urls = getEnvironment();
+  const config = {
+    issuer: urls.pingFedURL
+  };
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return logout(config, {
+    idToken: props.userTokens.idToken,
+    postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
+  });
+};
+
+export const handleLanguageChange = (
+  languageOptions: string[],
+  showFeedback: boolean,
+  props: HomeNavigatorComponentProps,
+  navigation: any
+// eslint-disable-next-line consistent-return
+) => {
+  ActionSheet.showActionSheetWithOptions(
+    {
+      options: languageOptions,
+      // toggle cancel option index based on feedback config
+      cancelButtonIndex: showFeedback ? 3 : 2
+    },
+    selectedLanguageIndex => {
+      switch (selectedLanguageIndex) {
+        case 0:
+          setLanguage('en');
+          updateDefaultPrinter(props);
+          trackEvent('change_language', { language: 'en' });
+          return navigation.dispatch(StackActions.replace('Tabs'));
+        case 1:
+          setLanguage('es');
+          updateDefaultPrinter(props);
+          trackEvent('change_language', { language: 'es' });
+          return navigation.dispatch(StackActions.replace('Tabs'));
+        case 2:
+          setLanguage('zh');
+          updateDefaultPrinter(props);
+          trackEvent('change_language', { language: 'zh' });
+          return navigation.dispatch(StackActions.replace('Tabs'));
+        default:
+          return null;
+      }
+    }
+  );
+};
+
+export const handleSignOut = async (
+  props: HomeNavigatorComponentProps
+) => {
+  props.showActivityModal();
+  trackEvent('user_sign_out', { lastPage: 'Home' });
+  try {
+    await logoutPFUser(props);
+  } catch (error) {
+    // Handle error (optional)
+  }
+  props.navigation.dispatch(
+    StackActions.replace('Login')
+  );
+  props.logoutUser();
+  if (Platform.OS === 'android') {
+    props.hideActivityModal();
+  }
+};
+
+export const handleFeedback = (
+  props: HomeNavigatorComponentProps
+) => {
+  props.navigation.navigate('FeedbackScreen');
+  trackEvent('feedback_screen', { lastPage: 'Home' });
+};
+
+export const showSignOutMenu = (
+  props: HomeNavigatorComponentProps,
+  navigation: any
+) => {
   const options = [
     strings('HOME.CHANGE_LANGUAGE'),
     strings('GENERICS.SIGN_OUT'),
     strings('GENERICS.CANCEL')
   ];
-
   const { showFeedback } = props.userConfig;
-
   // to insert feedback into the menu before "Cancel"
   // option based on user config
   if (showFeedback) {
     options.splice(2, 0, strings('GENERICS.FEEDBACK'));
   }
-
-  const updateDefaultPrinter = () => {
-    const defPrinter = {
-      type: PrinterType.LASER,
-      name: strings('PRINT.FRONT_DESK'),
-      desc: strings('GENERICS.DEFAULT'),
-      id: '000000000000',
-      labelsAvailable: ['price']
-    };
-    props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
-    savePrinter(defPrinter);
-    if (props.priceLabelPrinter && props.priceLabelPrinter.id === defPrinter.id) {
-      props.setPriceLabelPrinter(defPrinter);
-      setPriceLabelPrinterAsyncStorage(defPrinter);
-    }
-  };
-
-  const logoutPFUser = async () => {
-    const urls = getEnvironment();
-    const config = {
-      issuer: urls.pingFedURL
-    };
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return logout(config, {
-      idToken: props.userTokens.idToken,
-      postLogoutRedirectUrl: 'com.walmart.intl.oyi://'
-    });
-  };
-
   ActionSheet.showActionSheetWithOptions(
     {
       options,
@@ -125,61 +192,13 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
       ];
       switch (buttonIndex) {
         case 0:
-          ActionSheet.showActionSheetWithOptions(
-            {
-              options: languageOptions,
-              // toggle cancel option index based on feedback config
-              cancelButtonIndex: showFeedback ? 3 : 2
-            },
-            selectedLanguageIndex => {
-              switch (selectedLanguageIndex) {
-                case 0:
-                  setLanguage('en');
-                  updateDefaultPrinter();
-                  trackEvent('change_language', { language: 'en' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                case 1:
-                  setLanguage('es');
-                  updateDefaultPrinter();
-                  trackEvent('change_language', { language: 'es' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                case 2:
-                  setLanguage('zh');
-                  updateDefaultPrinter();
-                  trackEvent('change_language', { language: 'zh' });
-                  return navigation.dispatch(StackActions.replace('Tabs'));
-                default:
-                  return null;
-              }
-            }
-          );
+          handleLanguageChange(languageOptions, showFeedback, props, navigation);
           break;
         case 1:
-          props.showActivityModal();
-          trackEvent('user_sign_out', { lastPage: 'Home' });
-          logoutPFUser()
-            .then(() => {
-              props.navigation.replace('Login');
-              props.logoutUser();
-              if (Platform.OS === 'android') {
-                props.hideActivityModal();
-              }
-            })
-            .catch(() => {
-              // we do the exact same thing. Pingfed actually won't redirect you back,
-              // so the promise will likely be rejected
-              props.navigation.replace('Login');
-              props.logoutUser();
-              if (Platform.OS === 'android') {
-                props.hideActivityModal();
-              }
-            });
+          handleSignOut(props);
           break;
         case 2:
-          if (showFeedback) {
-            props.navigation.navigate('FeedbackScreen');
-            trackEvent('feedback_screen', { lastPage: 'Home' });
-          }
+          handleFeedback(props);
           break;
         default:
           return null;
@@ -188,7 +207,10 @@ export const showSignOutMenu = (props: HomeNavigatorComponentProps, navigation: 
   );
 };
 
-export const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScanFunc: (bool: boolean) => void) => (
+export const renderHomeScanButton = (
+  isManualScanEnabled: boolean,
+  setManualScanFunc: (bool: boolean) => void
+) => (
   <TouchableOpacity
     testID="btnScan"
     onPress={() => {
@@ -201,20 +223,32 @@ export const renderHomeScanButton = (isManualScanEnabled: boolean, setManualScan
     }}
   >
     <View style={styles.leftButton}>
-      <MaterialCommunityIcon name="barcode-scan" size={20} color={COLOR.WHITE} />
+      <MaterialCommunityIcon
+        name="barcode-scan"
+        size={20}
+        color={COLOR.WHITE}
+      />
     </View>
   </TouchableOpacity>
 );
 
 export const renderCamButton = () => (
-  <TouchableOpacity testID="camerabtn" onPress={() => { openCamera(); }}>
+  <TouchableOpacity
+    testID="camerabtn"
+    onPress={() => {
+      openCamera();
+    }}
+  >
     <View style={styles.camButton}>
       <MaterialCommunityIcon name="camera" size={20} color={COLOR.WHITE} />
     </View>
   </TouchableOpacity>
 );
 
-export const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigation: any) => (
+export const renderHomeMenuButton = (
+  props: HomeNavigatorComponentProps,
+  navigation: any
+) => (
   <TouchableOpacity
     testID="btnShowMenu"
     onPress={() => {
@@ -231,19 +265,41 @@ export const renderHomeMenuButton = (props: HomeNavigatorComponentProps, navigat
   </TouchableOpacity>
 );
 
-export const renderHomeHeader = (props: HomeNavigatorComponentProps, navigation: any) => {
+export const renderPrintQueueButton = (navigation: any): React.JSX.Element => (
+  <TouchableOpacity
+    testID="print-queue-button"
+    onPress={() => {
+      trackEvent('print_queue_list_click');
+      navigation.navigate('PrintPriceSign', { screen: 'PrintQueue' });
+    }}
+  >
+    <View style={styles.printerButton}>
+      <MaterialCommunityIcon name="printer" size={20} color={COLOR.WHITE} />
+    </View>
+  </TouchableOpacity>
+);
+
+export const renderHomeHeader = (
+  props: HomeNavigatorComponentProps,
+  navigation: any
+) => {
   const { isManualScanEnabled } = props;
 
   return (
     <View style={styles.headerContainer}>
-      {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage' ? renderCamButton() : null}
+      {Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage'
+        ? renderCamButton()
+        : null}
       {renderHomeScanButton(isManualScanEnabled, props.setManualScan)}
+      {renderPrintQueueButton(navigation)}
       {renderHomeMenuButton(props, navigation)}
     </View>
   );
 };
 
-export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.Element => (
+export const HomeNavigatorComponent = (
+  props: HomeNavigatorComponentProps
+): React.JSX.Element => (
   <Stack.Navigator
     screenOptions={{
       headerMode: 'float',
@@ -258,8 +314,12 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
         headerRight: () => renderHomeHeader(props, navigation),
         headerTitle: () => (
           <View>
-            <Text style={styles.headerTitle}>{strings('HOME.OWN_YOUR_INVENTORY')}</Text>
-            <Text style={styles.headerSubtitle}>{`${strings('GENERICS.CLUB')} ${props.clubNbr}`}</Text>
+            <Text style={styles.headerTitle}>
+              {strings('HOME.OWN_YOUR_INVENTORY')}
+            </Text>
+            <Text style={styles.headerSubtitle}>
+              {`${strings('GENERICS.CLUB')} ${props.clubNbr}`}
+            </Text>
           </View>
         )
       })}
@@ -270,7 +330,6 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
           }
         }
       }}
-
     />
     <Stack.Screen
       name="FeedbackScreen"
@@ -278,7 +337,9 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
       options={() => ({
         headerTitle: () => (
           <View>
-            <Text style={styles.headerTitle}>{strings('GENERICS.FEEDBACK')}</Text>
+            <Text style={styles.headerTitle}>
+              {strings('GENERICS.FEEDBACK')}
+            </Text>
           </View>
         )
       })}
@@ -286,4 +347,7 @@ export const HomeNavigatorComponent = (props: HomeNavigatorComponentProps): JSX.
   </Stack.Navigator>
 );
 
-export const HomeNavigator = connect(mapStateToProps, mapDispatchToProps)(HomeNavigatorComponent);
+export const HomeNavigator = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeNavigatorComponent);

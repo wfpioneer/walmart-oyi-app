@@ -9,7 +9,7 @@ import {
 } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import { AsyncState } from '../../models/AsyncState';
 import { strings } from '../../locales';
@@ -49,6 +49,32 @@ jest.mock('@react-navigation/native', () => {
     })
   };
 });
+
+jest.mock('react-native-config', () => {
+  const config = jest.requireActual('react-native-config');
+  return {
+    ...config,
+    ENVIRONMENT: ' DEV'
+  };
+});
+
+jest.mock('../../utils/scannerUtils.ts', () => ({
+  openCamera: jest.fn(),
+  barcodeEmitter: {
+    addListener: jest.fn().mockImplementation((event, callback) => {
+      callback({ value: 'test', type: 'UPC-A' });
+      return {
+        remove: jest.fn()
+      };
+    })
+  }
+}));
+
+jest.mock('../../utils/AppCenterTool.ts', () => ({
+  ...jest.requireActual('../../utils/__mocks__/AppCenterTool'),
+  trackEvent: jest.fn()
+}));
+
 const defaultAsyncState: AsyncState = {
   isWaiting: false,
   value: null,
@@ -91,7 +117,8 @@ const mockNoActionScreenProps: NoActionScanScreenProps = {
   upcNbr: '',
   useEffectHook: jest.fn(),
   userId: 'testUser',
-  validateSessionCall: jest.fn(() => Promise.resolve())
+  validateSessionCall: jest.fn(() => Promise.resolve()),
+  itemDetails: getMockItemDetails('123')
 };
 
 describe('NoActionScan', () => {
@@ -107,7 +134,7 @@ describe('NoActionScan', () => {
   });
 
   describe('render NoActionScan screen', () => {
-    it('render screen with navigation and state', () => {
+    it('Renders screen with navigation and state', () => {
       const component = (
         <Provider store={store}>
           <NavigationContainer>
@@ -121,13 +148,13 @@ describe('NoActionScan', () => {
       expect(toJSON()).toMatchSnapshot();
     });
 
-    it('Renders NoActionScan screen before service call without manual scan', () => {
+    it('Renders NoActionScan screen before service call with manual scan disabled', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(<NoActionScanScreen {...mockNoActionScreenProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
 
-    it('Renders NoActionScan screen before service call with manual scan', () => {
+    it('Renders NoActionScan screen before service call with manual scan enabled', () => {
       const renderer = ShallowRenderer.createRenderer();
       const manualScanEnabledProps: NoActionScanScreenProps = {
         ...mockNoActionScreenProps,
@@ -136,6 +163,33 @@ describe('NoActionScan', () => {
 
       renderer.render(<NoActionScanScreen {...manualScanEnabledProps} />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
+    });
+
+    it('Tests NoActionScanScreen openCamera', () => {
+      const testConfig = jest.requireMock('react-native-config');
+      const mockScannerUtil = jest.requireMock('../../utils/scannerUtils.ts');
+      testConfig.ENVIRONMENT = 'prod';
+      const component = (
+        <Provider store={store}>
+          <NavigationContainer>
+            <NavigationContext.Provider value={navContextValue}>
+              <NoActionScanScreen {...mockNoActionScreenProps} />
+            </NavigationContext.Provider>
+          </NavigationContainer>
+        </Provider>
+      );
+      const { toJSON, getByTestId, update } = render(component);
+
+      const openCameraButton = getByTestId('open camera');
+      fireEvent.press(openCameraButton);
+      expect(mockScannerUtil.openCamera).not.toHaveBeenCalled();
+
+      testConfig.ENVIRONMENT = 'dev';
+      update(component);
+      fireEvent.press(openCameraButton);
+      expect(mockScannerUtil.openCamera).toHaveBeenCalled();
+
+      expect(toJSON()).toMatchSnapshot();
     });
 
     it('Renders NoActionScan screen when waiting for service call', () => {
@@ -171,7 +225,12 @@ describe('NoActionScan', () => {
         }
       };
 
-      completeItemApiHook(mockDispatch, navigationProp, completedApiNotFound, routeProp);
+      completeItemApiHook(
+        mockDispatch,
+        navigationProp,
+        completedApiNotFound,
+        routeProp
+      );
       expect(navigationProp.isFocused).toHaveBeenCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith({ type: NO_ACTION.RESET });
       mockDispatch.mockReset();
@@ -183,7 +242,12 @@ describe('NoActionScan', () => {
         position: 'bottom'
       });
 
-      completeItemApiHook(mockDispatch, navigationProp, completedApiSuccess, routeProp);
+      completeItemApiHook(
+        mockDispatch,
+        navigationProp,
+        completedApiSuccess,
+        routeProp
+      );
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
@@ -193,7 +257,12 @@ describe('NoActionScan', () => {
         ...routeProp,
         params: { source: 'OtherAction' }
       };
-      completeItemApiHook(mockDispatch, navigationProp, completedApiSuccess, routeOtherAction);
+      completeItemApiHook(
+        mockDispatch,
+        navigationProp,
+        completedApiSuccess,
+        routeOtherAction
+      );
       expect(mockDispatch).toHaveBeenCalledWith({
         type: 'ITEM_DETAILS_SCREEN/ACTION_COMPLETED'
       });
@@ -240,9 +309,10 @@ describe('NoActionScan', () => {
         payload: {
           itemNbr: 1234567890,
           scannedValue: '1234567890098',
-          upc: '000055559999'
+          upc: '000055559999',
+          headers: { worklistType: ['nsfl', 'ra'] }
         },
-        type: 'SAGA/NO_ACTION'
+        type: 'SAGA/NO_ACTION_V1'
       };
       const expectedSetManualScanResults = {
         payload: false,
@@ -250,10 +320,14 @@ describe('NoActionScan', () => {
       };
 
       mockNoActionScreenProps.dispatch = mockDispatch;
+      mockItemDetails.worklistAuditType = 'ra';
+
       await callBackbarcodeEmitter(
         { value: '1234567890098', type: 'UPC-A' },
         mockItemDetails.upcNbr,
         mockItemDetails.itemNbr,
+        mockItemDetails.exceptionType,
+        mockItemDetails.worklistAuditType,
         mockNoActionScreenProps.userId,
         mockNoActionScreenProps.route,
         mockDispatch,
@@ -273,6 +347,8 @@ describe('NoActionScan', () => {
         { value: '1234567890098', type: 'QRCODE' },
         mockItemDetails.upcNbr,
         mockItemDetails.itemNbr,
+        mockItemDetails.exceptionType,
+        mockItemDetails.worklistAuditType,
         mockNoActionScreenProps.userId,
         mockNoActionScreenProps.route,
         mockDispatch,

@@ -297,7 +297,6 @@ export const handleAddPrintList = (
       trackEvent('print_add_to_loc_print_queue', { printQueueItem: JSON.stringify(printQueueItem) });
       dispatch(addLocationPrintQueue(printQueueItem));
     }
-    isValidDispatch(dispatch, actionCompleted, exceptionType);
     navigation.goBack();
   }
 };
