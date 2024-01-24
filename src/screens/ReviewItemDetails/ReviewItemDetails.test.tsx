@@ -1531,7 +1531,7 @@ describe('ReviewItemDetailsScreen', () => {
 
     it('Calls renderPrintPriceSignButton', async () => {
       const { toJSON, getByText } = render(
-        renderPrintPriceSignButton(false, mockItemDetail123, mockHandleProps)
+        renderPrintPriceSignButton(false, mockItemDetail123, mockHandleProps, mockItemDetail123?.location?.floor)
       );
 
       const onPressBtn = getByText(strings('PRINT.PRICE_SIGN'));

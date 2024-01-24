@@ -1,8 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import {
-  Image, Platform, Text, TouchableOpacity, View
-} from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import ActionSheet from 'react-native-action-sheet';
@@ -76,10 +74,7 @@ export const updateDefaultPrinter = (props: HomeNavigatorComponentProps) => {
   };
   props.updatePrinterByID({ id: '000000000000', printer: defPrinter });
   savePrinter(defPrinter);
-  if (
-    props.priceLabelPrinter
-    && props.priceLabelPrinter.id === defPrinter.id
-  ) {
+  if (props.priceLabelPrinter && props.priceLabelPrinter.id === defPrinter.id) {
     props.setPriceLabelPrinter(defPrinter);
     setPriceLabelPrinterAsyncStorage(defPrinter);
   }
@@ -103,7 +98,7 @@ export const handleLanguageChange = (
   showFeedback: boolean,
   props: HomeNavigatorComponentProps,
   navigation: any
-// eslint-disable-next-line consistent-return
+  // eslint-disable-next-line consistent-return
 ) => {
   ActionSheet.showActionSheetWithOptions(
     {
@@ -135,9 +130,7 @@ export const handleLanguageChange = (
   );
 };
 
-export const handleSignOut = async (
-  props: HomeNavigatorComponentProps
-) => {
+export const handleSignOut = async (props: HomeNavigatorComponentProps) => {
   props.showActivityModal();
   trackEvent('user_sign_out', { lastPage: 'Home' });
   try {
@@ -145,18 +138,14 @@ export const handleSignOut = async (
   } catch (error) {
     // Handle error (optional)
   }
-  props.navigation.dispatch(
-    StackActions.replace('Login')
-  );
+  props.navigation.dispatch(StackActions.replace('Login'));
   props.logoutUser();
   if (Platform.OS === 'android') {
     props.hideActivityModal();
   }
 };
 
-export const handleFeedback = (
-  props: HomeNavigatorComponentProps
-) => {
+export const handleFeedback = (props: HomeNavigatorComponentProps) => {
   props.navigation.navigate('FeedbackScreen');
   trackEvent('feedback_screen', { lastPage: 'Home' });
 };
@@ -192,7 +181,12 @@ export const showSignOutMenu = (
       ];
       switch (buttonIndex) {
         case 0:
-          handleLanguageChange(languageOptions, showFeedback, props, navigation);
+          handleLanguageChange(
+            languageOptions,
+            showFeedback,
+            props,
+            navigation
+          );
           break;
         case 1:
           handleSignOut(props);
@@ -297,6 +291,38 @@ export const renderHomeHeader = (
   );
 };
 
+// eslint-disable-next-line react/require-default-props
+const HeaderTitle = ({
+  title,
+  subtitle
+}: {
+  title: string;
+  // eslint-disable-next-line react/require-default-props
+  subtitle?: string;
+}) => (
+  <View>
+    <Text style={styles.headerTitle}>{title}</Text>
+    {subtitle && <Text style={styles.headerSubtitle}>{subtitle}</Text>}
+  </View>
+);
+
+const homeScreenOptions = (
+  props: HomeNavigatorComponentProps,
+  navigation: any
+) => ({
+  headerRight: () => renderHomeHeader(props, navigation),
+  headerTitle: () => (
+    <HeaderTitle
+      title={strings('HOME.OWN_YOUR_INVENTORY')}
+      subtitle={`${strings('GENERICS.CLUB')} ${props.clubNbr}`}
+    />
+  )
+});
+
+const feedScreenOptions = () => ({
+  headerTitle: () => <HeaderTitle title={strings('GENERICS.FEEDBACK')} />
+});
+
 export const HomeNavigatorComponent = (
   props: HomeNavigatorComponentProps
 ): React.JSX.Element => (
@@ -310,19 +336,7 @@ export const HomeNavigatorComponent = (
     <Stack.Screen
       name="HomeScreen"
       component={Home}
-      options={({ navigation }) => ({
-        headerRight: () => renderHomeHeader(props, navigation),
-        headerTitle: () => (
-          <View>
-            <Text style={styles.headerTitle}>
-              {strings('HOME.OWN_YOUR_INVENTORY')}
-            </Text>
-            <Text style={styles.headerSubtitle}>
-              {`${strings('GENERICS.CLUB')} ${props.clubNbr}`}
-            </Text>
-          </View>
-        )
-      })}
+      options={({ navigation }) => homeScreenOptions(props, navigation)}
       listeners={{
         blur: () => {
           if (props.isManualScanEnabled) {
@@ -334,15 +348,7 @@ export const HomeNavigatorComponent = (
     <Stack.Screen
       name="FeedbackScreen"
       component={Feedback}
-      options={() => ({
-        headerTitle: () => (
-          <View>
-            <Text style={styles.headerTitle}>
-              {strings('GENERICS.FEEDBACK')}
-            </Text>
-          </View>
-        )
-      })}
+      options={() => feedScreenOptions()}
     />
   </Stack.Navigator>
 );

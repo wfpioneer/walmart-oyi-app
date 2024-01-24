@@ -99,7 +99,7 @@ export interface Configurations {
   printingUpdate: boolean;
   binning: boolean;
   palletExpiration: boolean;
-  backupCategories: string;
+  perishableCategories: string;
   picking: boolean;
   areas: area[];
   enableAreaFilter: boolean;
@@ -118,7 +118,6 @@ export interface Configurations {
   manualNoAction: boolean;
   peteGetPallets: boolean;
   inProgress: boolean;
-  overridePalletPerishables: boolean;
   peteGetLocations: boolean;
   showQuantityStocked: boolean;
   enableAuditsInProgress: boolean;

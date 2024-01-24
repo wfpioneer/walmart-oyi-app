@@ -475,29 +475,6 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
     }
   >
     <View
-      style={
-        {
-          "alignItems": "center",
-          "flex": 1,
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        }
-      }
-    >
-      <Text
-        style={
-          {
-            "marginRight": 0,
-          }
-        }
-      />
-      <Text
-        style={{}}
-      >
-        [missing "en.ITEM.OH_CHANGE_HISTORY" translation]
-      </Text>
-    </View>
-    <View
       accessibilityState={
         {
           "busy": undefined,
@@ -527,17 +504,36 @@ exports[`ReviewItemDetailsScreen Tests Rendering 'renderOHChangeHistory' Renders
       onStartShouldSetResponder={[Function]}
       style={
         {
-          "flex": 0.1,
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
           "opacity": 1,
-          "paddingLeft": 5,
         }
       }
       testID="collapsible-card"
     >
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {},
+            ]
+          }
+        >
+          [missing "en.ITEM.OH_CHANGE_HISTORY" translation]
+        </Text>
+      </View>
       <Icon
         color="#000000"
         name="keyboard-arrow-up"
-        size={25}
+        size={30}
       />
     </View>
   </View>
@@ -1837,22 +1833,29 @@ exports[`ReviewItemDetailsScreen Tests rendering 'Complete & Other Action  'Butt
     </Text>
   </TouchableOpacity>
   <TouchableOpacity
+    disabled={true}
     onPress={[Function]}
     style={
-      {
-        "alignItems": "center",
-        "backgroundColor": "#0071e9",
-        "borderColor": "#0071e9",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "flex": 1,
-        "flexDirection": "row",
-        "height": 40,
-        "justifyContent": "center",
-        "marginHorizontal": 10,
-        "marginVertical": 10,
-        "paddingVertical": 10,
-      }
+      [
+        {
+          "alignItems": "center",
+          "backgroundColor": "#0071e9",
+          "borderColor": "#0071e9",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 40,
+          "justifyContent": "center",
+          "marginHorizontal": 10,
+          "marginVertical": 10,
+          "paddingVertical": 10,
+        },
+        {
+          "backgroundColor": "#bdbdbd",
+          "borderColor": "#bdbdbd",
+        },
+      ]
     }
   >
     <Text
@@ -3463,7 +3466,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        floorLocations={
+          [
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-1",
+              "sectionId": 1,
+              "sectionName": "1",
+              "type": "Sales Floor",
+              "typeNbr": 8,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 0,
+              "aisleName": "1",
+              "locationName": "A1-2",
+              "sectionId": 2,
+              "sectionName": "2",
+              "type": "End Cap",
+              "typeNbr": 12,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-3",
+              "sectionId": 3,
+              "sectionName": "3",
+              "type": "Pod",
+              "typeNbr": 13,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-4",
+              "sectionId": 4,
+              "sectionName": "4",
+              "type": "Display",
+              "typeNbr": 11,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+          ]
+        }
         imageToken="bearer megaalakazamvsvanillishswarm"
+        isLocationLoading={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -4184,7 +4236,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        floorLocations={
+          [
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-1",
+              "sectionId": 1,
+              "sectionName": "1",
+              "type": "Sales Floor",
+              "typeNbr": 8,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 0,
+              "aisleName": "1",
+              "locationName": "A1-2",
+              "sectionId": 2,
+              "sectionName": "2",
+              "type": "End Cap",
+              "typeNbr": 12,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-3",
+              "sectionId": 3,
+              "sectionName": "3",
+              "type": "Pod",
+              "typeNbr": 13,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-4",
+              "sectionId": 4,
+              "sectionName": "4",
+              "type": "Display",
+              "typeNbr": 11,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+          ]
+        }
         imageToken="bearer megaalakazamvsvanillishswarm"
+        isLocationLoading={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -4675,7 +4776,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        floorLocations={
+          [
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-1",
+              "sectionId": 1,
+              "sectionName": "1",
+              "type": "Sales Floor",
+              "typeNbr": 8,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 0,
+              "aisleName": "1",
+              "locationName": "A1-2",
+              "sectionId": 2,
+              "sectionName": "2",
+              "type": "End Cap",
+              "typeNbr": 12,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-3",
+              "sectionId": 3,
+              "sectionName": "3",
+              "type": "Pod",
+              "typeNbr": 13,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-4",
+              "sectionId": 4,
+              "sectionName": "4",
+              "type": "Display",
+              "typeNbr": 11,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+          ]
+        }
         imageToken="bearer megaalakazamvsvanillishswarm"
+        isLocationLoading={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -5366,7 +5516,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        floorLocations={
+          [
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-1",
+              "sectionId": 1,
+              "sectionName": "1",
+              "type": "Sales Floor",
+              "typeNbr": 8,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 0,
+              "aisleName": "1",
+              "locationName": "A1-2",
+              "sectionId": 2,
+              "sectionName": "2",
+              "type": "End Cap",
+              "typeNbr": 12,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-3",
+              "sectionId": 3,
+              "sectionName": "3",
+              "type": "Pod",
+              "typeNbr": 13,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-4",
+              "sectionId": 4,
+              "sectionName": "4",
+              "type": "Display",
+              "typeNbr": 11,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+          ]
+        }
         imageToken="bearer megaalakazamvsvanillishswarm"
+        isLocationLoading={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -6057,7 +6256,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        floorLocations={
+          [
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-1",
+              "sectionId": 1,
+              "sectionName": "1",
+              "type": "Sales Floor",
+              "typeNbr": 8,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 0,
+              "aisleName": "1",
+              "locationName": "A1-2",
+              "sectionId": 2,
+              "sectionName": "2",
+              "type": "End Cap",
+              "typeNbr": 12,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-3",
+              "sectionId": 3,
+              "sectionName": "3",
+              "type": "Pod",
+              "typeNbr": 13,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-4",
+              "sectionId": 4,
+              "sectionName": "4",
+              "type": "Display",
+              "typeNbr": 11,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+          ]
+        }
         imageToken="bearer megaalakazamvsvanillishswarm"
+        isLocationLoading={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -6548,7 +6796,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        floorLocations={
+          [
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-1",
+              "sectionId": 1,
+              "sectionName": "1",
+              "type": "Sales Floor",
+              "typeNbr": 8,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 0,
+              "aisleName": "1",
+              "locationName": "A1-2",
+              "sectionId": 2,
+              "sectionName": "2",
+              "type": "End Cap",
+              "typeNbr": 12,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-3",
+              "sectionId": 3,
+              "sectionName": "3",
+              "type": "Pod",
+              "typeNbr": 13,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-4",
+              "sectionId": 4,
+              "sectionName": "4",
+              "type": "Display",
+              "typeNbr": 11,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+          ]
+        }
         imageToken="bearer megaalakazamvsvanillishswarm"
+        isLocationLoading={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={
@@ -7039,7 +7336,56 @@ exports[`ReviewItemDetailsScreen Tests renders ItemDetails API Responses renders
         category="93 - Meat PI"
         countryCode="MX"
         exceptionType="nsfl"
+        floorLocations={
+          [
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-1",
+              "sectionId": 1,
+              "sectionName": "1",
+              "type": "Sales Floor",
+              "typeNbr": 8,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 0,
+              "aisleName": "1",
+              "locationName": "A1-2",
+              "sectionId": 2,
+              "sectionName": "2",
+              "type": "End Cap",
+              "typeNbr": 12,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-3",
+              "sectionId": 3,
+              "sectionName": "3",
+              "type": "Pod",
+              "typeNbr": 13,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+            {
+              "aisleId": 1,
+              "aisleName": "1",
+              "locationName": "A1-4",
+              "sectionId": 4,
+              "sectionName": "4",
+              "type": "Display",
+              "typeNbr": 11,
+              "zoneId": 0,
+              "zoneName": "A",
+            },
+          ]
+        }
         imageToken="bearer megaalakazamvsvanillishswarm"
+        isLocationLoading={false}
         itemName="Test Item That is Really, Really Long (and has parenthesis)"
         itemNbr={1234567890}
         navigationForPrint={

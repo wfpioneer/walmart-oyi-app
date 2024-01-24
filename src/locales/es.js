@@ -164,7 +164,10 @@ export default {
     NO_ACTION_NEEDED: 'El artículo no requiere ninguna acción mencionada',
     REPLENISH_RESERVE: 'Por favor reabastece tu bodega para poder pickear el artículo',
     CANCEL_APPROVAL: 'Esta acción cancelará la acción pendiente actual, ¿Quieres continuar?',
-    UNABLE_TO_CANCEL_APPROVAL: 'Incapaz de cancelar la aprobación en este momento, por favor ve con gerencia para que rechace este artículo'
+    UNABLE_TO_CANCEL_APPROVAL: 'Incapaz de cancelar la aprobación en este momento, por favor ve con gerencia para que rechace este artículo',
+    NO_ITEM_SCANNED: 'No se ha escaneado un artículo',
+    SCAN_ITEM: 'Por favor escanea un artículo',
+    ADD_FLOOR_LOCATION: 'Agrega la ubicación para imprimir la señalización'
   },
   PRINT: {
     MAIN_TITLE: 'Imprimir Señalización',
@@ -234,7 +237,7 @@ export default {
     CANNOT_HAVE_NEGATIVE_QTY: 'El artículo no puede teener cantidad negativa',
     ITEMS_DETAILS_EXIST: 'El artículo escaneado ya existe en el pallet',
     ITEMS_DETAILS_ERROR: 'Error. No es posible encontrar el UPC',
-    ITEMS_NOT_FOUND: 'Item Not found', // TODO SPANISH TRANSLATION
+    ITEMS_NOT_FOUND: 'Artículo no encontrado',
     PALLET_UPC_NOT_FOUND: 'El pallet o un UPC no se encontraron',
     ADD_UPC_SUCCESS: 'Todos los artículos se agregaron satisfactoriamente al pallet',
     ADD_UPC_ERROR: 'Error agregando artículos al pallet',

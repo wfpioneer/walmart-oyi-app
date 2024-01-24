@@ -401,12 +401,11 @@ describe('SelectLocationTypeScreen', () => {
 
       editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, false);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(navigationProp.goBack).toHaveBeenCalled();
-
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
       mockDispatch.mockReset();
       editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, 123, mockLocation, false);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
 
       editLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, false);
       expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });
@@ -436,12 +435,12 @@ describe('SelectLocationTypeScreen', () => {
       editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, true);
       expect(mockDispatch).toBeCalledTimes(1);
       expect(mockDispatch).toHaveBeenCalledWith(expect.objectContaining({ type: 'SAGA/GET_LOCATIONS_FOR_ITEM_V1' }));
-      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
 
       mockDispatch.mockReset();
       editLocationApiHook(successApi, mockSetError, mockDispatch, navigationProp, false, 123, mockLocation, true);
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(navigationProp.goBack).toHaveBeenCalled();
+      expect(navigationProp.navigate).toHaveBeenCalledWith('ReviewItemDetailsHome');
 
       editLocationApiHook(failureApi, mockSetError, mockDispatch, navigationProp, true, 123, mockLocation, true);
       expect(mockSetError).toHaveBeenCalledWith({ error: true, message: strings('LOCATION.EDIT_LOCATION_API_ERROR') });

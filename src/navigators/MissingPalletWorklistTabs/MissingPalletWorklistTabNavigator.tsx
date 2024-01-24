@@ -1,5 +1,11 @@
 import React, {
-  DependencyList, Dispatch, EffectCallback, useCallback, useEffect, useState
+  DependencyList,
+  Dispatch,
+  EffectCallback,
+  JSX,
+  useCallback,
+  useEffect,
+  useState
 } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
@@ -11,38 +17,49 @@ import {
 } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
-import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
+import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import COLOR from '../../themes/Color';
 import { strings } from '../../locales';
 import { TodoPalletWorklist } from '../../screens/Worklist/TodoPalletWorklist';
 import { CompletedPalletWorklist } from '../../screens/Worklist/CompletedPalletWorklist';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletConfig, getPalletWorklist } from '../../state/actions/saga';
+import { getPalletWorklist } from '../../state/actions/saga';
 import { Tabs } from '../../models/PalletWorklist';
 import { setSelectedTab } from '../../state/actions/PalletWorklist';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
-import { setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
+import {
+  setPerishableCategories,
+  setupPallet
+} from '../../state/actions/PalletManagement';
 import { AsyncState } from '../../models/AsyncState';
 import { Configurations } from '../../models/User';
-import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import {
+  hideActivityModal,
+  showActivityModal
+} from '../../state/actions/Modal';
 
 const Tab = createMaterialTopTabNavigator();
 
 interface MissingPalletWorklistTabNavigatorProps {
   useFocusEffectHook: (effect: EffectCallback) => void;
-  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
-  validateSessionCall: (navigation: NavigationProp<any>, route?: string) => Promise<void>;
+  useCallbackHook: <T extends (...args: any[]) => any>(
+    callback: T,
+    deps: DependencyList
+  ) => T;
+  validateSessionCall: (
+    navigation: NavigationProp<any>,
+    route?: string
+  ) => Promise<void>;
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
+  perishableCategoriesList: number[];
   selectedTab: Tabs;
-  perishableCategories: number[];
   palletConfigComplete: boolean;
   getPalletDetailsApi: AsyncState;
-  getPalletConfigApi: AsyncState;
   setPalletConfigComplete: React.Dispatch<React.SetStateAction<boolean>>;
   getPalletDetailsComplete: boolean;
   setGetPalletDetailsComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -50,28 +67,6 @@ interface MissingPalletWorklistTabNavigatorProps {
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
   userConfig: Configurations;
 }
-
-export const getPalletConfigHook = (
-  getPalletConfigApi: AsyncState,
-  dispatch: Dispatch<any>,
-  setPalletConfigComplete: React.Dispatch<React.SetStateAction<boolean>>,
-  backupCategories: string
-) => {
-  // on api success
-  if (!getPalletConfigApi.isWaiting && getPalletConfigApi.result) {
-    const { perishableCategories } = getPalletConfigApi.result.data;
-    dispatch(setPerishableCategories(perishableCategories));
-    dispatch({ type: GET_PALLET_CONFIG.RESET });
-    setPalletConfigComplete(true);
-  }
-  // on api error
-  if (getPalletConfigApi.error) {
-    const backupPerishableCategories = backupCategories.split('-').map(Number);
-    dispatch(setPerishableCategories(backupPerishableCategories));
-    dispatch({ type: GET_PALLET_CONFIG.RESET });
-    setPalletConfigComplete(true);
-  }
-};
 
 export const getPalletDetailsApiHook = (
   getPalletDetailsApi: AsyncState,
@@ -83,9 +78,8 @@ export const getPalletDetailsApiHook = (
   // on api success
   if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
     if (getPalletDetailsApi.result.status === 200 && palletClicked) {
-      const {
-        id, createDate, expirationDate, items
-      } = getPalletDetailsApi.result.data.pallets[0];
+      const { id, createDate, expirationDate, items } =
+        getPalletDetailsApi.result.data.pallets[0];
       setPalletClicked(false);
       const palletItems = items.map((item: PalletItem) => ({
         ...item,
@@ -133,19 +127,76 @@ export const getPalletDetailsApiHook = (
   }
 };
 
-export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTabNavigatorProps): JSX.Element => {
+export const resetPalletDetailsHook = (
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => {
+  navigation.addListener('beforeRemove', () => {
+    dispatch({ type: GET_PALLET_DETAILS.RESET });
+  });
+};
+
+export const navigationPalletHook = (
+  navigation: NavigationProp<any>,
+  palletConfigComplete: boolean,
+  getPalletDetailsComplete: boolean,
+  setGetPalletDetailsComplete: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (navigation.isFocused()) {
+    if (palletConfigComplete && getPalletDetailsComplete) {
+      navigation.navigate('PalletManagement', { screen: 'ManagePallet' });
+      setGetPalletDetailsComplete(false);
+    }
+  }
+};
+
+export const setPerishableCategoriesHook = (
+  perishableCategoriesList: number[],
+  perishableCategories: string,
+  dispatch: Dispatch<any>,
+  setPalletConfigComplete: React.Dispatch<React.SetStateAction<boolean>>,
+  navigation: NavigationProp<any>
+) => {
+  if (navigation.isFocused()) {
+    if (perishableCategoriesList.length === 0) {
+      const backupPerishableCategories = perishableCategories
+        .split('-')
+        .map(Number);
+      dispatch(setPerishableCategories(backupPerishableCategories));
+      setPalletConfigComplete(true);
+    } else {
+      setPalletConfigComplete(true);
+    }
+  }
+};
+
+export const MissingPalletWorklistTabNavigator = (
+  props: MissingPalletWorklistTabNavigatorProps
+): JSX.Element => {
   const {
-    useCallbackHook, useFocusEffectHook, useEffectHook, perishableCategories, getPalletConfigApi, getPalletDetailsApi,
-    dispatch, navigation, route, validateSessionCall, selectedTab, setGetPalletDetailsComplete, setPalletClicked,
-    setPalletConfigComplete, palletConfigComplete, palletClicked, getPalletDetailsComplete, userConfig
+    useCallbackHook,
+    useFocusEffectHook,
+    useEffectHook,
+    getPalletDetailsApi,
+    dispatch,
+    navigation,
+    route,
+    perishableCategoriesList,
+    validateSessionCall,
+    selectedTab,
+    setGetPalletDetailsComplete,
+    setPalletClicked,
+    setPalletConfigComplete,
+    palletConfigComplete,
+    palletClicked,
+    getPalletDetailsComplete,
+    userConfig
   } = props;
+  const { perishableCategories } = userConfig;
 
   // Navigation Listener
   useEffectHook(() => {
-    // Resets Get PalletDetails api response data when navigating off-screen
-    navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_PALLET_DETAILS.RESET });
-    });
+    resetPalletDetailsHook(navigation, dispatch);
   }, []);
 
   // Get Picklist Api call
@@ -158,19 +209,13 @@ export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTa
   );
 
   useEffectHook(() => {
-    if (navigation.isFocused()) {
-      if (perishableCategories.length === 0) {
-        if (!userConfig.overridePalletPerishables) {
-          dispatch(getPalletConfig());
-        } else {
-          const backupPerishableCategories = userConfig.backupCategories.split('-').map(Number);
-          dispatch(setPerishableCategories(backupPerishableCategories));
-          setPalletConfigComplete(true);
-        }
-      } else {
-        setPalletConfigComplete(true);
-      }
-    }
+    setPerishableCategoriesHook(
+      perishableCategoriesList,
+      perishableCategories,
+      dispatch,
+      setPalletConfigComplete,
+      navigation
+    );
   }, [perishableCategories, navigation]);
 
   // Get Pallet Details Api
@@ -186,20 +231,13 @@ export const MissingPalletWorklistTabNavigator = (props: MissingPalletWorklistTa
     }
   }, [getPalletDetailsApi]);
 
-  // GetPalletConfig API
   useEffectHook(() => {
-    if (navigation.isFocused()) {
-      getPalletConfigHook(getPalletConfigApi, dispatch, setPalletConfigComplete, userConfig.backupCategories);
-    }
-  }, [getPalletConfigApi]);
-
-  useEffectHook(() => {
-    if (navigation.isFocused()) {
-      if (palletConfigComplete && getPalletDetailsComplete) {
-        navigation.navigate('PalletManagement', { screen: 'ManagePallet' });
-        setGetPalletDetailsComplete(false);
-      }
-    }
+    navigationPalletHook(
+      navigation,
+      palletConfigComplete,
+      getPalletDetailsComplete,
+      setGetPalletDetailsComplete
+    );
   }, [getPalletDetailsComplete, palletConfigComplete]);
 
   return (
@@ -236,9 +274,8 @@ export const MissingPalletWorklistTabs = (): JSX.Element => {
   const navigation = useNavigation();
   const route = useRoute();
   const selectedTab = useTypedSelector(state => state.PalletWorklist.selectedTab);
-  const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
+  const { perishableCategoriesList } = useTypedSelector(state => state.PalletManagement);
   const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
-  const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const [palletConfigComplete, setPalletConfigComplete] = useState(false);
   const [getPalletDetailsComplete, setGetPalletDetailsComplete] = useState(false);
   const [palletClicked, setPalletClicked] = useState(false);
@@ -251,11 +288,10 @@ export const MissingPalletWorklistTabs = (): JSX.Element => {
       useEffectHook={useEffect}
       useFocusEffectHook={useFocusEffect}
       route={route}
+      perishableCategoriesList={perishableCategoriesList}
       validateSessionCall={validateSession}
-      perishableCategories={perishableCategories}
       selectedTab={selectedTab}
       getPalletDetailsApi={getPalletDetailsApi}
-      getPalletConfigApi={getPalletConfigApi}
       userConfig={userConfig}
       palletClicked={palletClicked}
       setPalletClicked={setPalletClicked}

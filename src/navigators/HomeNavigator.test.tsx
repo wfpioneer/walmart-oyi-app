@@ -83,7 +83,7 @@ jest.mock('react-native-app-auth', () => {
       authorizationCode: 'dummyAuthCode'
     })),
     refresh: jest.fn(() => Promise.resolve()),
-    logout: jest.fn(() => Promise.resolve())
+    logout: jest.fn(() => Promise.resolve()),
   };
 });
 

@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tab Navigator Render ReviewItemsNavigator 1`] = `
-<BottomTabNavigator
+<mockConstructor
   screenOptions={[Function]}
 >
-  <Screen
+  <mockConstructor
     component={
       {
         "$$typeof": Symbol(react.memo),
@@ -13,20 +13,20 @@ exports[`Tab Navigator Render ReviewItemsNavigator 1`] = `
         "type": [Function],
       }
     }
-    name="[missing "en.HOME.HOME" translation]"
+    name="HOME.HOME"
   />
-  <Screen
+  <mockConstructor
     component={[Function]}
-    name="[missing "en.WORKLIST.WORKLIST" translation]"
+    name="WORKLIST.WORKLIST"
   />
-</BottomTabNavigator>
+</mockConstructor>
 `;
 
 exports[`Tab Navigator Render ReviewItemsNavigator with user features 1`] = `
-<BottomTabNavigator
+<mockConstructor
   screenOptions={[Function]}
 >
-  <Screen
+  <mockConstructor
     component={
       {
         "$$typeof": Symbol(react.memo),
@@ -35,24 +35,33 @@ exports[`Tab Navigator Render ReviewItemsNavigator with user features 1`] = `
         "type": [Function],
       }
     }
-    name="[missing "en.HOME.HOME" translation]"
+    name="HOME.HOME"
   />
-  <Screen
+  <mockConstructor
     component={[Function]}
-    name="[missing "en.WORKLIST.WORKLIST" translation]"
+    name="WORKLIST.WORKLIST"
   />
-  <Screen
-    component={[Function]}
-    name="[missing "en.GENERICS.TOOLS" translation]"
-  />
-  <Screen
-    component={[Function]}
-    listeners={
+</mockConstructor>
+`;
+
+exports[`Tab Navigator Renders TabNavigatorStack with isBottomTabEnabled as true 1`] = `
+<mockConstructor
+  screenOptions={[Function]}
+>
+  <mockConstructor
+    component={
       {
-        "blur": [Function],
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "type": [Function],
       }
     }
-    name="[missing "en.APPROVAL.APPROVALS" translation]"
+    name="HOME.HOME"
   />
-</BottomTabNavigator>
+  <mockConstructor
+    component={[Function]}
+    name="WORKLIST.WORKLIST"
+  />
+</mockConstructor>
 `;

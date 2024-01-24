@@ -103,7 +103,6 @@ interface ManagePalletProps {
   clearPalletApi: AsyncState;
   displayClearConfirmation: boolean;
   setDisplayClearConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-  perishableCategories: number[];
   isPickerShow: boolean;
   setIsPickerShow: React.Dispatch<React.SetStateAction<boolean>>;
   displayWarningModal: boolean;
@@ -117,6 +116,7 @@ interface ManagePalletProps {
   userConfigs: Configurations;
   countryCode: string;
   trackEventCall: typeof trackEvent;
+  perishableCategoriesList:number[]
 }
 interface ApiResult {
   data: any;
@@ -780,13 +780,13 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
     route, dispatch, getItemDetailsApi, updateItemQtyAPI,
     deleteUpcsApi, addPalletUpcApi, getPalletDetailsApi, clearPalletApi,
     displayClearConfirmation, setDisplayClearConfirmation, setIsPickerShow,
-    isPickerShow, perishableCategories, displayWarningModal, setDisplayWarningModal,
+    isPickerShow , displayWarningModal, setDisplayWarningModal,
     useFocusEffectHook, useCallbackHook, confirmBackNavigate, setConfirmBackNavigate,
-    createPallet, postCreatePalletApi, countryCode, userConfigs, trackEventCall
+    createPallet, postCreatePalletApi, countryCode, userConfigs, trackEventCall,perishableCategoriesList
   } = props;
   const { id, expirationDate, newExpirationDate } = palletInfo;
-
-  // validation on app back press
+  
+ // validation on app back press
   useEffectHook(() => {
     const navigationListener = navigation.addListener('beforeRemove', e => {
       if (!confirmBackNavigate && enableSave(items, palletInfo)) {
@@ -881,7 +881,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       const palletId = id;
       const reducerInitialValue: string[] = [];
       const addExpiry = isExpiryDateChanged(palletInfo) ? newExpirationDate : expirationDate;
-      const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategories);
+      const removeExpirationDateForPallet = removeExpirationDate(items, perishableCategoriesList);
       // updated expiration date
       const updatedExpirationDate = addExpiry
         ? `${moment(addExpiry, 'DD/MM/YYYY').format('YYYY-MM-DDT00:00:00.000')}Z` : undefined;
@@ -928,8 +928,8 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
       dispatch(setPalletNewExpiration(newDate));
     }
   };
-  const isRemoveExpirationDate = removeExpirationDate(items, perishableCategories);
-  const isAddedPerishable = isAddedItemPerishable(items, perishableCategories);
+  const isRemoveExpirationDate = removeExpirationDate(items, perishableCategoriesList);
+  const isAddedPerishable = isAddedItemPerishable(items, perishableCategoriesList);
 
   return (
     <KeyboardAvoidingView
@@ -960,12 +960,12 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
               <Text style={styles.headerItemText}>{id}</Text>
             </View>
           )}
-          {(isPerishableItemExist(items, perishableCategories)) && (
+          {(isPerishableItemExist(items, perishableCategoriesList)) && (
             <PalletExpiration
               expirationDate={expirationDate}
               newExpirationDate={newExpirationDate}
               dateChanged={isExpiryDateChanged(palletInfo) || isAddedPerishable || isRemoveExpirationDate
-                || isPerishableItemDeleted(items, perishableCategories)}
+                || isPerishableItemDeleted(items, perishableCategoriesList)}
               dateRemoved={isRemoveExpirationDate}
               showPicker={isPickerShow}
               setShowPicker={setIsPickerShow}
@@ -1043,7 +1043,7 @@ export const ManagePalletScreen = (props: ManagePalletProps): JSX.Element => {
 
 const ManagePallet = (): JSX.Element => {
   const {
-    palletInfo, managePalletMenu, items, perishableCategories, createPallet
+    palletInfo, managePalletMenu, items, createPallet,perishableCategoriesList
   } = useTypedSelector(state => state.PalletManagement);
   const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
   const navigation: NavigationProp<any> = useNavigation();
@@ -1115,7 +1115,6 @@ const ManagePallet = (): JSX.Element => {
           clearPalletApi={clearPalletApi}
           displayClearConfirmation={displayClearConfirmation}
           setDisplayClearConfirmation={setDisplayClearConfirmation}
-          perishableCategories={perishableCategories}
           isPickerShow={isPickerShow}
           setIsPickerShow={setIsPickerShow}
           displayWarningModal={displayWarningModal}
@@ -1129,6 +1128,7 @@ const ManagePallet = (): JSX.Element => {
           userConfigs={configs}
           countryCode={countryCode}
           trackEventCall={trackEvent}
+          perishableCategoriesList={perishableCategoriesList}
         />
         <BottomSheetModal
           ref={bottomSheetModalRef}

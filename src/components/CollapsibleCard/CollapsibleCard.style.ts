@@ -11,15 +11,14 @@ const styles = StyleSheet.create({
     borderBottomColor: COLOR.GREY_200,
     backgroundColor: COLOR.WHITE
   },
+  arrowView: {
+    flex: 1
+  },
   titleContainer: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'
-  },
-  arrowView: {
-    flex: 0.1,
-    paddingLeft: 5
   }
 });
 

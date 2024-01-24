@@ -24,6 +24,7 @@ export interface LocationList {
     onCalcPress: () => void;
     scanned?: boolean;
     locationType: LocationType;
+    showQtyChanged?: boolean
 }
 
 interface LocationListCardProp {
@@ -38,6 +39,7 @@ interface LocationListCardProp {
   showCalculator: boolean;
   minQty: number;
   maxQty: number;
+  vendorPackQty: number | undefined;
 }
 
 const renderLocationCard = ({
@@ -53,7 +55,7 @@ const renderLocationCard = ({
     maxQty: number
   }) => {
   const {
-    locationName, quantity, palletId, increment, decrement, onDelete, onCalcPress, qtyChange, scanned
+    locationName, quantity, palletId, increment, decrement, onDelete, onCalcPress, qtyChange, scanned, showQtyChanged
   } = item;
   return (
     <View style={styles.locationCard} key={`${locationName}-${index}`}>
@@ -70,7 +72,7 @@ const renderLocationCard = ({
         onLocationDelete={onDelete}
         scanned={scanned}
         showCalculator={showCalculator}
-        showQtyChanged={item.quantity !== item.oldQuantity}
+        showQtyChanged={item.quantity !== item.oldQuantity || !!showQtyChanged}
         minQty={minQty}
         maxQty={maxQty}
       />
@@ -103,7 +105,8 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
     scanRequired,
     showCalculator,
     minQty,
-    maxQty
+    maxQty,
+    vendorPackQty
   } = props;
   const locationTitle = locationType === 'floor' ? strings('LOCATION.FLOOR') : strings('LOCATION.RESERVE');
 
@@ -147,7 +150,7 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
           <View>
             <MaterialCommunityIcon name="map-marker-outline" size={25} color={COLOR.BLACK} />
           </View>
-          <View>
+          <View style={styles.titleFlex}>
             <Text style={styles.title}>
               {`${locationTitle} ${!loading ? `(${locationList.length})` : ''}`}
             </Text>
@@ -155,6 +158,13 @@ const LocationListCard = (props: LocationListCardProp) : JSX.Element => {
               {getSubTextBasedonLocType(locationType, scanRequired)}
             </Text>
           </View>
+          {locationType === 'reserve' && vendorPackQty !== undefined && (
+            <View>
+              <Text>
+                {`${strings('ITEM.VENDOR_PACK')}: ${vendorPackQty}`}
+              </Text>
+            </View>
+          )}
         </View>
         {locationType === 'floor' && !loading
             && (

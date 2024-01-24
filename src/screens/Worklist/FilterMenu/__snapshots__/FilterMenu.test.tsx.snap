@@ -5,7 +5,7 @@ exports[`FilterMenu Component ShallowRender FilterMenu 1`] = `
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -169,7 +169,7 @@ exports[`FilterMenu Component ShallowRender FilterMenu with Audits WL Goal 1`] =
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],

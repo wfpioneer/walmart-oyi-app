@@ -195,7 +195,6 @@ describe('ManagePalletScreen', () => {
             setDisplayClearConfirmation={jest.fn()}
             isPickerShow={false}
             setIsPickerShow={jest.fn()}
-            perishableCategories={[]}
             displayWarningModal={false}
             setDisplayWarningModal={jest.fn()}
             useFocusEffectHook={jest.fn()}
@@ -207,6 +206,7 @@ describe('ManagePalletScreen', () => {
             userConfigs={mockConfig}
             countryCode={mockCountryCode}
             trackEventCall={jest.fn()}
+            perishableCategoriesList={[]}
           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -252,7 +252,6 @@ describe('ManagePalletScreen', () => {
               setDisplayClearConfirmation={jest.fn()}
               isPickerShow={false}
               setIsPickerShow={jest.fn()}
-              perishableCategories={[]}
               displayWarningModal={false}
               setDisplayWarningModal={jest.fn()}
               useFocusEffectHook={jest.fn()}
@@ -264,7 +263,8 @@ describe('ManagePalletScreen', () => {
               userConfigs={mockConfig}
               countryCode={mockCountryCode}
               trackEventCall={mockTrackEventCall}
-            />
+              perishableCategoriesList={[]}
+             />
           </Provider>
         );
         const onSubmitButton = getByTestId('Enable Save Button');
@@ -295,7 +295,6 @@ describe('ManagePalletScreen', () => {
               setDisplayClearConfirmation={jest.fn()}
               isPickerShow={false}
               setIsPickerShow={jest.fn()}
-              perishableCategories={[]}
               displayWarningModal={false}
               setDisplayWarningModal={jest.fn()}
               useFocusEffectHook={jest.fn()}
@@ -307,6 +306,7 @@ describe('ManagePalletScreen', () => {
               userConfigs={mockConfig}
               countryCode={mockCountryCode}
               trackEventCall={mockTrackEventCall}
+              perishableCategoriesList={[]}
             />
           </Provider>
         );
@@ -368,7 +368,6 @@ describe('ManagePalletScreen', () => {
             setDisplayClearConfirmation={jest.fn()}
             isPickerShow={false}
             setIsPickerShow={jest.fn()}
-            perishableCategories={[]}
             displayWarningModal={false}
             setDisplayWarningModal={jest.fn()}
             useFocusEffectHook={jest.fn()}
@@ -380,7 +379,8 @@ describe('ManagePalletScreen', () => {
             userConfigs={mockConfig}
             countryCode={mockCountryCode}
             trackEventCall={jest.fn()}
-          />
+            perishableCategoriesList={[]}
+           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
       });
@@ -406,7 +406,6 @@ describe('ManagePalletScreen', () => {
             setDisplayClearConfirmation={jest.fn()}
             isPickerShow={false}
             setIsPickerShow={jest.fn()}
-            perishableCategories={[]}
             displayWarningModal={true}
             setDisplayWarningModal={jest.fn()}
             useFocusEffectHook={jest.fn()}
@@ -418,7 +417,8 @@ describe('ManagePalletScreen', () => {
             userConfigs={mockConfig}
             countryCode={mockCountryCode}
             trackEventCall={jest.fn()}
-          />
+            perishableCategoriesList={[]}
+           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
       });
@@ -445,7 +445,6 @@ describe('ManagePalletScreen', () => {
             setDisplayClearConfirmation={jest.fn()}
             isPickerShow={false}
             setIsPickerShow={jest.fn()}
-            perishableCategories={[]}
             displayWarningModal={false}
             setDisplayWarningModal={jest.fn()}
             useFocusEffectHook={jest.fn()}
@@ -457,6 +456,7 @@ describe('ManagePalletScreen', () => {
             userConfigs={mockConfig}
             countryCode={mockCountryCode}
             trackEventCall={jest.fn()}
+            perishableCategoriesList={[]}
           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -488,7 +488,6 @@ describe('ManagePalletScreen', () => {
             setDisplayClearConfirmation={jest.fn()}
             isPickerShow={true}
             setIsPickerShow={jest.fn()}
-            perishableCategories={[]}
             displayWarningModal={false}
             setDisplayWarningModal={jest.fn()}
             useFocusEffectHook={jest.fn()}
@@ -500,7 +499,8 @@ describe('ManagePalletScreen', () => {
             userConfigs={mockConfig}
             countryCode={mockCountryCode}
             trackEventCall={jest.fn()}
-          />
+            perishableCategoriesList={[]}
+           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
       });
@@ -526,7 +526,6 @@ describe('ManagePalletScreen', () => {
             setDisplayClearConfirmation={jest.fn()}
             isPickerShow={false}
             setIsPickerShow={jest.fn()}
-            perishableCategories={[]}
             displayWarningModal={false}
             setDisplayWarningModal={jest.fn()}
             useFocusEffectHook={jest.fn()}
@@ -538,6 +537,7 @@ describe('ManagePalletScreen', () => {
             userConfigs={mockConfig}
             countryCode={mockCountryCode}
             trackEventCall={jest.fn()}
+            perishableCategoriesList={[]}
           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -568,7 +568,6 @@ describe('ManagePalletScreen', () => {
             setDisplayClearConfirmation={jest.fn()}
             isPickerShow={false}
             setIsPickerShow={jest.fn()}
-            perishableCategories={[]}
             displayWarningModal={false}
             setDisplayWarningModal={jest.fn()}
             useFocusEffectHook={jest.fn()}
@@ -580,6 +579,7 @@ describe('ManagePalletScreen', () => {
             userConfigs={mockConfig}
             countryCode={mockCountryCode}
             trackEventCall={jest.fn()}
+            perishableCategoriesList={[]}
           />
         );
         expect(renderer.getRenderOutput()).toMatchSnapshot();

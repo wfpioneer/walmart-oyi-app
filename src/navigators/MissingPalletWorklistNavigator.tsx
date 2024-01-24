@@ -1,7 +1,10 @@
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity, View } from 'react-native';
-import { HeaderBackButton } from '@react-navigation/elements';
+import {
+  HeaderBackButton,
+  HeaderBackButtonProps
+} from '@react-navigation/elements';
 import { useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -44,11 +47,38 @@ interface MissingPalletWorklistNavigatorProps {
   isBottomTabEnabled: boolean;
 }
 
+export const getScreenOptions = (
+  screenName: string,
+  title: string,
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean,
+  navigateBack: () => void
+) => ({
+  headerTitle: title,
+  headerLeft: (hlProps: HeaderBackButtonProps) => hlProps.canGoBack && (
+  <HeaderBackButton
+        // eslint-disable-next-line react/jsx-props-no-spreading
+    {...hlProps}
+    onPress={navigateBack}
+    testID="back-button"
+  />
+  ),
+  headerRight: () => (
+    <View style={styles.headerContainer}>
+      {renderScanButton(dispatch, isManualScanEnabled)}
+    </View>
+  )
+});
+
 export const MissingPalletWorklistNavigatorStack = (
   props: MissingPalletWorklistNavigatorProps
 ): JSX.Element => {
   const {
-    dispatch, isManualScanEnabled, palletWorklists, navigation, isBottomTabEnabled
+    dispatch,
+    isManualScanEnabled,
+    palletWorklists,
+    navigation,
+    isBottomTabEnabled
   } = props;
 
   const navigateBack = () => {
@@ -68,9 +98,17 @@ export const MissingPalletWorklistNavigatorStack = (
       })}
       screenListeners={{
         focus: screen => {
-          if (screen.target && !screen.target.includes('MissingPalletWorklistTabs') && isBottomTabEnabled) {
+          if (
+            screen.target
+            && !screen.target.includes('MissingPalletWorklistTabs')
+            && isBottomTabEnabled
+          ) {
             dispatch(setBottomTab(false));
-          } else if (screen.target && screen.target.includes('MissingPalletWorklistTabs') && !isBottomTabEnabled) {
+          } else if (
+            screen?.target
+            && screen?.target?.includes('MissingPalletWorklistTabs')
+            && !isBottomTabEnabled
+          ) {
             dispatch(setBottomTab(true));
           }
         }
@@ -79,40 +117,35 @@ export const MissingPalletWorklistNavigatorStack = (
       <Stack.Screen
         name="MissingPalletWorklistTabs"
         component={MissingPalletWorklistTabs}
-        options={{
-          headerTitle: strings('WORKLIST.PALLET_WORKLIST'),
-          headerLeft: hlProps => hlProps.canGoBack && (
-            <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...hlProps}
-              onPress={navigateBack}
-            />
-          )
-        }}
+        options={getScreenOptions(
+          'MissingPalletWorklistTabs',
+          strings('WORKLIST.PALLET_WORKLIST'),
+          dispatch,
+          isManualScanEnabled,
+          navigateBack
+        )}
       />
       <Stack.Screen
         name="ScanPallet"
         component={ScanPallet}
-        options={{
-          headerTitle: strings('WORKLIST.SCAN_PALLET'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'ScanPallet',
+          strings('WORKLIST.SCAN_PALLET'),
+          dispatch,
+          isManualScanEnabled,
+          navigateBack
+        )}
       />
       <Stack.Screen
         name="ScanLocation"
         component={ScanLocation}
-        options={{
-          headerTitle: strings('LOCATION.SCAN_LOCATION_HEADER'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'ScanLocation',
+          strings('LOCATION.SCAN_LOCATION_HEADER'),
+          dispatch,
+          isManualScanEnabled,
+          navigateBack
+        )}
       />
     </Stack.Navigator>
   );
@@ -120,7 +153,9 @@ export const MissingPalletWorklistNavigatorStack = (
 
 const MissingPalletWorklistNavigator = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { isManualScanEnabled, isBottomTabEnabled } = useTypedSelector(state => state.Global);
+  const { isManualScanEnabled, isBottomTabEnabled } = useTypedSelector(
+    state => state.Global
+  );
   const { palletWorklists } = useTypedSelector(state => state.User.configs);
   const navigation = useNavigation();
   return (

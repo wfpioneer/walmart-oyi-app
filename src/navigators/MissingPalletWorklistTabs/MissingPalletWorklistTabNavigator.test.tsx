@@ -1,20 +1,35 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import {
-  NavigationProp,
-  RouteProp
-} from '@react-navigation/native';
+import { NavigationProp, RouteProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import { strings } from '../../locales';
 import {
-  MissingPalletWorklistTabNavigator, getPalletConfigHook, getPalletDetailsApiHook
+  MissingPalletWorklistTabNavigator,
+  getPalletDetailsApiHook,
+  navigationPalletHook,
+  resetPalletDetailsHook,
+  setPerishableCategoriesHook
 } from './MissingPalletWorklistTabNavigator';
 import { mockConfig } from '../../mockData/mockConfig';
 import { AsyncState } from '../../models/AsyncState';
 import { Tabs } from '../../models/PalletWorklist';
 import { SNACKBAR_TIMEOUT } from '../../utils/global';
 
-let navigationProp: NavigationProp<any>;
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn(),
+  getState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
+};
 const routeProp: RouteProp<any, string> = {
   key: '',
   name: 'MissingPalletWorklistTabs'
@@ -35,13 +50,12 @@ describe('MissingPalletWorklist Navigator', () => {
         dispatch={jest.fn()}
         navigation={navigationProp}
         route={routeProp}
+        perishableCategoriesList={[49, 20]}
         validateSessionCall={jest.fn()}
         useCallbackHook={jest.fn()}
         useEffectHook={jest.fn()}
-        perishableCategories={[49, 20]}
         selectedTab={Tabs.TODO}
         getPalletDetailsApi={defaultAsyncState}
-        getPalletConfigApi={defaultAsyncState}
         userConfig={mockConfig}
         palletClicked={false}
         setPalletClicked={jest.fn()}
@@ -80,7 +94,11 @@ describe('MissingPalletWorklist Navigator', () => {
       };
 
       getPalletDetailsApiHook(
-        successApi, true, mockSetPalletClicked, mockDispatch, mockSetGetPalletDetailsComplete
+        successApi,
+        true,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockSetGetPalletDetailsComplete
       );
       expect(mockDispatch).toBeCalledTimes(2);
       expect(Toast.show).toBeCalledTimes(0);
@@ -98,7 +116,11 @@ describe('MissingPalletWorklist Navigator', () => {
       };
 
       getPalletDetailsApiHook(
-        apiResult, false, mockSetPalletClicked, mockDispatch, mockSetGetPalletDetailsComplete
+        apiResult,
+        false,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockSetGetPalletDetailsComplete
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -111,7 +133,11 @@ describe('MissingPalletWorklist Navigator', () => {
     it('Tests getPalletDetailsApiHook on fail', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
       getPalletDetailsApiHook(
-        failApi, false, mockSetPalletClicked, mockDispatch, mockSetGetPalletDetailsComplete
+        failApi,
+        false,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockSetGetPalletDetailsComplete
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -121,32 +147,61 @@ describe('MissingPalletWorklist Navigator', () => {
         position: 'bottom'
       });
     });
-    it('test getPalletConfigHook', async () => {
-      const dispatch = jest.fn();
-      const setConfigComplete = jest.fn();
-      const successAsyncState = {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: {
-            perishableCategories: [1, 8, 35, 36, 40, 41, 43, 45, 46, 47, 49, 51, 52, 53, 54, 55, 58]
-          }
-        }
-      };
-      const failureAsyncState = {
-        ...defaultAsyncState,
-        error: 'test'
-      };
+    it('Tests setPerishable categories Hook', () => {
+      const mockPerishableCategoriesList = [49, 22];
+      const mockSetPalletConfigComplete = jest.fn();
+      const mockIsNotFocused = jest.fn(() => false);
+      expect(mockIsNotFocused).not.toBeCalled();
+      const mockIsFocused = jest.fn(() => true);
+      expect(mockIsFocused).not.toBeCalled();
+      expect(mockIsNotFocused).not.toBeCalled();
+      setPerishableCategoriesHook(
+        mockPerishableCategoriesList,
+        '',
+        mockDispatch,
+        mockSetPalletConfigComplete,
+        navigationProp
+      );
+      expect(mockDispatch).toBeCalledTimes(0);
+      expect(mockSetPalletConfigComplete).toBeCalledWith(true);
+      setPerishableCategoriesHook(
+        [],
+        '',
+        mockDispatch,
+        mockSetPalletConfigComplete,
+        navigationProp
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockSetPalletConfigComplete).toBeCalledWith(true);
+    });
+    it('Tests reset pallet details hook', () => {
+      navigationProp.addListener = jest
+        .fn()
+        .mockImplementation((event, callBack) => {
+          callBack();
+        });
 
-      getPalletConfigHook(successAsyncState, dispatch, setConfigComplete, '1, 8');
-      expect(dispatch).toBeCalledTimes(2);
-      expect(setConfigComplete).toBeCalledTimes(1);
-
-      dispatch.mockReset();
-      setConfigComplete.mockReset();
-      getPalletConfigHook(failureAsyncState, dispatch, setConfigComplete, '1, 8');
-      expect(dispatch).toBeCalledTimes(2);
-      expect(setConfigComplete).toBeCalledTimes(1);
+      resetPalletDetailsHook(navigationProp, mockDispatch);
+      expect(navigationProp.addListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+    it('Tests reset pallet navigation hook', () => {
+      const mockIsNotFocused = jest.fn(() => false);
+      expect(mockIsNotFocused).not.toBeCalled();
+      const mockIsFocused = jest.fn(() => true);
+      expect(mockIsFocused).not.toBeCalled();
+      navigationPalletHook(
+        navigationProp,
+        true,
+        true,
+        mockSetGetPalletDetailsComplete
+      );
+      expect(navigationProp.navigate).toHaveBeenCalledTimes(1);
+      expect(navigationProp.navigate).toHaveBeenCalledWith('PalletManagement', { screen: 'ManagePallet' });
+      expect(mockSetGetPalletDetailsComplete).toBeCalledWith(false);
     });
   });
 });

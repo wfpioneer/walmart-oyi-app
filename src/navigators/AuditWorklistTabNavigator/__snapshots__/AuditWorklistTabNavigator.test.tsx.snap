@@ -5,7 +5,7 @@ exports[`AuditWorklistTab Navigator Renders AuditWorkListTab component wrapper 1
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -46,7 +46,7 @@ exports[`AuditWorklistTab Navigator Renders the Audit WorkList Tab Navigator com
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -119,7 +119,7 @@ exports[`AuditWorklistTab Navigator renders the Audit worklist tab navigator com
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],

@@ -32,7 +32,13 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
           size={25}
         />
       </View>
-      <View>
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
         <Text
           style={
             {
@@ -411,7 +417,13 @@ exports[`Tests LocationListCard Component should tests redering LocationListCard
           size={25}
         />
       </View>
-      <View>
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
         <Text
           style={
             {
@@ -971,7 +983,13 @@ exports[`Tests LocationListCard Component should tests rendering LocationListCar
           size={25}
         />
       </View>
-      <View>
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
         <Text
           style={
             {

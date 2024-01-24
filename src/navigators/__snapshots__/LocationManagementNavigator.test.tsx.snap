@@ -25,42 +25,22 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   <Screen
     component={[Function]}
     name="Zones"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Aisles"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Sections"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="SectionDetails"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
@@ -121,12 +101,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   <Screen
     component={[Function]}
     name="AddItems"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
-      }
-    }
+    options={[Function]}
   />
 </StackNavigator>
 `;
@@ -156,42 +131,22 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   <Screen
     component={[Function]}
     name="Zones"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Aisles"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Sections"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="SectionDetails"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
@@ -252,12 +207,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator w
   <Screen
     component={[Function]}
     name="AddItems"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
-      }
-    }
+    options={[Function]}
   />
 </StackNavigator>
 `;
@@ -287,42 +237,22 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   <Screen
     component={[Function]}
     name="Zones"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Aisles"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Sections"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="SectionDetails"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
@@ -383,12 +313,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   <Screen
     component={[Function]}
     name="AddItems"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
-      }
-    }
+    options={[Function]}
   />
 </StackNavigator>
 `;
@@ -418,42 +343,22 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   <Screen
     component={[Function]}
     name="Zones"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.ZONES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Aisles"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.AISLES" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="Sections"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SECTIONS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="SectionDetails"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.LOCATION_DETAILS" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
@@ -514,12 +419,7 @@ exports[`LocationManagement Navigator Renders the LocationManagement Navigator, 
   <Screen
     component={[Function]}
     name="AddItems"
-    options={
-      {
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.LOCATION.SCAN_ITEM" translation]",
-      }
-    }
+    options={[Function]}
   />
 </StackNavigator>
 `;
@@ -571,4 +471,200 @@ exports[`LocationManagement Navigator Renders the scanButton header icon 1`] = `
     />
   </View>
 </TouchableOpacity>
+`;
+
+exports[`LocationManagement Navigator addItemsOptions should generate correct options 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingLeft": 10,
+          "paddingRight": 15,
+        }
+      }
+    >
+      <mockConstructor
+        color="#ffffffff"
+        name="barcode-scan"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`LocationManagement Navigator aislesOptions should generate correct options 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <mockConstructor
+        color="#ffffffff"
+        name="camera"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingLeft": 10,
+          "paddingRight": 15,
+        }
+      }
+    >
+      <mockConstructor
+        color="#ffffffff"
+        name="barcode-scan"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`LocationManagement Navigator sectionDetailsOptions should generate correct options 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <mockConstructor
+        color="#ffffffff"
+        name="camera"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingLeft": 10,
+          "paddingRight": 15,
+        }
+      }
+    >
+      <mockConstructor
+        color="#ffffffff"
+        name="barcode-scan"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`LocationManagement Navigator sectionOptions should generate correct options 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingHorizontal": 10,
+        }
+      }
+    >
+      <mockConstructor
+        color="#ffffffff"
+        name="camera"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingLeft": 10,
+          "paddingRight": 15,
+        }
+      }
+    >
+      <mockConstructor
+        color="#ffffffff"
+        name="barcode-scan"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
 `;

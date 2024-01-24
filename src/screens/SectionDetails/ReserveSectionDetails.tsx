@@ -1,39 +1,55 @@
 import React, {
   DependencyList,
-  Dispatch, EffectCallback, useCallback, useEffect, useState
+  Dispatch,
+  EffectCallback,
+  JSX,
+  useCallback,
+  useEffect,
+  useState
 } from 'react';
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import {
-  ActivityIndicator, Text, TouchableOpacity, View
-} from 'react-native';
-import { NavigationProp, useFocusEffect, useNavigation } from '@react-navigation/native';
+  NavigationProp,
+  useFocusEffect,
+  useNavigation
+} from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from 'react-native-gesture-handler';
-import { Pallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
+import {
+  Pallet,
+  PalletInfo,
+  PalletItem
+} from '../../models/PalletManagementTypes';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { strings } from '../../locales';
-import { LocationItem, ReserveDetailsPallet, SectionDetailsPallet } from '../../models/LocationItems';
-import { getPalletConfig, getPalletDetails } from '../../state/actions/saga';
+import {
+  LocationItem,
+  ReserveDetailsPallet,
+  SectionDetailsPallet
+} from '../../models/LocationItems';
+import { getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import styles from './SectionDetailsScreen.style';
 import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
-import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
-import { setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
+import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
+import {
+  setPerishableCategories,
+  setupPallet
+} from '../../state/actions/PalletManagement';
 import ReservePalletRow from '../../components/ReservePalletRow/ReservePalletRow';
-import { Configurations } from '../../models/User';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 import { setIsToolBarNavigation } from '../../state/actions/Location';
 
 interface ReserveSectionDetailsProps {
   getSectionDetailsApi: AsyncState;
   getPalletDetailsApi: AsyncState;
-  getPalletConfigApi: AsyncState;
   dispatch: Dispatch<any>;
   navigation: NavigationProp<any>;
   trackEventCall: (eventName: string, params?: any) => void;
-  useEffectHook: (effect: EffectCallback, deps?:ReadonlyArray<any>) => void;
+  useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
   palletIds: string[];
   configComplete: boolean;
   setConfigComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -41,20 +57,26 @@ interface ReserveSectionDetailsProps {
   setGetPalletDetailsComplete: React.Dispatch<React.SetStateAction<boolean>>;
   palletClicked: boolean;
   setPalletClicked: React.Dispatch<React.SetStateAction<boolean>>;
-  userConfig: Configurations;
-  perishableCategories: number[];
   useFocusEffectHook: (effect: EffectCallback) => void;
-  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
-  palletInfo: PalletInfo
+  useCallbackHook: <T extends (...args: any[]) => any>(
+    callback: T,
+    deps: DependencyList
+  ) => T;
+  palletInfo: PalletInfo;
+  perishableCategoriesList: number[];
+  perishableCategories: string;
 }
 // Combines the Reserve Response data from the get pallet/sectionDetails api to display creation date.
 export const combineReserveArrays = (
-  reserveDetails?: ReserveDetailsPallet[], palletData?: Omit<SectionDetailsPallet, 'items'>[]
+  reserveDetails?: ReserveDetailsPallet[],
+  palletData?: Omit<SectionDetailsPallet, 'items'>[]
 ): ReserveDetailsPallet[] => {
   let palletDetails: ReserveDetailsPallet[] = [];
   if (reserveDetails && palletData) {
     palletDetails = reserveDetails.map(pallet => {
-      const sectionReserve = palletData.find(loc => loc.palletId === pallet.id.toString());
+      const sectionReserve = palletData.find(
+        loc => loc.palletId === pallet.id.toString()
+      );
       return { ...pallet, ...sectionReserve };
     });
   }
@@ -62,12 +84,60 @@ export const combineReserveArrays = (
 };
 
 export const showActivitySpinner = (
-  configWaiting: boolean,
   getPalletDetailsWaiting: boolean,
   getPalletDetailsComplete: boolean,
   getSectionDetailsWaiting: boolean
-) => (configWaiting) || (getPalletDetailsWaiting)
-|| (getSectionDetailsWaiting) || (!configWaiting && getPalletDetailsComplete);
+) =>
+  getPalletDetailsWaiting ||
+  getSectionDetailsWaiting ||
+  getPalletDetailsComplete;
+
+export const navListenerHook = (
+  navigation: NavigationProp<any>,
+  dispatch: Dispatch<any>
+) => {
+  // Resets Get PalletDetails api response data when navigating off-screen
+  navigation.addListener('beforeRemove', () => {
+    dispatch({ type: GET_PALLET_DETAILS.RESET });
+  });
+};
+
+export const setPerishableCategoriesHook = (
+  perishableCategoriesList: number[],
+  perishableCategories: string,
+  dispatch: Dispatch<any>,
+  setConfigComplete: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (perishableCategoriesList.length === 0) {
+    const backupPerishableCategories = perishableCategories
+      .split('-')
+      .map(Number);
+    dispatch(setPerishableCategories(backupPerishableCategories));
+    setConfigComplete(true);
+  }
+};
+
+export const navigateToPalletManagementHook = (
+  configComplete: boolean,
+  getPalletDetailsComplete: boolean,
+  trackEventCall: (eventName: string, params?: any) => void,
+  palletInfo: PalletInfo,
+  navigation: NavigationProp<any>,
+  setGetPalletDetailsComplete: React.Dispatch<React.SetStateAction<boolean>>,
+  dispatch: Dispatch<any>
+) => {
+  if (navigation.isFocused()) {
+    if (configComplete && getPalletDetailsComplete) {
+      trackEventCall('Section_Details', {
+        action: 'navigating_to_manage_pallet_screen',
+        palletId: palletInfo.id
+      });
+      navigation.navigate('PalletManagement', { screen: 'ManagePallet' });
+      setGetPalletDetailsComplete(false);
+      dispatch(setIsToolBarNavigation(false));
+    }
+  }
+};
 
 export const getPalletDetailsApiHook = (
   getPalletDetailsApi: AsyncState,
@@ -80,9 +150,8 @@ export const getPalletDetailsApiHook = (
   // on api success
   if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
     if (getPalletDetailsApi.result.status === 200 && palletClicked) {
-      const {
-        id, createDate, expirationDate, items
-      } = getPalletDetailsApi.result.data.pallets[0];
+      const { id, createDate, expirationDate, items } =
+        getPalletDetailsApi.result.data.pallets[0];
       setPalletClicked(false);
       const palletItems = items.map((item: PalletItem) => ({
         ...item,
@@ -102,11 +171,15 @@ export const getPalletDetailsApiHook = (
       dispatch(setupPallet(palletDetails));
       setGetPalletDetailsComplete(true);
     } else if (getPalletDetailsApi.result.status === 207) {
-      const failedPallets = reservePallets?.filter(pallet => pallet.statusCode !== 200).length;
+      const failedPallets = reservePallets?.filter(
+        pallet => pallet.statusCode !== 200
+      ).length;
       // Display toast message
       Toast.show({
         type: 'error',
-        text1: strings('LOCATION.GET_FAILED_PALLETS', { amount: failedPallets }),
+        text1: strings('LOCATION.GET_FAILED_PALLETS', {
+          amount: failedPallets
+        }),
         visibilityTime: SNACKBAR_TIMEOUT_LONG,
         position: 'bottom'
       });
@@ -132,34 +205,13 @@ export const getPalletDetailsApiHook = (
   }
 };
 
-export const getPalletConfigHook = (
-  getPalletConfigApi: AsyncState,
-  dispatch: Dispatch<any>,
-  setConfigComplete: React.Dispatch<React.SetStateAction<boolean>>,
-  backupCategories: string
-) => {
-  // on api success
-  if (!getPalletConfigApi.isWaiting && getPalletConfigApi.result) {
-    const { perishableCategories } = getPalletConfigApi.result.data;
-    dispatch(setPerishableCategories(perishableCategories));
-    dispatch({ type: GET_PALLET_CONFIG.RESET });
-    setConfigComplete(true);
-  }
-  // on api error
-  if (getPalletConfigApi.error) {
-    const backupPerishableCategories = backupCategories.split('-').map(Number);
-    dispatch(setPerishableCategories(backupPerishableCategories));
-    dispatch({ type: GET_PALLET_CONFIG.RESET });
-    setConfigComplete(true);
-  }
-};
-
-export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) : JSX.Element => {
+export const ReserveSectionDetailsScreen = (
+  props: ReserveSectionDetailsProps
+): JSX.Element => {
   const {
     getSectionDetailsApi,
     getPalletDetailsApi,
     dispatch,
-    userConfig,
     navigation,
     trackEventCall,
     useEffectHook,
@@ -170,11 +222,11 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     setConfigComplete,
     configComplete,
     setGetPalletDetailsComplete,
-    getPalletConfigApi,
-    perishableCategories,
     useFocusEffectHook,
     useCallbackHook,
-    palletInfo
+    palletInfo,
+    perishableCategoriesList,
+    perishableCategories
   } = props;
   const locationItem: LocationItem | undefined = (getSectionDetailsApi.result && getSectionDetailsApi.result.data)
   || undefined;
@@ -186,26 +238,16 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     locationItem?.pallets.palletData
   ).sort(sortPallets);
 
-  useEffectHook(() => {
-    // Resets Get PalletDetails api response data when navigating off-screen
-    navigation.addListener('beforeRemove', () => {
-      dispatch({ type: GET_PALLET_DETAILS.RESET });
-    });
-  }, []);
+  useEffectHook(() => navListenerHook(navigation, dispatch), []);
 
   useFocusEffectHook(
     useCallbackHook(() => {
-      if (perishableCategories.length === 0) {
-        if (!userConfig.overridePalletPerishables) {
-          dispatch(getPalletConfig());
-        } else {
-          const backupPerishableCategories = userConfig.backupCategories.split('-').map(Number);
-          dispatch(setPerishableCategories(backupPerishableCategories));
-          setConfigComplete(true);
-        }
-      } else {
-        setConfigComplete(true);
-      }
+      setPerishableCategoriesHook(
+        perishableCategoriesList,
+        perishableCategories,
+        dispatch,
+        setConfigComplete
+      );
     }, [navigation])
   );
 
@@ -223,33 +265,25 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     }
   }, [getPalletDetailsApi]);
 
-  // GetPalletConfig API
   useEffectHook(() => {
-    if (navigation.isFocused()) {
-      getPalletConfigHook(getPalletConfigApi, dispatch, setConfigComplete, userConfig.backupCategories);
-    }
-  }, [getPalletConfigApi]);
-
-  useEffectHook(() => {
-    if (navigation.isFocused()) {
-      if (configComplete && getPalletDetailsComplete) {
-        trackEventCall('Section_Details', {
-          action: 'navigating_to_manage_pallet_screen',
-          palletId: palletInfo.id
-        });
-        navigation.navigate('PalletManagement', { screen: 'ManagePallet' });
-        setGetPalletDetailsComplete(false);
-        dispatch(setIsToolBarNavigation(false));
-      }
-    }
+    navigateToPalletManagementHook(
+      configComplete,
+      getPalletDetailsComplete,
+      trackEventCall,
+      palletInfo,
+      navigation,
+      setGetPalletDetailsComplete,
+      dispatch
+    );
   }, [getPalletDetailsComplete, configComplete]);
 
-  if (showActivitySpinner(
-    getPalletConfigApi.isWaiting,
-    getPalletDetailsApi.isWaiting,
-    getPalletDetailsComplete,
-    getSectionDetailsApi.isWaiting
-  )) {
+  if (
+    showActivitySpinner(
+      getPalletDetailsApi.isWaiting,
+      getPalletDetailsComplete,
+      getSectionDetailsApi.isWaiting
+    )
+  ) {
     return (
       <ActivityIndicator
         animating={true}
@@ -265,11 +299,13 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
     return (
       <View style={styles.errorView}>
         <MaterialCommunityIcon name="alert" size={40} color={COLOR.RED_300} />
-        <Text style={styles.errorText}>{strings('LOCATION.LOCATION_API_ERROR')}</Text>
+        <Text style={styles.errorText}>
+          {strings('LOCATION.LOCATION_API_ERROR')}
+        </Text>
         <TouchableOpacity
           style={styles.errorButton}
           onPress={() => {
-            trackEventCall('location_api_retry',);
+            trackEventCall('location_api_retry');
             dispatch(getPalletDetails({ palletIds }));
           }}
         >
@@ -295,32 +331,42 @@ export const ReserveSectionDetailsScreen = (props: ReserveSectionDetailsProps) :
         keyExtractor={(item, idx) => `${item.id}${idx}`}
         ListEmptyComponent={(
           <View style={styles.emptyContainer}>
-            <MaterialCommunityIcon name="information" size={40} color={COLOR.DISABLED_BLUE} />
+            <MaterialCommunityIcon
+              name="information"
+              size={40}
+              color={COLOR.DISABLED_BLUE}
+            />
             <Text>{strings('LOCATION.RESERVE_EMPTY')}</Text>
           </View>
-        )}
+       )}
       />
     </View>
   );
 };
 
 const ReserveSectionDetails = (): JSX.Element => {
-  const getSectionDetailsApi = useTypedSelector(state => state.async.getSectionDetails);
-  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
-  const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
-  const { perishableCategories, palletInfo } = useTypedSelector(state => state.PalletManagement);
+  const getSectionDetailsApi = useTypedSelector(
+    state => state.async.getSectionDetails
+  );
+  const getPalletDetailsApi = useTypedSelector(
+    state => state.async.getPalletDetails
+  );
+  const { palletInfo, perishableCategoriesList } = useTypedSelector(
+    state => state.PalletManagement
+  );
   const userConfig = useTypedSelector(state => state.User.configs);
   const [configComplete, setConfigComplete] = useState(false);
-  const [getPalletDetailsComplete, setGetPalletDetailsComplete] = useState(false);
+  const [getPalletDetailsComplete, setGetPalletDetailsComplete] =
+    useState(false);
   const [palletClicked, setPalletClicked] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { palletIds } = useTypedSelector(state => state.Location);
+  const { perishableCategories } = userConfig;
   return (
     <ReserveSectionDetailsScreen
       getSectionDetailsApi={getSectionDetailsApi}
       getPalletDetailsApi={getPalletDetailsApi}
-      getPalletConfigApi={getPalletConfigApi}
       dispatch={dispatch}
       navigation={navigation}
       trackEventCall={trackEvent}
@@ -332,11 +378,11 @@ const ReserveSectionDetails = (): JSX.Element => {
       setGetPalletDetailsComplete={setGetPalletDetailsComplete}
       palletClicked={palletClicked}
       setPalletClicked={setPalletClicked}
-      userConfig={userConfig}
-      perishableCategories={perishableCategories}
       useFocusEffectHook={useFocusEffect}
       useCallbackHook={useCallback}
       palletInfo={palletInfo}
+      perishableCategoriesList={perishableCategoriesList}
+      perishableCategories={perishableCategories}
     />
   );
 };

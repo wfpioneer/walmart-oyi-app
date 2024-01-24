@@ -72,6 +72,18 @@ const styles = StyleSheet.create({
   },
   auditFlagView: {
     flexDirection: 'row'
+  },
+  bgWhite: {
+    backgroundColor: COLOR.WHITE
+  },
+  completeActivityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  addLocationText: {
+    fontSize: 15,
+    textAlign: 'center',
+    marginVertical: 5
   }
 });
 

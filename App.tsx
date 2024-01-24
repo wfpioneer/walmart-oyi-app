@@ -15,6 +15,7 @@ import SplashScreen from 'react-native-splash-screen';
 import Toast, {
   BaseToast, ErrorToast, InfoToast, ToastProps
 } from 'react-native-toast-message';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { MainNavigator } from './src/navigators/MainNavigator';
 import { setI18nConfig } from './src/locales';
 import { ActivityModalComponent } from './src/screens/Modal/Modal';
@@ -70,14 +71,16 @@ export default class App extends React.PureComponent {
   render(): JSX.Element {
     return (
       <Provider store={store}>
-        <AppRoot>
-          <ActivityModalComponent />
-          <CalculatorModal />
-          <SnackBar />
-          <MainNavigator />
-          {/* TODO Replace All instances of SnackBar with RN-Toast-Message */}
-          <Toast config={toastConfig} />
-        </AppRoot>
+        <SafeAreaProvider>
+          <AppRoot>
+            <ActivityModalComponent />
+            <CalculatorModal />
+            <SnackBar />
+            <MainNavigator />
+            {/* TODO Replace All instances of SnackBar with RN-Toast-Message */}
+            <Toast config={toastConfig} />
+          </AppRoot>
+        </SafeAreaProvider>
       </Provider>
     );
   }

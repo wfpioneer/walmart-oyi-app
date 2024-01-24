@@ -5,7 +5,7 @@ exports[`Calculator Modal render tests does not show when calcOpen is set to fal
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -35,7 +35,7 @@ exports[`Calculator Modal render tests show when calcOpen is set to true 1`] = `
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],

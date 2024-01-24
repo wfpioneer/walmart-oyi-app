@@ -16,29 +16,6 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
     }
   >
     <View
-      style={
-        {
-          "alignItems": "center",
-          "flex": 1,
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        }
-      }
-    >
-      <Text
-        style={
-          {
-            "marginRight": 0,
-          }
-        }
-      />
-      <Text
-        style={{}}
-      >
-        History
-      </Text>
-    </View>
-    <View
       accessibilityState={
         {
           "busy": undefined,
@@ -68,17 +45,36 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       onStartShouldSetResponder={[Function]}
       style={
         {
-          "flex": 0.1,
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
           "opacity": 1,
-          "paddingLeft": 5,
         }
       }
       testID="collapsible-card"
     >
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {},
+            ]
+          }
+        >
+          History
+        </Text>
+      </View>
       <Icon
         color="#000000"
         name="keyboard-arrow-down"
-        size={25}
+        size={30}
       />
     </View>
   </View>
@@ -101,29 +97,6 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
     }
   >
     <View
-      style={
-        {
-          "alignItems": "center",
-          "flex": 1,
-          "flexDirection": "row",
-          "justifyContent": "flex-start",
-        }
-      }
-    >
-      <Text
-        style={
-          {
-            "marginRight": 0,
-          }
-        }
-      />
-      <Text
-        style={{}}
-      >
-        History
-      </Text>
-    </View>
-    <View
       accessibilityState={
         {
           "busy": undefined,
@@ -153,17 +126,36 @@ exports[`Tests CollapsibleCard Component should tests CollapsibleCard when the c
       onStartShouldSetResponder={[Function]}
       style={
         {
-          "flex": 0.1,
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
           "opacity": 1,
-          "paddingLeft": 5,
         }
       }
       testID="collapsible-card"
     >
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {},
+            ]
+          }
+        >
+          History
+        </Text>
+      </View>
       <Icon
         color="#000000"
         name="keyboard-arrow-up"
-        size={25}
+        size={30}
       />
     </View>
   </View>

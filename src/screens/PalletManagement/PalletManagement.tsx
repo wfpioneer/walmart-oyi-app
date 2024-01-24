@@ -1,6 +1,4 @@
-import React, {
-  Dispatch, EffectCallback, useEffect, useState
-} from 'react';
+import React, { Dispatch, EffectCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   EmitterSubscription,
@@ -23,12 +21,16 @@ import styles from './PalletManagement.style';
 import { strings } from '../../locales';
 import { barcodeEmitter, openCamera } from '../../utils/scannerUtils';
 import { validateSession } from '../../utils/sessionTimeout';
-import { getPalletConfig, getPalletDetails } from '../../state/actions/saga';
+import { getPalletDetails } from '../../state/actions/saga';
 import { AsyncState } from '../../models/AsyncState';
 import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { trackEvent } from '../../utils/AppCenterTool';
-import { setCreatePalletState, setPerishableCategories, setupPallet } from '../../state/actions/PalletManagement';
-import { GET_PALLET_CONFIG, GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
+import {
+  setCreatePalletState,
+  setPerishableCategories,
+  setupPallet
+} from '../../state/actions/PalletManagement';
+import { GET_PALLET_DETAILS } from '../../state/actions/asyncAPI';
 import { Pallet, PalletItem } from '../../models/PalletManagementTypes';
 import { Configurations } from '../../models/User';
 import ManualScan from '../../components/manualscan/ManualScan';
@@ -37,26 +39,66 @@ import Button, { ButtonType } from '../../components/buttons/Button';
 const SCREEN_NAME = 'Pallet_Management_Screen';
 interface PalletManagementProps {
   useEffectHook: (effect: EffectCallback, deps?: ReadonlyArray<any>) => void;
-  configComplete: boolean;
-  setConfigComplete: React.Dispatch<React.SetStateAction<boolean>>;
   getInfoComplete: boolean;
   setGetInfoComplete: React.Dispatch<React.SetStateAction<boolean>>;
   navigation: NavigationProp<any>;
   route: RouteProp<any, string>;
   dispatch: Dispatch<any>;
   getPalletDetailsApi: AsyncState;
-  getPalletConfigApi: AsyncState;
   userConfig: Configurations;
   isManualScanEnabled: boolean;
   trackEventCall: typeof trackEvent;
 }
 
 export const showActivitySpinner = (
-  configWaiting: boolean,
-  configComplete: boolean,
   getInfoWaiting: boolean,
   getInfoCompleted: boolean
-) => (getInfoWaiting) || (configWaiting || !configComplete) || (configWaiting && getInfoCompleted);
+) => getInfoWaiting || getInfoCompleted;
+
+export const navigateToPalletManageHook = (
+  getInfoComplete: boolean,
+  navigation: NavigationProp<any>,
+  trackEventCall: (eventName: string, params?: any) => void,
+  setGetInfoComplete: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (getInfoComplete) {
+    trackEventCall(SCREEN_NAME, {
+      action: 'initiating_manage_pallet_flow'
+    });
+    navigation.navigate('ManagePallet');
+    setGetInfoComplete(false);
+  }
+};
+
+export const setPerishableCategoriesHook = (
+  perishableCategories: string,
+  navigation: NavigationProp<any>,
+  trackEventCall: (eventName: string, params?: any) => void,
+  dispatch: Dispatch<any>,
+  route: RouteProp<any, string>
+) => {
+  const backupPerishableCategories = perishableCategories
+    .split('-')
+    .map(Number);
+  dispatch(setPerishableCategories(backupPerishableCategories));
+  barcodeEmitter.addListener('scanned', scan => {
+    if (navigation.isFocused()) {
+      validateSession(navigation, route.name).then(() => {
+        trackEventCall('pallet_managment_scanned', {
+          barcode: scan.value,
+          type: scan.type
+        });
+        dispatch(
+          getPalletDetails({
+            palletIds: [scan.value],
+            isAllItems: true,
+            isSummary: false
+          })
+        );
+      });
+    }
+  });
+};
 
 export const getPalletDetailsApiHook = (
   getPalletDetailsApi: AsyncState,
@@ -66,9 +108,8 @@ export const getPalletDetailsApiHook = (
   // on api success
   if (!getPalletDetailsApi.isWaiting && getPalletDetailsApi.result) {
     if (getPalletDetailsApi.result.status === 200) {
-      const {
-        id, createDate, expirationDate, items
-      } = getPalletDetailsApi.result.data.pallets[0];
+      const { id, createDate, expirationDate, items } =
+        getPalletDetailsApi.result.data.pallets[0];
       const palletItems = items.map((item: PalletItem) => ({
         ...item,
         quantity: item.quantity || 0,
@@ -108,47 +149,22 @@ export const getPalletDetailsApiHook = (
   }
 };
 
-export const getPalletConfigHook = (
-  getPalletConfigApi: AsyncState,
-  dispatch: Dispatch<any>,
-  setConfigComplete: React.Dispatch<React.SetStateAction<boolean>>,
-  backupCategories: string
-) => {
-  // on api success
-  if (!getPalletConfigApi.isWaiting && getPalletConfigApi.result) {
-    const { perishableCategories } = getPalletConfigApi.result.data;
-    dispatch(setPerishableCategories(perishableCategories));
-    dispatch({ type: GET_PALLET_CONFIG.RESET });
-    setConfigComplete(true);
-  }
-  // on api error
-  if (getPalletConfigApi.error) {
-    const backupPerishableCategories = backupCategories.split('-').map(Number);
-    dispatch(setPerishableCategories(backupPerishableCategories));
-    dispatch({ type: GET_PALLET_CONFIG.RESET });
-    setConfigComplete(true);
-  }
-};
-
 export const PalletManagementScreen = (
   props: PalletManagementProps
 ): JSX.Element => {
   const {
     useEffectHook,
-    configComplete,
-    setConfigComplete,
     getInfoComplete,
     setGetInfoComplete,
     navigation,
     route,
     dispatch,
     getPalletDetailsApi,
-    getPalletConfigApi,
     userConfig,
     isManualScanEnabled,
     trackEventCall
   } = props;
-
+  const { perishableCategories } = userConfig;
   let scannedSubscription: EmitterSubscription;
 
   // Resets Get PalletInfo api state when navigating off-screen
@@ -162,26 +178,13 @@ export const PalletManagementScreen = (
 
   // Scanner listener
   useEffectHook(() => {
-    if (!userConfig.overridePalletPerishables) {
-      dispatch(getPalletConfig());
-    } else {
-      const backupPerishableCategories = userConfig.backupCategories.split('-').map(Number);
-      dispatch(setPerishableCategories(backupPerishableCategories));
-      setConfigComplete(true);
-    }
-    scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
-      if (navigation.isFocused()) {
-        validateSession(navigation, route.name).then(() => {
-          trackEvent('pallet_managment_scanned', {
-            barcode: scan.value,
-            type: scan.type
-          });
-          dispatch(
-            getPalletDetails({ palletIds: [scan.value], isAllItems: true, isSummary: false })
-          );
-        });
-      }
-    });
+    setPerishableCategoriesHook(
+      perishableCategories,
+      navigation,
+      trackEventCall,
+      dispatch,
+      route
+    );
     return () => {
       scannedSubscription.remove();
     };
@@ -190,30 +193,27 @@ export const PalletManagementScreen = (
   // Get Pallet Info Api
   useEffectHook(() => {
     if (navigation.isFocused()) {
-      getPalletDetailsApiHook(getPalletDetailsApi, dispatch, setGetInfoComplete);
+      getPalletDetailsApiHook(
+        getPalletDetailsApi,
+        dispatch,
+        setGetInfoComplete
+      );
     }
   }, [getPalletDetailsApi]);
 
-  // GetPalletConfig API
   useEffectHook(() => {
     if (navigation.isFocused()) {
-      getPalletConfigHook(getPalletConfigApi, dispatch, setConfigComplete, userConfig.backupCategories);
+      navigateToPalletManageHook(
+        getInfoComplete,
+        navigation,
+        trackEventCall,
+        setGetInfoComplete
+      );
     }
-  }, [getPalletConfigApi]);
-
-  useEffectHook(() => {
-    if (navigation.isFocused()) {
-      if (configComplete && getInfoComplete) {
-        trackEventCall(SCREEN_NAME, {
-          action: 'initiating_manage_pallet_flow'
-        });
-        navigation.navigate('ManagePallet');
-        setGetInfoComplete(false);
-      }
-    }
-  }, [configComplete, getInfoComplete]);
+  }, [getInfoComplete]);
   const showActivitySpinnerResult = showActivitySpinner(
-    getPalletConfigApi.isWaiting, configComplete, getPalletDetailsApi.isWaiting, getInfoComplete
+    getPalletDetailsApi.isWaiting,
+    getInfoComplete
   );
   if (showActivitySpinnerResult) {
     return (
@@ -229,14 +229,20 @@ export const PalletManagementScreen = (
 
   return (
     <View style={styles.container}>
-      {isManualScanEnabled && <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />}
+      {isManualScanEnabled && (
+        <ManualScan placeholder={strings('PALLET.ENTER_PALLET_ID')} />
+      )}
       <View style={styles.scanContainer}>
-        <Pressable onPress={() => {
-          if (Config.ENVIRONMENT === 'dev' || Config.ENVIRONMENT === 'stage') {
-            return openCamera();
-          }
-          return null;
-        }}
+        <Pressable
+          onPress={() => {
+            if (
+              Config.ENVIRONMENT === 'dev' ||
+              Config.ENVIRONMENT === 'stage'
+            ) {
+              return openCamera();
+            }
+            return null;
+          }}
         >
           <Icon size={100} name="barcode-scan" color={COLOR.BLACK} />
         </Pressable>
@@ -244,23 +250,23 @@ export const PalletManagementScreen = (
           <Text>{strings('PALLET.SCAN_PALLET')}</Text>
         </View>
         {userConfig.createPallet && (
-        <>
-          <View style={styles.orText}>
-            <Text>{strings('GENERICS.OR')}</Text>
-          </View>
-          <Button
-            title={strings('PALLET.CREATE_PALLET')}
-            type={ButtonType.PRIMARY}
-            style={styles.btnCreate}
-            onPress={() => {
-              trackEventCall(SCREEN_NAME, {
-                action: 'initiating_create_pallet_flow'
-              });
-              dispatch(setCreatePalletState(true));
-              navigation.navigate('ManagePallet');
-            }}
-          />
-        </>
+          <>
+            <View style={styles.orText}>
+              <Text>{strings('GENERICS.OR')}</Text>
+            </View>
+            <Button
+              title={strings('PALLET.CREATE_PALLET')}
+              type={ButtonType.PRIMARY}
+              style={styles.btnCreate}
+              onPress={() => {
+                trackEventCall(SCREEN_NAME, {
+                  action: 'initiating_create_pallet_flow'
+                });
+                dispatch(setCreatePalletState(true));
+                navigation.navigate('ManagePallet');
+              }}
+            />
+          </>
         )}
       </View>
     </View>
@@ -268,11 +274,13 @@ export const PalletManagementScreen = (
 };
 
 const PalletManagement = (): JSX.Element => {
-  const getPalletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
-  const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const getPalletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
+  const getPalletDetailsApi = useTypedSelector(
+    state => state.async.getPalletDetails
+  );
+  const isManualScanEnabled = useTypedSelector(
+    state => state.Global.isManualScanEnabled
+  );
   const userConfig = useTypedSelector(state => state.User.configs);
-  const [configComplete, setConfigComplete] = useState(false);
   const [getInfoComplete, setGetInfoComplete] = useState(false);
   const navigation = useNavigation();
   const route = useRoute();
@@ -281,12 +289,9 @@ const PalletManagement = (): JSX.Element => {
     <PalletManagementScreen
       isManualScanEnabled={isManualScanEnabled}
       useEffectHook={useEffect}
-      configComplete={configComplete}
-      setConfigComplete={setConfigComplete}
       getInfoComplete={getInfoComplete}
       setGetInfoComplete={setGetInfoComplete}
       getPalletDetailsApi={getPalletDetailsApi}
-      getPalletConfigApi={getPalletConfigApi}
       navigation={navigation}
       route={route}
       dispatch={dispatch}

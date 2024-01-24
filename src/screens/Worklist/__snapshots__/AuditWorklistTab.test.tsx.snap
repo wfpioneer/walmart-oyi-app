@@ -5,7 +5,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -68,7 +68,6 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
           },
         ],
         "auditWorklists": false,
-        "backupCategories": "",
         "binning": false,
         "createPallet": false,
         "enableAreaFilter": false,
@@ -80,10 +79,10 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders Audit
         "manualNoAction": false,
         "multiBin": false,
         "multiPick": false,
-        "overridePalletPerishables": false,
         "palletExpiration": false,
         "palletManagement": false,
         "palletWorklists": false,
+        "perishableCategories": "",
         "peteGetLocations": false,
         "peteGetPallets": false,
         "picking": false,
@@ -214,7 +213,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -277,7 +276,6 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           },
         ],
         "auditWorklists": false,
-        "backupCategories": "",
         "binning": false,
         "createPallet": false,
         "enableAreaFilter": false,
@@ -289,10 +287,10 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
         "manualNoAction": false,
         "multiBin": false,
         "multiPick": false,
-        "overridePalletPerishables": false,
         "palletExpiration": false,
         "palletManagement": false,
         "palletWorklists": false,
+        "perishableCategories": "",
         "peteGetLocations": false,
         "peteGetPallets": false,
         "picking": false,
@@ -390,7 +388,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -453,7 +451,6 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
           },
         ],
         "auditWorklists": false,
-        "backupCategories": "",
         "binning": false,
         "createPallet": false,
         "enableAreaFilter": false,
@@ -465,10 +462,10 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders compl
         "manualNoAction": false,
         "multiBin": false,
         "multiPick": false,
-        "overridePalletPerishables": false,
         "palletExpiration": false,
         "palletManagement": false,
         "palletWorklists": false,
+        "perishableCategories": "",
         "peteGetLocations": false,
         "peteGetPallets": false,
         "picking": false,
@@ -566,7 +563,7 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -629,7 +626,6 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
           },
         ],
         "auditWorklists": false,
-        "backupCategories": "",
         "binning": false,
         "createPallet": false,
         "enableAreaFilter": false,
@@ -641,10 +637,10 @@ exports[`AuditWorklistTab Tests rendering Audit worklist component Renders to-do
         "manualNoAction": false,
         "multiBin": false,
         "multiPick": false,
-        "overridePalletPerishables": false,
         "palletExpiration": false,
         "palletManagement": false,
         "palletWorklists": false,
+        "perishableCategories": "",
         "peteGetLocations": false,
         "peteGetPallets": false,
         "picking": false,
@@ -2253,7 +2249,7 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -2316,7 +2312,6 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
           },
         ],
         "auditWorklists": false,
-        "backupCategories": "",
         "binning": false,
         "createPallet": false,
         "enableAreaFilter": false,
@@ -2328,10 +2323,10 @@ exports[`AuditWorklistTab Tests rendering AuditWorklistTab component with collap
         "manualNoAction": false,
         "multiBin": false,
         "multiPick": false,
-        "overridePalletPerishables": false,
         "palletExpiration": false,
         "palletManagement": false,
         "palletWorklists": false,
+        "perishableCategories": "",
         "peteGetLocations": false,
         "peteGetPallets": false,
         "picking": false,

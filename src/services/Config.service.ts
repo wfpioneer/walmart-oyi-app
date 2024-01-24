@@ -11,7 +11,7 @@ export interface ConfigResponse {
   printingUpdate: boolean;
   binning: boolean;
   palletExpiration: boolean;
-  backupCategories: string;
+  perishableCatgs: string;
   picking: boolean;
   areas: area[];
   enableAreaFilter: boolean;
@@ -30,7 +30,6 @@ export interface ConfigResponse {
   manualNoAction: boolean;
   peteGetPallets: boolean;
   inProgress: boolean;
-  overridePltPerish: boolean;
   peteGetLocations: boolean;
   showQtyStocked: boolean;
   enableAuditsIP: boolean;

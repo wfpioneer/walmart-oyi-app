@@ -5,7 +5,7 @@ exports[`ActivityModalComponent should hide info modal when show info modal is s
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -35,7 +35,7 @@ exports[`ActivityModalComponent show activity loader when show activity is set t
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -178,7 +178,7 @@ exports[`ActivityModalComponent show when show activity is set to false 1`] = `
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],

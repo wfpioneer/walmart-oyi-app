@@ -782,6 +782,7 @@ export const ReserveAdjustmentScreen = (props: ReserveAdjustmentScreenProps): JS
           showCalculator={userConfig.showCalculator}
           minQty={MIN}
           maxQty={MAX}
+          vendorPackQty={props.itemDetails?.vendorPackQty}
         />
       </ScrollView>
       <ItemSeparator />

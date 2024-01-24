@@ -90,9 +90,9 @@ export const updatePalletExpirationDate = () => ({
   type: UPDATE_PALLET_EXPIRATION_DATE
 } as const);
 
-export const setPerishableCategories = (perishableCategories: number[]) => ({
+export const setPerishableCategories = (perishableCategoriesList: number[]) => ({
   type: SET_PERISHABLE_CATEGORIES,
-  payload: { perishableCategories }
+  payload: perishableCategoriesList
 } as const);
 
 export const setCreatePalletState = (payload: boolean) => ({

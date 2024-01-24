@@ -18,14 +18,18 @@ import {
   UPDATE_PALLET,
   UPDATE_PALLET_EXPIRATION_DATE
 } from '../actions/PalletManagement';
-import { CombinePallet, PalletInfo, PalletItem } from '../../models/PalletManagementTypes';
+import {
+  CombinePallet,
+  PalletInfo,
+  PalletItem
+} from '../../models/PalletManagementTypes';
 
-interface PalletManagementState {
+export interface PalletManagementState {
   managePalletMenu: boolean;
   palletInfo: PalletInfo;
   items: PalletItem[];
   combinePallets: CombinePallet[];
-  perishableCategories: number[];
+  perishableCategoriesList: number[];
   createPallet: boolean;
 }
 
@@ -38,11 +42,14 @@ export const initialState: PalletManagementState = {
   },
   items: [],
   combinePallets: [],
-  perishableCategories: [],
+  perishableCategoriesList: [],
   createPallet: false
 };
 
-export const PalletManagement = (state = initialState, action: Actions): PalletManagementState => {
+export const PalletManagement = (
+  state = initialState,
+  action: Actions
+): PalletManagementState => {
   switch (action.type) {
     case SHOW_MANAGE_PALLET_MENU:
       return {
@@ -50,12 +57,13 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         managePalletMenu: action.payload
       };
     case SETUP_PALLET: {
-      const { perishableCategories } = state;
+      const { perishableCategoriesList } = state;
       return {
         ...initialState,
         ...action.payload,
-        perishableCategories
-      }; }
+        perishableCategoriesList
+      };
+    }
     case ADD_COMBINE_PALLET:
       return {
         ...state,
@@ -67,7 +75,9 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         combinePallets: []
       };
     case REMOVE_COMBINE_PALLET: {
-      const deleteIndex = state.combinePallets.findIndex(item => item.palletId === action.payload);
+      const deleteIndex = state.combinePallets.findIndex(
+        item => item.palletId === action.payload
+      );
       const updatedPallets = [
         ...state.combinePallets.slice(0, deleteIndex),
         ...state.combinePallets.slice(deleteIndex + 1)
@@ -75,7 +85,8 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       return {
         ...state,
         combinePallets: updatedPallets
-      }; }
+      };
+    }
     case ADD_ITEM:
       return {
         ...state,
@@ -126,7 +137,10 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
     }
     case SET_ITEM_QUANTITY: {
       const newItems = state.items.map(item => {
-        if (item.itemNbr.toString() === action.payload.itemNbr && item.newQuantity) {
+        if (
+          item.itemNbr.toString() === action.payload.itemNbr &&
+          item.newQuantity
+        ) {
           item.quantity = item.newQuantity;
           return item;
         }
@@ -139,8 +153,13 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
     }
     case REMOVE_ITEM: {
       const { items: palletItems } = state;
-      const itemIdx = palletItems.findIndex(item => item.itemNbr.toString() === action.payload.itemNbr);
-      const updatedItems = [...palletItems.slice(0, itemIdx), ...palletItems.slice(itemIdx + 1)];
+      const itemIdx = palletItems.findIndex(
+        item => item.itemNbr.toString() === action.payload.itemNbr
+      );
+      const updatedItems = [
+        ...palletItems.slice(0, itemIdx),
+        ...palletItems.slice(itemIdx + 1)
+      ];
       return {
         ...state,
         items: updatedItems
@@ -153,14 +172,15 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
         newExpirationDate: action.payload
       };
       return {
-        ...state, palletInfo: updatedPalletInfo
+        ...state,
+        palletInfo: updatedPalletInfo
       };
     }
     case SET_PERISHABLE_CATEGORIES: {
-      const { perishableCategories } = action.payload;
+      const perishableCategoriesList = action.payload;
       return {
         ...state,
-        perishableCategories
+        perishableCategoriesList
       };
     }
     case UPDATE_PALLET_EXPIRATION_DATE: {
@@ -176,11 +196,11 @@ export const PalletManagement = (state = initialState, action: Actions): PalletM
       };
     }
     case SET_CREATE_PALLET: {
-      const { perishableCategories } = state;
+      const { perishableCategoriesList } = state;
       const palletState = action.payload ? initialState : state;
       return {
         ...palletState,
-        perishableCategories,
+        perishableCategoriesList,
         createPallet: action.payload
       };
     }

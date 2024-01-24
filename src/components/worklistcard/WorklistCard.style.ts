@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   title: {
-    flex: 1
+    flex: 2, // Adjusted the flex value to give more space to the title
+    overflow: 'hidden'
   },
   progress: {
     textAlign: 'right',

@@ -11,6 +11,7 @@ interface Location {
   qty?: number;
   quantity?: number;
   newQty: number;
+  showQtyChanged?: boolean;
 }
 
 // eslint-disable-next-line no-shadow

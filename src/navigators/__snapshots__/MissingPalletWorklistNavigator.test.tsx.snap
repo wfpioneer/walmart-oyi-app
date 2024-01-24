@@ -70,6 +70,7 @@ exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navig
     options={
       {
         "headerLeft": [Function],
+        "headerRight": [Function],
         "headerTitle": "[missing "en.WORKLIST.PALLET_WORKLIST" translation]",
       }
     }
@@ -79,6 +80,7 @@ exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navig
     name="ScanPallet"
     options={
       {
+        "headerLeft": [Function],
         "headerRight": [Function],
         "headerTitle": "[missing "en.WORKLIST.SCAN_PALLET" translation]",
       }
@@ -89,10 +91,53 @@ exports[`MissingPalletWorklist Navigator Renders the MissingPalletWorklist Navig
     name="ScanLocation"
     options={
       {
+        "headerLeft": [Function],
         "headerRight": [Function],
         "headerTitle": "[missing "en.LOCATION.SCAN_LOCATION_HEADER" translation]",
       }
     }
   />
 </StackNavigator>
+`;
+
+exports[`MissingPalletWorklist Navigator Returns the correct screen options 1`] = `
+<HeaderBackButton
+  canGoBack={true}
+  onPress={[MockFunction]}
+  testID="back-button"
+/>
+`;
+
+exports[`MissingPalletWorklist Navigator Returns the correct screen options 2`] = `
+<View
+  style={
+    {
+      "flex": 1,
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+    }
+  }
+>
+  <TouchableOpacity
+    onPress={[Function]}
+    testID="manual-scan"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingHorizontal": 15,
+        }
+      }
+    >
+      <Icon
+        color="#ffffffff"
+        name="barcode-scan"
+        size={20}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
 `;

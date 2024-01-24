@@ -28,12 +28,11 @@ import { UseStateType } from '../../models/Generics.d';
 import { AsyncState } from '../../models/AsyncState';
 import {
   deleteBadPallet,
-  deleteUpcs, getPalletConfig, getPalletDetails, updatePalletItemQty, updatePicklistStatus, updatePicklistStatusV1
+  deleteUpcs, getPalletDetails, updatePalletItemQty, updatePicklistStatus, updatePicklistStatusV1
 } from '../../state/actions/saga';
 import COLOR from '../../themes/Color';
 import {
   DELETE_UPCS,
-  GET_PALLET_CONFIG,
   GET_PALLET_DETAILS,
   UPDATE_PALLET_ITEM_QTY,
   UPDATE_PICKLIST_STATUS,
@@ -61,12 +60,11 @@ interface SFWorklfowProps {
   navigation: NavigationProp<any>;
   updatePicklistStatusApi: AsyncState;
   palletDetailsApi: AsyncState;
-  palletConfigApi: AsyncState;
   updatePalletItemsApi: AsyncState;
   deletePalletItemsApi: AsyncState;
   expirationState: UseStateType<string>;
   perishableItemsState: UseStateType<Array<number>>;
-  perishableCategories: number[];
+  perishableCategoriesList: number[];
   showExpiryPromptState: UseStateType<ExpiryPromptShow>;
   configCompleteState: UseStateType<boolean>;
   showActivity: boolean;
@@ -102,6 +100,29 @@ export const activityIndicatorEffect = (
     ) {
       dispatch(hideActivityModal());
     }
+  }
+};
+
+export const setPerishableCategoriesHook = (
+  firstSelectedPick: any,
+  perishableCategoriesList: number[],
+  dispatch: Dispatch<any>,
+  perishableCategories:string,
+  setConfigComplete:React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (perishableCategoriesList.length) {
+    dispatch(
+      getPalletDetails({
+        palletIds: [firstSelectedPick?.palletId],
+        isAllItems: true
+      })
+    );
+  } else {
+    const backupPerishableCategories = perishableCategories
+      .split('-')
+      .map(Number);
+    dispatch(setPerishableCategories(backupPerishableCategories));
+    setConfigComplete(true);
   }
 };
 
@@ -224,30 +245,7 @@ export const palletDetailsApiEffect = (
   }
 };
 
-export const palletConfigApiEffect = (
-  getPalletConfigApi: AsyncState,
-  dispatch: Dispatch<any>,
-  navigation: NavigationProp<any>,
-  setConfigComplete: React.Dispatch<React.SetStateAction<boolean>>,
-  backupCategories: string
-) => {
-  if (navigation.isFocused() && !getPalletConfigApi.isWaiting) {
-    // on api success
-    if (getPalletConfigApi.result) {
-      const { perishableCategories } = getPalletConfigApi.result.data;
-      dispatch(setPerishableCategories(perishableCategories));
-      dispatch({ type: GET_PALLET_CONFIG.RESET });
-      setConfigComplete(true);
-    }
-    // on api error
-    if (getPalletConfigApi.error) {
-      const backupPerishableCategories = backupCategories.split('-').map(Number);
-      dispatch(setPerishableCategories(backupPerishableCategories));
-      dispatch({ type: GET_PALLET_CONFIG.RESET });
-      setConfigComplete(true);
-    }
-  }
-};
+
 
 export const binApisEffect = (
   updateQuantitiesApi: AsyncState,
@@ -521,20 +519,19 @@ export const deleteBadPalletModal = (
 
 export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const {
-    pickingState, palletDetailsApi, palletConfigApi, dispatch,
-    navigation, useEffectHook, expirationState, perishableItemsState,
-    showExpiryPromptState, perishableCategories, configs,
+    pickingState, palletDetailsApi, dispatch,
+    navigation, useEffectHook, expirationState,perishableCategoriesList,
+    perishableItemsState,
+    showExpiryPromptState,configs,
     configCompleteState, showActivity, updatePalletItemsApi,
     deletePalletItemsApi, completePalletState, updatePicklistStatusApi,
     updateItemsState, deleteItemsState, showDeleteConfirmationState,
     deleteBadPalletApi
   } = props;
-
   const {
-    backupCategories,
-    overridePalletPerishables,
     inProgress,
-    showQuantityStocked
+    showQuantityStocked, 
+    perishableCategories
   } = configs;
 
   const [expirationDate, setExpiration] = expirationState;
@@ -545,25 +542,22 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
   const [isUpdateItems, setIsUpdateItems] = updateItemsState;
   const [isDeleteItems, setIsDeleteItems] = deleteItemsState;
   const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = showDeleteConfirmationState;
-
   const selectedPicks = pickingState.pickList.filter(pick => pickingState.selectedPicks.includes(pick.id));
   const firstSelectedPick = selectedPicks.length ? selectedPicks[0] : null;
   const assigned = firstSelectedPick?.assignedAssociate;
   const palletId = firstSelectedPick?.palletId || '';
 
-  useEffectHook(() => navigation.addListener('focus', () => {
-    if (firstSelectedPick) {
-      if (perishableCategories.length) {
-        dispatch(getPalletDetails({ palletIds: [firstSelectedPick.palletId], isAllItems: true }));
-      } else if (!overridePalletPerishables) {
-        dispatch(getPalletConfig());
-      } else {
-        const backupPerishableCategories = backupCategories.split('-').map(Number);
-        dispatch(setPerishableCategories(backupPerishableCategories));
-        setConfigComplete(true);
-      }
-    }
-  }), []);
+  useEffectHook(() => {
+    navigation.addListener('focus', () => {
+      setPerishableCategoriesHook(
+        firstSelectedPick,
+        perishableCategoriesList,
+        dispatch,
+        perishableCategories,
+        setConfigComplete
+      );
+    });
+  }, []);
 
   // Resets Get palletDetails api state when navigating off-screen
   useEffectHook(() => {
@@ -596,10 +590,6 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     navigation,
   ), [updatePicklistStatusApi]);
 
-  // GetPalletConfig API
-  useEffectHook(() => {
-    palletConfigApiEffect(palletConfigApi, dispatch, navigation, setConfigComplete, backupCategories);
-  }, [palletConfigApi]);
 
   useEffectHook(() => palletDetailsApiEffect(
     navigation,
@@ -609,7 +599,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     setExpiration,
     setPerishableItems,
     setIsReadyToComplete,
-    perishableCategories,
+    perishableCategoriesList,
     setShowDeleteConfirmationModal
   ), [palletDetailsApi]);
 
@@ -733,7 +723,7 @@ export const SalesFloorWorkflowScreen = (props: SFWorklfowProps) => {
     }
   };
 
-  if (palletDetailsApi.isWaiting || palletConfigApi.isWaiting) {
+  if (palletDetailsApi.isWaiting) {
     return (
       <ActivityIndicator
         animating={palletDetailsApi.isWaiting}
@@ -900,11 +890,10 @@ const SalesFloorWorkflow = () => {
   const updatePicklistStatusApi = configs.inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
     : useTypedSelector(state => state.async.updatePicklistStatus);
   const palletDetailsApi = useTypedSelector(state => state.async.getPalletDetails);
-  const palletConfigApi = useTypedSelector(state => state.async.getPalletConfig);
   const updatePalletItemsApi = useTypedSelector(state => state.async.updatePalletItemQty);
   const deletePalletItemsApi = useTypedSelector(state => state.async.deleteUpcs);
   const deleteBadPalletApi = useTypedSelector(state => state.async.deleteBadPallet);
-  const { perishableCategories } = useTypedSelector(state => state.PalletManagement);
+  const { perishableCategoriesList } = useTypedSelector(state => state.PalletManagement);
   const { showActivity } = useTypedSelector(state => state.modal);
   const dispatch = useDispatch();
   const navigation: NavigationProp<any> = useNavigation();
@@ -959,10 +948,9 @@ const SalesFloorWorkflow = () => {
           updatePicklistStatusApi={updatePicklistStatusApi}
           useEffectHook={useEffect}
           palletDetailsApi={palletDetailsApi}
-          palletConfigApi={palletConfigApi}
           expirationState={expirationState}
           perishableItemsState={perishableItemsState}
-          perishableCategories={perishableCategories}
+          perishableCategoriesList={perishableCategoriesList}
           showExpiryPromptState={showExpiryPromptState}
           configCompleteState={configCompleteState}
           showActivity={showActivity}

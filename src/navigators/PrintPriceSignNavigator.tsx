@@ -15,7 +15,10 @@ import PrintListTabs from './PrintListTabNavigator';
 
 const Stack = createStackNavigator();
 
-export const getHeaderTitle = (printingLocationLabels: string, printingPalletLabel: boolean) => {
+export const getHeaderTitle = (
+  printingLocationLabels: string,
+  printingPalletLabel: boolean
+) => {
   let title;
   if (printingLocationLabels) {
     title = strings('PRINT.LOCATION_TITLE');
@@ -27,9 +30,25 @@ export const getHeaderTitle = (printingLocationLabels: string, printingPalletLab
   return title;
 };
 
+const getPrinterListOptions = (navigation: NavigationProp<any>): any => ({
+  headerTitle: strings('PRINT.PRINTER_LIST'),
+  headerTitleAlign: 'left',
+  headerTitleStyle: styles.headerTitle,
+  headerRight: () => (
+    <TouchableOpacity
+      style={styles.changePrinterButton}
+      onPress={() => navigation.navigate('ChangePrinter')}
+    >
+      <MaterialCommunityIcons name="plus" size={30} color={COLOR.WHITE} />
+    </TouchableOpacity>
+  )
+});
+
 const PrintPriceSignNavigator = (): JSX.Element => {
   const navigation: NavigationProp<any> = useNavigation();
-  const { printingLocationLabels, printingPalletLabel } = useTypedSelector(state => state.Print);
+  const { printingLocationLabels, printingPalletLabel } = useTypedSelector(
+    state => state.Print
+  );
   const user = useTypedSelector(state => state.User);
   const isPrintUpdate = user.features.includes('printing update') || user.configs.printingUpdate;
 
@@ -45,7 +64,10 @@ const PrintPriceSignNavigator = (): JSX.Element => {
         name="PrintPriceSignScreen"
         component={PrintPriceSign}
         options={{
-          headerTitle: getHeaderTitle(printingLocationLabels, printingPalletLabel),
+          headerTitle: getHeaderTitle(
+            printingLocationLabels,
+            printingPalletLabel
+          ),
           headerTitleAlign: 'left',
           headerTitleStyle: styles.headerTitle,
           headerBackTitleVisible: false
@@ -54,16 +76,7 @@ const PrintPriceSignNavigator = (): JSX.Element => {
       <Stack.Screen
         name="PrinterList"
         component={PrinterList}
-        options={{
-          headerTitle: strings('PRINT.PRINTER_LIST'),
-          headerTitleAlign: 'left',
-          headerTitleStyle: styles.headerTitle,
-          headerRight: () => (
-            <TouchableOpacity style={styles.changePrinterButton} onPress={() => navigation.navigate('ChangePrinter')}>
-              <MaterialCommunityIcons name="plus" size={30} color={COLOR.WHITE} />
-            </TouchableOpacity>
-          )
-        }}
+        options={getPrinterListOptions(navigation)}
       />
       <Stack.Screen
         name="ChangePrinter"

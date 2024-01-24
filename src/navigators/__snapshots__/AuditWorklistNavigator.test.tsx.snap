@@ -126,6 +126,7 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
   onSliding={[Function]}
   onStartShouldSetResponderCapture={[Function]}
   openMenuOffset={500}
+  testID="audit-side-menu"
   toleranceX={10}
   toleranceY={10}
 >
@@ -141,13 +142,7 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
     <Screen
       component={[Function]}
       name="AuditWorklistTabs"
-      options={
-        {
-          "headerLeft": [Function],
-          "headerRight": [Function],
-          "headerTitle": "[missing "en.WORKLIST.AUDIT_WORKLIST" translation]",
-        }
-      }
+      options={[Function]}
     />
     <Screen
       component={[Function]}
@@ -157,12 +152,7 @@ exports[`AuditItemWorklist Navigator Renders the AuditItemWorklist Navigator 1`]
         }
       }
       name="AuditItem"
-      options={
-        {
-          "headerRight": [Function],
-          "headerTitle": "[missing "en.AUDITS.AUDIT_ITEM" translation]",
-        }
-      }
+      options={[Function]}
     />
     <Screen
       component={[Function]}
