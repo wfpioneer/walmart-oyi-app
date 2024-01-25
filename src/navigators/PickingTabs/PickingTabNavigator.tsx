@@ -1,13 +1,25 @@
 import React, {
-  DependencyList, EffectCallback, useCallback, useEffect, useMemo, useRef
+  DependencyList,
+  EffectCallback,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef
 } from 'react';
 import {
-  BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetModalProvider,
+  BottomSheetView
 } from '@gorhom/bottom-sheet';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Toast from 'react-native-toast-message';
 import {
-  BackHandler, BackHandlerStatic, NativeEventEmitter, Text, TouchableOpacity
+  BackHandler,
+  BackHandlerStatic,
+  NativeEventEmitter,
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import {
@@ -19,9 +31,8 @@ import {
 } from '@react-navigation/native';
 import { Badge } from 'react-native-paper';
 import { Dispatch } from 'redux';
-import {
-  BottomSheetDefaultBackdropProps
-} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types.d';
+// eslint-disable-next-line max-len
+import { BottomSheetDefaultBackdropProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types.d';
 import { strings } from '../../locales';
 import QuickPickTab from '../../screens/QuickPickTab/QuickPickTab';
 import { barcodeEmitter } from '../../utils/scannerUtils';
@@ -31,7 +42,10 @@ import { useTypedSelector } from '../../state/reducers/RootReducer';
 import { PickListItem, PickStatus, Tabs } from '../../models/Picking.d';
 import { validateSession } from '../../utils/sessionTimeout';
 import {
-  getItemDetailsV4, getLocationsForItem, getLocationsForItemV1, getPicklists
+  getItemDetailsV4,
+  getLocationsForItem,
+  getLocationsForItemV1,
+  getPicklists
 } from '../../state/actions/saga';
 import {
   initializePicklist,
@@ -45,7 +59,10 @@ import {
 } from '../../state/actions/Picking';
 import { resetScannedEvent } from '../../state/actions/Global';
 import { AsyncState } from '../../models/AsyncState';
-import { hideActivityModal, showActivityModal } from '../../state/actions/Modal';
+import {
+  hideActivityModal,
+  showActivityModal
+} from '../../state/actions/Modal';
 import {
   GET_ITEM_DETAILS_V4,
   GET_PICKLISTS,
@@ -58,6 +75,7 @@ import COLOR from '../../themes/Color';
 import { trackEvent } from '../../utils/AppCenterTool';
 
 const Tab = createMaterialTopTabNavigator();
+const TRY_AGAIN_TEXT = strings('GENERICS.TRY_AGAIN');
 
 interface PickingTabNavigatorProps {
   picklist: PickListItem[];
@@ -70,7 +88,10 @@ interface PickingTabNavigatorProps {
   updatePicklistStatusApi: AsyncState;
   selectedTab: Tabs;
   useFocusEffectHook: (effect: EffectCallback) => void;
-  useCallbackHook: <T extends (...args: any[]) => any>(callback: T, deps: DependencyList) => T;
+  useCallbackHook: <T extends (...args: any[]) => any>(
+    callback: T,
+    deps: DependencyList
+  ) => T;
   multiBinEnabled: boolean;
   multiPickEnabled: boolean;
   bottomSheetModalRef: React.RefObject<BottomSheetModal>;
@@ -79,9 +100,58 @@ interface PickingTabNavigatorProps {
 }
 
 interface BottomSheetCardProps {
-  text: string,
-  onPress: () => void
+  text: string;
+  onPress: () => void;
 }
+
+const handleApiSuccess = (
+  result: any,
+  dispatch: Dispatch<any>,
+  peteGetLocations: boolean,
+  navigation: NavigationProp<any>
+) => {
+  if (result.status === 200 || result.status === 207) {
+    const itemDetails = result.data;
+    dispatch(
+      setPickCreateItem({
+        itemName: itemDetails.itemName,
+        itemNbr: itemDetails.itemNbr,
+        upcNbr: itemDetails.upcNbr,
+        categoryNbr: itemDetails.categoryNbr,
+        categoryDesc: itemDetails.categoryDesc,
+        price: itemDetails.price
+      })
+    );
+
+    if (peteGetLocations) {
+      dispatch(getLocationsForItemV1(itemDetails.itemNbr));
+    } else {
+      dispatch(getLocationsForItem(itemDetails.itemNbr));
+    }
+    navigation.navigate('CreatePick');
+  } else if (result.status === 204) {
+    Toast.show({
+      type: 'error',
+      text1: strings('ITEM.ITEM_NOT_FOUND'),
+      visibilityTime: 4000,
+      position: 'bottom'
+    });
+  }
+  dispatch(hideActivityModal());
+  dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+};
+
+const handleApiError = (dispatch: Dispatch<any>) => {
+  dispatch(hideActivityModal());
+  dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+  Toast.show({
+    type: 'error',
+    text1: strings('ITEM.API_ERROR'),
+    text2: TRY_AGAIN_TEXT,
+    visibilityTime: 4000,
+    position: 'bottom'
+  });
+};
 
 export const getItemDetailsApiHook = (
   getItemDetailsApi: AsyncState,
@@ -92,45 +162,16 @@ export const getItemDetailsApiHook = (
   if (navigation.isFocused()) {
     // on api success
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.result) {
-      if (getItemDetailsApi.result.status === 200 || getItemDetailsApi.result.status === 207) {
-        const itemDetails: ItemDetails = getItemDetailsApi.result.data;
-        dispatch(setPickCreateItem({
-          itemName: itemDetails.itemName,
-          itemNbr: itemDetails.itemNbr,
-          upcNbr: itemDetails.upcNbr,
-          categoryNbr: itemDetails.categoryNbr,
-          categoryDesc: itemDetails.categoryDesc,
-          price: itemDetails.price
-        }));
-
-        if (peteGetLocations) {
-          dispatch(getLocationsForItemV1(itemDetails.itemNbr));
-        } else {
-          dispatch(getLocationsForItem(itemDetails.itemNbr));
-        }
-        navigation.navigate('CreatePick');
-      } else if (getItemDetailsApi.result.status === 204) {
-        Toast.show({
-          type: 'error',
-          text1: strings('ITEM.ITEM_NOT_FOUND'),
-          visibilityTime: 4000,
-          position: 'bottom'
-        });
-      }
-      dispatch(hideActivityModal());
-      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
+      handleApiSuccess(
+        getItemDetailsApi.result,
+        dispatch,
+        peteGetLocations,
+        navigation
+      );
     }
     // on api error
     if (!getItemDetailsApi.isWaiting && getItemDetailsApi.error) {
-      dispatch(hideActivityModal());
-      dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
-      Toast.show({
-        type: 'error',
-        text1: strings('ITEM.API_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
-        visibilityTime: 4000,
-        position: 'bottom'
-      });
+      handleApiError(dispatch);
     }
     // on api request
     if (getItemDetailsApi.isWaiting) {
@@ -167,7 +208,7 @@ export const getPicklistApiHook = (
       Toast.show({
         type: 'error',
         text1: strings('PICKING.PICKLIST_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: TRY_AGAIN_TEXT,
         visibilityTime: 4000,
         position: 'bottom'
       });
@@ -186,8 +227,12 @@ export const updatePicklistStatusApiHook = (
 ) => {
   if (screenIsFocused) {
     // on api success
-    if (!updatePicklistStatusApi.isWaiting && updatePicklistStatusApi.result
-    && (updatePicklistStatusApi.result.status === 200 || updatePicklistStatusApi.result.status === 204)) {
+    if (
+      !updatePicklistStatusApi.isWaiting
+      && updatePicklistStatusApi.result
+      && (updatePicklistStatusApi.result.status === 200
+        || updatePicklistStatusApi.result.status === 204)
+    ) {
       dispatch(hideActivityModal());
       Toast.show({
         type: 'success',
@@ -208,7 +253,7 @@ export const updatePicklistStatusApiHook = (
       Toast.show({
         type: 'error',
         text1: strings('PICKING.UPDATE_PICKLIST_STATUS_ERROR'),
-        text2: strings('GENERICS.TRY_AGAIN'),
+        text2: TRY_AGAIN_TEXT,
         visibilityTime: 4000,
         position: 'bottom'
       });
@@ -228,20 +273,25 @@ export const barcodeEmitterHook = (
   dispatch: Dispatch<any>,
   selectedTab: Tabs
 ) => {
-  const scannedSubscription = barcodeEventEmitter.addListener('scanned', scan => {
-    if (navigation.isFocused() && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)
-    && scan.value
-    ) {
-      validateSession(navigation, route.name).then(() => {
-        trackEvent('Items_Details_scanned', {
-          barcode: scan.value,
-          type: scan.type
+  const scannedSubscription = barcodeEventEmitter.addListener(
+    'scanned',
+    scan => {
+      if (
+        navigation.isFocused()
+        && (selectedTab === Tabs.PICK || selectedTab === Tabs.QUICKPICK)
+        && scan.value
+      ) {
+        validateSession(navigation, route.name).then(() => {
+          trackEvent('Items_Details_scanned', {
+            barcode: scan.value,
+            type: scan.type
+          });
+          dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
+          dispatch(resetScannedEvent());
         });
-        dispatch(getItemDetailsV4({ id: scan.value, getSummary: false }));
-        dispatch(resetScannedEvent());
-      });
+      }
     }
-  });
+  );
   return () => {
     scannedSubscription.remove();
   };
@@ -265,7 +315,32 @@ export const backHandlerEventHook = (
   return () => BackHandlerEmitter.removeEventListener('hardwareBackPress', onBackPress);
 };
 
-export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Element => {
+export const getTabScreenOptions = (
+  tabName: string,
+  title: string,
+  badgeCount: number
+) => ({
+  title,
+  tabBarBadge:
+    badgeCount !== 0
+      ? () => (
+        <Badge
+          onPressIn={undefined}
+          onPressOut={undefined}
+          style={
+              tabName === 'QUICKPICK' ? styles.quickPickBadge : styles.badge
+            }
+          visible={true}
+        >
+          {badgeCount}
+        </Badge>
+      )
+      : undefined
+});
+
+export const PickingTabNavigator = (
+  props: PickingTabNavigatorProps
+): React.JSX.Element => {
   const {
     picklist,
     dispatch,
@@ -299,7 +374,13 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
   // Scanner listener
   useEffectHook(() => {
-    barcodeEmitterHook(barcodeEmitter, navigation, route, dispatch, selectedTab);
+    barcodeEmitterHook(
+      barcodeEmitter,
+      navigation,
+      route,
+      dispatch,
+      selectedTab
+    );
   }, []);
 
   // Get Picklist Api call
@@ -313,7 +394,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
   // Get Item Details UPC api
   useEffectHook(
-    () => getItemDetailsApiHook(getItemDetailsApi, dispatch, navigation, peteGetLocations),
+    () => getItemDetailsApiHook(
+      getItemDetailsApi,
+      dispatch,
+      navigation,
+      peteGetLocations
+    ),
     [getItemDetailsApi]
   );
 
@@ -336,7 +422,12 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
 
   // Cancel multi Pick/Bin when pressing back from the device hardware
   useFocusEffectHook(() => {
-    backHandlerEventHook(BackHandler, multiBinEnabled, multiPickEnabled, dispatch);
+    backHandlerEventHook(
+      BackHandler,
+      multiBinEnabled,
+      multiPickEnabled,
+      dispatch
+    );
   });
 
   useEffectHook(() => {
@@ -371,14 +462,11 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
     >
       <Tab.Screen
         name={Tabs.QUICKPICK}
-        options={{
-          title: `${strings('PICKING.QUICKPICK')}`,
-          tabBarBadge: quickPickList.length !== 0 ? () => (
-            <Badge onPressIn={undefined} onPressOut={undefined} style={styles.quickPickBadge} visible={true}>
-              {quickPickList.length}
-            </Badge>
-          ) : undefined
-        }}
+        options={getTabScreenOptions(
+          'QUICKPICK',
+          strings('PICKING.QUICKPICK'),
+          quickPickList.length
+        )}
         listeners={{
           focus: () => dispatch(setSelectedTab(Tabs.QUICKPICK))
         }}
@@ -393,14 +481,11 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
       </Tab.Screen>
       <Tab.Screen
         name={Tabs.PICK}
-        options={{
-          title: `${strings('PICKING.PICK')}`,
-          tabBarBadge: pickBinList.length !== 0 ? () => (
-            <Badge onPressIn={undefined} onPressOut={undefined} style={styles.badge} visible={true}>
-              {pickBinList.length}
-            </Badge>
-          ) : undefined
-        }}
+        options={getTabScreenOptions(
+          'PICK',
+          strings('PICKING.PICK'),
+          pickBinList.length
+        )}
         listeners={{
           focus: () => dispatch(setSelectedTab(Tabs.PICK)),
           beforeRemove: () => {
@@ -420,14 +505,11 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
       </Tab.Screen>
       <Tab.Screen
         name={Tabs.SALESFLOOR}
-        options={{
-          title: `${strings('ITEM.SALES_FLOOR_QTY')}`,
-          tabBarBadge: salesFloorList.length !== 0 ? () => (
-            <Badge onPressIn={undefined} onPressOut={undefined} style={styles.badge} visible={true}>
-              {salesFloorList.length}
-            </Badge>
-          ) : undefined
-        }}
+        options={getTabScreenOptions(
+          'SALESFLOOR',
+          strings('ITEM.SALES_FLOOR_QTY'),
+          salesFloorList.length
+        )}
         listeners={{
           focus: () => dispatch(setSelectedTab(Tabs.SALESFLOOR))
         }}
@@ -444,7 +526,9 @@ export const PickingTabNavigator = (props: PickingTabNavigatorProps): JSX.Elemen
   );
 };
 
-export const BottomSheetCard = (props: BottomSheetCardProps): JSX.Element => {
+export const BottomSheetCard = (
+  props: BottomSheetCardProps
+): React.JSX.Element => {
   const { text, onPress } = props;
 
   return (
@@ -458,13 +542,20 @@ export const BottomSheetCard = (props: BottomSheetCardProps): JSX.Element => {
   );
 };
 
-export const PickingTabs = (): JSX.Element => {
+export const PickingTabs = (): React.JSX.Element => {
   const dispatch = useDispatch();
-  const { multiBinEnabled, multiPickEnabled, pickList } = useTypedSelector(state => state.Picking);
-  const { multiBin, multiPick, inProgress } = useTypedSelector(state => state.User.configs);
+  const { multiBinEnabled, multiPickEnabled, pickList } = useTypedSelector(
+    state => state.Picking
+  );
+  const { multiBin, multiPick, inProgress } = useTypedSelector(
+    state => state.User.configs
+  );
   const getPicklistApi = useTypedSelector(state => state.async.getPicklists);
-  const getItemDetailsApi = useTypedSelector(state => state.async.getItemDetailsV4);
-  const updatePicklistStatusApi = inProgress ? useTypedSelector(state => state.async.updatePicklistStatusV1)
+  const getItemDetailsApi = useTypedSelector(
+    state => state.async.getItemDetailsV4
+  );
+  const updatePicklistStatusApi = inProgress
+    ? useTypedSelector(state => state.async.updatePicklistStatusV1)
     : useTypedSelector(state => state.async.updatePicklistStatus);
   const selectedTab = useTypedSelector(state => state.Picking.selectedTab);
   const pickingMenu = useTypedSelector(state => state.Picking.pickingMenu);
@@ -472,7 +563,10 @@ export const PickingTabs = (): JSX.Element => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const navigation = useNavigation();
   const route = useRoute();
-  const snapPoints = useMemo(() => [`${(10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0))}%`], []);
+  const snapPoints = useMemo(
+    () => [`${10 + (multiBin ? 8 : 0) + (multiPick ? 8 : 0)}%`],
+    []
+  );
 
   const renderBackdrop = useCallback(
     (props: BottomSheetDefaultBackdropProps) => (
@@ -514,22 +608,22 @@ export const PickingTabs = (): JSX.Element => {
         onDismiss={() => dispatch(showPickingMenu(false))}
       >
         {multiBin && (
-        <BottomSheetCard
-          onPress={() => {
-            dispatch(toggleMultiBin(true));
-            dispatch(showPickingMenu(false));
-          }}
-          text={strings('PICKING.ACCEPT_MULTIPLE_BINS')}
-        />
+          <BottomSheetCard
+            onPress={() => {
+              dispatch(toggleMultiBin(true));
+              dispatch(showPickingMenu(false));
+            }}
+            text={strings('PICKING.ACCEPT_MULTIPLE_BINS')}
+          />
         )}
         {multiPick && (
-        <BottomSheetCard
-          onPress={() => {
-            dispatch(toggleMultiPick(true));
-            dispatch(showPickingMenu(false));
-          }}
-          text={strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
-        />
+          <BottomSheetCard
+            onPress={() => {
+              dispatch(toggleMultiPick(true));
+              dispatch(showPickingMenu(false));
+            }}
+            text={strings('PICKING.ACCEPT_MULTIPLE_PICKS')}
+          />
         )}
       </BottomSheetModal>
     </BottomSheetModalProvider>

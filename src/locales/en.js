@@ -166,7 +166,8 @@ export default {
     CANCEL_APPROVAL: 'This action will cancel the currently pending action. Would you Like to continue?',
     UNABLE_TO_CANCEL_APPROVAL: 'Unable to cancel Approval at this time please contact manager to cancel/reject approval',
     NO_ITEM_SCANNED: 'No Item Scanned',
-    SCAN_ITEM: 'Please scan an item'
+    SCAN_ITEM: 'Please scan an item',
+    ADD_FLOOR_LOCATION: 'Add location to print price sign'
   },
   PRINT: {
     MAIN_TITLE: 'Print price sign',
@@ -240,7 +241,7 @@ export default {
     PALLET_UPC_NOT_FOUND: 'The Pallet or a UPC was not found',
     ADD_UPC_SUCCESS: 'All Items were successfully added to the Pallet',
     ADD_UPC_ERROR: 'Error adding items to the Pallet',
-    COMBINE_PALLET_SUCCESS: 'Pallets combined sucessfully',
+    COMBINE_PALLET_SUCCESS: 'Pallets combined successfully',
     COMBINE_PALLET_FAILURE: 'Failed to combine pallets, please try again',
     PALLET_EXISTS: 'This pallet has already been scanned',
     PALLET_EXISTS_AS_TARGET: 'This pallet is already the target pallet',

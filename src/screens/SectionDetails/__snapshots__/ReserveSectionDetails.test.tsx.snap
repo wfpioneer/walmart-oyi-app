@@ -312,3 +312,87 @@ exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section de
   />
 </View>
 `;
+
+exports[`Tests Reserve Section Details Screen Tests rendering Reserve Section details screen data render screen with redux 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <RCTScrollView
+    ListEmptyComponent={
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <mockConstructor
+          color="#5FA7F2"
+          name="information"
+          size={40}
+        />
+        <Text>
+          [missing "en.LOCATION.RESERVE_EMPTY" translation]
+        </Text>
+      </View>
+    }
+    collapsable={false}
+    data={[]}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    handlerTag={1}
+    handlerType="NativeViewGestureHandler"
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
+    waitFor={
+      [
+        {
+          "current": null,
+        },
+        {
+          "current": null,
+        },
+      ]
+    }
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={
+          {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingVertical": 28,
+          }
+        }
+      >
+        <Text>
+          [missing "en.LOCATION.RESERVE_EMPTY" translation]
+        </Text>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

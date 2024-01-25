@@ -233,7 +233,7 @@ export const editLocationApiHook = (
     } else {
       dispatch(getSectionDetails({ sectionId: selectedLocation ? selectedLocation.sectionId.toString() : '' }));
     }
-    navigation.goBack();
+    navigation.navigate('ReviewItemDetailsHome');
   }
 };
 

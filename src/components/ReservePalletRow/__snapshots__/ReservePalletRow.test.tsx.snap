@@ -5,7 +5,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet 1`] = `
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -70,7 +70,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with an item with a 
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],
@@ -142,7 +142,7 @@ exports[`ReservePalletRow Component Renders a ReservePallet with no items 1`] = 
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],

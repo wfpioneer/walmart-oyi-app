@@ -536,7 +536,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
           }
         }
       >
-        <withTheme(Checkbox)
+        <Checkbox
           color="#0071e9"
           onPress={[Function]}
           status="unchecked"
@@ -601,7 +601,7 @@ exports[`Pick pallet info card render tests renders the card with items and show
           }
         }
       >
-        <withTheme(Checkbox)
+        <Checkbox
           color="#0071e9"
           onPress={[Function]}
           status="checked"

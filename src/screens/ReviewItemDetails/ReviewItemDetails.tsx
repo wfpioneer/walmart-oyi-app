@@ -1041,7 +1041,9 @@ export const renderPrintPriceSignButton = (
   actionCompleted: boolean,
   itemDetails: ItemDetails,
   props: HandleProps,
+  floorLocations: Location[] | undefined,
 ): JSX.Element => {
+  const hasFloorLocations = floorLocations && floorLocations.length >= 1;
   const {
     navigation, route, validateSessionCall, userId, trackEventCall
   } = props;
@@ -1051,7 +1053,13 @@ export const renderPrintPriceSignButton = (
 
   return (
     <TouchableOpacity
-      style={styles.worklistCompleteButton}
+      style={[styles.worklistCompleteButton,
+        {
+          backgroundColor: hasFloorLocations ? COLOR.MAIN_THEME_COLOR : COLOR.GREY_400,
+          borderColor: hasFloorLocations ? COLOR.MAIN_THEME_COLOR : COLOR.GREY_400
+        }
+      ]}
+      disabled={!hasFloorLocations}
       onPress={() => {
         // will only be callable when button is available
         validateSessionCall(navigation, route.name).then(() => {
@@ -1082,7 +1090,7 @@ export const completeButtonComponent = (props: ItemDetailsScreenProps, itemDetai
       return (
         <View style={styles.otherActionContainer}>
           {renderOtherActionButton(props, itemDetails.itemNbr, true)}
-          {renderPrintPriceSignButton(actionCompleted, itemDetails, props)}
+          {renderPrintPriceSignButton(actionCompleted, itemDetails, props, floorLocations)}
         </View>
       );
     }
@@ -1680,6 +1688,8 @@ export const ReviewItemDetailsScreen = (props: ItemDetailsScreenProps): JSX.Elem
             worklistStatus={itemDetails.worklistStatus ?? itemDetails.auditWorklistStatus}
             imageToken={imageToken}
             tokenIsWaiting={tokenIsWaiting}
+            floorLocations={floorLocations}
+            isLocationLoading={locationForItemsV1Api.isWaiting || locationForItemsApi.isWaiting}
           />
           <SFTCard
             title={strings('ITEM.QUANTITY')}

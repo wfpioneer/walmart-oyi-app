@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { Dispatch } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
@@ -8,7 +9,11 @@ import {
 import { Pressable, TouchableOpacity, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import {
+  ParamListBase,
+  RouteProp,
+  getFocusedRouteNameFromRoute
+} from '@react-navigation/native';
 import COLOR from '../themes/Color';
 import { strings } from '../locales';
 import PickingTabs from './PickingTabs/PickingTabNavigator';
@@ -32,14 +37,14 @@ interface PickingNavigatorProps {
   pickingMenu: boolean;
   multiBinEnabled: boolean;
   multiPickEnabled: boolean;
-  multiPick:boolean;
+  multiPick: boolean;
   multiBin: boolean;
 }
 
 export const renderScanButton = (
   dispatch: Dispatch<any>,
   isManualScanEnabled: boolean
-): JSX.Element => (
+): React.JSX.Element => (
   <TouchableOpacity
     onPress={() => {
       dispatch(setManualScan(!isManualScanEnabled));
@@ -67,7 +72,6 @@ export const kebabMenuButton = (
     }}
     testID="picking-menu"
     style={({ pressed }) => [styles.leftButton, { opacity: pressed ? 0.5 : 1 }]}
-
   >
     <MaterialCommunityIcons
       name="dots-vertical"
@@ -77,11 +81,55 @@ export const kebabMenuButton = (
   </Pressable>
 );
 
+const pickingOptions = (
+  navigate: (props: HeaderBackButtonProps) => void,
+  props: PickingNavigatorProps
+) => ({
+  headerLeft: (hlProps: HeaderBackButtonProps) => (
+    <HeaderBackButton
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...hlProps}
+      onPress={() => {
+        navigate(hlProps);
+      }}
+    />
+  ),
+  headerTitle: strings('PICKING.PICKING'),
+  headerRight: () => kebabMenuButton(props.pickingMenu, props.dispatch)
+});
+
+const pickingTabsOptions = (
+  screenRoute: RouteProp<ParamListBase, 'PickingTabs'>,
+  props: PickingNavigatorProps
+) => {
+  const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? props.selectedTab ?? 'Pick';
+  return {
+    headerRight: () => (
+      <View style={styles.headerContainer}>
+        {routeName === 'Pick'
+        && (props.multiBin || props.multiPick)
+        && !props.multiBinEnabled
+        && !props.multiPickEnabled
+          ? kebabMenuButton(props.pickingMenu, props.dispatch)
+          : null}
+        {!props.pickingMenu
+        && (routeName === 'QuickPick' || routeName === 'Pick')
+        && !props.multiBinEnabled
+        && !props.multiPickEnabled
+          ? renderScanButton(props.dispatch, props.isManualScanEnabled)
+          : null}
+      </View>
+    ),
+    headerTitle: strings('PICKING.PICKING')
+  };
+};
+
 export const PickingNavigatorStack = (
   props: PickingNavigatorProps
-): JSX.Element => {
+): React.JSX.Element => {
   const {
-    dispatch, isManualScanEnabled, selectedTab, pickingMenu, multiBinEnabled, multiPickEnabled, multiBin, multiPick
+    dispatch,
+    selectedTab
   } = props;
 
   const navigate = (hlProps: HeaderBackButtonProps) => {
@@ -108,58 +156,17 @@ export const PickingNavigatorStack = (
       <Stack.Screen
         name="PickingTabs"
         component={PickingTabs}
-        options={({ route: screenRoute }) => {
-          const routeName = getFocusedRouteNameFromRoute(screenRoute) ?? selectedTab ?? 'Pick';
-          return {
-            headerTitle: strings('PICKING.PICKING'),
-            headerRight: () => (
-              <View style={styles.headerContainer}>
-                {routeName === 'Pick' && (multiBin || multiPick) && (!multiBinEnabled && !multiPickEnabled)
-                  ? kebabMenuButton(pickingMenu, dispatch)
-                  : null}
-                {!pickingMenu
-                && (routeName === 'QuickPick' || routeName === 'Pick')
-                && (!multiBinEnabled && !multiPickEnabled)
-                  ? renderScanButton(dispatch, isManualScanEnabled)
-                  : null}
-              </View>
-            )
-          };
-        }}
+        options={({ route: screenRoute }) => pickingTabsOptions(screenRoute, props)}
       />
       <Stack.Screen
         name="PickBinWorkflow"
         component={PickBinWorkflow}
-        options={{
-          headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => kebabMenuButton(pickingMenu, dispatch),
-          headerLeft: hlProps => (
-            <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...hlProps}
-              onPress={() => {
-                navigate(hlProps);
-              }}
-            />
-          )
-        }}
+        options={() => pickingOptions(navigate, props)}
       />
       <Stack.Screen
         name="SalesFloorWorkflow"
         component={SalesFloorWorkflow}
-        options={{
-          headerTitle: strings('PICKING.PICKING'),
-          headerRight: () => kebabMenuButton(pickingMenu, dispatch),
-          headerLeft: hlProps => (
-            <HeaderBackButton
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...hlProps}
-              onPress={() => {
-                navigate(hlProps);
-              }}
-            />
-          )
-        }}
+        options={() => pickingOptions(navigate, props)}
       />
       <Stack.Screen
         name="CreatePick"
@@ -182,7 +189,7 @@ export const PickingNavigatorStack = (
   );
 };
 
-const PickingNavigator = (): JSX.Element => {
+const PickingNavigator = (): React.JSX.Element => {
   const {
     multiBinEnabled, multiPickEnabled, selectedTab, pickingMenu
   } = useTypedSelector(state => state.Picking);

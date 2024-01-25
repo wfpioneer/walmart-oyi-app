@@ -1183,6 +1183,7 @@ exports[`ReserveAdjustmentScreen renders loader for Location List while getting 
       onRetry={[Function]}
       scanRequired={false}
       showCalculator={false}
+      vendorPackQty={0}
     />
   </ScrollView>
   <ItemSeparator />
@@ -1454,6 +1455,7 @@ exports[`ReserveAdjustmentScreen renders the details for a item with non-null st
       onRetry={[Function]}
       scanRequired={false}
       showCalculator={false}
+      vendorPackQty={0}
     />
   </ScrollView>
   <ItemSeparator />

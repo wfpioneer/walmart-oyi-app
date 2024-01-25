@@ -1,93 +1,28 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
+import mockUser from '../mockData/mockUser';
 import {
-  TabNavigatorStack
+  TabNavigatorStack, tabBarOptions
 } from './TabNavigator';
 
-const User = {
-  additional: {
-    clockCheckResult: '',
-    displayName: '',
-    loginId: '',
-    mailId: ''
-  },
-  countryCode: '',
-  domain: '',
-  siteId: 0,
-  token: '',
-  userId: '',
-  features: [],
-  configs: {
-    locationManagement: false,
-    locationManagementEdit: false,
-    palletManagement: false,
-    settingsTool: false,
-    printingUpdate: false,
-    binning: false,
-    palletExpiration: false,
-    backupCategories: '',
-    picking: false,
-    areas: [],
-    enableAreaFilter: false,
-    palletWorklists: false,
-    createPallet: false,
-    auditWorklists: false,
-    showRollOverAudit: false,
-    showOpenAuditLink: false,
-    scanRequired: false,
-    showCalculator: false,
-    multiBin: false,
-    multiPick: false,
-    showItemImage: false,
-    showFeedback: false,
-    reserveAdjustment: false
-  }
-};
-const User1 = {
-  additional: {
-    clockCheckResult: '',
-    displayName: '',
-    loginId: '',
-    mailId: ''
-  },
-  countryCode: '',
-  domain: '',
-  siteId: 0,
-  token: '',
-  userId: '',
-  features: ['manager approval'],
-  configs: {
-    locationManagement: true,
-    locationManagementEdit: true,
-    palletManagement: false,
-    settingsTool: true,
-    printingUpdate: false,
-    binning: false,
-    palletExpiration: false,
-    backupCategories: '',
-    picking: false,
-    areas: [],
-    enableAreaFilter: false,
-    palletWorklists: false,
-    createPallet: false,
-    auditWorklists: false,
-    showRollOverAudit: false,
-    showOpenAuditLink: false,
-    scanRequired: false,
-    showCalculator: false,
-    multiBin: false,
-    multiPick: false,
-    showItemImage: false,
-    showFeedback: false,
-    reserveAdjustment: false
-  }
-};
+jest.mock('../locales', () => ({
+  ...jest.requireActual('../locales'),
+  strings: (key: string) => key
+}));
+
+jest.mock('@react-navigation/bottom-tabs', () => ({
+  createBottomTabNavigator: jest.fn(() => ({
+    Navigator: jest.fn(),
+    Screen: jest.fn()
+  }))
+}));
+
 describe('Tab Navigator', () => {
   it('Render ReviewItemsNavigator', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <TabNavigatorStack
-        user={User}
+        user={mockUser}
         selectedAmount={0}
         dispatch={jest.fn()}
         palletWorklists={false}
@@ -101,7 +36,7 @@ describe('Tab Navigator', () => {
     const renderer = ShallowRenderer.createRenderer();
     renderer.render(
       <TabNavigatorStack
-        user={User1}
+        user={mockUser}
         selectedAmount={0}
         dispatch={jest.fn()}
         palletWorklists={true}
@@ -110,5 +45,44 @@ describe('Tab Navigator', () => {
       />
     );
     expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Renders TabNavigatorStack with isBottomTabEnabled as true', () => {
+    const renderer = ShallowRenderer.createRenderer();
+    renderer.render(
+      <TabNavigatorStack
+        user={mockUser}
+        selectedAmount={0}
+        dispatch={jest.fn()}
+        palletWorklists={true}
+        auditWorklists={true}
+        isBottomTabEnabled={true}
+      />
+    );
+    expect(renderer.getRenderOutput()).toMatchSnapshot();
+  });
+
+  it('Should return the expected options from tabBarOptions', () => {
+    const props = {
+      selectedAmount: 0,
+      user: mockUser,
+      dispatch: jest.fn(),
+      palletWorklists: true,
+      auditWorklists: true,
+      isBottomTabEnabled: true
+    };
+    const route = {
+      key: 'Home',
+      name: 'HOME.HOME'
+    };
+    const result = tabBarOptions(props, route);
+
+    expect(result).toEqual({
+      tabBarIcon: expect.any(Function),
+      tabBarStyle: { display: 'flex' },
+      tabBarActiveTintColor: expect.any(String),
+      tabBarInactiveTintColor: expect.any(String),
+      headerShown: false
+    });
   });
 });

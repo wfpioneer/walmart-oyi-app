@@ -64,6 +64,35 @@ export const renderManagePalletKebabButton = (
   </TouchableOpacity>
 );
 
+export const getScreenOptions = (
+  screenName:string,
+  title: string,
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean,
+  createPallet: boolean,
+  managePalletMenu: boolean
+) => ({
+  headerTitle: () => (
+    screenName === 'PalletManagementHome' ? (
+      <HeaderTitle
+        style={{ color: COLOR.WHITE }}
+        numberOfLines={2}
+        lineBreakMode="tail"
+      >
+        {title}
+      </HeaderTitle>
+    )
+      : title
+  ),
+  headerRight: () => (
+    <View style={styles.headerContainer}>
+      {renderScanButton(dispatch, isManualScanEnabled)}
+      {screenName === 'ManagePallet' && !createPallet
+        && renderManagePalletKebabButton(managePalletMenu, dispatch)}
+    </View>
+  )
+});
+
 export const PalletManagementNavigatorStack = (
   props: PalletManagementNavigatorProps
 ): JSX.Element => {
@@ -81,48 +110,38 @@ export const PalletManagementNavigatorStack = (
       <Stack.Screen
         name="PalletManagementHome"
         component={PalletManagement}
-        options={{
-          headerTitle: () => (
-            <HeaderTitle
-              style={{ color: COLOR.WHITE }}
-              numberOfLines={2}
-              lineBreakMode="tail"
-            >
-              {strings('PALLET.PALLET_MANAGEMENT')}
-            </HeaderTitle>
-          ),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'PalletManagementHome',
+          strings('PALLET.PALLET_MANAGEMENT'),
+          dispatch,
+          isManualScanEnabled,
+          createPallet,
+          managePalletMenu
+        )}
       />
       <Stack.Screen
         name="ManagePallet"
         component={ManagePallet}
-        options={{
-          headerTitle: strings('PALLET.MANAGE_PALLET'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled)}
-              {!createPallet
-                && renderManagePalletKebabButton(managePalletMenu, dispatch)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'ManagePallet',
+          strings('PALLET.MANAGE_PALLET'),
+          dispatch,
+          isManualScanEnabled,
+          createPallet,
+          managePalletMenu
+        )}
       />
       <Stack.Screen
         name="CombinePallets"
         component={CombinePallets}
-        options={{
-          headerTitle: strings('PALLET.COMBINE_PALLETS'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'CombinePallets',
+          strings('PALLET.COMBINE_PALLETS'),
+          dispatch,
+          isManualScanEnabled,
+          createPallet,
+          managePalletMenu
+        )}
       />
     </Stack.Navigator>
   );

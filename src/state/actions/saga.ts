@@ -82,7 +82,6 @@ export const PRINT_PALLET_LABEL = 'SAGA/PRINT_PALLET_LABEL';
 export const CLEAR_PALLET = 'SAGA/CLEAR_PALLET';
 export const GET_PALLET_DETAILS = 'SAGA/GET_PALLET_DETAILS';
 export const POST_BIN_PALLETS = 'SAGA/POST_BIN_PALLETS';
-export const GET_PALLET_CONFIG = 'SAGA/GET_PALLET_CONFIG';
 export const UPDATE_PICKLIST_STATUS = 'SAGA/UPDATE_PICKLIST_STATUS';
 export const UPDATE_PICKLIST_STATUS_V1 = 'SAGA/UPDATE_PICKLIST_STATUS_V1';
 export const GET_PICKLISTS = 'SAGA/GET_PICKLISTS';
@@ -244,9 +243,6 @@ export const getPalletDetails = (payload: GetPalletDetailsRequest) => ({
 } as const);
 export const binPallets = (payload: PostBinPalletsRequest) => ({
   type: POST_BIN_PALLETS, payload
-} as const);
-export const getPalletConfig = () => ({
-  type: GET_PALLET_CONFIG
 } as const);
 export const updatePicklistStatus = (payload: {
   headers: { action: PickAction};

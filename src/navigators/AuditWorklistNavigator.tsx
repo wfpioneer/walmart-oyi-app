@@ -1,8 +1,8 @@
-import { HeaderBackButton } from '@react-navigation/elements';
 import {
-  NavigationProp,
-  useNavigation
-} from '@react-navigation/native';
+  HeaderBackButton,
+  HeaderBackButtonProps
+} from '@react-navigation/elements';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { Dispatch } from 'react';
 import { Animated, TouchableOpacity, View } from 'react-native';
@@ -13,7 +13,10 @@ import SelectLocationType from '../screens/SelectLocationType/SelectLocationType
 import { strings } from '../locales';
 import { FilterMenu } from '../screens/Worklist/FilterMenu/FilterMenu';
 import {
-  resetScannedEvent, setBottomTab, setCalcOpen, setManualScan
+  resetScannedEvent,
+  setBottomTab,
+  setCalcOpen,
+  setManualScan
 } from '../state/actions/Global';
 import { toggleMenu } from '../state/actions/Worklist';
 import { useTypedSelector } from '../state/reducers/RootReducer';
@@ -25,7 +28,7 @@ import { GET_ITEM_DETAILS_V4 } from '../state/actions/asyncAPI';
 
 const Stack = createStackNavigator();
 
-interface AuditWorklistNavProps {
+export interface AuditWorklistNavProps {
   auditWorklists: boolean;
   showCalculator: boolean;
   dispatch: Dispatch<any>;
@@ -57,8 +60,13 @@ export const renderScanButton = (
   </TouchableOpacity>
 );
 
-const renderPrintButton = (navigation: NavigationProp<any>) => (
-  <TouchableOpacity onPress={() => { navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' }); }}>
+export const renderPrintButton = (navigation: NavigationProp<any>) => (
+  <TouchableOpacity
+    onPress={() => {
+      navigation.navigate('PrintPriceSign', { screen: 'PrintPriceSignScreen' });
+    }}
+    testID="print-button"
+  >
     <View style={styles.headerRightIcon}>
       <MaterialCommunityIcons name="printer" size={20} color={COLOR.WHITE} />
     </View>
@@ -89,8 +97,8 @@ const onFilterMenuPress = (dispatch: Dispatch<any>, menuOpen: boolean) => {
   }
 };
 
-const renderFilterButton = (dispatch: Dispatch<any>, menuOpen: boolean) => (
-  <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)}>
+export const renderFilterButton = (dispatch: Dispatch<any>, menuOpen: boolean) => (
+  <TouchableOpacity onPress={() => onFilterMenuPress(dispatch, menuOpen)} testID="filter-button">
     <View style={styles.filterButton}>
       <MaterialCommunityIcons
         name="filter-variant"
@@ -100,6 +108,37 @@ const renderFilterButton = (dispatch: Dispatch<any>, menuOpen: boolean) => (
     </View>
   </TouchableOpacity>
 );
+
+export const auditWorklistTabsOptions = (
+  navigateBack: () => void,
+  props: AuditWorklistNavProps
+) => ({
+  headerLeft: (hlProps: HeaderBackButtonProps) => hlProps.canGoBack && (
+  <HeaderBackButton
+        // eslint-disable-next-line react/jsx-props-no-spreading
+    {...hlProps}
+    onPress={navigateBack}
+  />
+  ),
+  headerTitle: strings('WORKLIST.AUDIT_WORKLIST'),
+  headerRight: () => (
+    <View style={styles.headerContainer}>
+      {renderScanButton(props.dispatch, props.isManualScanEnabled)}
+      {renderFilterButton(props.dispatch, props.menuOpen)}
+    </View>
+  )
+});
+
+export const auditItemOptions = (props: AuditWorklistNavProps) => ({
+  headerTitle: strings('AUDITS.AUDIT_ITEM'),
+  headerRight: () => (
+    <View style={styles.headerContainer}>
+      {props.showCalculator && renderCalcButton(props.dispatch, props.calcOpen)}
+      {renderPrintButton(props.navigation)}
+      {renderScanButton(props.dispatch, props.isManualScanEnabled)}
+    </View>
+  )
+});
 
 export const AuditWorklistNavigatorStack = (
   props: AuditWorklistNavProps
@@ -126,6 +165,7 @@ export const AuditWorklistNavigatorStack = (
   return (
     <SideMenu
       menu={<FilterMenu screenName="Audit_Worklist" />}
+      testID="audit-side-menu"
       menuPosition="right"
       isOpen={menuOpen}
       animationFunction={(prop, value) => Animated.spring(prop, {
@@ -150,9 +190,17 @@ export const AuditWorklistNavigatorStack = (
         initialRouteName="AuditWorklistTabs"
         screenListeners={{
           focus: screen => {
-            if (screen.target && !screen.target.includes('AuditWorklistTabs') && isBottomTabEnabled) {
+            if (
+              screen.target
+              && !screen.target.includes('AuditWorklistTabs')
+              && isBottomTabEnabled
+            ) {
               dispatch(setBottomTab(false));
-            } else if (screen.target && screen.target.includes('AuditWorklistTabs') && !isBottomTabEnabled) {
+            } else if (
+              screen.target
+              && screen?.target?.includes('AuditWorklistTabs')
+              && !isBottomTabEnabled
+            ) {
               dispatch(setBottomTab(true));
             }
             if (scannedEvent.value) {
@@ -164,36 +212,12 @@ export const AuditWorklistNavigatorStack = (
         <Stack.Screen
           name="AuditWorklistTabs"
           component={AuditWorklistTabs}
-          options={{
-            headerTitle: strings('WORKLIST.AUDIT_WORKLIST'),
-            headerLeft: hlProps => hlProps.canGoBack && (
-            <HeaderBackButton
-                  // eslint-disable-next-line react/jsx-props-no-spreading
-              {...hlProps}
-              onPress={navigateBack}
-            />
-            ),
-            headerRight: () => (
-              <View style={styles.headerContainer}>
-                {renderScanButton(dispatch, isManualScanEnabled)}
-                {renderFilterButton(dispatch, menuOpen)}
-              </View>
-            )
-          }}
+          options={() => auditWorklistTabsOptions(navigateBack, props)}
         />
         <Stack.Screen
           name="AuditItem"
           component={AuditItem}
-          options={{
-            headerTitle: strings('AUDITS.AUDIT_ITEM'),
-            headerRight: () => (
-              <View style={styles.headerContainer}>
-                {showCalculator && renderCalcButton(dispatch, calcOpen)}
-                {renderPrintButton(navigation)}
-                {renderScanButton(dispatch, isManualScanEnabled)}
-              </View>
-            )
-          }}
+          options={() => auditItemOptions(props)}
           listeners={{
             beforeRemove: () => {
               dispatch({ type: GET_ITEM_DETAILS_V4.RESET });
@@ -220,7 +244,9 @@ const AuditWorklistNavigator = (): JSX.Element => {
   const {
     isManualScanEnabled, isBottomTabEnabled, calcOpen, scannedEvent
   } = useTypedSelector(state => state.Global);
-  const { auditWorklists, showCalculator } = useTypedSelector(state => state.User.configs);
+  const { auditWorklists, showCalculator } = useTypedSelector(
+    state => state.User.configs
+  );
   const { menuOpen } = useTypedSelector(state => state.Worklist);
 
   return (

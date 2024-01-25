@@ -115,7 +115,6 @@ const genericSagas = [
   makeAsyncSaga(saga.CLEAR_PALLET, actions.clearPallet, DeletePalletService.clearPallet),
   makeAsyncSaga(saga.GET_PALLET_DETAILS, actions.getPalletDetails, PalletManagementService.getPalletDetails),
   makeAsyncSaga(saga.POST_BIN_PALLETS, actions.binPallets, PalletManagementService.postBinPallets),
-  makeAsyncSaga(saga.GET_PALLET_CONFIG, actions.getPalletConfig, PalletManagementService.getPalletConfig),
   makeAsyncSaga(saga.POST_CREATE_PALLET, actions.postCreatePallet, CreatePalletService.createPallet),
   makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS, actions.updatePicklistStatus, PickingService.updatePickListStatus),
   makeAsyncSaga(saga.UPDATE_PICKLIST_STATUS_V1, actions.updatePicklistStatusV1, PickingService.updatePickListStatusV1),

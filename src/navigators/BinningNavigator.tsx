@@ -26,7 +26,7 @@ export const renderScanButton = (
   dispatch: Dispatch<any>,
   isManualScanEnabled: boolean,
   isRightMost: boolean
-): JSX.Element => (
+): React.JSX.Element => (
   <TouchableOpacity
     onPress={() => dispatch(setManualScan(!isManualScanEnabled))}
     testID="scanButton"
@@ -51,10 +51,28 @@ export const resetManualScan = (
   }
 };
 
-export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element => {
-  const {
-    isManualScanEnabled, dispatch, managePalletMenu
-  } = props;
+export const getScreenOptions = (
+  screenName: string,
+  title: string,
+  dispatch: Dispatch<any>,
+  isManualScanEnabled: boolean,
+  managePalletMenu: boolean,
+  isRightMost = true
+) => ({
+  headerTitle: title,
+  headerRight: () => (
+    <View style={styles.headerContainer}>
+      {renderScanButton(dispatch, isManualScanEnabled, isRightMost)}
+      {screenName === 'ManagePallet'
+        && renderManagePalletKebabButton(managePalletMenu, dispatch)}
+    </View>
+  )
+});
+
+export const BinningNavigatorStack = (
+  props: BinningNavigatorProps
+): React.JSX.Element => {
+  const { isManualScanEnabled, dispatch, managePalletMenu } = props;
   return (
     <Stack.Navigator
       screenOptions={{
@@ -66,14 +84,13 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
       <Stack.Screen
         name="BinningHome"
         component={Binning}
-        options={{
-          headerTitle: strings('BINNING.BINNING'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled, true)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'BinningHome',
+          strings('BINNING.BINNING'),
+          dispatch,
+          isManualScanEnabled,
+          managePalletMenu
+        )}
         listeners={{
           blur: () => {
             resetManualScan(isManualScanEnabled, dispatch);
@@ -86,47 +103,47 @@ export const BinningNavigatorStack = (props: BinningNavigatorProps): JSX.Element
       <Stack.Screen
         name="AssignLocation"
         component={AssignLocation}
-        options={{
-          headerTitle: strings('BINNING.ASSIGN_LOCATION'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled, true)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'AssignLocation',
+          strings('BINNING.ASSIGN_LOCATION'),
+          dispatch,
+          isManualScanEnabled,
+          managePalletMenu
+        )}
       />
       <Stack.Screen
         name="ManagePallet"
         component={ManagePallet}
-        options={{
-          headerTitle: strings('PALLET.MANAGE_PALLET'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled, true)}
-              {renderManagePalletKebabButton(managePalletMenu, dispatch)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'ManagePallet',
+          strings('PALLET.MANAGE_PALLET'),
+          dispatch,
+          isManualScanEnabled,
+          managePalletMenu
+        )}
       />
       <Stack.Screen
         name="CombinePallets"
         component={CombinePallets}
-        options={{
-          headerTitle: strings('PALLET.COMBINE_PALLETS'),
-          headerRight: () => (
-            <View style={styles.headerContainer}>
-              {renderScanButton(dispatch, isManualScanEnabled, true)}
-            </View>
-          )
-        }}
+        options={getScreenOptions(
+          'CombinePallets',
+          strings('PALLET.COMBINE_PALLETS'),
+          dispatch,
+          isManualScanEnabled,
+          managePalletMenu
+        )}
       />
     </Stack.Navigator>
   );
 };
 
-const BinningNavigator = (): JSX.Element => {
-  const isManualScanEnabled = useTypedSelector(state => state.Global.isManualScanEnabled);
-  const managePalletMenu = useTypedSelector(state => state.PalletManagement.managePalletMenu);
+const BinningNavigator = (): React.JSX.Element => {
+  const isManualScanEnabled = useTypedSelector(
+    state => state.Global.isManualScanEnabled
+  );
+  const managePalletMenu = useTypedSelector(
+    state => state.PalletManagement.managePalletMenu
+  );
   const dispatch = useDispatch();
   return (
     <BinningNavigatorStack

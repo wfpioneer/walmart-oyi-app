@@ -5,7 +5,7 @@ exports[`Approval filter render tests ShallowRenders the filter screen 1`] = `
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],

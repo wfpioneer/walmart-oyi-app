@@ -127,24 +127,12 @@ exports[`Picking Navigator Renders the Picking Navigator 1`] = `
   <Screen
     component={[Function]}
     name="PickBinWorkflow"
-    options={
-      {
-        "headerLeft": [Function],
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="SalesFloorWorkflow"
-    options={
-      {
-        "headerLeft": [Function],
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
@@ -190,24 +178,12 @@ exports[`Picking Navigator Renders the Picking Navigator with kebab menu 1`] = `
   <Screen
     component={[Function]}
     name="PickBinWorkflow"
-    options={
-      {
-        "headerLeft": [Function],
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}
     name="SalesFloorWorkflow"
-    options={
-      {
-        "headerLeft": [Function],
-        "headerRight": [Function],
-        "headerTitle": "[missing "en.PICKING.PICKING" translation]",
-      }
-    }
+    options={[Function]}
   />
   <Screen
     component={[Function]}

@@ -454,7 +454,6 @@ describe('Tests login screen functions', () => {
       ...mockConfig,
       printingUpdate: true,
       locMgmtEdit: mockConfig.locationManagementEdit,
-      overridePltPerish: false,
       showQtyStocked: true,
       enableAuditsIP: true
     };
@@ -507,7 +506,6 @@ describe('Tests login screen functions', () => {
       ...mockConfig,
       printingUpdate: true,
       locMgmtEdit: mockConfig.locationManagementEdit,
-      overridePltPerish: false,
       showQtyStocked: true,
       enableAuditsIP: true
     };

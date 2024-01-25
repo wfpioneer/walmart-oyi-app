@@ -28,9 +28,9 @@ describe('testing User reducer', () => {
     const testConfig: ConfigResponse = {
       ...mockConfig,
       locMgmtEdit: false,
-      overridePltPerish: false,
       showQtyStocked: false,
-      enableAuditsIP: false
+      enableAuditsIP: false,
+      perishableCatgs: ''
     };
     testChangedState = {
       ...initialState,

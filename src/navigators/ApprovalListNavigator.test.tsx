@@ -1,12 +1,17 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { UseStateType } from '../models/Generics.d';
 import {
   ApprovalListNavigatorStack, renderApprovalTitle, renderCloseButton, renderHeaderRight, renderSelectedItemQty
 } from './ApprovalListNavigator';
+import { UseStateType } from '../models/Generics.d';
 
 jest.mock('../utils/AppCenterTool.ts', () => jest.requireActual('../utils/__mocks__/AppCenterTool'));
-jest.mock('../utils/sessionTimeout.ts', () => jest.requireActual('../utils/__mocks__/sessTimeout'));
+jest.mock('../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../utils/__mocks__/sessTimeout'),
+  validateSession: jest.fn().mockImplementation(() => Promise.resolve())
+}));
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon');
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon');
 
 const mockSetFilterMenu = jest.fn();
 const mockTrackEventCall = jest.fn();

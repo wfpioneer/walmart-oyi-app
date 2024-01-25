@@ -1748,7 +1748,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
                     size={25}
                   />
                 </View>
-                <View>
+                <View
+                  style={
+                    {
+                      "flex": 1,
+                    }
+                  }
+                >
                   <Text
                     style={
                       {
@@ -1876,7 +1882,13 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
                     size={25}
                   />
                 </View>
-                <View>
+                <View
+                  style={
+                    {
+                      "flex": 1,
+                    }
+                  }
+                >
                   <Text
                     style={
                       {
@@ -1934,34 +1946,6 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
                 }
               >
                 <View
-                  style={
-                    {
-                      "alignItems": "center",
-                      "flex": 1,
-                      "flexDirection": "row",
-                      "justifyContent": "flex-start",
-                    }
-                  }
-                >
-                  <Text
-                    style={
-                      {
-                        "marginRight": 0,
-                      }
-                    }
-                  />
-                  <Text
-                    style={
-                      {
-                        "fontWeight": "500",
-                        "paddingLeft": 10,
-                      }
-                    }
-                  >
-                    [missing "en.AUDITS.OTHER_ON_HANDS" translation] (0)
-                  </Text>
-                </View>
-                <View
                   accessibilityState={
                     {
                       "busy": undefined,
@@ -1991,17 +1975,39 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses render screen w
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "flex": 0.1,
+                      "alignItems": "center",
+                      "flex": 1,
+                      "flexDirection": "row",
+                      "justifyContent": "center",
                       "opacity": 1,
-                      "paddingLeft": 5,
                     }
                   }
                   testID="collapsible-card"
                 >
+                  <View
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "fontWeight": "500",
+                            "paddingLeft": 10,
+                          },
+                        ]
+                      }
+                    >
+                      [missing "en.AUDITS.OTHER_ON_HANDS" translation] (0)
+                    </Text>
+                  </View>
                   <mockMaterialIcons
                     color="#000000"
                     name="keyboard-arrow-up"
-                    size={25}
+                    size={30}
                   />
                 </View>
               </View>
@@ -4959,6 +4965,7 @@ exports[`AuditItemScreen Tests renders ItemDetails API Responses renders the det
           onRetry={[Function]}
           scanRequired={false}
           showCalculator={false}
+          vendorPackQty={0}
         />
       </View>
       <View>

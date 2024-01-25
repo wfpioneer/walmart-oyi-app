@@ -28,6 +28,20 @@ const navigationProp: NavigationProp<any> = {
   getParent: jest.fn(),
   getState: jest.fn()
 };
+const mockFloorLocations = [
+  {
+    zoneId: 36842,
+    aisleId: 36843,
+    sectionId: 36844,
+    zoneName: 'A',
+    aisleName: '1',
+    sectionName: '1',
+    type: 'Sales Floor',
+    typeNbr: 8,
+    locationName: 'A1-1',
+    newQty: 1
+  }
+];
 
 describe('ItemInfo Component', () => {
   const mockAdditionalItemDetails: AdditionalItemDetailsProps = {
@@ -49,7 +63,9 @@ describe('ItemInfo Component', () => {
     exceptionType: 'NSFL',
     additionalItemDetails: mockAdditionalItemDetails,
     countryCode: 'MX',
-    showItemImage: false
+    showItemImage: false,
+    floorLocations: [],
+    isLocationLoading: false
   };
 
   describe('Tests rendering ItemInfo', () => {
@@ -68,6 +84,8 @@ describe('ItemInfo Component', () => {
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
+          floorLocations={[]}
+          isLocationLoading={false}
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -88,6 +106,8 @@ describe('ItemInfo Component', () => {
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
         showItemImage={mockItem.showItemImage}
+        floorLocations={[]}
+        isLocationLoading={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -108,6 +128,8 @@ describe('ItemInfo Component', () => {
         additionalItemDetails={{ ...mockAdditionalItemDetails }}
         countryCode={mockItem.countryCode}
         showItemImage={mockItem.showItemImage}
+        floorLocations={[]}
+        isLocationLoading={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -129,6 +151,8 @@ describe('ItemInfo Component', () => {
         showItemImage={mockItem.showItemImage}
         worklistAuditType="AU"
         worklistStatus={WorkListStatus.AUDITSTARTED}
+        floorLocations={[]}
+        isLocationLoading={false}
       />);
       expect(renderer.getRenderOutput()).toMatchSnapshot();
     });
@@ -149,6 +173,8 @@ describe('ItemInfo Component', () => {
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
+          floorLocations={[]}
+          isLocationLoading={false}
         />
       );
       const collapsibleCard = getByTestId('collapsible-card');
@@ -174,6 +200,8 @@ describe('ItemInfo Component', () => {
           additionalItemDetails={{ ...mockAdditionalItemDetails }}
           countryCode={mockItem.countryCode}
           showItemImage={mockItem.showItemImage}
+          floorLocations={mockFloorLocations}
+          isLocationLoading={false}
         />
       );
       const printPriceSignButton = getByTestId('print-price-sign');

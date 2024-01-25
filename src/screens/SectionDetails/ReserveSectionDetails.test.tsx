@@ -1,17 +1,22 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow';
-import { NavigationProp } from '@react-navigation/native';
+import { NavigationContainer, NavigationContext, NavigationProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import { Provider } from 'react-redux';
+import { render } from '@testing-library/react-native';
+import store from '../../state/index';
 import {
   mockLocationDetails,
   mockLocationDetailsEmpty
 } from '../../mockData/locationDetails';
 import { AsyncState } from '../../models/AsyncState';
-import {
+import ReserveSectionDetails, {
   ReserveSectionDetailsScreen,
   combineReserveArrays,
-  getPalletConfigHook,
   getPalletDetailsApiHook,
+  navListenerHook,
+  navigateToPalletManagementHook,
+  setPerishableCategoriesHook,
   showActivitySpinner
 } from './ReserveSectionDetails';
 import {
@@ -19,11 +24,25 @@ import {
   mockPalletDetails
 } from '../../mockData/getPalletDetails';
 import { ReserveDetailsPallet } from '../../models/LocationItems';
-import { mockConfig } from '../../mockData/mockConfig';
 import { strings } from '../../locales';
 import { SNACKBAR_TIMEOUT, SNACKBAR_TIMEOUT_LONG } from '../../utils/global';
 
-let navigationProp: NavigationProp<any, string>;
+const navigationProp: NavigationProp<any> = {
+  addListener: jest.fn(),
+  canGoBack: jest.fn(),
+  getParent: jest.fn(),
+  getId: jest.fn(),
+  getState: jest.fn(),
+  dispatch: jest.fn(),
+  goBack: jest.fn(),
+  isFocused: jest.fn(() => true),
+  removeListener: jest.fn(),
+  reset: jest.fn(),
+  setOptions: jest.fn(),
+  setParams: jest.fn(),
+  navigate: jest.fn()
+};
+
 describe('Tests Reserve Section Details Screen', () => {
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
@@ -47,6 +66,29 @@ describe('Tests Reserve Section Details Screen', () => {
         }
       }
     };
+    const actualNav = jest.requireActual('@react-navigation/native');
+    const navContextValue = {
+      ...actualNav.navigation,
+      isFocused: () => true,
+      goBack: jest.fn(),
+      addListener: jest.fn(() => jest.fn())
+    };
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+    it('render screen with redux', () => {
+      const component = (
+        <Provider store={store}>
+          <NavigationContainer>
+            <NavigationContext.Provider value={navContextValue}>
+              <ReserveSectionDetails />
+            </NavigationContext.Provider>
+          </NavigationContainer>
+        </Provider>
+      );
+      const { toJSON } = render(component);
+      expect(toJSON()).toMatchSnapshot();
+    });
     it('Renders Reserve Details Screen with Mock Reserve Items', () => {
       const renderer = ShallowRenderer.createRenderer();
       renderer.render(
@@ -58,18 +100,17 @@ describe('Tests Reserve Section Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           palletIds={[]}
-          getPalletConfigApi={defaultAsyncState}
           getPalletDetailsComplete={false}
           configComplete={false}
           setConfigComplete={jest.fn()}
           setGetPalletDetailsComplete={jest.fn()}
           palletClicked={false}
           setPalletClicked={jest.fn()}
-          userConfig={mockConfig}
-          perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           palletInfo={{ id: '1234' }}
+          perishableCategoriesList={[]}
+          perishableCategories=""
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -92,18 +133,17 @@ describe('Tests Reserve Section Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           palletIds={[]}
-          getPalletConfigApi={defaultAsyncState}
           getPalletDetailsComplete={false}
           configComplete={false}
           setConfigComplete={jest.fn()}
           setGetPalletDetailsComplete={jest.fn()}
           palletClicked={false}
           setPalletClicked={jest.fn()}
-          userConfig={mockConfig}
-          perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           palletInfo={{ id: '1234' }}
+          perishableCategoriesList={[]}
+          perishableCategories=""
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -128,18 +168,17 @@ describe('Tests Reserve Section Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           palletIds={[]}
-          getPalletConfigApi={defaultAsyncState}
           getPalletDetailsComplete={false}
           configComplete={false}
           setConfigComplete={jest.fn()}
           setGetPalletDetailsComplete={jest.fn()}
           palletClicked={false}
           setPalletClicked={jest.fn()}
-          userConfig={mockConfig}
-          perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           palletInfo={{ id: '1234' }}
+          perishableCategoriesList={[]}
+          perishableCategories=""
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -162,18 +201,17 @@ describe('Tests Reserve Section Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           palletIds={[]}
-          getPalletConfigApi={defaultAsyncState}
           getPalletDetailsComplete={false}
           configComplete={false}
           setConfigComplete={jest.fn()}
           setGetPalletDetailsComplete={jest.fn()}
           palletClicked={false}
           setPalletClicked={jest.fn()}
-          userConfig={mockConfig}
-          perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           palletInfo={{ id: '1234' }}
+          perishableCategoriesList={[]}
+          perishableCategories=""
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -194,18 +232,17 @@ describe('Tests Reserve Section Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           palletIds={[]}
-          getPalletConfigApi={defaultAsyncState}
           getPalletDetailsComplete={false}
           configComplete={false}
           setConfigComplete={jest.fn()}
           setGetPalletDetailsComplete={jest.fn()}
           palletClicked={false}
           setPalletClicked={jest.fn()}
-          userConfig={mockConfig}
-          perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           palletInfo={{ id: '1234' }}
+          perishableCategoriesList={[]}
+          perishableCategories=""
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -225,18 +262,17 @@ describe('Tests Reserve Section Details Screen', () => {
           trackEventCall={jest.fn()}
           useEffectHook={jest.fn()}
           palletIds={[]}
-          getPalletConfigApi={defaultAsyncState}
           getPalletDetailsComplete={false}
           configComplete={false}
           setConfigComplete={jest.fn()}
           setGetPalletDetailsComplete={jest.fn()}
           palletClicked={false}
           setPalletClicked={jest.fn()}
-          userConfig={mockConfig}
-          perishableCategories={[]}
           useCallbackHook={jest.fn()}
           useFocusEffectHook={jest.fn()}
           palletInfo={{ id: '1234' }}
+          perishableCategoriesList={[]}
+          perishableCategories=""
         />
       );
       expect(renderer.getRenderOutput()).toMatchSnapshot();
@@ -281,7 +317,12 @@ describe('Tests Reserve Section Details Screen', () => {
       };
 
       getPalletDetailsApiHook(
-        successApi, mockReservePallets, true, mockSetPalletClicked, mockDispatch, mockSetGetPalletDetailsComplete
+        successApi,
+        mockReservePallets,
+        true,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockSetGetPalletDetailsComplete
       );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(Toast.show).toBeCalledTimes(0);
@@ -298,17 +339,24 @@ describe('Tests Reserve Section Details Screen', () => {
         }
       };
 
-      mockReservePallets = [{
-        statusCode: 204,
-        id: 60,
-        createDate: 'today',
-        expirationDate: 'tomorrow',
-        items: [],
-        palletCreateTS: '2022-06-05T00:20:00Z',
-        palletId: '60'
-      }];
+      mockReservePallets = [
+        {
+          statusCode: 204,
+          id: 60,
+          createDate: 'today',
+          expirationDate: 'tomorrow',
+          items: [],
+          palletCreateTS: '2022-06-05T00:20:00Z',
+          palletId: '60'
+        }
+      ];
       getPalletDetailsApiHook(
-        failApi, mockReservePallets, false, mockSetPalletClicked, mockDispatch, mockSetGetPalletDetailsComplete
+        failApi,
+        mockReservePallets,
+        false,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockSetGetPalletDetailsComplete
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -327,7 +375,12 @@ describe('Tests Reserve Section Details Screen', () => {
       };
 
       getPalletDetailsApiHook(
-        apiResult, mockReservePallets, false, mockSetPalletClicked, mockDispatch, mockSetGetPalletDetailsComplete
+        apiResult,
+        mockReservePallets,
+        false,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockSetGetPalletDetailsComplete
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -340,7 +393,12 @@ describe('Tests Reserve Section Details Screen', () => {
     it('Tests getPalletDetailsApiHook on fail', () => {
       const failApi: AsyncState = { ...defaultAsyncState, error: {} };
       getPalletDetailsApiHook(
-        failApi, mockReservePallets, false, mockSetPalletClicked, mockDispatch, mockSetGetPalletDetailsComplete
+        failApi,
+        mockReservePallets,
+        false,
+        mockSetPalletClicked,
+        mockDispatch,
+        mockSetGetPalletDetailsComplete
       );
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -350,68 +408,105 @@ describe('Tests Reserve Section Details Screen', () => {
         position: 'bottom'
       });
     });
-    it('test getPalletConfigHook', async () => {
-      const dispatch = jest.fn();
-      const setConfigComplete = jest.fn();
-      const successAsyncState = {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: {
-            perishableCategories: [1, 8, 35, 36, 40, 41, 43, 45, 46, 47, 49, 51, 52, 53, 54, 55, 58]
-          }
-        }
-      };
-      const failureAsyncState = {
-        ...defaultAsyncState,
-        error: 'test'
-      };
+    it('Tests navListenerHook', () => {
+      navigationProp.addListener = jest
+        .fn()
+        .mockImplementation((event, callBack) => {
+          callBack();
+        });
 
-      getPalletConfigHook(successAsyncState, dispatch, setConfigComplete, '1, 8');
-      expect(dispatch).toBeCalledTimes(2);
-      expect(setConfigComplete).toBeCalledTimes(1);
-
-      dispatch.mockReset();
-      setConfigComplete.mockReset();
-      getPalletConfigHook(failureAsyncState, dispatch, setConfigComplete, '1, 8');
-      expect(dispatch).toBeCalledTimes(2);
-      expect(setConfigComplete).toBeCalledTimes(1);
+      navListenerHook(navigationProp, mockDispatch);
+      expect(navigationProp.addListener).toBeCalledWith(
+        'beforeRemove',
+        expect.any(Function)
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+    it('Tests perishableCategories hook', () => {
+      const mockMetConfigComplete = jest.fn();
+      setPerishableCategoriesHook(
+        [49, 20],
+        '',
+        mockDispatch,
+        mockMetConfigComplete
+      );
+      expect(mockDispatch).not.toBeCalled();
+      setPerishableCategoriesHook([], '', mockDispatch, mockMetConfigComplete);
+      expect(mockDispatch).toBeCalledTimes(1);
+    });
+    it('Tests navigateToPalletManagement Hook', () => {
+      const mockPalletInfo = { id: '1234' };
+      const mockTrackEventCall = jest.fn();
+      const mockIsNotFocused = jest.fn(() => false);
+      expect(mockIsNotFocused).not.toBeCalled();
+      navigateToPalletManagementHook(
+        false,
+        false,
+        mockTrackEventCall,
+        mockPalletInfo,
+        navigationProp,
+        mockSetGetPalletDetailsComplete,
+        mockDispatch
+      );
+      expect(mockDispatch).not.toBeCalled();
+      navigateToPalletManagementHook(
+        true,
+        true,
+        mockTrackEventCall,
+        mockPalletInfo,
+        navigationProp,
+        mockSetGetPalletDetailsComplete,
+        mockDispatch
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      expect(mockTrackEventCall).toBeCalledTimes(1);
+      expect(navigationProp.navigate).toHaveBeenCalledTimes(1);
+      expect(navigationProp.navigate).toHaveBeenCalledWith('PalletManagement', { screen: 'ManagePallet' });
+      expect(mockSetGetPalletDetailsComplete).toBeCalledWith(false);
     });
     it('test showAactivitySpinner functionality', () => {
-      let mockConfigWaiting = true;
       let mockGetPalletDetailsWaiting = false;
       let mockGetPalletDetailsComplete = true;
       let mockGetSectionDetailsWaiting = false;
       let result = showActivitySpinner(
-        mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
+        mockGetPalletDetailsWaiting,
+        mockGetPalletDetailsComplete,
+        mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(true);
 
-      mockConfigWaiting = false;
       mockGetPalletDetailsWaiting = true;
       mockGetPalletDetailsComplete = false;
       mockGetSectionDetailsWaiting = false;
       result = showActivitySpinner(
-        mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
+        mockGetPalletDetailsWaiting,
+        mockGetPalletDetailsComplete,
+        mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(true);
 
       mockGetPalletDetailsWaiting = false;
       mockGetSectionDetailsWaiting = true;
       result = showActivitySpinner(
-        mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
+        mockGetPalletDetailsWaiting,
+        mockGetPalletDetailsComplete,
+        mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(true);
 
       mockGetSectionDetailsWaiting = false;
       result = showActivitySpinner(
-        mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
+        mockGetPalletDetailsWaiting,
+        mockGetPalletDetailsComplete,
+        mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(false);
 
       mockGetPalletDetailsComplete = true;
       result = showActivitySpinner(
-        mockConfigWaiting, mockGetPalletDetailsWaiting, mockGetPalletDetailsComplete, mockGetSectionDetailsWaiting
+        mockGetPalletDetailsWaiting,
+        mockGetPalletDetailsComplete,
+        mockGetSectionDetailsWaiting
       );
       expect(result).toStrictEqual(true);
     });

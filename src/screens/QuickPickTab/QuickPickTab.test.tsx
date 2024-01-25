@@ -15,7 +15,7 @@ const mockUser: User = {
   },
   configs: {
     ...mockConfig,
-    backupCategories: '',
+    perishableCategories: '',
     binning: true,
     locationManagement: true,
     locationManagementEdit: true,

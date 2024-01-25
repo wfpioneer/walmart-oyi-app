@@ -34,8 +34,8 @@ import {
   handleIncrement,
   handleTextChange,
   onEndEditing,
-  palletConfigApiEffect,
   palletDetailsApiEffect,
+  setPerishableCategoriesHook,
   shouldDelete,
   shouldPromptNewExpiry,
   shouldRemoveExpiry,
@@ -131,25 +131,46 @@ const mockSetExpiration = jest.fn();
 const mockExpirationState: UseStateType<string> = ['', mockSetExpiration];
 
 const mockSetPerishables = jest.fn();
-const mockPerishablesState: UseStateType<Array<number>> = [[], mockSetPerishables];
+const mockPerishablesState: UseStateType<Array<number>> = [
+  [],
+  mockSetPerishables
+];
 
 const mockSetExpirationShow = jest.fn();
-const mockExpirationShowState: UseStateType<ExpiryPromptShow> = [ExpiryPromptShow.HIDDEN, mockSetExpirationShow];
+const mockExpirationShowState: UseStateType<ExpiryPromptShow> = [
+  ExpiryPromptShow.HIDDEN,
+  mockSetExpirationShow
+];
 
 const mockSetConfigComplete = jest.fn();
-const mockConfigCompleteState: UseStateType<boolean> = [false, mockSetConfigComplete];
+const mockConfigCompleteState: UseStateType<boolean> = [
+  false,
+  mockSetConfigComplete
+];
 
 const mockSetIsReadytoComplete = jest.fn();
-const mockCompletePalletState: UseStateType<boolean> = [false, mockSetIsReadytoComplete];
+const mockCompletePalletState: UseStateType<boolean> = [
+  false,
+  mockSetIsReadytoComplete
+];
 
 const mockSetIsUpdateItems = jest.fn();
-const mockUpdateItemsState: UseStateType<boolean> = [false, mockSetIsUpdateItems];
+const mockUpdateItemsState: UseStateType<boolean> = [
+  false,
+  mockSetIsUpdateItems
+];
 
 const mockSetIsDeleteItems = jest.fn();
-const mockDeleteItemsState: UseStateType<boolean> = [false, mockSetIsDeleteItems];
+const mockDeleteItemsState: UseStateType<boolean> = [
+  false,
+  mockSetIsDeleteItems
+];
 
 const mockSetShowDeleteConfirmationModal = jest.fn();
-const mockShowDeleteConfirmationState: UseStateType<boolean> = [false, mockSetShowDeleteConfirmationModal];
+const mockShowDeleteConfirmationState: UseStateType<boolean> = [
+  false,
+  mockSetShowDeleteConfirmationModal
+];
 
 describe('Sales floor workflow tests', () => {
   afterEach(() => {
@@ -169,8 +190,7 @@ describe('Sales floor workflow tests', () => {
         palletDetailsApi={defaultAsyncState}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
@@ -206,8 +226,7 @@ describe('Sales floor workflow tests', () => {
         useEffectHook={jest.fn()}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
@@ -246,8 +265,7 @@ describe('Sales floor workflow tests', () => {
         useEffectHook={jest.fn()}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
@@ -289,8 +307,7 @@ describe('Sales floor workflow tests', () => {
         useEffectHook={jest.fn()}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
@@ -336,8 +353,7 @@ describe('Sales floor workflow tests', () => {
         useEffectHook={jest.fn()}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
@@ -386,8 +402,7 @@ describe('Sales floor workflow tests', () => {
         useEffectHook={jest.fn()}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={waitingAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
@@ -436,8 +451,7 @@ describe('Sales floor workflow tests', () => {
         useEffectHook={jest.fn()}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={showExpiryDialogState}
         showActivity={false}
@@ -487,8 +501,7 @@ describe('Sales floor workflow tests', () => {
         palletDetailsApi={defaultAsyncState}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={showExpiryCalendarState}
         showActivity={false}
@@ -555,8 +568,7 @@ describe('Sales floor workflow tests', () => {
         palletDetailsApi={successApi}
         expirationState={mockExpirationState}
         perishableItemsState={mockPerishablesState}
-        perishableCategories={[]}
-        palletConfigApi={defaultAsyncState}
+        perishableCategoriesList={[]}
         configCompleteState={mockConfigCompleteState}
         showExpiryPromptState={mockExpirationShowState}
         showActivity={false}
@@ -743,34 +755,6 @@ describe('Sales floor workflow tests', () => {
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
     });
 
-    it('test getPalletConfigHook', async () => {
-      const dispatch = jest.fn();
-      const setConfigComplete = jest.fn();
-      const successAsyncState = {
-        ...defaultAsyncState,
-        result: {
-          status: 200,
-          data: {
-            perishableCategories: [1, 8, 35, 36, 40, 41, 43, 45, 46, 47, 49, 51, 52, 53, 54, 55, 58]
-          }
-        }
-      };
-      const failureAsyncState = {
-        ...defaultAsyncState,
-        error: 'test'
-      };
-
-      palletConfigApiEffect(successAsyncState, dispatch, navigationProp, setConfigComplete, '1, 8');
-      expect(dispatch).toBeCalledTimes(2);
-      expect(setConfigComplete).toBeCalledTimes(1);
-
-      dispatch.mockReset();
-      setConfigComplete.mockReset();
-      palletConfigApiEffect(failureAsyncState, dispatch, navigationProp, setConfigComplete, '1, 8');
-      expect(dispatch).toBeCalledTimes(2);
-      expect(setConfigComplete).toBeCalledTimes(1);
-    });
-
     it('tests the bin apis effect', () => {
       const successApi: AsyncState = {
         ...defaultAsyncState,
@@ -783,8 +767,14 @@ describe('Sales floor workflow tests', () => {
         value: {}
       };
 
-      const updateItemsCalledState: UseStateType<boolean> = [true, mockSetIsUpdateItems];
-      const deleteItemsCalledState: UseStateType<boolean> = [true, mockSetIsDeleteItems];
+      const updateItemsCalledState: UseStateType<boolean> = [
+        true,
+        mockSetIsUpdateItems
+      ];
+      const deleteItemsCalledState: UseStateType<boolean> = [
+        true,
+        mockSetIsDeleteItems
+      ];
 
       // success
       binApisEffect(
@@ -798,7 +788,9 @@ describe('Sales floor workflow tests', () => {
         false
       );
       expect(mockDispatch).toBeCalledTimes(3);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PICKLIST_STATUS }));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: UPDATE_PICKLIST_STATUS })
+      );
       expect(Toast.show).not.toBeCalled();
       jest.clearAllMocks();
 
@@ -815,7 +807,11 @@ describe('Sales floor workflow tests', () => {
       );
       expect(mockDispatch).not.toBeCalled();
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(expect.objectContaining({ text1: strings('PALLET.SAVE_PALLET_PARTIAL') }));
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({
+          text1: strings('PALLET.SAVE_PALLET_PARTIAL')
+        })
+      );
       jest.clearAllMocks();
 
       // complete failure
@@ -831,7 +827,11 @@ describe('Sales floor workflow tests', () => {
       );
       expect(mockDispatch).not.toBeCalled();
       expect(Toast.show).toBeCalledTimes(1);
-      expect(Toast.show).toBeCalledWith(expect.objectContaining({ text1: strings('PALLET.SAVE_PALLET_FAILURE') }));
+      expect(Toast.show).toBeCalledWith(
+        expect.objectContaining({
+          text1: strings('PALLET.SAVE_PALLET_FAILURE')
+        })
+      );
     });
 
     it('tests the bin apis effect with inProgress flag enabled', () => {
@@ -840,8 +840,14 @@ describe('Sales floor workflow tests', () => {
         result: {},
         value: {}
       };
-      const updateItemsCalledState: UseStateType<boolean> = [true, mockSetIsUpdateItems];
-      const deleteItemsCalledState: UseStateType<boolean> = [true, mockSetIsDeleteItems];
+      const updateItemsCalledState: UseStateType<boolean> = [
+        true,
+        mockSetIsUpdateItems
+      ];
+      const deleteItemsCalledState: UseStateType<boolean> = [
+        true,
+        mockSetIsDeleteItems
+      ];
 
       // success
       binApisEffect(
@@ -855,7 +861,9 @@ describe('Sales floor workflow tests', () => {
         true
       );
       expect(mockDispatch).toBeCalledTimes(3);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PICKLIST_STATUS_V1 }));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: UPDATE_PICKLIST_STATUS_V1 })
+      );
       expect(Toast.show).not.toBeCalled();
     });
 
@@ -872,7 +880,11 @@ describe('Sales floor workflow tests', () => {
         error: 'test'
       };
 
-      deleteBadPalletApiEffect(successApi, navigationProp, mockSetShowDeleteConfirmationModal);
+      deleteBadPalletApiEffect(
+        successApi,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal
+      );
       expect(navigationProp.isFocused).toHaveBeenCalled();
       expect(mockSetShowDeleteConfirmationModal).toHaveBeenCalledWith(false);
       expect(Toast.show).toHaveBeenCalledWith({
@@ -882,7 +894,11 @@ describe('Sales floor workflow tests', () => {
         visibilityTime: SNACKBAR_TIMEOUT
       });
 
-      deleteBadPalletApiEffect(failureApi, navigationProp, mockSetShowDeleteConfirmationModal);
+      deleteBadPalletApiEffect(
+        failureApi,
+        navigationProp,
+        mockSetShowDeleteConfirmationModal
+      );
       expect(navigationProp.isFocused).toHaveBeenCalled();
       expect(Toast.show).toHaveBeenCalledWith({
         type: 'error',
@@ -1049,10 +1065,22 @@ describe('Sales floor workflow tests', () => {
         { ...basePickItem, itemNbr: 5 }
       ];
 
-      const noPerishables = shouldRemoveExpiry(noPerishablePicks, perishableItems);
-      const notAllPerishables = shouldRemoveExpiry(notAllPerishablePicks, perishableItems);
-      const allPerishables = shouldRemoveExpiry(allPerishablePicks, perishableItems);
-      const moreThanPerishables = shouldRemoveExpiry(moreThanPerishablePicks, perishableItems);
+      const noPerishables = shouldRemoveExpiry(
+        noPerishablePicks,
+        perishableItems
+      );
+      const notAllPerishables = shouldRemoveExpiry(
+        notAllPerishablePicks,
+        perishableItems
+      );
+      const allPerishables = shouldRemoveExpiry(
+        allPerishablePicks,
+        perishableItems
+      );
+      const moreThanPerishables = shouldRemoveExpiry(
+        moreThanPerishablePicks,
+        perishableItems
+      );
 
       expect(noPerishables).toBe(false);
       expect(notAllPerishables).toBe(false);
@@ -1077,9 +1105,18 @@ describe('Sales floor workflow tests', () => {
         { ...basePickItem, itemNbr: 5 }
       ];
 
-      const noPerishables = shouldPromptNewExpiry(noPerishablePicks, perishableItems);
-      const notAllPerishables = shouldPromptNewExpiry(notAllPerishablePicks, perishableItems);
-      const allPerishables = shouldPromptNewExpiry(allPerishablePicks, perishableItems);
+      const noPerishables = shouldPromptNewExpiry(
+        noPerishablePicks,
+        perishableItems
+      );
+      const notAllPerishables = shouldPromptNewExpiry(
+        notAllPerishablePicks,
+        perishableItems
+      );
+      const allPerishables = shouldPromptNewExpiry(
+        allPerishablePicks,
+        perishableItems
+      );
 
       expect(noPerishables).toBe(false);
       expect(notAllPerishables).toBe(true);
@@ -1105,7 +1142,9 @@ describe('Sales floor workflow tests', () => {
         mockSetIsDeleteItems
       );
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY }));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY })
+      );
       expect(mockSetExpirationShow).not.toBeCalled();
       expect(mockSetIsUpdateItems).toBeCalledTimes(1);
       expect(mockSetIsDeleteItems).toBeCalledTimes(0);
@@ -1123,7 +1162,9 @@ describe('Sales floor workflow tests', () => {
         mockSetIsDeleteItems
       );
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: DELETE_UPCS })
+      );
       expect(mockSetExpirationShow).not.toBeCalled();
       expect(mockSetIsUpdateItems).toBeCalledTimes(0);
       expect(mockSetIsDeleteItems).toBeCalledTimes(1);
@@ -1142,7 +1183,9 @@ describe('Sales floor workflow tests', () => {
         'yesterday'
       );
       expect(mockDispatch).toBeCalledTimes(1);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: DELETE_UPCS })
+      );
       expect(mockSetExpirationShow).toBeCalledTimes(1);
       expect(mockSetExpirationShow).toBeCalledWith(ExpiryPromptShow.HIDDEN);
       expect(mockSetIsUpdateItems).toBeCalledTimes(0);
@@ -1162,8 +1205,12 @@ describe('Sales floor workflow tests', () => {
         'tomorrow'
       );
       expect(mockDispatch).toBeCalledTimes(2);
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY }));
-      expect(mockDispatch).toBeCalledWith(expect.objectContaining({ type: DELETE_UPCS }));
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: UPDATE_PALLET_ITEM_QTY })
+      );
+      expect(mockDispatch).toBeCalledWith(
+        expect.objectContaining({ type: DELETE_UPCS })
+      );
       expect(mockSetExpirationShow).toBeCalledTimes(1);
       expect(mockSetExpirationShow).toBeCalledWith(ExpiryPromptShow.HIDDEN);
       expect(mockSetIsUpdateItems).toBeCalledTimes(1);
@@ -1183,7 +1230,12 @@ describe('Sales floor workflow tests', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      updatePicklistStatusApiEffect(successApi, mockSelectedItems, mockDispatch, navigationProp);
+      updatePicklistStatusApiEffect(
+        successApi,
+        mockSelectedItems,
+        mockDispatch,
+        navigationProp
+      );
       expect(navigationProp.goBack).toHaveBeenCalled();
       expect(mockDispatch).toBeCalledTimes(4);
       expect(hideActivityModal).toBeCalledTimes(1);
@@ -1202,7 +1254,12 @@ describe('Sales floor workflow tests', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      updatePicklistStatusApiEffect(failureApi, mockSelectedItems, mockDispatch, navigationProp);
+      updatePicklistStatusApiEffect(
+        failureApi,
+        mockSelectedItems,
+        mockDispatch,
+        navigationProp
+      );
       expect(mockDispatch).toBeCalledTimes(3);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
@@ -1226,7 +1283,12 @@ describe('Sales floor workflow tests', () => {
         visibilityTime: 4000,
         position: 'bottom'
       };
-      updatePicklistStatusApiEffect(failureApi, mockSelectedItems, mockDispatch, navigationProp);
+      updatePicklistStatusApiEffect(
+        failureApi,
+        mockSelectedItems,
+        mockDispatch,
+        navigationProp
+      );
       expect(mockDispatch).toBeCalledTimes(3);
       expect(hideActivityModal).toBeCalledTimes(1);
       expect(Toast.show).toHaveBeenCalledWith(toastUpdatePicklistError);
@@ -1237,7 +1299,12 @@ describe('Sales floor workflow tests', () => {
         ...defaultAsyncState,
         isWaiting: true
       };
-      updatePicklistStatusApiEffect(isLoadingApi, mockSelectedItems, mockDispatch, navigationProp);
+      updatePicklistStatusApiEffect(
+        isLoadingApi,
+        mockSelectedItems,
+        mockDispatch,
+        navigationProp
+      );
       expect(mockDispatch).toBeCalledTimes(1);
       expect(showActivityModal).toBeCalledTimes(1);
     });
@@ -1262,9 +1329,11 @@ describe('Sales floor workflow tests', () => {
       handleIncrement(basePickItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
-        payload: [expect.objectContaining({
-          quantityLeft: 1
-        })]
+        payload: [
+          expect.objectContaining({
+            quantityLeft: 1
+          })
+        ]
       });
 
       mockDispatch.mockReset();
@@ -1273,10 +1342,12 @@ describe('Sales floor workflow tests', () => {
       handleIncrement(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
-        payload: [expect.objectContaining({
-          newQuantityLeft: 4,
-          itemQty: 1
-        })]
+        payload: [
+          expect.objectContaining({
+            newQuantityLeft: 4,
+            itemQty: 1
+          })
+        ]
       });
 
       mockDispatch.mockReset();
@@ -1289,9 +1360,11 @@ describe('Sales floor workflow tests', () => {
       // show quantity stocked true
       mockQuantifiedItem.newQuantityLeft = 3;
       handleIncrement(mockQuantifiedItem, mockDispatch, true);
-      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
-        payload: [expect.objectContaining({ itemQty: 1 })]
-      }));
+      expect(mockDispatch).not.toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: [expect.objectContaining({ itemQty: 1 })]
+        })
+      );
     });
 
     it('tests the decrement function', () => {
@@ -1304,10 +1377,12 @@ describe('Sales floor workflow tests', () => {
       handleDecrement(mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
-        payload: [expect.objectContaining({
-          newQuantityLeft: 2,
-          itemQty: 3
-        })]
+        payload: [
+          expect.objectContaining({
+            newQuantityLeft: 2,
+            itemQty: 3
+          })
+        ]
       });
 
       mockDispatch.mockReset();
@@ -1322,9 +1397,11 @@ describe('Sales floor workflow tests', () => {
       // show quantity stocked true
       mockQuantifiedItem.newQuantityLeft = 3;
       handleDecrement(mockQuantifiedItem, mockDispatch, true);
-      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
-        payload: [expect.objectContaining({ itemQty: 3 })]
-      }));
+      expect(mockDispatch).not.toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: [expect.objectContaining({ itemQty: 3 })]
+        })
+      );
     });
 
     it('tests the text editing', () => {
@@ -1336,9 +1413,11 @@ describe('Sales floor workflow tests', () => {
       handleTextChange('', mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
-        payload: [expect.objectContaining({
-          newQuantityLeft: NaN
-        })]
+        payload: [
+          expect.objectContaining({
+            newQuantityLeft: NaN
+          })
+        ]
       });
 
       mockDispatch.mockReset();
@@ -1355,21 +1434,27 @@ describe('Sales floor workflow tests', () => {
       handleTextChange('3', mockQuantifiedItem, mockDispatch, false);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: UPDATE_PICKS,
-        payload: [expect.objectContaining({
-          newQuantityLeft: 3,
-          itemQty: 2
-        })]
+        payload: [
+          expect.objectContaining({
+            newQuantityLeft: 3,
+            itemQty: 2
+          })
+        ]
       });
 
       mockDispatch.mockReset();
 
       // show quantity stocked true
       handleTextChange('2', mockQuantifiedItem, mockDispatch, true);
-      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
-        payload: [expect.objectContaining({
-          itemQty: 3
-        })]
-      }));
+      expect(mockDispatch).not.toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: [
+            expect.objectContaining({
+              itemQty: 3
+            })
+          ]
+        })
+      );
     });
 
     it('tests the onEditing function to ensure values are allowable', () => {
@@ -1395,13 +1480,34 @@ describe('Sales floor workflow tests', () => {
       // show quantity stocked true
       mockQuantifiedItem.newQuantityLeft = 3;
       onEndEditing(mockQuantifiedItem, mockDispatch, true);
-      expect(mockDispatch).not.toHaveBeenCalledWith(expect.objectContaining({
-        payload: [expect.objectContaining({
-          itemQty: 0
-        })]
-      }));
+      expect(mockDispatch).not.toHaveBeenCalledWith(
+        expect.objectContaining({
+          payload: [
+            expect.objectContaining({
+              itemQty: 0
+            })
+          ]
+        })
+      );
     });
-
+    it('Tests set perishable Categories hook', () => {
+      setPerishableCategoriesHook(
+        { palletId: 99 },
+        [],
+        mockDispatch,
+        '',
+        mockSetConfigComplete
+      );
+      expect(mockDispatch).toBeCalledTimes(1);
+      setPerishableCategoriesHook(
+        { palletId: 99 },
+        [49],
+        mockDispatch,
+        '',
+        mockSetConfigComplete
+      );
+      expect(mockDispatch).toBeCalledTimes(2);
+    });
     it('tests the deleteBadPalletModal confirm and cancel buttons', () => {
       const { getByTestId } = render(
         deleteBadPalletModal(
@@ -1420,10 +1526,10 @@ describe('Sales floor workflow tests', () => {
       const confirmButton = getByTestId('Confirm-Delete-Button');
       fireEvent.press(confirmButton);
       expect(mockDispatch).toHaveBeenCalledWith(deleteBadPallet('0'));
-      expect(trackEvent).toHaveBeenCalledWith(
-        'sales_floor_workflow_screen',
-        { action: 'delete_bad_pallet_click', palletId: '0' }
-      );
+      expect(trackEvent).toHaveBeenCalledWith('sales_floor_workflow_screen', {
+        action: 'delete_bad_pallet_click',
+        palletId: '0'
+      });
     });
   });
 });

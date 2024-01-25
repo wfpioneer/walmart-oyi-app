@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 
 import styles from './ItemInfo.style';
@@ -12,6 +12,7 @@ import ItemDetailsList, { ItemDetailsListRow } from '../ItemDetailsList/ItemDeta
 import ImageWrapper from '../ImageWrapper/ImageWrapper';
 import { TrackEventSource } from '../../models/Generics.d';
 import { WorkListStatus } from '../../models/WorklistItem';
+import Location from '../../models/Location';
 
 export type ItemInfoProps = {
   itemName: string;
@@ -29,6 +30,8 @@ export type ItemInfoProps = {
   worklistStatus?: WorkListStatus;
   imageToken?: string | undefined;
   tokenIsWaiting?: boolean;
+  floorLocations: Location[] | undefined;
+  isLocationLoading:boolean
 };
 
 export type AdditionalItemDetailsProps = {
@@ -116,8 +119,9 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
     itemName, itemNbr, upcNbr, status, category,
     price, exceptionType, navigationForPrint: navigation, additionalItemDetails,
     countryCode, showItemImage, worklistAuditType, worklistStatus,
-    imageToken, tokenIsWaiting
+    imageToken, tokenIsWaiting, floorLocations, isLocationLoading
   } = props;
+  const hasFloorLocations = floorLocations && floorLocations.length >= 1;
 
   const handlePrintPriceSign = () => {
     trackEvent('item_details_print_sign_button_click', { itemDetails: JSON.stringify(props) });
@@ -169,7 +173,8 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
       </View>
       {additionalItemDetails && renderAdditionalItemDetails(additionalItemDetails)}
       {price && price !== 0 ? <Text style={styles.priceText}>{`${currencies(price)}`}</Text> : null}
-      {navigation && (
+
+      {navigation && hasFloorLocations ? (
         <Button
           type={2}
           title={strings('PRINT.PRICE_SIGN')}
@@ -178,6 +183,18 @@ const ItemInfo = (props: ItemInfoProps): JSX.Element => {
           style={styles.printPriceBtn}
           onPress={handlePrintPriceSign}
         />
+      )
+        : (!isLocationLoading && <Text style={styles.addLocationText}>{strings('ITEM.ADD_FLOOR_LOCATION')}</Text>)}
+      {isLocationLoading && (
+        <View style={styles.bgWhite}>
+          <ActivityIndicator
+            animating={true}
+            hidesWhenStopped
+            color={COLOR.MAIN_THEME_COLOR}
+            size="small"
+            style={styles.completeActivityIndicator}
+          />
+        </View>
       )}
     </View>
   );

@@ -387,7 +387,7 @@ export const calculateFloorLocDecreaseQty = (
   locationName: string,
   dispatch: Dispatch<any>
 ) => {
-  const OH_MIN = 1;
+  const OH_MIN = 0;
   const OH_MAX = 9999;
   if (newOHQty > OH_MAX) {
     dispatch(updateFloorLocationQty(locationName, OH_MAX));
@@ -401,7 +401,7 @@ export const calculateFloorLocIncreaseQty = (
   locationName: string,
   dispatch: Dispatch<any>
 ) => {
-  const OH_MIN = 1;
+  const OH_MIN = 0;
   const OH_MAX = 9999;
   if (newOHQty < OH_MIN || Number.isNaN(newOHQty)) {
     dispatch(updateFloorLocationQty(locationName, OH_MIN));
@@ -455,14 +455,19 @@ export const getUpdatedFloorLocations = (
         const savedAuditLocationQty = savedFloorLocation?.get(`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`);
 
         return (alreadyExistedLocation?.newQty || savedAuditLocationQty)
-          ? { ...loc, newQty: alreadyExistedLocation?.newQty || savedAuditLocationQty || 0 }
-          : { ...loc, newQty: loc.qty || 0 };
+          ? {
+            ...loc,
+            newQty: alreadyExistedLocation?.newQty || savedAuditLocationQty || 0,
+            showQtyChanged: savedAuditLocationQty !== undefined
+          }
+          : { ...loc, newQty: loc.qty || 0, showQtyChanged: savedAuditLocationQty !== undefined };
       });
     } else {
       updatedFloorLocations = floorResultsData.map((loc: Location) => {
         const savedAuditLocationQty = savedFloorLocation?.get(`${loc.zoneName}${loc.aisleName}-${loc.sectionName}`);
-
-        return savedAuditLocationQty ? { ...loc, newQty: savedAuditLocationQty } : { ...loc, newQty: loc.qty || 0 };
+        return savedAuditLocationQty
+          ? { ...loc, newQty: savedAuditLocationQty, showQtyChanged: true }
+          : { ...loc, newQty: loc.qty || 0, showQtyChanged: savedAuditLocationQty !== undefined };
       });
     }
   }
@@ -750,7 +755,6 @@ export const deletePalletApiHook = (
 ) => {
   if (navigation.isFocused()) {
     if (!deletePalletApi.isWaiting && deletePalletApi.result) {
-      setShowDeleteConfirmationModal(false);
       if (deletePalletApi.result.status === 200) {
         Toast.show({
           type: 'success',
@@ -760,6 +764,7 @@ export const deletePalletApiHook = (
         });
         dispatch(getItemPalletsDispatch({ itemNbr }));
         dispatch({ type: CLEAR_PALLET.RESET });
+        setShowDeleteConfirmationModal(false);
       }
     } else if (!deletePalletApi.isWaiting && deletePalletApi.error) {
       setShowDeleteConfirmationModal(false);
@@ -1534,7 +1539,7 @@ export const disabledContinue = (
   reserveLocations: ItemPalletInfo[],
   scanRequired: boolean,
   itemDetailsLoading: boolean
-): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || -1) < FLOOR_MIN)
+): boolean => itemDetailsLoading || floorLocations.some(loc => (loc.newQty || loc.qty || 0) < FLOOR_MIN)
   || reserveLocations.some(
     loc => (scanRequired && !loc.scanned) || (loc.newQty || loc.quantity || 0) < PALLET_MIN
   );
@@ -2036,7 +2041,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): React.JSX.Element 
   };
 
   const getFloorLocationList = (locations: Location[]) => {
-    const locationLst: LocationList[] = [];
+    const locationList: LocationList[] = [];
 
     if (locations && locations.length) {
       const sortLocations = (a: Location, b: Location) => (
@@ -2047,7 +2052,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): React.JSX.Element 
 
       locations.sort(sortLocations);
       locations.forEach((loc: Location, index: number) => {
-        locationLst.push({
+        locationList.push({
           sectionId: loc.sectionId,
           locationName: `${loc.zoneName}${loc.aisleName}-${loc.sectionName}`,
           quantity: loc.newQty,
@@ -2068,19 +2073,20 @@ export const AuditItemScreen = (props: AuditItemScreenProps): React.JSX.Element 
           onCalcPress: () => {
             setLocation({ locationName: loc.locationName, locationType: 'floor', palletId: 0 });
             setShowCalcModal(true);
-          }
+          },
+          showQtyChanged: loc.showQtyChanged
         });
       });
     }
-    return locationLst;
+    return locationList;
   };
 
   const getReserveLocationList = (locations: ItemPalletInfo[]) => {
-    const locationLst: LocationList[] = [];
+    const locationList: LocationList[] = [];
     if (locations && locations.length) {
       const sortedLocations = sortReserveLocations(locations);
       sortedLocations.forEach((loc, index) => {
-        locationLst.push({
+        locationList.push({
           sectionId: loc.sectionId,
           locationName: loc.locationName,
           quantity: loc.newQty,
@@ -2106,7 +2112,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): React.JSX.Element 
         });
       });
     }
-    return locationLst;
+    return locationList;
   };
 
   if (completeItemApi.isWaiting) {
@@ -2207,6 +2213,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): React.JSX.Element 
               showCalculator={userConfig.showCalculator}
               minQty={FLOOR_MIN}
               maxQty={MAX}
+              vendorPackQty={undefined}
             />
           </View>
           <View style={styles.marginBottomStyle}>
@@ -2220,6 +2227,7 @@ export const AuditItemScreen = (props: AuditItemScreenProps): React.JSX.Element 
               showCalculator={userConfig.showCalculator}
               minQty={PALLET_MIN}
               maxQty={MAX}
+              vendorPackQty={props.itemDetails?.vendorPackQty}
             />
           </View>
           <View>

@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect } from 'react';
+import React, { Dispatch, useLayoutEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderBackButton, HeaderBackButtonProps } from '@react-navigation/elements';
 import { Animated, TouchableOpacity, View } from 'react-native';
@@ -70,7 +70,7 @@ export const WorklistNavigatorStack = (props:worklistNavigatorProps): JSX.Elemen
   const {
     dispatch, navigation, menuOpen, userConfig
   } = props;
-  useEffect(
+  useLayoutEffect(
     () => navigation.addListener('focus', () => {
       if (userConfig.inProgress) {
         dispatch(getWorklistV1());

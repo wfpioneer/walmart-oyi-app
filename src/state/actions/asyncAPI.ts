@@ -147,11 +147,8 @@ export const clearPallet = makeAsyncActionCreators(CLEAR_PALLET);
 export const GET_PALLET_DETAILS = makeAsyncActionTypes('API/GET_PALLET_DETAILS');
 export const getPalletDetails = makeAsyncActionCreators(GET_PALLET_DETAILS);
 
-export const POST_BIN_PALLETS = makeAsyncActionTypes('API/POST_BIN_PALLETS');
+export const POST_BIN_PALLETS = makeAsyncActionTypes('API/POST_BIN_PALLETS')
 export const binPallets = makeAsyncActionCreators(POST_BIN_PALLETS);
-
-export const GET_PALLET_CONFIG = makeAsyncActionTypes('API/GET_PALLET_CONFIG');
-export const getPalletConfig = makeAsyncActionCreators(GET_PALLET_CONFIG);
 
 export const UPDATE_PICKLIST_STATUS = makeAsyncActionTypes('API/UPDATE_PICKLIST_STATUS');
 export const updatePicklistStatus = makeAsyncActionCreators(UPDATE_PICKLIST_STATUS);

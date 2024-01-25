@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SnackBarComponent Renders the default snack bar component 1`] = `
-<withTheme(Snackbar)
+<Snackbar
   duration={5000}
   onDismiss={[Function]}
   style={
@@ -16,11 +16,11 @@ exports[`SnackBarComponent Renders the default snack bar component 1`] = `
   visible={false}
 >
   
-</withTheme(Snackbar)>
+</Snackbar>
 `;
 
 exports[`SnackBarComponent Renders the snack bar component with a message 1`] = `
-<withTheme(Snackbar)
+<Snackbar
   duration={5000}
   onDismiss={[Function]}
   style={
@@ -35,5 +35,5 @@ exports[`SnackBarComponent Renders the snack bar component with a message 1`] = 
   visible={true}
 >
   [missing "en.GENERICS.UPDATED" translation]
-</withTheme(Snackbar)>
+</Snackbar>
 `;

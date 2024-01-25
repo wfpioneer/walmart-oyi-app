@@ -212,6 +212,17 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen 1`] = `
           </Text>
         </View>
       </View>
+      <Text
+        style={
+          {
+            "fontSize": 15,
+            "marginVertical": 5,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.ADD_FLOOR_LOCATION" translation]
+      </Text>
     </View>
   </View>
   <Text
@@ -393,6 +404,17 @@ exports[`OtherActionScreen Tests renders the OtherActionScreen with desired Acti
           </Text>
         </View>
       </View>
+      <Text
+        style={
+          {
+            "fontSize": 15,
+            "marginVertical": 5,
+            "textAlign": "center",
+          }
+        }
+      >
+        [missing "en.ITEM.ADD_FLOOR_LOCATION" translation]
+      </Text>
     </View>
   </View>
   <Text

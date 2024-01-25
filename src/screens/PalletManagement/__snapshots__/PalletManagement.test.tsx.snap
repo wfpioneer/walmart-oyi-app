@@ -17,17 +17,119 @@ exports[`PalletManagementScreen Tests rendering Get Pallet Info Api responses Re
 `;
 
 exports[`PalletManagementScreen Tests rendering the PalletManagement Screen Renders the PalletManagement default  1`] = `
-<ActivityIndicator
-  animating={true}
-  color="#0071e9"
-  hidesWhenStopped={true}
-  size="large"
+<View
   style={
     {
       "alignItems": "center",
       "flex": 1,
-      "justifyContent": "center",
+      "justifyContent": "space-between",
+      "width": "100%",
     }
   }
-/>
+>
+  <ManualScanComponent
+    keyboardType="numeric"
+    placeholder="[missing "en.PALLET.ENTER_PALLET_ID" translation]"
+  />
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <Memo(Pressable)
+      onPress={[Function]}
+    >
+      <mockConstructor
+        color="#000000"
+        name="barcode-scan"
+        size={100}
+      />
+    </Memo(Pressable)>
+    <View
+      style={
+        {
+          "paddingTop": 20,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PALLET.SCAN_PALLET" translation]
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`PalletManagementScreen Tests rendering the PalletManagement Screen render screen with redux 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "space-between",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    />
+    <View
+      style={
+        {
+          "paddingTop": 20,
+        }
+      }
+    >
+      <Text>
+        [missing "en.PALLET.SCAN_PALLET" translation]
+      </Text>
+    </View>
+  </View>
+</View>
 `;

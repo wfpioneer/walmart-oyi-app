@@ -50,7 +50,7 @@ exports[`Worklist Navigator Renders the worklist Tabs 1`] = `
   value={
     {
       "getServerState": undefined,
-      "noopCheck": "once",
+      "identityFunctionCheck": "once",
       "stabilityCheck": "once",
       "store": {
         "@@observable": [Function],

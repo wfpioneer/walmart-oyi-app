@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+  titleFlex: {
+    flex: 1
+  },
   errorView: {
     flex: 1,
     alignItems: 'center',

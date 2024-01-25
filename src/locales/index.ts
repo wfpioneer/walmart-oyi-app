@@ -12,7 +12,7 @@ export const setI18nConfig: () => void = () => {
   // fallback if no available language fits
   const fallback = { languageTag: 'en', isRTL: false };
 
-  const { languageTag } = RNLocalize.findBestAvailableLanguage(['en', 'es', 'zh'])
+  const { languageTag } = RNLocalize.findBestLanguageTag(['en', 'es', 'zh'])
     || fallback;
 
   // set i18n-js config
