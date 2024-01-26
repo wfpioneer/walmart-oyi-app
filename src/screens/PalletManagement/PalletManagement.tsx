@@ -75,29 +75,28 @@ export const setPerishableCategoriesHook = (
   navigation: NavigationProp<any>,
   trackEventCall: (eventName: string, params?: any) => void,
   dispatch: Dispatch<any>,
-  route: RouteProp<any, string>
+  route: RouteProp<any, string>,
+  scan: any
 ) => {
   const backupPerishableCategories = perishableCategories
     .split('-')
     .map(Number);
   dispatch(setPerishableCategories(backupPerishableCategories));
-  barcodeEmitter.addListener('scanned', scan => {
-    if (navigation.isFocused()) {
-      validateSession(navigation, route.name).then(() => {
-        trackEventCall('pallet_managment_scanned', {
-          barcode: scan.value,
-          type: scan.type
-        });
-        dispatch(
-          getPalletDetails({
-            palletIds: [scan.value],
-            isAllItems: true,
-            isSummary: false
-          })
-        );
+  if (navigation.isFocused()) {
+    validateSession(navigation, route.name).then(() => {
+      trackEventCall('pallet_managment_scanned', {
+        barcode: scan.value,
+        type: scan.type
       });
-    }
-  });
+      dispatch(
+        getPalletDetails({
+          palletIds: [scan.value],
+          isAllItems: true,
+          isSummary: false
+        })
+      );
+    });
+  }
 };
 
 export const getPalletDetailsApiHook = (
@@ -165,7 +164,6 @@ export const PalletManagementScreen = (
     trackEventCall
   } = props;
   const { perishableCategories } = userConfig;
-  let scannedSubscription: EmitterSubscription;
 
   // Resets Get PalletInfo api state when navigating off-screen
   useEffectHook(() => {
@@ -178,13 +176,16 @@ export const PalletManagementScreen = (
 
   // Scanner listener
   useEffectHook(() => {
-    setPerishableCategoriesHook(
-      perishableCategories,
-      navigation,
-      trackEventCall,
-      dispatch,
-      route
-    );
+    const scannedSubscription = barcodeEmitter.addListener('scanned', scan => {
+      setPerishableCategoriesHook(
+        perishableCategories,
+        navigation,
+        trackEventCall,
+        dispatch,
+        route,
+        scan
+      );
+    });
     return () => {
       scannedSubscription.remove();
     };

@@ -37,6 +37,11 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
+jest.mock('../../utils/sessionTimeout.ts', () => ({
+  ...jest.requireActual('../../utils/sessionTimeout.ts'),
+  validateSession: jest.fn(() => Promise.resolve())
+}));
+
 describe('PalletManagementScreen', () => {
   const defaultAsyncState: AsyncState = {
     isWaiting: false,
@@ -209,7 +214,8 @@ describe('PalletManagementScreen', () => {
         navigationProp,
         mockTrackEventCall,
         jest.fn(),
-        routeProp
+        routeProp,
+        ''
       );
     });
   });
