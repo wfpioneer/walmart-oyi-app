@@ -73,16 +73,13 @@ export const getScreenOptions = (
   managePalletMenu: boolean
 ) => ({
   headerTitle: () => (
-    screenName === 'PalletManagementHome' ? (
-      <HeaderTitle
-        style={{ color: COLOR.WHITE }}
-        numberOfLines={2}
-        lineBreakMode="tail"
-      >
-        {title}
-      </HeaderTitle>
-    )
-      : title
+    <HeaderTitle
+      style={{ color: COLOR.WHITE }}
+      numberOfLines={2}
+      lineBreakMode="tail"
+    >
+      {title}
+    </HeaderTitle>
   ),
   headerRight: () => (
     <View style={styles.headerContainer}>
